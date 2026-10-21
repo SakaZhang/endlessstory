@@ -4,3 +4,5 @@ import './storage-tests.mjs';
 
 import './reforge-tests.mjs';
 import './loadout-tests.mjs';
+
+import './merchant-tests.mjs';

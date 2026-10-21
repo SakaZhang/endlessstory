@@ -187,6 +187,70 @@ export function offline(s,now=Date.now()){
  if(!s.running||elapsed<60000||!s.normalWins[s.location])return null;
  const cycles=Math.floor(elapsed/60000),l=LOCS[s.location],gold=cycles*l.reward,xp=cycles*8,mat=Math.floor(cycles/3);s.gold+=gold;gainXp(s,xp);s.materials[l.mat]+=mat;s.chronicle.unshift('离线驻扎：侦察员带回'+gold+'金币与'+mat+'份'+l.mat+'。');s.chronicle=s.chronicle.slice(0,20);return {minutes:Math.floor(elapsed/60000),gold,xp,mat};
 }
+export const MATERIALS={
+ '铁屑':{icon:'iron',tags:['金属'],description:'旧驿道散落的铁料，融合时偏向厚重装备与碎砧套装。',origin:'失落驿道',price:4},
+ '炉火晶':{icon:'fire',tags:['火焰'],description:'矿炉余热凝成的晶体，融合时偏向饰品与炉纹套装。',origin:'熄火矿井',price:7},
+ '誓约残片':{icon:'soul',tags:['灵魂'],description:'旧誓遗物的碎片，融合时偏向饰品与守冢套装。',origin:'旧誓墓园',price:10}
+};
+const MERCHANT_STOCK={'铁屑':[6,12],'炉火晶':[3,7],'誓约残片':[2,5]};
+export const MERCHANT_CYCLE_MS=30*60*1000;
+function validEquipment(i){try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;return typeof i.id==='string'&&typeof i.name==='string'&&SLOTS.includes(i.slot)&&Number.isInteger(i.rarity)&&i.rarity>=0&&i.rarity<=3&&(!i.set||(BUILD.some(b=>b.id===i.set)&&SET_SLOTS.includes(i.slot)&&i.rarity===3))&&num(i.atk)&&num(i.hp)&&num(i.armor)&&num(i.level)&&num(i.bless,5)&&Array.isArray(i.affixes)&&(i.rarity===0?i.affixes.length<=1:i.affixes.length===i.rarity+1)&&new Set(i.affixes.map(a=>a.stat)).size===i.affixes.length&&i.affixes.every(a=>Object.hasOwn(AFFIX_DEFS,a.stat)&&Number.isInteger(a.value)&&num(a.value,50))&&(!i.special||(!i.set&&i.rarity>=2&&Object.hasOwn(SPECIALS,i.special.id)))&&i.legendaryId===null&&(i.divine===undefined||(i.divine?.id==='forge-favor'&&i.divine.name==='神赐·炉火眷顾'&&i.divine.model==='raw-v1'&&['atk','armor','hp'].every(k=>num(i.divine.bonus?.[k]))));}catch{return false;}}
+function validMerchant(merchant){
+ if(!merchant||merchant.version!==1||!Number.isFinite(merchant.generatedAt)||merchant.generatedAt<0||merchant.generatedAt>1e15||!Array.isArray(merchant.offers))return false;
+ const rows=merchant.offers,legacy=rows.length>=2&&rows.length<=3&&rows.every(o=>o&&!o.type);
+ const materialValid=o=>Object.hasOwn(MATERIALS,o.material)&&o.price===MATERIALS[o.material].price&&Number.isInteger(o.stock)&&o.stock>=0&&o.stock<=MERCHANT_STOCK[o.material][1];
+ if(legacy){if(!rows.every(materialValid)||new Set(rows.map(o=>o.material)).size!==rows.length)return false;}
+ else{
+  if(rows.length!==8||new Set(rows.map(o=>o?.offerId)).size!==8||!rows.every(o=>o&&typeof o.offerId==='string'))return false;
+  const mats=rows.filter(o=>o.type==='material'),gear=rows.filter(o=>o.type==='equipment');
+  if(mats.length<2||mats.length>3||mats.length+gear.length!==8||new Set(mats.map(o=>o.material)).size!==mats.length||!mats.every(materialValid))return false;
+  if(!gear.every(o=>validEquipment(o.item)&&!o.item.divine&&o.item.legendaryId===null&&[0,1].includes(o.stock)&&o.price===15+sellValue(o.item)*4+o.item.level*3)||new Set(gear.map(o=>o.item.id)).size!==gear.length)return false;
+ }
+ if(['cycleStart','nextRefreshAt','paidRefreshes','revision'].every(k=>merchant[k]===undefined))return legacy;
+ return Number.isFinite(merchant.cycleStart)&&merchant.cycleStart>=0&&merchant.cycleStart<=1e15&&merchant.nextRefreshAt===merchant.cycleStart+MERCHANT_CYCLE_MS&&Number.isSafeInteger(merchant.paidRefreshes)&&merchant.paidRefreshes>=0&&merchant.paidRefreshes<=1e9&&Number.isSafeInteger(merchant.revision)&&merchant.revision>=0;
+}
+function rollMerchantOffers(s,revision,preservedMaterials=null){
+ const pool=Object.keys(MATERIALS),offers=preservedMaterials?preservedMaterials.map(o=>({...o,type:'material'})):[],count=preservedMaterials?offers.length:rand(2,3);
+ if(!preservedMaterials)for(let i=0;i<count;i++){const material=pool.splice(rand(0,pool.length-1),1)[0],[min,max]=MERCHANT_STOCK[material];offers.push({type:'material',material,price:MATERIALS[material].price,stock:rand(min,max)});}
+ while(offers.length<8){const isSet=Math.random()<.01,slot=isSet?SET_SLOTS[rand(0,SET_SLOTS.length-1)]:SLOTS[rand(0,SLOTS.length-1)],set=isSet?BUILD[rand(0,2)].id:null,it=item(slot,s.level,set,isSet?3:rollQuality());offers.push({type:'equipment',item:it,price:15+sellValue(it)*4+it.level*3,stock:1});}
+ return offers.map((offer,index)=>({...offer,offerId:`merchant-${revision}-${index}`}));
+}
+export function ensureMerchant(s,now=Date.now()){
+ if(!Number.isFinite(now)||now<0||now>1e15)return null;
+ if(s.merchant===undefined){s.merchant={version:1,offers:rollMerchantOffers(s,0),generatedAt:now,cycleStart:now,nextRefreshAt:now+MERCHANT_CYCLE_MS,paidRefreshes:0,revision:0};return s.merchant;}
+ if(!validMerchant(s.merchant))return null;
+ const m=s.merchant;
+ // Upgrade the initial merchant schema without replacing purchased stock.
+ if(m.cycleStart===undefined){m.cycleStart=m.generatedAt;m.nextRefreshAt=m.cycleStart+MERCHANT_CYCLE_MS;m.paidRefreshes=0;m.revision=0;}
+ if(now>=m.nextRefreshAt){
+  const skipped=Math.floor((now-m.cycleStart)/MERCHANT_CYCLE_MS);
+  m.cycleStart+=skipped*MERCHANT_CYCLE_MS;m.nextRefreshAt=m.cycleStart+MERCHANT_CYCLE_MS;
+  m.revision++;m.offers=rollMerchantOffers(s,m.revision);m.generatedAt=now;m.paidRefreshes=0;
+ }
+ if(m.offers.length!==8)m.offers=rollMerchantOffers(s,m.revision,m.offers);
+ return m;
+}
+export function getMerchantRefreshCost(s){const n=s.merchant?.paidRefreshes??0;return 20+10*n;}
+export function paidRefreshMerchant(s,now=Date.now(),expectedRevision){
+ const m=ensureMerchant(s,now);
+ if(!m||!Number.isSafeInteger(expectedRevision)||m.revision!==expectedRevision||m.paidRefreshes>=1e9)return false;
+ const cost=getMerchantRefreshCost(s);if(!Number.isFinite(s.gold)||s.gold<cost)return false;
+ const offers=rollMerchantOffers(s,m.revision+1);s.gold-=cost;m.offers=offers;m.paidRefreshes++;m.revision++;m.generatedAt=now;return true;
+}
+export function buyMaterial(s,material,qty,expectedRevision,now=Date.now()){
+ // Invalid input is not a refresh request. Valid but stale quotes refresh then reject.
+ if(!Number.isSafeInteger(qty)||qty<=0||!Object.hasOwn(MATERIALS,material))return false;
+ const m=ensureMerchant(s,now);if(!m||(expectedRevision!==undefined&&m.revision!==expectedRevision))return false;
+ const offer=m.offers.find(o=>o.type==='material'&&o.material===material);
+ if(!offer||qty>offer.stock||!Number.isFinite(s.gold)||s.gold<offer.price*qty||!s.materials||!Number.isFinite(s.materials[material])||s.materials[material]<0||s.materials[material]+qty>1e12)return false;
+ s.gold-=offer.price*qty;s.materials[material]+=qty;offer.stock-=qty;return true;
+}
+export function purchaseEquipment(s,offerId,expectedRevision,now=Date.now()){
+ const m=ensureMerchant(s,now);if(!m||!Number.isSafeInteger(expectedRevision)||m.revision!==expectedRevision)return false;
+ const offer=m.offers.find(o=>o.type==='equipment'&&o.offerId===offerId);
+ if(!offer||offer.stock!==1||bagItems(s).length>=100||!Number.isFinite(s.gold)||s.gold<offer.price||s.inventory.some(it=>it.id===offer.item.id))return false;
+ s.gold-=offer.price;offer.stock=0;s.inventory.push(offer.item);return true;
+}
 export const FUSION_TAGS={
  '铁屑':{set:'anvil',slots:{weapon:2,helm:1,armor:2,gloves:1,boots:1,ring:0,amulet:0}},
  '炉火晶':{set:'rune',slots:{weapon:1,helm:0,armor:0,gloves:1,boots:0,ring:2,amulet:2}},
@@ -212,8 +276,9 @@ export function codexState(s,id){const entry=LEGENDARY_CODEX.find(x=>x.id===id);
 export function validSave(s){
  try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;
  if(s.version!==SCHEMA_VERSION||s.race!=='dwarf'||s.hero!=='布洛克'||!Number.isInteger(s.level)||s.level<1||s.level>=100000||!num(s.xp)||!num(s.gold)||!Number.isInteger(s.location)||s.location<0||s.location>2)return false;
- if(!Array.isArray(s.inventory)||s.inventory.length>124||!s.inventory.every(i=>typeof i.id==='string'&&typeof i.name==='string'&&SLOTS.includes(i.slot)&&Number.isInteger(i.rarity)&&i.rarity>=0&&i.rarity<=3&&(!i.set||(BUILD.some(b=>b.id===i.set)&&SET_SLOTS.includes(i.slot)&&i.rarity===3))&&num(i.atk)&&num(i.hp)&&num(i.armor)&&num(i.level)&&num(i.bless,5)&&Array.isArray(i.affixes)&&(i.rarity===0?i.affixes.length<=1:i.affixes.length===i.rarity+1)&&new Set(i.affixes.map(a=>a.stat)).size===i.affixes.length&&i.affixes.every(a=>Object.hasOwn(AFFIX_DEFS,a.stat)&&Number.isInteger(a.value)&&num(a.value,50))&&(!i.special||(!i.set&&i.rarity>=2&&Object.hasOwn(SPECIALS,i.special.id)))&&i.legendaryId===null&&(i.divine===undefined||(i.divine?.id==='forge-favor'&&i.divine.name==='神赐·炉火眷顾'&&i.divine.model==='raw-v1'&&['atk','armor','hp'].every(k=>num(i.divine.bonus?.[k]))))))return false;
- if(!validLoadoutSlots(s)||bagItems(s).length>100)return false;
+ if(!Array.isArray(s.inventory)||s.inventory.length>124||!s.inventory.every(validEquipment))return false;
+ if(s.merchant?.offers?.some(o=>o.type==='equipment'&&o.stock===1&&s.inventory.some(it=>it.id===o.item?.id)))return false;
+ if(!validLoadoutSlots(s)||bagItems(s).length>100||(s.merchant!==undefined&&!validMerchant(s.merchant)))return false;
  if(new Set(s.inventory.map(i=>i.id)).size!==s.inventory.length||!s.equip||Object.keys(s.equip).length!==SOCKETS.length||!SOCKETS.every(k=>s.equip[k]===null||s.inventory.some(i=>i.id===s.equip[k]&&i.slot===SOCKET_TYPE[k])))return false;
  const equipped=Object.values(s.equip).filter(Boolean);if(new Set(equipped).size!==equipped.length)return false;
  return Array.isArray(s.skills)&&s.skills.length===3&&new Set(s.skills).size===3&&s.skills.every(k=>Object.hasOwn(SKILLS,k))&&Array.isArray(s.conditions)&&s.conditions.length===3&&s.conditions.every(k=>['always','low','charge','burn'].includes(k))&&LOCS.every(l=>num(s.materials[l.mat]))&&['power','heart','steel'].every(k=>Number.isInteger(s.talents[k])&&num(s.talents[k],s.level))&&Object.values(s.talents).reduce((a,b)=>a+b,0)<=s.level-1&&['bossWins','bossReady','normalWins'].every(k=>Array.isArray(s[k])&&s[k].length===3&&s[k].every(n=>num(n,1e15)))&&Array.isArray(s.chapters)&&s.chapters.every(n=>Number.isInteger(n)&&n>=0&&n<3)&&Array.isArray(s.chronicle)&&s.chronicle.length<=100&&s.chronicle.every(t=>typeof t==='string'&&t.length<2000)&&num(s.kills)&&num(s.stock,3)&&num(s.lastSeen,1e15)&&[0,1].includes(s.momentum)&&typeof s.running==='boolean';
