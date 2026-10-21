@@ -123,7 +123,7 @@ export function reforge(s,itemId,mode,index){
  if(new Set(it.affixes.map(a=>a.stat)).size!==it.affixes.length||!it.affixes.every(a=>Object.hasOwn(AFFIX_DEFS,a.stat)&&Number.isInteger(a.value)&&a.value>=AFFIX_DEFS[a.stat].min&&a.value<=AFFIX_DEFS[a.stat].max))return null;
  if(mode!=='all'&&(!Number.isInteger(index)||index<0||index>=it.affixes.length))return null;
  if(mode==='replace'&&it.affixes.length===Object.keys(AFFIX_DEFS).length)return null;
- if(!Number.isFinite(s.gold)||s.gold<cost.gold||!s.materials||Object.entries(cost.materials).some(([key,n])=>!Number.isFinite(s.materials[key])||s.materials[key]<n))return null;
+ if(!Number.isFinite(s.gold)||s.gold<cost.gold||!validMaterials(s)||Object.entries(cost.materials).some(([key,n])=>materialCount(s,key,0)<n))return null;
  const before=it.affixes.map(a=>({...a})),after=before.map(a=>({...a}));
  const roll=stat=>({stat,value:luckyRoll(()=>rand(AFFIX_DEFS[stat].min,AFFIX_DEFS[stat].max),s.talents.luck??0)});
  if(mode==='value')after[index]=roll(after[index].stat);
@@ -136,7 +136,7 @@ export function reforge(s,itemId,mode,index){
   for(let i=0;i<after.length;i++)after[i]=roll(pool.splice(rand(0,pool.length-1),1)[0]);
  }
  // Commit after all validation and rolls. Identity, base stats and unique effects stay intact.
- s.gold-=cost.gold;for(const [key,n] of Object.entries(cost.materials))s.materials[key]-=n;
+ normalizeMaterials(s);s.gold-=cost.gold;for(const [key,n] of Object.entries(cost.materials))s.materialStacks[materialKey(key)]-=n;
  it.affixes=after;
  if(divineMultiplier(it)>1)it.divine.bonus.affixes=after.map(a=>({stat:a.stat,value:a.value/10}));
  return {item:it,mode,index:mode==='all'?null:index,cost,before,after:after.map(a=>({...a}))};
@@ -184,7 +184,7 @@ export function applyLoadout(s,index,battleActive=false){
 }
 export function fresh(){
  const inventory=SOCKETS.map(socket=>{let type=SOCKET_TYPE[socket],it=item(type,1,null,0);it.name='旧炉·'+names[type];it.atk=bases[type].atk+1;it.armor=bases[type].armor+1;it.hp=bases[type].hp+2;it.affixes=[];return it;});
- return {version:SCHEMA_VERSION,race:'dwarf',hero:'布洛克',level:1,xp:0,gold:100,location:0,build:'anvil',inventory,equip:Object.fromEntries(SOCKETS.map((socket,i)=>[socket,inventory[i].id])),skills:['break','heavy','interrupt',null],conditions:['always','always','charge','always'],materials:{'铁屑':5,'炉火晶':2,'誓约残片':1},talents:Object.fromEntries(Object.keys(TALENTS).map(k=>[k,0])),consumables:{memoryFruit:0,refundCredits:0},kills:0,normalWins:[0,0,0],bossWins:[0,0,0],bossReady:[0,0,0],stock:3,loadouts:[null,null,null],chapters:[],chronicle:['灰冠历317年：你带着旧炉装备，离开黑炉堡寻找失踪商队。'],momentum:0,lastSeen:Date.now(),running:false};
+ return {version:SCHEMA_VERSION,race:'dwarf',hero:'布洛克',level:1,xp:0,gold:100,location:0,build:'anvil',inventory,equip:Object.fromEntries(SOCKETS.map((socket,i)=>[socket,inventory[i].id])),skills:['break','heavy','interrupt',null],conditions:['always','always','charge','always'],materialStacks:{'铁屑|0':5,'炉火晶|0':2,'誓约残片|0':1},offlineLuck:0,talents:Object.fromEntries(Object.keys(TALENTS).map(k=>[k,0])),consumables:{memoryFruit:0,refundCredits:0},kills:0,normalWins:[0,0,0],bossWins:[0,0,0],bossReady:[0,0,0],stock:3,loadouts:[null,null,null],chapters:[],chronicle:['灰冠历317年：你带着旧炉装备，离开黑炉堡寻找失踪商队。'],momentum:0,lastSeen:Date.now(),running:false};
 }
 export function equipItem(s,id,socket){
  const it=s.inventory.find(i=>i.id===id);if(!it)return false;
@@ -272,8 +272,10 @@ function rollQuality(weights=[65,28,6.5,.5]){return Number(weighted(weights.map(
 function rollDrop(s,boss,luck=0){if(Math.random()>=(boss?.65:.18)||bagItems(s).length>=100)return null;const isSet=Math.random()<(boss?.05:.01),slot=isSet?SET_SLOTS[rand(0,SET_SLOTS.length-1)]:SLOTS[rand(0,SLOTS.length-1)],set=isSet?BUILD[rand(0,2)].id:null,quality=isSet?3:luckyRoll(()=>rollQuality(),luck);const it=item(slot,s.level,set,quality);s.inventory.push(it);return it;}
 export function reward(s,e,now=Date.now()){
  if(!e.win||e.rewarded)return null;e.rewarded=true;const index=e.location??s.location,l=LOCS[index],st=stats(s);s.kills++;s.gold+=e.boss?l.bossGold:l.reward;
- const baseXp=e.boss?100:20+index*8,knowledge=st.specials.knowledge&&Math.random()<.05;gainXp(s,baseXp*(knowledge?2:1));s.materials[l.mat]+=e.boss?4:1;
- if(st.specials.scavenger&&Math.random()<.1){s.materials[l.mat]++;e.rewardNotes=['拾荒者：额外材料 +1'];}if(knowledge)(e.rewardNotes??=[]).push('求知：额外基础经验 +'+baseXp);
+ const baseXp=e.boss?100:20+index*8,knowledge=st.specials.knowledge&&Math.random()<.05;gainXp(s,baseXp*(knowledge?2:1));e.materialLoot=earnedMaterials(s,l.mat,e.boss?4:1,e.boss,e.luck??0);let expectedMaterials=e.boss?4:1;
+ if(st.specials.scavenger&&Math.random()<.1){expectedMaterials++;e.materialLoot.push(...earnedMaterials(s,l.mat,1,e.boss,e.luck??0));e.rewardNotes=['拾荒者：额外材料 +1'];}if(knowledge)(e.rewardNotes??=[]).push('求知：额外基础经验 +'+baseXp);
+ if(e.materialLoot.reduce((n,x)=>n+x.count,0)<expectedMaterials)(e.rewardNotes??=[]).push('部分材料堆叠已满（每堆上限1万亿），超出部分未收取。');
+ for(const loot of e.materialLoot.filter(x=>x.quality>0))(e.rewardNotes??=[]).push(MATERIAL_QUALITIES[loot.quality]+' '+loot.material+' ×'+loot.count);
  let drop=rollDrop(s,e.boss,e.luck??0);
  if(e.boss){s.bossWins[index]++;s.bossReady[index]=now+60000;if(!s.chapters.includes(index)){s.chapters.push(index);s.chronicle.unshift(['沃恩交出了商队货单：货物并非被抢，而是被人改道。','哥布林技师「尼克」从炉芯发现了烬裔封印。','精灵信使「瑟拉」证实：旧盟约的碎片，正在被五族争夺。'][index]);}}else s.normalWins[index]++;
  return drop;
@@ -281,20 +283,47 @@ export function reward(s,e,now=Date.now()){
 export function offline(s,now=Date.now()){
  const elapsed=Math.min(4*3600000,Math.max(0,now-s.lastSeen));s.lastSeen=now;
  if(!s.running||elapsed<60000||!s.normalWins[s.location])return null;
- const cycles=Math.floor(elapsed/60000),l=LOCS[s.location],gold=cycles*l.reward,xp=cycles*8,mat=Math.floor(cycles/3);s.gold+=gold;gainXp(s,xp);s.materials[l.mat]+=mat;s.chronicle.unshift('离线驻扎：侦察员带回'+gold+'金币与'+mat+'份'+l.mat+'。');s.chronicle=s.chronicle.slice(0,20);return {minutes:Math.floor(elapsed/60000),gold,xp,mat};
+ const cycles=Math.floor(elapsed/60000),l=LOCS[s.location],gold=cycles*l.reward,xp=cycles*8,mat=Math.floor(cycles/3);s.gold+=gold;gainXp(s,xp);const materialLoot=earnedMaterials(s,l.mat,mat,false,s.offlineLuck??0),received=materialLoot.reduce((n,x)=>n+x.count,0);s.chronicle.unshift('离线驻扎：侦察员带回'+gold+'金币与'+received+'份'+l.mat+'。'+(received<mat?'部分材料堆叠已满，超出部分未收取。':''));s.chronicle=s.chronicle.slice(0,20);return {minutes:Math.floor(elapsed/60000),gold,xp,mat:received,materialLoot,materialOverflow:mat-received};
 }
 export const MATERIALS={
  '铁屑':{icon:'iron',tags:['金属'],description:'旧驿道散落的铁料，融合时偏向厚重装备与碎砧套装。',origin:'失落驿道',price:4},
  '炉火晶':{icon:'fire',tags:['火焰'],description:'矿炉余热凝成的晶体，融合时偏向饰品与炉纹套装。',origin:'熄火矿井',price:7},
  '誓约残片':{icon:'soul',tags:['灵魂'],description:'旧誓遗物的碎片，融合时偏向饰品与守冢套装。',origin:'旧誓墓园',price:10}
 };
+export const MATERIAL_QUALITIES=['普通','稀有','优良','至臻'];
+export function materialKey(material,quality=0){return Object.hasOwn(MATERIALS,material)&&Number.isInteger(quality)&&quality>=0&&quality<=3?`${material}|${quality}`:null;}
+export function parseMaterialKey(value){
+ if(typeof value!=='string')return null;
+ if(Object.hasOwn(MATERIALS,value))return {material:value,quality:0,key:materialKey(value,0)};
+ const parts=value.split('|');if(parts.length!==2||!['0','1','2','3'].includes(parts[1]))return null;
+ const key=materialKey(parts[0],Number(parts[1]));return key?{material:parts[0],quality:Number(parts[1]),key}:null;
+}
+function validMaterials(s){
+ const count=n=>Number.isSafeInteger(n)&&n>=0&&n<=1e12;
+ if(s.materialStacks!==undefined)return s.materials===undefined&&s.materialStacks&&typeof s.materialStacks==='object'&&!Array.isArray(s.materialStacks)&&Object.entries(s.materialStacks).every(([k,n])=>parseMaterialKey(k)?.key===k&&count(n));
+ return s.materials&&typeof s.materials==='object'&&!Array.isArray(s.materials)&&Object.keys(s.materials).every(k=>Object.hasOwn(MATERIALS,k))&&Object.keys(MATERIALS).every(k=>count(s.materials[k]));
+}
+export function normalizeMaterials(s){
+ if(!validMaterials(s))return false;
+ if(s.materialStacks===undefined){s.materialStacks=Object.fromEntries(Object.entries(s.materials).map(([kind,n])=>[materialKey(kind),n]));delete s.materials;}
+ return true;
+}
+export function materialCount(s,material,quality=0){const key=materialKey(material,quality);if(!key)return 0;return s.materialStacks!==undefined?(s.materialStacks[key]??0):(quality===0?s.materials?.[material]??0:0);}
+export function materialEntries(s){return Object.keys(MATERIALS).flatMap(material=>[0,1,2,3].map(quality=>({key:materialKey(material,quality),material,quality,count:materialCount(s,material,quality)}))).filter(row=>row.count>0);}
+export function materialPrice(material,quality=0){return materialKey(material,quality)?Math.ceil(MATERIALS[material].price*[1,1.5,2.5,4][quality]):null;}
+function addMaterial(s,material,quality,count){const key=materialKey(material,quality),before=s.materialStacks[key]??0,added=Math.max(0,Math.min(count,1e12-before));s.materialStacks[key]=before+added;return added;}
+function earnedMaterials(s,material,count,boss=false,luck=0){
+ normalizeMaterials(s);const loot=[];
+ for(let i=0;i<count;i++){const quality=luckyRoll(()=>rollQuality(boss?[65,28,6.5,.5]:[80,17,2.8,.2]),luck);const added=addMaterial(s,material,quality,1);if(!added)continue;const entry=loot.find(x=>x.quality===quality);if(entry)entry.count++;else loot.push({key:materialKey(material,quality),material,quality,count:1});}
+ return loot;
+}
 const MERCHANT_STOCK={'铁屑':[6,12],'炉火晶':[3,7],'誓约残片':[2,5]};
 export const MERCHANT_CYCLE_MS=30*60*1000;
 function validEquipment(i){try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;return typeof i.id==='string'&&typeof i.name==='string'&&SLOTS.includes(i.slot)&&Number.isInteger(i.rarity)&&i.rarity>=0&&i.rarity<=3&&(!i.set||(BUILD.some(b=>b.id===i.set)&&SET_SLOTS.includes(i.slot)&&i.rarity===3))&&num(i.atk)&&num(i.hp)&&num(i.armor)&&num(i.level)&&num(i.bless,5)&&Array.isArray(i.affixes)&&(i.rarity===0?i.affixes.length<=1:i.affixes.length===i.rarity+1)&&new Set(i.affixes.map(a=>a.stat)).size===i.affixes.length&&i.affixes.every(a=>Object.hasOwn(AFFIX_DEFS,a.stat)&&Number.isInteger(a.value)&&num(a.value,50))&&(!i.special||(!i.set&&i.rarity>=2&&Object.hasOwn(SPECIALS,i.special.id)))&&i.legendaryId===null&&(i.divine===undefined||(i.divine?.id==='forge-favor'&&i.divine.name==='神赐·炉火眷顾'&&i.divine.model==='raw-v1'&&['atk','armor','hp'].every(k=>num(i.divine.bonus?.[k]))));}catch{return false;}}
 function validMerchant(merchant){
  if(!merchant||merchant.version!==1||!Number.isFinite(merchant.generatedAt)||merchant.generatedAt<0||merchant.generatedAt>1e15||!Array.isArray(merchant.offers))return false;
  const rows=merchant.offers,legacy=rows.length>=2&&rows.length<=3&&rows.every(o=>o&&!o.type);
- const materialValid=o=>Object.hasOwn(MATERIALS,o.material)&&o.price===MATERIALS[o.material].price&&Number.isInteger(o.stock)&&o.stock>=0&&o.stock<=MERCHANT_STOCK[o.material][1];
+ const materialValid=o=>Object.hasOwn(MATERIALS,o.material)&&Number.isInteger(o.quality??0)&&(o.quality??0)>=0&&(o.quality??0)<=3&&o.price===materialPrice(o.material,o.quality??0)&&Number.isInteger(o.stock)&&o.stock>=0&&o.stock<=MERCHANT_STOCK[o.material][1];
  if(legacy){if(!rows.every(materialValid)||new Set(rows.map(o=>o.material)).size!==rows.length)return false;}
  else{
   if(rows.length!==8||new Set(rows.map(o=>o?.offerId)).size!==8||!rows.every(o=>o&&typeof o.offerId==='string'))return false;
@@ -306,8 +335,8 @@ function validMerchant(merchant){
  return Number.isFinite(merchant.cycleStart)&&merchant.cycleStart>=0&&merchant.cycleStart<=1e15&&merchant.nextRefreshAt===merchant.cycleStart+MERCHANT_CYCLE_MS&&Number.isSafeInteger(merchant.paidRefreshes)&&merchant.paidRefreshes>=0&&merchant.paidRefreshes<=1e9&&Number.isSafeInteger(merchant.revision)&&merchant.revision>=0;
 }
 function rollMerchantOffers(s,revision,preservedMaterials=null){
- const pool=Object.keys(MATERIALS),offers=preservedMaterials?preservedMaterials.map(o=>({...o,type:'material'})):[],count=preservedMaterials?offers.length:rand(2,3);
- if(!preservedMaterials)for(let i=0;i<count;i++){const material=pool.splice(rand(0,pool.length-1),1)[0],[min,max]=MERCHANT_STOCK[material];offers.push({type:'material',material,price:MATERIALS[material].price,stock:rand(min,max)});}
+ const pool=Object.keys(MATERIALS),offers=preservedMaterials?preservedMaterials.map(o=>({...o,type:'material',quality:o.quality??0})):[],count=preservedMaterials?offers.length:rand(2,3);
+ if(!preservedMaterials)for(let i=0;i<count;i++){const material=pool.splice(rand(0,pool.length-1),1)[0],[min,max]=MERCHANT_STOCK[material];const quality=rollQuality([75,20,4.5,.5]);offers.push({type:'material',material,quality,price:materialPrice(material,quality),stock:rand(min,max)});}
  while(offers.length<8){const isSet=Math.random()<.01,slot=isSet?SET_SLOTS[rand(0,SET_SLOTS.length-1)]:SLOTS[rand(0,SLOTS.length-1)],set=isSet?BUILD[rand(0,2)].id:null,it=item(slot,s.level,set,isSet?3:rollQuality());offers.push({type:'equipment',item:it,price:15+sellValue(it)*4+it.level*3,stock:1});}
  if(Math.random()<.03)offers[7]={type:'consumable',consumable:'memoryFruit',price:200,stock:1};
  return offers.map((offer,index)=>({...offer,offerId:`merchant-${revision}-${index}`}));
@@ -316,7 +345,7 @@ export function ensureMerchant(s,now=Date.now()){
  if(!Number.isFinite(now)||now<0||now>1e15)return null;
  if(s.merchant===undefined){s.merchant={version:1,offers:rollMerchantOffers(s,0),generatedAt:now,cycleStart:now,nextRefreshAt:now+MERCHANT_CYCLE_MS,paidRefreshes:0,revision:0};return s.merchant;}
  if(!validMerchant(s.merchant))return null;
- const m=s.merchant;
+ const m=s.merchant;for(const offer of m.offers)if(offer.type==='material'||!offer.type)offer.quality??=0;
  // Upgrade the initial merchant schema without replacing purchased stock.
  if(m.cycleStart===undefined){m.cycleStart=m.generatedAt;m.nextRefreshAt=m.cycleStart+MERCHANT_CYCLE_MS;m.paidRefreshes=0;m.revision=0;}
  if(now>=m.nextRefreshAt){
@@ -334,13 +363,12 @@ export function paidRefreshMerchant(s,now=Date.now(),expectedRevision){
  const cost=getMerchantRefreshCost(s);if(!Number.isFinite(s.gold)||s.gold<cost)return false;
  const offers=rollMerchantOffers(s,m.revision+1);s.gold-=cost;m.offers=offers;m.paidRefreshes++;m.revision++;m.generatedAt=now;return true;
 }
-export function buyMaterial(s,material,qty,expectedRevision,now=Date.now()){
- // Invalid input is not a refresh request. Valid but stale quotes refresh then reject.
- if(!Number.isSafeInteger(qty)||qty<=0||!Object.hasOwn(MATERIALS,material))return false;
- const m=ensureMerchant(s,now);if(!m||(expectedRevision!==undefined&&m.revision!==expectedRevision))return false;
- const offer=m.offers.find(o=>o.type==='material'&&o.material===material);
- if(!offer||qty>offer.stock||!Number.isFinite(s.gold)||s.gold<offer.price*qty||!s.materials||!Number.isFinite(s.materials[material])||s.materials[material]<0||s.materials[material]+qty>1e12)return false;
- s.gold-=offer.price*qty;s.materials[material]+=qty;offer.stock-=qty;return true;
+export function buyMaterial(s,stackKey,qty,expectedRevision,now=Date.now()){
+ const parsed=parseMaterialKey(stackKey);if(!Number.isSafeInteger(qty)||qty<=0||!parsed||!validMaterials(s))return false;
+ const {material,quality}=parsed,m=ensureMerchant(s,now);if(!m||(expectedRevision!==undefined&&m.revision!==expectedRevision))return false;
+ const offer=m.offers.find(o=>o.type==='material'&&o.material===material&&(o.quality??0)===quality);
+ if(!offer||qty>offer.stock||!Number.isFinite(s.gold)||s.gold<offer.price*qty||materialCount(s,material,quality)+qty>1e12)return false;
+ normalizeMaterials(s);s.gold-=offer.price*qty;addMaterial(s,material,quality,qty);offer.stock-=qty;return true;
 }
 export function purchaseEquipment(s,offerId,expectedRevision,now=Date.now()){
  const m=ensureMerchant(s,now);if(!m||!Number.isSafeInteger(expectedRevision)||m.revision!==expectedRevision)return false;
@@ -359,12 +387,14 @@ export const FUSION_TAGS={
  '炉火晶':{set:'rune',slots:{weapon:1,helm:0,armor:0,gloves:1,boots:0,ring:2,amulet:2}},
  '誓约残片':{set:'guard',slots:{weapon:0,helm:1,armor:0,gloves:0,boots:1,ring:2,amulet:2}}
 };
-export function fusionWeights(selection){const slots=Object.fromEntries(SLOTS.map(k=>[k,2])),sets=Object.fromEntries(BUILD.map(b=>[b.id,1]));for(const key of selection){const tag=FUSION_TAGS[key];if(!tag)continue;sets[tag.set]+=2;for(const slot of SLOTS)slots[slot]+=tag.slots[slot];}return {slots,sets};}
+export function fusionWeights(selection){const slots=Object.fromEntries(SLOTS.map(k=>[k,2])),sets=Object.fromEntries(BUILD.map(b=>[b.id,1]));for(const key of selection){const parsed=parseMaterialKey(key),tag=parsed?FUSION_TAGS[parsed.material]:null;if(!tag)continue;sets[tag.set]+=2;for(const slot of SLOTS)slots[slot]+=tag.slots[slot];}return {slots,sets};}
 export function forge(s,selection){
- if(!Array.isArray(selection)||selection.length<1||selection.length>5||s.gold<40||bagItems(s).length>=100)return null;
- const counts={};for(const key of selection){if(!Object.hasOwn(FUSION_TAGS,key))return null;counts[key]=(counts[key]||0)+1;}if(Object.entries(counts).some(([k,v])=>s.materials[k]<v))return null;
- const weights=fusionWeights(selection),isSet=Math.random()<.05,slot=weighted(Object.entries(weights.slots).filter(([k])=>!isSet||SET_SLOTS.includes(k))),set=isSet?weighted(Object.entries(weights.sets)):null,n=selection.length,quality=isSet?3:luckyRoll(()=>rollQuality([50-4*n,40+2*n,9+1.6*n,1+.4*n]),s.talents.luck??0);
- const it=item(slot,s.level+rand(0,2),set,quality);if(Math.random()<.03)applyForgeFavor(it);Object.entries(counts).forEach(([k,v])=>s.materials[k]-=v);s.gold-=40;s.inventory.push(it);return it;
+ if(!Array.isArray(selection)||selection.length<1||selection.length>5||s.gold<40||bagItems(s).length>=100||!validMaterials(s))return null;
+ const counts={},parsed=[];for(const key of selection){const entry=parseMaterialKey(key);if(!entry)return null;parsed.push(entry);counts[entry.key]=(counts[entry.key]||0)+1;}
+ if(parsed.some(({material,quality,key})=>materialCount(s,material,quality)<counts[key]))return null;
+ const weights=fusionWeights(selection),isSet=Math.random()<.05,slot=weighted(Object.entries(weights.slots).filter(([k])=>!isSet||SET_SLOTS.includes(k))),set=isSet?weighted(Object.entries(weights.sets)):null,n=selection.length,a=parsed.reduce((total,p)=>total+p.quality,0)/n,quality=isSet?3:luckyRoll(()=>rollQuality([50-4*n-3*a,40+2*n-a,9+1.6*n+3*a,1+.4*n+a]),s.talents.luck??0);
+ const it=item(slot,s.level+rand(0,2),set,quality);if(Math.random()<.03)applyForgeFavor(it);
+ normalizeMaterials(s);Object.entries(counts).forEach(([key,v])=>s.materialStacks[key]-=v);s.gold-=40;s.inventory.push(it);return it;
 }
 export function applyForgeFavor(it){
  if(it.divine)return false;
@@ -384,7 +414,7 @@ export function validSave(s){
  if(!validLoadoutSlots(s)||bagItems(s).length>100||(s.merchant!==undefined&&!validMerchant(s.merchant)))return false;
  if(new Set(s.inventory.map(i=>i.id)).size!==s.inventory.length||!s.equip||Object.keys(s.equip).length!==SOCKETS.length||!SOCKETS.every(k=>s.equip[k]===null||s.inventory.some(i=>i.id===s.equip[k]&&i.slot===SOCKET_TYPE[k])))return false;
  const equipped=Object.values(s.equip).filter(Boolean);if(new Set(equipped).size!==equipped.length)return false;
- return validSkillSlots(s.skills,s.conditions)&&LOCS.every(l=>num(s.materials[l.mat]))&&validTalents(s)&&validConsumables(s)&&['bossWins','bossReady','normalWins'].every(k=>Array.isArray(s[k])&&s[k].length===3&&s[k].every(n=>num(n,1e15)))&&Array.isArray(s.chapters)&&s.chapters.every(n=>Number.isInteger(n)&&n>=0&&n<3)&&Array.isArray(s.chronicle)&&s.chronicle.length<=100&&s.chronicle.every(t=>typeof t==='string'&&t.length<2000)&&num(s.kills)&&num(s.stock,3)&&num(s.lastSeen,1e15)&&[0,1].includes(s.momentum)&&typeof s.running==='boolean';
+ return validSkillSlots(s.skills,s.conditions)&&validMaterials(s)&&(s.offlineLuck===undefined||(Number.isInteger(s.offlineLuck)&&num(s.offlineLuck,10)))&&validTalents(s)&&validConsumables(s)&&['bossWins','bossReady','normalWins'].every(k=>Array.isArray(s[k])&&s[k].length===3&&s[k].every(n=>num(n,1e15)))&&Array.isArray(s.chapters)&&s.chapters.every(n=>Number.isInteger(n)&&n>=0&&n<3)&&Array.isArray(s.chronicle)&&s.chronicle.length<=100&&s.chronicle.every(t=>typeof t==='string'&&t.length<2000)&&num(s.kills)&&num(s.stock,3)&&num(s.lastSeen,1e15)&&[0,1].includes(s.momentum)&&typeof s.running==='boolean';
  }catch{return false;}
 }
 
