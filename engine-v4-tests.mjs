@@ -8,7 +8,7 @@ try{
  for(const slot of SLOTS)for(const b of BUILD){const it=item(slot,4,b.id,0);if(SET_SLOTS.includes(slot)){assert.equal(it.rarity,3);assert.equal(it.set,b.id);assert.equal(it.affixes.length,4);assert(!it.special);}else assert.equal(it.set,null);}
  // Affixes really modify stats, with explicit caps.
  let p=fresh(),base=stats(p);p.inventory[0].affixes=[{stat:'atk',value:10}];assert(stats(p).atk>base.atk);p.inventory[0].affixes=[{stat:'hp',value:10}];assert(stats(p).hp>base.hp);p.inventory[0].affixes=[{stat:'armor',value:10}];assert(stats(p).armor>base.armor);
- for(const [stat,out,max] of [['hit','hit',1],['crit','crit',.6],['critDamage','critDamage',2.5],['element','element',.6]]){p.inventory[0].affixes=[{stat,value:1000}];assert(stats(p)[out]>base[out]);assert(stats(p)[out]<= (stat==='element'?Math.floor(stats(p).atk*.6):max));}
+ for(const [stat,out,max] of [['hit','hit',1],['crit','crit',.6],['critDamage','critDamage',2.5],['element','element',1000]]){p.inventory[0].affixes=[{stat,value:1000}];assert(stats(p)[out]>base[out]);assert(stats(p)[out]<= max);}
  p=fresh();let unmodified=stats(p);p.inventory.push({...item('ring',3,null,2),id:'extra-ring',affixes:[{stat:'crit',value:3},{stat:'atk',value:5},{stat:'hp',value:7}]});equipItem(p,'extra-ring','ring2');assert(stats(p).crit>unmodified.crit);assert(validSave(p));
  // Set counts are exactly three pieces, no phantom fourth threshold.
  for(const b of BUILD){let x=fresh();for(const slot of SET_SLOTS){let it=item(slot,5,b.id,3);x.inventory.push(it);equipItem(x,it.id,slot);}preset(x,b.id);assert.equal(stats(x).count[b.id],4);assert(validSave(x));}
@@ -17,7 +17,7 @@ try{
  // Direct combat responds to flat attack, elemental damage and rating-derived crits.
  let probe=fresh();probe.skills=['break','heavy','interrupt'];probe.conditions=['low','low','charge'];
  const dealt=(state,roll=.4)=>{let battle=encounter(state);battle.hp=battle.max=100000;battle.atk=0;Math.random=()=>roll;step(state,battle);Math.random=rng;return 100000-battle.hp;};
- const plainDamage=dealt(probe);probe.inventory[0].affixes=[{stat:'atk',value:8}];assert(dealt(probe)>plainDamage);probe.inventory[0].affixes=[{stat:'element',value:7}];assert(dealt(probe)>plainDamage);probe.inventory[0].affixes=[{stat:'crit',value:50}];assert(dealt(probe,.1)>plainDamage);
+ const plainDamage=dealt(probe);probe.inventory[0].affixes=[{stat:'atk',value:8}];assert(dealt(probe)>plainDamage);probe.inventory[0].affixes=[{stat:'element',value:7}];assert.equal(dealt(probe),plainDamage);probe.inventory[0].affixes=[{stat:'crit',value:50}];assert(dealt(probe,.1)>plainDamage);
  // Two-piece core enhancement and four-piece follow-up bonuses are active, never a three-piece threshold.
  for(const build of BUILD){let t=fresh();for(const socket of SET_SLOTS){const gear=item(socket,1,build.id,3);gear.affixes=[{stat:'hp',value:15},{stat:'armor',value:2},{stat:'hit',value:5},{stat:'critDamage',value:8}];t.inventory.push(gear);equipItem(t,gear.id,socket);}assert.equal(stats(t).count[build.id],4);let first=encounter(t);first.hp=first.max=100000;preset(t,build.id);Math.random=()=>.5;step(t,first);Math.random=rng;assert(first.round===1);}
  // Shield once only; special effects cannot recursively reward.

@@ -1,3 +1,5 @@
+import {ELEMENT_KEYS,ELEMENT_AFFIX_DEFS,resolveElementDamage} from './element-schema.js';
+export {ELEMENT_KEYS,resolveElementDamage} from './element-schema.js';
 // v0.4 equipment foundation. Item families and equipment sockets are intentionally separate.
 export const SCHEMA_VERSION = 2;
 export const SLOTS = ['weapon','helm','armor','gloves','boots','ring','amulet'];
@@ -12,7 +14,7 @@ export const BUILD = [
  {id:'rune',name:'炉纹',sub:'铭火 · 引燃',skills:['mark','ignite','interrupt',null],bonus:'2件：铭火灼烧 +30%；炉蚀延长1回合；4件：引燃伤害 +35%。'},
  {id:'guard',name:'守冢',sub:'坚守 · 反击',skills:['guard','break','interrupt',null],bonus:'2件：坚守主动伤害 +30%；铁衣延长1回合；4件：坚守反击提高到100%攻击，铸壁获得2回合坚守。'}
 ];
-export const SKILLS={break:{name:'裂甲锤',icon:'⌁',cd:4,desc:'120%攻击伤害，削减目标25%护甲，持续6回合。'},heavy:{name:'重锻击',icon:'✦',cd:5,desc:'220%攻击伤害，破甲目标再提高25%。'},interrupt:{name:'断势',icon:'ϟ',cd:6,desc:'115%攻击伤害，打断本回合蓄力重击。'},mark:{name:'铭火',icon:'♨',cd:4,desc:'90%攻击伤害，附加5回合灼烧。'},ignite:{name:'引燃',icon:'✧',cd:5,desc:'160%攻击伤害，灼烧目标额外80%攻击伤害。'},guard:{name:'坚守',icon:'▣',cd:5,desc:'100%攻击伤害，3回合减伤40%并反击。'}};
+export const SKILLS={break:{name:'裂甲锤',icon:'⌁',cd:4,desc:'120%攻击伤害，削减目标25%护甲，持续6回合。'},heavy:{name:'重锻击',icon:'✦',cd:5,desc:'220%攻击伤害，破甲目标再提高25%。'},interrupt:{name:'断势',icon:'ϟ',cd:6,desc:'115%攻击伤害，打断本回合蓄力重击。'},mark:{name:'铭火',icon:'♨',cd:4,desc:'90%攻击的火元素伤害，附加5回合火焰灼烧；不受护甲影响。'},ignite:{name:'引燃',icon:'✧',cd:5,desc:'160%攻击的火元素伤害，灼烧目标额外80%攻击；不受护甲影响。'},guard:{name:'坚守',icon:'▣',cd:5,desc:'100%攻击伤害，3回合减伤40%并反击。'}};
 Object.assign(SKILLS,{
  warcry:{name:'砧誓战吼',icon:'⚒',cd:7,desc:'攻击提高25%，持续3回合。碎砧2件延长1回合。'},
  ironcoat:{name:'铁衣铭文',icon:'▣',cd:7,desc:'护甲提高40%，持续3回合。守冢2件延长1回合。'},
@@ -31,7 +33,7 @@ export const LOCS=[
 export const TALENTS={
  power:{name:'力量',desc:'每点攻击 +3。',icon:'heavy',cap:null},heart:{name:'体魄',desc:'每点生命 +20。',icon:'mend',cap:null},steel:{name:'坚韧',desc:'每点护甲 +3。',icon:'ironcoat',cap:null},
  precision:{name:'精准',desc:'每点命中值 +5。',icon:'mark',cap:10},crit:{name:'锐意',desc:'每点暴击值 +5。',icon:'interrupt',cap:10},critDamage:{name:'重创',desc:'每点暴伤值 +8。',icon:'heavy',cap:null},
- penetration:{name:'破壁',desc:'每点物理穿甲 +2。',icon:'break',cap:null},element:{name:'元素亲和',desc:'每点元素附伤 +2，附伤总量最多为攻击60%。',icon:'fire',cap:null},elementResist:{name:'元素抗性',desc:'每点元素抗性值 +5，降低所受灼烧伤害。',icon:'cleanse',cap:null},
+ penetration:{name:'破壁',desc:'每点物理穿甲 +2。',icon:'break',cap:null},element:{name:'元素亲和',desc:'每点元素技能增幅 +2；只增强元素伤害，不为物理攻击追加附伤。',icon:'fire',cap:null},elementResist:{name:'元素抗性',desc:'每点六系元素抗性值各 +5；按对应元素降低伤害。',icon:'cleanse',cap:null},
  block:{name:'格挡训练',desc:'每点格挡值 +4，概率减轻30%直接攻击伤害。',icon:'barrier',cap:10},shield:{name:'护盾塑形',desc:'已有技能或词条生成护盾时，每点额外 +4；不自动生成。',icon:'shield',cap:null},healing:{name:'复苏',desc:'每点回炉息在基础恢复后额外 +3，总恢复上限为最大生命35%。',icon:'mend',cap:null},
  resolve:{name:'抗扰',desc:'每5点缩短新受到的灼烧、虚弱1回合，最低1回合。',icon:'ironcoat',cap:10},luck:{name:'幸运',desc:'小幅提高非套装掉落、融合品质及改造普通词条数值；不改变套装与神赐概率，不直接提高特殊词条判定率。',icon:'ring',cap:10}
 };
@@ -70,8 +72,9 @@ export function commitTalentRefund(s,draft,battleActive=false){
 }
 export const AFFIX_DEFS={
  atk:{name:'攻击',suffix:'',min:3,max:8},hp:{name:'生命',suffix:'',min:15,max:40},armor:{name:'护甲',suffix:'',min:2,max:6},
- hit:{name:'命中值',suffix:'',min:5,max:12},crit:{name:'暴击值',suffix:'',min:5,max:15},critDamage:{name:'暴伤值',suffix:'',min:8,max:20},element:{name:'元素附伤',suffix:'',min:2,max:7}
+ hit:{name:'命中值',suffix:'',min:5,max:12},crit:{name:'暴击值',suffix:'',min:5,max:15},critDamage:{name:'暴伤值',suffix:'',min:8,max:20},element:{name:'元素技能增幅',suffix:'',min:2,max:7},...ELEMENT_AFFIX_DEFS
 };
+export const ACTIVE_AFFIX_KEYS=Object.freeze(['atk','hp','armor','hit','crit','critDamage',...Object.keys(ELEMENT_AFFIX_DEFS)]);
 // Roll color is derived from the original roll, never from divine gains.
 export function affixRollInfo(a){
  const def=AFFIX_DEFS[a?.stat];if(!def)return null;
@@ -93,7 +96,7 @@ const rand=(a,b)=>Math.floor(a+Math.random()*(b-a+1));
 const names={weapon:'战锤',helm:'铁盔',armor:'板甲',gloves:'护手',boots:'战靴',ring:'指环',amulet:'护符'};
 const bases={weapon:{atk:12,armor:1,hp:5},helm:{atk:1,armor:4,hp:18},armor:{atk:1,armor:8,hp:18},gloves:{atk:3,armor:3,hp:8},boots:{atk:1,armor:4,hp:10},ring:{atk:3,armor:1,hp:8},amulet:{atk:2,armor:1,hp:14}};
 function weighted(entries){let roll=Math.random()*entries.reduce((n,[,w])=>n+w,0);for(const [key,w] of entries){roll-=w;if(roll<0)return key;}return entries.at(-1)[0];}
-function rollAffixes(quality){const pool=Object.keys(AFFIX_DEFS);const count=quality===0?rand(0,1):quality+1,affixes=[];for(let i=0;i<count;i++){const key=pool.splice(rand(0,pool.length-1),1)[0],def=AFFIX_DEFS[key];affixes.push({stat:key,value:rand(def.min,def.max)});}return affixes;}
+function rollAffixes(quality){const pool=[...ACTIVE_AFFIX_KEYS];const count=quality===0?rand(0,1):quality+1,affixes=[];for(let i=0;i<count;i++){const key=pool.splice(rand(0,pool.length-1),1)[0],def=AFFIX_DEFS[key];affixes.push({stat:key,value:rand(def.min,def.max)});}return affixes;}
 export function item(slot,level=1,set=null,rarity=0){
  if(!SLOTS.includes(slot))throw new Error('Unsupported item family');
  rarity=clamp(Math.floor(rarity),0,3);level=Math.max(1,Math.floor(level));
@@ -122,17 +125,18 @@ export function reforge(s,itemId,mode,index){
  if(divineMultiplier(it)>1&&(!it.divine.bonus||typeof it.divine.bonus!=='object'))return null;
  if(new Set(it.affixes.map(a=>a.stat)).size!==it.affixes.length||!it.affixes.every(a=>Object.hasOwn(AFFIX_DEFS,a.stat)&&Number.isInteger(a.value)&&a.value>=AFFIX_DEFS[a.stat].min&&a.value<=AFFIX_DEFS[a.stat].max))return null;
  if(mode!=='all'&&(!Number.isInteger(index)||index<0||index>=it.affixes.length))return null;
- if(mode==='replace'&&it.affixes.length===Object.keys(AFFIX_DEFS).length)return null;
+ if(mode==='replace'&&!ACTIVE_AFFIX_KEYS.some(stat=>!it.affixes.some(a=>a.stat===stat)))return null;
+ if(mode==='all'&&it.affixes.length>ACTIVE_AFFIX_KEYS.length)return null;
  if(!Number.isFinite(s.gold)||s.gold<cost.gold||!validMaterials(s)||Object.entries(cost.materials).some(([key,n])=>materialCount(s,key,0)<n))return null;
  const before=it.affixes.map(a=>({...a})),after=before.map(a=>({...a}));
  const roll=stat=>({stat,value:luckyRoll(()=>rand(AFFIX_DEFS[stat].min,AFFIX_DEFS[stat].max),s.talents.luck??0)});
  if(mode==='value')after[index]=roll(after[index].stat);
  else if(mode==='replace'){
   const occupied=new Set(after.map(a=>a.stat));
-  const pool=Object.keys(AFFIX_DEFS).filter(stat=>!occupied.has(stat));
+  const pool=ACTIVE_AFFIX_KEYS.filter(stat=>!occupied.has(stat));
   after[index]=roll(pool[rand(0,pool.length-1)]);
  }else{
-  const pool=Object.keys(AFFIX_DEFS);
+  const pool=[...ACTIVE_AFFIX_KEYS];
   for(let i=0;i<after.length;i++)after[i]=roll(pool.splice(rand(0,pool.length-1),1)[0]);
  }
  // Commit after all validation and rolls. Identity, base stats and unique effects stay intact.
@@ -201,7 +205,9 @@ export function stats(s){
  bonus.hit+=(s.talents.precision??0)*5;bonus.crit+=(s.talents.crit??0)*5;bonus.critDamage+=(s.talents.critDamage??0)*8;bonus.element+=(s.talents.element??0)*2;
  atk=Math.round(atk+bonus.atk);armor=Math.round(armor+bonus.armor);hp=Math.round(hp+bonus.hp);
  const ratingFactor=r=>Math.max(0,r)/(100+Math.max(0,r));
- return {atk,armor,hp,penetration:(s.talents.penetration??0)*2,elementResist:.5*ratingFactor((s.talents.elementResist??0)*5+potionBuffStrength(s,'fireResist')),block:.35*ratingFactor((s.talents.block??0)*4),shieldBonus:(s.talents.shield??0)*4,healingBonus:(s.talents.healing??0)*3,resolveReduction:Math.floor((s.talents.resolve??0)/5),luck:s.talents.luck??0,hit:clamp(.9+.1*ratingFactor(bonus.hit),.5,.995),crit:clamp(.05+.55*ratingFactor(bonus.crit),0,.6),critDamage:clamp(1.5+ratingFactor(bonus.critDamage),1.5,2.5),element:Math.min(bonus.element,Math.floor(atk*.6)),hitRating:bonus.hit,critRating:bonus.crit,critDamageRating:bonus.critDamage,count,specials,legend:false,bonus};
+ const elementAttack=Object.fromEntries(ELEMENT_KEYS.map(k=>[k,bonus.element+(bonus[k+'Atk']??0)]));
+ const elementResistance=Object.fromEntries(ELEMENT_KEYS.map(k=>[k,(s.talents.elementResist??0)*5+(bonus[k+'Resist']??0)+(k==='fire'?potionBuffStrength(s,'fireResist'):0)]));
+ return {atk,armor,hp,penetration:(s.talents.penetration??0)*2,elementAttack,elementResistance,elementResist:.5*ratingFactor(elementResistance.fire),block:.35*ratingFactor((s.talents.block??0)*4),shieldBonus:(s.talents.shield??0)*4,healingBonus:(s.talents.healing??0)*3,resolveReduction:Math.floor((s.talents.resolve??0)/5),luck:s.talents.luck??0,hit:clamp(.9+.1*ratingFactor(bonus.hit),.5,.995),crit:clamp(.05+.55*ratingFactor(bonus.crit),0,.6),critDamage:clamp(1.5+ratingFactor(bonus.critDamage),1.5,2.5),element:bonus.element,hitRating:bonus.hit,critRating:bonus.crit,critDamageRating:bonus.critDamage,count,specials,legend:false,bonus};
 }
 export function preset(s,id){const b=BUILD.find(x=>x.id===id);if(!b)return null;s.build=id;s.skills=[...b.skills];s.conditions=['always','always','charge','always'];return b;}
 export const POTIONS={
@@ -209,6 +215,33 @@ export const POTIONS={
  strength:{name:'力量药剂',icon:'potionPower',desc:'按品质攻击 +10 / +15 / +20 / +25，持续5分钟。同品质续时，高品质替换强度与时间，低品质不可覆盖。'},
  fireResist:{name:'火抗药剂',icon:'potionFireResist',desc:'按品质火焰抗性值 +30 / +40 / +50 / +60，持续5分钟。同品质续时，高品质替换强度与时间，低品质不可覆盖。'}
 };
+// Recipe/material design is deferred. These reserved identities are not obtainable.
+export const RECIPES={
+ 'potion-healing':{id:'potion-healing',name:'治疗药剂配方',potionType:'healing',icon:'potionHeal',ingredients:[],price:null,craftGold:null,enabled:false},
+ 'potion-strength':{id:'potion-strength',name:'力量药剂配方',potionType:'strength',icon:'potionPower',ingredients:[],price:null,craftGold:null,enabled:false},
+ 'potion-fireResist':{id:'potion-fireResist',name:'火抗药剂配方',potionType:'fireResist',icon:'potionFireResist',ingredients:[],price:null,craftGold:null,enabled:false}
+};
+function validRecipes(s){return s.learnedRecipes===undefined||(Array.isArray(s.learnedRecipes)&&s.learnedRecipes.length<=Object.keys(RECIPES).length&&new Set(s.learnedRecipes).size===s.learnedRecipes.length&&s.learnedRecipes.every(id=>Object.hasOwn(RECIPES,id)));}
+export function recipeKnown(s,id){return Object.hasOwn(RECIPES,id)&&Array.isArray(s.learnedRecipes)&&s.learnedRecipes.includes(id);}
+export function normalizeRecipes(s){
+ if(!validRecipes(s))return false;s.learnedRecipes??=[];
+ for(const offer of s.merchant?.offers??[])if(offer.type==='recipe'&&recipeKnown(s,offer.recipeId))offer.stock=0;
+ return true;
+}
+export function learnRecipe(s,id){
+ if(!Object.hasOwn(RECIPES,id)||!RECIPES[id].enabled||!validRecipes(s)||recipeKnown(s,id))return false;
+ normalizeRecipes(s);s.learnedRecipes.push(id);for(const offer of s.merchant?.offers??[])if(offer.type==='recipe'&&offer.recipeId===id)offer.stock=0;return true;
+}
+export function craftRecipe(s,id,selection){
+ if(!Object.hasOwn(RECIPES,id)||!RECIPES[id].enabled||!recipeKnown(s,id)||!validRecipes(s)||!validMaterials(s)||!validPotions(s)||!Array.isArray(selection)||selection.length<1||selection.length>5)return null;
+ const recipe=RECIPES[id];if(!Number.isSafeInteger(recipe.craftGold)||recipe.craftGold<0||!Number.isFinite(s.gold)||s.gold<recipe.craftGold)return null;
+ const selected={},stacks={},parsed=[];for(const key of selection){const row=parseMaterialKey(key);if(!row)return null;parsed.push(row);selected[row.material]=(selected[row.material]??0)+1;stacks[row.key]=(stacks[row.key]??0)+1;}
+ if(Object.keys(selected).length!==recipe.ingredients.length||!recipe.ingredients.every(r=>selected[r.material]===r.count)||parsed.some(r=>materialCount(s,r.material,r.quality)<stacks[r.key]))return null;
+ const quality=luckyRoll(()=>rollQuality(fusionQualityWeights(selection)),s.talents.luck??0),type=recipe.potionType,key=potionKey(type,quality);
+ if(potionCount(s,type,quality)>=1e9)return null;
+ normalizeMaterials(s);normalizePotions(s);for(const [key,n] of Object.entries(stacks))s.materialStacks[key]-=n;s.gold-=recipe.craftGold;s.potionStacks[key]=(s.potionStacks[key]??0)+1;
+ return {kind:'potion',potionType:type,quality,name:POTIONS[type].name,quantity:1,key,recipeId:id};
+}
 export const POTION_DURATION_MS=300000,POTION_COOLDOWN_MS=20000;
 // Same-quality doses extend time; stronger doses replace both potency and time.
 export const POTION_QUALITY_EFFECTS=[0,1,2,3].map(quality=>({heal:.25+.05*quality,durationMs:300000,attack:10+5*quality,resistance:30+10*quality}));
@@ -253,9 +286,18 @@ export function autoDrinkPotion(s,battle=s.activeEncounter??null,now=Date.now())
 }
 function capHealth(s){if(s.heroHp!==undefined){s.heroHp=Math.min(s.heroHp,stats(s).hp);if(s.activeEncounter&&!s.activeEncounter.done)s.activeEncounter.heroHp=Math.min(s.activeEncounter.heroHp,s.heroHp);}}
 export const REST_DURATION_MS=5*60*1000;
+export function normalizeEncounterElements(e){
+ if(!e)return e;
+ const tags=e.location===1?['earth','fire']:e.location===2?['dark']:[];
+ e.elementTags??=tags;
+ e.elementResistance??=Object.fromEntries(ELEMENT_KEYS.map(k=>[k,tags.includes(k)?(e.boss?12:8):0]));
+ return e;
+}
 function validEncounter(e){
  if(e===undefined||e===null)return true;
  const number=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;
+ if(e.elementTags!==undefined&&(!Array.isArray(e.elementTags)||e.elementTags.length>6||new Set(e.elementTags).size!==e.elementTags.length||!e.elementTags.every(k=>ELEMENT_KEYS.includes(k))))return false;
+ if(e.elementResistance!==undefined&&(!e.elementResistance||typeof e.elementResistance!=='object'||Array.isArray(e.elementResistance)||Object.keys(e.elementResistance).length!==6||!ELEMENT_KEYS.every(k=>number(e.elementResistance[k]))))return false;
  if(!e||typeof e!=='object'||Array.isArray(e)||![0,1,2].includes(e.location)||typeof e.name!=='string'||e.name.length>100||typeof e.boss!=='boolean'||typeof e.done!=='boolean'||typeof e.rewarded!=='boolean')return false;
  if(!['hp','max','atk','armor','heroHp','round','burn','broken','guard','stun','shield'].every(k=>number(e[k])))return false;
  if(!e.cd||typeof e.cd!=='object'||Array.isArray(e.cd)||!Object.entries(e.cd).every(([k,n])=>Object.hasOwn(SKILLS,k)&&number(n,100)))return false;
@@ -290,7 +332,7 @@ export function canStartEncounter(s,now=Date.now()){
  if(s.heroHp<=0&&s.restUntil===0)startRest(s,now);
  return s.restUntil===0&&s.heroHp>0&&s.lastHealthClock>=(s.nextBattleAt??0);
 }
-export function encounter(s,boss=false,now=Date.now()){if(!canStartEncounter(s,now))return null;if(s.activeEncounter&&!s.activeEncounter.rewarded)return s.activeEncounter;const l=LOCS[s.location],st=stats(s);const e={location:s.location,luck:st.luck,boss,name:boss?l.boss:l.enemy,hp:l.hp*(boss?4:1),max:l.hp*(boss?4:1),atk:l.atk*(boss?1.65:1),armor:l.armor*(boss?1.3:1),heroHp:s.heroHp,round:0,nextHeavy:4,heavyDelayed:false,warcry:0,ironcoat:0,blunt:0,scorch:0,barrier:0,barrierShield:0,heroBurn:0,weakness:0,burn:0,broken:0,guard:0,stun:0,cd:{},shelterUsed:false,shield:0,done:false,rewarded:false,killSource:null};s.activeEncounter=e;s.nextActionAt=s.lastHealthClock+1100;return e;}
+export function encounter(s,boss=false,now=Date.now()){if(!canStartEncounter(s,now))return null;if(s.activeEncounter&&!s.activeEncounter.rewarded)return normalizeEncounterElements(s.activeEncounter);const l=LOCS[s.location],st=stats(s);const e={location:s.location,luck:st.luck,boss,name:boss?l.boss:l.enemy,hp:l.hp*(boss?4:1),max:l.hp*(boss?4:1),atk:l.atk*(boss?1.65:1),armor:l.armor*(boss?1.3:1),heroHp:s.heroHp,round:0,nextHeavy:4,heavyDelayed:false,warcry:0,ironcoat:0,blunt:0,scorch:0,barrier:0,barrierShield:0,heroBurn:0,weakness:0,burn:0,broken:0,guard:0,stun:0,cd:{},shelterUsed:false,shield:0,done:false,rewarded:false,killSource:null};normalizeEncounterElements(e);s.activeEncounter=e;s.nextActionAt=s.lastHealthClock+1100;return e;}
 const damage=(raw,armor)=>Math.max(1,Math.round(raw*100/(100+Math.max(0,armor))));
 function finish(e,win,source){e.done=true;e.win=win;e.hp=Math.max(0,e.hp);e.heroHp=Math.max(0,e.heroHp);e.killSource=source;}
 export function combatStatuses(e){
@@ -306,7 +348,7 @@ export function step(s,e,now=Date.now()){
  if(s.heroHp<=0){const resume=!!s.running&&!e.boss&&!s.stopAfterBattle;startRest(s,now,resume);s.stopAfterBattle=false;}return logs;
 }
 function combatStep(s,e){
- if(e.done)return[];const st=stats(s),logs=[];e.round++;
+ if(e.done)return[];normalizeEncounterElements(e);const st=stats(s),logs=[];e.round++;
  for(const field of ['warcry','ironcoat','blunt','scorch','barrier','barrierShield','heroBurn','weakness'])e[field]??=0;
  e.nextHeavy??=4;e.heavyDelayed??=false;for(const k in e.cd)e.cd[k]=Math.max(0,e.cd[k]-1);
  let charge=e.round>=e.nextHeavy;
@@ -335,13 +377,14 @@ function combatStep(s,e){
    if(k==='scorch'){raw*=.5;e.scorch=4+(st.count.rune>=2?1:0);}
    if((k==='mark'||k==='ignite')&&e.scorch>0)raw*=1.25;
    if(!k&&s.momentum){raw*=1.35;s.momentum=0;logs.push('余势：普攻增强');}
-   const crit=Math.random()<st.crit,armor=e.armor*(e.broken?.75:1),physical=damage(raw*(crit?st.critDamage:1),(k==='mark'||k==='ignite')?armor:Math.max(0,armor-st.penetration)),element=st.element>0?damage(st.element,armor*.5):0;
-   e.hp-=physical+element;logs.push((k?SKILLS[k].name:'普通攻击')+(crit?' 暴击':'')+' · '+(physical+element)+' 伤害'+(element?'（元素'+element+'）':''));
+   const crit=Math.random()<st.crit,armor=e.armor*(e.broken?.75:1),isFire=k==='mark'||k==='ignite',base=raw*(crit?st.critDamage:1);
+   const dealt=isFire?resolveElementDamage(base,'fire',st.elementAttack.fire,e.elementResistance.fire,e.elementTags):damage(base,Math.max(0,armor-st.penetration));
+   e.hp-=dealt;logs.push((k?SKILLS[k].name:'普通攻击')+(crit?' 暴击':'')+' · '+Number(dealt.toFixed(1))+' 伤害'+(isFire?'（火）':''));
    if(e.hp<=0){if(st.specials.momentum)s.momentum=1;finish(e,true,'active');return logs;}
   }else logs.push((k?SKILLS[k].name:'普通攻击')+' · 未命中');
  }
- if(e.burn>0){const dot=damage(st.atk*(e.warcry>0?1.25:1)*(e.weakness>0?.8:1)*.32*(st.count.rune>=2?1.3:1)*(e.scorch>0?1.25:1),e.armor*.5);e.hp-=dot;e.burn--;logs.push('炉火灼烧 · '+dot);if(e.hp<=0){finish(e,true,'burn');return logs;}}
- if(e.heroBurn>0){const dot=Math.max(2,Math.round(e.atk*.05))*(1-st.elementResist);e.heroHp-=dot;e.heroBurn--;logs.push('灼烧侵蚀 · -'+Number(dot.toFixed(1)));if(e.heroHp<=0){s.momentum=0;finish(e,false,null);return logs;}}
+ if(e.burn>0){const dot=resolveElementDamage(st.atk*(e.warcry>0?1.25:1)*(e.weakness>0?.8:1)*.32*(st.count.rune>=2?1.3:1)*(e.scorch>0?1.25:1),'fire',st.elementAttack.fire,e.elementResistance.fire,e.elementTags);e.hp-=dot;e.burn--;logs.push('炉火灼烧 · '+Number(dot.toFixed(1)));if(e.hp<=0){finish(e,true,'burn');return logs;}}
+ if(e.heroBurn>0){const dot=resolveElementDamage(Math.max(2,Math.round(e.atk*.05)),'fire',0,st.elementResistance.fire,[]);e.heroHp-=dot;e.heroBurn--;logs.push('灼烧侵蚀 · -'+Number(dot.toFixed(1)));if(e.heroHp<=0){s.momentum=0;finish(e,false,null);return logs;}}
  if(e.stun){logs.push('敌人蓄力被打断');e.stun=0;}else{
   let hurt=Math.max(1,Math.round(damage(e.atk*(e.blunt>0?.8:1)*(charge?2:1),st.armor*(e.ironcoat>0?1.4:1))*(e.guard>0?.6:1)));
   if(st.block>0&&Math.random()<st.block){hurt=Math.max(1,Math.round(hurt*.7));logs.push('格挡 · 减轻30%直接伤害');}
@@ -441,8 +484,8 @@ function validMerchant(merchant){
  if(legacy){if(!rows.every(materialValid)||new Set(rows.map(o=>o.material)).size!==rows.length)return false;}
  else{
   if(rows.length!==8||new Set(rows.map(o=>o?.offerId)).size!==8||!rows.every(o=>o&&typeof o.offerId==='string'))return false;
-  const mats=rows.filter(o=>o.type==='material'),gear=rows.filter(o=>o.type==='equipment'),consumables=rows.filter(o=>o.type==='consumable');
-  if(mats.length<2||mats.length>3||mats.length+gear.length+consumables.length!==8||consumables.length>1||!consumables.every(o=>o.consumable==='memoryFruit'&&o.price===200&&[0,1].includes(o.stock))||new Set(mats.map(o=>o.material)).size!==mats.length||!mats.every(materialValid))return false;
+  const mats=rows.filter(o=>o.type==='material'),gear=rows.filter(o=>o.type==='equipment'),consumables=rows.filter(o=>o.type==='consumable'),recipes=rows.filter(o=>o.type==='recipe');
+  if(mats.length<2||mats.length>3||mats.length+gear.length+consumables.length+recipes.length!==8||recipes.length>3||new Set(recipes.map(o=>o.recipeId)).size!==recipes.length||!recipes.every(o=>Object.hasOwn(RECIPES,o.recipeId)&&RECIPES[o.recipeId].enabled&&o.price===RECIPES[o.recipeId].price&&Number.isSafeInteger(o.price)&&o.price>0&&[0,1].includes(o.stock))||consumables.length>1||!consumables.every(o=>o.consumable==='memoryFruit'&&o.price===200&&[0,1].includes(o.stock))||new Set(mats.map(o=>o.material)).size!==mats.length||!mats.every(materialValid))return false;
   if(!gear.every(o=>validEquipment(o.item)&&!o.item.divine&&o.item.legendaryId===null&&[0,1].includes(o.stock)&&o.price===15+sellValue(o.item)*4+o.item.level*3)||new Set(gear.map(o=>o.item.id)).size!==gear.length)return false;
  }
  if(['cycleStart','nextRefreshAt','paidRefreshes','revision'].every(k=>merchant[k]===undefined))return legacy;
@@ -453,13 +496,16 @@ function rollMerchantOffers(s,revision,preservedMaterials=null){
  if(!preservedMaterials)for(let i=0;i<count;i++){const material=pool.splice(rand(0,pool.length-1),1)[0],[min,max]=MERCHANT_STOCK[material];const quality=rollQuality([75,20,4.5,.5]);offers.push({type:'material',material,quality,price:materialPrice(material,quality),stock:rand(min,max)});}
  while(offers.length<8){const isSet=Math.random()<.01,slot=isSet?SET_SLOTS[rand(0,SET_SLOTS.length-1)]:SLOTS[rand(0,SLOTS.length-1)],set=isSet?BUILD[rand(0,2)].id:null,it=item(slot,s.level,set,isSet?3:rollQuality());offers.push({type:'equipment',item:it,price:15+sellValue(it)*4+it.level*3,stock:1});}
  if(Math.random()<.03)offers[7]={type:'consumable',consumable:'memoryFruit',price:200,stock:1};
+ const unknown=Object.keys(RECIPES).filter(id=>RECIPES[id].enabled&&!recipeKnown(s,id));
+ if(unknown.length){const count=Math.min(unknown.length,rand(1,2));for(let i=0;i<count;i++){const id=unknown.splice(rand(0,unknown.length-1),1)[0],index=offers.findLastIndex(o=>o.type==='equipment');if(index>=0)offers[index]={type:'recipe',recipeId:id,price:RECIPES[id].price,stock:1};}}
  return offers.map((offer,index)=>({...offer,offerId:`merchant-${revision}-${index}`}));
 }
 export function ensureMerchant(s,now=Date.now()){
+ if(!validRecipes(s))return null;
  if(!Number.isFinite(now)||now<0||now>1e15)return null;
- if(s.merchant===undefined){s.merchant={version:1,offers:rollMerchantOffers(s,0),generatedAt:now,cycleStart:now,nextRefreshAt:now+MERCHANT_CYCLE_MS,paidRefreshes:0,revision:0};return s.merchant;}
+ if(s.merchant===undefined){normalizeRecipes(s);s.merchant={version:1,offers:rollMerchantOffers(s,0),generatedAt:now,cycleStart:now,nextRefreshAt:now+MERCHANT_CYCLE_MS,paidRefreshes:0,revision:0};return s.merchant;}
  if(!validMerchant(s.merchant))return null;
- const m=s.merchant;for(const offer of m.offers)if(offer.type==='material'||!offer.type)offer.quality??=0;
+ normalizeRecipes(s);const m=s.merchant;for(const offer of m.offers)if(offer.type==='material'||!offer.type)offer.quality??=0;
  // Upgrade the initial merchant schema without replacing purchased stock.
  if(m.cycleStart===undefined){m.cycleStart=m.generatedAt;m.nextRefreshAt=m.cycleStart+MERCHANT_CYCLE_MS;m.paidRefreshes=0;m.revision=0;}
  if(now>=m.nextRefreshAt){
@@ -496,6 +542,16 @@ export function purchaseConsumable(s,offerId,expectedRevision,now=Date.now()){
  if(!offer||offer.stock!==1||offer.consumable!=='memoryFruit'||!validTalents(s)||!validConsumables(s)||!Number.isFinite(s.gold)||s.gold<offer.price||(s.consumables?.memoryFruit??0)>=1e9)return false;
  normalizeTalents(s);s.gold-=offer.price;offer.stock=0;s.consumables.memoryFruit++;return true;
 }
+export function purchaseRecipe(s,offerId,expectedRevision,now=Date.now()){
+ if(!validRecipes(s))return false;const merchant=ensureMerchant(s,now);if(!merchant||!Number.isSafeInteger(expectedRevision)||merchant.revision!==expectedRevision)return false;
+ const offer=merchant.offers.find(o=>o.type==='recipe'&&o.offerId===offerId);
+ if(!offer||offer.stock!==1||recipeKnown(s,offer.recipeId)||!Number.isFinite(s.gold)||s.gold<offer.price)return false;
+ if(!learnRecipe(s,offer.recipeId))return false;s.gold-=offer.price;offer.stock=0;return true;
+}
+export function fusionQualityWeights(selection){
+ if(!Array.isArray(selection)||selection.length<1||selection.length>5)return null;const parsed=selection.map(parseMaterialKey);if(parsed.some(x=>!x))return null;
+ const n=selection.length,a=parsed.reduce((sum,x)=>sum+x.quality,0)/n;return [50-4*n-3*a,40+2*n-a,9+1.6*n+3*a,1+.4*n+a];
+}
 export const FUSION_TAGS={
  '铁屑':{set:'anvil',slots:{weapon:2,helm:1,armor:2,gloves:1,boots:1,ring:0,amulet:0}},
  '炉火晶':{set:'rune',slots:{weapon:1,helm:0,armor:0,gloves:1,boots:0,ring:2,amulet:2}},
@@ -507,7 +563,7 @@ export function forge(s,selection){
  if(!Array.isArray(selection)||selection.length<1||selection.length>5||s.gold<40||bagItems(s).length>=100||!validMaterials(s))return null;
  const counts={},parsed=[];for(const key of selection){const entry=parseMaterialKey(key);if(!entry)return null;parsed.push(entry);counts[entry.key]=(counts[entry.key]||0)+1;}
  if(parsed.some(({material,quality,key})=>materialCount(s,material,quality)<counts[key]))return null;
- const n=selection.length,a=parsed.reduce((total,p)=>total+p.quality,0)/n,qualityWeights=[50-4*n-3*a,40+2*n-a,9+1.6*n+3*a,1+.4*n+a],herbs=parsed.filter(p=>p.material==='灰根草').length;
+ const n=selection.length,a=parsed.reduce((total,p)=>total+p.quality,0)/n,qualityWeights=fusionQualityWeights(selection),herbs=parsed.filter(p=>p.material==='灰根草').length;
  if(herbs&&Math.random()<.35+.5*herbs/n){
   if(!validPotions(s))return null;
   const quality=luckyRoll(()=>rollQuality(qualityWeights),s.talents.luck??0),type=weighted([['healing',60],['strength',25],['fireResist',15]]),key=potionKey(type,quality);
@@ -534,7 +590,7 @@ export function validSave(s){
  if(s.version!==SCHEMA_VERSION||s.race!=='dwarf'||s.hero!=='布洛克'||!Number.isInteger(s.level)||s.level<1||s.level>=100000||!num(s.xp)||!num(s.gold)||!Number.isInteger(s.location)||s.location<0||s.location>2)return false;
  if(!Array.isArray(s.inventory)||s.inventory.length>124||!s.inventory.every(validEquipment))return false;
  if(s.merchant?.offers?.some(o=>o.type==='equipment'&&o.stock===1&&s.inventory.some(it=>it.id===o.item?.id)))return false;
- if((s.nextActionAt!==undefined&&(!Number.isFinite(s.nextActionAt)||s.nextActionAt<0||s.nextActionAt>1e15))||(s.restResume!==undefined&&typeof s.restResume!=='boolean')||(s.nextBattleAt!==undefined&&(!Number.isFinite(s.nextBattleAt)||s.nextBattleAt<0||s.nextBattleAt>1e15))||!validEncounter(s.activeEncounter)||!validPotions(s)||!validHealth(s)||!validLoadoutSlots(s)||bagItems(s).length>100||(s.merchant!==undefined&&!validMerchant(s.merchant)))return false;
+ if((s.nextActionAt!==undefined&&(!Number.isFinite(s.nextActionAt)||s.nextActionAt<0||s.nextActionAt>1e15))||(s.restResume!==undefined&&typeof s.restResume!=='boolean')||(s.nextBattleAt!==undefined&&(!Number.isFinite(s.nextBattleAt)||s.nextBattleAt<0||s.nextBattleAt>1e15))||!validRecipes(s)||!validEncounter(s.activeEncounter)||!validPotions(s)||!validHealth(s)||!validLoadoutSlots(s)||bagItems(s).length>100||(s.merchant!==undefined&&!validMerchant(s.merchant)))return false;
  if(new Set(s.inventory.map(i=>i.id)).size!==s.inventory.length||!s.equip||Object.keys(s.equip).length!==SOCKETS.length||!SOCKETS.every(k=>s.equip[k]===null||s.inventory.some(i=>i.id===s.equip[k]&&i.slot===SOCKET_TYPE[k])))return false;
  const equipped=Object.values(s.equip).filter(Boolean);if(new Set(equipped).size!==equipped.length)return false;
  return validSkillSlots(s.skills,s.conditions)&&validMaterials(s)&&(s.offlineLuck===undefined||(Number.isInteger(s.offlineLuck)&&num(s.offlineLuck,10)))&&validTalents(s)&&validConsumables(s)&&['bossWins','bossReady','normalWins'].every(k=>Array.isArray(s[k])&&s[k].length===3&&s[k].every(n=>num(n,1e15)))&&Array.isArray(s.chapters)&&s.chapters.every(n=>Number.isInteger(n)&&n>=0&&n<3)&&Array.isArray(s.chronicle)&&s.chronicle.length<=100&&s.chronicle.every(t=>typeof t==='string'&&t.length<2000)&&num(s.kills)&&num(s.stock,3)&&num(s.lastSeen,1e15)&&[0,1].includes(s.momentum)&&typeof s.running==='boolean';

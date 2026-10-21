@@ -20,3 +20,8 @@ import './hp-rest-tests.mjs';
 import './potion-tests.mjs';
 import './potion-forge-tests.mjs';
 import './offline-combat-tests.mjs';
+
+import './recipe-tests.mjs';
+
+import './element-schema-tests.mjs';
+import './elemental-combat-tests.mjs';
