@@ -6,3 +6,6 @@ import './reforge-tests.mjs';
 import './loadout-tests.mjs';
 
 import './merchant-tests.mjs';
+
+import './skill-slot-tests.mjs';
+import './skill-expansion-tests.mjs';

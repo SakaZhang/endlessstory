@@ -8,11 +8,21 @@ export const SLOTNAME = {weapon:'武器',helm:'头盔',armor:'护甲',gloves:'�
 export const RARITY = ['普通','稀有','优良','至臻'];
 export const SET_SLOTS = ['helm','armor','gloves','boots'];
 export const BUILD = [
- {id:'anvil',name:'碎砧',sub:'裂甲 · 重击',skills:['break','heavy','interrupt'],bonus:'2件：裂甲锤伤害 +25%；4件：重锻击伤害 +35%。'},
- {id:'rune',name:'炉纹',sub:'铭火 · 引燃',skills:['mark','ignite','interrupt'],bonus:'2件：铭火灼烧 +30%；4件：引燃伤害 +35%。'},
- {id:'guard',name:'守冢',sub:'坚守 · 反击',skills:['guard','break','interrupt'],bonus:'2件：坚守主动伤害 +30%；4件：坚守反击提高到100%攻击。'}
+ {id:'anvil',name:'碎砧',sub:'裂甲 · 重击',skills:['break','heavy','interrupt',null],bonus:'2件：裂甲锤伤害 +25%；战吼延长1回合；4件：重锻击伤害 +35%。'},
+ {id:'rune',name:'炉纹',sub:'铭火 · 引燃',skills:['mark','ignite','interrupt',null],bonus:'2件：铭火灼烧 +30%；炉蚀延长1回合；4件：引燃伤害 +35%。'},
+ {id:'guard',name:'守冢',sub:'坚守 · 反击',skills:['guard','break','interrupt',null],bonus:'2件：坚守主动伤害 +30%；铁衣延长1回合；4件：坚守反击提高到100%攻击，铸壁获得2回合坚守。'}
 ];
 export const SKILLS={break:{name:'裂甲锤',icon:'⌁',cd:4,desc:'120%攻击伤害，削减目标25%护甲，持续6回合。'},heavy:{name:'重锻击',icon:'✦',cd:5,desc:'220%攻击伤害，破甲目标再提高25%。'},interrupt:{name:'断势',icon:'ϟ',cd:6,desc:'115%攻击伤害，打断本回合蓄力重击。'},mark:{name:'铭火',icon:'♨',cd:4,desc:'90%攻击伤害，附加5回合灼烧。'},ignite:{name:'引燃',icon:'✧',cd:5,desc:'160%攻击伤害，灼烧目标额外80%攻击伤害。'},guard:{name:'坚守',icon:'▣',cd:5,desc:'100%攻击伤害，3回合减伤40%并反击。'}};
+Object.assign(SKILLS,{
+ warcry:{name:'砧誓战吼',icon:'⚒',cd:7,desc:'攻击提高25%，持续3回合。碎砧2件延长1回合。'},
+ ironcoat:{name:'铁衣铭文',icon:'▣',cd:7,desc:'护甲提高40%，持续3回合。守冢2件延长1回合。'},
+ blunt:{name:'挫锋打击',icon:'⌁',cd:7,desc:'60%攻击伤害；敌方攻击降低20%，持续3回合。'},
+ scorch:{name:'炉蚀刻印',icon:'♨',cd:7,desc:'50%攻击伤害；目标受到铭火、引燃与灼烧伤害提高25%，持续4回合。炉纹2件延长1回合。'},
+ delay:{name:'迟滞符',icon:'⌛',cd:8,desc:'重击将至时使用：将本次重击延后1回合，敌人仍普通攻击。同一次重击最多延后一次。'},
+ barrier:{name:'铸壁',icon:'▥',cd:8,desc:'获得20%最大生命护盾，持续3回合，不叠加。守冢4件同时获得2回合坚守反击。'},
+ mend:{name:'回炉息',icon:'✚',cd:10,desc:'生命低于60%时恢复70%攻击+15生命，最多20%最大生命。'},
+ cleanse:{name:'净炉',icon:'✧',cd:7,desc:'仅在有灼烧或虚弱时释放，移除自身灼烧和虚弱。'}
+});
 export const LOCS=[
  {name:'失落驿道',en:'THE FORSAKEN ROAD',desc:'沿着车辙，追查消失的黑炉商队。',enemy:'灰旗劫掠者',boss:'灰旗首领 · 沃恩',hp:100,atk:9,armor:7,mat:'铁屑',tag:'金属',reward:3,bossGold:20},
  {name:'熄火矿井',en:'THE HOLLOW FORGE',desc:'熔炉已经冷却，矿井深处仍有锤声。',enemy:'失控矿傀',boss:'炉心守卫 · 断铸',hp:170,atk:14,armor:20,mat:'炉火晶',tag:'火焰',reward:5,bossGold:35},
@@ -96,11 +106,22 @@ export function wardrobeIds(s){
 }
 export function bagItems(s){const ids=wardrobeIds(s);return s.inventory.filter(it=>!ids.has(it.id));}
 export function isProtected(s,id){return wardrobeIds(s).has(id);}
+function validSkillSlots(skills,conditions){
+ if(!Array.isArray(skills)||![3,4].includes(skills.length)||!Array.isArray(conditions)||conditions.length!==skills.length)return false;
+ const active=skills.filter(k=>k!==null);
+ return new Set(active).size===active.length&&skills.every(k=>(skills.length===4&&k===null)||Object.hasOwn(SKILLS,k))&&conditions.every(k=>['always','low','charge','burn'].includes(k));
+}
+export function normalizeSkillSlots(s){
+ const targets=[s,...(Array.isArray(s.loadouts)?s.loadouts.filter(Boolean):[])];
+ if(!targets.every(t=>validSkillSlots(t.skills,t.conditions)))return false;
+ for(const t of targets)if(t.skills.length===3){t.skills=[...t.skills,null];t.conditions=[...t.conditions,'always'];}
+ return true;
+}
 function validLoadout(s,loadout){
  if(!loadout||typeof loadout.name!=='string'||loadout.name.length<1||loadout.name.length>20||!loadout.equip||Object.keys(loadout.equip).length!==SOCKETS.length)return false;
  if(!SOCKETS.every(k=>loadout.equip[k]===null||s.inventory.some(it=>it.id===loadout.equip[k]&&it.slot===SOCKET_TYPE[k])))return false;
  const ids=Object.values(loadout.equip).filter(Boolean);if(new Set(ids).size!==ids.length)return false;
- return Array.isArray(loadout.skills)&&loadout.skills.length===3&&new Set(loadout.skills).size===3&&loadout.skills.every(k=>Object.hasOwn(SKILLS,k))&&Array.isArray(loadout.conditions)&&loadout.conditions.length===3&&loadout.conditions.every(k=>['always','low','charge','burn'].includes(k));
+ return validSkillSlots(loadout.skills,loadout.conditions);
 }
 function validLoadoutSlots(s){return s.loadouts===undefined||(Array.isArray(s.loadouts)&&s.loadouts.length===3&&s.loadouts.every(l=>l===null||validLoadout(s,l)));}
 function projectedLoadouts(s,index,next){
@@ -112,17 +133,18 @@ export function saveLoadout(s,index,name=''){
  if(typeof name!=='string')return false;
  const snapshot={name:name.trim().slice(0,20)||`方案${index+1}`,equip:{...s.equip},skills:[...s.skills],conditions:[...s.conditions]};
  if(!validLoadout(s,snapshot))return false;
+ if(snapshot.skills.length===3){snapshot.skills.push(null);snapshot.conditions.push('always');}
  const slots=projectedLoadouts(s,index,snapshot);if(!slots)return false;s.loadouts=slots;return true;
 }
 export function deleteLoadout(s,index){const slots=projectedLoadouts(s,index,null);if(!slots)return false;s.loadouts=slots;return true;}
 export function applyLoadout(s,index,battleActive=false){
  if(s.running||battleActive||!Number.isInteger(index)||index<0||index>2||!validLoadoutSlots(s))return false;
  const loadout=s.loadouts?.[index];if(!validLoadout(s,loadout))return false;
- s.equip={...loadout.equip};s.skills=[...loadout.skills];s.conditions=[...loadout.conditions];return true;
+ s.equip={...loadout.equip};s.skills=[...loadout.skills];s.conditions=[...loadout.conditions];normalizeSkillSlots(s);return true;
 }
 export function fresh(){
  const inventory=SOCKETS.map(socket=>{let type=SOCKET_TYPE[socket],it=item(type,1,null,0);it.name='旧炉·'+names[type];it.atk=bases[type].atk+1;it.armor=bases[type].armor+1;it.hp=bases[type].hp+2;it.affixes=[];return it;});
- return {version:SCHEMA_VERSION,race:'dwarf',hero:'布洛克',level:1,xp:0,gold:100,location:0,build:'anvil',inventory,equip:Object.fromEntries(SOCKETS.map((socket,i)=>[socket,inventory[i].id])),skills:['break','heavy','interrupt'],conditions:['always','always','charge'],materials:{'铁屑':5,'炉火晶':2,'誓约残片':1},talents:{power:0,heart:0,steel:0},kills:0,normalWins:[0,0,0],bossWins:[0,0,0],bossReady:[0,0,0],stock:3,loadouts:[null,null,null],chapters:[],chronicle:['灰冠历317年：你带着旧炉装备，离开黑炉堡寻找失踪商队。'],momentum:0,lastSeen:Date.now(),running:false};
+ return {version:SCHEMA_VERSION,race:'dwarf',hero:'布洛克',level:1,xp:0,gold:100,location:0,build:'anvil',inventory,equip:Object.fromEntries(SOCKETS.map((socket,i)=>[socket,inventory[i].id])),skills:['break','heavy','interrupt',null],conditions:['always','always','charge','always'],materials:{'铁屑':5,'炉火晶':2,'誓约残片':1},talents:{power:0,heart:0,steel:0},kills:0,normalWins:[0,0,0],bossWins:[0,0,0],bossReady:[0,0,0],stock:3,loadouts:[null,null,null],chapters:[],chronicle:['灰冠历317年：你带着旧炉装备，离开黑炉堡寻找失踪商队。'],momentum:0,lastSeen:Date.now(),running:false};
 }
 export function equipItem(s,id,socket){
  const it=s.inventory.find(i=>i.id===id);if(!it)return false;
@@ -140,35 +162,65 @@ export function stats(s){
  const ratingFactor=r=>Math.max(0,r)/(100+Math.max(0,r));
  return {atk,armor,hp,hit:clamp(.9+.1*ratingFactor(bonus.hit),.5,.995),crit:clamp(.05+.55*ratingFactor(bonus.crit),0,.6),critDamage:clamp(1.5+ratingFactor(bonus.critDamage),1.5,2.5),element:Math.min(bonus.element,Math.floor(atk*.6)),hitRating:bonus.hit,critRating:bonus.crit,critDamageRating:bonus.critDamage,count,specials,legend:false,bonus};
 }
-export function preset(s,id){const b=BUILD.find(x=>x.id===id);if(!b)return null;s.build=id;s.skills=[...b.skills];s.conditions=['always','always','charge'];return b;}
-export function encounter(s,boss=false){const l=LOCS[s.location],st=stats(s);return {location:s.location,boss,name:boss?l.boss:l.enemy,hp:l.hp*(boss?4:1),max:l.hp*(boss?4:1),atk:l.atk*(boss?1.65:1),armor:l.armor*(boss?1.3:1),heroHp:st.hp,round:0,burn:0,broken:0,guard:0,stun:0,cd:{},shelterUsed:false,shield:0,done:false,rewarded:false,killSource:null};}
+export function preset(s,id){const b=BUILD.find(x=>x.id===id);if(!b)return null;s.build=id;s.skills=[...b.skills];s.conditions=['always','always','charge','always'];return b;}
+export function encounter(s,boss=false){const l=LOCS[s.location],st=stats(s);return {location:s.location,boss,name:boss?l.boss:l.enemy,hp:l.hp*(boss?4:1),max:l.hp*(boss?4:1),atk:l.atk*(boss?1.65:1),armor:l.armor*(boss?1.3:1),heroHp:st.hp,round:0,nextHeavy:4,heavyDelayed:false,warcry:0,ironcoat:0,blunt:0,scorch:0,barrier:0,barrierShield:0,heroBurn:0,weakness:0,burn:0,broken:0,guard:0,stun:0,cd:{},shelterUsed:false,shield:0,done:false,rewarded:false,killSource:null};}
 const damage=(raw,armor)=>Math.max(1,Math.round(raw*100/(100+Math.max(0,armor))));
 function finish(e,win,source){e.done=true;e.win=win;e.hp=Math.max(0,e.hp);e.heroHp=Math.max(0,e.heroHp);e.killSource=source;}
+export function combatStatuses(e){
+ if(!e)return[];
+ const defs=[['warcry','warcry','砧誓战吼','hero'],['ironcoat','ironcoat','铁衣铭文','hero'],['guard','guard','坚守','hero'],['barrier','barrier','铸壁','hero'],['heroBurn','mark','灼烧','hero'],['weakness','blunt','虚弱','hero'],['broken','break','破甲','enemy'],['burn','mark','铭火','enemy'],['blunt','blunt','挫锋','enemy'],['scorch','scorch','炉蚀','enemy']];
+ const out=defs.filter(([id])=>e[id]>0).map(([id,key,name,side])=>({key,name,turns:e[id],side}));
+ if(e.heavyDelayed)out.push({key:'delay',name:'重击延后',turns:Math.max(1,e.nextHeavy-e.round),side:'enemy'});return out;
+}
 export function step(s,e){
- if(e.done)return[];const st=stats(s),logs=[];e.round++;for(const k in e.cd)e.cd[k]=Math.max(0,e.cd[k]-1);
- const charge=e.round%4===0,ix=s.skills.findIndex((k,i)=>!e.cd[k]&&(s.conditions[i]!=='low'||e.heroHp<st.hp*.6)&&(s.conditions[i]!=='charge'||charge)&&(s.conditions[i]!=='burn'||e.burn>0)),k=ix<0?null:s.skills[ix];
- let raw=st.atk;
+ if(e.done)return[];const st=stats(s),logs=[];e.round++;
+ for(const field of ['warcry','ironcoat','blunt','scorch','barrier','barrierShield','heroBurn','weakness'])e[field]??=0;
+ e.nextHeavy??=4;e.heavyDelayed??=false;for(const k in e.cd)e.cd[k]=Math.max(0,e.cd[k]-1);
+ let charge=e.round>=e.nextHeavy;
+ const usable=k=>!(k==='warcry'&&e.warcry>0)&&!(k==='ironcoat'&&e.ironcoat>0)&&!(k==='blunt'&&e.blunt>0)&&!(k==='scorch'&&e.scorch>0)&&!(k==='barrier'&&e.barrier>0)&&!(k==='mend'&&e.heroHp>=st.hp*.6)&&!(k==='cleanse'&&!e.heroBurn&&!e.weakness)&&!(k==='delay'&&(!charge||e.heavyDelayed));
+ const ix=s.skills.findIndex((k,i)=>k!==null&&Object.hasOwn(SKILLS,k)&&!e.cd[k]&&usable(k)&&(s.conditions[i]!=='low'||e.heroHp<st.hp*.6)&&(s.conditions[i]!=='charge'||charge)&&(s.conditions[i]!=='burn'||e.burn>0)),k=ix<0?null:s.skills[ix];
  if(k)e.cd[k]=SKILLS[k].cd;
- if(Math.random()<st.hit){
-  if(k==='break'){raw*=1.2*(st.count.anvil>=2?1.25:1);e.broken=6;}
-  if(k==='heavy')raw*=2.2*(e.broken?1.25:1)*(st.count.anvil>=4?1.35:1);
-  if(k==='mark'){raw*=.9;e.burn=5;}
-  if(k==='ignite')raw*=(e.burn?2.4:1.6)*(st.count.rune>=4?1.35:1);
-  if(k==='guard'){raw*=st.count.guard>=2?1.3:1;e.guard=3;}
-  if(k==='interrupt'){raw*=1.15;if(charge)e.stun=1;}
-  if(!k&&s.momentum){raw*=1.35;s.momentum=0;logs.push('余势：普攻增强');}
-  const crit=Math.random()<st.crit,armor=e.armor*(e.broken?.75:1),physical=damage(raw*(crit?st.critDamage:1),armor),element=st.element>0?damage(st.element,armor*.5):0;
-  e.hp-=physical+element;logs.push((k?SKILLS[k].name:'普通攻击')+(crit?' 暴击':'')+' · '+(physical+element)+' 伤害'+(element?'（元素'+element+'）':''));
-  if(e.hp<=0){if(st.specials.momentum)s.momentum=1;finish(e,true,'active');return logs;}
- }else logs.push((k?SKILLS[k].name:'普通攻击')+' · 未命中');
- if(e.burn>0){const dot=damage(st.atk*.32*(st.count.rune>=2?1.3:1),e.armor*.5);e.hp-=dot;e.burn--;logs.push('炉火灼烧 · '+dot);if(e.hp<=0){finish(e,true,'burn');return logs;}}
- if(e.stun){logs.push('敌人蓄力被打断');e.stun=0;}else{
-  let hurt=Math.max(1,Math.round(damage(e.atk*(charge?2:1),st.armor)*(e.guard>0?.6:1)));
-  if(st.specials.shelter&&!e.shelterUsed&&e.heroHp-hurt<=st.hp*.3){e.shelterUsed=true;e.shield=Math.ceil(st.hp*.2);logs.push('绝境庇护 · 护盾 '+e.shield);}
-  const absorbed=Math.min(e.shield,hurt);e.shield-=absorbed;hurt-=absorbed;e.heroHp-=hurt;logs.push((charge?'敌人重击':'敌人攻击')+' · -'+hurt+(absorbed?'（护盾吸收'+absorbed+'）':''));
-  if(e.heroHp>0&&e.guard>0){const counter=damage(st.atk*(st.count.guard>=4?1:.6),e.armor);e.hp-=counter;logs.push('坚守反击 · '+counter);}
+ const utility=['warcry','ironcoat','delay','barrier','mend','cleanse'].includes(k);
+ if(utility){
+  if(k==='warcry')e.warcry=3+(st.count.anvil>=2?1:0);
+  if(k==='ironcoat')e.ironcoat=3+(st.count.guard>=2?1:0);
+  if(k==='delay'){e.nextHeavy++;e.heavyDelayed=true;charge=false;}
+  if(k==='barrier'){e.barrier=3;e.barrierShield=Math.floor(st.hp*.2);if(st.count.guard>=4)e.guard=Math.max(e.guard,2);}
+  if(k==='mend'){const heal=Math.min(st.hp-e.heroHp,Math.floor(st.hp*.2),Math.round(st.atk*.7+15));e.heroHp+=heal;logs.push('回炉息 · 恢复 '+heal);}
+  if(k==='cleanse'){e.heroBurn=0;e.weakness=0;}
+  if(k!=='mend')logs.push(SKILLS[k].name+' · 生效');
+ }else{
+  let raw=st.atk*(e.warcry>0?1.25:1)*(e.weakness>0?.8:1);
+  if(Math.random()<st.hit){
+   if(k==='break'){raw*=1.2*(st.count.anvil>=2?1.25:1);e.broken=6;}
+   if(k==='heavy')raw*=2.2*(e.broken?1.25:1)*(st.count.anvil>=4?1.35:1);
+   if(k==='mark'){raw*=.9;e.burn=5;}
+   if(k==='ignite')raw*=(e.burn?2.4:1.6)*(st.count.rune>=4?1.35:1);
+   if(k==='guard'){raw*=st.count.guard>=2?1.3:1;e.guard=3;}
+   if(k==='interrupt'){raw*=1.15;if(charge)e.stun=1;}
+   if(k==='blunt'){raw*=.6;e.blunt=3;}
+   if(k==='scorch'){raw*=.5;e.scorch=4+(st.count.rune>=2?1:0);}
+   if((k==='mark'||k==='ignite')&&e.scorch>0)raw*=1.25;
+   if(!k&&s.momentum){raw*=1.35;s.momentum=0;logs.push('余势：普攻增强');}
+   const crit=Math.random()<st.crit,armor=e.armor*(e.broken?.75:1),physical=damage(raw*(crit?st.critDamage:1),armor),element=st.element>0?damage(st.element,armor*.5):0;
+   e.hp-=physical+element;logs.push((k?SKILLS[k].name:'普通攻击')+(crit?' 暴击':'')+' · '+(physical+element)+' 伤害'+(element?'（元素'+element+'）':''));
+   if(e.hp<=0){if(st.specials.momentum)s.momentum=1;finish(e,true,'active');return logs;}
+  }else logs.push((k?SKILLS[k].name:'普通攻击')+' · 未命中');
  }
- e.guard=Math.max(0,e.guard-1);e.broken=Math.max(0,e.broken-1);
+ if(e.burn>0){const dot=damage(st.atk*(e.warcry>0?1.25:1)*(e.weakness>0?.8:1)*.32*(st.count.rune>=2?1.3:1)*(e.scorch>0?1.25:1),e.armor*.5);e.hp-=dot;e.burn--;logs.push('炉火灼烧 · '+dot);if(e.hp<=0){finish(e,true,'burn');return logs;}}
+ if(e.heroBurn>0){const dot=Math.max(2,Math.round(e.atk*.05));e.heroHp-=dot;e.heroBurn--;logs.push('灼烧侵蚀 · -'+dot);if(e.heroHp<=0){s.momentum=0;finish(e,false,null);return logs;}}
+ if(e.stun){logs.push('敌人蓄力被打断');e.stun=0;}else{
+  let hurt=Math.max(1,Math.round(damage(e.atk*(e.blunt>0?.8:1)*(charge?2:1),st.armor*(e.ironcoat>0?1.4:1))*(e.guard>0?.6:1)));
+  if(st.specials.shelter&&!e.shelterUsed&&e.heroHp-hurt<=st.hp*.3){e.shelterUsed=true;e.shield=Math.ceil(st.hp*.2);logs.push('绝境庇护 · 护盾 '+e.shield);}
+  const wallAbsorbed=Math.min(e.barrierShield,hurt);e.barrierShield-=wallAbsorbed;hurt-=wallAbsorbed;
+  const absorbed=Math.min(e.shield,hurt);e.shield-=absorbed;hurt-=absorbed;e.heroHp-=hurt;logs.push((charge?'敌人重击':'敌人攻击')+' · -'+hurt+(absorbed+wallAbsorbed?'（护盾吸收'+(absorbed+wallAbsorbed)+'）':''));
+  if(e.heroHp>0&&e.guard>0){const counter=damage(st.atk*(e.warcry>0?1.25:1)*(e.weakness>0?.8:1)*(st.count.guard>=4?1:.6),e.armor);e.hp-=counter;logs.push('坚守反击 · '+counter);}
+  if(e.location===1&&e.round%5===0){e.heroBurn=3;logs.push('矿炉余火 · 受到3回合灼烧');}
+  if(e.location===2&&e.round%6===0){e.weakness=3;logs.push('失誓诅咒 · 受到2回合虚弱');}
+ }
+ if(charge){e.nextHeavy=e.round+4;e.heavyDelayed=false;}
+ for(const field of ['guard','broken','warcry','ironcoat','blunt','scorch','barrier','weakness'])e[field]=Math.max(0,e[field]-1);
+ if(!e.barrier)e.barrierShield=0;
  if(e.heroHp<=0){s.momentum=0;finish(e,false,null);}else if(e.hp<=0)finish(e,true,'counter');return logs;
 }
 export function gainXp(s,n){s.xp+=n;while(s.xp>=s.level*80){s.xp-=s.level*80;s.level++;}}
@@ -281,6 +333,6 @@ export function validSave(s){
  if(!validLoadoutSlots(s)||bagItems(s).length>100||(s.merchant!==undefined&&!validMerchant(s.merchant)))return false;
  if(new Set(s.inventory.map(i=>i.id)).size!==s.inventory.length||!s.equip||Object.keys(s.equip).length!==SOCKETS.length||!SOCKETS.every(k=>s.equip[k]===null||s.inventory.some(i=>i.id===s.equip[k]&&i.slot===SOCKET_TYPE[k])))return false;
  const equipped=Object.values(s.equip).filter(Boolean);if(new Set(equipped).size!==equipped.length)return false;
- return Array.isArray(s.skills)&&s.skills.length===3&&new Set(s.skills).size===3&&s.skills.every(k=>Object.hasOwn(SKILLS,k))&&Array.isArray(s.conditions)&&s.conditions.length===3&&s.conditions.every(k=>['always','low','charge','burn'].includes(k))&&LOCS.every(l=>num(s.materials[l.mat]))&&['power','heart','steel'].every(k=>Number.isInteger(s.talents[k])&&num(s.talents[k],s.level))&&Object.values(s.talents).reduce((a,b)=>a+b,0)<=s.level-1&&['bossWins','bossReady','normalWins'].every(k=>Array.isArray(s[k])&&s[k].length===3&&s[k].every(n=>num(n,1e15)))&&Array.isArray(s.chapters)&&s.chapters.every(n=>Number.isInteger(n)&&n>=0&&n<3)&&Array.isArray(s.chronicle)&&s.chronicle.length<=100&&s.chronicle.every(t=>typeof t==='string'&&t.length<2000)&&num(s.kills)&&num(s.stock,3)&&num(s.lastSeen,1e15)&&[0,1].includes(s.momentum)&&typeof s.running==='boolean';
+ return validSkillSlots(s.skills,s.conditions)&&LOCS.every(l=>num(s.materials[l.mat]))&&['power','heart','steel'].every(k=>Number.isInteger(s.talents[k])&&num(s.talents[k],s.level))&&Object.values(s.talents).reduce((a,b)=>a+b,0)<=s.level-1&&['bossWins','bossReady','normalWins'].every(k=>Array.isArray(s[k])&&s[k].length===3&&s[k].every(n=>num(n,1e15)))&&Array.isArray(s.chapters)&&s.chapters.every(n=>Number.isInteger(n)&&n>=0&&n<3)&&Array.isArray(s.chronicle)&&s.chronicle.length<=100&&s.chronicle.every(t=>typeof t==='string'&&t.length<2000)&&num(s.kills)&&num(s.stock,3)&&num(s.lastSeen,1e15)&&[0,1].includes(s.momentum)&&typeof s.running==='boolean';
  }catch{return false;}
 }
