@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {fresh,item,getReforgeCost,reforge,applyForgeFavor,affixRollInfo,AFFIX_DEFS,stats,equipItem,validSave} from './dist/engine.js';
+import {fresh,item,getReforgeCost,reforge,resolveReforge,applyForgeFavor,affixRollInfo,AFFIX_DEFS,stats,equipItem,validSave} from './dist/engine.js';
 const original=Math.random;let seed=51481,calls=0;Math.random=()=>{calls++;seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};
 try{
  const s=fresh();s.gold=1e7;s.materialStacks['铁屑|0']=1e6;s.materialStacks['炉火晶|0']=1e6;
@@ -10,7 +10,7 @@ try{
  const fixed=({affixes,divine,...rest})=>({...rest,divine:{...divine,bonus:{...divine.bonus,affixes:undefined}}});const identity=fixed(structuredClone(it));
  for(let i=0;i<3000;i++){
   const mode=['value','replace','all'][i%3],index=i%4,before=structuredClone(it.affixes),gold=s.gold,iron=s.materialStacks['铁屑|0'],crystal=s.materialStacks['炉火晶|0'],cost=getReforgeCost(it,mode);
-  const result=reforge(s,it.id,mode,index);assert(result);assert.equal(result.item,it);assert.equal(s.gold,gold-cost.gold);assert.equal(s.materialStacks['铁屑|0'],iron-cost.materials['铁屑']);assert.equal(s.materialStacks['炉火晶|0'],crystal-(cost.materials['炉火晶']||0));
+  const result=reforge(s,it.id,mode,index);assert(result);assert.equal(result.item,it);assert.deepEqual(it.affixes,before);assert(resolveReforge(s,true));assert.equal(s.gold,gold-cost.gold);assert.equal(s.materialStacks['铁屑|0'],iron-cost.materials['铁屑']);assert.equal(s.materialStacks['炉火晶|0'],crystal-(cost.materials['炉火晶']||0));
   assert.equal(it.affixes.length,4);assert.equal(new Set(it.affixes.map(a=>a.stat)).size,4);assert.deepEqual(fixed(it),identity);assert.deepEqual(result.before,before);
   if(mode==='value')assert.equal(it.affixes[index].stat,before[index].stat);
   if(mode==='replace')assert.notEqual(it.affixes[index].stat,before[index].stat);
@@ -22,7 +22,7 @@ try{
  s.materialStacks['炉火晶|0']=0;noMoney=JSON.stringify(s);assert.equal(reforge(s,it.id,'replace',0),null);assert.equal(JSON.stringify(s),noMoney);
  // Values change actual equipped combat stats, not only labels; divine color remains raw.
  const p=fresh(),gear=item('weapon',1,null,0);gear.affixes=[{stat:'atk',value:3}];applyForgeFavor(gear);p.inventory.push(gear);equipItem(p,gear.id);const low=stats(p).atk;Math.random=()=>.999999;
- const result=reforge(p,gear.id,'value',0);assert.equal(result.item.affixes[0].value,8);assert(stats(p).atk>low);assert.equal(affixRollInfo(gear.affixes[0]).tier,3);assert.equal(gear.divine.bonus.affixes[0].value,.8);assert(validSave(p));
+ const result=reforge(p,gear.id,'value',0);assert(resolveReforge(p,true));assert.equal(result.item.affixes[0].value,8);assert(stats(p).atk>low);assert.equal(affixRollInfo(gear.affixes[0]).tier,3);assert.equal(gear.divine.bonus.affixes[0].value,.8);assert(validSave(p));
  // Sets retain their four-piece identities and no-special invariant.
  const set=item('gloves',2,'anvil',3);p.inventory.push(set);p.gold=1000;p.materialStacks={'铁屑|0':10,'炉火晶|0':10,'誓约残片|0':1};assert(reforge(p,set.id,'all'));assert.equal(set.set,'anvil');assert.equal(set.special,null);assert(validSave(p));
  console.log('v0.5 reforge: 3,000 operations, atomic costs, invalid/no-RNG previews, legal rolls, identity/divine persistence, real stats: PASS');

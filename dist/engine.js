@@ -119,7 +119,7 @@ export function getReforgeCost(it,mode){
  return null;
 }
 export function reforge(s,itemId,mode,index){
- if(!s||!Array.isArray(s.inventory))return null;
+ if(!s||!Array.isArray(s.inventory)||s.pendingReforge)return null;
  const it=s.inventory.find(i=>i.id===itemId),cost=getReforgeCost(it,mode);
  if(!cost||!SLOTS.includes(it.slot)||it.affixes.length>Object.keys(AFFIX_DEFS).length||it.affixes.some(a=>!a||typeof a!=='object'))return null;
  if(divineMultiplier(it)>1&&(!it.divine.bonus||typeof it.divine.bonus!=='object'))return null;
@@ -141,15 +141,39 @@ export function reforge(s,itemId,mode,index){
  }
  // Commit after all validation and rolls. Identity, base stats and unique effects stay intact.
  normalizeMaterials(s);s.gold-=cost.gold;for(const [key,n] of Object.entries(cost.materials))s.materialStacks[materialKey(key)]-=n;
- it.affixes=after;
- if(divineMultiplier(it)>1)it.divine.bonus.affixes=after.map(a=>({stat:a.stat,value:a.value/10}));
- capHealth(s);return {item:it,mode,index:mode==='all'?null:index,cost,before,after:after.map(a=>({...a}))};
+ const operationId='reforge-'+Date.now().toString(36)+'-'+(++serial).toString(36);
+ s.pendingReforge={operationId,itemId:it.id,mode,index:mode==='all'?null:index,oldAffixes:before,newAffixes:after,cost};
+ return {item:it,operationId,mode,index:mode==='all'?null:index,cost,before:before.map(a=>({...a})),after:after.map(a=>({...a})),pending:true};
+}
+export function validPendingReforge(s){
+ const p=s.pendingReforge;if(p===undefined||p===null)return true;
+ if(!p||typeof p!=='object'||Array.isArray(p)||typeof p.operationId!=='string'||p.operationId.length<1||p.operationId.length>160)return false;
+ const it=s.inventory?.find(i=>i.id===p.itemId),cost=getReforgeCost(it,p.mode);
+ if(!it||!cost||!p.cost||p.cost.gold!==cost.gold||!p.cost.materials||Object.keys(p.cost.materials).length!==Object.keys(cost.materials).length||!Object.entries(cost.materials).every(([k,v])=>p.cost.materials[k]===v))return false;
+ const legal=list=>Array.isArray(list)&&list.length===it.affixes.length&&new Set(list.map(a=>a?.stat)).size===list.length&&list.every(a=>a&&Object.hasOwn(AFFIX_DEFS,a.stat)&&Number.isInteger(a.value)&&a.value>=AFFIX_DEFS[a.stat].min&&a.value<=AFFIX_DEFS[a.stat].max);
+ const equal=(a,b)=>a.stat===b.stat&&a.value===b.value;
+ if(!legal(p.oldAffixes)||!legal(p.newAffixes)||!p.oldAffixes.every((a,i)=>equal(a,it.affixes[i])))return false;
+ if(p.mode==='all')return p.index===null&&p.newAffixes.every(a=>ACTIVE_AFFIX_KEYS.includes(a.stat));
+ if(!Number.isInteger(p.index)||p.index<0||p.index>=it.affixes.length||!p.newAffixes.every((a,i)=>i===p.index||equal(a,p.oldAffixes[i])))return false;
+ return p.mode==='value'?p.newAffixes[p.index].stat===p.oldAffixes[p.index].stat:p.newAffixes[p.index].stat!==p.oldAffixes[p.index].stat&&ACTIVE_AFFIX_KEYS.includes(p.newAffixes[p.index].stat);
+}
+export function resolveReforge(s,accept,expectedOperationId){
+ const p=s?.pendingReforge;
+ if(!p||typeof accept!=='boolean'||(expectedOperationId!==undefined&&expectedOperationId!==p.operationId)||!validPendingReforge(s))return null;
+ const it=s.inventory.find(i=>i.id===p.itemId);
+ if(accept&&Object.values(s.equip).includes(it.id)&&(s.running||(s.activeEncounter&&!s.activeEncounter.done)))return null;
+ if(accept){
+  it.affixes=p.newAffixes.map(a=>({...a}));
+  if(divineMultiplier(it)>1)it.divine.bonus.affixes=it.affixes.map(a=>({stat:a.stat,value:a.value/10}));
+ }
+ s.pendingReforge=null;capHealth(s);
+ return {item:it,accepted:accept,operationId:p.operationId};
 }
 export function wardrobeIds(s){
  const ids=new Set();for(const loadout of Array.isArray(s.loadouts)?s.loadouts:[])if(loadout?.equip)for(const id of Object.values(loadout.equip))if(typeof id==='string')ids.add(id);return ids;
 }
 export function bagItems(s){const ids=wardrobeIds(s);return s.inventory.filter(it=>!ids.has(it.id));}
-export function isProtected(s,id){return wardrobeIds(s).has(id);}
+export function isProtected(s,id){return wardrobeIds(s).has(id)||s.pendingReforge?.itemId===id;}
 function validSkillSlots(skills,conditions){
  if(!Array.isArray(skills)||![3,4].includes(skills.length)||!Array.isArray(conditions)||conditions.length!==skills.length)return false;
  const active=skills.filter(k=>k!==null);
@@ -588,7 +612,7 @@ export function codexState(s,id){const entry=LEGENDARY_CODEX.find(x=>x.id===id);
 export function validSave(s){
  try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;
  if(s.version!==SCHEMA_VERSION||s.race!=='dwarf'||s.hero!=='布洛克'||!Number.isInteger(s.level)||s.level<1||s.level>=100000||!num(s.xp)||!num(s.gold)||!Number.isInteger(s.location)||s.location<0||s.location>2)return false;
- if(!Array.isArray(s.inventory)||s.inventory.length>124||!s.inventory.every(validEquipment))return false;
+ if(!Array.isArray(s.inventory)||s.inventory.length>124||!s.inventory.every(validEquipment)||!validPendingReforge(s))return false;
  if(s.merchant?.offers?.some(o=>o.type==='equipment'&&o.stock===1&&s.inventory.some(it=>it.id===o.item?.id)))return false;
  if((s.nextActionAt!==undefined&&(!Number.isFinite(s.nextActionAt)||s.nextActionAt<0||s.nextActionAt>1e15))||(s.restResume!==undefined&&typeof s.restResume!=='boolean')||(s.nextBattleAt!==undefined&&(!Number.isFinite(s.nextBattleAt)||s.nextBattleAt<0||s.nextBattleAt>1e15))||!validRecipes(s)||!validEncounter(s.activeEncounter)||!validPotions(s)||!validHealth(s)||!validLoadoutSlots(s)||bagItems(s).length>100||(s.merchant!==undefined&&!validMerchant(s.merchant)))return false;
  if(new Set(s.inventory.map(i=>i.id)).size!==s.inventory.length||!s.equip||Object.keys(s.equip).length!==SOCKETS.length||!SOCKETS.every(k=>s.equip[k]===null||s.inventory.some(i=>i.id===s.equip[k]&&i.slot===SOCKET_TYPE[k])))return false;

@@ -12,7 +12,7 @@ export function sequenceFingerprint(api){
   for(let i=0;i<400;i++){const {id,...it}=api.item(api.SLOTS[i%api.SLOTS.length],1+i%9,null,i%4);outputs.push(it);}
   const s=api.fresh();s.gold=1e7;s.materialStacks['铁屑|0']=1e6;s.materialStacks['炉火晶|0']=1e6;
   const it=api.item('gloves',5,null,3);s.inventory.push(it);
-  for(let i=0;i<300;i++){const result=api.reforge(s,it.id,['value','replace','all'][i%3],i%4);assert(result);outputs.push(result.after);}
+  for(let i=0;i<300;i++){const result=api.reforge(s,it.id,['value','replace','all'][i%3],i%4);assert(result);outputs.push(result.after);assert(api.resolveReforge(s,true));}
   return createHash('sha256').update(JSON.stringify(outputs)).digest('hex');
  }finally{Math.random=random;}
 }

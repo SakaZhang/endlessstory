@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {fresh,TALENTS,stats,normalizeTalents,spendTalent,getTalentRefundQuote,commitTalentRefund,availableTalentPoints,validSave,encounter,step,luckChance,forge,reforge,item,reward} from './dist/engine.js';
+import {fresh,TALENTS,stats,normalizeTalents,spendTalent,getTalentRefundQuote,commitTalentRefund,availableTalentPoints,validSave,encounter,step,luckChance,forge,reforge,resolveReforge,item,reward} from './dist/engine.js';
 const original=Math.random;let seed=17653;const rng=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};Math.random=rng;
 try{
  assert.equal(Object.keys(TALENTS).length,14);const s=fresh();assert(validSave(s));assert.equal(s.consumables.memoryFruit,0);s.level=30;for(const key of Object.keys(TALENTS))assert(spendTalent(s,key));assert.equal(availableTalentPoints(s),15);assert(validSave(s));
@@ -23,7 +23,7 @@ try{
  const report=[];
  for(const points of [0,5,10]){seed=17653;Math.random=rng;const q=fresh();q.level=20;q.talents.luck=points;q.gold=1e10;for(const k in q.materialStacks)q.materialStacks[k]=1e7;let quality=0,nonsets=0,sets=0,divine=0;for(let i=0;i<20000;i++){const it=forge(q,['铁屑']);if(it.set)sets++;else{quality+=it.rarity;nonsets++;}if(it.divine)divine++;q.inventory.pop();}report.push({points,meanQuality:quality/nonsets,sets,divine});}
  assert(report[1].meanQuality>report[0].meanQuality);assert(report[2].meanQuality>report[0].meanQuality);assert(report[2].meanQuality-report[0].meanQuality<.08);
- for(const points of [0,5,10]){seed=9351;Math.random=rng;const q=fresh();q.level=20;q.talents.luck=points;q.gold=1e10;q.materialStacks['铁屑|0']=1e7;const it=item('weapon',1,null,0);it.affixes=[{stat:'atk',value:3}];q.inventory.push(it);let total=0;for(let i=0;i<20000;i++){assert(reforge(q,it.id,'value',0));total+=it.affixes[0].value;}report.find(x=>x.points===points).meanReforge=total/20000;}
+ for(const points of [0,5,10]){seed=9351;Math.random=rng;const q=fresh();q.level=20;q.talents.luck=points;q.gold=1e10;q.materialStacks['铁屑|0']=1e7;const it=item('weapon',1,null,0);it.affixes=[{stat:'atk',value:3}];q.inventory.push(it);let total=0;for(let i=0;i<20000;i++){assert(reforge(q,it.id,'value',0));assert(resolveReforge(q,true));total+=it.affixes[0].value;}report.find(x=>x.points===points).meanReforge=total/20000;}
  assert(report[1].meanReforge>report[0].meanReforge);assert(report[2].meanReforge>report[0].meanReforge);assert(report[2].meanReforge-report[0].meanReforge<.15);
  for(const points of [0,5,10]){seed=61091;Math.random=rng;const q=fresh();q.level=20;q.talents.luck=points;let quality=0,count=0;for(let i=0;i<20000;i++){q.nextBattleAt=0;const e=encounter(q);e.done=true;e.win=true;const it=reward(q,e,0);if(it){if(!it.set){quality+=it.rarity;count++;}q.inventory.pop();}q.level=20;q.xp=0;}report.find(x=>x.points===points).meanDrop=quality/count;}
  assert(report[1].meanDrop>report[0].meanDrop);assert(report[2].meanDrop>report[0].meanDrop);assert(report[2].meanDrop-report[0].meanDrop<.1);
