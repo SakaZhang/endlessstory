@@ -47,11 +47,12 @@ function validTalents(s){
  if(!['power','heart','steel'].every(k=>Number.isInteger(s.talents[k])&&s.talents[k]>=0))return false;
  return Object.entries(s.talents).every(([key,n])=>Object.hasOwn(TALENTS,key)&&Number.isSafeInteger(n)&&n>=0&&n<=(TALENTS[key].cap??talentPointBudget(s)))&&Object.values(s.talents).reduce((a,b)=>a+b,0)<=talentPointBudget(s);
 }
-function validConsumables(s){return s.consumables===undefined||(s.consumables&&Number.isSafeInteger(s.consumables.memoryFruit)&&s.consumables.memoryFruit>=0&&s.consumables.memoryFruit<=1e9&&(s.consumables.refundCredits===undefined||(Number.isSafeInteger(s.consumables.refundCredits)&&s.consumables.refundCredits>=0&&s.consumables.refundCredits<=1e10)));}
+export const CONSUMABLES={memoryFruit:{name:'回忆之果',icon:'memoryfruit',description:'确认洗点时每枚提供10点返还额度。',price:200},reforgeToken:{name:'重铸印记',icon:'reforgeToken',description:'完整重铸消耗1枚；保留旧结果也不返还。',price:120}};
+function validConsumables(s){return s.consumables===undefined||(s.consumables&&Number.isSafeInteger(s.consumables.memoryFruit)&&s.consumables.memoryFruit>=0&&s.consumables.memoryFruit<=1e9&&(s.consumables.reforgeToken===undefined||(Number.isSafeInteger(s.consumables.reforgeToken)&&s.consumables.reforgeToken>=0&&s.consumables.reforgeToken<=1e9))&&(s.consumables.refundCredits===undefined||(Number.isSafeInteger(s.consumables.refundCredits)&&s.consumables.refundCredits>=0&&s.consumables.refundCredits<=1e10)));}
 export function normalizeTalents(s){
  if(!validTalents(s)||!validConsumables(s))return false;
  for(const key of Object.keys(TALENTS))s.talents[key]??=0;
- s.consumables??={memoryFruit:0};s.consumables.refundCredits??=0;return true;
+ s.consumables??={memoryFruit:0};s.consumables.refundCredits??=0;s.consumables.reforgeToken??=0;return true;
 }
 export function availableTalentPoints(s){return talentPointBudget(s)-Object.values(s.talents).reduce((a,b)=>a+b,0);}
 export function spendTalent(s,key,battleActive=false){
@@ -110,7 +111,7 @@ export function item(slot,level=1,set=null,rarity=0){
 export function itemTotals(it){const m=divineMultiplier(it);return {atk:it.atk*m+(it.bless||0)*2,armor:it.armor*m,hp:it.hp*m};}
 export function sellValue(it){return [2,4,8,16][it.rarity]+Math.floor(it.level/3);}
 // Cost previews are deterministic and never consume random rolls.
-export function getReforgeCost(it,mode){
+function legacyReforgeCost(it,mode){
  if(!it||!Number.isInteger(it.rarity)||it.rarity<0||it.rarity>3||!Array.isArray(it.affixes)||it.affixes.length===0)return null;
  const q=it.rarity;
  if(mode==='value')return {gold:10+5*q,materials:{'铁屑':1}};
@@ -118,7 +119,17 @@ export function getReforgeCost(it,mode){
  if(mode==='all')return {gold:50+20*q,materials:{'铁屑':3,'炉火晶':2}};
  return null;
 }
-export function reforge(s,itemId,mode,index){
+export function getReforgeCost(it,mode){
+ const cost=legacyReforgeCost(it,mode);if(!cost)return null;
+ return mode==='all'?{gold:0,materials:{},consumables:{reforgeToken:1}}:mode==='replace'?{gold:0,materials:{},equipment:1}:cost;
+}
+export function eligibleReforgeDonors(s,targetId,index){
+ const target=s?.inventory?.find(it=>it.id===targetId);
+ if(!target||!Number.isInteger(index)||index<0||index>=target.affixes.length||s.pendingReforge)return [];
+ const occupied=new Set(target.affixes.map(a=>a.stat));
+ return s.inventory.filter(it=>it.id!==targetId&&!it.locked&&!it.legendaryId&&!Object.values(s.equip).includes(it.id)&&!isProtected(s,it.id)).map(it=>({item:it,affixes:it.affixes.filter(a=>Object.hasOwn(AFFIX_DEFS,a.stat)&&!occupied.has(a.stat))})).filter(x=>x.affixes.length);
+}
+export function reforge(s,itemId,mode,index,donorId){
  if(!s||!Array.isArray(s.inventory)||s.pendingReforge)return null;
  const it=s.inventory.find(i=>i.id===itemId),cost=getReforgeCost(it,mode);
  if(!cost||!SLOTS.includes(it.slot)||it.affixes.length>Object.keys(AFFIX_DEFS).length||it.affixes.some(a=>!a||typeof a!=='object'))return null;
@@ -127,35 +138,54 @@ export function reforge(s,itemId,mode,index){
  if(mode!=='all'&&(!Number.isInteger(index)||index<0||index>=it.affixes.length))return null;
  if(mode==='replace'&&!ACTIVE_AFFIX_KEYS.some(stat=>!it.affixes.some(a=>a.stat===stat)))return null;
  if(mode==='all'&&it.affixes.length>ACTIVE_AFFIX_KEYS.length)return null;
- if(!Number.isFinite(s.gold)||s.gold<cost.gold||!validMaterials(s)||Object.entries(cost.materials).some(([key,n])=>materialCount(s,key,0)<n))return null;
+ if(!Number.isFinite(s.gold)||s.gold<cost.gold||!validMaterials(s)||!validConsumables(s)||Object.entries(cost.materials).some(([key,n])=>materialCount(s,key,0)<n)||Object.entries(cost.consumables??{}).some(([key,n])=>(s.consumables?.[key]??0)<n))return null;
+ const donor=mode==='replace'?eligibleReforgeDonors(s,itemId,index).find(x=>x.item.id===donorId):null;
+ if(mode==='replace'&&!donor)return null;
  const before=it.affixes.map(a=>({...a})),after=before.map(a=>({...a}));
  const roll=stat=>({stat,value:luckyRoll(()=>rand(AFFIX_DEFS[stat].min,AFFIX_DEFS[stat].max),s.talents.luck??0)});
  if(mode==='value')after[index]=roll(after[index].stat);
  else if(mode==='replace'){
   const occupied=new Set(after.map(a=>a.stat));
-  const pool=ACTIVE_AFFIX_KEYS.filter(stat=>!occupied.has(stat));
+  const pool=[...new Set(donor.affixes.map(a=>a.stat))];
   after[index]=roll(pool[rand(0,pool.length-1)]);
  }else{
   const pool=[...ACTIVE_AFFIX_KEYS];
   for(let i=0;i<after.length;i++)after[i]=roll(pool.splice(rand(0,pool.length-1),1)[0]);
  }
- // Commit after all validation and rolls. Identity, base stats and unique effects stay intact.
- normalizeMaterials(s);s.gold-=cost.gold;for(const [key,n] of Object.entries(cost.materials))s.materialStacks[materialKey(key)]-=n;
+ const oldSpecial=it.special?{...it.special}:null;
+ const newSpecial=mode==='all'&&!it.set&&it.rarity>=2&&!it.legendaryId?{id:Object.keys(SPECIALS)[rand(0,Object.keys(SPECIALS).length-1)]}:oldSpecial?{...oldSpecial}:null;
+ // Charge once, then persist the choice without modifying the target.
+ normalizeMaterials(s);normalizeTalents(s);s.gold-=cost.gold;for(const [key,n] of Object.entries(cost.materials))s.materialStacks[materialKey(key)]-=n;for(const [key,n] of Object.entries(cost.consumables??{}))s.consumables[key]-=n;
+ if(donor)s.inventory.splice(s.inventory.findIndex(x=>x.id===donor.item.id),1);
  const operationId='reforge-'+Date.now().toString(36)+'-'+(++serial).toString(36);
- s.pendingReforge={operationId,itemId:it.id,mode,index:mode==='all'?null:index,oldAffixes:before,newAffixes:after,cost};
- return {item:it,operationId,mode,index:mode==='all'?null:index,cost,before:before.map(a=>({...a})),after:after.map(a=>({...a})),pending:true};
+ s.pendingReforge={ruleVersion:2,operationId,itemId:it.id,mode,index:mode==='all'?null:index,oldAffixes:before,newAffixes:after,oldSpecial,newSpecial,cost,...(donor?{donor:{id:donor.item.id,name:donor.item.name,slot:donor.item.slot,eligibleStats:[...new Set(donor.affixes.map(a=>a.stat))]}}:{})};
+ return {item:it,operationId,mode,index:mode==='all'?null:index,cost,before:before.map(a=>({...a})),after:after.map(a=>({...a})),oldSpecial,newSpecial,pending:true};
 }
 export function validPendingReforge(s){
  const p=s.pendingReforge;if(p===undefined||p===null)return true;
  if(!p||typeof p!=='object'||Array.isArray(p)||typeof p.operationId!=='string'||p.operationId.length<1||p.operationId.length>160)return false;
- const it=s.inventory?.find(i=>i.id===p.itemId),cost=getReforgeCost(it,p.mode);
+ if(p.ruleVersion!==undefined&&p.ruleVersion!==2)return false;
+ const it=s.inventory?.find(i=>i.id===p.itemId),cost=p.ruleVersion===2?getReforgeCost(it,p.mode):legacyReforgeCost(it,p.mode);
  if(!it||!cost||!p.cost||p.cost.gold!==cost.gold||!p.cost.materials||Object.keys(p.cost.materials).length!==Object.keys(cost.materials).length||!Object.entries(cost.materials).every(([k,v])=>p.cost.materials[k]===v))return false;
+ if((p.cost.equipment??0)!==(cost.equipment??0))return false;
+ const expectedConsumables=cost.consumables??{},actualConsumables=p.cost.consumables??{};
+ if(Object.keys(actualConsumables).length!==Object.keys(expectedConsumables).length||!Object.entries(expectedConsumables).every(([k,v])=>actualConsumables[k]===v))return false;
+ if(p.ruleVersion===2){
+  if(p.mode==='replace'){
+   const d=p.donor;
+   if(!d||typeof d.id!=='string'||!d.id||d.id===p.itemId||s.inventory.some(it=>it.id===d.id)||typeof d.name!=='string'||d.name.length>200||!SLOTS.includes(d.slot)||!Array.isArray(d.eligibleStats)||!d.eligibleStats.length||d.eligibleStats.length>4||new Set(d.eligibleStats).size!==d.eligibleStats.length||!d.eligibleStats.every(k=>Object.hasOwn(AFFIX_DEFS,k)&&!it.affixes.some(a=>a.stat===k))||!d.eligibleStats.includes(p.newAffixes?.[p.index]?.stat))return false;
+  }else if(p.donor!==undefined)return false;
+  const legalSpecial=x=>x===null||(x&&typeof x==='object'&&!Array.isArray(x)&&Object.keys(x).length===1&&Object.hasOwn(SPECIALS,x.id));
+  if(!legalSpecial(p.oldSpecial)||!legalSpecial(p.newSpecial)||(p.oldSpecial?.id??null)!==(it.special?.id??null))return false;
+  if(p.mode==='all'&&!it.set&&it.rarity>=2&&!it.legendaryId){if(!p.newSpecial)return false;}
+  else if((p.oldSpecial?.id??null)!==(p.newSpecial?.id??null))return false;
+ }
  const legal=list=>Array.isArray(list)&&list.length===it.affixes.length&&new Set(list.map(a=>a?.stat)).size===list.length&&list.every(a=>a&&Object.hasOwn(AFFIX_DEFS,a.stat)&&Number.isInteger(a.value)&&a.value>=AFFIX_DEFS[a.stat].min&&a.value<=AFFIX_DEFS[a.stat].max);
  const equal=(a,b)=>a.stat===b.stat&&a.value===b.value;
  if(!legal(p.oldAffixes)||!legal(p.newAffixes)||!p.oldAffixes.every((a,i)=>equal(a,it.affixes[i])))return false;
  if(p.mode==='all')return p.index===null&&p.newAffixes.every(a=>ACTIVE_AFFIX_KEYS.includes(a.stat));
  if(!Number.isInteger(p.index)||p.index<0||p.index>=it.affixes.length||!p.newAffixes.every((a,i)=>i===p.index||equal(a,p.oldAffixes[i])))return false;
- return p.mode==='value'?p.newAffixes[p.index].stat===p.oldAffixes[p.index].stat:p.newAffixes[p.index].stat!==p.oldAffixes[p.index].stat&&ACTIVE_AFFIX_KEYS.includes(p.newAffixes[p.index].stat);
+ return p.mode==='value'?p.newAffixes[p.index].stat===p.oldAffixes[p.index].stat:p.newAffixes[p.index].stat!==p.oldAffixes[p.index].stat&&(p.ruleVersion===2?p.donor.eligibleStats.includes(p.newAffixes[p.index].stat):ACTIVE_AFFIX_KEYS.includes(p.newAffixes[p.index].stat));
 }
 export function resolveReforge(s,accept,expectedOperationId){
  const p=s?.pendingReforge;
@@ -164,6 +194,7 @@ export function resolveReforge(s,accept,expectedOperationId){
  if(accept&&Object.values(s.equip).includes(it.id)&&(s.running||(s.activeEncounter&&!s.activeEncounter.done)))return null;
  if(accept){
   it.affixes=p.newAffixes.map(a=>({...a}));
+  if(p.ruleVersion===2)it.special=p.newSpecial?{...p.newSpecial}:null;
   if(divineMultiplier(it)>1)it.divine.bonus.affixes=it.affixes.map(a=>({stat:a.stat,value:a.value/10}));
  }
  s.pendingReforge=null;capHealth(s);
@@ -212,7 +243,7 @@ export function applyLoadout(s,index,battleActive=false){
 }
 export function fresh(){
  const inventory=SOCKETS.map(socket=>{let type=SOCKET_TYPE[socket],it=item(type,1,null,0);it.name='旧炉·'+names[type];it.atk=bases[type].atk+1;it.armor=bases[type].armor+1;it.hp=bases[type].hp+2;it.affixes=[];return it;});
- return {version:SCHEMA_VERSION,race:'dwarf',hero:'布洛克',level:1,xp:0,gold:100,location:0,build:'anvil',inventory,equip:Object.fromEntries(SOCKETS.map((socket,i)=>[socket,inventory[i].id])),skills:['break','heavy','interrupt',null],conditions:['always','always','charge','always'],materialStacks:{'铁屑|0':5,'炉火晶|0':2,'誓约残片|0':1},offlineLuck:0,talents:Object.fromEntries(Object.keys(TALENTS).map(k=>[k,0])),consumables:{memoryFruit:0,refundCredits:0},kills:0,normalWins:[0,0,0],bossWins:[0,0,0],bossReady:[0,0,0],stock:3,loadouts:[null,null,null],chapters:[],chronicle:['灰冠历317年：你带着旧炉装备，离开黑炉堡寻找失踪商队。'],momentum:0,lastSeen:Date.now(),running:false};
+ return {version:SCHEMA_VERSION,race:'dwarf',hero:'布洛克',level:1,xp:0,gold:100,location:0,build:'anvil',inventory,equip:Object.fromEntries(SOCKETS.map((socket,i)=>[socket,inventory[i].id])),skills:['break','heavy','interrupt',null],conditions:['always','always','charge','always'],materialStacks:{'铁屑|0':5,'炉火晶|0':2,'誓约残片|0':1},offlineLuck:0,talents:Object.fromEntries(Object.keys(TALENTS).map(k=>[k,0])),consumables:{memoryFruit:0,refundCredits:0,reforgeToken:0},kills:0,normalWins:[0,0,0],bossWins:[0,0,0],bossReady:[0,0,0],stock:3,loadouts:[null,null,null],chapters:[],chronicle:['灰冠历317年：你带着旧炉装备，离开黑炉堡寻找失踪商队。'],momentum:0,lastSeen:Date.now(),running:false};
 }
 export function equipItem(s,id,socket){
  const it=s.inventory.find(i=>i.id===id);if(!it)return false;
@@ -430,13 +461,14 @@ function luckyRoll(draw,points){const first=draw();if(points>0&&Math.random()<lu
 function rollQuality(weights=[65,28,6.5,.5]){return Number(weighted(weights.map((w,i)=>[i,w])));}
 function rollDrop(s,boss,luck=0){if(Math.random()>=(boss?.65:.18)||bagItems(s).length>=100)return null;const isSet=Math.random()<(boss?.05:.01),slot=isSet?SET_SLOTS[rand(0,SET_SLOTS.length-1)]:SLOTS[rand(0,SLOTS.length-1)],set=isSet?BUILD[rand(0,2)].id:null,quality=isSet?3:luckyRoll(()=>rollQuality(),luck);const it=item(slot,s.level,set,quality);s.inventory.push(it);return it;}
 export function reward(s,e,now=Date.now()){
- if(!e.win||e.rewarded)return null;e.rewarded=true;const index=e.location??s.location,l=LOCS[index],st=stats(s);s.kills++;s.gold+=e.boss?l.bossGold:l.reward;
+ if(!e.win||e.rewarded)return null;const tokenEligible=e.boss&&e.done&&s.activeEncounter===e&&now>=(s.bossReady[e.location??s.location]??0);e.rewarded=true;const index=e.location??s.location,l=LOCS[index],st=stats(s);s.kills++;s.gold+=e.boss?l.bossGold:l.reward;
  const baseXp=e.boss?100:20+index*8,knowledge=st.specials.knowledge&&Math.random()<.05;gainXp(s,baseXp*(knowledge?2:1));e.materialLoot=earnedMaterials(s,l.mat,e.boss?4:1,e.boss,e.luck??0);let expectedMaterials=e.boss?4:1;
  if(st.specials.scavenger&&Math.random()<.1){expectedMaterials++;e.materialLoot.push(...earnedMaterials(s,l.mat,1,e.boss,e.luck??0));e.rewardNotes=['拾荒者：额外材料 +1'];}if(knowledge)(e.rewardNotes??=[]).push('求知：额外基础经验 +'+baseXp);
  if(Math.random()<.12){expectedMaterials++;const herbLoot=earnedMaterials(s,'灰根草',1,e.boss,e.luck??0);e.materialLoot.push(...herbLoot);if(herbLoot[0]?.quality===0)(e.rewardNotes??=[]).push('普通 灰根草 ×1');}
  for(const loot of e.materialLoot.filter(x=>x.quality>0))(e.rewardNotes??=[]).push(MATERIAL_QUALITIES[loot.quality]+' '+loot.material+' ×'+loot.count);
  if(e.materialLoot.reduce((n,x)=>n+x.count,0)<expectedMaterials)(e.rewardNotes??=[]).push('部分材料堆叠已满（每堆上限1万亿），超出部分未收取。');
  let drop=rollDrop(s,e.boss,e.luck??0);
+ if(tokenEligible&&Math.random()<.08){normalizeTalents(s);if(s.consumables.reforgeToken<1e9){s.consumables.reforgeToken++;(e.rewardNotes??=[]).push('重铸印记 ×1');}}
  if(e.boss){s.bossWins[index]++;s.bossReady[index]=now+60000;if(!s.chapters.includes(index)){s.chapters.push(index);s.chronicle.unshift(['沃恩交出了商队货单：货物并非被抢，而是被人改道。','哥布林技师「尼克」从炉芯发现了烬裔封印。','精灵信使「瑟拉」证实：旧盟约的碎片，正在被五族争夺。'][index]);}}else s.normalWins[index]++;
  s.nextBattleAt=Math.max(now,s.lastHealthClock??0)+1800;s.nextActionAt=s.nextBattleAt;if(e.boss||s.stopAfterBattle){s.running=false;s.stopAfterBattle=false;}if(s.activeEncounter===e)s.activeEncounter=null;return drop;
 }
@@ -509,7 +541,7 @@ function validMerchant(merchant){
  else{
   if(rows.length!==8||new Set(rows.map(o=>o?.offerId)).size!==8||!rows.every(o=>o&&typeof o.offerId==='string'))return false;
   const mats=rows.filter(o=>o.type==='material'),gear=rows.filter(o=>o.type==='equipment'),consumables=rows.filter(o=>o.type==='consumable'),recipes=rows.filter(o=>o.type==='recipe');
-  if(mats.length<2||mats.length>3||mats.length+gear.length+consumables.length+recipes.length!==8||recipes.length>3||new Set(recipes.map(o=>o.recipeId)).size!==recipes.length||!recipes.every(o=>Object.hasOwn(RECIPES,o.recipeId)&&RECIPES[o.recipeId].enabled&&o.price===RECIPES[o.recipeId].price&&Number.isSafeInteger(o.price)&&o.price>0&&[0,1].includes(o.stock))||consumables.length>1||!consumables.every(o=>o.consumable==='memoryFruit'&&o.price===200&&[0,1].includes(o.stock))||new Set(mats.map(o=>o.material)).size!==mats.length||!mats.every(materialValid))return false;
+  if(mats.length<2||mats.length>3||mats.length+gear.length+consumables.length+recipes.length!==8||recipes.length>3||new Set(recipes.map(o=>o.recipeId)).size!==recipes.length||!recipes.every(o=>Object.hasOwn(RECIPES,o.recipeId)&&RECIPES[o.recipeId].enabled&&o.price===RECIPES[o.recipeId].price&&Number.isSafeInteger(o.price)&&o.price>0&&[0,1].includes(o.stock))||consumables.length>2||new Set(consumables.map(o=>o.consumable)).size!==consumables.length||!consumables.every(o=>Object.hasOwn({memoryFruit:200,reforgeToken:120},o.consumable)&&o.price===({memoryFruit:200,reforgeToken:120})[o.consumable]&&[0,1].includes(o.stock))||new Set(mats.map(o=>o.material)).size!==mats.length||!mats.every(materialValid))return false;
   if(!gear.every(o=>validEquipment(o.item)&&!o.item.divine&&o.item.legendaryId===null&&[0,1].includes(o.stock)&&o.price===15+sellValue(o.item)*4+o.item.level*3)||new Set(gear.map(o=>o.item.id)).size!==gear.length)return false;
  }
  if(['cycleStart','nextRefreshAt','paidRefreshes','revision'].every(k=>merchant[k]===undefined))return legacy;
@@ -520,6 +552,7 @@ function rollMerchantOffers(s,revision,preservedMaterials=null){
  if(!preservedMaterials)for(let i=0;i<count;i++){const material=pool.splice(rand(0,pool.length-1),1)[0],[min,max]=MERCHANT_STOCK[material];const quality=rollQuality([75,20,4.5,.5]);offers.push({type:'material',material,quality,price:materialPrice(material,quality),stock:rand(min,max)});}
  while(offers.length<8){const isSet=Math.random()<.01,slot=isSet?SET_SLOTS[rand(0,SET_SLOTS.length-1)]:SLOTS[rand(0,SLOTS.length-1)],set=isSet?BUILD[rand(0,2)].id:null,it=item(slot,s.level,set,isSet?3:rollQuality());offers.push({type:'equipment',item:it,price:15+sellValue(it)*4+it.level*3,stock:1});}
  if(Math.random()<.03)offers[7]={type:'consumable',consumable:'memoryFruit',price:200,stock:1};
+ if(Math.random()<.10){const index=offers.findLastIndex(o=>o.type==='equipment');offers[index]={type:'consumable',consumable:'reforgeToken',price:120,stock:1};}
  const unknown=Object.keys(RECIPES).filter(id=>RECIPES[id].enabled&&!recipeKnown(s,id));
  if(unknown.length){const count=Math.min(unknown.length,rand(1,2));for(let i=0;i<count;i++){const id=unknown.splice(rand(0,unknown.length-1),1)[0],index=offers.findLastIndex(o=>o.type==='equipment');if(index>=0)offers[index]={type:'recipe',recipeId:id,price:RECIPES[id].price,stock:1};}}
  return offers.map((offer,index)=>({...offer,offerId:`merchant-${revision}-${index}`}));
@@ -563,8 +596,8 @@ export function purchaseEquipment(s,offerId,expectedRevision,now=Date.now()){
 export function purchaseConsumable(s,offerId,expectedRevision,now=Date.now()){
  const m=ensureMerchant(s,now);if(!m||!Number.isSafeInteger(expectedRevision)||m.revision!==expectedRevision)return false;
  const offer=m.offers.find(o=>o.type==='consumable'&&o.offerId===offerId);
- if(!offer||offer.stock!==1||offer.consumable!=='memoryFruit'||!validTalents(s)||!validConsumables(s)||!Number.isFinite(s.gold)||s.gold<offer.price||(s.consumables?.memoryFruit??0)>=1e9)return false;
- normalizeTalents(s);s.gold-=offer.price;offer.stock=0;s.consumables.memoryFruit++;return true;
+ if(!offer||offer.stock!==1||!['memoryFruit','reforgeToken'].includes(offer.consumable)||!validTalents(s)||!validConsumables(s)||!Number.isFinite(s.gold)||s.gold<offer.price||(s.consumables?.[offer.consumable]??0)>=1e9)return false;
+ normalizeTalents(s);s.gold-=offer.price;offer.stock=0;s.consumables[offer.consumable]++;return true;
 }
 export function purchaseRecipe(s,offerId,expectedRevision,now=Date.now()){
  if(!validRecipes(s))return false;const merchant=ensureMerchant(s,now);if(!merchant||!Number.isSafeInteger(expectedRevision)||merchant.revision!==expectedRevision)return false;

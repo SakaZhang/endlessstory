@@ -26,3 +26,4 @@ import './recipe-tests.mjs';
 import './element-schema-tests.mjs';
 import './elemental-combat-tests.mjs';
 import './pending-reforge-tests.mjs';
+import './reforge-v13-tests.mjs';
