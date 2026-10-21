@@ -54,7 +54,7 @@ export function normalizeTalents(s){
 export function availableTalentPoints(s){return talentPointBudget(s)-Object.values(s.talents).reduce((a,b)=>a+b,0);}
 export function spendTalent(s,key,battleActive=false){
  if(s.running||battleActive||!Object.hasOwn(TALENTS,key)||!validTalents(s)||!validConsumables(s)||availableTalentPoints(s)<=0||(TALENTS[key].cap!==null&&(s.talents[key]??0)>=TALENTS[key].cap))return false;
- normalizeTalents(s);s.talents[key]++;return true;
+ normalizeTalents(s);s.talents[key]++;capHealth(s);return true;
 }
 export function getTalentRefundQuote(s,draft){
  if(!validTalents(s)||!validConsumables(s)||!draft||typeof draft!=='object'||Array.isArray(draft))return null;
@@ -66,7 +66,7 @@ export function commitTalentRefund(s,draft,battleActive=false){
  if(s.running||battleActive)return false;const quote=getTalentRefundQuote(s,draft);
  if(!quote||(s.consumables?.memoryFruit??0)<quote.fruitCost)return false;
  normalizeTalents(s);s.consumables.memoryFruit-=quote.fruitCost;s.consumables.refundCredits=quote.creditsAfter;
- for(const [key,n] of Object.entries(draft))s.talents[key]-=n;return true;
+ for(const [key,n] of Object.entries(draft))s.talents[key]-=n;capHealth(s);return true;
 }
 export const AFFIX_DEFS={
  atk:{name:'攻击',suffix:'',min:3,max:8},hp:{name:'生命',suffix:'',min:15,max:40},armor:{name:'护甲',suffix:'',min:2,max:6},
@@ -139,7 +139,7 @@ export function reforge(s,itemId,mode,index){
  normalizeMaterials(s);s.gold-=cost.gold;for(const [key,n] of Object.entries(cost.materials))s.materialStacks[materialKey(key)]-=n;
  it.affixes=after;
  if(divineMultiplier(it)>1)it.divine.bonus.affixes=after.map(a=>({stat:a.stat,value:a.value/10}));
- return {item:it,mode,index:mode==='all'?null:index,cost,before,after:after.map(a=>({...a}))};
+ capHealth(s);return {item:it,mode,index:mode==='all'?null:index,cost,before,after:after.map(a=>({...a}))};
 }
 export function wardrobeIds(s){
  const ids=new Set();for(const loadout of Array.isArray(s.loadouts)?s.loadouts:[])if(loadout?.equip)for(const id of Object.values(loadout.equip))if(typeof id==='string')ids.add(id);return ids;
@@ -180,7 +180,7 @@ export function deleteLoadout(s,index){const slots=projectedLoadouts(s,index,nul
 export function applyLoadout(s,index,battleActive=false){
  if(s.running||battleActive||!Number.isInteger(index)||index<0||index>2||!validLoadoutSlots(s))return false;
  const loadout=s.loadouts?.[index];if(!validLoadout(s,loadout))return false;
- s.equip={...loadout.equip};s.skills=[...loadout.skills];s.conditions=[...loadout.conditions];normalizeSkillSlots(s);return true;
+ s.equip={...loadout.equip};s.skills=[...loadout.skills];s.conditions=[...loadout.conditions];normalizeSkillSlots(s);capHealth(s);return true;
 }
 export function fresh(){
  const inventory=SOCKETS.map(socket=>{let type=SOCKET_TYPE[socket],it=item(type,1,null,0);it.name='旧炉·'+names[type];it.atk=bases[type].atk+1;it.armor=bases[type].armor+1;it.hp=bases[type].hp+2;it.affixes=[];return it;});
@@ -191,20 +191,106 @@ export function equipItem(s,id,socket){
  if(!socket){if(it.slot==='ring'){socket=!s.equip.ring1?'ring1':!s.equip.ring2?'ring2':'ring1';}else socket=it.slot;}
  if(!SOCKETS.includes(socket)||SOCKET_TYPE[socket]!==it.slot)return false;
  for(const k of SOCKETS)if(k!==socket&&s.equip[k]===id){if(it.slot==='ring')s.equip[k]=s.equip[socket]??null;else return false;}
- s.equip[socket]=id;return true;
+ s.equip[socket]=id;capHealth(s);return true;
 }
 export function stats(s){
  const ids=[...new Set(Object.values(s.equip).filter(Boolean))],gear=ids.map(id=>s.inventory.find(i=>i.id===id)).filter(Boolean),count={},specials={};
- let atk=14+s.level*3+s.talents.power*3,armor=5+s.level+s.talents.steel*3,hp=120+s.level*14+s.talents.heart*20;
+ let atk=14+s.level*3+s.talents.power*3+potionBuffStrength(s,'strength'),armor=5+s.level+s.talents.steel*3,hp=120+s.level*14+s.talents.heart*20;
  const bonus=Object.fromEntries(Object.keys(AFFIX_DEFS).map(k=>[k,0]));
  for(const it of gear){const totals=itemTotals(it);atk+=totals.atk;armor+=totals.armor;hp+=totals.hp;if(it.set)count[it.set]=(count[it.set]||0)+1;if(it.special)specials[it.special.id]=true;for(const a of it.affixes)bonus[a.stat]+=a.value*divineMultiplier(it);}
  bonus.hit+=(s.talents.precision??0)*5;bonus.crit+=(s.talents.crit??0)*5;bonus.critDamage+=(s.talents.critDamage??0)*8;bonus.element+=(s.talents.element??0)*2;
  atk=Math.round(atk+bonus.atk);armor=Math.round(armor+bonus.armor);hp=Math.round(hp+bonus.hp);
  const ratingFactor=r=>Math.max(0,r)/(100+Math.max(0,r));
- return {atk,armor,hp,penetration:(s.talents.penetration??0)*2,elementResist:.5*ratingFactor((s.talents.elementResist??0)*5),block:.35*ratingFactor((s.talents.block??0)*4),shieldBonus:(s.talents.shield??0)*4,healingBonus:(s.talents.healing??0)*3,resolveReduction:Math.floor((s.talents.resolve??0)/5),luck:s.talents.luck??0,hit:clamp(.9+.1*ratingFactor(bonus.hit),.5,.995),crit:clamp(.05+.55*ratingFactor(bonus.crit),0,.6),critDamage:clamp(1.5+ratingFactor(bonus.critDamage),1.5,2.5),element:Math.min(bonus.element,Math.floor(atk*.6)),hitRating:bonus.hit,critRating:bonus.crit,critDamageRating:bonus.critDamage,count,specials,legend:false,bonus};
+ return {atk,armor,hp,penetration:(s.talents.penetration??0)*2,elementResist:.5*ratingFactor((s.talents.elementResist??0)*5+potionBuffStrength(s,'fireResist')),block:.35*ratingFactor((s.talents.block??0)*4),shieldBonus:(s.talents.shield??0)*4,healingBonus:(s.talents.healing??0)*3,resolveReduction:Math.floor((s.talents.resolve??0)/5),luck:s.talents.luck??0,hit:clamp(.9+.1*ratingFactor(bonus.hit),.5,.995),crit:clamp(.05+.55*ratingFactor(bonus.crit),0,.6),critDamage:clamp(1.5+ratingFactor(bonus.critDamage),1.5,2.5),element:Math.min(bonus.element,Math.floor(atk*.6)),hitRating:bonus.hit,critRating:bonus.crit,critDamageRating:bonus.critDamage,count,specials,legend:false,bonus};
 }
 export function preset(s,id){const b=BUILD.find(x=>x.id===id);if(!b)return null;s.build=id;s.skills=[...b.skills];s.conditions=['always','always','charge','always'];return b;}
-export function encounter(s,boss=false){const l=LOCS[s.location],st=stats(s);return {location:s.location,luck:st.luck,boss,name:boss?l.boss:l.enemy,hp:l.hp*(boss?4:1),max:l.hp*(boss?4:1),atk:l.atk*(boss?1.65:1),armor:l.armor*(boss?1.3:1),heroHp:st.hp,round:0,nextHeavy:4,heavyDelayed:false,warcry:0,ironcoat:0,blunt:0,scorch:0,barrier:0,barrierShield:0,heroBurn:0,weakness:0,burn:0,broken:0,guard:0,stun:0,cd:{},shelterUsed:false,shield:0,done:false,rewarded:false,killSource:null};}
+export const POTIONS={
+ healing:{name:'治疗药剂',icon:'potionHeal',desc:'按品质恢复25% / 30% / 35% / 40%最大生命。'},
+ strength:{name:'力量药剂',icon:'potionPower',desc:'按品质攻击 +10 / +15 / +20 / +25，持续5分钟。同品质续时，高品质替换强度与时间，低品质不可覆盖。'},
+ fireResist:{name:'火抗药剂',icon:'potionFireResist',desc:'按品质火焰抗性值 +30 / +40 / +50 / +60，持续5分钟。同品质续时，高品质替换强度与时间，低品质不可覆盖。'}
+};
+export const POTION_DURATION_MS=300000,POTION_COOLDOWN_MS=20000;
+// Same-quality doses extend time; stronger doses replace both potency and time.
+export const POTION_QUALITY_EFFECTS=[0,1,2,3].map(quality=>({heal:.25+.05*quality,durationMs:300000,attack:10+5*quality,resistance:30+10*quality}));
+function potionBuff(s,type){const b=s.potionBuffs?.[type];return typeof b==='number'?{quality:0,endAt:b}:b??{quality:0,endAt:0};}
+function potionBuffStrength(s,type){const b=potionBuff(s,type);if(b.endAt<=(s.lastHealthClock??0))return 0;return type==='strength'?POTION_QUALITY_EFFECTS[b.quality].attack:POTION_QUALITY_EFFECTS[b.quality].resistance;}
+export function potionEffect(type,quality=0){if(!Number.isInteger(quality)||quality<0||quality>3)return null;const effect=POTION_QUALITY_EFFECTS[quality];return Object.hasOwn(POTIONS,type)&&effect?{healFraction:type==='healing'?effect.heal:0,durationMs:type==='healing'?0:effect.durationMs,attack:type==='strength'?effect.attack:0,resistance:type==='fireResist'?effect.resistance:0}:null;}
+export function potionKey(type,quality=0){return Object.hasOwn(POTIONS,type)&&Number.isInteger(quality)&&quality>=0&&quality<=3?`${type}|${quality}`:null;}
+export function parsePotionKey(value){
+ if(typeof value!=='string')return null;if(Object.hasOwn(POTIONS,value))return {type:value,quality:0,key:potionKey(value)};
+ const parts=value.split('|');if(parts.length!==2||!['0','1','2','3'].includes(parts[1]))return null;const key=potionKey(parts[0],Number(parts[1]));return key?{type:parts[0],quality:Number(parts[1]),key}:null;
+}
+function validPotions(s){
+ const count=n=>Number.isSafeInteger(n)&&n>=0&&n<=1e9,time=n=>Number.isFinite(n)&&n>=0&&n<=1e15;
+ const stacks=s.potionStacks===undefined?(s.potions===undefined||(s.potions&&typeof s.potions==='object'&&!Array.isArray(s.potions)&&Object.keys(s.potions).every(k=>Object.hasOwn(POTIONS,k)&&count(s.potions[k])))):(s.potions===undefined&&s.potionStacks&&typeof s.potionStacks==='object'&&!Array.isArray(s.potionStacks)&&Object.entries(s.potionStacks).every(([k,n])=>parsePotionKey(k)?.key===k&&count(n)));
+ const selected=s.potionSlot?.key??s.potionSlot?.type??null;
+ return stacks&&(s.potionSlot===undefined||(s.potionSlot&&(selected===null||parsePotionKey(selected))&&typeof s.potionSlot.auto==='boolean'))&&(s.potionReadyAt===undefined||time(s.potionReadyAt))&&(s.potionBuffs===undefined||(s.potionBuffs&&typeof s.potionBuffs==='object'&&!Array.isArray(s.potionBuffs)&&['strength','fireResist'].every(type=>{const b=s.potionBuffs[type];return b===undefined||time(b)||(b&&Number.isInteger(b.quality)&&b.quality>=0&&b.quality<=3&&time(b.endAt));})));
+}
+export function normalizePotions(s){
+ if(!validPotions(s))return false;if(s.potionStacks===undefined){s.potionStacks=Object.fromEntries(Object.entries(s.potions??{}).map(([type,n])=>[potionKey(type),n]));delete s.potions;}
+ const selected=s.potionSlot?.key??s.potionSlot?.type??null;s.potionSlot={key:selected===null?null:parsePotionKey(selected).key,auto:s.potionSlot?.auto??false};s.potionReadyAt??=0;s.potionBuffs??={};for(const type of ['strength','fireResist']){const b=s.potionBuffs[type];if(typeof b==='number'||b===undefined)s.potionBuffs[type]={quality:0,endAt:b??0};}return true;
+}
+export function potionCount(s,type,quality=0){return s.potionStacks?.[potionKey(type,quality)]??(quality===0?s.potions?.[type]??0:0);}
+export function potionEntries(s){return Object.keys(POTIONS).flatMap(type=>[0,1,2,3].map(quality=>({key:potionKey(type,quality),type,quality,count:potionCount(s,type,quality)}))).filter(x=>x.count>0);}
+export function equipPotion(s,key){const parsed=key===null?null:parsePotionKey(key);if((key!==null&&!parsed)||!normalizePotions(s))return false;s.potionSlot.key=parsed?.key??null;return true;}
+export function setPotionAuto(s,enabled){if(typeof enabled!=='boolean'||!normalizePotions(s))return false;s.potionSlot.auto=enabled;return true;}
+export function drinkPotion(s,key=s.potionSlot?.key,now=Date.now(),battle=s.activeEncounter??null){
+ const parsed=parsePotionKey(key);if(!parsed||!POTION_QUALITY_EFFECTS[parsed.quality]||!validPotions(s)||!normalizeHealth(s,now))return false;settleRest(s,now);
+ const {type,quality}=parsed,effect=POTION_QUALITY_EFFECTS[quality],clock=s.lastHealthClock;if(s.restUntil>0||s.heroHp<=0||(s.potionReadyAt??0)>clock||potionCount(s,type,quality)<1)return false;
+ const max=stats(s).hp;if(type==='healing'&&s.heroHp>=max)return false;
+ const current=potionBuff(s,type),active=current.endAt>clock;if(type!=='healing'&&active&&quality<current.quality)return false;
+ const end=type==='healing'?0:(active&&quality===current.quality?current.endAt:clock)+effect.durationMs;if(end>1e15||clock+POTION_COOLDOWN_MS>1e15)return false;
+ normalizePotions(s);s.potionStacks[parsed.key]--;s.potionReadyAt=clock+POTION_COOLDOWN_MS;
+ if(type==='healing'){s.heroHp=Math.min(max,s.heroHp+max*effect.heal);if(battle&&!battle.done)battle.heroHp=s.heroHp;}
+ else s.potionBuffs[type]={quality,endAt:end};
+ return true;
+}
+export function autoDrinkPotion(s,battle=s.activeEncounter??null,now=Date.now()){
+ if(!s.potionSlot?.auto||!s.potionSlot.key)return false;const parsed=parsePotionKey(s.potionSlot.key);if(!parsed)return false;const {type}=parsed,clock=Math.max(now,s.lastHealthClock??0);
+ if(type==='healing'&&s.heroHp>stats(s).hp*.4)return false;
+ if(type!=='healing'&&potionBuff(s,type).endAt>clock)return false;
+ return drinkPotion(s,parsed.key,now,battle);
+}
+function capHealth(s){if(s.heroHp!==undefined){s.heroHp=Math.min(s.heroHp,stats(s).hp);if(s.activeEncounter&&!s.activeEncounter.done)s.activeEncounter.heroHp=Math.min(s.activeEncounter.heroHp,s.heroHp);}}
+export const REST_DURATION_MS=5*60*1000;
+function validEncounter(e){
+ if(e===undefined||e===null)return true;
+ const number=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;
+ if(!e||typeof e!=='object'||Array.isArray(e)||![0,1,2].includes(e.location)||typeof e.name!=='string'||e.name.length>100||typeof e.boss!=='boolean'||typeof e.done!=='boolean'||typeof e.rewarded!=='boolean')return false;
+ if(!['hp','max','atk','armor','heroHp','round','burn','broken','guard','stun','shield'].every(k=>number(e[k])))return false;
+ if(!e.cd||typeof e.cd!=='object'||Array.isArray(e.cd)||!Object.entries(e.cd).every(([k,n])=>Object.hasOwn(SKILLS,k)&&number(n,100)))return false;
+ if(!['warcry','ironcoat','blunt','scorch','barrier','barrierShield','heroBurn','weakness','nextHeavy','luck'].every(k=>e[k]===undefined||number(e[k])))return false;
+ if((e.win!==undefined&&typeof e.win!=='boolean')||(e.heavyDelayed!==undefined&&typeof e.heavyDelayed!=='boolean')||typeof e.shelterUsed!=='boolean')return false;
+ if(![null,'active','burn','counter'].includes(e.killSource))return false;
+ return (e.rewardNotes===undefined||(Array.isArray(e.rewardNotes)&&e.rewardNotes.length<=20&&e.rewardNotes.every(t=>typeof t==='string'&&t.length<=300)))&&(e.materialLoot===undefined||(Array.isArray(e.materialLoot)&&e.materialLoot.length<=12&&e.materialLoot.every(l=>parseMaterialKey(l.key)?.key===l.key&&number(l.count,100))));
+}
+function validHealth(s){
+ const keys=['heroHp','restUntil','lastHealthClock'];if(keys.every(k=>s[k]===undefined))return true;
+ return Number.isFinite(s.heroHp)&&s.heroHp>=0&&s.heroHp<=1e12&&Number.isFinite(s.restUntil)&&s.restUntil>=0&&s.restUntil<=1e15+REST_DURATION_MS&&Number.isFinite(s.lastHealthClock)&&s.lastHealthClock>=0&&s.lastHealthClock<=1e15;
+}
+export function normalizeHealth(s,now=Date.now()){
+ if(!Number.isFinite(now)||now<0||now>1e15||!validHealth(s))return false;
+ const max=stats(s).hp;
+ if(s.heroHp===undefined){s.heroHp=max;s.restUntil=0;s.lastHealthClock=now;}
+ else{capHealth(s);s.lastHealthClock=Math.max(s.lastHealthClock,now);}
+ return true;
+}
+export function settleRest(s,now=Date.now()){
+ if(!normalizeHealth(s,now))return false;
+ if(s.restUntil>0&&s.lastHealthClock>=s.restUntil){s.heroHp=stats(s).hp;s.restUntil=0;s.running=!!s.running&&!!s.restResume;s.restResume=false;s.nextActionAt=s.lastHealthClock;return true;}
+ return false;
+}
+export function startRest(s,now=Date.now(),resume=false){
+ if(!normalizeHealth(s,now))return false;
+ if(s.restUntil>0)return false;
+ s.restUntil=s.lastHealthClock+REST_DURATION_MS;s.activeEncounter=null;s.restResume=!!resume;s.running=!!resume;s.nextActionAt=s.restUntil;return true;
+}
+export function canStartEncounter(s,now=Date.now()){
+ if(!normalizeHealth(s,now))return false;settleRest(s,now);
+ if(s.heroHp<=0&&s.restUntil===0)startRest(s,now);
+ return s.restUntil===0&&s.heroHp>0&&s.lastHealthClock>=(s.nextBattleAt??0);
+}
+export function encounter(s,boss=false,now=Date.now()){if(!canStartEncounter(s,now))return null;if(s.activeEncounter&&!s.activeEncounter.rewarded)return s.activeEncounter;const l=LOCS[s.location],st=stats(s);const e={location:s.location,luck:st.luck,boss,name:boss?l.boss:l.enemy,hp:l.hp*(boss?4:1),max:l.hp*(boss?4:1),atk:l.atk*(boss?1.65:1),armor:l.armor*(boss?1.3:1),heroHp:s.heroHp,round:0,nextHeavy:4,heavyDelayed:false,warcry:0,ironcoat:0,blunt:0,scorch:0,barrier:0,barrierShield:0,heroBurn:0,weakness:0,burn:0,broken:0,guard:0,stun:0,cd:{},shelterUsed:false,shield:0,done:false,rewarded:false,killSource:null};s.activeEncounter=e;s.nextActionAt=s.lastHealthClock+1100;return e;}
 const damage=(raw,armor)=>Math.max(1,Math.round(raw*100/(100+Math.max(0,armor))));
 function finish(e,win,source){e.done=true;e.win=win;e.hp=Math.max(0,e.hp);e.heroHp=Math.max(0,e.heroHp);e.killSource=source;}
 export function combatStatuses(e){
@@ -213,7 +299,13 @@ export function combatStatuses(e){
  const out=defs.filter(([id])=>e[id]>0).map(([id,key,name,side])=>({key,name,turns:e[id],side}));
  if(e.heavyDelayed)out.push({key:'delay',name:'重击延后',turns:Math.max(1,e.nextHeavy-e.round),side:'enemy'});return out;
 }
-export function step(s,e){
+export function step(s,e,now=Date.now()){
+ if(!e||e!==s.activeEncounter||e.done||!normalizeHealth(s,now)||s.restUntil>0)return[];
+ e.heroHp=Math.min(e.heroHp,stats(s).hp);s.heroHp=e.heroHp;const drank=autoDrinkPotion(s,e,now);
+ const logs=combatStep(s,e);s.nextActionAt=s.lastHealthClock+1100;if(drank)logs.unshift('自动饮用 · '+POTIONS[parsePotionKey(s.potionSlot.key).type].name);s.heroHp=Math.max(0,Math.min(stats(s).hp,e.heroHp));
+ if(s.heroHp<=0){const resume=!!s.running&&!e.boss&&!s.stopAfterBattle;startRest(s,now,resume);s.stopAfterBattle=false;}return logs;
+}
+function combatStep(s,e){
  if(e.done)return[];const st=stats(s),logs=[];e.round++;
  for(const field of ['warcry','ironcoat','blunt','scorch','barrier','barrierShield','heroBurn','weakness'])e[field]??=0;
  e.nextHeavy??=4;e.heavyDelayed??=false;for(const k in e.cd)e.cd[k]=Math.max(0,e.cd[k]-1);
@@ -274,20 +366,42 @@ export function reward(s,e,now=Date.now()){
  if(!e.win||e.rewarded)return null;e.rewarded=true;const index=e.location??s.location,l=LOCS[index],st=stats(s);s.kills++;s.gold+=e.boss?l.bossGold:l.reward;
  const baseXp=e.boss?100:20+index*8,knowledge=st.specials.knowledge&&Math.random()<.05;gainXp(s,baseXp*(knowledge?2:1));e.materialLoot=earnedMaterials(s,l.mat,e.boss?4:1,e.boss,e.luck??0);let expectedMaterials=e.boss?4:1;
  if(st.specials.scavenger&&Math.random()<.1){expectedMaterials++;e.materialLoot.push(...earnedMaterials(s,l.mat,1,e.boss,e.luck??0));e.rewardNotes=['拾荒者：额外材料 +1'];}if(knowledge)(e.rewardNotes??=[]).push('求知：额外基础经验 +'+baseXp);
- if(e.materialLoot.reduce((n,x)=>n+x.count,0)<expectedMaterials)(e.rewardNotes??=[]).push('部分材料堆叠已满（每堆上限1万亿），超出部分未收取。');
+ if(Math.random()<.12){expectedMaterials++;const herbLoot=earnedMaterials(s,'灰根草',1,e.boss,e.luck??0);e.materialLoot.push(...herbLoot);if(herbLoot[0]?.quality===0)(e.rewardNotes??=[]).push('普通 灰根草 ×1');}
  for(const loot of e.materialLoot.filter(x=>x.quality>0))(e.rewardNotes??=[]).push(MATERIAL_QUALITIES[loot.quality]+' '+loot.material+' ×'+loot.count);
+ if(e.materialLoot.reduce((n,x)=>n+x.count,0)<expectedMaterials)(e.rewardNotes??=[]).push('部分材料堆叠已满（每堆上限1万亿），超出部分未收取。');
  let drop=rollDrop(s,e.boss,e.luck??0);
  if(e.boss){s.bossWins[index]++;s.bossReady[index]=now+60000;if(!s.chapters.includes(index)){s.chapters.push(index);s.chronicle.unshift(['沃恩交出了商队货单：货物并非被抢，而是被人改道。','哥布林技师「尼克」从炉芯发现了烬裔封印。','精灵信使「瑟拉」证实：旧盟约的碎片，正在被五族争夺。'][index]);}}else s.normalWins[index]++;
- return drop;
+ s.nextBattleAt=Math.max(now,s.lastHealthClock??0)+1800;s.nextActionAt=s.nextBattleAt;if(e.boss||s.stopAfterBattle){s.running=false;s.stopAfterBattle=false;}if(s.activeEncounter===e)s.activeEncounter=null;return drop;
 }
 export function offline(s,now=Date.now()){
- const elapsed=Math.min(4*3600000,Math.max(0,now-s.lastSeen));s.lastSeen=now;
- if(!s.running||elapsed<60000||!s.normalWins[s.location])return null;
- const cycles=Math.floor(elapsed/60000),l=LOCS[s.location],gold=cycles*l.reward,xp=cycles*8,mat=Math.floor(cycles/3);s.gold+=gold;gainXp(s,xp);const materialLoot=earnedMaterials(s,l.mat,mat,false,s.offlineLuck??0),received=materialLoot.reduce((n,x)=>n+x.count,0);s.chronicle.unshift('离线驻扎：侦察员带回'+gold+'金币与'+received+'份'+l.mat+'。'+(received<mat?'部分材料堆叠已满，超出部分未收取。':''));s.chronicle=s.chronicle.slice(0,20);return {minutes:Math.floor(elapsed/60000),gold,xp,mat:received,materialLoot,materialOverflow:mat-received};
+ if(!Number.isFinite(now)||now<0||now>1e15)return null;
+ const start=Math.max(s.lastSeen,s.lastHealthClock??s.lastSeen),end=Math.min(now,start+4*3600000),beforeGold=s.gold,beforeXp=s.xp,beforeLevel=s.level;
+ if(!normalizeHealth(s,start)||!normalizeMaterials(s)||!normalizePotions(s))return null;
+ const beforeMaterials=new Map(materialEntries(s).map(x=>[x.key,x.count]));let time=start,kills=0,rests=0,rounds=0;
+ // Real combat turns, bounded to four hours. Camp waits jump to their deadline.
+ while(time<end&&s.running){
+  if(s.restUntil>0){if(s.restUntil>end)break;time=Math.max(time,s.restUntil);settleRest(s,time);if(!s.running)break;continue;}
+  if(s.nextBattleAt>time){time=Math.min(end,s.nextBattleAt);if(time>=end)break;}
+  let e=s.activeEncounter;
+  if(e?.done){if(e.win&&!e.rewarded){reward(s,e,time);kills++;}else s.activeEncounter=null;continue;}
+  if(!e){e=encounter(s,false,time);if(!e){if(s.restUntil>0){rests++;continue;}break;}e.luck=s.offlineLuck??0;}
+  const turnAt=Math.max(time,s.nextActionAt??(time+1100));if(turnAt>end)break;time=turnAt;
+  const wasResting=s.restUntil>0;step(s,e,time);rounds++;if(!wasResting&&s.restUntil>0)rests++;
+  if(e.done&&e.win){reward(s,e,time);kills++;}
+  if(rounds>13100)break;
+ }
+ // Time beyond the reward cap may finish rest/expire buffs, never grants extra kills.
+ settleRest(s,Math.max(now,start));s.lastSeen=Math.max(now,start);
+ const materialLoot=materialEntries(s).map(x=>({...x,count:x.count-(beforeMaterials.get(x.key)??0)})).filter(x=>x.count>0),mat=materialLoot.reduce((n,x)=>n+x.count,0);
+ const xp=(s.level-beforeLevel)*(beforeLevel+s.level-1)*40+s.xp-beforeXp,gold=s.gold-beforeGold;
+ if(now<=start)return null;
+ s.chronicle.unshift('离线实战：完成'+kills+'场胜利，休息'+rests+'次，获得'+gold+'金币与'+mat+'份材料。');s.chronicle=s.chronicle.slice(0,20);
+ return {minutes:Math.floor(Math.max(0,end-start)/60000),gold,xp,mat,materialLoot,kills,rests,rounds,capped:now-start>4*3600000};
 }
 export const MATERIALS={
  '铁屑':{icon:'iron',tags:['金属'],description:'旧驿道散落的铁料，融合时偏向厚重装备与碎砧套装。',origin:'失落驿道',price:4},
  '炉火晶':{icon:'fire',tags:['火焰'],description:'矿炉余热凝成的晶体，融合时偏向饰品与炉纹套装。',origin:'熄火矿井',price:7},
+ '灰根草':{icon:'herb',tags:['草药'],description:'黑炉荒野生长的耐寒草药，使随机融合更容易产出药剂。',origin:'黑炉诸地',price:5},
  '誓约残片':{icon:'soul',tags:['灵魂'],description:'旧誓遗物的碎片，融合时偏向饰品与守冢套装。',origin:'旧誓墓园',price:10}
 };
 export const MATERIAL_QUALITIES=['普通','稀有','优良','至臻'];
@@ -301,7 +415,7 @@ export function parseMaterialKey(value){
 function validMaterials(s){
  const count=n=>Number.isSafeInteger(n)&&n>=0&&n<=1e12;
  if(s.materialStacks!==undefined)return s.materials===undefined&&s.materialStacks&&typeof s.materialStacks==='object'&&!Array.isArray(s.materialStacks)&&Object.entries(s.materialStacks).every(([k,n])=>parseMaterialKey(k)?.key===k&&count(n));
- return s.materials&&typeof s.materials==='object'&&!Array.isArray(s.materials)&&Object.keys(s.materials).every(k=>Object.hasOwn(MATERIALS,k))&&Object.keys(MATERIALS).every(k=>count(s.materials[k]));
+ return s.materials&&typeof s.materials==='object'&&!Array.isArray(s.materials)&&Object.keys(s.materials).every(k=>Object.hasOwn(MATERIALS,k))&&['铁屑','炉火晶','誓约残片'].every(k=>count(s.materials[k]))&&count(s.materials['灰根草']??0);
 }
 export function normalizeMaterials(s){
  if(!validMaterials(s))return false;
@@ -317,7 +431,7 @@ function earnedMaterials(s,material,count,boss=false,luck=0){
  for(let i=0;i<count;i++){const quality=luckyRoll(()=>rollQuality(boss?[65,28,6.5,.5]:[80,17,2.8,.2]),luck);const added=addMaterial(s,material,quality,1);if(!added)continue;const entry=loot.find(x=>x.quality===quality);if(entry)entry.count++;else loot.push({key:materialKey(material,quality),material,quality,count:1});}
  return loot;
 }
-const MERCHANT_STOCK={'铁屑':[6,12],'炉火晶':[3,7],'誓约残片':[2,5]};
+const MERCHANT_STOCK={'铁屑':[6,12],'炉火晶':[3,7],'誓约残片':[2,5],'灰根草':[4,8]};
 export const MERCHANT_CYCLE_MS=30*60*1000;
 function validEquipment(i){try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;return typeof i.id==='string'&&typeof i.name==='string'&&SLOTS.includes(i.slot)&&Number.isInteger(i.rarity)&&i.rarity>=0&&i.rarity<=3&&(!i.set||(BUILD.some(b=>b.id===i.set)&&SET_SLOTS.includes(i.slot)&&i.rarity===3))&&num(i.atk)&&num(i.hp)&&num(i.armor)&&num(i.level)&&num(i.bless,5)&&Array.isArray(i.affixes)&&(i.rarity===0?i.affixes.length<=1:i.affixes.length===i.rarity+1)&&new Set(i.affixes.map(a=>a.stat)).size===i.affixes.length&&i.affixes.every(a=>Object.hasOwn(AFFIX_DEFS,a.stat)&&Number.isInteger(a.value)&&num(a.value,50))&&(!i.special||(!i.set&&i.rarity>=2&&Object.hasOwn(SPECIALS,i.special.id)))&&i.legendaryId===null&&(i.divine===undefined||(i.divine?.id==='forge-favor'&&i.divine.name==='神赐·炉火眷顾'&&i.divine.model==='raw-v1'&&['atk','armor','hp'].every(k=>num(i.divine.bonus?.[k]))));}catch{return false;}}
 function validMerchant(merchant){
@@ -385,14 +499,23 @@ export function purchaseConsumable(s,offerId,expectedRevision,now=Date.now()){
 export const FUSION_TAGS={
  '铁屑':{set:'anvil',slots:{weapon:2,helm:1,armor:2,gloves:1,boots:1,ring:0,amulet:0}},
  '炉火晶':{set:'rune',slots:{weapon:1,helm:0,armor:0,gloves:1,boots:0,ring:2,amulet:2}},
+ '灰根草':{set:null,slots:{weapon:0,helm:0,armor:0,gloves:0,boots:0,ring:0,amulet:0}},
  '誓约残片':{set:'guard',slots:{weapon:0,helm:1,armor:0,gloves:0,boots:1,ring:2,amulet:2}}
 };
-export function fusionWeights(selection){const slots=Object.fromEntries(SLOTS.map(k=>[k,2])),sets=Object.fromEntries(BUILD.map(b=>[b.id,1]));for(const key of selection){const parsed=parseMaterialKey(key),tag=parsed?FUSION_TAGS[parsed.material]:null;if(!tag)continue;sets[tag.set]+=2;for(const slot of SLOTS)slots[slot]+=tag.slots[slot];}return {slots,sets};}
+export function fusionWeights(selection){const slots=Object.fromEntries(SLOTS.map(k=>[k,2])),sets=Object.fromEntries(BUILD.map(b=>[b.id,1]));for(const key of selection){const parsed=parseMaterialKey(key),tag=parsed?FUSION_TAGS[parsed.material]:null;if(!tag)continue;if(tag.set)sets[tag.set]+=2;for(const slot of SLOTS)slots[slot]+=tag.slots[slot];}return {slots,sets};}
 export function forge(s,selection){
  if(!Array.isArray(selection)||selection.length<1||selection.length>5||s.gold<40||bagItems(s).length>=100||!validMaterials(s))return null;
  const counts={},parsed=[];for(const key of selection){const entry=parseMaterialKey(key);if(!entry)return null;parsed.push(entry);counts[entry.key]=(counts[entry.key]||0)+1;}
  if(parsed.some(({material,quality,key})=>materialCount(s,material,quality)<counts[key]))return null;
- const weights=fusionWeights(selection),isSet=Math.random()<.05,slot=weighted(Object.entries(weights.slots).filter(([k])=>!isSet||SET_SLOTS.includes(k))),set=isSet?weighted(Object.entries(weights.sets)):null,n=selection.length,a=parsed.reduce((total,p)=>total+p.quality,0)/n,quality=isSet?3:luckyRoll(()=>rollQuality([50-4*n-3*a,40+2*n-a,9+1.6*n+3*a,1+.4*n+a]),s.talents.luck??0);
+ const n=selection.length,a=parsed.reduce((total,p)=>total+p.quality,0)/n,qualityWeights=[50-4*n-3*a,40+2*n-a,9+1.6*n+3*a,1+.4*n+a],herbs=parsed.filter(p=>p.material==='灰根草').length;
+ if(herbs&&Math.random()<.35+.5*herbs/n){
+  if(!validPotions(s))return null;
+  const quality=luckyRoll(()=>rollQuality(qualityWeights),s.talents.luck??0),type=weighted([['healing',60],['strength',25],['fireResist',15]]),key=potionKey(type,quality);
+  if(potionCount(s,type,quality)>=1e9)return null;
+  normalizeMaterials(s);normalizePotions(s);Object.entries(counts).forEach(([key,v])=>s.materialStacks[key]-=v);s.gold-=40;s.potionStacks[key]=(s.potionStacks[key]??0)+1;
+  return {kind:'potion',potionType:type,quality,name:POTIONS[type].name,quantity:1,key};
+ }
+ const weights=fusionWeights(selection),isSet=Math.random()<.05,slot=weighted(Object.entries(weights.slots).filter(([k])=>!isSet||SET_SLOTS.includes(k))),set=isSet?weighted(Object.entries(weights.sets)):null,quality=isSet?3:luckyRoll(()=>rollQuality(qualityWeights),s.talents.luck??0);
  const it=item(slot,s.level+rand(0,2),set,quality);if(Math.random()<.03)applyForgeFavor(it);
  normalizeMaterials(s);Object.entries(counts).forEach(([key,v])=>s.materialStacks[key]-=v);s.gold-=40;s.inventory.push(it);return it;
 }
@@ -411,7 +534,7 @@ export function validSave(s){
  if(s.version!==SCHEMA_VERSION||s.race!=='dwarf'||s.hero!=='布洛克'||!Number.isInteger(s.level)||s.level<1||s.level>=100000||!num(s.xp)||!num(s.gold)||!Number.isInteger(s.location)||s.location<0||s.location>2)return false;
  if(!Array.isArray(s.inventory)||s.inventory.length>124||!s.inventory.every(validEquipment))return false;
  if(s.merchant?.offers?.some(o=>o.type==='equipment'&&o.stock===1&&s.inventory.some(it=>it.id===o.item?.id)))return false;
- if(!validLoadoutSlots(s)||bagItems(s).length>100||(s.merchant!==undefined&&!validMerchant(s.merchant)))return false;
+ if((s.nextActionAt!==undefined&&(!Number.isFinite(s.nextActionAt)||s.nextActionAt<0||s.nextActionAt>1e15))||(s.restResume!==undefined&&typeof s.restResume!=='boolean')||(s.nextBattleAt!==undefined&&(!Number.isFinite(s.nextBattleAt)||s.nextBattleAt<0||s.nextBattleAt>1e15))||!validEncounter(s.activeEncounter)||!validPotions(s)||!validHealth(s)||!validLoadoutSlots(s)||bagItems(s).length>100||(s.merchant!==undefined&&!validMerchant(s.merchant)))return false;
  if(new Set(s.inventory.map(i=>i.id)).size!==s.inventory.length||!s.equip||Object.keys(s.equip).length!==SOCKETS.length||!SOCKETS.every(k=>s.equip[k]===null||s.inventory.some(i=>i.id===s.equip[k]&&i.slot===SOCKET_TYPE[k])))return false;
  const equipped=Object.values(s.equip).filter(Boolean);if(new Set(equipped).size!==equipped.length)return false;
  return validSkillSlots(s.skills,s.conditions)&&validMaterials(s)&&(s.offlineLuck===undefined||(Number.isInteger(s.offlineLuck)&&num(s.offlineLuck,10)))&&validTalents(s)&&validConsumables(s)&&['bossWins','bossReady','normalWins'].every(k=>Array.isArray(s[k])&&s[k].length===3&&s[k].every(n=>num(n,1e15)))&&Array.isArray(s.chapters)&&s.chapters.every(n=>Number.isInteger(n)&&n>=0&&n<3)&&Array.isArray(s.chronicle)&&s.chronicle.length<=100&&s.chronicle.every(t=>typeof t==='string'&&t.length<2000)&&num(s.kills)&&num(s.stock,3)&&num(s.lastSeen,1e15)&&[0,1].includes(s.momentum)&&typeof s.running==='boolean';

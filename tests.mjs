@@ -15,3 +15,8 @@ import './talent-tests.mjs';
 import './support-grant-tests.mjs';
 
 import './material-quality-tests.mjs';
+
+import './hp-rest-tests.mjs';
+import './potion-tests.mjs';
+import './potion-forge-tests.mjs';
+import './offline-combat-tests.mjs';
