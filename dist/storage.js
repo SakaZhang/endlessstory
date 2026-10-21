@@ -26,3 +26,15 @@ export function listBackups(storage){
 }
 
 export function applySupportGrant(storage,game){const next=JSON.parse(JSON.stringify(game));if(!grantDevelopmentSupport(next))return {game,granted:false};try{storage.setItem(SAVE_KEY,JSON.stringify(next));return {game:next,granted:true};}catch{return {game,granted:false,failed:true};}}
+
+// User-visible resource operations commit storage before adopting their candidate.
+// A rejected operation may still carry a legitimate automatic merchant refresh.
+export function commitGameTransaction(storage,game,operation,{commitOnNoop=false,now=Date.now()}={}){
+ let candidate,value;
+ try{candidate=structuredClone(game);value=operation(candidate);}catch{return {ok:false,game,value:null,reason:'operation'};}
+ if(!value&&!commitOnNoop)return {ok:false,game,value,reason:'rejected'};
+ if(!Number.isFinite(now)||now<0)return {ok:false,game,value:null,reason:'operation'};
+ candidate.lastSeen=now;
+ try{storage.setItem(SAVE_KEY,JSON.stringify(candidate));}catch{return {ok:false,game,value:null,reason:'storage'};}
+ return {ok:true,game:candidate,value,reason:null};
+}

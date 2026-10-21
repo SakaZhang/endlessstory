@@ -29,3 +29,5 @@ import './pending-reforge-tests.mjs';
 import './reforge-v13-tests.mjs';
 import './location-foundation-tests.mjs';
 import './dungeon-routing-tests.mjs';
+
+import './transaction-tests.mjs';
