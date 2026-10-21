@@ -11,3 +11,5 @@ import './skill-slot-tests.mjs';
 import './skill-expansion-tests.mjs';
 
 import './talent-tests.mjs';
+
+import './support-grant-tests.mjs';

@@ -29,16 +29,21 @@ export const LOCS=[
  {name:'旧誓墓园',en:'THE OATHBOUND GRAVES',desc:'破碎盟约的见证者，沉睡于灰冠之下。',enemy:'失誓卫兵',boss:'守誓者 · 莫尔',hp:250,atk:20,armor:12,mat:'誓约残片',tag:'灵魂',reward:8,bossGold:55}
 ];
 export const TALENTS={
- power:{name:'力量',desc:'每点攻击 +3。',icon:'heavy',cap:10},heart:{name:'体魄',desc:'每点生命 +20。',icon:'mend',cap:10},steel:{name:'坚韧',desc:'每点护甲 +3。',icon:'ironcoat',cap:10},
- precision:{name:'精准',desc:'每点命中值 +5。',icon:'mark',cap:10},crit:{name:'锐意',desc:'每点暴击值 +5。',icon:'interrupt',cap:10},critDamage:{name:'重创',desc:'每点暴伤值 +8。',icon:'heavy',cap:10},
- penetration:{name:'破壁',desc:'每点物理穿甲 +2。',icon:'break',cap:10},element:{name:'元素亲和',desc:'每点元素附伤 +2，附伤总量最多为攻击60%。',icon:'fire',cap:10},elementResist:{name:'元素抗性',desc:'每点元素抗性值 +5，降低所受灼烧伤害。',icon:'cleanse',cap:10},
- block:{name:'格挡训练',desc:'每点格挡值 +4，概率减轻30%直接攻击伤害。',icon:'barrier',cap:10},shield:{name:'护盾塑形',desc:'已有技能或词条生成护盾时，每点额外 +4；不自动生成。',icon:'shield',cap:10},healing:{name:'复苏',desc:'每点回炉息在基础恢复后额外 +3，总恢复上限为最大生命35%。',icon:'mend',cap:10},
+ power:{name:'力量',desc:'每点攻击 +3。',icon:'heavy',cap:null},heart:{name:'体魄',desc:'每点生命 +20。',icon:'mend',cap:null},steel:{name:'坚韧',desc:'每点护甲 +3。',icon:'ironcoat',cap:null},
+ precision:{name:'精准',desc:'每点命中值 +5。',icon:'mark',cap:10},crit:{name:'锐意',desc:'每点暴击值 +5。',icon:'interrupt',cap:10},critDamage:{name:'重创',desc:'每点暴伤值 +8。',icon:'heavy',cap:null},
+ penetration:{name:'破壁',desc:'每点物理穿甲 +2。',icon:'break',cap:null},element:{name:'元素亲和',desc:'每点元素附伤 +2，附伤总量最多为攻击60%。',icon:'fire',cap:null},elementResist:{name:'元素抗性',desc:'每点元素抗性值 +5，降低所受灼烧伤害。',icon:'cleanse',cap:null},
+ block:{name:'格挡训练',desc:'每点格挡值 +4，概率减轻30%直接攻击伤害。',icon:'barrier',cap:10},shield:{name:'护盾塑形',desc:'已有技能或词条生成护盾时，每点额外 +4；不自动生成。',icon:'shield',cap:null},healing:{name:'复苏',desc:'每点回炉息在基础恢复后额外 +3，总恢复上限为最大生命35%。',icon:'mend',cap:null},
  resolve:{name:'抗扰',desc:'每5点缩短新受到的灼烧、虚弱1回合，最低1回合。',icon:'ironcoat',cap:10},luck:{name:'幸运',desc:'小幅提高非套装掉落、融合品质及改造普通词条数值；不改变套装与神赐概率，不直接提高特殊词条判定率。',icon:'ring',cap:10}
 };
+export const DEVELOPMENT_GRANT_ID='v081support';
+export function talentPointBudget(s){return s.level-1+(s.bonusTalentPoints??0);}
 function validTalents(s){
+ if(s.bonusTalentPoints!==undefined&&(!Number.isSafeInteger(s.bonusTalentPoints)||s.bonusTalentPoints<0||s.bonusTalentPoints>1000000))return false;
+ if(s.testGrants!==undefined&&(!s.testGrants||typeof s.testGrants!=='object'||Array.isArray(s.testGrants)||!Object.values(s.testGrants).every(x=>x===true)))return false;
+ if(s.testGrants?.[DEVELOPMENT_GRANT_ID]&&(s.bonusTalentPoints??0)<30)return false;
  if(!s.talents||typeof s.talents!=='object'||Array.isArray(s.talents))return false;
  if(!['power','heart','steel'].every(k=>Number.isInteger(s.talents[k])&&s.talents[k]>=0))return false;
- return Object.entries(s.talents).every(([key,n])=>Object.hasOwn(TALENTS,key)&&Number.isInteger(n)&&n>=0&&n<=(['power','heart','steel'].includes(key)?s.level-1:10))&&Object.values(s.talents).reduce((a,b)=>a+b,0)<=s.level-1;
+ return Object.entries(s.talents).every(([key,n])=>Object.hasOwn(TALENTS,key)&&Number.isSafeInteger(n)&&n>=0&&n<=(TALENTS[key].cap??talentPointBudget(s)))&&Object.values(s.talents).reduce((a,b)=>a+b,0)<=talentPointBudget(s);
 }
 function validConsumables(s){return s.consumables===undefined||(s.consumables&&Number.isSafeInteger(s.consumables.memoryFruit)&&s.consumables.memoryFruit>=0&&s.consumables.memoryFruit<=1e9&&(s.consumables.refundCredits===undefined||(Number.isSafeInteger(s.consumables.refundCredits)&&s.consumables.refundCredits>=0&&s.consumables.refundCredits<=1e10)));}
 export function normalizeTalents(s){
@@ -46,9 +51,9 @@ export function normalizeTalents(s){
  for(const key of Object.keys(TALENTS))s.talents[key]??=0;
  s.consumables??={memoryFruit:0};s.consumables.refundCredits??=0;return true;
 }
-export function availableTalentPoints(s){return s.level-1-Object.values(s.talents).reduce((a,b)=>a+b,0);}
+export function availableTalentPoints(s){return talentPointBudget(s)-Object.values(s.talents).reduce((a,b)=>a+b,0);}
 export function spendTalent(s,key,battleActive=false){
- if(s.running||battleActive||!Object.hasOwn(TALENTS,key)||!validTalents(s)||!validConsumables(s)||availableTalentPoints(s)<=0||(s.talents[key]??0)>=TALENTS[key].cap)return false;
+ if(s.running||battleActive||!Object.hasOwn(TALENTS,key)||!validTalents(s)||!validConsumables(s)||availableTalentPoints(s)<=0||(TALENTS[key].cap!==null&&(s.talents[key]??0)>=TALENTS[key].cap))return false;
  normalizeTalents(s);s.talents[key]++;return true;
 }
 export function getTalentRefundQuote(s,draft){
@@ -382,3 +387,5 @@ export function validSave(s){
  return validSkillSlots(s.skills,s.conditions)&&LOCS.every(l=>num(s.materials[l.mat]))&&validTalents(s)&&validConsumables(s)&&['bossWins','bossReady','normalWins'].every(k=>Array.isArray(s[k])&&s[k].length===3&&s[k].every(n=>num(n,1e15)))&&Array.isArray(s.chapters)&&s.chapters.every(n=>Number.isInteger(n)&&n>=0&&n<3)&&Array.isArray(s.chronicle)&&s.chronicle.length<=100&&s.chronicle.every(t=>typeof t==='string'&&t.length<2000)&&num(s.kills)&&num(s.stock,3)&&num(s.lastSeen,1e15)&&[0,1].includes(s.momentum)&&typeof s.running==='boolean';
  }catch{return false;}
 }
+
+export function grantDevelopmentSupport(s){if(!validSave(s)||s.testGrants?.[DEVELOPMENT_GRANT_ID]||s.gold>1e12-5000||(s.bonusTalentPoints??0)>1000000-30||(s.consumables?.memoryFruit??0)>1e9-3)return false;normalizeTalents(s);s.gold+=5000;s.bonusTalentPoints=(s.bonusTalentPoints??0)+30;s.consumables.memoryFruit+=3;s.testGrants={...s.testGrants,[DEVELOPMENT_GRANT_ID]:true};return true;}

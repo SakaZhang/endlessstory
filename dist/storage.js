@@ -1,4 +1,4 @@
-import {fresh,validSave} from './engine.js';
+import {fresh,validSave,grantDevelopmentSupport} from './engine.js';
 export const SAVE_KEY='ashencrown-v2';
 export const LEGACY_KEY='ashencrown-v1';
 export const BACKUP_PREFIX='ashencrown-backup-';
@@ -24,3 +24,5 @@ export function listBackups(storage){
   for(let i=0;i<storage.length;i++){const key=storage.key(i);if(key?.startsWith(BACKUP_PREFIX))out.push({key,label:key.includes('recovery')?'格式异常恢复备份':'手动操作前备份'});}
   return out;
 }
+
+export function applySupportGrant(storage,game){const next=JSON.parse(JSON.stringify(game));if(!grantDevelopmentSupport(next))return {game,granted:false};try{storage.setItem(SAVE_KEY,JSON.stringify(next));return {game:next,granted:true};}catch{return {game,granted:false,failed:true};}}
