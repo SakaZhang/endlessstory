@@ -1,3 +1,5 @@
+import {AREAS,SITES,INSTANCES,resolveLegacySite,instanceCooldownMs,pickRoute,areaGearLevel} from './location-schema.js';
+export {AREAS,SITES,INSTANCES,resolveLegacySite,instanceCooldownMs,pickRoute,areaGearLevel} from './location-schema.js';
 import {ELEMENT_KEYS,ELEMENT_AFFIX_DEFS,resolveElementDamage} from './element-schema.js';
 export {ELEMENT_KEYS,resolveElementDamage} from './element-schema.js';
 // v0.4 equipment foundation. Item families and equipment sockets are intentionally separate.
@@ -341,6 +343,45 @@ export function autoDrinkPotion(s,battle=s.activeEncounter??null,now=Date.now())
 }
 function capHealth(s){if(s.heroHp!==undefined){s.heroHp=Math.min(s.heroHp,stats(s).hp);if(s.activeEncounter&&!s.activeEncounter.done)s.activeEncounter.heroHp=Math.min(s.activeEncounter.heroHp,s.heroHp);}}
 export const REST_DURATION_MS=5*60*1000;
+export function validExpeditionState(s){
+ const ex=s.expedition,cd=s.instanceCooldowns;
+ if(cd!==undefined&&(!cd||typeof cd!=='object'||Array.isArray(cd)||!Object.entries(cd).every(([id,t])=>Object.hasOwn(INSTANCES,id)&&INSTANCES[id].kind!=='field'&&Number.isFinite(t)&&t>=0&&t<=1e15+1800000)))return false;
+ if(s.dungeonRun!==undefined&&s.dungeonRun!==null&&(!s.dungeonRun||INSTANCES[s.dungeonRun.instanceId]?.kind!=='dungeon'||typeof s.dungeonRun.runId!=='string'||s.dungeonRun.runId.length>160||!Number.isInteger(s.dungeonRun.stage)||s.dungeonRun.stage<1||s.dungeonRun.stage>3))return false;
+ if(ex!==undefined&&(!ex||typeof ex!=='object'||!['field','dungeon'].includes(ex.mode)||typeof ex.loop!=='boolean'||INSTANCES[ex.fieldId]?.kind!=='field'||(ex.targetInstanceId!==null&&INSTANCES[ex.targetInstanceId]?.kind!=='dungeon')))return false;
+ return s.siteId===undefined||!!resolveLegacySite(s.siteId);
+}
+export function normalizeExpedition(s){
+ if(!validExpeditionState(s))return false;
+ const site=resolveLegacySite(s.siteId??s.location);if(!site)return false;
+ s.siteId??=site.id;
+ s.expedition??={mode:'field',targetInstanceId:null,fieldId:site.id+'-field',loop:false};
+ s.instanceCooldowns??={};
+ for(const site of SITES){const ready=s.bossReady?.[site.legacyIndex]??0;if(ready>0)s.instanceCooldowns[site.id+'-boss']=Math.max(s.instanceCooldowns[site.id+'-boss']??0,ready);}
+ const e=s.activeEncounter;
+ if(e){const oldSite=resolveLegacySite(e.location);if(!oldSite)return false;e.siteId??=oldSite.id;e.areaId??=oldSite.areaId;e.kind??=e.boss?'boss':'field';e.instanceId??=oldSite.id+(e.boss?'-boss':'-field');}
+ return true;
+}
+export function nextEncounterRoute(s,now=Date.now()){
+ return pickRoute(s.expedition??{mode:'field',fieldId:resolveLegacySite(s.location)?.id+'-field',targetInstanceId:null,loop:false},s.instanceCooldowns??{},now);
+}
+export function configureExpedition(s,config){
+ if(s.running||(s.activeEncounter&&!s.activeEncounter.rewarded)||s.dungeonRun||!config)return false;
+ const candidate={mode:config.mode,targetInstanceId:config.targetInstanceId??null,fieldId:config.fieldId,loop:config.loop};
+ if(!validExpeditionState({...s,expedition:candidate})||(candidate.mode==='dungeon'&&!INSTANCES[candidate.targetInstanceId]?.enabled))return false;
+ if(!normalizeExpedition(s))return false;s.expedition=candidate;return true;
+}
+export function setExpeditionLoop(s,enabled){
+ if(typeof enabled!=='boolean'||!normalizeExpedition(s))return false;
+ s.expedition.loop=enabled;
+ if(!enabled&&s.restUntil>0&&s.expedition.mode==='dungeon'){s.restResume=false;s.running=false;}
+ return true;
+}
+export function startRoutedEncounter(s,now=Date.now()){
+ if(!normalizeExpedition(s))return null;
+ if(s.activeEncounter&&!s.activeEncounter.rewarded)return normalizeEncounterElements(s.activeEncounter);
+ if(s.dungeonRun)return startInstanceEncounter(s,s.dungeonRun.instanceId,now);
+ const route=nextEncounterRoute(s,now);return route?startInstanceEncounter(s,route.id,now):null;
+}
 export function normalizeEncounterElements(e){
  if(!e)return e;
  const tags=e.location===1?['earth','fire']:e.location===2?['dark']:[];
@@ -351,6 +392,9 @@ export function normalizeEncounterElements(e){
 function validEncounter(e){
  if(e===undefined||e===null)return true;
  const number=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;
+ if(e.kind==='dungeon'&&(!Number.isInteger(e.dungeonStage)||e.dungeonStage<1||e.dungeonStage>3||typeof e.runId!=='string'||!e.runId||e.runId.length>160||e.boss))return false;
+ if(e.instanceId!==undefined&&(!Object.hasOwn(INSTANCES,e.instanceId)||e.kind!==INSTANCES[e.instanceId].kind||e.siteId!==INSTANCES[e.instanceId].siteId||e.areaId!==INSTANCES[e.instanceId].areaId||resolveLegacySite(e.location)?.id!==e.siteId))return false;
+ if(e.instanceId===undefined&&['siteId','areaId','kind'].some(k=>e[k]!==undefined))return false;
  if(e.elementTags!==undefined&&(!Array.isArray(e.elementTags)||e.elementTags.length>6||new Set(e.elementTags).size!==e.elementTags.length||!e.elementTags.every(k=>ELEMENT_KEYS.includes(k))))return false;
  if(e.elementResistance!==undefined&&(!e.elementResistance||typeof e.elementResistance!=='object'||Array.isArray(e.elementResistance)||Object.keys(e.elementResistance).length!==6||!ELEMENT_KEYS.every(k=>number(e.elementResistance[k]))))return false;
  if(!e||typeof e!=='object'||Array.isArray(e)||![0,1,2].includes(e.location)||typeof e.name!=='string'||e.name.length>100||typeof e.boss!=='boolean'||typeof e.done!=='boolean'||typeof e.rewarded!=='boolean')return false;
@@ -380,14 +424,29 @@ export function settleRest(s,now=Date.now()){
 export function startRest(s,now=Date.now(),resume=false){
  if(!normalizeHealth(s,now))return false;
  if(s.restUntil>0)return false;
- s.restUntil=s.lastHealthClock+REST_DURATION_MS;s.activeEncounter=null;s.restResume=!!resume;s.running=!!resume;s.nextActionAt=s.restUntil;return true;
+ s.restUntil=s.lastHealthClock+REST_DURATION_MS;s.activeEncounter=null;s.dungeonRun=null;s.restResume=!!resume;s.running=!!resume;s.nextActionAt=s.restUntil;return true;
 }
 export function canStartEncounter(s,now=Date.now()){
  if(!normalizeHealth(s,now))return false;settleRest(s,now);
  if(s.heroHp<=0&&s.restUntil===0)startRest(s,now);
  return s.restUntil===0&&s.heroHp>0&&s.lastHealthClock>=(s.nextBattleAt??0);
 }
-export function encounter(s,boss=false,now=Date.now()){if(!canStartEncounter(s,now))return null;if(s.activeEncounter&&!s.activeEncounter.rewarded)return normalizeEncounterElements(s.activeEncounter);const l=LOCS[s.location],st=stats(s);const e={location:s.location,luck:st.luck,boss,name:boss?l.boss:l.enemy,hp:l.hp*(boss?4:1),max:l.hp*(boss?4:1),atk:l.atk*(boss?1.65:1),armor:l.armor*(boss?1.3:1),heroHp:s.heroHp,round:0,nextHeavy:4,heavyDelayed:false,warcry:0,ironcoat:0,blunt:0,scorch:0,barrier:0,barrierShield:0,heroBurn:0,weakness:0,burn:0,broken:0,guard:0,stun:0,cd:{},shelterUsed:false,shield:0,done:false,rewarded:false,killSource:null};normalizeEncounterElements(e);s.activeEncounter=e;s.nextActionAt=s.lastHealthClock+1100;return e;}
+export function encounter(s,boss=false,now=Date.now()){
+ if(s.activeEncounter&&!s.activeEncounter.rewarded)return normalizeEncounterElements(s.activeEncounter);
+ const site=resolveLegacySite(s.location);
+ return boss?startInstanceEncounter(s,site.id+'-boss',now):startRoutedEncounter(s,now);
+}
+export function startInstanceEncounter(s,instanceId,now=Date.now()){
+ const instance=INSTANCES[instanceId];if(!instance?.enabled||!canStartEncounter(s,now)||!normalizeExpedition(s))return null;
+ if(s.activeEncounter&&!s.activeEncounter.rewarded)return s.activeEncounter.instanceId===instanceId?s.activeEncounter:null;
+ if(s.dungeonRun&&s.dungeonRun.instanceId!==instanceId)return null;
+ if(instance.kind!=='field'&&!s.dungeonRun&&s.lastHealthClock<(s.instanceCooldowns[instanceId]??0))return null;
+ const site=resolveLegacySite(instance.siteId);s.location=site.legacyIndex;s.siteId=site.id;
+ if(instance.kind==='dungeon'&&!s.dungeonRun){s.dungeonRun={instanceId,runId:'run-'+Date.now().toString(36)+'-'+(++serial).toString(36),stage:1};s.expedition={...s.expedition,mode:'dungeon',targetInstanceId:instanceId};s.running=true;}
+ const boss=instance.kind==='boss',stage=s.dungeonRun?.stage,elite=instance.kind==='dungeon'&&stage===3,l=LOCS[s.location],st=stats(s);
+ const e={location:s.location,siteId:site.id,areaId:site.areaId,instanceId,kind:instance.kind,...(instance.kind==='dungeon'?{dungeonStage:stage,runId:s.dungeonRun.runId}:{}),luck:st.luck,boss,name:boss?l.boss:elite?l.enemy+' · 精英':l.enemy,hp:l.hp*(boss?4:elite?1.8:1),max:l.hp*(boss?4:elite?1.8:1),atk:l.atk*(boss?1.65:elite?1.25:1),armor:l.armor*(boss?1.3:1),heroHp:s.heroHp,round:0,nextHeavy:4,heavyDelayed:false,warcry:0,ironcoat:0,blunt:0,scorch:0,barrier:0,barrierShield:0,heroBurn:0,weakness:0,burn:0,broken:0,guard:0,stun:0,cd:{},shelterUsed:false,shield:0,done:false,rewarded:false,killSource:null};
+ normalizeEncounterElements(e);s.activeEncounter=e;s.nextActionAt=s.lastHealthClock+1100;return e;
+}
 const damage=(raw,armor)=>Math.max(1,Math.round(raw*100/(100+Math.max(0,armor))));
 function finish(e,win,source){e.done=true;e.win=win;e.hp=Math.max(0,e.hp);e.heroHp=Math.max(0,e.heroHp);e.killSource=source;}
 export function combatStatuses(e){
@@ -400,7 +459,7 @@ export function step(s,e,now=Date.now()){
  if(!e||e!==s.activeEncounter||e.done||!normalizeHealth(s,now)||s.restUntil>0)return[];
  e.heroHp=Math.min(e.heroHp,stats(s).hp);s.heroHp=e.heroHp;const drank=autoDrinkPotion(s,e,now);
  const logs=combatStep(s,e);s.nextActionAt=s.lastHealthClock+1100;if(drank)logs.unshift('自动饮用 · '+POTIONS[parsePotionKey(s.potionSlot.key).type].name);s.heroHp=Math.max(0,Math.min(stats(s).hp,e.heroHp));
- if(s.heroHp<=0){const resume=!!s.running&&!e.boss&&!s.stopAfterBattle;startRest(s,now,resume);s.stopAfterBattle=false;}return logs;
+ if(s.heroHp<=0){const resume=!!s.running&&!e.boss&&!s.stopAfterBattle&&(e.kind!=='dungeon'||!!s.expedition?.loop);startRest(s,now,resume);s.stopAfterBattle=false;}return logs;
 }
 function combatStep(s,e){
  if(e.done)return[];normalizeEncounterElements(e);const st=stats(s),logs=[];e.round++;
@@ -459,17 +518,27 @@ export function gainXp(s,n){s.xp+=n;while(s.xp>=s.level*80){s.xp-=s.level*80;s.l
 export function luckChance(points){return .06*Math.max(0,points)/(Math.max(0,points)+5);}
 function luckyRoll(draw,points){const first=draw();if(points>0&&Math.random()<luckChance(points))return Math.max(first,draw());return first;}
 function rollQuality(weights=[65,28,6.5,.5]){return Number(weighted(weights.map((w,i)=>[i,w])));}
-function rollDrop(s,boss,luck=0){if(Math.random()>=(boss?.65:.18)||bagItems(s).length>=100)return null;const isSet=Math.random()<(boss?.05:.01),slot=isSet?SET_SLOTS[rand(0,SET_SLOTS.length-1)]:SLOTS[rand(0,SLOTS.length-1)],set=isSet?BUILD[rand(0,2)].id:null,quality=isSet?3:luckyRoll(()=>rollQuality(),luck);const it=item(slot,s.level,set,quality);s.inventory.push(it);return it;}
+function rollDrop(s,boss,luck=0,instanceId=resolveLegacySite(s.location).id+'-field',clear=false){const dungeon=INSTANCES[instanceId]?.kind==='dungeon';if(Math.random()>=(boss?.65:clear?.35:.18)||bagItems(s).length>=100)return null;const isSet=Math.random()<(boss?.05:dungeon?.03:.01),slot=isSet?SET_SLOTS[rand(0,SET_SLOTS.length-1)]:SLOTS[rand(0,SLOTS.length-1)],set=isSet?BUILD[rand(0,2)].id:null,quality=isSet?3:luckyRoll(()=>rollQuality(boss?[50,35,13,2]:dungeon?[55,34,10,1]:[65,28,6.5,.5]),luck);const it=item(slot,areaGearLevel(instanceId),set,quality);s.inventory.push(it);return it;}
 export function reward(s,e,now=Date.now()){
- if(!e.win||e.rewarded)return null;const tokenEligible=e.boss&&e.done&&s.activeEncounter===e&&now>=(s.bossReady[e.location??s.location]??0);e.rewarded=true;const index=e.location??s.location,l=LOCS[index],st=stats(s);s.kills++;s.gold+=e.boss?l.bossGold:l.reward;
- const baseXp=e.boss?100:20+index*8,knowledge=st.specials.knowledge&&Math.random()<.05;gainXp(s,baseXp*(knowledge?2:1));e.materialLoot=earnedMaterials(s,l.mat,e.boss?4:1,e.boss,e.luck??0);let expectedMaterials=e.boss?4:1;
- if(st.specials.scavenger&&Math.random()<.1){expectedMaterials++;e.materialLoot.push(...earnedMaterials(s,l.mat,1,e.boss,e.luck??0));e.rewardNotes=['拾荒者：额外材料 +1'];}if(knowledge)(e.rewardNotes??=[]).push('求知：额外基础经验 +'+baseXp);
- if(Math.random()<.12){expectedMaterials++;const herbLoot=earnedMaterials(s,'灰根草',1,e.boss,e.luck??0);e.materialLoot.push(...herbLoot);if(herbLoot[0]?.quality===0)(e.rewardNotes??=[]).push('普通 灰根草 ×1');}
+ if(!e.win||e.rewarded)return null;
+ const dungeon=e.kind==='dungeon',run=s.dungeonRun;
+ if(dungeon&&(!e.done||s.activeEncounter!==e||!run||run.runId!==e.runId||run.stage!==e.dungeonStage))return null;
+ normalizeExpedition(s);const clear=dungeon&&e.dungeonStage===3,instanceId=e.instanceId;
+ const tokenEligible=(e.boss||clear)&&e.done&&s.activeEncounter===e&&now>=(s.instanceCooldowns[instanceId]??0);
+ e.rewarded=true;const index=e.location??s.location,l=LOCS[index],st=stats(s);s.kills++;s.gold+=(e.boss?l.bossGold:l.reward)+(clear?20:0);
+ const materialWeights=e.boss?[55,34,10,1]:dungeon?(clear?[65,28,6.5,.5]:[70,24,5.5,.5]):null;
+ const baseXp=e.boss?100:20+index*8,knowledge=st.specials.knowledge&&Math.random()<.05;gainXp(s,baseXp*(knowledge?2:1)+(clear?40:0));e.materialLoot=earnedMaterials(s,l.mat,e.boss?4:clear?3:1,e.boss,e.luck??0,materialWeights);let expectedMaterials=e.boss?4:clear?3:1;
+ if(st.specials.scavenger&&Math.random()<.1){expectedMaterials++;e.materialLoot.push(...earnedMaterials(s,l.mat,1,e.boss,e.luck??0,materialWeights));e.rewardNotes=['拾荒者：额外材料 +1'];}if(knowledge)(e.rewardNotes??=[]).push('求知：额外基础经验 +'+baseXp);
+ if(Math.random()<.12){expectedMaterials++;const herbLoot=earnedMaterials(s,'灰根草',1,e.boss,e.luck??0,materialWeights);e.materialLoot.push(...herbLoot);if(herbLoot[0]?.quality===0)(e.rewardNotes??=[]).push('普通 灰根草 ×1');}
  for(const loot of e.materialLoot.filter(x=>x.quality>0))(e.rewardNotes??=[]).push(MATERIAL_QUALITIES[loot.quality]+' '+loot.material+' ×'+loot.count);
  if(e.materialLoot.reduce((n,x)=>n+x.count,0)<expectedMaterials)(e.rewardNotes??=[]).push('部分材料堆叠已满（每堆上限1万亿），超出部分未收取。');
- let drop=rollDrop(s,e.boss,e.luck??0);
- if(tokenEligible&&Math.random()<.08){normalizeTalents(s);if(s.consumables.reforgeToken<1e9){s.consumables.reforgeToken++;(e.rewardNotes??=[]).push('重铸印记 ×1');}}
- if(e.boss){s.bossWins[index]++;s.bossReady[index]=now+60000;if(!s.chapters.includes(index)){s.chapters.push(index);s.chronicle.unshift(['沃恩交出了商队货单：货物并非被抢，而是被人改道。','哥布林技师「尼克」从炉芯发现了烬裔封印。','精灵信使「瑟拉」证实：旧盟约的碎片，正在被五族争夺。'][index]);}}else s.normalWins[index]++;
+ let drop=rollDrop(s,e.boss,e.luck??0,e.instanceId??resolveLegacySite(index).id+(e.boss?'-boss':'-field'),clear);
+ if(tokenEligible&&Math.random()<(clear?.02:.08)){normalizeTalents(s);if(s.consumables.reforgeToken<1e9){s.consumables.reforgeToken++;(e.rewardNotes??=[]).push('重铸印记 ×1');}}
+ if(e.boss){s.bossWins[index]++;s.bossReady[index]=Math.max(now,s.lastHealthClock??0)+1800000;s.instanceCooldowns[instanceId]=s.bossReady[index];if(!s.chapters.includes(index)){s.chapters.push(index);s.chronicle.unshift(['沃恩交出了商队货单：货物并非被抢，而是被人改道。','哥布林技师「尼克」从炉芯发现了烬裔封印。','精灵信使「瑟拉」证实：旧盟约的碎片，正在被五族争夺。'][index]);}}else s.normalWins[index]++;
+ if(dungeon){
+  if(clear){s.instanceCooldowns[instanceId]=Math.max(now,s.lastHealthClock??0)+300000;s.dungeonRun=null;(e.rewardNotes??=[]).push('普通副本通关：额外20金币、40经验、2份材料；冷却5分钟。');if(!s.expedition.loop)s.running=false;}
+  else{run.stage++;(e.rewardNotes??=[]).push('副本进度 '+e.dungeonStage+'/3：本阶段战利品已收取。');}
+ }
  s.nextBattleAt=Math.max(now,s.lastHealthClock??0)+1800;s.nextActionAt=s.nextBattleAt;if(e.boss||s.stopAfterBattle){s.running=false;s.stopAfterBattle=false;}if(s.activeEncounter===e)s.activeEncounter=null;return drop;
 }
 export function offline(s,now=Date.now()){
@@ -483,7 +552,7 @@ export function offline(s,now=Date.now()){
   if(s.nextBattleAt>time){time=Math.min(end,s.nextBattleAt);if(time>=end)break;}
   let e=s.activeEncounter;
   if(e?.done){if(e.win&&!e.rewarded){reward(s,e,time);kills++;}else s.activeEncounter=null;continue;}
-  if(!e){e=encounter(s,false,time);if(!e){if(s.restUntil>0){rests++;continue;}break;}e.luck=s.offlineLuck??0;}
+  if(!e){e=startRoutedEncounter(s,time);if(!e){if(s.restUntil>0){rests++;continue;}break;}e.luck=s.offlineLuck??0;}
   const turnAt=Math.max(time,s.nextActionAt??(time+1100));if(turnAt>end)break;time=turnAt;
   const wasResting=s.restUntil>0;step(s,e,time);rounds++;if(!wasResting&&s.restUntil>0)rests++;
   if(e.done&&e.win){reward(s,e,time);kills++;}
@@ -525,9 +594,9 @@ export function materialCount(s,material,quality=0){const key=materialKey(materi
 export function materialEntries(s){return Object.keys(MATERIALS).flatMap(material=>[0,1,2,3].map(quality=>({key:materialKey(material,quality),material,quality,count:materialCount(s,material,quality)}))).filter(row=>row.count>0);}
 export function materialPrice(material,quality=0){return materialKey(material,quality)?Math.ceil(MATERIALS[material].price*[1,1.5,2.5,4][quality]):null;}
 function addMaterial(s,material,quality,count){const key=materialKey(material,quality),before=s.materialStacks[key]??0,added=Math.max(0,Math.min(count,1e12-before));s.materialStacks[key]=before+added;return added;}
-function earnedMaterials(s,material,count,boss=false,luck=0){
+function earnedMaterials(s,material,count,boss=false,luck=0,weights=null){
  normalizeMaterials(s);const loot=[];
- for(let i=0;i<count;i++){const quality=luckyRoll(()=>rollQuality(boss?[65,28,6.5,.5]:[80,17,2.8,.2]),luck);const added=addMaterial(s,material,quality,1);if(!added)continue;const entry=loot.find(x=>x.quality===quality);if(entry)entry.count++;else loot.push({key:materialKey(material,quality),material,quality,count:1});}
+ for(let i=0;i<count;i++){const quality=luckyRoll(()=>rollQuality(weights??(boss?[65,28,6.5,.5]:[80,17,2.8,.2])),luck);const added=addMaterial(s,material,quality,1);if(!added)continue;const entry=loot.find(x=>x.quality===quality);if(entry)entry.count++;else loot.push({key:materialKey(material,quality),material,quality,count:1});}
  return loot;
 }
 const MERCHANT_STOCK={'铁屑':[6,12],'炉火晶':[3,7],'誓约残片':[2,5],'灰根草':[4,8]};
@@ -645,7 +714,8 @@ export function codexState(s,id){const entry=LEGENDARY_CODEX.find(x=>x.id===id);
 export function validSave(s){
  try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;
  if(s.version!==SCHEMA_VERSION||s.race!=='dwarf'||s.hero!=='布洛克'||!Number.isInteger(s.level)||s.level<1||s.level>=100000||!num(s.xp)||!num(s.gold)||!Number.isInteger(s.location)||s.location<0||s.location>2)return false;
- if(!Array.isArray(s.inventory)||s.inventory.length>124||!s.inventory.every(validEquipment)||!validPendingReforge(s))return false;
+ if(s.activeEncounter?.kind==='dungeon'&&(!s.dungeonRun||s.activeEncounter.runId!==s.dungeonRun.runId||s.activeEncounter.dungeonStage!==s.dungeonRun.stage))return false;
+ if(!validExpeditionState(s)||!Array.isArray(s.inventory)||s.inventory.length>124||!s.inventory.every(validEquipment)||!validPendingReforge(s))return false;
  if(s.merchant?.offers?.some(o=>o.type==='equipment'&&o.stock===1&&s.inventory.some(it=>it.id===o.item?.id)))return false;
  if((s.nextActionAt!==undefined&&(!Number.isFinite(s.nextActionAt)||s.nextActionAt<0||s.nextActionAt>1e15))||(s.restResume!==undefined&&typeof s.restResume!=='boolean')||(s.nextBattleAt!==undefined&&(!Number.isFinite(s.nextBattleAt)||s.nextBattleAt<0||s.nextBattleAt>1e15))||!validRecipes(s)||!validEncounter(s.activeEncounter)||!validPotions(s)||!validHealth(s)||!validLoadoutSlots(s)||bagItems(s).length>100||(s.merchant!==undefined&&!validMerchant(s.merchant)))return false;
  if(new Set(s.inventory.map(i=>i.id)).size!==s.inventory.length||!s.equip||Object.keys(s.equip).length!==SOCKETS.length||!SOCKETS.every(k=>s.equip[k]===null||s.inventory.some(i=>i.id===s.equip[k]&&i.slot===SOCKET_TYPE[k])))return false;
