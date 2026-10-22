@@ -1,0 +1,25 @@
+/* Equipment only: quality is a background, never the frame colour.
+   These scoped marker selectors deliberately exclude materials, potions and affix text. */
+:is(.itemCell,.equipSlot,.detailIcon,.forgeResult,.orbitSlot,.fusionGearCard,.commodityCard,.donorCard,.collectionTile,.collectionDetail,.collectedPart,.loadoutGearSlot,.batchSaleItem,.workshopItem,.shopGearIcon,.workshopBigIcon,.workshopTemplate):has(svg[data-equipment-quality]) {
+  border-color:#48515a!important;
+}
+:is(.itemCell,.equipSlot,.detailIcon,.forgeResult,.orbitSlot,.fusionGearCard,.commodityCard,.donorCard,.collectionTile,.collectionDetail,.collectedPart,.loadoutGearSlot,.batchSaleItem,.workshopItem,.shopGearIcon,.workshopBigIcon,.workshopTemplate):has(svg[data-equipment-set="true"]),
+.itemCell.setFrame.selected:has(svg[data-equipment-set="true"]) {
+  border-color:#6aaf70!important;
+}
+/* Compact icon cells use the same full-cell fill as their SVG icon. Rows/cards
+   keep their existing neutral surfaces; the icon still carries its own fill. */
+:is(.itemCell,.equipSlot,.detailIcon,.forgeResult,.orbitSlot,.loadoutGearSlot,.batchSaleItem,.workshopItem,.shopGearIcon,.workshopBigIcon):has(svg[data-equipment-quality="0"]) { background:#555b61!important; }
+:is(.itemCell,.equipSlot,.detailIcon,.forgeResult,.orbitSlot,.loadoutGearSlot,.batchSaleItem,.workshopItem,.shopGearIcon,.workshopBigIcon):has(svg[data-equipment-quality="1"]) { background:#21476a!important; }
+:is(.itemCell,.equipSlot,.detailIcon,.forgeResult,.orbitSlot,.loadoutGearSlot,.batchSaleItem,.workshopItem,.shopGearIcon,.workshopBigIcon):has(svg[data-equipment-quality="2"]) { background:#49305e!important; }
+:is(.itemCell,.equipSlot,.detailIcon,.forgeResult,.orbitSlot,.loadoutGearSlot,.batchSaleItem,.workshopItem,.shopGearIcon,.workshopBigIcon):has(svg[data-equipment-quality="3"]),
+:is(.itemCell,.equipSlot,.detailIcon,.forgeResult,.orbitSlot,.loadoutGearSlot,.batchSaleItem,.workshopItem,.shopGearIcon,.workshopBigIcon):has(svg[data-equipment-set="true"]) { background:#682d36!important; }
+/* Selection is independent of both quality and set identity. */
+:is(.itemCell,.equipSlot,.orbitSlot,.fusionGearCard,.donorCard,.workshopItem,.workshopTemplate).selected:has(svg[data-equipment-quality]),
+:is(.itemCell,.equipSlot,.orbitSlot,.fusionGearCard,.donorCard,.workshopItem,.workshopTemplate)[aria-pressed="true"]:has(svg[data-equipment-quality]) {
+  outline:2px solid #e6d8a0; outline-offset:3px;
+}
+
+/* Fusion selection and quality artwork stay independent of legacy rarity glows. */
+.fusionGearCard.fusionSelected:has(svg[data-equipment-quality]) { outline:2px solid #e6d8a0; outline-offset:3px; }
+svg[data-equipment-quality] { filter:none!important; }

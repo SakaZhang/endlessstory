@@ -2,6 +2,7 @@
 import {EQUIPMENT_TEMPLATE_BY_ID} from './equipment-templates.js';
 import {renderArmorPixels} from './equipment-armor-art.js';
 import {icon} from './icons.js';
+import {frameEquipmentSVG} from './equipment-presentation.js';
 const C={ink:'#151b24',steel:'#899ba6',light:'#dce5df',shade:'#425361',copper:'#b57b49',gold:'#e2b574',wood:'#704635',ember:'#c65c35',stone:'#819286'};
 export function renderWeaponAccessoryPixels(template){
  const id=template?.id?.replace('dwarf_scatter_','');let s='';
@@ -36,4 +37,4 @@ export function renderWeaponAccessoryPixels(template){
 }
 export function equipmentArtTemplate(item){for(const id of [item?.visualVariant,item?.templateId,item?.id])if(typeof id==='string'&&Object.hasOwn(EQUIPMENT_TEMPLATE_BY_ID,id))return EQUIPMENT_TEMPLATE_BY_ID[id];return null;}
 export function renderEquipmentPixels(template){return renderWeaponAccessoryPixels(template)||renderArmorPixels(template);}
-export function equipmentIcon(item,options={}){const template=equipmentArtTemplate(item),pixels=template&&renderEquipmentPixels(template);if(!pixels)return icon(item?.weaponType==='axe'?'axe':item?.weaponType==='hammer'?'hammer':item?.iconKey||item?.icon||item?.slot||'weapon',item?.set||item?.setId||'anvil',item?.rarity??1);const size=Number.isFinite(options.size)?Math.max(16,Math.min(512,Math.round(options.size))):64;return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 32 32" shape-rendering="crispEdges" role="img" aria-label="${String(template.name).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;')}" data-equipment-art="${template.id}" data-equipment-visual="${template.id}" data-equipment-template="${template.id}">${pixels}</svg>`;}
+export function equipmentIcon(item,options={}){const template=equipmentArtTemplate(item),pixels=template&&renderEquipmentPixels(template);if(!pixels)return frameEquipmentSVG(icon(item?.weaponType==='axe'?'axe':item?.weaponType==='hammer'?'hammer':item?.iconKey||item?.icon||item?.slot||'weapon',item?.set||item?.setId||'anvil',item?.rarity??1),item,64);const size=Number.isFinite(options.size)?Math.max(16,Math.min(512,Math.round(options.size))):64;return frameEquipmentSVG(`<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 32 32" shape-rendering="crispEdges" role="img" aria-label="${String(template.name).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;')}" data-equipment-art="${template.id}" data-equipment-visual="${template.id}" data-equipment-template="${template.id}">${pixels}</svg>`,{...item,set:item?.set||template.setId});}

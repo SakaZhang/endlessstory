@@ -56,3 +56,7 @@ import './equipment-enhancement-tests.mjs';
 import './equipment-armor-art-tests.mjs';
 import './equipment-art-tests.mjs';
 import './equipment-art-ui-tests.mjs';
+
+import './equipment-presentation-tests.mjs';
+
+import './equipment-presentation-css-tests.mjs';
