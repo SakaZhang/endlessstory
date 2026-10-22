@@ -1,5 +1,6 @@
+import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
 import assert from 'node:assert/strict';
-import {fresh,RECIPES,normalizeRecipes,recipeKnown,learnRecipe,purchaseRecipe,craftRecipe,ensureMerchant,validSave,item,bagItems,materialCount,potionCount,fusionQualityWeights,paidRefreshMerchant} from './dist/engine.js';
+import {RECIPES,normalizeRecipes,recipeKnown,learnRecipe,purchaseRecipe,craftRecipe,ensureMerchant,validSave,item,bagItems,materialCount,potionCount,fusionQualityWeights,paidRefreshMerchant} from './dist/engine.js';
 const original=Math.random,registry=structuredClone(RECIPES);let calls=0;Math.random=()=>{calls++;return .5;};
 const installRecipe=(merchant,id,price)=>{let ix=merchant.offers.findIndex(o=>o.type==='recipe'&&o.recipeId===id);if(ix<0)ix=merchant.offers.findIndex(o=>o.type==='equipment');return merchant.offers[ix]={type:'recipe',recipeId:id,offerId:`merchant-0-${ix}`,price,stock:1};};
 try{

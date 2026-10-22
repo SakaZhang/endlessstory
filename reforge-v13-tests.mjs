@@ -1,5 +1,6 @@
+import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
 import assert from 'node:assert/strict';
-import {fresh,item,reforge,resolveReforge,eligibleReforgeDonors,validSave,getReforgeCost,AFFIX_DEFS,SPECIALS,ensureMerchant,purchaseConsumable,encounter,reward,normalizeTalents,saveLoadout,equipItem} from './dist/engine.js';
+import {item,reforge,resolveReforge,eligibleReforgeDonors,validSave,getReforgeCost,AFFIX_DEFS,SPECIALS,ensureMerchant,purchaseConsumable,encounter,reward,normalizeTalents,saveLoadout,equipItem} from './dist/engine.js';
 const original=Math.random;let seed=11432;const rng=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};Math.random=rng;
 const target=(s,q=2,set=null)=>{const it=item(set?'gloves':'weapon',1,set,q);if(!it.affixes.length)it.affixes=[{stat:'atk',value:3}];s.inventory.push(it);return it;};
 try{

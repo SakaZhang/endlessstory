@@ -1,5 +1,6 @@
+import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
 import assert from 'node:assert/strict';
-import {fresh,normalizeHealth,normalizePotions,configureExpedition,setExpeditionLoop,startRoutedEncounter,startInstanceEncounter,step,reward,settleRest,startRest,offline,validSave,stats,INSTANCES} from './dist/engine.js';
+import {normalizeHealth,normalizePotions,configureExpedition,setExpeditionLoop,startRoutedEncounter,startInstanceEncounter,step,reward,settleRest,startRest,offline,validSave,stats,INSTANCES} from './dist/engine.js';
 import {pickRoute} from './dist/location-schema.js';
 const dungeon='dwarf-blackforge-1-dungeon',field='blackforge-road-field';
 const prepare=(loop=false)=>{const s=fresh();s.lastSeen=0;normalizeHealth(s,0);normalizePotions(s);assert(configureExpedition(s,{mode:'dungeon',targetInstanceId:dungeon,fieldId:field,loop}));return s;};

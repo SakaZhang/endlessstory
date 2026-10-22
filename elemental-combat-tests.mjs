@@ -1,5 +1,6 @@
+import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
 import assert from 'node:assert/strict';
-import {fresh,stats,encounter,step,validSave,normalizeEncounterElements,applyForgeFavor,resolveElementDamage,ACTIVE_AFFIX_KEYS,item,reforge} from './dist/engine.js';
+import {stats,encounter,step,validSave,normalizeEncounterElements,applyForgeFavor,resolveElementDamage,ACTIVE_AFFIX_KEYS,item,reforge} from './dist/engine.js';
 import {ELEMENT_KEYS,ELEMENT_COUNTERS} from './dist/element-schema.js';
 for(const type of ELEMENT_KEYS){
  assert.equal(resolveElementDamage(100,type,0,0,[]),100);

@@ -1,5 +1,6 @@
+import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
 import assert from 'node:assert/strict';
-import {fresh,normalizeHealth,normalizePotions,stats,encounter,step,reward,startRest,settleRest,offline,validSave,equipPotion,setPotionAuto,REST_DURATION_MS} from './dist/engine.js';
+import {normalizeHealth,normalizePotions,stats,encounter,step,reward,startRest,settleRest,offline,validSave,equipPotion,setPotionAuto,REST_DURATION_MS} from './dist/engine.js';
 const original=Math.random;let seed=812;const rng=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};Math.random=rng;
 try{
  const s=fresh();normalizeHealth(s,1000);s.running=true;const e=encounter(s,false,1000);step(s,e,2100);const stored=JSON.stringify(s),loaded=JSON.parse(stored);assert(validSave(loaded));const resumed=encounter(loaded,false,2200);assert.equal(resumed,loaded.activeEncounter);assert.equal(resumed.round,e.round);assert.equal(resumed.hp,e.hp);assert.deepEqual(resumed.cd,e.cd);assert.equal(loaded.heroHp,s.heroHp);assert.equal(loaded.nextActionAt,3200);

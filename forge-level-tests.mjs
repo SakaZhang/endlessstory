@@ -1,5 +1,6 @@
+import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
 import assert from 'node:assert/strict';
-import {fresh,forge,validSave,materialCount} from './dist/engine.js';
+import {forge,validSave,materialCount} from './dist/engine.js';
 const original=Math.random;let seed=312042;Math.random=()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0)/2**32);
 let sets=0,divine=0,qualities=new Set();
 try{

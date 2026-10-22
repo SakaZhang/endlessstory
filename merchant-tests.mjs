@@ -1,5 +1,6 @@
+import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
 import assert from 'node:assert/strict';
-import {fresh,MATERIALS,materialKey,materialCount,materialPrice,ensureMerchant,buyMaterial,paidRefreshMerchant,getMerchantRefreshCost,MERCHANT_CYCLE_MS as C,validSave,purchaseEquipment,purchaseConsumable,bagItems,item,sellValue} from './dist/engine.js';
+import {MATERIALS,materialKey,materialCount,materialPrice,ensureMerchant,buyMaterial,paidRefreshMerchant,getMerchantRefreshCost,MERCHANT_CYCLE_MS as C,validSave,purchaseEquipment,purchaseConsumable,bagItems,item,sellValue} from './dist/engine.js';
 const original=Math.random;let seed=713,calls=0;Math.random=()=>{calls++;seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};
 try{
  const s=fresh();s.gold=10000;assert(validSave(s));const m=ensureMerchant(s,1000);assert.equal(m.nextRefreshAt,1000+C);assert.equal(m.revision,0);assert(validSave(s));let before=JSON.stringify(s),n=calls;for(let i=0;i<100;i++)assert.equal(ensureMerchant(s,1500),m);assert.equal(JSON.stringify(s),before);assert.equal(calls,n);const loaded=JSON.parse(before);assert(validSave(loaded));assert.deepEqual(ensureMerchant(loaded,1600),m);

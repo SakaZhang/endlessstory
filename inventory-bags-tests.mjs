@@ -1,5 +1,6 @@
+import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
 import assert from 'node:assert/strict';
-import {fresh,item,SLOTS,stats,normalizeHealth,normalizePotions,normalizeInventoryState,bagCounts,canReceiveEquipment,canReceiveMaterial,canReceiveItem,setLootFilter,shouldDiscardLoot,saveLoadout,deleteLoadout,validSave,receiveBattleLoot,encounter,reward,offline,forge,claimForgeResult,ensureMerchant,purchaseEquipment,purchaseConsumable,buyMaterial,materialKey,RECIPES,learnRecipe,craftRecipe} from './dist/engine.js';
+import {item,SLOTS,stats,normalizeHealth,normalizePotions,normalizeInventoryState,bagCounts,canReceiveEquipment,canReceiveMaterial,canReceiveItem,setLootFilter,shouldDiscardLoot,saveLoadout,deleteLoadout,validSave,receiveBattleLoot,encounter,reward,offline,forge,claimForgeResult,ensureMerchant,purchaseEquipment,purchaseConsumable,buyMaterial,materialKey,RECIPES,learnRecipe,craftRecipe} from './dist/engine.js';
 import {emptyLootSummary} from './dist/inventory-schema.js';
 const original=Math.random;let seed=751;Math.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};
 const fill=(s,slot,n=50)=>{while(bagCounts(s).equipment[slot]<n)s.inventory.push(item(slot,1,null,0));};

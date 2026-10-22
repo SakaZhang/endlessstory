@@ -1,5 +1,6 @@
+import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
 import assert from 'node:assert/strict';
-import {fresh,stats,normalizeHealth,normalizePotions,potionKey,parsePotionKey,potionEntries,potionEffect,equipPotion,setPotionAuto,drinkPotion,autoDrinkPotion,startRest,settleRest,validSave,encounter,step} from './dist/engine.js';
+import {stats,normalizeHealth,normalizePotions,potionKey,parsePotionKey,potionEntries,potionEffect,equipPotion,setPotionAuto,drinkPotion,autoDrinkPotion,startRest,settleRest,validSave,encounter,step} from './dist/engine.js';
 const original=Math.random;Math.random=()=>.5;
 try{
  const s=fresh();normalizeHealth(s,1000);assert(normalizePotions(s));assert.deepEqual(s.potionSlot,{key:null,auto:false});s.potionStacks={'healing|0':5,'strength|0':5,'fireResist|0':5};assert(validSave(s));assert.equal(potionKey('healing',0),'healing|0');assert.equal(parsePotionKey('healing').key,'healing|0');assert.equal(potionEntries(s).length,3);assert.equal(potionEffect('healing',0).healFraction,.25);

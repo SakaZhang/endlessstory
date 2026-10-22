@@ -1,5 +1,6 @@
+import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
 import assert from 'node:assert/strict';
-import {fresh,normalizeHealth,normalizePotions,configureExpedition,startRoutedEncounter,startRest,settleRest,step,reward,validSave,offline,stats} from './dist/engine.js';
+import {normalizeHealth,normalizePotions,configureExpedition,startRoutedEncounter,startRest,settleRest,step,reward,validSave,offline,stats} from './dist/engine.js';
 import {DUNGEON_PLAYER_FIELDS} from './dist/dungeon-player-state.js';
 const original=Math.random;let seed=8841;const rng=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};Math.random=rng;
 const prepare=()=>{const s=fresh();s.lastSeen=0;normalizeHealth(s,0);normalizePotions(s);configureExpedition(s,{mode:'dungeon',targetInstanceId:'dwarf-blackforge-1-dungeon',fieldId:'blackforge-road-field',loop:true});return s;};

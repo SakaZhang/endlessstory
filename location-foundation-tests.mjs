@@ -1,5 +1,6 @@
+import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
 import assert from 'node:assert/strict';
-import {fresh,encounter,reward,validSave,normalizeExpedition,nextEncounterRoute,stats} from './dist/engine.js';
+import {encounter,reward,validSave,normalizeExpedition,nextEncounterRoute,stats} from './dist/engine.js';
 import {AREAS,SITES,INSTANCES,instanceCooldownMs,pickRoute,areaGearLevel} from './dist/location-schema.js';
 assert.equal(Object.keys(AREAS).length,1);assert.deepEqual(AREAS['dwarf-blackforge-1'].levelRange,[1,10]);
 assert.equal(Object.values(INSTANCES).filter(x=>x.kind==='field').length,3);

@@ -1,5 +1,6 @@
+import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
 import assert from 'node:assert/strict';
-import {fresh,normalizeAreaProgress,getAreaProgress,getMerchantEquipmentLevelRange,areaLevelRange,validSave,normalizeHealth,configureExpedition,startRoutedEncounter,startInstanceEncounter,step,reward,ensureMerchant,paidRefreshMerchant,offline,INSTANCES} from './dist/engine.js';
+import {normalizeAreaProgress,getAreaProgress,getMerchantEquipmentLevelRange,areaLevelRange,validSave,normalizeHealth,configureExpedition,startRoutedEncounter,startInstanceEncounter,step,reward,ensureMerchant,paidRefreshMerchant,offline,INSTANCES} from './dist/engine.js';
 const dungeon='dwarf-blackforge-1-dungeon',random=Math.random;let seed=1917;Math.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};
 const ready=()=>{const s=fresh();s.lastSeen=0;normalizeHealth(s,0);assert(configureExpedition(s,{mode:'dungeon',targetInstanceId:dungeon,fieldId:'blackforge-road-field',loop:false}));return s;};
 const win=(s,e,time)=>{e.done=true;e.win=true;return reward(s,e,time);};

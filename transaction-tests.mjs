@@ -1,6 +1,7 @@
+import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
 import assert from 'node:assert/strict';
 import {commitGameTransaction,SAVE_KEY} from './dist/storage.js';
-import {fresh,RECIPES,ensureMerchant,purchaseRecipe,craftRecipe,recipeKnown,forge,validSave} from './dist/engine.js';
+import {RECIPES,ensureMerchant,purchaseRecipe,craftRecipe,recipeKnown,forge,validSave} from './dist/engine.js';
 const original=Math.random,registry=structuredClone(RECIPES);Math.random=()=>.2;
 let raw=null,fail=false,writes=0;const storage={setItem(k,v){assert.equal(k,SAVE_KEY);if(fail)throw new Error('quota');raw=v;writes++;}};
 try{

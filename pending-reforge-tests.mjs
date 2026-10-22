@@ -1,5 +1,6 @@
+import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
 import assert from 'node:assert/strict';
-import {fresh,item,reforge,resolveReforge,getReforgeCost,stats,validSave,isProtected,applyForgeFavor,equipItem,saveLoadout} from './dist/engine.js';
+import {item,reforge,resolveReforge,getReforgeCost,stats,validSave,isProtected,applyForgeFavor,equipItem,saveLoadout} from './dist/engine.js';
 const rng=Math.random;Math.random=()=>.99;
 try{
  for(const mode of ['value','replace','all']){

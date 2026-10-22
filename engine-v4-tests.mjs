@@ -1,5 +1,6 @@
+import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
 import assert from 'node:assert/strict';
-import {fresh,item,stats,preset,encounter,step,reward,offline,forge,applyForgeFavor,validSave,SOCKETS,SOCKET_TYPE,SLOTS,SET_SLOTS,RARITY,BUILD,AFFIX_DEFS,equipItem,LEGENDARY_CODEX,codexState,affixRollInfo,divineMultiplier,itemTotals} from './dist/engine.js';
+import {item,stats,preset,encounter,step,reward,offline,forge,applyForgeFavor,validSave,SOCKETS,SOCKET_TYPE,SLOTS,SET_SLOTS,RARITY,BUILD,AFFIX_DEFS,equipItem,LEGENDARY_CODEX,codexState,affixRollInfo,divineMultiplier,itemTotals} from './dist/engine.js';
 const originalRandom=Math.random;let seed=93812;const rng=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};Math.random=rng;
 try{
  const s=fresh();assert(validSave(s));assert.equal(s.version,2);assert.equal(SOCKETS.length,8);assert.equal(s.inventory.length,8);assert.deepEqual(RARITY,['普通','稀有','优良','至臻']);assert(s.inventory.every(i=>!i.set&&i.rarity===0&&!i.special&&i.affixes.length===0));assert.equal(new Set(Object.values(s.equip)).size,8);

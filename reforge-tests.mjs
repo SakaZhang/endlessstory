@@ -1,5 +1,6 @@
+import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
 import assert from 'node:assert/strict';
-import {fresh,item,getReforgeCost,reforge,resolveReforge,applyForgeFavor,affixRollInfo,AFFIX_DEFS,stats,equipItem,validSave} from './dist/engine.js';
+import {item,getReforgeCost,reforge,resolveReforge,applyForgeFavor,affixRollInfo,AFFIX_DEFS,stats,equipItem,validSave} from './dist/engine.js';
 const original=Math.random;let seed=51481,calls=0;Math.random=()=>{calls++;seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};
 try{
  const s=fresh();s.consumables.reforgeToken=10000;s.gold=1e7;s.materialStacks['铁屑|0']=1e6;s.materialStacks['炉火晶|0']=1e6;

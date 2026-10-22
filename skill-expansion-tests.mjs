@@ -1,5 +1,6 @@
+import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
 import assert from 'node:assert/strict';
-import {fresh,stats,encounter,step,SKILLS,combatStatuses,SET_SLOTS,item,equipItem,BUILD,preset,SOCKETS} from './dist/engine.js';
+import {stats,encounter,step,SKILLS,combatStatuses,SET_SLOTS,item,equipItem,BUILD,preset,SOCKETS} from './dist/engine.js';
 const original=Math.random;Math.random=()=>.5;
 const setup=(key,location=0)=>{const s=fresh();s.location=location;s.skills=[key,null,null,null];s.conditions=['always','always','always','always'];const e=encounter(s);e.hp=e.max=100000;e.heroHp=stats(s).hp;return [s,e];};
 try{

@@ -1,5 +1,6 @@
+import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
 import assert from 'node:assert/strict';
-import {fresh,normalizeMaterials,materialEntries,materialKey,parseMaterialKey,materialCount,materialPrice,validSave,forge,reforge,resolveReforge,item,encounter,reward,offline,ensureMerchant,buyMaterial} from './dist/engine.js';
+import {normalizeMaterials,materialEntries,materialKey,parseMaterialKey,materialCount,materialPrice,validSave,forge,reforge,resolveReforge,item,encounter,reward,offline,ensureMerchant,buyMaterial} from './dist/engine.js';
 const original=Math.random;let seed=3811;const rng=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};Math.random=rng;
 try{
  const legacy=fresh();delete legacy.materialStacks;legacy.materials={'铁屑':17,'炉火晶':0,'誓约残片':6};assert(validSave(legacy));assert(normalizeMaterials(legacy));assert.equal(legacy.materials,undefined);assert.equal(materialCount(legacy,'铁屑'),17);assert.equal(materialEntries(legacy).reduce((n,x)=>n+x.count,0),23);let before=JSON.stringify(legacy);assert(normalizeMaterials(legacy));assert.equal(JSON.stringify(legacy),before);assert(validSave(JSON.parse(before)));

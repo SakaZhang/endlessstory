@@ -1,5 +1,6 @@
+import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
 import assert from 'node:assert/strict';
-import {fresh,item,stats,validSave,normalizeEquipmentLevels,rollDropEquipmentLevel,rollEquipmentFusionLevel,ensureMerchant,purchaseEquipment,forge,reforge,resolveReforge,equipItem,saveLoadout} from './dist/engine.js';
+import {item,stats,validSave,normalizeEquipmentLevels,rollDropEquipmentLevel,rollEquipmentFusionLevel,ensureMerchant,purchaseEquipment,forge,reforge,resolveReforge,equipItem,saveLoadout} from './dist/engine.js';
 const original=Math.random;let seed=613;Math.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};
 try{
  const old=fresh();old.level=137;ensureMerchant(old,1000);

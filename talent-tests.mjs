@@ -1,5 +1,6 @@
+import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
 import assert from 'node:assert/strict';
-import {fresh,TALENTS,stats,normalizeTalents,spendTalent,getTalentRefundQuote,commitTalentRefund,availableTalentPoints,validSave,encounter,step,luckChance,forge,reforge,resolveReforge,item,reward} from './dist/engine.js';
+import {TALENTS,stats,normalizeTalents,spendTalent,getTalentRefundQuote,commitTalentRefund,availableTalentPoints,validSave,encounter,step,luckChance,forge,reforge,resolveReforge,item,reward} from './dist/engine.js';
 const original=Math.random;let seed=17653;const rng=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};Math.random=rng;
 try{
  assert.equal(Object.keys(TALENTS).length,14);const s=fresh();assert(validSave(s));assert.equal(s.consumables.memoryFruit,0);s.level=30;for(const key of Object.keys(TALENTS))assert(spendTalent(s,key));assert.equal(availableTalentPoints(s),15);assert(validSave(s));

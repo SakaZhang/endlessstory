@@ -1,5 +1,6 @@
+import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
 import assert from 'node:assert/strict';
-import {fresh,forge,materialKey,materialCount,potionEntries,POTIONS,validSave,normalizePotions,ensureMerchant} from './dist/engine.js';
+import {forge,materialKey,materialCount,potionEntries,POTIONS,validSave,normalizePotions,ensureMerchant} from './dist/engine.js';
 const original=Math.random;let seed=7245;Math.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};
 try{
  const s=fresh();s.gold=1e9;s.materialStacks={'灰根草|0':100000,'铁屑|0':100000};const kinds={healing:0,strength:0,fireResist:0},qualities=[0,0,0,0];let potions=0,gear=0;

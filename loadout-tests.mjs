@@ -1,5 +1,6 @@
+import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
 import assert from 'node:assert/strict';
-import {fresh,item,saveLoadout,deleteLoadout,applyLoadout,wardrobeIds,bagItems,bagCounts,claimForgeResult,isProtected,validSave,equipItem,forge,reforge,resolveReforge,SOCKETS,SOCKET_TYPE,encounter,reward,preset} from './dist/engine.js';
+import {item,saveLoadout,deleteLoadout,applyLoadout,wardrobeIds,bagItems,bagCounts,claimForgeResult,isProtected,validSave,equipItem,forge,reforge,resolveReforge,SOCKETS,SOCKET_TYPE,encounter,reward,preset} from './dist/engine.js';
 const original=Math.random;let seed=382;Math.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};
 try{
  const s=fresh();assert.deepEqual(s.loadouts,[null,null,null]);assert(validSave(s));const old=structuredClone(s);delete old.loadouts;assert(validSave(old));assert(saveLoadout(old,0,'旧存档方案'));assert(validSave(old));
