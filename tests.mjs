@@ -31,3 +31,5 @@ import './location-foundation-tests.mjs';
 import './dungeon-routing-tests.mjs';
 
 import './transaction-tests.mjs';
+
+import './forge-level-tests.mjs';

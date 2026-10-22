@@ -698,7 +698,7 @@ export function forge(s,selection){
   return {kind:'potion',potionType:type,quality,name:POTIONS[type].name,quantity:1,key};
  }
  const weights=fusionWeights(selection),isSet=Math.random()<.05,slot=weighted(Object.entries(weights.slots).filter(([k])=>!isSet||SET_SLOTS.includes(k))),set=isSet?weighted(Object.entries(weights.sets)):null,quality=isSet?3:luckyRoll(()=>rollQuality(qualityWeights),s.talents.luck??0);
- const it=item(slot,s.level+rand(0,2),set,quality);if(Math.random()<.03)applyForgeFavor(it);
+ const it=item(slot,s.level,set,quality);if(Math.random()<.03)applyForgeFavor(it);
  normalizeMaterials(s);Object.entries(counts).forEach(([key,v])=>s.materialStacks[key]-=v);s.gold-=40;s.inventory.push(it);return it;
 }
 export function applyForgeFavor(it){
