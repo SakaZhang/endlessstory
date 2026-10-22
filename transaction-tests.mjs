@@ -10,7 +10,7 @@ try{
  fail=false;tx=commitGameTransaction(storage,s,x=>forge(x,['铁屑|0']),{now:100});assert(tx.ok);assert.equal(tx.game.gold,960);assert.deepEqual(s,before);assert.equal(JSON.parse(raw).inventory.length,9);assert.equal(tx.game.lastSeen,100);assert(validSave(tx.game));
  const n=writes;tx=commitGameTransaction(storage,s,()=>false);assert(!tx.ok);assert.equal(writes,n);tx=commitGameTransaction(storage,s,x=>{x.gold=0;throw new Error('invalid')});assert.equal(tx.reason,'operation');assert.deepEqual(s,before);
  // Disabled recipe definitions are enabled only as isolated test fixtures, never shipped as content.
- const id='potion-healing';Object.assign(RECIPES[id],{enabled:true,price:100,craftGold:40,ingredients:[{material:'灰根草',count:2},{material:'铁屑',count:1}]});
+ const id='potion-healing';Object.assign(RECIPES[id],{functionalTag:null,enabled:true,price:100,craftGold:40,ingredients:[{material:'灰根草',count:2},{material:'铁屑',count:1}]});
  s=fresh();s.gold=1000;const shop=ensureMerchant(s,1000),offer=shop.offers.find(x=>x.type==='recipe'&&x.recipeId===id);assert(offer);before=structuredClone(s);fail=true;
  tx=commitGameTransaction(storage,s,x=>purchaseRecipe(x,offer.offerId,shop.revision,1001),{commitOnNoop:true,now:1001});assert(!tx.ok);assert(!recipeKnown(s,id));assert.deepEqual(s,before);
  fail=false;tx=commitGameTransaction(storage,s,x=>purchaseRecipe(x,offer.offerId,shop.revision,1001),{commitOnNoop:true,now:1001});assert(tx.ok&&tx.value);s=tx.game;assert(recipeKnown(s,id));assert.equal(s.gold,900);assert(validSave(s));

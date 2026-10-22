@@ -32,10 +32,10 @@ try{
  const duplicateStock=fresh();const dupShop=ensureMerchant(duplicateStock,1000);duplicateStock.pendingForgeClaim={kind:'equipment',item:structuredClone(dupShop.offers.find(o=>o.type==='equipment').item)};assert(!validSave(duplicateStock));
  // Disabled production recipes remain disabled; fixture exercises common pending storage.
  const recipe=RECIPES['potion-healing'],savedRecipe=structuredClone(recipe);
- try{Object.assign(recipe,{enabled:true,ingredients:[{material:'灰根草',count:2},{material:'铁屑',count:1}],craftGold:20});
+ try{Object.assign(recipe,{functionalTag:null,enabled:true,ingredients:[{material:'灰根草',count:2},{material:'铁屑',count:1}],craftGold:20});
  const fixed=fresh();fixed.gold=100;fixed.materialStacks['灰根草|0']=2;normalizePotions(fixed);fixed.potionStacks['healing|0']=1e9;assert(learnRecipe(fixed,'potion-healing'));const brewedRecipe=craftRecipe(fixed,'potion-healing',['灰根草|0','灰根草|0','铁屑|0']);assert(brewedRecipe);assert.equal(fixed.gold,80);assert.equal(fixed.pendingForgeClaim.potion.key,'healing|0');assert(validSave(fixed));const once=JSON.stringify(fixed);assert.equal(craftRecipe(fixed,'potion-healing',['灰根草|0','灰根草|0','铁屑|0']),null);assert.equal(JSON.stringify(fixed),once);fixed.potionStacks['healing|0']--;assert.equal(claimForgeResult(fixed).recipeId,'potion-healing');assert(validSave(fixed));
  }finally{for(const key of Object.keys(recipe))delete recipe[key];Object.assign(recipe,savedRecipe);}
- assert(Object.values(RECIPES).every(r=>!r.enabled));
+ assert(RECIPES['potion-healing'].enabled);assert(!RECIPES['potion-strength'].enabled&&!RECIPES['potion-fireResist'].enabled);
  // Filters never apply to crafted or purchased items.
  const craft=fresh();setLootFilter(craft,'equipment',[0,1,2,3]);const made=forge(craft,['铁屑|0']);assert(craft.inventory.some(it=>it.id===made.id));assert(validSave(craft));
  console.log('Inventory bags/R04: seven50 caps, preserved overcapacity/wardrobe returns, generic100-stack capacities, filters vs ungraded/protected, separate overflow reports, purchase nocharge, actual forge result pending/reload/exact-once claim: PASS');

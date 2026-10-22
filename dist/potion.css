@@ -5,3 +5,6 @@
 .inventoryPotions{grid-column:1/-1}#potionPanelHost{margin-top:12px}
 
 .potionVitals{font-size:11px;color:#a6b79e;margin:0 0 7px}.railStat:last-child b{font-size:12px}
+.battlePotionButton{position:relative;width:58px;height:62px;padding:3px;background:#14222c;border:2px solid #60717d;overflow:hidden}.battlePotionButton>svg{width:45px;height:45px}.battlePotionButton>b{position:absolute;bottom:1px;right:3px;font-size:11px;color:#f1e7bf;text-shadow:1px 1px #000}.battlePotionShade{position:absolute;inset:0;background:#07101abf;display:grid;place-items:center}.battlePotionShade strong{font-size:18px;color:#fff1cd}.potionTypeChoices{display:flex;gap:7px;margin:15px 0}.potionTypeChoices button{display:flex;align-items:center;flex:1;flex-direction:column;gap:4px;font-size:12px}.potionTypeChoices svg{width:38px;height:38px}.potionPriorityChoices{display:flex;gap:10px;margin:12px 0}.potionPriorityChoices button{flex:1}.potionPriorityChoices [aria-pressed=true],.potionTypeChoices [aria-pressed=true]{border-color:#d4ba80;background:#343426}
+
+.battlePotionHost{position:absolute;right:16px;top:16px;z-index:3}.battlePotionHost .battlePotionButton{width:66px;height:74px}@media(max-width:600px){.battlePotionHost{right:8px;top:8px}}

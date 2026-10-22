@@ -42,3 +42,5 @@ import './set-source-tests.mjs';
 import './codex-collection-tests.mjs';
 import './batch-sale-tests.mjs';
 import './equipment-fusion-tests.mjs';
+
+await import('./recovery-tests.mjs');

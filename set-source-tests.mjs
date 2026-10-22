@@ -5,7 +5,7 @@ try{
  const s=fresh();s.gold=1e9;s.materialStacks['铁屑|0']=100000;let gods=0;const qualities=new Set();
  for(let i=0;i<20000;i++){const gold=s.gold,it=forge(s,['铁屑|0']);assert.equal(it.set,null);assert.equal(s.gold,gold-40);qualities.add(it.rarity);gods+=!!it.divine;s.inventory.pop();}assert.equal(qualities.size,4);assert(gods>450&&gods<750);
  let equipment=0,fruit=0,token=0;for(let i=0;i<20000;i++){const p=fresh(),m=ensureMerchant(p,1000);assert.equal(m.offers.length,8);fruit+=m.offers.some(o=>o.consumable==='memoryFruit');token+=m.offers.some(o=>o.consumable==='reforgeToken');for(const o of m.offers.filter(o=>o.type==='equipment')){equipment++;assert.equal(o.item.set,null);assert(isMerchantEquipmentSellable(o));}}
- assert(equipment>90000);assert(fruit>450&&fruit<750);assert(token>1750&&token<2250);
+ assert(equipment>80000);assert(fruit>450&&fruit<750);assert(token>1750&&token<2250);
  // Future policy is exercised synthetically; no future playable location is registered.
  for(const kind of ['dungeon','boss']){let count=0;const sets=new Set(),slots=new Set();for(let i=0;i<20000;i++){const result=rollSourceSet({source:'drop',kind,areaNumber:3,race:'dwarf'},rng);if(result){count++;sets.add(result.set);slots.add(result.slot);assert.equal(result.rarity,3);assert(SET_SLOTS.includes(result.slot));}}assert.equal(sets.size,3);assert.equal(slots.size,4);assert(count>(kind==='boss'?800:450)&&count<(kind==='boss'?1200:750));}
  let draws=0;const zero=()=>{draws++;return 0;};
