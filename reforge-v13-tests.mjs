@@ -18,12 +18,12 @@ try{
   assert(reforge(s,it.id,mode,0,donor?.id));const p=s.pendingReforge;delete p.ruleVersion;delete p.oldSpecial;delete p.newSpecial;delete p.donor;p.cost=mode==='all'?{gold:90,materials:{'铁屑':3,'炉火晶':2}}:{gold:45,materials:{'铁屑':2,'炉火晶':1}};
   assert(validSave(s));const oldGold=s.gold;assert(resolveReforge(s,true));assert.equal(it.special.id,'knowledge');assert.equal(s.gold,oldGold);
  }
- // Donors contribute only a new ordinary stat type; raw value is newly rolled.
+ // Donors contribute an eligible ordinary stat and its original raw value (v0.29).
  const s=fresh(),it=target(s);it.affixes=[{stat:'atk',value:3},{stat:'hp',value:15},{stat:'crit',value:5}];const donor=item('ring',1,null,1);donor.affixes=[{stat:'armor',value:6},{stat:'atk',value:8}];donor.special={id:'knowledge'};s.inventory.push(donor);const oldGold=s.gold;
  assert.deepEqual(eligibleReforgeDonors(s,it.id,0).find(x=>x.item.id===donor.id).affixes,[{stat:'armor',value:6}]);
  for(const flag of ['locked','legendaryId']){donor[flag]=flag==='locked'?true:'fake';assert(!eligibleReforgeDonors(s,it.id,0).some(x=>x.item.id===donor.id));donor[flag]=flag==='locked'?false:null;}
  equipItem(s,donor.id,'ring1');assert(!eligibleReforgeDonors(s,it.id,0).some(x=>x.item.id===donor.id));saveLoadout(s,0,'protected');equipItem(s,s.inventory[5].id,'ring1');assert(!eligibleReforgeDonors(s,it.id,0).some(x=>x.item.id===donor.id));s.loadouts[0]=null;
- Math.random=()=>0;const r=reforge(s,it.id,'replace',0,donor.id);assert(r);assert.equal(r.after[0].stat,'armor');assert.equal(r.after[0].value,2);assert(!s.inventory.some(x=>x.id===donor.id));assert.equal(s.gold,oldGold);assert.equal(r.newSpecial,it.special??null);assert(resolveReforge(s,false));assert(!s.inventory.some(x=>x.id===donor.id));
+ Math.random=()=>0;const r=reforge(s,it.id,'replace',0,donor.id);assert(r);assert.equal(r.after[0].stat,'armor');assert.equal(r.after[0].value,6);assert(!s.inventory.some(x=>x.id===donor.id));assert.equal(s.gold,oldGold);assert.equal(r.newSpecial,it.special??null);assert(resolveReforge(s,false));assert(!s.inventory.some(x=>x.id===donor.id));
  // Invalid/self/no-new-type donors consume neither RNG nor resources.
  const d=item('ring',1,null,0);d.affixes=[{stat:'atk',value:8}];s.inventory.push(d);let calls=0;Math.random=()=>{calls++;return 0;};let before=JSON.stringify(s);assert.equal(reforge(s,it.id,'replace',0,d.id),null);assert.equal(reforge(s,it.id,'replace',0,it.id),null);assert.equal(calls,0);assert.equal(JSON.stringify(s),before);
  // Boss reward: real finished encounter, cooldown, and reward-once guards.

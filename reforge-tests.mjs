@@ -11,7 +11,7 @@ try{
  const fixed=({affixes,divine,special,...rest})=>({...rest,divine:{...divine,bonus:{...divine.bonus,affixes:undefined}}});const identity=fixed(structuredClone(it));
  for(let i=0;i<3000;i++){
   const mode=['value','replace','all'][i%3],index=i%4,before=structuredClone(it.affixes),gold=s.gold,iron=s.materialStacks['铁屑|0'],crystal=s.materialStacks['炉火晶|0'],cost=getReforgeCost(it,mode);
-  let donor;if(mode==='replace'){donor=item('ring',1,null,1);donor.affixes=[{stat:Object.keys(AFFIX_DEFS).find(k=>!it.affixes.some(a=>a.stat===k)),value:3}];s.inventory.push(donor);}
+  let donor;if(mode==='replace'){donor=item('ring',1,null,1);const stat=Object.keys(AFFIX_DEFS).find(k=>!it.affixes.some(a=>a.stat===k));donor.affixes=[{stat,value:AFFIX_DEFS[stat].min}];s.inventory.push(donor);}
   const result=reforge(s,it.id,mode,index,donor?.id);assert(result);assert.equal(result.item,it);assert.deepEqual(it.affixes,before);assert(resolveReforge(s,true));assert.equal(s.gold,gold-cost.gold);assert.equal(s.materialStacks['铁屑|0'],iron-(cost.materials['铁屑']||0));assert.equal(s.materialStacks['炉火晶|0'],crystal-(cost.materials['炉火晶']||0));
   assert.equal(it.affixes.length,4);assert.equal(new Set(it.affixes.map(a=>a.stat)).size,4);assert.deepEqual(fixed(it),identity);assert.deepEqual(result.before,before);
   if(mode==='value')assert.equal(it.affixes[index].stat,before[index].stat);

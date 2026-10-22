@@ -60,3 +60,5 @@ import './equipment-art-ui-tests.mjs';
 import './equipment-presentation-tests.mjs';
 
 import './equipment-presentation-css-tests.mjs';
+
+import './reforge-inheritance-tests.mjs';

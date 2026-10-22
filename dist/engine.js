@@ -153,7 +153,8 @@ export function eligibleReforgeDonors(s,targetId,index){
  const target=s?.inventory?.find(it=>it.id===targetId);
  if(!target||!Number.isInteger(index)||index<0||index>=target.affixes.length||s.pendingReforge)return [];
  const occupied=new Set(target.affixes.map(a=>a.stat));
- return s.inventory.filter(it=>it.id!==targetId&&!it.locked&&!it.legendaryId&&!Object.values(s.equip).includes(it.id)&&!isProtected(s,it.id)).map(it=>({item:it,affixes:it.affixes.filter(a=>Object.hasOwn(AFFIX_DEFS,a.stat)&&!occupied.has(a.stat))})).filter(x=>x.affixes.length);
+ const legalDonor=it=>Array.isArray(it.affixes)&&new Set(it.affixes.map(a=>a?.stat)).size===it.affixes.length&&it.affixes.every(a=>a&&Object.hasOwn(AFFIX_DEFS,a.stat)&&Number.isInteger(a.value)&&a.value>=AFFIX_DEFS[a.stat].min&&a.value<=AFFIX_DEFS[a.stat].max);
+ return s.inventory.filter(it=>it.id!==targetId&&legalDonor(it)&&!it.locked&&!it.legendaryId&&!Object.values(s.equip).includes(it.id)&&!isProtected(s,it.id)).map(it=>({item:it,affixes:it.affixes.filter(a=>Object.hasOwn(AFFIX_DEFS,a.stat)&&!occupied.has(a.stat))})).filter(x=>x.affixes.length);
 }
 export function reforge(s,itemId,mode,index,donorId){
  if(!s||!Array.isArray(s.inventory)||s.pendingReforge)return null;
@@ -172,9 +173,8 @@ export function reforge(s,itemId,mode,index,donorId){
  const roll=stat=>({stat,value:luckyRoll(()=>rand(AFFIX_DEFS[stat].min,AFFIX_DEFS[stat].max),s.talents.luck??0)});
  if(mode==='value')after[index]=roll(after[index].stat);
  else if(mode==='replace'){
-  const occupied=new Set(after.map(a=>a.stat));
-  const pool=[...new Set(donor.affixes.map(a=>a.stat))];
-  after[index]=roll(pool[rand(0,pool.length-1)]);
+  const chosen=donor.affixes[rand(0,donor.affixes.length-1)];
+  after[index]={stat:chosen.stat,value:chosen.value};
  }else{
   const pool=[...ACTIVE_AFFIX_KEYS];
   for(let i=0;i<after.length;i++)after[i]=roll(pool.splice(rand(0,pool.length-1),1)[0]);
@@ -186,22 +186,28 @@ export function reforge(s,itemId,mode,index,donorId){
  if(donor)normalizeCodexCollection(s);
  if(donor)s.inventory.splice(s.inventory.findIndex(x=>x.id===donor.item.id),1);
  const operationId='reforge-'+Date.now().toString(36)+'-'+(++serial).toString(36);
- s.pendingReforge={ruleVersion:2,operationId,itemId:it.id,mode,index:mode==='all'?null:index,oldAffixes:before,newAffixes:after,oldSpecial,newSpecial,cost,...(donor?{donor:{id:donor.item.id,name:donor.item.name,slot:donor.item.slot,eligibleStats:[...new Set(donor.affixes.map(a=>a.stat))]}}:{})};
+ s.pendingReforge={ruleVersion:mode==='replace'?3:2,operationId,itemId:it.id,mode,index:mode==='all'?null:index,oldAffixes:before,newAffixes:after,oldSpecial,newSpecial,cost,...(donor?{donor:{id:donor.item.id,name:donor.item.name,slot:donor.item.slot,eligibleStats:donor.affixes.map(a=>a.stat),eligibleAffixes:donor.affixes.map(a=>({stat:a.stat,value:a.value})),selectedAffix:{...after[index]}}}:{})};
  return {item:it,operationId,mode,index:mode==='all'?null:index,cost,before:before.map(a=>({...a})),after:after.map(a=>({...a})),oldSpecial,newSpecial,pending:true};
 }
 export function validPendingReforge(s){
  const p=s.pendingReforge;if(p===undefined||p===null)return true;
  if(!p||typeof p!=='object'||Array.isArray(p)||typeof p.operationId!=='string'||p.operationId.length<1||p.operationId.length>160)return false;
- if(p.ruleVersion!==undefined&&p.ruleVersion!==2)return false;
- const it=s.inventory?.find(i=>i.id===p.itemId),cost=p.ruleVersion===2?getReforgeCost(it,p.mode):legacyReforgeCost(it,p.mode);
+ if(p.ruleVersion!==undefined&&p.ruleVersion!==2&&p.ruleVersion!==3)return false;
+ if(p.ruleVersion===3&&p.mode!=='replace')return false;
+ const it=s.inventory?.find(i=>i.id===p.itemId),cost=p.ruleVersion>=2?getReforgeCost(it,p.mode):legacyReforgeCost(it,p.mode);
  if(!it||!cost||!p.cost||p.cost.gold!==cost.gold||!p.cost.materials||Object.keys(p.cost.materials).length!==Object.keys(cost.materials).length||!Object.entries(cost.materials).every(([k,v])=>p.cost.materials[k]===v))return false;
  if((p.cost.equipment??0)!==(cost.equipment??0))return false;
  const expectedConsumables=cost.consumables??{},actualConsumables=p.cost.consumables??{};
  if(Object.keys(actualConsumables).length!==Object.keys(expectedConsumables).length||!Object.entries(expectedConsumables).every(([k,v])=>actualConsumables[k]===v))return false;
- if(p.ruleVersion===2){
+ if(p.ruleVersion>=2){
   if(p.mode==='replace'){
    const d=p.donor;
    if(!d||typeof d.id!=='string'||!d.id||d.id===p.itemId||s.inventory.some(it=>it.id===d.id)||typeof d.name!=='string'||d.name.length>200||!SLOTS.includes(d.slot)||!Array.isArray(d.eligibleStats)||!d.eligibleStats.length||d.eligibleStats.length>4||new Set(d.eligibleStats).size!==d.eligibleStats.length||!d.eligibleStats.every(k=>Object.hasOwn(AFFIX_DEFS,k)&&!it.affixes.some(a=>a.stat===k))||!d.eligibleStats.includes(p.newAffixes?.[p.index]?.stat))return false;
+   if(p.ruleVersion===3){
+    const legal=a=>a&&Object.hasOwn(AFFIX_DEFS,a.stat)&&Number.isInteger(a.value)&&a.value>=AFFIX_DEFS[a.stat].min&&a.value<=AFFIX_DEFS[a.stat].max;
+    const same=(a,b)=>a?.stat===b?.stat&&a?.value===b?.value;
+    if(!Array.isArray(d.eligibleAffixes)||d.eligibleAffixes.length!==d.eligibleStats.length||!d.eligibleAffixes.every((a,i)=>legal(a)&&a.stat===d.eligibleStats[i])||!legal(d.selectedAffix)||!d.eligibleAffixes.some(a=>same(a,d.selectedAffix))||!same(d.selectedAffix,p.newAffixes?.[p.index]))return false;
+   }
   }else if(p.donor!==undefined)return false;
   const legalSpecial=x=>x===null||(x&&typeof x==='object'&&!Array.isArray(x)&&Object.keys(x).length===1&&Object.hasOwn(SPECIALS,x.id));
   if(!legalSpecial(p.oldSpecial)||!legalSpecial(p.newSpecial)||(p.oldSpecial?.id??null)!==(it.special?.id??null))return false;
@@ -213,7 +219,7 @@ export function validPendingReforge(s){
  if(!legal(p.oldAffixes)||!legal(p.newAffixes)||!p.oldAffixes.every((a,i)=>equal(a,it.affixes[i])))return false;
  if(p.mode==='all')return p.index===null&&p.newAffixes.every(a=>ACTIVE_AFFIX_KEYS.includes(a.stat));
  if(!Number.isInteger(p.index)||p.index<0||p.index>=it.affixes.length||!p.newAffixes.every((a,i)=>i===p.index||equal(a,p.oldAffixes[i])))return false;
- return p.mode==='value'?p.newAffixes[p.index].stat===p.oldAffixes[p.index].stat:p.newAffixes[p.index].stat!==p.oldAffixes[p.index].stat&&(p.ruleVersion===2?p.donor.eligibleStats.includes(p.newAffixes[p.index].stat):ACTIVE_AFFIX_KEYS.includes(p.newAffixes[p.index].stat));
+ return p.mode==='value'?p.newAffixes[p.index].stat===p.oldAffixes[p.index].stat:p.newAffixes[p.index].stat!==p.oldAffixes[p.index].stat&&(p.ruleVersion>=2?p.donor.eligibleStats.includes(p.newAffixes[p.index].stat):ACTIVE_AFFIX_KEYS.includes(p.newAffixes[p.index].stat));
 }
 export function resolveReforge(s,accept,expectedOperationId){
  const p=s?.pendingReforge;
@@ -222,7 +228,7 @@ export function resolveReforge(s,accept,expectedOperationId){
  if(accept&&Object.values(s.equip).includes(it.id)&&(s.running||(s.activeEncounter&&!s.activeEncounter.done)))return null;
  if(accept){
   it.affixes=p.newAffixes.map(a=>({...a}));
-  if(p.ruleVersion===2)it.special=p.newSpecial?{...p.newSpecial}:null;
+  if(p.ruleVersion>=2)it.special=p.newSpecial?{...p.newSpecial}:null;
   if(divineMultiplier(it)>1)it.divine.bonus.affixes=it.affixes.map(a=>({stat:a.stat,value:a.value/10}));
  }
  s.pendingReforge=null;capHealth(s);
