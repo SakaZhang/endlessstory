@@ -1,3 +1,5 @@
+import {BAG_LIMITS,INVENTORY_SAVE_LIMIT,bagCounts,canReceiveEquipment,canReceiveMaterial,canReceiveItem,validLootFilters,normalizeInventoryState,setLootFilter,shouldDiscardLoot,emptyLootSummary,validLootSummary,mergeLootSummary} from './inventory-schema.js';
+export {BAG_LIMITS,bagCounts,canReceiveEquipment,canReceiveMaterial,canReceiveItem,normalizeInventoryState,setLootFilter,shouldDiscardLoot} from './inventory-schema.js';
 import {validDungeonCarry,captureDungeonPlayerState,applyDungeonPlayerState} from './dungeon-player-state.js';
 import {validEquipmentLevelMetadata,normalizeEquipmentLevels,rollDropEquipmentLevel} from './equipment-level-schema.js';
 export {normalizeEquipmentLevels,rollDropEquipmentLevel,rollEquipmentFusionLevel,EQUIPMENT_LEVEL_SOURCES} from './equipment-level-schema.js';
@@ -233,7 +235,7 @@ function validLoadoutSlots(s){return s.loadouts===undefined||(Array.isArray(s.lo
 function projectedLoadouts(s,index,next){
  if(!Number.isInteger(index)||index<0||index>2||!validLoadoutSlots(s))return null;
  const slots=s.loadouts?[...s.loadouts]:[null,null,null];slots[index]=next;
- return bagItems({...s,loadouts:slots}).length<=100?slots:null;
+ return slots;
 }
 export function saveLoadout(s,index,name=''){
  if(typeof name!=='string')return false;
@@ -295,14 +297,13 @@ export function learnRecipe(s,id){
  normalizeRecipes(s);s.learnedRecipes.push(id);for(const offer of s.merchant?.offers??[])if(offer.type==='recipe'&&offer.recipeId===id)offer.stock=0;return true;
 }
 export function craftRecipe(s,id,selection){
- if(!Object.hasOwn(RECIPES,id)||!RECIPES[id].enabled||!recipeKnown(s,id)||!validRecipes(s)||!validMaterials(s)||!validPotions(s)||!Array.isArray(selection)||selection.length<1||selection.length>5)return null;
+ if(s.pendingForgeClaim||!Object.hasOwn(RECIPES,id)||!RECIPES[id].enabled||!recipeKnown(s,id)||!validRecipes(s)||!validMaterials(s)||!validPotions(s)||!Array.isArray(selection)||selection.length<1||selection.length>5)return null;
  const recipe=RECIPES[id];if(!Number.isSafeInteger(recipe.craftGold)||recipe.craftGold<0||!Number.isFinite(s.gold)||s.gold<recipe.craftGold)return null;
  const selected={},stacks={},parsed=[];for(const key of selection){const row=parseMaterialKey(key);if(!row)return null;parsed.push(row);selected[row.material]=(selected[row.material]??0)+1;stacks[row.key]=(stacks[row.key]??0)+1;}
  if(Object.keys(selected).length!==recipe.ingredients.length||!recipe.ingredients.every(r=>selected[r.material]===r.count)||parsed.some(r=>materialCount(s,r.material,r.quality)<stacks[r.key]))return null;
  const quality=luckyRoll(()=>rollQuality(fusionQualityWeights(selection)),s.talents.luck??0),type=recipe.potionType,key=potionKey(type,quality);
- if(potionCount(s,type,quality)>=1e9)return null;
- normalizeMaterials(s);normalizePotions(s);for(const [key,n] of Object.entries(stacks))s.materialStacks[key]-=n;s.gold-=recipe.craftGold;s.potionStacks[key]=(s.potionStacks[key]??0)+1;
- return {kind:'potion',potionType:type,quality,name:POTIONS[type].name,quantity:1,key,recipeId:id};
+ normalizeMaterials(s);normalizePotions(s);for(const [key,n] of Object.entries(stacks))s.materialStacks[key]-=n;s.gold-=recipe.craftGold;
+ const result={kind:'potion',potionType:type,quality,name:POTIONS[type].name,quantity:1,key,recipeId:id};if(canReceiveItem(s,key))s.potionStacks[key]=(s.potionStacks[key]??0)+1;else s.pendingForgeClaim={kind:'potion',potion:result};return result;
 }
 export const POTION_DURATION_MS=300000,POTION_COOLDOWN_MS=20000;
 // Same-quality doses extend time; stronger doses replace both potency and time.
@@ -438,6 +439,7 @@ function validEncounter(e){
  if(e===undefined||e===null)return true;
  const number=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;
  if(e.kind==='dungeon'&&(!Number.isInteger(e.dungeonStage)||e.dungeonStage<1||e.dungeonStage>3||typeof e.runId!=='string'||!e.runId||e.runId.length>160||e.boss))return false;
+ if(e.lootSummary!==undefined&&!validLootSummary(e.lootSummary))return false;
  if(e.instanceId!==undefined&&(!Object.hasOwn(INSTANCES,e.instanceId)||e.kind!==INSTANCES[e.instanceId].kind||e.siteId!==INSTANCES[e.instanceId].siteId||e.areaId!==INSTANCES[e.instanceId].areaId||resolveLegacySite(e.location)?.id!==e.siteId))return false;
  if(e.instanceId===undefined&&['siteId','areaId','kind'].some(k=>e[k]!==undefined))return false;
  if(e.elementTags!==undefined&&(!Array.isArray(e.elementTags)||e.elementTags.length>6||new Set(e.elementTags).size!==e.elementTags.length||!e.elementTags.every(k=>ELEMENT_KEYS.includes(k))))return false;
@@ -570,44 +572,45 @@ export function gainXp(s,n){s.xp+=n;while(s.xp>=s.level*80){s.xp-=s.level*80;s.l
 export function luckChance(points){return .06*Math.max(0,points)/(Math.max(0,points)+5);}
 function luckyRoll(draw,points){const first=draw();if(points>0&&Math.random()<luckChance(points))return Math.max(first,draw());return first;}
 function rollQuality(weights=[65,28,6.5,.5]){return Number(weighted(weights.map((w,i)=>[i,w])));}
-function rollDrop(s,boss,luck=0,instanceId=resolveLegacySite(s.location).id+'-field',clear=false){const dungeon=INSTANCES[instanceId]?.kind==='dungeon';if(Math.random()>=(boss?.65:clear?.35:.18)||bagItems(s).length>=100)return null;const isSet=Math.random()<(boss?.05:dungeon?.03:.01),slot=isSet?SET_SLOTS[rand(0,SET_SLOTS.length-1)]:SLOTS[rand(0,SLOTS.length-1)],set=isSet?BUILD[rand(0,2)].id:null,quality=isSet?3:luckyRoll(()=>rollQuality(boss?[50,35,13,2]:dungeon?[55,34,10,1]:[65,28,6.5,.5]),luck);const rolled=rollDropEquipmentLevel(areaGearLevel(instanceId),AREAS[INSTANCES[instanceId].areaId].levelRange);const it=item(slot,rolled.level,set,quality,rolled);s.inventory.push(it);return it;}
+function rollDrop(s,boss,luck=0,instanceId=resolveLegacySite(s.location).id+'-field',clear=false,lootSummary=emptyLootSummary()){const dungeon=INSTANCES[instanceId]?.kind==='dungeon';if(Math.random()>=(boss?.65:clear?.35:.18) )return null;const isSet=Math.random()<(boss?.05:dungeon?.03:.01),slot=isSet?SET_SLOTS[rand(0,SET_SLOTS.length-1)]:SLOTS[rand(0,SLOTS.length-1)],set=isSet?BUILD[rand(0,2)].id:null,quality=isSet?3:luckyRoll(()=>rollQuality(boss?[50,35,13,2]:dungeon?[55,34,10,1]:[65,28,6.5,.5]),luck);const rolled=rollDropEquipmentLevel(areaGearLevel(instanceId),AREAS[INSTANCES[instanceId].areaId].levelRange);const it=item(slot,rolled.level,set,quality,rolled);return receiveBattleLoot(s,{kind:'equipment',item:it},lootSummary)?it:null;}
 export function reward(s,e,now=Date.now()){
  if(!e.win||e.rewarded)return null;
  const dungeon=e.kind==='dungeon',run=s.dungeonRun;
  if(dungeon&&(!e.done||s.activeEncounter!==e||!run||run.runId!==e.runId||run.stage!==e.dungeonStage||run.instanceId!==e.instanceId||INSTANCES[e.instanceId]?.kind!=='dungeon'||!INSTANCES[e.instanceId]?.enabled))return null;
  normalizeExpedition(s);const clear=dungeon&&e.dungeonStage===3,instanceId=e.instanceId;
  const tokenEligible=(e.boss||clear)&&e.done&&s.activeEncounter===e&&now>=(s.instanceCooldowns[instanceId]??0);
- e.rewarded=true;const index=e.location??s.location,l=LOCS[index],st=stats(s);s.kills++;s.gold+=(e.boss?l.bossGold:l.reward)+(clear?20:0);
+ e.rewarded=true;e.lootSummary=emptyLootSummary();const index=e.location??s.location,l=LOCS[index],st=stats(s);s.kills++;s.gold+=(e.boss?l.bossGold:l.reward)+(clear?20:0);
  const materialWeights=e.boss?[55,34,10,1]:dungeon?(clear?[65,28,6.5,.5]:[70,24,5.5,.5]):null;
- const baseXp=e.boss?100:20+index*8,knowledge=st.specials.knowledge&&Math.random()<.05;gainXp(s,baseXp*(knowledge?2:1)+(clear?40:0));e.materialLoot=earnedMaterials(s,l.mat,e.boss?4:clear?3:1,e.boss,e.luck??0,materialWeights);let expectedMaterials=e.boss?4:clear?3:1;
- if(st.specials.scavenger&&Math.random()<.1){expectedMaterials++;e.materialLoot.push(...earnedMaterials(s,l.mat,1,e.boss,e.luck??0,materialWeights));e.rewardNotes=['拾荒者：额外材料 +1'];}if(knowledge)(e.rewardNotes??=[]).push('求知：额外基础经验 +'+baseXp);
- if(Math.random()<.12){expectedMaterials++;const herbLoot=earnedMaterials(s,'灰根草',1,e.boss,e.luck??0,materialWeights);e.materialLoot.push(...herbLoot);if(herbLoot[0]?.quality===0)(e.rewardNotes??=[]).push('普通 灰根草 ×1');}
+ const baseXp=e.boss?100:20+index*8,knowledge=st.specials.knowledge&&Math.random()<.05;gainXp(s,baseXp*(knowledge?2:1)+(clear?40:0));e.materialLoot=earnedMaterials(s,l.mat,e.boss?4:clear?3:1,e.boss,e.luck??0,materialWeights,e.lootSummary);
+ if(st.specials.scavenger&&Math.random()<.1){e.materialLoot.push(...earnedMaterials(s,l.mat,1,e.boss,e.luck??0,materialWeights,e.lootSummary));e.rewardNotes=['拾荒者：额外材料 +1'];}if(knowledge)(e.rewardNotes??=[]).push('求知：额外基础经验 +'+baseXp);
+ if(Math.random()<.12){const herbLoot=earnedMaterials(s,'灰根草',1,e.boss,e.luck??0,materialWeights,e.lootSummary);e.materialLoot.push(...herbLoot);if(herbLoot[0]?.quality===0)(e.rewardNotes??=[]).push('普通 灰根草 ×1');}
  for(const loot of e.materialLoot.filter(x=>x.quality>0))(e.rewardNotes??=[]).push(MATERIAL_QUALITIES[loot.quality]+' '+loot.material+' ×'+loot.count);
- if(e.materialLoot.reduce((n,x)=>n+x.count,0)<expectedMaterials)(e.rewardNotes??=[]).push('部分材料堆叠已满（每堆上限1万亿），超出部分未收取。');
- let drop=rollDrop(s,e.boss,e.luck??0,e.instanceId??resolveLegacySite(index).id+(e.boss?'-boss':'-field'),clear);
- if(tokenEligible&&Math.random()<(clear?.02:.08)){normalizeTalents(s);if(s.consumables.reforgeToken<1e9){s.consumables.reforgeToken++;(e.rewardNotes??=[]).push('重铸印记 ×1');}}
+
+ let drop=rollDrop(s,e.boss,e.luck??0,e.instanceId??resolveLegacySite(index).id+(e.boss?'-boss':'-field'),clear,e.lootSummary);
+ if(tokenEligible&&Math.random()<(clear?.02:.08)){normalizeTalents(s);if(receiveBattleLoot(s,{kind:'consumable',key:'reforgeToken',quantity:1},e.lootSummary))(e.rewardNotes??=[]).push('重铸印记 ×1');}
  if(e.boss){s.bossWins[index]++;s.bossReady[index]=Math.max(now,s.lastHealthClock??0)+1800000;s.instanceCooldowns[instanceId]=s.bossReady[index];if(!s.chapters.includes(index)){s.chapters.push(index);s.chronicle.unshift(['沃恩交出了商队货单：货物并非被抢，而是被人改道。','哥布林技师「尼克」从炉芯发现了烬裔封印。','精灵信使「瑟拉」证实：旧盟约的碎片，正在被五族争夺。'][index]);}}else s.normalWins[index]++;
  if(dungeon){
   if(clear){const newlyCleared=recordDungeonAreaClear(s,e);if(newlyCleared)(e.rewardNotes??=[]).push('区域1已通关：解锁区域2进度，商人下次补货采用11–20级装备；区域2地图尚未开放。');s.instanceCooldowns[instanceId]=Math.max(now,s.lastHealthClock??0)+300000;s.dungeonRun=null;(e.rewardNotes??=[]).push('普通副本通关：额外20金币、40经验、2份材料；冷却5分钟。');if(!s.expedition.loop)s.running=false;}
   else{run.carry=captureDungeonPlayerState(e);run.stage++;(e.rewardNotes??=[]).push('副本进度 '+e.dungeonStage+'/3：本阶段战利品已收取。');}
  }
+ for(const action of ['discarded','overflow']){const n=Object.values(e.lootSummary[action]).reduce((a,b)=>a+b,0);if(n)(e.rewardNotes??=[]).push((action==='discarded'?'品质过滤丢弃':'对应背包已满未收取')+'：装备'+e.lootSummary[action].equipment+'／材料'+e.lootSummary[action].materials+'／物品'+e.lootSummary[action].items);}
  s.nextBattleAt=Math.max(now,s.lastHealthClock??0)+1800;s.nextActionAt=s.nextBattleAt;if(e.boss||s.stopAfterBattle){s.running=false;s.stopAfterBattle=false;}if(s.activeEncounter===e)s.activeEncounter=null;return drop;
 }
 export function offline(s,now=Date.now()){
  if(!Number.isFinite(now)||now<0||now>1e15)return null;
  const start=Math.max(s.lastSeen,s.lastHealthClock??s.lastSeen),end=Math.min(now,start+4*3600000),beforeGold=s.gold,beforeXp=s.xp,beforeLevel=s.level;
  if(!normalizeHealth(s,start)||!normalizeMaterials(s)||!normalizePotions(s))return null;
- const beforeMaterials=new Map(materialEntries(s).map(x=>[x.key,x.count]));let time=start,kills=0,rests=0,rounds=0;
+ const beforeMaterials=new Map(materialEntries(s).map(x=>[x.key,x.count]));let time=start,kills=0,rests=0,rounds=0;const lootSummary=emptyLootSummary();
  // Real combat turns, bounded to four hours. Camp waits jump to their deadline.
  while(time<end&&s.running){
   if(s.restUntil>0){if(s.restUntil>end)break;time=Math.max(time,s.restUntil);settleRest(s,time);if(!s.running)break;continue;}
   if(s.nextBattleAt>time){time=Math.min(end,s.nextBattleAt);if(time>=end)break;}
   let e=s.activeEncounter;
-  if(e?.done){if(e.win&&!e.rewarded){reward(s,e,time);kills++;}else s.activeEncounter=null;continue;}
+  if(e?.done){if(e.win&&!e.rewarded){reward(s,e,time);mergeLootSummary(lootSummary,e.lootSummary);kills++;}else s.activeEncounter=null;continue;}
   if(!e){e=startRoutedEncounter(s,time);if(!e){if(s.restUntil>0){rests++;continue;}break;}e.luck=s.offlineLuck??0;}
   const turnAt=Math.max(time,s.nextActionAt??(time+1100));if(turnAt>end)break;time=turnAt;
   const wasResting=s.restUntil>0;step(s,e,time);rounds++;if(!wasResting&&s.restUntil>0)rests++;
-  if(e.done&&e.win){reward(s,e,time);kills++;}
+  if(e.done&&e.win){reward(s,e,time);mergeLootSummary(lootSummary,e.lootSummary);kills++;}
   if(rounds>13100)break;
  }
  // Time beyond the reward cap may finish rest/expire buffs, never grants extra kills.
@@ -615,8 +618,8 @@ export function offline(s,now=Date.now()){
  const materialLoot=materialEntries(s).map(x=>({...x,count:x.count-(beforeMaterials.get(x.key)??0)})).filter(x=>x.count>0),mat=materialLoot.reduce((n,x)=>n+x.count,0);
  const xp=(s.level-beforeLevel)*(beforeLevel+s.level-1)*40+s.xp-beforeXp,gold=s.gold-beforeGold;
  if(now<=start)return null;
- s.chronicle.unshift('离线实战：完成'+kills+'场胜利，休息'+rests+'次，获得'+gold+'金币与'+mat+'份材料。');s.chronicle=s.chronicle.slice(0,20);
- return {minutes:Math.floor(Math.max(0,end-start)/60000),gold,xp,mat,materialLoot,kills,rests,rounds,capped:now-start>4*3600000};
+ s.chronicle.unshift('离线实战：完成'+kills+'场胜利，休息'+rests+'次，获得'+gold+'金币与'+mat+'份材料。');for(const action of ['discarded','overflow']){const n=Object.values(lootSummary[action]).reduce((a,b)=>a+b,0);if(n)s.chronicle.unshift((action==='discarded'?'离线品质过滤丢弃':'离线背包已满未收取')+'：装备'+lootSummary[action].equipment+'／材料'+lootSummary[action].materials+'／物品'+lootSummary[action].items);}s.chronicle=s.chronicle.slice(0,20);
+ return {minutes:Math.floor(Math.max(0,end-start)/60000),gold,xp,mat,materialLoot,lootSummary,kills,rests,rounds,capped:now-start>4*3600000};
 }
 export const MATERIALS={
  '铁屑':{icon:'iron',tags:['金属'],description:'旧驿道散落的铁料，融合时偏向厚重装备与碎砧套装。',origin:'失落驿道',price:4},
@@ -646,9 +649,33 @@ export function materialCount(s,material,quality=0){const key=materialKey(materi
 export function materialEntries(s){return Object.keys(MATERIALS).flatMap(material=>[0,1,2,3].map(quality=>({key:materialKey(material,quality),material,quality,count:materialCount(s,material,quality)}))).filter(row=>row.count>0);}
 export function materialPrice(material,quality=0){return materialKey(material,quality)?Math.ceil(MATERIALS[material].price*[1,1.5,2.5,4][quality]):null;}
 function addMaterial(s,material,quality,count){const key=materialKey(material,quality),before=s.materialStacks[key]??0,added=Math.max(0,Math.min(count,1e12-before));s.materialStacks[key]=before+added;return added;}
-function earnedMaterials(s,material,count,boss=false,luck=0,weights=null){
+export function receiveBattleLoot(s,loot,summary=emptyLootSummary()){
+ if(!loot||!['equipment','material','consumable','potion'].includes(loot.kind))return false;
+ const qty=loot.quantity??1;if(!Number.isSafeInteger(qty)||qty<1)return false;
+ const category=loot.kind==='equipment'?'equipment':loot.kind==='material'?'materials':'items';
+ const quality=loot.kind==='equipment'?loot.item?.rarity:loot.kind==='material'?parseMaterialKey(loot.key)?.quality:loot.kind==='potion'?parsePotionKey(loot.key)?.quality:undefined;
+ if(!(loot.kind==='equipment'&&(loot.item?.locked||isProtected(s,loot.item?.id)))&&shouldDiscardLoot(s,category,quality)){summary.discarded[category]+=qty;return false;}
+ if(loot.kind==='equipment'){if(!validEquipment(loot.item)||s.inventory.some(it=>it.id===loot.item.id))return false;if(qty!==1||!canReceiveEquipment(s,loot.item)){summary.overflow.equipment+=qty;return false;}s.inventory.push(loot.item);return true;}
+ if(loot.kind==='material'){const parsed=parseMaterialKey(loot.key);if(!parsed)return false;normalizeMaterials(s);if(!canReceiveMaterial(s,parsed.key,qty)){summary.overflow.materials+=qty;return false;}addMaterial(s,parsed.material,parsed.quality,qty);return true;}
+ if(loot.kind==='consumable'){if(!Object.hasOwn(CONSUMABLES,loot.key))return false;normalizeTalents(s);if(!canReceiveItem(s,loot.key,qty)){summary.overflow.items+=qty;return false;}s.consumables[loot.key]=(s.consumables[loot.key]??0)+qty;return true;}
+ if(loot.kind==='potion'){const parsed=parsePotionKey(loot.key);if(!parsed||!normalizePotions(s))return false;if(!canReceiveItem(s,parsed.key,qty)){summary.overflow.items+=qty;return false;}s.potionStacks[parsed.key]=(s.potionStacks[parsed.key]??0)+qty;return true;}
+ return false;
+}
+function validPendingForgeClaim(s){
+ const p=s.pendingForgeClaim;if(p===undefined||p===null)return true;
+ if(!p||typeof p!=='object'||Array.isArray(p))return false;
+ if(p.kind==='equipment')return validEquipment(p.item)&&!s.inventory?.some(it=>it.id===p.item.id)&&!s.merchant?.offers?.some(o=>o.type==='equipment'&&o.stock===1&&o.item?.id===p.item.id);
+ if(p.kind==='potion'){const r=p.potion,parsed=parsePotionKey(r?.key);return !!parsed&&r?.kind==='potion'&&r.quantity===1&&parsed.type===r.potionType&&parsed.quality===r.quality&&r.name===POTIONS[r.potionType]?.name;}
+ return false;
+}
+export function claimForgeResult(s){
+ const p=s.pendingForgeClaim;if(!p||!validPendingForgeClaim(s))return null;
+ if(p.kind==='equipment'){if(!canReceiveEquipment(s,p.item))return null;s.inventory.push(p.item);s.pendingForgeClaim=null;return p.item;}
+ const r=p.potion;if(!normalizePotions(s)||!canReceiveItem(s,r.key))return null;s.potionStacks[r.key]=(s.potionStacks[r.key]??0)+1;s.pendingForgeClaim=null;return r;
+}
+function earnedMaterials(s,material,count,boss=false,luck=0,weights=null,summary=emptyLootSummary()){
  normalizeMaterials(s);const loot=[];
- for(let i=0;i<count;i++){const quality=luckyRoll(()=>rollQuality(weights??(boss?[65,28,6.5,.5]:[80,17,2.8,.2])),luck);const added=addMaterial(s,material,quality,1);if(!added)continue;const entry=loot.find(x=>x.quality===quality);if(entry)entry.count++;else loot.push({key:materialKey(material,quality),material,quality,count:1});}
+ for(let i=0;i<count;i++){const quality=luckyRoll(()=>rollQuality(weights??(boss?[65,28,6.5,.5]:[80,17,2.8,.2])),luck);const added=receiveBattleLoot(s,{kind:'material',key:materialKey(material,quality),quality,quantity:1},summary);if(!added)continue;const entry=loot.find(x=>x.quality===quality);if(entry)entry.count++;else loot.push({key:materialKey(material,quality),material,quality,count:1});}
  return loot;
 }
 const MERCHANT_STOCK={'铁屑':[6,12],'炉火晶':[3,7],'誓约残片':[2,5],'灰根草':[4,8]};
@@ -706,19 +733,19 @@ export function buyMaterial(s,stackKey,qty,expectedRevision,now=Date.now()){
  const parsed=parseMaterialKey(stackKey);if(!Number.isSafeInteger(qty)||qty<=0||!parsed||!validMaterials(s))return false;
  const {material,quality}=parsed,m=ensureMerchant(s,now);if(!m||(expectedRevision!==undefined&&m.revision!==expectedRevision))return false;
  const offer=m.offers.find(o=>o.type==='material'&&o.material===material&&(o.quality??0)===quality);
- if(!offer||qty>offer.stock||!Number.isFinite(s.gold)||s.gold<offer.price*qty||materialCount(s,material,quality)+qty>1e12)return false;
+ if(!offer||qty>offer.stock||!Number.isFinite(s.gold)||s.gold<offer.price*qty||!canReceiveMaterial(s,parsed.key,qty))return false;
  normalizeMaterials(s);s.gold-=offer.price*qty;addMaterial(s,material,quality,qty);offer.stock-=qty;return true;
 }
 export function purchaseEquipment(s,offerId,expectedRevision,now=Date.now()){
  const m=ensureMerchant(s,now);if(!m||!Number.isSafeInteger(expectedRevision)||m.revision!==expectedRevision)return false;
  const offer=m.offers.find(o=>o.type==='equipment'&&o.offerId===offerId);
- if(!offer||offer.stock!==1||bagItems(s).length>=100||!Number.isFinite(s.gold)||s.gold<offer.price||s.inventory.some(it=>it.id===offer.item.id))return false;
+ if(!offer||offer.stock!==1||!canReceiveEquipment(s,offer.item)||!Number.isFinite(s.gold)||s.gold<offer.price||s.inventory.some(it=>it.id===offer.item.id))return false;
  s.gold-=offer.price;offer.stock=0;s.inventory.push(offer.item);return true;
 }
 export function purchaseConsumable(s,offerId,expectedRevision,now=Date.now()){
  const m=ensureMerchant(s,now);if(!m||!Number.isSafeInteger(expectedRevision)||m.revision!==expectedRevision)return false;
  const offer=m.offers.find(o=>o.type==='consumable'&&o.offerId===offerId);
- if(!offer||offer.stock!==1||!['memoryFruit','reforgeToken'].includes(offer.consumable)||!validTalents(s)||!validConsumables(s)||!Number.isFinite(s.gold)||s.gold<offer.price||(s.consumables?.[offer.consumable]??0)>=1e9)return false;
+ if(!offer||offer.stock!==1||!['memoryFruit','reforgeToken'].includes(offer.consumable)||!validTalents(s)||!validConsumables(s)||!Number.isFinite(s.gold)||s.gold<offer.price||!canReceiveItem(s,offer.consumable,1))return false;
  normalizeTalents(s);s.gold-=offer.price;offer.stock=0;s.consumables[offer.consumable]++;return true;
 }
 export function purchaseRecipe(s,offerId,expectedRevision,now=Date.now()){
@@ -739,20 +766,20 @@ export const FUSION_TAGS={
 };
 export function fusionWeights(selection){const slots=Object.fromEntries(SLOTS.map(k=>[k,2])),sets=Object.fromEntries(BUILD.map(b=>[b.id,1]));for(const key of selection){const parsed=parseMaterialKey(key),tag=parsed?FUSION_TAGS[parsed.material]:null;if(!tag)continue;if(tag.set)sets[tag.set]+=2;for(const slot of SLOTS)slots[slot]+=tag.slots[slot];}return {slots,sets};}
 export function forge(s,selection){
- if(!Array.isArray(selection)||selection.length<1||selection.length>5||s.gold<40||bagItems(s).length>=100||!validMaterials(s))return null;
+ if(!Array.isArray(selection)||selection.length<1||selection.length>5||s.gold<40||s.pendingForgeClaim||!validMaterials(s))return null;
  const counts={},parsed=[];for(const key of selection){const entry=parseMaterialKey(key);if(!entry)return null;parsed.push(entry);counts[entry.key]=(counts[entry.key]||0)+1;}
  if(parsed.some(({material,quality,key})=>materialCount(s,material,quality)<counts[key]))return null;
  const n=selection.length,a=parsed.reduce((total,p)=>total+p.quality,0)/n,qualityWeights=fusionQualityWeights(selection),herbs=parsed.filter(p=>p.material==='灰根草').length;
  if(herbs&&Math.random()<.35+.5*herbs/n){
   if(!validPotions(s))return null;
   const quality=luckyRoll(()=>rollQuality(qualityWeights),s.talents.luck??0),type=weighted([['healing',60],['strength',25],['fireResist',15]]),key=potionKey(type,quality);
-  if(potionCount(s,type,quality)>=1e9)return null;
-  normalizeMaterials(s);normalizePotions(s);Object.entries(counts).forEach(([key,v])=>s.materialStacks[key]-=v);s.gold-=40;s.potionStacks[key]=(s.potionStacks[key]??0)+1;
-  return {kind:'potion',potionType:type,quality,name:POTIONS[type].name,quantity:1,key};
+  normalizeMaterials(s);normalizePotions(s);Object.entries(counts).forEach(([key,v])=>s.materialStacks[key]-=v);s.gold-=40;
+  const result={kind:'potion',potionType:type,quality,name:POTIONS[type].name,quantity:1,key};
+  if(canReceiveItem(s,key))s.potionStacks[key]=(s.potionStacks[key]??0)+1;else s.pendingForgeClaim={kind:'potion',potion:result};return result;
  }
  const weights=fusionWeights(selection),isSet=Math.random()<.05,slot=weighted(Object.entries(weights.slots).filter(([k])=>!isSet||SET_SLOTS.includes(k))),set=isSet?weighted(Object.entries(weights.sets)):null,quality=isSet?3:luckyRoll(()=>rollQuality(qualityWeights),s.talents.luck??0);
  const it=item(slot,s.level,set,quality,{levelSource:'material'});if(Math.random()<.03)applyForgeFavor(it);
- normalizeMaterials(s);Object.entries(counts).forEach(([key,v])=>s.materialStacks[key]-=v);s.gold-=40;s.inventory.push(it);return it;
+ normalizeMaterials(s);Object.entries(counts).forEach(([key,v])=>s.materialStacks[key]-=v);s.gold-=40;if(canReceiveEquipment(s,it))s.inventory.push(it);else s.pendingForgeClaim={kind:'equipment',item:it};return it;
 }
 export function applyForgeFavor(it){
  if(it.divine)return false;
@@ -768,9 +795,9 @@ export function validSave(s){
  try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;
  if(s.version!==SCHEMA_VERSION||s.race!=='dwarf'||s.hero!=='布洛克'||!Number.isInteger(s.level)||s.level<1||s.level>=100000||!num(s.xp)||!num(s.gold)||!Number.isInteger(s.location)||s.location<0||s.location>2)return false;
  if(s.activeEncounter?.kind==='dungeon'&&(!s.dungeonRun||s.activeEncounter.runId!==s.dungeonRun.runId||s.activeEncounter.dungeonStage!==s.dungeonRun.stage))return false;
- if(!validAreaProgress(s)||!validExpeditionState(s)||!Array.isArray(s.inventory)||s.inventory.length>124||!s.inventory.every(validEquipment)||!validPendingReforge(s))return false;
+ if(!validLootFilters(s)||!validPendingForgeClaim(s)||!validAreaProgress(s)||!validExpeditionState(s)||!Array.isArray(s.inventory)||s.inventory.length>INVENTORY_SAVE_LIMIT||!s.inventory.every(validEquipment)||!validPendingReforge(s))return false;
  if(s.merchant?.offers?.some(o=>o.type==='equipment'&&o.stock===1&&s.inventory.some(it=>it.id===o.item?.id)))return false;
- if((s.nextActionAt!==undefined&&(!Number.isFinite(s.nextActionAt)||s.nextActionAt<0||s.nextActionAt>1e15))||(s.restResume!==undefined&&typeof s.restResume!=='boolean')||(s.nextBattleAt!==undefined&&(!Number.isFinite(s.nextBattleAt)||s.nextBattleAt<0||s.nextBattleAt>1e15))||!validRecipes(s)||!validEncounter(s.activeEncounter)||!validPotions(s)||!validHealth(s)||!validLoadoutSlots(s)||bagItems(s).length>100||(s.merchant!==undefined&&!validMerchant(s.merchant)))return false;
+ if((s.nextActionAt!==undefined&&(!Number.isFinite(s.nextActionAt)||s.nextActionAt<0||s.nextActionAt>1e15))||(s.restResume!==undefined&&typeof s.restResume!=='boolean')||(s.nextBattleAt!==undefined&&(!Number.isFinite(s.nextBattleAt)||s.nextBattleAt<0||s.nextBattleAt>1e15))||!validRecipes(s)||!validEncounter(s.activeEncounter)||!validPotions(s)||!validHealth(s)||!validLoadoutSlots(s)||(s.merchant!==undefined&&!validMerchant(s.merchant)))return false;
  if(new Set(s.inventory.map(i=>i.id)).size!==s.inventory.length||!s.equip||Object.keys(s.equip).length!==SOCKETS.length||!SOCKETS.every(k=>s.equip[k]===null||s.inventory.some(i=>i.id===s.equip[k]&&i.slot===SOCKET_TYPE[k])))return false;
  const equipped=Object.values(s.equip).filter(Boolean);if(new Set(equipped).size!==equipped.length)return false;
  return validSkillSlots(s.skills,s.conditions)&&validMaterials(s)&&(s.offlineLuck===undefined||(Number.isInteger(s.offlineLuck)&&num(s.offlineLuck,10)))&&validTalents(s)&&validConsumables(s)&&['bossWins','bossReady','normalWins'].every(k=>Array.isArray(s[k])&&s[k].length===3&&s[k].every(n=>num(n,1e15)))&&Array.isArray(s.chapters)&&s.chapters.every(n=>Number.isInteger(n)&&n>=0&&n<3)&&Array.isArray(s.chronicle)&&s.chronicle.length<=100&&s.chronicle.every(t=>typeof t==='string'&&t.length<2000)&&num(s.kills)&&num(s.stock,3)&&num(s.lastSeen,1e15)&&[0,1].includes(s.momentum)&&typeof s.running==='boolean';
