@@ -16,7 +16,7 @@ assert.equal(pickRoute({...ex,targetInstanceId:'blackforge-road-boss'},{},1000,r
 assert.equal(pickRoute({...ex,targetInstanceId:'dwarf-blackforge-1-dungeon'},{},1000).kind,'dungeon');
 const random=Math.random;Math.random=()=>0;
 try{for(const level of [1,100,500])for(let index=0;index<3;index++){
- const x=fresh();x.level=level;x.location=index;const b=encounter(x);b.done=true;b.win=true;const gear=reward(x,b,Date.now());assert(gear);assert.equal(gear.level,[3,6,9][index]);assert.equal(areaGearLevel(SITES[index].id+'-boss'),gear.level);
+ const x=fresh();x.level=level;x.location=index;const b=encounter(x);b.done=true;b.win=true;const gear=reward(x,b,Date.now());assert(gear);assert.equal(gear.baseLevel,[3,6,9][index]);assert(gear.level>=Math.max(1,gear.baseLevel-2)&&gear.level<=Math.min(10,gear.baseLevel+2));assert.equal(areaGearLevel(SITES[index].id+'-boss'),gear.baseLevel);
 }}finally{Math.random=random;}
 for(const mutate of [x=>x.instanceCooldowns.bad=100,x=>x.expedition.fieldId='blackforge-road-boss',x=>x.activeEncounter.instanceId='bad']){
  const bad=JSON.parse(once);mutate(bad);assert(!validSave(bad));
