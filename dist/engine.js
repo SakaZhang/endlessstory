@@ -1,3 +1,4 @@
+import {equipmentFingerprint,validBatchSelection,validBatchQuote} from './batch-sale-schema.js';
 import {validCollectionLedger,addOwnedCollection,normalizeCollectionLedger} from './codex-collection-schema.js';
 import {rollSourceSet,isMerchantEquipmentSellable} from './set-source-schema.js';
 export {rollSourceSet,isMerchantEquipmentSellable};
@@ -839,3 +840,21 @@ export function grantDevelopmentSupport(s){if(!validSave(s)||s.testGrants?.[DEVE
 
 export function skillUnlockLevelForBuild(id){const b=BUILD.find(x=>x.id===id);return b?Math.max(...b.skills.filter(Boolean).map(k=>SKILL_UNLOCK_LEVELS[k])):null;}
 export function collectSkillUnlockNotices(s){return collectSkillUnlockKeys(s).map(key=>({key,name:SKILLS[key].name,level:SKILL_UNLOCK_LEVELS[key]}));}
+
+function batchSaleEligible(s,it,slot,qualities){
+ return it.slot===slot&&qualities.includes(it.rarity)&&!it.locked&&!Object.values(s.equip).includes(it.id)&&!isProtected(s,it.id);
+}
+export function quoteBatchSale(s,slot,qualities){
+ if(!validBatchSelection(slot,qualities,SLOTS)||!validSave(s))return null;
+ const entries=s.inventory.filter(it=>batchSaleEligible(s,it,slot,qualities)).map(it=>({id:it.id,fingerprint:equipmentFingerprint(it),value:sellValue(it)}));
+ const quote={version:1,slot,qualities:[...qualities].sort((a,b)=>a-b),entries,count:entries.length,total:entries.reduce((n,e)=>n+e.value,0)};
+ return validBatchQuote(quote,SLOTS)?quote:null;
+}
+export function executeBatchSale(s,quote){
+ if(!validBatchQuote(quote,SLOTS)||quote.count===0||!validSave(s)||s.gold+quote.total>1e12||!Number.isFinite(s.gold+quote.total))return null;
+ for(const entry of quote.entries){const it=s.inventory.find(x=>x.id===entry.id);if(!it||!batchSaleEligible(s,it,quote.slot,quote.qualities)||sellValue(it)!==entry.value||equipmentFingerprint(it)!==entry.fingerprint)return null;}
+ // Capture current-held legacy history only after the entire quote passes.
+ if(!normalizeCodexCollection(s))return null;
+ const ids=quote.entries.map(e=>e.id),sold=new Set(ids);s.inventory=s.inventory.filter(it=>!sold.has(it.id));s.gold+=quote.total;
+ return {ok:true,ids,count:quote.count,total:quote.total,gold:quote.total};
+}

@@ -40,3 +40,4 @@ import './inventory-bags-tests.mjs';
 import './skill-progression-tests.mjs';
 import './set-source-tests.mjs';
 import './codex-collection-tests.mjs';
+import './batch-sale-tests.mjs';
