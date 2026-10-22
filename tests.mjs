@@ -62,3 +62,9 @@ import './equipment-presentation-tests.mjs';
 import './equipment-presentation-css-tests.mjs';
 
 import './reforge-inheritance-tests.mjs';
+
+import './affix-expansion-tests.mjs';
+import './multi-affix-tests.mjs';
+
+import './affix-production-tests.mjs';
+import './reforge-same-type-tests.mjs';

@@ -1,3 +1,4 @@
+import {NEW_ORDINARY_AFFIX_DEFS,NEW_SPECIAL_DEFS,createBattleAffixState,validBattleAffixState,tryNirvana,tryReaperHit,lifestealRate,lifestealHeal,openingShelterShield} from './affix-expansion.js';
 import {selectEquipmentTemplate,applyEquipmentTemplate,validEquipmentTemplateMetadata} from './equipment-templates.js';
 export {EQUIPMENT_TEMPLATES,EQUIPMENT_TEMPLATE_BY_ID,RACE_WEAPON_POOLS,equipmentTemplateDisplay} from './equipment-templates.js';
 import {validEnhancementMetadata,enhancedItemBase} from './equipment-enhancement.js';
@@ -96,9 +97,9 @@ export function commitTalentRefund(s,draft,battleActive=false){
 }
 export const AFFIX_DEFS={
  atk:{name:'攻击',suffix:'',min:3,max:8},hp:{name:'生命',suffix:'',min:15,max:40},armor:{name:'护甲',suffix:'',min:2,max:6},
- hit:{name:'命中值',suffix:'',min:5,max:12},crit:{name:'暴击值',suffix:'',min:5,max:15},critDamage:{name:'暴伤值',suffix:'',min:8,max:20},element:{name:'元素技能增幅',suffix:'',min:2,max:7},...ELEMENT_AFFIX_DEFS
+ hit:{name:'命中值',suffix:'',min:5,max:12},crit:{name:'暴击值',suffix:'',min:5,max:15},critDamage:{name:'暴伤值',suffix:'',min:8,max:20},element:{name:'元素技能增幅',suffix:'',min:2,max:7},...ELEMENT_AFFIX_DEFS,...NEW_ORDINARY_AFFIX_DEFS
 };
-export const ACTIVE_AFFIX_KEYS=Object.freeze(['atk','hp','armor','hit','crit','critDamage',...Object.keys(ELEMENT_AFFIX_DEFS)]);
+export const ACTIVE_AFFIX_KEYS=Object.freeze(['atk','hp','armor','hit','crit','critDamage',...Object.keys(ELEMENT_AFFIX_DEFS),...Object.keys(NEW_ORDINARY_AFFIX_DEFS)]);
 // Roll color is derived from the original roll, never from divine gains.
 export function affixRollInfo(a){
  const def=AFFIX_DEFS[a?.stat];if(!def)return null;
@@ -110,8 +111,8 @@ export function divineMultiplier(it){return it.divine?.id==='forge-favor'&&it.di
 export const SPECIALS={
  knowledge:{name:'求知',desc:'胜利时5%概率额外获得一次基础战斗经验，不重复触发。'},
  scavenger:{name:'拾荒者',desc:'胜利时10%概率额外获得当前区域材料1份，不重复触发。'},
- shelter:{name:'绝境庇护',desc:'每战一次：来袭伤害将使生命降至30%以下时，生成20%最大生命护盾。'},
- momentum:{name:'余势',desc:'主动攻击击杀后，下一次普攻伤害 +35%。不叠加，败退清除，灼烧和反击不触发。'}
+ momentum:{name:'余势',desc:'主动攻击击杀后，下一次普攻伤害 +35%。不叠加，败退清除，灼烧和反击不触发。'},
+ ...NEW_SPECIAL_DEFS
 };
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 let serial=0;
@@ -120,6 +121,8 @@ const rand=(a,b)=>Math.floor(a+Math.random()*(b-a+1));
 const names={weapon:'战锤',helm:'铁盔',armor:'板甲',gloves:'护手',boots:'战靴',ring:'指环',amulet:'护符'};
 const bases={weapon:{atk:12,armor:1,hp:5},helm:{atk:1,armor:4,hp:18},armor:{atk:1,armor:8,hp:18},gloves:{atk:3,armor:3,hp:8},boots:{atk:1,armor:4,hp:10},ring:{atk:3,armor:1,hp:8},amulet:{atk:2,armor:1,hp:14}};
 function weighted(entries){let roll=Math.random()*entries.reduce((n,[,w])=>n+w,0);for(const [key,w] of entries){roll-=w;if(roll<0)return key;}return entries.at(-1)[0];}
+export const ACTIVE_SPECIAL_KEYS=Object.freeze(Object.keys(SPECIALS).filter(k=>SPECIALS[k].enabled!==false));
+const activeSpecialKeys=()=>ACTIVE_SPECIAL_KEYS;
 function rollAffixes(quality){const pool=[...ACTIVE_AFFIX_KEYS];const count=quality===0?rand(0,1):quality+1,affixes=[];for(let i=0;i<count;i++){const key=pool.splice(rand(0,pool.length-1),1)[0],def=AFFIX_DEFS[key];affixes.push({stat:key,value:rand(def.min,def.max)});}return affixes;}
 export function item(slot,level=1,set=null,rarity=0,levelMetadata={}){
  if(!SLOTS.includes(slot))throw new Error('Unsupported item family');
@@ -130,7 +133,7 @@ export function item(slot,level=1,set=null,rarity=0,levelMetadata={}){
  const baseLevel=levelMetadata.baseLevel??level,levelSource=levelMetadata.levelSource??'generated';
  if(!validEquipmentLevelMetadata({baseLevel,levelSource}))throw new RangeError('Invalid equipment level provenance');
  const out={id:uid(),slot,set,rarity,level,baseLevel,levelSource,name,atk:Math.max(1,Math.round(b.atk*scale+level*.7)),armor:Math.max(1,Math.round(b.armor*scale+level*.45)),hp:Math.round(b.hp*scale+level*1.8),affixes:rollAffixes(rarity),special:null,legendaryId:null,locked:false,bless:0};
- if(!set&&rarity>=2&&Math.random()<(rarity===2?.1:.2)){out.special={id:Object.keys(SPECIALS)[rand(0,3)]};}
+ if(!set&&rarity>=2&&Math.random()<(rarity===2?.1:.2)){out.special={id:activeSpecialKeys()[rand(0,activeSpecialKeys().length-1)]};}
  let hash=2166136261;for(const ch of out.id){hash^=ch.charCodeAt(0);hash=Math.imul(hash,16777619)>>>0;}
  const template=selectEquipmentTemplate({slot,setId:set,originRace:'dwarf'},()=>hash/2**32);return template?applyEquipmentTemplate(out,template.id):out;
 }
@@ -149,28 +152,27 @@ export function getReforgeCost(it,mode){
  const cost=legacyReforgeCost(it,mode);if(!cost)return null;
  return mode==='all'?{gold:0,materials:{},consumables:{reforgeToken:1}}:mode==='replace'?{gold:0,materials:{},equipment:1}:cost;
 }
-export function eligibleReforgeDonors(s,targetId,index){
+export function eligibleReforgeDonors(s,targetId,index=0){
  const target=s?.inventory?.find(it=>it.id===targetId);
  if(!target||!Number.isInteger(index)||index<0||index>=target.affixes.length||s.pendingReforge)return [];
- const occupied=new Set(target.affixes.map(a=>a.stat));
+ const occupied=new Set(target.affixes.filter((a,i)=>i!==index).map(a=>a.stat));
  const legalDonor=it=>Array.isArray(it.affixes)&&new Set(it.affixes.map(a=>a?.stat)).size===it.affixes.length&&it.affixes.every(a=>a&&Object.hasOwn(AFFIX_DEFS,a.stat)&&Number.isInteger(a.value)&&a.value>=AFFIX_DEFS[a.stat].min&&a.value<=AFFIX_DEFS[a.stat].max);
  return s.inventory.filter(it=>it.id!==targetId&&legalDonor(it)&&!it.locked&&!it.legendaryId&&!Object.values(s.equip).includes(it.id)&&!isProtected(s,it.id)).map(it=>({item:it,affixes:it.affixes.filter(a=>Object.hasOwn(AFFIX_DEFS,a.stat)&&!occupied.has(a.stat))})).filter(x=>x.affixes.length);
 }
-export function reforge(s,itemId,mode,index,donorId){
+export function reforge(s,itemId,mode,index=0,donorId){
  if(!s||!Array.isArray(s.inventory)||s.pendingReforge)return null;
  const it=s.inventory.find(i=>i.id===itemId),cost=getReforgeCost(it,mode);
  if(!cost||!SLOTS.includes(it.slot)||it.affixes.length>Object.keys(AFFIX_DEFS).length||it.affixes.some(a=>!a||typeof a!=='object'))return null;
  if(divineMultiplier(it)>1&&(!it.divine.bonus||typeof it.divine.bonus!=='object'))return null;
  if(new Set(it.affixes.map(a=>a.stat)).size!==it.affixes.length||!it.affixes.every(a=>Object.hasOwn(AFFIX_DEFS,a.stat)&&Number.isInteger(a.value)&&a.value>=AFFIX_DEFS[a.stat].min&&a.value<=AFFIX_DEFS[a.stat].max))return null;
  if(mode!=='all'&&(!Number.isInteger(index)||index<0||index>=it.affixes.length))return null;
- if(mode==='replace'&&!ACTIVE_AFFIX_KEYS.some(stat=>!it.affixes.some(a=>a.stat===stat)))return null;
  if(mode==='all'&&it.affixes.length>ACTIVE_AFFIX_KEYS.length)return null;
  if(!Number.isFinite(s.gold)||s.gold<cost.gold||!validMaterials(s)||!validConsumables(s)||Object.entries(cost.materials).some(([key,n])=>materialCount(s,key,0)<n)||Object.entries(cost.consumables??{}).some(([key,n])=>(s.consumables?.[key]??0)<n))return null;
  const donor=mode==='replace'?eligibleReforgeDonors(s,itemId,index).find(x=>x.item.id===donorId):null;
  if(mode==='replace'&&!donor)return null;
  if(!validCodexCollection(s))return null;
  const before=it.affixes.map(a=>({...a})),after=before.map(a=>({...a}));
- const roll=stat=>({stat,value:luckyRoll(()=>rand(AFFIX_DEFS[stat].min,AFFIX_DEFS[stat].max),s.talents.luck??0)});
+ const roll=stat=>({stat,value:luckyRoll(()=>rand(AFFIX_DEFS[stat].min,AFFIX_DEFS[stat].max),effectiveLuck(s))});
  if(mode==='value')after[index]=roll(after[index].stat);
  else if(mode==='replace'){
   const chosen=donor.affixes[rand(0,donor.affixes.length-1)];
@@ -180,20 +182,20 @@ export function reforge(s,itemId,mode,index,donorId){
   for(let i=0;i<after.length;i++)after[i]=roll(pool.splice(rand(0,pool.length-1),1)[0]);
  }
  const oldSpecial=it.special?{...it.special}:null;
- const newSpecial=mode==='all'&&!it.set&&it.rarity>=2&&!it.legendaryId?{id:Object.keys(SPECIALS)[rand(0,Object.keys(SPECIALS).length-1)]}:oldSpecial?{...oldSpecial}:null;
+ const newSpecial=mode==='all'&&!it.set&&it.rarity>=2&&!it.legendaryId?{id:activeSpecialKeys()[rand(0,activeSpecialKeys().length-1)]}:oldSpecial?{...oldSpecial}:null;
  // Charge once, then persist the choice without modifying the target.
  normalizeMaterials(s);normalizeTalents(s);s.gold-=cost.gold;for(const [key,n] of Object.entries(cost.materials))s.materialStacks[materialKey(key)]-=n;for(const [key,n] of Object.entries(cost.consumables??{}))s.consumables[key]-=n;
  if(donor)normalizeCodexCollection(s);
  if(donor)s.inventory.splice(s.inventory.findIndex(x=>x.id===donor.item.id),1);
  const operationId='reforge-'+Date.now().toString(36)+'-'+(++serial).toString(36);
- s.pendingReforge={ruleVersion:mode==='replace'?3:2,operationId,itemId:it.id,mode,index:mode==='all'?null:index,oldAffixes:before,newAffixes:after,oldSpecial,newSpecial,cost,...(donor?{donor:{id:donor.item.id,name:donor.item.name,slot:donor.item.slot,eligibleStats:donor.affixes.map(a=>a.stat),eligibleAffixes:donor.affixes.map(a=>({stat:a.stat,value:a.value})),selectedAffix:{...after[index]}}}:{})};
+ s.pendingReforge={ruleVersion:mode==='replace'?4:2,operationId,itemId:it.id,mode,index:mode==='all'?null:index,oldAffixes:before,newAffixes:after,oldSpecial,newSpecial,cost,...(donor?{donor:{id:donor.item.id,name:donor.item.name,slot:donor.item.slot,eligibleStats:donor.affixes.map(a=>a.stat),eligibleAffixes:donor.affixes.map(a=>({stat:a.stat,value:a.value})),selectedAffix:{...after[index]}}}:{})};
  return {item:it,operationId,mode,index:mode==='all'?null:index,cost,before:before.map(a=>({...a})),after:after.map(a=>({...a})),oldSpecial,newSpecial,pending:true};
 }
 export function validPendingReforge(s){
  const p=s.pendingReforge;if(p===undefined||p===null)return true;
  if(!p||typeof p!=='object'||Array.isArray(p)||typeof p.operationId!=='string'||p.operationId.length<1||p.operationId.length>160)return false;
- if(p.ruleVersion!==undefined&&p.ruleVersion!==2&&p.ruleVersion!==3)return false;
- if(p.ruleVersion===3&&p.mode!=='replace')return false;
+ if(p.ruleVersion!==undefined&&p.ruleVersion!==2&&p.ruleVersion!==3&&p.ruleVersion!==4)return false;
+ if(p.ruleVersion>=3&&p.mode!=='replace')return false;
  const it=s.inventory?.find(i=>i.id===p.itemId),cost=p.ruleVersion>=2?getReforgeCost(it,p.mode):legacyReforgeCost(it,p.mode);
  if(!it||!cost||!p.cost||p.cost.gold!==cost.gold||!p.cost.materials||Object.keys(p.cost.materials).length!==Object.keys(cost.materials).length||!Object.entries(cost.materials).every(([k,v])=>p.cost.materials[k]===v))return false;
  if((p.cost.equipment??0)!==(cost.equipment??0))return false;
@@ -202,8 +204,8 @@ export function validPendingReforge(s){
  if(p.ruleVersion>=2){
   if(p.mode==='replace'){
    const d=p.donor;
-   if(!d||typeof d.id!=='string'||!d.id||d.id===p.itemId||s.inventory.some(it=>it.id===d.id)||typeof d.name!=='string'||d.name.length>200||!SLOTS.includes(d.slot)||!Array.isArray(d.eligibleStats)||!d.eligibleStats.length||d.eligibleStats.length>4||new Set(d.eligibleStats).size!==d.eligibleStats.length||!d.eligibleStats.every(k=>Object.hasOwn(AFFIX_DEFS,k)&&!it.affixes.some(a=>a.stat===k))||!d.eligibleStats.includes(p.newAffixes?.[p.index]?.stat))return false;
-   if(p.ruleVersion===3){
+   if(!d||typeof d.id!=='string'||!d.id||d.id===p.itemId||s.inventory.some(it=>it.id===d.id)||typeof d.name!=='string'||d.name.length>200||!SLOTS.includes(d.slot)||!Array.isArray(d.eligibleStats)||!d.eligibleStats.length||d.eligibleStats.length>4||new Set(d.eligibleStats).size!==d.eligibleStats.length||!d.eligibleStats.every(k=>Object.hasOwn(AFFIX_DEFS,k)&&!it.affixes.some((a,i)=>a.stat===k&&(p.ruleVersion<4||i!==p.index)))||!d.eligibleStats.includes(p.newAffixes?.[p.index]?.stat))return false;
+   if(p.ruleVersion>=3){
     const legal=a=>a&&Object.hasOwn(AFFIX_DEFS,a.stat)&&Number.isInteger(a.value)&&a.value>=AFFIX_DEFS[a.stat].min&&a.value<=AFFIX_DEFS[a.stat].max;
     const same=(a,b)=>a?.stat===b?.stat&&a?.value===b?.value;
     if(!Array.isArray(d.eligibleAffixes)||d.eligibleAffixes.length!==d.eligibleStats.length||!d.eligibleAffixes.every((a,i)=>legal(a)&&a.stat===d.eligibleStats[i])||!legal(d.selectedAffix)||!d.eligibleAffixes.some(a=>same(a,d.selectedAffix))||!same(d.selectedAffix,p.newAffixes?.[p.index]))return false;
@@ -219,7 +221,7 @@ export function validPendingReforge(s){
  if(!legal(p.oldAffixes)||!legal(p.newAffixes)||!p.oldAffixes.every((a,i)=>equal(a,it.affixes[i])))return false;
  if(p.mode==='all')return p.index===null&&p.newAffixes.every(a=>ACTIVE_AFFIX_KEYS.includes(a.stat));
  if(!Number.isInteger(p.index)||p.index<0||p.index>=it.affixes.length||!p.newAffixes.every((a,i)=>i===p.index||equal(a,p.oldAffixes[i])))return false;
- return p.mode==='value'?p.newAffixes[p.index].stat===p.oldAffixes[p.index].stat:p.newAffixes[p.index].stat!==p.oldAffixes[p.index].stat&&(p.ruleVersion>=2?p.donor.eligibleStats.includes(p.newAffixes[p.index].stat):ACTIVE_AFFIX_KEYS.includes(p.newAffixes[p.index].stat));
+ return p.mode==='value'?p.newAffixes[p.index].stat===p.oldAffixes[p.index].stat:(p.ruleVersion===4||p.newAffixes[p.index].stat!==p.oldAffixes[p.index].stat)&&(p.ruleVersion>=2?p.donor.eligibleStats.includes(p.newAffixes[p.index].stat):ACTIVE_AFFIX_KEYS.includes(p.newAffixes[p.index].stat));
 }
 export function resolveReforge(s,accept,expectedOperationId){
  const p=s?.pendingReforge;
@@ -296,8 +298,9 @@ export function stats(s){
  const ratingFactor=r=>Math.max(0,r)/(100+Math.max(0,r));
  const elementAttack=Object.fromEntries(ELEMENT_KEYS.map(k=>[k,bonus.element+(bonus[k+'Atk']??0)]));
  const elementResistance=Object.fromEntries(ELEMENT_KEYS.map(k=>[k,(s.talents.elementResist??0)*5+(bonus[k+'Resist']??0)+(k==='fire'?potionBuffStrength(s,'fireResist'):0)]));
- return {atk,armor,hp,penetration:(s.talents.penetration??0)*2,elementAttack,elementResistance,elementResist:.5*ratingFactor(elementResistance.fire),block:.35*ratingFactor((s.talents.block??0)*4),shieldBonus:(s.talents.shield??0)*4,healingBonus:(s.talents.healing??0)*3,resolveReduction:Math.floor((s.talents.resolve??0)/5),luck:s.talents.luck??0,hit:clamp(.9+.1*ratingFactor(bonus.hit),.5,.995),crit:clamp(.05+.55*ratingFactor(bonus.crit),0,.6),critDamage:clamp(1.5+ratingFactor(bonus.critDamage),1.5,2.5),element:bonus.element,hitRating:bonus.hit,critRating:bonus.crit,critDamageRating:bonus.critDamage,count,specials,legend:false,bonus};
+ return {atk,armor,hp,penetration:(s.talents.penetration??0)*2,elementAttack,elementResistance,elementResist:.5*ratingFactor(elementResistance.fire),block:.35*ratingFactor((s.talents.block??0)*4),shieldBonus:(s.talents.shield??0)*4,healingBonus:(s.talents.healing??0)*3,resolveReduction:Math.floor((s.talents.resolve??0)/5),luck:Math.min(1000,Math.max(0,(s.talents.luck??0)+bonus.luck)),lifesteal:bonus.lifesteal,lifestealRating:bonus.lifesteal,lifestealRate:lifestealRate(bonus.lifesteal),lifestealCap:hp*.08,hit:clamp(.9+.1*ratingFactor(bonus.hit),.5,.995),crit:clamp(.05+.55*ratingFactor(bonus.crit),0,.6),critDamage:clamp(1.5+ratingFactor(bonus.critDamage),1.5,2.5),element:bonus.element,hitRating:bonus.hit,critRating:bonus.crit,critDamageRating:bonus.critDamage,count,specials,legend:false,bonus};
 }
+export function effectiveLuck(s){return stats(s).luck;}
 export function preset(s,id){const b=BUILD.find(x=>x.id===id);if(!b||!b.skills.every(k=>k===null||skillUnlocked(s,k)))return null;s.build=id;s.skills=[...b.skills];s.conditions=['always','always','charge','always'];return b;}
 export const POTIONS={
  healing:{name:'治疗药剂',icon:'potionHeal',desc:'按品质恢复10% / 15% / 20% / 25%最大生命。'},
@@ -343,7 +346,7 @@ export function craftRecipe(s,id,selection,targetQuality=0){
  const recipe=RECIPES[id];if(!Number.isSafeInteger(recipe.craftGold)||recipe.craftGold<0||!Number.isFinite(s.gold)||s.gold<recipe.craftGold)return null;
  const selected={},stacks={},parsed=[];for(const key of selection){const row=parseMaterialKey(key);if(!row)return null;parsed.push(row);selected[row.material]=(selected[row.material]??0)+1;stacks[row.key]=(stacks[row.key]??0)+1;}
  if(Object.keys(selected).length!==recipe.ingredients.length||!recipe.ingredients.every(r=>selected[r.material]===r.count)||parsed.some(r=>materialCount(s,r.material,r.quality)<stacks[r.key]))return null;
- const quality=luckyRoll(()=>rollQuality(fusionQualityWeights(selection)),s.talents.luck??0),type=recipe.potionType,key=potionKey(type,quality);
+ const quality=luckyRoll(()=>rollQuality(fusionQualityWeights(selection)),effectiveLuck(s)),type=recipe.potionType,key=potionKey(type,quality);
  normalizeMaterials(s);normalizePotions(s);for(const [key,n] of Object.entries(stacks))s.materialStacks[key]-=n;s.gold-=recipe.craftGold;
  const result={kind:'potion',potionType:type,quality,name:POTIONS[type].name,quantity:1,key,recipeId:id};if(canReceiveItem(s,key))s.potionStacks[key]=(s.potionStacks[key]??0)+1;else s.pendingForgeClaim={kind:'potion',potion:result};return result;
 }
@@ -492,6 +495,9 @@ function validEncounter(e){
  if(!validMultiEncounter(e,INSTANCES))return false;
  const number=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;
  if(e.kind==='dungeon'&&(!Number.isInteger(e.dungeonStage)||e.dungeonStage<1||e.dungeonStage>3||typeof e.runId!=='string'||!e.runId||e.runId.length>160||e.boss))return false;
+ if(e.affixState!==undefined&&(!validBattleAffixState(e.affixState)||e.affixState.battleId!==(e.id??e.affixBattleId)))return false;
+ if(e.luck!==undefined&&(!Number.isFinite(e.luck)||e.luck<0||e.luck>1000))return false;
+ if(e.activeCastCount!==undefined&&(!Number.isSafeInteger(e.activeCastCount)||e.activeCastCount<0))return false;
  if(e.lootSummary!==undefined&&!validLootSummary(e.lootSummary))return false;
  if(e.instanceId!==undefined&&(!Object.hasOwn(INSTANCES,e.instanceId)||e.kind!==INSTANCES[e.instanceId].kind||e.siteId!==INSTANCES[e.instanceId].siteId||e.areaId!==INSTANCES[e.instanceId].areaId||resolveLegacySite(e.location)?.id!==e.siteId))return false;
  if(e.instanceId===undefined&&['siteId','areaId','kind'].some(k=>e[k]!==undefined))return false;
@@ -536,6 +542,9 @@ export function encounter(s,boss=false,now=Date.now()){
  const site=resolveLegacySite(s.location);
  return boss?startInstanceEncounter(s,site.id+'-boss',now):startRoutedEncounter(s,now);
 }
+function initializeEncounterAffixes(e,st){e.affixBattleId=e.id??('battle-'+(++serial));e.affixState=createBattleAffixState(e.affixBattleId);e.shelterUsed=!!st.specials.shelter;e.shield=openingShelterShield({hasShelter:!!st.specials.shelter,maxHp:st.hp,flatBonus:st.shieldBonus});}
+function ensureEncounterAffixes(e){e.affixBattleId??=e.id??('legacy-battle-'+(++serial));e.affixState??=createBattleAffixState(e.affixBattleId);}
+function reviveEncounter(e,st,logs){const out=tryNirvana(e.affixState,{battleId:e.affixState.battleId,hasNirvana:!!st.specials.nirvana,hp:e.heroHp,maxHp:st.hp});if(!out)return false;e.affixState=out.state;if(out.revived){e.heroHp=out.hp;logs.push('涅槃 · 满血复活（本场已使用）');}return out.revived;}
 export function startInstanceEncounter(s,instanceId,now=Date.now()){
  const instance=INSTANCES[instanceId];if(!instance?.enabled||!canStartEncounter(s,now)||!normalizeExpedition(s))return null;
  if(s.activeEncounter&&!s.activeEncounter.rewarded)return s.activeEncounter.instanceId===instanceId?s.activeEncounter:null;
@@ -546,7 +555,7 @@ export function startInstanceEncounter(s,instanceId,now=Date.now()){
  const boss=instance.kind==='boss',stage=s.dungeonRun?.stage,elite=instance.kind==='dungeon'&&stage===3,l=LOCS[s.location],st=stats(s);
  const e={location:s.location,siteId:site.id,areaId:site.areaId,instanceId,kind:instance.kind,...(instance.kind==='dungeon'?{dungeonStage:stage,runId:s.dungeonRun.runId}:{}),luck:st.luck,boss,name:boss?l.boss:elite?l.enemy+' · 精英':l.enemy,hp:l.hp*(boss?4:elite?1.8:1),max:l.hp*(boss?4:elite?1.8:1),atk:l.atk*(boss?1.65:elite?1.25:1),armor:l.armor*(boss?1.3:1),heroHp:s.heroHp,round:0,nextHeavy:4,heavyDelayed:false,warcry:0,ironcoat:0,blunt:0,scorch:0,barrier:0,barrierShield:0,heroBurn:0,heroBurnPower:0,weakness:0,burn:0,broken:0,guard:0,stun:0,cd:{},shelterUsed:false,shield:0,done:false,rewarded:false,killSource:null};
  if(instance.kind==='dungeon'&&s.dungeonRun.carry){applyDungeonPlayerState(e,s.dungeonRun.carry);delete s.dungeonRun.carry;}
- normalizeEncounterElements(e);s.activeEncounter=e;s.nextActionAt=s.lastHealthClock+1100;recordEncounteredMonsters(s,e);return e;
+ initializeEncounterAffixes(e,st);normalizeEncounterElements(e);s.activeEncounter=e;s.nextActionAt=s.lastHealthClock+1100;recordEncounteredMonsters(s,e);return e;
 }
 
 // Explicit developer entry: callers isolate the supplied save; no production random trigger.
@@ -556,6 +565,7 @@ export function startDeveloperGroup(s,options={},now=Date.now()){
  if(!canStartEncounter(s,now)||!normalizeExpedition(s))return null;
  const site=resolveLegacySite(s.location),instance=INSTANCES[site.id+'-field'],l=LOCS[s.location],st=stats(s),id='dev-'+Math.floor(now)+'-'+seed;
  const e={location:s.location,siteId:site.id,areaId:site.areaId,instanceId:instance.id,kind:'field',luck:st.luck,boss:false,heroHp:s.heroHp,round:0,warcry:0,ironcoat:0,barrier:0,barrierShield:0,heroBurn:0,heroBurnPower:0,weakness:0,guard:0,cd:{},shelterUsed:false,shield:0,done:false,rewarded:false,killSource:null,multiVersion:1,developmentFixture:true,id,rngState:seed,rngDraws:0,itemSerial:0,summonSerial:0,activeCastCount:0,enemies:[]};
+ initializeEncounterAffixes(e,st);
  for(let i=0;i<count;i++){const u=normalizeEncounterElements(makeMultiUnit(id+'-enemy-'+i,s.location,instance.id,l,s.lastHealthClock,profiles[i]??{}));u.main=i===0;e.enemies.push(u);}
  e.targetId=e.enemies[0].id;syncMultiTarget(e);s.activeEncounter=e;s.running=true;s.nextActionAt=s.lastHealthClock+1100;return e;
 }
@@ -594,7 +604,7 @@ export function combatStatuses(e){
 }
 export function step(s,e,now=Date.now()){
  if(!e||e!==s.activeEncounter||e.done||e.pauseAt!==undefined||!normalizeHealth(s,now)||s.restUntil>0)return[];
- e.heroHp=Math.min(e.heroHp,stats(s).hp);s.heroHp=e.heroHp;const drank=autoDrinkPotion(s,e,now);
+ ensureEncounterAffixes(e);e.heroHp=Math.min(e.heroHp,stats(s).hp);s.heroHp=e.heroHp;const drank=autoDrinkPotion(s,e,now);
  const turn={burnAtStart:e.heroBurn??0,burnTicked:false},logs=e.multiVersion===1?withMultiRng(e,()=>stepMulti(s,e,turn,{stats,SKILLS,skillUnlocked,resolveElementDamage,now:s.lastHealthClock,makeSummon:(u,n)=>normalizeEncounterElements(makeMultiUnit(e.id+'-summon-'+n,u.location,u.sourceInstanceId,LOCS[u.location],s.lastHealthClock))})):combatStep(s,e,turn);
  // Every executed player round consumes one turn of temporary player statuses,
  // including an early lethal hit. Do not run skipped damage phases.
@@ -613,6 +623,9 @@ function combatStep(s,e,turn){
  const usable=k=>!(k==='warcry'&&e.warcry>0)&&!(k==='ironcoat'&&e.ironcoat>0)&&!(k==='blunt'&&e.blunt>0)&&!(k==='scorch'&&e.scorch>0)&&!(k==='guard'&&e.guard>0)&&!(k==='barrier'&&(e.barrier>0||e.barrierShield>0))&&!(k==='mend'&&e.heroHp>=st.hp)&&!(k==='cleanse'&&!e.heroBurn&&!e.weakness)&&!(k==='delay'&&(!charge||e.heavyDelayed));
  const ix=s.skills.findIndex((k,i)=>k!==null&&Object.hasOwn(SKILLS,k)&&skillUnlocked(s,k)&&!e.cd[k]&&usable(k)&&(s.conditions[i]!=='low'||e.heroHp<st.hp*.6)&&(s.conditions[i]!=='charge'||charge)&&(s.conditions[i]!=='burn'||e.burn>0)),k=ix<0?null:s.skills[ix];
  if(k)e.cd[k]=SKILLS[k].cd;
+ const cast=k=>{
+ if(k)e.activeCastCount=(e.activeCastCount??0)+1;
+ const castId='cast-'+e.round+'-'+(e.activeCastCount??0);
  const utility=['warcry','ironcoat','delay','barrier','mend','cleanse'].includes(k);
  if(utility){
   if(k==='warcry')e.warcry=3+(st.count.anvil>=2?1:0);
@@ -637,18 +650,23 @@ function combatStep(s,e,turn){
    if(!k&&s.momentum){raw*=1.35;s.momentum=0;logs.push('余势：普攻增强');}
    const crit=Math.random()<st.crit,armor=e.armor*(e.broken?.75:1),isFire=k==='mark'||k==='ignite',base=raw*(crit?st.critDamage:1);
    const dealt=isFire?resolveElementDamage(base,'fire',st.elementAttack.fire,e.elementResistance.fire,e.elementTags):damage(base,Math.max(0,armor-st.penetration));
-   e.hp-=dealt;logs.push((k?SKILLS[k].name:'普通攻击')+(crit?' 暴击':'')+' · '+Number(dealt.toFixed(1))+' 伤害'+(isFire?'（火）':''));
+   const hpBefore=e.hp;e.hp-=dealt;const healed=lifestealHeal({rating:st.lifestealRating,damage:Math.min(hpBefore,dealt),maxHp:st.hp,currentHp:e.heroHp});e.heroHp+=healed;if(healed>0)logs.push('吸血 · +'+Number(healed.toFixed(2)));
+   const execution=tryReaperHit(e.affixState,{battleId:e.affixState.battleId,castId,hitIndex:0,targetId:'primary',hit:true,targetHp:Math.max(0,e.hp),hasReaper:!!st.specials.reaper});if(execution){e.affixState=execution.state;if(execution.triggered){e.hp=0;logs.push('死神 · 斩杀');}}
+   logs.push((k?SKILLS[k].name:'普通攻击')+(crit?' 暴击':'')+' · '+Number(dealt.toFixed(1))+' 伤害'+(isFire?'（火）':''));
    if(e.hp<=0){if(st.specials.momentum)s.momentum=1;finish(e,true,'active');return logs;}
   }else logs.push((k?SKILLS[k].name:'普通攻击')+' · 未命中');
  }
+ };
+ cast(k);if(e.done)return logs;
+ if(k&&st.specials.multicast&&Math.random()<.15){logs.push('多重施法 · 追加');cast(k);if(e.done)return logs;}
  if(e.burn>0){const dot=resolveElementDamage(st.atk*(e.warcry>0?1.25:1)*(e.weakness>0?.8:1)*.32*(st.count.rune>=2?1.3:1)*(e.scorch>0?1.25:1),'fire',st.elementAttack.fire,e.elementResistance.fire,e.elementTags);e.hp-=dot;e.burn--;logs.push('炉火灼烧 · '+Number(dot.toFixed(1)));if(e.hp<=0){finish(e,true,'burn');return logs;}}
- if(e.heroBurn>0){const dot=resolveElementDamage(e.heroBurnPower,'fire',0,st.elementResistance.fire,[]);e.heroHp-=dot;e.heroBurn--;turn.burnTicked=true;logs.push('灼烧侵蚀 · -'+Number(dot.toFixed(1)));if(e.heroHp<=0){s.momentum=0;finish(e,false,null);return logs;}}
+ if(e.heroBurn>0){const dot=resolveElementDamage(e.heroBurnPower,'fire',0,st.elementResistance.fire,[]);e.heroHp-=dot;e.heroBurn--;turn.burnTicked=true;logs.push('灼烧侵蚀 · -'+Number(dot.toFixed(1)));if(e.heroHp<=0&&!reviveEncounter(e,st,logs)){s.momentum=0;finish(e,false,null);return logs;}}
  if(e.stun){logs.push('敌人蓄力被打断');e.stun=0;}else{
   let hurt=Math.max(1,Math.round(damage(e.atk*(e.blunt>0?.8:1)*(charge?2:1),st.armor*(e.ironcoat>0?1.4:1))*(e.guard>0?.6:1)));
   if(st.block>0&&Math.random()<st.block){hurt=Math.max(1,Math.round(hurt*.7));logs.push('格挡 · 减轻30%直接伤害');}
-  if(st.specials.shelter&&!e.shelterUsed&&e.heroHp-hurt<=st.hp*.3){e.shelterUsed=true;e.shield=Math.ceil(st.hp*.2)+st.shieldBonus;logs.push('绝境庇护 · 护盾 '+e.shield);}
   const wallAbsorbed=Math.min(e.barrierShield,hurt);e.barrierShield-=wallAbsorbed;hurt-=wallAbsorbed;
   const absorbed=Math.min(e.shield,hurt);e.shield-=absorbed;hurt-=absorbed;e.heroHp-=hurt;logs.push((charge?'敌人重击':'敌人攻击')+' · -'+hurt+(absorbed+wallAbsorbed?'（护盾吸收'+(absorbed+wallAbsorbed)+'）':''));
+  if(e.heroHp<=0)reviveEncounter(e,st,logs);
   if(e.heroHp>0&&e.guard>0){const counter=damage(st.atk*(e.warcry>0?1.25:1)*(e.weakness>0?.8:1)*(st.count.guard>=4?1:.6),Math.max(0,e.armor-st.penetration));e.hp-=counter;logs.push('坚守反击 · '+counter);}
   if(e.location===1&&e.round%5===0){e.heroBurn=Math.max(1,3-st.resolveReduction);e.heroBurnPower=Math.max(2,Math.round(e.atk*.05));logs.push('矿炉余火 · 受到'+e.heroBurn+'回合灼烧');}
   if(e.location===2&&e.round%6===0){const duration=Math.max(1,2-st.resolveReduction);e.weakness=duration+1;logs.push('失誓诅咒 · 受到'+duration+'回合虚弱');}
@@ -878,12 +896,12 @@ export function forge(s,selection){
  const n=selection.length,qualityWeights=gear.length?null:fusionQualityWeights(materials),herbs=parsed.filter(p=>p.material==='灰根草').length;
  if(!gear.length&&herbs&&!validPotions(s))return null;
  if(!gear.length&&herbs&&Math.random()<.35+.5*herbs/n){
-  const quality=luckyRoll(()=>rollQuality(qualityWeights),s.talents.luck??0),type=weighted([['healing',60],['strength',25],['fireResist',15]]),key=potionKey(type,quality);
+  const quality=luckyRoll(()=>rollQuality(qualityWeights),effectiveLuck(s)),type=weighted([['healing',60],['strength',25],['fireResist',15]]),key=potionKey(type,quality);
   normalizeMaterials(s);normalizePotions(s);Object.entries(counts).forEach(([key,v])=>s.materialStacks[key]-=v);s.gold-=40;
   const result={kind:'potion',potionType:type,quality,name:POTIONS[type].name,quantity:1,key};
   if(canReceiveItem(s,key))s.potionStacks[key]=(s.potionStacks[key]??0)+1;else s.pendingForgeClaim={kind:'potion',potion:result};return result;
  }
- const weights=fusionWeights(materials),slot=weighted(Object.entries(weights.slots)),quality=luckyRoll(()=>gear.length?rollEquipmentInputQuality(inputs):rollQuality(qualityWeights),s.talents.luck??0);
+ const weights=fusionWeights(materials),slot=weighted(Object.entries(weights.slots)),quality=luckyRoll(()=>gear.length?rollEquipmentInputQuality(inputs):rollQuality(qualityWeights),effectiveLuck(s));
  const level=gear.length?rollEquipmentFusionLevel(gear):{level:s.level,baseLevel:s.level,levelSource:'material'};
  const it=item(slot,level.level,null,quality,level);if(Math.random()<fusionDivineChance(inputs))applyForgeFavor(it);
  // Record actual owned inputs before their one-time consumption.
@@ -929,7 +947,7 @@ export function validSave(s){
  if((s.nextActionAt!==undefined&&(!Number.isFinite(s.nextActionAt)||s.nextActionAt<0||s.nextActionAt>1e15))||(s.restResume!==undefined&&typeof s.restResume!=='boolean')||(s.nextBattleAt!==undefined&&(!Number.isFinite(s.nextBattleAt)||s.nextBattleAt<0||s.nextBattleAt>1e15))||!validRecipes(s)||!validEncounter(s.activeEncounter)||!validPotions(s)||!validHealth(s)||!validLoadoutSlots(s)||(s.merchant!==undefined&&!validMerchant(s.merchant)))return false;
  if(new Set(s.inventory.map(i=>i.id)).size!==s.inventory.length||!s.equip||Object.keys(s.equip).length!==SOCKETS.length||!SOCKETS.every(k=>s.equip[k]===null||s.inventory.some(i=>i.id===s.equip[k]&&i.slot===SOCKET_TYPE[k])))return false;
  const equipped=Object.values(s.equip).filter(Boolean);if(new Set(equipped).size!==equipped.length)return false;
- return validSkillProgression(s)&&validSkillSlots(s.skills,s.conditions)&&s.skills.every(k=>k===null||skillUnlocked(s,k))&&validMaterials(s)&&(s.offlineLuck===undefined||(Number.isInteger(s.offlineLuck)&&num(s.offlineLuck,10)))&&validTalents(s)&&validConsumables(s)&&['bossWins','bossReady','normalWins'].every(k=>Array.isArray(s[k])&&s[k].length===3&&s[k].every(n=>num(n,1e15)))&&Array.isArray(s.chapters)&&s.chapters.every(n=>Number.isInteger(n)&&n>=0&&n<3)&&Array.isArray(s.chronicle)&&s.chronicle.length<=100&&s.chronicle.every(t=>typeof t==='string'&&t.length<2000)&&num(s.kills)&&num(s.stock,3)&&num(s.lastSeen,1e15)&&[0,1].includes(s.momentum)&&typeof s.running==='boolean';
+ return validSkillProgression(s)&&validSkillSlots(s.skills,s.conditions)&&s.skills.every(k=>k===null||skillUnlocked(s,k))&&validMaterials(s)&&(s.offlineLuck===undefined||num(s.offlineLuck,1000))&&validTalents(s)&&validConsumables(s)&&['bossWins','bossReady','normalWins'].every(k=>Array.isArray(s[k])&&s[k].length===3&&s[k].every(n=>num(n,1e15)))&&Array.isArray(s.chapters)&&s.chapters.every(n=>Number.isInteger(n)&&n>=0&&n<3)&&Array.isArray(s.chronicle)&&s.chronicle.length<=100&&s.chronicle.every(t=>typeof t==='string'&&t.length<2000)&&num(s.kills)&&num(s.stock,3)&&num(s.lastSeen,1e15)&&[0,1].includes(s.momentum)&&typeof s.running==='boolean';
  }catch{return false;}
 }
 

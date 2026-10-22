@@ -1,4 +1,4 @@
-import {fresh,validSave,grantDevelopmentSupport} from './engine.js';
+import {fresh,validSave,grantDevelopmentSupport,effectiveLuck} from './engine.js';
 export const SAVE_KEY='ashencrown-v2';
 export const LEGACY_KEY='ashencrown-v1';
 export const BACKUP_PREFIX='ashencrown-backup-';
@@ -34,7 +34,7 @@ export function commitGameTransaction(storage,game,operation,{commitOnNoop=false
  try{candidate=structuredClone(game);value=operation(candidate);}catch{return {ok:false,game,value:null,reason:'operation'};}
  if(!value&&!commitOnNoop)return {ok:false,game,value,reason:'rejected'};
  if(!Number.isFinite(now)||now<0)return {ok:false,game,value:null,reason:'operation'};
- candidate.lastSeen=now;
+ candidate.lastSeen=now;candidate.offlineLuck=effectiveLuck(candidate);
  try{storage.setItem(SAVE_KEY,JSON.stringify(candidate));}catch{return {ok:false,game,value:null,reason:'storage'};}
  return {ok:true,game:candidate,value,reason:null};
 }

@@ -11,16 +11,16 @@ try{
  s.stopAfterBattle=true;win(s,e,100);assert(!s.running);assert(s.dungeonRun.carry);const before=JSON.stringify(s);reward(s,e,100);assert.equal(JSON.stringify(s),before);assert(validSave(s));
  const loaded=JSON.parse(before);assert(validSave(loaded));const carry=structuredClone(loaded.dungeonRun.carry);
  e=startRoutedEncounter(loaded,100000);assert.equal(e.dungeonStage,2);assert.equal(loaded.dungeonRun.carry,undefined);
- for(const key of DUNGEON_PLAYER_FIELDS)assert.equal(e[key],carry[key]);assert.deepEqual(e.cd,carry.cd);assert(e.shelterUsed);
+ for(const key of DUNGEON_PLAYER_FIELDS.filter(k=>!['shield','shelterUsed'].includes(k)))assert.equal(e[key],carry[key]);assert.deepEqual(e.cd,carry.cd);assert(!e.shelterUsed);assert.equal(e.shield,0);
  for(const key of ['burn','broken','blunt','scorch','stun','round'])assert.equal(e[key],0);
  assert.equal(e.nextHeavy,4);assert(!e.heavyDelayed);assert.equal(startRoutedEncounter(loaded,100001),e);assert(validSave(loaded));
- loaded.skills=[null,null,null,null];e.atk=0;e.hp=1e8;step(loaded,e,101100);assert.equal(e.cd.mark,4);assert.equal(e.warcry,2);assert.equal(e.heroBurn,1);assert(e.barrierShield<=31);assert(e.shelterUsed);
- win(loaded,e,102000);e=startRoutedEncounter(loaded,103800);assert.equal(e.dungeonStage,3);assert(e.shelterUsed);assert.equal(e.cd.mark,4);
+ loaded.skills=[null,null,null,null];e.atk=0;e.hp=1e8;step(loaded,e,101100);assert.equal(e.cd.mark,4);assert.equal(e.warcry,2);assert.equal(e.heroBurn,1);assert(e.barrierShield<=31);assert(!e.shelterUsed);
+ win(loaded,e,102000);e=startRoutedEncounter(loaded,103800);assert.equal(e.dungeonStage,3);assert(!e.shelterUsed);assert.equal(e.cd.mark,4);
  loaded.momentum=1;win(loaded,e,104000);assert.equal(loaded.dungeonRun,null);assert.equal(loaded.momentum,1);loaded.running=true;const field=startRoutedEncounter(loaded,105800);assert.equal(field.kind,'field');assert.equal(field.shield,0);assert.equal(field.warcry,0);assert(!field.shelterUsed);assert.deepEqual(field.cd,{});
- // The actual once-only shelter special cannot refill on each new dungeon enemy.
+ // Shelter refreshes its own pool on each approved dungeon sub-battle; other carried shields remain independent.
  const guarded=prepare();const gear=guarded.inventory[0];gear.rarity=2;gear.affixes=[{stat:'atk',value:3},{stat:'hp',value:15},{stat:'armor',value:2}];gear.special={id:'shelter'};guarded.skills=[null,null,null,null];let g=startRoutedEncounter(guarded,0);guarded.heroHp=g.heroHp=stats(guarded).hp*.3+1;g.atk=20;g.hp=1e8;Math.random=()=>.5;
- assert(step(guarded,g,1100).some(l=>l.includes('绝境庇护')));assert(g.shelterUsed);win(guarded,g,1200);
- for(const at of [3000,6000]){g=startRoutedEncounter(guarded,at);assert(g.shelterUsed);g.shield=g.barrierShield=0;guarded.heroHp=g.heroHp=stats(guarded).hp*.3+1;g.atk=10;g.hp=1e8;assert(!step(guarded,g,at+1100).some(l=>l.includes('绝境庇护')));win(guarded,g,at+1200);}
+ assert.equal(g.shield,Math.floor(stats(guarded).hp*.15));step(guarded,g,1100);assert(g.shelterUsed);win(guarded,g,1200);
+ for(const at of [3000,6000]){g=startRoutedEncounter(guarded,at);assert(g.shelterUsed);assert.equal(g.shield,Math.floor(stats(guarded).hp*.15));g.shield=g.barrierShield=0;guarded.heroHp=g.heroHp=stats(guarded).hp*.3+1;g.atk=10;g.hp=1e8;assert(!step(guarded,g,at+1100).some(l=>l.includes('绝境庇护')));win(guarded,g,at+1200);}
  // Lethal rounds tick durations once without executing a skipped burn damage phase.
  const lethal=prepare();lethal.skills=[null,null,null,null];let hit=startRoutedEncounter(lethal,0);
  Object.assign(hit,{hp:1,guard:1,warcry:1,ironcoat:1,barrier:1,barrierShield:17,shield:9,weakness:1,heroBurn:2,heroBurnPower:10});
@@ -53,5 +53,5 @@ try{
  const batch=structuredClone(template),online=structuredClone(template),end=180000;Math.random=rng;seed=819;offline(batch,end);seed=819;let time=100;
  while(time<end&&online.running){if(online.restUntil>0){if(online.restUntil>end)break;time=online.restUntil;settleRest(online,time);continue;}time=Math.max(time,online.nextBattleAt??0);if(time>=end)break;const battle=online.activeEncounter??startRoutedEncounter(online,time);if(!battle)break;time=online.nextActionAt;if(time>end)break;step(online,battle,time);if(battle.done&&battle.win)reward(online,battle,time);}
  settleRest(online,end);for(const key of ['gold','xp','heroHp','kills'])assert.equal(batch[key],online[key]);assert.deepEqual(batch.materialStacks,online.materialStacks);assert.deepEqual(batch.activeEncounter?.cd,online.activeEncounter?.cd);assert.equal(batch.activeEncounter?.shelterUsed,online.activeEncounter?.shelterUsed);assert(validSave(batch));
- console.log('Dungeon player carry: exact once-only shields/CD/buffs/debuffs/shelter, enemy reset, pause/reload/camp/death/clear boundaries, validation and offline parity: PASS');
+ console.log('Dungeon player carry: per-stage shelter plus carried skill shields/CD/buffs/debuffs, enemy reset, pause/reload/camp/death/clear boundaries, validation and offline parity: PASS');
 }finally{Math.random=original;}

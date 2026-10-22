@@ -17,7 +17,7 @@ export function sequenceFingerprint(api){
  }finally{Math.random=random;}
 }
 
-assert.deepEqual(engine.ACTIVE_AFFIX_KEYS,['atk','hp','armor','hit','crit','critDamage',...Object.keys(ELEMENT_AFFIX_DEFS)]);
+assert.deepEqual(engine.ACTIVE_AFFIX_KEYS,['atk','hp','armor','hit','crit','critDamage',...Object.keys(ELEMENT_AFFIX_DEFS),'lifesteal','luck']);
 assert.equal(Object.keys(ELEMENT_AFFIX_DEFS).length,12);
 assert.deepEqual(ELEMENT_KEYS.map(k=>ELEMENTS[k].name),['地','水','火','风','光','暗']);
 for(const [key,def] of Object.entries(ELEMENT_AFFIX_DEFS)){

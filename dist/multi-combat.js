@@ -1,3 +1,4 @@
+import {createBattleAffixState,validBattleAffixState,tryNirvana,tryReaperHit,calculateLifesteal,tryMulticast} from './affix-expansion.js';
 import {createControl,validControl,advanceControlClock,controlAllowsAction,beginPreparing,claimCompletedCast,interruptPreparing,applyStun,preparingProgress} from './multi-control.js';
 export const PROTOTYPE_MONSTERS=['grayflag-raider','rogue-mine-golem','oathless-soldier'];
 const n=x=>Number.isFinite(x)&&x>=0&&x<=1e12;
@@ -12,11 +13,14 @@ export function validMultiProfile(p){if(!p||typeof p!=='object'||Array.isArray(p
 export function validMultiEncounter(e,instances){
  if(e.multiVersion===undefined)return e.enemies===undefined&&e.targetId===undefined;
  if(e.multiVersion!==1||e.developmentFixture!==true||e.kind!=='field'||e.boss||typeof e.id!=='string'||!e.id||e.id.length>100||!int(e.rngState)||e.rngState>0xffffffff||!int(e.rngDraws)||!int(e.itemSerial)||!int(e.summonSerial)||!int(e.activeCastCount)||!Array.isArray(e.enemies)||e.enemies.length<2||e.enemies.length>100000||new Set(e.enemies.map(u=>u?.id)).size!==e.enemies.length)return false;
+ if(e.affixState!==undefined&&(!validBattleAffixState(e.affixState)||e.affixState.battleId!==e.id))return false;
  const initial=e.enemies.filter(u=>u.origin==='initial');if(initial.length<2||initial.length>3)return false;
  if(!e.enemies.every(u=>u&&typeof u.id==='string'&&u.id.length<200&&['initial','summoned'].includes(u.origin)&&u.sourceInstanceId===e.instanceId&&instances[u.sourceInstanceId]?.kind==='field'&&instances[u.sourceInstanceId]?.enabled&&u.location===e.location&&[0,1,2].includes(u.location)&&u.monsterId===PROTOTYPE_MONSTERS[u.location]&&u.definitionId===u.monsterId&&typeof u.name==='string'&&u.name.length<150&&typeof u.main==='boolean'&&['hp','max','atk','armor','shield','burn','broken','blunt','scorch','stun','round','nextHeavy'].every(k=>n(u[k]))&&u.max>0&&u.hp<=u.max&&typeof u.heavyDelayed==='boolean'&&u.cd&&typeof u.cd==='object'&&Object.values(u.cd).every(n)&&validControl(u.control)&&u.control.unitId===u.id&&validMultiProfile(u.profile)&&Array.isArray(u.elementTags)&&new Set(u.elementTags).size===u.elementTags.length&&u.elementTags.every(k=>['earth','water','fire','wind','light','dark'].includes(k))&&u.elementResistance&&Object.keys(u.elementResistance).length===6&&['earth','water','fire','wind','light','dark'].every(k=>n(u.elementResistance[k]))))return false;
  if(e.pauseAt!==undefined&&(!Number.isSafeInteger(e.pauseAt)||e.pauseAt<0||e.pauseAt>1e15||!Number.isFinite(e.pauseRemainingAction)||e.pauseRemainingAction<0||e.pauseRemainingAction>1100))return false;
  if(e.pauseAt===undefined&&e.pauseRemainingAction!==undefined)return false;
  if(e.lastCast!==undefined&&(!e.lastCast||typeof e.lastCast.id!=='string'||!['single','all','self'].includes(e.lastCast.scope)||typeof e.lastCast.skillId!=='string'||!Array.isArray(e.lastCast.hits)||e.lastCast.hits.length>e.enemies.length||!e.lastCast.hits.every(h=>typeof h.id==='string'&&typeof h.hit==='boolean'&&e.enemies.some(u=>u.id===h.targetId))))return false;
+ if(e.lastCast?.hits?.some(h=>(h.hitIndex!==undefined&&!int(h.hitIndex))||['hpBefore','hpAfter','actualHpLost','killProcHpLost'].some(k=>h[k]!==undefined&&!n(h[k]))||(h.hpBefore!==undefined&&h.hpAfter>h.hpBefore)||(h.actualHpLost!==undefined&&h.actualHpLost>h.hpBefore)||(h.killProcHpLost!==undefined&&h.killProcHpLost>h.hpAfter)))return false;
+ if(e.lastCast?.lifesteal!==undefined&&!n(e.lastCast.lifesteal))return false;
  if(e.fixtureAction!==undefined&&e.fixtureAction!==null&&!validFixtureAction(e.fixtureAction))return false;
  if(e.rewardRoundSources!==undefined&&(!Array.isArray(e.rewardRoundSources)||e.rewardRoundSources.length!==2||!e.rewardRoundSources.every(id=>initial.some(u=>u.id===id))))return false;
  return e.done?(e.targetId===null&&(!e.win||e.enemies.every(u=>u.hp===0))):e.enemies.some(u=>u.id===e.targetId&&u.hp>0);
@@ -36,13 +40,17 @@ function cleared(e,source){if(e.enemies.every(u=>u.hp<=0)){end(e,true,source);re
 function hitHero(e,amount){let absorbed=Math.min(e.barrierShield,amount);e.barrierShield-=absorbed;amount-=absorbed;absorbed=Math.min(e.shield,amount);e.shield-=absorbed;amount-=absorbed;const loss=Math.min(e.heroHp,amount);e.heroHp-=loss;return loss;}
 export function stepMulti(s,e,turn,ctx){
  const {stats,SKILLS,skillUnlocked,resolveElementDamage,now,makeSummon}=ctx,st=stats(s),logs=[];e.round++;
+ e.affixState??=createBattleAffixState(e.id);
+ const heroDied=()=>{if(e.heroHp>0)return false;const revived=tryNirvana(e.affixState,{battleId:e.id,hasNirvana:!!st.specials.nirvana,hp:e.heroHp,maxHp:st.hp});if(revived){e.affixState=revived.state;if(revived.revived){e.heroHp=revived.hp;logs.push('涅槃 · 满血复生');return false;}}s.momentum=0;end(e,false,null);return true;};
  for(const k in e.cd)e.cd[k]=Math.max(0,e.cd[k]-1);
  for(const u of e.enemies){u.control=advanceControlClock(u.control,now);u.cd=Object.fromEntries(Object.entries(u.control.cooldowns).map(([k,v])=>[k,Math.max(0,Math.ceil((v-now)/1100))]));}
  let target=e.enemies.find(u=>u.id===e.targetId);const charging=()=>!!target.control.preparing||e.round>=target.nextHeavy;
  const usable=k=>!(k==='warcry'&&e.warcry>0)&&!(k==='ironcoat'&&e.ironcoat>0)&&!(k==='blunt'&&target.blunt>0)&&!(k==='scorch'&&target.scorch>0)&&!(k==='guard'&&e.guard>0)&&!(k==='barrier'&&(e.barrier>0||e.barrierShield>0))&&!(k==='mend'&&e.heroHp>=st.hp)&&!(k==='cleanse'&&!e.heroBurn&&!e.weakness)&&!(k==='delay'&&(!charging()||target.heavyDelayed));
  const k=s.skills.find((key,i)=>key!==null&&SKILLS[key]&&skillUnlocked(s,key)&&!e.cd[key]&&usable(key)&&(s.conditions[i]!=='low'||e.heroHp<st.hp*.6)&&(s.conditions[i]!=='charge'||charging())&&(s.conditions[i]!=='burn'||target.burn>0))??null,fixture=e.fixtureAction;e.fixtureAction=null;
- if(k&&!fixture)e.cd[k]=SKILLS[k].cd;if(k||fixture)e.activeCastCount++;
- const castId=e.id+':'+e.round; e.lastCast={id:castId,skillId:fixture?'developer-fixture':k??'basic',scope:fixture?.scope??(['warcry','ironcoat','barrier','mend','cleanse'].includes(k)?'self':'single'),hits:[]};const utility=['warcry','ironcoat','delay','barrier','mend','cleanse'].includes(k)&&!fixture;
+ if(k&&!fixture)e.cd[k]=SKILLS[k].cd;
+ const executeCast=(extra=false)=>{if(k||fixture)e.activeCastCount++;
+ target=e.enemies.find(u=>u.id===e.targetId&&u.hp>0)??e.enemies.find(u=>u.hp>0);if(!target)return true;
+ const castId=e.id+':'+e.round+(extra?':extra':''); e.lastCast={id:castId,skillId:fixture?'developer-fixture':k??'basic',scope:fixture?.scope??(['warcry','ironcoat','barrier','mend','cleanse'].includes(k)?'self':'single'),hits:[]};const utility=['warcry','ironcoat','delay','barrier','mend','cleanse'].includes(k)&&!fixture;
  if(utility){
   if(k==='warcry')e.warcry=3+(st.count.anvil>=2?1:0);
   if(k==='ironcoat')e.ironcoat=3+(st.count.guard>=2?1:0);
@@ -52,8 +60,8 @@ export function stepMulti(s,e,turn,ctx){
   if(k==='cleanse'){e.heroBurn=0;e.heroBurnPower=0;e.weakness=0;}
   if(k!=='mend')logs.push(SKILLS[k].name+' · 生效');
  }else{
-  const targets=fixture?.scope==='all'?e.enemies.filter(u=>u.hp>0):[target];let countered=false,counterReaction=null;
-  for(const u of targets){const hitId=castId+':'+u.id,hit=Math.random()<st.hit;e.lastCast.hits.push({id:hitId,targetId:u.id,hit});if(!hit){logs.push(u.name+' · 未命中');continue;}
+  const targets=fixture?.scope==='all'?e.enemies.filter(u=>u.hp>0):[target];let countered=false,counterReaction=null;const lifestealHits=[];
+  for(const u of targets){if(u.hp<=0)continue;const hitIndex=0,hitId=castId+':'+hitIndex+':'+u.id,hit=Math.random()<st.hit,hitRecord={id:hitId,hitIndex,targetId:u.id,hit,hpBefore:u.hp,hpAfter:u.hp,actualHpLost:0,killProcHpLost:0};e.lastCast.hits.push(hitRecord);if(!hit){logs.push(u.name+' · 未命中');continue;}
    if(fixture?.kind==='stun'){
     const c=fixture.control,r=applyStun(u.control,{...c,now,baseDuration:fixture.amount,reduction:u.profile.controlReduction??0});if(r){u.control=r.state;logs.push(u.name+' · 测试眩晕 '+r.duration+'ms');}continue;
    }
@@ -71,18 +79,24 @@ export function stepMulti(s,e,turn,ctx){
     if(!k&&s.momentum){raw*=1.35;s.momentum=0;logs.push('余势：普攻增强');}
    }
    const crit=Math.random()<st.crit,fire=!fixture&&(k==='mark'||k==='ignite'),base=raw*(crit?st.critDamage:1),dealt=fire?resolveElementDamage(base,'fire',st.elementAttack.fire,u.elementResistance.fire,u.elementTags):physical(base,Math.max(0,u.armor*(u.broken?.75:1)-st.penetration));
-   const hpLost=hitEnemy(u,dealt);logs.push((fixture?'开发测试范围攻击':k?SKILLS[k].name:'普通攻击')+' → '+u.name+' · '+Number(dealt.toFixed(1))+(fire?'（火）':''));
+   const hpBefore=u.hp,hpLost=hitEnemy(u,dealt);Object.assign(hitRecord,{hpBefore,hpAfter:u.hp,actualHpLost:hpLost});lifestealHits.push({hitId,hpBefore,hpAfter:u.hp,source:k||fixture?'active':'basic'});
+   const execute=tryReaperHit(e.affixState,{battleId:e.id,castId,hitIndex,targetId:u.id,hit:true,targetHp:u.hp,hasReaper:!!st.specials.reaper});if(execute){e.affixState=execute.state;if(execute.triggered){hitRecord.killProcHpLost=u.hp;u.hp=0;logs.push('死神 → '+u.name);}}
+   logs.push((fixture?'开发测试范围攻击':k?SKILLS[k].name:'普通攻击')+' → '+u.name+' · '+Number(dealt.toFixed(1))+(fire?'（火）':''));
    if(u.hp===0&&st.specials.momentum)s.momentum=1;
    if(u.hp>0&&hpLost>0&&u.profile.counterRatio>0&&!countered){countered=true;counterReaction={name:u.name,amount:hpLost*u.profile.counterRatio};}
   }
   if(counterReaction){const loss=hitHero(e,counterReaction.amount);logs.push(counterReaction.name+' · 反伤 '+Number(loss.toFixed(1)));}
-  if(e.heroHp<=0){s.momentum=0;end(e,false,null);return logs;}
-  if(cleared(e,'active'))return logs;
+  if(e.heroHp>0){const recovery=calculateLifesteal({rating:st.lifesteal??0,maxHp:st.hp,currentHp:e.heroHp,hits:lifestealHits},ctx.lifestealConfig);if(recovery?.heal>0){e.heroHp+=recovery.heal;e.lastCast.lifesteal=recovery.heal;logs.push('吸血 · 恢复 '+Number(recovery.heal.toFixed(2)));}}
+  if(heroDied())return true;
+  if(cleared(e,'active'))return true;
  }
+ return false;};
+ if(executeCast())return logs;
+ if(k&&!fixture&&st.specials.multicast&&tryMulticast({source:'active',triggered:false,hasLivingEnemies:e.enemies.some(u=>u.hp>0)})?.triggered){logs.push('多重施法 · '+SKILLS[k].name);if(executeCast(true))return logs;}
  // Each enemy owns its DOT/debuff state. Player self-DOT retains its saved source and bypasses shields.
  for(const u of e.enemies.filter(u=>u.hp>0))if(u.burn>0){const dot=resolveElementDamage(st.atk*(e.warcry>0?1.25:1)*(e.weakness>0?.8:1)*.32*(st.count.rune>=2?1.3:1)*(u.scorch>0?1.25:1),'fire',st.elementAttack.fire,u.elementResistance.fire,u.elementTags);hitEnemy(u,dot);u.burn--;logs.push(u.name+' · 炉火灼烧 '+Number(dot.toFixed(1)));}
  if(cleared(e,'burn'))return logs;
- if(e.heroBurn>0){const dot=resolveElementDamage(e.heroBurnPower,'fire',0,st.elementResistance.fire,[]);e.heroHp-=dot;e.heroBurn--;turn.burnTicked=true;logs.push('灼烧侵蚀 · -'+Number(dot.toFixed(1)));if(e.heroHp<=0){s.momentum=0;end(e,false,null);return logs;}}
+ if(e.heroBurn>0){const dot=resolveElementDamage(e.heroBurnPower,'fire',0,st.elementResistance.fire,[]);e.heroHp-=dot;e.heroBurn--;turn.burnTicked=true;logs.push('灼烧侵蚀 · -'+Number(dot.toFixed(1)));if(heroDied())return logs;}
  const acting=[...e.enemies];
  for(const u of acting){if(u.hp<=0)continue;u.round++;let multiplier=1,perform=true;
   if(u.stun){u.stun=0;perform=false;logs.push(u.name+' · 蓄力被打断');}
@@ -94,14 +108,14 @@ export function stepMulti(s,e,turn,ctx){
   if(perform){
    let hurt=Math.max(1,Math.round(physical(u.atk*(u.blunt>0?.8:1)*multiplier,st.armor*(e.ironcoat>0?1.4:1))*(e.guard>0?.6:1)));
    if(st.block>0&&Math.random()<st.block)hurt=Math.max(1,Math.round(hurt*.7));
-   if(st.specials.shelter&&!e.shelterUsed&&e.heroHp-hurt<=st.hp*.3){e.shelterUsed=true;e.shield=Math.ceil(st.hp*.2)+st.shieldBonus;logs.push('绝境庇护');}
    const loss=hitHero(e,hurt);logs.push(u.name+' · 攻击 -'+Number(loss.toFixed(1)));
    if(u.profile.lifestealRatio>0){const heal=Math.min(u.max-u.hp,loss*u.profile.lifestealRatio,u.profile.lifestealCap??0);u.hp+=heal;}
+   if(heroDied())return logs;
    if(e.heroHp>0&&e.guard>0){const counter=physical(st.atk*(e.warcry>0?1.25:1)*(e.weakness>0?.8:1)*(st.count.guard>=4?1:.6),Math.max(0,u.armor-st.penetration));hitEnemy(u,counter);logs.push('坚守反击 → '+u.name+' · '+counter);}
    if(u.location===1&&u.round%5===0){e.heroBurn=Math.max(1,3-st.resolveReduction);e.heroBurnPower=Math.max(2,Math.round(u.atk*.05));}
    if(u.location===2&&u.round%6===0)e.weakness=Math.max(1,2-st.resolveReduction)+1;
   }
-  if(e.heroHp<=0){s.momentum=0;end(e,false,null);return logs;}
+  if(heroDied())return logs;
  }
  for(const u of e.enemies)for(const key of ['broken','blunt','scorch'])u[key]=Math.max(0,u[key]-1);
  if(!cleared(e,'counter'))syncMultiTarget(e);return logs;

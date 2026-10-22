@@ -20,12 +20,12 @@ try{
  }
  // Donors contribute an eligible ordinary stat and its original raw value (v0.29).
  const s=fresh(),it=target(s);it.affixes=[{stat:'atk',value:3},{stat:'hp',value:15},{stat:'crit',value:5}];const donor=item('ring',1,null,1);donor.affixes=[{stat:'armor',value:6},{stat:'atk',value:8}];donor.special={id:'knowledge'};s.inventory.push(donor);const oldGold=s.gold;
- assert.deepEqual(eligibleReforgeDonors(s,it.id,0).find(x=>x.item.id===donor.id).affixes,[{stat:'armor',value:6}]);
+ assert.deepEqual(eligibleReforgeDonors(s,it.id,0).find(x=>x.item.id===donor.id).affixes,[{stat:'armor',value:6},{stat:'atk',value:8}]);
  for(const flag of ['locked','legendaryId']){donor[flag]=flag==='locked'?true:'fake';assert(!eligibleReforgeDonors(s,it.id,0).some(x=>x.item.id===donor.id));donor[flag]=flag==='locked'?false:null;}
  equipItem(s,donor.id,'ring1');assert(!eligibleReforgeDonors(s,it.id,0).some(x=>x.item.id===donor.id));saveLoadout(s,0,'protected');equipItem(s,s.inventory[5].id,'ring1');assert(!eligibleReforgeDonors(s,it.id,0).some(x=>x.item.id===donor.id));s.loadouts[0]=null;
  Math.random=()=>0;const r=reforge(s,it.id,'replace',0,donor.id);assert(r);assert.equal(r.after[0].stat,'armor');assert.equal(r.after[0].value,6);assert(!s.inventory.some(x=>x.id===donor.id));assert.equal(s.gold,oldGold);assert.equal(r.newSpecial,it.special??null);assert(resolveReforge(s,false));assert(!s.inventory.some(x=>x.id===donor.id));
- // Invalid/self/no-new-type donors consume neither RNG nor resources.
- const d=item('ring',1,null,0);d.affixes=[{stat:'atk',value:8}];s.inventory.push(d);let calls=0;Math.random=()=>{calls++;return 0;};let before=JSON.stringify(s);assert.equal(reforge(s,it.id,'replace',0,d.id),null);assert.equal(reforge(s,it.id,'replace',0,it.id),null);assert.equal(calls,0);assert.equal(JSON.stringify(s),before);
+ // A donor matching another retained slot is invalid and consumes nothing.
+ const d=item('ring',1,null,0);d.affixes=[{stat:'hp',value:20}];s.inventory.push(d);let calls=0;Math.random=()=>{calls++;return 0;};let before=JSON.stringify(s);assert.equal(reforge(s,it.id,'replace',0,d.id),null);assert.equal(reforge(s,it.id,'replace',0,it.id),null);assert.equal(calls,0);assert.equal(JSON.stringify(s),before);
  // Boss reward: real finished encounter, cooldown, and reward-once guards.
  Math.random=()=>0;const b=fresh(),e=encounter(b,true);e.done=true;e.win=true;const simultaneous=reward(b,e,Date.now());assert(simultaneous);assert(e.materialLoot.reduce((n,x)=>n+x.count,0)>=4);assert.equal(b.consumables.reforgeToken,1);assert(e.rewardNotes.includes('重铸印记 ×1'));reward(b,e,Date.now());assert.equal(b.consumables.reforgeToken,1);
  const full=fresh();for(const slot of ['weapon','helm','armor','gloves','boots','ring','amulet'])while(full.inventory.filter(it=>it.slot===slot).length<50)full.inventory.push(item(slot,1,null,0));const fe=encounter(full,true);fe.done=true;fe.win=true;assert.equal(reward(full,fe,Date.now()),null);assert.equal(full.consumables.reforgeToken,1);assert(fe.materialLoot.length>0);assert.equal(full.consumables.memoryFruit,0);

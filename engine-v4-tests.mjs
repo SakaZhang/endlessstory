@@ -40,7 +40,7 @@ try{
   assert.equal(affixRollInfo({stat:key,value:def.min}).tier,0);
   assert.equal(affixRollInfo({stat:key,value:def.max}).tier,3);
   const tiers=new Set();for(let value=def.min;value<=def.max;value++)tiers.add(affixRollInfo({stat:key,value}).tier);
-  assert.equal(tiers.size,4);
+  assert.equal(tiers.size,Math.min(4,def.max-def.min+1));
  }
  p=fresh();const divineItem=p.inventory[0];divineItem.rarity=3;divineItem.affixes=[{stat:'atk',value:3},{stat:'hp',value:15},{stat:'crit',value:5},{stat:'element',value:2}];divineItem.bless=2;
  const raw=structuredClone(divineItem),pre=stats(p);assert(applyForgeFavor(divineItem));
