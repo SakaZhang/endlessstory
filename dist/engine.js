@@ -1,3 +1,4 @@
+import {validDungeonCarry,captureDungeonPlayerState,applyDungeonPlayerState} from './dungeon-player-state.js';
 import {validEquipmentLevelMetadata,normalizeEquipmentLevels,rollDropEquipmentLevel} from './equipment-level-schema.js';
 export {normalizeEquipmentLevels,rollDropEquipmentLevel,rollEquipmentFusionLevel,EQUIPMENT_LEVEL_SOURCES} from './equipment-level-schema.js';
 import {AREAS,SITES,INSTANCES,RACE_KEYS,areaLevelRange,resolveLegacySite,instanceCooldownMs,pickRoute,areaGearLevel} from './location-schema.js';
@@ -387,6 +388,7 @@ function recordDungeonAreaClear(s,e){
 }
 export function validExpeditionState(s){
  const ex=s.expedition,cd=s.instanceCooldowns;
+ if(s.dungeonRun?.carry!==undefined&&(!validDungeonCarry(s.dungeonRun.carry,SKILLS)||s.dungeonRun.stage===1||s.activeEncounter))return false;
  if(cd!==undefined&&(!cd||typeof cd!=='object'||Array.isArray(cd)||!Object.entries(cd).every(([id,t])=>Object.hasOwn(INSTANCES,id)&&INSTANCES[id].kind!=='field'&&Number.isFinite(t)&&t>=0&&t<=1e15+1800000)))return false;
  if(s.dungeonRun!==undefined&&s.dungeonRun!==null&&(!s.dungeonRun||INSTANCES[s.dungeonRun.instanceId]?.kind!=='dungeon'||typeof s.dungeonRun.runId!=='string'||s.dungeonRun.runId.length>160||!Number.isInteger(s.dungeonRun.stage)||s.dungeonRun.stage<1||s.dungeonRun.stage>3))return false;
  if(ex!==undefined&&(!ex||typeof ex!=='object'||!['field','dungeon'].includes(ex.mode)||typeof ex.loop!=='boolean'||INSTANCES[ex.fieldId]?.kind!=='field'||(ex.targetInstanceId!==null&&INSTANCES[ex.targetInstanceId]?.kind!=='dungeon')))return false;
@@ -427,6 +429,7 @@ export function startRoutedEncounter(s,now=Date.now()){
 export function normalizeEncounterElements(e){
  if(!e)return e;
  const tags=e.location===1?['earth','fire']:e.location===2?['dark']:[];
+ if(e.heroBurnPower===undefined)e.heroBurnPower=e.heroBurn>0?Math.max(2,Math.round(e.atk*.05)):0;
  e.elementTags??=tags;
  e.elementResistance??=Object.fromEntries(ELEMENT_KEYS.map(k=>[k,tags.includes(k)?(e.boss?12:8):0]));
  return e;
@@ -442,7 +445,7 @@ function validEncounter(e){
  if(!e||typeof e!=='object'||Array.isArray(e)||![0,1,2].includes(e.location)||typeof e.name!=='string'||e.name.length>100||typeof e.boss!=='boolean'||typeof e.done!=='boolean'||typeof e.rewarded!=='boolean')return false;
  if(!['hp','max','atk','armor','heroHp','round','burn','broken','guard','stun','shield'].every(k=>number(e[k])))return false;
  if(!e.cd||typeof e.cd!=='object'||Array.isArray(e.cd)||!Object.entries(e.cd).every(([k,n])=>Object.hasOwn(SKILLS,k)&&number(n,100)))return false;
- if(!['warcry','ironcoat','blunt','scorch','barrier','barrierShield','heroBurn','weakness','nextHeavy','luck'].every(k=>e[k]===undefined||number(e[k])))return false;
+ if(!['warcry','ironcoat','blunt','scorch','barrier','barrierShield','heroBurn','heroBurnPower','weakness','nextHeavy','luck'].every(k=>e[k]===undefined||number(e[k])))return false;
  if((e.win!==undefined&&typeof e.win!=='boolean')||(e.heavyDelayed!==undefined&&typeof e.heavyDelayed!=='boolean')||typeof e.shelterUsed!=='boolean')return false;
  if(![null,'active','burn','counter'].includes(e.killSource))return false;
  return (e.rewardNotes===undefined||(Array.isArray(e.rewardNotes)&&e.rewardNotes.length<=20&&e.rewardNotes.every(t=>typeof t==='string'&&t.length<=300)))&&(e.materialLoot===undefined||(Array.isArray(e.materialLoot)&&e.materialLoot.length<=12&&e.materialLoot.every(l=>parseMaterialKey(l.key)?.key===l.key&&number(l.count,100))));
@@ -486,7 +489,8 @@ export function startInstanceEncounter(s,instanceId,now=Date.now()){
  const site=resolveLegacySite(instance.siteId);s.location=site.legacyIndex;s.siteId=site.id;
  if(instance.kind==='dungeon'&&!s.dungeonRun){s.dungeonRun={instanceId,runId:'run-'+Date.now().toString(36)+'-'+(++serial).toString(36),stage:1};s.expedition={...s.expedition,mode:'dungeon',targetInstanceId:instanceId};s.running=true;}
  const boss=instance.kind==='boss',stage=s.dungeonRun?.stage,elite=instance.kind==='dungeon'&&stage===3,l=LOCS[s.location],st=stats(s);
- const e={location:s.location,siteId:site.id,areaId:site.areaId,instanceId,kind:instance.kind,...(instance.kind==='dungeon'?{dungeonStage:stage,runId:s.dungeonRun.runId}:{}),luck:st.luck,boss,name:boss?l.boss:elite?l.enemy+' · 精英':l.enemy,hp:l.hp*(boss?4:elite?1.8:1),max:l.hp*(boss?4:elite?1.8:1),atk:l.atk*(boss?1.65:elite?1.25:1),armor:l.armor*(boss?1.3:1),heroHp:s.heroHp,round:0,nextHeavy:4,heavyDelayed:false,warcry:0,ironcoat:0,blunt:0,scorch:0,barrier:0,barrierShield:0,heroBurn:0,weakness:0,burn:0,broken:0,guard:0,stun:0,cd:{},shelterUsed:false,shield:0,done:false,rewarded:false,killSource:null};
+ const e={location:s.location,siteId:site.id,areaId:site.areaId,instanceId,kind:instance.kind,...(instance.kind==='dungeon'?{dungeonStage:stage,runId:s.dungeonRun.runId}:{}),luck:st.luck,boss,name:boss?l.boss:elite?l.enemy+' · 精英':l.enemy,hp:l.hp*(boss?4:elite?1.8:1),max:l.hp*(boss?4:elite?1.8:1),atk:l.atk*(boss?1.65:elite?1.25:1),armor:l.armor*(boss?1.3:1),heroHp:s.heroHp,round:0,nextHeavy:4,heavyDelayed:false,warcry:0,ironcoat:0,blunt:0,scorch:0,barrier:0,barrierShield:0,heroBurn:0,heroBurnPower:0,weakness:0,burn:0,broken:0,guard:0,stun:0,cd:{},shelterUsed:false,shield:0,done:false,rewarded:false,killSource:null};
+ if(instance.kind==='dungeon'&&s.dungeonRun.carry){applyDungeonPlayerState(e,s.dungeonRun.carry);delete s.dungeonRun.carry;}
  normalizeEncounterElements(e);s.activeEncounter=e;s.nextActionAt=s.lastHealthClock+1100;return e;
 }
 const damage=(raw,armor)=>Math.max(1,Math.round(raw*100/(100+Math.max(0,armor))));
@@ -500,10 +504,17 @@ export function combatStatuses(e){
 export function step(s,e,now=Date.now()){
  if(!e||e!==s.activeEncounter||e.done||!normalizeHealth(s,now)||s.restUntil>0)return[];
  e.heroHp=Math.min(e.heroHp,stats(s).hp);s.heroHp=e.heroHp;const drank=autoDrinkPotion(s,e,now);
- const logs=combatStep(s,e);s.nextActionAt=s.lastHealthClock+1100;if(drank)logs.unshift('自动饮用 · '+POTIONS[parsePotionKey(s.potionSlot.key).type].name);s.heroHp=Math.max(0,Math.min(stats(s).hp,e.heroHp));
+ const turn={burnAtStart:e.heroBurn??0,burnTicked:false},logs=combatStep(s,e,turn);
+ // Every executed player round consumes one turn of temporary player statuses,
+ // including an early lethal hit. Do not run skipped damage phases.
+ for(const field of ['guard','warcry','ironcoat','barrier','weakness'])e[field]=Math.max(0,(e[field]??0)-1);
+ if(turn.burnAtStart>0&&!turn.burnTicked&&e.heroBurn>0)e.heroBurn--;
+ if(!e.heroBurn)e.heroBurnPower=0;
+ if(!e.barrier)e.barrierShield=0;
+ s.nextActionAt=s.lastHealthClock+1100;if(drank)logs.unshift('自动饮用 · '+POTIONS[parsePotionKey(s.potionSlot.key).type].name);s.heroHp=Math.max(0,Math.min(stats(s).hp,e.heroHp));
  if(s.heroHp<=0){const resume=!!s.running&&!e.boss&&!s.stopAfterBattle&&(e.kind!=='dungeon'||!!s.expedition?.loop);startRest(s,now,resume);s.stopAfterBattle=false;}return logs;
 }
-function combatStep(s,e){
+function combatStep(s,e,turn){
  if(e.done)return[];normalizeEncounterElements(e);const st=stats(s),logs=[];e.round++;
  for(const field of ['warcry','ironcoat','blunt','scorch','barrier','barrierShield','heroBurn','weakness'])e[field]??=0;
  e.nextHeavy??=4;e.heavyDelayed??=false;for(const k in e.cd)e.cd[k]=Math.max(0,e.cd[k]-1);
@@ -518,7 +529,7 @@ function combatStep(s,e){
   if(k==='delay'){e.nextHeavy++;e.heavyDelayed=true;charge=false;}
   if(k==='barrier'){e.barrier=3;e.barrierShield=Math.floor(st.hp*.2)+st.shieldBonus;if(st.count.guard>=4)e.guard=Math.max(e.guard,2);}
   if(k==='mend'){const heal=Math.min(st.hp-e.heroHp,Math.floor(st.hp*.35),Math.min(Math.floor(st.hp*.2),Math.round(st.atk*.7+15))+st.healingBonus);e.heroHp+=heal;logs.push('回炉息 · 恢复 '+heal);}
-  if(k==='cleanse'){e.heroBurn=0;e.weakness=0;}
+  if(k==='cleanse'){e.heroBurn=0;e.heroBurnPower=0;e.weakness=0;}
   if(k!=='mend')logs.push(SKILLS[k].name+' · 生效');
  }else{
   let raw=st.atk*(e.warcry>0?1.25:1)*(e.weakness>0?.8:1);
@@ -540,7 +551,7 @@ function combatStep(s,e){
   }else logs.push((k?SKILLS[k].name:'普通攻击')+' · 未命中');
  }
  if(e.burn>0){const dot=resolveElementDamage(st.atk*(e.warcry>0?1.25:1)*(e.weakness>0?.8:1)*.32*(st.count.rune>=2?1.3:1)*(e.scorch>0?1.25:1),'fire',st.elementAttack.fire,e.elementResistance.fire,e.elementTags);e.hp-=dot;e.burn--;logs.push('炉火灼烧 · '+Number(dot.toFixed(1)));if(e.hp<=0){finish(e,true,'burn');return logs;}}
- if(e.heroBurn>0){const dot=resolveElementDamage(Math.max(2,Math.round(e.atk*.05)),'fire',0,st.elementResistance.fire,[]);e.heroHp-=dot;e.heroBurn--;logs.push('灼烧侵蚀 · -'+Number(dot.toFixed(1)));if(e.heroHp<=0){s.momentum=0;finish(e,false,null);return logs;}}
+ if(e.heroBurn>0){const dot=resolveElementDamage(e.heroBurnPower,'fire',0,st.elementResistance.fire,[]);e.heroHp-=dot;e.heroBurn--;turn.burnTicked=true;logs.push('灼烧侵蚀 · -'+Number(dot.toFixed(1)));if(e.heroHp<=0){s.momentum=0;finish(e,false,null);return logs;}}
  if(e.stun){logs.push('敌人蓄力被打断');e.stun=0;}else{
   let hurt=Math.max(1,Math.round(damage(e.atk*(e.blunt>0?.8:1)*(charge?2:1),st.armor*(e.ironcoat>0?1.4:1))*(e.guard>0?.6:1)));
   if(st.block>0&&Math.random()<st.block){hurt=Math.max(1,Math.round(hurt*.7));logs.push('格挡 · 减轻30%直接伤害');}
@@ -548,12 +559,11 @@ function combatStep(s,e){
   const wallAbsorbed=Math.min(e.barrierShield,hurt);e.barrierShield-=wallAbsorbed;hurt-=wallAbsorbed;
   const absorbed=Math.min(e.shield,hurt);e.shield-=absorbed;hurt-=absorbed;e.heroHp-=hurt;logs.push((charge?'敌人重击':'敌人攻击')+' · -'+hurt+(absorbed+wallAbsorbed?'（护盾吸收'+(absorbed+wallAbsorbed)+'）':''));
   if(e.heroHp>0&&e.guard>0){const counter=damage(st.atk*(e.warcry>0?1.25:1)*(e.weakness>0?.8:1)*(st.count.guard>=4?1:.6),Math.max(0,e.armor-st.penetration));e.hp-=counter;logs.push('坚守反击 · '+counter);}
-  if(e.location===1&&e.round%5===0){e.heroBurn=Math.max(1,3-st.resolveReduction);logs.push('矿炉余火 · 受到'+e.heroBurn+'回合灼烧');}
+  if(e.location===1&&e.round%5===0){e.heroBurn=Math.max(1,3-st.resolveReduction);e.heroBurnPower=Math.max(2,Math.round(e.atk*.05));logs.push('矿炉余火 · 受到'+e.heroBurn+'回合灼烧');}
   if(e.location===2&&e.round%6===0){const duration=Math.max(1,2-st.resolveReduction);e.weakness=duration+1;logs.push('失誓诅咒 · 受到'+duration+'回合虚弱');}
  }
  if(charge){e.nextHeavy=e.round+4;e.heavyDelayed=false;}
- for(const field of ['guard','broken','warcry','ironcoat','blunt','scorch','barrier','weakness'])e[field]=Math.max(0,e[field]-1);
- if(!e.barrier)e.barrierShield=0;
+ for(const field of ['broken','blunt','scorch'])e[field]=Math.max(0,e[field]-1);
  if(e.heroHp<=0){s.momentum=0;finish(e,false,null);}else if(e.hp<=0)finish(e,true,'counter');return logs;
 }
 export function gainXp(s,n){s.xp+=n;while(s.xp>=s.level*80){s.xp-=s.level*80;s.level++;}}
@@ -579,7 +589,7 @@ export function reward(s,e,now=Date.now()){
  if(e.boss){s.bossWins[index]++;s.bossReady[index]=Math.max(now,s.lastHealthClock??0)+1800000;s.instanceCooldowns[instanceId]=s.bossReady[index];if(!s.chapters.includes(index)){s.chapters.push(index);s.chronicle.unshift(['沃恩交出了商队货单：货物并非被抢，而是被人改道。','哥布林技师「尼克」从炉芯发现了烬裔封印。','精灵信使「瑟拉」证实：旧盟约的碎片，正在被五族争夺。'][index]);}}else s.normalWins[index]++;
  if(dungeon){
   if(clear){const newlyCleared=recordDungeonAreaClear(s,e);if(newlyCleared)(e.rewardNotes??=[]).push('区域1已通关：解锁区域2进度，商人下次补货采用11–20级装备；区域2地图尚未开放。');s.instanceCooldowns[instanceId]=Math.max(now,s.lastHealthClock??0)+300000;s.dungeonRun=null;(e.rewardNotes??=[]).push('普通副本通关：额外20金币、40经验、2份材料；冷却5分钟。');if(!s.expedition.loop)s.running=false;}
-  else{run.stage++;(e.rewardNotes??=[]).push('副本进度 '+e.dungeonStage+'/3：本阶段战利品已收取。');}
+  else{run.carry=captureDungeonPlayerState(e);run.stage++;(e.rewardNotes??=[]).push('副本进度 '+e.dungeonStage+'/3：本阶段战利品已收取。');}
  }
  s.nextBattleAt=Math.max(now,s.lastHealthClock??0)+1800;s.nextActionAt=s.nextBattleAt;if(e.boss||s.stopAfterBattle){s.running=false;s.stopAfterBattle=false;}if(s.activeEncounter===e)s.activeEncounter=null;return drop;
 }

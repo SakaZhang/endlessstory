@@ -12,7 +12,7 @@ try{
  const setup=key=>{const s=fresh();s.level=30;if(key)s.talents[key]=10;s.skills=[null,null,null,null];const e=encounter(s);e.hp=e.max=100000;return [s,e];};Math.random=()=>.5;
  const [pen,pe]=setup('penetration'),[normal,ne]=setup(null);step(pen,pe);step(normal,ne);assert(pe.max-pe.hp>ne.max-ne.hp);
  const [blocked,be]=setup('block'),[unblocked,ue]=setup(null);Math.random=()=>0;step(blocked,be);step(unblocked,ue);assert(be.heroHp>ue.heroHp);
- Math.random=()=>.5;const [resist,re]=setup('elementResist'),[raw,rawe]=setup(null);re.atk=rawe.atk=14;re.heroBurn=rawe.heroBurn=1;step(resist,re);step(raw,rawe);assert(re.heroHp>rawe.heroHp);
+ Math.random=()=>.5;const [resist,re]=setup('elementResist'),[raw,rawe]=setup(null);re.atk=rawe.atk=14;re.heroBurn=rawe.heroBurn=1;re.heroBurnPower=rawe.heroBurnPower=2;step(resist,re);step(raw,rawe);assert(re.heroHp>rawe.heroHp);
  for(const [location,turns,field,want] of [[1,5,'heroBurn',1],[2,6,'weakness',1]]){const [s,e]=setup('resolve');e.location=location;for(let n=0;n<turns;n++)step(s,e);assert.equal(e[field],want);}
  const [shield,se]=setup('shield'),[none,noe]=setup(null);shield.skills=none.skills=['barrier',null,null,null];step(shield,se);step(none,noe);assert.equal(se.barrierShield-noe.barrierShield,40);
  const [healer,he]=setup('healing'),[ordinary,oe]=setup(null);healer.skills=ordinary.skills=['mend',null,null,null];he.heroHp=oe.heroHp=20;step(healer,he);step(ordinary,oe);assert(he.heroHp>oe.heroHp);
