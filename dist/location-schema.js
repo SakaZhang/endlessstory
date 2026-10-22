@@ -1,7 +1,7 @@
 // Stable identifiers for the three legacy fields/bosses and one approved
 // three-encounter normal dungeon prototype, all in dwarf area 1.
 export const AREAS=Object.freeze({
- 'dwarf-blackforge-1':Object.freeze({id:'dwarf-blackforge-1',race:'dwarf',name:'黑炉边境',levelRange:Object.freeze([1,10])})
+ 'dwarf-blackforge-1':Object.freeze({id:'dwarf-blackforge-1',race:'dwarf',number:1,name:'黑炉边境',levelRange:Object.freeze([1,10])})
 });
 export const SITES=Object.freeze([
  {id:'blackforge-road',legacyIndex:0,gearLevel:3,areaId:'dwarf-blackforge-1',name:'失落驿道'},
@@ -43,4 +43,9 @@ export function areaGearLevel(instanceId){
  if(!site)return null;
  const [min,max]=AREAS[site.areaId].levelRange;
  return Math.max(min,Math.min(max,site.gearLevel));
+}
+
+export const RACE_KEYS=Object.freeze(['human','dwarf','elf','goblin','ashen']);
+export function areaLevelRange(number){
+ return Number.isInteger(number)&&number>=1&&number<=10?[(number-1)*10+1,number*10]:null;
 }

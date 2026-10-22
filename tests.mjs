@@ -33,3 +33,4 @@ import './dungeon-routing-tests.mjs';
 import './transaction-tests.mjs';
 
 import './forge-level-tests.mjs';
+import './area-progress-tests.mjs';

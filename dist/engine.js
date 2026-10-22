@@ -1,5 +1,5 @@
-import {AREAS,SITES,INSTANCES,resolveLegacySite,instanceCooldownMs,pickRoute,areaGearLevel} from './location-schema.js';
-export {AREAS,SITES,INSTANCES,resolveLegacySite,instanceCooldownMs,pickRoute,areaGearLevel} from './location-schema.js';
+import {AREAS,SITES,INSTANCES,RACE_KEYS,areaLevelRange,resolveLegacySite,instanceCooldownMs,pickRoute,areaGearLevel} from './location-schema.js';
+export {AREAS,SITES,INSTANCES,RACE_KEYS,areaLevelRange,resolveLegacySite,instanceCooldownMs,pickRoute,areaGearLevel} from './location-schema.js';
 import {ELEMENT_KEYS,ELEMENT_AFFIX_DEFS,resolveElementDamage} from './element-schema.js';
 export {ELEMENT_KEYS,resolveElementDamage} from './element-schema.js';
 // v0.4 equipment foundation. Item families and equipment sockets are intentionally separate.
@@ -343,6 +343,44 @@ export function autoDrinkPotion(s,battle=s.activeEncounter??null,now=Date.now())
 }
 function capHealth(s){if(s.heroHp!==undefined){s.heroHp=Math.min(s.heroHp,stats(s).hp);if(s.activeEncounter&&!s.activeEncounter.done)s.activeEncounter.heroHp=Math.min(s.activeEncounter.heroHp,s.heroHp);}}
 export const REST_DURATION_MS=5*60*1000;
+export function validAreaProgress(s){
+ if(s.areaProgress===undefined)return true;
+ const progress=s.areaProgress;
+ if(!progress||typeof progress!=='object'||Array.isArray(progress)||Object.keys(progress).length!==RACE_KEYS.length)return false;
+ return RACE_KEYS.every(race=>{
+  const p=progress[race];if(!p||!Array.isArray(p.unlocked)||!Array.isArray(p.cleared)||p.unlocked.length>10||p.cleared.length>10)return false;
+  if(!p.unlocked.every((n,i)=>Number.isInteger(n)&&n===i+1)||!p.cleared.every((n,i)=>Number.isInteger(n)&&n===i+1))return false;
+  if(p.cleared.some(n=>!p.unlocked.includes(n)))return false;
+  if(race==='dwarf'&&!p.unlocked.length)return false;
+  // No unreleased race has an entry point yet. Opening one requires actual content.
+  if(p.unlocked.length&&!Object.values(AREAS).some(a=>a.race===race))return false;
+  return !p.unlocked.length?p.cleared.length===0:p.unlocked.length===Math.min(p.cleared.length+1,10);
+ });
+}
+export function normalizeAreaProgress(s){
+ if(!validAreaProgress(s))return false;
+ s.areaProgress??=Object.fromEntries(RACE_KEYS.map(race=>[race,{unlocked:race==='dwarf'?[1]:[],cleared:[]}]));
+ return true;
+}
+export function getAreaProgress(s,race='dwarf'){
+ if(!RACE_KEYS.includes(race)||!validAreaProgress(s))return null;
+ const p=s.areaProgress?.[race]??{unlocked:race==='dwarf'?[1]:[],cleared:[]};
+ return {unlocked:[...p.unlocked],cleared:[...p.cleared]};
+}
+export function getMerchantEquipmentLevelRange(s){
+ if(!validAreaProgress(s))return null;
+ const highest=Math.max(1,...RACE_KEYS.flatMap(r=>getAreaProgress(s,r).unlocked));
+ return areaLevelRange(highest);
+}
+function recordDungeonAreaClear(s,e){
+ const instance=INSTANCES[e.instanceId],area=AREAS[instance?.areaId],run=s.dungeonRun;
+ if(!instance?.enabled||instance.kind!=='dungeon'||!area||e.areaId!==area.id||e.kind!=='dungeon'||e.dungeonStage!==3||!e.done||!e.win||s.activeEncounter!==e||run?.instanceId!==e.instanceId||run?.runId!==e.runId||run?.stage!==3||!normalizeAreaProgress(s))return false;
+ const p=s.areaProgress[area.race],number=area.number;
+ if(!p.unlocked.includes(number)||p.cleared.includes(number))return false;
+ p.cleared.push(number);p.cleared.sort((a,b)=>a-b);
+ if(number<10&&!p.unlocked.includes(number+1))p.unlocked.push(number+1);
+ return true;
+}
 export function validExpeditionState(s){
  const ex=s.expedition,cd=s.instanceCooldowns;
  if(cd!==undefined&&(!cd||typeof cd!=='object'||Array.isArray(cd)||!Object.entries(cd).every(([id,t])=>Object.hasOwn(INSTANCES,id)&&INSTANCES[id].kind!=='field'&&Number.isFinite(t)&&t>=0&&t<=1e15+1800000)))return false;
@@ -351,7 +389,7 @@ export function validExpeditionState(s){
  return s.siteId===undefined||!!resolveLegacySite(s.siteId);
 }
 export function normalizeExpedition(s){
- if(!validExpeditionState(s))return false;
+ if(!validExpeditionState(s)||!normalizeAreaProgress(s))return false;
  const site=resolveLegacySite(s.siteId??s.location);if(!site)return false;
  s.siteId??=site.id;
  s.expedition??={mode:'field',targetInstanceId:null,fieldId:site.id+'-field',loop:false};
@@ -522,7 +560,7 @@ function rollDrop(s,boss,luck=0,instanceId=resolveLegacySite(s.location).id+'-fi
 export function reward(s,e,now=Date.now()){
  if(!e.win||e.rewarded)return null;
  const dungeon=e.kind==='dungeon',run=s.dungeonRun;
- if(dungeon&&(!e.done||s.activeEncounter!==e||!run||run.runId!==e.runId||run.stage!==e.dungeonStage))return null;
+ if(dungeon&&(!e.done||s.activeEncounter!==e||!run||run.runId!==e.runId||run.stage!==e.dungeonStage||run.instanceId!==e.instanceId||INSTANCES[e.instanceId]?.kind!=='dungeon'||!INSTANCES[e.instanceId]?.enabled))return null;
  normalizeExpedition(s);const clear=dungeon&&e.dungeonStage===3,instanceId=e.instanceId;
  const tokenEligible=(e.boss||clear)&&e.done&&s.activeEncounter===e&&now>=(s.instanceCooldowns[instanceId]??0);
  e.rewarded=true;const index=e.location??s.location,l=LOCS[index],st=stats(s);s.kills++;s.gold+=(e.boss?l.bossGold:l.reward)+(clear?20:0);
@@ -536,7 +574,7 @@ export function reward(s,e,now=Date.now()){
  if(tokenEligible&&Math.random()<(clear?.02:.08)){normalizeTalents(s);if(s.consumables.reforgeToken<1e9){s.consumables.reforgeToken++;(e.rewardNotes??=[]).push('重铸印记 ×1');}}
  if(e.boss){s.bossWins[index]++;s.bossReady[index]=Math.max(now,s.lastHealthClock??0)+1800000;s.instanceCooldowns[instanceId]=s.bossReady[index];if(!s.chapters.includes(index)){s.chapters.push(index);s.chronicle.unshift(['沃恩交出了商队货单：货物并非被抢，而是被人改道。','哥布林技师「尼克」从炉芯发现了烬裔封印。','精灵信使「瑟拉」证实：旧盟约的碎片，正在被五族争夺。'][index]);}}else s.normalWins[index]++;
  if(dungeon){
-  if(clear){s.instanceCooldowns[instanceId]=Math.max(now,s.lastHealthClock??0)+300000;s.dungeonRun=null;(e.rewardNotes??=[]).push('普通副本通关：额外20金币、40经验、2份材料；冷却5分钟。');if(!s.expedition.loop)s.running=false;}
+  if(clear){const newlyCleared=recordDungeonAreaClear(s,e);if(newlyCleared)(e.rewardNotes??=[]).push('区域1已通关：解锁区域2进度，商人下次补货采用11–20级装备；区域2地图尚未开放。');s.instanceCooldowns[instanceId]=Math.max(now,s.lastHealthClock??0)+300000;s.dungeonRun=null;(e.rewardNotes??=[]).push('普通副本通关：额外20金币、40经验、2份材料；冷却5分钟。');if(!s.expedition.loop)s.running=false;}
   else{run.stage++;(e.rewardNotes??=[]).push('副本进度 '+e.dungeonStage+'/3：本阶段战利品已收取。');}
  }
  s.nextBattleAt=Math.max(now,s.lastHealthClock??0)+1800;s.nextActionAt=s.nextBattleAt;if(e.boss||s.stopAfterBattle){s.running=false;s.stopAfterBattle=false;}if(s.activeEncounter===e)s.activeEncounter=null;return drop;
@@ -617,9 +655,10 @@ function validMerchant(merchant){
  return Number.isFinite(merchant.cycleStart)&&merchant.cycleStart>=0&&merchant.cycleStart<=1e15&&merchant.nextRefreshAt===merchant.cycleStart+MERCHANT_CYCLE_MS&&Number.isSafeInteger(merchant.paidRefreshes)&&merchant.paidRefreshes>=0&&merchant.paidRefreshes<=1e9&&Number.isSafeInteger(merchant.revision)&&merchant.revision>=0;
 }
 function rollMerchantOffers(s,revision,preservedMaterials=null){
+ const [minGearLevel,maxGearLevel]=getMerchantEquipmentLevelRange(s);
  const pool=Object.keys(MATERIALS),offers=preservedMaterials?preservedMaterials.map(o=>({...o,type:'material',quality:o.quality??0})):[],count=preservedMaterials?offers.length:rand(2,3);
  if(!preservedMaterials)for(let i=0;i<count;i++){const material=pool.splice(rand(0,pool.length-1),1)[0],[min,max]=MERCHANT_STOCK[material];const quality=rollQuality([75,20,4.5,.5]);offers.push({type:'material',material,quality,price:materialPrice(material,quality),stock:rand(min,max)});}
- while(offers.length<8){const isSet=Math.random()<.01,slot=isSet?SET_SLOTS[rand(0,SET_SLOTS.length-1)]:SLOTS[rand(0,SLOTS.length-1)],set=isSet?BUILD[rand(0,2)].id:null,it=item(slot,s.level,set,isSet?3:rollQuality());offers.push({type:'equipment',item:it,price:15+sellValue(it)*4+it.level*3,stock:1});}
+ while(offers.length<8){const isSet=Math.random()<.01,slot=isSet?SET_SLOTS[rand(0,SET_SLOTS.length-1)]:SLOTS[rand(0,SLOTS.length-1)],set=isSet?BUILD[rand(0,2)].id:null,it=item(slot,rand(minGearLevel,maxGearLevel),set,isSet?3:rollQuality());offers.push({type:'equipment',item:it,price:15+sellValue(it)*4+it.level*3,stock:1});}
  if(Math.random()<.03)offers[7]={type:'consumable',consumable:'memoryFruit',price:200,stock:1};
  if(Math.random()<.10){const index=offers.findLastIndex(o=>o.type==='equipment');offers[index]={type:'consumable',consumable:'reforgeToken',price:120,stock:1};}
  const unknown=Object.keys(RECIPES).filter(id=>RECIPES[id].enabled&&!recipeKnown(s,id));
@@ -627,7 +666,7 @@ function rollMerchantOffers(s,revision,preservedMaterials=null){
  return offers.map((offer,index)=>({...offer,offerId:`merchant-${revision}-${index}`}));
 }
 export function ensureMerchant(s,now=Date.now()){
- if(!validRecipes(s))return null;
+ if(!validRecipes(s)||!normalizeAreaProgress(s))return null;
  if(!Number.isFinite(now)||now<0||now>1e15)return null;
  if(s.merchant===undefined){normalizeRecipes(s);s.merchant={version:1,offers:rollMerchantOffers(s,0),generatedAt:now,cycleStart:now,nextRefreshAt:now+MERCHANT_CYCLE_MS,paidRefreshes:0,revision:0};return s.merchant;}
  if(!validMerchant(s.merchant))return null;
@@ -715,7 +754,7 @@ export function validSave(s){
  try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;
  if(s.version!==SCHEMA_VERSION||s.race!=='dwarf'||s.hero!=='布洛克'||!Number.isInteger(s.level)||s.level<1||s.level>=100000||!num(s.xp)||!num(s.gold)||!Number.isInteger(s.location)||s.location<0||s.location>2)return false;
  if(s.activeEncounter?.kind==='dungeon'&&(!s.dungeonRun||s.activeEncounter.runId!==s.dungeonRun.runId||s.activeEncounter.dungeonStage!==s.dungeonRun.stage))return false;
- if(!validExpeditionState(s)||!Array.isArray(s.inventory)||s.inventory.length>124||!s.inventory.every(validEquipment)||!validPendingReforge(s))return false;
+ if(!validAreaProgress(s)||!validExpeditionState(s)||!Array.isArray(s.inventory)||s.inventory.length>124||!s.inventory.every(validEquipment)||!validPendingReforge(s))return false;
  if(s.merchant?.offers?.some(o=>o.type==='equipment'&&o.stock===1&&s.inventory.some(it=>it.id===o.item?.id)))return false;
  if((s.nextActionAt!==undefined&&(!Number.isFinite(s.nextActionAt)||s.nextActionAt<0||s.nextActionAt>1e15))||(s.restResume!==undefined&&typeof s.restResume!=='boolean')||(s.nextBattleAt!==undefined&&(!Number.isFinite(s.nextBattleAt)||s.nextBattleAt<0||s.nextBattleAt>1e15))||!validRecipes(s)||!validEncounter(s.activeEncounter)||!validPotions(s)||!validHealth(s)||!validLoadoutSlots(s)||bagItems(s).length>100||(s.merchant!==undefined&&!validMerchant(s.merchant)))return false;
  if(new Set(s.inventory.map(i=>i.id)).size!==s.inventory.length||!s.equip||Object.keys(s.equip).length!==SOCKETS.length||!SOCKETS.every(k=>s.equip[k]===null||s.inventory.some(i=>i.id===s.equip[k]&&i.slot===SOCKET_TYPE[k])))return false;
