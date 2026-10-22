@@ -1,10 +1,10 @@
 import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
 import assert from 'node:assert/strict';
 import {encounter,reward,validSave,normalizeExpedition,nextEncounterRoute,stats} from './dist/engine.js';
-import {AREAS,SITES,INSTANCES,instanceCooldownMs,pickRoute,areaGearLevel} from './dist/location-schema.js';
-assert.equal(Object.keys(AREAS).length,1);assert.deepEqual(AREAS['dwarf-blackforge-1'].levelRange,[1,10]);
-assert.equal(Object.values(INSTANCES).filter(x=>x.kind==='field').length,3);
-assert.equal(Object.values(INSTANCES).filter(x=>x.kind==='boss').length,3);
+import {LEGACY_AREAS,LEGACY_INSTANCES,PLANNED_AREAS,PLANNED_INSTANCES,AREAS,SITES,INSTANCES,instanceCooldownMs,pickRoute,areaGearLevel} from './dist/location-schema.js';
+assert.equal(Object.keys(LEGACY_AREAS).length,1);assert.deepEqual(AREAS['dwarf-blackforge-1'].levelRange,[1,10]);
+assert.equal(Object.values(LEGACY_INSTANCES).filter(x=>x.kind==='field').length,3);
+assert.equal(Object.values(LEGACY_INSTANCES).filter(x=>x.kind==='boss').length,3);
 assert(Object.values(INSTANCES).filter(x=>x.kind==='dungeon').every(x=>x.enabled));
 const s=fresh();s.location=1;s.bossReady=[100,200,300];const e=encounter(s);e.hp-=12;e.heroHp-=7;e.cd.mark=3;e.burn=4;
 const old=structuredClone(e),hp=stats(s).hp;assert(validSave(s));assert(normalizeExpedition(s));assert.equal(s.siteId,'blackforge-mine');assert.equal(s.instanceCooldowns['blackforge-mine-boss'],200);assert.equal(e.hp,old.hp);assert.equal(e.heroHp,old.heroHp);assert.deepEqual(e.cd,old.cd);assert.equal(e.burn,4);assert.equal(stats(s).hp,hp);
@@ -22,4 +22,6 @@ try{for(const level of [1,100,500])for(let index=0;index<3;index++){
 for(const mutate of [x=>x.instanceCooldowns.bad=100,x=>x.expedition.fieldId='blackforge-road-boss',x=>x.activeEncounter.instanceId='bad']){
  const bad=JSON.parse(once);mutate(bad);assert(!validSave(bad));
 }
-console.log('Location foundation: stable IDs/lossless old encounter and cooldown migration, single normal prototype, pure fallback/boundary routing, fixed area gear levels: PASS');
+console.log('Location foundation: stable IDs/lossless old encounter and cooldown migration, legacy normal prototype plus seven planned nodes, pure fallback/boundary routing, fixed area gear levels: PASS');
+
+assert.equal(Object.keys(PLANNED_AREAS).length,3);assert.equal(Object.keys(PLANNED_INSTANCES).length,7);assert(!PLANNED_INSTANCES['dwarf.a01.boss']);

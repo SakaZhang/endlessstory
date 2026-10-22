@@ -9,7 +9,7 @@ const enhancementLevel=it=>Number.isInteger(it?.enhancement?.level)?it.enhanceme
 const image=it=>equipmentIcon(it);
 const variantLabel=t=>({balanced:'均衡型',attack:'攻击型',defensive:'防护型',armor:'护甲型',vitality:'生命型',element:'元素型',survival:'生存型'})[t.baseVariant?.split('_').at(-1)]??'基础型';
 const badge=it=>it.divine?'<small class="divineBadge">神赐</small>':'';
-const issueNames={'at-maximum':'已达到试验上限 +5','stale-quote':'装备或费用已变化，请重新预览',max:'已达到试验上限 +5','max-level':'已达到试验上限 +5',gold:'金币不足',funds:'金币不足','insufficient-gold':'金币不足',materials:'所需材料不足',stale:'装备或费用已变化，请重新预览',protected:'当前装备不能改造',pending:'请先完成待确认改造',sandbox:'请进入独立试验'};
+const issueNames={'formal-model':'该装备已采用正式强化模型，请回熔炉强化；旧数值试验不会转换正式模型','at-maximum':'已达到试验上限 +5','stale-quote':'装备或费用已变化，请重新预览',max:'已达到试验上限 +5','max-level':'已达到试验上限 +5',gold:'金币不足',funds:'金币不足','insufficient-gold':'金币不足',materials:'所需材料不足',stale:'装备或费用已变化，请重新预览',protected:'当前装备不能改造',pending:'请先完成待确认改造',sandbox:'请进入独立试验'};
 export function renderEquipmentWorkshop(s,{templates=EQUIPMENT_TEMPLATES,selectedId=null,selectedTemplate=null,quote=null,lastResult=null,busy=false,error=''}={}){
  const catalog=(Array.isArray(templates)?templates:Object.values(templates??{})).map(t=>({...t,set:t.set??t.setId??null})),plain=catalog.filter(t=>!t.set),sets=catalog.filter(t=>t.set),item=s.inventory?.find(it=>it.id===selectedId),level=enhancementLevel(item),isSandbox=s.developmentEquipmentSandbox===true;
  const validQuote=quote?.ok===true&&quote.itemId===selectedId,canEnhance=!!(item&&isSandbox&&validQuote&&level<5&&!busy&&!lastResult),current=validQuote?quote.bases?.current:item?enhancedItemBase(item,{development:isSandbox}):null,success=validQuote?quote.bases?.success:null,failure=validQuote?quote.bases?.failure:null;

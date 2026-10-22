@@ -73,3 +73,23 @@ import './reforge-divine-tests.mjs';
 import './fusion-origin-tests.mjs';
 
 import './fusion-origin-production-tests.mjs';
+
+import './character-progression-tests.mjs';
+import './equipment-budget-adapter-tests.mjs';
+import './formal-enhancement-tests.mjs';
+import './formal-enhancement-integration-tests.mjs';
+import './m2-generation-tests.mjs';
+import './m2-engine-tests.mjs';
+import './m2-set-progression-tests.mjs';
+import './m2-progression-combat-tests.mjs';
+
+import './m2-delay-lifecycle-tests.mjs';
+
+import './m2-reaper-shield-tests.mjs';
+
+import './m2-support-eligibility-tests.mjs';
+
+import "./dwarf-monster-portrait-ui-tests.mjs";
+// Native pixel export regression: node dwarf-art-tests.mjs (requires optional QA canvas renderer).
+
+import "./m2-production-activation-tests.mjs";

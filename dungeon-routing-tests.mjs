@@ -1,3 +1,4 @@
+import {prepareM2TestRoute} from './m2-test-budget-fixture.mjs';
 import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
 import assert from 'node:assert/strict';
 import {normalizeHealth,normalizePotions,configureExpedition,setExpeditionLoop,startRoutedEncounter,startInstanceEncounter,step,reward,settleRest,startRest,offline,validSave,stats,INSTANCES} from './dist/engine.js';
@@ -24,7 +25,7 @@ try{
  const b=fresh();normalizeHealth(b,0);let boss=startInstanceEncounter(b,'blackforge-road-boss',0);win(b,boss,100);assert.equal(b.instanceCooldowns['blackforge-road-boss'],1800100);assert.equal(startInstanceEncounter(b,'blackforge-road-boss',2000),null);assert(startInstanceEncounter(b,'blackforge-mine-boss',2000));assert(!b.running);
  const crossField={id:'other-field',kind:'field',enabled:true,areaId:'other'};assert.equal(pickRoute({mode:'dungeon',targetInstanceId:dungeon,fieldId:crossField.id,loop:true},{[dungeon]:200},100,{...INSTANCES,[crossField.id]:crossField}),crossField);
  // Full offline and online routing share stages, cooldown fallback, rest and rewards.
- const template=prepare(true);template.level=25;template.heroHp=stats(template).hp;template.running=true;
+ const template=prepare(true);prepareM2TestRoute(template,0);template.expedition={mode:'dungeon',fieldId:'dwarf.a01.field',targetInstanceId:'dwarf.a01.dungeon',loop:true};template.level=25;template.heroHp=stats(template).hp;template.running=true;
  const batch=structuredClone(template),online=structuredClone(template),end=720000;
  seed=927;offline(batch,end);seed=927;let time=0;
  while(time<end&&online.running){

@@ -17,7 +17,7 @@ try{
  complete(s,304100);assert.deepEqual(getAreaProgress(s),{unlocked:[1,2],cleared:[1]});
  const reloaded=JSON.parse(JSON.stringify(s));assert(validSave(reloaded));assert.deepEqual(getMerchantEquipmentLevelRange(reloaded),[11,20]);assert(ensureMerchant(reloaded,1800000).offers.filter(o=>o.type==='equipment').every(o=>o.item.level>=11&&o.item.level<=20));
  // Actual offline battle completion records the same unlock; no cap/truncation.
- const off=ready();off.level=137;off.heroHp=10000;off.running=true;const report=offline(off,60000);assert.equal(report.kills,3);assert.deepEqual(getAreaProgress(off),{unlocked:[1,2],cleared:[1]});assert.equal(off.level,137);
+ const off=ready();off.level=137;off.heroHp=10000;off.running=true;assert(startRoutedEncounter(off,0));const report=offline(off,60000);assert.equal(report.kills,3);assert.deepEqual(getAreaProgress(off),{unlocked:[1,2],cleared:[1]});assert.equal(off.level,137);
  const failed=ready();const fe=startRoutedEncounter(failed,0);failed.heroHp=fe.heroHp=1;fe.hp=fe.atk=1e8;step(failed,fe,1100);assert.deepEqual(getAreaProgress(failed),{unlocked:[1],cleared:[]});
  const ranges=new Set();for(let i=0;i<1000;i++){const x=fresh();x.level=i%2?1:999;const m=ensureMerchant(x,0);for(const o of m.offers.filter(o=>o.type==='equipment')){assert(o.item.level>=1&&o.item.level<=10);ranges.add(o.item.level);}}assert.equal(ranges.size,10);
  const cap=fresh();normalizeAreaProgress(cap);cap.areaProgress.dwarf={unlocked:Array.from({length:10},(_,i)=>i+1),cleared:Array.from({length:10},(_,i)=>i+1)};assert(validSave(cap));assert.deepEqual(getMerchantEquipmentLevelRange(cap),[91,100]);assert.equal(areaLevelRange(11),null);

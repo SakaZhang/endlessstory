@@ -2,12 +2,14 @@ import assert from 'node:assert/strict';
 import {fresh,item,stats,itemTotals,validSave,quoteDeveloperEnhancement,prepareDeveloperEnhancement,attemptDeveloperEnhancement,enhancedItemBase,DEVELOPMENT_ENHANCEMENT_CONFIG} from './dist/engine.js';
 import {commitGameTransaction} from './dist/storage.js';
 const clone=x=>structuredClone(x);
+// Synthetic raw-base edge cases model pre-M2 owned gear, not altered formal budgets.
+const legacyBudget=it=>{for(const key of ['baseBudgetModel','budgetLevel','budgetSourceLevel','budgetCompatibility'])delete it[key];return it;};
 function setup(){const s=fresh();s.developmentEquipmentSandbox=true;s.gold=10000;return s;}
 {
  const s=fresh(),it=s.inventory[0];it.bless=3;const before=clone(it),tot=itemTotals(it);assert.equal(quoteDeveloperEnhancement(s,it.id).ok,false);assert.deepEqual(itemTotals(it),tot);assert.deepEqual(it,before);assert(validSave(s));
 }
 {
- const s=setup(),it=s.inventory[0];it.atk=20;it.armor=0;it.hp=0;it.bless=3;it.locked=true;it.divine={id:'forge-favor',name:'神赐·炉火眷顾',model:'raw-v1',bonus:{atk:2,armor:0,hp:0}};const raw=clone(it),formal=itemTotals(it),affix=clone(it.affixes);let previous=stats(s).atk;
+ const s=setup(),it=legacyBudget(s.inventory[0]);it.atk=20;it.armor=0;it.hp=0;it.bless=3;it.locked=true;it.divine={id:'forge-favor',name:'神赐·炉火眷顾',model:'raw-v1',bonus:{atk:2,armor:0,hp:0}};const raw=clone(it),formal=itemTotals(it),affix=clone(it.affixes);let previous=stats(s).atk;
  for(let level=0;level<5;level++){const q=quoteDeveloperEnhancement(s,it.id);assert(q.ok);assert.equal(q.successRate,DEVELOPMENT_ENHANCEMENT_CONFIG.successRates[level]);const gold=s.gold;const receipt=attemptDeveloperEnhancement(s,q,()=>0);assert(receipt.success);assert.equal(it.enhancement,undefined,'original object remains untouched by clone adoption');const owned=s.inventory[0];assert.equal(owned.enhancement.level,level+1);assert.equal(s.gold,gold-q.cost.gold);assert.equal(owned.atk,raw.atk);assert.equal(owned.armor,0);assert.equal(owned.hp,0);assert.deepEqual(owned.affixes,affix);assert.equal(owned.bless,3);assert.deepEqual(itemTotals(owned),formal,'formal default ignores candidate');assert(stats(s).atk>=previous);previous=stats(s).atk;assert.equal(attemptDeveloperEnhancement(s,q,()=>0),null);assert(validSave(s));}
  assert(!quoteDeveloperEnhancement(s,it.id).ok);assert.equal(enhancedItemBase(s.inventory[0],{development:true}).armor,0);const saved=JSON.parse(JSON.stringify(s));assert.deepEqual(stats(saved),stats(s),'reload never compounds');assert.deepEqual(saved.inventory[0].divine,raw.divine);
 }
@@ -26,7 +28,7 @@ console.log('Developer enhancement: formal legacy untouched,5 probabilities/fail
 }
 console.log('Enhancement quote survives unrelated clocks/HP/loot and cached retry rebases without rollback');
 {
- const s=fresh();for(const it of s.inventory){for(const key of ['templateId','baseVariant','weaponType','originRace','visualKey','visualVariant','iconKey'])delete it[key];it.name='旧炉·原名';it.bless=2;}const before=clone(s);assert(validSave(s));assert.deepEqual(s,before);assert.deepEqual(stats(JSON.parse(JSON.stringify(s))),stats(s));
+ const s=fresh();for(const it of s.inventory){legacyBudget(it);for(const key of ['templateId','baseVariant','weaponType','originRace','visualKey','visualVariant','iconKey'])delete it[key];it.name='旧炉·原名';it.bless=2;}const before=clone(s);assert(validSave(s));assert.deepEqual(s,before);assert.deepEqual(stats(JSON.parse(JSON.stringify(s))),stats(s));
  const bad=clone(s);bad.inventory[0].enhancement={version:1,model:'development-budget-v1',level:6};assert(!validSave(bad));
 }
 console.log('Legacy named equipment/bless remains unchanged and candidate metadata is bounded');

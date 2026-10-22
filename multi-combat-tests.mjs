@@ -44,7 +44,7 @@ console.log('Explicit per-slot conditions remain additional guards');
 {
  const {encounter,SKILLS}=await import('./dist/engine.js');
  for(const key of Object.keys(SKILLS)){
-  const a=game(58,2),b=clone(a);delete a.skillRulesVersion;delete a.skillAccess;delete b.skillRulesVersion;delete b.skillAccess;a.skills=b.skills=[key,null,null,null];a.conditions=b.conditions=['always','always','always','always'];b.activeEncounter=null;b.running=false;b.nextActionAt=0;
+  const a=game(58,2),b=clone(a);delete a.skillRulesVersion;delete a.skillAccess;delete b.skillRulesVersion;delete b.skillAccess;a.skills=b.skills=[key,null,null,null];a.conditions=b.conditions=['always','always','always','always'];b.activeEncounter=null;b.running=false;b.nextActionAt=0;delete b.siteId;delete b.expedition;delete b.contentMigration;
   const multi=a.activeEncounter,single=encounter(b,false,10000);for(const e of [multi,single]){e.heroHp-=30;e.heroBurn=key==='cleanse'?2:0;e.heroBurnPower=2;e.weakness=key==='cleanse'?2:0;e.nextHeavy=key==='delay'?1:4;}
   const u=multi.enemies[0];u.nextHeavy=single.nextHeavy;u.hp=u.max=single.hp=single.max=1e6;u.burn=single.burn=key==='ignite'?3:0;multi.enemies[1].hp=multi.enemies[1].max=1e6;
   let seed=58;const old=Math.random;Math.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};try{step(b,single,11100);}finally{Math.random=old;}step(a,multi,11100);

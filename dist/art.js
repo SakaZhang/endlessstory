@@ -1,3 +1,5 @@
+import {drawDwarfMonster} from './dwarf-monster-art.js';
+import {drawDwarfArea,dwarfAreaIndex} from './dwarf-area-art.js';
 // Original, deliberately low-resolution pixel artwork. All assets are drawn locally.
 export function enemySceneLayout(count){
  const n=Number.isInteger(count)&&count>0?count:1;
@@ -40,6 +42,8 @@ export function drawScene(canvas, state = {}) {
     rect(63,286,166,24,'#535957');poly([[51,282],[78,261],[218,261],[239,282]],'#66706a');rect(84,266,116,5,'#85877b');rect(767,264,100,43,'#404b4c');rect(759,257,118,13,'#606b65');
     for(const x of [248,711]){rect(x,159,7,102,'#323d40');rect(x-8,162,23,7,'#758379');rect(x-4,143,15,19,'#a4bb88');glow(x+4,151,82,'#84c4a238');}
   }
+  const m2Area=dwarfAreaIndex(state.areaId??state.instanceId);
+  if(m2Area!==null)drawDwarfArea(c,m2Area,t);
   // Mist between background and combat plane.
   for(let i=0;i<10;i++){let x=(i*173+(t*.008))%1150-120;rect(x,251+(i%4)*11,180,3,'#b0ba9620');}
   poly([[0,300],[190,289],[380,306],[623,290],[960,302],[960,420],[0,420]],p[3]);
@@ -64,7 +68,7 @@ export function drawScene(canvas, state = {}) {
     let swing=fight?Math.sin(t*.012)*.12:0;c.save();c.translate(30,-29);c.rotate(swing);rect(-2,-37,4,59,'#684e35');rect(-1,-36,2,56,'#a28758');poly([[0,-39],[5,-43],[18,-41],[24,-33],[20,-23],[6,-23],[1,-27]],'#aeb5aa');poly([[16,-40],[22,-33],[19,-25],[13,-25],[16,-32]],'#dde0be');rect(-7,-36,9,9,'#788b8b');rect(-4,-35,3,7,'#c7c9aa');c.restore();
     poly([[-34,-33],[-25,-39],[-14,-34],[-14,-14],[-23,-7],[-33,-14]],'#8f9581');poly([[-31,-31],[-25,-35],[-17,-31],[-17,-16],[-23,-11],[-30,-16]],'#3c5755');rect(-25,-29,4,14,'#bda66b');rect(-29,-24,12,4,'#bda66b');c.restore();
   }
-  function foe(x,y,unit={}){c.save();c.translate(Math.floor(x),Math.floor(y));c.scale(2*(unit.sceneScale??1),2*(unit.sceneScale??1));let boss=unit.boss??state.boss;const loc=unit.artLocation??unit.location??state.location??0;if(unit.dead||unit.hp<=0)c.globalAlpha=.28;
+  function foe(x,y,unit={}){if(drawDwarfMonster(c,x,y,unit,{time:t,scale:unit.sceneScale??1}))return;c.save();c.translate(Math.floor(x),Math.floor(y));c.scale(2*(unit.sceneScale??1),2*(unit.sceneScale??1));let boss=unit.boss??state.boss;const loc=unit.artLocation??unit.location??state.location??0;if(unit.dead||unit.hp<=0)c.globalAlpha=.28;
     rect(-27,5,53,6,'#10171980');
     if(loc===1){
       rect(-21,-21,16,27,'#4c4948');rect(7,-24,17,30,'#514d49');rect(-24,0,19,7,'#77706a');rect(8,0,20,7,'#77706a');poly([[-25,-57],[-11,-66],[19,-62],[29,-48],[24,-23],[11,-13],[-20,-20]],'#5c5b56');rect(-22,-53,42,7,'#858173');rect(-17,-43,34,19,'#383c3c');rect(-9,-42,7,15,'#de6939');rect(6,-43,6,17,'#c95832');rect(-34,-54,16,21,'#787268');rect(-38,-35,17,22,'#55544e');rect(23,-53,15,22,'#777064');rect(28,-34,17,22,'#55544e');rect(-11,-79,27,23,'#676b61');rect(-14,-78,33,5,'#939181');rect(-7,-69,6,4,'#faac51');rect(7,-69,6,4,'#faac51');rect(-6,-60,17,4,'#252e31');

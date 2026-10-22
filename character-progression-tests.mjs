@@ -1,0 +1,8 @@
+import assert from 'node:assert/strict';
+import {planExperience,applyExperience} from './dist/character-progression.js';
+let s={level:99,xp:7900,running:true,chapters:['ongoing'],talents:{strength:31},bonusTalentPoints:30,inventory:[{level:150,atk:999}]};let result=applyExperience(s,100);assert.equal(s.level,100);assert.equal(s.xp,80);assert.equal(result.acceptedXp,100);assert(s.running);assert.deepEqual(s.chapters,['ongoing']);assert.equal(s.talents.strength,31);assert.equal(s.bonusTalentPoints,30);assert.deepEqual(s.inventory,[{level:150,atk:999}]);const before=JSON.stringify(s);result=applyExperience(s,100000);assert.equal(result.acceptedXp,0);assert.equal(result.ignoredXp,100000);assert.equal(JSON.stringify(s),before);
+for(const level of [100,101,150,99999]){const old={level,xp:12345,storyComplete:false,remainingTalents:200};const previous=JSON.stringify(old);const out=applyExperience(old,1000);assert.equal(out.levelsGained,0);assert.equal(out.acceptedXp,0);assert.equal(JSON.stringify(old),previous);}
+for(const start of [1,10,50,99]){const old={level:start,xp:0},before=JSON.stringify(old),out=planExperience(old,1e7);assert.equal(out.level,100);assert.equal(JSON.stringify(old),before);assert(Number.isFinite(out.xp));}
+let old={level:1,xp:0};assert.equal(applyExperience(old,80).level,2);assert.equal(old.xp,0);
+for(const bad of [NaN,Infinity,-1,1e12+1])assert.throws(()=>planExperience({level:1,xp:0},bad));assert.throws(()=>planExperience({level:1,xp:1e12},1));
+console.log('PASS level100 progression: new cap with arrival remainder, laterXP ignored/reported, legacyover100 preserved, no story/expedition/talent reset, numeric guards.');

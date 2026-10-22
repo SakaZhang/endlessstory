@@ -1,6 +1,6 @@
 import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
 import assert from 'node:assert/strict';
-import {normalizeHealth,normalizePotions,configureExpedition,startRoutedEncounter,startRest,settleRest,step,reward,validSave,offline,stats} from './dist/engine.js';
+import {normalizeHealth,normalizePotions,configureExpedition,startRoutedEncounter,startRest,settleRest,step,reward,validSave,offline,stats,normalizeContentMigration} from './dist/engine.js';
 import {DUNGEON_PLAYER_FIELDS} from './dist/dungeon-player-state.js';
 const original=Math.random;let seed=8841;const rng=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};Math.random=rng;
 const prepare=()=>{const s=fresh();s.lastSeen=0;normalizeHealth(s,0);normalizePotions(s);configureExpedition(s,{mode:'dungeon',targetInstanceId:'dwarf-blackforge-1-dungeon',fieldId:'blackforge-road-field',loop:true});return s;};
@@ -50,7 +50,7 @@ try{
  const nextLegacy=startRoutedEncounter(legacyDone,1800);assert.equal(nextLegacy.heroBurnPower,10);assert.equal(nextLegacy.heroBurn,2);
  // Saved carry on a paused boundary can be replayed offline with identical results.
  const template=JSON.parse(before);template.running=true;template.lastSeen=100;template.level=30;template.heroHp=stats(template).hp;
- const batch=structuredClone(template),online=structuredClone(template),end=180000;Math.random=rng;seed=819;offline(batch,end);seed=819;let time=100;
+ const batch=structuredClone(template),online=structuredClone(template),end=180000;Math.random=rng;seed=819;offline(batch,end);seed=819;normalizeContentMigration(online);let time=100;
  while(time<end&&online.running){if(online.restUntil>0){if(online.restUntil>end)break;time=online.restUntil;settleRest(online,time);continue;}time=Math.max(time,online.nextBattleAt??0);if(time>=end)break;const battle=online.activeEncounter??startRoutedEncounter(online,time);if(!battle)break;time=online.nextActionAt;if(time>end)break;step(online,battle,time);if(battle.done&&battle.win)reward(online,battle,time);}
  settleRest(online,end);for(const key of ['gold','xp','heroHp','kills'])assert.equal(batch[key],online[key]);assert.deepEqual(batch.materialStacks,online.materialStacks);assert.deepEqual(batch.activeEncounter?.cd,online.activeEncounter?.cd);assert.equal(batch.activeEncounter?.shelterUsed,online.activeEncounter?.shelterUsed);assert(validSave(batch));
  console.log('Dungeon player carry: per-stage shelter plus carried skill shields/CD/buffs/debuffs, enemy reset, pause/reload/camp/death/clear boundaries, validation and offline parity: PASS');

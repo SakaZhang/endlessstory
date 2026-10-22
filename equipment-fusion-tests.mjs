@@ -36,12 +36,12 @@ try{
  const full=fresh();full.gold=1000;for(const slot of SLOTS)while(bagCounts(full).equipment[slot]<50)full.inventory.push(item(slot,1,null,0));const consume=full.inventory.find(it=>it.slot==='gloves'&&!Object.values(full.equip).includes(it.id));Math.random=()=>0;const pending=forge(full,[input(consume)]);assert.equal(pending.slot,'weapon');assert(full.pendingForgeClaim);assert.equal(full.gold,960);assert(!full.inventory.some(it=>it.id===consume.id));assert(validSave(full));const loaded=JSON.parse(JSON.stringify(full)),same=JSON.stringify(loaded);assert.equal(forge(loaded,['铁屑|0']),null);assert.equal(JSON.stringify(loaded),same);assert.equal(claimForgeResult(loaded),null);const remove=loaded.inventory.find(it=>it.slot==='weapon'&&!Object.values(loaded.equip).includes(it.id));loaded.inventory=loaded.inventory.filter(it=>it.id!==remove.id);assert.equal(claimForgeResult(loaded).id,pending.id);assert(validSave(loaded));
  // Failed persistence adopts neither consumed inputs, collection history nor generated output.
  const atomic=fresh(),piece=item('boots',1,'guard',3);atomic.inventory.push(piece);const before=JSON.stringify(atomic);let fail=true;const store={setItem(){if(fail)throw Error('quota');}};let tx=commitGameTransaction(store,atomic,p=>forge(p,[input(piece)]),{now:100});assert(!tx.ok);assert.equal(JSON.stringify(atomic),before);assert(!codexSetState(atomic,'guard').discovered);fail=false;tx=commitGameTransaction(store,atomic,p=>forge(p,[input(piece)]),{now:100});assert(tx.ok);assert(!tx.game.inventory.some(it=>it.id===piece.id));assert.deepEqual(codexSetState(tx.game,'guard').parts,['boots']);
- // Exact 2,000-result quality/type/slot sequences captured from deployed v0.22 (31a324a).
+ // Exact 2,000-result M2 sequences after approved removal of the legacy raw-spread RNG draw; material quality formula remains unchanged.
  const legacySequences=[
- [['铁屑|0'],'02f468188db8437953135f175f691055206b5102b96dd680a75d5102b31468c9'],
- [Array(5).fill('铁屑|3'),'4f3b765cba921a4b3e7a3099f756efc02bcba3192425f3459198d8ed7b074541'],
- [['灰根草|0','铁屑|0'],'914afe96b0f510ee64fddbb29a0f70a8ef994b36dc2a04a0614b127058132d10'],
- [['灰根草|3','炉火晶|2','灰根草|1'],'5ef2975c90790be95a16f176e922eba10884ee70842532c6d688bdd0129b9b67']];
+ [['铁屑|0'],'62fa65144c5e56d31cf3b08dd934103de9e61950aeb19d9f3635eb78902072f5'],
+ [Array(5).fill('铁屑|3'),'d743197575f675b4127125bfb38849d9c34f9ac8a2a1902e70c4329fdcdef13e'],
+ [['灰根草|0','铁屑|0'],'afabc55ec09394f6f32ac1c8e2c9855d0858d105b520f61d776ebbd39612549c'],
+ [['灰根草|3','炉火晶|2','灰根草|1'],'a6f72cd41a0be0c684e1e0fd97034d1ba23e398b521c0799e5b8be6858b6176a']];
  for(const [selection,expected] of legacySequences){seed=91731;Math.random=rng;const p=fresh();p.level=20;p.talents.luck=10;p.gold=1e9;for(const k of selection)p.materialStacks[k]=10000;const rows=[];for(let n=0;n<2000;n++){const out=forge(p,selection);rows.push([out.kind??'equipment',out.rarity??out.quality,out.slot??out.potionType]);if(!out.kind)p.inventory.pop();}assert.equal(createHash('sha256').update(JSON.stringify(rows)).digest('hex'),expected);}
  console.log('Equipment-input fusion:1161 exact dominance cases;5same20k baseline',observed,'divine',gods,'; protected/duplicate no-RNG,1–5 mixed gear, independent blessing, level no-ratchet1000, pending/codex/storage atomics: PASS');
 }finally{Math.random=original;}

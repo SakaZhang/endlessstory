@@ -1,3 +1,4 @@
+import {enableM2TestBudget,prepareM2TestRoute} from './m2-test-budget-fixture.mjs';
 import assert from 'node:assert/strict';
 import {fresh,SKILLS,BUILD,SKILL_UNLOCK_LEVELS,skillUnlocked,normalizeSkillProgression,collectSkillUnlockNotices,skillUnlockLevelForBuild,normalizeSkillSlots,preset,saveLoadout,applyLoadout,validSave,encounter,step,gainXp,offline,normalizeHealth} from './dist/engine.js';
 const original=Math.random;Math.random=()=>.5;
@@ -15,9 +16,9 @@ try{
  }
  for(const build of BUILD){const required=Math.max(...build.skills.filter(Boolean).map(k=>SKILL_UNLOCK_LEVELS[k]));assert.equal(skillUnlockLevelForBuild(build.id),required);const p=fresh();p.level=Math.max(1,required-1);const before=JSON.stringify(p);if(required>1){assert.equal(preset(p,build.id),null);assert.equal(JSON.stringify(p),before);}p.level=required;assert(preset(p,build.id));assert(validSave(p));}
  assert.equal(skillUnlockLevelForBuild('unknown'),null);
- const locked=fresh();locked.skills=['heavy',null,null,null];assert(!validSave(locked));assert(!saveLoadout(locked,0,'未解锁'));const e=encounter(locked);e.hp=e.max=10000;e.atk=0;step(locked,e);assert.equal(e.cd.heavy??0,0); // Defensive skip even for an in-memory forged selection.
+ const locked=fresh();locked.skills=['heavy',null,null,null];assert(!validSave(locked));assert(!saveLoadout(locked,0,'未解锁'));delete locked.siteId;delete locked.expedition;delete locked.contentMigration;const e=encounter(locked);e.hp=e.max=10000;e.atk=0;step(locked,e);assert.equal(e.cd.heavy??0,0); // Defensive skip even for an in-memory forged selection.
  const cabinet=fresh();assert(saveLoadout(cabinet,0,'普通'));cabinet.loadouts[0].skills=['delay',null,null,null];const before=JSON.stringify(cabinet);assert(!applyLoadout(cabinet,0));assert.equal(JSON.stringify(cabinet),before);assert(!validSave(cabinet));
  // Offline level crossings use the same notice collection, batched once after simulation.
- const afk=fresh();afk.level=9;afk.xp=9*80-1;normalizeHealth(afk,0);afk.lastSeen=0;afk.running=true;const report=offline(afk,60000);assert(report.kills>0);assert(afk.level>=10);const notices=collectSkillUnlockNotices(afk);assert(notices.some(n=>n.key==='heavy'));assert.deepEqual(collectSkillUnlockNotices(JSON.parse(JSON.stringify(afk))),[]);
+ const afk=fresh();afk.level=9;afk.xp=9*80-1;normalizeHealth(afk,0);afk.lastSeen=0;afk.running=true;enableM2TestBudget();prepareM2TestRoute(afk,0);const report=offline(afk,60000);assert(report.kills>0);assert(afk.level>=10);const notices=collectSkillUnlockNotices(afk);assert(notices.some(n=>n.key==='heavy'));assert.deepEqual(collectSkillUnlockNotices(JSON.parse(JSON.stringify(afk))),[]);
  console.log('Skill progression: six level thresholds, true fresh4, legacy all14/no reset/no spam, malformed markers rejected, locked preset/loadout/save/combat guards, persisted online/offline notices: PASS');
 }finally{Math.random=original;}

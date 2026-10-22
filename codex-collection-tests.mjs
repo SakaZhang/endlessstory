@@ -1,3 +1,4 @@
+import {enableM2TestBudget,prepareM2TestRoute} from './m2-test-budget-fixture.mjs';
 import assert from 'node:assert/strict';
 import {commitGameTransaction} from './dist/storage.js';
 import {fresh,item,stats,validSave,SET_CODEX,SET_SLOTS,LEGENDARY_CODEX,normalizeCodexCollection,recordCollectedEquipment,codexSetState,codexState,receiveBattleLoot,setLootFilter,bagCounts,claimForgeResult,ensureMerchant,purchaseEquipment,sellValue,equipItem,saveLoadout,reforge,resolveReforge,offline,normalizeHealth} from './dist/engine.js';
@@ -5,7 +6,7 @@ const original=Math.random;Math.random=()=>0;
 try{
  const s=fresh();assert.equal(s.codexCollection,undefined);const beforeStats=JSON.stringify(stats(s));assert(normalizeCodexCollection(s));assert.equal(JSON.stringify(stats(s)),beforeStats);assert(validSave(s));assert.equal(SET_CODEX.length,3);assert(SET_CODEX.every(x=>x.parts.length===4));assert.deepEqual(codexSetState(s,'anvil'),{discovered:false,parts:[],complete:false});assert.equal(codexSetState(s,'unknown'),null);
  for(const part of SET_SLOTS){const it=item(part,part==='helm'?5:40,'anvil',3);// Legacy names are arbitrary; new template names are deliberately immutable.
- for(const key of ['templateId','baseVariant','weaponType','originRace','visualKey','visualVariant','iconKey'])delete it[key];it.name='任意名称';assert(receiveBattleLoot(s,{kind:'equipment',item:it}));assert(codexSetState(s,'anvil').parts.includes(part));}
+ for(const key of ['baseBudgetModel','budgetLevel','budgetSourceLevel','budgetCompatibility','templateId','baseVariant','weaponType','originRace','visualKey','visualVariant','iconKey'])delete it[key];it.name='任意名称';assert(receiveBattleLoot(s,{kind:'equipment',item:it}));assert(codexSetState(s,'anvil').parts.includes(part));}
  const acquired=JSON.stringify(stats(s));assert(codexSetState(s,'anvil').complete);assert.equal(codexSetState(s,'anvil').parts.length,4);assert(normalizeCodexCollection(s));assert.equal(JSON.stringify(stats(s)),acquired);assert(receiveBattleLoot(s,{kind:'equipment',item:item('helm',99,'anvil',3)}));assert.equal(codexSetState(s,'anvil').parts.length,4);
  s.inventory=s.inventory.filter(it=>!it.set);assert(codexSetState(s,'anvil').complete);assert(validSave(s));const restored=JSON.parse(JSON.stringify(s));assert(normalizeCodexCollection(restored));assert(codexSetState(restored,'anvil').complete);
  // Legacy migration knows only current held inventory, including wardrobe IDs, never prior sales.
@@ -19,7 +20,7 @@ try{
  // Consumption records a legacy donor before removing it, with no new set identity on target.
  const donorState=fresh(),target=item('weapon',1,null,1),donor=item('gloves',1,'guard',3);target.affixes=[{stat:'atk',value:3},{stat:'hp',value:15}];donor.affixes=[{stat:'armor',value:2},{stat:'hit',value:5},{stat:'crit',value:5},{stat:'critDamage',value:8}];donorState.inventory.push(target,donor);assert(reforge(donorState,target.id,'replace',0,donor.id));assert(!donorState.inventory.some(x=>x.id===donor.id));assert.deepEqual(codexSetState(donorState,'guard').parts,['gloves']);assert(resolveReforge(donorState,true));assert.equal(target.set,null);assert(validSave(donorState));
  // Offline acquisition uses the same collector and backfills currently owned legacy sets.
- const afk=fresh();afk.inventory.push(item('boots',1,'anvil',3));normalizeHealth(afk,0);afk.lastSeen=0;afk.running=true;const report=offline(afk,60000);assert(report.kills>0);assert.deepEqual(codexSetState(afk,'anvil').parts,['boots']);assert(validSave(afk));
+ const afk=fresh();afk.inventory.push(item('boots',1,'anvil',3));normalizeHealth(afk,0);afk.lastSeen=0;afk.running=true;enableM2TestBudget();prepareM2TestRoute(afk,0);const report=offline(afk,60000);assert(report.kills>0);assert.deepEqual(codexSetState(afk,'anvil').parts,['boots']);assert(validSave(afk));
  const legend=LEGENDARY_CODEX[0];assert.equal(legend.implemented,false);assert.equal(codexState(s,legend.id).collected,false);
  const fake=fresh(),fakeItem=item('weapon',1,null,3);fakeItem.legendaryId=legend.id;fake.inventory.push(fakeItem);assert(!recordCollectedEquipment(fake,fakeItem));assert.equal(codexState(fake,legend.id).collected,false);
  // Test-only enabled entry exercises the future actual-implemented legendary lifecycle.
