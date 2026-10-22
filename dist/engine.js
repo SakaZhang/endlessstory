@@ -1,3 +1,5 @@
+import {rollEquipmentInputQuality,fusionDivineChance} from './fusion-input-schema.js';
+export {equipmentFusionQualityDistribution,rollEquipmentInputQuality,fusionDivineChance} from './fusion-input-schema.js';
 import {equipmentFingerprint,validBatchSelection,validBatchQuote} from './batch-sale-schema.js';
 import {validCollectionLedger,addOwnedCollection,normalizeCollectionLedger} from './codex-collection-schema.js';
 import {rollSourceSet,isMerchantEquipmentSellable} from './set-source-schema.js';
@@ -7,7 +9,7 @@ export {SKILL_UNLOCK_LEVELS,normalizeSkillProgression,skillUnlocked};
 import {BAG_LIMITS,INVENTORY_SAVE_LIMIT,bagCounts,canReceiveEquipment,canReceiveMaterial,canReceiveItem,validLootFilters,normalizeInventoryState,setLootFilter,shouldDiscardLoot,emptyLootSummary,validLootSummary,mergeLootSummary} from './inventory-schema.js';
 export {BAG_LIMITS,bagCounts,canReceiveEquipment,canReceiveMaterial,canReceiveItem,normalizeInventoryState,setLootFilter,shouldDiscardLoot} from './inventory-schema.js';
 import {validDungeonCarry,captureDungeonPlayerState,applyDungeonPlayerState} from './dungeon-player-state.js';
-import {validEquipmentLevelMetadata,normalizeEquipmentLevels,rollDropEquipmentLevel} from './equipment-level-schema.js';
+import {validEquipmentLevelMetadata,normalizeEquipmentLevels,rollDropEquipmentLevel,rollEquipmentFusionLevel} from './equipment-level-schema.js';
 export {normalizeEquipmentLevels,rollDropEquipmentLevel,rollEquipmentFusionLevel,EQUIPMENT_LEVEL_SOURCES} from './equipment-level-schema.js';
 import {AREAS,SITES,INSTANCES,RACE_KEYS,areaLevelRange,resolveLegacySite,instanceCooldownMs,pickRoute,areaGearLevel} from './location-schema.js';
 export {AREAS,SITES,INSTANCES,RACE_KEYS,areaLevelRange,resolveLegacySite,instanceCooldownMs,pickRoute,areaGearLevel} from './location-schema.js';
@@ -780,21 +782,32 @@ export const FUSION_TAGS={
  '誓约残片':{slots:{weapon:0,helm:1,armor:0,gloves:0,boots:1,ring:2,amulet:2}}
 };
 export function fusionWeights(selection){const slots=Object.fromEntries(SLOTS.map(k=>[k,2]));for(const key of selection){const parsed=parseMaterialKey(key),tag=parsed?FUSION_TAGS[parsed.material]:null;if(!tag)continue;for(const slot of SLOTS)slots[slot]+=tag.slots[slot];}return {slots};}
+export function eligibleFusionEquipment(s){
+ return s.inventory.filter(it=>validEquipment(it)&&!it.legendaryId&&!it.locked&&!Object.values(s.equip).includes(it.id)&&!isProtected(s,it.id));
+}
 export function forge(s,selection){
- if(!validCodexCollection(s)||!Array.isArray(selection)||selection.length<1||selection.length>5||s.gold<40||s.pendingForgeClaim||!validMaterials(s))return null;
- const counts={},parsed=[];for(const key of selection){const entry=parseMaterialKey(key);if(!entry)return null;parsed.push(entry);counts[entry.key]=(counts[entry.key]||0)+1;}
+ if(!validCodexCollection(s)||!Array.isArray(selection)||selection.length<1||selection.length>5||!Number.isFinite(s.gold)||s.gold<40||s.pendingForgeClaim||!validMaterials(s))return null;
+ const counts={},parsed=[],gear=[],ids=new Set(),inputs=[],materials=[],eligible=new Map(eligibleFusionEquipment(s).map(it=>[it.id,it]));
+ for(const input of selection){
+  if(typeof input==='string'){const entry=parseMaterialKey(input);if(!entry)return null;parsed.push(entry);materials.push(entry.key);inputs.push({kind:'material',quality:entry.quality});counts[entry.key]=(counts[entry.key]||0)+1;}
+  else{if(!input||typeof input!=='object'||Array.isArray(input)||Object.keys(input).length!==2||input.kind!=='equipment'||typeof input.id!=='string'||ids.has(input.id)||!eligible.has(input.id))return null;const it=eligible.get(input.id);ids.add(it.id);gear.push(it);inputs.push({kind:'equipment',quality:it.rarity});}
+ }
  if(parsed.some(({material,quality,key})=>materialCount(s,material,quality)<counts[key]))return null;
- const n=selection.length,a=parsed.reduce((total,p)=>total+p.quality,0)/n,qualityWeights=fusionQualityWeights(selection),herbs=parsed.filter(p=>p.material==='灰根草').length;
- if(herbs&&Math.random()<.35+.5*herbs/n){
-  if(!validPotions(s))return null;
+ const n=selection.length,qualityWeights=gear.length?null:fusionQualityWeights(materials),herbs=parsed.filter(p=>p.material==='灰根草').length;
+ if(!gear.length&&herbs&&!validPotions(s))return null;
+ if(!gear.length&&herbs&&Math.random()<.35+.5*herbs/n){
   const quality=luckyRoll(()=>rollQuality(qualityWeights),s.talents.luck??0),type=weighted([['healing',60],['strength',25],['fireResist',15]]),key=potionKey(type,quality);
   normalizeMaterials(s);normalizePotions(s);Object.entries(counts).forEach(([key,v])=>s.materialStacks[key]-=v);s.gold-=40;
   const result={kind:'potion',potionType:type,quality,name:POTIONS[type].name,quantity:1,key};
   if(canReceiveItem(s,key))s.potionStacks[key]=(s.potionStacks[key]??0)+1;else s.pendingForgeClaim={kind:'potion',potion:result};return result;
  }
- const weights=fusionWeights(selection),slot=weighted(Object.entries(weights.slots)),set=null,quality=luckyRoll(()=>rollQuality(qualityWeights),s.talents.luck??0);
- const it=item(slot,s.level,set,quality,{levelSource:'material'});if(Math.random()<.03)applyForgeFavor(it);
- normalizeMaterials(s);Object.entries(counts).forEach(([key,v])=>s.materialStacks[key]-=v);s.gold-=40;if(canReceiveEquipment(s,it)){s.inventory.push(it);recordCollectedEquipment(s,it);}else s.pendingForgeClaim={kind:'equipment',item:it};return it;
+ const weights=fusionWeights(materials),slot=weighted(Object.entries(weights.slots)),quality=luckyRoll(()=>gear.length?rollEquipmentInputQuality(inputs):rollQuality(qualityWeights),s.talents.luck??0);
+ const level=gear.length?rollEquipmentFusionLevel(gear):{level:s.level,baseLevel:s.level,levelSource:'material'};
+ const it=item(slot,level.level,null,quality,level);if(Math.random()<fusionDivineChance(inputs))applyForgeFavor(it);
+ // Record actual owned inputs before their one-time consumption.
+ if(gear.length)normalizeCodexCollection(s);
+ normalizeMaterials(s);Object.entries(counts).forEach(([key,v])=>s.materialStacks[key]-=v);s.inventory=s.inventory.filter(it=>!ids.has(it.id));s.gold-=40;
+ if(canReceiveEquipment(s,it)){s.inventory.push(it);recordCollectedEquipment(s,it);}else s.pendingForgeClaim={kind:'equipment',item:it};return it;
 }
 export function applyForgeFavor(it){
  if(it.divine)return false;

@@ -21,8 +21,8 @@ function rollWithin(baseLevel,range,random,levelSource){
 export function rollDropEquipmentLevel(baseLevel,areaRange,random=Math.random){
  return rollWithin(baseLevel,areaRange,random,'drop');
 }
-// Pure future-facing level calculation only. No item consumption, crafting,
-// quality choice, or gameplay entry point is implemented here.
+// Pure level calculation shared with equipment-input fusion. Consumption and
+// quality choice stay in the engine; offsets never become the next baseline.
 export function rollEquipmentFusionLevel(items,random=Math.random){
  if(!Array.isArray(items)||!items.length||items.length>5||!items.every(it=>it&&validEquipmentLevelMetadata(it)&&Number.isFinite(it.baseLevel??it.level)&&(it.baseLevel??it.level)>=0&&(it.baseLevel??it.level)<=1e12))return null;
  const baseLevel=Math.max(...items.map(it=>it.baseLevel??it.level));
