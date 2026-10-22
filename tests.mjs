@@ -39,3 +39,4 @@ import './dungeon-carry-tests.mjs';
 import './inventory-bags-tests.mjs';
 import './skill-progression-tests.mjs';
 import './set-source-tests.mjs';
+import './codex-collection-tests.mjs';

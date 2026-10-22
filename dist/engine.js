@@ -1,3 +1,4 @@
+import {validCollectionLedger,addOwnedCollection,normalizeCollectionLedger} from './codex-collection-schema.js';
 import {rollSourceSet,isMerchantEquipmentSellable} from './set-source-schema.js';
 export {rollSourceSet,isMerchantEquipmentSellable};
 import {SKILL_UNLOCK_LEVELS,validSkillProgression,normalizeSkillProgression,skillUnlocked,collectSkillUnlockKeys} from './skill-progression-schema.js';
@@ -154,6 +155,7 @@ export function reforge(s,itemId,mode,index,donorId){
  if(!Number.isFinite(s.gold)||s.gold<cost.gold||!validMaterials(s)||!validConsumables(s)||Object.entries(cost.materials).some(([key,n])=>materialCount(s,key,0)<n)||Object.entries(cost.consumables??{}).some(([key,n])=>(s.consumables?.[key]??0)<n))return null;
  const donor=mode==='replace'?eligibleReforgeDonors(s,itemId,index).find(x=>x.item.id===donorId):null;
  if(mode==='replace'&&!donor)return null;
+ if(!validCodexCollection(s))return null;
  const before=it.affixes.map(a=>({...a})),after=before.map(a=>({...a}));
  const roll=stat=>({stat,value:luckyRoll(()=>rand(AFFIX_DEFS[stat].min,AFFIX_DEFS[stat].max),s.talents.luck??0)});
  if(mode==='value')after[index]=roll(after[index].stat);
@@ -169,6 +171,7 @@ export function reforge(s,itemId,mode,index,donorId){
  const newSpecial=mode==='all'&&!it.set&&it.rarity>=2&&!it.legendaryId?{id:Object.keys(SPECIALS)[rand(0,Object.keys(SPECIALS).length-1)]}:oldSpecial?{...oldSpecial}:null;
  // Charge once, then persist the choice without modifying the target.
  normalizeMaterials(s);normalizeTalents(s);s.gold-=cost.gold;for(const [key,n] of Object.entries(cost.materials))s.materialStacks[materialKey(key)]-=n;for(const [key,n] of Object.entries(cost.consumables??{}))s.consumables[key]-=n;
+ if(donor)normalizeCodexCollection(s);
  if(donor)s.inventory.splice(s.inventory.findIndex(x=>x.id===donor.item.id),1);
  const operationId='reforge-'+Date.now().toString(36)+'-'+(++serial).toString(36);
  s.pendingReforge={ruleVersion:2,operationId,itemId:it.id,mode,index:mode==='all'?null:index,oldAffixes:before,newAffixes:after,oldSpecial,newSpecial,cost,...(donor?{donor:{id:donor.item.id,name:donor.item.name,slot:donor.item.slot,eligibleStats:[...new Set(donor.affixes.map(a=>a.stat))]}}:{})};
@@ -661,12 +664,12 @@ export function materialEntries(s){return Object.keys(MATERIALS).flatMap(materia
 export function materialPrice(material,quality=0){return materialKey(material,quality)?Math.ceil(MATERIALS[material].price*[1,1.5,2.5,4][quality]):null;}
 function addMaterial(s,material,quality,count){const key=materialKey(material,quality),before=s.materialStacks[key]??0,added=Math.max(0,Math.min(count,1e12-before));s.materialStacks[key]=before+added;return added;}
 export function receiveBattleLoot(s,loot,summary=emptyLootSummary()){
- if(!loot||!['equipment','material','consumable','potion'].includes(loot.kind))return false;
+ if(!validCodexCollection(s)||!loot||!['equipment','material','consumable','potion'].includes(loot.kind))return false;
  const qty=loot.quantity??1;if(!Number.isSafeInteger(qty)||qty<1)return false;
  const category=loot.kind==='equipment'?'equipment':loot.kind==='material'?'materials':'items';
  const quality=loot.kind==='equipment'?loot.item?.rarity:loot.kind==='material'?parseMaterialKey(loot.key)?.quality:loot.kind==='potion'?parsePotionKey(loot.key)?.quality:undefined;
  if(!(loot.kind==='equipment'&&(loot.item?.locked||isProtected(s,loot.item?.id)))&&shouldDiscardLoot(s,category,quality)){summary.discarded[category]+=qty;return false;}
- if(loot.kind==='equipment'){if(!validEquipment(loot.item)||s.inventory.some(it=>it.id===loot.item.id))return false;if(qty!==1||!canReceiveEquipment(s,loot.item)){summary.overflow.equipment+=qty;return false;}s.inventory.push(loot.item);return true;}
+ if(loot.kind==='equipment'){if(!validEquipment(loot.item)||s.inventory.some(it=>it.id===loot.item.id))return false;if(qty!==1||!canReceiveEquipment(s,loot.item)){summary.overflow.equipment+=qty;return false;}s.inventory.push(loot.item);recordCollectedEquipment(s,loot.item);return true;}
  if(loot.kind==='material'){const parsed=parseMaterialKey(loot.key);if(!parsed)return false;normalizeMaterials(s);if(!canReceiveMaterial(s,parsed.key,qty)){summary.overflow.materials+=qty;return false;}addMaterial(s,parsed.material,parsed.quality,qty);return true;}
  if(loot.kind==='consumable'){if(!Object.hasOwn(CONSUMABLES,loot.key))return false;normalizeTalents(s);if(!canReceiveItem(s,loot.key,qty)){summary.overflow.items+=qty;return false;}s.consumables[loot.key]=(s.consumables[loot.key]??0)+qty;return true;}
  if(loot.kind==='potion'){const parsed=parsePotionKey(loot.key);if(!parsed||!normalizePotions(s))return false;if(!canReceiveItem(s,parsed.key,qty)){summary.overflow.items+=qty;return false;}s.potionStacks[parsed.key]=(s.potionStacks[parsed.key]??0)+qty;return true;}
@@ -680,8 +683,8 @@ function validPendingForgeClaim(s){
  return false;
 }
 export function claimForgeResult(s){
- const p=s.pendingForgeClaim;if(!p||!validPendingForgeClaim(s))return null;
- if(p.kind==='equipment'){if(!canReceiveEquipment(s,p.item))return null;s.inventory.push(p.item);s.pendingForgeClaim=null;return p.item;}
+ const p=s.pendingForgeClaim;if(!p||!validCodexCollection(s)||!validPendingForgeClaim(s))return null;
+ if(p.kind==='equipment'){if(!canReceiveEquipment(s,p.item))return null;s.inventory.push(p.item);recordCollectedEquipment(s,p.item);s.pendingForgeClaim=null;return p.item;}
  const r=p.potion;if(!normalizePotions(s)||!canReceiveItem(s,r.key))return null;s.potionStacks[r.key]=(s.potionStacks[r.key]??0)+1;s.pendingForgeClaim=null;return r;
 }
 function earnedMaterials(s,material,count,boss=false,luck=0,weights=null,summary=emptyLootSummary()){
@@ -691,7 +694,7 @@ function earnedMaterials(s,material,count,boss=false,luck=0,weights=null,summary
 }
 const MERCHANT_STOCK={'铁屑':[6,12],'炉火晶':[3,7],'誓约残片':[2,5],'灰根草':[4,8]};
 export const MERCHANT_CYCLE_MS=30*60*1000;
-function validEquipment(i){try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;return validEquipmentLevelMetadata(i)&&typeof i.id==='string'&&typeof i.name==='string'&&SLOTS.includes(i.slot)&&Number.isInteger(i.rarity)&&i.rarity>=0&&i.rarity<=3&&(!i.set||(BUILD.some(b=>b.id===i.set)&&SET_SLOTS.includes(i.slot)&&i.rarity===3))&&num(i.atk)&&num(i.hp)&&num(i.armor)&&num(i.level)&&num(i.bless,5)&&Array.isArray(i.affixes)&&(i.rarity===0?i.affixes.length<=1:i.affixes.length===i.rarity+1)&&new Set(i.affixes.map(a=>a.stat)).size===i.affixes.length&&i.affixes.every(a=>Object.hasOwn(AFFIX_DEFS,a.stat)&&Number.isInteger(a.value)&&num(a.value,50))&&(!i.special||(!i.set&&i.rarity>=2&&Object.hasOwn(SPECIALS,i.special.id)))&&i.legendaryId===null&&(i.divine===undefined||(i.divine?.id==='forge-favor'&&i.divine.name==='神赐·炉火眷顾'&&i.divine.model==='raw-v1'&&['atk','armor','hp'].every(k=>num(i.divine.bonus?.[k]))));}catch{return false;}}
+function validEquipment(i){try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;return validEquipmentLevelMetadata(i)&&typeof i.id==='string'&&typeof i.name==='string'&&SLOTS.includes(i.slot)&&Number.isInteger(i.rarity)&&i.rarity>=0&&i.rarity<=3&&(!i.set||(BUILD.some(b=>b.id===i.set)&&SET_SLOTS.includes(i.slot)&&i.rarity===3))&&num(i.atk)&&num(i.hp)&&num(i.armor)&&num(i.level)&&num(i.bless,5)&&Array.isArray(i.affixes)&&(i.rarity===0?i.affixes.length<=1:i.affixes.length===i.rarity+1)&&new Set(i.affixes.map(a=>a.stat)).size===i.affixes.length&&i.affixes.every(a=>Object.hasOwn(AFFIX_DEFS,a.stat)&&Number.isInteger(a.value)&&num(a.value,50))&&(!i.special||(!i.set&&i.rarity>=2&&Object.hasOwn(SPECIALS,i.special.id)))&&(i.legendaryId===null||LEGENDARY_CODEX.some(def=>def.id===i.legendaryId&&def.implemented&&def.slot===i.slot&&!i.set))&&(i.divine===undefined||(i.divine?.id==='forge-favor'&&i.divine.name==='神赐·炉火眷顾'&&i.divine.model==='raw-v1'&&['atk','armor','hp'].every(k=>num(i.divine.bonus?.[k]))));}catch{return false;}}
 function validMerchant(merchant){
  if(!merchant||merchant.version!==1||!Number.isFinite(merchant.generatedAt)||merchant.generatedAt<0||merchant.generatedAt>1e15||!Array.isArray(merchant.offers))return false;
  const rows=merchant.offers,legacy=rows.length>=2&&rows.length<=3&&rows.every(o=>o&&!o.type);
@@ -750,8 +753,8 @@ export function buyMaterial(s,stackKey,qty,expectedRevision,now=Date.now()){
 export function purchaseEquipment(s,offerId,expectedRevision,now=Date.now()){
  const m=ensureMerchant(s,now);if(!m||!Number.isSafeInteger(expectedRevision)||m.revision!==expectedRevision)return false;
  const offer=m.offers.find(o=>o.type==='equipment'&&o.offerId===offerId);
- if(!isMerchantEquipmentSellable(offer)||offer.stock!==1||!canReceiveEquipment(s,offer.item)||!Number.isFinite(s.gold)||s.gold<offer.price||s.inventory.some(it=>it.id===offer.item.id))return false;
- s.gold-=offer.price;offer.stock=0;s.inventory.push(offer.item);return true;
+ if(!validCodexCollection(s)||!isMerchantEquipmentSellable(offer)||offer.stock!==1||!canReceiveEquipment(s,offer.item)||!Number.isFinite(s.gold)||s.gold<offer.price||s.inventory.some(it=>it.id===offer.item.id))return false;
+ s.gold-=offer.price;offer.stock=0;s.inventory.push(offer.item);recordCollectedEquipment(s,offer.item);return true;
 }
 export function purchaseConsumable(s,offerId,expectedRevision,now=Date.now()){
  const m=ensureMerchant(s,now);if(!m||!Number.isSafeInteger(expectedRevision)||m.revision!==expectedRevision)return false;
@@ -777,7 +780,7 @@ export const FUSION_TAGS={
 };
 export function fusionWeights(selection){const slots=Object.fromEntries(SLOTS.map(k=>[k,2]));for(const key of selection){const parsed=parseMaterialKey(key),tag=parsed?FUSION_TAGS[parsed.material]:null;if(!tag)continue;for(const slot of SLOTS)slots[slot]+=tag.slots[slot];}return {slots};}
 export function forge(s,selection){
- if(!Array.isArray(selection)||selection.length<1||selection.length>5||s.gold<40||s.pendingForgeClaim||!validMaterials(s))return null;
+ if(!validCodexCollection(s)||!Array.isArray(selection)||selection.length<1||selection.length>5||s.gold<40||s.pendingForgeClaim||!validMaterials(s))return null;
  const counts={},parsed=[];for(const key of selection){const entry=parseMaterialKey(key);if(!entry)return null;parsed.push(entry);counts[entry.key]=(counts[entry.key]||0)+1;}
  if(parsed.some(({material,quality,key})=>materialCount(s,material,quality)<counts[key]))return null;
  const n=selection.length,a=parsed.reduce((total,p)=>total+p.quality,0)/n,qualityWeights=fusionQualityWeights(selection),herbs=parsed.filter(p=>p.material==='灰根草').length;
@@ -790,7 +793,7 @@ export function forge(s,selection){
  }
  const weights=fusionWeights(selection),slot=weighted(Object.entries(weights.slots)),set=null,quality=luckyRoll(()=>rollQuality(qualityWeights),s.talents.luck??0);
  const it=item(slot,s.level,set,quality,{levelSource:'material'});if(Math.random()<.03)applyForgeFavor(it);
- normalizeMaterials(s);Object.entries(counts).forEach(([key,v])=>s.materialStacks[key]-=v);s.gold-=40;if(canReceiveEquipment(s,it))s.inventory.push(it);else s.pendingForgeClaim={kind:'equipment',item:it};return it;
+ normalizeMaterials(s);Object.entries(counts).forEach(([key,v])=>s.materialStacks[key]-=v);s.gold-=40;if(canReceiveEquipment(s,it)){s.inventory.push(it);recordCollectedEquipment(s,it);}else s.pendingForgeClaim={kind:'equipment',item:it};return it;
 }
 export function applyForgeFavor(it){
  if(it.divine)return false;
@@ -801,12 +804,29 @@ export function applyForgeFavor(it){
  it.divine={id:'forge-favor',name:'神赐·炉火眷顾',model:'raw-v1',bonus};return true;
 }
 export const LEGENDARY_CODEX=[{id:'first-forge-oathhammer',name:'王统·初炉誓锤',slot:'weapon',icon:'firstforge',implemented:false,lore:'每一代矮人王继承此锤时，都会重新锻造它，并刻下自己的名字。旧王的誓言留在锤身，新王的名字融入炉火。',affix:'祖王回响',effect:'累计主动攻击后，触发一次强力、部分穿甲的额外重击。回响不会累积自身触发次数，也不会递归触发。',acquisition:'获取途径待定',attributes:'常规属性随机范围待定',tuning:'触发次数、伤害和穿甲数值待调'}];
-export function codexState(s,id){const entry=LEGENDARY_CODEX.find(x=>x.id===id);if(!entry)return null;if(!entry.implemented)return {collected:false,status:'设计预览 · 未收集'};const collected=s.inventory.some(i=>i.legendaryId===id);return {collected,status:collected?'已收集':'未收集'};}
+export const SET_CODEX=BUILD.map(b=>({id:b.id,name:b.name,icon:b.id,parts:[...SET_SLOTS],bonus:b.bonus}));
+function validCodexCollection(s){return validCollectionLedger(s,SET_CODEX,LEGENDARY_CODEX);}
+export function normalizeCodexCollection(s){return normalizeCollectionLedger(s,SET_CODEX,LEGENDARY_CODEX,validEquipment);}
+export function recordCollectedEquipment(s,it){
+ const owned=s.inventory?.find(candidate=>candidate.id===it?.id);if(!owned||!validEquipment(owned)||!normalizeCodexCollection(s))return false;
+ return addOwnedCollection(s.codexCollection,owned,SET_CODEX,LEGENDARY_CODEX);
+}
+export function codexSetState(s,id){
+ const entry=SET_CODEX.find(x=>x.id===id);if(!entry)return null;
+ const parts=validCodexCollection(s)?[...(s.codexCollection?.sets[id]??[])]:[];
+ return {discovered:parts.length>0,parts,complete:parts.length===entry.parts.length};
+}
+export function codexState(s,id){
+ const entry=LEGENDARY_CODEX.find(x=>x.id===id);if(!entry)return null;
+ if(!entry.implemented)return {collected:false,status:'设计预览 · 未收集'};
+ const collected=validCodexCollection(s)&&s.codexCollection?.legendaries.includes(id)===true;
+ return {collected,status:collected?'已收集':'未收集'};
+}
 export function validSave(s){
  try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;
  if(s.version!==SCHEMA_VERSION||s.race!=='dwarf'||s.hero!=='布洛克'||!Number.isInteger(s.level)||s.level<1||s.level>=100000||!num(s.xp)||!num(s.gold)||!Number.isInteger(s.location)||s.location<0||s.location>2)return false;
  if(s.activeEncounter?.kind==='dungeon'&&(!s.dungeonRun||s.activeEncounter.runId!==s.dungeonRun.runId||s.activeEncounter.dungeonStage!==s.dungeonRun.stage))return false;
- if(!validLootFilters(s)||!validPendingForgeClaim(s)||!validAreaProgress(s)||!validExpeditionState(s)||!Array.isArray(s.inventory)||s.inventory.length>INVENTORY_SAVE_LIMIT||!s.inventory.every(validEquipment)||!validPendingReforge(s))return false;
+ if(!validCodexCollection(s)||!validLootFilters(s)||!validPendingForgeClaim(s)||!validAreaProgress(s)||!validExpeditionState(s)||!Array.isArray(s.inventory)||s.inventory.length>INVENTORY_SAVE_LIMIT||!s.inventory.every(validEquipment)||!validPendingReforge(s))return false;
  if(s.merchant?.offers?.some(o=>o.type==='equipment'&&o.stock===1&&s.inventory.some(it=>it.id===o.item?.id)))return false;
  if((s.nextActionAt!==undefined&&(!Number.isFinite(s.nextActionAt)||s.nextActionAt<0||s.nextActionAt>1e15))||(s.restResume!==undefined&&typeof s.restResume!=='boolean')||(s.nextBattleAt!==undefined&&(!Number.isFinite(s.nextBattleAt)||s.nextBattleAt<0||s.nextBattleAt>1e15))||!validRecipes(s)||!validEncounter(s.activeEncounter)||!validPotions(s)||!validHealth(s)||!validLoadoutSlots(s)||(s.merchant!==undefined&&!validMerchant(s.merchant)))return false;
  if(new Set(s.inventory.map(i=>i.id)).size!==s.inventory.length||!s.equip||Object.keys(s.equip).length!==SOCKETS.length||!SOCKETS.every(k=>s.equip[k]===null||s.inventory.some(i=>i.id===s.equip[k]&&i.slot===SOCKET_TYPE[k])))return false;
