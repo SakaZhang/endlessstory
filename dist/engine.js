@@ -1,3 +1,5 @@
+import {rollSourceSet,isMerchantEquipmentSellable} from './set-source-schema.js';
+export {rollSourceSet,isMerchantEquipmentSellable};
 import {SKILL_UNLOCK_LEVELS,validSkillProgression,normalizeSkillProgression,skillUnlocked,collectSkillUnlockKeys} from './skill-progression-schema.js';
 export {SKILL_UNLOCK_LEVELS,normalizeSkillProgression,skillUnlocked};
 import {BAG_LIMITS,INVENTORY_SAVE_LIMIT,bagCounts,canReceiveEquipment,canReceiveMaterial,canReceiveItem,validLootFilters,normalizeInventoryState,setLootFilter,shouldDiscardLoot,emptyLootSummary,validLootSummary,mergeLootSummary} from './inventory-schema.js';
@@ -574,7 +576,14 @@ export function gainXp(s,n){s.xp+=n;while(s.xp>=s.level*80){s.xp-=s.level*80;s.l
 export function luckChance(points){return .06*Math.max(0,points)/(Math.max(0,points)+5);}
 function luckyRoll(draw,points){const first=draw();if(points>0&&Math.random()<luckChance(points))return Math.max(first,draw());return first;}
 function rollQuality(weights=[65,28,6.5,.5]){return Number(weighted(weights.map((w,i)=>[i,w])));}
-function rollDrop(s,boss,luck=0,instanceId=resolveLegacySite(s.location).id+'-field',clear=false,lootSummary=emptyLootSummary()){const dungeon=INSTANCES[instanceId]?.kind==='dungeon';if(Math.random()>=(boss?.65:clear?.35:.18) )return null;const isSet=Math.random()<(boss?.05:dungeon?.03:.01),slot=isSet?SET_SLOTS[rand(0,SET_SLOTS.length-1)]:SLOTS[rand(0,SLOTS.length-1)],set=isSet?BUILD[rand(0,2)].id:null,quality=isSet?3:luckyRoll(()=>rollQuality(boss?[50,35,13,2]:dungeon?[55,34,10,1]:[65,28,6.5,.5]),luck);const rolled=rollDropEquipmentLevel(areaGearLevel(instanceId),AREAS[INSTANCES[instanceId].areaId].levelRange);const it=item(slot,rolled.level,set,quality,rolled);return receiveBattleLoot(s,{kind:'equipment',item:it},lootSummary)?it:null;}
+function rollDrop(s,boss,luck=0,instanceId=resolveLegacySite(s.location).id+'-field',clear=false,lootSummary=emptyLootSummary()){
+ const instance=INSTANCES[instanceId],area=AREAS[instance?.areaId];if(!instance||!area)return null;
+ const dungeon=instance.kind==='dungeon';if(Math.random()>=(boss?.65:clear?.35:.18))return null;
+ const setRoll=rollSourceSet({source:'drop',kind:instance.kind,areaNumber:area.number,race:area.race});
+ const slot=setRoll?.slot??SLOTS[rand(0,SLOTS.length-1)],set=setRoll?.set??null,quality=setRoll?.rarity??luckyRoll(()=>rollQuality(boss?[50,35,13,2]:dungeon?[55,34,10,1]:[65,28,6.5,.5]),luck);
+ const rolled=rollDropEquipmentLevel(areaGearLevel(instanceId),area.levelRange),it=item(slot,rolled.level,set,quality,rolled);
+ return receiveBattleLoot(s,{kind:'equipment',item:it},lootSummary)?it:null;
+}
 export function reward(s,e,now=Date.now()){
  if(!e.win||e.rewarded)return null;
  const dungeon=e.kind==='dungeon',run=s.dungeonRun;
@@ -624,10 +633,10 @@ export function offline(s,now=Date.now()){
  return {minutes:Math.floor(Math.max(0,end-start)/60000),gold,xp,mat,materialLoot,lootSummary,kills,rests,rounds,capped:now-start>4*3600000};
 }
 export const MATERIALS={
- '铁屑':{icon:'iron',tags:['金属'],description:'旧驿道散落的铁料，融合时偏向厚重装备与碎砧套装。',origin:'失落驿道',price:4},
- '炉火晶':{icon:'fire',tags:['火焰'],description:'矿炉余热凝成的晶体，融合时偏向饰品与炉纹套装。',origin:'熄火矿井',price:7},
+ '铁屑':{icon:'iron',tags:['金属'],description:'旧驿道散落的铁料，融合时偏向厚重装备；不产出套装。',origin:'失落驿道',price:4},
+ '炉火晶':{icon:'fire',tags:['火焰'],description:'矿炉余热凝成的晶体，融合时偏向饰品；不产出套装。',origin:'熄火矿井',price:7},
  '灰根草':{icon:'herb',tags:['草药'],description:'黑炉荒野生长的耐寒草药，使随机融合更容易产出药剂。',origin:'黑炉诸地',price:5},
- '誓约残片':{icon:'soul',tags:['灵魂'],description:'旧誓遗物的碎片，融合时偏向饰品与守冢套装。',origin:'旧誓墓园',price:10}
+ '誓约残片':{icon:'soul',tags:['灵魂'],description:'旧誓遗物的碎片，融合时偏向饰品；不产出套装。',origin:'旧誓墓园',price:10}
 };
 export const MATERIAL_QUALITIES=['普通','稀有','优良','至臻'];
 export function materialKey(material,quality=0){return Object.hasOwn(MATERIALS,material)&&Number.isInteger(quality)&&quality>=0&&quality<=3?`${material}|${quality}`:null;}
@@ -701,7 +710,7 @@ function rollMerchantOffers(s,revision,preservedMaterials=null){
  const [minGearLevel,maxGearLevel]=getMerchantEquipmentLevelRange(s);
  const pool=Object.keys(MATERIALS),offers=preservedMaterials?preservedMaterials.map(o=>({...o,type:'material',quality:o.quality??0})):[],count=preservedMaterials?offers.length:rand(2,3);
  if(!preservedMaterials)for(let i=0;i<count;i++){const material=pool.splice(rand(0,pool.length-1),1)[0],[min,max]=MERCHANT_STOCK[material];const quality=rollQuality([75,20,4.5,.5]);offers.push({type:'material',material,quality,price:materialPrice(material,quality),stock:rand(min,max)});}
- while(offers.length<8){const isSet=Math.random()<.01,slot=isSet?SET_SLOTS[rand(0,SET_SLOTS.length-1)]:SLOTS[rand(0,SLOTS.length-1)],set=isSet?BUILD[rand(0,2)].id:null,it=item(slot,rand(minGearLevel,maxGearLevel),set,isSet?3:rollQuality(),{levelSource:'merchant'});offers.push({type:'equipment',item:it,price:15+sellValue(it)*4+it.level*3,stock:1});}
+ while(offers.length<8){const slot=SLOTS[rand(0,SLOTS.length-1)],it=item(slot,rand(minGearLevel,maxGearLevel),null,rollQuality(),{levelSource:'merchant'});offers.push({type:'equipment',item:it,price:15+sellValue(it)*4+it.level*3,stock:1});}
  if(Math.random()<.03)offers[7]={type:'consumable',consumable:'memoryFruit',price:200,stock:1};
  if(Math.random()<.10){const index=offers.findLastIndex(o=>o.type==='equipment');offers[index]={type:'consumable',consumable:'reforgeToken',price:120,stock:1};}
  const unknown=Object.keys(RECIPES).filter(id=>RECIPES[id].enabled&&!recipeKnown(s,id));
@@ -741,7 +750,7 @@ export function buyMaterial(s,stackKey,qty,expectedRevision,now=Date.now()){
 export function purchaseEquipment(s,offerId,expectedRevision,now=Date.now()){
  const m=ensureMerchant(s,now);if(!m||!Number.isSafeInteger(expectedRevision)||m.revision!==expectedRevision)return false;
  const offer=m.offers.find(o=>o.type==='equipment'&&o.offerId===offerId);
- if(!offer||offer.stock!==1||!canReceiveEquipment(s,offer.item)||!Number.isFinite(s.gold)||s.gold<offer.price||s.inventory.some(it=>it.id===offer.item.id))return false;
+ if(!isMerchantEquipmentSellable(offer)||offer.stock!==1||!canReceiveEquipment(s,offer.item)||!Number.isFinite(s.gold)||s.gold<offer.price||s.inventory.some(it=>it.id===offer.item.id))return false;
  s.gold-=offer.price;offer.stock=0;s.inventory.push(offer.item);return true;
 }
 export function purchaseConsumable(s,offerId,expectedRevision,now=Date.now()){
@@ -761,12 +770,12 @@ export function fusionQualityWeights(selection){
  const n=selection.length,a=parsed.reduce((sum,x)=>sum+x.quality,0)/n;return [50-4*n-3*a,40+2*n-a,9+1.6*n+3*a,1+.4*n+a];
 }
 export const FUSION_TAGS={
- '铁屑':{set:'anvil',slots:{weapon:2,helm:1,armor:2,gloves:1,boots:1,ring:0,amulet:0}},
- '炉火晶':{set:'rune',slots:{weapon:1,helm:0,armor:0,gloves:1,boots:0,ring:2,amulet:2}},
- '灰根草':{set:null,slots:{weapon:0,helm:0,armor:0,gloves:0,boots:0,ring:0,amulet:0}},
- '誓约残片':{set:'guard',slots:{weapon:0,helm:1,armor:0,gloves:0,boots:1,ring:2,amulet:2}}
+ '铁屑':{slots:{weapon:2,helm:1,armor:2,gloves:1,boots:1,ring:0,amulet:0}},
+ '炉火晶':{slots:{weapon:1,helm:0,armor:0,gloves:1,boots:0,ring:2,amulet:2}},
+ '灰根草':{slots:{weapon:0,helm:0,armor:0,gloves:0,boots:0,ring:0,amulet:0}},
+ '誓约残片':{slots:{weapon:0,helm:1,armor:0,gloves:0,boots:1,ring:2,amulet:2}}
 };
-export function fusionWeights(selection){const slots=Object.fromEntries(SLOTS.map(k=>[k,2])),sets=Object.fromEntries(BUILD.map(b=>[b.id,1]));for(const key of selection){const parsed=parseMaterialKey(key),tag=parsed?FUSION_TAGS[parsed.material]:null;if(!tag)continue;if(tag.set)sets[tag.set]+=2;for(const slot of SLOTS)slots[slot]+=tag.slots[slot];}return {slots,sets};}
+export function fusionWeights(selection){const slots=Object.fromEntries(SLOTS.map(k=>[k,2]));for(const key of selection){const parsed=parseMaterialKey(key),tag=parsed?FUSION_TAGS[parsed.material]:null;if(!tag)continue;for(const slot of SLOTS)slots[slot]+=tag.slots[slot];}return {slots};}
 export function forge(s,selection){
  if(!Array.isArray(selection)||selection.length<1||selection.length>5||s.gold<40||s.pendingForgeClaim||!validMaterials(s))return null;
  const counts={},parsed=[];for(const key of selection){const entry=parseMaterialKey(key);if(!entry)return null;parsed.push(entry);counts[entry.key]=(counts[entry.key]||0)+1;}
@@ -779,7 +788,7 @@ export function forge(s,selection){
   const result={kind:'potion',potionType:type,quality,name:POTIONS[type].name,quantity:1,key};
   if(canReceiveItem(s,key))s.potionStacks[key]=(s.potionStacks[key]??0)+1;else s.pendingForgeClaim={kind:'potion',potion:result};return result;
  }
- const weights=fusionWeights(selection),isSet=Math.random()<.05,slot=weighted(Object.entries(weights.slots).filter(([k])=>!isSet||SET_SLOTS.includes(k))),set=isSet?weighted(Object.entries(weights.sets)):null,quality=isSet?3:luckyRoll(()=>rollQuality(qualityWeights),s.talents.luck??0);
+ const weights=fusionWeights(selection),slot=weighted(Object.entries(weights.slots)),set=null,quality=luckyRoll(()=>rollQuality(qualityWeights),s.talents.luck??0);
  const it=item(slot,s.level,set,quality,{levelSource:'material'});if(Math.random()<.03)applyForgeFavor(it);
  normalizeMaterials(s);Object.entries(counts).forEach(([key,v])=>s.materialStacks[key]-=v);s.gold-=40;if(canReceiveEquipment(s,it))s.inventory.push(it);else s.pendingForgeClaim={kind:'equipment',item:it};return it;
 }

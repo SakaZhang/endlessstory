@@ -16,10 +16,10 @@ try{
  for(const socket of SOCKETS){const replacement=item(SOCKET_TYPE[socket],1,null,0);s.inventory.push(replacement);equipItem(s,replacement.id,socket);}
  assert(saveLoadout(s,2,'覆盖'));assert.equal(bagItems(s).length,108);assert.equal(s.inventory.length,116);assert(originalIds.every(id=>!isProtected(s,id)));assert(validSave(s));
  // Actual output determines its bag; a full destination holds the paid result.
- while(bagCounts(s).equipment.helm<50)s.inventory.push(item('helm',1,null,0));
+ while(bagCounts(s).equipment.weapon<50)s.inventory.push(item('weapon',1,null,0));
  s.gold=1000;s.materialStacks['铁屑|0']=10;Math.random=()=>0;const result=forge(s,['铁屑']);assert(result);assert.equal(s.gold,960);assert(s.pendingForgeClaim);assert.equal(claimForgeResult(s),null);
  const remove=bagItems(s).find(it=>it.slot===result.slot).id;s.inventory=s.inventory.filter(it=>it.id!==remove);assert.equal(claimForgeResult(s).id,result.id);assert(validSave(s));
- const t=fresh();saveLoadout(t,0,'掉落柜');while(bagCounts(t).equipment.helm<49)t.inventory.push(item('helm',1,null,0));let e=encounter(t);e.done=true;e.win=true;assert(reward(t,e));assert.equal(bagCounts(t).equipment.helm,50);const count=t.inventory.length;t.nextBattleAt=0;e=encounter(t);e.done=true;e.win=true;assert.equal(reward(t,e),null);assert.equal(t.inventory.length,count);
+ const t=fresh();saveLoadout(t,0,'掉落柜');while(bagCounts(t).equipment.weapon<49)t.inventory.push(item('weapon',1,null,0));let e=encounter(t);e.done=true;e.win=true;assert(reward(t,e));assert.equal(bagCounts(t).equipment.weapon,50);const count=t.inventory.length;t.nextBattleAt=0;e=encounter(t);e.done=true;e.win=true;assert.equal(reward(t,e),null);assert.equal(t.inventory.length,count);
  for(const index of [-1,3,1.5]){before=JSON.stringify(s);assert(!saveLoadout(s,index,'无效'));assert(!deleteLoadout(s,index));assert(!applyLoadout(s,index));assert.equal(JSON.stringify(s),before);}
  const equippedBefore=JSON.stringify(s.equip);s.inventory.push(item('gloves',10,'anvil',3));preset(s,'anvil');assert.equal(JSON.stringify(s.equip),equippedBefore);
  console.log('Loadouts: old-save compatibility, 3 snapshots, shared wardrobe, atomic capacity, protected references, battle lock, rings, skill order, forge/drop capacity: PASS');

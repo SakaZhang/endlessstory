@@ -8,6 +8,6 @@ try{
   const s=fresh();s.level=level;s.gold=100;s.bonusTalentPoints=30;s.testGrants={v081support:true};s.materialStacks={['铁屑|'+quality]:5};s.talents.luck=draw%11;
   const it=forge(s,Array(5).fill('铁屑|'+quality));assert(it);assert.equal(it.level,level);assert.equal(s.level,level);assert.equal(s.gold,60);assert.equal(materialCount(s,'铁屑',quality),0);assert.equal(s.inventory.length,9);assert(validSave(s));sets+=!!it.set;divine+=!!it.divine;qualities.add(it.rarity);
  }
- assert(sets>0&&divine>0);assert.equal(qualities.size,4);
- console.log('Material forge exact current level: 2000 draws at levels1/7/40/100/137, all material qualities, sets/divine retained, cost40 and input counts unchanged; no level cap: PASS');
+ assert.equal(sets,0);assert(divine>0);assert.equal(qualities.size,4);
+ console.log('Material forge exact current level: 2000 draws at levels1/7/40/100/137, all material qualities, no new sets/divine retained, cost40 and input counts unchanged; no level cap: PASS');
 }finally{Math.random=original;}
