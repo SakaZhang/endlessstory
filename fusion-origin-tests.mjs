@@ -1,0 +1,25 @@
+import assert from 'node:assert/strict';
+import {EQUIPMENT_TEMPLATES} from './dist/equipment-templates.js';
+import {chooseFusionOrigin,fusionOriginWeights,fusionOriginTemplates,equipmentFusionOrigin} from './dist/fusion-origin.js';
+let calls=0;const rng=()=>{calls++;return .9;};
+const dwarf=EQUIPMENT_TEMPLATES.find(t=>t.slot==='weapon'&&!t.setId),gear=id=>({id,templateId:dwarf.id,visualVariant:dwarf.id,originRace:'dwarf',rarity:3});
+assert.equal(chooseFusionOrigin({heroRace:'dwarf',equipment:[]},rng),'dwarf');assert.equal(calls,0);
+assert.equal(chooseFusionOrigin({heroRace:'human',equipment:[gear('a'),gear('b')]},rng),'dwarf');assert.equal(calls,0,'single real origin preserves forge RNG sequence');
+assert.equal(equipmentFusionOrigin({id:'old',slot:'weapon'}),'dwarf');assert.equal(chooseFusionOrigin({heroRace:'elf',equipment:[{id:'old'}]},rng),'dwarf');
+assert.equal(chooseFusionOrigin({heroRace:'human',equipment:[]},rng),null,'no production human templates');
+assert.equal(equipmentFusionOrigin({originRace:'human'}),null);assert.equal(equipmentFusionOrigin({templateId:'unregistered',originRace:'dwarf'}),null);assert.equal(equipmentFusionOrigin({templateId:dwarf.id,originRace:'elf'}),null);assert.equal(equipmentFusionOrigin({visualVariant:dwarf.id}),'dwarf');
+assert.equal(fusionOriginWeights({heroRace:'dwarf',equipment:[gear('same'),gear('same')]}),null);
+assert.equal(fusionOriginWeights({heroRace:'dwarf',equipment:Array.from({length:6},(_,i)=>gear('g'+i))}),null);
+assert(fusionOriginTemplates('dwarf',{slot:'weapon'}).every(t=>t.originRace==='dwarf'&&t.slot==='weapon'&&t.setId===null));assert.deepEqual(fusionOriginTemplates('elf'),[]);
+// Foreign templates are isolated fixtures, not added to the production registry.
+const templates=[...EQUIPMENT_TEMPLATES,{id:'fixture_human_sword',originRace:'human',slot:'weapon',setId:null},{id:'fixture_elf_bow',originRace:'elf',slot:'weapon',setId:null}],options={templates};
+const human=id=>({id,templateId:'fixture_human_sword',originRace:'human',rarity:0});
+const input={heroRace:'elf',equipment:[gear('d0'),gear('d1'),human('h0'),human('h1'),human('h2')],materials:[{originRace:'elf',quality:3},{originRace:'elf',quality:3}]};
+const before=JSON.stringify(input);assert.deepEqual(fusionOriginWeights(input,options),{dwarf:2,human:3});assert.equal(chooseFusionOrigin(input,()=>.399999,options),'dwarf');assert.equal(chooseFusionOrigin(input,()=>.4,options),'human');assert.equal(chooseFusionOrigin(input,()=>.999999,options),'human');
+let counts={dwarf:0,human:0};for(let i=0;i<10000;i++)counts[chooseFusionOrigin(input,()=>(i+.5)/10000,options)]++;assert.deepEqual(counts,{dwarf:4000,human:6000},'piece counts, not supreme input quality');assert.equal(JSON.stringify(input),before);
+const same={...input,equipment:input.equipment.map(x=>({...x,rarity:3-x.rarity}))};assert.deepEqual(fusionOriginWeights(same,options),{dwarf:2,human:3});
+assert.equal(chooseFusionOrigin({heroRace:'elf',equipment:[]},()=>{throw Error('must not draw');},options),'elf');
+assert.equal(chooseFusionOrigin(input,()=>1,options),null);assert.equal(chooseFusionOrigin(input,()=>NaN,options),null);assert.equal(chooseFusionOrigin(input,()=>{throw Error('bad RNG');},options),null);
+assert.deepEqual(fusionOriginWeights({heroRace:'human',equipment:[{id:'old'}]},options),{dwarf:1});
+assert.equal(EQUIPMENT_TEMPLATES.some(t=>t.originRace!=='dwarf'),false,'fixture registry never mutates production');
+console.log('PASS fusion origin: pure hero, count-weighted equipment, materials/quality excluded, stable dwarf legacy, metadata mismatch rejection, one-origin zero RNG, fixture 40/60 distribution, no mutation.');

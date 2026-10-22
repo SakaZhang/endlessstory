@@ -68,3 +68,8 @@ import './multi-affix-tests.mjs';
 
 import './affix-production-tests.mjs';
 import './reforge-same-type-tests.mjs';
+
+import './reforge-divine-tests.mjs';
+import './fusion-origin-tests.mjs';
+
+import './fusion-origin-production-tests.mjs';

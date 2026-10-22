@@ -1,3 +1,5 @@
+import {chooseFusionOrigin,fusionOriginTemplates,fusionOriginWeights} from './fusion-origin.js';
+export {chooseFusionOrigin,fusionOriginWeights} from './fusion-origin.js';
 import {NEW_ORDINARY_AFFIX_DEFS,NEW_SPECIAL_DEFS,createBattleAffixState,validBattleAffixState,tryNirvana,tryReaperHit,lifestealRate,lifestealHeal,openingShelterShield} from './affix-expansion.js';
 import {selectEquipmentTemplate,applyEquipmentTemplate,validEquipmentTemplateMetadata} from './equipment-templates.js';
 export {EQUIPMENT_TEMPLATES,EQUIPMENT_TEMPLATE_BY_ID,RACE_WEAPON_POOLS,equipmentTemplateDisplay} from './equipment-templates.js';
@@ -129,13 +131,14 @@ export function item(slot,level=1,set=null,rarity=0,levelMetadata={}){
  rarity=clamp(Math.floor(rarity),0,3);level=Math.max(1,Math.floor(level));
  if(set&&(!SET_SLOTS.includes(slot)||!BUILD.some(b=>b.id===set)))set=null;
  if(set)rarity=3;
+ const originRace=levelMetadata.originRace??'dwarf';if(!fusionOriginTemplates(originRace,{slot,setId:set}).length)throw new Error('Equipment origin has no registered template');
  const b=bases[slot],scale=(1+rarity*.1)*(0.92+Math.random()*.16),name=(set?BUILD.find(x=>x.id===set).name+'·':'旅铸·')+names[slot];
  const baseLevel=levelMetadata.baseLevel??level,levelSource=levelMetadata.levelSource??'generated';
  if(!validEquipmentLevelMetadata({baseLevel,levelSource}))throw new RangeError('Invalid equipment level provenance');
  const out={id:uid(),slot,set,rarity,level,baseLevel,levelSource,name,atk:Math.max(1,Math.round(b.atk*scale+level*.7)),armor:Math.max(1,Math.round(b.armor*scale+level*.45)),hp:Math.round(b.hp*scale+level*1.8),affixes:rollAffixes(rarity),special:null,legendaryId:null,locked:false,bless:0};
  if(!set&&rarity>=2&&Math.random()<(rarity===2?.1:.2)){out.special={id:activeSpecialKeys()[rand(0,activeSpecialKeys().length-1)]};}
  let hash=2166136261;for(const ch of out.id){hash^=ch.charCodeAt(0);hash=Math.imul(hash,16777619)>>>0;}
- const template=selectEquipmentTemplate({slot,setId:set,originRace:'dwarf'},()=>hash/2**32);return template?applyEquipmentTemplate(out,template.id):out;
+ const template=selectEquipmentTemplate({slot,setId:set,originRace},()=>hash/2**32);return template?applyEquipmentTemplate(out,template.id):out;
 }
 export function itemTotals(it,{development=false}={}){const m=divineMultiplier(it),base=enhancedItemBase(it,{development})??it;return {atk:base.atk*m+(it.bless||0)*2,armor:base.armor*m,hp:base.hp*m};}
 export function sellValue(it){return [2,4,8,16][it.rarity]+Math.floor(it.level/3);}
@@ -159,6 +162,25 @@ export function eligibleReforgeDonors(s,targetId,index=0){
  const legalDonor=it=>Array.isArray(it.affixes)&&new Set(it.affixes.map(a=>a?.stat)).size===it.affixes.length&&it.affixes.every(a=>a&&Object.hasOwn(AFFIX_DEFS,a.stat)&&Number.isInteger(a.value)&&a.value>=AFFIX_DEFS[a.stat].min&&a.value<=AFFIX_DEFS[a.stat].max);
  return s.inventory.filter(it=>it.id!==targetId&&legalDonor(it)&&!it.locked&&!it.legendaryId&&!Object.values(s.equip).includes(it.id)&&!isProtected(s,it.id)).map(it=>({item:it,affixes:it.affixes.filter(a=>Object.hasOwn(AFFIX_DEFS,a.stat)&&!occupied.has(a.stat))})).filter(x=>x.affixes.length);
 }
+export const REFORGE_DIVINE_CONFIG=Object.freeze({chance:0.03});
+const sameReforgeData=(a,b)=>{
+ if(a===b)return true;
+ if(!a||!b||typeof a!=='object'||typeof b!=='object'||Array.isArray(a)!==Array.isArray(b))return false;
+ const keys=Object.keys(a);return keys.length===Object.keys(b).length&&keys.every(k=>Object.hasOwn(b,k)&&sameReforgeData(a[k],b[k]));
+};
+function reforgeCandidateItem(it,p){
+ const candidate=structuredClone(it);candidate.affixes=structuredClone(p.newAffixes);
+ if(p.ruleVersion>=2)candidate.special=structuredClone(p.newSpecial);
+ if(p.ruleVersion===5){if(p.newDivine===null)delete candidate.divine;else candidate.divine=structuredClone(p.newDivine);}
+ else if(divineMultiplier(candidate)>1)candidate.divine.bonus.affixes=candidate.affixes.map(a=>({stat:a.stat,value:a.value/10}));
+ return candidate;
+}
+// Returns the complete candidate, never the owned target or a mutable pending reference.
+export function getPendingReforgeCandidate(s){
+ if(!s?.pendingReforge||!validPendingReforge(s))return null;
+ return reforgeCandidateItem(s.inventory.find(it=>it.id===s.pendingReforge.itemId),s.pendingReforge);
+}
+function canonicalReforgeDivine(it){const copy=structuredClone(it);delete copy.divine;applyForgeFavor(copy);return copy.divine;}
 export function reforge(s,itemId,mode,index=0,donorId){
  if(!s||!Array.isArray(s.inventory)||s.pendingReforge)return null;
  const it=s.inventory.find(i=>i.id===itemId),cost=getReforgeCost(it,mode);
@@ -171,6 +193,7 @@ export function reforge(s,itemId,mode,index=0,donorId){
  const donor=mode==='replace'?eligibleReforgeDonors(s,itemId,index).find(x=>x.item.id===donorId):null;
  if(mode==='replace'&&!donor)return null;
  if(!validCodexCollection(s))return null;
+ if(mode==='all'&&it.divine!==undefined&&!sameReforgeData(it.divine,canonicalReforgeDivine(it)))return null;
  const before=it.affixes.map(a=>({...a})),after=before.map(a=>({...a}));
  const roll=stat=>({stat,value:luckyRoll(()=>rand(AFFIX_DEFS[stat].min,AFFIX_DEFS[stat].max),effectiveLuck(s))});
  if(mode==='value')after[index]=roll(after[index].stat);
@@ -183,19 +206,26 @@ export function reforge(s,itemId,mode,index=0,donorId){
  }
  const oldSpecial=it.special?{...it.special}:null;
  const newSpecial=mode==='all'&&!it.set&&it.rarity>=2&&!it.legendaryId?{id:activeSpecialKeys()[rand(0,activeSpecialKeys().length-1)]}:oldSpecial?{...oldSpecial}:null;
+ const divineSnapshot={};
+ if(mode==='all'){
+  const candidate=structuredClone(it);candidate.affixes=structuredClone(after);candidate.special=structuredClone(newSpecial);
+  if(candidate.divine)candidate.divine=canonicalReforgeDivine(candidate);
+  else if(Math.random()<REFORGE_DIVINE_CONFIG.chance)applyForgeFavor(candidate);
+  divineSnapshot.oldDivine=structuredClone(it.divine??null);divineSnapshot.newDivine=structuredClone(candidate.divine??null);
+ }
  // Charge once, then persist the choice without modifying the target.
  normalizeMaterials(s);normalizeTalents(s);s.gold-=cost.gold;for(const [key,n] of Object.entries(cost.materials))s.materialStacks[materialKey(key)]-=n;for(const [key,n] of Object.entries(cost.consumables??{}))s.consumables[key]-=n;
  if(donor)normalizeCodexCollection(s);
  if(donor)s.inventory.splice(s.inventory.findIndex(x=>x.id===donor.item.id),1);
  const operationId='reforge-'+Date.now().toString(36)+'-'+(++serial).toString(36);
- s.pendingReforge={ruleVersion:mode==='replace'?4:2,operationId,itemId:it.id,mode,index:mode==='all'?null:index,oldAffixes:before,newAffixes:after,oldSpecial,newSpecial,cost,...(donor?{donor:{id:donor.item.id,name:donor.item.name,slot:donor.item.slot,eligibleStats:donor.affixes.map(a=>a.stat),eligibleAffixes:donor.affixes.map(a=>({stat:a.stat,value:a.value})),selectedAffix:{...after[index]}}}:{})};
+ s.pendingReforge={ruleVersion:mode==='all'?5:mode==='replace'?4:2,operationId,itemId:it.id,mode,index:mode==='all'?null:index,oldAffixes:before,newAffixes:after,oldSpecial,newSpecial,cost,...divineSnapshot,...(donor?{donor:{id:donor.item.id,name:donor.item.name,slot:donor.item.slot,eligibleStats:donor.affixes.map(a=>a.stat),eligibleAffixes:donor.affixes.map(a=>({stat:a.stat,value:a.value})),selectedAffix:{...after[index]}}}:{})};
  return {item:it,operationId,mode,index:mode==='all'?null:index,cost,before:before.map(a=>({...a})),after:after.map(a=>({...a})),oldSpecial,newSpecial,pending:true};
 }
 export function validPendingReforge(s){
  const p=s.pendingReforge;if(p===undefined||p===null)return true;
  if(!p||typeof p!=='object'||Array.isArray(p)||typeof p.operationId!=='string'||p.operationId.length<1||p.operationId.length>160)return false;
- if(p.ruleVersion!==undefined&&p.ruleVersion!==2&&p.ruleVersion!==3&&p.ruleVersion!==4)return false;
- if(p.ruleVersion>=3&&p.mode!=='replace')return false;
+ if(p.ruleVersion!==undefined&&p.ruleVersion!==2&&p.ruleVersion!==3&&p.ruleVersion!==4&&p.ruleVersion!==5)return false;
+ if((p.ruleVersion===3||p.ruleVersion===4)&&p.mode!=='replace'||p.ruleVersion===5&&p.mode!=='all')return false;
  const it=s.inventory?.find(i=>i.id===p.itemId),cost=p.ruleVersion>=2?getReforgeCost(it,p.mode):legacyReforgeCost(it,p.mode);
  if(!it||!cost||!p.cost||p.cost.gold!==cost.gold||!p.cost.materials||Object.keys(p.cost.materials).length!==Object.keys(cost.materials).length||!Object.entries(cost.materials).every(([k,v])=>p.cost.materials[k]===v))return false;
  if((p.cost.equipment??0)!==(cost.equipment??0))return false;
@@ -219,6 +249,13 @@ export function validPendingReforge(s){
  const legal=list=>Array.isArray(list)&&list.length===it.affixes.length&&new Set(list.map(a=>a?.stat)).size===list.length&&list.every(a=>a&&Object.hasOwn(AFFIX_DEFS,a.stat)&&Number.isInteger(a.value)&&a.value>=AFFIX_DEFS[a.stat].min&&a.value<=AFFIX_DEFS[a.stat].max);
  const equal=(a,b)=>a.stat===b.stat&&a.value===b.value;
  if(!legal(p.oldAffixes)||!legal(p.newAffixes)||!p.oldAffixes.every((a,i)=>equal(a,it.affixes[i])))return false;
+ if(p.ruleVersion===5){
+  if(!Object.hasOwn(p,'oldDivine')||!Object.hasOwn(p,'newDivine')||!sameReforgeData(p.oldDivine,it.divine??null))return false;
+  if(p.oldDivine!==null&&!sameReforgeData(p.oldDivine,canonicalReforgeDivine(it)))return false;
+  const expected=structuredClone(it);expected.affixes=structuredClone(p.newAffixes);expected.special=structuredClone(p.newSpecial);
+  if(p.newDivine!==null&&!sameReforgeData(p.newDivine,canonicalReforgeDivine(expected)))return false;
+  if(p.oldDivine!==null&&p.newDivine===null)return false;
+ }else if(p.oldDivine!==undefined||p.newDivine!==undefined)return false;
  if(p.mode==='all')return p.index===null&&p.newAffixes.every(a=>ACTIVE_AFFIX_KEYS.includes(a.stat));
  if(!Number.isInteger(p.index)||p.index<0||p.index>=it.affixes.length||!p.newAffixes.every((a,i)=>i===p.index||equal(a,p.oldAffixes[i])))return false;
  return p.mode==='value'?p.newAffixes[p.index].stat===p.oldAffixes[p.index].stat:(p.ruleVersion===4||p.newAffixes[p.index].stat!==p.oldAffixes[p.index].stat)&&(p.ruleVersion>=2?p.donor.eligibleStats.includes(p.newAffixes[p.index].stat):ACTIVE_AFFIX_KEYS.includes(p.newAffixes[p.index].stat));
@@ -231,7 +268,8 @@ export function resolveReforge(s,accept,expectedOperationId){
  if(accept){
   it.affixes=p.newAffixes.map(a=>({...a}));
   if(p.ruleVersion>=2)it.special=p.newSpecial?{...p.newSpecial}:null;
-  if(divineMultiplier(it)>1)it.divine.bonus.affixes=it.affixes.map(a=>({stat:a.stat,value:a.value/10}));
+  if(p.ruleVersion===5){if(p.newDivine===null)delete it.divine;else it.divine=structuredClone(p.newDivine);}
+  else if(divineMultiplier(it)>1)it.divine.bonus.affixes=it.affixes.map(a=>({stat:a.stat,value:a.value/10}));
  }
  s.pendingReforge=null;capHealth(s);
  return {item:it,accepted:accept,operationId:p.operationId};
@@ -893,6 +931,7 @@ export function forge(s,selection){
   else{if(!input||typeof input!=='object'||Array.isArray(input)||Object.keys(input).length!==2||input.kind!=='equipment'||typeof input.id!=='string'||ids.has(input.id)||!eligible.has(input.id))return null;const it=eligible.get(input.id);ids.add(it.id);gear.push(it);inputs.push({kind:'equipment',quality:it.rarity});}
  }
  if(parsed.some(({material,quality,key})=>materialCount(s,material,quality)<counts[key]))return null;
+ if(gear.length&&!fusionOriginWeights({heroRace:s.race,equipment:gear}))return null;
  const n=selection.length,qualityWeights=gear.length?null:fusionQualityWeights(materials),herbs=parsed.filter(p=>p.material==='灰根草').length;
  if(!gear.length&&herbs&&!validPotions(s))return null;
  if(!gear.length&&herbs&&Math.random()<.35+.5*herbs/n){
@@ -901,9 +940,10 @@ export function forge(s,selection){
   const result={kind:'potion',potionType:type,quality,name:POTIONS[type].name,quantity:1,key};
   if(canReceiveItem(s,key))s.potionStacks[key]=(s.potionStacks[key]??0)+1;else s.pendingForgeClaim={kind:'potion',potion:result};return result;
  }
+ const originRace=chooseFusionOrigin({heroRace:s.race,equipment:gear});if(originRace===null)return null;
  const weights=fusionWeights(materials),slot=weighted(Object.entries(weights.slots)),quality=luckyRoll(()=>gear.length?rollEquipmentInputQuality(inputs):rollQuality(qualityWeights),effectiveLuck(s));
  const level=gear.length?rollEquipmentFusionLevel(gear):{level:s.level,baseLevel:s.level,levelSource:'material'};
- const it=item(slot,level.level,null,quality,level);if(Math.random()<fusionDivineChance(inputs))applyForgeFavor(it);
+ const it=item(slot,level.level,null,quality,{...level,originRace});if(Math.random()<fusionDivineChance(inputs))applyForgeFavor(it);
  // Record actual owned inputs before their one-time consumption.
  if(gear.length)normalizeCodexCollection(s);
  normalizeMaterials(s);Object.entries(counts).forEach(([key,v])=>s.materialStacks[key]-=v);s.inventory=s.inventory.filter(it=>!ids.has(it.id));s.gold-=40;
