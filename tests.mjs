@@ -52,3 +52,7 @@ import './development-sandbox-tests.mjs';
 
 import './equipment-template-tests.mjs';
 import './equipment-enhancement-tests.mjs';
+
+import './equipment-armor-art-tests.mjs';
+import './equipment-art-tests.mjs';
+import './equipment-art-ui-tests.mjs';

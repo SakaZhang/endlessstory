@@ -1,3 +1,4 @@
+import {equipmentIcon} from './equipment-art.js';
 import {icon} from './icons.js';
 import {EQUIPMENT_TEMPLATES} from './equipment-templates.js';
 import {enhancedItemBase} from './equipment-enhancement.js';
@@ -5,7 +6,7 @@ import {RARITY,SLOTNAME} from './engine.js';
 const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=n=>Number.isFinite(n)?String(Math.round(n*100)/100):'—';
 const enhancementLevel=it=>Number.isInteger(it?.enhancement?.level)?it.enhancement.level:0;
-const image=it=>icon(it.weaponType==='axe'?'axe':it.weaponType==='hammer'?'hammer':it.iconKey??it.icon??it.slot??'forge',it.set||'anvil',it.rarity??0);
+const image=it=>equipmentIcon(it);
 const variantLabel=t=>({balanced:'均衡型',attack:'攻击型',defensive:'防护型',armor:'护甲型',vitality:'生命型',element:'元素型',survival:'生存型'})[t.baseVariant?.split('_').at(-1)]??'基础型';
 const badge=it=>it.divine?'<small class="divineBadge">神赐</small>':'';
 const issueNames={'at-maximum':'已达到试验上限 +5','stale-quote':'装备或费用已变化，请重新预览',max:'已达到试验上限 +5','max-level':'已达到试验上限 +5',gold:'金币不足',funds:'金币不足','insufficient-gold':'金币不足',materials:'所需材料不足',stale:'装备或费用已变化，请重新预览',protected:'当前装备不能改造',pending:'请先完成待确认改造',sandbox:'请进入独立试验'};
