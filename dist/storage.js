@@ -12,7 +12,7 @@ export function backupRaw(storage,raw,label='manual'){
 }
 export function loadProgress(storage){
   const raw=storage.getItem(SAVE_KEY);
-  if(raw){try{const game=JSON.parse(raw);if(validSave(game))return {game,notice:null};}catch{}
+  if(raw){try{const game=JSON.parse(raw);if(validSave(game)&&game.developmentEquipmentSandbox!==true)return {game,notice:null};}catch{}
     const backup=backupRaw(storage,raw,'recovery');
     return {game:fresh(),notice:'当前存档格式异常，原始数据已保留为可导出的恢复备份。',backup};
   }

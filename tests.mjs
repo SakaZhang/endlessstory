@@ -49,3 +49,6 @@ import './multi-combat-tests.mjs';
 
 import './monster-codex-tests.mjs';
 import './development-sandbox-tests.mjs';
+
+import './equipment-template-tests.mjs';
+import './equipment-enhancement-tests.mjs';

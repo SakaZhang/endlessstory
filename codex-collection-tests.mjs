@@ -4,7 +4,8 @@ import {fresh,item,stats,validSave,SET_CODEX,SET_SLOTS,LEGENDARY_CODEX,normalize
 const original=Math.random;Math.random=()=>0;
 try{
  const s=fresh();assert.equal(s.codexCollection,undefined);const beforeStats=JSON.stringify(stats(s));assert(normalizeCodexCollection(s));assert.equal(JSON.stringify(stats(s)),beforeStats);assert(validSave(s));assert.equal(SET_CODEX.length,3);assert(SET_CODEX.every(x=>x.parts.length===4));assert.deepEqual(codexSetState(s,'anvil'),{discovered:false,parts:[],complete:false});assert.equal(codexSetState(s,'unknown'),null);
- for(const part of SET_SLOTS){const it=item(part,part==='helm'?5:40,'anvil',3);it.name='任意名称';assert(receiveBattleLoot(s,{kind:'equipment',item:it}));assert(codexSetState(s,'anvil').parts.includes(part));}
+ for(const part of SET_SLOTS){const it=item(part,part==='helm'?5:40,'anvil',3);// Legacy names are arbitrary; new template names are deliberately immutable.
+ for(const key of ['templateId','baseVariant','weaponType','originRace','visualKey','visualVariant','iconKey'])delete it[key];it.name='任意名称';assert(receiveBattleLoot(s,{kind:'equipment',item:it}));assert(codexSetState(s,'anvil').parts.includes(part));}
  const acquired=JSON.stringify(stats(s));assert(codexSetState(s,'anvil').complete);assert.equal(codexSetState(s,'anvil').parts.length,4);assert(normalizeCodexCollection(s));assert.equal(JSON.stringify(stats(s)),acquired);assert(receiveBattleLoot(s,{kind:'equipment',item:item('helm',99,'anvil',3)}));assert.equal(codexSetState(s,'anvil').parts.length,4);
  s.inventory=s.inventory.filter(it=>!it.set);assert(codexSetState(s,'anvil').complete);assert(validSave(s));const restored=JSON.parse(JSON.stringify(s));assert(normalizeCodexCollection(restored));assert(codexSetState(restored,'anvil').complete);
  // Legacy migration knows only current held inventory, including wardrobe IDs, never prior sales.
