@@ -1,3 +1,5 @@
+import {pauseMulti,makeMultiUnit,validMultiProfile,validMultiEncounter,validFixtureAction,syncMultiTarget,selectMultiTarget,multiTargetRows,stepMulti,withMultiRng,multiItemId} from './multi-combat.js';
+import {validMonsterLedger,recordEncounteredMonsters} from './monster-codex-schema.js';
 import {RECOVERY_RECIPE_CONFIG,recoveryInputPlan,rollRecoverySupply} from './recovery-recipe-schema.js';
 export {RECOVERY_RECIPE_CONFIG,recoveryInputPlan,recoverySourceEligible} from './recovery-recipe-schema.js';
 import {rollEquipmentInputQuality,fusionDivineChance} from './fusion-input-schema.js';
@@ -109,7 +111,7 @@ export const SPECIALS={
 };
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 let serial=0;
-const uid=()=>`${Date.now().toString(36)}-${(++serial).toString(36)}-${Math.random().toString(36).slice(2,7)}`;
+const uid=()=>multiItemId()??`${Date.now().toString(36)}-${(++serial).toString(36)}-${Math.random().toString(36).slice(2,7)}`;
 const rand=(a,b)=>Math.floor(a+Math.random()*(b-a+1));
 const names={weapon:'战锤',helm:'铁盔',armor:'板甲',gloves:'护手',boots:'战靴',ring:'指环',amulet:'护符'};
 const bases={weapon:{atk:12,armor:1,hp:5},helm:{atk:1,armor:4,hp:18},armor:{atk:1,armor:8,hp:18},gloves:{atk:3,armor:3,hp:8},boots:{atk:1,armor:4,hp:10},ring:{atk:3,armor:1,hp:8},amulet:{atk:2,armor:1,hp:14}};
@@ -476,6 +478,7 @@ export function normalizeEncounterElements(e){
 }
 function validEncounter(e){
  if(e===undefined||e===null)return true;
+ if(!validMultiEncounter(e,INSTANCES))return false;
  const number=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;
  if(e.kind==='dungeon'&&(!Number.isInteger(e.dungeonStage)||e.dungeonStage<1||e.dungeonStage>3||typeof e.runId!=='string'||!e.runId||e.runId.length>160||e.boss))return false;
  if(e.lootSummary!==undefined&&!validLootSummary(e.lootSummary))return false;
@@ -532,8 +535,44 @@ export function startInstanceEncounter(s,instanceId,now=Date.now()){
  const boss=instance.kind==='boss',stage=s.dungeonRun?.stage,elite=instance.kind==='dungeon'&&stage===3,l=LOCS[s.location],st=stats(s);
  const e={location:s.location,siteId:site.id,areaId:site.areaId,instanceId,kind:instance.kind,...(instance.kind==='dungeon'?{dungeonStage:stage,runId:s.dungeonRun.runId}:{}),luck:st.luck,boss,name:boss?l.boss:elite?l.enemy+' · 精英':l.enemy,hp:l.hp*(boss?4:elite?1.8:1),max:l.hp*(boss?4:elite?1.8:1),atk:l.atk*(boss?1.65:elite?1.25:1),armor:l.armor*(boss?1.3:1),heroHp:s.heroHp,round:0,nextHeavy:4,heavyDelayed:false,warcry:0,ironcoat:0,blunt:0,scorch:0,barrier:0,barrierShield:0,heroBurn:0,heroBurnPower:0,weakness:0,burn:0,broken:0,guard:0,stun:0,cd:{},shelterUsed:false,shield:0,done:false,rewarded:false,killSource:null};
  if(instance.kind==='dungeon'&&s.dungeonRun.carry){applyDungeonPlayerState(e,s.dungeonRun.carry);delete s.dungeonRun.carry;}
- normalizeEncounterElements(e);s.activeEncounter=e;s.nextActionAt=s.lastHealthClock+1100;return e;
+ normalizeEncounterElements(e);s.activeEncounter=e;s.nextActionAt=s.lastHealthClock+1100;recordEncounteredMonsters(s,e);return e;
 }
+
+// Explicit developer entry: callers isolate the supplied save; no production random trigger.
+export function startDeveloperGroup(s,options={},now=Date.now()){
+ const {count=2,seed=1,profiles=[]}=options;
+ if(!Number.isSafeInteger(now)||now<0||!Number.isSafeInteger(s.lastHealthClock??now)||![2,3].includes(count)||!Number.isInteger(seed)||seed<0||seed>0xffffffff||!Array.isArray(profiles)||profiles.length>count||!profiles.every(validMultiProfile)||options.scopeOverrides||s.activeEncounter&&!s.activeEncounter.rewarded||s.dungeonRun)return null;
+ if(!canStartEncounter(s,now)||!normalizeExpedition(s))return null;
+ const site=resolveLegacySite(s.location),instance=INSTANCES[site.id+'-field'],l=LOCS[s.location],st=stats(s),id='dev-'+Math.floor(now)+'-'+seed;
+ const e={location:s.location,siteId:site.id,areaId:site.areaId,instanceId:instance.id,kind:'field',luck:st.luck,boss:false,heroHp:s.heroHp,round:0,warcry:0,ironcoat:0,barrier:0,barrierShield:0,heroBurn:0,heroBurnPower:0,weakness:0,guard:0,cd:{},shelterUsed:false,shield:0,done:false,rewarded:false,killSource:null,multiVersion:1,developmentFixture:true,id,rngState:seed,rngDraws:0,itemSerial:0,summonSerial:0,activeCastCount:0,enemies:[]};
+ for(let i=0;i<count;i++){const u=normalizeEncounterElements(makeMultiUnit(id+'-enemy-'+i,s.location,instance.id,l,s.lastHealthClock,profiles[i]??{}));u.main=i===0;e.enemies.push(u);}
+ e.targetId=e.enemies[0].id;syncMultiTarget(e);s.activeEncounter=e;s.running=true;s.nextActionAt=s.lastHealthClock+1100;return e;
+}
+export function setMultiPaused(s,paused,now=Date.now()){return pauseMulti(s,paused,now);}
+export function setCombatTarget(s,id){return s.activeEncounter?.multiVersion===1?selectMultiTarget(s.activeEncounter,id):false;}
+export function combatTargets(e,now){return e?.multiVersion===1?multiTargetRows(e,now):[];}
+export function queueDeveloperAction(s,action){const e=s.activeEncounter;if(e?.multiVersion!==1||!e.developmentFixture||e.done||e.fixtureAction||!validFixtureAction(action))return false;e.fixtureAction=structuredClone(action);return true;}
+function rewardMulti(s,e,now){
+ if(s.activeEncounter!==e||!e.done||!e.win||e.rewarded||!e.enemies.every(u=>u.hp===0)||!validMultiEncounter(e,INSTANCES))return null;
+ return withMultiRng(e,()=>{
+  e.rewarded=true;e.lootSummary=emptyLootSummary();e.materialLoot=[];e.rewardNotes=[];e.rewardRoundSources=[];
+  const l=LOCS[e.location],st=stats(s),baseXp=(20+e.location*8)*2,knowledge=st.specials.knowledge&&Math.random()<.05;
+  s.kills++;s.normalWins[e.location]++;s.gold+=l.reward*2;gainXp(s,baseXp*(knowledge?2:1));if(knowledge)e.rewardNotes.push('求知：额外基础经验 +'+baseXp);
+  let first=null;const initial=e.enemies.filter(u=>u.origin==='initial');
+  for(let round=0;round<2;round++){
+   const u=initial[Math.floor(Math.random()*initial.length)],source=INSTANCES[u.sourceInstanceId],loc=LOCS[u.location];e.rewardRoundSources.push(u.id);
+   e.materialLoot.push(...earnedMaterials(s,loc.mat,1,false,e.luck??0,null,e.lootSummary));
+   if(st.specials.scavenger&&Math.random()<.1)e.materialLoot.push(...earnedMaterials(s,loc.mat,1,false,e.luck??0,null,e.lootSummary));
+   const count=rollRecoverySupply(source,AREAS[source.areaId],false);if(count)e.materialLoot.push(...earnedMaterials(s,'灰根草',count,false,e.luck??0,null,e.lootSummary));
+   const drop=rollDrop(s,false,e.luck??0,u.sourceInstanceId,false,e.lootSummary);if(drop){first??=drop;e.rewardNotes.push('群怪战利品：'+drop.name);}
+  }
+  const merged=new Map();for(const row of e.materialLoot){const old=merged.get(row.key);if(old)old.count+=row.count;else merged.set(row.key,{...row});}e.materialLoot=[...merged.values()];
+  for(const row of e.materialLoot)e.rewardNotes.push(MATERIAL_QUALITIES[row.quality]+' '+row.material+' ×'+row.count);
+  for(const action of ['discarded','overflow'])if(Object.values(e.lootSummary[action]).some(Boolean))e.rewardNotes.push((action==='discarded'?'品质过滤丢弃':'背包已满')+'：'+JSON.stringify(e.lootSummary[action]));
+  s.running=false;s.stopAfterBattle=false;s.nextBattleAt=Math.max(now,s.lastHealthClock??0)+1800;s.nextActionAt=s.nextBattleAt;s.activeEncounter=null;return first;
+ });
+}
+
 const damage=(raw,armor)=>Math.max(1,Math.round(raw*100/(100+Math.max(0,armor))));
 function finish(e,win,source){e.done=true;e.win=win;e.hp=Math.max(0,e.hp);e.heroHp=Math.max(0,e.heroHp);e.killSource=source;}
 export function combatStatuses(e){
@@ -543,9 +582,9 @@ export function combatStatuses(e){
  if(e.heavyDelayed)out.push({key:'delay',name:'重击延后',turns:Math.max(1,e.nextHeavy-e.round),side:'enemy'});return out;
 }
 export function step(s,e,now=Date.now()){
- if(!e||e!==s.activeEncounter||e.done||!normalizeHealth(s,now)||s.restUntil>0)return[];
+ if(!e||e!==s.activeEncounter||e.done||e.pauseAt!==undefined||!normalizeHealth(s,now)||s.restUntil>0)return[];
  e.heroHp=Math.min(e.heroHp,stats(s).hp);s.heroHp=e.heroHp;const drank=autoDrinkPotion(s,e,now);
- const turn={burnAtStart:e.heroBurn??0,burnTicked:false},logs=combatStep(s,e,turn);
+ const turn={burnAtStart:e.heroBurn??0,burnTicked:false},logs=e.multiVersion===1?withMultiRng(e,()=>stepMulti(s,e,turn,{stats,SKILLS,skillUnlocked,resolveElementDamage,now:s.lastHealthClock,makeSummon:(u,n)=>normalizeEncounterElements(makeMultiUnit(e.id+'-summon-'+n,u.location,u.sourceInstanceId,LOCS[u.location],s.lastHealthClock))})):combatStep(s,e,turn);
  // Every executed player round consumes one turn of temporary player statuses,
  // including an early lethal hit. Do not run skipped damage phases.
  for(const field of ['guard','warcry','ironcoat','barrier','weakness'])e[field]=Math.max(0,(e[field]??0)-1);
@@ -553,14 +592,14 @@ export function step(s,e,now=Date.now()){
  if(!e.heroBurn)e.heroBurnPower=0;
  if(!e.barrier)e.barrierShield=0;
  s.nextActionAt=s.lastHealthClock+1100;if(drank)logs.unshift('自动饮用 · '+POTIONS[parsePotionKey(s.potionSlot.key).type].name);s.heroHp=Math.max(0,Math.min(stats(s).hp,e.heroHp));
- if(s.heroHp<=0){const resume=!!s.running&&!e.boss&&!s.stopAfterBattle&&(e.kind!=='dungeon'||!!s.expedition?.loop);startRest(s,now,resume);s.stopAfterBattle=false;}return logs;
+ if(s.heroHp<=0){const resume=!e.developmentFixture&&!!s.running&&!e.boss&&!s.stopAfterBattle&&(e.kind!=='dungeon'||!!s.expedition?.loop);startRest(s,now,resume);s.stopAfterBattle=false;}return logs;
 }
 function combatStep(s,e,turn){
  if(e.done)return[];normalizeEncounterElements(e);const st=stats(s),logs=[];e.round++;
  for(const field of ['warcry','ironcoat','blunt','scorch','barrier','barrierShield','heroBurn','weakness'])e[field]??=0;
  e.nextHeavy??=4;e.heavyDelayed??=false;for(const k in e.cd)e.cd[k]=Math.max(0,e.cd[k]-1);
  let charge=e.round>=e.nextHeavy;
- const usable=k=>!(k==='warcry'&&e.warcry>0)&&!(k==='ironcoat'&&e.ironcoat>0)&&!(k==='blunt'&&e.blunt>0)&&!(k==='scorch'&&e.scorch>0)&&!(k==='barrier'&&e.barrier>0)&&!(k==='mend'&&e.heroHp>=st.hp*.6)&&!(k==='cleanse'&&!e.heroBurn&&!e.weakness)&&!(k==='delay'&&(!charge||e.heavyDelayed));
+ const usable=k=>!(k==='warcry'&&e.warcry>0)&&!(k==='ironcoat'&&e.ironcoat>0)&&!(k==='blunt'&&e.blunt>0)&&!(k==='scorch'&&e.scorch>0)&&!(k==='guard'&&e.guard>0)&&!(k==='barrier'&&(e.barrier>0||e.barrierShield>0))&&!(k==='mend'&&e.heroHp>=st.hp)&&!(k==='cleanse'&&!e.heroBurn&&!e.weakness)&&!(k==='delay'&&(!charge||e.heavyDelayed));
  const ix=s.skills.findIndex((k,i)=>k!==null&&Object.hasOwn(SKILLS,k)&&skillUnlocked(s,k)&&!e.cd[k]&&usable(k)&&(s.conditions[i]!=='low'||e.heroHp<st.hp*.6)&&(s.conditions[i]!=='charge'||charge)&&(s.conditions[i]!=='burn'||e.burn>0)),k=ix<0?null:s.skills[ix];
  if(k)e.cd[k]=SKILLS[k].cd;
  const utility=['warcry','ironcoat','delay','barrier','mend','cleanse'].includes(k);
@@ -620,6 +659,7 @@ function rollDrop(s,boss,luck=0,instanceId=resolveLegacySite(s.location).id+'-fi
  return receiveBattleLoot(s,{kind:'equipment',item:it},lootSummary)?it:null;
 }
 export function reward(s,e,now=Date.now()){
+ if(e.multiVersion===1)return rewardMulti(s,e,now);
  if(!e.win||e.rewarded)return null;
  const dungeon=e.kind==='dungeon',run=s.dungeonRun;
  if(dungeon&&(!e.done||s.activeEncounter!==e||!run||run.runId!==e.runId||run.stage!==e.dungeonStage||run.instanceId!==e.instanceId||INSTANCES[e.instanceId]?.kind!=='dungeon'||!INSTANCES[e.instanceId]?.enabled))return null;
@@ -698,7 +738,7 @@ export function materialEntries(s){return Object.keys(MATERIALS).flatMap(materia
 export function materialPrice(material,quality=0){return materialKey(material,quality)?Math.ceil(MATERIALS[material].price*[1,1.5,2.5,4][quality]):null;}
 function addMaterial(s,material,quality,count){const key=materialKey(material,quality),before=s.materialStacks[key]??0,added=Math.max(0,Math.min(count,1e12-before));s.materialStacks[key]=before+added;return added;}
 export function receiveBattleLoot(s,loot,summary=emptyLootSummary()){
- if(!validCodexCollection(s)||!loot||!['equipment','material','consumable','potion'].includes(loot.kind))return false;
+ if(!validMonsterLedger(s)||!validCodexCollection(s)||!loot||!['equipment','material','consumable','potion'].includes(loot.kind))return false;
  const qty=loot.quantity??1;if(!Number.isSafeInteger(qty)||qty<1)return false;
  const category=loot.kind==='equipment'?'equipment':loot.kind==='material'?'materials':'items';
  const quality=loot.kind==='equipment'?loot.item?.rarity:loot.kind==='material'?parseMaterialKey(loot.key)?.quality:loot.kind==='potion'?parsePotionKey(loot.key)?.quality:undefined;
@@ -870,8 +910,9 @@ export function codexState(s,id){
 export function validSave(s){
  try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;
  if(s.version!==SCHEMA_VERSION||s.race!=='dwarf'||s.hero!=='布洛克'||!Number.isInteger(s.level)||s.level<1||s.level>=100000||!num(s.xp)||!num(s.gold)||!Number.isInteger(s.location)||s.location<0||s.location>2)return false;
+ if(s.activeEncounter?.pauseAt!==undefined&&s.running)return false;
  if(s.activeEncounter?.kind==='dungeon'&&(!s.dungeonRun||s.activeEncounter.runId!==s.dungeonRun.runId||s.activeEncounter.dungeonStage!==s.dungeonRun.stage))return false;
- if(!validCodexCollection(s)||!validLootFilters(s)||!validPendingForgeClaim(s)||!validAreaProgress(s)||!validExpeditionState(s)||!Array.isArray(s.inventory)||s.inventory.length>INVENTORY_SAVE_LIMIT||!s.inventory.every(validEquipment)||!validPendingReforge(s))return false;
+ if(!validMonsterLedger(s)||!validCodexCollection(s)||!validLootFilters(s)||!validPendingForgeClaim(s)||!validAreaProgress(s)||!validExpeditionState(s)||!Array.isArray(s.inventory)||s.inventory.length>INVENTORY_SAVE_LIMIT||!s.inventory.every(validEquipment)||!validPendingReforge(s))return false;
  if(s.merchant?.offers?.some(o=>o.type==='equipment'&&o.stock===1&&s.inventory.some(it=>it.id===o.item?.id)))return false;
  if((s.nextActionAt!==undefined&&(!Number.isFinite(s.nextActionAt)||s.nextActionAt<0||s.nextActionAt>1e15))||(s.restResume!==undefined&&typeof s.restResume!=='boolean')||(s.nextBattleAt!==undefined&&(!Number.isFinite(s.nextBattleAt)||s.nextBattleAt<0||s.nextBattleAt>1e15))||!validRecipes(s)||!validEncounter(s.activeEncounter)||!validPotions(s)||!validHealth(s)||!validLoadoutSlots(s)||(s.merchant!==undefined&&!validMerchant(s.merchant)))return false;
  if(new Set(s.inventory.map(i=>i.id)).size!==s.inventory.length||!s.equip||Object.keys(s.equip).length!==SOCKETS.length||!SOCKETS.every(k=>s.equip[k]===null||s.inventory.some(i=>i.id===s.equip[k]&&i.slot===SOCKET_TYPE[k])))return false;

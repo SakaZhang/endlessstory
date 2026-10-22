@@ -44,3 +44,8 @@ import './batch-sale-tests.mjs';
 import './equipment-fusion-tests.mjs';
 
 await import('./recovery-tests.mjs');
+
+import './multi-combat-tests.mjs';
+
+import './monster-codex-tests.mjs';
+import './development-sandbox-tests.mjs';
