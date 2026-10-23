@@ -1,0 +1,18 @@
+/* Fusion is performed IN the workshop scene, not in a second UI box below it. */
+.forgeScene{position:relative;min-height:398px;background:#142333;isolation:isolate;overflow:hidden}
+.viewport .forgeScene #forgeCanvas{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;object-fit:cover;object-position:center;image-rendering:pixelated;border:0;z-index:-1}
+.forgeScene .forgeSceneBench{width:100%;min-height:398px;display:flex;align-items:center;flex-direction:column;justify-content:center;padding:12px 8px;background:transparent;border:0;box-shadow:none}
+.forgeScene .pixelBenchLabel{margin:0;padding:4px 10px;background:#101d2cd9;border:1px solid #526476;font-size:12px;color:#efd69c;text-shadow:1px 1px #0b1421}
+.forgeScene .fusionStage{width:300px;max-width:100%;height:246px;margin:0;transform:none}
+.forgeScene .forgeCircle{width:196px;height:196px;border:2px dashed #dfb55c;background:#19263245;box-shadow:none}
+.forgeScene .orbitSlot{width:52px;height:52px;padding:6px;background:#1d3040e8;border:2px solid #b99a60;box-shadow:2px 3px #080f17}
+.forgeScene .forgeCore{width:82px;height:82px;background:#283846db;border:2px solid #c5a660;box-shadow:inset 3px 3px #4e5747,inset -3px -3px #111f2c}
+.forgeScene .forgeResult{width:78px;height:78px;padding:5px}
+.forgeScene .forgeOutcome{min-height:80px;width:min(420px,100%);margin:0;padding:8px 12px;background:#101e2de8;border:1px solid #516479;gap:5px;color:#edcf91}
+.forgeScene .forgeOutcome>strong{font-size:14px}.forgeScene .forgeOutcome>small,.forgeScene .forgeOutcome>button{font-size:12px;line-height:1.5}.forgeScene .forgeOutcome>button{min-height:36px;padding:5px 12px}
+.forgeScene .serviceSceneStatus{position:absolute;left:0;top:0;right:0;z-index:5;pointer-events:none;background:#152330d9}.forgeScene #retryServiceScene{position:absolute;top:28px;right:0;z-index:6}
+.forgeWorkshop{display:block}.forgeWorkshop .pixelForgeInputs{max-height:420px;overflow:auto}.forgeWorkshop .fusionInputPicker{margin:0 0 12px}.forgeWorkshop .craftControls{margin-top:12px}
+.recipeBatchBar{display:grid;gap:8px;padding:12px;background:#102130;border:2px solid #536a7b;margin:12px 0}.recipeBatchBar>label{font-size:14px;color:#edd29b}.recipeBatchControls{display:flex;align-items:stretch;gap:6px;flex-wrap:wrap}.recipeBatchControls button{min-height:42px;min-width:42px;padding:7px 12px;font-size:13px}.recipeBatchControls input{width:80px;min-width:50px;max-width:120px;min-height:42px;text-align:center;background:#0c1c29;border:2px solid #617689;color:#f1d69a;font-size:16px}.recipeBatchPresets{display:flex;gap:6px}.recipeBatchPresets button{min-height:38px;flex:1;font-size:12px}.recipeBatchBar>small{font-size:12px;color:#b4c4cf;line-height:1.5}
+@media(max-width:760px){.forgeScene,.forgeScene .forgeSceneBench{min-height:386px}.forgeScene .fusionStage{height:238px;width:290px}.forgeScene .forgeOutcome{min-height:82px}.forgeWorkshop .pixelForgeInputs{max-height:380px}.recipeBatchBar{padding:10px}.recipeBatchControls{gap:4px}.recipeBatchControls button{padding:7px 9px}.recipeBatchControls input{width:64px}}
+
+.forgeScene .forgeCore:has(.forgeEmptyOutput){background:#14233344;border:2px dashed #b99a60;box-shadow:none}.forgeEmptyOutput{width:60px;height:60px;display:block}
