@@ -142,3 +142,6 @@ for(const file of ['pixel-shell-tests.mjs','pixel-inventory-tests.mjs','pixel-se
 
 // v0.49 all-lifecycle presentation: actual fresh idle, errors, neutral and portraits.
 runAffixSourceTest(process.execPath,[new URL('./live-battle-lifecycle-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.50 real service scenes, isolated resource errors and exact layered art.
+runAffixSourceTest(process.execPath,[new URL('./pixel-service-scenes-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});

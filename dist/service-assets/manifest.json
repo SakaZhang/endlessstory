@@ -1,0 +1,122 @@
+{
+  "version": "pixel-services-v050",
+  "logicalScene": [
+    480,
+    160
+  ],
+  "canvasDisplay": [
+    960,
+    320
+  ],
+  "backgrounds": [
+    {
+      "id": "forge-room",
+      "file": "forge-room.png"
+    },
+    {
+      "id": "forge-anvil",
+      "file": "forge-anvil-layer.png"
+    },
+    {
+      "id": "merchant-stall",
+      "file": "merchant-stall.png"
+    },
+    {
+      "id": "merchant-counter",
+      "file": "merchant-counter-layer.png"
+    }
+  ],
+  "sprites": {
+    "nick": {
+      "displayName": "行商尼克",
+      "identity": "Existing green goblin, single brass monocle, plum waistcoat, brown travel hat. No new story.",
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "headY": 110,
+      "healthBarAnchor": null,
+      "sceneAnchor": [
+        330,
+        145
+      ],
+      "z": 1,
+      "facing": "left",
+      "frames": [
+        {
+          "id": "idle",
+          "file": "nick-idle.png",
+          "alphaBBox": [
+            75,
+            110,
+            117,
+            176
+          ],
+          "solidBBox": [
+            75,
+            110,
+            117,
+            176
+          ],
+          "sourceCrop": [
+            265,
+            70,
+            1025,
+            1240
+          ],
+          "sourceScale": 0.058,
+          "sourceAnchor": [
+            646,
+            1219
+          ],
+          "durationMs": 1000
+        }
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ]
+      }
+    }
+  },
+  "scenes": {
+    "forge": {
+      "label": "锻炉",
+      "layers": [
+        {
+          "background": "forge-room",
+          "z": 0
+        },
+        {
+          "background": "forge-anvil",
+          "z": 2
+        }
+      ]
+    },
+    "merchant": {
+      "label": "行商",
+      "layers": [
+        {
+          "background": "merchant-stall",
+          "z": 0
+        },
+        {
+          "sprite": "nick",
+          "at": [
+            330,
+            145
+          ],
+          "z": 1
+        },
+        {
+          "background": "merchant-counter",
+          "z": 2
+        }
+      ]
+    }
+  }
+}
