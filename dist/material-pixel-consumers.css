@@ -1,0 +1,10 @@
+/* Exact native source sizes. Parent material cards retain quality/background/selection. */
+.materialPixel{display:inline-block;position:relative;vertical-align:middle;flex:none;width:var(--material-size,48px)!important;height:var(--material-size,48px)!important;min-width:var(--material-size,48px);min-height:var(--material-size,48px);max-width:none!important;max-height:none!important;box-sizing:content-box;padding:0;border:0;image-rendering:pixelated}
+.materialPixelImage{display:block;width:100%;height:100%;object-fit:contain;image-rendering:pixelated;pointer-events:none}
+.materialPixelError[hidden]{display:none}.materialPixelError:not([hidden]){display:grid;place-items:center;position:absolute;inset:0;font-size:12px;line-height:1.2;text-align:center;overflow-wrap:anywhere;color:#ecddbb}
+.materialPixel:has(.materialPixelError:not([hidden]))>.materialPixelImage{display:none}
+.materialPixelUnknown{display:inline-grid;place-items:center;font-size:12px;color:#b7ad9a}
+:is(.materialStack,.shopItem,.recoveryMaterial,.recipeMaterial)>.materialPixel{justify-self:center;margin-inline:auto}
+.detailIcon:has(>.materialPixel){display:grid;place-items:center}
+/* Discovered map rows formerly reserved24px for generic SVG; match real32px source. */
+.discoveredMaterialIcon:has(>.materialPixel){width:32px;height:32px;align-items:center}

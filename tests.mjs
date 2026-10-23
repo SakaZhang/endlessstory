@@ -154,3 +154,6 @@ for(const file of ['skill-pixel-icons-tests.mjs','skill-pixel-consumers-tests.mj
 
 // v0.53 direct equipment PNGs, canonical identity/frame and explicit image failure.
 for(const file of ['equipment-raster-adapter-tests.mjs','legendary-art-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.54 exact material art; acquisition and story flags are not changed by visuals.
+runAffixSourceTest(process.execPath,[new URL('./material-pixel-art-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
