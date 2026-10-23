@@ -172,3 +172,5 @@ runAffixSourceTest(process.execPath,[new URL('./racial-camp-scenes-tests.mjs',im
 for(const file of ['skill-tree-live-budget-tests.mjs','skill-tree-layout-v057-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
 // v0.57 fixed-recipe batch controls respect quantities and inventory limits.
 runAffixSourceTest(process.execPath,[new URL('./recipe-batch-limits-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+// v0.57 current-area opt-in automation and owned-only life-potion controls.
+for(const file of ['expedition-automation-tests.mjs','battle-potion-owned-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
