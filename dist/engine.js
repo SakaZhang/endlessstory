@@ -1,3 +1,5 @@
+import {validRegionNavigation,normalizeRegionNavigation,getRegionNavigation,recordNodeExplored,recordMaterialDiscovered,toggleFavoriteNode,setFavoriteNode} from './region-navigation-state.js';
+export {validRegionNavigation,normalizeRegionNavigation,getRegionNavigation,toggleFavoriteNode,setFavoriteNode} from './region-navigation-state.js';
 import {LEGENDARY_EQUIPMENT_DEFINITIONS,createLegendaryEquipment,validLegendaryEquipmentMetadata} from './legendary-equipment.js';
 import {prepareLegendaryDrop} from './legendary-drop.js';
 import {legendaryPoolProbability} from './luck-policy.js';
@@ -539,6 +541,21 @@ export function configureExpedition(s,config){
  if(!validExpeditionState({...s,expedition:candidate})||(candidate.mode==='dungeon'&&!INSTANCES[candidate.targetInstanceId]?.enabled))return false;
  if(!normalizeExpedition(s))return false;s.expedition=candidate;if(s.contentMigration){s.contentMigration.legacyDrain=false;s.contentMigration.reselectRequired=false;}return true;
 }
+// Caller persists the returned mutation using clone-save-adopt. Rejected navigation never changes state.
+export function chooseAdventureNode(s,nodeId,{start=true,loop=false,fieldId=null}={},now=Date.now()){
+ if(!Number.isFinite(now)||now<0||now>1e15||typeof start!=='boolean'||typeof loop!=='boolean'||typeof nodeId!=='string'||!Object.hasOwn(PLANNED_INSTANCES,nodeId)||!validSave(s))return null;
+ const next=structuredClone(s);
+ if(!normalizeContentMigration(next)||!normalizeExpedition(next)||next.contentMigration.legacyDrain||next.running||(next.activeEncounter&&!next.activeEncounter.rewarded)||next.dungeonRun)return null;
+ const time=Math.max(now,next.lastHealthClock??0),node=plannedNodes(next,time).find(x=>x.id===nodeId);
+ if(!node?.enabled||!node.unlocked||!node.budgetReady||(next.restUntil??0)>time||node.readyAt>time)return null;
+ const fallback=fieldId??node.fieldId,field=plannedNodes(next,time).find(x=>x.id===fallback);
+ if(!field?.enabled||field.kind!=='field'||!field.unlocked||!field.budgetReady)return null;
+ const config={mode:node.kind==='dungeon'?'dungeon':'field',targetInstanceId:node.kind==='dungeon'?node.id:null,fieldId:node.kind==='field'?node.id:fallback,loop:node.kind==='dungeon'?loop:false};
+ if(!configureExpedition(next,config))return null;
+ let encounter=null;if(start){encounter=startInstanceEncounter(next,node.id,now);if(!encounter)return null;}
+ if(!validSave(next))return null;
+ for(const key of Object.keys(s))if(!Object.hasOwn(next,key))delete s[key];Object.assign(s,next);return {ok:true,nodeId,started:!!encounter,encounter:s.activeEncounter??null};
+}
 export function setExpeditionLoop(s,enabled){
  if(typeof enabled!=='boolean'||!normalizeExpedition(s))return false;
  s.expedition.loop=enabled;
@@ -627,7 +644,7 @@ export function startInstanceEncounter(s,instanceId,now=Date.now()){
  const boss=instance.kind==='boss',stage=s.dungeonRun?.stage,elite=instance.kind==='dungeon'&&stage===3,l=LOCS[s.location],st=stats(s);
  const e={location:s.location,siteId:site.id,areaId:site.areaId,instanceId,kind:instance.kind,...(instance.kind==='dungeon'?{dungeonStage:stage,runId:s.dungeonRun.runId}:{}),luck:st.luck,boss,name:boss?l.boss:elite?l.enemy+' · 精英':l.enemy,hp:l.hp*(boss?4:elite?1.8:1),max:l.hp*(boss?4:elite?1.8:1),atk:l.atk*(boss?1.65:elite?1.25:1),armor:l.armor*(boss?1.3:1),heroHp:s.heroHp,round:0,nextHeavy:4,heavyDelayed:false,warcry:0,ironcoat:0,blunt:0,scorch:0,barrier:0,barrierShield:0,heroBurn:0,heroBurnPower:0,weakness:0,burn:0,broken:0,guard:0,stun:0,cd:{},shelterUsed:false,shield:0,done:false,rewarded:false,killSource:null};
  if(instance.kind==='dungeon'&&s.dungeonRun.carry){applyDungeonPlayerState(e,s.dungeonRun.carry);delete s.dungeonRun.carry;}
- initializeEncounterAffixes(e,st);normalizeEncounterElements(e);s.activeEncounter=e;s.nextActionAt=s.lastHealthClock+1100;recordEncounteredMonsters(s,e);return e;
+ initializeEncounterAffixes(e,st);normalizeEncounterElements(e);s.activeEncounter=e;s.nextActionAt=s.lastHealthClock+1100;recordEncounteredMonsters(s,e);recordNodeExplored(s,e);return e;
 }
 
 function startDwarfEncounter(s,instance,now){
@@ -657,7 +674,7 @@ function startDwarfEncounter(s,instance,now){
  }
  if(instance.kind==='field'&&s.expedition.mode!=='dungeon')s.expedition={mode:'field',targetInstanceId:null,fieldId:instance.id,loop:false};
  if(instance.kind==='dungeon'&&!INSTANCES[s.expedition.fieldId]?.contentVersion)s.expedition.fieldId=area.id+'.field';
- initializeEncounterAffixes(e,st);if(s.equipmentShieldCarry){e.playerShieldLayers=structuredClone(s.equipmentShieldCarry);delete s.equipmentShieldCarry;}e.targetId=e.enemies[0].id;syncMultiTarget(e);s.contentMigration={version:1,legacyDrain:false,reselectRequired:false};s.location=e.location;s.siteId=instance.siteId;s.activeEncounter=e;s.running=true;s.nextActionAt=s.lastHealthClock+1100;recordEncounteredMonsters(s,e);return e;
+ initializeEncounterAffixes(e,st);if(s.equipmentShieldCarry){e.playerShieldLayers=structuredClone(s.equipmentShieldCarry);delete s.equipmentShieldCarry;}e.targetId=e.enemies[0].id;syncMultiTarget(e);s.contentMigration={version:1,legacyDrain:false,reselectRequired:false};s.location=e.location;s.siteId=instance.siteId;s.activeEncounter=e;s.running=true;s.nextActionAt=s.lastHealthClock+1100;recordEncounteredMonsters(s,e);recordNodeExplored(s,e);return e;
 }
 // Explicit developer entry: callers isolate the supplied save; no production random trigger.
 export function startDeveloperGroup(s,options={},now=Date.now()){
@@ -913,7 +930,7 @@ export function normalizeMaterials(s){
 export function materialCount(s,material,quality=0){const key=materialKey(material,quality);if(!key)return 0;return s.materialStacks!==undefined?(s.materialStacks[key]??0):(quality===0?s.materials?.[material]??0:0);}
 export function materialEntries(s){return Object.keys(MATERIALS).flatMap(material=>[0,1,2,3].map(quality=>({key:materialKey(material,quality),material,quality,count:materialCount(s,material,quality)}))).filter(row=>row.count>0);}
 export function materialPrice(material,quality=0){return materialKey(material,quality)?Math.ceil(MATERIALS[material].price*[1,1.5,2.5,4][quality]):null;}
-function addMaterial(s,material,quality,count){const key=materialKey(material,quality),before=s.materialStacks[key]??0,added=Math.max(0,Math.min(count,1e12-before));s.materialStacks[key]=before+added;return added;}
+function addMaterial(s,material,quality,count){const key=materialKey(material,quality),before=s.materialStacks[key]??0,added=Math.max(0,Math.min(count,1e12-before));s.materialStacks[key]=before+added;if(added>0)recordMaterialDiscovered(s,material);return added;}
 export function receiveBattleLoot(s,loot,summary=emptyLootSummary()){
  if(!validMonsterLedger(s)||!validCodexCollection(s)||!loot||!['equipment','material','consumable','potion'].includes(loot.kind))return false;
  const qty=loot.quantity??1;if(!Number.isSafeInteger(qty)||qty<1)return false;
@@ -1094,7 +1111,7 @@ export function validSave(s){
  if(s.activeEncounter?.pauseAt!==undefined&&s.running)return false;
  if(s.activeEncounter?.kind==='dungeon'&&(!s.dungeonRun||s.activeEncounter.runId!==s.dungeonRun.runId||s.activeEncounter.dungeonStage!==s.dungeonRun.stage))return false;
  if(s.contentMigration!==undefined&&(s.contentMigration?.version!==1||typeof s.contentMigration.legacyDrain!=='boolean'||typeof s.contentMigration.reselectRequired!=='boolean'))return false;
- if(!validEquipmentRuntime(s)||!validMonsterLedger(s)||!validCodexCollection(s)||!validLootFilters(s)||!validPendingForgeClaim(s)||!validAreaProgress(s)||!validExpeditionState(s)||!Array.isArray(s.inventory)||s.inventory.length>INVENTORY_SAVE_LIMIT||!s.inventory.every(validEquipment)||!validPendingReforge(s))return false;
+ if(!validRegionNavigation(s)||!validEquipmentRuntime(s)||!validMonsterLedger(s)||!validCodexCollection(s)||!validLootFilters(s)||!validPendingForgeClaim(s)||!validAreaProgress(s)||!validExpeditionState(s)||!Array.isArray(s.inventory)||s.inventory.length>INVENTORY_SAVE_LIMIT||!s.inventory.every(validEquipment)||!validPendingReforge(s))return false;
  if(s.merchant?.offers?.some(o=>o.type==='equipment'&&o.stock===1&&s.inventory.some(it=>it.id===o.item?.id)))return false;
  if((s.nextActionAt!==undefined&&(!Number.isFinite(s.nextActionAt)||s.nextActionAt<0||s.nextActionAt>1e15))||(s.restResume!==undefined&&typeof s.restResume!=='boolean')||(s.nextBattleAt!==undefined&&(!Number.isFinite(s.nextBattleAt)||s.nextBattleAt<0||s.nextBattleAt>1e15))||!validRecipes(s)||!validEncounter(s.activeEncounter)||!validPotions(s)||!validHealth(s)||!validLoadoutSlots(s)||(s.merchant!==undefined&&!validMerchant(s.merchant)))return false;
  if(new Set(s.inventory.map(i=>i.id)).size!==s.inventory.length||!s.equip||Object.keys(s.equip).length!==SOCKETS.length||!SOCKETS.every(k=>s.equip[k]===null||s.inventory.some(i=>i.id===s.equip[k]&&i.slot===SOCKET_TYPE[k])))return false;

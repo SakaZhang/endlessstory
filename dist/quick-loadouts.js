@@ -1,0 +1,6 @@
+import {icon} from './icons.js';
+const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+function matches(s,plan){return plan&&Object.keys(s.equip??{}).every(k=>plan.equip?.[k]===s.equip[k])&&same(plan.skills,s.skills)&&same(plan.conditions,s.conditions);}
+/** Rendering only. Clicking delegates to the existing transactional loadout handler. */
+export function renderQuickLoadouts(s){const busy=!!s.running||!!s.activeEncounter&&!s.activeEncounter.done;return `<div class="quickLoadouts" aria-label="自定义方案快速切换">${Array.from({length:3},(_,i)=>{const plan=s.loadouts?.[i],active=matches(s,plan),reason=!plan?'空方案，请先编辑并保存':busy?'停止远征并结束当前战斗后切换':'切换已保存的装备与战技；天赋不变';return `<button class="quickLoadout ${active?'is-current':''} ${!plan?'is-empty':''}" data-loadoutapply="${i}" ${!plan||busy?'disabled':''} aria-pressed="${!!active}" title="${esc(reason)}"><span class="quickLoadoutNumber">${i+1}</span>${icon(plan?.skills?.find(Boolean)||'bag')}<span class="quickLoadoutName">${esc(plan?.name||'方案'+(i+1))}<small>${!plan?'未保存':active?'当前配置':'装备与战技'}</small></span></button>`;}).join('')}<button class="quickLoadoutEdit" data-view="loadouts">${icon('book')}<span>编辑方案</span></button></div>`;}

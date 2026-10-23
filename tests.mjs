@@ -101,3 +101,6 @@ runAffixSourceTest(process.execPath,[new URL('./affix-source-tests.mjs',import.m
 
 // v0.34 tests require the default production provider, isolated from old boundary fixtures.
 for(const file of ['luck-policy-tests.mjs','luck-production-tests.mjs','legendary-drop-tests.mjs','player-shield-layers-tests.mjs','equipment-runtime-tests.mjs','equipment-runtime-production-tests.mjs','legendary-equipment-tests.mjs','legendary-combat-tests.mjs','legendary-production-tests.mjs','legendary-filter-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.35 navigation ledgers and preview modules run in their own production realm.
+for(const file of ['region-navigation-state-tests.mjs','adjacent-region-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
