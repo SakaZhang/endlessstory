@@ -163,3 +163,5 @@ runAffixSourceTest(process.execPath,[new URL('./consumable-pixel-art-tests.mjs',
 
 // v0.56 reuse exact battle idle artwork in codex/source/unit portraits.
 runAffixSourceTest(process.execPath,[new URL('./monster-pixel-portrait-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+import './battle-feedback-regression-tests.mjs';

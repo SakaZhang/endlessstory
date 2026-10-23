@@ -4,7 +4,7 @@ const nonnegative=n=>Number.isFinite(n)&&n>=0&&n<=1e12;
 const clock=n=>Number.isFinite(n)&&n>=0&&n<=1e15;
 const id=x=>typeof x==='string'&&x.length>0&&x.length<=200;
 export const ORDINARY_AFFIX_CANDIDATES=freeze({
- lifesteal:{name:'吸血值',suffix:'',unit:'rating',min:3,max:8,sourceApproved:true,mechanicsReady:true,enabled:true},
+ lifesteal:{name:'吸血',suffix:'',unit:'rating',min:3,max:8,sourceApproved:true,mechanicsReady:true,enabled:true},
  luck:{name:'幸运值',suffix:'',unit:'rating',min:1,max:3,sourceApproved:true,mechanicsReady:true,enabled:true}
 });
 export const SPECIAL_AFFIX_EXPANSION=freeze({
