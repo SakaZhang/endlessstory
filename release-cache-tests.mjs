@@ -31,7 +31,7 @@ async function probe(output,report){
    const manifestUrl=new URL(assetRoot[1]+'manifest.json',release);
    await visit(manifestUrl,url.href);
    const manifest=JSON.parse(await readFile(join(output,'releases',report.release,manifestUrl.pathname.slice(release.pathname.length)),'utf8'));
-   const imageRows=[...manifest.backgrounds,...Object.values(manifest.sprites).flatMap(s=>s.frames)];assert.ok(imageRows.length>0);
+   const imageRows=[...manifest.backgrounds,...Object.values(manifest.campBackgrounds??{}),...Object.values(manifest.sprites).flatMap(s=>s.frames)];assert.ok(imageRows.length>0);
    for(const image of imageRows)await visit(new URL(assetRoot[1]+image.file,release),manifestUrl.href);
   }
  }
