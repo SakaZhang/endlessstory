@@ -119,3 +119,6 @@ for(const file of ['m3-content-tests.mjs','m3-material-tests.mjs','m3-slow-tests
 
 // Final dwarf area batch: staged data/typed effects preserve existing production sources.
 for(const file of ['m4-content-tests.mjs','m4-material-tests.mjs','m4-runtime-tests.mjs','m4-production-activation-tests.mjs','m4-rewards-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.41 fixed recipes and real buff-expiry parity require isolated production realms.
+for(const file of ['potion-catalog-tests.mjs','potion-expansion-tests.mjs','potion-expiry-parity-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});

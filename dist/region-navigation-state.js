@@ -1,5 +1,5 @@
 import {INSTANCES,AREAS,PLANNED_INSTANCES} from './location-schema.js';
-import {DWARF_MATERIALS,resolveDwarfMaterialId} from './dwarf-material-catalog.js';
+import {MATERIAL_CATALOG as DWARF_MATERIALS,resolveMaterialId as resolveDwarfMaterialId} from './material-catalog.js';
 const safeId=id=>typeof id==='string'&&id.length>0&&id.length<=160&&/^[a-zA-Z0-9_.-]+$/.test(id)&&!['__proto__','constructor','prototype'].includes(id);
 const favorites=v=>Array.isArray(v)&&v.length<=1000&&new Set(v).size===v.length&&Array.from(v).every(safeId);
 const ids=(v,registry)=>Array.isArray(v)&&v.length<=Object.keys(registry).length&&new Set(v).size===v.length&&Array.from(v).every(id=>typeof id==='string'&&Object.hasOwn(registry,id));

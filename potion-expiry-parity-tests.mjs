@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';import {execFileSync} from 'node:child_process';import fs from 'node:fs';import os from 'node:os';import path from 'node:path';
+import * as E from './dist/engine.js';import {POTION_BUFF_KEYS} from './dist/potion-catalog.js';
+const mode=process.argv[2],directory=process.argv[3];
+if(mode){
+ const START=1700000000000;Date.now=()=>START;let seed=7193;Math.random=()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0)/4294967296);
+ let s=E.fresh();s.level=100;s.skillTree.presets[0].unlocked=E.SKILL_TREE_DEFINITION.nodes.map(n=>n.id);s.skillTree.presets[0].active=['ember_brand','furnace_wave','forge_breath',null];s.skillTree.presets[0].passive=['fire_affinity','mountain_vitality'];E.normalizeHealth(s,START);s.heroHp=E.stats(s).hp;E.normalizePotions(s);let at=START;
+ for(const type of POTION_BUFF_KEYS){s.potionStacks[E.potionKey(type,3)]=1;assert(E.drinkPotion(s,E.potionKey(type,3),at));at+=10000;}
+ E.normalizeHealth(s,at);s.lastSeen=at;s.running=true;s.offlineLuck=999;assert(E.validSave(s));const initial=JSON.stringify(s),end=at+600000;seed=12345;let snapshots=[],restored=false;
+ if(mode==='offline')E.offline(s,end);
+ else {let t=at;while(t<end&&s.running){if(s.restUntil>0){if(s.restUntil>end)break;t=Math.max(t,s.restUntil);E.settleRest(s,t);if(!s.running)break;continue;}if(s.nextBattleAt>t){t=Math.min(end,s.nextBattleAt);if(t>=end)break;}let e=s.activeEncounter;if(e?.done){if(e.win&&!e.rewarded)E.reward(s,e,t);else s.activeEncounter=null;continue;}if(!e){e=E.startRoutedEncounter(s,t);assert(e);snapshots.push({at:t,luck:e.luck});assert.equal(e.luck,E.effectiveLuck(s),'current encounter snapshot, not stale offlineLuck');}t=Math.max(t,s.nextActionAt??t+1100);if(t>end)break;E.step(s,e,t);if(e.done&&e.win)E.reward(s,e,t);if(mode==='json'&&!restored&&t>=at+240000){assert(E.validSave(s));s=JSON.parse(JSON.stringify(s));restored=true;}}E.settleRest(s,end);s.lastSeen=end;}
+ assert(E.validSave(s));assert.equal(E.effectiveLuck(s),E.baseStats({...s,potionBuffs:{}}).luck);if(mode!=='offline'){assert(snapshots.some(x=>x.luck>=4));assert(snapshots.some(x=>x.luck===0));}delete s.chronicle;fs.writeFileSync(path.join(directory,mode+'.json'),JSON.stringify({initial,s}));
+}else{
+ const dir=fs.mkdtempSync(path.join(os.tmpdir(),'potion-parity-'));for(const kind of ['online','json','offline'])execFileSync(process.execPath,[new URL(import.meta.url).pathname,kind,dir],{stdio:'inherit'});const rows=['online','json','offline'].map(k=>JSON.parse(fs.readFileSync(path.join(dir,k+'.json'))));assert.deepEqual(rows[0],rows[1]);assert.deepEqual(rows[0],rows[2]);console.log('PASS real normal600s online/JSON/offline full-state potion expiry parity,14 buffs, current encounter luck snapshots, stale offlineLuck not reused');
+}

@@ -1,0 +1,33 @@
+import assert from 'node:assert/strict';
+import * as E from './dist/engine.js';
+import {POTION_BUFF_KEYS,POTION_IMPORT_MATERIALS,potionRecipeAllows} from './dist/potion-catalog.js';
+import {commitGameTransaction,SAVE_KEY} from './dist/storage.js';
+import {materialMonsterSources} from './dist/monster-codex-schema.js';
+const realRandom=Math.random,realNow=Date.now;let clock=1700000000000,seed=123456;Date.now=()=>clock;Math.random=()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0)/4294967296);
+const state=()=>{const s=E.fresh();s.gold=100000;E.normalizeHealth(s,clock);E.normalizePotions(s);return s;};
+try{
+ assert.equal(Object.keys(E.POTIONS).length,15);assert.equal(POTION_BUFF_KEYS.length,14);
+ for(const [id,recipe]of Object.entries(E.RECIPES))for(let q=0;q<4;q++){
+  let s=state();assert(E.learnRecipe(s,id));let quote;
+  if(id==='potion-healing'){s.materialStacks['灰根草|'+q]=3;quote=E.quoteRecoveryRecipe(s,q,[{key:'灰根草|'+q,quantity:3}]);}
+  else {const main=Object.keys(E.MATERIALS).find(k=>potionRecipeAllows(id,'main',k)),aux=Object.keys(E.MATERIALS).find(k=>potionRecipeAllows(id,'aux',k));assert(main&&aux,id);s.materialStacks[main+'|'+q]=6;s.materialStacks[aux+'|'+q]=6;quote=E.quotePotionRecipe(s,id,q,{mainKey:main+'|'+q,auxKey:aux+'|'+q,quantity:3});}
+  assert(quote,id);const original=JSON.stringify(s);let saved=null,fail=true;const storage={setItem(k,v){assert.equal(k,SAVE_KEY);if(fail)throw Error('quota');saved=v;}};
+  const operation=d=>id==='potion-healing'?E.craftRecoveryRecipe(d,quote):E.craftPotionRecipe(d,quote),rng=Math.random;Math.random=()=>{throw Error('fixed recipe must never roll');};
+  let tx=commitGameTransaction(storage,s,operation,{now:clock});assert(!tx.ok);assert.equal(JSON.stringify(s),original);fail=false;tx=commitGameTransaction(storage,s,operation,{now:clock});assert(tx.ok,id+' craft');assert.equal(tx.value.quality,q);assert.equal(tx.value.quantity,3);s=JSON.parse(saved);assert(E.validSave(s));assert.equal(s.gold,100000-quote.gold);Math.random=rng;
+  const key=E.potionKey(recipe.potionType,q);assert.equal(E.potionCount(s,recipe.potionType,q),3);if(recipe.potionType==='healing')s.heroHp/=2;
+  assert(E.drinkPotion(s,key,clock),id+' use');assert(!E.drinkPotion(s,key,clock+9999));assert.equal(s.potionReadyAt,clock+10000);assert(E.validSave(JSON.parse(JSON.stringify(s))));
+ }
+ // Same physical stack cannot satisfy both roles with one unit, including stale quotations.
+ const s=state();E.learnRecipe(s,'potion-luck');s.materialStacks['human.mat.12|1']=1;assert.equal(E.quotePotionRecipe(s,'potion-luck',1,{mainKey:'human.mat.12|1',auxKey:'human.mat.12|1'}),null);s.materialStacks['human.mat.12|1']=2;const q=E.quotePotionRecipe(s,'potion-luck',1,{mainKey:'human.mat.12|1',auxKey:'human.mat.12|1'});assert.deepEqual(q.inputs,[{key:'human.mat.12|1',quantity:2}]);s.materialStacks['human.mat.12|1']=1;const before=JSON.stringify(s);assert.equal(E.craftPotionRecipe(s,q),null);assert.equal(JSON.stringify(s),before);assert.equal(E.quotePotionRecipe(s,'potion-luck',1,{mainKey:'human.mat.12|1',auxKey:'human.mat.12|2'}),null);
+ // All buff types share CD; exact expiry and stronger-over-weaker semantics, no potency stacking.
+ for(const type of POTION_BUFF_KEYS){const x=state();for(let q=0;q<4;q++)x.potionStacks[E.potionKey(type,q)]=3;assert(E.drinkPotion(x,E.potionKey(type,1),clock));assert.equal(x.potionBuffs[type].endAt,clock+300000);assert(!E.drinkPotion(x,E.potionKey(type,0),clock+10000));assert(E.drinkPotion(x,E.potionKey(type,1),clock+10000));assert.equal(x.potionBuffs[type].endAt,clock+600000);assert(E.drinkPotion(x,E.potionKey(type,3),clock+20000));assert.equal(x.potionBuffs[type].endAt,clock+320000);assert.equal(x.potionBuffs[type].quality,3);E.normalizeHealth(x,clock+320000);const noBuff=structuredClone(x);noBuff.potionBuffs={};assert.deepEqual(E.stats(x),E.stats(noBuff));}
+ // A non-healing batch also uses the one conserved pending slot at numeric stack capacity.
+ const full=state();E.learnRecipe(full,'potion-luck');full.materialStacks['human.mat.12|3']=1998;full.potionStacks['luck|3']=1e9;const fq=E.quotePotionRecipe(full,'potion-luck',3,{mainKey:'human.mat.12|3',auxKey:'human.mat.12|3',quantity:999});assert(fq);assert.equal(E.quotePotionRecipe(full,'potion-luck',3,{mainKey:'human.mat.12|3',auxKey:'human.mat.12|3',quantity:1000}),null);const paid=E.craftPotionRecipe(full,fq);assert.equal(paid.quantity,999);assert.equal(full.pendingForgeClaim.potion.quantity,999);assert.equal(full.materialStacks['human.mat.12|3'],0);assert(E.validSave(full));const fullSnapshot=JSON.stringify(full);assert.equal(E.claimForgeResult(full),null);assert.equal(JSON.stringify(full),fullSnapshot);full.potionStacks['luck|3']-=999;assert.equal(E.claimForgeResult(full).quantity,999);assert.equal(full.potionStacks['luck|3'],1e9);assert.equal(E.claimForgeResult(full),null);
+ // Real merchant stock -> purchase -> discover -> save. No imported material acquires map sources.
+ let shop=state(),seenBooks=new Set(),seenImports=new Set();
+ for(let n=0;n<500&&(seenBooks.size<15||seenImports.size<10);n++){
+  const m=E.ensureMerchant(shop,clock);assert.equal(m.offers.length,8);for(const o of [...m.offers]){if(o.type==='recipe'){assert(E.purchaseRecipe(shop,o.offerId,m.revision,clock));seenBooks.add(o.recipeId);}if(o.type==='material'&&POTION_IMPORT_MATERIALS[o.material]){assert(E.buyMaterial(shop,E.materialKey(o.material,o.quality),1,m.revision,clock));seenImports.add(o.material);assert(shop.regionNavigation.discoveredMaterialIds.includes(o.material));assert.deepEqual(materialMonsterSources(shop,o.material),[]);}}assert(E.validSave(shop));shop=JSON.parse(JSON.stringify(shop));clock=m.nextRefreshAt;
+ }
+ assert.equal(seenBooks.size,15);assert.equal(seenImports.size,10);assert(!E.ensureMerchant(shop,clock).offers.some(o=>o.type==='recipe'));
+ console.log('PASS potion15: 60 deterministic batch transactions/use/save, quota rollback, raw quantity and same-stack double cost, 14 buffs/CD/expiry, real merchant books/import discovery without map leakage');
+}finally{Math.random=realRandom;Date.now=realNow;}

@@ -1,7 +1,7 @@
 import {enableM2TestBudget,prepareM2TestRoute} from './m2-test-budget-fixture.mjs';
 import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
 import assert from 'node:assert/strict';
-import {item,SLOTS,stats,normalizeHealth,normalizePotions,normalizeInventoryState,bagCounts,canReceiveEquipment,canReceiveMaterial,canReceiveItem,setLootFilter,shouldDiscardLoot,saveLoadout,deleteLoadout,validSave,receiveBattleLoot,encounter,reward,offline,forge,claimForgeResult,ensureMerchant,purchaseEquipment,purchaseConsumable,buyMaterial,materialKey,RECIPES,learnRecipe,craftRecipe} from './dist/engine.js';
+import {item,SLOTS,stats,normalizeHealth,normalizePotions,normalizeInventoryState,bagCounts,canReceiveEquipment,canReceiveMaterial,canReceiveItem,setLootFilter,shouldDiscardLoot,saveLoadout,deleteLoadout,validSave,receiveBattleLoot,encounter,reward,offline,forge,claimForgeResult,ensureMerchant,purchaseEquipment,purchaseConsumable,buyMaterial,materialKey,RECIPES,learnRecipe,quoteRecoveryRecipe,craftRecoveryRecipe} from './dist/engine.js';
 import {emptyLootSummary} from './dist/inventory-schema.js';
 const original=Math.random;let seed=751;Math.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};
 const fill=(s,slot,n=50)=>{while(bagCounts(s).equipment[slot]<n)s.inventory.push(item(slot,1,null,0));};
@@ -31,12 +31,13 @@ try{
  // Invalid pending packets are rejected rather than interpreted as an empty potion.
  const malformed=fresh();malformed.pendingForgeClaim={kind:'potion',potion:{kind:'potion',quantity:1}};assert(!validSave(malformed));assert.equal(claimForgeResult(malformed),null);
  const duplicateStock=fresh();const dupShop=ensureMerchant(duplicateStock,1000);duplicateStock.pendingForgeClaim={kind:'equipment',item:structuredClone(dupShop.offers.find(o=>o.type==='equipment').item)};assert(!validSave(duplicateStock));
- // Disabled production recipes remain disabled; fixture exercises common pending storage.
- const recipe=RECIPES['potion-healing'],savedRecipe=structuredClone(recipe);
- try{Object.assign(recipe,{functionalTag:null,enabled:true,ingredients:[{material:'灰根草',count:2},{material:'铁屑',count:1}],craftGold:20});
- const fixed=fresh();fixed.gold=100;fixed.materialStacks['灰根草|0']=2;normalizePotions(fixed);fixed.potionStacks['healing|0']=1e9;assert(learnRecipe(fixed,'potion-healing'));const brewedRecipe=craftRecipe(fixed,'potion-healing',['灰根草|0','灰根草|0','铁屑|0']);assert(brewedRecipe);assert.equal(fixed.gold,80);assert.equal(fixed.pendingForgeClaim.potion.key,'healing|0');assert(validSave(fixed));const once=JSON.stringify(fixed);assert.equal(craftRecipe(fixed,'potion-healing',['灰根草|0','灰根草|0','铁屑|0']),null);assert.equal(JSON.stringify(fixed),once);fixed.potionStacks['healing|0']--;assert.equal(claimForgeResult(fixed).recipeId,'potion-healing');assert(validSave(fixed));
- }finally{for(const key of Object.keys(recipe))delete recipe[key];Object.assign(recipe,savedRecipe);}
- assert(RECIPES['potion-healing'].enabled);assert(!RECIPES['potion-strength'].enabled&&!RECIPES['potion-fireResist'].enabled);
+ // Real fixed healing recipe shares pending storage with random forge results.
+ const fixed=fresh();fixed.gold=100;fixed.materialStacks['灰根草|0']=2;normalizePotions(fixed);fixed.potionStacks['healing|0']=1e9;assert(learnRecipe(fixed,'potion-healing'));
+ const quote=quoteRecoveryRecipe(fixed,0,[{key:'灰根草|0',quantity:2}]);assert(quote);
+ let recipeCalls=0;Math.random=()=>{recipeCalls++;throw Error('fixed recipe RNG');};
+ const brewedRecipe=craftRecoveryRecipe(fixed,quote);assert(brewedRecipe);assert.equal(recipeCalls,0);assert.equal(fixed.gold,98);assert.equal(fixed.pendingForgeClaim.potion.key,'healing|0');assert.equal(brewedRecipe.quantity,2);assert(validSave(fixed));
+ const once=JSON.stringify(fixed);assert.equal(craftRecoveryRecipe(fixed,quote),null);assert.equal(JSON.stringify(fixed),once);assert.equal(claimForgeResult(fixed),null);fixed.potionStacks['healing|0']-=2;assert.equal(claimForgeResult(fixed).recipeId,'potion-healing');assert.equal(fixed.potionStacks['healing|0'],1e9);assert.equal(claimForgeResult(fixed),null);assert.equal(recipeCalls,0);assert(validSave(fixed));Math.random=()=>0;
+ assert.equal(Object.keys(RECIPES).length,15);assert(Object.values(RECIPES).every(r=>r.enabled));assert(Object.isFrozen(RECIPES));
  // Filters never apply to crafted or purchased items.
  const craft=fresh();setLootFilter(craft,'equipment',[0,1,2,3]);const made=forge(craft,['铁屑|0']);assert(craft.inventory.some(it=>it.id===made.id));assert(validSave(craft));
  console.log('Inventory bags/R04: seven50 caps, preserved overcapacity/wardrobe returns, generic100-stack capacities, filters vs ungraded/protected, separate overflow reports, purchase nocharge, actual forge result pending/reload/exact-once claim: PASS');

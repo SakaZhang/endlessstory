@@ -1,3 +1,4 @@
+import {POTION_IMPORT_MATERIALS} from './potion-catalog.js';
 import {DWARF_MONSTER_INFO,DWARF_MATERIALS,DWARF_MATERIAL_REGISTRY,DWARF_SOURCE_NODES,getDwarfMaterialPool,resolveDwarfMaterialId,toDwarfInventoryKey} from './dwarf-material-catalog.js';
 import {INSTANCES,SITES} from './location-schema.js';
 const freeze=x=>{Object.values(x).forEach(v=>{if(v&&typeof v==='object')freeze(v)});return Object.freeze(x)};
@@ -13,7 +14,7 @@ const defs=[
 ];
 const legacyMonsters=Object.fromEntries(defs.map(([id,name,location,boss,sources])=>[id,{id,name,location,boss,elite:id.endsWith('-elite'),sources,elementTags:location===1?['earth','fire']:location===2?['dark']:[],skills:[...common,...(location===1?[{name:'矿炉余火',description:'周期性施加火焰灼烧。'}]:location===2?[{name:'失誓诅咒',description:'周期性施加虚弱。'}]:[])],traits:[],prototype:true}]));
 export const MONSTER_CATALOG=freeze({...legacyMonsters,...Object.fromEntries(DWARF_MONSTER_INFO.map(m=>[m.id,{...m,location:m.area-1,boss:m.rank==='boss',elite:m.rank==='elite',prototype:false}]))});
-export const MONSTER_MATERIALS=freeze({...DWARF_MATERIAL_REGISTRY,...DWARF_MATERIALS});
+export const MONSTER_MATERIALS=freeze({...DWARF_MATERIAL_REGISTRY,...DWARF_MATERIALS,...POTION_IMPORT_MATERIALS});
 const plain=x=>!!x&&typeof x==='object'&&!Array.isArray(x);
 const validId=id=>Object.hasOwn(MONSTER_CATALOG,id);
 export function validMonsterLedger(s){const l=s?.monsterLedger;return l===undefined||plain(l)&&l.version===1&&plain(l.encountered)&&Object.entries(l.encountered).every(([id,v])=>validId(id)&&v===true);}

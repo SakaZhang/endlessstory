@@ -1,3 +1,4 @@
+import {POTION_CATALOG,POTION_BUFF_KEYS,POTION_RECIPE_CATALOG,POTION_IMPORT_MATERIALS,potionCatalogEffect,potionRecipeAllows} from './potion-catalog.js';
 import {emitCombatDisplay} from './combat-display-bridge.js';
 import {TREE_TUNING} from './skill-tree-tuning.js';
 import {resolveTreePassives,derivePassiveStats,passiveReceivedHeal} from './skill-tree-passives.js';
@@ -363,9 +364,9 @@ export function baseStats(s){
  bonus.hit+=(s.talents.precision??0)*5;bonus.crit+=(s.talents.crit??0)*5;bonus.critDamage+=(s.talents.critDamage??0)*8;bonus.element+=(s.talents.element??0)*2;
  atk=Math.round(atk+bonus.atk);armor=Math.round(armor+bonus.armor);hp=Math.round(hp+bonus.hp);
  const ratingFactor=r=>Math.max(0,r)/(100+Math.max(0,r));
- const elementAttack=Object.fromEntries(ELEMENT_KEYS.map(k=>[k,bonus.element+(bonus[k+'Atk']??0)]));
- const elementResistance=Object.fromEntries(ELEMENT_KEYS.map(k=>[k,(s.talents.elementResist??0)*5+(bonus[k+'Resist']??0)+(k==='fire'?potionBuffStrength(s,'fireResist'):0)]));
- return {atk,armor,hp,penetration:(s.talents.penetration??0)*2,elementAttack,elementResistance,elementResist:.5*ratingFactor(elementResistance.fire),block:.35*ratingFactor((s.talents.block??0)*4),shieldBonus:(s.talents.shield??0)*4,healingBonus:(s.talents.healing??0)*3,resolveReduction:Math.floor((s.talents.resolve??0)/5),luck:Math.min(1000,Math.max(0,(s.talents.luck??0)+bonus.luck)),lifesteal:bonus.lifesteal,lifestealRating:bonus.lifesteal,lifestealRate:lifestealRate(bonus.lifesteal),lifestealCap:hp*.08,hit:clamp(.9+.1*ratingFactor(bonus.hit),.5,.995),crit:clamp(.05+.55*ratingFactor(bonus.crit),0,.6),critDamage:clamp(1.5+ratingFactor(bonus.critDamage),1.5,2.5),element:bonus.element,hitRating:bonus.hit,critRating:bonus.crit,critDamageRating:bonus.critDamage,count,specials,legend:false,bonus};
+ const elementAttack=Object.fromEntries(ELEMENT_KEYS.map(k=>[k,bonus.element+(bonus[k+'Atk']??0)+potionBuffStrength(s,k+'Atk')]));
+ const elementResistance=Object.fromEntries(ELEMENT_KEYS.map(k=>[k,(s.talents.elementResist??0)*5+(bonus[k+'Resist']??0)+potionBuffStrength(s,k+'Resist')]));
+ return {atk,armor,hp,penetration:(s.talents.penetration??0)*2,elementAttack,elementResistance,elementResist:.5*ratingFactor(elementResistance.fire),block:.35*ratingFactor((s.talents.block??0)*4),shieldBonus:(s.talents.shield??0)*4,healingBonus:(s.talents.healing??0)*3,resolveReduction:Math.floor((s.talents.resolve??0)/5),luck:Math.min(1000,Math.max(0,(s.talents.luck??0)+bonus.luck+potionBuffStrength(s,'luck'))),lifesteal:bonus.lifesteal,lifestealRating:bonus.lifesteal,lifestealRate:lifestealRate(bonus.lifesteal),lifestealCap:hp*.08,hit:clamp(.9+.1*ratingFactor(bonus.hit),.5,.995),crit:clamp(.05+.55*ratingFactor(bonus.crit),0,.6),critDamage:clamp(1.5+ratingFactor(bonus.critDamage),1.5,2.5),element:bonus.element,hitRating:bonus.hit,critRating:bonus.crit,critDamageRating:bonus.critDamage,count,specials,legend:false,bonus};
 }
 // Candidate overrides are execution-local only; never serialized into a save.
 const treeCandidatePolicies=new WeakMap();
@@ -383,17 +384,8 @@ export function stats(s){
 export function reconcileSkillTreeHealth(s){if(!validSkillTree(s,SKILL_TREE_DEFINITION))return false;capHealth(s);return true;}
 export function effectiveLuck(s){return stats(s).luck;}
 export function preset(s,id){const b=BUILD.find(x=>x.id===id);if(!b||!b.skills.every(k=>k===null||skillUnlocked(s,k)))return null;s.build=id;s.skills=[...b.skills];s.conditions=['always','always','charge','always'];return b;}
-export const POTIONS={
- healing:{name:'治疗药剂',icon:'potionHeal',desc:'按品质恢复10% / 15% / 20% / 25%最大生命。'},
- strength:{name:'力量药剂',icon:'potionPower',desc:'按品质攻击 +10 / +15 / +20 / +25，持续5分钟。同品质续时，高品质替换强度与时间，低品质不可覆盖。'},
- fireResist:{name:'火抗药剂',icon:'potionFireResist',desc:'按品质火焰抗性值 +30 / +40 / +50 / +60，持续5分钟。同品质续时，高品质替换强度与时间，低品质不可覆盖。'}
-};
-// Only the fixed-quality healing recipe is approved; other identities stay reserved.
-export const RECIPES={
- 'potion-healing':{id:'potion-healing',name:'治疗药剂配方',potionType:'healing',icon:'potionHeal',ingredients:[{functionalTag:'recoveryBase',count:1}],functionalTag:'recoveryBase',price:45,craftGoldByQuality:RECOVERY_RECIPE_CONFIG.coinCosts,craftGold:null,enabled:true},
- 'potion-strength':{id:'potion-strength',name:'力量药剂配方',potionType:'strength',icon:'potionPower',ingredients:[],price:null,craftGold:null,enabled:false},
- 'potion-fireResist':{id:'potion-fireResist',name:'火抗药剂配方',potionType:'fireResist',icon:'potionFireResist',ingredients:[],price:null,craftGold:null,enabled:false}
-};
+export const POTIONS=POTION_CATALOG;
+export const RECIPES=POTION_RECIPE_CATALOG;
 function validRecipes(s){return s.learnedRecipes===undefined||(Array.isArray(s.learnedRecipes)&&s.learnedRecipes.length<=Object.keys(RECIPES).length&&new Set(s.learnedRecipes).size===s.learnedRecipes.length&&s.learnedRecipes.every(id=>Object.hasOwn(RECIPES,id)));}
 export function recipeKnown(s,id){return Object.hasOwn(RECIPES,id)&&Array.isArray(s.learnedRecipes)&&s.learnedRecipes.includes(id);}
 export function normalizeRecipes(s){
@@ -421,22 +413,33 @@ export function craftRecoveryRecipe(s,quote){
  if(canReceiveItem(s,key,result.quantity))s.potionStacks[key]=(s.potionStacks[key]??0)+result.quantity;else s.pendingForgeClaim={kind:'potion',potion:result};
  return result;
 }
+export function eligiblePotionRecipeMaterials(s,id,role,quality){return materialEntries(s).filter(row=>row.quality===quality&&potionRecipeAllows(id,role,row.material));}
+export function quotePotionRecipe(s,id,quality,{mainKey,auxKey,quantity=1}={}){
+ const recipe=RECIPES[id];if(!recipe||id==='potion-healing'||!recipe.enabled||!recipeKnown(s,id)||s.pendingForgeClaim||!validRecipes(s)||!validMaterials(s)||!validPotions(s)||!Number.isInteger(quality)||quality<0||quality>3||!Number.isSafeInteger(quantity)||quantity<1||quantity>999)return null;
+ const main=parseMaterialKey(mainKey),aux=parseMaterialKey(auxKey);if(!main||!aux||main.quality!==quality||aux.quality!==quality||!potionRecipeAllows(id,'main',main.material)||!potionRecipeAllows(id,'aux',aux.material))return null;
+ const counts={};for(const row of [main,aux])counts[row.key]=(counts[row.key]??0)+quantity;
+ const inputs=Object.entries(counts).sort(([a],[b])=>a.localeCompare(b)).map(([key,quantity])=>({key,quantity})),gold=recipe.craftGoldByQuality?.[quality]*quantity;
+ if(!Number.isSafeInteger(gold)||gold<0||!Number.isFinite(s.gold)||s.gold<gold||inputs.some(row=>{const p=parseMaterialKey(row.key);return materialCount(s,p.material,p.quality)<row.quantity;}))return null;
+ return {recipeId:id,quality,quantity,gold,mainKey:main.key,auxKey:aux.key,inputs};
+}
+export function craftPotionRecipe(s,quote){
+ if(!quote||typeof quote!=='object'||Array.isArray(quote)||Object.keys(quote).length!==7)return null;
+ const actual=quotePotionRecipe(s,quote.recipeId,quote.quality,quote);if(!actual||JSON.stringify(actual)!==JSON.stringify(quote))return null;
+ normalizeMaterials(s);normalizePotions(s);for(const row of actual.inputs)s.materialStacks[row.key]-=row.quantity;s.gold-=actual.gold;
+ const type=RECIPES[actual.recipeId].potionType,key=potionKey(type,actual.quality),result={kind:'potion',potionType:type,quality:actual.quality,name:POTIONS[type].name,quantity:actual.quantity,key,recipeId:actual.recipeId};
+ if(canReceiveItem(s,key,result.quantity))s.potionStacks[key]=(s.potionStacks[key]??0)+result.quantity;else s.pendingForgeClaim={kind:'potion',potion:result};return result;
+}
 export function craftRecipe(s,id,selection,targetQuality=0){
- if(id==='potion-healing'&&RECIPES[id].functionalTag==='recoveryBase')return craftRecoveryRecipe(s,quoteRecoveryRecipe(s,targetQuality,selection));
- if(s.pendingForgeClaim||!Object.hasOwn(RECIPES,id)||!RECIPES[id].enabled||!recipeKnown(s,id)||!validRecipes(s)||!validMaterials(s)||!validPotions(s)||!Array.isArray(selection)||selection.length<1||selection.length>5)return null;
- const recipe=RECIPES[id];if(!Number.isSafeInteger(recipe.craftGold)||recipe.craftGold<0||!Number.isFinite(s.gold)||s.gold<recipe.craftGold)return null;
- const selected={},stacks={},parsed=[];for(const key of selection){const row=parseMaterialKey(key);if(!row)return null;parsed.push(row);selected[row.material]=(selected[row.material]??0)+1;stacks[row.key]=(stacks[row.key]??0)+1;}
- if(Object.keys(selected).length!==recipe.ingredients.length||!recipe.ingredients.every(r=>selected[r.material]===r.count)||parsed.some(r=>materialCount(s,r.material,r.quality)<stacks[r.key]))return null;
- const quality=luckyRoll(()=>rollQuality(fusionQualityWeights(selection)),effectiveLuck(s)),type=recipe.potionType,key=potionKey(type,quality);
- normalizeMaterials(s);normalizePotions(s);for(const [key,n] of Object.entries(stacks))s.materialStacks[key]-=n;s.gold-=recipe.craftGold;
- const result={kind:'potion',potionType:type,quality,name:POTIONS[type].name,quantity:1,key,recipeId:id};if(canReceiveItem(s,key))s.potionStacks[key]=(s.potionStacks[key]??0)+1;else s.pendingForgeClaim={kind:'potion',potion:result};return result;
+ if(id==='potion-healing')return craftRecoveryRecipe(s,quoteRecoveryRecipe(s,targetQuality,selection));
+ if(!Array.isArray(selection)||selection.length!==2)return null;
+ return craftPotionRecipe(s,quotePotionRecipe(s,id,targetQuality,{mainKey:selection[0],auxKey:selection[1]}));
 }
 export const POTION_DURATION_MS=300000,POTION_COOLDOWN_MS=10000;
 // Same-quality doses extend time; stronger doses replace both potency and time.
 export const POTION_QUALITY_EFFECTS=[0,1,2,3].map(quality=>({heal:[.10,.15,.20,.25][quality],durationMs:300000,attack:10+5*quality,resistance:30+10*quality}));
 function potionBuff(s,type){const b=s.potionBuffs?.[type];return typeof b==='number'?{quality:0,endAt:b}:b??{quality:0,endAt:0};}
-function potionBuffStrength(s,type){const b=potionBuff(s,type);if(b.endAt<=(s.lastHealthClock??0))return 0;return type==='strength'?POTION_QUALITY_EFFECTS[b.quality].attack:POTION_QUALITY_EFFECTS[b.quality].resistance;}
-export function potionEffect(type,quality=0){if(!Number.isInteger(quality)||quality<0||quality>3)return null;const effect=POTION_QUALITY_EFFECTS[quality];return Object.hasOwn(POTIONS,type)&&effect?{healFraction:type==='healing'?effect.heal:0,durationMs:type==='healing'?0:effect.durationMs,attack:type==='strength'?effect.attack:0,resistance:type==='fireResist'?effect.resistance:0}:null;}
+function potionBuffStrength(s,type){const b=potionBuff(s,type);if(b.endAt<=(s.lastHealthClock??0))return 0;const effect=potionCatalogEffect(type,b.quality);return effect?(effect.attack||effect.elementAttack||effect.elementResistance||effect.luck||0):0;}
+export function potionEffect(type,quality=0){return potionCatalogEffect(type,quality);}
 export function potionKey(type,quality=0){return Object.hasOwn(POTIONS,type)&&Number.isInteger(quality)&&quality>=0&&quality<=3?`${type}|${quality}`:null;}
 export function parsePotionKey(value){
  if(typeof value!=='string')return null;if(Object.hasOwn(POTIONS,value))return {type:value,quality:0,key:potionKey(value)};
@@ -446,11 +449,11 @@ function validPotions(s){
  const count=n=>Number.isSafeInteger(n)&&n>=0&&n<=1e9,time=n=>Number.isFinite(n)&&n>=0&&n<=1e15;
  const stacks=s.potionStacks===undefined?(s.potions===undefined||(s.potions&&typeof s.potions==='object'&&!Array.isArray(s.potions)&&Object.keys(s.potions).every(k=>Object.hasOwn(POTIONS,k)&&count(s.potions[k])))):(s.potions===undefined&&s.potionStacks&&typeof s.potionStacks==='object'&&!Array.isArray(s.potionStacks)&&Object.entries(s.potionStacks).every(([k,n])=>parsePotionKey(k)?.key===k&&count(n)));
  const selected=s.potionSlot?.key??s.potionSlot?.type??null;
- return stacks&&(s.potionSlot===undefined||(s.potionSlot&&(selected===null||parsePotionKey(selected))&&typeof s.potionSlot.auto==='boolean'&&(s.potionSlot.priorityVersion===undefined?s.potionSlot.priority===undefined:s.potionSlot.priorityVersion===1&&['low','high'].includes(s.potionSlot.priority))))&&(s.potionReadyAt===undefined||time(s.potionReadyAt))&&(s.potionBuffs===undefined||(s.potionBuffs&&typeof s.potionBuffs==='object'&&!Array.isArray(s.potionBuffs)&&['strength','fireResist'].every(type=>{const b=s.potionBuffs[type];return b===undefined||time(b)||(b&&Number.isInteger(b.quality)&&b.quality>=0&&b.quality<=3&&time(b.endAt));})));
+ return stacks&&(s.potionSlot===undefined||(s.potionSlot&&(selected===null||parsePotionKey(selected))&&typeof s.potionSlot.auto==='boolean'&&(s.potionSlot.priorityVersion===undefined?s.potionSlot.priority===undefined:s.potionSlot.priorityVersion===1&&['low','high'].includes(s.potionSlot.priority))))&&(s.potionReadyAt===undefined||time(s.potionReadyAt))&&(s.potionBuffs===undefined||(s.potionBuffs&&typeof s.potionBuffs==='object'&&!Array.isArray(s.potionBuffs)&&Object.keys(s.potionBuffs).every(type=>POTION_BUFF_KEYS.includes(type))&&POTION_BUFF_KEYS.every(type=>{const b=s.potionBuffs[type];return b===undefined||time(b)||(b&&Number.isInteger(b.quality)&&b.quality>=0&&b.quality<=3&&time(b.endAt));})));
 }
 export function normalizePotions(s){
  if(!validPotions(s))return false;if(s.potionStacks===undefined){s.potionStacks=Object.fromEntries(Object.entries(s.potions??{}).map(([type,n])=>[potionKey(type),n]));delete s.potions;}
- const selected=s.potionSlot?.key??s.potionSlot?.type??null;const priority=s.potionSlot?.priorityVersion===1?s.potionSlot.priority:(parsePotionKey(selected)?.quality??0)>=2?'high':'low';s.potionSlot={key:selected===null?null:parsePotionKey(selected).key,auto:s.potionSlot?.auto??false,priority,priorityVersion:1};s.potionReadyAt??=0;s.potionBuffs??={};for(const type of ['strength','fireResist']){const b=s.potionBuffs[type];if(typeof b==='number'||b===undefined)s.potionBuffs[type]={quality:0,endAt:b??0};}return true;
+ const selected=s.potionSlot?.key??s.potionSlot?.type??null;const priority=s.potionSlot?.priorityVersion===1?s.potionSlot.priority:(parsePotionKey(selected)?.quality??0)>=2?'high':'low';s.potionSlot={key:selected===null?null:parsePotionKey(selected).key,auto:s.potionSlot?.auto??false,priority,priorityVersion:1};s.potionReadyAt??=0;s.potionBuffs??={};for(const type of POTION_BUFF_KEYS){const b=s.potionBuffs[type];if(typeof b==='number'||b===undefined)s.potionBuffs[type]={quality:0,endAt:b??0};}return true;
 }
 export function potionCount(s,type,quality=0){return s.potionStacks?.[potionKey(type,quality)]??(quality===0?s.potions?.[type]??0:0);}
 export function potionEntries(s){return Object.keys(POTIONS).flatMap(type=>[0,1,2,3].map(quality=>({key:potionKey(type,quality),type,quality,count:potionCount(s,type,quality)}))).filter(x=>x.count>0);}
@@ -938,7 +941,7 @@ export function offline(s,now=Date.now()){
   if(s.nextBattleAt>time){time=Math.min(end,s.nextBattleAt);if(time>=end)break;}
   let e=s.activeEncounter;
   if(e?.done){if(e.win&&!e.rewarded){reward(s,e,time);mergeLootSummary(lootSummary,e.lootSummary);kills++;}else s.activeEncounter=null;continue;}
-  if(!e){e=startRoutedEncounter(s,time);if(!e){if(s.restUntil>0){rests++;continue;}break;}e.luck=s.offlineLuck??0;}
+  if(!e){e=startRoutedEncounter(s,time);if(!e){if(s.restUntil>0){rests++;continue;}break;}}
   const turnAt=Math.max(time,s.nextActionAt??(time+1100));if(turnAt>end)break;time=turnAt;
   const wasResting=s.restUntil>0;step(s,e,time);rounds++;if(!wasResting&&s.restUntil>0)rests++;
   if(e.done&&e.win){reward(s,e,time);mergeLootSummary(lootSummary,e.lootSummary);kills++;}
@@ -953,6 +956,7 @@ export function offline(s,now=Date.now()){
  return {minutes:Math.floor(Math.max(0,end-start)/60000),gold,xp,mat,materialLoot,lootSummary,kills,rests,rounds,capped:now-start>4*3600000};
 }
 export const MATERIALS={
+ ...POTION_IMPORT_MATERIALS,
  ...Object.fromEntries(Object.entries(DWARF_MATERIAL_REGISTRY).filter(([key])=>!['铁屑','炉火晶','誓约残片','灰根草'].includes(key)).map(([key,meta])=>[key,{...meta,price:meta.merchantBasePrice??0,merchantEnabled:meta.merchantAllowed===true}])),
  '铁屑':{icon:'iron',tags:['金属'],description:'旧驿道散落的铁料，融合时偏向厚重装备；不产出套装。',origin:'失落驿道',price:4},
  '炉火晶':{icon:'fire',tags:['火焰'],description:'矿炉余热凝成的晶体，融合时偏向饰品；不产出套装。',origin:'熄火矿井',price:7},
@@ -1010,7 +1014,7 @@ function earnedMaterials(s,material,count,boss=false,luck=0,weights=null,summary
  for(let i=0;i<count;i++){const quality=luckyRoll(()=>rollQuality(weights??(boss?[65,28,6.5,.5]:[80,17,2.8,.2])),luck);const added=receiveBattleLoot(s,{kind:'material',key:materialKey(material,quality),quality,quantity:1},summary);if(!added)continue;const entry=loot.find(x=>x.quality===quality);if(entry)entry.count++;else loot.push({key:materialKey(material,quality),material,quality,count:1});}
  return loot;
 }
-const MERCHANT_STOCK={'铁屑':[6,12],'炉火晶':[3,7],'誓约残片':[2,5],'灰根草':[4,8],'dwarf.blackvein_ore':[6,12],'dwarf.rock_lizard_sinew':[3,7]};
+const MERCHANT_STOCK={...Object.fromEntries(Object.entries(POTION_IMPORT_MATERIALS).map(([key,m])=>[key,m.stock])), '铁屑':[6,12],'炉火晶':[3,7],'誓约残片':[2,5],'灰根草':[4,8],'dwarf.blackvein_ore':[6,12],'dwarf.rock_lizard_sinew':[3,7]};
 export const MERCHANT_CYCLE_MS=30*60*1000;
 function validEquipment(i){try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;return validItemBudgetMetadata(i)&&(!i.legendaryId||validLegendaryEquipmentMetadata(i,AFFIX_DEFS))&&validEquipmentTemplateMetadata(i)&&validEnhancementMetadata(i)&&validEquipmentLevelMetadata(i)&&typeof i.id==='string'&&typeof i.name==='string'&&SLOTS.includes(i.slot)&&Number.isInteger(i.rarity)&&i.rarity>=0&&i.rarity<=3&&(!i.set||(BUILD.some(b=>b.id===i.set)&&SET_SLOTS.includes(i.slot)&&i.rarity===3))&&num(i.atk)&&num(i.hp)&&num(i.armor)&&num(i.level)&&num(i.bless,5)&&Array.isArray(i.affixes)&&(i.rarity===0?i.affixes.length<=1:i.affixes.length===i.rarity+1)&&new Set(i.affixes.map(a=>a.stat)).size===i.affixes.length&&i.affixes.every(a=>validAffixSource(a,AFFIX_DEFS,{legacyWide:true}))&&(!i.special||(!i.set&&i.rarity>=2&&Object.hasOwn(SPECIALS,i.special.id)))&&(i.legendaryId===null||LEGENDARY_CODEX.some(def=>def.id===i.legendaryId&&def.implemented&&def.slot===i.slot&&!i.set))&&(i.divine===undefined||(i.divine?.id==='forge-favor'&&i.divine.name==='神赐·炉火眷顾'&&i.divine.model==='raw-v1'&&['atk','armor','hp'].every(k=>num(i.divine.bonus?.[k]))));}catch{return false;}}
 function validMerchant(merchant){
@@ -1030,7 +1034,7 @@ function validMerchant(merchant){
 function rollMerchantOffers(s,revision,preservedMaterials=null){
  const [minGearLevel,maxGearLevel]=getMerchantEquipmentLevelRange(s);
  const pool=Object.keys(MATERIALS).filter(k=>MATERIALS[k].merchantEnabled!==false),offers=preservedMaterials?preservedMaterials.map(o=>({...o,type:'material',quality:o.quality??0})):[],count=preservedMaterials?offers.length:rand(2,3);
- if(!preservedMaterials)for(let i=0;i<count;i++){const material=pool.splice(rand(0,pool.length-1),1)[0],[min,max]=MERCHANT_STOCK[material];const quality=rollQuality([75,20,4.5,.5]);offers.push({type:'material',material,quality,price:materialPrice(material,quality),stock:rand(min,max)});}
+ if(!preservedMaterials)for(let i=0;i<count;i++){const material=weighted(pool.map(key=>[key,MATERIALS[key].weight??1]));pool.splice(pool.indexOf(material),1);const [min,max]=MERCHANT_STOCK[material];const quality=rollQuality([75,20,4.5,.5]);offers.push({type:'material',material,quality,price:materialPrice(material,quality),stock:rand(min,max)});}
  while(offers.length<8){const slot=SLOTS[rand(0,SLOTS.length-1)],it=item(slot,rand(minGearLevel,maxGearLevel),null,rollQuality(),{levelSource:'merchant'});offers.push({type:'equipment',item:it,price:15+sellValue(it)*4+it.level*3,stock:1});}
  if(Math.random()<.03)offers[7]={type:'consumable',consumable:'memoryFruit',price:200,stock:1};
  if(Math.random()<.10){const index=offers.findLastIndex(o=>o.type==='equipment');offers[index]={type:'consumable',consumable:'reforgeToken',price:120,stock:1};}
