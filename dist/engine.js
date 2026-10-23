@@ -56,7 +56,7 @@ export const SLOTS = ['weapon','helm','armor','gloves','boots','ring','amulet'];
 export const SOCKETS = ['weapon','helm','armor','gloves','boots','ring1','ring2','amulet'];
 export const SOCKET_TYPE = Object.fromEntries(SOCKETS.map(k=>[k,k.startsWith('ring')?'ring':k]));
 export const CORE_SOCKET = {socket:'core',type:'core',race:'ashen',playable:false};
-export const SLOTNAME = {weapon:'武器',helm:'头盔',armor:'护甲',gloves:'手套',boots:'靴子',ring:'戒指',ring1:'戒指Ⅰ',ring2:'戒指Ⅱ',amulet:'项链',core:'核心'};
+export const SLOTNAME = {weapon:'武器',helm:'头盔',armor:'护甲',gloves:'手套',boots:'靴子',ring:'戒指',ring1:'戒指左',ring2:'戒指右',amulet:'项链',core:'核心'};
 export const RARITY = ['普通','稀有','优良','至臻'];
 export const SET_SLOTS = ['helm','armor','gloves','boots'];
 export const BUILD = [
@@ -177,7 +177,7 @@ export function eligibleReforgeDonors(s,targetId,index=0){
  if(!target||!validEquipment(target)||!Number.isInteger(index)||index<0||index>=target.affixes.length||s.pendingReforge)return [];
  const occupied=new Set(target.affixes.filter((a,i)=>i!==index).map(a=>a.stat));
  const legalDonor=it=>validEquipment(it)&&Array.isArray(it.affixes)&&new Set(it.affixes.map(a=>a?.stat)).size===it.affixes.length&&it.affixes.every(a=>validAffixSource(a,AFFIX_DEFS));
- return s.inventory.filter(it=>it.id!==targetId&&legalDonor(it)&&!it.locked&&!Object.values(s.equip).includes(it.id)&&!isProtected(s,it.id)).map(it=>({item:it,affixes:it.affixes.filter(a=>Object.hasOwn(AFFIX_DEFS,a.stat)&&!occupied.has(a.stat))})).filter(x=>x.affixes.length);
+ return s.inventory.filter(it=>it.id!==targetId&&it.slot===target.slot&&legalDonor(it)&&!it.locked&&!Object.values(s.equip).includes(it.id)&&!isProtected(s,it.id)).map(it=>({item:it,affixes:it.affixes.filter(a=>Object.hasOwn(AFFIX_DEFS,a.stat)&&!occupied.has(a.stat))})).filter(x=>x.affixes.length);
 }
 export const REFORGE_DIVINE_CONFIG=Object.freeze({chance:0.03});
 const sameReforgeData=(a,b)=>{

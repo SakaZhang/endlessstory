@@ -174,3 +174,5 @@ for(const file of ['skill-tree-live-budget-tests.mjs','skill-tree-layout-v057-te
 runAffixSourceTest(process.execPath,[new URL('./recipe-batch-limits-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
 // v0.57 current-area opt-in automation and owned-only life-potion controls.
 for(const file of ['expedition-automation-tests.mjs','battle-potion-owned-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+// v0.57 same-slot affix transplant, exact source inheritance and ring socket names.
+runAffixSourceTest(process.execPath,[new URL('./reforge-same-slot-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});

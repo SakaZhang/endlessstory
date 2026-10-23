@@ -6,8 +6,8 @@ global.document={hidden:false,getElementById:el,addEventListener:(k,f)=>(events[
  const sourced=(stat,quality,value)=>({stat,value,sourceRange:{model:'quality-v1',quality,...affixRange(E.AFFIX_DEFS[stat],quality)}}),hp45=sourced('hp',3,45);
  const base=E.fresh();base.gold=10000;base.materialStacks['铁屑|0']=100;base.consumables.reforgeToken=3;
  const target=E.item('weapon',9,null,0);target.affixes=[sourced('atk',0,5)];E.applyForgeFavor(target);
- const donor=E.item('gloves',30,null,3);donor.affixes=[hp45,...['atk','crit','armor'].map(stat=>sourced(stat,3,affixRange(E.AFFIX_DEFS[stat],3).min))];donor.bless=0;E.applyForgeFavor(donor);
- const donor2=E.item('boots',30,null,3);donor2.affixes=structuredClone(donor.affixes);E.applyForgeFavor(donor2);
+ const donor=E.item(target.slot,30,null,3);donor.affixes=[hp45,...['atk','crit','armor'].map(stat=>sourced(stat,3,affixRange(E.AFFIX_DEFS[stat],3).min))];donor.bless=0;E.applyForgeFavor(donor);
+ const donor2=E.item(target.slot,30,null,3);donor2.affixes=structuredClone(donor.affixes);E.applyForgeFavor(donor2);
  const nextTarget=E.item('weapon',2,null,0);nextTarget.affixes=[sourced('atk',0,3)];E.applyForgeFavor(nextTarget);
  base.inventory.push(target,donor,donor2,nextTarget);assert(E.validSave(base));{const retired=structuredClone(base);retired.inventory.find(it=>it.id===donor.id).bless=4;assert(!E.validSave(retired),'retired bless is rejected, not imported or mapped to current enhancement');}store.set('ashencrown-v3',JSON.stringify(base));let sequence=0;
  const refresh=async()=>{elements=new Map();events={};await import('./dist/app.js?affix-source-'+(++sequence));},saved=()=>JSON.parse(store.get('ashencrown-v3')),item=id=>saved().inventory.find(i=>i.id===id),click=(dataset={},id='')=>{const b={dataset,id};for(const f of events.click||[])f({target:{id,closest:()=>b}});};

@@ -16,18 +16,18 @@ try{
  // Old v0.12 pending quotes resolve under their original rules, with no token.
  for(const mode of ['all','replace']){
   const s=fresh(),it=target(s);it.special={id:'knowledge'};s.consumables.reforgeToken=1;
-  let donor;if(mode==='replace'){donor=item('ring',1,null,0);const stat=Object.keys(AFFIX_DEFS).find(k=>!it.affixes.some(a=>a.stat===k));donor.affixes=[currentAffix(stat,AFFIX_DEFS[stat].min)];s.inventory.push(donor);}
+  let donor;if(mode==='replace'){donor=item(it.slot,1,null,0);const stat=Object.keys(AFFIX_DEFS).find(k=>!it.affixes.some(a=>a.stat===k));donor.affixes=[currentAffix(stat,AFFIX_DEFS[stat].min)];s.inventory.push(donor);}
   assert(reforge(s,it.id,mode,0,donor?.id));const p=s.pendingReforge;p.newAffixes=p.newAffixes.map(legacyAffix);delete p.ruleVersion;delete p.oldDivine;delete p.newDivine;delete p.oldSpecial;delete p.newSpecial;delete p.donor;p.cost=mode==='all'?{gold:90,materials:{'铁屑':3,'炉火晶':2}}:{gold:45,materials:{'铁屑':2,'炉火晶':1}};
   assert(!validSave(s));const snapshot=JSON.stringify(s);assert.equal(resolveReforge(s,true),null);assert.equal(JSON.stringify(s),snapshot);
  }
  // Donors contribute an eligible ordinary stat and its original raw value (v0.29).
- const s=fresh(),it=target(s);it.affixes=[currentAffix('atk',3),currentAffix('hp',15),currentAffix('crit',5)];const donor=item('ring',1,null,1);donor.affixes=[currentAffix('armor',6),currentAffix('atk',8)];s.inventory.push(donor);const oldGold=s.gold;
+ const s=fresh(),it=target(s);it.affixes=[currentAffix('atk',3),currentAffix('hp',15),currentAffix('crit',5)];const donor=item(it.slot,1,null,1);donor.affixes=[currentAffix('armor',6),currentAffix('atk',8)];s.inventory.push(donor);const oldGold=s.gold;
  assert.deepEqual(eligibleReforgeDonors(s,it.id,0).find(x=>x.item.id===donor.id).affixes,[currentAffix('armor',6),currentAffix('atk',8)]);
  for(const flag of ['locked','legendaryId']){donor[flag]=flag==='locked'?true:'fake';assert(!eligibleReforgeDonors(s,it.id,0).some(x=>x.item.id===donor.id));donor[flag]=flag==='locked'?false:null;}
- equipItem(s,donor.id,'ring1');assert(!eligibleReforgeDonors(s,it.id,0).some(x=>x.item.id===donor.id));saveLoadout(s,0,'protected');equipItem(s,s.inventory[5].id,'ring1');assert(!eligibleReforgeDonors(s,it.id,0).some(x=>x.item.id===donor.id));s.loadouts[0]=null;
+ equipItem(s,donor.id,it.slot);assert(!eligibleReforgeDonors(s,it.id,0).some(x=>x.item.id===donor.id));saveLoadout(s,0,'protected');equipItem(s,s.inventory.find(x=>x.slot===it.slot&&x.id!==it.id&&x.id!==donor.id).id,it.slot);assert(!eligibleReforgeDonors(s,it.id,0).some(x=>x.item.id===donor.id));s.loadouts[0]=null;
  Math.random=()=>0;const r=reforge(s,it.id,'replace',0,donor.id);assert(r);assert.equal(r.after[0].stat,'armor');assert.equal(r.after[0].value,6);assert(!s.inventory.some(x=>x.id===donor.id));assert.equal(s.gold,oldGold);assert.deepEqual(r.newSpecial,it.special??null);assert(resolveReforge(s,false));assert(!s.inventory.some(x=>x.id===donor.id));
  // A donor matching another retained slot is invalid and consumes nothing.
- const d=item('ring',1,null,0);d.affixes=[currentAffix('hp',20)];s.inventory.push(d);let calls=0;Math.random=()=>{calls++;return 0;};let before=JSON.stringify(s);assert.equal(reforge(s,it.id,'replace',0,d.id),null);assert.equal(reforge(s,it.id,'replace',0,it.id),null);assert.equal(calls,0);assert.equal(JSON.stringify(s),before);
+ const d=item(it.slot,1,null,0);d.affixes=[currentAffix('hp',20)];s.inventory.push(d);let calls=0;Math.random=()=>{calls++;return 0;};let before=JSON.stringify(s);assert.equal(reforge(s,it.id,'replace',0,d.id),null);assert.equal(reforge(s,it.id,'replace',0,it.id),null);assert.equal(calls,0);assert.equal(JSON.stringify(s),before);
  // Current A03 boss reward: independent mark, equipment/material coexistence and once-only guard.
  const bossState=()=>{const s=fresh();normalizeAreaProgress(s);s.areaProgress.dwarf={unlocked:[1,2,3],cleared:[1,2]};const e=startInstanceEncounter(s,'dwarf.a03.boss',s.lastSeen);assert(e);e.done=e.win=true;e.targetId=null;e.hp=0;for(const u of e.enemies)u.hp=0;return s;};
  const template=bossState();let b,e,simultaneous;

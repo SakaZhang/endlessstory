@@ -12,3 +12,10 @@
 - pending-forge-ui-tests.cjs: strengthened successful claim assertions: no result icon, no has-result style, no claim action. Existing full-bag, save-failure and exact-once tests retained.
 - Existing recovery-recipe-ui, potion-expansion-ui, potion-forge-ui, formal-enhancement-ui, forge-animation and pixel-services-live-app-ui suites passed.
 - forge-workflow-native-proof.mjs generates actual scene renderer + production icon native compositions with the CSS geometry, including 960px and320px input/converge/result/claimed states. These are NOT browser screenshots. Browser/mobile layout QA remains a separate gate.
+
+## Additional approved slot and transplant repairs
+- Equipped socket labels are 戒指左 / 戒指右 throughout SLOTNAME consumers and equip actions. Stored IDs stay ring1 / ring2. Items, drops, inventory family and donor matching stay the one generic ring slot.
+- Modification and formal enhancement now start with a shared seven-slot selector, then only that slot's candidates. Direct enhancement from an item detail selects its known slot. Worn targets sort before other candidates, with the backpack E corner badge; both worn rings lead the one ring category. Existing within-group order is stable and physical item IDs are de-duplicated.
+- 替换一条 is now 词条移植. Donor admission is enforced in engine eligibleReforgeDonors by item.slot === target.slot, not just hidden in UI. Wrong-slot attempts return before RNG or spending. Equipped/locked/preset-protected donors remain excluded.
+- Ordinary affix raw value and sourceRange are inherited exactly. Existing paid candidate receipts still resolve without a new charge or reroll; the new admission rule does not invalidate already-paid pending receipts.
+- Existing donor test fixtures were changed to the target's matching slot so their original raw/range/divine/cost/protection tests remain meaningful. New reforge-same-slot-tests and forge-slot-picker-app-ui-tests cover forbidden wrong slots, rings, selector order and E markers explicitly.

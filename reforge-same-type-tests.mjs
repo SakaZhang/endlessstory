@@ -1,7 +1,7 @@
 import {currentAffix} from './current-equipment-test-fixture.mjs';
 import assert from 'node:assert/strict';
 import * as E from './dist/engine.js';
-const s=E.fresh(),it=E.item('gloves',2,null,1),d=E.item('boots',2,null,0);it.affixes=[currentAffix('atk',3),currentAffix('hp',15)];d.affixes=[currentAffix('atk',8)];s.inventory.push(it,d);
+const s=E.fresh(),it=E.item('gloves',2,null,1),d=E.item('gloves',2,null,0);it.affixes=[currentAffix('atk',3),currentAffix('hp',15)];d.affixes=[currentAffix('atk',8)];s.inventory.push(it,d);
 assert.deepEqual(E.eligibleReforgeDonors(s,it.id).find(x=>x.item.id===d.id).affixes,d.affixes);
 assert(!E.eligibleReforgeDonors(s,it.id,1).some(x=>x.item.id===d.id));
 assert(E.reforge(s,it.id,'replace',0,d.id));assert.equal(s.pendingReforge.ruleVersion,6);assert(E.validSave(s));assert.deepEqual(s.pendingReforge.newAffixes,[currentAffix('atk',8),currentAffix('hp',15)]);
