@@ -16,10 +16,11 @@ for(const accept of [false,true])for(const hit of [false,true]){
 {
  const {s,it}=setup();E.applyForgeFavor(it);const before=clone(it);const r=rolls(Array(9).fill(.4),()=>E.reforge(s,it.id,'all'));assert.equal(r.calls,9);assert(E.validPendingReforge(s));assert(E.resolveReforge(s,true,s.pendingReforge.operationId));assert.equal(it.atk,before.atk);assert.equal(it.divine.bonus.atk,it.atk/10);assert.equal(it.divine.bonus.affixes[0].value,it.affixes[0].value/10);
 }
-// Luck introduces its own ordinary-value draws, not a new or boosted divine probability.
-for(const luck of [0,10])for(const favor of [.029999,.03]){
+// v0.34: ordinary-value draws stay separate; luck now mildly boosts divine.
+for(const luck of [0,10])for(const delta of [-.000001,0,.000001]){
+ const threshold=.03*(1+.20*luck/(luck+5)),favor=threshold+delta;
  const {s,it}=setup();s.talents.luck=luck;s.bonusTalentPoints=10;const count=luck?13:9;
- const r=rolls([...Array(count).fill(.9),favor],()=>E.reforge(s,it.id,'all'));assert.equal(r.calls,count+1);assert.equal(!!s.pendingReforge.newDivine,favor<.03);
+ const r=rolls([...Array(count).fill(.9),favor],()=>E.reforge(s,it.id,'all'));assert.equal(r.calls,count+1);assert.equal(!!s.pendingReforge.newDivine,delta<0);
 }
 // Old pending all records preserve their original semantics and never acquire new favor.
 for(const legacy of [undefined,2]){
