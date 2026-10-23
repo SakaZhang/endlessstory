@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import {validLootFilters,setLootFilter,normalizeInventoryState,shouldDiscardLoot} from './dist/inventory-schema.js';
+import {validBatchSelection} from './dist/batch-sale-schema.js';
+import {renderBatchSale} from './dist/batch-sale-ui.js';
+import * as E from './dist/engine.js';
+const s=E.fresh();normalizeInventoryState(s);assert.deepEqual(s.lootFilters.equipment,[]);assert(setLootFilter(s,'equipment',[4]));assert(validLootFilters(s));assert(shouldDiscardLoot(s,'equipment',4));assert(!shouldDiscardLoot(s,'equipment',3));assert(!setLootFilter(s,'items',[4]));assert(!setLootFilter(s,'materials',[4]));assert(setLootFilter(s,'equipment',[0,1,2,3,4]));assert(!setLootFilter(s,'equipment',[4,4]));assert(!setLootFilter(s,'equipment',[5]));assert(validBatchSelection('weapon',[0,1,2,3,4],E.SLOTS));assert(!validBatchSelection('weapon',[5],E.SLOTS));assert(!validBatchSelection('weapon',[4,4],E.SLOTS));
+const old={lootFilters:{equipment:[3],materials:[3],items:[3]}};assert(normalizeInventoryState(old));assert.deepEqual(old.lootFilters.equipment,[3]);assert(!shouldDiscardLoot(old,'equipment',4));
+const html=renderBatchSale(s,{slot:'weapon',qualities:[4]});assert(html.includes('data-batch-quality="4"'));assert(html.includes('传说'));assert(html.includes('color:#e7bc58'));
+const relic=E.legendaryItem('first-forge-oathhammer',30),normal=E.item('weapon',30,null,3);s.inventory.push(relic,normal);assert(E.validSave(s));
+const normalQuote=E.quoteBatchSale(s,'weapon',[3]);assert(normalQuote);assert(normalQuote.entries.some(x=>x.id===normal.id));assert(!normalQuote.entries.some(x=>x.id===relic.id));
+const legendQuote=E.quoteBatchSale(s,'weapon',[4]);assert(legendQuote);assert.deepEqual(legendQuote.entries.map(x=>x.id),[relic.id]);relic.locked=true;assert.equal(E.quoteBatchSale(s,'weapon',[4]).count,0);relic.locked=false;
+const selected=E.quoteBatchSale(s,'weapon',[4]);assert(E.executeBatchSale(s,selected).ok);assert(s.inventory.some(x=>x.id===normal.id));assert(!s.inventory.some(x=>x.id===relic.id));
+console.log('PASS legendary separate filter/batch category4, defaults and old3 preserved, materials/items unchanged, protected excluded');
+const {emptyLootSummary}=await import('./dist/inventory-schema.js');
+const receiver=E.fresh();setLootFilter(receiver,'equipment',[3]);const kept=E.legendaryItem('first-forge-oathhammer',30),ignored=E.item('weapon',30,null,3);let summary=emptyLootSummary();assert(E.receiveBattleLoot(receiver,{kind:'equipment',item:kept},summary));assert(!E.receiveBattleLoot(receiver,{kind:'equipment',item:ignored},summary));assert.equal(summary.discarded.equipment,1);
+setLootFilter(receiver,'equipment',[4]);summary=emptyLootSummary();assert(!E.receiveBattleLoot(receiver,{kind:'equipment',item:E.legendaryItem('first-forge-oathhammer',30)},summary));assert.equal(summary.discarded.equipment,1);
+setLootFilter(receiver,'equipment',[]);while(E.bagCounts(receiver).equipment.weapon<50)receiver.inventory.push(E.item('weapon',1,null,0));summary=emptyLootSummary();assert(!E.receiveBattleLoot(receiver,{kind:'equipment',item:E.legendaryItem('first-forge-oathhammer',30)},summary));assert.equal(summary.overflow.equipment,1);assert.equal(summary.discarded.equipment,0);
+console.log('PASS actual receive: ordinary3 never filters legend, explicit4 does, full family still loses only incoming item');

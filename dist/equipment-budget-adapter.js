@@ -1,3 +1,4 @@
+import {validLegendaryEquipmentMetadata} from './legendary-equipment.js';
 import {CONFIG,deriveEquipmentBase} from './equipment-budget.js';
 export const EQUIPMENT_BUDGET_MODEL=CONFIG.id;
 const budgetKeys=['baseBudgetModel','budgetLevel','budgetSourceLevel','budgetCompatibility'];
@@ -9,6 +10,8 @@ export function deriveNewItemBudget({slot,baseVariant,level,quality}){
 }
 export function validItemBudgetMetadata(it){
  if(!it||typeof it!=='object'||Array.isArray(it))return false;
+ if(it.legendaryId)return validLegendaryEquipmentMetadata(it);
+ if(it.budgetQuality!==undefined||it.legendaryBudget!==undefined||it.exclusive!==undefined)return false;
  if(it.baseBudgetModel===undefined)return budgetKeys.every(key=>it[key]===undefined);
  if(it.baseBudgetModel!==CONFIG.id||!Number.isSafeInteger(it.level)||it.level<1||it.level>1e12||it.budgetSourceLevel!==it.level||it.budgetLevel!==Math.min(100,it.level)||it.budgetCompatibility!==(it.level>100?'level-cap-100':undefined))return false;
  try{const expected=deriveNewItemBudget({slot:it.slot,baseVariant:it.baseVariant,level:it.level,quality:it.rarity});return ['atk','armor','hp'].every(k=>it[k]===expected[k]);}catch{return false;}

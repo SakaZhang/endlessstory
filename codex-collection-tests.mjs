@@ -1,3 +1,4 @@
+import {legendaryItem} from './dist/engine.js';
 import {enableM2TestBudget,prepareM2TestRoute} from './m2-test-budget-fixture.mjs';
 import assert from 'node:assert/strict';
 import {commitGameTransaction} from './dist/storage.js';
@@ -21,13 +22,13 @@ try{
  const donorState=fresh(),target=item('weapon',1,null,1),donor=item('gloves',1,'guard',3);target.affixes=[{stat:'atk',value:3},{stat:'hp',value:15}];donor.affixes=[{stat:'armor',value:2},{stat:'hit',value:5},{stat:'crit',value:5},{stat:'critDamage',value:8}];donorState.inventory.push(target,donor);assert(reforge(donorState,target.id,'replace',0,donor.id));assert(!donorState.inventory.some(x=>x.id===donor.id));assert.deepEqual(codexSetState(donorState,'guard').parts,['gloves']);assert(resolveReforge(donorState,true));assert.equal(target.set,null);assert(validSave(donorState));
  // Offline acquisition uses the same collector and backfills currently owned legacy sets.
  const afk=fresh();afk.inventory.push(item('boots',1,'anvil',3));normalizeHealth(afk,0);afk.lastSeen=0;afk.running=true;enableM2TestBudget();prepareM2TestRoute(afk,0);const report=offline(afk,60000);assert(report.kills>0);assert.deepEqual(codexSetState(afk,'anvil').parts,['boots']);assert(validSave(afk));
- const legend=LEGENDARY_CODEX[0];assert.equal(legend.implemented,false);assert.equal(codexState(s,legend.id).collected,false);
+ const legend=LEGENDARY_CODEX[0];assert.equal(legend.implemented,true);assert.equal(codexState(s,legend.id).collected,false);
  const fake=fresh(),fakeItem=item('weapon',1,null,3);fakeItem.legendaryId=legend.id;fake.inventory.push(fakeItem);assert(!recordCollectedEquipment(fake,fakeItem));assert.equal(codexState(fake,legend.id).collected,false);
  // Test-only enabled entry exercises the future actual-implemented legendary lifecycle.
- try{legend.implemented=true;const l=fresh(),actual=item('weapon',1,null,3);actual.legendaryId=legend.id;assert(receiveBattleLoot(l,{kind:'equipment',item:actual}));assert(codexState(l,legend.id).collected);l.inventory=l.inventory.filter(x=>x.id!==actual.id);assert(codexState(l,legend.id).collected);assert(validSave(l));assert(codexState(JSON.parse(JSON.stringify(l)),legend.id).collected);
- }finally{legend.implemented=false;}
+ {const l=fresh(),actual=legendaryItem(legend.id,1);assert(receiveBattleLoot(l,{kind:'equipment',item:actual}));assert(codexState(l,legend.id).collected);l.inventory=l.inventory.filter(x=>x.id!==actual.id);assert(codexState(l,legend.id).collected);assert(validSave(l));assert(codexState(JSON.parse(JSON.stringify(l)),legend.id).collected);
+ }
  assert.equal(codexState(s,legend.id).collected,false);
- for(const mutate of [p=>p.codexCollection.version=2,p=>p.codexCollection.sets.anvil.push('weapon'),p=>p.codexCollection.sets.anvil.push('helm','helm'),p=>p.codexCollection.sets.unknown=[],p=>p.codexCollection.legendaries.push('unknown'),p=>p.codexCollection.legendaries.push(legend.id),p=>p.codexCollection=null]){
+ for(const mutate of [p=>p.codexCollection.version=2,p=>p.codexCollection.sets.anvil.push('weapon'),p=>p.codexCollection.sets.anvil.push('helm','helm'),p=>p.codexCollection.sets.unknown=[],p=>p.codexCollection.legendaries.push('unknown'),p=>p.codexCollection.legendaries.push(legend.id,legend.id),p=>p.codexCollection=null]){
   const bad=fresh();normalizeCodexCollection(bad);mutate(bad);const before=JSON.stringify(bad);assert(!validSave(bad));assert(!normalizeCodexCollection(bad));assert.equal(JSON.stringify(bad),before);
  }
  // A failed claim save must not adopt either the item or its collection record.

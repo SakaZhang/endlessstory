@@ -6,7 +6,7 @@ const original=Math.random;Math.random=()=>.5;
 const add=(s,slot='ring',rarity=0,set=null)=>{const it=item(slot,3,set,rarity);s.inventory.push(it);return it;};
 try{
  const s=fresh(),gold=s.gold;for(let q=0;q<4;q++)add(s,'ring',q);add(s,'weapon',0);const locked=add(s);locked.locked=true;
- assert.equal(quoteBatchSale(s,'ring',[]).count,0);assert.equal(executeBatchSale(s,quoteBatchSale(s,'ring',[])),null);for(const bad of [[0,0],[-1],[4],null,['0'],Array(1)])assert.equal(quoteBatchSale(s,'ring',bad),null);assert.equal(quoteBatchSale(s,'ring1',[0]),null);
+ assert.equal(quoteBatchSale(s,'ring',[]).count,0);assert.equal(executeBatchSale(s,quoteBatchSale(s,'ring',[])),null);for(const bad of [[0,0],[-1],[5],null,['0'],Array(1)])assert.equal(quoteBatchSale(s,'ring',bad),null);assert.equal(quoteBatchSale(s,'ring1',[0]),null);
  const beforeQuote=JSON.stringify(s),quote=quoteBatchSale(s,'ring',[3,0,2,1]);assert.equal(JSON.stringify(s),beforeQuote);assert.deepEqual(quote.qualities,[0,1,2,3]);assert.equal(quote.count,4);assert.equal(quote.total,quote.entries.reduce((n,e)=>n+e.value,0));assert(quote.entries.every(e=>e.fingerprint.includes('"slot":"ring"')));
  const later=add(s,'ring',0),soldIds=quote.entries.map(e=>e.id),out=executeBatchSale(s,quote);assert(out.ok);assert.equal(out.count,4);assert.equal(out.total,quote.total);assert.equal(s.gold,gold+quote.total);assert(s.inventory.some(it=>it.id===later.id));assert(s.inventory.some(it=>it.id===locked.id));assert(soldIds.every(id=>!s.inventory.some(it=>it.id===id)));assert(validSave(s));const once=JSON.stringify(s);assert.equal(executeBatchSale(s,quote),null);assert.equal(JSON.stringify(s),once);
  // A set is not blanket-excluded; history is captured before the old piece disappears.

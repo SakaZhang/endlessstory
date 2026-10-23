@@ -24,7 +24,7 @@ export function canReceiveItem(s,key,qty=1){
 }
 export function validLootFilters(s){
  const f=s.lootFilters;if(f===undefined)return true;
- return f&&typeof f==='object'&&!Array.isArray(f)&&Object.keys(f).length===3&&LOOT_CATEGORIES.every(k=>Array.isArray(f[k])&&f[k].length<=4&&new Set(f[k]).size===f[k].length&&f[k].every(q=>Number.isInteger(q)&&q>=0&&q<=3));
+ return f&&typeof f==='object'&&!Array.isArray(f)&&Object.keys(f).length===3&&LOOT_CATEGORIES.every(k=>Array.isArray(f[k])&&f[k].length<=(k==='equipment'?5:4)&&new Set(f[k]).size===f[k].length&&Array.from(f[k]).every(q=>Number.isInteger(q)&&q>=0&&q<=(k==='equipment'?4:3)));
 }
 export function normalizeInventoryState(s){
  if(!validLootFilters(s))return false;
@@ -35,7 +35,7 @@ export function setLootFilter(s,category,qualities){
  normalizeInventoryState(s);s.lootFilters[category]=[...qualities].sort((a,b)=>a-b);return true;
 }
 export function shouldDiscardLoot(s,category,quality){
- return Number.isInteger(quality)&&quality>=0&&quality<=3&&s.lootFilters?.[category]?.includes(quality)===true;
+ return Number.isInteger(quality)&&quality>=0&&quality<=(category==='equipment'?4:3)&&s.lootFilters?.[category]?.includes(quality)===true;
 }
 export function emptyLootSummary(){return {discarded:{equipment:0,materials:0,items:0},overflow:{equipment:0,materials:0,items:0}};}
 export function validLootSummary(value){

@@ -13,7 +13,7 @@ export function equipmentFingerprint(item){
  try{return JSON.stringify(canonical(item));}catch{return null;}
 }
 export function validBatchSelection(slot,qualities,slots){
- return slots.includes(slot)&&Array.isArray(qualities)&&qualities.length<=4&&new Set(qualities).size===qualities.length&&Array.from(qualities).every(q=>Number.isInteger(q)&&q>=0&&q<=3);
+ return slots.includes(slot)&&Array.isArray(qualities)&&qualities.length<=5&&new Set(qualities).size===qualities.length&&Array.from(qualities).every(q=>Number.isInteger(q)&&q>=0&&q<=4);
 }
 export function validBatchQuote(quote,slots){
  if(!quote||typeof quote!=='object'||Array.isArray(quote)||Object.keys(quote).length!==6||quote.version!==1||!validBatchSelection(quote.slot,quote.qualities,slots)||!quote.qualities.every((q,i)=>i===0||q>quote.qualities[i-1])||!Array.isArray(quote.entries)||quote.entries.length>10000||quote.count!==quote.entries.length||!Number.isSafeInteger(quote.total)||quote.total<0)return false;

@@ -1,3 +1,5 @@
+import {advanceLegendaryCombat} from './legendary-combat.js';
+import {createPlayerShieldLayers,expirePlayerShieldLayers,grantPlayerShieldLayer,absorbPlayerShieldDamage} from './player-shield-layers.js';
 import {DWARF_MONSTERS} from './dwarf-content.js';
 import {validDwarfActor,expireDwarfShield,nextDwarfAction,applyDwarfDot,tickDwarfDots,validDwarfDots} from './dwarf-effects.js';
 import {createBattleAffixState,validBattleAffixState,tryNirvana,tryReaperHit,calculateLifesteal,tryMulticast} from './affix-expansion.js';
@@ -47,13 +49,28 @@ const physical=(raw,armor)=>Math.max(1,Math.round(raw*100/(100+Math.max(0,armor)
 function hitEnemy(u,amount){const absorbed=Math.min(u.shield,amount);u.shield-=absorbed;const hpLost=Math.min(u.hp,amount-absorbed);u.hp-=hpLost;return hpLost;}
 function end(e,win,source){e.done=true;e.win=win;e.killSource=source;e.heroHp=Math.max(0,e.heroHp);e.targetId=null;syncMultiTarget(e);}
 function cleared(e,source){if(e.enemies.every(u=>u.hp<=0)){end(e,true,source);return true;}return false;}
-function hitHero(e,amount){let absorbed=Math.min(e.barrierShield,amount);e.barrierShield-=absorbed;amount-=absorbed;absorbed=Math.min(e.shield,amount);e.shield-=absorbed;amount-=absorbed;const loss=Math.min(e.heroHp,amount);e.heroHp-=loss;return loss;}
+function mirrorLayers(e){if(!e.playerShieldLayers)return;const layers=e.playerShieldLayers.layers;e.shield=layers.find(l=>l.source==='shelter')?.remaining??0;e.barrierShield=layers.find(l=>l.source==='barrier')?.remaining??0;e.legendaryShield=layers.filter(l=>l.source.startsWith('reactor:')).reduce((n,l)=>n+l.remaining,0);}
+function syncLayers(e){if(!e.playerShieldLayers)return;for(const [source,value,duration]of [['shelter',e.shield,null],['barrier',e.barrierShield,Math.max(0,e.barrier??0)*1100]]){const old=e.playerShieldLayers.layers.find(l=>l.source===source);if((old?.remaining??0)!==(value??0)){const r=grantPlayerShieldLayer(e.playerShieldLayers,{source,capacity:value??0,durationMs:duration,clock:e.playerShieldLayers.clock,hp:e.heroHp});if(r)e.playerShieldLayers=r.state;}}}
+function hitHero(e,amount){if(e.playerShieldLayers){syncLayers(e);const r=absorbPlayerShieldDamage(e.playerShieldLayers,{damage:amount,hp:e.heroHp,clock:e.playerShieldLayers.clock});e.playerShieldLayers=r.state;e.heroHp=r.hpAfter;mirrorLayers(e);return r.hpDamage;}let absorbed=Math.min(e.barrierShield,amount);e.barrierShield-=absorbed;amount-=absorbed;absorbed=Math.min(e.shield,amount);e.shield-=absorbed;amount-=absorbed;const loss=Math.min(e.heroHp,amount);e.heroHp-=loss;return loss;}
 export function stepMulti(s,e,turn,ctx){
  const {stats,SKILLS,skillUnlocked,resolveElementDamage,now,makeSummon}=ctx,st=stats(s),logs=[];e.round++;
  e.affixState??=createBattleAffixState(e.id);
+ for(const u of e.enemies)expireDwarfShield(u,now);
+ if(e.playerShieldLayers||(s.inventory??[]).some(it=>it.legendaryId==='everburning-reactor'&&Object.values(s.equip??{}).includes(it.id))){e.playerShieldLayers??=createPlayerShieldLayers();syncLayers(e);e.playerShieldLayers=expirePlayerShieldLayers(e.playerShieldLayers,e.playerShieldLayers.clock+(ctx.combatDeltaMs??1100));mirrorLayers(e);}
+ const legendaryProc=proc=>{
+  if(e.heroHp<=0||!e.enemies.some(u=>u.hp>0))return {stop:true};
+  const targets=proc.kind==='reactor'?e.enemies.filter(u=>u.hp>0):[e.enemies.find(u=>u.id===e.targetId&&u.hp>0)??e.enemies.find(u=>u.hp>0)],hits=[];
+  for(const u of targets){const crit=Math.random()<st.crit,raw=st.atk*proc.coefficient*(crit?st.critDamage:1),damage=proc.kind==='reactor'?resolveElementDamage(raw,'fire',st.elementAttack.fire,u.elementResistance.fire,u.elementTags):physical(raw,Math.max(0,u.armor*(u.broken?.75:1)*(1-proc.penetration)-st.penetration));const before=u.hp;hitEnemy(u,damage);hits.push({hitId:proc.itemId+':'+e.round+':'+u.id,hpBefore:before,hpAfter:u.hp,source:'active'});logs.push((proc.kind==='reactor'?'余热循环':'祖王回响')+' → '+u.name+' · '+Number(damage.toFixed(1)));}
+  const heal=calculateLifesteal({rating:st.lifesteal??0,maxHp:st.hp,currentHp:e.heroHp,hits},ctx.lifestealConfig);if(heal?.heal>0)e.heroHp+=heal.heal;
+  if(proc.kind==='reactor'&&e.heroHp>0){e.playerShieldLayers??=createPlayerShieldLayers();const r=grantPlayerShieldLayer(e.playerShieldLayers,{source:'reactor:'+proc.itemId,ownerItemId:proc.itemId,capacity:st.hp*proc.shieldFraction+(st.shieldBonus??0),durationMs:proc.shieldMs,clock:e.playerShieldLayers.clock,hp:e.heroHp});if(r)e.playerShieldLayers=r.state;mirrorLayers(e);}
+  return {stop:cleared(e,'legendary')};
+ };
+ const advanceLegends=options=>advanceLegendaryCombat(s,{...options,alive:e.heroHp>0,hasTargets:e.enemies.some(u=>u.hp>0),resolve:legendaryProc});
+ advanceLegends({combatDeltaMs:ctx.combatDeltaMs??1100});if(e.done)return logs;
+
  const heroDied=()=>{if(e.heroHp>0)return false;const revived=tryNirvana(e.affixState,{battleId:e.id,hasNirvana:!!st.specials.nirvana,hp:e.heroHp,maxHp:st.hp});if(revived){e.affixState=revived.state;if(revived.revived){e.heroHp=revived.hp;logs.push('涅槃 · 满血复生');return false;}}s.momentum=0;end(e,false,null);return true;};
  for(const k in e.cd)e.cd[k]=Math.max(0,e.cd[k]-1);
- for(const u of e.enemies){expireDwarfShield(u,now);u.control=advanceControlClock(u.control,now);u.cd=Object.fromEntries(Object.entries(u.control.cooldowns).map(([k,v])=>[k,Math.max(0,Math.ceil((v-now)/1100))]));}
+ for(const u of e.enemies){u.control=advanceControlClock(u.control,now);u.cd=Object.fromEntries(Object.entries(u.control.cooldowns).map(([k,v])=>[k,Math.max(0,Math.ceil((v-now)/1100))]));}
  let target=e.enemies.find(u=>u.id===e.targetId);const charging=()=>!!target.control.preparing||(!target.typedProfile&&e.round>=target.nextHeavy);
  const usable=k=>!(k==='warcry'&&e.warcry>0)&&!(k==='ironcoat'&&e.ironcoat>0)&&!(k==='blunt'&&target.blunt>0)&&!(k==='scorch'&&target.scorch>0)&&!(k==='guard'&&e.guard>0)&&!(k==='barrier'&&(e.barrier>0||e.barrierShield>0))&&!(k==='mend'&&e.heroHp>=st.hp)&&!(k==='cleanse'&&!e.heroBurn&&!e.weakness&&!(e.typedDots?.length))&&!(k==='delay'&&(!charging()||target.heavyDelayed));
  const k=s.skills.find((key,i)=>key!==null&&SKILLS[key]&&skillUnlocked(s,key)&&!e.cd[key]&&usable(key)&&(s.conditions[i]!=='low'||e.heroHp<st.hp*.6)&&(s.conditions[i]!=='charge'||charging())&&(s.conditions[i]!=='burn'||target.burn>0))??null,fixture=e.developmentFixture===true?e.fixtureAction:null;e.fixtureAction=null;
@@ -65,7 +82,7 @@ export function stepMulti(s,e,turn,ctx){
   if(k==='warcry')e.warcry=3+(st.count.anvil>=2?1:0);
   if(k==='ironcoat')e.ironcoat=3+(st.count.guard>=2?1:0);
   if(k==='delay'){if(target.control.preparing)target.control.preparing.completesAt+=1100;else target.nextHeavy++;target.heavyDelayed=true;}
-  if(k==='barrier'){e.barrier=3;e.barrierShield=Math.floor(st.hp*.2)+st.shieldBonus;if(st.count.guard>=4)e.guard=Math.max(e.guard,2);}
+  if(k==='barrier'){e.barrier=3;e.barrierShield=Math.floor(st.hp*.2)+st.shieldBonus;if(e.playerShieldLayers){const r=grantPlayerShieldLayer(e.playerShieldLayers,{source:'barrier',capacity:e.barrierShield,durationMs:3300,clock:e.playerShieldLayers.clock,hp:e.heroHp});if(r)e.playerShieldLayers=r.state;}if(st.count.guard>=4)e.guard=Math.max(e.guard,2);}
   if(k==='mend'){const heal=Math.min(st.hp-e.heroHp,Math.floor(st.hp*.35),Math.min(Math.floor(st.hp*.2),Math.round(st.atk*.7+15))+st.healingBonus);e.heroHp+=heal;logs.push('回炉息 · 恢复 '+heal);}
   if(k==='cleanse'){e.heroBurn=0;e.heroBurnPower=0;e.weakness=0;e.typedDots=[];}
   if(k!=='mend')logs.push(SKILLS[k].name+' · 生效');
@@ -99,6 +116,7 @@ export function stepMulti(s,e,turn,ctx){
   if(counterReaction){const loss=hitHero(e,counterReaction.amount);logs.push(counterReaction.name+' · 反伤 '+Number(loss.toFixed(1)));}
   if(e.heroHp>0){const recovery=calculateLifesteal({rating:st.lifesteal??0,maxHp:st.hp,currentHp:e.heroHp,hits:lifestealHits},ctx.lifestealConfig);if(recovery?.heal>0){e.heroHp+=recovery.heal;e.lastCast.lifesteal=recovery.heal;logs.push('吸血 · 恢复 '+Number(recovery.heal.toFixed(2)));}}
   if(heroDied())return true;
+  advanceLegends({damageAction:true});if(e.done)return true;
   if(cleared(e,'active'))return true;
  }
  return false;};

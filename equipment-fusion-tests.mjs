@@ -37,11 +37,13 @@ try{
  // Failed persistence adopts neither consumed inputs, collection history nor generated output.
  const atomic=fresh(),piece=item('boots',1,'guard',3);atomic.inventory.push(piece);const before=JSON.stringify(atomic);let fail=true;const store={setItem(){if(fail)throw Error('quota');}};let tx=commitGameTransaction(store,atomic,p=>forge(p,[input(piece)]),{now:100});assert(!tx.ok);assert.equal(JSON.stringify(atomic),before);assert(!codexSetState(atomic,'guard').discovered);fail=false;tx=commitGameTransaction(store,atomic,p=>forge(p,[input(piece)]),{now:100});assert(tx.ok);assert(!tx.game.inventory.some(it=>it.id===piece.id));assert.deepEqual(codexSetState(tx.game,'guard').parts,['boots']);
  // Exact 2,000-result M2 sequences after approved removal of the legacy raw-spread RNG draw; material quality formula remains unchanged.
+ // v0.34 explicitly changes nonzero luck RNG (new values/divine benefits).
+ // Zero-luck hashes independently captured from deployed v0.33 HEAD 44c13d0.
  const legacySequences=[
- [['铁屑|0'],'62fa65144c5e56d31cf3b08dd934103de9e61950aeb19d9f3635eb78902072f5'],
- [Array(5).fill('铁屑|3'),'d743197575f675b4127125bfb38849d9c34f9ac8a2a1902e70c4329fdcdef13e'],
- [['灰根草|0','铁屑|0'],'afabc55ec09394f6f32ac1c8e2c9855d0858d105b520f61d776ebbd39612549c'],
- [['灰根草|3','炉火晶|2','灰根草|1'],'a6f72cd41a0be0c684e1e0fd97034d1ba23e398b521c0799e5b8be6858b6176a']];
- for(const [selection,expected] of legacySequences){seed=91731;Math.random=rng;const p=fresh();p.level=20;p.talents.luck=10;p.gold=1e9;for(const k of selection)p.materialStacks[k]=10000;const rows=[];for(let n=0;n<2000;n++){const out=forge(p,selection);rows.push([out.kind??'equipment',out.rarity??out.quality,out.slot??out.potionType]);if(!out.kind)p.inventory.pop();}assert.equal(createHash('sha256').update(JSON.stringify(rows)).digest('hex'),expected);}
+ [['铁屑|0'],'e61b7922994f8307ee298058e1b6c16e01513ab7df0c8484780b3bfcc947ad84'],
+ [Array(5).fill('铁屑|3'),'ea71b6c3388fdefe1c30872150307c3a2bac5f1c0b7072f60087e277549f2dad'],
+ [['灰根草|0','铁屑|0'],'a21fe083fc751d72c9609272d750ec9e30e6ef39e2f4d6f25bf68e6c581a3333'],
+ [['灰根草|3','炉火晶|2','灰根草|1'],'a36353915ce033a33b3d2cc76727977a228a17a2368ae1eb98ea16a79bed6788']];
+ for(const [selection,expected] of legacySequences){seed=91731;Math.random=rng;const p=fresh();p.level=20;p.talents.luck=0;p.gold=1e9;for(const k of selection)p.materialStacks[k]=10000;const rows=[];for(let n=0;n<2000;n++){const out=forge(p,selection);rows.push([out.kind??'equipment',out.rarity??out.quality,out.slot??out.potionType]);if(!out.kind)p.inventory.pop();}assert.equal(createHash('sha256').update(JSON.stringify(rows)).digest('hex'),expected);}
  console.log('Equipment-input fusion:1161 exact dominance cases;5same20k baseline',observed,'divine',gods,'; protected/duplicate no-RNG,1–5 mixed gear, independent blessing, level no-ratchet1000, pending/codex/storage atomics: PASS');
 }finally{Math.random=original;}

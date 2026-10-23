@@ -1,6 +1,6 @@
 import {affixRange} from './equipment-budget.js';
 const plain=x=>{if(!x||typeof x!=='object'||Array.isArray(x))return false;const proto=Object.getPrototypeOf(x);return proto===null||Object.getPrototypeOf(proto)===null;};
-export function makeAffixSourceRange(def,quality){if(!Number.isInteger(quality)||quality<0||quality>3)return null;try{return {model:'quality-v1',quality,...affixRange(def,quality)};}catch{return null;}}
+export function makeAffixSourceRange(def,quality){if(!Number.isInteger(quality)||quality<0||quality>4)return null;try{return {model:'quality-v1',quality,...affixRange(def,quality)};}catch{return null;}}
 export function affixOwnRange(a,defs){
  if(typeof a?.stat!=='string'||!defs||!Object.hasOwn(defs,a.stat))return null;const def=defs[a.stat];if(!def)return null;
  if(!Object.hasOwn(a,'sourceRange'))return {min:def.min,max:def.max};

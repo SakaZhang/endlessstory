@@ -98,3 +98,6 @@ import "./m2-production-activation-tests.mjs";
 // normal affix acquisition in a fresh production realm, not that poisoned fixture.
 import {execFileSync as runAffixSourceTest} from 'node:child_process';
 runAffixSourceTest(process.execPath,[new URL('./affix-source-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.34 tests require the default production provider, isolated from old boundary fixtures.
+for(const file of ['luck-policy-tests.mjs','luck-production-tests.mjs','legendary-drop-tests.mjs','player-shield-layers-tests.mjs','equipment-runtime-tests.mjs','equipment-runtime-production-tests.mjs','legendary-equipment-tests.mjs','legendary-combat-tests.mjs','legendary-production-tests.mjs','legendary-filter-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});

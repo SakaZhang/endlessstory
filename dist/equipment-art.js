@@ -37,4 +37,17 @@ export function renderWeaponAccessoryPixels(template){
 }
 export function equipmentArtTemplate(item){for(const id of [item?.visualVariant,item?.templateId,item?.id])if(typeof id==='string'&&Object.hasOwn(EQUIPMENT_TEMPLATE_BY_ID,id))return EQUIPMENT_TEMPLATE_BY_ID[id];return null;}
 export function renderEquipmentPixels(template){return renderWeaponAccessoryPixels(template)||renderArmorPixels(template);}
-export function equipmentIcon(item,options={}){const template=equipmentArtTemplate(item),pixels=template&&renderEquipmentPixels(template);if(!pixels)return frameEquipmentSVG(icon(item?.weaponType==='axe'?'axe':item?.weaponType==='hammer'?'hammer':item?.iconKey||item?.icon||item?.slot||'weapon',item?.set||item?.setId||'anvil',item?.rarity??1),item,64);const size=Number.isFinite(options.size)?Math.max(16,Math.min(512,Math.round(options.size))):64;return frameEquipmentSVG(`<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 32 32" shape-rendering="crispEdges" role="img" aria-label="${String(template.name).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;')}" data-equipment-art="${template.id}" data-equipment-visual="${template.id}" data-equipment-template="${template.id}">${pixels}</svg>`,{...item,set:item?.set||template.setId});}
+function legendaryEquipmentIcon(item,options){
+ const size=Number.isFinite(options.size)?Math.max(16,Math.min(512,Math.round(options.size))):64;
+ if(item?.legendaryId==='first-forge-oathhammer')return frameEquipmentSVG(icon('firstforge','guard',3).replace(/width="64" height="64"/,`width="${size}" height="${size}"`).replace('<svg ','<svg data-equipment-art="first-forge-oathhammer" '),item,64);
+ if(item?.legendaryId!=='everburning-reactor')return null;
+ let pixels='';const r=(x,y,w,h,c)=>pixels+=`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${c}"/>`;
+ for(let j=0;j<5;j++){r(5+j*2,2+j*2,3,3,'#141c25');r(6+j*2,2+j*2,1,2,'#d7b66b');r(24-j*2,2+j*2,3,3,'#141c25');r(25-j*2,2+j*2,1,2,'#d7b66b');}
+ r(12,9,8,5,'#18212b');r(14,10,4,3,'#b88a45');
+ r(8,12,16,18,'#141c25');r(6,16,20,10,'#141c25');r(9,13,14,15,'#81949c');r(10,14,12,2,'#d7e1d5');r(7,17,3,8,'#526975');r(22,17,3,8,'#526975');r(10,26,12,3,'#ab7941');
+ r(11,16,10,10,'#30323a');r(12,17,8,8,'#b85b32');r(13,18,6,6,'#f29c40');r(14,18,4,5,'#ffda74');r(15,19,2,3,'#fff7ce');
+ for(const x of [9,21])for(const y of [14,25])r(x,y,2,2,'#e9c575');
+ r(6,19,3,1,'#dbb767');r(23,19,3,1,'#dbb767');r(6,22,3,1,'#263a47');r(23,22,3,1,'#263a47');r(13,27,6,2,'#202d37');
+ return frameEquipmentSVG(`<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 32 32" shape-rendering="crispEdges" role="img" aria-label="不熄之炉" data-equipment-art="everburning-reactor">${pixels}</svg>`,item,32);
+}
+export function equipmentIcon(item,options={}){const legendary=legendaryEquipmentIcon(item,options);if(legendary)return legendary;const template=equipmentArtTemplate(item),pixels=template&&renderEquipmentPixels(template);if(!pixels)return frameEquipmentSVG(icon(item?.weaponType==='axe'?'axe':item?.weaponType==='hammer'?'hammer':item?.iconKey||item?.icon||item?.slot||'weapon',item?.set||item?.setId||'anvil',item?.rarity??1),item,64);const size=Number.isFinite(options.size)?Math.max(16,Math.min(512,Math.round(options.size))):64;return frameEquipmentSVG(`<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 32 32" shape-rendering="crispEdges" role="img" aria-label="${String(template.name).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;')}" data-equipment-art="${template.id}" data-equipment-visual="${template.id}" data-equipment-template="${template.id}">${pixels}</svg>`,{...item,set:item?.set||template.setId});}

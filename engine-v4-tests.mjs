@@ -34,7 +34,7 @@ try{
  // Fusion types, quality affix counts, costs once, god once and persistent.
  let types=new Set(),sets=0,gods=0;x=fresh();x.gold=1e8;for(const k in x.materialStacks)x.materialStacks[k]=1e6;for(let i=0;i<10000;i++){let before=x.gold,it=forge(x,['铁屑','炉火晶']);assert.equal(x.gold,before-40);types.add(it.slot);if(it.set){sets++;assert(SET_SLOTS.includes(it.slot));assert.equal(it.rarity,3);assert(!it.special);}if(it.divine){gods++;let copy=JSON.stringify(it);assert.equal(applyForgeFavor(it),false);assert.equal(JSON.stringify(it),copy);}assert(it.rarity===0?it.affixes.length<=1:it.affixes.length===it.rarity+1);x.inventory.pop();}assert.equal(types.size,7);assert.equal(sets,0);assert(gods>200&&gods<400);console.log('10k fusions:',{types:[...types],sets,gods});
  x=fresh();let it=item('gloves',3,null,2);applyForgeFavor(it);x.inventory.push(it);let roundtrip=JSON.parse(JSON.stringify(x));assert(validSave(roundtrip));assert.deepEqual(roundtrip.inventory.at(-1).divine,it.divine);snapshot=JSON.stringify(x);assert.equal(forge(x,[]),null);assert.equal(forge(x,Array(6).fill('铁屑')),null);assert.equal(forge(x,['__proto__']),null);assert.equal(JSON.stringify(x),snapshot);
- assert.equal(codexState(x,LEGENDARY_CODEX[0].id).collected,false);assert(!LEGENDARY_CODEX[0].implemented);
+ assert.equal(codexState(x,LEGENDARY_CODEX[0].id).collected,false);assert(LEGENDARY_CODEX[0].implemented);
  // Divine gains apply to raw bases and every ordinary numeric affix once.
  for(const [key,def] of Object.entries(AFFIX_DEFS)){
   assert.equal(affixRollInfo({stat:key,value:def.min}).tier,0);
