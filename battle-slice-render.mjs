@@ -1,5 +1,6 @@
 // QA only: actual production slice renderer + engine events, not a browser screenshot.
 import fs from 'node:fs';
+import {stats} from './dist/engine.js';
 import assert from 'node:assert/strict';
 import path from 'node:path';
 import {createRequire} from 'node:module';
@@ -17,7 +18,7 @@ for(let i=0;i<=duration/1000*fps;i++){
  if(t>=nextStep){const batch=model.advance(START+t);events.push(...batch);presentation.enqueue(batch,t);nextStep+=1100;}
  presentation.advance(t);
  const stateBeforeDraw=JSON.stringify(model.state);
- drawBattleSliceCanvas(canvas,{manifest,images,encounter:model.encounter,positions,animations:presentation.animations,time:t,floats:presentation.floats});
+ drawBattleSliceCanvas(canvas,{manifest,images,encounter:model.encounter,positions,animations:presentation.animations,time:t,floats:presentation.floats,heroMaxHp:stats(model.state).hp});
  assert.equal(JSON.stringify(model.state),stateBeforeDraw,'native drawing must not mutate gameplay');
  fs.writeFileSync(path.join(out,'frames',String(i).padStart(4,'0')+'.png'),canvas.toBuffer('image/png'));
 }
