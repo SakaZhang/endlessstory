@@ -25,5 +25,5 @@ for(const reloadBeforeResume of [false,true]){
  // A failed import must not replace in-memory state, even when a later periodic save runs.
  const beforeFailed=store.get('ashencrown-v3');el('settingsBtn').onclick();failWrite=true;await el('importFile').onchange({target:{files:[{text:async()=>JSON.stringify(snapshot)}]}});failWrite=false;assert.equal(store.get('ashencrown-v3'),beforeFailed);periodic();assert.equal(saved().activeEncounter.id,resumed.activeEncounter.id);assert.equal(saved().running,true);assert.equal(saved().activeEncounter.pauseAt,undefined);
 }
-el('helpBtn').onclick();assert(el('modalBody').innerHTML.includes('v0.48'));assert(el('modalBody').innerHTML.includes('当前已开放第1–10区域'));assert(!el('modalBody').innerHTML.includes('当前尚未开放；已有套装'));
+el('helpBtn').onclick();assert(el('modalBody').innerHTML.includes('v0.49'));assert(el('modalBody').innerHTML.includes('当前已开放第1–10区域'));assert(!el('modalBody').innerHTML.includes('当前尚未开放；已有套装'));
 Date.now=origNow;Math.random=origRandom;console.log('PASS actual app M2 map/node selection atomicity, area locks, real multi target/reward, dungeon3 clear/unlock, boss hiddenoutsideA03, budgetgate. Test-only injected provider, DOM mock not browser.');})();

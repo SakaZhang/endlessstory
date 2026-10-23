@@ -1,5 +1,5 @@
 {
-  "version": "2.7-a01-a10",
+  "version": "2.8-a01-a10-lifecycle",
   "provenance": "Original generated raster art via built-in image_gen. User-approved original concept used as visual reference. No third-party game assets. No separate license grant implied.",
   "logicalScene": [
     480,
@@ -10425,6 +10425,65 @@
           "death"
         ]
       }
+    },
+    "hero-neutral": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "right",
+      "weaponFamily": null,
+      "headY": 117,
+      "healthBarAnchor": [
+        96,
+        108
+      ],
+      "portraitCrop": [
+        69,
+        115,
+        125,
+        161
+      ],
+      "portraitCropFormat": "left,top,right,bottom exclusive",
+      "frames": [
+        {
+          "id": "idle",
+          "file": "hero-neutral-idle.png",
+          "alphaBBox": [
+            70,
+            117,
+            122,
+            177
+          ],
+          "solidBBox": [
+            71,
+            117,
+            122,
+            176
+          ],
+          "durationMs": 1000,
+          "sourceCrop": [
+            300,
+            365,
+            910,
+            1065
+          ],
+          "sourceAnchor": [
+            603,
+            1046
+          ],
+          "sourceScale": 0.09
+        }
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ]
+      }
     }
   },
   "backgrounds": [
@@ -10829,5 +10888,6 @@
     "dwarf.a08": 207,
     "dwarf.a09": 220,
     "dwarf.a10": 193
-  }
+  },
+  "heroNeutralSprite": "hero-neutral"
 }

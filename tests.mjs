@@ -139,3 +139,6 @@ runAffixSourceTest(process.execPath,[new URL('./live-battle-a07-a10-tests.mjs',i
 
 // v0.48 production UI layouts and original integer-grid icons.
 for(const file of ['pixel-shell-tests.mjs','pixel-inventory-tests.mjs','pixel-services-tests.mjs','pixel-ui-icons-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.49 all-lifecycle presentation: actual fresh idle, errors, neutral and portraits.
+runAffixSourceTest(process.execPath,[new URL('./live-battle-lifecycle-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
