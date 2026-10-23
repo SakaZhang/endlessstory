@@ -1,0 +1,29 @@
+/* Canonical 32px source, integer 64px expansion only. Actual CSS paths are the release asset graph. */
+.skillPixelIcon{display:inline-block;position:relative;flex:none;width:32px;height:32px;min-width:32px;min-height:32px;vertical-align:middle;background-color:#1b2e40;background-position:center;background-repeat:no-repeat;background-size:32px 32px;image-rendering:pixelated;box-shadow:0 0 0 1px #607789;opacity:1;filter:none;border:0;border-radius:0}
+.skillPixelIcon[data-skill-icon-size="64"]{width:64px;height:64px;min-width:64px;min-height:64px;background-size:64px 64px}
+.skillPixelIcon.isEmpty{background-image:none;box-shadow:inset 0 0 0 1px #536779;background-color:#172635}
+.skillPixelIcon.isEmpty:after{content:'';position:absolute;left:25%;right:25%;top:calc(50% - 1px);height:2px;background:#8294a4}
+/* Disabled is still a real disabled control; never dim the skill art into the dark slot. */
+.treeNode:disabled:has(.skillPixelIcon),.treeNode.learned:disabled:has(.skillPixelIcon),.quickLoadout:disabled:has(.skillPixelIcon){opacity:1;filter:none}
+.treeNode:disabled:has(.skillPixelIcon){border-color:#536274;color:#aebbc7}
+.skillPixelIcon[data-skill-icon="fracture_strike"]{background-image:url('./skill-assets/fracture_strike.png')}
+.skillPixelIcon[data-skill-icon="fault_sweep"]{background-image:url('./skill-assets/fault_sweep.png')}
+.skillPixelIcon[data-skill-icon="breach_followup"]{background-image:url('./skill-assets/breach_followup.png')}
+.skillPixelIcon[data-skill-icon="ember_brand"]{background-image:url('./skill-assets/ember_brand.png')}
+.skillPixelIcon[data-skill-icon="furnace_wave"]{background-image:url('./skill-assets/furnace_wave.png')}
+.skillPixelIcon[data-skill-icon="cinder_barrage"]{background-image:url('./skill-assets/cinder_barrage.png')}
+.skillPixelIcon[data-skill-icon="iron_vigil"]{background-image:url('./skill-assets/iron_vigil.png')}
+.skillPixelIcon[data-skill-icon="bastion_blow"]{background-image:url('./skill-assets/bastion_blow.png')}
+.skillPixelIcon[data-skill-icon="repelling_wave"]{background-image:url('./skill-assets/repelling_wave.png')}
+.skillPixelIcon[data-skill-icon="anvil_cry"]{background-image:url('./skill-assets/anvil_cry.png')}
+.skillPixelIcon[data-skill-icon="breaking_intercept"]{background-image:url('./skill-assets/breaking_intercept.png')}
+.skillPixelIcon[data-skill-icon="furnace_etch"]{background-image:url('./skill-assets/furnace_etch.png')}
+.skillPixelIcon[data-skill-icon="scatter_ash"]{background-image:url('./skill-assets/scatter_ash.png')}
+.skillPixelIcon[data-skill-icon="forge_breath"]{background-image:url('./skill-assets/forge_breath.png')}
+.skillPixelIcon[data-skill-icon="purifying_bulwark"]{background-image:url('./skill-assets/purifying_bulwark.png')}
+.skillPixelIcon[data-skill-icon="axe_fervor"]{background-image:url('./skill-assets/axe_fervor.png')}
+.skillPixelIcon[data-skill-icon="hammer_penetration"]{background-image:url('./skill-assets/hammer_penetration.png')}
+.skillPixelIcon[data-skill-icon="fire_affinity"]{background-image:url('./skill-assets/fire_affinity.png')}
+.skillPixelIcon[data-skill-icon="shield_reserve"]{background-image:url('./skill-assets/shield_reserve.png')}
+.skillPixelIcon[data-skill-icon="mountain_vitality"]{background-image:url('./skill-assets/mountain_vitality.png')}
+.skillPixelIcon[data-skill-icon="forged_resilience"]{background-image:url('./skill-assets/forged_resilience.png')}

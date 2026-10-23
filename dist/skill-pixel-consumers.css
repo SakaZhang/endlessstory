@@ -1,0 +1,24 @@
+/* Canonical skill artwork: 32px native pixels, never faded to imply a rule. */
+.treeNodeArt{position:relative;grid-column:1;grid-row:1/4;width:32px;height:32px;align-self:center}
+.skillPixelLock{position:absolute;right:-3px;bottom:-3px;width:10px;height:8px;background:#d7ba78;border:2px solid #263141;box-sizing:content-box}
+.skillPixelLock:before{content:'';position:absolute;width:6px;height:5px;left:0;top:-7px;border:2px solid #d7ba78;border-bottom:0}
+.skillPixelLock:after{content:'';position:absolute;width:2px;height:4px;background:#263141;left:4px;top:2px}
+.treeNodeCard .treeNode{grid-template-columns:36px 1fr}
+.treeSlot{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.treeSlot label{flex:1;min-width:140px}
+.quickLoadout .skillPixelIcon{flex:none}
+.loadoutPassive{display:inline-flex;align-items:center;gap:7px;margin:6px 12px 6px 0;font-size:12px}
+.liveBattleSkills{grid-template-columns:repeat(6,minmax(0,1fr))}
+.liveBattleSkill{position:relative;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;gap:5px;padding:6px 2px;font-size:12px;min-width:0;min-height:66px}
+.liveBattleSkill>.skillPixelIcon{overflow:visible;white-space:normal;flex:none}
+.liveBattleSkill>span:not(.skillPixelIcon){font-size:12px;line-height:15px;max-width:100%;text-align:center}
+.liveBattleSkill small{font-size:11px}
+.sliceSkills{gap:5px;flex-wrap:wrap}
+.sliceSkill,.sliceSkill.passive{width:48px;height:auto;min-height:70px;padding:5px 2px;display:flex;align-items:center;flex-direction:column;gap:5px}
+.sliceSkill>.skillPixelIcon{flex:none;overflow:visible}
+.sliceSkill>span:not(.skillPixelIcon){font-size:12px;line-height:14px;white-space:normal;overflow:visible;text-align:center}
+.sliceHelp>.skillPixelIcon{float:left;margin:0 12px 8px 0}
+@media(max-width:520px){.treeNodeCard .treeNode{grid-template-columns:36px 1fr}.sliceSkill,.sliceSkill.passive{width:44px;min-height:70px}.liveBattleSkill{font-size:12px}.liveBattleSkill>.skillPixelIcon{width:32px;height:32px}.liveBattleSkills{gap:4px}}
+.loadoutSkills>div{flex-direction:column;min-width:0;gap:6px}
+.loadoutSkills small{font-size:12px;line-height:16px;overflow-wrap:anywhere}
+.loadoutSkills .skillPixelIcon{flex:none}
