@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {mkdtemp,cp,readFile,writeFile,rm} from 'node:fs/promises';
+import {mkdtemp,cp,readFile,writeFile,rm,mkdir} from 'node:fs/promises';
 import {existsSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
@@ -71,20 +71,30 @@ try{
  assert.throws(()=>rootHtml('<head><base href="/"></head>','index.html',a.release),/Existing base/);
  const storage=await readFile(join(source,'storage.js'),'utf8');assert.match(storage,/SAVE_KEY='ashencrown-v3'/);
  assert.equal(new URL(a.base,root).origin,new URL(root).origin);assert.ok(!legacyHtml.includes('serviceWorker.register'));
- const actual=await buildRelease();const graph=await probe('build',actual);
+ // Exercise the real CLI and official packager in an isolated copy of the current source.
+ // Parallel independent gates must never remove one another's shared build/build.tmp.
+ const actualRoot=join(temp,'actual-checkout'),actualOutput=join(actualRoot,'build');
+ await mkdir(join(actualRoot,'.openai'),{recursive:true});
+ await cp('dist',join(actualRoot,'dist'),{recursive:true});
+ await cp('build-release.mjs',join(actualRoot,'build-release.mjs'));
+ await cp('.openai/hosting.json',join(actualRoot,'.openai/hosting.json'));
+ execFileSync(process.execPath,['build-release.mjs'],{cwd:actualRoot,encoding:'utf8'});
+ const actual=JSON.parse(await readFile(join(actualOutput,'release-integrity.json'),'utf8'));
+ assert.deepEqual(actual.files.map(f=>[f.path,f.sha256]),before,'isolated CLI source differs from current source snapshot');
+ const graph=await probe(actualOutput,actual);
  const helper=process.env.SITES_PREPARE_HELPER??'/home/agent/.codex/plugins/cache/openai-curated-remote/sites/1.1.1/skills/sites/scripts/prepare-site-build.cjs';
  let packageCheck='not run: Sites helper unavailable';
  if(existsSync(helper)){
   const packed=join(temp,'packaged-dist');
-  assert.equal(execFileSync(process.execPath,[helper,process.cwd(),packed],{encoding:'utf8'}).trim(),'static');
+  assert.equal(execFileSync(process.execPath,[helper,actualRoot,packed],{encoding:'utf8'}).trim(),'static');
   const packedConfig=JSON.parse(await readFile(join(packed,'.openai/hosting.json'),'utf8'));
   const sourceConfig=JSON.parse(await readFile('.openai/hosting.json','utf8'));
   assert.equal(sourceConfig.static.directory,'build');assert.equal(packedConfig.static.directory,'dist');assert.equal(packedConfig.project_id,sourceConfig.project_id);
-  for(const f of await readTree('build'))assert.equal(digest(await readFile(join(packed,f.path))),f.sha256,'packaged byte drift '+f.path);
+  for(const f of await readTree(actualOutput))assert.equal(digest(await readFile(join(packed,f.path))),f.sha256,'packaged byte drift '+f.path);
   packageCheck='actual Sites prepare helper PASS: build copied byte-identically and hosting.static.directory normalized to dist';
  }
 
- await writeFile('build/dependency-probe.json',JSON.stringify({release:actual.release,legacyEntry:legacyScript,packageCheck,kind:'Actual emitted HTML/ESM/CSS and dynamic manifest/image URL graph; filesystem + URL/cache model, not browser cache inspection',...graph},null,2)+'\n');
+ await writeFile(join(actualOutput,'dependency-probe.json'),JSON.stringify({release:actual.release,legacyEntry:legacyScript,packageCheck,kind:'Actual emitted HTML/ESM/CSS and dynamic manifest/image URL graph; filesystem + URL/cache model, not browser cache inspection',...graph},null,2)+'\n');
  console.log(packageCheck);
  console.log(`PASS release cache: ${actual.files.length} files hash-verified; ${graph.urls.length} resource URLs / ${graph.edges.length} dependency edges; old legacy and prior release cache misses; 4 mutation classes; roots/navigation/origin/save key preserved.`);
 }finally{await rm(temp,{recursive:true,force:true});}

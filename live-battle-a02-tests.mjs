@@ -1,3 +1,4 @@
+// retired.unsupported below is a presentation-only negative fixture; never persisted as a valid game.
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
 import {readFileSync,mkdirSync,writeFileSync} from 'node:fs';
@@ -22,7 +23,7 @@ try{
   const png=canvas.toBuffer('image/png');writeFileSync(new URL(name+'.png',out),png);writeFileSync(new URL(name+'.html',out),view.detailsHtml);
   records.push({name,sha256:createHash('sha256').update(png).digest('hex'),actorCount:e.enemies.length+1,level:s.level,round:e.round,dungeonStage:e.dungeonStage??null,weapon:s.inventory.find(x=>x.id===s.equip.weapon)?.weaponType,area:e.areaId,observationClock:drawNow,backgroundIds:view.status.backgroundIds,actors:e.enemies.map(u=>({unitId:u.id,definitionId:u.definitionId,monsterId:u.monsterId,name:u.name,follower:u.follower,sprite:view.positions[u.id].sprite,x:view.positions[u.id].x,y:view.positions[u.id].y,hp:u.hp,max:u.max,shield:u.shield,preparing:u.control?.preparing??null})),targetId:e.targetId});return {view,canvas};
  };
- assert.deepEqual(liveAreaBackgrounds('dwarf.a01.field',manifest).map(x=>x.id),['cave','stage']);assert.deepEqual(liveAreaBackgrounds('dwarf.a02.dungeon',manifest).map(x=>x.id),['rift-cave','rift-platform']);assert.deepEqual(liveAreaBackgrounds('dwarf.a07',manifest),[]);
+ assert.deepEqual(liveAreaBackgrounds('dwarf.a01.field',manifest).map(x=>x.id),['cave','stage']);assert.deepEqual(liveAreaBackgrounds('dwarf.a02.dungeon',manifest).map(x=>x.id),['rift-cave','rift-platform']);assert.deepEqual(liveAreaBackgrounds('retired.unsupported',manifest),[]);
  const seen=new Set();let group=false;
  for(let i=0;i<800&&(seen.size<3||!group);i++){const s=setup(),e=E.startInstanceEncounter(s,'dwarf.a02.field',now);assert(e);if(!seen.has(e.enemies[0].definitionId)){const {view}=capture(e.enemies[0].definitionId,s,e);if(e.enemies[0].definitionId==='dwarf.a02.normal.2')assert.equal(view.positions[e.enemies[0].id].y,203,'bat hover already in image; no extra offset');seen.add(e.enemies[0].definitionId);view.dispose();}if(e.enemies.length===3&&!group){capture('a02-real-three-enemies',s,e).view.dispose();group=true;}}
  assert.equal(seen.size,3);assert(group);
@@ -40,8 +41,8 @@ try{
  assert(casting,'actual production A02 mother enters genuine preparing state');
  for(let turn=0;turn<80&&young[1].hp>0&&!e.done;turn++){const batch=captureCombatDisplay(e,()=>E.step(s,e,s.nextActionAt));animationTime+=1100;stream.sync(s,e,{now:s.lastHealthClock,running:s.running});stream.enqueue(batch.events,animationTime);stream.draw(createCanvas(480,270),animationTime+600);}
  assert(young[1].hp<=0);const death=capture('a02-real-young-death',s,e);assert.equal(death.view.positions[young[1].id].sprite,'rock-lizard-young');death.view.dispose();stream.dispose();
- // A07 remains completely unsupported, even though its monster art exists in legacy renderer.
- const later=setup();later.areaProgress.dwarf={unlocked:[1,2,3,4,5,6,7],cleared:[1,2,3,4,5,6]};const a07=E.startInstanceEncounter(later,'dwarf.a07.field',now);const fallback=createLiveBattlePresentation({manifest,images});fallback.sync(later,a07,{now:later.lastHealthClock});assert.equal(fallback.status.reason,'area-not-covered');assert.equal(fallback.draw(createCanvas(480,270),0),false);fallback.dispose();
+ // Invalid retired area is presentation-only negative fixture, never saved or presented as playable content.
+ const later=setup();later.areaProgress.dwarf={unlocked:[1,2,3,4,5,6,7],cleared:[1,2,3,4,5,6]};const a07=E.startInstanceEncounter(later,'dwarf.a07.field',now);const fallback=createLiveBattlePresentation({manifest,images});fallback.sync(later,{...a07,areaId:'retired.unsupported'},{now:later.lastHealthClock});assert.equal(fallback.status.reason,'area-not-covered');assert.equal(fallback.draw(createCanvas(480,270),0),false);fallback.dispose();
  writeFileSync(new URL('evidence.json',out),JSON.stringify({capture:'Native actual production live renderer, NOT browser screenshot',generationSeed:4302,accessFixture:'legal A02 unlocked/cleared records; normal images use E.fresh level1, actual dungeon progression uses level30 + lawful iron_vigil/forge_breath/scatter_ash quotes; no raw monster/HP/cast modifications. Midpoint frame reads the actual pending cast at startedAt+duration/2 without stepping or mutating game state (normal presentation interpolation)',variantContract:'mother and children retain same real definitionId; follower:true uses explicit young sprite; no vertical hover offset',records},null,2));
- console.log('PASS A02 real 3 normals / 3-enemy field / 3-stage elite+2 explicit young / actual cast / real target IDs / stable reorder / area-only layers / readonly no RNG / missing-variant fallback / A07 remains fallback.');
+ console.log('PASS A02 real 3 normals / 3-enemy field / 3-stage elite+2 explicit young / actual cast / real target IDs / stable reorder / area-only layers / readonly no RNG / missing-variant fallback / unsupported presentation-only area remains fallback.');
 }finally{Math.random=originalRandom;}

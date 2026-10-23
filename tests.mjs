@@ -133,3 +133,6 @@ runAffixSourceTest(process.execPath,[new URL('./live-battle-a04-tests.mjs',impor
 
 // v0.46 A05–06 exact art, region baselines and real follower/shield events.
 runAffixSourceTest(process.execPath,[new URL('./live-battle-a05-a06-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.47 remaining18 canonical enemy identities, actual follower and boss events.
+runAffixSourceTest(process.execPath,[new URL('./live-battle-a07-a10-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});

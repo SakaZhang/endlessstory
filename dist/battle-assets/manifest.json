@@ -1,5 +1,5 @@
 {
-  "version": "2.6-a01-a06",
+  "version": "2.7-a01-a10",
   "provenance": "Original generated raster art via built-in image_gen. User-approved original concept used as visual reference. No third-party game assets. No separate license grant implied.",
   "logicalScene": [
     480,
@@ -6414,6 +6414,4017 @@
       "derivedFrom": "cast-slag-soldier",
       "relativeSize": 0.65,
       "role": "elite follower 铸渣小工"
+    },
+    "silver-whisker-borer": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.16,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/silver-whisker-borer-idle.png",
+          "sourceFile": "source/silver-whisker-borer.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            0,
+            95,
+            530,
+            460
+          ],
+          "sourceAnchor": [
+            330,
+            440
+          ],
+          "alphaBBox": [
+            43,
+            123,
+            128,
+            177
+          ],
+          "solidBBox": [
+            45,
+            124,
+            126,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/silver-whisker-borer-anticipation.png",
+          "sourceFile": "source/silver-whisker-borer.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            565,
+            130,
+            944,
+            460
+          ],
+          "sourceAnchor": [
+            790,
+            441
+          ],
+          "alphaBBox": [
+            64,
+            126,
+            121,
+            177
+          ],
+          "solidBBox": [
+            65,
+            129,
+            121,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/silver-whisker-borer-strike.png",
+          "sourceFile": "source/silver-whisker-borer.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            960,
+            130,
+            1536,
+            460
+          ],
+          "sourceAnchor": [
+            1320,
+            442
+          ],
+          "alphaBBox": [
+            38,
+            127,
+            128,
+            177
+          ],
+          "solidBBox": [
+            38,
+            128,
+            128,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/silver-whisker-borer-recovery.png",
+          "sourceFile": "source/silver-whisker-borer.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            0,
+            590,
+            530,
+            925
+          ],
+          "sourceAnchor": [
+            330,
+            904
+          ],
+          "alphaBBox": [
+            43,
+            126,
+            128,
+            178
+          ],
+          "solidBBox": [
+            45,
+            129,
+            126,
+            177
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/silver-whisker-borer-hurt.png",
+          "sourceFile": "source/silver-whisker-borer.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            560,
+            560,
+            948,
+            930
+          ],
+          "sourceAnchor": [
+            790,
+            910
+          ],
+          "alphaBBox": [
+            61,
+            121,
+            121,
+            177
+          ],
+          "solidBBox": [
+            62,
+            123,
+            121,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/silver-whisker-borer-death.png",
+          "sourceFile": "source/silver-whisker-borer.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            948,
+            690,
+            1536,
+            935
+          ],
+          "sourceAnchor": [
+            1270,
+            917
+          ],
+          "alphaBBox": [
+            44,
+            141,
+            138,
+            178
+          ],
+          "solidBBox": [
+            44,
+            143,
+            136,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 124,
+      "healthBarAnchor": [
+        96,
+        115
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "frost-crystal-spider": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.16,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/frost-crystal-spider-idle.png",
+          "sourceFile": "source/frost-crystal-spider.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            15,
+            165,
+            500,
+            490
+          ],
+          "sourceAnchor": [
+            270,
+            473
+          ],
+          "alphaBBox": [
+            56,
+            127,
+            130,
+            179
+          ],
+          "solidBBox": [
+            58,
+            130,
+            130,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/frost-crystal-spider-anticipation.png",
+          "sourceFile": "source/frost-crystal-spider.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            560,
+            125,
+            990,
+            490
+          ],
+          "sourceAnchor": [
+            780,
+            473
+          ],
+          "alphaBBox": [
+            62,
+            120,
+            130,
+            178
+          ],
+          "solidBBox": [
+            64,
+            123,
+            129,
+            175
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/frost-crystal-spider-strike.png",
+          "sourceFile": "source/frost-crystal-spider.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            990,
+            160,
+            1525,
+            490
+          ],
+          "sourceAnchor": [
+            1290,
+            473
+          ],
+          "alphaBBox": [
+            48,
+            126,
+            134,
+            179
+          ],
+          "solidBBox": [
+            50,
+            129,
+            132,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/frost-crystal-spider-recovery.png",
+          "sourceFile": "source/frost-crystal-spider.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            25,
+            610,
+            525,
+            945
+          ],
+          "sourceAnchor": [
+            270,
+            925
+          ],
+          "alphaBBox": [
+            58,
+            126,
+            137,
+            179
+          ],
+          "solidBBox": [
+            60,
+            129,
+            135,
+            177
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/frost-crystal-spider-hurt.png",
+          "sourceFile": "source/frost-crystal-spider.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            570,
+            620,
+            965,
+            945
+          ],
+          "sourceAnchor": [
+            780,
+            925
+          ],
+          "alphaBBox": [
+            62,
+            127,
+            125,
+            179
+          ],
+          "solidBBox": [
+            65,
+            130,
+            122,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/frost-crystal-spider-death.png",
+          "sourceFile": "source/frost-crystal-spider.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            1000,
+            700,
+            1530,
+            950
+          ],
+          "sourceAnchor": [
+            1280,
+            932
+          ],
+          "alphaBBox": [
+            51,
+            139,
+            136,
+            178
+          ],
+          "solidBBox": [
+            54,
+            142,
+            133,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 130,
+      "healthBarAnchor": [
+        96,
+        121
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "unclaimed-inscription-idol": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.16,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/unclaimed-inscription-idol-idle.png",
+          "sourceFile": "source/unclaimed-inscription-idol.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            60,
+            50,
+            440,
+            470
+          ],
+          "sourceAnchor": [
+            270,
+            450
+          ],
+          "alphaBBox": [
+            65,
+            114,
+            121,
+            178
+          ],
+          "solidBBox": [
+            65,
+            115,
+            120,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/unclaimed-inscription-idol-anticipation.png",
+          "sourceFile": "source/unclaimed-inscription-idol.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            540,
+            60,
+            965,
+            470
+          ],
+          "sourceAnchor": [
+            780,
+            450
+          ],
+          "alphaBBox": [
+            61,
+            117,
+            124,
+            178
+          ],
+          "solidBBox": [
+            61,
+            117,
+            123,
+            177
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/unclaimed-inscription-idol-strike.png",
+          "sourceFile": "source/unclaimed-inscription-idol.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            990,
+            60,
+            1520,
+            470
+          ],
+          "sourceAnchor": [
+            1340,
+            450
+          ],
+          "alphaBBox": [
+            43,
+            116,
+            123,
+            179
+          ],
+          "solidBBox": [
+            44,
+            117,
+            122,
+            177
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/unclaimed-inscription-idol-recovery.png",
+          "sourceFile": "source/unclaimed-inscription-idol.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            70,
+            520,
+            440,
+            945
+          ],
+          "sourceAnchor": [
+            270,
+            926
+          ],
+          "alphaBBox": [
+            66,
+            113,
+            122,
+            177
+          ],
+          "solidBBox": [
+            67,
+            114,
+            120,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/unclaimed-inscription-idol-hurt.png",
+          "sourceFile": "source/unclaimed-inscription-idol.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            530,
+            520,
+            945,
+            955
+          ],
+          "sourceAnchor": [
+            780,
+            935
+          ],
+          "alphaBBox": [
+            58,
+            112,
+            122,
+            179
+          ],
+          "solidBBox": [
+            59,
+            113,
+            119,
+            177
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/unclaimed-inscription-idol-death.png",
+          "sourceFile": "source/unclaimed-inscription-idol.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            980,
+            680,
+            1530,
+            955
+          ],
+          "sourceAnchor": [
+            1280,
+            936
+          ],
+          "alphaBBox": [
+            49,
+            136,
+            134,
+            178
+          ],
+          "solidBBox": [
+            50,
+            138,
+            134,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 115,
+      "healthBarAnchor": [
+        96,
+        106
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "silver-rebound-idol": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.18,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/silver-rebound-idol-idle.png",
+          "sourceFile": "source/silver-rebound-idol.png",
+          "sourceScale": 0.18,
+          "sourceCrop": [
+            30,
+            70,
+            450,
+            505
+          ],
+          "sourceAnchor": [
+            270,
+            485
+          ],
+          "alphaBBox": [
+            56,
+            103,
+            126,
+            177
+          ],
+          "solidBBox": [
+            57,
+            105,
+            125,
+            175
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/silver-rebound-idol-anticipation.png",
+          "sourceFile": "source/silver-rebound-idol.png",
+          "sourceScale": 0.18,
+          "sourceCrop": [
+            495,
+            100,
+            950,
+            505
+          ],
+          "sourceAnchor": [
+            770,
+            485
+          ],
+          "alphaBBox": [
+            48,
+            110,
+            125,
+            178
+          ],
+          "solidBBox": [
+            49,
+            111,
+            124,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/silver-rebound-idol-strike.png",
+          "sourceFile": "source/silver-rebound-idol.png",
+          "sourceScale": 0.18,
+          "sourceCrop": [
+            960,
+            85,
+            1510,
+            505
+          ],
+          "sourceAnchor": [
+            1310,
+            485
+          ],
+          "alphaBBox": [
+            34,
+            106,
+            128,
+            178
+          ],
+          "solidBBox": [
+            35,
+            107,
+            128,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/silver-rebound-idol-recovery.png",
+          "sourceFile": "source/silver-rebound-idol.png",
+          "sourceScale": 0.18,
+          "sourceCrop": [
+            45,
+            540,
+            465,
+            970
+          ],
+          "sourceAnchor": [
+            270,
+            948
+          ],
+          "alphaBBox": [
+            59,
+            106,
+            129,
+            178
+          ],
+          "solidBBox": [
+            60,
+            107,
+            128,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/silver-rebound-idol-hurt.png",
+          "sourceFile": "source/silver-rebound-idol.png",
+          "sourceScale": 0.18,
+          "sourceCrop": [
+            550,
+            560,
+            945,
+            970
+          ],
+          "sourceAnchor": [
+            770,
+            948
+          ],
+          "alphaBBox": [
+            59,
+            109,
+            124,
+            178
+          ],
+          "solidBBox": [
+            60,
+            109,
+            123,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/silver-rebound-idol-death.png",
+          "sourceFile": "source/silver-rebound-idol.png",
+          "sourceScale": 0.18,
+          "sourceCrop": [
+            950,
+            710,
+            1520,
+            990
+          ],
+          "sourceAnchor": [
+            1270,
+            966
+          ],
+          "alphaBBox": [
+            40,
+            132,
+            140,
+            177
+          ],
+          "solidBBox": [
+            40,
+            134,
+            137,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 105,
+      "healthBarAnchor": [
+        96,
+        96
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "obsidian-blade-lizard": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.19,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/obsidian-blade-lizard-idle.png",
+          "sourceFile": "source/obsidian-blade-lizard.png",
+          "sourceScale": 0.19,
+          "sourceCrop": [
+            20,
+            250,
+            515,
+            490
+          ],
+          "sourceAnchor": [
+            260,
+            471
+          ],
+          "alphaBBox": [
+            52,
+            138,
+            141,
+            178
+          ],
+          "solidBBox": [
+            54,
+            138,
+            140,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/obsidian-blade-lizard-anticipation.png",
+          "sourceFile": "source/obsidian-blade-lizard.png",
+          "sourceScale": 0.19,
+          "sourceCrop": [
+            540,
+            175,
+            950,
+            490
+          ],
+          "sourceAnchor": [
+            770,
+            473
+          ],
+          "alphaBBox": [
+            55,
+            121,
+            127,
+            177
+          ],
+          "solidBBox": [
+            56,
+            123,
+            126,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/obsidian-blade-lizard-strike.png",
+          "sourceFile": "source/obsidian-blade-lizard.png",
+          "sourceScale": 0.19,
+          "sourceCrop": [
+            995,
+            240,
+            1520,
+            495
+          ],
+          "sourceAnchor": [
+            1320,
+            477
+          ],
+          "alphaBBox": [
+            37,
+            133,
+            131,
+            177
+          ],
+          "solidBBox": [
+            38,
+            135,
+            129,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/obsidian-blade-lizard-recovery.png",
+          "sourceFile": "source/obsidian-blade-lizard.png",
+          "sourceScale": 0.19,
+          "sourceCrop": [
+            15,
+            670,
+            520,
+            905
+          ],
+          "sourceAnchor": [
+            260,
+            884
+          ],
+          "alphaBBox": [
+            51,
+            137,
+            144,
+            178
+          ],
+          "solidBBox": [
+            52,
+            139,
+            141,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/obsidian-blade-lizard-hurt.png",
+          "sourceFile": "source/obsidian-blade-lizard.png",
+          "sourceScale": 0.19,
+          "sourceCrop": [
+            560,
+            635,
+            975,
+            905
+          ],
+          "sourceAnchor": [
+            770,
+            885
+          ],
+          "alphaBBox": [
+            59,
+            131,
+            133,
+            179
+          ],
+          "solidBBox": [
+            60,
+            132,
+            131,
+            175
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/obsidian-blade-lizard-death.png",
+          "sourceFile": "source/obsidian-blade-lizard.png",
+          "sourceScale": 0.19,
+          "sourceCrop": [
+            1010,
+            740,
+            1536,
+            925
+          ],
+          "sourceAnchor": [
+            1270,
+            902
+          ],
+          "alphaBBox": [
+            49,
+            147,
+            144,
+            178
+          ],
+          "solidBBox": [
+            51,
+            149,
+            144,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 138,
+      "healthBarAnchor": [
+        96,
+        129
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "rock-resin-prowler": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.19,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/rock-resin-prowler-idle.png",
+          "sourceFile": "source/rock-resin-prowler.png",
+          "sourceScale": 0.19,
+          "sourceCrop": [
+            25,
+            185,
+            490,
+            475
+          ],
+          "sourceAnchor": [
+            270,
+            452
+          ],
+          "alphaBBox": [
+            51,
+            125,
+            135,
+            178
+          ],
+          "solidBBox": [
+            52,
+            128,
+            133,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/rock-resin-prowler-anticipation.png",
+          "sourceFile": "source/rock-resin-prowler.png",
+          "sourceScale": 0.19,
+          "sourceCrop": [
+            525,
+            220,
+            975,
+            475
+          ],
+          "sourceAnchor": [
+            780,
+            457
+          ],
+          "alphaBBox": [
+            48,
+            134,
+            132,
+            177
+          ],
+          "solidBBox": [
+            52,
+            135,
+            130,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/rock-resin-prowler-strike.png",
+          "sourceFile": "source/rock-resin-prowler.png",
+          "sourceScale": 0.19,
+          "sourceCrop": [
+            995,
+            190,
+            1510,
+            475
+          ],
+          "sourceAnchor": [
+            1300,
+            453
+          ],
+          "alphaBBox": [
+            41,
+            129,
+            134,
+            178
+          ],
+          "solidBBox": [
+            42,
+            130,
+            132,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/rock-resin-prowler-recovery.png",
+          "sourceFile": "source/rock-resin-prowler.png",
+          "sourceScale": 0.19,
+          "sourceCrop": [
+            25,
+            620,
+            510,
+            915
+          ],
+          "sourceAnchor": [
+            270,
+            891
+          ],
+          "alphaBBox": [
+            51,
+            127,
+            141,
+            180
+          ],
+          "solidBBox": [
+            52,
+            129,
+            137,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/rock-resin-prowler-hurt.png",
+          "sourceFile": "source/rock-resin-prowler.png",
+          "sourceScale": 0.19,
+          "sourceCrop": [
+            580,
+            615,
+            980,
+            910
+          ],
+          "sourceAnchor": [
+            780,
+            887
+          ],
+          "alphaBBox": [
+            60,
+            124,
+            134,
+            178
+          ],
+          "solidBBox": [
+            62,
+            128,
+            131,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/rock-resin-prowler-death.png",
+          "sourceFile": "source/rock-resin-prowler.png",
+          "sourceScale": 0.19,
+          "sourceCrop": [
+            1005,
+            695,
+            1515,
+            915
+          ],
+          "sourceAnchor": [
+            1280,
+            896
+          ],
+          "alphaBBox": [
+            47,
+            138,
+            139,
+            177
+          ],
+          "solidBBox": [
+            48,
+            142,
+            137,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 128,
+      "healthBarAnchor": [
+        96,
+        119
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "broken-lift-automaton": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.2,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/broken-lift-automaton-idle.png",
+          "sourceFile": "source/broken-lift-automaton.png",
+          "sourceScale": 0.2,
+          "sourceCrop": [
+            25,
+            135,
+            415,
+            470
+          ],
+          "sourceAnchor": [
+            245,
+            449
+          ],
+          "alphaBBox": [
+            52,
+            114,
+            127,
+            180
+          ],
+          "solidBBox": [
+            56,
+            117,
+            125,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/broken-lift-automaton-anticipation.png",
+          "sourceFile": "source/broken-lift-automaton.png",
+          "sourceScale": 0.2,
+          "sourceCrop": [
+            505,
+            125,
+            1010,
+            470
+          ],
+          "sourceAnchor": [
+            750,
+            449
+          ],
+          "alphaBBox": [
+            49,
+            111,
+            148,
+            180
+          ],
+          "solidBBox": [
+            51,
+            116,
+            145,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/broken-lift-automaton-strike.png",
+          "sourceFile": "source/broken-lift-automaton.png",
+          "sourceScale": 0.2,
+          "sourceCrop": [
+            1015,
+            135,
+            1525,
+            470
+          ],
+          "sourceAnchor": [
+            1370,
+            449
+          ],
+          "alphaBBox": [
+            25,
+            113,
+            125,
+            180
+          ],
+          "solidBBox": [
+            27,
+            117,
+            123,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/broken-lift-automaton-recovery.png",
+          "sourceFile": "source/broken-lift-automaton.png",
+          "sourceScale": 0.2,
+          "sourceCrop": [
+            40,
+            580,
+            465,
+            920
+          ],
+          "sourceAnchor": [
+            250,
+            897
+          ],
+          "alphaBBox": [
+            56,
+            113,
+            138,
+            179
+          ],
+          "solidBBox": [
+            58,
+            117,
+            135,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/broken-lift-automaton-hurt.png",
+          "sourceFile": "source/broken-lift-automaton.png",
+          "sourceScale": 0.2,
+          "sourceCrop": [
+            545,
+            590,
+            965,
+            920
+          ],
+          "sourceAnchor": [
+            770,
+            897
+          ],
+          "alphaBBox": [
+            51,
+            115,
+            134,
+            179
+          ],
+          "solidBBox": [
+            55,
+            118,
+            131,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/broken-lift-automaton-death.png",
+          "sourceFile": "source/broken-lift-automaton.png",
+          "sourceScale": 0.2,
+          "sourceCrop": [
+            995,
+            710,
+            1525,
+            980
+          ],
+          "sourceAnchor": [
+            1270,
+            959
+          ],
+          "alphaBBox": [
+            43,
+            126,
+            143,
+            176
+          ],
+          "solidBBox": [
+            45,
+            130,
+            142,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 117,
+      "healthBarAnchor": [
+        96,
+        108
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "rift-chain-overseer": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.21,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/rift-chain-overseer-idle.png",
+          "sourceFile": "source/rift-chain-overseer.png",
+          "sourceScale": 0.21,
+          "sourceCrop": [
+            15,
+            120,
+            510,
+            450
+          ],
+          "sourceAnchor": [
+            320,
+            427
+          ],
+          "alphaBBox": [
+            34,
+            113,
+            133,
+            178
+          ],
+          "solidBBox": [
+            36,
+            116,
+            132,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/rift-chain-overseer-anticipation.png",
+          "sourceFile": "source/rift-chain-overseer.png",
+          "sourceScale": 0.21,
+          "sourceCrop": [
+            560,
+            115,
+            905,
+            450
+          ],
+          "sourceAnchor": [
+            750,
+            427
+          ],
+          "alphaBBox": [
+            57,
+            112,
+            128,
+            180
+          ],
+          "solidBBox": [
+            60,
+            114,
+            127,
+            175
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/rift-chain-overseer-strike.png",
+          "sourceFile": "source/rift-chain-overseer.png",
+          "sourceScale": 0.21,
+          "sourceCrop": [
+            907,
+            125,
+            1510,
+            450
+          ],
+          "sourceAnchor": [
+            1350,
+            427
+          ],
+          "alphaBBox": [
+            3,
+            113,
+            127,
+            178
+          ],
+          "solidBBox": [
+            4,
+            117,
+            126,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/rift-chain-overseer-recovery.png",
+          "sourceFile": "source/rift-chain-overseer.png",
+          "sourceScale": 0.21,
+          "sourceCrop": [
+            15,
+            580,
+            510,
+            920
+          ],
+          "sourceAnchor": [
+            320,
+            898
+          ],
+          "alphaBBox": [
+            35,
+            110,
+            136,
+            177
+          ],
+          "solidBBox": [
+            36,
+            113,
+            132,
+            175
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/rift-chain-overseer-hurt.png",
+          "sourceFile": "source/rift-chain-overseer.png",
+          "sourceScale": 0.21,
+          "sourceCrop": [
+            560,
+            590,
+            1010,
+            920
+          ],
+          "sourceAnchor": [
+            790,
+            898
+          ],
+          "alphaBBox": [
+            51,
+            111,
+            142,
+            178
+          ],
+          "solidBBox": [
+            53,
+            115,
+            139,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/rift-chain-overseer-death.png",
+          "sourceFile": "source/rift-chain-overseer.png",
+          "sourceScale": 0.21,
+          "sourceCrop": [
+            1010,
+            695,
+            1525,
+            935
+          ],
+          "sourceAnchor": [
+            1270,
+            911
+          ],
+          "alphaBBox": [
+            42,
+            131,
+            149,
+            179
+          ],
+          "solidBBox": [
+            44,
+            135,
+            148,
+            177
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 116,
+      "healthBarAnchor": [
+        96,
+        107
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "rift-drill-beast": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.15,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/rift-drill-beast-idle.png",
+          "sourceFile": "source/rift-drill-beast.png",
+          "sourceScale": 0.15,
+          "sourceCrop": [
+            55,
+            155,
+            480,
+            440
+          ],
+          "sourceAnchor": [
+            280,
+            421
+          ],
+          "alphaBBox": [
+            64,
+            136,
+            124,
+            177
+          ],
+          "solidBBox": [
+            65,
+            139,
+            123,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/rift-drill-beast-anticipation.png",
+          "sourceFile": "source/rift-drill-beast.png",
+          "sourceScale": 0.15,
+          "sourceCrop": [
+            560,
+            180,
+            970,
+            440
+          ],
+          "sourceAnchor": [
+            780,
+            421
+          ],
+          "alphaBBox": [
+            63,
+            140,
+            123,
+            178
+          ],
+          "solidBBox": [
+            66,
+            143,
+            122,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/rift-drill-beast-strike.png",
+          "sourceFile": "source/rift-drill-beast.png",
+          "sourceScale": 0.15,
+          "sourceCrop": [
+            1010,
+            165,
+            1500,
+            440
+          ],
+          "sourceAnchor": [
+            1300,
+            421
+          ],
+          "alphaBBox": [
+            54,
+            138,
+            124,
+            178
+          ],
+          "solidBBox": [
+            55,
+            141,
+            123,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/rift-drill-beast-recovery.png",
+          "sourceFile": "source/rift-drill-beast.png",
+          "sourceScale": 0.15,
+          "sourceCrop": [
+            60,
+            620,
+            490,
+            915
+          ],
+          "sourceAnchor": [
+            280,
+            893
+          ],
+          "alphaBBox": [
+            63,
+            135,
+            125,
+            177
+          ],
+          "solidBBox": [
+            66,
+            138,
+            124,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/rift-drill-beast-hurt.png",
+          "sourceFile": "source/rift-drill-beast.png",
+          "sourceScale": 0.15,
+          "sourceCrop": [
+            590,
+            580,
+            985,
+            910
+          ],
+          "sourceAnchor": [
+            780,
+            888
+          ],
+          "alphaBBox": [
+            68,
+            130,
+            125,
+            178
+          ],
+          "solidBBox": [
+            71,
+            133,
+            124,
+            177
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/rift-drill-beast-death.png",
+          "sourceFile": "source/rift-drill-beast.png",
+          "sourceScale": 0.15,
+          "sourceCrop": [
+            1045,
+            695,
+            1500,
+            910
+          ],
+          "sourceAnchor": [
+            1280,
+            889
+          ],
+          "alphaBBox": [
+            63,
+            147,
+            127,
+            177
+          ],
+          "solidBBox": [
+            64,
+            150,
+            126,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 139,
+      "healthBarAnchor": [
+        96,
+        130
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "crystal-marrow-feeder": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.17,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/crystal-marrow-feeder-idle.png",
+          "sourceFile": "source/crystal-marrow-feeder.png",
+          "sourceScale": 0.17,
+          "sourceCrop": [
+            25,
+            170,
+            485,
+            485
+          ],
+          "sourceAnchor": [
+            270,
+            464
+          ],
+          "alphaBBox": [
+            54,
+            126,
+            129,
+            179
+          ],
+          "solidBBox": [
+            57,
+            129,
+            128,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/crystal-marrow-feeder-anticipation.png",
+          "sourceFile": "source/crystal-marrow-feeder.png",
+          "sourceScale": 0.17,
+          "sourceCrop": [
+            550,
+            165,
+            940,
+            485
+          ],
+          "sourceAnchor": [
+            780,
+            464
+          ],
+          "alphaBBox": [
+            59,
+            125,
+            123,
+            178
+          ],
+          "solidBBox": [
+            61,
+            128,
+            119,
+            175
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/crystal-marrow-feeder-strike.png",
+          "sourceFile": "source/crystal-marrow-feeder.png",
+          "sourceScale": 0.17,
+          "sourceCrop": [
+            950,
+            165,
+            1515,
+            485
+          ],
+          "sourceAnchor": [
+            1300,
+            464
+          ],
+          "alphaBBox": [
+            36,
+            125,
+            131,
+            177
+          ],
+          "solidBBox": [
+            40,
+            128,
+            128,
+            175
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/crystal-marrow-feeder-recovery.png",
+          "sourceFile": "source/crystal-marrow-feeder.png",
+          "sourceScale": 0.17,
+          "sourceCrop": [
+            50,
+            620,
+            510,
+            930
+          ],
+          "sourceAnchor": [
+            280,
+            909
+          ],
+          "alphaBBox": [
+            58,
+            127,
+            135,
+            180
+          ],
+          "solidBBox": [
+            60,
+            130,
+            132,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/crystal-marrow-feeder-hurt.png",
+          "sourceFile": "source/crystal-marrow-feeder.png",
+          "sourceScale": 0.17,
+          "sourceCrop": [
+            610,
+            645,
+            930,
+            930
+          ],
+          "sourceAnchor": [
+            780,
+            909
+          ],
+          "alphaBBox": [
+            69,
+            131,
+            121,
+            179
+          ],
+          "solidBBox": [
+            71,
+            135,
+            117,
+            175
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/crystal-marrow-feeder-death.png",
+          "sourceFile": "source/crystal-marrow-feeder.png",
+          "sourceScale": 0.17,
+          "sourceCrop": [
+            990,
+            685,
+            1490,
+            925
+          ],
+          "sourceAnchor": [
+            1280,
+            905
+          ],
+          "alphaBBox": [
+            48,
+            139,
+            129,
+            179
+          ],
+          "solidBBox": [
+            51,
+            142,
+            128,
+            177
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 129,
+      "healthBarAnchor": [
+        96,
+        120
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "refracting-crystal-moth": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.13,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/refracting-crystal-moth-idle.png",
+          "sourceFile": "source/refracting-crystal-moth.png",
+          "sourceScale": 0.13,
+          "sourceCrop": [
+            35,
+            45,
+            525,
+            495
+          ],
+          "sourceAnchor": [
+            270,
+            620
+          ],
+          "alphaBBox": [
+            67,
+            102,
+            128,
+            157
+          ],
+          "solidBBox": [
+            68,
+            103,
+            126,
+            156
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/refracting-crystal-moth-anticipation.png",
+          "sourceFile": "source/refracting-crystal-moth.png",
+          "sourceScale": 0.13,
+          "sourceCrop": [
+            560,
+            25,
+            955,
+            500
+          ],
+          "sourceAnchor": [
+            760,
+            620
+          ],
+          "alphaBBox": [
+            71,
+            101,
+            120,
+            160
+          ],
+          "solidBBox": [
+            73,
+            102,
+            118,
+            158
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/refracting-crystal-moth-strike.png",
+          "sourceFile": "source/refracting-crystal-moth.png",
+          "sourceScale": 0.13,
+          "sourceCrop": [
+            980,
+            145,
+            1510,
+            495
+          ],
+          "sourceAnchor": [
+            1280,
+            620
+          ],
+          "alphaBBox": [
+            58,
+            115,
+            124,
+            158
+          ],
+          "solidBBox": [
+            60,
+            117,
+            123,
+            157
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/refracting-crystal-moth-recovery.png",
+          "sourceFile": "source/refracting-crystal-moth.png",
+          "sourceScale": 0.13,
+          "sourceCrop": [
+            25,
+            500,
+            515,
+            950
+          ],
+          "sourceAnchor": [
+            270,
+            1080
+          ],
+          "alphaBBox": [
+            65,
+            101,
+            127,
+            159
+          ],
+          "solidBBox": [
+            67,
+            103,
+            126,
+            156
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/refracting-crystal-moth-hurt.png",
+          "sourceFile": "source/refracting-crystal-moth.png",
+          "sourceScale": 0.13,
+          "sourceCrop": [
+            560,
+            560,
+            940,
+            945
+          ],
+          "sourceAnchor": [
+            760,
+            1080
+          ],
+          "alphaBBox": [
+            70,
+            110,
+            118,
+            156
+          ],
+          "solidBBox": [
+            73,
+            111,
+            116,
+            155
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/refracting-crystal-moth-death.png",
+          "sourceFile": "source/refracting-crystal-moth.png",
+          "sourceScale": 0.13,
+          "sourceCrop": [
+            970,
+            760,
+            1495,
+            960
+          ],
+          "sourceAnchor": [
+            1280,
+            942
+          ],
+          "alphaBBox": [
+            56,
+            152,
+            124,
+            176
+          ],
+          "solidBBox": [
+            58,
+            155,
+            121,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 103,
+      "healthBarAnchor": [
+        96,
+        94
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      },
+      "flightHeightBaked": true,
+      "additionalYOffset": 0
+    },
+    "runebone-scroll-statue": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.16,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/runebone-scroll-statue-idle.png",
+          "sourceFile": "source/runebone-scroll-statue.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            40,
+            50,
+            440,
+            495
+          ],
+          "sourceAnchor": [
+            250,
+            472
+          ],
+          "alphaBBox": [
+            63,
+            108,
+            124,
+            177
+          ],
+          "solidBBox": [
+            65,
+            111,
+            123,
+            175
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/runebone-scroll-statue-anticipation.png",
+          "sourceFile": "source/runebone-scroll-statue.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            495,
+            20,
+            910,
+            495
+          ],
+          "sourceAnchor": [
+            710,
+            472
+          ],
+          "alphaBBox": [
+            62,
+            104,
+            128,
+            180
+          ],
+          "solidBBox": [
+            65,
+            107,
+            125,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/runebone-scroll-statue-strike.png",
+          "sourceFile": "source/runebone-scroll-statue.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            920,
+            75,
+            1505,
+            495
+          ],
+          "sourceAnchor": [
+            1310,
+            472
+          ],
+          "alphaBBox": [
+            34,
+            115,
+            126,
+            177
+          ],
+          "solidBBox": [
+            36,
+            115,
+            125,
+            175
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/runebone-scroll-statue-recovery.png",
+          "sourceFile": "source/runebone-scroll-statue.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            40,
+            505,
+            415,
+            965
+          ],
+          "sourceAnchor": [
+            250,
+            944
+          ],
+          "alphaBBox": [
+            63,
+            108,
+            120,
+            178
+          ],
+          "solidBBox": [
+            65,
+            109,
+            118,
+            177
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/runebone-scroll-statue-hurt.png",
+          "sourceFile": "source/runebone-scroll-statue.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            455,
+            565,
+            870,
+            965
+          ],
+          "sourceAnchor": [
+            690,
+            944
+          ],
+          "alphaBBox": [
+            59,
+            117,
+            124,
+            178
+          ],
+          "solidBBox": [
+            61,
+            119,
+            122,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/runebone-scroll-statue-death.png",
+          "sourceFile": "source/runebone-scroll-statue.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            890,
+            690,
+            1525,
+            980
+          ],
+          "sourceAnchor": [
+            1260,
+            955
+          ],
+          "alphaBBox": [
+            37,
+            136,
+            136,
+            177
+          ],
+          "solidBBox": [
+            39,
+            137,
+            136,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 111,
+      "healthBarAnchor": [
+        96,
+        102
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "runebone-hidden-blade": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.18,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/runebone-hidden-blade-idle.png",
+          "sourceFile": "source/runebone-hidden-blade.png",
+          "sourceScale": 0.18,
+          "sourceCrop": [
+            60,
+            50,
+            410,
+            490
+          ],
+          "sourceAnchor": [
+            240,
+            470
+          ],
+          "alphaBBox": [
+            67,
+            103,
+            124,
+            177
+          ],
+          "solidBBox": [
+            68,
+            104,
+            123,
+            175
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/runebone-hidden-blade-anticipation.png",
+          "sourceFile": "source/runebone-hidden-blade.png",
+          "sourceScale": 0.18,
+          "sourceCrop": [
+            500,
+            55,
+            895,
+            490
+          ],
+          "sourceAnchor": [
+            710,
+            470
+          ],
+          "alphaBBox": [
+            60,
+            101,
+            129,
+            178
+          ],
+          "solidBBox": [
+            61,
+            105,
+            125,
+            175
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/runebone-hidden-blade-strike.png",
+          "sourceFile": "source/runebone-hidden-blade.png",
+          "sourceScale": 0.18,
+          "sourceCrop": [
+            900,
+            65,
+            1530,
+            485
+          ],
+          "sourceAnchor": [
+            1320,
+            464
+          ],
+          "alphaBBox": [
+            21,
+            105,
+            131,
+            177
+          ],
+          "solidBBox": [
+            22,
+            108,
+            130,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/runebone-hidden-blade-recovery.png",
+          "sourceFile": "source/runebone-hidden-blade.png",
+          "sourceScale": 0.18,
+          "sourceCrop": [
+            50,
+            525,
+            390,
+            955
+          ],
+          "sourceAnchor": [
+            240,
+            934
+          ],
+          "alphaBBox": [
+            64,
+            105,
+            122,
+            177
+          ],
+          "solidBBox": [
+            66,
+            106,
+            119,
+            175
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/runebone-hidden-blade-hurt.png",
+          "sourceFile": "source/runebone-hidden-blade.png",
+          "sourceScale": 0.18,
+          "sourceCrop": [
+            485,
+            535,
+            920,
+            955
+          ],
+          "sourceAnchor": [
+            700,
+            934
+          ],
+          "alphaBBox": [
+            57,
+            106,
+            135,
+            178
+          ],
+          "solidBBox": [
+            60,
+            108,
+            135,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/runebone-hidden-blade-death.png",
+          "sourceFile": "source/runebone-hidden-blade.png",
+          "sourceScale": 0.18,
+          "sourceCrop": [
+            915,
+            720,
+            1525,
+            975
+          ],
+          "sourceAnchor": [
+            1270,
+            954
+          ],
+          "alphaBBox": [
+            32,
+            134,
+            141,
+            177
+          ],
+          "solidBBox": [
+            32,
+            134,
+            139,
+            177
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 104,
+      "healthBarAnchor": [
+        96,
+        95
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "hedor-archive-keeper": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.19,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/hedor-archive-keeper-idle.png",
+          "sourceFile": "source/hedor-archive-keeper.png",
+          "sourceScale": 0.19,
+          "sourceCrop": [
+            5,
+            40,
+            525,
+            500
+          ],
+          "sourceAnchor": [
+            305,
+            478
+          ],
+          "alphaBBox": [
+            41,
+            96,
+            136,
+            177
+          ],
+          "solidBBox": [
+            42,
+            97,
+            135,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/hedor-archive-keeper-anticipation.png",
+          "sourceFile": "source/hedor-archive-keeper.png",
+          "sourceScale": 0.19,
+          "sourceCrop": [
+            555,
+            10,
+            986,
+            500
+          ],
+          "sourceAnchor": [
+            785,
+            481
+          ],
+          "alphaBBox": [
+            54,
+            89,
+            134,
+            178
+          ],
+          "solidBBox": [
+            56,
+            91,
+            134,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/hedor-archive-keeper-strike.png",
+          "sourceFile": "source/hedor-archive-keeper.png",
+          "sourceScale": 0.19,
+          "sourceCrop": [
+            995,
+            90,
+            1536,
+            500
+          ],
+          "sourceAnchor": [
+            1340,
+            481
+          ],
+          "alphaBBox": [
+            30,
+            104,
+            133,
+            179
+          ],
+          "solidBBox": [
+            30,
+            105,
+            131,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/hedor-archive-keeper-recovery.png",
+          "sourceFile": "source/hedor-archive-keeper.png",
+          "sourceScale": 0.19,
+          "sourceCrop": [
+            0,
+            515,
+            505,
+            950
+          ],
+          "sourceAnchor": [
+            290,
+            932
+          ],
+          "alphaBBox": [
+            43,
+            99,
+            136,
+            179
+          ],
+          "solidBBox": [
+            44,
+            101,
+            134,
+            177
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/hedor-archive-keeper-hurt.png",
+          "sourceFile": "source/hedor-archive-keeper.png",
+          "sourceScale": 0.19,
+          "sourceCrop": [
+            510,
+            555,
+            963,
+            955
+          ],
+          "sourceAnchor": [
+            755,
+            932
+          ],
+          "alphaBBox": [
+            49,
+            105,
+            135,
+            178
+          ],
+          "solidBBox": [
+            50,
+            106,
+            135,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/hedor-archive-keeper-death.png",
+          "sourceFile": "source/hedor-archive-keeper.png",
+          "sourceScale": 0.19,
+          "sourceCrop": [
+            965,
+            700,
+            1530,
+            985
+          ],
+          "sourceAnchor": [
+            1280,
+            967
+          ],
+          "alphaBBox": [
+            36,
+            128,
+            143,
+            178
+          ],
+          "solidBBox": [
+            36,
+            129,
+            141,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 97,
+      "healthBarAnchor": [
+        96,
+        88
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "deepforge-cast-guard": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.17,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/deepforge-cast-guard-idle.png",
+          "sourceFile": "source/deepforge-cast-guard.png",
+          "sourceScale": 0.17,
+          "sourceCrop": [
+            0,
+            110,
+            520,
+            510
+          ],
+          "sourceAnchor": [
+            320,
+            491
+          ],
+          "alphaBBox": [
+            42,
+            112,
+            130,
+            177
+          ],
+          "solidBBox": [
+            45,
+            114,
+            126,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/deepforge-cast-guard-anticipation.png",
+          "sourceFile": "source/deepforge-cast-guard.png",
+          "sourceScale": 0.17,
+          "sourceCrop": [
+            595,
+            20,
+            970,
+            515
+          ],
+          "sourceAnchor": [
+            770,
+            494
+          ],
+          "alphaBBox": [
+            66,
+            97,
+            129,
+            176
+          ],
+          "solidBBox": [
+            70,
+            98,
+            126,
+            175
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/deepforge-cast-guard-strike.png",
+          "sourceFile": "source/deepforge-cast-guard.png",
+          "sourceScale": 0.17,
+          "sourceCrop": [
+            975,
+            135,
+            1536,
+            510
+          ],
+          "sourceAnchor": [
+            1380,
+            491
+          ],
+          "alphaBBox": [
+            27,
+            117,
+            122,
+            177
+          ],
+          "solidBBox": [
+            29,
+            118,
+            121,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/deepforge-cast-guard-recovery.png",
+          "sourceFile": "source/deepforge-cast-guard.png",
+          "sourceScale": 0.17,
+          "sourceCrop": [
+            0,
+            585,
+            480,
+            970
+          ],
+          "sourceAnchor": [
+            310,
+            949
+          ],
+          "alphaBBox": [
+            45,
+            117,
+            122,
+            177
+          ],
+          "solidBBox": [
+            46,
+            117,
+            122,
+            175
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/deepforge-cast-guard-hurt.png",
+          "sourceFile": "source/deepforge-cast-guard.png",
+          "sourceScale": 0.17,
+          "sourceCrop": [
+            490,
+            590,
+            1000,
+            970
+          ],
+          "sourceAnchor": [
+            790,
+            950
+          ],
+          "alphaBBox": [
+            46,
+            115,
+            131,
+            180
+          ],
+          "solidBBox": [
+            46,
+            119,
+            130,
+            177
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/deepforge-cast-guard-death.png",
+          "sourceFile": "source/deepforge-cast-guard.png",
+          "sourceScale": 0.17,
+          "sourceCrop": [
+            1005,
+            725,
+            1536,
+            975
+          ],
+          "sourceAnchor": [
+            1290,
+            955
+          ],
+          "alphaBBox": [
+            48,
+            137,
+            136,
+            177
+          ],
+          "solidBBox": [
+            50,
+            140,
+            135,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 114,
+      "healthBarAnchor": [
+        96,
+        105
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "dark-vein-riftshade": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.16,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/dark-vein-riftshade-idle.png",
+          "sourceFile": "source/dark-vein-riftshade.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            25,
+            40,
+            500,
+            490
+          ],
+          "sourceAnchor": [
+            280,
+            471
+          ],
+          "alphaBBox": [
+            56,
+            109,
+            130,
+            178
+          ],
+          "solidBBox": [
+            58,
+            111,
+            127,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/dark-vein-riftshade-anticipation.png",
+          "sourceFile": "source/dark-vein-riftshade.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            535,
+            80,
+            929,
+            490
+          ],
+          "sourceAnchor": [
+            750,
+            472
+          ],
+          "alphaBBox": [
+            64,
+            115,
+            125,
+            178
+          ],
+          "solidBBox": [
+            65,
+            117,
+            125,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/dark-vein-riftshade-strike.png",
+          "sourceFile": "source/dark-vein-riftshade.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            960,
+            80,
+            1536,
+            490
+          ],
+          "sourceAnchor": [
+            1350,
+            473
+          ],
+          "alphaBBox": [
+            34,
+            115,
+            124,
+            179
+          ],
+          "solidBBox": [
+            34,
+            116,
+            124,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/dark-vein-riftshade-recovery.png",
+          "sourceFile": "source/dark-vein-riftshade.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            20,
+            530,
+            515,
+            980
+          ],
+          "sourceAnchor": [
+            280,
+            958
+          ],
+          "alphaBBox": [
+            54,
+            110,
+            132,
+            178
+          ],
+          "solidBBox": [
+            58,
+            112,
+            128,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/dark-vein-riftshade-hurt.png",
+          "sourceFile": "source/dark-vein-riftshade.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            560,
+            555,
+            980,
+            980
+          ],
+          "sourceAnchor": [
+            750,
+            958
+          ],
+          "alphaBBox": [
+            66,
+            114,
+            133,
+            177
+          ],
+          "solidBBox": [
+            70,
+            116,
+            128,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/dark-vein-riftshade-death.png",
+          "sourceFile": "source/dark-vein-riftshade.png",
+          "sourceScale": 0.16,
+          "sourceCrop": [
+            1000,
+            690,
+            1525,
+            985
+          ],
+          "sourceAnchor": [
+            1280,
+            965
+          ],
+          "alphaBBox": [
+            51,
+            132,
+            133,
+            178
+          ],
+          "solidBBox": [
+            54,
+            133,
+            131,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 111,
+      "healthBarAnchor": [
+        96,
+        102
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "rock-resin-greatshell": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.18,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/rock-resin-greatshell-idle.png",
+          "sourceFile": "source/rock-resin-greatshell.png",
+          "sourceScale": 0.18,
+          "sourceCrop": [
+            30,
+            105,
+            505,
+            470
+          ],
+          "sourceAnchor": [
+            270,
+            447
+          ],
+          "alphaBBox": [
+            55,
+            117,
+            138,
+            177
+          ],
+          "solidBBox": [
+            57,
+            118,
+            135,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/rock-resin-greatshell-anticipation.png",
+          "sourceFile": "source/rock-resin-greatshell.png",
+          "sourceScale": 0.18,
+          "sourceCrop": [
+            545,
+            70,
+            985,
+            470
+          ],
+          "sourceAnchor": [
+            780,
+            448
+          ],
+          "alphaBBox": [
+            56,
+            110,
+            131,
+            177
+          ],
+          "solidBBox": [
+            58,
+            111,
+            129,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/rock-resin-greatshell-strike.png",
+          "sourceFile": "source/rock-resin-greatshell.png",
+          "sourceScale": 0.18,
+          "sourceCrop": [
+            985,
+            125,
+            1505,
+            475
+          ],
+          "sourceAnchor": [
+            1280,
+            452
+          ],
+          "alphaBBox": [
+            46,
+            120,
+            134,
+            178
+          ],
+          "solidBBox": [
+            47,
+            121,
+            133,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/rock-resin-greatshell-recovery.png",
+          "sourceFile": "source/rock-resin-greatshell.png",
+          "sourceScale": 0.18,
+          "sourceCrop": [
+            30,
+            570,
+            505,
+            935
+          ],
+          "sourceAnchor": [
+            270,
+            914
+          ],
+          "alphaBBox": [
+            56,
+            116,
+            137,
+            178
+          ],
+          "solidBBox": [
+            56,
+            117,
+            135,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/rock-resin-greatshell-hurt.png",
+          "sourceFile": "source/rock-resin-greatshell.png",
+          "sourceScale": 0.18,
+          "sourceCrop": [
+            545,
+            550,
+            995,
+            950
+          ],
+          "sourceAnchor": [
+            780,
+            927
+          ],
+          "alphaBBox": [
+            57,
+            110,
+            133,
+            176
+          ],
+          "solidBBox": [
+            58,
+            111,
+            131,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/rock-resin-greatshell-death.png",
+          "sourceFile": "source/rock-resin-greatshell.png",
+          "sourceScale": 0.18,
+          "sourceCrop": [
+            1080,
+            630,
+            1520,
+            945
+          ],
+          "sourceAnchor": [
+            1300,
+            923
+          ],
+          "alphaBBox": [
+            59,
+            125,
+            133,
+            177
+          ],
+          "solidBBox": [
+            60,
+            127,
+            131,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 118,
+      "healthBarAnchor": [
+        96,
+        109
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "evercast-prototype": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.2,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/evercast-prototype-idle.png",
+          "sourceFile": "source/evercast-prototype.png",
+          "sourceScale": 0.2,
+          "sourceCrop": [
+            45,
+            85,
+            500,
+            470
+          ],
+          "sourceAnchor": [
+            285,
+            446
+          ],
+          "alphaBBox": [
+            51,
+            104,
+            139,
+            177
+          ],
+          "solidBBox": [
+            53,
+            109,
+            134,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/evercast-prototype-anticipation.png",
+          "sourceFile": "source/evercast-prototype.png",
+          "sourceScale": 0.2,
+          "sourceCrop": [
+            560,
+            125,
+            980,
+            465
+          ],
+          "sourceAnchor": [
+            775,
+            444
+          ],
+          "alphaBBox": [
+            54,
+            112,
+            137,
+            178
+          ],
+          "solidBBox": [
+            57,
+            116,
+            135,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/evercast-prototype-strike.png",
+          "sourceFile": "source/evercast-prototype.png",
+          "sourceScale": 0.2,
+          "sourceCrop": [
+            985,
+            130,
+            1525,
+            470
+          ],
+          "sourceAnchor": [
+            1310,
+            446
+          ],
+          "alphaBBox": [
+            31,
+            113,
+            136,
+            181
+          ],
+          "solidBBox": [
+            32,
+            117,
+            135,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/evercast-prototype-recovery.png",
+          "sourceFile": "source/evercast-prototype.png",
+          "sourceScale": 0.2,
+          "sourceCrop": [
+            25,
+            560,
+            505,
+            945
+          ],
+          "sourceAnchor": [
+            285,
+            922
+          ],
+          "alphaBBox": [
+            44,
+            107,
+            139,
+            178
+          ],
+          "solidBBox": [
+            49,
+            108,
+            136,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/evercast-prototype-hurt.png",
+          "sourceFile": "source/evercast-prototype.png",
+          "sourceScale": 0.2,
+          "sourceCrop": [
+            535,
+            575,
+            950,
+            945
+          ],
+          "sourceAnchor": [
+            775,
+            919
+          ],
+          "alphaBBox": [
+            48,
+            110,
+            127,
+            178
+          ],
+          "solidBBox": [
+            52,
+            111,
+            127,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/evercast-prototype-death.png",
+          "sourceFile": "source/evercast-prototype.png",
+          "sourceScale": 0.2,
+          "sourceCrop": [
+            960,
+            705,
+            1530,
+            965
+          ],
+          "sourceAnchor": [
+            1280,
+            941
+          ],
+          "alphaBBox": [
+            32,
+            129,
+            144,
+            180
+          ],
+          "solidBBox": [
+            33,
+            133,
+            142,
+            178
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 109,
+      "healthBarAnchor": [
+        96,
+        100
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "uldor-forge-controller": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.22,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/uldor-forge-controller-idle.png",
+          "sourceFile": "source/uldor-forge-controller.png",
+          "sourceScale": 0.22,
+          "sourceCrop": [
+            0,
+            75,
+            545,
+            500
+          ],
+          "sourceAnchor": [
+            310,
+            477
+          ],
+          "alphaBBox": [
+            31,
+            92,
+            148,
+            181
+          ],
+          "solidBBox": [
+            32,
+            93,
+            148,
+            177
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/uldor-forge-controller-anticipation.png",
+          "sourceFile": "source/uldor-forge-controller.png",
+          "sourceScale": 0.22,
+          "sourceCrop": [
+            545,
+            60,
+            1000,
+            500
+          ],
+          "sourceAnchor": [
+            780,
+            477
+          ],
+          "alphaBBox": [
+            44,
+            87,
+            144,
+            177
+          ],
+          "solidBBox": [
+            44,
+            88,
+            144,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/uldor-forge-controller-strike.png",
+          "sourceFile": "source/uldor-forge-controller.png",
+          "sourceScale": 0.22,
+          "sourceCrop": [
+            1000,
+            90,
+            1536,
+            500
+          ],
+          "sourceAnchor": [
+            1350,
+            476
+          ],
+          "alphaBBox": [
+            19,
+            92,
+            134,
+            181
+          ],
+          "solidBBox": [
+            20,
+            96,
+            133,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/uldor-forge-controller-recovery.png",
+          "sourceFile": "source/uldor-forge-controller.png",
+          "sourceScale": 0.22,
+          "sourceCrop": [
+            0,
+            555,
+            545,
+            985
+          ],
+          "sourceAnchor": [
+            310,
+            961
+          ],
+          "alphaBBox": [
+            31,
+            88,
+            148,
+            179
+          ],
+          "solidBBox": [
+            32,
+            92,
+            147,
+            177
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/uldor-forge-controller-hurt.png",
+          "sourceFile": "source/uldor-forge-controller.png",
+          "sourceScale": 0.22,
+          "sourceCrop": [
+            550,
+            570,
+            967,
+            980
+          ],
+          "sourceAnchor": [
+            780,
+            958
+          ],
+          "alphaBBox": [
+            47,
+            94,
+            137,
+            177
+          ],
+          "solidBBox": [
+            48,
+            96,
+            136,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/uldor-forge-controller-death.png",
+          "sourceFile": "source/uldor-forge-controller.png",
+          "sourceScale": 0.22,
+          "sourceCrop": [
+            970,
+            660,
+            1536,
+            980
+          ],
+          "sourceAnchor": [
+            1290,
+            955
+          ],
+          "alphaBBox": [
+            26,
+            114,
+            148,
+            177
+          ],
+          "solidBBox": [
+            26,
+            116,
+            147,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 93,
+      "healthBarAnchor": [
+        96,
+        84
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
     }
   },
   "backgrounds": [
@@ -6548,6 +10559,94 @@
       "z": 1,
       "hasAlpha": true,
       "parallax": 1
+    },
+    {
+      "id": "silver-gallery",
+      "file": "backgrounds/silver-gallery.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0,
+      "hasAlpha": false,
+      "parallax": 0.15
+    },
+    {
+      "id": "silver-platform",
+      "file": "backgrounds/silver-platform.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 1,
+      "hasAlpha": true,
+      "parallax": 1
+    },
+    {
+      "id": "obsidian-rift",
+      "file": "backgrounds/obsidian-rift.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0,
+      "hasAlpha": false,
+      "parallax": 0.15
+    },
+    {
+      "id": "a08-rift-platform",
+      "file": "backgrounds/a08-rift-platform.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 1,
+      "hasAlpha": true,
+      "parallax": 1
+    },
+    {
+      "id": "runebone-archive",
+      "file": "backgrounds/runebone-archive.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0,
+      "hasAlpha": false,
+      "parallax": 0.15
+    },
+    {
+      "id": "archive-platform",
+      "file": "backgrounds/archive-platform.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 1,
+      "hasAlpha": true,
+      "parallax": 1
+    },
+    {
+      "id": "deepcore-forge",
+      "file": "backgrounds/deepcore-forge.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0,
+      "hasAlpha": false,
+      "parallax": 0.15
+    },
+    {
+      "id": "deepforge-platform",
+      "file": "backgrounds/deepforge-platform.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 1,
+      "hasAlpha": true,
+      "parallax": 1
     }
   ],
   "limitations": [
@@ -6589,7 +10688,25 @@
     "dwarf.a06.normal.2": "pressure-steam-wisp",
     "dwarf.a06.normal.3": "sunken-pot-carrier",
     "dwarf.a06.elite": "four-arm-foreman",
-    "dwarf.a06.boss": "broken-furnace-guardian"
+    "dwarf.a06.boss": "broken-furnace-guardian",
+    "dwarf.a07.normal.1": "silver-whisker-borer",
+    "dwarf.a07.normal.2": "frost-crystal-spider",
+    "dwarf.a07.normal.3": "unclaimed-inscription-idol",
+    "dwarf.a07.elite": "silver-rebound-idol",
+    "dwarf.a08.normal.1": "obsidian-blade-lizard",
+    "dwarf.a08.normal.2": "rock-resin-prowler",
+    "dwarf.a08.normal.3": "broken-lift-automaton",
+    "dwarf.a08.elite": "rift-chain-overseer",
+    "dwarf.a09.normal.1": "crystal-marrow-feeder",
+    "dwarf.a09.normal.2": "refracting-crystal-moth",
+    "dwarf.a09.normal.3": "runebone-scroll-statue",
+    "dwarf.a09.elite": "runebone-hidden-blade",
+    "dwarf.a09.boss": "hedor-archive-keeper",
+    "dwarf.a10.normal.1": "deepforge-cast-guard",
+    "dwarf.a10.normal.2": "dark-vein-riftshade",
+    "dwarf.a10.normal.3": "rock-resin-greatshell",
+    "dwarf.a10.elite": "evercast-prototype",
+    "dwarf.a10.boss": "uldor-forge-controller"
   },
   "areaBackgrounds": {
     "dwarf.a01": [
@@ -6615,6 +10732,22 @@
     "dwarf.a06": [
       "sunken-forge",
       "forge-platform"
+    ],
+    "dwarf.a07": [
+      "silver-gallery",
+      "silver-platform"
+    ],
+    "dwarf.a08": [
+      "obsidian-rift",
+      "a08-rift-platform"
+    ],
+    "dwarf.a09": [
+      "runebone-archive",
+      "archive-platform"
+    ],
+    "dwarf.a10": [
+      "deepcore-forge",
+      "deepforge-platform"
     ]
   },
   "coveragePolicy": "Only explicit monsterSprites AND areaBackgrounds mappings are allowed; missing coverage must use legacy renderer, never index/modulo or generic substitution.",
@@ -6640,6 +10773,15 @@
       "spriteKey": "slag-apprentice",
       "priority": 100,
       "name": "铸渣小工"
+    },
+    {
+      "match": {
+        "definitionId": "dwarf.a08.elite",
+        "follower": true
+      },
+      "spriteKey": "rift-drill-beast",
+      "priority": 100,
+      "reason": "Actual 裂谷钻兽 followers are independent burrowing beasts, not small overseers."
     }
   ],
   "batchSources": {
@@ -6668,10 +10810,24 @@
       "pose": "idle",
       "overlay": "actual engine blue shield only",
       "noDamage": true
+    },
+    "dwarf.a07.normal.3:0": {
+      "pose": "idle",
+      "overlay": "actual engine blue shield only",
+      "noDamage": true
+    },
+    "dwarf.a09.boss:2": {
+      "pose": "idle",
+      "overlay": "actual engine blue shield only",
+      "noDamage": true
     }
   },
   "areaBaselines": {
     "dwarf.a05": 193,
-    "dwarf.a06": 203
+    "dwarf.a06": 203,
+    "dwarf.a07": 210,
+    "dwarf.a08": 207,
+    "dwarf.a09": 220,
+    "dwarf.a10": 193
   }
 }
