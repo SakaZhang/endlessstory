@@ -8,7 +8,7 @@ import * as E from './dist/engine.js';
 import {captureCombatDisplay} from './dist/combat-display-bridge.js';
 const require=createRequire(import.meta.url),{createCanvas,loadImage}=require('@napi-rs/canvas');
 const manifest=JSON.parse(readFileSync(new URL('./dist/battle-assets/manifest.json',import.meta.url))),images=new Map();
-for(const f of [...manifest.backgrounds,...Object.values(manifest.sprites).flatMap(s=>s.frames)])if(!images.has(f.file))images.set(f.file,await loadImage(new URL('./dist/battle-assets/'+f.file,import.meta.url).pathname));
+for(const f of [...manifest.backgrounds,...Object.values(manifest.campBackgrounds),...Object.values(manifest.sprites).flatMap(s=>s.frames)])if(!images.has(f.file))images.set(f.file,await loadImage(new URL('./dist/battle-assets/'+f.file,import.meta.url).pathname));
 // Reproducible real engine generation only; renderer is separately tested with RNG throwing.
 const originalRandom=Math.random,originalNow=Date.now;Date.now=()=>1770000000000;let generationSeed=74105;Math.random=()=>{generationSeed=(Math.imul(generationSeed,1664525)+1013904223)>>>0;return generationSeed/4294967296;};
 try{
