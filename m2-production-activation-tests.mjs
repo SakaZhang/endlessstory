@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
-import {PRODUCTION_DWARF_PARAMETERS as P,DWARF_PARAMETER_PROVENANCE as META} from './dist/dwarf-parameters.js';
+import {PRODUCTION_DWARF_PARAMETERS as P} from './dist/dwarf-parameters.js';
 import {DWARF_MATERIAL_SOURCE_POOLS} from './dist/dwarf-material-catalog.js';
+const historicalSource=execFileSync('git',['show','4e1a6a5:dist/dwarf-parameters.js'],{encoding:'utf8'});const META=JSON.parse(historicalSource.split('DWARF_PARAMETER_PROVENANCE=freeze(')[1].split(');')[0]);
 assert.equal(P.reviewed,true);assert(!Object.hasOwn(P,'testOnly'));assert.equal(P.fieldGroupChance,.04);assert.equal(P.skillOverrides['dwarf.a03.boss:0'].castMs,2200);assert.equal(Object.keys(P.monsters).filter(id=>Number(id.split('.')[1].slice(1))<=3).length,13);
 const restored=structuredClone(Object.values(DWARF_MATERIAL_SOURCE_POOLS).filter(row=>Number(row.nodeId.split('.')[1].slice(1))<=3));let count=0;for(const row of restored)for(const c of row.channels)if(c.channel==='recovery'){assert.equal(c.quantity,1);c.quantity=3;count++;}assert.equal(count,22);assert.equal(createHash('sha256').update(JSON.stringify(restored)).digest('hex'),META.unpatchedMaterialRowsSha256,'exact22 quantity-only edits, all probability/quality/regular pools unchanged');
 // A fresh JS realm is essential: earlier tests intentionally inject/clear providers.
