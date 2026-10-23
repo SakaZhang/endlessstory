@@ -157,3 +157,6 @@ for(const file of ['equipment-raster-adapter-tests.mjs','legendary-art-tests.mjs
 
 // v0.54 exact material art; acquisition and story flags are not changed by visuals.
 runAffixSourceTest(process.execPath,[new URL('./material-pixel-art-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.55 exact potion / utility art without modifying effects or costs.
+runAffixSourceTest(process.execPath,[new URL('./consumable-pixel-art-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
