@@ -467,11 +467,12 @@ export function drinkPotion(s,key=undefined,now=Date.now(),battle=s.activeEncoun
  else s.potionBuffs[type]={quality,endAt:end};
  return true;
 }
+export function resolveHealingPotionKey(s,now=Date.now()){
+ return resolvePotionKey({...s,potionSlot:{...s.potionSlot,key:'healing|0'}},now);
+}
 export function autoDrinkPotion(s,battle=s.activeEncounter??null,now=Date.now()){
- if(!s.potionSlot?.auto||!s.potionSlot.key)return false;const parsed=parsePotionKey(s.potionSlot.key);if(!parsed)return false;const {type}=parsed,clock=Math.max(now,s.lastHealthClock??0);
- if(type==='healing'&&s.heroHp>stats(s).hp*.4)return false;
- if(type!=='healing'&&potionBuff(s,type).endAt>clock)return false;
- return drinkPotion(s,undefined,now,battle);
+ if(!s.potionSlot?.auto||s.heroHp>stats(s).hp*.4)return false;
+ return drinkPotion(s,resolveHealingPotionKey(s,now),now,battle);
 }
 function capHealth(s){if(s.heroHp!==undefined){s.heroHp=Math.min(s.heroHp,stats(s).hp);if(s.activeEncounter&&!s.activeEncounter.done)s.activeEncounter.heroHp=Math.min(s.activeEncounter.heroHp,s.heroHp);}}
 export const REST_DURATION_MS=5*60*1000;
@@ -518,10 +519,11 @@ export function plannedNodes(s,now=Date.now()){
 }
 export function validExpeditionState(s){
  const ex=s.expedition,cd=s.instanceCooldowns;
+ if(s.stopAfterDungeon!==undefined&&typeof s.stopAfterDungeon!=='boolean')return false;
  if(s.dungeonRun?.carry!==undefined&&(!validDungeonCarry(s.dungeonRun.carry,SKILLS)||s.dungeonRun.stage===1||s.activeEncounter))return false;
  if(cd!==undefined&&(!cd||typeof cd!=='object'||Array.isArray(cd)||!Object.entries(cd).every(([id,t])=>Object.hasOwn(PLANNED_INSTANCES,id)&&INSTANCES[id].kind!=='field'&&Number.isFinite(t)&&t>=0&&t<=1e15+1800000)))return false;
  if(s.dungeonRun!==undefined&&s.dungeonRun!==null&&(!s.dungeonRun||PLANNED_INSTANCES[s.dungeonRun.instanceId]?.kind!=='dungeon'||typeof s.dungeonRun.runId!=='string'||s.dungeonRun.runId.length>160||!Number.isInteger(s.dungeonRun.stage)||s.dungeonRun.stage<1||s.dungeonRun.stage>3))return false;
- if(ex!==undefined&&(!ex||typeof ex!=='object'||!['field','dungeon'].includes(ex.mode)||typeof ex.loop!=='boolean'||PLANNED_INSTANCES[ex.fieldId]?.kind!=='field'||(ex.targetInstanceId!==null&&PLANNED_INSTANCES[ex.targetInstanceId]?.kind!=='dungeon')))return false;
+ if(ex!==undefined&&(!ex||typeof ex!=='object'||!['field','dungeon'].includes(ex.mode)||typeof ex.loop!=='boolean'||['autoDungeon','autoBoss'].some(k=>ex[k]!==undefined&&typeof ex[k]!=='boolean')||PLANNED_INSTANCES[ex.fieldId]?.kind!=='field'||(ex.targetInstanceId!==null&&PLANNED_INSTANCES[ex.targetInstanceId]?.kind!=='dungeon')))return false;
  return Object.values(PLANNED_INSTANCES).some(n=>n.siteId===s.siteId);
 }
 export function normalizeExpedition(s){
@@ -539,7 +541,7 @@ export function nextEncounterRoute(s,now=Date.now()){
 export function configureExpedition(s,config){
  if(s.version!==SCHEMA_VERSION||s.running||(s.activeEncounter&&!s.activeEncounter.rewarded)||s.dungeonRun||!config)return false;
  if(INSTANCES[config.fieldId]?.contentVersion&&!getAreaProgress(s)?.unlocked.includes(AREAS[INSTANCES[config.fieldId].areaId].number))return false;
- const candidate={mode:config.mode,targetInstanceId:config.targetInstanceId??null,fieldId:config.fieldId,loop:config.loop};
+ const candidate={mode:config.mode,targetInstanceId:config.targetInstanceId??null,fieldId:config.fieldId,loop:config.loop,...Object.fromEntries(['autoDungeon','autoBoss'].filter(k=>config[k]!==undefined).map(k=>[k,config[k]]))};
  if(!validExpeditionState({...s,expedition:candidate})||(candidate.mode==='dungeon'&&!INSTANCES[candidate.targetInstanceId]?.enabled))return false;
  if(!normalizeExpedition(s))return false;s.expedition=candidate;return true;
 }
@@ -552,11 +554,18 @@ export function chooseAdventureNode(s,nodeId,{start=true,loop=false,fieldId=null
  if(!node?.enabled||!node.unlocked||!node.budgetReady||(next.restUntil??0)>time||node.readyAt>time)return null;
  const fallback=fieldId??node.fieldId,field=plannedNodes(next,time).find(x=>x.id===fallback);
  if(!field?.enabled||field.kind!=='field'||!field.unlocked||!field.budgetReady)return null;
- const config={mode:node.kind==='dungeon'?'dungeon':'field',targetInstanceId:node.kind==='dungeon'?node.id:null,fieldId:node.kind==='field'?node.id:fallback,loop:node.kind==='dungeon'?loop:false};
+ const config={mode:node.kind==='dungeon'?'dungeon':'field',targetInstanceId:node.kind==='dungeon'?node.id:null,fieldId:node.kind==='field'?node.id:fallback,loop:node.kind==='dungeon'?loop:false,...Object.fromEntries(['autoDungeon','autoBoss'].filter(k=>next.expedition[k]!==undefined).map(k=>[k,next.expedition[k]]))};
  if(!configureExpedition(next,config))return null;
  let encounter=null;if(start){encounter=startInstanceEncounter(next,node.id,now);if(!encounter)return null;}
  if(!validSave(next))return null;
  for(const key of Object.keys(s))if(!Object.hasOwn(next,key))delete s[key];Object.assign(s,next);return {ok:true,nodeId,started:!!encounter,encounter:s.activeEncounter??null};
+}
+export function setExpeditionAutomation(s,kind,enabled){
+ if(!['dungeon','boss'].includes(kind)||typeof enabled!=='boolean'||!normalizeExpedition(s))return false;
+ s.expedition[kind==='boss'?'autoBoss':'autoDungeon']=enabled;
+ // The new checkbox owns ordinary-repeat behavior once explicitly changed.
+ if(kind==='dungeon')s.expedition.loop=enabled;
+ return true;
 }
 export function setExpeditionLoop(s,enabled){
  if(typeof enabled!=='boolean'||!normalizeExpedition(s))return false;
@@ -669,7 +678,7 @@ function startDwarfEncounter(s,instance,now){
   if(s.dungeonRun.carry){applyDungeonPlayerState(e,s.dungeonRun.carry);delete s.dungeonRun.carry;}
   s.expedition={...s.expedition,mode:'dungeon',targetInstanceId:instance.id};
  }
- if(instance.kind==='field'&&s.expedition.mode!=='dungeon')s.expedition={mode:'field',targetInstanceId:null,fieldId:instance.id,loop:false};
+ if(instance.kind==='field'&&s.expedition.mode!=='dungeon')s.expedition={...s.expedition,mode:'field',targetInstanceId:null,fieldId:instance.id,loop:false};
  if(instance.kind==='dungeon'&&!INSTANCES[s.expedition.fieldId]?.contentVersion)s.expedition.fieldId=area.id+'.field';
  if(s.skillTree?.mode==='active')e.skillResolver='tree-v1';initializeEncounterAffixes(e,st);if(s.equipmentShieldCarry){e.playerShieldLayers=structuredClone(s.equipmentShieldCarry);delete s.equipmentShieldCarry;}if(treeCarry&&!restoreDungeonSkillShieldLayers(e,treeCarry))return null;
  // Each fresh field encounter starts a new skill clock. Preserve carried shield
@@ -722,15 +731,15 @@ function rewardDwarf(s,e,now){
   if(e.boss){const area=AREAS[e.areaId],receipt=prepareLegendaryDrop({settlementId:e.id,nodeId:e.instanceId,regionRace:area?.race,kind:e.kind,won:true},{probability:legendaryPoolProbability(e.luck??0),random:Math.random,generateItem:({legendaryId})=>{const lv=rollDropEquipmentLevel(areaGearLevel(e.instanceId),area.levelRange);return legendaryItem(legendaryId,lv.level,{...lv,luck:e.luck??0});},validateItem:it=>validEquipment(it)});if(receipt){e.legendaryDropReceipt=receipt;if(receipt.item){const accepted=receiveBattleLoot(s,{kind:'equipment',item:structuredClone(receipt.item)},e.lootSummary);e.rewardNotes.push(accepted?'传说 · '+receipt.item.name:'传说未收取 · '+receipt.item.name);}}}
   const markChance=e.boss?.08:clear?(clearRewards?.markChance??.02):0;
   if(markChance>0&&Math.random()<lootOccurrenceProbability(markChance,e.luck??0)&&receiveBattleLoot(s,{kind:'consumable',key:'reforgeToken',quantity:1},e.lootSummary))e.rewardNotes.push('重铸印记 ×1');
-  if(e.boss){s.instanceCooldowns[e.instanceId]=Math.max(now,s.lastHealthClock??0)+1800000;s.running=false;}
+  if(e.boss){s.instanceCooldowns[e.instanceId]=Math.max(now,s.lastHealthClock??0)+1800000;s.running=!!s.expedition.autoBoss;}
   else if(e.kind==='dungeon'){
-   if(clear){recordDungeonAreaClear(s,e);s.instanceCooldowns[e.instanceId]=Math.max(now,s.lastHealthClock??0)+300000;s.dungeonRun=null;e.rewardNotes.push('普通副本通关 · 冷却5分钟');if(!s.expedition.loop)s.running=false;}
+   if(clear){recordDungeonAreaClear(s,e);s.instanceCooldowns[e.instanceId]=Math.max(now,s.lastHealthClock??0)+300000;s.dungeonRun=null;e.rewardNotes.push('普通副本通关 · 冷却5分钟');if(!s.expedition.loop&&!s.expedition.autoDungeon&&!s.expedition.autoBoss)s.running=false;}
    else{run.carry=captureDungeonPlayerState(e);run.stage++;e.rewardNotes.push('副本进度 '+e.dungeonStage+'/3');}
   }
   for(const row of e.materialLoot)e.rewardNotes.push(MATERIAL_QUALITIES[row.quality]+' '+(MATERIALS[row.material]?.name??row.material)+' ×'+row.count);
   for(const action of ['discarded','overflow'])if(Object.values(e.lootSummary[action]).some(Boolean))e.rewardNotes.push((action==='discarded'?'品质过滤丢弃':'背包已满')+'：'+JSON.stringify(e.lootSummary[action]));
   if(e.playerShieldLayers)s.equipmentShieldCarry={version:1,clock:e.playerShieldLayers.clock,layers:e.playerShieldLayers.layers.filter(layer=>layer.ownerItemId&&layer.source==='reactor:'+layer.ownerItemId).map(layer=>structuredClone(layer))};
-  s.nextBattleAt=Math.max(now,s.lastHealthClock??0)+1800;s.nextActionAt=s.nextBattleAt;if(s.stopAfterBattle){s.running=false;s.stopAfterBattle=false;}s.activeEncounter=null;return first;
+  s.nextBattleAt=Math.max(now,s.lastHealthClock??0)+1800;s.nextActionAt=s.nextBattleAt;if(s.stopAfterBattle||(s.stopAfterDungeon&&!s.dungeonRun)){s.running=false;s.stopAfterBattle=false;s.stopAfterDungeon=false;}s.activeEncounter=null;return first;
  });
 }
 function rewardMulti(s,e,now){
@@ -776,7 +785,7 @@ function stepImpl(s,e,now=Date.now(),treeSkills=null){
  if(!e.heroBurn)e.heroBurnPower=0;
  if(!e.barrier)e.barrierShield=0;
  if(e.multiVersion===1){e.lastCombatEventAt=eventAt;if(basicOnly)e.basicMicroElapsed=combatDeltaMs;else {delete e.basicMicroElapsed;e.nextRegularAt=eventAt+1100;}s.nextActionAt=Math.min(e.nextRegularAt??eventAt+1100,e.pendingBasicAt??Infinity);}else s.nextActionAt=eventAt+1100;if(drank)logs.unshift('自动饮用 · '+POTIONS[parsePotionKey(s.potionSlot.key).type].name);s.heroHp=Math.max(0,Math.min(stats(s).hp,e.heroHp));
- if(s.heroHp<=0){const resume=!e.developmentFixture&&!!s.running&&!e.boss&&!s.stopAfterBattle&&(e.kind!=='dungeon'||!!s.expedition?.loop);startRest(s,now,resume);s.stopAfterBattle=false;}return logs;
+ if(s.heroHp<=0){const resume=!e.developmentFixture&&!!s.running&&(!e.boss||!!s.expedition?.autoBoss)&&!s.stopAfterBattle&&!s.stopAfterDungeon&&(e.kind!=='dungeon'||!!s.expedition?.loop||!!s.expedition?.autoDungeon||!!s.expedition?.autoBoss);startRest(s,now,resume);s.stopAfterBattle=false;s.stopAfterDungeon=false;}return logs;
 }
 function selectedTreeRules(s,parameters=TREE_TUNING){
  const p=s.skillTree?.presets?.[s.skillTree.selectedPreset];if(!p)return null;

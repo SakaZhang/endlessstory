@@ -27,12 +27,20 @@ export function instanceCooldownMs(instance){
  const kind=typeof instance==='string'?INSTANCES[instance]?.kind:instance?.kind;
  return kind==='dungeon'?300000:kind==='boss'?1800000:0;
 }
-// Pure routing policy: never returns a boss, and never starts combat or heals.
+// Pure routing policy. Optional current-area automation never interrupts an active encounter.
 // registry argument supports testing confirmed rules against synthetic content.
 export function pickRoute(expedition,cooldowns,now,registry=INSTANCES){
  if(!expedition||!Number.isFinite(now)||now<0)return null;
  const field=registry[expedition.fieldId];
  if(!field?.enabled||field.kind!=='field')return null;
+ if(expedition.autoBoss===true||expedition.autoDungeon===true){
+  for(const kind of ['boss','dungeon']){
+   if(!(kind==='boss'?expedition.autoBoss:expedition.autoDungeon))continue;
+   const target=Object.values(registry).find(n=>n.enabled&&n.areaId===field.areaId&&n.kind===kind);
+   if(target&&now>=(cooldowns?.[target.id]??0))return target;
+  }
+  return field;
+ }
  if(expedition.mode==='dungeon'){
   const target=registry[expedition.targetInstanceId];
   if(target?.enabled&&target.kind==='dungeon'){
