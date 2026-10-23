@@ -334,7 +334,7 @@ export function applyLoadout(s,index,battleActive=false){
 }
 export function fresh(){
  const inventory=SOCKETS.map(socket=>{let type=SOCKET_TYPE[socket],it=item(type,1,null,0,{levelSource:'starter'});it.affixes=[];return it;});
- const s={version:SCHEMA_VERSION,race:'dwarf',hero:'布洛克',level:1,xp:0,gold:100,location:0,siteId:'dwarf.a01',expedition:{mode:'field',fieldId:'dwarf.a01.field',targetInstanceId:null,loop:false},build:'custom',inventory,equip:Object.fromEntries(SOCKETS.map((socket,i)=>[socket,inventory[i].id])),skills:[null,null,null,null],conditions:['always','always','always','always'],materialStacks:{'铁屑|0':5,'炉火晶|0':2,'誓约残片|0':1},offlineLuck:0,talents:Object.fromEntries(Object.keys(TALENTS).map(k=>[k,0])),consumables:{memoryFruit:0,refundCredits:0,reforgeToken:0},potionSlot:{key:null,auto:false,priority:'low',priorityVersion:1},kills:0,normalWins:[0,0,0],bossWins:[0,0,0],bossReady:[0,0,0],stock:3,loadouts:[null,null,null],chapters:[],chronicle:['灰冠历317年：你带着旧炉装备，离开黑炉堡寻找失踪商队。'],momentum:0,lastSeen:Date.now(),running:false};
+ const s={version:SCHEMA_VERSION,race:'dwarf',hero:'布洛克',atCamp:true,level:1,xp:0,gold:100,location:0,siteId:'dwarf.a01',expedition:{mode:'field',fieldId:'dwarf.a01.field',targetInstanceId:null,loop:false},build:'custom',inventory,equip:Object.fromEntries(SOCKETS.map((socket,i)=>[socket,inventory[i].id])),skills:[null,null,null,null],conditions:['always','always','always','always'],materialStacks:{'铁屑|0':5,'炉火晶|0':2,'誓约残片|0':1},offlineLuck:0,talents:Object.fromEntries(Object.keys(TALENTS).map(k=>[k,0])),consumables:{memoryFruit:0,refundCredits:0,reforgeToken:0},potionSlot:{key:null,auto:false,priority:'low',priorityVersion:1},kills:0,normalWins:[0,0,0],bossWins:[0,0,0],bossReady:[0,0,0],stock:3,loadouts:[null,null,null],chapters:[],chronicle:['灰冠历317年：你带着旧炉装备，离开黑炉堡寻找失踪商队。'],momentum:0,lastSeen:Date.now(),running:false};
  normalizeSkillTree(s,SKILL_TREE_DEFINITION);s.skillTree.mode='active';
  return s;
 }
@@ -619,7 +619,7 @@ export function settleRest(s,now=Date.now()){
 export function startRest(s,now=Date.now(),resume=false){
  if(!normalizeHealth(s,now))return false;
  if(s.restUntil>0)return false;
- s.restUntil=s.lastHealthClock+REST_DURATION_MS;s.activeEncounter=null;s.dungeonRun=null;s.restResume=!!resume;s.running=!!resume;s.nextActionAt=s.restUntil;return true;
+ s.atCamp=true;s.restUntil=s.lastHealthClock+REST_DURATION_MS;s.activeEncounter=null;s.dungeonRun=null;s.restResume=!!resume;s.running=!!resume;s.nextActionAt=s.restUntil;return true;
 }
 export function canStartEncounter(s,now=Date.now()){
  if(!normalizeHealth(s,now))return false;settleRest(s,now);
@@ -675,7 +675,7 @@ function startDwarfEncounter(s,instance,now){
  // Each fresh field encounter starts a new skill clock. Preserve carried shield
  // lifetime, not its previous encounter's absolute clock origin.
  if(e.skillResolver==='tree-v1'&&e.playerShieldLayers){const clock=e.treeEffects?.clock??e.treeCombatClock??0,offset=clock-e.playerShieldLayers.clock;e.playerShieldLayers={...e.playerShieldLayers,clock,layers:e.playerShieldLayers.layers.map(l=>({...l,expiresAt:l.expiresAt===null?null:l.expiresAt+offset}))};}
- e.targetId=e.enemies[0].id;syncMultiTarget(e);s.location=e.location;s.siteId=instance.siteId;s.activeEncounter=e;s.running=true;s.nextActionAt=s.lastHealthClock+1100;recordEncounteredMonsters(s,e);recordNodeExplored(s,e);return e;
+ e.targetId=e.enemies[0].id;syncMultiTarget(e);s.location=e.location;s.siteId=instance.siteId;s.activeEncounter=e;s.atCamp=false;s.running=true;s.nextActionAt=s.lastHealthClock+1100;recordEncounteredMonsters(s,e);recordNodeExplored(s,e);return e;
 }
 // Explicit developer entry: callers isolate the supplied save; no production random trigger.
 export function startDeveloperGroup(s,options={},now=Date.now()){
@@ -686,7 +686,7 @@ export function startDeveloperGroup(s,options={},now=Date.now()){
  const e={location:s.location,siteId:site.id,areaId:site.areaId,instanceId:instance.id,kind:'field',luck:st.luck,boss:false,heroHp:s.heroHp,round:0,warcry:0,ironcoat:0,barrier:0,barrierShield:0,heroBurn:0,heroBurnPower:0,weakness:0,guard:0,cd:{},shelterUsed:false,shield:0,done:false,rewarded:false,killSource:null,multiVersion:1,developmentFixture:true,id,rngState:seed,rngDraws:0,itemSerial:0,summonSerial:0,activeCastCount:0,enemies:[]};
  initializeEncounterAffixes(e,st);
  for(let i=0;i<count;i++){const u=normalizeEncounterElements(makeMultiUnit(id+'-enemy-'+i,s.location,instance.id,l,s.lastHealthClock,profiles[i]??{}));u.main=i===0;e.enemies.push(u);}
- e.targetId=e.enemies[0].id;syncMultiTarget(e);s.activeEncounter=e;s.running=true;s.nextActionAt=s.lastHealthClock+1100;return e;
+ e.targetId=e.enemies[0].id;syncMultiTarget(e);s.activeEncounter=e;s.atCamp=false;s.running=true;s.nextActionAt=s.lastHealthClock+1100;return e;
 }
 export function setMultiPaused(s,paused,now=Date.now()){return pauseMulti(s,paused,now);}
 export function setCombatTarget(s,id){return s.activeEncounter?.multiVersion===1?selectMultiTarget(s.activeEncounter,id):false;}
@@ -1035,6 +1035,7 @@ export function validSave(s){
  if(s.supportGrantEligible!==undefined||s.testGrants!==undefined||s.bonusTalentPoints!==undefined||s.skillRulesVersion!==undefined||s.skillAccess!==undefined)return false;
  if(s.developmentEquipmentSandbox!==undefined&&s.developmentEquipmentSandbox!==true)return false;
  if(s.version!==SCHEMA_VERSION||s.race!=='dwarf'||s.hero!=='布洛克'||!Number.isInteger(s.level)||s.level<1||s.level>=100000||!num(s.xp)||!num(s.gold)||!Number.isInteger(s.location)||s.location<0||!(Object.values(PLANNED_INSTANCES).some(x=>AREAS[x.areaId].number-1===s.location&&s.siteId===x.siteId)))return false;
+ if(s.atCamp!==undefined&&typeof s.atCamp!=='boolean')return false;
  if(s.activeEncounter?.pauseAt!==undefined&&s.running)return false;
  if(s.activeEncounter?.kind==='dungeon'&&(!s.dungeonRun||s.activeEncounter.runId!==s.dungeonRun.runId||s.activeEncounter.dungeonStage!==s.dungeonRun.stage))return false;
  if(s.contentMigration!==undefined)return false;

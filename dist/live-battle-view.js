@@ -28,6 +28,9 @@ export function drawLiveHeroPortrait(canvas,state,{manifest,images,time=0}={}){
 export const LIVE_MONSTER_SPRITES=Object.freeze({'dwarf.a01.normal.1':'raider','dwarf.a01.normal.2':'pit-rat','dwarf.a01.normal.3':'golem','dwarf.a01.elite':'shield-captain'});
 const identity=u=>u.monsterId??u.definitionId??null;
 const areaOf=(s,e)=>e?.areaId??e?.instanceId??s?.siteId??'';
+export const RACIAL_CAMPS=Object.freeze({dwarf:'黑炉营地',human:'边境营地',elf:'林间营地',goblin:'拾荒者营地',ashen:'余烬营地'});
+export function liveCampRace(state){if(state?.atCamp!==true&&!(state?.restUntil>0))return null;const territory=String(state.siteId??'').split('.')[0];return Object.hasOwn(RACIAL_CAMPS,territory)?territory:Object.hasOwn(RACIAL_CAMPS,state.race)?state.race:'dwarf';}
+export function liveSceneBackgrounds(snapshot,manifest){if(snapshot?.campRace){const row=manifest?.campBackgrounds?.[snapshot.campRace];return row?[row]:[];}return liveAreaBackgrounds(snapshot?.areaId,manifest);}
 const areaKey=id=>String(id).match(/^dwarf\.a(?:0[1-9]|10)(?=\.|$)/)?.[0]??null;
 export function liveActorSprite(unit,manifest){
  const variant=[...(manifest?.actorVariants??[])].sort((a,b)=>(b.priority??0)-(a.priority??0)).find(row=>row.match&&Object.entries(row.match).every(([key,value])=>(key==='definitionId'?(unit.definitionId??unit.monsterId):unit[key])===value));
@@ -62,11 +65,11 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
   const base={mode:'fallback',reason:null,label:'像素画面暂不可用',missingIds:[],coverage:[]};
   if(disposed)return {...base,reason:'disposed',label:'像素画面已释放'};
   if(!snapshot)return {...base,mode:'idle',reason:'no-encounter',label:'等待战斗'};
-  if(!areaKey(snapshot.areaId))return {...base,reason:'area-not-covered',label:'当前区域尚未接入像素背景'};
+  if(!snapshot.campRace&&!areaKey(snapshot.areaId))return {...base,reason:'area-not-covered',label:'当前区域尚未接入像素背景'};
 
   if(loadError)return {...base,reason:'asset-load-failed',label:'像素素材加载失败 · 请重试',error:loadError};
   if(!manifest)return {...base,reason:'assets-not-loaded',label:'像素外观准备中'};
-  const backgrounds=liveAreaBackgrounds(snapshot.areaId,manifest);if(!backgrounds.length)return {...base,reason:'area-not-covered',label:'当前区域尚未接入像素背景'};
+  const backgrounds=liveSceneBackgrounds(snapshot,manifest);if(!backgrounds.length)return {...base,reason:'area-not-covered',label:'当前区域尚未接入像素背景'};
   const rows=snapshot.encounter.enemies.map(u=>({unitId:u.id,monsterId:identity(u),follower:!!u.follower,sprite:liveActorSprite(u,manifest)}));
   const missing=rows.filter(r=>!r.sprite||!manifest.sprites?.[r.sprite]);
   if(missing.length)return {...base,reason:'monster-not-covered',label:'当前怪物尚未全部覆盖像素外观',missingIds:missing.map(r=>r.monsterId??r.unitId),coverage:rows};
@@ -75,13 +78,13 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
   const sprites=[heroSprite,...new Set(rows.map(r=>r.sprite))];
   const files=[...backgrounds,...sprites.flatMap(key=>manifest.sprites?.[key]?.frames??[])];
   if(sprites.some(key=>!manifest.sprites?.[key]?.animations?.idle?.length)||files.some(f=>!images.get(f.file)))return {...base,reason:'asset-frames-missing',label:'像素帧尚未完整加载',coverage:rows};
-  return {...base,mode:'ready',reason:null,label:snapshot.idle?'像素营地待机':'实时像素战斗',heroAppearance:heroSprite==='hero-neutral'?'neutral-idle':'equipped-weapon',heroAppearanceNote:heroSprite==='hero-neutral'?'中立待机外观 · 当前武器外观未覆盖':'',backgroundIds:backgrounds.map(bg=>bg.id),coverage:rows};
+  return {...base,mode:'ready',reason:null,label:snapshot.campRace?RACIAL_CAMPS[snapshot.campRace]:snapshot.idle?'野外待机':'实时像素战斗',campRace:snapshot.campRace,heroAppearance:heroSprite==='hero-neutral'?'neutral-idle':'equipped-weapon',heroAppearanceNote:heroSprite==='hero-neutral'?'中立待机外观 · 当前武器外观未覆盖':'',backgroundIds:backgrounds.map(bg=>bg.id),coverage:rows};
  };
  function rebuildPositions(){
   const units=snapshot.encounter.enemies;for(const u of units)if(!slots.has(u.id))slots.set(u.id,slots.size);
   const layout=units.length<=1?[350]:units.length===2?[305,405]:[275,350,425];
-  const baseline=manifest?.areaBaselines?.[areaKey(snapshot.areaId)]??203;
-  positions.hero={x:100,y:baseline,sprite:heroSpriteFor(metadata.hero?.weaponType,manifest)};
+  const baseline=snapshot.campRace?(manifest?.campBackgrounds?.[snapshot.campRace]?.baseline??195):manifest?.areaBaselines?.[areaKey(snapshot.areaId)]??203;
+  positions.hero={x:snapshot.campRace?144:100,y:baseline,sprite:heroSpriteFor(metadata.hero?.weaponType,manifest)};
   for(const u of units){const n=slots.get(u.id),row=Math.floor(n/3);positions[u.id]={x:positions[u.id]?.x??layout[n%3]??425,y:baseline-row*51,sprite:liveActorSprite(u,manifest)};}
   for(const id of Object.keys(positions))if(id!=='hero'&&!units.some(u=>u.id===id))delete positions[id];
  }
@@ -89,7 +92,7 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
   if(disposed)return false;if(manifest&&providedImages)return coverage().reason!=='asset-frames-missing';if(loadPromise)return loadPromise;
   if(typeof globalThis.fetch!=='function'||typeof globalThis.Image!=='function'){loadError='Image/fetch unavailable';return false;}
   loading=true;loadError=null;loadPromise=(async()=>{try{if(!manifest){const response=await fetch(assetRoot+'manifest.json');if(!response.ok)throw Error('Manifest HTTP '+response.status);manifest=await response.json();}
-   const files=[...new Set([...(manifest.backgrounds??[]),...Object.values(manifest.sprites??{}).flatMap(s=>s.frames??[])].map(f=>f.file))];
+   const files=[...new Set([...(manifest.backgrounds??[]),...Object.values(manifest.campBackgrounds??{}),...Object.values(manifest.sprites??{}).flatMap(s=>s.frames??[])].map(f=>f.file))];
    // Unrelated area failures cannot invalidate already usable current-area assets.
    await Promise.allSettled(files.map(async file=>{if(images.has(file))return;const img=new Image();img.src=assetRoot+file;await img.decode();if(!disposed)images.set(file,img);}));if(snapshot)rebuildPositions();return !disposed&&(!snapshot||coverage().mode==='ready');
   }catch(error){loadError=String(error?.message??error);return false;}finally{loading=false;loadPromise=null;}})();return loadPromise;
@@ -101,10 +104,11 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
   battleId=encounter?.id??null;paused=newPaused;visible=newVisible;displayTime=Number.isFinite(options.presentationTime)?options.presentationTime:displayTime;
   if(!state){snapshot=null;return coverage();}
   heroMaxHp=stats(structuredClone(state)).hp;
-  const idle=!encounter||!Array.isArray(encounter.enemies);
+  const campRace=liveCampRace(state);
+  const idle=!!campRace||!encounter||!Array.isArray(encounter.enemies);
   const displayEncounter=idle?{heroHp:state.heroHp??heroMaxHp,enemies:[],areaId:areaOf(state,null),targetId:null}:encounter;
   // Detached snapshots guarantee later game mutations cannot race a presentation frame.
-  snapshot={idle,encounter:{...structuredClone(displayEncounter),heroHp:idle||encounter.done?state.heroHp??heroMaxHp:displayEncounter.heroHp},areaId:areaOf(state,displayEncounter),units:idle?[]:normalizeBattleEnemies(encounter,now),gameNow:now};
+  snapshot={idle,campRace,encounter:{...structuredClone(displayEncounter),heroHp:idle||encounter.done?state.heroHp??heroMaxHp:displayEncounter.heroHp},areaId:areaOf(state,displayEncounter),units:idle?[]:normalizeBattleEnemies(encounter,now),gameNow:now};
   heroMaxHp=stats(structuredClone(state)).hp;Object.assign(metadata,{hero:{weaponType:liveHeroWeaponType(state)}});rebuildPositions();return coverage();
  }
  function enqueue(events,at){
@@ -117,12 +121,12 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
   if(typeof time==='object')time=time.time??displayTime;
   if(disposed||!visible)return false;
   const heroUnavailable=coverage().reason==='hero-weapon-not-covered';
-  if(!snapshot||coverage().mode!=='ready'&&!heroUnavailable){drawPixelNotice(canvas,coverage().label);if(snapshot&&manifest){const bgs=liveAreaBackgrounds(snapshot.areaId,manifest);if(bgs.length&&bgs.every(bg=>images.has(bg.file))){const c=canvas.getContext('2d');for(const bg of bgs)c.drawImage(images.get(bg.file),0,0);c.fillStyle='#102030ee';c.fillRect(50,112,380,46);c.fillStyle='#e7cb8d';c.font='12px sans-serif';c.textAlign='center';c.fillText(coverage().label,240,139,350);}}return true;}
+  if(!snapshot||coverage().mode!=='ready'&&!heroUnavailable){drawPixelNotice(canvas,coverage().label);if(snapshot&&manifest){const bgs=liveSceneBackgrounds(snapshot,manifest);if(bgs.length&&bgs.every(bg=>images.has(bg.file))){const c=canvas.getContext('2d');for(const bg of bgs)c.drawImage(images.get(bg.file),0,0);c.fillStyle='#102030ee';c.fillRect(50,112,380,46);c.fillStyle='#e7cb8d';c.font='12px sans-serif';c.textAlign='center';c.fillText(coverage().label,240,139,350);}}return true;}
   try{if(canvas.width!==480)canvas.width=480;if(canvas.height!==270)canvas.height=270;
    displayTime=Number.isFinite(time)?time:displayTime;presentation.advance(displayTime);const animations=liveLivingAnimations(snapshot.encounter,presentation.animations);if(positions.hero?.sprite==='hero-neutral'){animations.delete('hero');animations.skillEffects=(animations.skillEffects??[]).filter(effect=>effect.sourceId!=='hero');}
    const drawPositions=heroUnavailable?Object.fromEntries(Object.entries(positions).filter(([id])=>id!=='hero')):positions;
    const actorFrames={};for(const u of [{id:'hero',hp:snapshot.encounter.heroHp},...snapshot.encounter.enemies]){if(u.hp>0||!drawPositions[u.id])continue;const sprite=manifest.sprites[positions[u.id].sprite],frames=sprite.animations.death;if(frames?.length){const start=deathStarts.get(u.id);actorFrames[u.id]=start===undefined?frames.at(-1):displayTime<start?sprite.animations.idle[0]:frames[Math.min(frames.length-1,Math.floor((displayTime-start)/110))];}}
-   drawBattleSliceCanvas(canvas,{manifest:{...manifest,backgrounds:liveAreaBackgrounds(snapshot.areaId,manifest)},images,actorFrames,encounter:{...snapshot.encounter,enemies:snapshot.encounter.enemies.map(u=>({...u,max:0}))},positions:drawPositions,animations,time:displayTime,floats:presentation.floats,heroMaxHp:0});
+   drawBattleSliceCanvas(canvas,{manifest:{...manifest,areaBackgrounds:undefined,backgrounds:liveSceneBackgrounds(snapshot,manifest)},images,actorFrames,encounter:{...snapshot.encounter,enemies:snapshot.encounter.enemies.map(u=>({...u,max:0}))},positions:drawPositions,animations,time:displayTime,floats:presentation.floats,heroMaxHp:0});
    const c=canvas.getContext('2d');const bars=liveBattleBars(snapshot.encounter,drawPositions,animations,displayTime,{heroMaxHp,manifest});drawBattleSliceBars(c,bars);if(heroUnavailable||positions.hero?.sprite==='hero-neutral'&&(metadata.hero?.weaponType||snapshot.encounter.heroHp<=0)){c.fillStyle='#142334ee';c.fillRect(20,210,160,26);c.fillStyle='#e7cb8d';c.font='12px sans-serif';c.textAlign='center';c.fillText(heroUnavailable?'角色外观暂不可用':snapshot.encounter.heroHp<=0?'已倒下 · 中立外观':'中立待机 · 未覆盖武器外观',100,227);}const target=snapshot.encounter.targetId;
    for(const u of snapshot.units){const p=positions[u.id];if(!p||u.hp<=0)continue;const x=presentationActorX(p,animations.get(u.id),displayTime);if(u.id===target){c.fillStyle='#e4c587';c.fillRect(Math.round(x-14),p.y+5,28,2);c.fillRect(Math.round(x-17),p.y+2,3,5);c.fillRect(Math.round(x+14),p.y+2,3,5);const top=(bars.find(b=>b.id===u.id)?.y??p.y-70)-4;c.fillRect(Math.round(x-35),top,8,2);c.fillRect(Math.round(x-35),top,2,8);c.fillRect(Math.round(x+27),top,8,2);c.fillRect(Math.round(x+33),top,2,8);}
     const effects=readEnemyEffectRows(snapshot.encounter,u.id),baseY=(bars.find(b=>b.id===u.id)?.y??p.y-80)-9;

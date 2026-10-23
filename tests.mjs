@@ -164,4 +164,7 @@ runAffixSourceTest(process.execPath,[new URL('./consumable-pixel-art-tests.mjs',
 // v0.56 reuse exact battle idle artwork in codex/source/unit portraits.
 runAffixSourceTest(process.execPath,[new URL('./monster-pixel-portrait-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
 
-import './battle-feedback-regression-tests.mjs';
+// Isolate actual combat fixtures from older suites' provider overrides.
+runAffixSourceTest(process.execPath,[new URL('./battle-feedback-regression-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+// Camp scenes are real persisted location transitions, not a field skin.
+runAffixSourceTest(process.execPath,[new URL('./racial-camp-scenes-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});

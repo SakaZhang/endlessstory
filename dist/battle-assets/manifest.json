@@ -10889,5 +10889,32 @@
     "dwarf.a09": 220,
     "dwarf.a10": 193
   },
-  "heroNeutralSprite": "hero-neutral"
+  "heroNeutralSprite": "hero-neutral",
+  "campBackgrounds": {
+    "human": {
+      "id": "camp-human",
+      "file": "backgrounds/camp-human.png",
+      "baseline": 200
+    },
+    "dwarf": {
+      "id": "camp-dwarf",
+      "file": "backgrounds/camp-dwarf.png",
+      "baseline": 185
+    },
+    "elf": {
+      "id": "camp-elf",
+      "file": "backgrounds/camp-elf.png",
+      "baseline": 190
+    },
+    "goblin": {
+      "id": "camp-goblin",
+      "file": "backgrounds/camp-goblin.png",
+      "baseline": 190
+    },
+    "ashen": {
+      "id": "camp-ashen",
+      "file": "backgrounds/camp-ashen.png",
+      "baseline": 195
+    }
+  }
 }
