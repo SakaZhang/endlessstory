@@ -107,3 +107,6 @@ for(const file of ['region-navigation-state-tests.mjs','adjacent-region-tests.mj
 
 // New-tree state, shared production host and migration regressions use isolated realms.
 for(const file of ['skill-tree-state-tests.mjs','skill-tree-preparation-tests.mjs','skill-tree-consumer-tests.mjs','skill-tree-poison-tests.mjs','skill-tree-effects-tests.mjs','skill-tree-effect-host-tests.mjs','skill-tree-poison-host-tests.mjs','skill-tree-combat-schema-tests.mjs','skill-tree-production-host-tests.mjs','skill-tree-attributes-tests.mjs','skill-tree-passives-tests.mjs','skill-tree-passive-host-tests.mjs','skill-tree-selector-tests.mjs','skill-tree-dungeon-carry-tests.mjs','skill-tree-active-integration-tests.mjs','skill-tree-fresh-migration-tests.mjs','skill-tree-healing-compat-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.37 constant racial forge policy and actual transactions use isolated realms.
+for(const file of ['dwarf-forge-favor-tests.mjs','dwarf-forge-production-tests.mjs','dwarf-forge-enhancement-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});

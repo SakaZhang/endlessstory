@@ -9,6 +9,8 @@ import {LEGENDARY_EQUIPMENT_DEFINITIONS,createLegendaryEquipment,validLegendaryE
 import {prepareLegendaryDrop} from './legendary-drop.js';
 import {legendaryPoolProbability} from './luck-policy.js';
 import {ordinarySecondRollProbability,lootOccurrenceProbability,divineProbability} from './luck-policy.js';
+import {combinedFavorableRollChance,dwarfDivineChance,dwarfForgeOccurrenceChance,weightedDonorIndex} from './dwarf-forge-favor.js';
+import {DWARF_FORGE_FAVOR_CONFIG} from './dwarf-forge-favor-config.js';
 import {validEquipmentRuntime,normalizeEquipmentRuntime,applyEquipmentRuntimeChange} from './equipment-runtime.js';
 export {validEquipmentRuntime,normalizeEquipmentRuntime,applyEquipmentRuntimeChange} from './equipment-runtime.js';
 import {makeAffixSourceRange,affixOwnRange,validAffixSource} from './affix-range.js';
@@ -145,7 +147,7 @@ const bases={weapon:{atk:12,armor:1,hp:5},helm:{atk:1,armor:4,hp:18},armor:{atk:
 function weighted(entries){let roll=Math.random()*entries.reduce((n,[,w])=>n+w,0);for(const [key,w] of entries){roll-=w;if(roll<0)return key;}return entries.at(-1)[0];}
 export const ACTIVE_SPECIAL_KEYS=Object.freeze(Object.keys(SPECIALS).filter(k=>SPECIALS[k].enabled!==false));
 const activeSpecialKeys=()=>ACTIVE_SPECIAL_KEYS;
-function rollAffixes(quality,luck=0){const pool=[...ACTIVE_AFFIX_KEYS];const count=quality===0?rand(0,1):quality+1,affixes=[];for(let i=0;i<count;i++){const key=pool.splice(rand(0,pool.length-1),1)[0],sourceRange=makeAffixSourceRange(AFFIX_DEFS[key],quality);affixes.push({stat:key,value:luckyRoll(()=>rand(sourceRange.min,sourceRange.max),luck),sourceRange});}return affixes;}
+function rollAffixes(quality,luck=0,forgeRace=null){const pool=[...ACTIVE_AFFIX_KEYS];const count=quality===0?rand(0,1):quality+1,affixes=[];for(let i=0;i<count;i++){const key=pool.splice(rand(0,pool.length-1),1)[0],sourceRange=makeAffixSourceRange(AFFIX_DEFS[key],quality);affixes.push({stat:key,value:forgeRace===null?luckyRoll(()=>rand(sourceRange.min,sourceRange.max),luck):forgeLuckyRoll(()=>rand(sourceRange.min,sourceRange.max),luck,forgeRace),sourceRange});}return affixes;}
 export function item(slot,level=1,set=null,rarity=0,levelMetadata={}){
  if(!SLOTS.includes(slot))throw new Error('Unsupported item family');
  rarity=clamp(Math.floor(rarity),0,3);level=Math.max(1,Math.floor(level));
@@ -155,8 +157,9 @@ export function item(slot,level=1,set=null,rarity=0,levelMetadata={}){
  const name=(set?BUILD.find(x=>x.id===set).name+'·':'旅铸·')+names[slot];
  const baseLevel=levelMetadata.baseLevel??level,levelSource=levelMetadata.levelSource??'generated';
  if(!validEquipmentLevelMetadata({baseLevel,levelSource}))throw new RangeError('Invalid equipment level provenance');
- const out={id:uid(),slot,set,rarity,level,baseLevel,levelSource,name,atk:0,armor:0,hp:0,affixes:rollAffixes(rarity,levelMetadata.luck??0),special:null,legendaryId:null,locked:false,bless:0};
- if(!set&&rarity>=2&&Math.random()<lootOccurrenceProbability(rarity===2?.1:.2,levelMetadata.luck??0)){out.special={id:activeSpecialKeys()[rand(0,activeSpecialKeys().length-1)]};}
+ const out={id:uid(),slot,set,rarity,level,baseLevel,levelSource,name,atk:0,armor:0,hp:0,affixes:rollAffixes(rarity,levelMetadata.luck??0,levelMetadata.forgeRace??null),special:null,legendaryId:null,locked:false,bless:0};
+ const specialChance=lootOccurrenceProbability(rarity===2?.1:.2,levelMetadata.luck??0);
+ if(!set&&rarity>=2&&Math.random()<(levelMetadata.forgeRace?dwarfForgeOccurrenceChance(specialChance,levelMetadata.forgeRace,DWARF_FORGE_FAVOR_CONFIG):specialChance)){out.special={id:activeSpecialKeys()[rand(0,activeSpecialKeys().length-1)]};}
  let hash=2166136261;for(const ch of out.id){hash^=ch.charCodeAt(0);hash=Math.imul(hash,16777619)>>>0;}
  const template=selectEquipmentTemplate({slot,setId:set,originRace},()=>hash/2**32);const generated=template?applyEquipmentTemplate(out,template.id):out;Object.assign(generated,deriveNewItemBudget({slot,baseVariant:generated.baseVariant,level,quality:rarity}));return generated;
 }
@@ -216,10 +219,10 @@ export function reforge(s,itemId,mode,index=0,donorId){
  if(!validCodexCollection(s))return null;
  if(mode==='all'&&it.divine!==undefined&&!sameReforgeData(it.divine,canonicalReforgeDivine(it)))return null;
  const before=structuredClone(it.affixes),after=structuredClone(before);
- const roll=(stat,original)=>{const sourceRange=original?original.sourceRange:makeAffixSourceRange(AFFIX_DEFS[stat],it.legendaryId?4:it.rarity),range=original?affixOwnRange(original,AFFIX_DEFS):sourceRange;return {stat,value:luckyRoll(()=>rand(range.min,range.max),effectiveLuck(s)),...(sourceRange?{sourceRange:structuredClone(sourceRange)}:{})};};
+ const roll=(stat,original)=>{const sourceRange=original?original.sourceRange:makeAffixSourceRange(AFFIX_DEFS[stat],it.legendaryId?4:it.rarity),range=original?affixOwnRange(original,AFFIX_DEFS):sourceRange;return {stat,value:forgeLuckyRoll(()=>rand(range.min,range.max),effectiveLuck(s),s.race),...(sourceRange?{sourceRange:structuredClone(sourceRange)}:{})};};
  if(mode==='value')after[index]=roll(after[index].stat,after[index]);
  else if(mode==='replace'){
-  const chosen=donor.affixes[rand(0,donor.affixes.length-1)];
+  const chosen=donor.affixes[weightedDonorIndex(donor.affixes,AFFIX_DEFS,s.race,DWARF_FORGE_FAVOR_CONFIG,Math.random())];
   after[index]=structuredClone(chosen);
  }else{
   const pool=[...ACTIVE_AFFIX_KEYS];
@@ -231,7 +234,7 @@ export function reforge(s,itemId,mode,index=0,donorId){
  if(mode==='all'){
   const candidate=structuredClone(it);candidate.affixes=structuredClone(after);candidate.special=structuredClone(newSpecial);
   if(candidate.divine)candidate.divine=canonicalReforgeDivine(candidate);
-  else if(Math.random()<divineProbability(REFORGE_DIVINE_CONFIG.chance,effectiveLuck(s)))applyForgeFavor(candidate);
+  else if(Math.random()<dwarfDivineChance(divineProbability(REFORGE_DIVINE_CONFIG.chance,effectiveLuck(s)),s.race,DWARF_FORGE_FAVOR_CONFIG))applyForgeFavor(candidate);
   divineSnapshot.oldDivine=structuredClone(it.divine??null);divineSnapshot.newDivine=structuredClone(candidate.divine??null);
  }
  // Charge once, then persist the choice without modifying the target.
@@ -884,6 +887,7 @@ export function gainXp(s,n){return applyExperience(s,n);}
 export function enhanceEquipment(s,quote,random=Math.random){const result=attemptEnhancement(s,quote,random);if(result)capHealth(s);return result;}
 export function luckChance(points){return ordinarySecondRollProbability(points)??0;}
 function luckyRoll(draw,points){const first=draw();if(points>0&&Math.random()<luckChance(points))return Math.max(first,draw());return first;}
+function forgeLuckyRoll(draw,points,race){const first=draw(),chance=combinedFavorableRollChance(luckChance(points),race,DWARF_FORGE_FAVOR_CONFIG);if(chance===null)throw new Error('Invalid forge benefit policy');if(chance>0&&Math.random()<chance)return Math.max(first,draw());return first;}
 function rollQuality(weights=[65,28,6.5,.5]){return Number(weighted(weights.map((w,i)=>[i,w])));}
 function rollDrop(s,boss,luck=0,instanceId=resolveLegacySite(s.location).id+'-field',clear=false,lootSummary=emptyLootSummary(),chanceOverride){
  const instance=INSTANCES[instanceId],area=AREAS[instance?.areaId];if(!instance||!area)return null;
@@ -1106,15 +1110,15 @@ export function forge(s,selection){
  const n=selection.length,qualityWeights=gear.length?null:fusionQualityWeights(materials),herbs=parsed.filter(p=>p.material==='灰根草').length;
  if(!gear.length&&herbs&&!validPotions(s))return null;
  if(!gear.length&&herbs&&Math.random()<.35+.5*herbs/n){
-  const quality=luckyRoll(()=>rollQuality(qualityWeights),effectiveLuck(s)),type=weighted([['healing',60],['strength',25],['fireResist',15]]),key=potionKey(type,quality);
+  const quality=forgeLuckyRoll(()=>rollQuality(qualityWeights),effectiveLuck(s),s.race),type=weighted([['healing',60],['strength',25],['fireResist',15]]),key=potionKey(type,quality);
   normalizeMaterials(s);normalizePotions(s);Object.entries(counts).forEach(([key,v])=>s.materialStacks[key]-=v);s.gold-=40;
   const result={kind:'potion',potionType:type,quality,name:POTIONS[type].name,quantity:1,key};
   if(canReceiveItem(s,key))s.potionStacks[key]=(s.potionStacks[key]??0)+1;else s.pendingForgeClaim={kind:'potion',potion:result};return result;
  }
  const originRace=chooseFusionOrigin({heroRace:s.race,equipment:gear});if(originRace===null)return null;
- const weights=fusionWeights(materials),slot=weighted(Object.entries(weights.slots)),quality=gear.some(it=>it.legendaryId)?3:luckyRoll(()=>gear.length?rollEquipmentInputQuality(inputs):rollQuality(qualityWeights),effectiveLuck(s));
+ const weights=fusionWeights(materials),slot=weighted(Object.entries(weights.slots)),quality=gear.some(it=>it.legendaryId)?3:forgeLuckyRoll(()=>gear.length?rollEquipmentInputQuality(inputs):rollQuality(qualityWeights),effectiveLuck(s),s.race);
  const level=gear.length?rollEquipmentFusionLevel(gear):{level:s.level,baseLevel:s.level,levelSource:'material'};
- const it=item(slot,level.level,null,quality,{...level,originRace,luck:effectiveLuck(s)});if(Math.random()<divineProbability(fusionDivineChance(inputs),effectiveLuck(s)))applyForgeFavor(it);
+ const it=item(slot,level.level,null,quality,{...level,originRace,luck:effectiveLuck(s),forgeRace:s.race});if(Math.random()<dwarfDivineChance(divineProbability(fusionDivineChance(inputs),effectiveLuck(s)),s.race,DWARF_FORGE_FAVOR_CONFIG))applyForgeFavor(it);
  // Record actual owned inputs before their one-time consumption.
  if(gear.length)normalizeCodexCollection(s);
  normalizeMaterials(s);Object.entries(counts).forEach(([key,v])=>s.materialStacks[key]-=v);s.inventory=s.inventory.filter(it=>!ids.has(it.id));s.gold-=40;

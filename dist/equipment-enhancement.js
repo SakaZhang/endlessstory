@@ -1,3 +1,5 @@
+import {dwarfEnhancementChance} from './dwarf-forge-favor.js';
+import {DWARF_FORGE_FAVOR_CONFIG} from './dwarf-forge-favor-config.js';
 import {validLegendaryEquipmentMetadata} from './legendary-equipment.js';
 import {CONFIG as FORMAL_BUDGET,enhanceRawBase,enhancementFee} from './equipment-budget.js';
 // Candidate magnitude/cost are explicit developer configuration, never formal defaults.
@@ -33,7 +35,7 @@ export function attemptDeveloperEnhancement(s,quote,random=Math.random){const re
 // Formal enhancement is a paid transaction on the same item, never a reroll preview.
 export const FORMAL_ENHANCEMENT_CONFIG=FORMAL_BUDGET;
 const formalPrepared=new WeakMap();
-function formalFingerprint(s,id){return JSON.stringify({item:s?.inventory?.find(i=>i.id===id),gold:s?.gold,equipped:Object.values(s?.equip??{}).includes(id),running:!!s?.running,active:!!s?.activeEncounter&&!s.activeEncounter.done,pending:s?.pendingReforge?.itemId===id});}
+function formalFingerprint(s,id){return JSON.stringify({race:s?.race,item:s?.inventory?.find(i=>i.id===id),gold:s?.gold,equipped:Object.values(s?.equip??{}).includes(id),running:!!s?.running,active:!!s?.activeEncounter&&!s.activeEncounter.done,pending:s?.pendingReforge?.itemId===id});}
 function formalBase(it,level){try{const base=enhanceRawBase(Object.fromEntries(['atk','armor','hp'].map(k=>[k,it[k]])),level);return Object.values(base).every(number)?base:null;}catch{return null;}}
 export function quoteEnhancement(s,itemId){
  const it=s?.inventory?.find(i=>i.id===itemId),equipped=Object.values(s?.equip??{}).includes(itemId);
@@ -42,7 +44,7 @@ export function quoteEnhancement(s,itemId){
  let gold;try{gold=enhancementFee({level:it.level,quality:it.legendaryId?4:it.rarity,target:level+1});}catch{return bad('invalid-item');}
  if(!Number.isSafeInteger(gold)||gold<1||gold>1e12||!number(s.gold)||s.gold<gold)return bad('insufficient-gold');
  const bases={current:formalBase(it,level),success:formalBase(it,level+1),failure:formalBase(it,Math.max(0,level-1))};if(Object.values(bases).some(x=>!x))return bad('invalid-base');
- return freeze({ok:true,version:2,model:FORMAL_BUDGET.id,itemId,fromLevel:level,targetLevel:level+1,successRate:FORMAL_BUDGET.successRates[level],cost:{gold,materials:[]},bases,stateFingerprint:formalFingerprint(s,itemId)});
+ return freeze({ok:true,version:2,model:FORMAL_BUDGET.id,itemId,fromLevel:level,targetLevel:level+1,baseSuccessRate:FORMAL_BUDGET.successRates[level],successRate:dwarfEnhancementChance(FORMAL_BUDGET.successRates[level],s.race??'legacy',DWARF_FORGE_FAVOR_CONFIG),finalSuccessRate:dwarfEnhancementChance(FORMAL_BUDGET.successRates[level],s.race??'legacy',DWARF_FORGE_FAVOR_CONFIG),cost:{gold,materials:[]},bases,stateFingerprint:formalFingerprint(s,itemId)});
 }
 export function prepareEnhancement(s,quote,random=Math.random){
  if(!quote?.ok||quote.version!==2||typeof random!=='function'||formalFingerprint(s,quote.itemId)!==quote.stateFingerprint)return bad('stale-quote');
