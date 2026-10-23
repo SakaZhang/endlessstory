@@ -122,3 +122,6 @@ for(const file of ['m4-content-tests.mjs','m4-material-tests.mjs','m4-runtime-te
 
 // v0.41 fixed recipes and real buff-expiry parity require isolated production realms.
 for(const file of ['potion-catalog-tests.mjs','potion-expansion-tests.mjs','potion-expiry-parity-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.42 normal battle presentation observes committed live events only.
+for(const file of ['live-combat-events-tests.mjs','live-battle-view-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});

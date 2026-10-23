@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": "2.2-a01-axe-hammer-frozen",
   "provenance": "Original generated raster art via built-in image_gen. User-approved original concept used as visual reference. No third-party game assets. No separate license grant implied.",
   "logicalScene": [
     480,
@@ -39,7 +39,13 @@
             177,
             178
           ],
-          "durationMs": 120
+          "durationMs": 120,
+          "solidBBox": [
+            70,
+            116,
+            162,
+            175
+          ]
         },
         {
           "id": "idle-1",
@@ -60,7 +66,13 @@
             161,
             177
           ],
-          "durationMs": 120
+          "durationMs": 120,
+          "solidBBox": [
+            70,
+            115,
+            158,
+            175
+          ]
         },
         {
           "id": "anticipation",
@@ -81,7 +93,13 @@
             147,
             179
           ],
-          "durationMs": 120
+          "durationMs": 120,
+          "solidBBox": [
+            53,
+            114,
+            123,
+            175
+          ]
         },
         {
           "id": "windup",
@@ -102,7 +120,13 @@
             146,
             177
           ],
-          "durationMs": 120
+          "durationMs": 120,
+          "solidBBox": [
+            65,
+            91,
+            123,
+            175
+          ]
         },
         {
           "id": "strike",
@@ -123,7 +147,13 @@
             177,
             184
           ],
-          "durationMs": 90
+          "durationMs": 90,
+          "solidBBox": [
+            65,
+            117,
+            177,
+            175
+          ]
         },
         {
           "id": "followthrough",
@@ -144,7 +174,13 @@
             163,
             180
           ],
-          "durationMs": 120
+          "durationMs": 120,
+          "solidBBox": [
+            68,
+            118,
+            162,
+            177
+          ]
         },
         {
           "id": "recovery",
@@ -165,7 +201,13 @@
             166,
             183
           ],
-          "durationMs": 120
+          "durationMs": 120,
+          "solidBBox": [
+            70,
+            117,
+            155,
+            175
+          ]
         },
         {
           "id": "hurt",
@@ -186,7 +228,41 @@
             150,
             184
           ],
-          "durationMs": 120
+          "durationMs": 120,
+          "solidBBox": [
+            59,
+            113,
+            140,
+            175
+          ]
+        },
+        {
+          "id": "death",
+          "file": "sprites/dwarf-death.png",
+          "sourceCrop": [
+            450,
+            300,
+            1400,
+            710
+          ],
+          "sourceAnchor": [
+            900,
+            640
+          ],
+          "uniformSourceScale": 0.12,
+          "durationMs": 650,
+          "alphaBBox": [
+            49,
+            141,
+            148,
+            179
+          ],
+          "solidBBox": [
+            49,
+            141,
+            148,
+            179
+          ]
         }
       ],
       "animations": {
@@ -204,8 +280,17 @@
         "hurt": [
           "hurt",
           "idle-0"
+        ],
+        "death": [
+          "death"
         ]
-      }
+      },
+      "headY": 116,
+      "healthBarAnchor": [
+        96,
+        107
+      ],
+      "weaponFamily": "axe"
     },
     "lizard": {
       "frameSize": [
@@ -238,7 +323,13 @@
             138,
             185
           ],
-          "durationMs": 120
+          "durationMs": 120,
+          "solidBBox": [
+            68,
+            129,
+            129,
+            176
+          ]
         },
         {
           "id": "anticipation",
@@ -259,7 +350,13 @@
             148,
             186
           ],
-          "durationMs": 120
+          "durationMs": 120,
+          "solidBBox": [
+            70,
+            140,
+            139,
+            176
+          ]
         },
         {
           "id": "strike",
@@ -280,7 +377,13 @@
             142,
             188
           ],
-          "durationMs": 90
+          "durationMs": 90,
+          "solidBBox": [
+            55,
+            129,
+            136,
+            176
+          ]
         },
         {
           "id": "hurt",
@@ -301,7 +404,13 @@
             132,
             187
           ],
-          "durationMs": 120
+          "durationMs": 120,
+          "solidBBox": [
+            65,
+            132,
+            131,
+            176
+          ]
         }
       ],
       "animations": {
@@ -317,7 +426,12 @@
           "hurt",
           "idle"
         ]
-      }
+      },
+      "headY": 129,
+      "healthBarAnchor": [
+        96,
+        120
+      ]
     },
     "golem": {
       "frameSize": [
@@ -350,7 +464,13 @@
             143,
             181
           ],
-          "durationMs": 120
+          "durationMs": 120,
+          "solidBBox": [
+            37,
+            115,
+            136,
+            175
+          ]
         },
         {
           "id": "anticipation",
@@ -371,7 +491,13 @@
             145,
             184
           ],
-          "durationMs": 120
+          "durationMs": 120,
+          "solidBBox": [
+            48,
+            83,
+            136,
+            175
+          ]
         },
         {
           "id": "strike",
@@ -392,7 +518,13 @@
             130,
             190
           ],
-          "durationMs": 90
+          "durationMs": 90,
+          "solidBBox": [
+            12,
+            117,
+            130,
+            176
+          ]
         },
         {
           "id": "hurt",
@@ -413,7 +545,41 @@
             138,
             191
           ],
-          "durationMs": 120
+          "durationMs": 120,
+          "solidBBox": [
+            37,
+            106,
+            137,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "sprites/golem-death.png",
+          "sourceCrop": [
+            200,
+            350,
+            1330,
+            850
+          ],
+          "sourceAnchor": [
+            850,
+            800
+          ],
+          "uniformSourceScale": 0.11,
+          "durationMs": 650,
+          "alphaBBox": [
+            30,
+            132,
+            142,
+            181
+          ],
+          "solidBBox": [
+            30,
+            133,
+            142,
+            177
+          ]
         }
       ],
       "animations": {
@@ -428,8 +594,868 @@
         "hurt": [
           "hurt",
           "idle"
+        ],
+        "death": [
+          "death"
         ]
-      }
+      },
+      "headY": 115,
+      "healthBarAnchor": [
+        96,
+        106
+      ]
+    },
+    "raider": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.2,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/raider-idle.png",
+          "sourceCrop": [
+            0,
+            0,
+            512,
+            550
+          ],
+          "sourceAnchor": [
+            330,
+            501
+          ],
+          "durationMs": 140,
+          "alphaBBox": [
+            35,
+            104,
+            128,
+            177
+          ],
+          "solidBBox": [
+            44,
+            116,
+            122,
+            176
+          ]
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/raider-anticipation.png",
+          "sourceCrop": [
+            512,
+            0,
+            950,
+            550
+          ],
+          "sourceAnchor": [
+            735,
+            501
+          ],
+          "durationMs": 140,
+          "alphaBBox": [
+            64,
+            86,
+            125,
+            178
+          ],
+          "solidBBox": [
+            67,
+            114,
+            123,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "sprites/raider-strike.png",
+          "sourceCrop": [
+            950,
+            0,
+            1536,
+            550
+          ],
+          "sourceAnchor": [
+            1333,
+            501
+          ],
+          "durationMs": 140,
+          "alphaBBox": [
+            21,
+            109,
+            126,
+            177
+          ],
+          "solidBBox": [
+            22,
+            119,
+            124,
+            176
+          ]
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/raider-recovery.png",
+          "sourceCrop": [
+            0,
+            550,
+            512,
+            1024
+          ],
+          "sourceAnchor": [
+            260,
+            910
+          ],
+          "durationMs": 140,
+          "alphaBBox": [
+            53,
+            108,
+            139,
+            185
+          ],
+          "solidBBox": [
+            66,
+            116,
+            138,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/raider-hurt.png",
+          "sourceCrop": [
+            512,
+            550,
+            950,
+            1024
+          ],
+          "sourceAnchor": [
+            750,
+            910
+          ],
+          "durationMs": 140,
+          "alphaBBox": [
+            49,
+            112,
+            136,
+            188
+          ],
+          "solidBBox": [
+            63,
+            113,
+            129,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "sprites/raider-death.png",
+          "sourceCrop": [
+            950,
+            550,
+            1536,
+            1024
+          ],
+          "sourceAnchor": [
+            1260,
+            920
+          ],
+          "durationMs": 650,
+          "alphaBBox": [
+            44,
+            103,
+            145,
+            178
+          ],
+          "solidBBox": [
+            44,
+            142,
+            142,
+            177
+          ]
+        }
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      },
+      "headY": 116,
+      "healthBarAnchor": [
+        96,
+        107
+      ]
+    },
+    "pit-rat": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.16,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/pit-rat-idle.png",
+          "sourceCrop": [
+            0,
+            0,
+            600,
+            500
+          ],
+          "sourceAnchor": [
+            300,
+            449
+          ],
+          "durationMs": 140,
+          "alphaBBox": [
+            55,
+            105,
+            144,
+            184
+          ],
+          "solidBBox": [
+            57,
+            138,
+            138,
+            176
+          ]
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/pit-rat-anticipation.png",
+          "sourceCrop": [
+            600,
+            0,
+            1190,
+            500
+          ],
+          "sourceAnchor": [
+            900,
+            449
+          ],
+          "durationMs": 140,
+          "alphaBBox": [
+            52,
+            108,
+            142,
+            182
+          ],
+          "solidBBox": [
+            57,
+            144,
+            138,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "sprites/pit-rat-strike.png",
+          "sourceCrop": [
+            1190,
+            0,
+            1774,
+            500
+          ],
+          "sourceAnchor": [
+            1470,
+            449
+          ],
+          "durationMs": 140,
+          "alphaBBox": [
+            52,
+            110,
+            144,
+            182
+          ],
+          "solidBBox": [
+            55,
+            140,
+            142,
+            176
+          ]
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/pit-rat-recovery.png",
+          "sourceCrop": [
+            0,
+            500,
+            600,
+            887
+          ],
+          "sourceAnchor": [
+            300,
+            845
+          ],
+          "durationMs": 140,
+          "alphaBBox": [
+            51,
+            122,
+            144,
+            179
+          ],
+          "solidBBox": [
+            58,
+            143,
+            141,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/pit-rat-hurt.png",
+          "sourceCrop": [
+            600,
+            500,
+            1190,
+            887
+          ],
+          "sourceAnchor": [
+            930,
+            845
+          ],
+          "durationMs": 140,
+          "alphaBBox": [
+            44,
+            121,
+            135,
+            178
+          ],
+          "solidBBox": [
+            58,
+            130,
+            133,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "sprites/pit-rat-death.png",
+          "sourceCrop": [
+            1190,
+            500,
+            1774,
+            887
+          ],
+          "sourceAnchor": [
+            1460,
+            844
+          ],
+          "durationMs": 650,
+          "alphaBBox": [
+            55,
+            121,
+            143,
+            179
+          ],
+          "solidBBox": [
+            57,
+            149,
+            140,
+            176
+          ]
+        }
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      },
+      "headY": 138,
+      "healthBarAnchor": [
+        96,
+        129
+      ]
+    },
+    "shield-captain": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.205,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/shield-captain-idle.png",
+          "sourceCrop": [
+            0,
+            0,
+            512,
+            550
+          ],
+          "sourceAnchor": [
+            270,
+            474
+          ],
+          "durationMs": 140,
+          "alphaBBox": [
+            44,
+            83,
+            140,
+            190
+          ],
+          "solidBBox": [
+            51,
+            111,
+            139,
+            176
+          ]
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/shield-captain-anticipation.png",
+          "sourceCrop": [
+            512,
+            0,
+            980,
+            550
+          ],
+          "sourceAnchor": [
+            730,
+            474
+          ],
+          "durationMs": 140,
+          "alphaBBox": [
+            52,
+            80,
+            139,
+            189
+          ],
+          "solidBBox": [
+            53,
+            109,
+            138,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "sprites/shield-captain-strike.png",
+          "sourceCrop": [
+            980,
+            0,
+            1536,
+            550
+          ],
+          "sourceAnchor": [
+            1280,
+            474
+          ],
+          "durationMs": 140,
+          "alphaBBox": [
+            36,
+            86,
+            144,
+            192
+          ],
+          "solidBBox": [
+            38,
+            116,
+            143,
+            176
+          ]
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/shield-captain-recovery.png",
+          "sourceCrop": [
+            0,
+            550,
+            512,
+            1024
+          ],
+          "sourceAnchor": [
+            250,
+            954
+          ],
+          "durationMs": 140,
+          "alphaBBox": [
+            51,
+            94,
+            141,
+            178
+          ],
+          "solidBBox": [
+            52,
+            110,
+            141,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/shield-captain-hurt.png",
+          "sourceCrop": [
+            512,
+            550,
+            980,
+            1024
+          ],
+          "sourceAnchor": [
+            750,
+            954
+          ],
+          "durationMs": 140,
+          "alphaBBox": [
+            50,
+            95,
+            142,
+            187
+          ],
+          "solidBBox": [
+            51,
+            105,
+            141,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "sprites/shield-captain-death.png",
+          "sourceCrop": [
+            980,
+            550,
+            1536,
+            1024
+          ],
+          "sourceAnchor": [
+            1250,
+            965
+          ],
+          "durationMs": 650,
+          "alphaBBox": [
+            44,
+            91,
+            150,
+            178
+          ],
+          "solidBBox": [
+            46,
+            134,
+            148,
+            178
+          ]
+        }
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      },
+      "headY": 111,
+      "healthBarAnchor": [
+        96,
+        102
+      ]
+    },
+    "dwarf-hammer": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "right",
+      "uniformSourceScale": 0.24,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/dwarf-hammer-idle.png",
+          "sourceCrop": [
+            0,
+            0,
+            520,
+            510
+          ],
+          "sourceAnchor": [
+            210,
+            452
+          ],
+          "durationMs": 160,
+          "alphaBBox": [
+            56,
+            81,
+            171,
+            190
+          ],
+          "solidBBox": [
+            69,
+            114,
+            161,
+            176
+          ]
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/dwarf-hammer-anticipation.png",
+          "sourceCrop": [
+            520,
+            0,
+            950,
+            510
+          ],
+          "sourceAnchor": [
+            740,
+            452
+          ],
+          "durationMs": 160,
+          "alphaBBox": [
+            43,
+            73,
+            146,
+            187
+          ],
+          "solidBBox": [
+            54,
+            115,
+            126,
+            176
+          ]
+        },
+        {
+          "id": "windup",
+          "file": "sprites/dwarf-hammer-windup.png",
+          "sourceCrop": [
+            950,
+            0,
+            1300,
+            510
+          ],
+          "sourceAnchor": [
+            1120,
+            452
+          ],
+          "durationMs": 160,
+          "alphaBBox": [
+            55,
+            83,
+            139,
+            190
+          ],
+          "solidBBox": [
+            66,
+            84,
+            125,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "sprites/dwarf-hammer-strike.png",
+          "sourceCrop": [
+            1300,
+            0,
+            1774,
+            510
+          ],
+          "sourceAnchor": [
+            1500,
+            452
+          ],
+          "durationMs": 160,
+          "alphaBBox": [
+            57,
+            92,
+            160,
+            189
+          ],
+          "solidBBox": [
+            61,
+            124,
+            158,
+            185
+          ]
+        },
+        {
+          "id": "followthrough",
+          "file": "sprites/dwarf-hammer-followthrough.png",
+          "sourceCrop": [
+            0,
+            510,
+            520,
+            887
+          ],
+          "sourceAnchor": [
+            200,
+            824
+          ],
+          "durationMs": 160,
+          "alphaBBox": [
+            54,
+            101,
+            168,
+            182
+          ],
+          "solidBBox": [
+            63,
+            121,
+            166,
+            180
+          ]
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/dwarf-hammer-recovery.png",
+          "sourceCrop": [
+            520,
+            510,
+            950,
+            887
+          ],
+          "sourceAnchor": [
+            670,
+            824
+          ],
+          "durationMs": 160,
+          "alphaBBox": [
+            67,
+            116,
+            163,
+            186
+          ],
+          "solidBBox": [
+            68,
+            117,
+            158,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/dwarf-hammer-hurt.png",
+          "sourceCrop": [
+            950,
+            510,
+            1300,
+            887
+          ],
+          "sourceAnchor": [
+            1120,
+            826
+          ],
+          "durationMs": 160,
+          "alphaBBox": [
+            55,
+            100,
+            139,
+            184
+          ],
+          "solidBBox": [
+            55,
+            110,
+            137,
+            175
+          ]
+        },
+        {
+          "id": "death",
+          "file": "sprites/dwarf-hammer-death.png",
+          "sourceCrop": [
+            1300,
+            510,
+            1774,
+            887
+          ],
+          "sourceAnchor": [
+            1525,
+            828
+          ],
+          "durationMs": 650,
+          "alphaBBox": [
+            42,
+            102,
+            151,
+            179
+          ],
+          "solidBBox": [
+            42,
+            146,
+            150,
+            178
+          ]
+        }
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "windup",
+          "strike",
+          "followthrough",
+          "recovery"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      },
+      "weaponFamily": "hammer",
+      "headY": 114,
+      "healthBarAnchor": [
+        96,
+        105
+      ]
     }
   },
   "backgrounds": [
@@ -461,6 +1487,29 @@
     "Source sheet spacing is imperfect; explicit crop regions recorded rather than claiming perfectly uniform source cells.",
     "Minor pose/volume variation remains, especially golem pickaxe handedness; 4-frame enemy motion is intentionally limited.",
     "Dwarf strike contains baked-in slash; do not double-add equivalent effect. Tiny slash tip clipped at frame region boundary.",
-    "Background is two independent generated layers, not a sliced screenshot. Far layer contains static cave rim and bridge together; no independent bridge parallax."
-  ]
+    "Background is two independent generated layers, not a sliced screenshot. Far layer contains static cave rim and bridge together; no independent bridge parallax.",
+    "A01 golem uses approved amber-core mining golem prototype although written lore describes its lamp extinguished.",
+    "Enemy death is one distinct held collapse frame, not a multi-frame fall.",
+    "New humanoid attack frames have minor hand/axe pose drift. Shield captain shield is on right side of picture, not left-facing front.",
+    "Use sprite.healthBarAnchor or idle solidBBox, not alphaBBox, for stationary overhead health/shield overlay. alphaBBox contains invisible source dust.",
+    "Lizard asset remains prototype only: not mapped to A02 brown armored lizard. A02-A10 no new animation coverage.",
+    "Hero weapon coverage only axe and hammer; other families must fallback honestly. Hammer strike includes baked gold impact sparks, not an elemental damage claim. Hero death is held collapsed pose, not alpha-only removal."
+  ],
+  "monsterSprites": {
+    "dwarf.a01.normal.1": "raider",
+    "dwarf.a01.normal.2": "pit-rat",
+    "dwarf.a01.normal.3": "golem",
+    "dwarf.a01.elite": "shield-captain"
+  },
+  "areaBackgrounds": {
+    "dwarf.a01": [
+      "cave",
+      "stage"
+    ]
+  },
+  "coveragePolicy": "Only explicit monsterSprites AND areaBackgrounds mappings are allowed; missing coverage must use legacy renderer, never index/modulo or generic substitution.",
+  "heroWeaponSprites": {
+    "axe": "dwarf",
+    "hammer": "dwarf-hammer"
+  }
 }
