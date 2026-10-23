@@ -1,1 +1,8 @@
-{"type":"module","scripts":{"test":"node tests.mjs"}}
+{
+  "type": "module",
+  "scripts": {
+    "test": "node tests.mjs",
+    "build": "node build-release.mjs",
+    "test:release": "node release-cache-tests.mjs"
+  }
+}

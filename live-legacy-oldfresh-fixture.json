@@ -1,0 +1,276 @@
+{
+  "source": "cd8bd18 dist/engine.js fresh() unmodified output",
+  "state": {
+    "version": 2,
+    "race": "dwarf",
+    "hero": "布洛克",
+    "level": 1,
+    "xp": 0,
+    "gold": 100,
+    "location": 0,
+    "build": "custom",
+    "skillRulesVersion": 1,
+    "skillAccess": {
+      "legacyAll": false,
+      "notified": [
+        "break",
+        "mark",
+        "guard",
+        "interrupt"
+      ]
+    },
+    "inventory": [
+      {
+        "id": "mvkxoqsx-1-8b496",
+        "slot": "weapon",
+        "set": null,
+        "rarity": 0,
+        "level": 1,
+        "baseLevel": 1,
+        "levelSource": "starter",
+        "name": "旧炉·战锤",
+        "atk": 13,
+        "armor": 2,
+        "hp": 7,
+        "affixes": [],
+        "special": null,
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0
+      },
+      {
+        "id": "mvkxoqsx-2-4hldy",
+        "slot": "helm",
+        "set": null,
+        "rarity": 0,
+        "level": 1,
+        "baseLevel": 1,
+        "levelSource": "starter",
+        "name": "旧炉·铁盔",
+        "atk": 2,
+        "armor": 5,
+        "hp": 20,
+        "affixes": [],
+        "special": null,
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0
+      },
+      {
+        "id": "mvkxoqsx-3-upkco",
+        "slot": "armor",
+        "set": null,
+        "rarity": 0,
+        "level": 1,
+        "baseLevel": 1,
+        "levelSource": "starter",
+        "name": "旧炉·板甲",
+        "atk": 2,
+        "armor": 9,
+        "hp": 20,
+        "affixes": [],
+        "special": null,
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0
+      },
+      {
+        "id": "mvkxoqsx-4-gdvlu",
+        "slot": "gloves",
+        "set": null,
+        "rarity": 0,
+        "level": 1,
+        "baseLevel": 1,
+        "levelSource": "starter",
+        "name": "旧炉·护手",
+        "atk": 4,
+        "armor": 4,
+        "hp": 10,
+        "affixes": [],
+        "special": null,
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0
+      },
+      {
+        "id": "mvkxoqsx-5-ghupt",
+        "slot": "boots",
+        "set": null,
+        "rarity": 0,
+        "level": 1,
+        "baseLevel": 1,
+        "levelSource": "starter",
+        "name": "旧炉·战靴",
+        "atk": 2,
+        "armor": 5,
+        "hp": 12,
+        "affixes": [],
+        "special": null,
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0
+      },
+      {
+        "id": "mvkxoqsy-6-p2ski",
+        "slot": "ring",
+        "set": null,
+        "rarity": 0,
+        "level": 1,
+        "baseLevel": 1,
+        "levelSource": "starter",
+        "name": "旧炉·指环",
+        "atk": 4,
+        "armor": 2,
+        "hp": 10,
+        "affixes": [],
+        "special": null,
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0
+      },
+      {
+        "id": "mvkxoqsy-7-vaneg",
+        "slot": "ring",
+        "set": null,
+        "rarity": 0,
+        "level": 1,
+        "baseLevel": 1,
+        "levelSource": "starter",
+        "name": "旧炉·指环",
+        "atk": 4,
+        "armor": 2,
+        "hp": 10,
+        "affixes": [],
+        "special": null,
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0
+      },
+      {
+        "id": "mvkxoqsy-8-kdd42",
+        "slot": "amulet",
+        "set": null,
+        "rarity": 0,
+        "level": 1,
+        "baseLevel": 1,
+        "levelSource": "starter",
+        "name": "旧炉·护符",
+        "atk": 3,
+        "armor": 2,
+        "hp": 16,
+        "affixes": [],
+        "special": null,
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0
+      }
+    ],
+    "equip": {
+      "weapon": "mvkxoqsx-1-8b496",
+      "helm": "mvkxoqsx-2-4hldy",
+      "armor": "mvkxoqsx-3-upkco",
+      "gloves": "mvkxoqsx-4-gdvlu",
+      "boots": "mvkxoqsx-5-ghupt",
+      "ring1": "mvkxoqsy-6-p2ski",
+      "ring2": "mvkxoqsy-7-vaneg",
+      "amulet": "mvkxoqsy-8-kdd42"
+    },
+    "skills": [
+      "break",
+      "mark",
+      "guard",
+      "interrupt"
+    ],
+    "conditions": [
+      "always",
+      "always",
+      "always",
+      "charge"
+    ],
+    "materialStacks": {
+      "铁屑|0": 5,
+      "炉火晶|0": 2,
+      "誓约残片|0": 1
+    },
+    "offlineLuck": 0,
+    "talents": {
+      "power": 0,
+      "heart": 0,
+      "steel": 0,
+      "precision": 0,
+      "crit": 0,
+      "critDamage": 0,
+      "penetration": 0,
+      "element": 0,
+      "elementResist": 0,
+      "block": 0,
+      "shield": 0,
+      "healing": 0,
+      "resolve": 0,
+      "luck": 0
+    },
+    "consumables": {
+      "memoryFruit": 0,
+      "refundCredits": 0,
+      "reforgeToken": 0
+    },
+    "potionSlot": {
+      "key": null,
+      "auto": false,
+      "priority": "low",
+      "priorityVersion": 1
+    },
+    "kills": 0,
+    "normalWins": [
+      0,
+      0,
+      0
+    ],
+    "bossWins": [
+      0,
+      0,
+      0
+    ],
+    "bossReady": [
+      0,
+      0,
+      0
+    ],
+    "stock": 3,
+    "loadouts": [
+      null,
+      null,
+      null
+    ],
+    "chapters": [],
+    "chronicle": [
+      "灰冠历317年：你带着旧炉装备，离开黑炉堡寻找失踪商队。"
+    ],
+    "momentum": 0,
+    "lastSeen": 1792757767858,
+    "running": false
+  },
+  "travelWeapon": {
+    "id": "mvkxpmh7-1-x1q8e",
+    "slot": "weapon",
+    "set": null,
+    "rarity": 0,
+    "level": 1,
+    "baseLevel": 1,
+    "levelSource": "generated",
+    "name": "旅铸·战锤",
+    "atk": 12,
+    "armor": 1,
+    "hp": 7,
+    "affixes": [
+      {
+        "stat": "armor",
+        "value": 2
+      }
+    ],
+    "special": null,
+    "legendaryId": null,
+    "locked": false,
+    "bless": 0
+  }
+}

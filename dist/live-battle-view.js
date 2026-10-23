@@ -1,5 +1,5 @@
 // Read-only adapter for the real game. No model creation, stepping, timers, storage or RNG.
-import {createBattleSlicePresentation,drawBattleSliceCanvas,presentationActorX,sliceActorMetadata,battleSliceBars,drawBattleSliceBars} from './battle-slice.js';
+import {createBattleSlicePresentation,drawBattleSliceCanvas,presentationActorX,battleSliceBars,drawBattleSliceBars} from './battle-slice.js';
 import {normalizeBattleEnemies,readEnemyEffectRows,renderPlayerShieldSummary} from './multi-battle-ui.js';
 import {validDisplayEvent} from './combat-display-queue.js';
 import {stats,SKILL_TREE_DEFINITION,SKILLS} from './engine.js';
@@ -8,6 +8,18 @@ const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const skillNames=Object.fromEntries(SKILL_TREE_DEFINITION.nodes.map(n=>[n.id,n.name]));
 // Only approved identity mappings. Missing frames never become an unrelated substitute.
 export const LIVE_HERO_SPRITES=Object.freeze({axe:'dwarf',hammer:'dwarf-hammer'});
+// Display compatibility only. Never promote legacy display identity into combat metadata.
+export function liveHeroWeaponType(state){
+ const item=state?.inventory?.find(it=>it.id===state?.equip?.weapon);
+ if(!item||item.slot!=='weapon')return null;
+ const legacyName=['旅铸·战锤','旧炉·战锤'].includes(item.name);
+ const newIdentity=['templateId','legendaryId','baseVariant','visualKey','visualVariant','iconKey','originRace'].some(key=>item[key]!==undefined&&item[key]!==null);
+ if(item.weaponType!==undefined){
+  if(legacyName&&!newIdentity&&item.weaponType!=='hammer')return null;
+  return item.weaponType;
+ }
+ return legacyName&&!newIdentity?'hammer':null;
+}
 export const LIVE_MONSTER_SPRITES=Object.freeze({'dwarf.a01.normal.1':'raider','dwarf.a01.normal.2':'pit-rat','dwarf.a01.normal.3':'golem','dwarf.a01.elite':'shield-captain'});
 const identity=u=>u.monsterId??u.definitionId??null;
 const areaOf=(s,e)=>e?.areaId??e?.instanceId??s?.siteId??'';
@@ -75,7 +87,7 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
   if(!encounter||!Array.isArray(encounter.enemies)){snapshot=null;return coverage();}
   // Detached snapshots guarantee later game mutations cannot race a presentation frame.
   snapshot={encounter:structuredClone(encounter),areaId:areaOf(state,encounter),units:normalizeBattleEnemies(encounter,now),gameNow:now};
-  heroMaxHp=stats(structuredClone(state)).hp;Object.assign(metadata,sliceActorMetadata(state));rebuildPositions();return coverage();
+  heroMaxHp=stats(structuredClone(state)).hp;Object.assign(metadata,{hero:{weaponType:liveHeroWeaponType(state)}});rebuildPositions();return coverage();
  }
  function enqueue(events,at){
   if(disposed||!snapshot||!visible||coverage().mode!=='ready')return {accepted:0,reason:'not-presenting'};

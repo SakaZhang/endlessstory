@@ -131,3 +131,7 @@ runAffixSourceTest(process.execPath,[new URL('./live-battle-a02-tests.mjs',impor
 
 // v0.44 actual A03 elite/boss identities and shield-only non-damaging presentation.
 runAffixSourceTest(process.execPath,[new URL('./live-battle-a03-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.44.1: real historical weapon display and immutable release resource graph.
+runAffixSourceTest(process.execPath,[new URL('./live-battle-legacy-hero-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+runAffixSourceTest(process.execPath,[new URL('./release-cache-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
