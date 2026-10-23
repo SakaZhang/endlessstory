@@ -1,5 +1,5 @@
 import {PRODUCTION_DWARF_PARAMETERS} from './dwarf-parameters.js';
-// Typed A01–A03 source definitions; descriptions are never parsed at runtime.
+// Typed A01–A06 source definitions; descriptions are never parsed at runtime.
 export const DWARF_MONSTERS={
  "dwarf.a01.normal.1": {
   "id": "dwarf.a01.normal.1",
@@ -484,6 +484,541 @@ export const DWARF_MONSTERS={
    }
   ],
   "trait": null
+ } ,
+ "dwarf.a04.normal.1": {
+  "id": "dwarf.a04.normal.1",
+  "name": "渣火蜥",
+  "area": 4,
+  "rank": "normal",
+  "nodes": [
+   "dwarf.a04.field",
+   "dwarf.a04.dungeon"
+  ],
+  "elementTags": [
+   "fire"
+  ],
+  "basicAttackType": "physical",
+  "skills": [
+   {
+    "id": "dwarf.a04.normal.1:0",
+    "name": "吐烬",
+    "cooldownMs": 9000,
+    "firstAtMs": 3000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.05,
+      "damageType": "fire",
+      "powerBasis": "elementalPower"
+     },
+     {
+      "type": "dot",
+      "damageType": "fire",
+      "powerBasis": "elementalPower",
+      "coefficientPerSecond": 0.1,
+      "seconds": 3,
+      "refresh": "same_skill",
+      "mitigation": "resistance_only"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": null
+ },
+ "dwarf.a04.normal.2": {
+  "id": "dwarf.a04.normal.2",
+  "name": "烟囱灰蝠",
+  "area": 4,
+  "rank": "normal",
+  "nodes": [
+   "dwarf.a04.field",
+   "dwarf.a04.dungeon"
+  ],
+  "elementTags": [
+   "wind",
+   "fire"
+  ],
+  "basicAttackType": "wind",
+  "skills": [
+   {
+    "id": "dwarf.a04.normal.2:0",
+    "name": "灰翼突袭",
+    "cooldownMs": 8000,
+    "firstAtMs": 3000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.2,
+      "damageType": "wind",
+      "powerBasis": "elementalPower"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": null
+ },
+ "dwarf.a04.normal.3": {
+  "id": "dwarf.a04.normal.3",
+  "name": "积盐炉壳",
+  "area": 4,
+  "rank": "normal",
+  "nodes": [
+   "dwarf.a04.field",
+   "dwarf.a04.dungeon"
+  ],
+  "elementTags": [
+   "earth",
+   "fire"
+  ],
+  "basicAttackType": "earth",
+  "skills": [
+   {
+    "id": "dwarf.a04.normal.3:0",
+    "name": "热盐撞击",
+    "cooldownMs": 12000,
+    "firstAtMs": 3000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.4,
+      "damageType": "fire",
+      "powerBasis": "elementalPower"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": null
+ },
+ "dwarf.a04.elite": {
+  "id": "dwarf.a04.elite",
+  "name": "鼓风监炉官",
+  "area": 4,
+  "rank": "elite",
+  "nodes": [
+   "dwarf.a04.dungeon"
+  ],
+  "elementTags": [
+   "fire",
+   "wind"
+  ],
+  "basicAttackType": "fire",
+  "skills": [
+   {
+    "id": "dwarf.a04.elite:0",
+    "name": "鼓风喷焰",
+    "cooldownMs": 12000,
+    "firstAtMs": 4000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.45,
+      "damageType": "fire",
+      "powerBasis": "elementalPower"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": {
+   "type": "openingShield",
+   "fraction": 0.12,
+   "durationMs": 8000
+  }
+ },
+ "dwarf.a05.normal.1": {
+  "id": "dwarf.a05.normal.1",
+  "name": "泉壁苔兽",
+  "area": 5,
+  "rank": "normal",
+  "nodes": [
+   "dwarf.a05.field",
+   "dwarf.a05.dungeon"
+  ],
+  "elementTags": [
+   "water",
+   "earth"
+  ],
+  "basicAttackType": "earth",
+  "skills": [
+   {
+    "id": "dwarf.a05.normal.1:0",
+    "name": "寒泉喷吐",
+    "cooldownMs": 9000,
+    "firstAtMs": 3000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.2,
+      "damageType": "water",
+      "powerBasis": "elementalPower"
+     },
+     {
+      "type": "next_basic_slow",
+      "multiplier": 1.15,
+      "charges": 1
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": null
+ },
+ "dwarf.a05.normal.2": {
+  "id": "dwarf.a05.normal.2",
+  "name": "冷雾晶蛾",
+  "area": 5,
+  "rank": "normal",
+  "nodes": [
+   "dwarf.a05.field",
+   "dwarf.a05.dungeon"
+  ],
+  "elementTags": [
+   "water",
+   "wind"
+  ],
+  "basicAttackType": "water",
+  "skills": [
+   {
+    "id": "dwarf.a05.normal.2:0",
+    "name": "凝露针",
+    "cooldownMs": 8000,
+    "firstAtMs": 3000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.15,
+      "damageType": "water",
+      "powerBasis": "elementalPower"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": null
+ },
+ "dwarf.a05.normal.3": {
+  "id": "dwarf.a05.normal.3",
+  "name": "石胆菌甲虫",
+  "area": 5,
+  "rank": "normal",
+  "nodes": [
+   "dwarf.a05.field",
+   "dwarf.a05.dungeon"
+  ],
+  "elementTags": [
+   "earth"
+  ],
+  "basicAttackType": "physical",
+  "skills": [
+   {
+    "id": "dwarf.a05.normal.3:0",
+    "name": "合壳",
+    "cooldownMs": 15000,
+    "firstAtMs": 3000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "shield",
+      "fraction": 0.08,
+      "seconds": 6
+     }
+    ],
+    "requiresHitForEffects": false,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": null
+ },
+ "dwarf.a05.elite": {
+  "id": "dwarf.a05.elite",
+  "name": "寒泉汲髓兽",
+  "area": 5,
+  "rank": "elite",
+  "nodes": [
+   "dwarf.a05.dungeon"
+  ],
+  "elementTags": [
+   "water"
+  ],
+  "basicAttackType": "water",
+  "skills": [
+   {
+    "id": "dwarf.a05.elite:0",
+    "name": "汲髓咬",
+    "cooldownMs": 10000,
+    "firstAtMs": 4000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.35,
+      "damageType": "water",
+      "powerBasis": "elementalPower"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": {
+   "type": "lifesteal",
+   "fraction": 0.12,
+   "perActionCap": 0.02,
+   "encounterCap": 0.15
+  }
+ },
+ "dwarf.a06.normal.1": {
+  "id": "dwarf.a06.normal.1",
+  "name": "炉池铸渣兵",
+  "area": 6,
+  "rank": "normal",
+  "nodes": [
+   "dwarf.a06.field",
+   "dwarf.a06.dungeon"
+  ],
+  "elementTags": [
+   "fire",
+   "earth"
+  ],
+  "basicAttackType": "physical",
+  "skills": [
+   {
+    "id": "dwarf.a06.normal.1:0",
+    "name": "烙铁斩",
+    "cooldownMs": 9000,
+    "firstAtMs": 3000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.25,
+      "damageType": "fire",
+      "powerBasis": "elementalPower"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": null
+ },
+ "dwarf.a06.normal.2": {
+  "id": "dwarf.a06.normal.2",
+  "name": "汽压游魂",
+  "area": 6,
+  "rank": "normal",
+  "nodes": [
+   "dwarf.a06.field",
+   "dwarf.a06.dungeon"
+  ],
+  "elementTags": [
+   "water",
+   "wind"
+  ],
+  "basicAttackType": "wind",
+  "skills": [
+   {
+    "id": "dwarf.a06.normal.2:0",
+    "name": "汽流切割",
+    "cooldownMs": 8000,
+    "firstAtMs": 3000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.15,
+      "damageType": "water",
+      "powerBasis": "elementalPower"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": null
+ },
+ "dwarf.a06.normal.3": {
+  "id": "dwarf.a06.normal.3",
+  "name": "沉炉搬运傀",
+  "area": 6,
+  "rank": "normal",
+  "nodes": [
+   "dwarf.a06.field",
+   "dwarf.a06.dungeon"
+  ],
+  "elementTags": [
+   "earth",
+   "fire"
+  ],
+  "basicAttackType": "physical",
+  "skills": [
+   {
+    "id": "dwarf.a06.normal.3:0",
+    "name": "坠罐",
+    "cooldownMs": 12000,
+    "firstAtMs": 3000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.45,
+      "damageType": "physical",
+      "powerBasis": "atk"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": null
+ },
+ "dwarf.a06.elite": {
+  "id": "dwarf.a06.elite",
+  "name": "沉炉督造傀",
+  "area": 6,
+  "rank": "elite",
+  "nodes": [
+   "dwarf.a06.dungeon"
+  ],
+  "elementTags": [
+   "earth",
+   "fire"
+  ],
+  "basicAttackType": "physical",
+  "skills": [
+   {
+    "id": "dwarf.a06.elite:0",
+    "name": "双锤合铸",
+    "cooldownMs": 12000,
+    "firstAtMs": 4000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.5,
+      "damageType": "physical",
+      "powerBasis": "atk"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": {
+   "type": "followers",
+   "shares": [
+    0.6,
+    0.2,
+    0.2
+   ],
+   "name": "铸渣小工"
+  }
+ },
+ "dwarf.a06.boss": {
+  "id": "dwarf.a06.boss",
+  "name": "炉心守卫 · 断铸",
+  "area": 6,
+  "rank": "boss",
+  "nodes": [
+   "dwarf.a06.boss"
+  ],
+  "elementTags": [
+   "fire",
+   "earth"
+  ],
+  "basicAttackType": "physical",
+  "skills": [
+   {
+    "id": "dwarf.a06.boss:0",
+    "name": "炉口喷流",
+    "cooldownMs": 12000,
+    "firstAtMs": 6000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.55,
+      "damageType": "fire",
+      "powerBasis": "elementalPower"
+     },
+     {
+      "type": "dot",
+      "damageType": "fire",
+      "powerBasis": "elementalPower",
+      "coefficientPerSecond": 0.12,
+      "seconds": 4,
+      "refresh": "same_skill",
+      "mitigation": "resistance_only"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   },
+   {
+    "id": "dwarf.a06.boss:1",
+    "name": "沉砧坠击",
+    "cooldownMs": 18000,
+    "firstAtMs": 10000,
+    "castMs": 2000,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 2.0,
+      "damageType": "earth",
+      "powerBasis": "elementalPower"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   },
+   {
+    "id": "dwarf.a06.boss:2",
+    "name": "冷凝炉壳",
+    "cooldownMs": 24000,
+    "firstAtMs": 18000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "shield",
+      "fraction": 0.08,
+      "seconds": 6
+     }
+    ],
+    "requiresHitForEffects": false,
+    "trigger": "cooldown_limited_two_casts",
+    "maxCasts": 2
+   }
+  ],
+  "trait": null
  }
 };
 // One replaceable absolute parameter layer. No fallback to withdrawn proxy/legacy LOCS.
@@ -491,8 +1026,10 @@ let parameterSet=null;
 export function configureDwarfParameters(config){
  if(config===null){parameterSet=null;return true;}
  if(!config||typeof config.id!=='string'||(config.reviewed!==true&&config.testOnly!==true)||!config.monsters||!Number.isFinite(config.fieldGroupChance)||config.fieldGroupChance<0||config.fieldGroupChance>1)return false;
- for(const id of Object.keys(DWARF_MONSTERS)){const p=config.monsters[id];if(!p||!['hp','atk','armor','elementalPower','rewardGold','rewardXp'].every(k=>Number.isFinite(p[k])&&p[k]>=0&&p[k]<=1e9)||p.hp<=0||!Number.isSafeInteger(p.basicIntervalMs)||p.basicIntervalMs<100||p.basicIntervalMs>60000||p.elementResistance!==undefined&&(!p.elementResistance||!['earth','water','fire','wind','light','dark'].every(k=>Number.isFinite(p.elementResistance[k])&&p.elementResistance[k]>=0&&p.elementResistance[k]<=1e9)))return false;}
- if(!config.clearRewards||![1,2,3].every(a=>{const c=config.clearRewards[a];return c&&['gold','xp'].every(k=>Number.isFinite(c[k])&&c[k]>=0&&c[k]<=1e9)&&Number.isInteger(c.materialRounds)&&c.materialRounds>=0&&c.materialRounds<=3&&['gearChance','markChance'].every(k=>Number.isFinite(c[k])&&c[k]>=0&&c[k]<=1);}))return false;
+ const areas=config.areas??[1,2,3];
+ if(!Array.isArray(areas)||!areas.length||new Set(areas).size!==areas.length||!areas.every(a=>Number.isInteger(a)&&a>=1&&a<=6)||![1,2,3].every(a=>areas.includes(a)))return false;
+ for(const id of Object.keys(DWARF_MONSTERS).filter(id=>areas.includes(DWARF_MONSTERS[id].area))){const p=config.monsters[id];if(!p||!['hp','atk','armor','elementalPower','rewardGold','rewardXp'].every(k=>Number.isFinite(p[k])&&p[k]>=0&&p[k]<=1e9)||p.hp<=0||!Number.isSafeInteger(p.basicIntervalMs)||p.basicIntervalMs<100||p.basicIntervalMs>60000||p.elementResistance!==undefined&&(!p.elementResistance||!['earth','water','fire','wind','light','dark'].every(k=>Number.isFinite(p.elementResistance[k])&&p.elementResistance[k]>=0&&p.elementResistance[k]<=1e9)))return false;}
+ if(!config.clearRewards||!areas.every(a=>{const c=config.clearRewards[a];return c&&['gold','xp'].every(k=>Number.isFinite(c[k])&&c[k]>=0&&c[k]<=1e9)&&Number.isInteger(c.materialRounds)&&c.materialRounds>=0&&c.materialRounds<=3&&['gearChance','markChance'].every(k=>Number.isFinite(c[k])&&c[k]>=0&&c[k]<=1);}))return false;
  const skills=new Set(Object.values(DWARF_MONSTERS).flatMap(d=>d.skills.map(s=>s.id)));
  if(config.skillOverrides!==undefined&&(!config.skillOverrides||Object.entries(config.skillOverrides).some(([id,x])=>!skills.has(id)||!x||Object.keys(x).length!==1||!Number.isSafeInteger(x.castMs)||x.castMs<0||x.castMs>60000)))return false;
  if(config.controlReduction!==undefined&&(!config.controlReduction||Object.entries(config.controlReduction).some(([rank,x])=>!['normal','elite','boss'].includes(rank)||!Number.isFinite(x)||x<0||x>=1)))return false;
@@ -500,10 +1037,10 @@ export function configureDwarfParameters(config){
  parameterSet=structuredClone(config);return true;
 }
 export function dwarfParameterSet(){return parameterSet?structuredClone(parameterSet):null;}
-export function dwarfParameters(id){const p=parameterSet?.monsters[id];return p?{...structuredClone(p),parameterSetId:parameterSet.id,skillOverrides:structuredClone(parameterSet.skillOverrides??{}),controlReduction:parameterSet.controlReduction?.[DWARF_MONSTERS[id].rank]??0,interruptStopMs:parameterSet.interruptStopMs??1100}:null;}
-export function dwarfBudgetReady(){return parameterSet!==null;}
+export function dwarfParameters(id){const p=parameterSet&&(parameterSet.areas??[1,2,3]).includes(DWARF_MONSTERS[id]?.area)?parameterSet.monsters[id]:null;return p?{...structuredClone(p),parameterSetId:parameterSet.id,skillOverrides:structuredClone(parameterSet.skillOverrides??{}),controlReduction:parameterSet.controlReduction?.[DWARF_MONSTERS[id].rank]??0,interruptStopMs:parameterSet.interruptStopMs??1100}:null;}
+export function dwarfBudgetReady(areaNumber){return parameterSet!==null&&(areaNumber===undefined||(parameterSet.areas??[1,2,3]).includes(areaNumber));}
 export function dwarfGroupChance(){return parameterSet?.fieldGroupChance??0;}
-export function dwarfEligibleMonsters(nodeId,rank){return Object.values(DWARF_MONSTERS).filter(m=>m.nodes.includes(nodeId)&&m.rank===rank);}
+export function dwarfEligibleMonsters(nodeId,rank){return Object.values(DWARF_MONSTERS).filter(m=>m.nodes.includes(nodeId)&&m.rank===rank&&dwarfBudgetReady(m.area));}
 
 // Invalid or absent parameter sets never fall back to prototype monster numbers.
 if(!configureDwarfParameters(PRODUCTION_DWARF_PARAMETERS))throw new Error('Invalid approved dwarf parameter set');

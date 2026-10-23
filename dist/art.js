@@ -16,7 +16,7 @@ export function drawScene(canvas, state = {}) {
   const rng=(i)=>{let x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x);};
   const glow=(x,y,r,color)=>{let g=c.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,color);g.addColorStop(1,'transparent');c.fillStyle=g;c.fillRect(x-r,y-r,r*2,r*2);};
   const palettes=[['#101b23','#263435','#34403b','#161e20','#4b4938'],['#19151b','#34262b','#443039','#211d23','#594038'],['#111a23','#26313b','#36414a','#1a222a','#404a47']];
-  const p=palettes[loc];rect(0,0,W,H,p[0]);
+  const p=palettes[loc]??palettes[0];rect(0,0,W,H,p[0]);
   // Skies and distant silhouettes.
   for(let y=0;y<230;y+=6)rect(0,y,W,6,loc===1?`rgba(101,45,34,${.12+y/1800})`:`rgba(75,95,91,${.06+y/1700})`);
   if(loc!==1){glow(715,76,110,loc===2?'#53796b27':'#87978220');rect(703,37,31,31,'#a7aa821c');rect(707,37,23,31,'#c2c5a12a');}

@@ -113,3 +113,6 @@ for(const file of ['dwarf-forge-favor-tests.mjs','dwarf-forge-production-tests.m
 
 // Presentation observers must leave real simulation/RNG untouched.
 for(const file of ['combat-display-bridge-tests.mjs','combat-display-potion-tests.mjs','battle-slice-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+// M3 staged content, source routing and isolated delayed basic scheduling.
+for(const file of ['m3-content-tests.mjs','m3-material-tests.mjs','m3-slow-tests.mjs','m3-rewards-tests.mjs','m3-production-activation-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});

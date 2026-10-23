@@ -33,6 +33,11 @@ export function validMultiEncounter(e,instances){
   if(e.enemies.some(u=>DWARF_MONSTERS[u.definitionId]?.rank!==rank))return false;
   if(e.clearRewards!==undefined&&e.clearRewards!==null){const c=e.clearRewards;if(!['gold','xp'].every(k=>n(c[k]))||!Number.isInteger(c.materialRounds)||c.materialRounds<0||c.materialRounds>3||!['gearChance','markChance'].every(k=>Number.isFinite(c[k])&&c[k]>=0&&c[k]<=1))return false;}
  }
+ for(const key of ['pendingBasicDelayMs','basicMicroElapsed'])if(e[key]!==undefined&&e[key]!==165)return false;
+ if((e.pendingBasicAt===undefined)!==(e.pendingBasicDelayMs===undefined))return false;
+ if(e.nextBasicSlow!==undefined&&e.nextBasicSlow!==1.15)return false;
+ for(const key of ['pendingBasicAt','nextRegularAt','lastCombatEventAt'])if(e[key]!==undefined&&(!Number.isSafeInteger(e[key])||e[key]<0||e[key]>1e15))return false;
+ if(e.pendingBasicAt!==undefined&&e.nextRegularAt!==undefined&&e.pendingBasicAt>=e.nextRegularAt)return false;
  if(e.treeCombatClock!==undefined&&(!Number.isSafeInteger(e.treeCombatClock)||e.treeCombatClock<0||e.treeCombatClock>1e15))return false;
  if(e.treeEffects!==undefined&&(!validSkillEffectState(e.treeEffects)||!Object.keys(e.treeEffects.enemies).every(id=>e.enemies.some(u=>u.id===id))))return false;
  if(e.treePoison!==undefined&&(!e.treePoison||typeof e.treePoison!=='object'||Array.isArray(e.treePoison)||Object.keys(e.treePoison).length>100||!Object.entries(e.treePoison).every(([id,p])=>e.enemies.some(u=>u.id===id)&&validSkillPoison(p)&&p.enemyId===id)))return false;
@@ -40,7 +45,7 @@ export function validMultiEncounter(e,instances){
  if(e.treeSkillCooldowns!==undefined&&(!e.treeSkillCooldowns||typeof e.treeSkillCooldowns!=='object'||Array.isArray(e.treeSkillCooldowns)||!Object.entries(e.treeSkillCooldowns).every(([key,value])=>TREE_ACTIVE_SKILL_IDS.includes(key)&&Number.isInteger(value)&&value>=0&&value<=100)))return false;
  if(e.affixState!==undefined&&(!validBattleAffixState(e.affixState)||e.affixState.battleId!==e.id))return false;
  const initial=e.enemies.filter(u=>u.origin==='initial');if(planned&&e.fieldGroup&&initial.length<2)return false;if(initial.length<(planned?1:2)||initial.length>3)return false;
- if(!e.enemies.every(u=>u&&typeof u.id==='string'&&u.id.length<200&&['initial','summoned'].includes(u.origin)&&u.sourceInstanceId===e.instanceId&&(planned||instances[u.sourceInstanceId]?.kind==='field')&&instances[u.sourceInstanceId]?.enabled&&u.location===e.location&&[0,1,2].includes(u.location)&&(planned?validDwarfActor(u):u.monsterId===PROTOTYPE_MONSTERS[u.location]&&u.definitionId===u.monsterId)&&typeof u.name==='string'&&u.name.length<150&&typeof u.main==='boolean'&&['hp','max','atk','armor','shield','burn','broken','blunt','scorch','stun','round','nextHeavy'].every(k=>n(u[k]))&&u.max>0&&u.hp<=u.max&&typeof u.heavyDelayed==='boolean'&&u.cd&&typeof u.cd==='object'&&Object.values(u.cd).every(n)&&validControl(u.control)&&u.control.unitId===u.id&&validMultiProfile(u.profile)&&Array.isArray(u.elementTags)&&new Set(u.elementTags).size===u.elementTags.length&&u.elementTags.every(k=>['earth','water','fire','wind','light','dark'].includes(k))&&u.elementResistance&&Object.keys(u.elementResistance).length===6&&['earth','water','fire','wind','light','dark'].every(k=>n(u.elementResistance[k]))))return false;
+ if(!e.enemies.every(u=>u&&typeof u.id==='string'&&u.id.length<200&&['initial','summoned'].includes(u.origin)&&u.sourceInstanceId===e.instanceId&&(planned||instances[u.sourceInstanceId]?.kind==='field')&&instances[u.sourceInstanceId]?.enabled&&u.location===e.location&&(planned?u.location===DWARF_MONSTERS[u.definitionId]?.area-1:[0,1,2].includes(u.location))&&(planned?validDwarfActor(u):u.monsterId===PROTOTYPE_MONSTERS[u.location]&&u.definitionId===u.monsterId)&&typeof u.name==='string'&&u.name.length<150&&typeof u.main==='boolean'&&['hp','max','atk','armor','shield','burn','broken','blunt','scorch','stun','round','nextHeavy'].every(k=>n(u[k]))&&u.max>0&&u.hp<=u.max&&typeof u.heavyDelayed==='boolean'&&u.cd&&typeof u.cd==='object'&&Object.values(u.cd).every(n)&&validControl(u.control)&&u.control.unitId===u.id&&validMultiProfile(u.profile)&&Array.isArray(u.elementTags)&&new Set(u.elementTags).size===u.elementTags.length&&u.elementTags.every(k=>['earth','water','fire','wind','light','dark'].includes(k))&&u.elementResistance&&Object.keys(u.elementResistance).length===6&&['earth','water','fire','wind','light','dark'].every(k=>n(u.elementResistance[k]))))return false;
  if(e.pauseAt!==undefined&&(!Number.isSafeInteger(e.pauseAt)||e.pauseAt<0||e.pauseAt>1e15||!Number.isFinite(e.pauseRemainingAction)||e.pauseRemainingAction<0||e.pauseRemainingAction>1100))return false;
  if(e.pauseAt===undefined&&e.pauseRemainingAction!==undefined)return false;
  if(e.lastCast!==undefined&&!validMultiCastRecord(e.lastCast,e.enemies))return false;
@@ -89,7 +94,7 @@ function treePassiveStats(base,e,context){
 function treeDamage(context,type,kind='skill'){return context?passiveDamageMultiplier(context,{damageType:type,source:{kind}}):1;}
 function treeHeal(context,e,amount,maxHp){return context?passiveReceivedHeal(context,{amount,currentHp:e.heroHp,maxHp}):Math.min(amount,Math.max(0,maxHp-e.heroHp));}
 export function stepMulti(s,e,turn,ctx){
- const {stats,SKILLS,skillUnlocked,resolveElementDamage,now,makeSummon}=ctx,passives=treePassiveContext(ctx),baseStats=stats(s),st=treePassiveStats(baseStats,e,passives),logs=[];e.round++;
+ const {stats,SKILLS,skillUnlocked,resolveElementDamage,now,makeSummon}=ctx,passives=treePassiveContext(ctx),baseStats=stats(s),st=treePassiveStats(baseStats,e,passives),logs=[];if(!ctx.basicOnly)e.round++;else {delete e.pendingBasicAt;delete e.pendingBasicDelayMs;}
  const refreshStats=()=>Object.assign(st,treePassiveStats(e.treeEffects?skillTreeHeroStats(baseStats,e.treeEffects,ctx.treeSkills.attributeConfig):baseStats,e,passives));
  e.affixState??=createBattleAffixState(e.id);
  if(ctx.treeSkills){const beforeClock=e.treeEffects?.clock??e.treeCombatClock??0;if(e.treePoison)advanceTreePoisons(e,beforeClock+(ctx.combatDeltaMs??1100),now,logs);runTreePlayerPhase(s,e,{...ctx,treeTimersOnly:true,onDamageAction:()=>{},onHeroDeath:()=>false},logs);if(e.done){advanceLegendaryCombat(s,{combatDeltaMs:Math.max(0,(e.treeCombatClock??beforeClock)-beforeClock),alive:e.heroHp>0,hasTargets:false,deferProcs:true,resolve:()=>({stop:true})});return logs;}}
@@ -109,16 +114,16 @@ export function stepMulti(s,e,turn,ctx){
  advanceLegends({combatDeltaMs:ctx.combatDeltaMs??1100});if(e.done)return logs;
 
  const heroDied=()=>{if(e.heroHp>0)return false;const revived=tryNirvana(e.affixState,{battleId:e.id,hasNirvana:!!st.specials.nirvana,hp:e.heroHp,maxHp:st.hp});if(revived){e.affixState=revived.state;if(revived.revived){const recovered=revived.hp-e.heroHp;e.heroHp=revived.hp;emitCombatDisplay(e,{kind:'heal',skillId:'nirvana',hpDelta:recovered});logs.push('涅槃 · 满血复生');return false;}}s.momentum=0;end(e,false,null);return true;};
- for(const k in e.cd)e.cd[k]=Math.max(0,e.cd[k]-1);
- for(const k in e.treeSkillCooldowns??{})e.treeSkillCooldowns[k]=Math.max(0,e.treeSkillCooldowns[k]-1);
+ if(!ctx.basicOnly)for(const k in e.cd)e.cd[k]=Math.max(0,e.cd[k]-1);
+ if(!ctx.basicOnly)for(const k in e.treeSkillCooldowns??{})e.treeSkillCooldowns[k]=Math.max(0,e.treeSkillCooldowns[k]-1);
  for(const u of e.enemies){u.control=advanceControlClock(u.control,now);u.cd=Object.fromEntries(Object.entries(u.control.cooldowns).map(([k,v])=>[k,Math.max(0,Math.ceil((v-now)/1100))]));}
- const treePhase=ctx.treeSkills?runTreePlayerPhase(s,e,{...ctx,treeTimersPrepared:true,onDamageAction:()=>advanceLegends({damageAction:true}),onHeroDeath:heroDied},logs):null;
+ const treePhase=ctx.treeSkills&&!ctx.basicOnly?runTreePlayerPhase(s,e,{...ctx,treeTimersPrepared:true,onDamageAction:()=>advanceLegends({damageAction:true}),onHeroDeath:heroDied},logs):null;
  if(e.done)return logs;
  if(treePhase?.stats)Object.assign(st,treePhase.stats);refreshStats();
  if(!treePhase?.acted){
  let target=e.enemies.find(u=>u.id===e.targetId);const charging=()=>!!target.control.preparing||(!target.typedProfile&&e.round>=target.nextHeavy);
  const usable=k=>!(k==='warcry'&&e.warcry>0)&&!(k==='ironcoat'&&e.ironcoat>0)&&!(k==='blunt'&&target.blunt>0)&&!(k==='scorch'&&target.scorch>0)&&!(k==='guard'&&e.guard>0)&&!(k==='barrier'&&(e.barrier>0||e.barrierShield>0))&&!(k==='mend'&&e.heroHp>=st.hp)&&!(k==='cleanse'&&!e.heroBurn&&!e.weakness&&!(e.typedDots?.length))&&!(k==='delay'&&(!charging()||target.heavyDelayed));
- const k=(ctx.treeSkills?null:s.skills.find((key,i)=>key!==null&&SKILLS[key]&&skillUnlocked(s,key)&&!e.cd[key]&&usable(key)&&(s.conditions[i]!=='low'||e.heroHp<st.hp*.6)&&(s.conditions[i]!=='charge'||charging())&&(s.conditions[i]!=='burn'||target.burn>0)))??null,fixture=e.developmentFixture===true?e.fixtureAction:null;e.fixtureAction=null;
+ const k=(ctx.treeSkills||ctx.basicOnly?null:s.skills.find((key,i)=>key!==null&&SKILLS[key]&&skillUnlocked(s,key)&&!e.cd[key]&&usable(key)&&(s.conditions[i]!=='low'||e.heroHp<st.hp*.6)&&(s.conditions[i]!=='charge'||charging())&&(s.conditions[i]!=='burn'||target.burn>0)))??null,fixture=!ctx.basicOnly&&e.developmentFixture===true?e.fixtureAction:null;if(!ctx.basicOnly)e.fixtureAction=null;
  if(k&&!fixture)e.cd[k]=SKILLS[k].cd;
  const executeCast=(extra=false)=>{if(k||fixture)e.activeCastCount++;
  target=e.enemies.find(u=>u.id===e.targetId&&u.hp>0)??e.enemies.find(u=>u.hp>0);if(!target)return true;
@@ -166,14 +171,19 @@ export function stepMulti(s,e,turn,ctx){
   if(cleared(e,'active'))return true;
  }
  return false;};
- if(executeCast())return logs;
+ const deferBasic=!ctx.basicOnly&&!k&&!fixture&&(e.nextBasicSlow??1)>1;
+ if(deferBasic){e.pendingBasicDelayMs=Math.round(1100*(e.nextBasicSlow-1));e.pendingBasicAt=now+e.pendingBasicDelayMs;delete e.nextBasicSlow;}
+ else if(executeCast())return logs;
  if(k&&!fixture&&st.specials.multicast&&tryMulticast({source:'active',triggered:false,hasLivingEnemies:e.enemies.some(u=>u.hp>0)})?.triggered){logs.push('多重施法 · '+SKILLS[k].name);if(executeCast(true))return logs;}
  } // legacy/basic player branch; actual enemy phase is shared with the tree consumer.
+ if(!ctx.basicOnly){
  // Each enemy owns its DOT/debuff state. Player self-DOT retains its saved source and bypasses shields.
  for(const u of e.enemies.filter(u=>u.hp>0))if(u.burn>0){const dot=resolveElementDamage(st.atk*(e.warcry>0?1.25:1)*(e.weakness>0?.8:1)*.32*(st.count.rune>=2?1.3:1)*(u.scorch>0?1.25:1)*treeDamage(passives,'fire','dot'),'fire',st.elementAttack.fire,u.elementResistance.fire,u.elementTags);hitEnemy(u,dot,e,{kind:'dot',skillId:'mark',element:'fire'});u.burn--;logs.push(u.name+' · 炉火灼烧 '+Number(dot.toFixed(1)));}
  if(cleared(e,'burn'))return logs;
  if(e.heroBurn>0){const dot=resolveElementDamage(e.heroBurnPower,'fire',0,st.elementResistance.fire,[]);const beforeDot=e.heroHp;e.heroHp-=dot;emitCombatDisplay(e,{kind:'dot',sourceId:'enemy-burn',targetId:'hero',element:'fire',hpDelta:-Math.min(beforeDot,dot)});e.heroBurn--;turn.burnTicked=true;logs.push('灼烧侵蚀 · -'+Number(dot.toFixed(1)));if(heroDied())return logs;}
+ }
  tickDwarfDots(e,now,dot=>{const amount=dot.type==='physical'?physical(dot.raw,st.armor):resolveElementDamage(dot.raw,dot.type,0,st.elementResistance[dot.type],[]);const beforeDot=e.heroHp;e.heroHp-=amount;emitCombatDisplay(e,{kind:'dot',sourceId:dot.key,targetId:'hero',element:dot.type,hpDelta:-Math.min(beforeDot,amount)});logs.push('持续侵蚀 · -'+Number(amount.toFixed(1)));});if(heroDied())return logs;
+ if(ctx.basicOnly){if(!cleared(e,'active'))syncMultiTarget(e);return logs;}
  const treeCounterReady=()=>!!ctx.treeSkills&&e.treeEffects?.hero.sources.some(x=>x.counterEligible===true&&x.endAt>e.treeEffects.clock)&&((e.playerShieldLayers?.layers.reduce((n,l)=>n+l.remaining,0)??((e.shield??0)+(e.barrierShield??0)))>0);
  const treeCounter=(u,ready,hpLoss)=>{if(!ready||hpLoss<=0||e.heroHp<=0||u.hp<=0)return;const coefficient=ctx.treeSkills.counterCoefficient;if(!Number.isFinite(coefficient)||coefficient<0)throw Error('Missing iron vigil counter coefficient');refreshStats();const damage=physical(st.atk*coefficient*treeDamage(passives,'physical','counter'),Math.max(0,u.armor-st.penetration));hitEnemy(u,damage,e,{kind:'counter',skillId:'iron_vigil'});logs.push('铁幕反击 → '+u.name+' · '+damage);};
  const acting=[...e.enemies];
@@ -182,15 +192,18 @@ export function stepMulti(s,e,turn,ctx){
   const avoidRating=(treeEnemy?.hitDownRating??0)+(st.dodgeRating??0),enemyHitChance=1-(ctx.treeSkills?.attributeConfig?.dodgeCap??0)*avoidRating/(100+avoidRating);
   const missed=()=>avoidRating>0&&Math.random()>=enemyHitChance;
   if(u.typedProfile){
-   const action=nextDwarfAction(u,now);if(!action)continue;emitCombatDisplay(e,{kind:'cast',sourceId:u.id,targetId:'hero',skillId:action.id,castId:enemyCastId,outcome:'none'});let direct=false;
+   const action=nextDwarfAction(u,now);if(!action)continue;emitCombatDisplay(e,{kind:'cast',sourceId:u.id,targetId:'hero',skillId:action.id,castId:enemyCastId,outcome:'none'});let direct=false,actionHpLoss=0;
    for(const effect of action.effects){
+    if(action.requiresHitForEffects&&effect.type!=='damage'&&effect.type!=='shield'&&!direct)continue;
     if(effect.type==='shield'){const beforeShield=u.shield;u.shield=u.max*effect.fraction;emitCombatDisplay(e,{kind:'shield',castId:enemyCastId,sourceId:u.id,targetId:u.id,skillId:action.id,shieldDelta:Math.max(0,u.shield-beforeShield)});u.shieldUntil=now+effect.seconds*1000;logs.push(u.name+' · '+action.name);}
+    if(effect.type==='next_basic_slow'){e.nextBasicSlow=Math.max(e.nextBasicSlow??1,effect.multiplier);logs.push(u.name+' · 下一次普攻减速');}
     if(effect.type==='dot')applyDwarfDot(e,u,action,passives?{...effect,seconds:passiveNegativeDuration(passives,effect.seconds*1000)/1000}:effect,now);
     if(effect.type==='damage'){refreshStats();if(missed()){emitCombatDisplay(e,{castId:enemyCastId,sourceId:u.id,targetId:'hero',outcome:'miss'});logs.push(u.name+' · 未命中');continue;}direct=true;const raw=(effect.powerBasis==='atk'?enemyAtk:u[effect.powerBasis])*(u.blunt>0?.8:1)*effect.coefficient;
      let hurt=(effect.damageType==='physical'?physical(raw,st.armor*(e.ironcoat>0?1.4:1)):resolveElementDamage(raw,effect.damageType,0,st.elementResistance[effect.damageType],[]))*(e.guard>0?.6:1);
-     if(st.block>0&&Math.random()<st.block)hurt*=.7;const counterReady=treeCounterReady(),loss=hitHero(e,hurt,{castId:enemyCastId,sourceId:u.id,skillId:typeof action!=='undefined'?action.id:'basic',element:typeof effect!=='undefined'?effect.damageType:'physical'});treeCounter(u,counterReady,loss);logs.push(u.name+' · '+action.name+' -'+Number(loss.toFixed(1)));if(heroDied())return logs;if(u.hp<=0)break;
+     if(st.block>0&&Math.random()<st.block)hurt*=.7;const counterReady=treeCounterReady(),loss=hitHero(e,hurt,{castId:enemyCastId,sourceId:u.id,skillId:typeof action!=='undefined'?action.id:'basic',element:typeof effect!=='undefined'?effect.damageType:'physical'});actionHpLoss+=loss;treeCounter(u,counterReady,loss);logs.push(u.name+' · '+action.name+' -'+Number(loss.toFixed(1)));if(heroDied())return logs;if(u.hp<=0)break;
     }
    }
+   const drain=DWARF_MONSTERS[u.definitionId]?.trait;if(drain?.type==='lifesteal'&&u.hp>0&&actionHpLoss>0){const heal=Math.max(0,Math.min(u.max-u.hp,actionHpLoss*drain.fraction,u.max*drain.perActionCap,u.max*drain.encounterCap-(u.lifestealHealed??0)));u.hp+=heal;u.lifestealHealed=(u.lifestealHealed??0)+heal;emitCombatDisplay(e,{kind:'heal',castId:enemyCastId,sourceId:u.id,targetId:u.id,skillId:'lifesteal',hpDelta:heal});}
    if(direct&&e.heroHp>0&&e.guard>0){const counter=physical(st.atk*(e.warcry>0?1.25:1)*(e.weakness>0?.8:1)*(st.count.guard>=4?1:.6)*treeDamage(passives,'physical','counter'),Math.max(0,u.armor-st.penetration));hitEnemy(u,counter,e,{kind:'counter',skillId:'guard'});logs.push('坚守反击 → '+u.name+' · '+counter);}
    continue;
   }
@@ -231,7 +244,7 @@ export function pauseMulti(s,paused,now){
   if(c.preparing){c.preparing.startedAt+=elapsed;c.preparing.completesAt+=elapsed;}
   return c;
  });if(!controls.every(validControl))return false;
- e.enemies.forEach((u,i)=>{u.control=controls[i];if(u.typedProfile){for(const k of ['nextBasicAt','shieldUntil','reflectReadyAt'])if(u[k]>0)u[k]+=elapsed;}});for(const dot of e.typedDots??[]){dot.nextAt+=elapsed;dot.endAt+=elapsed;}s.nextActionAt=clock+e.pauseRemainingAction;delete e.pauseAt;delete e.pauseRemainingAction;s.running=true;return true;
+ e.enemies.forEach((u,i)=>{u.control=controls[i];if(u.typedProfile){for(const k of ['nextBasicAt','shieldUntil','reflectReadyAt'])if(u[k]>0)u[k]+=elapsed;}});for(const dot of e.typedDots??[]){dot.nextAt+=elapsed;dot.endAt+=elapsed;}for(const key of ['pendingBasicAt','nextRegularAt','lastCombatEventAt'])if(e[key]!==undefined)e[key]+=elapsed;s.nextActionAt=clock+e.pauseRemainingAction;delete e.pauseAt;delete e.pauseRemainingAction;s.running=true;return true;
 }
 
 // New-tree production host. It shares this module's actual mitigation/HP/shield helpers.

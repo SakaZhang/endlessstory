@@ -524,7 +524,7 @@ function recordDungeonAreaClear(s,e){
  return true;
 }
 export function plannedNodes(s,now=Date.now()){
- const unlocked=getAreaProgress(s)?.unlocked??[1];return Object.values(PLANNED_INSTANCES).map(n=>({...n,name:n.name,areaNumber:AREAS[n.areaId].number,levelRange:[...AREAS[n.areaId].levelRange],unlocked:unlocked.includes(AREAS[n.areaId].number),budgetReady:dwarfBudgetReady(),readyAt:s.instanceCooldowns?.[n.id]??0,fieldId:n.areaId+'.field'}));
+ const unlocked=getAreaProgress(s)?.unlocked??[1];return Object.values(PLANNED_INSTANCES).map(n=>({...n,name:n.name,areaNumber:AREAS[n.areaId].number,levelRange:[...AREAS[n.areaId].levelRange],unlocked:unlocked.includes(AREAS[n.areaId].number),budgetReady:dwarfBudgetReady(AREAS[n.areaId].number),readyAt:s.instanceCooldowns?.[n.id]??0,fieldId:n.areaId+'.field'}));
 }
 export function normalizeContentMigration(s){
  if(s.contentMigration!==undefined)return s.contentMigration?.version===1&&typeof s.contentMigration.legacyDrain==='boolean'&&typeof s.contentMigration.reselectRequired==='boolean';
@@ -615,7 +615,7 @@ function validEncounter(e){
  if(e.instanceId===undefined&&['siteId','areaId','kind'].some(k=>e[k]!==undefined))return false;
  if(e.elementTags!==undefined&&(!Array.isArray(e.elementTags)||e.elementTags.length>6||new Set(e.elementTags).size!==e.elementTags.length||!e.elementTags.every(k=>ELEMENT_KEYS.includes(k))))return false;
  if(e.elementResistance!==undefined&&(!e.elementResistance||typeof e.elementResistance!=='object'||Array.isArray(e.elementResistance)||Object.keys(e.elementResistance).length!==6||!ELEMENT_KEYS.every(k=>number(e.elementResistance[k]))))return false;
- if(!e||typeof e!=='object'||Array.isArray(e)||![0,1,2].includes(e.location)||typeof e.name!=='string'||e.name.length>100||typeof e.boss!=='boolean'||typeof e.done!=='boolean'||typeof e.rewarded!=='boolean')return false;
+ if(!e||typeof e!=='object'||Array.isArray(e)||!(e.contentVersion==='dwarf-m2-v1'?AREAS[e.areaId]?.number-1===e.location&&INSTANCES[e.instanceId]?.areaId===e.areaId:[0,1,2].includes(e.location))||typeof e.name!=='string'||e.name.length>100||typeof e.boss!=='boolean'||typeof e.done!=='boolean'||typeof e.rewarded!=='boolean')return false;
  if(!['hp','max','atk','armor','heroHp','round','burn','broken','guard','stun','shield'].every(k=>number(e[k])))return false;
  if(!e.cd||typeof e.cd!=='object'||Array.isArray(e.cd)||!Object.entries(e.cd).every(([k,n])=>Object.hasOwn(SKILLS,k)&&number(n,100)))return false;
  if(!['warcry','ironcoat','blunt','scorch','barrier','barrierShield','heroBurn','heroBurnPower','weakness','nextHeavy','luck'].every(k=>e[k]===undefined||number(e[k])))return false;
@@ -674,7 +674,7 @@ export function startInstanceEncounter(s,instanceId,now=Date.now()){
 
 function startDwarfEncounter(s,instance,now){
  const treeCarry=s.dungeonRun?.carry;
- const area=AREAS[instance.areaId];if(!dwarfBudgetReady()||!getAreaProgress(s)?.unlocked.includes(area.number))return null;
+ const area=AREAS[instance.areaId];if(!dwarfBudgetReady(area.number)||!getAreaProgress(s)?.unlocked.includes(area.number))return null;
  const stage=s.dungeonRun?.stage??1,rank=instance.kind==='boss'?'boss':instance.kind==='dungeon'&&stage===3?'elite':'normal',pool=dwarfEligibleMonsters(instance.id,rank);
  if(!pool.length)return null;
  const st=stats(s),id='m2-'+Math.floor(now)+'-'+(++serial),seed=rand(0,0xffffffff),e={contentVersion:'dwarf-m2-v1',location:area.number-1,siteId:instance.siteId,areaId:instance.areaId,instanceId:instance.id,kind:instance.kind,luck:st.luck,boss:instance.kind==='boss',heroHp:s.heroHp,round:0,warcry:0,ironcoat:0,barrier:0,barrierShield:0,heroBurn:0,heroBurnPower:0,weakness:0,guard:0,cd:{},shelterUsed:false,shield:0,done:false,rewarded:false,killSource:null,multiVersion:1,id,rngState:seed,rngDraws:0,itemSerial:0,summonSerial:0,activeCastCount:0,enemies:[],typedDots:[]};
@@ -796,14 +796,15 @@ export function combatStatuses(e){
 function stepImpl(s,e,now=Date.now(),treeSkills=null){
  if(!e||e!==s.activeEncounter||e.done||e.pauseAt!==undefined||!normalizeHealth(s,now)||s.restUntil>0)return[];
  ensureEncounterAffixes(e);e.heroHp=Math.min(e.heroHp,stats(s).hp);s.heroHp=e.heroHp;const drank=autoDrinkPotion(s,e,now);
- const turn={burnAtStart:e.heroBurn??0,burnTicked:false},logs=e.multiVersion===1?withMultiRng(e,()=>stepMulti(s,e,turn,{stats:treeSkills?baseStats:stats,SKILLS,skillUnlocked,resolveElementDamage,treeSkills,now:s.lastHealthClock,makeSummon:(u,n)=>normalizeEncounterElements(makeMultiUnit(e.id+'-summon-'+n,u.location,u.sourceInstanceId,LOCS[u.location],s.lastHealthClock))})):combatStep(s,e,turn);
+ const eventAt=s.lastHealthClock,basicOnly=e.multiVersion===1&&Number.isFinite(e.pendingBasicAt)&&e.pendingBasicAt<=eventAt&&e.pendingBasicAt<(e.nextRegularAt??Infinity),combatDeltaMs=basicOnly?(e.pendingBasicDelayMs??165):1100-(e.basicMicroElapsed??0);
+ const turn={burnAtStart:e.heroBurn??0,burnTicked:false},logs=e.multiVersion===1?withMultiRng(e,()=>stepMulti(s,e,turn,{stats:treeSkills?baseStats:stats,SKILLS,skillUnlocked,resolveElementDamage,treeSkills,basicOnly,combatDeltaMs,now:s.lastHealthClock,makeSummon:(u,n)=>normalizeEncounterElements(makeMultiUnit(e.id+'-summon-'+n,u.location,u.sourceInstanceId,LOCS[u.location],s.lastHealthClock))})):combatStep(s,e,turn);
  // Every executed player round consumes one turn of temporary player statuses,
  // including an early lethal hit. Do not run skipped damage phases.
- for(const field of ['guard','warcry','ironcoat','barrier','weakness'])e[field]=Math.max(0,(e[field]??0)-1);
- if(turn.burnAtStart>0&&!turn.burnTicked&&e.heroBurn>0)e.heroBurn--;
+ if(!basicOnly)for(const field of ['guard','warcry','ironcoat','barrier','weakness'])e[field]=Math.max(0,(e[field]??0)-1);
+ if(!basicOnly&&turn.burnAtStart>0&&!turn.burnTicked&&e.heroBurn>0)e.heroBurn--;
  if(!e.heroBurn)e.heroBurnPower=0;
  if(!e.barrier)e.barrierShield=0;
- s.nextActionAt=s.lastHealthClock+1100;if(drank)logs.unshift('自动饮用 · '+POTIONS[parsePotionKey(s.potionSlot.key).type].name);s.heroHp=Math.max(0,Math.min(stats(s).hp,e.heroHp));
+ if(e.multiVersion===1){e.lastCombatEventAt=eventAt;if(basicOnly)e.basicMicroElapsed=combatDeltaMs;else {delete e.basicMicroElapsed;e.nextRegularAt=eventAt+1100;}s.nextActionAt=Math.min(e.nextRegularAt??eventAt+1100,e.pendingBasicAt??Infinity);}else s.nextActionAt=eventAt+1100;if(drank)logs.unshift('自动饮用 · '+POTIONS[parsePotionKey(s.potionSlot.key).type].name);s.heroHp=Math.max(0,Math.min(stats(s).hp,e.heroHp));
  if(s.heroHp<=0){const resume=!e.developmentFixture&&!!s.running&&!e.boss&&!s.stopAfterBattle&&(e.kind!=='dungeon'||!!s.expedition?.loop);startRest(s,now,resume);completeLegacyHandoff(s);s.stopAfterBattle=false;}return logs;
 }
 function selectedTreeRules(s,parameters=TREE_TUNING){
@@ -941,7 +942,7 @@ export function offline(s,now=Date.now()){
   const turnAt=Math.max(time,s.nextActionAt??(time+1100));if(turnAt>end)break;time=turnAt;
   const wasResting=s.restUntil>0;step(s,e,time);rounds++;if(!wasResting&&s.restUntil>0)rests++;
   if(e.done&&e.win){reward(s,e,time);mergeLootSummary(lootSummary,e.lootSummary);kills++;}
-  if(rounds>13100)break;
+  if(rounds>26200)break; // At most one delayed-basic micro-event per regular 1.1s round within 4h.
  }
  // Time beyond the reward cap may finish rest/expire buffs, never grants extra kills.
  settleRest(s,Math.max(now,start));s.lastSeen=Math.max(now,start);
@@ -1168,7 +1169,7 @@ export function validSave(s){
  if(s.activeEncounter?.skillResolver!==undefined&&(s.activeEncounter.skillResolver!=='tree-v1'||s.skillTree?.mode!=='active'||s.activeEncounter.multiVersion!==1))return false;
  if(s.supportGrantEligible!==undefined&&typeof s.supportGrantEligible!=='boolean')return false;
  if(s.developmentEquipmentSandbox!==undefined&&s.developmentEquipmentSandbox!==true)return false;
- if(s.version!==SCHEMA_VERSION||s.race!=='dwarf'||s.hero!=='布洛克'||!Number.isInteger(s.level)||s.level<1||s.level>=100000||!num(s.xp)||!num(s.gold)||!Number.isInteger(s.location)||s.location<0||s.location>2)return false;
+ if(s.version!==SCHEMA_VERSION||s.race!=='dwarf'||s.hero!=='布洛克'||!Number.isInteger(s.level)||s.level<1||s.level>=100000||!num(s.xp)||!num(s.gold)||!Number.isInteger(s.location)||s.location<0||!([...SITES,...Object.values(PLANNED_INSTANCES)].some(x=>x.contentVersion?AREAS[x.areaId].number-1===s.location&&s.siteId===x.siteId:x.legacyIndex===s.location)))return false;
  if(s.activeEncounter?.pauseAt!==undefined&&s.running)return false;
  if(s.activeEncounter?.kind==='dungeon'&&(!s.dungeonRun||s.activeEncounter.runId!==s.dungeonRun.runId||s.activeEncounter.dungeonStage!==s.dungeonRun.stage))return false;
  if(s.contentMigration!==undefined&&(s.contentMigration?.version!==1||typeof s.contentMigration.legacyDrain!=='boolean'||typeof s.contentMigration.reselectRequired!=='boolean'))return false;

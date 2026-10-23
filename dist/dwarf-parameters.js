@@ -1,17 +1,19 @@
-// Approved source copied verbatim numerically; shared calibration originals remain unchanged.
+// Approved numerical provider; only review/status metadata differs from the shared final source.
 const freeze=x=>{for(const v of Object.values(x))if(v&&typeof v==='object')freeze(v);return Object.freeze(x);};
 export const DWARF_PARAMETER_PROVENANCE=freeze({
-  "sourceId": "m2-dwarf-a01-a03-final-candidate-20261022",
-  "providerSha256": "cd05ed7ad2204862f8978c55489305904b6b3f32c230d4585f474a5dfae126bc",
+  "sourceId": "dwarf-a04-a06-v039-field-pressure-candidate",
+  "providerSha256": "8889b7f4f9087825d3e99e168e95b43bcb7c9120eb097c173a8acf6f4195644d",
   "recoveryPatchSha256": "a437b5f647a760c70192bec686a7a3a9c7e106689866257a78423ce96022d419",
-  "authorization": "Root approved after independent narrow review",
-  "authorizedOn": "2026-10-22",
-  "unpatchedMaterialRowsSha256": "ece5872085b772008728fa8500c02e5250f8bd24184e074e4503c71fd130f058"
+  "authorization": "Root approved final A04–A06 initial parameters after actual host matrix and four-hour parity",
+  "authorizedOn": "2026-10-23",
+  "unpatchedMaterialRowsSha256": "ece5872085b772008728fa8500c02e5250f8bd24184e074e4503c71fd130f058",
+  "previousProviderSha256": "cd05ed7ad2204862f8978c55489305904b6b3f32c230d4585f474a5dfae126bc",
+  "manifestSha256": "d0dbe2dc7539942b5ddbbf50fbc810fa8aa63c5cd81592762983c8b1ab76cf0b"
 });
 export const PRODUCTION_DWARF_PARAMETERS=freeze({
-  "id": "m2-dwarf-a01-a03-final-candidate-20261022",
+  "id": "dwarf-a04-a06-v039-field-pressure-candidate",
   "reviewed": true,
-  "status": "root-approved-production-2026-10-22",
+  "status": "root-approved-production-2026-10-23",
   "fieldGroupChance": 0.04,
   "clearRewards": {
     "1": {
@@ -31,6 +33,27 @@ export const PRODUCTION_DWARF_PARAMETERS=freeze({
     "3": {
       "gold": 8,
       "xp": 48,
+      "materialRounds": 0,
+      "gearChance": 0.35,
+      "markChance": 0.02
+    },
+    "4": {
+      "gold": 8,
+      "xp": 56,
+      "materialRounds": 0,
+      "gearChance": 0.35,
+      "markChance": 0.02
+    },
+    "5": {
+      "gold": 8,
+      "xp": 64,
+      "materialRounds": 0,
+      "gearChance": 0.35,
+      "markChance": 0.02
+    },
+    "6": {
+      "gold": 10,
+      "xp": 72,
       "materialRounds": 0,
       "gearChance": 0.35,
       "markChance": 0.02
@@ -257,6 +280,227 @@ export const PRODUCTION_DWARF_PARAMETERS=freeze({
         "light": 6,
         "dark": 19
       }
+    },
+    "dwarf.a04.normal.1": {
+      "hp": 2380,
+      "atk": 4,
+      "armor": 28,
+      "elementalPower": 2,
+      "basicIntervalMs": 2200,
+      "rewardGold": 4,
+      "rewardXp": 28,
+      "elementResistance": {
+        "earth": 6,
+        "water": 6,
+        "fire": 20,
+        "wind": 6,
+        "light": 6,
+        "dark": 6
+      }
+    },
+    "dwarf.a04.normal.2": {
+      "hp": 1918,
+      "atk": 4,
+      "armor": 19,
+      "elementalPower": 2,
+      "basicIntervalMs": 1800,
+      "rewardGold": 4,
+      "rewardXp": 28,
+      "elementResistance": {
+        "earth": 6,
+        "water": 6,
+        "fire": 20,
+        "wind": 20,
+        "light": 6,
+        "dark": 6
+      }
+    },
+    "dwarf.a04.normal.3": {
+      "hp": 3076,
+      "atk": 5,
+      "armor": 39,
+      "elementalPower": 2,
+      "basicIntervalMs": 2800,
+      "rewardGold": 4,
+      "rewardXp": 28,
+      "elementResistance": {
+        "earth": 20,
+        "water": 6,
+        "fire": 20,
+        "wind": 6,
+        "light": 6,
+        "dark": 6
+      }
+    },
+    "dwarf.a04.elite": {
+      "hp": 9146,
+      "atk": 161,
+      "armor": 45,
+      "elementalPower": 40,
+      "basicIntervalMs": 2200,
+      "rewardGold": 18,
+      "rewardXp": 92,
+      "elementResistance": {
+        "earth": 7,
+        "water": 7,
+        "fire": 20,
+        "wind": 20,
+        "light": 7,
+        "dark": 7
+      }
+    },
+    "dwarf.a05.normal.1": {
+      "hp": 2989,
+      "atk": 7,
+      "armor": 30,
+      "elementalPower": 3,
+      "basicIntervalMs": 2200,
+      "rewardGold": 4,
+      "rewardXp": 32,
+      "elementResistance": {
+        "earth": 21,
+        "water": 21,
+        "fire": 7,
+        "wind": 7,
+        "light": 7,
+        "dark": 7
+      }
+    },
+    "dwarf.a05.normal.2": {
+      "hp": 2406,
+      "atk": 5,
+      "armor": 21,
+      "elementalPower": 3,
+      "basicIntervalMs": 1800,
+      "rewardGold": 4,
+      "rewardXp": 32,
+      "elementResistance": {
+        "earth": 7,
+        "water": 21,
+        "fire": 7,
+        "wind": 21,
+        "light": 7,
+        "dark": 7
+      }
+    },
+    "dwarf.a05.normal.3": {
+      "hp": 3839,
+      "atk": 8,
+      "armor": 42,
+      "elementalPower": 3,
+      "basicIntervalMs": 2800,
+      "rewardGold": 4,
+      "rewardXp": 32,
+      "elementResistance": {
+        "earth": 21,
+        "water": 7,
+        "fire": 7,
+        "wind": 7,
+        "light": 7,
+        "dark": 7
+      }
+    },
+    "dwarf.a05.elite": {
+      "hp": 11190,
+      "atk": 230,
+      "armor": 49,
+      "elementalPower": 50,
+      "basicIntervalMs": 2200,
+      "rewardGold": 18,
+      "rewardXp": 106,
+      "elementResistance": {
+        "earth": 8,
+        "water": 22,
+        "fire": 8,
+        "wind": 8,
+        "light": 8,
+        "dark": 8
+      }
+    },
+    "dwarf.a06.normal.1": {
+      "hp": 3740,
+      "atk": 9,
+      "armor": 32,
+      "elementalPower": 4,
+      "basicIntervalMs": 2200,
+      "rewardGold": 5,
+      "rewardXp": 36,
+      "elementResistance": {
+        "earth": 22,
+        "water": 8,
+        "fire": 22,
+        "wind": 8,
+        "light": 8,
+        "dark": 8
+      }
+    },
+    "dwarf.a06.normal.2": {
+      "hp": 3031,
+      "atk": 7,
+      "armor": 22,
+      "elementalPower": 4,
+      "basicIntervalMs": 1800,
+      "rewardGold": 5,
+      "rewardXp": 36,
+      "elementResistance": {
+        "earth": 8,
+        "water": 22,
+        "fire": 8,
+        "wind": 22,
+        "light": 8,
+        "dark": 8
+      }
+    },
+    "dwarf.a06.normal.3": {
+      "hp": 4777,
+      "atk": 11,
+      "armor": 45,
+      "elementalPower": 4,
+      "basicIntervalMs": 2800,
+      "rewardGold": 5,
+      "rewardXp": 36,
+      "elementResistance": {
+        "earth": 22,
+        "water": 8,
+        "fire": 22,
+        "wind": 8,
+        "light": 8,
+        "dark": 8
+      }
+    },
+    "dwarf.a06.elite": {
+      "hp": 13854,
+      "atk": 327,
+      "armor": 52,
+      "elementalPower": 61,
+      "basicIntervalMs": 2200,
+      "rewardGold": 23,
+      "rewardXp": 119,
+      "elementResistance": {
+        "earth": 23,
+        "water": 8,
+        "fire": 23,
+        "wind": 8,
+        "light": 8,
+        "dark": 8
+      }
+    },
+    "dwarf.a06.boss": {
+      "hp": 29774,
+      "atk": 327,
+      "armor": 60,
+      "elementalPower": 85,
+      "basicIntervalMs": 2200,
+      "rewardGold": 75,
+      "rewardXp": 468,
+      "elementResistance": {
+        "earth": 23,
+        "water": 8,
+        "fire": 23,
+        "wind": 8,
+        "light": 8,
+        "dark": 8
+      }
     }
   },
   "skillOverrides": {
@@ -278,5 +522,13 @@ export const PRODUCTION_DWARF_PARAMETERS=freeze({
     "elite": 0.2,
     "boss": 0.4
   },
-  "interruptStopMs": 1100
+  "interruptStopMs": 1100,
+  "areas": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ]
 });

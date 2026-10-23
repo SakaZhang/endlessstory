@@ -104,11 +104,11 @@ export function buildRegionSnapshot(s, now=Date.now(), sourceFocus=null, overrid
   const navigation=Engine.getRegionNavigation(s)??{exploredAreaIds:[],favoriteNodeIds:[],discoveryLedger:{version:1,discovered:{}}};
   const exploredAreaIds=overrides.exploredAreaIds??navigation.exploredAreaIds;
   const visibleAreaIds=overrides.visibleAreaIds??Object.values(PLANNED_AREAS).map(a=>a.id);
-  const areas=Object.values(PLANNED_AREAS).map(a=>({...a,implemented:true,visible:visibleAreaIds.includes(a.id),unlocked:nodes.some(n=>n.areaId===a.id&&n.unlocked)}));
+  const areas=Object.values(PLANNED_AREAS).map(a=>({...a,implemented:a.number<=3||nodes.some(n=>n.areaId===a.id&&n.budgetReady),visible:visibleAreaIds.includes(a.id),unlocked:nodes.some(n=>n.areaId===a.id&&n.unlocked)}));
   const monstersByNode=Object.fromEntries(nodes.map(n=>[n.id,Object.values(MONSTER_CATALOG).filter(m=>m.sources.includes(n.id))]));
   const materialIdsByNode=Object.fromEntries(nodes.map(n=>[n.id,[...new Set(monstersByNode[n.id].flatMap(m=>monsterMaterialPool(m.id,n.id)).map(resolveDwarfMaterialId).filter(Boolean))]]));
   return {now,nodes,areas,sourceFocus,exploredAreaIds:[...exploredAreaIds],favoriteNodeIds:[...(overrides.favoriteNodeIds??navigation.favoriteNodeIds)],
-    adjacency:{'dwarf.a01':[{areaId:'dwarf.a02',side:'right'}],'dwarf.a02':[{areaId:'dwarf.a01',side:'left'},{areaId:'dwarf.a03',side:'right'}],'dwarf.a03':[{areaId:'dwarf.a02',side:'left'},{areaId:'dwarf.a04',side:'right'}]},
+    adjacency:Object.fromEntries(Object.values(PLANNED_AREAS).map(a=>[a.id,[...(a.number>1?[{areaId:'dwarf.a'+String(a.number-1).padStart(2,'0'),side:'left'}]:[]),...(a.number<10?[{areaId:'dwarf.a'+String(a.number+1).padStart(2,'0'),side:'right'}]:[])]])),
     monstersByNode,materialIdsByNode,materialCatalog:DWARF_MATERIALS,
     encounteredMonsterIds:Object.keys(s.monsterLedger?.encountered??{}).filter(id=>s.monsterLedger.encountered[id]===true),
     discoveryLedger:overrides.discoveryLedger??navigation.discoveryLedger,migration:s.contentMigration,
