@@ -110,3 +110,6 @@ for(const file of ['skill-tree-state-tests.mjs','skill-tree-preparation-tests.mj
 
 // v0.37 constant racial forge policy and actual transactions use isolated realms.
 for(const file of ['dwarf-forge-favor-tests.mjs','dwarf-forge-production-tests.mjs','dwarf-forge-enhancement-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+// Presentation observers must leave real simulation/RNG untouched.
+for(const file of ['combat-display-bridge-tests.mjs','combat-display-potion-tests.mjs','battle-slice-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});

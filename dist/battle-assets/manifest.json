@@ -1,0 +1,466 @@
+{
+  "version": 2,
+  "provenance": "Original generated raster art via built-in image_gen. User-approved original concept used as visual reference. No third-party game assets. No separate license grant implied.",
+  "logicalScene": [
+    480,
+    270
+  ],
+  "rendering": "nearest-neighbor only, integer scene scale recommended",
+  "baselineY": 203,
+  "sprites": {
+    "dwarf": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "right",
+      "uniformSourceScale": 0.24,
+      "frames": [
+        {
+          "id": "idle-0",
+          "file": "sprites/dwarf-idle-0.png",
+          "sourceCrop": [
+            0,
+            0,
+            548,
+            460
+          ],
+          "sourceAnchor": [
+            212,
+            445
+          ],
+          "alphaBBox": [
+            52,
+            75,
+            177,
+            178
+          ],
+          "durationMs": 120
+        },
+        {
+          "id": "idle-1",
+          "file": "sprites/dwarf-idle-1.png",
+          "sourceCrop": [
+            548,
+            0,
+            935,
+            460
+          ],
+          "sourceAnchor": [
+            666,
+            445
+          ],
+          "alphaBBox": [
+            68,
+            74,
+            161,
+            177
+          ],
+          "durationMs": 120
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/dwarf-anticipation.png",
+          "sourceCrop": [
+            935,
+            0,
+            1335,
+            460
+          ],
+          "sourceAnchor": [
+            1120,
+            445
+          ],
+          "alphaBBox": [
+            52,
+            81,
+            147,
+            179
+          ],
+          "durationMs": 120
+        },
+        {
+          "id": "windup",
+          "file": "sprites/dwarf-windup.png",
+          "sourceCrop": [
+            1335,
+            0,
+            1774,
+            460
+          ],
+          "sourceAnchor": [
+            1560,
+            445
+          ],
+          "alphaBBox": [
+            42,
+            74,
+            146,
+            177
+          ],
+          "durationMs": 120
+        },
+        {
+          "id": "strike",
+          "file": "sprites/dwarf-strike.png",
+          "sourceCrop": [
+            0,
+            460,
+            548,
+            887
+          ],
+          "sourceAnchor": [
+            212,
+            833
+          ],
+          "alphaBBox": [
+            45,
+            86,
+            177,
+            184
+          ],
+          "durationMs": 90
+        },
+        {
+          "id": "followthrough",
+          "file": "sprites/dwarf-followthrough.png",
+          "sourceCrop": [
+            548,
+            460,
+            945,
+            887
+          ],
+          "sourceAnchor": [
+            666,
+            833
+          ],
+          "alphaBBox": [
+            68,
+            91,
+            163,
+            180
+          ],
+          "durationMs": 120
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/dwarf-recovery.png",
+          "sourceCrop": [
+            945,
+            460,
+            1380,
+            887
+          ],
+          "sourceAnchor": [
+            1088,
+            833
+          ],
+          "alphaBBox": [
+            62,
+            86,
+            166,
+            183
+          ],
+          "durationMs": 120
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/dwarf-hurt.png",
+          "sourceCrop": [
+            1380,
+            460,
+            1774,
+            887
+          ],
+          "sourceAnchor": [
+            1550,
+            833
+          ],
+          "alphaBBox": [
+            55,
+            92,
+            150,
+            184
+          ],
+          "durationMs": 120
+        }
+      ],
+      "animations": {
+        "idle": [
+          "idle-0",
+          "idle-1"
+        ],
+        "attack": [
+          "anticipation",
+          "windup",
+          "strike",
+          "followthrough",
+          "recovery"
+        ],
+        "hurt": [
+          "hurt",
+          "idle-0"
+        ]
+      }
+    },
+    "lizard": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.16,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/lizard-idle.png",
+          "sourceCrop": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "sourceAnchor": [
+            340,
+            560
+          ],
+          "alphaBBox": [
+            49,
+            100,
+            138,
+            185
+          ],
+          "durationMs": 120
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/lizard-anticipation.png",
+          "sourceCrop": [
+            627,
+            0,
+            1254,
+            627
+          ],
+          "sourceAnchor": [
+            900,
+            560
+          ],
+          "alphaBBox": [
+            52,
+            94,
+            148,
+            186
+          ],
+          "durationMs": 120
+        },
+        {
+          "id": "strike",
+          "file": "sprites/lizard-strike.png",
+          "sourceCrop": [
+            0,
+            627,
+            627,
+            1254
+          ],
+          "sourceAnchor": [
+            340,
+            1150
+          ],
+          "alphaBBox": [
+            43,
+            92,
+            142,
+            188
+          ],
+          "durationMs": 90
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/lizard-hurt.png",
+          "sourceCrop": [
+            627,
+            627,
+            1254,
+            1254
+          ],
+          "sourceAnchor": [
+            960,
+            1150
+          ],
+          "alphaBBox": [
+            43,
+            92,
+            132,
+            187
+          ],
+          "durationMs": 120
+        }
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ]
+      }
+    },
+    "golem": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.18,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/golem-idle.png",
+          "sourceCrop": [
+            0,
+            0,
+            700,
+            650
+          ],
+          "sourceAnchor": [
+            420,
+            605
+          ],
+          "alphaBBox": [
+            24,
+            78,
+            143,
+            181
+          ],
+          "durationMs": 120
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/golem-anticipation.png",
+          "sourceCrop": [
+            700,
+            0,
+            1330,
+            650
+          ],
+          "sourceAnchor": [
+            1025,
+            605
+          ],
+          "alphaBBox": [
+            38,
+            74,
+            145,
+            184
+          ],
+          "durationMs": 120
+        },
+        {
+          "id": "strike",
+          "file": "sprites/golem-strike.png",
+          "sourceCrop": [
+            0,
+            650,
+            700,
+            1182
+          ],
+          "sourceAnchor": [
+            500,
+            1090
+          ],
+          "alphaBBox": [
+            10,
+            97,
+            130,
+            190
+          ],
+          "durationMs": 90
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/golem-hurt.png",
+          "sourceCrop": [
+            700,
+            650,
+            1330,
+            1182
+          ],
+          "sourceAnchor": [
+            1080,
+            1090
+          ],
+          "alphaBBox": [
+            35,
+            97,
+            138,
+            191
+          ],
+          "durationMs": 120
+        }
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ]
+      }
+    }
+  },
+  "backgrounds": [
+    {
+      "id": "cave",
+      "file": "backgrounds/cave.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0,
+      "parallax": 0.15,
+      "hasAlpha": false
+    },
+    {
+      "id": "stage",
+      "file": "backgrounds/stage.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 1,
+      "parallax": 1,
+      "hasAlpha": true
+    }
+  ],
+  "limitations": [
+    "AI-generated pixel-style source, not hand-authored exact palette/grid. Logical exports are nearest-neighbor normalized, not native pixel generation.",
+    "Source sheet spacing is imperfect; explicit crop regions recorded rather than claiming perfectly uniform source cells.",
+    "Minor pose/volume variation remains, especially golem pickaxe handedness; 4-frame enemy motion is intentionally limited.",
+    "Dwarf strike contains baked-in slash; do not double-add equivalent effect. Tiny slash tip clipped at frame region boundary.",
+    "Background is two independent generated layers, not a sliced screenshot. Far layer contains static cave rim and bridge together; no independent bridge parallax."
+  ]
+}
