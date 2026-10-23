@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import {fresh,validSave,effectiveLuck} from './dist/engine.js';
+import {clearAndRestartNoBackup,SAVE_KEY,LEGACY_KEY,BACKUP_PREFIX} from './dist/storage.js';
+const initial=[[SAVE_KEY,'old save bytes'],[LEGACY_KEY,'legacy bytes'],[BACKUP_PREFIX+'a','backup a'],[BACKUP_PREFIX+'b','backup b'],['other-site-key','untouched'],['ashencrown-backup','not prefix']];
+function storage({failSet=false,failRemove=false,failRollback=false,failRead=false}={}){
+ const map=new Map(initial),calls=[];let failed=false;return {map,calls,get length(){return map.size;},key(i){return [...map.keys()][i]??null;},getItem(k){if(failRead)throw Error('read');return map.get(k)??null;},setItem(k,v){calls.push(['set',k,v]);if(failSet||failed&&failRollback)throw Error('write');map.set(k,v);},removeItem(k){calls.push(['remove',k]);if(failRemove&&k===BACKUP_PREFIX+'b'){failed=true;throw Error('remove');}map.delete(k);},clear(){throw Error('Must never clear unrelated origin data');}};
+}
+const game=fresh(),before=JSON.stringify(game),now=1770000000000;
+let st=storage();assert.equal(st.calls.length,0,'import alone performs no storage operations');let result=clearAndRestartNoBackup(st,game,{now});assert(result.ok);assert(validSave(result.game));assert.equal(result.game.lastSeen,now);assert.equal(result.game.offlineLuck,effectiveLuck(game));assert.equal(JSON.stringify(game),before);assert.equal(st.getItem(LEGACY_KEY),null);assert.equal(st.getItem(BACKUP_PREFIX+'a'),null);assert.equal(st.getItem(BACKUP_PREFIX+'b'),null);assert.equal(st.getItem('other-site-key'),'untouched');assert.equal(st.getItem('ashencrown-backup'),'not prefix');assert.deepEqual(st.calls.filter(x=>x[0]==='set').map(x=>x[1]),[SAVE_KEY],'no backup key created');assert.equal(st.calls[0][0],'set');
+st=storage({failSet:true});result=clearAndRestartNoBackup(st,game,{now});assert(!result.ok&&!result.rollbackFailed);assert.deepEqual([...st.map],initial);assert(!st.calls.some(x=>x[0]==='remove'),'failed first write never deletes old data');
+st=storage({failRemove:true});result=clearAndRestartNoBackup(st,game,{now});assert(!result.ok&&!result.rollbackFailed);assert.deepEqual(Object.fromEntries(st.map),Object.fromEntries(initial),'remove failure restores every old byte');assert.equal(result.game,undefined);
+st=storage({failRemove:true,failRollback:true});result=clearAndRestartNoBackup(st,game,{now});assert(!result.ok&&result.rollbackFailed,'persistent storage failure cannot claim successful rollback');assert.equal(st.getItem('other-site-key'),'untouched');
+st=storage({failRead:true});assert.equal(clearAndRestartNoBackup(st,game,{now}).reason,'storage-read');assert.equal(st.calls.length,0);
+for(const candidate of [null,{}, {version:999}]){st=storage();assert.equal(clearAndRestartNoBackup(st,candidate,{now}).reason,'invalid-candidate');assert.equal(st.calls.length,0);}
+st=storage();assert.equal(clearAndRestartNoBackup(st,game,{now:NaN}).reason,'invalid-candidate');assert.equal(st.calls.length,0);assert.equal(JSON.stringify(game),before);
+st=storage({failRemove:true});st.map.delete(SAVE_KEY);result=clearAndRestartNoBackup(st,game,{now});assert(!result.ok&&!result.rollbackFailed);assert.equal(st.getItem(SAVE_KEY),null,'rollback restores absent original SAVE');
+const random=Math.random;Math.random=()=>{throw Error('reset helper consumed RNG');};try{assert(clearAndRestartNoBackup(storage(),game,{now}).ok);}finally{Math.random=random;}
+console.log('PASS explicit no-backup restart: precise keys, valid fresh save, immutable input, write-before-delete, remove rollback byte restoration, failed rollback reported, unrelated keys untouched.');

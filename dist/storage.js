@@ -38,3 +38,30 @@ export function commitGameTransaction(storage,game,operation,{commitOnNoop=false
  try{storage.setItem(SAVE_KEY,JSON.stringify(candidate));}catch{return {ok:false,game,value:null,reason:'storage'};}
  return {ok:true,game:candidate,value,reason:null};
 }
+
+// Explicit user action only. Keep the rollback snapshot in memory, never as a backup key.
+export function clearAndRestartNoBackup(storage,freshState,{now=Date.now()}={}){
+ let candidate,raw;
+ try{
+  if(!Number.isFinite(now)||now<0)throw Error('Invalid clock');
+  candidate=structuredClone(freshState);candidate.lastSeen=now;candidate.offlineLuck=effectiveLuck(candidate);
+  if(!validSave(candidate)||candidate.developmentEquipmentSandbox===true)throw Error('Invalid fresh save');
+  raw=JSON.stringify(candidate);
+ }catch{return {ok:false,reason:'invalid-candidate',rollbackFailed:false};}
+ const snapshot=new Map();
+ try{
+  const keys=new Set([SAVE_KEY,LEGACY_KEY]);
+  for(let i=0;i<storage.length;i++){const key=storage.key(i);if(typeof key==='string'&&key.startsWith(BACKUP_PREFIX))keys.add(key);}
+  for(const key of keys)snapshot.set(key,storage.getItem(key));
+ }catch{return {ok:false,reason:'storage-read',rollbackFailed:false};}
+ try{
+  storage.setItem(SAVE_KEY,raw);
+  for(const [key,value]of snapshot)if(key!==SAVE_KEY&&value!==null)storage.removeItem(key);
+  return {ok:true,game:candidate,reason:null,rollbackFailed:false};
+ }catch{
+  let rollbackFailed=false;
+  for(const [key,value]of snapshot){try{if(storage.getItem(key)===value)continue;if(value===null)storage.removeItem(key);else storage.setItem(key,value);}catch{rollbackFailed=true;}}
+  for(const [key,value]of snapshot){try{if(storage.getItem(key)!==value)rollbackFailed=true;}catch{rollbackFailed=true;}}
+  return {ok:false,reason:'storage',rollbackFailed};
+ }
+}

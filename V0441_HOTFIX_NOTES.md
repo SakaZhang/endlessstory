@@ -6,3 +6,6 @@ Scope remains A01–A03 (13 canonical monster IDs plus A02 juvenile variant). No
 - The publication build places the entire resource graph (ESM modules, CSS, manifest and images) under a deterministic content-hash namespace. Root index and preview URLs remain unchanged and same-origin. A refreshed new entry cannot combine its dependencies with cached unversioned v0.35 modules.
 - This does not erase browser data or require a fresh character. Unknown weapon identity and uncovered areas still use honest fallback.
 - Native rendering and actual App test evidence are not full-page browser QA. The reported user's exact region/weapon/cache remains unknown until confirmed; old v0.25 weapons independently reproduce a genuine compatibility failure.
+
+## Explicit no-backup restart
+Settings now offers a separate “清空并重开（不留备份）” action with confirmation. It replaces only this game's main key and deletes its legacy key and backup prefix keys. The old backup-preserving restart remains available. Nothing is cleared merely by loading the page. Storage failure does not adopt the fresh game; in-memory rollback is attempted, and a rollback failure is reported rather than presented as success.

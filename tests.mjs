@@ -135,3 +135,4 @@ runAffixSourceTest(process.execPath,[new URL('./live-battle-a03-tests.mjs',impor
 // v0.44.1: real historical weapon display and immutable release resource graph.
 runAffixSourceTest(process.execPath,[new URL('./live-battle-legacy-hero-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
 runAffixSourceTest(process.execPath,[new URL('./release-cache-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+runAffixSourceTest(process.execPath,[new URL('./storage-clear-no-backup-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
