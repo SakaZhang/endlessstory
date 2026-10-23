@@ -160,3 +160,6 @@ runAffixSourceTest(process.execPath,[new URL('./material-pixel-art-tests.mjs',im
 
 // v0.55 exact potion / utility art without modifying effects or costs.
 runAffixSourceTest(process.execPath,[new URL('./consumable-pixel-art-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.56 reuse exact battle idle artwork in codex/source/unit portraits.
+runAffixSourceTest(process.execPath,[new URL('./monster-pixel-portrait-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});

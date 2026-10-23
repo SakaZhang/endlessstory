@@ -1,0 +1,9 @@
+/* Keep existing responsive portrait dimensions; fit exact idle silhouette inside each slot. */
+.monsterPixelPortrait{display:inline-block;position:relative;overflow:hidden;vertical-align:middle;image-rendering:pixelated;background:#14212a}
+.monsterPixelImage{display:block;position:absolute;max-width:none!important;max-height:none!important;image-rendering:pixelated;pointer-events:none}
+.monsterPixelError[hidden]{display:none}.monsterPixelError:not([hidden]){display:grid;place-items:center;position:absolute;inset:0;font-size:12px;line-height:1.2;color:#ecddbb;text-align:center;overflow-wrap:anywhere}
+.monsterPixelPortrait:has(.monsterPixelError:not([hidden]))>.monsterPixelImage{display:none}
+.monsterPixelUnknown,.monsterPixelUnavailable{display:inline-grid;place-items:center;vertical-align:middle;background:#14212a;color:#b6c0c7;font-size:12px;line-height:1.2;text-align:center}
+.monsterPixelUnknown>svg{width:50%;height:50%}
+.enemyPortrait>.monsterPortrait{display:block;width:100%;height:100%;margin:0}
+.monsterTile strong{font-size:12px}
