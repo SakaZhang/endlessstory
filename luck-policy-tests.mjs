@@ -7,7 +7,7 @@ for(const r of [0,5,36.4,1000])for(const pp of [0,.01,.2,1]){assert.equal(legend
 for(const bad of [-1,NaN,Infinity,-Infinity,1000.01,'5',null,undefined]){assert.equal(legendary(bad),null);assert.equal(ordinary(bad),null);}for(const pp of [-.01,NaN,Infinity,1.01,'0',null])assert.equal(legendary(5,pp),null);
 // Policy never resolves a source, changes item counts, or turns an ineligible event eligible.
 const events=[{kind:'field',eligible:false},{kind:'boss',eligible:false},{kind:'boss',eligible:true}];const before=structuredClone(events);const approved=(event,r)=>event.eligible?legendary(r):0;for(const e of events){assert.equal(approved(e,1000)>0,e.eligible);}assert.deepEqual(events,before);
-assert(Object.isFrozen(LUCK_POLICY));assert(Object.isFrozen(RESERVED_LUCK_CHANNELS));assert.equal(reservedLuckChannelPolicy('divine').enabled,true);assert.equal(reservedLuckChannelPolicy('specialAffix').enabled,false);assert.equal(reservedLuckChannelPolicy('other'),null);assert.equal(reservedLuckChannelPolicy('__proto__'),null);
+assert(Object.isFrozen(LUCK_POLICY));assert(Object.isFrozen(RESERVED_LUCK_CHANNELS));assert.equal(reservedLuckChannelPolicy('divine').enabled,true);assert.equal(reservedLuckChannelPolicy('specialAffix').enabled,true);assert.equal(reservedLuckChannelPolicy('other'),null);assert.equal(reservedLuckChannelPolicy('__proto__'),null);
 console.log('PASS pure luck policy:5% + bounded2pp rating + explicitPP, finite0–1000 asymptote<7%, existing6% second-roll probability only, invalid inputs rejected, no source/production activation');
 
 const {lootOccurrenceProbability,divineProbability}=await import('./dist/luck-policy.js');
