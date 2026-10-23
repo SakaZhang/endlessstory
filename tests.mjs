@@ -94,4 +94,7 @@ import "./dwarf-monster-portrait-ui-tests.mjs";
 
 import "./m2-production-activation-tests.mjs";
 
-import "./affix-source-tests.mjs";
+// Earlier boundary tests deliberately clear the global monster provider; verify
+// normal affix acquisition in a fresh production realm, not that poisoned fixture.
+import {execFileSync as runAffixSourceTest} from 'node:child_process';
+runAffixSourceTest(process.execPath,[new URL('./affix-source-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
