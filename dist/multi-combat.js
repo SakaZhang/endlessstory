@@ -98,7 +98,7 @@ export function stepMulti(s,e,turn,ctx){
  const refreshStats=()=>Object.assign(st,treePassiveStats(e.treeEffects?skillTreeHeroStats(baseStats,e.treeEffects,ctx.treeSkills.attributeConfig):baseStats,e,passives));
  e.affixState??=createBattleAffixState(e.id);
  if(ctx.treeSkills){const beforeClock=e.treeEffects?.clock??e.treeCombatClock??0;if(e.treePoison)advanceTreePoisons(e,beforeClock+(ctx.combatDeltaMs??1100),now,logs);runTreePlayerPhase(s,e,{...ctx,treeTimersOnly:true,onDamageAction:()=>{},onHeroDeath:()=>false},logs);if(e.done){advanceLegendaryCombat(s,{combatDeltaMs:Math.max(0,(e.treeCombatClock??beforeClock)-beforeClock),alive:e.heroHp>0,hasTargets:false,deferProcs:true,resolve:()=>({stop:true})});return logs;}}
- for(const u of e.enemies)expireDwarfShield(u,now);
+ for(const u of e.enemies){expireDwarfShield(u,now);if(u.timedReflect?.endsAt<=now)delete u.timedReflect;}
  if(e.playerShieldLayers||(s.inventory??[]).some(it=>it.legendaryId==='everburning-reactor'&&Object.values(s.equip??{}).includes(it.id))){e.playerShieldLayers??=createPlayerShieldLayers();syncLayers(e);e.playerShieldLayers=expirePlayerShieldLayers(e.playerShieldLayers,ctx.treeSkills?(e.treeCombatClock??e.playerShieldLayers.clock):e.playerShieldLayers.clock+(ctx.combatDeltaMs??1100));mirrorLayers(e);}
  refreshStats();
  const legendaryProc=proc=>{
@@ -161,10 +161,10 @@ export function stepMulti(s,e,turn,ctx){
    const execute=tryReaperHit(e.affixState,{battleId:e.id,castId,hitIndex,targetId:u.id,hit:true,targetHp:u.hp,hasReaper:!!st.specials.reaper});if(execute){e.affixState=execute.state;if(execute.triggered){hitRecord.killProcHpLost=u.hp;emitCombatDisplay(e,{castId,hitId:hitId+':reaper',skillId:'reaper',targetId:u.id,hpDelta:-u.hp,element:null});u.hp=0;logs.push('死神 → '+u.name);}}
    logs.push((fixture?'开发测试范围攻击':k?SKILLS[k].name:'普通攻击')+' → '+u.name+' · '+Number(dealt.toFixed(1))+(fire?'（火）':''));
    if(u.hp===0&&st.specials.momentum)s.momentum=1;
-   const reflect=DWARF_MONSTERS[u.definitionId]?.trait;if(u.typedProfile&&reflect?.type==='reflect'&&u.hp>0&&hpLost>0&&!countered&&now>=u.reflectReadyAt&&Math.random()<reflect.chance){countered=true;u.reflectReadyAt=now+reflect.cooldownMs;counterReaction={sourceId:u.id,name:u.name,amount:physical(u.atk*reflect.coefficient,st.armor*(e.ironcoat>0?1.4:1))};}
+   if(!countered){counterReaction=typedEnemyReaction(u,hpLost,{...st,ironcoatActive:e.ironcoat>0},now,resolveElementDamage);if(counterReaction)countered=true;}
    if(u.hp>0&&hpLost>0&&u.profile.counterRatio>0&&!countered){countered=true;counterReaction={sourceId:u.id,name:u.name,amount:hpLost*u.profile.counterRatio};}
   }
-  if(counterReaction){const loss=hitHero(e,counterReaction.amount,{kind:'counter',sourceId:counterReaction.sourceId});logs.push(counterReaction.name+' · 反伤 '+Number(loss.toFixed(1)));}
+  if(counterReaction){const loss=hitHero(e,counterReaction.amount,{kind:'counter',sourceId:counterReaction.sourceId,element:counterReaction.element??'physical'});logs.push(counterReaction.name+' · 反伤 '+Number(loss.toFixed(1)));}
   if(e.heroHp>0){const recovery=calculateLifesteal({rating:st.lifesteal??0,maxHp:st.hp,currentHp:e.heroHp,hits:lifestealHits},ctx.lifestealConfig);if(recovery?.heal>0){const received=treeHeal(passives,e,recovery.heal,st.hp);e.heroHp+=received;emitCombatDisplay(e,{kind:'heal',skillId:'lifesteal',hpDelta:received});e.lastCast.lifesteal=received;logs.push('吸血 · 恢复 '+Number(recovery.heal.toFixed(2)));}}
   if(heroDied())return true;
   advanceLegends({damageAction:true});if(e.done)return true;
@@ -196,6 +196,7 @@ export function stepMulti(s,e,turn,ctx){
    for(const effect of action.effects){
     if(action.requiresHitForEffects&&effect.type!=='damage'&&effect.type!=='shield'&&!direct)continue;
     if(effect.type==='shield'){const beforeShield=u.shield;u.shield=u.max*effect.fraction;emitCombatDisplay(e,{kind:'shield',castId:enemyCastId,sourceId:u.id,targetId:u.id,skillId:action.id,shieldDelta:Math.max(0,u.shield-beforeShield)});u.shieldUntil=now+effect.seconds*1000;logs.push(u.name+' · '+action.name);}
+    if(effect.type==='reflect'){u.timedReflect={skillId:action.id,endsAt:now+effect.seconds*1000,charges:effect.charges};logs.push(u.name+' · '+action.name);}
     if(effect.type==='next_basic_slow'){e.nextBasicSlow=Math.max(e.nextBasicSlow??1,effect.multiplier);logs.push(u.name+' · 下一次普攻减速');}
     if(effect.type==='dot')applyDwarfDot(e,u,action,passives?{...effect,seconds:passiveNegativeDuration(passives,effect.seconds*1000)/1000}:effect,now);
     if(effect.type==='damage'){refreshStats();if(missed()){emitCombatDisplay(e,{castId:enemyCastId,sourceId:u.id,targetId:'hero',outcome:'miss'});logs.push(u.name+' · 未命中');continue;}direct=true;const raw=(effect.powerBasis==='atk'?enemyAtk:u[effect.powerBasis])*(u.blunt>0?.8:1)*effect.coefficient;
@@ -203,7 +204,7 @@ export function stepMulti(s,e,turn,ctx){
      if(st.block>0&&Math.random()<st.block)hurt*=.7;const counterReady=treeCounterReady(),loss=hitHero(e,hurt,{castId:enemyCastId,sourceId:u.id,skillId:typeof action!=='undefined'?action.id:'basic',element:typeof effect!=='undefined'?effect.damageType:'physical'});actionHpLoss+=loss;treeCounter(u,counterReady,loss);logs.push(u.name+' · '+action.name+' -'+Number(loss.toFixed(1)));if(heroDied())return logs;if(u.hp<=0)break;
     }
    }
-   const drain=DWARF_MONSTERS[u.definitionId]?.trait;if(drain?.type==='lifesteal'&&u.hp>0&&actionHpLoss>0){const heal=Math.max(0,Math.min(u.max-u.hp,actionHpLoss*drain.fraction,u.max*drain.perActionCap,u.max*drain.encounterCap-(u.lifestealHealed??0)));u.hp+=heal;u.lifestealHealed=(u.lifestealHealed??0)+heal;emitCombatDisplay(e,{kind:'heal',castId:enemyCastId,sourceId:u.id,targetId:u.id,skillId:'lifesteal',hpDelta:heal});}
+   const drain=action.effects.find(f=>f.type==='lifesteal')??DWARF_MONSTERS[u.definitionId]?.trait;if(drain?.type==='lifesteal'&&u.hp>0&&actionHpLoss>0){const heal=Math.max(0,Math.min(u.max-u.hp,actionHpLoss*drain.fraction,u.max*drain.perActionCap,u.max*drain.encounterCap-(u.lifestealHealed??0)));u.hp+=heal;u.lifestealHealed=(u.lifestealHealed??0)+heal;emitCombatDisplay(e,{kind:'heal',castId:enemyCastId,sourceId:u.id,targetId:u.id,skillId:'lifesteal',hpDelta:heal});}
    if(direct&&e.heroHp>0&&e.guard>0){const counter=physical(st.atk*(e.warcry>0?1.25:1)*(e.weakness>0?.8:1)*(st.count.guard>=4?1:.6)*treeDamage(passives,'physical','counter'),Math.max(0,u.armor-st.penetration));hitEnemy(u,counter,e,{kind:'counter',skillId:'guard'});logs.push('坚守反击 → '+u.name+' · '+counter);}
    continue;
   }
@@ -244,12 +245,26 @@ export function pauseMulti(s,paused,now){
   if(c.preparing){c.preparing.startedAt+=elapsed;c.preparing.completesAt+=elapsed;}
   return c;
  });if(!controls.every(validControl))return false;
- e.enemies.forEach((u,i)=>{u.control=controls[i];if(u.typedProfile){for(const k of ['nextBasicAt','shieldUntil','reflectReadyAt'])if(u[k]>0)u[k]+=elapsed;}});for(const dot of e.typedDots??[]){dot.nextAt+=elapsed;dot.endAt+=elapsed;}for(const key of ['pendingBasicAt','nextRegularAt','lastCombatEventAt'])if(e[key]!==undefined)e[key]+=elapsed;s.nextActionAt=clock+e.pauseRemainingAction;delete e.pauseAt;delete e.pauseRemainingAction;s.running=true;return true;
+ e.enemies.forEach((u,i)=>{u.control=controls[i];if(u.typedProfile){for(const k of ['nextBasicAt','shieldUntil','reflectReadyAt'])if(u[k]>0)u[k]+=elapsed;if(u.timedReflect)u.timedReflect.endsAt+=elapsed;}});for(const dot of e.typedDots??[]){dot.nextAt+=elapsed;dot.endAt+=elapsed;}for(const key of ['pendingBasicAt','nextRegularAt','lastCombatEventAt'])if(e[key]!==undefined)e[key]+=elapsed;s.nextActionAt=clock+e.pauseRemainingAction;delete e.pauseAt;delete e.pauseRemainingAction;s.running=true;return true;
 }
 
 // New-tree production host. It shares this module's actual mitigation/HP/shield helpers.
 // The authoritative tree selector will call it once configuration is activated. No save field
 // enables this entry; numeric/configuration and effect hooks must be supplied explicitly.
+// A timed reflect is consumed only by a living enemy taking actual HP damage.
+// It is one reaction within the player's cast, not an active attack/proc chain.
+function typedEnemyReaction(u,hpLost,st,now,resolveElementDamage){
+ if(!u.typedProfile||u.hp<=0||hpLost<=0)return null;
+ const d=DWARF_MONSTERS[u.definitionId],timed=u.timedReflect;
+ if(timed&&timed.endsAt<=now)delete u.timedReflect;
+ if(u.timedReflect?.charges>0){
+  const fx=d?.skills.find(k=>k.id===timed.skillId)?.effects.find(x=>x.type==='reflect');
+  if(fx){timed.charges--;const raw=u[fx.powerBasis]*fx.coefficient,amount=fx.damageType==='physical'?physical(raw,st.armor*(st.ironcoatActive?1.4:1)):resolveElementDamage(raw,fx.damageType,0,st.elementResistance[fx.damageType],[]);return {sourceId:u.id,name:u.name,amount,element:fx.damageType};}
+ }
+ const trait=d?.trait;if(trait?.type==='reflect'&&now>=u.reflectReadyAt&&Math.random()<trait.chance){u.reflectReadyAt=now+trait.cooldownMs;return {sourceId:u.id,name:u.name,amount:physical(u.atk*trait.coefficient,st.armor*(st.ironcoatActive?1.4:1)),element:'physical'};}
+ return null;
+}
+
 export function executeTreePlayerAction(s,e,ctx){
  const {stats,resolveElementDamage,now,input,effects,onDamageAction,onHeroDeath}=ctx??{};
  if(!e||e.done||!Array.isArray(e.enemies)||typeof stats!=='function'||typeof resolveElementDamage!=='function'||!Number.isFinite(now)||!effects||typeof effects.apply!=='function'||typeof onDamageAction!=='function'||typeof onHeroDeath!=='function')return null;
@@ -280,13 +295,12 @@ export function executeTreePlayerAction(s,e,ctx){
    const hpBefore=u.hp,hpLost=hitEnemy(u,dealt,e,{castId:event.castId,hitId:action.hitId,skillId:event.skillId,crit,element:action.damageType,segmentIndex:action.hitIndex});Object.assign(record,{hpBefore,hpAfter:u.hp,actualHpLost:hpLost});lifestealHits.push({hitId:action.hitId,hpBefore,hpAfter:u.hp,source:'active'});
    const execute=tryReaperHit(e.affixState,{battleId:e.id,castId:event.castId,hitIndex:action.hitIndex,targetId:u.id,hit:true,targetHp:u.hp,hasReaper:!!st.specials.reaper});if(execute){e.affixState=execute.state;if(execute.triggered){record.killProcHpLost=u.hp;emitCombatDisplay(e,{castId:event.castId,hitId:action.hitId+':reaper',skillId:'reaper',targetId:u.id,hpDelta:-u.hp,element:null});u.hp=0;logs.push('死神 → '+u.name);}}
    logs.push((skillTreeNode(event.skillId)?.name??event.skillId)+' → '+u.name+' · '+Number(dealt.toFixed(1)));if(u.hp===0&&st.specials.momentum)s.momentum=1;
-   const reflect=DWARF_MONSTERS[u.definitionId]?.trait;
-   if(!counter&&u.hp>0&&hpLost>0&&u.typedProfile&&reflect?.type==='reflect'&&now>=u.reflectReadyAt&&Math.random()<reflect.chance){u.reflectReadyAt=now+reflect.cooldownMs;counter={sourceId:u.id,name:u.name,amount:physical(u.atk*reflect.coefficient,st.armor*(e.ironcoat>0?1.4:1))};}
+   if(!counter)counter=typedEnemyReaction(u,hpLost,{...st,ironcoatActive:e.ironcoat>0},now,resolveElementDamage);
    if(!counter&&u.hp>0&&hpLost>0&&u.profile.counterRatio>0)counter={sourceId:u.id,name:u.name,amount:hpLost*u.profile.counterRatio};
    return record;
   },
   onCastEnd:event=>{
-   if(counter&&(byId(counter.sourceId)?.hp??0)>0){const loss=hitHero(e,counter.amount,{kind:'counter',sourceId:counter.sourceId});logs.push(counter.name+' · 反伤 '+Number(loss.toFixed(1)));}
+   if(counter&&(byId(counter.sourceId)?.hp??0)>0){const loss=hitHero(e,counter.amount,{kind:'counter',sourceId:counter.sourceId,element:counter.element??'physical'});logs.push(counter.name+' · 反伤 '+Number(loss.toFixed(1)));}
    if(e.heroHp>0){const recovery=calculateLifesteal({rating:st.lifesteal??0,maxHp:st.hp,currentHp:e.heroHp,hits:lifestealHits},ctx.lifestealConfig);if(recovery?.heal>0){const received=treeHeal(passives,e,recovery.heal,st.hp);e.heroHp+=received;emitCombatDisplay(e,{kind:'heal',skillId:'lifesteal',hpDelta:received});e.lastCast.lifesteal=received;}}
    if(e.heroHp<=0){onHeroDeath();if(e.heroHp<=0)return;}
    if(event.damageActionCount)onDamageAction(event);

@@ -15,9 +15,9 @@ export const LEGACY_INSTANCES=Object.freeze(Object.fromEntries([
  ]),
  {id:'dwarf-blackforge-1-dungeon',siteId:'blackforge-mine',areaId:'dwarf-blackforge-1',kind:'dungeon',enabled:true,name:'熄火矿井 · 普通副本'}
 ].map(instance=>[instance.id,Object.freeze(instance)])));
-export const PLANNED_AREAS=Object.freeze(Object.fromEntries(['山麓矿道','岩蜥支洞','旧矿与石牌遗址','废炉外坡','冷泉与炉区交界','地下炉池'].map((name,i)=>{const number=i+1,id='dwarf.a0'+number;return [id,Object.freeze({id,race:'dwarf',number,name,levelRange:[i*10+1,number*10]})]})));
+export const PLANNED_AREAS=Object.freeze(Object.fromEntries(['山麓矿道','岩蜥支洞','旧矿与石牌遗址','废炉外坡','冷泉与炉区交界','地下炉池','银纹矿廊','深脉裂谷','晶脉深层','地心锻造遗址'].map((name,i)=>{const number=i+1,id='dwarf.a'+String(number).padStart(2,'0');return [id,Object.freeze({id,race:'dwarf',number,name,levelRange:[i*10+1,number*10]})]})));
 export const PLANNED_SITES=Object.freeze(Object.values(PLANNED_AREAS).map(a=>Object.freeze({id:a.id,areaId:a.id,legacyIndex:a.number-1,gearLevel:(a.number-1)*10+5,name:a.name})));
-export const PLANNED_INSTANCES=Object.freeze(Object.fromEntries(PLANNED_SITES.flatMap(site=>['field','dungeon',...(['dwarf.a03','dwarf.a06'].includes(site.id)?['boss']:[])].map(kind=>{const id=site.id+'.'+kind;return [id,Object.freeze({id,siteId:site.id,areaId:site.areaId,kind,enabled:true,contentVersion:'dwarf-m2-v1',name:site.name+' · '+({field:'野外',dungeon:'普通副本',boss:'首领副本'}[kind])})]}))));
+export const PLANNED_INSTANCES=Object.freeze(Object.fromEntries(PLANNED_SITES.flatMap(site=>['field','dungeon',...(['dwarf.a03','dwarf.a06','dwarf.a09','dwarf.a10'].includes(site.id)?['boss']:[])].map(kind=>{const id=site.id+'.'+kind;return [id,Object.freeze({id,siteId:site.id,areaId:site.areaId,kind,enabled:true,contentVersion:'dwarf-m2-v1',name:site.name+' · '+({field:'野外',dungeon:'普通副本',boss:'首领副本'}[kind])})]}))));
 export const AREAS=Object.freeze({...LEGACY_AREAS,...PLANNED_AREAS});
 export const INSTANCES=Object.freeze({...LEGACY_INSTANCES,...PLANNED_INSTANCES});
 export function resolveLegacySite(value){

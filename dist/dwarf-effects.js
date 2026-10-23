@@ -1,15 +1,22 @@
 import {DWARF_MONSTERS} from './dwarf-content.js';
 import {beginPreparing,claimCompletedCast,controlAllowsAction} from './multi-control.js';
 const elements=['earth','water','fire','wind','light','dark'];
+const lifestealCap=d=>Math.max(d.trait?.type==='lifesteal'?d.trait.encounterCap:0,...d.skills.flatMap(s=>s.effects.filter(e=>e.type==='lifesteal').map(e=>e.encounterCap)));
 export function initializeDwarfActor(unit,definition,parameters,now,{share=1,follower=false}={}){
  Object.assign(unit,{monsterId:definition.id,definitionId:definition.id,elementalPower:parameters.elementalPower*share,atk:parameters.atk*share,armor:parameters.armor,max:parameters.hp*share,hp:parameters.hp*share,name:follower?definition.trait.name:definition.name,elementTags:[...definition.elementTags],elementResistance:Object.fromEntries(elements.map(k=>[k,parameters.elementResistance?.[k]??0])),parameterSetId:parameters.parameterSetId,basicIntervalMs:parameters.basicIntervalMs,nextBasicAt:now+parameters.basicIntervalMs,skillUses:{},follower,typedProfile:true,shieldUntil:0,reflectReadyAt:0});
- if(definition.trait?.type==='lifesteal')unit.lifestealHealed=0;
+ if(lifestealCap(definition)>0)unit.lifestealHealed=0;
  for(const skill of definition.skills)unit.control.cooldowns[skill.id]=now+skill.firstAtMs;
- if(!follower&&definition.trait?.type==='openingShield'){unit.shield=unit.max*definition.trait.fraction;unit.shieldUntil=now+definition.trait.durationMs;}
+ const openingShield=definition.trait?.type==='openingShield'?definition.trait:definition.trait?.openingShield;
+ if(!follower&&openingShield){unit.shield=unit.max*openingShield.fraction;unit.shieldUntil=now+openingShield.durationMs;}
  unit.skillOverrides=Object.fromEntries(definition.skills.filter(s=>parameters.skillOverrides?.[s.id]).map(s=>[s.id,structuredClone(parameters.skillOverrides[s.id])]));unit.profile.controlReduction=parameters.controlReduction??0;unit.profile.interruptStop=parameters.interruptStopMs??1100;
  return unit;
 }
-export function validDwarfActor(u){const d=DWARF_MONSTERS[u.definitionId];return !!d&&(d.trait?.type!=='lifesteal'||Number.isFinite(u.lifestealHealed)&&u.lifestealHealed>=0&&u.lifestealHealed<=u.max*d.trait.encounterCap+1e-9)&&d.nodes.includes(u.sourceInstanceId)&&u.monsterId===d.id&&u.typedProfile===true&&typeof u.parameterSetId==='string'&&typeof u.follower==='boolean'&&(!u.follower||d.trait?.type==='followers')&&Number.isFinite(u.elementalPower)&&u.elementalPower>=0&&u.elementalPower<=1e12&&Number.isSafeInteger(u.basicIntervalMs)&&u.basicIntervalMs>=100&&u.basicIntervalMs<=60000&&['nextBasicAt','shieldUntil','reflectReadyAt'].every(k=>Number.isFinite(u[k])&&u[k]>=0&&u[k]<=1e15+60000)&&(u.skillOverrides===undefined||u.skillOverrides&&Object.entries(u.skillOverrides).every(([id,x])=>d.skills.some(s=>s.id===id)&&x&&Object.keys(x).length===1&&Number.isSafeInteger(x.castMs)&&x.castMs>=0&&x.castMs<=60000))&&u.skillUses&&typeof u.skillUses==='object'&&!Array.isArray(u.skillUses)&&Object.entries(u.skillUses).every(([k,n])=>d.skills.some(s=>s.id===k)&&Number.isSafeInteger(n)&&n>=0);}
+function validTimedReflect(u,d){
+ if(u.timedReflect===undefined)return true;
+ const r=u.timedReflect,effect=d.skills.find(s=>s.id===r?.skillId)?.effects.find(e=>e.type==='reflect');
+ return !!effect&&r&&Object.keys(r).length===3&&['skillId','endsAt','charges'].every(k=>Object.hasOwn(r,k))&&Number.isSafeInteger(r.endsAt)&&r.endsAt>=0&&r.endsAt<=1e15+60000&&Number.isInteger(r.charges)&&r.charges>=0&&r.charges<=effect.charges;
+}
+export function validDwarfActor(u){const d=DWARF_MONSTERS[u.definitionId];return !!d&&validTimedReflect(u,d)&&(lifestealCap(d)===0||Number.isFinite(u.lifestealHealed)&&u.lifestealHealed>=0&&u.lifestealHealed<=u.max*lifestealCap(d)+1e-9)&&d.nodes.includes(u.sourceInstanceId)&&u.monsterId===d.id&&u.typedProfile===true&&typeof u.parameterSetId==='string'&&typeof u.follower==='boolean'&&(!u.follower||d.trait?.type==='followers')&&Number.isFinite(u.elementalPower)&&u.elementalPower>=0&&u.elementalPower<=1e12&&Number.isSafeInteger(u.basicIntervalMs)&&u.basicIntervalMs>=100&&u.basicIntervalMs<=60000&&['nextBasicAt','shieldUntil','reflectReadyAt'].every(k=>Number.isFinite(u[k])&&u[k]>=0&&u[k]<=1e15+60000)&&(u.skillOverrides===undefined||u.skillOverrides&&Object.entries(u.skillOverrides).every(([id,x])=>d.skills.some(s=>s.id===id)&&x&&Object.keys(x).length===1&&Number.isSafeInteger(x.castMs)&&x.castMs>=0&&x.castMs<=60000))&&u.skillUses&&typeof u.skillUses==='object'&&!Array.isArray(u.skillUses)&&Object.entries(u.skillUses).every(([k,n])=>d.skills.some(s=>s.id===k)&&Number.isSafeInteger(n)&&n>=0);}
 export function expireDwarfShield(u,now){if(u.typedProfile&&u.shieldUntil>0&&now>=u.shieldUntil){u.shield=0;u.shieldUntil=0;}}
 // Timed DOT keeps source power and type, never newly-selected enemy attack.
 export function applyDwarfDot(e,u,skill,effect,now){

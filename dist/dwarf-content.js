@@ -1,5 +1,5 @@
 import {PRODUCTION_DWARF_PARAMETERS} from './dwarf-parameters.js';
-// Typed A01–A06 source definitions; descriptions are never parsed at runtime.
+// Typed A01–A10 source definitions; descriptions are never parsed at runtime.
 export const DWARF_MONSTERS={
  "dwarf.a01.normal.1": {
   "id": "dwarf.a01.normal.1",
@@ -1019,6 +1019,785 @@ export const DWARF_MONSTERS={
    }
   ],
   "trait": null
+ },
+ "dwarf.a07.normal.1": {
+  "id": "dwarf.a07.normal.1",
+  "name": "银须钻虫",
+  "area": 7,
+  "rank": "normal",
+  "nodes": [
+   "dwarf.a07.field",
+   "dwarf.a07.dungeon"
+  ],
+  "elementTags": [
+   "earth"
+  ],
+  "basicAttackType": "physical",
+  "skills": [
+   {
+    "id": "dwarf.a07.normal.1:0",
+    "name": "钻颚",
+    "cooldownMs": 9000,
+    "firstAtMs": 3000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.3,
+      "damageType": "physical",
+      "powerBasis": "atk"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": null
+ },
+ "dwarf.a07.normal.2": {
+  "id": "dwarf.a07.normal.2",
+  "name": "霜纹晶蛛",
+  "area": 7,
+  "rank": "normal",
+  "nodes": [
+   "dwarf.a07.field",
+   "dwarf.a07.dungeon"
+  ],
+  "elementTags": [
+   "water"
+  ],
+  "basicAttackType": "water",
+  "skills": [
+   {
+    "id": "dwarf.a07.normal.2:0",
+    "name": "冰丝针",
+    "cooldownMs": 8000,
+    "firstAtMs": 3000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.15,
+      "damageType": "water",
+      "powerBasis": "elementalPower"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": null
+ },
+ "dwarf.a07.normal.3": {
+  "id": "dwarf.a07.normal.3",
+  "name": "无主铭文像",
+  "area": 7,
+  "rank": "normal",
+  "nodes": [
+   "dwarf.a07.field",
+   "dwarf.a07.dungeon"
+  ],
+  "elementTags": [
+   "light",
+   "earth"
+  ],
+  "basicAttackType": "light",
+  "skills": [
+   {
+    "id": "dwarf.a07.normal.3:0",
+    "name": "封纹",
+    "cooldownMs": 15000,
+    "firstAtMs": 3000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "shield",
+      "fraction": 0.09,
+      "seconds": 6
+     }
+    ],
+    "requiresHitForEffects": false,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": null
+ },
+ "dwarf.a07.elite": {
+  "id": "dwarf.a07.elite",
+  "name": "银纹反震像",
+  "area": 7,
+  "rank": "elite",
+  "nodes": [
+   "dwarf.a07.dungeon"
+  ],
+  "elementTags": [
+   "earth",
+   "light"
+  ],
+  "basicAttackType": "earth",
+  "skills": [
+   {
+    "id": "dwarf.a07.elite:0",
+    "name": "铭震",
+    "cooldownMs": 12000,
+    "firstAtMs": 4000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.45,
+      "damageType": "earth",
+      "powerBasis": "elementalPower"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": {
+   "type": "reflect",
+   "chance": 0.2,
+   "coefficient": 0.35,
+   "cooldownMs": 4000
+  }
+ },
+ "dwarf.a08.normal.1": {
+  "id": "dwarf.a08.normal.1",
+  "name": "黑曜刃蜥",
+  "area": 8,
+  "rank": "normal",
+  "nodes": [
+   "dwarf.a08.field",
+   "dwarf.a08.dungeon"
+  ],
+  "elementTags": [
+   "earth",
+   "dark"
+  ],
+  "basicAttackType": "physical",
+  "skills": [
+   {
+    "id": "dwarf.a08.normal.1:0",
+    "name": "侧脊斩",
+    "cooldownMs": 8000,
+    "firstAtMs": 3000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.25,
+      "damageType": "physical",
+      "powerBasis": "atk"
+     },
+     {
+      "type": "dot",
+      "damageType": "physical",
+      "powerBasis": "atk",
+      "coefficientPerSecond": 0.08,
+      "seconds": 3,
+      "refresh": "same_skill",
+      "mitigation": "armor_only"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": null
+ },
+ "dwarf.a08.normal.2": {
+  "id": "dwarf.a08.normal.2",
+  "name": "岩脂伏行兽",
+  "area": 8,
+  "rank": "normal",
+  "nodes": [
+   "dwarf.a08.field",
+   "dwarf.a08.dungeon"
+  ],
+  "elementTags": [
+   "earth"
+  ],
+  "basicAttackType": "physical",
+  "skills": [
+   {
+    "id": "dwarf.a08.normal.2:0",
+    "name": "黏脂撞击",
+    "cooldownMs": 9000,
+    "firstAtMs": 3000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.25,
+      "damageType": "earth",
+      "powerBasis": "elementalPower"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": null
+ },
+ "dwarf.a08.normal.3": {
+  "id": "dwarf.a08.normal.3",
+  "name": "断索升降傀",
+  "area": 8,
+  "rank": "normal",
+  "nodes": [
+   "dwarf.a08.field",
+   "dwarf.a08.dungeon"
+  ],
+  "elementTags": [
+   "earth"
+  ],
+  "basicAttackType": "physical",
+  "skills": [
+   {
+    "id": "dwarf.a08.normal.3:0",
+    "name": "链索抽打",
+    "cooldownMs": 12000,
+    "firstAtMs": 3000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.45,
+      "damageType": "physical",
+      "powerBasis": "atk"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": null
+ },
+ "dwarf.a08.elite": {
+  "id": "dwarf.a08.elite",
+  "name": "裂谷锁链监工",
+  "area": 8,
+  "rank": "elite",
+  "nodes": [
+   "dwarf.a08.dungeon"
+  ],
+  "elementTags": [
+   "earth",
+   "dark"
+  ],
+  "basicAttackType": "physical",
+  "skills": [
+   {
+    "id": "dwarf.a08.elite:0",
+    "name": "拖链横扫",
+    "cooldownMs": 12000,
+    "firstAtMs": 4000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.5,
+      "damageType": "physical",
+      "powerBasis": "atk"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": {
+   "type": "followers",
+   "shares": [
+    0.6,
+    0.2,
+    0.2
+   ],
+   "name": "裂谷钻兽"
+  }
+ },
+ "dwarf.a09.normal.1": {
+  "id": "dwarf.a09.normal.1",
+  "name": "晶髓噬者",
+  "area": 9,
+  "rank": "normal",
+  "nodes": [
+   "dwarf.a09.field",
+   "dwarf.a09.dungeon"
+  ],
+  "elementTags": [
+   "water",
+   "dark"
+  ],
+  "basicAttackType": "water",
+  "skills": [
+   {
+    "id": "dwarf.a09.normal.1:0",
+    "name": "汲晶刺",
+    "cooldownMs": 10000,
+    "firstAtMs": 3000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.1,
+      "damageType": "water",
+      "powerBasis": "elementalPower"
+     },
+     {
+      "type": "lifesteal",
+      "fraction": 0.15,
+      "perActionCap": 0.02,
+      "encounterCap": 0.15
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": null
+ },
+ "dwarf.a09.normal.2": {
+  "id": "dwarf.a09.normal.2",
+  "name": "折光晶蛾",
+  "area": 9,
+  "rank": "normal",
+  "nodes": [
+   "dwarf.a09.field",
+   "dwarf.a09.dungeon"
+  ],
+  "elementTags": [
+   "light",
+   "wind"
+  ],
+  "basicAttackType": "light",
+  "skills": [
+   {
+    "id": "dwarf.a09.normal.2:0",
+    "name": "折光束",
+    "cooldownMs": 8000,
+    "firstAtMs": 3000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.2,
+      "damageType": "light",
+      "powerBasis": "elementalPower"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": null
+ },
+ "dwarf.a09.normal.3": {
+  "id": "dwarf.a09.normal.3",
+  "name": "符骨守卷像",
+  "area": 9,
+  "rank": "normal",
+  "nodes": [
+   "dwarf.a09.field",
+   "dwarf.a09.dungeon"
+  ],
+  "elementTags": [
+   "earth",
+   "light"
+  ],
+  "basicAttackType": "earth",
+  "skills": [
+   {
+    "id": "dwarf.a09.normal.3:0",
+    "name": "石卷压印",
+    "cooldownMs": 12000,
+    "firstAtMs": 3000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.45,
+      "damageType": "earth",
+      "powerBasis": "elementalPower"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": null
+ },
+ "dwarf.a09.elite": {
+  "id": "dwarf.a09.elite",
+  "name": "符骨藏锋者",
+  "area": 9,
+  "rank": "elite",
+  "nodes": [
+   "dwarf.a09.dungeon"
+  ],
+  "elementTags": [
+   "light",
+   "water"
+  ],
+  "basicAttackType": "light",
+  "skills": [
+   {
+    "id": "dwarf.a09.elite:0",
+    "name": "开卷光刃",
+    "cooldownMs": 12000,
+    "firstAtMs": 4000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.5,
+      "damageType": "light",
+      "powerBasis": "elementalPower"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": {
+   "type": "reflect",
+   "chance": 0.15,
+   "coefficient": 0.3,
+   "cooldownMs": 5000,
+   "openingShield": {
+    "fraction": 0.08,
+    "durationMs": 8000
+   }
+  }
+ },
+ "dwarf.a10.normal.1": {
+  "id": "dwarf.a10.normal.1",
+  "name": "地心铸卫",
+  "area": 10,
+  "rank": "normal",
+  "nodes": [
+   "dwarf.a10.field",
+   "dwarf.a10.dungeon"
+  ],
+  "elementTags": [
+   "earth",
+   "fire"
+  ],
+  "basicAttackType": "physical",
+  "skills": [
+   {
+    "id": "dwarf.a10.normal.1:0",
+    "name": "熔核重斩",
+    "cooldownMs": 9000,
+    "firstAtMs": 3000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.3,
+      "damageType": "fire",
+      "powerBasis": "elementalPower"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": null
+ },
+ "dwarf.a10.normal.2": {
+  "id": "dwarf.a10.normal.2",
+  "name": "暗脉裂影",
+  "area": 10,
+  "rank": "normal",
+  "nodes": [
+   "dwarf.a10.field",
+   "dwarf.a10.dungeon"
+  ],
+  "elementTags": [
+   "dark"
+  ],
+  "basicAttackType": "dark",
+  "skills": [
+   {
+    "id": "dwarf.a10.normal.2:0",
+    "name": "裂影穿刺",
+    "cooldownMs": 8000,
+    "firstAtMs": 3000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.2,
+      "damageType": "dark",
+      "powerBasis": "elementalPower"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": null
+ },
+ "dwarf.a10.normal.3": {
+  "id": "dwarf.a10.normal.3",
+  "name": "岩脂巨壳",
+  "area": 10,
+  "rank": "normal",
+  "nodes": [
+   "dwarf.a10.field",
+   "dwarf.a10.dungeon"
+  ],
+  "elementTags": [
+   "earth",
+   "water"
+  ],
+  "basicAttackType": "earth",
+  "skills": [
+   {
+    "id": "dwarf.a10.normal.3:0",
+    "name": "沉壳震击",
+    "cooldownMs": 12000,
+    "firstAtMs": 3000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.5,
+      "damageType": "earth",
+      "powerBasis": "elementalPower"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": null
+ },
+ "dwarf.a10.elite": {
+  "id": "dwarf.a10.elite",
+  "name": "永铸试作体",
+  "area": 10,
+  "rank": "elite",
+  "nodes": [
+   "dwarf.a10.dungeon"
+  ],
+  "elementTags": [
+   "earth",
+   "fire"
+  ],
+  "basicAttackType": "physical",
+  "skills": [
+   {
+    "id": "dwarf.a10.elite:0",
+    "name": "核火贯击",
+    "cooldownMs": 12000,
+    "firstAtMs": 4000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.6,
+      "damageType": "physical",
+      "powerBasis": "atk"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   }
+  ],
+  "trait": {
+   "type": "lifesteal",
+   "fraction": 0.08,
+   "perActionCap": 0.02,
+   "encounterCap": 0.15,
+   "openingShield": {
+    "fraction": 0.08,
+    "durationMs": 8000
+   }
+  }
+ },
+ "dwarf.a09.boss": {
+  "id": "dwarf.a09.boss",
+  "name": "符骨档主 · 赫铎",
+  "area": 9,
+  "rank": "boss",
+  "nodes": [
+   "dwarf.a09.boss"
+  ],
+  "elementTags": [
+   "light",
+   "water"
+  ],
+  "basicAttackType": "light",
+  "skills": [
+   {
+    "id": "dwarf.a09.boss:0",
+    "name": "裂卷光矛",
+    "cooldownMs": 12000,
+    "firstAtMs": 6000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.8,
+      "damageType": "light",
+      "powerBasis": "elementalPower"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   },
+   {
+    "id": "dwarf.a09.boss:1",
+    "name": "寒镜折射",
+    "cooldownMs": 18000,
+    "firstAtMs": 10000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.5,
+      "damageType": "water",
+      "powerBasis": "elementalPower"
+     },
+     {
+      "type": "reflect",
+      "coefficient": 0.45,
+      "damageType": "light",
+      "powerBasis": "elementalPower",
+      "seconds": 6,
+      "charges": 1,
+      "requiresHpDamage": true,
+      "recursive": false
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   },
+   {
+    "id": "dwarf.a09.boss:2",
+    "name": "封库石印",
+    "cooldownMs": 24000,
+    "firstAtMs": 18000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "shield",
+      "fraction": 0.08,
+      "seconds": 6
+     }
+    ],
+    "requiresHitForEffects": false,
+    "trigger": "cooldown_limited_two_casts",
+    "maxCasts": 2
+   }
+  ],
+  "trait": null
+ },
+ "dwarf.a10.boss": {
+  "id": "dwarf.a10.boss",
+  "name": "永铸炉王 · 乌尔铎",
+  "area": 10,
+  "rank": "boss",
+  "nodes": [
+   "dwarf.a10.boss"
+  ],
+  "elementTags": [
+   "earth",
+   "fire",
+   "dark"
+  ],
+  "basicAttackType": "physical",
+  "skills": [
+   {
+    "id": "dwarf.a10.boss:0",
+    "name": "地脉断铸",
+    "cooldownMs": 15000,
+    "firstAtMs": 6000,
+    "castMs": 2000,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 2.1,
+      "damageType": "earth",
+      "powerBasis": "elementalPower"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   },
+   {
+    "id": "dwarf.a10.boss:1",
+    "name": "黑炉潮汐",
+    "cooldownMs": 18000,
+    "firstAtMs": 10000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.6,
+      "damageType": "fire",
+      "powerBasis": "elementalPower"
+     },
+     {
+      "type": "dot",
+      "damageType": "fire",
+      "powerBasis": "elementalPower",
+      "coefficientPerSecond": 0.12,
+      "seconds": 4,
+      "refresh": "same_skill",
+      "mitigation": "resistance_only"
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": null,
+    "maxCasts": null
+   },
+   {
+    "id": "dwarf.a10.boss:2",
+    "name": "回收敕令",
+    "cooldownMs": 24000,
+    "firstAtMs": 18000,
+    "castMs": 0,
+    "effects": [
+     {
+      "type": "damage",
+      "coefficient": 1.35,
+      "damageType": "dark",
+      "powerBasis": "elementalPower"
+     },
+     {
+      "type": "lifesteal",
+      "fraction": 0.3,
+      "perActionCap": 0.03,
+      "encounterCap": 0.15
+     }
+    ],
+    "requiresHitForEffects": true,
+    "trigger": "cooldown_limited_two_casts",
+    "maxCasts": 2
+   }
+  ],
+  "trait": null
  }
 };
 // One replaceable absolute parameter layer. No fallback to withdrawn proxy/legacy LOCS.
@@ -1027,7 +1806,7 @@ export function configureDwarfParameters(config){
  if(config===null){parameterSet=null;return true;}
  if(!config||typeof config.id!=='string'||(config.reviewed!==true&&config.testOnly!==true)||!config.monsters||!Number.isFinite(config.fieldGroupChance)||config.fieldGroupChance<0||config.fieldGroupChance>1)return false;
  const areas=config.areas??[1,2,3];
- if(!Array.isArray(areas)||!areas.length||new Set(areas).size!==areas.length||!areas.every(a=>Number.isInteger(a)&&a>=1&&a<=6)||![1,2,3].every(a=>areas.includes(a)))return false;
+ if(!Array.isArray(areas)||!areas.length||new Set(areas).size!==areas.length||!areas.every(a=>Number.isInteger(a)&&a>=1&&a<=10)||![1,2,3].every(a=>areas.includes(a)))return false;
  for(const id of Object.keys(DWARF_MONSTERS).filter(id=>areas.includes(DWARF_MONSTERS[id].area))){const p=config.monsters[id];if(!p||!['hp','atk','armor','elementalPower','rewardGold','rewardXp'].every(k=>Number.isFinite(p[k])&&p[k]>=0&&p[k]<=1e9)||p.hp<=0||!Number.isSafeInteger(p.basicIntervalMs)||p.basicIntervalMs<100||p.basicIntervalMs>60000||p.elementResistance!==undefined&&(!p.elementResistance||!['earth','water','fire','wind','light','dark'].every(k=>Number.isFinite(p.elementResistance[k])&&p.elementResistance[k]>=0&&p.elementResistance[k]<=1e9)))return false;}
  if(!config.clearRewards||!areas.every(a=>{const c=config.clearRewards[a];return c&&['gold','xp'].every(k=>Number.isFinite(c[k])&&c[k]>=0&&c[k]<=1e9)&&Number.isInteger(c.materialRounds)&&c.materialRounds>=0&&c.materialRounds<=3&&['gearChance','markChance'].every(k=>Number.isFinite(c[k])&&c[k]>=0&&c[k]<=1);}))return false;
  const skills=new Set(Object.values(DWARF_MONSTERS).flatMap(d=>d.skills.map(s=>s.id)));

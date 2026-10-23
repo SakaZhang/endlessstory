@@ -4,8 +4,8 @@ import {DWARF_MONSTERS,configureDwarfParameters,dwarfParameterSet,dwarfParameter
 import {initializeDwarfActor,nextDwarfAction,validDwarfActor} from './dist/dwarf-effects.js';
 import {createControl} from './dist/multi-control.js';
 const original=dwarfParameterSet();
-const additions=Object.values(DWARF_MONSTERS).filter(d=>d.area>=4);
-assert.equal(Object.keys(DWARF_MONSTERS).length,26);
+const additions=Object.values(DWARF_MONSTERS).filter(d=>d.area>=4&&d.area<=6);
+assert.equal(Object.keys(DWARF_MONSTERS).length,44);
 assert.equal(additions.length,13);assert.equal(dwarfEligibleMonsters('dwarf.a07.field','normal').length,0);
 const expected=[
  ['dwarf.a04.normal.1','渣火蜥','fire',1.05],['dwarf.a04.normal.2','烟囱灰蝠','wind',1.2],['dwarf.a04.normal.3','积盐炉壳','fire',1.4],['dwarf.a04.elite','鼓风监炉官','fire',1.45],
@@ -31,7 +31,7 @@ try{
  assert.equal(E.startInstanceEncounter(setup(),'dwarf.a04.field',Date.now()),null);
  assert(E.startInstanceEncounter(setup(),'dwarf.a01.field',Date.now()));
  assert(configureDwarfParameters(fixture));
- for(const bad of [{...fixture,areas:[1,2,3,7]},{...fixture,areas:[1,2,3,4,4]},{...fixture,monsters:{...fixture.monsters,'dwarf.a04.elite':undefined}},{...fixture,clearRewards:{...fixture.clearRewards,4:undefined}}])assert.equal(configureDwarfParameters(bad),false);
+ for(const bad of [{...fixture,areas:[1,2,3,11]},{...fixture,areas:[1,2,3,4,4]},{...fixture,monsters:{...fixture.monsters,'dwarf.a04.elite':undefined}},{...fixture,clearRewards:{...fixture.clearRewards,4:undefined}}])assert.equal(configureDwarfParameters(bad),false);
  for(const d of additions){
   assert(dwarfBudgetReady(d.area));assert(dwarfEligibleMonsters(d.nodes.at(-1),d.rank).some(x=>x.id===d.id));
   const p=dwarfParameters(d.id),u=initializeDwarfActor({id:d.id,sourceInstanceId:d.nodes.at(-1),control:createControl(d.id,0),profile:{}},d,p,0);

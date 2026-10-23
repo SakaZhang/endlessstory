@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import * as D from './dist/dwarf-material-catalog.js';
 import {recoveryInputPlan} from './dist/recovery-recipe-schema.js';
-assert.equal(Object.keys(D.DWARF_MATERIALS).length,18);assert.equal(D.DWARF_MONSTER_INFO.length,26);
+assert.equal(Object.keys(D.DWARF_MATERIALS).length,18);assert.equal(D.DWARF_MONSTER_INFO.length,44);
 for(const [key,id]of Object.entries(D.LEGACY_MATERIAL_IDS)){assert.equal(D.resolveDwarfMaterialId(key),id);assert.equal(D.toDwarfInventoryKey(id),key);assert.equal(D.DWARF_MATERIAL_REGISTRY[key].catalogId,id);}
 assert.equal(D.resolveDwarfMaterialId('unknown'),null);assert.equal(D.getDwarfMaterialPool('dwarf.a01.normal.1','dwarf.a03.boss'),null);
 for(const pool of Object.values(D.DWARF_MATERIAL_SOURCE_POOLS)){assert(D.validDwarfMaterialPool(pool),pool.monsterId+' '+pool.nodeId);for(const c of pool.channels)for(const e of c.entries){assert(D.DWARF_MATERIALS[e.materialId].sources.includes(pool.nodeId));assert(!D.DWARF_MATERIALS[e.materialId].storyOnly);}}
@@ -15,7 +15,7 @@ const sourceMaterials=new Set(first.drops.map(d=>d.materialId));assert(!sourceMa
 const recovery=Object.entries(D.DWARF_MATERIAL_REGISTRY).filter(([,m])=>m.functionalTags.includes('recoveryBase'));assert(recovery.length>=4);
 for(const [key]of recovery)for(let quality=0;quality<4;quality++){const plan=recoveryInputPlan(quality,[{key:key+'|'+quality,quantity:3}],D.DWARF_MATERIAL_REGISTRY);assert(plan);assert.equal(plan.quantity,3);assert.equal(plan.gold,(quality+1)*3);assert.equal(recoveryInputPlan(quality,[{key:key+'|'+((quality+1)%4),quantity:3}],D.DWARF_MATERIAL_REGISTRY),null);}
 assert.equal(recoveryInputPlan(0,[{key:'铁屑|0',quantity:1}],D.DWARF_MATERIAL_REGISTRY),null);
-console.log('PASS dwarf materials:18 registry/26 identities, strict all source pairs, no invented fallback, old4 keys, independent channels, sequential gem ownership/reacquire, no summons/story materials, same-quality recovery substitution.');
+console.log('PASS dwarf materials:18 registry/44 identities, strict all source pairs, no invented fallback, old4 keys, independent channels, sequential gem ownership/reacquire, no summons/story materials, same-quality recovery substitution.');
 
 assert.equal(Object.values(D.DWARF_MATERIAL_REGISTRY).filter(m=>m.merchantAllowed).length,6);
 assert.equal(D.DWARF_MATERIAL_REGISTRY['dwarf.blackvein_ore'].merchantBasePrice,3);

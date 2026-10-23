@@ -24,4 +24,4 @@ for(const mutate of [x=>x.instanceCooldowns.bad=100,x=>x.expedition.fieldId='bla
 }
 console.log('Location foundation: stable IDs/lossless old encounter and cooldown migration, legacy normal prototype plus seven planned nodes, pure fallback/boundary routing, fixed area gear levels: PASS');
 
-assert.equal(Object.keys(PLANNED_AREAS).length,6);assert.equal(Object.keys(PLANNED_INSTANCES).length,14);assert(!PLANNED_INSTANCES['dwarf.a01.boss']);
+assert.equal(Object.keys(PLANNED_AREAS).length,10);assert.equal(Object.keys(PLANNED_INSTANCES).length,24);assert(!PLANNED_INSTANCES['dwarf.a01.boss']);

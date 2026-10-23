@@ -116,3 +116,6 @@ for(const file of ['combat-display-bridge-tests.mjs','combat-display-potion-test
 
 // M3 staged content, source routing and isolated delayed basic scheduling.
 for(const file of ['m3-content-tests.mjs','m3-material-tests.mjs','m3-slow-tests.mjs','m3-rewards-tests.mjs','m3-production-activation-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+// Final dwarf area batch: staged data/typed effects preserve existing production sources.
+for(const file of ['m4-content-tests.mjs','m4-material-tests.mjs','m4-runtime-tests.mjs','m4-production-activation-tests.mjs','m4-rewards-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
