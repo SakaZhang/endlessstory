@@ -1,0 +1,107 @@
+{
+  "version": "1.0",
+  "key": "world-terrain",
+  "image": "world-terrain.png",
+  "size": [
+    960,
+    540
+  ],
+  "normalizedArtSize": [
+    480,
+    270
+  ],
+  "opaque": true,
+  "layer": 0,
+  "territories": {
+    "human": {
+      "normalized": [
+        0.29,
+        0.39
+      ],
+      "anchor": [
+        278.4,
+        210.6
+      ]
+    },
+    "dwarf": {
+      "normalized": [
+        0.55,
+        0.29
+      ],
+      "anchor": [
+        528.0,
+        156.6
+      ]
+    },
+    "elf": {
+      "normalized": [
+        0.2,
+        0.73
+      ],
+      "anchor": [
+        192.0,
+        394.2
+      ]
+    },
+    "goblin": {
+      "normalized": [
+        0.57,
+        0.75
+      ],
+      "anchor": [
+        547.1999999999999,
+        405.0
+      ]
+    },
+    "ashen": {
+      "normalized": [
+        0.81,
+        0.51
+      ],
+      "anchor": [
+        777.6,
+        275.4
+      ]
+    }
+  },
+  "safeZones": {
+    "pinHalfSize": [
+      90,
+      40
+    ],
+    "title": [
+      18,
+      15,
+      300,
+      80
+    ],
+    "hint": [
+      18,
+      480,
+      500,
+      530
+    ],
+    "border": 16
+  },
+  "interaction": "existing DOM territoryPin/data-race and all text above art; no geometry or unlock changes",
+  "license": "original generated art",
+  "limitations": [
+    "AI-generated normalization nearest; not native hand-authored grid",
+    "Clearing placement is approximate, not guaranteed blank safe rectangles; DOM pins require their existing readable backing",
+    "Geographic land coastline and terrain are visual approximation of original; all canonical coordinates and gameplay unchanged",
+    "QA overlay is not production image and is not browser screenshot"
+  ],
+  "backgrounds": [
+    {
+      "id": "world-terrain",
+      "file": "world-terrain.png",
+      "size": [
+        960,
+        540
+      ],
+      "z": 0,
+      "hasAlpha": false
+    }
+  ],
+  "sprites": {}
+}

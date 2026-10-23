@@ -8,8 +8,8 @@
 .pixelSectionTitle{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #4f5359;padding-bottom:7px;font-size:14px;font-weight:700}
 .pixelSectionTitle button,.pixelWardrobeLink{display:flex;align-items:center;justify-content:center;gap:6px;min-height:40px;font-size:12px}
 .pixelSectionTitle button svg,.pixelWardrobeLink svg{width:24px;height:24px}
-.pixelInventory .equipmentDoll.pixelEquipmentDoll{display:grid;grid-template-columns:64px minmax(70px,1fr) 64px;grid-template-rows:repeat(4,76px);column-gap:2px;row-gap:8px;min-height:328px;align-content:center;justify-content:stretch;padding:10px 0;background:repeating-linear-gradient(0deg,#1d253000 0 23px,#8690940c 23px 24px),radial-gradient(ellipse at 50% 65%,#49505a,#1c232d 64%)}
-.pixelInventory .pixelEquipmentDoll:before{content:'';position:absolute;left:50%;top:auto;bottom:40px;width:96px;height:18px;background:#0d141b;border:2px solid #535451;transform:translateX(-50%);box-shadow:0 5px #101720}
+.pixelInventory .equipmentDoll.pixelEquipmentDoll{display:grid;grid-template-columns:64px minmax(70px,1fr) 64px;grid-template-rows:repeat(4,76px);column-gap:2px;row-gap:8px;min-height:328px;align-content:center;justify-content:stretch;padding:10px 0;background:#1c232d}
+.pixelInventory .pixelEquipmentDoll:before{content:none}
 .pixelInventory .pixelEquipmentDoll canvas{position:absolute;left:50%;top:100px;transform:translateX(-50%);width:160px;height:150px;opacity:1;image-rendering:pixelated;pointer-events:none}
 .pixelInventory .pixelEquipmentDoll .equipSlot{width:64px;height:76px;margin:0;padding:4px;z-index:1;border-width:2px;box-shadow:inset 0 0 0 2px #111820}
 .pixelInventory .pixelEquipmentDoll .equipSlot svg{width:48px;height:48px;image-rendering:pixelated}
@@ -28,3 +28,15 @@
 @media(max-width:650px){.pixelInventory{padding:8px}.pixelInventory .inventoryLayout.pixelInventoryLayout{grid-template-columns:minmax(0,1fr);gap:12px}.pixelInventory .pixelEquipmentStage,.pixelInventory .bagSection,.pixelInventory .pixelItemDetail{grid-column:1;grid-row:auto}.pixelInventory .pixelEquipmentDoll{max-width:360px;margin:auto}.pixelInventory .equipmentFamilies button{min-height:58px}.pixelInventory .bagGrid{grid-template-columns:repeat(auto-fill,minmax(48px,1fr));max-height:320px;min-height:110px}.pixelInventory .detailActions{grid-template-columns:repeat(2,minmax(0,1fr))}.pixelInventory .inventoryTabs button{font-size:12px}.pixelInventory .inventoryTabs svg{width:26px;height:26px}.pixelInventory .bagHeader{flex-wrap:wrap}}
 .pixelInventory .lockedDot svg,.pixelInventory .divineDot svg,.pixelBagFooter>span svg{display:inline-block;width:12px;height:12px;max-width:12px;max-height:12px;vertical-align:-2px;image-rendering:pixelated}
 .pixelSetEffects{font-size:12px;border-top:1px solid #49525c;padding:6px 0;color:#bfc9ba}.pixelSetEffects summary{cursor:pointer;min-height:36px;display:list-item;padding:7px 0}.pixelSetEffects p{font-size:12px;line-height:1.6;margin:4px 0 9px}.pixelSetEffects strong{color:#a9cba4}
+
+/* Keep the explicit CSS asset dependency in the release graph; the real image DOM below is the only painted layer. */
+.pixelInventory .pixelEquipmentDoll{--equipment-alcove-asset:url('./ui-art/equipment-alcove.png');isolation:isolate}
+.equipmentAlcoveCrop{position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none}
+.equipmentAlcove{position:absolute;left:50%;top:0;transform:translateX(-50%);width:360px;height:348px;max-width:none;image-rendering:pixelated;font-size:12px;line-height:1.5;color:#d6c8a7}
+.pixelInventory .pixelEquipmentDoll canvas{z-index:1}
+.pixelInventory .pixelEquipmentDoll .equipSlot{z-index:2}
+.equipmentAlcoveStatus{display:flex;align-items:center;justify-content:space-between;gap:5px;min-height:36px;font-size:12px;color:#cfbd95;flex-wrap:wrap}.equipmentAlcoveStatus[hidden]{display:none}.equipmentAlcoveStatus button{font-size:12px;min-height:36px;padding:5px 8px}.equipmentAlcoveStatus button[hidden]{display:none}
+
+/* Only vacant sockets use low-contrast monochrome watermarks. */
+.pixelEquipmentDoll .emptySlot .emptySlotWatermark{color:#58616a;opacity:.62;filter:none}
+.pixelEquipmentDoll .emptySlot{background:#171d25;border-color:#39434c}

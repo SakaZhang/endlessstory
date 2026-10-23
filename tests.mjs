@@ -145,3 +145,6 @@ runAffixSourceTest(process.execPath,[new URL('./live-battle-lifecycle-tests.mjs'
 
 // v0.50 real service scenes, isolated resource errors and exact layered art.
 runAffixSourceTest(process.execPath,[new URL('./pixel-service-scenes-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.51 exact world/area pixel maps and current equipment alcove, no gameplay changes.
+for(const file of ['test-pixel-map-scenes.mjs','test-map-pin-geometry.mjs','equipment-stage-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
