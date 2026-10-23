@@ -4,12 +4,13 @@ import assert from 'node:assert/strict';
 import path from 'node:path';
 import {createRequire} from 'node:module';
 import {createHash} from 'node:crypto';
-import {createBattleSliceModel,createBattleSlicePresentation,drawBattleSliceCanvas,slicePositions} from './dist/battle-slice.js';
+import {createBattleSliceModel,createBattleSlicePresentation,drawBattleSliceCanvas,slicePositions,sliceActorMetadata} from './dist/battle-slice.js';
 const require=createRequire(import.meta.url),{createCanvas,loadImage}=require('@napi-rs/canvas');
 const out=process.argv[2]??'/workspace/shared/battle-slice-review';fs.mkdirSync(path.join(out,'frames'),{recursive:true});
 const root='dist/battle-assets/',manifest=JSON.parse(fs.readFileSync(root+'manifest.json')),images=new Map();
 for(const f of [...manifest.backgrounds,...Object.values(manifest.sprites).flatMap(s=>s.frames)])images.set(f.file,await loadImage(root+f.file));
-const START=1800000000000,model=createBattleSliceModel({now:START}),positions=slicePositions(model.encounter),presentation=createBattleSlicePresentation(positions),canvas=createCanvas(480,270),events=[],initial=JSON.stringify(model.state);model.toggle(START);
+const scenario=process.argv[3]??'fire';
+const START=1800000000000,model=createBattleSliceModel({now:START,scenario}),positions=slicePositions(model.encounter),presentation=createBattleSlicePresentation(positions,sliceActorMetadata(model.state)),canvas=createCanvas(480,270),events=[],initial=JSON.stringify(model.state);model.toggle(START);
 const fps=20,duration=22000;let nextStep=1100;
 for(let i=0;i<=duration/1000*fps;i++){
  const t=i*1000/fps;

@@ -6,3 +6,21 @@ const m=createBattleSliceModel({now:Date.now()});assert(E.validSave(m.state));as
 const poison=createBattleSliceModel({now:1700000000000,scenario:'poison'});let pt=1700000000000;poison.toggle(pt);const poisonEvents=[];for(let i=0;i<60&&!poison.encounter.done;i++)poisonEvents.push(...poison.advance(pt+=1100));assert.equal(poison.emissionError,null);assert(poisonEvents.some(e=>e.kind==='poison'&&e.element===null&&e.crit===false));console.log('PASS second seeded scenario: real poison ticks emitted with independent noncritical/null-element damage.');
 
 const origin={x:110},attack={kind:'attack',element:'physical',targetX:350,at:0};assert.equal(presentationActorX(origin,attack,0),110);assert.equal(presentationActorX(origin,attack,220),310);assert.equal(presentationActorX(origin,attack,600),110);assert.equal(presentationActorX(origin,{...attack,element:'fire'},220),110);const foe={x:350};assert.equal(presentationActorX(foe,{...attack,targetX:110},220),150);assert(displayTokens({kind:'hit',hpDelta:-128,shieldDelta:0,crit:false,outcome:'hit',element:'physical'})[0].text.startsWith('−'));console.log('PASS melee approach/contact/return anchors in both directions; ranged stays planted; damage negative, shield tagged, healing positive.');
+
+const {skillVisualForEvent,sliceActorMetadata}=await import('./dist/battle-slice.js');
+const hit={kind:'hit',skillId:'fracture_strike',outcome:'hit',segmentIndex:0};
+assert.equal(skillVisualForEvent(hit,'axe'),'axeFirst');assert.equal(skillVisualForEvent({...hit,segmentIndex:1},'axe'),'axeHeavy');assert.equal(skillVisualForEvent(hit,'hammer'),'hammerCrack');assert.equal(skillVisualForEvent(hit,null),null);assert.equal(skillVisualForEvent({...hit,skillId:'basic'},'axe'),null);assert.equal(skillVisualForEvent({...hit,outcome:'miss'},'axe'),null);
+const observed=new Set();
+for(const scenario of ['fire','poison','eruption']){
+ const mm=createBattleSliceModel({now:1700000000000,scenario}),pp=createBattleSlicePresentation(slicePositions(mm.encounter),sliceActorMetadata(mm.state));assert(E.validSave(mm.state));assert.equal(mm.state.skillTree.presets[0].active.length,4);mm.toggle(1700000000000);let eruptionTargets=0;
+ for(let i=1;i<45&&!mm.encounter.done;i++){
+  const batch=mm.advance(1700000000000+i*1100),unchanged=JSON.stringify(mm.state);pp.enqueue(batch,i*1100);pp.advance(i*1100+400);const sampled=[...pp.effects];pp.advance(i*1100+800);sampled.push(...pp.effects.filter(f=>!sampled.includes(f)));
+  for(const f of sampled){observed.add(f.visual);const event=batch.find(e=>e.targetId===f.targetId&&e.skillId===f.skillId&&e.segmentIndex===f.segmentIndex);assert(event,'FX only uses actual emitted target / skill / segment');if(f.visual==='shieldRune'||f.visual==='healing')assert.equal(f.targetId,'hero');}
+  if(scenario==='eruption'){const actual=batch.filter(e=>e.kind==='hit'&&e.skillId==='furnace_wave');if(actual.length){const rendered=sampled.filter(f=>f.visual==='eruption');assert.deepEqual(rendered.map(f=>f.targetId).sort(),actual.map(e=>e.targetId).sort());eruptionTargets=Math.max(eruptionTargets,rendered.length);}}
+  assert.equal(JSON.stringify(mm.state),unchanged,'display does not mutate combat');
+ }
+ if(scenario==='eruption')assert.equal(eruptionTargets,3,'real axe furnace_wave hits all three actual enemies, no fabricated targets');
+ pp.advance(999999);assert.equal(pp.effects.length,0);mm.dispose();
+}
+for(const visual of ['axeFirst','axeHeavy','emberSeal','emberTick','shieldRune','healing','ash','poison','eruption'])assert(observed.has(visual),visual+' verified via real engine events');
+console.log('PASS typed representative skill FX: actual IDs/segments/targets; axe dual arcs vs hammer crack; real three-target furnace_wave, shield/heal self targets, ash/poison, expiry; basic unchanged, no combat mutation.');

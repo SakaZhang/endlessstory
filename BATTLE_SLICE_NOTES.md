@@ -17,3 +17,6 @@ The preview creates a separate seeded fixture using the real production engine: 
 Browser recheck found supported cloud Chromium, but localhost/terminal preview was unreachable. Authorized outside-sandbox server launch failed in environment setup; file URL preview was policy-blocked and not bypassed. Sites currently has no non-production preview URL. A future approved private version may expose only this isolated route for actual browser review; no new public site or access changes are authorized.
 
 The broader visual redesign, default-screen replacement and all game numerical changes are outside this slice.
+
+## Representative skill-FX refinement
+Explicit typed skill-ID mapping now distinguishes axe fracture segments / hammer impact, `furnace_wave` eruptions at actual hit targets, `ember_brand` marks, `scatter_ash` dust and independent poison markers, `iron_vigil` shield runes and `forge_breath` healing particles. Weapon metadata is read from the isolated actor's actual equipment; no skill text parsing or additional targets are generated. `?scenario=eruption` offers a legal four-active/two-passive level30 fixture with real three-target furnace-wave receipts. These are representative effects, not completed art for all15 skills.
