@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import * as D from './dist/dwarf-material-catalog.js';
 import {recoveryInputPlan} from './dist/recovery-recipe-schema.js';
-assert.equal(Object.keys(D.DWARF_MATERIALS).length,18);assert.equal(D.DWARF_MONSTER_INFO.length,13);
+assert.equal(Object.keys(D.DWARF_MATERIALS).length,18);assert.equal(D.DWARF_MONSTER_INFO.length,26);
 for(const [key,id]of Object.entries(D.LEGACY_MATERIAL_IDS)){assert.equal(D.resolveDwarfMaterialId(key),id);assert.equal(D.toDwarfInventoryKey(id),key);assert.equal(D.DWARF_MATERIAL_REGISTRY[key].catalogId,id);}
 assert.equal(D.resolveDwarfMaterialId('unknown'),null);assert.equal(D.getDwarfMaterialPool('dwarf.a01.normal.1','dwarf.a03.boss'),null);
 for(const pool of Object.values(D.DWARF_MATERIAL_SOURCE_POOLS)){assert(D.validDwarfMaterialPool(pool),pool.monsterId+' '+pool.nodeId);for(const c of pool.channels)for(const e of c.entries){assert(D.DWARF_MATERIALS[e.materialId].sources.includes(pool.nodeId));assert(!D.DWARF_MATERIALS[e.materialId].storyOnly);}}

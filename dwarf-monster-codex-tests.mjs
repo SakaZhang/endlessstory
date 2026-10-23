@@ -3,7 +3,7 @@ import * as M from './dist/monster-codex-schema.js';
 import * as U from './dist/monster-codex-ui.js';
 import {DWARF_MONSTER_INFO} from './dist/dwarf-material-catalog.js';
 const s={monsterLedger:{version:1,encountered:{'grayflag-raider':true}}};
-assert.equal(Object.keys(M.MONSTER_CATALOG).length,20);assert(M.validMonsterLedger(s));
+assert.equal(Object.keys(M.MONSTER_CATALOG).length,33);assert(M.validMonsterLedger(s));
 for(const m of DWARF_MONSTER_INFO){assert.deepEqual(M.monsterCodexEntry(s,m.id),{id:m.id,encountered:false});const html=U.renderMonsterDetail(s,m.id);assert(!html.includes(m.name));}
 const e={contentVersion:'dwarf-m2-v1',instanceId:'dwarf.a01.field',enemies:[{definitionId:'dwarf.a01.normal.1',sourceInstanceId:'dwarf.a01.field'}]};
 assert.deepEqual(M.recordEncounteredMonsters(s,e),['dwarf.a01.normal.1']);assert(M.monsterCodexEntry(s,'dwarf.a01.normal.1').encountered);assert(s.monsterLedger.encountered['grayflag-raider']);
