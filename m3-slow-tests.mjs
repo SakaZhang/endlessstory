@@ -5,8 +5,8 @@ const original=dwarfParameterSet(),budget={...structuredClone(original),id:'m3-s
 for(const d of Object.values(DWARF_MONSTERS))budget.monsters[d.id]={hp:100000,atk:1,armor:100000,elementalPower:1,basicIntervalMs:2200,rewardGold:1,rewardXp:1};
 for(const a of [4,5,6])budget.clearRewards[a]=structuredClone(budget.clearRewards[3]);
 function setup(options){
- const s=E.fresh(options);E.normalizeHealth(s,s.lastSeen);E.normalizeExpedition(s);E.normalizeContentMigration(s);
- s.areaProgress.dwarf.unlocked=[1,2,3,4,5,6];s.areaProgress.dwarf.cleared=[1,2,3,4,5];s.contentMigration.reselectRequired=false;s.skills=[null,null,null,null];
+ const s=E.fresh(options);E.normalizeHealth(s,s.lastSeen);E.normalizeExpedition(s);
+ s.areaProgress.dwarf.unlocked=[1,2,3,4,5,6];s.areaProgress.dwarf.cleared=[1,2,3,4,5];s.skills=[null,null,null,null];
  const e=E.startInstanceEncounter(s,'dwarf.a05.field',s.lastSeen);assert(e);return {s,e};
 }
 try{
@@ -26,10 +26,10 @@ try{
  E.step(clone,clone.activeEncounter,t+165);assert.deepEqual(clone,s,'JSON restore identical microevent');
  E.step(s,e,t+1100);assert.equal(e.round,2);assert.equal(e.treeCombatClock,2200);assert.equal(e.cd.break,2);
  // An eligible active action is never delayed or consumed by the basic-only slow.
- const active=setup({legacySkillModel:true});active.s.skills=['break',null,null,null];active.e.nextBasicSlow=1.15;
- E.step(active.s,active.e,active.s.nextActionAt);assert.equal(active.e.lastCast.skillId,'break');assert.equal(active.e.pendingBasicAt,undefined);assert.equal(active.e.nextBasicSlow,1.15);
- // Legacy timers/procs also retain one regular action opportunity, not a second full turn.
- const legacy=setup({legacySkillModel:true});legacy.e.nextBasicSlow=1.15;const lt=legacy.s.nextActionAt;
+ const active=setup();active.s.level=10;active.s.skillTree.presets[0].unlocked=['fracture_strike'];active.s.skillTree.presets[0].active=['fracture_strike',null,null,null];active.e.nextBasicSlow=1.15;
+ E.step(active.s,active.e,active.s.nextActionAt);assert.equal(active.e.lastCast.skillId,'fracture_strike');assert.equal(active.e.pendingBasicAt,undefined);assert.equal(active.e.nextBasicSlow,1.15);
+ // Current timers/procs also retain one regular action opportunity, not a second full turn.
+ const legacy=setup();legacy.e.nextBasicSlow=1.15;const lt=legacy.s.nextActionAt;
  E.step(legacy.s,legacy.e,lt);const lr=legacy.e.enemies.map(u=>u.round);E.step(legacy.s,legacy.e,lt+165);assert.equal(legacy.e.round,1);assert.deepEqual(legacy.e.enemies.map(u=>u.round),lr);assert.equal(legacy.e.lastCast.skillId,'basic');assert(E.validSave(legacy.s));
  // Pausing a pending hit shifts all event clocks, without losing the 165ms delay.
  const p=setup(),at=p.s.nextActionAt;p.e.nextBasicSlow=1.15;E.step(p.s,p.e,at);

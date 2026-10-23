@@ -9,7 +9,7 @@ const require=createRequire(import.meta.url),{createCanvas,loadImage}=require('@
 const manifest=JSON.parse(readFileSync(new URL('./dist/battle-assets/manifest.json',import.meta.url))),images=new Map();
 for(const f of [...manifest.backgrounds,...Object.values(manifest.sprites).flatMap(s=>s.frames)])if(!images.has(f.file))images.set(f.file,await loadImage(new URL('./dist/battle-assets/'+f.file,import.meta.url).pathname));
 // Reproducible real engine generation only; renderer is separately tested with RNG throwing.
-const originalRandom=Math.random;let generationSeed=74105;Math.random=()=>{generationSeed=(Math.imul(generationSeed,1664525)+1013904223)>>>0;return generationSeed/4294967296;};
+const originalRandom=Math.random,originalNow=Date.now;Date.now=()=>1770000000000;let generationSeed=74105;Math.random=()=>{generationSeed=(Math.imul(generationSeed,1664525)+1013904223)>>>0;return generationSeed/4294967296;};
 try{
 const now=1770000000000;let state,encounter;
 // Real default E.fresh and real A01 generation; no slice fixture or replacement game model.
@@ -20,7 +20,7 @@ const input=JSON.stringify(state),oldRandom=Math.random;Math.random=()=>{throw E
 try{assert.equal(view.sync(state,encounter,{now,presentationTime:0,running:true,visible:true}).mode,'ready');assert(view.draw(canvas,0));assert.equal(JSON.stringify(state),input);assert.equal(view.positions[encounter.enemies[0].id].sprite,'golem');const hud=renderLiveBattleHud(state,encounter);assert.equal((hud.match(/class="liveBattleSkill /g)||[]).length,6);assert(!hud.includes('<button'));assert.equal(JSON.stringify(state),input);}finally{Math.random=oldRandom;}
 const initialPng=canvas.toBuffer('image/png');
 const contact=structuredClone(view.positions);for(const p of Object.values(contact))p.x=300;const contactBars=liveBattleBars(encounter,contact,new Map(),0,{heroMaxHp:E.stats(state).hp,manifest});assert(contactBars.length>=2);for(let i=0;i<contactBars.length;i++)for(let j=i+1;j<contactBars.length;j++)assert(Math.abs(contactBars[i].y-contactBars[j].y)>=6,'head boxes resolve AFTER per-species solid head height');
-const legacyState=structuredClone(state);legacyState.skillTree.mode='legacy';const legacyHud=renderLiveBattleHud(legacyState,encounter);assert.equal((legacyHud.match(/class="liveBattleSkill"/g)||[]).length,4);assert(!legacyHud.includes('isPassive'));
+const invalidState=structuredClone(state);invalidState.skillTree.mode='legacy';assert(!E.validSave(invalidState),'old resolver state is not importable');
 const id=encounter.enemies[0].id,p=view.positions[id];assert.equal(view.targetAt({clientX:p.x*2+10,clientY:(p.y-20)*2+20},{left:10,top:20,width:960,height:540}),id);
 const beforePosition=view.positions[id];const reordered={...encounter,enemies:[...encounter.enemies].reverse()};view.sync(state,reordered,{now,running:true});assert.deepEqual(view.positions[id],beforePosition);
 // Actual event capture has a relative combat clock, unlike the absolute caller's now.
@@ -40,13 +40,15 @@ console.log('PASS live readonly adapter: real A01+relative-clock events, native 
 if(Object.values(LIVE_MONSTER_SPRITES).every(key=>manifest.sprites[key])){
  const {quoteSkillTreeChange,prepareSkillTreeChange}=await import('./dist/skill-tree-state.js');
  const records=[];
- const actualHero=()=>{let s;for(let i=0;i<100;i++){s=E.fresh();if(s.inventory.find(x=>x.id===s.equip.weapon)?.weaponType==='axe')break;}E.normalizeHealth(s,now);return s;};
+ const actualHero=()=>{let s;for(let i=0;i<100;i++){s=E.fresh();if(s.inventory.find(x=>x.id===s.equip.weapon)?.weaponType==='axe')break;}assert.equal(s.inventory.find(x=>x.id===s.equip.weapon)?.weaponType,'axe');E.normalizeHealth(s,now);return s;};
  const capture=(name,s,e,at=0)=>{const v=createLiveBattlePresentation({manifest,images});v.sync(s,e,{now:s.lastHealthClock,presentationTime:at,running:s.running,visible:true});const c=createCanvas(480,270),ok=v.draw(c,at);if(ok)writeFileSync(new URL(name+'.png',out),c.toBuffer('image/png'));writeFileSync(new URL(name+'-details.html',out),v.detailsHtml);records.push({name,drawn:ok,frameSha256:ok?createHash('sha256').update(c.toBuffer('image/png')).digest('hex'):null,actorCount:e.enemies.length+1,round:e.round,dungeonStage:e.dungeonStage??null,heroHp:e.heroHp,heroMaxHp:E.stats(s).hp,status:v.status,ids:e.enemies.map(u=>({unitId:u.id,monsterId:u.monsterId,follower:u.follower,hp:u.hp,max:u.max,shield:u.shield,shieldBarPixels:Math.min(1,Math.max(0,u.shield??0)/u.max)*34})),level:s.level,weapon:s.inventory.find(x=>x.id===s.equip.weapon)?.weaponType,skillPreset:s.skillTree.presets[s.skillTree.selectedPreset],stateSource:'real default E.fresh + real production encounter/steps; only declared level12/30 on dungeon/poison cases, lawful skill quotes and A02 access fixture as explicitly listed'});v.dispose();return ok;};
  const seen=new Set();let grouped=false;
  for(let i=0;i<500&&(seen.size<3||!grouped);i++){const s=actualHero(),e=E.startInstanceEncounter(s,'dwarf.a01.field',now);const mid=e.enemies[0].monsterId;if(!seen.has(mid)){assert(capture(mid,s,e));seen.add(mid);}if(!grouped&&e.enemies.length===3){assert(capture('a01-real-field-group',s,e));grouped=true;}}
  assert.equal(seen.size,3);assert(grouped,'actual production 4% group generated');
  const configure=(s,active,level=30)=>{s.level=level;for(const skillId of active.filter(Boolean)){const q=quoteSkillTreeChange(s,E.SKILL_TREE_DEFINITION,{type:'unlock',skillId});assert(q);s=prepareSkillTreeChange(s,q,E.SKILL_TREE_DEFINITION).game;}const q=quoteSkillTreeChange(s,E.SKILL_TREE_DEFINITION,{type:'slots',active,conditions:['always','always','always','always']});assert(q);return prepareSkillTreeChange(s,q,E.SKILL_TREE_DEFINITION).game;};
  let ds=configure(actualHero(),['scatter_ash','iron_vigil','forge_breath',null],12);let de=E.startInstanceEncounter(ds,'dwarf.a01.dungeon',now),poisonCaptured=false;
+ // Deterministic natural success seed for the real axe poison effect (no fabricated ledger).
+ let poisonSeed=null;for(let seed=1;seed<=1000&&poisonSeed===null;seed++){const trial=structuredClone(ds);trial.activeEncounter.rngState=seed;E.setMultiPaused(trial,false,trial.lastHealthClock);E.step(trial,trial.activeEncounter,trial.nextActionAt);if(Object.values(trial.activeEncounter.treePoison??{}).some(p=>p.layers?.length))poisonSeed=seed;}assert.notEqual(poisonSeed,null,'real production scatter must be able to apply poison');de.rngState=poisonSeed;
  for(let stage=1;stage<=3;stage++){
   assert.equal(de.dungeonStage,stage);if(stage===3){assert.equal(de.enemies[0].monsterId,'dwarf.a01.elite');assert(de.enemies[0].shield>0);assert(capture('a01-real-elite-opening-shield',ds,de));assert.equal(de.enemies.length,1,'A01 shield captain does NOT have followers');}
   E.setMultiPaused(ds,false,ds.lastHealthClock);
@@ -68,8 +70,8 @@ if(Object.values(LIVE_MONSTER_SPRITES).every(key=>manifest.sprites[key])){
   let defeated=false;for(let fight=0;fight<3&&!defeated;fight++){E.setMultiPaused(ws,false,ws.lastHealthClock);for(let turn=0;turn<150&&!we.done;turn++)E.step(ws,we,ws.nextActionAt);assert(we.done);if(!we.win){defeated=true;break;}E.reward(ws,we,ws.lastHealthClock);we=E.startRoutedEncounter(ws,ws.nextActionAt);assert(we);}
   assert(defeated,'actual A01 three-stage dungeon reaches fresh hero defeat');assert.equal(we.heroHp,0);assert(capture('a01-real-'+weapon+'-hero-death',ws,we));const terminal=createLiveBattlePresentation({manifest,images});terminal.sync(ws,we,{now:ws.lastHealthClock,running:false});const seenImages=[],cv=createCanvas(480,270),cx=cv.getContext('2d'),pr=new Proxy(cx,{get(t,k){if(k==='drawImage')return(...a)=>{seenImages.push(a[0]);return t.drawImage(...a)};const v=t[k];return typeof v==='function'?v.bind(t):v;},set(t,k,v){t[k]=v;return true;}});assert(terminal.draw({width:480,height:270,getContext:()=>pr},0));const sprite=manifest.sprites[expected],death=sprite.frames.find(f=>f.id===sprite.animations.death.at(-1));assert(seenImages.includes(images.get(death.file)));terminal.dispose();
  }
- writeFileSync(new URL('full-a01-evidence.json',out),JSON.stringify({generationSeed:74105,capture:'Native production renderer. No browser claim. A01 has no natural cast-duration skill and no followers; A02 follower encounter is separately mapped in v043; A04 remains outside coverage.',records},null,2));
+ writeFileSync(new URL('full-a01-evidence.json',out),JSON.stringify({generationSeed:74105,clock:now,poisonFixtureSeed:poisonSeed,capture:'Native production renderer. No browser claim. A01 has no natural cast-duration skill and no followers; A02 follower encounter is separately mapped in v043; A04 remains outside coverage.',records},null,2));
  console.log('PASS full real A01 normal identities/group, actual level12 lawful poison build and three-stage opening-shield elite; real A02 followers use explicit identities, never substituted.');
 }
 
-}finally{Math.random=originalRandom;}
+}finally{Math.random=originalRandom;Date.now=originalNow;}

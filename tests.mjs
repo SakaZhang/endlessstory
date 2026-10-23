@@ -1,25 +1,20 @@
 // Current schema regression entrypoint. Prior schema tests are superseded.
 import './engine-v4-tests.mjs';
-import './storage-tests.mjs';
 
 import './reforge-tests.mjs';
 import './loadout-tests.mjs';
 
 import './merchant-tests.mjs';
 
-import './skill-slot-tests.mjs';
-import './skill-expansion-tests.mjs';
 
 import './talent-tests.mjs';
 
-import './support-grant-tests.mjs';
 
 import './material-quality-tests.mjs';
 
 import './hp-rest-tests.mjs';
 import './potion-tests.mjs';
 import './potion-forge-tests.mjs';
-import './offline-combat-tests.mjs';
 
 import './recipe-tests.mjs';
 
@@ -27,17 +22,13 @@ import './element-schema-tests.mjs';
 import './elemental-combat-tests.mjs';
 import './pending-reforge-tests.mjs';
 import './reforge-v13-tests.mjs';
-import './location-foundation-tests.mjs';
-import './dungeon-routing-tests.mjs';
 
 import './transaction-tests.mjs';
 
 import './forge-level-tests.mjs';
 import './area-progress-tests.mjs';
 import './equipment-level-tests.mjs';
-import './dungeon-carry-tests.mjs';
 import './inventory-bags-tests.mjs';
-import './skill-progression-tests.mjs';
 import './set-source-tests.mjs';
 import './codex-collection-tests.mjs';
 import './batch-sale-tests.mjs';
@@ -47,7 +38,6 @@ await import('./recovery-tests.mjs');
 
 import './multi-combat-tests.mjs';
 
-import './monster-codex-tests.mjs';
 import './development-sandbox-tests.mjs';
 
 import './equipment-template-tests.mjs';
@@ -105,7 +95,7 @@ for(const file of ['luck-policy-tests.mjs','luck-production-tests.mjs','legendar
 // v0.35 navigation ledgers and preview modules run in their own production realm.
 for(const file of ['region-navigation-state-tests.mjs','adjacent-region-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
 
-// New-tree state, shared production host and migration regressions use isolated realms.
+// Current-tree state, shared production host and strict-generation regressions use isolated realms.
 for(const file of ['skill-tree-state-tests.mjs','skill-tree-preparation-tests.mjs','skill-tree-consumer-tests.mjs','skill-tree-poison-tests.mjs','skill-tree-effects-tests.mjs','skill-tree-effect-host-tests.mjs','skill-tree-poison-host-tests.mjs','skill-tree-combat-schema-tests.mjs','skill-tree-production-host-tests.mjs','skill-tree-attributes-tests.mjs','skill-tree-passives-tests.mjs','skill-tree-passive-host-tests.mjs','skill-tree-selector-tests.mjs','skill-tree-dungeon-carry-tests.mjs','skill-tree-active-integration-tests.mjs','skill-tree-fresh-migration-tests.mjs','skill-tree-healing-compat-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
 
 // v0.37 constant racial forge policy and actual transactions use isolated realms.
@@ -132,8 +122,8 @@ runAffixSourceTest(process.execPath,[new URL('./live-battle-a02-tests.mjs',impor
 // v0.44 actual A03 elite/boss identities and shield-only non-damaging presentation.
 runAffixSourceTest(process.execPath,[new URL('./live-battle-a03-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
 
-// v0.44.1: real historical weapon display and immutable release resource graph.
-runAffixSourceTest(process.execPath,[new URL('./live-battle-legacy-hero-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+// Immutable release resource graph; retired save factories are tested only for deletion.
 runAffixSourceTest(process.execPath,[new URL('./release-cache-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
-runAffixSourceTest(process.execPath,[new URL('./storage-clear-no-backup-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
 runAffixSourceTest(process.execPath,[new URL('./battle-preview-entry-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+for(const file of ['current-save-generation-tests.mjs','storage-generation-v3-tests.mjs','storage-real-retired-tests.mjs','combat-float-icons-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});

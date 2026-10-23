@@ -1,3 +1,4 @@
+import {currentAffix} from './current-equipment-test-fixture.mjs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import * as engine from './dist/engine.js';
@@ -12,7 +13,7 @@ export function sequenceFingerprint(api){
   for(let i=0;i<400;i++){const {id,name,templateId,baseVariant,weaponType,originRace,visualKey,visualVariant,iconKey,atk,hp,armor,...it}=api.item(api.SLOTS[i%api.SLOTS.length],1+i%9,null,i%4);outputs.push(it);}
   const s=api.fresh();s.consumables.reforgeToken=10000;s.gold=1e7;s.materialStacks['铁屑|0']=1e6;s.materialStacks['炉火晶|0']=1e6;
   const it=api.item('gloves',5,null,3);s.inventory.push(it);
-  for(let i=0;i<300;i++){const mode=['value','replace','all'][i%3];let donor;if(mode==='replace'){donor=api.item('ring',1,null,0);const stat=api.ACTIVE_AFFIX_KEYS.find(k=>!it.affixes.some(a=>a.stat===k));donor.affixes=[{stat,value:api.AFFIX_DEFS[stat].min}];s.inventory.push(donor);}const result=api.reforge(s,it.id,mode,i%4,donor?.id);assert(result);outputs.push(result.after);assert(api.resolveReforge(s,true));}
+  for(let i=0;i<300;i++){const mode=['value','replace','all'][i%3];let donor;if(mode==='replace'){donor=api.item('ring',1,null,0);const stat=api.ACTIVE_AFFIX_KEYS.find(k=>!it.affixes.some(a=>a.stat===k));donor.affixes=[currentAffix(stat,api.AFFIX_DEFS[stat].min)];s.inventory.push(donor);}const result=api.reforge(s,it.id,mode,i%4,donor?.id);assert(result);outputs.push(result.after);assert(api.resolveReforge(s,true));}
   return createHash('sha256').update(JSON.stringify(outputs)).digest('hex');
  }finally{Math.random=random;}
 }

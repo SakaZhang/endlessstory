@@ -1,16 +1,16 @@
 const assert=require('assert/strict');const {createCanvas}=require('@napi-rs/canvas');let elements=new Map(),events={},store=new Map(),timers=new Map(),timerId=0,reduced=false;
 function el(id){if(elements.has(id))return elements.get(id);const canvas=createCanvas(960,540);const obj={id,style:{},classList:{add(){},remove(){}},open:false,showModal(){this.open=true},close(){this.open=false},addEventListener(){},click(){this.onclick?.()},getContext(...a){return canvas.getContext(...a)}};let html='';Object.defineProperty(obj,'innerHTML',{get:()=>html,set:v=>{html=v;for(let m of v.matchAll(/id="([^"]+)"/g))el(m[1]);}});elements.set(id,obj);return obj;}
 global.document={hidden:false,getElementById:el,addEventListener:(k,f)=>(events[k]??=[]).push(f),createElement:()=>({click(){}})};global.window={addEventListener(){},matchMedia:()=>({matches:reduced})};global.localStorage={getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,v),get length(){return store.size},key:i=>[...store.keys()][i]};global.requestAnimationFrame=()=>{};global.setInterval=()=>0;global.setTimeout=(fn,ms)=>{let id=++timerId;timers.set(id,{fn,ms});return id};global.clearTimeout=id=>timers.delete(id);global.confirm=()=>true;
-(async()=>{
+(async()=>{const {makeAffixSourceRange}=await import('./dist/affix-range.js');
 const E=await import('./dist/engine.js'),originalRandom=Math.random,originalNow=Date.now;Math.random=()=>.2;const now=Date.now();Date.now=()=>now;
 assert.equal(E.ACTIVE_AFFIX_KEYS.length,20);assert(E.ACTIVE_AFFIX_KEYS.includes('lifesteal'));assert(E.ACTIVE_AFFIX_KEYS.includes('luck'));
 assert.equal(Object.keys(E.SPECIALS).length,7);assert(Array.isArray(E.ACTIVE_SPECIAL_KEYS));for(const key of E.ACTIVE_SPECIAL_KEYS)assert(E.SPECIALS[key].enabled!==false);assert.equal(E.ACTIVE_SPECIAL_KEYS.includes('multicast'),E.SPECIALS.multicast?.enabled!==false);
 for(const id of ['shelter','nirvana','multicast','reaper'])assert(E.SPECIALS[id]);assert.equal(E.SPECIALS.shelter.name,'护佑');
-const base=E.fresh();base.bonusTalentPoints=30;base.testGrants={v081support:true};base.gold=1000;
-const records=Object.keys(E.SPECIALS).map(id=>{const it=E.item('gloves',10,null,2);it.affixes=[{stat:'lifesteal',value:E.AFFIX_DEFS.lifesteal.min},{stat:'luck',value:E.AFFIX_DEFS.luck.min},{stat:'atk',value:3}];it.special={id};base.inventory.push(it);return it;});
+const base=E.fresh();base.gold=1000;
+const records=Object.keys(E.SPECIALS).map(id=>{const it=E.item('gloves',10,null,2);it.affixes=[{stat:'lifesteal',value:E.AFFIX_DEFS.lifesteal.min},{stat:'luck',value:E.AFFIX_DEFS.luck.min},{stat:'atk',value:3}].map(a=>({...a,sourceRange:makeAffixSourceRange(E.AFFIX_DEFS[a.stat],0)}));it.special={id};base.inventory.push(it);return it;});
 const guarded=records.find(it=>it.special.id==='shelter');E.applyForgeFavor(guarded);for(const key of Object.keys(base.equip))base.equip[key]=null;base.equip.gloves=guarded.id;
-assert(E.validSave(base));store.set('ashencrown-v2',JSON.stringify(base));await import('./dist/app.js?affix-expansion-ui');
-const click=(dataset={},id='')=>{const b={dataset,id};for(const f of events.click||[])f({target:{id,closest:()=>b}});},saved=()=>JSON.parse(store.get('ashencrown-v2'));
+assert(E.validSave(base));store.set('ashencrown-v3',JSON.stringify(base));await import('./dist/app.js?affix-expansion-ui');
+const click=(dataset={},id='')=>{const b={dataset,id};for(const f of events.click||[])f({target:{id,closest:()=>b}});},saved=()=>JSON.parse(store.get('ashencrown-v3'));
 click({view:'inventory'});click({bagSlot:'gloves'});
 for(const it of records){click({item:it.id});const html=el('view').innerHTML;assert(html.includes(E.SPECIALS[it.special.id].name));assert(html.includes(E.SPECIALS[it.special.id].desc));assert(html.includes(E.AFFIX_DEFS.lifesteal.name));assert(html.includes(E.AFFIX_DEFS.luck.name));assert(!html.includes('绝境庇护'));}
 click({item:guarded.id});let html=el('view').innerHTML;assert(html.includes('divineBadge'));assert(html.includes('（+10%）'));

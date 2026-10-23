@@ -1,4 +1,4 @@
-import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
+import {fresh} from './dist/engine.js';
 import assert from 'node:assert/strict';
 import {RECIPES,normalizeRecipes,recipeKnown,learnRecipe,purchaseRecipe,craftRecipe,ensureMerchant,validSave,item,bagItems,materialCount,potionCount,fusionQualityWeights,paidRefreshMerchant,MATERIALS,quotePotionRecipe,craftPotionRecipe,quoteRecoveryRecipe,craftRecoveryRecipe} from './dist/engine.js';
 import {potionRecipeAllows} from './dist/potion-catalog.js';

@@ -8,17 +8,9 @@ const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const skillNames=Object.fromEntries(SKILL_TREE_DEFINITION.nodes.map(n=>[n.id,n.name]));
 // Only approved identity mappings. Missing frames never become an unrelated substitute.
 export const LIVE_HERO_SPRITES=Object.freeze({axe:'dwarf',hammer:'dwarf-hammer'});
-// Display compatibility only. Never promote legacy display identity into combat metadata.
 export function liveHeroWeaponType(state){
  const item=state?.inventory?.find(it=>it.id===state?.equip?.weapon);
- if(!item||item.slot!=='weapon')return null;
- const legacyName=['旅铸·战锤','旧炉·战锤'].includes(item.name);
- const newIdentity=['templateId','legendaryId','baseVariant','visualKey','visualVariant','iconKey','originRace'].some(key=>item[key]!==undefined&&item[key]!==null);
- if(item.weaponType!==undefined){
-  if(legacyName&&!newIdentity&&item.weaponType!=='hammer')return null;
-  return item.weaponType;
- }
- return legacyName&&!newIdentity?'hammer':null;
+ return item?.slot==='weapon'?item.weaponType??null:null;
 }
 export const LIVE_MONSTER_SPRITES=Object.freeze({'dwarf.a01.normal.1':'raider','dwarf.a01.normal.2':'pit-rat','dwarf.a01.normal.3':'golem','dwarf.a01.elite':'shield-captain'});
 const identity=u=>u.monsterId??u.definitionId??null;

@@ -21,8 +21,8 @@ const fixture={id:'m3-content-explicit-test-only',testOnly:true,reviewed:false,a
  monsters:Object.fromEntries(Object.keys(DWARF_MONSTERS).map(id=>[id,{hp:100000,atk:1,armor:100000,elementalPower:10,basicIntervalMs:2200,rewardGold:4,rewardXp:20}])),
  clearRewards:Object.fromEntries([1,2,3,4,5,6].map(a=>[a,{gold:20,xp:40,materialRounds:1,gearChance:.35,markChance:.02}]))};
 function setup(){
- const s=E.fresh();E.normalizeHealth(s,s.lastSeen);E.normalizeExpedition(s);E.normalizeContentMigration(s);
- s.areaProgress.dwarf.unlocked=[1,2,3,4,5,6];s.areaProgress.dwarf.cleared=[1,2,3,4,5];s.contentMigration.reselectRequired=false;
+ const s=E.fresh();E.normalizeHealth(s,s.lastSeen);E.normalizeExpedition(s);
+ s.areaProgress.dwarf.unlocked=[1,2,3,4,5,6];s.areaProgress.dwarf.cleared=[1,2,3,4,5];
  s.expedition={mode:'field',fieldId:'dwarf.a01.field',targetInstanceId:null,loop:false};return s;
 }
 try{

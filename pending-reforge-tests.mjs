@@ -1,11 +1,12 @@
-import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
+import {currentAffix} from './current-equipment-test-fixture.mjs';
+import {fresh} from './dist/engine.js';
 import assert from 'node:assert/strict';
 import {item,reforge,resolveReforge,getReforgeCost,stats,validSave,isProtected,applyForgeFavor,equipItem,saveLoadout} from './dist/engine.js';
 const rng=Math.random;Math.random=()=>.99;
 try{
  for(const mode of ['value','replace','all']){
-  const s=fresh();s.consumables.reforgeToken=10000;s.gold=10000;s.materialStacks={'铁屑|0':100,'炉火晶|0':100};const it=item('weapon',1,null,2);it.affixes=[{stat:'atk',value:3},{stat:'hp',value:15},{stat:'crit',value:5}];it.special={id:'knowledge'};it.locked=true;applyForgeFavor(it);s.inventory.push(it);equipItem(s,it.id);saveLoadout(s,0,'a');saveLoadout(s,1,'b');
-  let donor;if(mode==='replace'){donor=item('ring',1,null,0);donor.affixes=[{stat:'armor',value:2}];s.inventory.push(donor);}
+  const s=fresh();s.consumables.reforgeToken=10000;s.gold=10000;s.materialStacks={'铁屑|0':100,'炉火晶|0':100};const it=item('weapon',1,null,2);it.affixes=[currentAffix('atk',3),currentAffix('hp',15),currentAffix('crit',5)];it.special={id:'knowledge'};it.locked=true;applyForgeFavor(it);s.inventory.push(it);equipItem(s,it.id);saveLoadout(s,0,'a');saveLoadout(s,1,'b');
+  let donor;if(mode==='replace'){donor=item('ring',1,null,0);donor.affixes=[currentAffix('armor',2)];s.inventory.push(donor);}
   const old=structuredClone(it),oldStats=stats(s),gold=s.gold,cost=getReforgeCost(it,mode),r=reforge(s,it.id,mode,0,donor?.id);
   assert(r?.pending);assert.deepEqual(it,old);assert.deepEqual(stats(s),oldStats);assert.equal(s.gold,gold-cost.gold);assert(isProtected(s,it.id));assert(validSave(s));
   const snapshot=JSON.stringify(s);assert.equal(reforge(s,it.id,mode,0),null);assert.equal(JSON.stringify(s),snapshot);

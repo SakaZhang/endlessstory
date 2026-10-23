@@ -7,3 +7,9 @@ exports.installM2UiFixture=async function({fieldGroupChance=0,hp=150}={}){
   monsters:Object.fromEntries(Object.keys(DWARF_MONSTERS).map(id=>[id,{hp,atk:5,armor:10,elementalPower:7,rewardGold:4,rewardXp:20,basicIntervalMs:2200}]))};
  if(!E.configureDwarfParameters(config))throw Error('M2 UI fixture rejected');return config;
 };
+
+// Legal factory gear only: tests may choose a high item level, never rewrite budgets.
+exports.equipFactoryItem=async function(state,slot,{level=100,quality=0,equippedSlot=slot}={}){
+ const E=await import('./dist/engine.js');const item=E.item(slot,level,null,quality);
+ state.inventory.push(item);state.equip[equippedSlot]=item.id;return item;
+};

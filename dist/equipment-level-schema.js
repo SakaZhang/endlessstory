@@ -1,14 +1,12 @@
-export const EQUIPMENT_LEVEL_SOURCES=Object.freeze(['legacy','generated','starter','drop','material','merchant','equipment']);
+export const EQUIPMENT_LEVEL_SOURCES=Object.freeze(['generated','starter','drop','material','merchant','equipment']);
 export function validEquipmentLevelMetadata(it){
  if(!it||typeof it!=='object')return false;
- if(it.baseLevel===undefined&&it.levelSource===undefined)return true;
- return Number.isFinite(it.baseLevel)&&it.baseLevel>=0&&it.baseLevel<=1e12&&EQUIPMENT_LEVEL_SOURCES.includes(it.levelSource);
+ return Number.isSafeInteger(it.baseLevel)&&it.baseLevel>=1&&it.baseLevel<=1e12&&EQUIPMENT_LEVEL_SOURCES.includes(it.levelSource);
 }
 export function normalizeEquipmentLevels(s){
  if(!s||!Array.isArray(s.inventory)||(s.merchant!==undefined&&(!s.merchant||!Array.isArray(s.merchant.offers))))return false;
  const items=[...(s?.inventory??[]),...(s?.merchant?.offers??[]).filter(o=>o?.type==='equipment').map(o=>o.item)];
  if(!items.every(it=>it&&Number.isFinite(it.level)&&it.level>=0&&it.level<=1e12&&validEquipmentLevelMetadata(it)))return false;
- for(const it of items)if(it.baseLevel===undefined&&it.levelSource===undefined){it.baseLevel=it.level;it.levelSource='legacy';}
  return true;
 }
 function rollWithin(baseLevel,range,random,levelSource){

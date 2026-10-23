@@ -1,4 +1,4 @@
-import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
+import {fresh} from './dist/engine.js';
 import assert from 'node:assert/strict';
 import {commitGameTransaction,SAVE_KEY} from './dist/storage.js';
 import {RECIPES,ensureMerchant,purchaseRecipe,quoteRecoveryRecipe,craftRecoveryRecipe,recipeKnown,forge,validSave} from './dist/engine.js';

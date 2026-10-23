@@ -26,8 +26,8 @@ const fixture={id:'m4-content-test-only',testOnly:true,reviewed:false,areas:[1,2
  monsters:Object.fromEntries(Object.keys(DWARF_MONSTERS).map(id=>[id,{hp:100000,atk:1,armor:100000,elementalPower:10,basicIntervalMs:2200,rewardGold:4,rewardXp:20}])),
  clearRewards:Object.fromEntries(Array.from({length:10},(_,i)=>[i+1,{gold:20,xp:40,materialRounds:0,gearChance:0,markChance:0}]))};
 function setup(){
- const s=E.fresh();E.normalizeHealth(s,s.lastSeen);E.normalizeExpedition(s);E.normalizeContentMigration(s);
- s.areaProgress.dwarf.unlocked=[1,2,3,4,5,6,7,8,9,10];s.areaProgress.dwarf.cleared=[1,2,3,4,5,6,7,8,9];s.contentMigration.reselectRequired=false;
+ const s=E.fresh();E.normalizeHealth(s,s.lastSeen);E.normalizeExpedition(s);
+ s.areaProgress.dwarf.unlocked=[1,2,3,4,5,6,7,8,9,10];s.areaProgress.dwarf.cleared=[1,2,3,4,5,6,7,8,9];
  s.expedition={mode:'field',fieldId:'dwarf.a01.field',targetInstanceId:null,loop:false};return s;
 }
 const actor=d=>initializeDwarfActor({id:d.id,sourceInstanceId:d.nodes.at(-1),control:createControl(d.id,0),profile:{}},d,dwarfParameters(d.id),0);

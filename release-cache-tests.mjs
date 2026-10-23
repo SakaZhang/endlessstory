@@ -69,7 +69,7 @@ try{
  const links=[...anchor.matchAll(/<a href="([^"]+)"/g)].map(m=>new URL(m[1],base).href);
  assert.deepEqual(links,[root+'battle-preview.html?scenario=poison#x',root+'index.html#help','https://other.example/']);
  assert.throws(()=>rootHtml('<head><base href="/"></head>','index.html',a.release),/Existing base/);
- const storage=await readFile(join(source,'storage.js'),'utf8');assert.match(storage,/SAVE_KEY='ashencrown-v2'/);
+ const storage=await readFile(join(source,'storage.js'),'utf8');assert.match(storage,/SAVE_KEY='ashencrown-v3'/);
  assert.equal(new URL(a.base,root).origin,new URL(root).origin);assert.ok(!legacyHtml.includes('serviceWorker.register'));
  const actual=await buildRelease();const graph=await probe('build',actual);
  const helper=process.env.SITES_PREPARE_HELPER??'/home/agent/.codex/plugins/cache/openai-curated-remote/sites/1.1.1/skills/sites/scripts/prepare-site-build.cjs';

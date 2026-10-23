@@ -1,4 +1,4 @@
-import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
+import {fresh} from './dist/engine.js';
 import assert from 'node:assert/strict';
 import {forge,materialKey,materialCount,potionEntries,POTIONS,validSave,normalizePotions,ensureMerchant} from './dist/engine.js';
 const original=Math.random;let seed=7245;Math.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};

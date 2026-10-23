@@ -25,7 +25,7 @@ function win(s,e){
  assert(e.done&&e.win);assert(E.validSave(s));return e;
 }
 const fresh=E.fresh();E.normalizeHealth(fresh,fresh.lastSeen);E.normalizeExpedition(fresh);
-assert.equal(fresh.gold,100);assert.equal(fresh.supportGrantEligible,false);
+assert.equal(fresh.gold,100);assert.equal(fresh.supportGrantEligible,undefined);
 const nodes=E.plannedNodes(fresh);assert.equal(nodes.length,24);assert.equal(new Set(nodes.map(n=>n.areaNumber)).size,10);assert(nodes.every(n=>n.budgetReady));
 assert.deepEqual(nodes.filter(n=>n.kind==='boss').map(n=>n.areaNumber),[3,6,9,10]);
 assert.equal(E.startInstanceEncounter(fresh,'dwarf.a07.field',fresh.lastSeen),null,'fresh save cannot skip unlock');

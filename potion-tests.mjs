@@ -1,4 +1,4 @@
-import {legacyFresh as fresh} from './legacy-skill-test-fixture.mjs';
+import {fresh} from './dist/engine.js';
 import assert from 'node:assert/strict';
 import {stats,normalizeHealth,normalizePotions,potionKey,parsePotionKey,potionEntries,potionEffect,equipPotion,setPotionAuto,drinkPotion,autoDrinkPotion,startRest,settleRest,validSave,encounter,step} from './dist/engine.js';
 const original=Math.random;Math.random=()=>.5;
@@ -11,7 +11,7 @@ try{
  const heal=fresh();normalizeHealth(heal,1000);normalizePotions(heal);heal.potionStacks['healing|0']=3;equipPotion(heal,'healing|0');setPotionAuto(heal,true);heal.heroHp=stats(heal).hp*.41;assert(!autoDrinkPotion(heal,null,1000));heal.heroHp=stats(heal).hp*.4;assert(autoDrinkPotion(heal,null,1000));assert.equal(heal.potionStacks['healing|0'],2);
  startRest(heal,22000);const restEnd=heal.restUntil;assert(!drinkPotion(heal,'healing|0',23000));assert.equal(heal.restUntil,restEnd);assert.equal(heal.potionStacks['healing|0'],2);settleRest(heal,restEnd);assert(!drinkPotion(heal,'healing|0',restEnd));
  const auto=fresh();normalizeHealth(auto,1000);normalizePotions(auto);auto.potionStacks['healing|0']=1;equipPotion(auto,'healing|0');setPotionAuto(auto,true);auto.heroHp=20;const battle=encounter(auto,false,1000);const logs=step(auto,battle,1000);assert(logs.some(x=>x.includes('自动饮用')));assert.equal(auto.potionStacks['healing|0'],0);assert.equal(battle.heroHp,auto.heroHp);
- const old=fresh();old.potions={healing:2,strength:1};assert(normalizePotions(old));assert.equal(old.potions,undefined);assert.equal(old.potionStacks['healing|0'],2);const saved=JSON.stringify(old);normalizePotions(old);assert.equal(JSON.stringify(old),saved);
+ const old=fresh();old.potions={healing:2,strength:1};const saved=JSON.stringify(old);assert.equal(normalizePotions(old),false);assert(!validSave(old));assert.equal(JSON.stringify(old),saved);
  console.log('Potion core: exact stacks,10%healing,10sec sharedCD,fixed intensity/time stacking,coexistence,auto rules,rest blocking,clock persistence: PASS');
 }finally{Math.random=original;}
 // Confirmed quality policies and real fusion acquisition.
