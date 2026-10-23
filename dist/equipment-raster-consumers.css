@@ -1,0 +1,50 @@
+/* v053 exact equipment image sizes. Load after legacy consumer styles.
+   Raster wrappers retain their inline quality fill/frame; all 50 authored images use direct PNG. Retired unmarked SVG fallbacks
+   remain scoped separately. Unmarked empty-slot SVGs are intentionally untouched. */
+.equipmentRaster{display:inline-block;position:relative;flex:none;vertical-align:middle;width:var(--equipment-size,48px)!important;height:var(--equipment-size,48px)!important;min-width:var(--equipment-size,48px);min-height:var(--equipment-size,48px);max-width:none!important;max-height:none!important;background:var(--equipment-bg);image-rendering:pixelated;box-sizing:content-box;padding:0;border:0}
+.equipmentRaster:after{content:"";position:absolute;inset:0;border:1px solid var(--equipment-frame,#48515a);pointer-events:none;box-sizing:border-box}
+.equipmentRasterError[hidden]{display:none}.equipmentRasterError:not([hidden]){display:grid;place-items:center;position:absolute;inset:0;font-size:12px;line-height:1.2;text-align:center;overflow-wrap:anywhere;color:#ecddbb}
+.equipmentRaster:has(.equipmentRasterError:not([hidden]))>.equipmentRasterImage{display:none}
+.equipmentRasterImage{display:block;width:100%;height:100%;object-fit:contain;image-rendering:pixelated;pointer-events:none}
+/* Raster native32/48/64 source is selected by JS options.size, never CSS-resized.
+   Only legacy marked SVG uses fixed consumer dimensions below. */
+:is(svg[data-equipment-art],svg[data-equipment-quality]){--equipment-icon-size:48px;width:var(--equipment-icon-size)!important;height:var(--equipment-icon-size)!important;min-width:var(--equipment-icon-size);min-height:var(--equipment-icon-size);max-width:none!important;max-height:none!important;flex-shrink:0;image-rendering:pixelated}
+/* These SVG dimensions match the JS native-PNG consumer contract at every viewport. */
+:is(.itemCell,.loadoutGearSlot,.batchSaleItem,.fusionGearCard,.orbitSlot,.donorCard,.workshopItem,.collectedPart)>:is(svg[data-equipment-art],svg[data-equipment-quality]){--equipment-icon-size:32px}
+:is(.equipSlot,.detailIcon,.shopGearIcon,.workshopTemplate,.collectionTile)>:is(svg[data-equipment-art],svg[data-equipment-quality]){--equipment-icon-size:48px}
+:is(.forgeResult,.workshopBigIcon,.collectionHero,.codexSigil)>:is(svg[data-equipment-art],svg[data-equipment-quality]){--equipment-icon-size:64px}
+.shopGearIcon:has(>.equipmentRaster),.shopGearIcon:has(>svg[data-equipment-quality]){width:60px;height:60px;padding:5px}
+.detailIcon:has(>.equipmentRaster){display:grid;place-items:center}
+:is(.itemCell,.loadoutGearSlot,.batchSaleItem,.workshopItem,.workshopTemplate,.fusionGearCard)>.equipmentRaster{justify-self:center;margin-inline:auto}
+/* Preserve unknown-set discovery styling; known icons are never dimmed. */
+.undiscoveredSet .equipmentRasterImage{filter:grayscale(1);opacity:.3}
+/* Mirror existing equipmentPresentation parent fill/selection rules for span.
+   Existing SVG rules stay in force; this does not create a second rarity system. */
+/* Equipment only: quality is a background, never the frame colour.
+   These scoped marker selectors deliberately exclude materials, potions and affix text. */
+:is(.itemCell,.equipSlot,.detailIcon,.forgeResult,.orbitSlot,.fusionGearCard,.commodityCard,.donorCard,.collectionTile,.collectionDetail,.collectedPart,.loadoutGearSlot,.batchSaleItem,.workshopItem,.shopGearIcon,.workshopBigIcon,.workshopTemplate):has(.equipmentRaster[data-equipment-quality]) {
+  border-color:#48515a!important;
+}
+:is(.itemCell,.equipSlot,.detailIcon,.forgeResult,.orbitSlot,.fusionGearCard,.commodityCard,.donorCard,.collectionTile,.collectionDetail,.collectedPart,.loadoutGearSlot,.batchSaleItem,.workshopItem,.shopGearIcon,.workshopBigIcon,.workshopTemplate):has(.equipmentRaster[data-equipment-set="true"]),
+.itemCell.setFrame.selected:has(.equipmentRaster[data-equipment-set="true"]) {
+  border-color:#6aaf70!important;
+}
+/* Compact icon cells use the same full-cell fill as their SVG icon. Rows/cards
+   keep their existing neutral surfaces; the icon still carries its own fill. */
+:is(.itemCell,.equipSlot,.detailIcon,.forgeResult,.orbitSlot,.loadoutGearSlot,.batchSaleItem,.workshopItem,.shopGearIcon,.workshopBigIcon):has(.equipmentRaster[data-equipment-quality="0"]) { background:#555b61!important; }
+:is(.itemCell,.equipSlot,.detailIcon,.forgeResult,.orbitSlot,.loadoutGearSlot,.batchSaleItem,.workshopItem,.shopGearIcon,.workshopBigIcon):has(.equipmentRaster[data-equipment-quality="1"]) { background:#21476a!important; }
+:is(.itemCell,.equipSlot,.detailIcon,.forgeResult,.orbitSlot,.loadoutGearSlot,.batchSaleItem,.workshopItem,.shopGearIcon,.workshopBigIcon):has(.equipmentRaster[data-equipment-quality="2"]) { background:#49305e!important; }
+:is(.itemCell,.equipSlot,.detailIcon,.forgeResult,.orbitSlot,.loadoutGearSlot,.batchSaleItem,.workshopItem,.shopGearIcon,.workshopBigIcon):has(.equipmentRaster[data-equipment-quality="3"]),
+:is(.itemCell,.equipSlot,.detailIcon,.forgeResult,.orbitSlot,.loadoutGearSlot,.batchSaleItem,.workshopItem,.shopGearIcon,.workshopBigIcon):has(.equipmentRaster[data-equipment-set="true"]) { background:#682d36!important; }
+/* Selection is independent of both quality and set identity. */
+:is(.itemCell,.equipSlot,.orbitSlot,.fusionGearCard,.donorCard,.workshopItem,.workshopTemplate).selected:has(.equipmentRaster[data-equipment-quality]),
+:is(.itemCell,.equipSlot,.orbitSlot,.fusionGearCard,.donorCard,.workshopItem,.workshopTemplate)[aria-pressed="true"]:has(.equipmentRaster[data-equipment-quality]) {
+  outline:2px solid #e6d8a0; outline-offset:3px;
+}
+
+/* Fusion selection and quality artwork stay independent of legacy rarity glows. */
+.fusionGearCard.fusionSelected:has(.equipmentRaster[data-equipment-quality]) { outline:2px solid #e6d8a0; outline-offset:3px; }
+.equipmentRaster[data-equipment-quality] { filter:none!important; }
+/* Legendary identity is independent of the four ordinary roll tiers. */
+:is(.itemCell,.equipSlot,.detailIcon,.forgeResult,.loadoutGearSlot,.batchSaleItem):has(.equipmentRaster[data-equipment-quality="4"]) { background:#5a4524!important; }
+:is(.itemCell,.equipSlot,.detailIcon):has(.equipmentRaster[data-equipment-quality="4"]) { box-shadow:inset 0 0 0 1px #c7a361; }

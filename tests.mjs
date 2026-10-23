@@ -151,3 +151,6 @@ for(const file of ['test-pixel-map-scenes.mjs','test-map-pin-geometry.mjs','equi
 
 // v0.52 original canonical artwork across every skill consumer.
 for(const file of ['skill-pixel-icons-tests.mjs','skill-pixel-consumers-tests.mjs','skill-pixel-hud-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.53 direct equipment PNGs, canonical identity/frame and explicit image failure.
+for(const file of ['equipment-raster-adapter-tests.mjs','legendary-art-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});

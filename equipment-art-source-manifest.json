@@ -1,0 +1,1014 @@
+{
+  "packages": [
+    {
+      "package": "pixel-equipment-refinement-v1",
+      "sha256": "01d4b5ba68ef49f549bd16c1364f57df174c8c6086bbf26d4e536dc329042cb9"
+    },
+    {
+      "package": "pixel-equipment-legendary-v1",
+      "sha256": "f851781d0ce85cf3e1dca9df16b1f554032df866c9ecd7c9cb497c7645778945"
+    }
+  ],
+  "entries": [
+    {
+      "id": "dwarf_scatter_cleft_axe",
+      "rasters": {
+        "32": {
+          "sha256": "45c0bd287b065261b2ddfe7e5dbd4cf949d443506eb4af80ed0f0dfaec30ce48",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "a17c719150b586cf1bba7c638780a5d589950f9cb80c4f5e30f17f64bf13a436",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "0d9026cabb968bfda88d5b60721f21b5641057b4b56adb08c39d4d061816c31d",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_veincut_axe",
+      "rasters": {
+        "32": {
+          "sha256": "c064bc4697891229c83f7e9915f7b62e86e7063833a90c82863d066c76cfc9d3",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "486fcdd911546e5256482b7ed4fd266278f8cc44c4cb140b0dc8effc84330652",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "d07e6dccc40082ae4e8af0098fb54b14674f84ba1b6f469d4caf555625ce8e23",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_rivet_hammer",
+      "rasters": {
+        "32": {
+          "sha256": "5c9cedc69870a125fdae416a776a07323176acf2b04b163803a848c65d9ab221",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "77da10bf9307d3426197b8da27b628748843c92830ad9e6767a5316b29396a07",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "f047619b574d949cfcf8048350a3a939f222f2bdabc6336ef7f83e84774784b5",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_deepforge_hammer",
+      "rasters": {
+        "32": {
+          "sha256": "b68c551630488213509f654cc203ca982a2df5b6546e62989419bd72bdbc2954",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "cfc08d4edce3702638bea003df9496ed7892f65ced784610ed05728945f135ab",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "a850eaacf13cd1cc13bd82d02f6bd2483b49bfa98f6a3bf7182b621e7c72e742",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_mineguard_helm",
+      "rasters": {
+        "32": {
+          "sha256": "dfc5801ff6fa66d622046dc6daf2a8759fe81a55aa198a444b44fde22d720573",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "b22914331700a77d71837914f7325afed0f17340f374769ffb113d4d46965a20",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "f4539487dafb8ca47ae565c338ea6a72481e134260be2b6ccd08f8b5d10c63a9",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_forger_hood",
+      "rasters": {
+        "32": {
+          "sha256": "6f77554dcc0f4badcec0da30ef03399d93c5f32ee854416606099cd5f6b756b1",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "c6d58c6f9341fc6dce761ad3d60048f3a2e0bdacbb6917450d6cc0e9dd57216c",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "15bbe9b0032bfe62dd4fba1b6b6a56348af26bc34141454bbd7f259adcc4edd8",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_blackforge_plate",
+      "rasters": {
+        "32": {
+          "sha256": "fe12e84009c80506d4e59ad4bc37d5bf85c329d850087f83c864443975d15ef4",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "5a60214371a761d26f91afe58fea0949ffa7aa672f9bd320662ec459fdc7382e",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "fe5f6070240903c6d8e3b0591b29e70a46e6087230ffd70179da9f2c922f4d98",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_rocklizard_hide",
+      "rasters": {
+        "32": {
+          "sha256": "f57696a2668e98e4840747fb7378bdbd8801c2d8f329888625d364de6f253c39",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "01e920374bc8471e5f3959764c7667225a94f88f6c7bfdfe1327f448a83761d0",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "dbc1bd78dd0d7b700bce529d978decf4c2355187fd6cb3702219748594b97f18",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_forge_ironhands",
+      "rasters": {
+        "32": {
+          "sha256": "1aead8ea4374d090c131a9a1a4154165f6d3fcb80380de01f69c63aa88d68678",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "143f4a60dc5e7d6780e1135ed805f93c4447df37ce6bd23878018233e0c9c759",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "f2df8e6f83ab45fc4145863b1d6a30f0d0c55633822698a7793c04b6f63c8239",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_haulrope_grips",
+      "rasters": {
+        "32": {
+          "sha256": "d3193816381a9aeb8a3265b014052a72ee9857a0b153165c21a5196a6054c69d",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "a354caf03b7e3eb6cfea9c6d209b1a60bb6a0a540e3dfd717679285aff9572c1",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "d12385180cf095b02c08b36ce94209c5198de9643b587ce50bb5a6672554a6e8",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_ironsole_boots",
+      "rasters": {
+        "32": {
+          "sha256": "e6d6fd3092891b5bb79bfd07a10a436f4d8e9a6e787ba0ddb204f5cf9c08683b",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "40b0aa40827b1aaec05c60be1d4f7012c81e714662c4b5c5e84019933f1845bf",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "3978c85832945d01354f0cd16bf7dc168596eec962f9f190c965f9a209f42d88",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_stonepath_boots",
+      "rasters": {
+        "32": {
+          "sha256": "bf6010204b7000cd80ca7a644c2d75ccae53bf01e9ea889b0e0f118c9e0f0e4d",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "027f3fb8b1baf32bde29598c666119694052a50d497051c92f0148f9e63ea019",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "ba0e067323bc03d6caa5484dffc2dde5a30a31bd6797fa29b82192fb748b579d",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_anvil_seal_ring",
+      "rasters": {
+        "32": {
+          "sha256": "38d6e67d1a38f64948e937ac636625d37a4ef4c51692e42283b6f419e1e5073b",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "2c390c809c41b3842c666d6d8b14506b9be51f85164c638d7da3233d910421a4",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "19412b0bc80c68e9ef641bb3659f024a9ad855daa3b6ba5756ebf6c67b6fa300",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_engraved_ring",
+      "rasters": {
+        "32": {
+          "sha256": "f8049ec156ad91302e7a0a2222d2bb024d4c408c5a3e0f2c49bcfcd8bdc372b0",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "a16ba4fe2d0494705d03f9f831bef6d6d6cdc1459e4307ba9d7c213d95bfa606",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "fa445fad222520b13c03fbb661329b7b7aebce680708e778b47e9d4b1b2d5da8",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_oathkeeper_ring",
+      "rasters": {
+        "32": {
+          "sha256": "da2fddf9780320d54bf1f24fcdcfead07bb5501fccd468a405c4a89f7528f6a6",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "8936e921cf55053328a037b1a53dac58613e4370778f06e5b0bb176c2546c8eb",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "f86b27e91c337351a68caeb05677ad96dec0e439bb3708ff09fdf4a942384a19",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_hearth_pendant",
+      "rasters": {
+        "32": {
+          "sha256": "a91be56af23e6ec6ba1923d0d95c3f36efbf7c1ad46b294726260d90efa6898f",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "63652ad50e44285c4b38462670309da78b68a0aba0287cc5a709f3aead74a509",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "1d7f3f1144f6549e471f27621d6279fd882df83daff3aeaf7d551eeaac83185d",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_stone_marrow_pendant",
+      "rasters": {
+        "32": {
+          "sha256": "b146d1269de551bd59c577529cfb6829ab5865dd7ceaf420c09b1aeda4224300",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "4e87863daaa2862b887dfca292aa263492e40a2490d8d7cd96c2430131dedfd8",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "057a7461520fe68dfba2875818929e511e16a08b2e8f9f54ab49a59e7c7f4d06",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_old_oath_charm",
+      "rasters": {
+        "32": {
+          "sha256": "5ee707bac181745817f2bc311b60163a2400ec6dd97428feb0af0e25500cdcc4",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "3a93af72ed9ace9fe96719ac466917011378d0c516d49ad5ff7f78e0ccd4ec3f",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "abbb08b42d0b4086cf8062d03096ec1a8c38e8a0a7a53fc213d97459066aa6f4",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_slagtooth_axe",
+      "rasters": {
+        "32": {
+          "sha256": "dfa80d5685277d3cd7f8048d04f69e7e624741d3ed4e3d55bbb5cbdba014a471",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "372b7f431f5fd2b90447724874531d25bdca812ffbaecde1ce222bb560559b94",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "fb4864e125932b97002fe0529738b872812eaf9554de4e1af14b09d9213a4638",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_copperedge_axe",
+      "rasters": {
+        "32": {
+          "sha256": "f8b1795c76e5de6409816831cbdbf1f510d1063a1ad5f917185b994a624206c5",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "ab947e089847accfcee9ab8ffd5f52dfc32f5fbdba2f996a5ba8b9b546eebe53",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "31c7e92c9034a4d0282379dedc4d4535d32584f95fc9c95206e9e0521321bd88",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_squareforge_hammer",
+      "rasters": {
+        "32": {
+          "sha256": "6377e02f090f6d6c63bb0a7a971c6c60d88c678ceefbb3f48668f9f9b3d0b916",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "2c0d6e5245374e261f8b922e1fa2b82d84dbe1d16abc5f44ef3e64b430557b72",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "e66a201b3903ab5f4676682b63a7e1cae3c5cab9dfef2ba7aed06121f432d3c0",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_coalmark_hammer",
+      "rasters": {
+        "32": {
+          "sha256": "88de43c8a4b36b3c9ef0dd38b2bf6d9947a04895a6a652e0c8e6b4616a38189d",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "c1e013f03a26a949382d30acc005744cc7d8a678ee508138c49b88c198b1a073",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "65748b16d0b487b70c96de4112dff5d2c63b033886ae238b0b88e0584b2d50e8",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_riveted_helm",
+      "rasters": {
+        "32": {
+          "sha256": "d039bcf0e8faf3e7c469ee7228a0604c722e54e0ecc53f6f4f839c34ef19b4c7",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "efd929082387a54a9422b912b391b5bfc8c1ef3a7d7055cb815087e32f06c418",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "a3652fe95948474f48711d3643e4698d193240e77239cbd3ba529f14297ae905",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_sootcloth_hood",
+      "rasters": {
+        "32": {
+          "sha256": "02c7626cc319ed6ff5944a156af78c1f4ab3b0cc3510c9b33a30dc9c4a00b0dc",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "1bea9722fb0214eaae66c2e6ac54e72f859f1181a13bd862ba677d39f6a0b25c",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "35c67e7266033379d036c41c28e9b20387812e9c09fff0f3f36c5b3cdec7ae71",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_riveted_cuirass",
+      "rasters": {
+        "32": {
+          "sha256": "cb7d75b09616bd7418c8ddf38e84b4ddf481b45f564a77a2aede02ff58cf532b",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "5908470e7badd3cc5809e6bd9729486bb52716b61cc2f7cde5abed56263013fe",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "848612849a7dbac833027ca88642baca629a102f4d06684c8e77850aa2e22e45",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_minehide_coat",
+      "rasters": {
+        "32": {
+          "sha256": "772974fbe8bde32c3538ad40ccca8570d4f3e2d1a4b06a8b52be44c8d33fcf50",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "378868377aa5a16a4ac8b3e66e327b965c59a48bab067312f945b0c156798a4d",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "91cbb9c80e655dadfd46178e010c3db0e9fb3117860581734dfb13efed094fdc",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_copperknuckle_gloves",
+      "rasters": {
+        "32": {
+          "sha256": "83e64dfa9c8895ff8ea8616113abbfc1d55f2d9f03db6033725d6bea4b7fcb42",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "645876c560c152c06658f2d67de42acb3a648bb75d7a8d455c1e0f6a288146ca",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "15d0f80197d271c738de2990e4cb401ad76ccefeed2f1ba58e5648f81b8ec2ef",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_hempbound_grips",
+      "rasters": {
+        "32": {
+          "sha256": "dce29d0ff3fa9865433dceaa1cc0a26c7f174c641fdd1f95a54c62b14e7137cc",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "c137eee6fdddba8ede33c214138ed3063129ad8a09b2fc83b0d4f3dd1899b365",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "fa884a21d8d2d819628c8798f05538d6e52002ed1c518225fb9ce68ef2970d56",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_rivetheel_boots",
+      "rasters": {
+        "32": {
+          "sha256": "5210e4c434f3c40bb4fbaec2d935589a169f1078bfe406753c4c0a8916462887",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "f8755a4a7ebb4f107f3e7f1f56c30beafa6f6569ab89153acd59238a785f7e63",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "0a0c53157a83d4e85a823a3f300776856275c54cad7308e1fbd5407d809edce6",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_shaftwalker_boots",
+      "rasters": {
+        "32": {
+          "sha256": "64b9b86b8c470a399b7ac5c16f5f39fa9f619fc9b0a8b0efe02d90c00a8f1ff0",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "79a388b7a1dd2aea81eda1512ddad479caf591f6cc589025292ca0beb545bb52",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "24f4ed7e906bba4fdb051366ea6b27108004ac07926475980b77d055ad8398f5",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_hammermark_ring",
+      "rasters": {
+        "32": {
+          "sha256": "aceb108b83e69767779fb7a674f8bafbe3e5d4baa36aa24c2216f83abef12415",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "28f164bbb7d5b3a152b3e2d6bf18301e676d5bf123a5fa352dc7d5f3f0547c9c",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "3b92eaacb64a6b1da4fe16f8018092e10c8ebfc84c51a53c6f2ff34898a24637",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_copperglyph_ring",
+      "rasters": {
+        "32": {
+          "sha256": "a4829e15eed21aade906dbc809141b4a63b8a9b63803641c41edaca9cc4e0870",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "86da83d5541bbd2961ff0b46bfa955f0af95f9c68b44149fa0d6218f03613d54",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "021411103f8a7ef49d65fa8d051873dff48f4599eab553f40e6dde38388c975e",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_stonebound_ring",
+      "rasters": {
+        "32": {
+          "sha256": "f62563e78d040011a89207b556e2fdd11807e0f1f69f5359a24fc32542350e25",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "b66b29ac18abb125e1dc78445eeb0789c71e58520cdfb0a5524ac9f848de4c65",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "ea55fd3b54d5d7786cf14c709f54716723b306f52ff95aaabd03baf0e9c02751",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_forgechip_pendant",
+      "rasters": {
+        "32": {
+          "sha256": "1deb824877a3fbbe609637931e8031f2851b6007d2c03b78b180cfd3026126b0",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "7d17de644a1852769c84d63d0ad4b89a90f7f0d1c6dff07c4eaf176e0b85b0b5",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "17b8922c101a419428c7ac7dc3ced19104c279794458dbe124b8ec723ef065fc",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_deepstone_charm",
+      "rasters": {
+        "32": {
+          "sha256": "89ee8e6dcbc8881650b22418320ff56daaba7045515e10390b3f9116ccba1ab1",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "f23170d304ef6069bdbd72ac8d0352ab0f6f2425bf3161e58ab25bcbe609d56a",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "4472cc11128724054d1fb283dd38667ed3edc323c54427f734013523ef42e319",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_inscribedplate_charm",
+      "rasters": {
+        "32": {
+          "sha256": "3c160441ed4018f05e7968ef20e5370b3251ce4890bd60521133bf75490ac1a9",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "d3637a896285c18f841d20522bbeeeba64187b7914290cc50278f29bf26ef596",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "5d27e06d836e4af6943cb039ff12ca0bbeba0c54d792845fd10e26bd91718c9f",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_set_anvil_helm",
+      "rasters": {
+        "32": {
+          "sha256": "9f02d504df8a086c8a63e378ecadcc548a8d466b198ea7bb6b2017ccfa23680f",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "31c9ef0730279a065230169d932e0a7bd28df2e46f7f5e835ccde4592a657042",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "5d09318fd09368ff121d768566e7e4c39636743a8acd372b5a5363ff4094bc51",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_set_anvil_armor",
+      "rasters": {
+        "32": {
+          "sha256": "35c86e6cd513500b637af35ab8bce9f3132c6eeeaee21b8122c9a8fcffde51e3",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "603212fc20eecb9d934238f5092ee768e3d19f85d48647b2d254e565248cddd0",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "029b06b0aabccdc68be2cfee21c722ff5eb96e7358158ec4a3fab20c29b7c393",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_set_anvil_gloves",
+      "rasters": {
+        "32": {
+          "sha256": "cb480d411a3df7e0a0b3e8d1dc51ede41cbbc710feb375ebb94df60eb8b85f04",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "41dc1a716431aef3efdd6b6d2f942f406b49ca2ca290dd3b3f1a504c75e4b418",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "53c55d83aa8d11649fd1ae098d9a962bcecd5edff1a8e08158fd0d6ee73c5f41",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_set_anvil_boots",
+      "rasters": {
+        "32": {
+          "sha256": "2fc34ffae5099de6d1b3aa3f4e79fdb32c30569b0f14bfababa8187c78fbc93c",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "266e5ce86ad13eb1c7646b32a4c00ff53fd5bc1d89f0aaebbb1f3ecda4334dfb",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "d3ff8b3b64b86c2e4372650223b9a0a74833fb1a3b30d09c93fe1451ca61fd76",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_set_rune_helm",
+      "rasters": {
+        "32": {
+          "sha256": "6c75947c1555811e928a2c667e5d4fd8f4f4dcd62749853cd31b45e73db95575",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "eece57c620f1849163d0f58801d1e25e92eb6769a4ff7ecaed8ba724750313e3",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "ffaadd91b4f1107004f1d5fc0580b896090a1c80802209b076e64a8227581744",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_set_rune_armor",
+      "rasters": {
+        "32": {
+          "sha256": "6a9d41b42396679744379bcf7b517766d94acdba003306252de5d066fee0087e",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "fb962f7ec2f49440cc211b67a373b68677ea69a57260da70fc74b7b7ed075d81",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "3436456f046010399d704eb3987d2162ee99d949f677a38b6d68e74ecafe8e26",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_set_rune_gloves",
+      "rasters": {
+        "32": {
+          "sha256": "446511b58c15ec297eb40260101d0e213822fbbab46c2064f05c4e32de0a8170",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "101e849c07e807cb2bb9a84135b709c5b3c7ab7aa3848f3d5c42bf5447d7d3f7",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "cdbb6b2b44a7fd83123b2d97f6a569fc02d54fa261c9e3e88bc1ff514571ddfc",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_set_rune_boots",
+      "rasters": {
+        "32": {
+          "sha256": "0cfd60a002534b3d084a62e355aa0d8886ef904a22c40aaea143132743764955",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "0d7252b92841e44e90d94ed04cc11500cf6e0aa790305b2b9bf09ed5202016f2",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "9e00f759a053a8123c4c05eb75a7d58281b2275170fad4b18c42ab5e5dcb20f7",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_set_guard_helm",
+      "rasters": {
+        "32": {
+          "sha256": "07a08d752c2b5c7bfc09db19a5e1eb60dfa7456edf1b4967220bd93bab222fb8",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "23b778968f3202eb313d4ec45b846eda3a09ab06c861e2731c66f30699d1146e",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "81c82bb173fd063b5f08fe4fbba2de0a2bda93d3b17951f3b56992f8a5bea4d6",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_set_guard_armor",
+      "rasters": {
+        "32": {
+          "sha256": "7e293cc41fdce7537637680c3eb9bc381b617bb548e54b7516e6de6b45f6116d",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "7664cb2ee78f82d489a4eac73600c887650854b5a137dd020cf48b3ffb172464",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "d528187602d27f1a49b9ffc279f7edf6e80cd1a9a8349464f70f3207bf4b8519",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_set_guard_gloves",
+      "rasters": {
+        "32": {
+          "sha256": "e20e01f1d49a6e19c3ae5296e5aba9833fb5e030d19975b1d526f3c776aa8567",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "eb1de241876f5f8ef8f872f497f4d040c7327a5892d296fab941215aec6af664",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "5c8c9ba185a553cce38786aac0a1a227d721716ad7a2387b1fd4a5a243600a83",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "dwarf_set_guard_boots",
+      "rasters": {
+        "32": {
+          "sha256": "835511f1b57adfb84b43b7e7a5c08db64051a70cb740d226f8bdd00c69e97a2c",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "5043b0eb51a3f2589239a1ea3ff42b5f9f37ad353e5b0c3f9ed4f11bea73c3d1",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "b4d08d388a7b6614439fa0fd8efefe6ecb12ac0313dd72436fe3c1f62e867e1e",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "first-forge-oathhammer",
+      "rasters": {
+        "32": {
+          "sha256": "3d92957ad63cc3d32fef4cce2118788807daa8f74da85b958c5a927d13d3562a",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "c487b7dfa0bd1d9eae6b223712de161ab3c6ae39fdadee0f0536390d62b21cdf",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "bd6440844e6fa87a7de907c986ac9bcb00614d3c331d0f8f70a83717ee4d228e",
+          "width": 64,
+          "height": 64
+        }
+      }
+    },
+    {
+      "id": "everburning-reactor",
+      "rasters": {
+        "32": {
+          "sha256": "282b06a21957c49f4e2e9215564f84b32d694366e25615a1d7b21fb1626888ef",
+          "width": 32,
+          "height": 32
+        },
+        "48": {
+          "sha256": "10cf1252ffcd6b84b5a4d81b5efc938bb9dcfe9cf69a8c8fa78567079f090e35",
+          "width": 48,
+          "height": 48
+        },
+        "64": {
+          "sha256": "3e8f487d9773e4d6a8c6185bdf849001476892ec55e304492dcec0aa6d0406ef",
+          "width": 64,
+          "height": 64
+        }
+      }
+    }
+  ]
+}
