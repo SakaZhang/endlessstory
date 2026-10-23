@@ -168,3 +168,5 @@ runAffixSourceTest(process.execPath,[new URL('./monster-pixel-portrait-tests.mjs
 runAffixSourceTest(process.execPath,[new URL('./battle-feedback-regression-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
 // Camp scenes are real persisted location transitions, not a field skin.
 runAffixSourceTest(process.execPath,[new URL('./racial-camp-scenes-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+// v0.57 earned skill points stay live while local drafts survive combat.
+for(const file of ['skill-tree-live-budget-tests.mjs','skill-tree-layout-v057-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});

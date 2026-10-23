@@ -22,3 +22,28 @@
 .loadoutSkills>div{flex-direction:column;min-width:0;gap:6px}
 .loadoutSkills small{font-size:12px;line-height:16px;overflow-wrap:anywhere}
 .loadoutSkills .skillPixelIcon{flex:none}
+/* Skill editor v057: branch order and fixed slot columns, never a wrapping form row. */
+.skillTreeEditor .treeBranches{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0}
+.skillTreeEditor .treeBranch{min-width:0;padding:10px;background:#112333;border:1px solid #4c6577}
+.skillTreeEditor .treeBranch h3{margin:0 0 10px;font-size:14px;color:#eed6a3}
+.skillTreeEditor .treeBranch .treeNodes{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;margin:0}
+.skillTreeEditor .treeBranch-shared{grid-column:1/-1}
+.skillTreeEditor .treeBranch-shared .treeNodes{grid-template-columns:repeat(3,minmax(0,1fr))}
+.skillTreeEditor .treeNodeCard .treeNode{min-height:94px;grid-template-columns:32px minmax(0,1fr);gap:4px 8px}
+.skillTreeEditor .treeNode strong,.skillTreeEditor .treeNode small{min-width:0;overflow-wrap:anywhere}
+.skillTreeEditor .treeNodeAction{color:#ead09a}
+.treePrerequisite{padding:6px 9px 0;color:#9db3c7;font-size:11px;line-height:1.6}
+.skillTreeEditor .treeStatus{margin:10px 0;min-height:22px;color:#e7cd98}
+.treePointBalance{color:#f2d794;white-space:nowrap}
+.skillTreeEditor .treeSlots{grid-template-columns:minmax(0,3fr) minmax(190px,2fr);align-items:start}
+.treeSlotSection{min-width:0}.treeSlotSection h3{margin:0;font-size:14px}.treeSlotSection>p{margin:4px 0 12px}
+.skillTreeEditor .treeSlot{display:grid;grid-template-columns:32px minmax(0,1fr) minmax(0,1fr);gap:8px;align-items:end;margin:0 0 12px;min-height:64px}
+.skillTreeEditor .treeSlot-passive{grid-template-columns:32px minmax(0,1fr)}
+.skillTreeEditor .treeSlot>.skillPixelIcon{align-self:center}
+.skillTreeEditor .treeSlot label{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;min-width:0;margin:0}
+.skillTreeEditor .treeSlot label>span{color:#aabfcd;font-size:11px;line-height:16px}
+.skillTreeEditor .treeSlot select{box-sizing:border-box;width:100%;min-width:0;max-width:100%;height:40px;margin:0;padding:6px;font-size:12px}
+@media(max-width:1000px){.skillTreeEditor .treeSlots{grid-template-columns:minmax(0,1fr)}.treeSlotSection-passive{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 12px}.treeSlotSection-passive>h3,.treeSlotSection-passive>p{grid-column:1/-1}}
+@media(max-width:640px){.skillTreeEditor .treeBranches{grid-template-columns:minmax(0,1fr)}.skillTreeEditor .treeBranch-shared .treeNodes{grid-template-columns:repeat(2,minmax(0,1fr))}.skillTreeEditor .treeBranch{padding:8px}.skillTreeEditor .treeBranch:not(.treeBranch-shared) .treeNodes{grid-template-columns:repeat(2,minmax(0,1fr))}.skillTreeEditor .treeBranch:not(.treeBranch-shared) .treeNodeCard:first-child{grid-column:1/-1}.skillTreeEditor header{gap:8px}.skillTreeEditor header h2{font-size:16px}.skillTreeEditor header .primary{min-height:40px}}
+@media(max-width:380px){.skillTreeEditor .treeBranch-shared .treeNodes,.skillTreeEditor .treeBranch:not(.treeBranch-shared) .treeNodes{grid-template-columns:minmax(0,1fr)}.treeSlotSection-passive{grid-template-columns:minmax(0,1fr)}}
+.treeStatusBar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.treeStatusBar .treeStatus{flex:1;min-width:180px}.treeStatusBar>button{min-height:40px;font-size:12px}

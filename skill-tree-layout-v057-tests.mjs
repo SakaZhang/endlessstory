@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {fresh} from './dist/engine.js';
+import {renderSkillTree} from './dist/skill-tree-ui.js';
+import {SKILL_TREE_DEFINITION as D} from './dist/skill-tree-definition.js';
+const s=fresh();s.level=100;const html=renderSkillTree({draft:s,index:0,busy:false,blocked:false});
+assert.equal((html.match(/class="treeBranch treeBranch-/g)||[]).length,4);
+for(const id of D.nodes.map(n=>n.id))assert.equal((html.match(new RegExp(`data-tree-branch-node="${id}"`,'g'))||[]).length,1,id+' exactly once');
+for(const name of ['裂岩战技','炉火战技','守势战技','共通战技'])assert(html.includes(`aria-label="${name}"`));
+assert.equal((html.match(/class="treeSlot treeSlot-active"/g)||[]).length,4);assert.equal((html.match(/class="treeSlot treeSlot-passive"/g)||[]).length,2);
+assert.equal((html.match(/class="treeSlotCondition"/g)||[]).length,4);assert.equal((html.match(/data-tree-action="commit"/g)||[]).length,2,'top and bottom save actions');
+assert(!html.includes('SKILL TREE WORKSHOP'));assert.equal(D.nodes.reduce((n,x)=>n+x.cost,0),99);
+const css=fs.readFileSync('./dist/skill-pixel-consumers.css','utf8');
+for(const rule of ['grid-template-columns:32px minmax(0,1fr) minmax(0,1fr)','grid-template-columns:32px minmax(0,1fr)','@media(max-width:640px)','@media(max-width:380px)','width:100%;min-width:0;max-width:100%;height:40px'])assert(css.includes(rule));
+assert(!css.includes('#fff'));
+console.log('Skill layout static PASS: three branches/shared skills exactly once, 4 active/2 passive, fixed select columns, 640/380 narrow rules and top/bottom save. Not a browser visual QA claim.');

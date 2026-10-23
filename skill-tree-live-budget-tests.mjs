@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {mountSkillTree} from './dist/skill-tree-ui.js';
+import {fresh} from './dist/engine.js';
+let s=fresh();s.level=3;s.running=true;const events={};let paints=0,html='';const host={get innerHTML(){return html},set innerHTML(v){html=v;paints++},contains:x=>x.host===host,addEventListener:(k,f)=>events[k]=f,removeEventListener:k=>delete events[k]};let commits=0;
+const ui=mountSkillTree(host,{getState:()=>s,commit:async payload=>{commits++;assert.equal(payload.baseState.level,s.level);s.skillTree.presets=structuredClone(payload.presets);return {ok:true}}});
+const click=async(action,id)=>events.click({target:{closest:()=>({host,dataset:{treeAction:action,treeId:id}})}});
+const change=(kind,index,value)=>events.change({target:{host,dataset:{treeSlot:kind,treeIndex:String(index)},value}});
+assert(html.includes('还需 1 点'));await click('node','fracture_strike');assert.deepEqual(ui.getDraft().skillTree.presets[0].unlocked,[]);
+s.level=4;ui.refresh();assert(html.includes('剩余 3 点'));await click('node','fracture_strike');change('active',0,'fracture_strike');assert.deepEqual(s.skillTree.presets[0].unlocked,[]);assert.deepEqual(s.skillTree.presets[0].active,[null,null,null,null]);await click('commit');assert.equal(commits,0);
+const painted=paints;ui.refresh();assert.equal(paints,painted,'unchanged polling does not replace focused selects');s.level=5;ui.refresh();assert(html.includes('剩余 1 点'));assert.deepEqual(ui.getDraft().skillTree.presets[0].unlocked,['fracture_strike']);
+s.running=false;ui.refresh();await click('commit');assert.equal(commits,1);assert.deepEqual(s.skillTree.presets[0].unlocked,['fracture_strike']);assert.equal(s.skillTree.presets[0].active[0],'fracture_strike');
+s.skillTree.presets[0].name='Changed elsewhere';ui.refresh();assert(html.includes('配置已在其他位置变化'));await click('node','forge_breath');assert.deepEqual(ui.getDraft().skillTree.presets[0].unlocked,['fracture_strike']);await click('commit');assert.equal(commits,1);await click('cancel');assert(html.includes('Changed elsewhere'));ui.dispose();
+console.log('Skill live budget PASS: growth rebases earned points only, edits isolated, commit combat guard, no focus-destroying polling, external configuration conflict protected.');
