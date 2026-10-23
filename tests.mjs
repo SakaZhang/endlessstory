@@ -127,3 +127,6 @@ runAffixSourceTest(process.execPath,[new URL('./release-cache-tests.mjs',import.
 runAffixSourceTest(process.execPath,[new URL('./battle-preview-entry-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
 
 for(const file of ['current-save-generation-tests.mjs','storage-generation-v3-tests.mjs','storage-real-retired-tests.mjs','combat-float-icons-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.45 exact A04 skill presentation on the current save generation.
+runAffixSourceTest(process.execPath,[new URL('./live-battle-a04-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});

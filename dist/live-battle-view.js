@@ -15,7 +15,7 @@ export function liveHeroWeaponType(state){
 export const LIVE_MONSTER_SPRITES=Object.freeze({'dwarf.a01.normal.1':'raider','dwarf.a01.normal.2':'pit-rat','dwarf.a01.normal.3':'golem','dwarf.a01.elite':'shield-captain'});
 const identity=u=>u.monsterId??u.definitionId??null;
 const areaOf=(s,e)=>e?.areaId??e?.instanceId??s?.siteId??'';
-const areaKey=id=>String(id).match(/^dwarf\.a0[123](?=\.|$)/)?.[0]??null;
+const areaKey=id=>String(id).match(/^dwarf\.a0[1234](?=\.|$)/)?.[0]??null;
 export function liveActorSprite(unit,manifest){
  const variant=[...(manifest?.actorVariants??[])].sort((a,b)=>(b.priority??0)-(a.priority??0)).find(row=>row.match&&Object.entries(row.match).every(([key,value])=>(key==='definitionId'?(unit.definitionId??unit.monsterId):unit[key])===value));
  if(variant)return variant.spriteKey;
@@ -27,6 +27,14 @@ export function renderLiveBattleHud(s,e){
  const tree=s?.skillTree,p=tree?.presets?.[tree.selectedPreset];if(tree?.mode!=='active')return `<div class="liveBattleSkills isLegacy" aria-label="旧战技四槽 · 只读">${Array.from({length:4},(_,i)=>{const id=s?.skills?.[i];return `<span class="liveBattleSkill" data-live-slot="legacy-${i}">${icon(id?'sword':'bag')}<span>${esc(SKILLS[id]?.name??'空槽')}</span></span>`;}).join('')}</div>`;if(!p)return '';
  return `<div class="liveBattleSkills" aria-label="当前装备技能 · 只读">${[...Array.from({length:4},(_,i)=>({id:p.active?.[i],i,passive:false})),...Array.from({length:2},(_,i)=>({id:p.passive?.[i],i,passive:true}))].map(({id,i,passive})=>{const cd=id?(e?.treeSkillCooldowns?.[id]??e?.cd?.[id]??0):0;return `<span class="liveBattleSkill ${passive?'isPassive':''}" title="${esc(skillNames[id]??'空槽')}" data-live-skill="${esc(id??'')}" data-live-slot="${passive?'passive':'active'}-${i}">${icon(!id?'bag':passive?'shield':id.includes('ember')?'fire':id.includes('vigil')?'shield':id.includes('breath')?'herb':'sword')}<span>${esc(skillNames[id]??'空槽')}</span>${!passive&&cd>0?`<small>${Math.ceil(cd)}回</small>`:''}</span>`;}).join('')}</div>`;
 }
+// Death is authoritative even while the shared presentation retains timed attacks.
+// Derive draw-only state: never remove real damage floats or mutate event queues.
+export function liveLivingAnimations(encounter, animations){
+ const dead=new Set([{id:'hero',hp:encounter.heroHp},...encounter.enemies].filter(u=>u.hp<=0).map(u=>u.id));
+ const visible=new Map([...animations].filter(([id])=>!dead.has(id)));
+ visible.skillEffects=(animations.skillEffects??[]).filter(effect=>!dead.has(effect.sourceId));
+ return visible;
+}
 export function liveBattleBars(encounter,positions,animations,time,{heroMaxHp,manifest}){
  const bars=battleSliceBars(encounter,positions,animations,time,{heroMaxHp});
  for(let i=0;i<bars.length;i++){const b=bars[i],sprite=manifest.sprites[positions[b.id].sprite],frame=sprite.frames.find(f=>f.id===sprite.animations.idle[0]);b.y=positions[b.id].y-sprite.anchor[1]+(sprite.healthBarAnchor?.[1]??((frame.solidBBox?.[1]??frame.headY??sprite.anchor[1]-(positions[b.id].sprite==='pit-rat'?46:62))-9));
@@ -35,8 +43,8 @@ export function liveBattleBars(encounter,positions,animations,time,{heroMaxHp,ma
 }
 export function createLiveBattlePresentation({assetRoot='./battle-assets/',manifest:providedManifest=null,images:providedImages=null}={}){
  let manifest=providedManifest,images=providedImages??new Map(),loadPromise=null,loadError=null,loading=false,disposed=false,snapshot=null,battleId=null,paused=true,visible=true,displayTime=0,heroMaxHp=1;
- let positions={},metadata={},presentation=createBattleSlicePresentation(positions,metadata),seen=new Set(),slots=new Map(),deathStarts=new Map();
- const reset=(dropHistory=true)=>{presentation.clear();if(dropHistory)seen.clear();deathStarts.clear();positions={};metadata={};slots=new Map();presentation=createBattleSlicePresentation(positions,metadata);};
+ let positions={},metadata={},presentation=createBattleSlicePresentation(positions,metadata,{preserveAttack:true}),seen=new Set(),slots=new Map(),deathStarts=new Map();
+ const reset=(dropHistory=true)=>{presentation.clear();if(dropHistory)seen.clear();deathStarts.clear();positions={};metadata={};slots=new Map();presentation=createBattleSlicePresentation(positions,metadata,{preserveAttack:true});};
  const coverage=()=>{
   const base={mode:'fallback',reason:null,label:'使用原战斗画面',missingIds:[],coverage:[]};
   if(disposed)return {...base,reason:'disposed',label:'像素画面已释放'};
@@ -91,11 +99,11 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
   if(typeof time==='object')time=time.time??displayTime;
   if(disposed||!visible||!snapshot||coverage().mode!=='ready')return false;
   try{if(canvas.width!==480)canvas.width=480;if(canvas.height!==270)canvas.height=270;
-   displayTime=Number.isFinite(time)?time:displayTime;presentation.advance(displayTime);
+   displayTime=Number.isFinite(time)?time:displayTime;presentation.advance(displayTime);const animations=liveLivingAnimations(snapshot.encounter,presentation.animations);
    const actorFrames={};for(const u of [{id:'hero',hp:snapshot.encounter.heroHp},...snapshot.encounter.enemies]){if(u.hp>0)continue;const sprite=manifest.sprites[positions[u.id].sprite],frames=sprite.animations.death;if(frames?.length){const start=deathStarts.get(u.id);actorFrames[u.id]=start===undefined?frames.at(-1):displayTime<start?sprite.animations.idle[0]:frames[Math.min(frames.length-1,Math.floor((displayTime-start)/110))];}}
-   drawBattleSliceCanvas(canvas,{manifest:{...manifest,backgrounds:liveAreaBackgrounds(snapshot.areaId,manifest)},images,actorFrames,encounter:{...snapshot.encounter,enemies:snapshot.encounter.enemies.map(u=>({...u,max:0}))},positions,animations:presentation.animations,time:displayTime,floats:presentation.floats,heroMaxHp:0});
-   const c=canvas.getContext('2d');const bars=liveBattleBars(snapshot.encounter,positions,presentation.animations,displayTime,{heroMaxHp,manifest});drawBattleSliceBars(c,bars);const target=snapshot.encounter.targetId;
-   for(const u of snapshot.units){const p=positions[u.id];if(!p||u.hp<=0)continue;const x=presentationActorX(p,presentation.animations.get(u.id),displayTime);if(u.id===target){c.fillStyle='#e4c587';c.fillRect(Math.round(x-14),p.y+5,28,2);c.fillRect(Math.round(x-17),p.y+2,3,5);c.fillRect(Math.round(x+14),p.y+2,3,5);const top=(bars.find(b=>b.id===u.id)?.y??p.y-70)-4;c.fillRect(Math.round(x-35),top,8,2);c.fillRect(Math.round(x-35),top,2,8);c.fillRect(Math.round(x+27),top,8,2);c.fillRect(Math.round(x+33),top,2,8);}
+   drawBattleSliceCanvas(canvas,{manifest:{...manifest,backgrounds:liveAreaBackgrounds(snapshot.areaId,manifest)},images,actorFrames,encounter:{...snapshot.encounter,enemies:snapshot.encounter.enemies.map(u=>({...u,max:0}))},positions,animations,time:displayTime,floats:presentation.floats,heroMaxHp:0});
+   const c=canvas.getContext('2d');const bars=liveBattleBars(snapshot.encounter,positions,animations,displayTime,{heroMaxHp,manifest});drawBattleSliceBars(c,bars);const target=snapshot.encounter.targetId;
+   for(const u of snapshot.units){const p=positions[u.id];if(!p||u.hp<=0)continue;const x=presentationActorX(p,animations.get(u.id),displayTime);if(u.id===target){c.fillStyle='#e4c587';c.fillRect(Math.round(x-14),p.y+5,28,2);c.fillRect(Math.round(x-17),p.y+2,3,5);c.fillRect(Math.round(x+14),p.y+2,3,5);const top=(bars.find(b=>b.id===u.id)?.y??p.y-70)-4;c.fillRect(Math.round(x-35),top,8,2);c.fillRect(Math.round(x-35),top,2,8);c.fillRect(Math.round(x+27),top,8,2);c.fillRect(Math.round(x+33),top,2,8);}
     const effects=readEnemyEffectRows(snapshot.encounter,u.id),baseY=(bars.find(b=>b.id===u.id)?.y??p.y-80)-9;
     effects.slice(0,4).forEach((effect,i)=>{c.fillStyle=effect.key==='poison'?'#b7dc70':effect.key==='burn'?'#e69b57':'#b9c8d0';c.fillRect(Math.round(x-12+i*7),baseY,5,5);c.fillStyle='#25333a';c.fillRect(Math.round(x-11+i*7),baseY+2,3,1);if(effect.layers){c.font='bold 7px monospace';c.fillStyle='#e7f5b2';c.fillText(String(effect.layers),Math.round(x-12+i*7),baseY-1);}});
     if(u.preparing){c.fillStyle='#202b33';c.fillRect(Math.round(x-17),baseY-7,34,3);c.fillStyle=u.preparing.paused?'#83969e':'#e9bd71';c.fillRect(Math.round(x-17),baseY-7,Math.round(34*u.preparing.progress),3);}
@@ -109,5 +117,5 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
   let closest=null,distance=Infinity;for(const u of snapshot.encounter.enemies){if(u.hp<=0)continue;const p=positions[u.id],xx=presentationActorX(p,presentation.animations.get(u.id),displayTime);if(Math.abs(x-xx)<=37&&y>=p.y-83&&y<=p.y+10&&Math.abs(x-xx)<distance){closest=u.id;distance=Math.abs(x-xx);}}return closest;
  }
  function detailHtml(){if(!snapshot)return '';return renderPlayerShieldSummary(snapshot.encounter)+snapshot.units.filter(u=>u.hp>0).map(u=>`<button class="liveBattleDetail" data-monster-detail="${esc(u.definitionId??identity(snapshot.encounter.enemies.find(e=>e.id===u.id)))}" data-unit-detail="${esc(u.id)}" aria-label="查看${esc(u.name)}状态">${esc(u.name)}${u.preparing?` · ${esc(u.preparing.name)} · ${Math.max(0,((snapshot.encounter.enemies.find(e=>e.id===u.id)?.control?.preparing?.duration??0)*(1-u.preparing.progress))/1000).toFixed(1)}秒${u.preparing.paused?'（暂停）':''}`:''}${readEnemyEffectRows(snapshot.encounter,u.id).map(r=>' · '+esc(r.label)+(r.layers?' ×'+r.layers:'')).join('')} ⓘ</button><button class="liveBattleDetail" data-enemy-effects="${esc(u.id)}" aria-label="查看${esc(u.name)}状态来源与剩余">状态详情</button>`).join('');}
- return Object.freeze({load,sync,enqueue,draw,targetAt,get status(){return coverage();},get positions(){return structuredClone(positions);},get detailsHtml(){return detailHtml();},get debug(){return {battleId,paused,visible,floats:presentation.floats.length,effects:presentation.effects.length,seen:seen.size,deathActors:[...deathStarts.keys()]};},dispose(){disposed=true;reset();snapshot=null;images=new Map();}});
+ return Object.freeze({load,sync,enqueue,draw,targetAt,get status(){return coverage();},get positions(){return structuredClone(positions);},get detailsHtml(){return detailHtml();},get debug(){return {battleId,paused,visible,floats:presentation.floats.length,deferredHurts:presentation.deferredHurtCount,effects:presentation.effects.length,seen:seen.size,deathActors:[...deathStarts.keys()]};},dispose(){disposed=true;reset();snapshot=null;images=new Map();}});
 }
