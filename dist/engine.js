@@ -1,3 +1,4 @@
+import {emitCombatDisplay} from './combat-display-bridge.js';
 import {TREE_TUNING} from './skill-tree-tuning.js';
 import {resolveTreePassives,derivePassiveStats,passiveReceivedHeal} from './skill-tree-passives.js';
 import {SKILL_TREE_DEFINITION} from './skill-tree-definition.js';
@@ -472,7 +473,7 @@ export function drinkPotion(s,key=undefined,now=Date.now(),battle=s.activeEncoun
  const current=potionBuff(s,type),active=current.endAt>clock;if(type!=='healing'&&active&&quality<current.quality)return false;
  const end=type==='healing'?0:(active&&quality===current.quality?current.endAt:clock)+effect.durationMs;if(end>1e15||clock+POTION_COOLDOWN_MS>1e15)return false;
  normalizePotions(s);s.potionStacks[parsed.key]--;s.potionReadyAt=clock+POTION_COOLDOWN_MS;
- if(type==='healing'){const context=treePassiveContext(s),amount=context?passiveReceivedHeal(context,{amount:max*effect.heal,currentHp:s.heroHp,maxHp:max}):Math.min(max-s.heroHp,max*effect.heal);s.heroHp=Math.min(max,s.heroHp+amount);if(battle&&!battle.done)battle.heroHp=s.heroHp;}
+ if(type==='healing'){const beforeHp=s.heroHp,context=treePassiveContext(s),amount=context?passiveReceivedHeal(context,{amount:max*effect.heal,currentHp:s.heroHp,maxHp:max}):Math.min(max-s.heroHp,max*effect.heal);s.heroHp=Math.min(max,s.heroHp+amount);if(battle&&!battle.done){battle.heroHp=s.heroHp;if(s.heroHp>beforeHp)emitCombatDisplay(battle,{kind:'heal',sourceId:'potion:'+parsed.key,skillId:null,element:null,hpDelta:s.heroHp-beforeHp});}}
  else s.potionBuffs[type]={quality,endAt:end};
  return true;
 }

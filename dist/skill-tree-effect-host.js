@@ -3,7 +3,7 @@ import {createSkillEffectState,validSkillEffectState,applySkillEffect,advanceSki
 import {createPlayerShieldLayers,validPlayerShieldLayers,grantPlayerShieldLayer,expirePlayerShieldLayers} from './player-shield-layers.js';
 const negative=new Set(['armorDown','fireResistDown','attackDown','hitDown','dot']);
 const copy=x=>structuredClone(x);
-export function createTreeEffectHost(s,e,{stats,combatClock=0,resolveDot,applyStun,interrupt,shieldBonus=0,tickIntervalMs,receivedHeal,negativeDuration}={}){
+export function createTreeEffectHost(s,e,{stats,combatClock=0,resolveDot,applyStun,interrupt,shieldBonus=0,tickIntervalMs,receivedHeal,negativeDuration,onHeal,onShield}={}){
  const st=()=>typeof stats==='function'?stats(s,e):stats;
  if(!s||!e||!Array.isArray(e.enemies)||!Number.isFinite(combatClock)||combatClock<0||!Number.isFinite(st()?.hp)||st().hp<=0||!Number.isFinite(e.heroHp)||e.heroHp<0||!Number.isFinite(shieldBonus)||shieldBonus<0)return null;
  const initial=e.treeEffects??createSkillEffectState(e.enemies.map(u=>u.id),combatClock);
@@ -11,7 +11,8 @@ export function createTreeEffectHost(s,e,{stats,combatClock=0,resolveDot,applySt
  e.treeEffects=copy(initial);
  const alive=id=>id==='self'?e.heroHp>0:e.enemies.some(u=>u.id===id&&u.hp>0);
  const syncHp=()=>{s.heroHp=e.heroHp;};
- const heal=amount=>{if(e.heroHp<=0)return false;const before=e.heroHp;const gain=typeof receivedHeal==='function'?receivedHeal(amount):amount;if(!Number.isFinite(gain)||gain<0)return false;e.heroHp=Math.min(st().hp,e.heroHp+gain);syncHp();return e.heroHp-before;};
+ const notify=(fn,payload)=>{try{fn?.(Object.freeze(payload));}catch{}};
+ const heal=(amount,source={},at=e.treeEffects.clock)=>{if(e.heroHp<=0)return false;const before=e.heroHp;const gain=typeof receivedHeal==='function'?receivedHeal(amount):amount;if(!Number.isFinite(gain)||gain<0)return false;e.heroHp=Math.min(st().hp,e.heroHp+gain);syncHp();notify(onHeal,{sourceId:source.sourceId??'skill-heal',received:e.heroHp-before,clock:at});return e.heroHp-before;};
  const target=id=>id==='self'?e.treeEffects.hero:e.treeEffects.enemies[id];
  const eligibleDebuffIds=()=>[
  ...(e.heroBurn>0?['legacy:heroBurn']:[]),...(e.weakness>0?['legacy:weakness']:[]),
@@ -29,12 +30,12 @@ export function createTreeEffectHost(s,e,{stats,combatClock=0,resolveDot,applySt
    removed++;
   }return removed;
  };
- const callbacks={heal:(_id,ef)=>heal(ef.amount),cleanse:(_id,ef)=>cleanse(ef.eligibleIds,ef.count),stun:(id,ef)=>typeof applyStun==='function'?applyStun(id,ef):false,interrupt:(id,ef)=>typeof interrupt==='function'?interrupt(id,ef):false,
+ const callbacks={heal:(_id,ef)=>heal(ef.amount,ef),cleanse:(_id,ef)=>cleanse(ef.eligibleIds,ef.count),stun:(id,ef)=>typeof applyStun==='function'?applyStun(id,ef):false,interrupt:(id,ef)=>typeof interrupt==='function'?interrupt(id,ef):false,
  shield:(id,source)=>{
   if(id!=='self'||source.source.kind!=='skill')return false;
   const layers=e.playerShieldLayers??createPlayerShieldLayers(e.treeEffects.clock);
   const grant=grantPlayerShieldLayer(layers,{source:'skill:'+source.sourceId,capacity:source.amount+shieldBonus,durationMs:source.endAt-e.treeEffects.clock,clock:e.treeEffects.clock,hp:e.heroHp});
-  if(!grant?.applied)return false;e.playerShieldLayers=grant.state;return true;
+  if(!grant?.applied)return false;const before=layers.layers.reduce((n,l)=>n+l.remaining,0);e.playerShieldLayers=grant.state;notify(onShield,{sourceId:source.sourceId,received:Math.max(0,grant.state.layers.reduce((n,l)=>n+l.remaining,0)-before),clock:e.treeEffects.clock});return true;
  }};
  const applyEffect=(id,effect)=>{
   if(!alive(id))return false;
@@ -48,7 +49,7 @@ export function createTreeEffectHost(s,e,{stats,combatClock=0,resolveDot,applySt
   if(typeof resolveDot!=='function'&&[e.treeEffects.hero,...Object.values(e.treeEffects.enemies)].some(t=>t.sources.some(x=>x.type==='dot'&&x.nextTickAt<=Math.min(clock,x.endAt))))return null;
   const result=advanceSkillEffectState(e.treeEffects,clock,{onTick(id,source,at,tickId){
    if(!alive(id))return false;
-   if(source.type==='healOverTime'){if(id==='self')heal(source.amount);}
+   if(source.type==='healOverTime'){if(id==='self')heal(source.amount,source,at);}
    else {if(typeof resolveDot!=='function')throw Error('resolveDot callback required');resolveDot({targetId:id,source,clock:at,tickId,s,e});syncHp();}
    return e.heroHp>0&&alive(id);
   },onExpire(){}});

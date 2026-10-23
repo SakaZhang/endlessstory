@@ -18,3 +18,8 @@ assert(h2.advance(3000));assert.equal(ticks,3);assert.equal(restored.playerShiel
 const dead={heroHp:0,enemies:[{id:'e',hp:1}]};const dh=createTreeEffectHost({heroHp:0},dead,{stats:{hp:100}});assert(dh);assert.equal(dh.applyEffect('self',{type:'heal',amount:20}),false);assert.equal(dead.heroHp,0);
 assert.equal(createTreeEffectHost({},e,{stats:{hp:100},combatClock:NaN}),null);
 console.log('PASS real skill plans → effect host → encounter/JSON: buffs, debuffs, source shields, HP clamp, exact DOT callback, eligible legacy cleanse, no death heal or equipment-shield pollution');
+const observed={heroHp:95,enemies:[{id:'x',hp:10}]},observedS={heroHp:95},healEvents=[],shieldEvents=[];
+const observe=createTreeEffectHost(observedS,observed,{stats:{hp:100},tickIntervalMs:1000,onHeal:r=>{healEvents.push(r);throw Error('display failure');},onShield:r=>shieldEvents.push(r)});
+assert(observe.applyEffect('self',{sourceId:'forge_breath',type:'healOverTime',amount:3,durationMs:2000}));assert(observe.advance(2000));assert.deepEqual(healEvents.map(r=>[r.received,r.clock]),[[3,1000],[2,2000]]);assert.equal(observed.heroHp,100);
+assert(observe.applyEffect('self',{sourceId:'iron_vigil',type:'shield',amount:10,durationMs:1000}));assert(observe.applyEffect('self',{sourceId:'iron_vigil',type:'shield',amount:10,durationMs:1000}));assert.deepEqual(shieldEvents.map(r=>r.received),[10,0]);
+console.log('PASS optional display callbacks: per-HOT tick actual capped recovery, shield refresh delta not grant amount, thrown callback cannot affect gameplay');
