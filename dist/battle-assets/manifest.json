@@ -1,5 +1,5 @@
 {
-  "version": "2.5-a01-a04",
+  "version": "2.6-a01-a06",
   "provenance": "Original generated raster art via built-in image_gen. User-approved original concept used as visual reference. No third-party game assets. No separate license grant implied.",
   "logicalScene": [
     480,
@@ -4345,6 +4345,2075 @@
       "skillAnimations": {
         "dwarf.a04.elite:0": "fireAttack"
       }
+    },
+    "spring-moss-beast": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.19,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/spring-moss-beast-idle.png",
+          "sourceCrop": [
+            65,
+            250,
+            510,
+            540
+          ],
+          "sourceAnchor": [
+            300,
+            522
+          ],
+          "alphaBBox": [
+            52,
+            124,
+            136,
+            177
+          ],
+          "solidBBox": [
+            54,
+            127,
+            134,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/spring-moss-beast-anticipation.png",
+          "sourceCrop": [
+            550,
+            275,
+            1000,
+            540
+          ],
+          "sourceAnchor": [
+            800,
+            522
+          ],
+          "alphaBBox": [
+            49,
+            129,
+            133,
+            177
+          ],
+          "solidBBox": [
+            51,
+            132,
+            132,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/spring-moss-beast-strike.png",
+          "sourceCrop": [
+            1000,
+            240,
+            1505,
+            540
+          ],
+          "sourceAnchor": [
+            1280,
+            520
+          ],
+          "alphaBBox": [
+            43,
+            123,
+            139,
+            178
+          ],
+          "solidBBox": [
+            45,
+            126,
+            137,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/spring-moss-beast-recovery.png",
+          "sourceCrop": [
+            45,
+            635,
+            525,
+            930
+          ],
+          "sourceAnchor": [
+            300,
+            911
+          ],
+          "alphaBBox": [
+            48,
+            124,
+            139,
+            180
+          ],
+          "solidBBox": [
+            51,
+            127,
+            136,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/spring-moss-beast-hurt.png",
+          "sourceCrop": [
+            565,
+            645,
+            980,
+            930
+          ],
+          "sourceAnchor": [
+            800,
+            911
+          ],
+          "alphaBBox": [
+            51,
+            125,
+            130,
+            176
+          ],
+          "solidBBox": [
+            54,
+            128,
+            127,
+            175
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/spring-moss-beast-death.png",
+          "sourceCrop": [
+            1010,
+            720,
+            1520,
+            930
+          ],
+          "sourceAnchor": [
+            1280,
+            911
+          ],
+          "alphaBBox": [
+            45,
+            140,
+            142,
+            178
+          ],
+          "solidBBox": [
+            48,
+            143,
+            139,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 127,
+      "healthBarAnchor": [
+        96,
+        118
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "cold-mist-moth": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.155,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/cold-mist-moth-idle.png",
+          "sourceCrop": [
+            80,
+            80,
+            535,
+            490
+          ],
+          "sourceAnchor": [
+            300,
+            630
+          ],
+          "alphaBBox": [
+            62,
+            91,
+            133,
+            155
+          ],
+          "solidBBox": [
+            65,
+            94,
+            131,
+            153
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/cold-mist-moth-anticipation.png",
+          "sourceCrop": [
+            595,
+            150,
+            990,
+            515
+          ],
+          "sourceAnchor": [
+            800,
+            630
+          ],
+          "alphaBBox": [
+            65,
+            102,
+            125,
+            159
+          ],
+          "solidBBox": [
+            66,
+            104,
+            123,
+            157
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/cold-mist-moth-strike.png",
+          "sourceCrop": [
+            1005,
+            150,
+            1525,
+            490
+          ],
+          "sourceAnchor": [
+            1280,
+            630
+          ],
+          "alphaBBox": [
+            53,
+            102,
+            134,
+            155
+          ],
+          "solidBBox": [
+            55,
+            105,
+            132,
+            153
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/cold-mist-moth-recovery.png",
+          "sourceCrop": [
+            70,
+            520,
+            540,
+            930
+          ],
+          "sourceAnchor": [
+            300,
+            1060
+          ],
+          "alphaBBox": [
+            60,
+            92,
+            133,
+            156
+          ],
+          "solidBBox": [
+            62,
+            95,
+            131,
+            153
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/cold-mist-moth-hurt.png",
+          "sourceCrop": [
+            590,
+            560,
+            970,
+            915
+          ],
+          "sourceAnchor": [
+            800,
+            1060
+          ],
+          "alphaBBox": [
+            63,
+            98,
+            121,
+            152
+          ],
+          "solidBBox": [
+            66,
+            100,
+            120,
+            150
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/cold-mist-moth-death.png",
+          "sourceCrop": [
+            1020,
+            730,
+            1520,
+            940
+          ],
+          "sourceAnchor": [
+            1280,
+            923
+          ],
+          "alphaBBox": [
+            56,
+            146,
+            134,
+            179
+          ],
+          "solidBBox": [
+            58,
+            148,
+            131,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 94,
+      "healthBarAnchor": [
+        96,
+        85
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      },
+      "isFlying": true,
+      "flightOffsetBaked": true
+    },
+    "fungus-iron-beetle": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.16,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/fungus-iron-beetle-idle.png",
+          "sourceCrop": [
+            8,
+            175,
+            495,
+            495
+          ],
+          "sourceAnchor": [
+            300,
+            483
+          ],
+          "alphaBBox": [
+            50,
+            127,
+            127,
+            178
+          ],
+          "solidBBox": [
+            51,
+            129,
+            125,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/fungus-iron-beetle-anticipation.png",
+          "sourceCrop": [
+            510,
+            220,
+            1000,
+            495
+          ],
+          "sourceAnchor": [
+            800,
+            478
+          ],
+          "alphaBBox": [
+            50,
+            135,
+            128,
+            179
+          ],
+          "solidBBox": [
+            52,
+            137,
+            127,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/fungus-iron-beetle-strike.png",
+          "sourceCrop": [
+            1000,
+            200,
+            1520,
+            495
+          ],
+          "sourceAnchor": [
+            1300,
+            477
+          ],
+          "alphaBBox": [
+            48,
+            132,
+            131,
+            179
+          ],
+          "solidBBox": [
+            49,
+            134,
+            129,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/fungus-iron-beetle-recovery.png",
+          "sourceCrop": [
+            10,
+            615,
+            510,
+            940
+          ],
+          "sourceAnchor": [
+            300,
+            927
+          ],
+          "alphaBBox": [
+            51,
+            126,
+            128,
+            176
+          ],
+          "solidBBox": [
+            52,
+            129,
+            128,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/fungus-iron-beetle-hurt.png",
+          "sourceCrop": [
+            580,
+            550,
+            985,
+            945
+          ],
+          "sourceAnchor": [
+            800,
+            928
+          ],
+          "alphaBBox": [
+            63,
+            117,
+            126,
+            178
+          ],
+          "solidBBox": [
+            64,
+            118,
+            123,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/fungus-iron-beetle-death.png",
+          "sourceCrop": [
+            1040,
+            695,
+            1500,
+            960
+          ],
+          "sourceAnchor": [
+            1290,
+            941
+          ],
+          "alphaBBox": [
+            56,
+            137,
+            128,
+            177
+          ],
+          "solidBBox": [
+            59,
+            140,
+            128,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 129,
+      "healthBarAnchor": [
+        96,
+        120
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "pale-spring-drainer": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.23,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/pale-spring-drainer-idle.png",
+          "sourceCrop": [
+            25,
+            245,
+            535,
+            505
+          ],
+          "sourceAnchor": [
+            290,
+            487
+          ],
+          "alphaBBox": [
+            37,
+            120,
+            152,
+            179
+          ],
+          "solidBBox": [
+            39,
+            123,
+            148,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/pale-spring-drainer-anticipation.png",
+          "sourceCrop": [
+            545,
+            175,
+            1020,
+            505
+          ],
+          "sourceAnchor": [
+            790,
+            490
+          ],
+          "alphaBBox": [
+            41,
+            104,
+            147,
+            180
+          ],
+          "solidBBox": [
+            43,
+            108,
+            146,
+            177
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/pale-spring-drainer-strike.png",
+          "sourceCrop": [
+            1025,
+            180,
+            1515,
+            505
+          ],
+          "sourceAnchor": [
+            1290,
+            488
+          ],
+          "alphaBBox": [
+            35,
+            105,
+            146,
+            178
+          ],
+          "solidBBox": [
+            38,
+            109,
+            144,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/pale-spring-drainer-recovery.png",
+          "sourceCrop": [
+            30,
+            595,
+            545,
+            920
+          ],
+          "sourceAnchor": [
+            290,
+            903
+          ],
+          "alphaBBox": [
+            37,
+            107,
+            154,
+            179
+          ],
+          "solidBBox": [
+            40,
+            108,
+            151,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/pale-spring-drainer-hurt.png",
+          "sourceCrop": [
+            585,
+            620,
+            1028,
+            925
+          ],
+          "sourceAnchor": [
+            810,
+            910
+          ],
+          "alphaBBox": [
+            45,
+            109,
+            146,
+            177
+          ],
+          "solidBBox": [
+            47,
+            113,
+            146,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/pale-spring-drainer-death.png",
+          "sourceCrop": [
+            1028,
+            725,
+            1530,
+            925
+          ],
+          "sourceAnchor": [
+            1280,
+            910
+          ],
+          "alphaBBox": [
+            38,
+            133,
+            151,
+            177
+          ],
+          "solidBBox": [
+            38,
+            136,
+            150,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 123,
+      "healthBarAnchor": [
+        96,
+        114
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "cast-slag-soldier": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.18,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/cast-slag-soldier-idle.png",
+          "sourceFile": "source/cast-slag-soldier.png",
+          "sourceScale": 0.18,
+          "sourceCrop": [
+            55,
+            80,
+            440,
+            465
+          ],
+          "sourceAnchor": [
+            270,
+            445
+          ],
+          "alphaBBox": [
+            57,
+            113,
+            125,
+            176
+          ],
+          "solidBBox": [
+            60,
+            113,
+            123,
+            175
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/cast-slag-soldier-anticipation.png",
+          "sourceFile": "source/cast-slag-soldier.png",
+          "sourceScale": 0.18,
+          "sourceCrop": [
+            595,
+            125,
+            945,
+            465
+          ],
+          "sourceAnchor": [
+            770,
+            445
+          ],
+          "alphaBBox": [
+            66,
+            121,
+            124,
+            176
+          ],
+          "solidBBox": [
+            67,
+            122,
+            123,
+            175
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/cast-slag-soldier-strike.png",
+          "sourceFile": "source/cast-slag-soldier.png",
+          "sourceScale": 0.18,
+          "sourceCrop": [
+            1015,
+            125,
+            1520,
+            465
+          ],
+          "sourceAnchor": [
+            1320,
+            445
+          ],
+          "alphaBBox": [
+            42,
+            118,
+            130,
+            176
+          ],
+          "solidBBox": [
+            44,
+            121,
+            129,
+            175
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/cast-slag-soldier-recovery.png",
+          "sourceFile": "source/cast-slag-soldier.png",
+          "sourceScale": 0.18,
+          "sourceCrop": [
+            45,
+            555,
+            425,
+            930
+          ],
+          "sourceAnchor": [
+            250,
+            911
+          ],
+          "alphaBBox": [
+            60,
+            114,
+            125,
+            177
+          ],
+          "solidBBox": [
+            62,
+            116,
+            124,
+            177
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/cast-slag-soldier-hurt.png",
+          "sourceFile": "source/cast-slag-soldier.png",
+          "sourceScale": 0.18,
+          "sourceCrop": [
+            580,
+            595,
+            915,
+            930
+          ],
+          "sourceAnchor": [
+            770,
+            907
+          ],
+          "alphaBBox": [
+            64,
+            123,
+            119,
+            177
+          ],
+          "solidBBox": [
+            65,
+            124,
+            118,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/cast-slag-soldier-death.png",
+          "sourceFile": "source/cast-slag-soldier.png",
+          "sourceScale": 0.18,
+          "sourceCrop": [
+            1020,
+            740,
+            1520,
+            930
+          ],
+          "sourceAnchor": [
+            1280,
+            911
+          ],
+          "alphaBBox": [
+            50,
+            147,
+            136,
+            176
+          ],
+          "solidBBox": [
+            52,
+            149,
+            135,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 113,
+      "healthBarAnchor": [
+        96,
+        104
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "pressure-steam-wisp": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.14,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/pressure-steam-wisp-idle.png",
+          "sourceFile": "source/pressure-steam-wisp.png",
+          "sourceScale": 0.14,
+          "sourceCrop": [
+            50,
+            50,
+            500,
+            490
+          ],
+          "sourceAnchor": [
+            270,
+            610
+          ],
+          "alphaBBox": [
+            65,
+            98,
+            128,
+            160
+          ],
+          "solidBBox": [
+            69,
+            101,
+            119,
+            157
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/pressure-steam-wisp-anticipation.png",
+          "sourceFile": "source/pressure-steam-wisp.png",
+          "sourceScale": 0.14,
+          "sourceCrop": [
+            560,
+            65,
+            990,
+            490
+          ],
+          "sourceAnchor": [
+            780,
+            610
+          ],
+          "alphaBBox": [
+            65,
+            101,
+            125,
+            160
+          ],
+          "solidBBox": [
+            70,
+            104,
+            118,
+            157
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/pressure-steam-wisp-strike.png",
+          "sourceFile": "source/pressure-steam-wisp.png",
+          "sourceScale": 0.14,
+          "sourceCrop": [
+            1020,
+            100,
+            1510,
+            490
+          ],
+          "sourceAnchor": [
+            1280,
+            610
+          ],
+          "alphaBBox": [
+            60,
+            105,
+            129,
+            160
+          ],
+          "solidBBox": [
+            63,
+            109,
+            127,
+            157
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/pressure-steam-wisp-recovery.png",
+          "sourceFile": "source/pressure-steam-wisp.png",
+          "sourceScale": 0.14,
+          "sourceCrop": [
+            50,
+            540,
+            510,
+            980
+          ],
+          "sourceAnchor": [
+            270,
+            1095
+          ],
+          "alphaBBox": [
+            65,
+            98,
+            129,
+            160
+          ],
+          "solidBBox": [
+            69,
+            102,
+            127,
+            156
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/pressure-steam-wisp-hurt.png",
+          "sourceFile": "source/pressure-steam-wisp.png",
+          "sourceScale": 0.14,
+          "sourceCrop": [
+            550,
+            550,
+            995,
+            980
+          ],
+          "sourceAnchor": [
+            780,
+            1095
+          ],
+          "alphaBBox": [
+            64,
+            100,
+            126,
+            160
+          ],
+          "solidBBox": [
+            67,
+            104,
+            123,
+            157
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/pressure-steam-wisp-death.png",
+          "sourceFile": "source/pressure-steam-wisp.png",
+          "sourceScale": 0.14,
+          "sourceCrop": [
+            1050,
+            690,
+            1510,
+            980
+          ],
+          "sourceAnchor": [
+            1280,
+            962
+          ],
+          "alphaBBox": [
+            64,
+            138,
+            128,
+            179
+          ],
+          "solidBBox": [
+            70,
+            140,
+            125,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 101,
+      "healthBarAnchor": [
+        96,
+        92
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      },
+      "flightHeightBaked": true,
+      "additionalYOffset": 0
+    },
+    "sunken-pot-carrier": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.17,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/sunken-pot-carrier-idle.png",
+          "sourceFile": "source/sunken-pot-carrier.png",
+          "sourceScale": 0.17,
+          "sourceCrop": [
+            50,
+            35,
+            515,
+            505
+          ],
+          "sourceAnchor": [
+            290,
+            488
+          ],
+          "alphaBBox": [
+            57,
+            101,
+            133,
+            178
+          ],
+          "solidBBox": [
+            58,
+            101,
+            132,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/sunken-pot-carrier-anticipation.png",
+          "sourceFile": "source/sunken-pot-carrier.png",
+          "sourceScale": 0.17,
+          "sourceCrop": [
+            525,
+            85,
+            955,
+            505
+          ],
+          "sourceAnchor": [
+            770,
+            488
+          ],
+          "alphaBBox": [
+            55,
+            107,
+            127,
+            178
+          ],
+          "solidBBox": [
+            57,
+            110,
+            124,
+            175
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/sunken-pot-carrier-strike.png",
+          "sourceFile": "source/sunken-pot-carrier.png",
+          "sourceScale": 0.17,
+          "sourceCrop": [
+            980,
+            60,
+            1500,
+            505
+          ],
+          "sourceAnchor": [
+            1290,
+            488
+          ],
+          "alphaBBox": [
+            44,
+            104,
+            131,
+            179
+          ],
+          "solidBBox": [
+            46,
+            106,
+            128,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/sunken-pot-carrier-recovery.png",
+          "sourceFile": "source/sunken-pot-carrier.png",
+          "sourceScale": 0.17,
+          "sourceCrop": [
+            15,
+            545,
+            490,
+            985
+          ],
+          "sourceAnchor": [
+            280,
+            963
+          ],
+          "alphaBBox": [
+            51,
+            105,
+            131,
+            178
+          ],
+          "solidBBox": [
+            54,
+            108,
+            128,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/sunken-pot-carrier-hurt.png",
+          "sourceFile": "source/sunken-pot-carrier.png",
+          "sourceScale": 0.17,
+          "sourceCrop": [
+            545,
+            535,
+            970,
+            985
+          ],
+          "sourceAnchor": [
+            780,
+            963
+          ],
+          "alphaBBox": [
+            58,
+            103,
+            128,
+            177
+          ],
+          "solidBBox": [
+            59,
+            106,
+            125,
+            175
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/sunken-pot-carrier-death.png",
+          "sourceFile": "source/sunken-pot-carrier.png",
+          "sourceScale": 0.17,
+          "sourceCrop": [
+            975,
+            650,
+            1536,
+            985
+          ],
+          "sourceAnchor": [
+            1270,
+            963
+          ],
+          "alphaBBox": [
+            46,
+            124,
+            138,
+            178
+          ],
+          "solidBBox": [
+            46,
+            127,
+            138,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 101,
+      "healthBarAnchor": [
+        96,
+        92
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "four-arm-foreman": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.17,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/four-arm-foreman-idle.png",
+          "sourceFile": "source/four-arm-foreman.png",
+          "sourceScale": 0.17,
+          "sourceCrop": [
+            0,
+            50,
+            465,
+            510
+          ],
+          "sourceAnchor": [
+            260,
+            489
+          ],
+          "alphaBBox": [
+            52,
+            103,
+            129,
+            177
+          ],
+          "solidBBox": [
+            55,
+            104,
+            127,
+            175
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/four-arm-foreman-anticipation.png",
+          "sourceFile": "source/four-arm-foreman-anticipation.png",
+          "sourceScale": 0.11,
+          "sourceCrop": [
+            140,
+            65,
+            785,
+            815
+          ],
+          "sourceAnchor": [
+            480,
+            797
+          ],
+          "alphaBBox": [
+            61,
+            95,
+            127,
+            176
+          ],
+          "solidBBox": [
+            62,
+            97,
+            127,
+            175
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/four-arm-foreman-strike.png",
+          "sourceFile": "source/four-arm-foreman-strike.png",
+          "sourceScale": 0.11,
+          "sourceCrop": [
+            875,
+            230,
+            1710,
+            815
+          ],
+          "sourceAnchor": [
+            1450,
+            797
+          ],
+          "alphaBBox": [
+            35,
+            116,
+            123,
+            177
+          ],
+          "solidBBox": [
+            36,
+            117,
+            122,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/four-arm-foreman-recovery.png",
+          "sourceFile": "source/four-arm-foreman.png",
+          "sourceScale": 0.17,
+          "sourceCrop": [
+            15,
+            565,
+            490,
+            990
+          ],
+          "sourceAnchor": [
+            260,
+            970
+          ],
+          "alphaBBox": [
+            54,
+            109,
+            135,
+            179
+          ],
+          "solidBBox": [
+            57,
+            110,
+            132,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/four-arm-foreman-hurt.png",
+          "sourceFile": "source/four-arm-foreman.png",
+          "sourceScale": 0.17,
+          "sourceCrop": [
+            550,
+            565,
+            975,
+            990
+          ],
+          "sourceAnchor": [
+            780,
+            970
+          ],
+          "alphaBBox": [
+            59,
+            107,
+            127,
+            177
+          ],
+          "solidBBox": [
+            60,
+            110,
+            125,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/four-arm-foreman-death.png",
+          "sourceFile": "source/four-arm-foreman.png",
+          "sourceScale": 0.17,
+          "sourceCrop": [
+            980,
+            715,
+            1536,
+            1000
+          ],
+          "sourceAnchor": [
+            1280,
+            979
+          ],
+          "alphaBBox": [
+            46,
+            134,
+            138,
+            177
+          ],
+          "solidBBox": [
+            47,
+            134,
+            137,
+            175
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 117,
+      "healthBarAnchor": [
+        96,
+        108
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "broken-furnace-guardian": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.2,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/broken-furnace-guardian-idle.png",
+          "sourceFile": "source/broken-furnace-guardian.png",
+          "sourceScale": 0.2,
+          "sourceCrop": [
+            0,
+            65,
+            520,
+            500
+          ],
+          "sourceAnchor": [
+            300,
+            476
+          ],
+          "alphaBBox": [
+            36,
+            94,
+            140,
+            177
+          ],
+          "solidBBox": [
+            39,
+            98,
+            137,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/broken-furnace-guardian-anticipation.png",
+          "sourceFile": "source/broken-furnace-guardian.png",
+          "sourceScale": 0.2,
+          "sourceCrop": [
+            550,
+            100,
+            1000,
+            505
+          ],
+          "sourceAnchor": [
+            800,
+            481
+          ],
+          "alphaBBox": [
+            49,
+            101,
+            136,
+            177
+          ],
+          "solidBBox": [
+            50,
+            104,
+            136,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/broken-furnace-guardian-strike.png",
+          "sourceFile": "source/broken-furnace-guardian.png",
+          "sourceScale": 0.2,
+          "sourceCrop": [
+            990,
+            125,
+            1536,
+            510
+          ],
+          "sourceAnchor": [
+            1300,
+            476
+          ],
+          "alphaBBox": [
+            34,
+            106,
+            143,
+            182
+          ],
+          "solidBBox": [
+            34,
+            109,
+            140,
+            179
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/broken-furnace-guardian-recovery.png",
+          "sourceFile": "source/broken-furnace-guardian.png",
+          "sourceScale": 0.2,
+          "sourceCrop": [
+            0,
+            565,
+            500,
+            980
+          ],
+          "sourceAnchor": [
+            290,
+            960
+          ],
+          "alphaBBox": [
+            39,
+            98,
+            138,
+            177
+          ],
+          "solidBBox": [
+            41,
+            101,
+            135,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/broken-furnace-guardian-hurt.png",
+          "sourceFile": "source/broken-furnace-guardian.png",
+          "sourceScale": 0.2,
+          "sourceCrop": [
+            510,
+            580,
+            970,
+            980
+          ],
+          "sourceAnchor": [
+            790,
+            960
+          ],
+          "alphaBBox": [
+            40,
+            102,
+            132,
+            180
+          ],
+          "solidBBox": [
+            43,
+            104,
+            132,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/broken-furnace-guardian-death.png",
+          "sourceFile": "source/broken-furnace-guardian.png",
+          "sourceScale": 0.2,
+          "sourceCrop": [
+            985,
+            710,
+            1536,
+            980
+          ],
+          "sourceAnchor": [
+            1270,
+            960
+          ],
+          "alphaBBox": [
+            39,
+            126,
+            149,
+            177
+          ],
+          "solidBBox": [
+            39,
+            129,
+            146,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 98,
+      "healthBarAnchor": [
+        96,
+        89
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "slag-apprentice": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.117,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/slag-apprentice-idle.png",
+          "sourceFile": "source/slag-apprentice.png",
+          "sourceScale": 0.117,
+          "sourceCrop": [
+            55,
+            80,
+            440,
+            465
+          ],
+          "sourceAnchor": [
+            270,
+            445
+          ],
+          "alphaBBox": [
+            71,
+            135,
+            115,
+            176
+          ],
+          "solidBBox": [
+            73,
+            135,
+            114,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/slag-apprentice-anticipation.png",
+          "sourceFile": "source/slag-apprentice.png",
+          "sourceScale": 0.117,
+          "sourceCrop": [
+            595,
+            125,
+            945,
+            465
+          ],
+          "sourceAnchor": [
+            770,
+            445
+          ],
+          "alphaBBox": [
+            77,
+            141,
+            115,
+            177
+          ],
+          "solidBBox": [
+            78,
+            142,
+            115,
+            177
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/slag-apprentice-strike.png",
+          "sourceFile": "source/slag-apprentice.png",
+          "sourceScale": 0.117,
+          "sourceCrop": [
+            1015,
+            125,
+            1520,
+            465
+          ],
+          "sourceAnchor": [
+            1320,
+            445
+          ],
+          "alphaBBox": [
+            61,
+            141,
+            117,
+            179
+          ],
+          "solidBBox": [
+            62,
+            141,
+            117,
+            177
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/slag-apprentice-recovery.png",
+          "sourceFile": "source/slag-apprentice.png",
+          "sourceScale": 0.117,
+          "sourceCrop": [
+            45,
+            555,
+            425,
+            930
+          ],
+          "sourceAnchor": [
+            250,
+            911
+          ],
+          "alphaBBox": [
+            72,
+            135,
+            115,
+            176
+          ],
+          "solidBBox": [
+            74,
+            136,
+            114,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/slag-apprentice-hurt.png",
+          "sourceFile": "source/slag-apprentice.png",
+          "sourceScale": 0.117,
+          "sourceCrop": [
+            580,
+            595,
+            915,
+            930
+          ],
+          "sourceAnchor": [
+            770,
+            907
+          ],
+          "alphaBBox": [
+            75,
+            141,
+            111,
+            176
+          ],
+          "solidBBox": [
+            76,
+            142,
+            111,
+            175
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/slag-apprentice-death.png",
+          "sourceFile": "source/slag-apprentice.png",
+          "sourceScale": 0.117,
+          "sourceCrop": [
+            1020,
+            740,
+            1520,
+            930
+          ],
+          "sourceAnchor": [
+            1280,
+            911
+          ],
+          "alphaBBox": [
+            67,
+            157,
+            122,
+            176
+          ],
+          "solidBBox": [
+            68,
+            158,
+            122,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 135,
+      "healthBarAnchor": [
+        96,
+        126
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      },
+      "derivedFrom": "cast-slag-soldier",
+      "relativeSize": 0.65,
+      "role": "elite follower 铸渣小工"
     }
   },
   "backgrounds": [
@@ -4435,6 +6504,50 @@
       "z": 1,
       "hasAlpha": true,
       "parallax": 1
+    },
+    {
+      "id": "mineral-springs",
+      "file": "backgrounds/mineral-springs.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0,
+      "hasAlpha": false,
+      "parallax": 0.15
+    },
+    {
+      "id": "spring-platform",
+      "file": "backgrounds/spring-platform.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 1,
+      "hasAlpha": true,
+      "parallax": 1
+    },
+    {
+      "id": "sunken-forge",
+      "file": "backgrounds/sunken-forge.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0,
+      "hasAlpha": false,
+      "parallax": 0.15
+    },
+    {
+      "id": "forge-platform",
+      "file": "backgrounds/forge-platform.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 1,
+      "hasAlpha": true,
+      "parallax": 1
     }
   ],
   "limitations": [
@@ -4467,7 +6580,16 @@
     "dwarf.a04.normal.1": "slag-fire-lizard",
     "dwarf.a04.normal.2": "chimney-ash-bat",
     "dwarf.a04.normal.3": "salt-furnace-shell",
-    "dwarf.a04.elite": "bellows-warden"
+    "dwarf.a04.elite": "bellows-warden",
+    "dwarf.a05.normal.1": "spring-moss-beast",
+    "dwarf.a05.normal.2": "cold-mist-moth",
+    "dwarf.a05.normal.3": "fungus-iron-beetle",
+    "dwarf.a05.elite": "pale-spring-drainer",
+    "dwarf.a06.normal.1": "cast-slag-soldier",
+    "dwarf.a06.normal.2": "pressure-steam-wisp",
+    "dwarf.a06.normal.3": "sunken-pot-carrier",
+    "dwarf.a06.elite": "four-arm-foreman",
+    "dwarf.a06.boss": "broken-furnace-guardian"
   },
   "areaBackgrounds": {
     "dwarf.a01": [
@@ -4485,6 +6607,14 @@
     "dwarf.a04": [
       "ash-furnaces",
       "slag-platform"
+    ],
+    "dwarf.a05": [
+      "mineral-springs",
+      "spring-platform"
+    ],
+    "dwarf.a06": [
+      "sunken-forge",
+      "forge-platform"
     ]
   },
   "coveragePolicy": "Only explicit monsterSprites AND areaBackgrounds mappings are allowed; missing coverage must use legacy renderer, never index/modulo or generic substitution.",
@@ -4501,6 +6631,15 @@
       "spriteKey": "rock-lizard-young",
       "priority": 100,
       "reason": "Production followers retain elite definitionId; name 褐背幼蜥. Visual-only juvenile derivation from brown-rock-lizard, 65% size."
+    },
+    {
+      "match": {
+        "definitionId": "dwarf.a06.elite",
+        "follower": true
+      },
+      "spriteKey": "slag-apprentice",
+      "priority": 100,
+      "name": "铸渣小工"
     }
   ],
   "batchSources": {
@@ -4519,6 +6658,20 @@
       "pose": "idle",
       "overlay": "existing blue shield from actual shield event",
       "note": "Do not treat held shield pose as attack."
+    },
+    "dwarf.a05.normal.3:0": {
+      "pose": "idle",
+      "overlay": "actual engine blue shield only",
+      "noDamage": true
+    },
+    "dwarf.a06.boss:2": {
+      "pose": "idle",
+      "overlay": "actual engine blue shield only",
+      "noDamage": true
     }
+  },
+  "areaBaselines": {
+    "dwarf.a05": 193,
+    "dwarf.a06": 203
   }
 }

@@ -15,7 +15,7 @@ export function liveHeroWeaponType(state){
 export const LIVE_MONSTER_SPRITES=Object.freeze({'dwarf.a01.normal.1':'raider','dwarf.a01.normal.2':'pit-rat','dwarf.a01.normal.3':'golem','dwarf.a01.elite':'shield-captain'});
 const identity=u=>u.monsterId??u.definitionId??null;
 const areaOf=(s,e)=>e?.areaId??e?.instanceId??s?.siteId??'';
-const areaKey=id=>String(id).match(/^dwarf\.a0[1234](?=\.|$)/)?.[0]??null;
+const areaKey=id=>String(id).match(/^dwarf\.a0[123456](?=\.|$)/)?.[0]??null;
 export function liveActorSprite(unit,manifest){
  const variant=[...(manifest?.actorVariants??[])].sort((a,b)=>(b.priority??0)-(a.priority??0)).find(row=>row.match&&Object.entries(row.match).every(([key,value])=>(key==='definitionId'?(unit.definitionId??unit.monsterId):unit[key])===value));
  if(variant)return variant.spriteKey;
@@ -67,8 +67,9 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
  function rebuildPositions(){
   const units=snapshot.encounter.enemies;for(const u of units)if(!slots.has(u.id))slots.set(u.id,slots.size);
   const layout=units.length<=1?[350]:units.length===2?[305,405]:[275,350,425];
-  positions.hero={x:100,y:203,sprite:({...LIVE_HERO_SPRITES,...(manifest?.heroWeaponSprites??manifest?.heroSprites??{})})[metadata.hero?.weaponType]??null};
-  for(const u of units){const n=slots.get(u.id),row=Math.floor(n/3);positions[u.id]={x:positions[u.id]?.x??layout[n%3]??425,y:positions[u.id]?.y??203-row*51,sprite:liveActorSprite(u,manifest)};}
+  const baseline=manifest?.areaBaselines?.[areaKey(snapshot.areaId)]??203;
+  positions.hero={x:100,y:baseline,sprite:({...LIVE_HERO_SPRITES,...(manifest?.heroWeaponSprites??manifest?.heroSprites??{})})[metadata.hero?.weaponType]??null};
+  for(const u of units){const n=slots.get(u.id),row=Math.floor(n/3);positions[u.id]={x:positions[u.id]?.x??layout[n%3]??425,y:baseline-row*51,sprite:liveActorSprite(u,manifest)};}
   for(const id of Object.keys(positions))if(id!=='hero'&&!units.some(u=>u.id===id))delete positions[id];
  }
  async function load(){

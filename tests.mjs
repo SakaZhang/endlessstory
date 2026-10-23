@@ -130,3 +130,6 @@ for(const file of ['current-save-generation-tests.mjs','storage-generation-v3-te
 
 // v0.45 exact A04 skill presentation on the current save generation.
 runAffixSourceTest(process.execPath,[new URL('./live-battle-a04-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.46 A05–06 exact art, region baselines and real follower/shield events.
+runAffixSourceTest(process.execPath,[new URL('./live-battle-a05-a06-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
