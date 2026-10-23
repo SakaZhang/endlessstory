@@ -1,5 +1,5 @@
 {
-  "version": "2.3-a01-a02",
+  "version": "2.4-a01-a03",
   "provenance": "Original generated raster art via built-in image_gen. User-approved original concept used as visual reference. No third-party game assets. No separate license grant implied.",
   "logicalScene": [
     480,
@@ -2466,6 +2466,1001 @@
         "scale": 0.65,
         "newMonsterDefinition": false
       }
+    },
+    "oathless-guard": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.2,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/oathless-guard-idle.png",
+          "sourceCrop": [
+            20,
+            160,
+            440,
+            490
+          ],
+          "sourceAnchor": [
+            280,
+            477
+          ],
+          "alphaBBox": [
+            46,
+            116,
+            126,
+            179
+          ],
+          "solidBBox": [
+            47,
+            116,
+            125,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/oathless-guard-anticipation.png",
+          "sourceCrop": [
+            540,
+            125,
+            935,
+            490
+          ],
+          "sourceAnchor": [
+            770,
+            477
+          ],
+          "alphaBBox": [
+            53,
+            106,
+            127,
+            177
+          ],
+          "solidBBox": [
+            53,
+            109,
+            126,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/oathless-guard-strike.png",
+          "sourceCrop": [
+            980,
+            180,
+            1525,
+            490
+          ],
+          "sourceAnchor": [
+            1330,
+            477
+          ],
+          "alphaBBox": [
+            27,
+            119,
+            133,
+            179
+          ],
+          "solidBBox": [
+            29,
+            120,
+            132,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/oathless-guard-recovery.png",
+          "sourceCrop": [
+            30,
+            610,
+            450,
+            940
+          ],
+          "sourceAnchor": [
+            280,
+            925
+          ],
+          "alphaBBox": [
+            48,
+            113,
+            130,
+            179
+          ],
+          "solidBBox": [
+            49,
+            116,
+            128,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/oathless-guard-hurt.png",
+          "sourceCrop": [
+            530,
+            580,
+            1010,
+            940
+          ],
+          "sourceAnchor": [
+            800,
+            925
+          ],
+          "alphaBBox": [
+            43,
+            107,
+            138,
+            177
+          ],
+          "solidBBox": [
+            45,
+            109,
+            136,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/oathless-guard-death.png",
+          "sourceCrop": [
+            1015,
+            730,
+            1520,
+            950
+          ],
+          "sourceAnchor": [
+            1290,
+            930
+          ],
+          "alphaBBox": [
+            41,
+            136,
+            142,
+            179
+          ],
+          "solidBBox": [
+            43,
+            139,
+            139,
+            177
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 116,
+      "healthBarAnchor": [
+        96,
+        107
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "inscription-lizard": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.19,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/inscription-lizard-idle.png",
+          "sourceCrop": [
+            25,
+            350,
+            490,
+            610
+          ],
+          "sourceAnchor": [
+            260,
+            598
+          ],
+          "alphaBBox": [
+            53,
+            132,
+            137,
+            178
+          ],
+          "solidBBox": [
+            54,
+            132,
+            137,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/inscription-lizard-anticipation.png",
+          "sourceCrop": [
+            545,
+            290,
+            995,
+            610
+          ],
+          "sourceAnchor": [
+            780,
+            595
+          ],
+          "alphaBBox": [
+            53,
+            120,
+            137,
+            178
+          ],
+          "solidBBox": [
+            54,
+            121,
+            135,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/inscription-lizard-strike.png",
+          "sourceCrop": [
+            1005,
+            230,
+            1530,
+            610
+          ],
+          "sourceAnchor": [
+            1290,
+            598
+          ],
+          "alphaBBox": [
+            43,
+            108,
+            141,
+            178
+          ],
+          "solidBBox": [
+            45,
+            109,
+            140,
+            169
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/inscription-lizard-recovery.png",
+          "sourceCrop": [
+            15,
+            710,
+            510,
+            975
+          ],
+          "sourceAnchor": [
+            260,
+            960
+          ],
+          "alphaBBox": [
+            49,
+            130,
+            143,
+            176
+          ],
+          "solidBBox": [
+            51,
+            130,
+            141,
+            175
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/inscription-lizard-hurt.png",
+          "sourceCrop": [
+            535,
+            680,
+            990,
+            975
+          ],
+          "sourceAnchor": [
+            780,
+            960
+          ],
+          "alphaBBox": [
+            50,
+            123,
+            135,
+            178
+          ],
+          "solidBBox": [
+            51,
+            125,
+            133,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/inscription-lizard-death.png",
+          "sourceCrop": [
+            1020,
+            775,
+            1530,
+            985
+          ],
+          "sourceAnchor": [
+            1290,
+            965
+          ],
+          "alphaBBox": [
+            46,
+            141,
+            140,
+            180
+          ],
+          "solidBBox": [
+            47,
+            143,
+            140,
+            179
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 132,
+      "healthBarAnchor": [
+        96,
+        123
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "broken-tablet-idol": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.17,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/broken-tablet-idol-idle.png",
+          "sourceCrop": [
+            85,
+            180,
+            445,
+            560
+          ],
+          "sourceAnchor": [
+            270,
+            543
+          ],
+          "alphaBBox": [
+            65,
+            114,
+            124,
+            177
+          ],
+          "solidBBox": [
+            68,
+            117,
+            124,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/broken-tablet-idol-anticipation.png",
+          "sourceCrop": [
+            575,
+            190,
+            925,
+            560
+          ],
+          "sourceAnchor": [
+            765,
+            543
+          ],
+          "alphaBBox": [
+            65,
+            118,
+            122,
+            177
+          ],
+          "solidBBox": [
+            67,
+            119,
+            122,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/broken-tablet-idol-strike.png",
+          "sourceCrop": [
+            950,
+            195,
+            1485,
+            560
+          ],
+          "sourceAnchor": [
+            1310,
+            543
+          ],
+          "alphaBBox": [
+            37,
+            117,
+            126,
+            179
+          ],
+          "solidBBox": [
+            38,
+            120,
+            123,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/broken-tablet-idol-recovery.png",
+          "sourceCrop": [
+            90,
+            600,
+            485,
+            955
+          ],
+          "sourceAnchor": [
+            280,
+            940
+          ],
+          "alphaBBox": [
+            65,
+            118,
+            131,
+            176
+          ],
+          "solidBBox": [
+            67,
+            121,
+            131,
+            175
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/broken-tablet-idol-hurt.png",
+          "sourceCrop": [
+            585,
+            600,
+            980,
+            955
+          ],
+          "sourceAnchor": [
+            785,
+            940
+          ],
+          "alphaBBox": [
+            63,
+            120,
+            129,
+            177
+          ],
+          "solidBBox": [
+            65,
+            121,
+            127,
+            175
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/broken-tablet-idol-death.png",
+          "sourceCrop": [
+            975,
+            765,
+            1515,
+            980
+          ],
+          "sourceAnchor": [
+            1260,
+            960
+          ],
+          "alphaBBox": [
+            49,
+            143,
+            140,
+            179
+          ],
+          "solidBBox": [
+            50,
+            146,
+            139,
+            178
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 117,
+      "healthBarAnchor": [
+        96,
+        108
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "tablet-executioner": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.23,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/tablet-executioner-idle.png",
+          "sourceCrop": [
+            60,
+            120,
+            550,
+            455
+          ],
+          "sourceAnchor": [
+            300,
+            442
+          ],
+          "alphaBBox": [
+            42,
+            103,
+            153,
+            179
+          ],
+          "solidBBox": [
+            44,
+            105,
+            150,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/tablet-executioner-anticipation.png",
+          "sourceCrop": [
+            625,
+            35,
+            1120,
+            455
+          ],
+          "sourceAnchor": [
+            900,
+            442
+          ],
+          "alphaBBox": [
+            34,
+            85,
+            147,
+            178
+          ],
+          "solidBBox": [
+            37,
+            86,
+            143,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/tablet-executioner-strike.png",
+          "sourceCrop": [
+            1170,
+            170,
+            1740,
+            480
+          ],
+          "sourceAnchor": [
+            1470,
+            442
+          ],
+          "alphaBBox": [
+            27,
+            113,
+            158,
+            182
+          ],
+          "solidBBox": [
+            29,
+            117,
+            155,
+            181
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/tablet-executioner-recovery.png",
+          "sourceCrop": [
+            60,
+            510,
+            580,
+            840
+          ],
+          "sourceAnchor": [
+            310,
+            824
+          ],
+          "alphaBBox": [
+            39,
+            106,
+            155,
+            177
+          ],
+          "solidBBox": [
+            41,
+            107,
+            154,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/tablet-executioner-hurt.png",
+          "sourceCrop": [
+            730,
+            515,
+            1160,
+            840
+          ],
+          "sourceAnchor": [
+            950,
+            824
+          ],
+          "alphaBBox": [
+            45,
+            105,
+            141,
+            180
+          ],
+          "solidBBox": [
+            47,
+            105,
+            140,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/tablet-executioner-death.png",
+          "sourceCrop": [
+            1175,
+            640,
+            1740,
+            855
+          ],
+          "sourceAnchor": [
+            1450,
+            835
+          ],
+          "alphaBBox": [
+            35,
+            132,
+            163,
+            179
+          ],
+          "solidBBox": [
+            36,
+            135,
+            162,
+            177
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 105,
+      "healthBarAnchor": [
+        96,
+        96
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "morl-oathkeeper": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.23,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/morl-oathkeeper-idle.png",
+          "sourceCrop": [
+            15,
+            230,
+            525,
+            560
+          ],
+          "sourceAnchor": [
+            340,
+            543
+          ],
+          "alphaBBox": [
+            22,
+            106,
+            136,
+            178
+          ],
+          "solidBBox": [
+            24,
+            107,
+            135,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/morl-oathkeeper-anticipation.png",
+          "sourceCrop": [
+            580,
+            50,
+            945,
+            560
+          ],
+          "sourceAnchor": [
+            770,
+            543
+          ],
+          "alphaBBox": [
+            54,
+            66,
+            136,
+            180
+          ],
+          "solidBBox": [
+            55,
+            67,
+            136,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "strike",
+          "file": "sprites/morl-oathkeeper-strike.png",
+          "sourceCrop": [
+            946,
+            240,
+            1530,
+            570
+          ],
+          "sourceAnchor": [
+            1340,
+            543
+          ],
+          "alphaBBox": [
+            5,
+            106,
+            137,
+            180
+          ],
+          "solidBBox": [
+            5,
+            108,
+            137,
+            179
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/morl-oathkeeper-recovery.png",
+          "sourceCrop": [
+            5,
+            615,
+            525,
+            970
+          ],
+          "sourceAnchor": [
+            340,
+            952
+          ],
+          "alphaBBox": [
+            21,
+            98,
+            137,
+            178
+          ],
+          "solidBBox": [
+            21,
+            101,
+            136,
+            176
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/morl-oathkeeper-hurt.png",
+          "sourceCrop": [
+            540,
+            615,
+            1030,
+            975
+          ],
+          "sourceAnchor": [
+            780,
+            952
+          ],
+          "alphaBBox": [
+            42,
+            99,
+            154,
+            181
+          ],
+          "solidBBox": [
+            44,
+            100,
+            154,
+            178
+          ],
+          "durationMs": 160
+        },
+        {
+          "id": "death",
+          "file": "sprites/morl-oathkeeper-death.png",
+          "sourceCrop": [
+            1035,
+            745,
+            1530,
+            1005
+          ],
+          "sourceAnchor": [
+            1280,
+            980
+          ],
+          "alphaBBox": [
+            40,
+            122,
+            152,
+            180
+          ],
+          "solidBBox": [
+            40,
+            125,
+            151,
+            179
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 107,
+      "healthBarAnchor": [
+        96,
+        98
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      }
     }
   },
   "backgrounds": [
@@ -2512,6 +3507,28 @@
       "z": 1,
       "hasAlpha": true,
       "parallax": 1
+    },
+    {
+      "id": "oath-ruins",
+      "file": "backgrounds/oath-ruins.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0,
+      "hasAlpha": false,
+      "parallax": 0.15
+    },
+    {
+      "id": "oath-platform",
+      "file": "backgrounds/oath-platform.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 1,
+      "hasAlpha": true,
+      "parallax": 1
     }
   ],
   "limitations": [
@@ -2535,7 +3552,12 @@
     "dwarf.a02.normal.1": "brown-rock-lizard",
     "dwarf.a02.normal.2": "rift-bat",
     "dwarf.a02.normal.3": "iron-throat-crab",
-    "dwarf.a02.elite": "brood-rock-lizard"
+    "dwarf.a02.elite": "brood-rock-lizard",
+    "dwarf.a03.normal.1": "oathless-guard",
+    "dwarf.a03.normal.2": "inscription-lizard",
+    "dwarf.a03.normal.3": "broken-tablet-idol",
+    "dwarf.a03.elite": "tablet-executioner",
+    "dwarf.a03.boss": "morl-oathkeeper"
   },
   "areaBackgrounds": {
     "dwarf.a01": [
@@ -2545,6 +3567,10 @@
     "dwarf.a02": [
       "rift-cave",
       "rift-platform"
+    ],
+    "dwarf.a03": [
+      "oath-ruins",
+      "oath-platform"
     ]
   },
   "coveragePolicy": "Only explicit monsterSprites AND areaBackgrounds mappings are allowed; missing coverage must use legacy renderer, never index/modulo or generic substitution.",
@@ -2565,6 +3591,19 @@
   ],
   "batchSources": {
     "a01": "2.2-a01-axe-hammer-frozen",
-    "a02": "a02-nextbatch-1"
+    "a02": "a02-nextbatch-1",
+    "a03": "a03-nextbatch-1"
+  },
+  "skillPresentation": {
+    "dwarf.a03.normal.3:0": {
+      "pose": "idle",
+      "overlay": "existing blue shield from actual shield event",
+      "note": "Do not emit punch/damage for shield-only ability."
+    },
+    "dwarf.a03.boss:2": {
+      "pose": "idle",
+      "overlay": "existing blue shield from actual shield event",
+      "note": "Do not treat held shield pose as attack."
+    }
   }
 }

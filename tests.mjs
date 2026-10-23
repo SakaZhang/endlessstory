@@ -128,3 +128,6 @@ for(const file of ['live-combat-events-tests.mjs','live-battle-view-tests.mjs'])
 
 // v0.43 actual A02 identities, follower visual variants and area-only background layers.
 runAffixSourceTest(process.execPath,[new URL('./live-battle-a02-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.44 actual A03 elite/boss identities and shield-only non-damaging presentation.
+runAffixSourceTest(process.execPath,[new URL('./live-battle-a03-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
