@@ -3,7 +3,7 @@ import fs from 'node:fs';
 const css=fs.readFileSync('dist/equipment-presentation.css','utf8'),html=fs.readFileSync('dist/index.html','utf8');
 assert.equal((html.match(/href="equipment-presentation.css"/g)||[]).length,1);
 assert(html.indexOf('equipment-presentation.css')>html.indexOf('equipment-workshop-ui.css'));
-assert(/可玩原型 v\d+\.\d+/.test(html));
+assert(/黑炉余烬 · v\d+\.\d+/.test(html),'current release label remains visible without prototype copy');
 for(const c of ['itemCell','equipSlot','detailIcon','forgeResult','orbitSlot','fusionGearCard','commodityCard','donorCard','collectionTile','collectionDetail','collectedPart','loadoutGearSlot','batchSaleItem','workshopItem','shopGearIcon','workshopBigIcon','workshopTemplate'])assert(css.includes('.'+c),c);
 for(const [q,color]of [[0,'#555b61'],[1,'#21476a'],[2,'#49305e'],[3,'#682d36']])assert(new RegExp(`data-equipment-quality="${q}"[\\s\\S]*?background:${color}!important`).test(css));
 assert(css.includes('border-color:#48515a!important'));
