@@ -11,7 +11,14 @@ export const LIVE_HERO_SPRITES=Object.freeze({axe:'dwarf',hammer:'dwarf-hammer'}
 export const LIVE_MONSTER_SPRITES=Object.freeze({'dwarf.a01.normal.1':'raider','dwarf.a01.normal.2':'pit-rat','dwarf.a01.normal.3':'golem','dwarf.a01.elite':'shield-captain'});
 const identity=u=>u.monsterId??u.definitionId??null;
 const areaOf=(s,e)=>e?.areaId??e?.instanceId??s?.siteId??'';
-const isA01=id=>/^dwarf\.a01(?:\.|$)/.test(String(id));
+const areaKey=id=>String(id).match(/^dwarf\.a0[12](?=\.|$)/)?.[0]??null;
+export function liveActorSprite(unit,manifest){
+ const variant=[...(manifest?.actorVariants??[])].sort((a,b)=>(b.priority??0)-(a.priority??0)).find(row=>row.match&&Object.entries(row.match).every(([key,value])=>(key==='definitionId'?(unit.definitionId??unit.monsterId):unit[key])===value));
+ if(variant)return variant.spriteKey;
+ if(unit.follower===true)return null; // A child retaining its mother's ID must never silently use her sprite.
+ return ({...LIVE_MONSTER_SPRITES,...(manifest?.monsterSprites??{})})[identity(unit)]??null;
+}
+export function liveAreaBackgrounds(areaId,manifest){const key=areaKey(areaId),ids=manifest?.areaBackgrounds?.[key];if(!key||!Array.isArray(ids)||!ids.length)return [];const selected=ids.map(id=>manifest.backgrounds?.find(bg=>bg.id===id));return selected.every(Boolean)?selected:[];}
 export function renderLiveBattleHud(s,e){
  const tree=s?.skillTree,p=tree?.presets?.[tree.selectedPreset];if(tree?.mode!=='active')return `<div class="liveBattleSkills isLegacy" aria-label="旧战技四槽 · 只读">${Array.from({length:4},(_,i)=>{const id=s?.skills?.[i];return `<span class="liveBattleSkill" data-live-slot="legacy-${i}">${icon(id?'sword':'bag')}<span>${esc(SKILLS[id]?.name??'空槽')}</span></span>`;}).join('')}</div>`;if(!p)return '';
  return `<div class="liveBattleSkills" aria-label="当前装备技能 · 只读">${[...Array.from({length:4},(_,i)=>({id:p.active?.[i],i,passive:false})),...Array.from({length:2},(_,i)=>({id:p.passive?.[i],i,passive:true}))].map(({id,i,passive})=>{const cd=id?(e?.treeSkillCooldowns?.[id]??e?.cd?.[id]??0):0;return `<span class="liveBattleSkill ${passive?'isPassive':''}" title="${esc(skillNames[id]??'空槽')}" data-live-skill="${esc(id??'')}" data-live-slot="${passive?'passive':'active'}-${i}">${icon(!id?'bag':passive?'shield':id.includes('ember')?'fire':id.includes('vigil')?'shield':id.includes('breath')?'herb':'sword')}<span>${esc(skillNames[id]??'空槽')}</span>${!passive&&cd>0?`<small>${Math.ceil(cd)}回</small>`:''}</span>`;}).join('')}</div>`;
@@ -30,27 +37,26 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
   const base={mode:'fallback',reason:null,label:'使用原战斗画面',missingIds:[],coverage:[]};
   if(disposed)return {...base,reason:'disposed',label:'像素画面已释放'};
   if(!snapshot)return {...base,mode:'idle',reason:'no-encounter',label:'等待战斗'};
-  if(!isA01(snapshot.areaId))return {...base,reason:'area-not-covered',label:'当前区域尚未接入像素背景'};
+  if(!areaKey(snapshot.areaId))return {...base,reason:'area-not-covered',label:'当前区域尚未接入像素背景'};
   if(loading)return {...base,mode:'loading',reason:'assets-loading',label:'像素外观准备中'};
   if(loadError)return {...base,reason:'asset-load-failed',label:'像素素材加载失败，使用原画面',error:loadError};
   if(!manifest)return {...base,reason:'assets-not-loaded',label:'像素外观准备中'};
-  const map={...LIVE_MONSTER_SPRITES,...(manifest.monsterSprites??{})};
-  const rows=snapshot.encounter.enemies.map(u=>({unitId:u.id,monsterId:identity(u),sprite:map[identity(u)]??null}));
+  const backgrounds=liveAreaBackgrounds(snapshot.areaId,manifest);if(!backgrounds.length)return {...base,reason:'area-not-covered',label:'当前区域尚未接入像素背景'};
+  const rows=snapshot.encounter.enemies.map(u=>({unitId:u.id,monsterId:identity(u),follower:!!u.follower,sprite:liveActorSprite(u,manifest)}));
   const missing=rows.filter(r=>!r.sprite||!manifest.sprites?.[r.sprite]);
   if(missing.length)return {...base,reason:'monster-not-covered',label:'当前怪物尚未全部覆盖像素外观',missingIds:missing.map(r=>r.monsterId??r.unitId),coverage:rows};
   if(rows.length>6)return {...base,reason:'formation-not-covered',label:'当前编队尚未覆盖像素布局',coverage:rows};
   const heroSprite=({...LIVE_HERO_SPRITES,...(manifest.heroWeaponSprites??manifest.heroSprites??{})})[metadata.hero?.weaponType];if(!heroSprite||!manifest.sprites?.[heroSprite])return {...base,reason:'hero-weapon-not-covered',label:'当前武器尚未覆盖像素外观，使用原画面',coverage:rows,heroWeapon:metadata.hero?.weaponType??null};
   const sprites=[heroSprite,...new Set(rows.map(r=>r.sprite))];
-  const files=[...(manifest.backgrounds??[]),...sprites.flatMap(key=>manifest.sprites?.[key]?.frames??[])];
-  if(!manifest.backgrounds?.length||sprites.some(key=>!manifest.sprites?.[key]?.animations?.idle?.length)||files.some(f=>!images.get(f.file)))return {...base,reason:'asset-frames-missing',label:'像素帧尚未完整加载',coverage:rows};
-  return {...base,mode:'ready',reason:null,label:'实时像素战斗',coverage:rows};
+  const files=[...backgrounds,...sprites.flatMap(key=>manifest.sprites?.[key]?.frames??[])];
+  if(sprites.some(key=>!manifest.sprites?.[key]?.animations?.idle?.length)||files.some(f=>!images.get(f.file)))return {...base,reason:'asset-frames-missing',label:'像素帧尚未完整加载',coverage:rows};
+  return {...base,mode:'ready',reason:null,label:'实时像素战斗',backgroundIds:backgrounds.map(bg=>bg.id),coverage:rows};
  };
  function rebuildPositions(){
   const units=snapshot.encounter.enemies;for(const u of units)if(!slots.has(u.id))slots.set(u.id,slots.size);
   const layout=units.length<=1?[350]:units.length===2?[305,405]:[275,350,425];
   positions.hero={x:100,y:203,sprite:({...LIVE_HERO_SPRITES,...(manifest?.heroWeaponSprites??manifest?.heroSprites??{})})[metadata.hero?.weaponType]??null};
-  const map={...LIVE_MONSTER_SPRITES,...(manifest?.monsterSprites??{})};
-  for(const u of units){const n=slots.get(u.id),row=Math.floor(n/3);positions[u.id]={x:positions[u.id]?.x??layout[n%3]??425,y:positions[u.id]?.y??203-row*51,sprite:map[identity(u)]??null};}
+  for(const u of units){const n=slots.get(u.id),row=Math.floor(n/3);positions[u.id]={x:positions[u.id]?.x??layout[n%3]??425,y:positions[u.id]?.y??203-row*51,sprite:liveActorSprite(u,manifest)};}
   for(const id of Object.keys(positions))if(id!=='hero'&&!units.some(u=>u.id===id))delete positions[id];
  }
  async function load(){
@@ -83,7 +89,7 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
   try{if(canvas.width!==480)canvas.width=480;if(canvas.height!==270)canvas.height=270;
    displayTime=Number.isFinite(time)?time:displayTime;presentation.advance(displayTime);
    const actorFrames={};for(const u of [{id:'hero',hp:snapshot.encounter.heroHp},...snapshot.encounter.enemies]){if(u.hp>0)continue;const sprite=manifest.sprites[positions[u.id].sprite],frames=sprite.animations.death;if(frames?.length){const start=deathStarts.get(u.id);actorFrames[u.id]=start===undefined?frames.at(-1):displayTime<start?sprite.animations.idle[0]:frames[Math.min(frames.length-1,Math.floor((displayTime-start)/110))];}}
-   drawBattleSliceCanvas(canvas,{manifest,images,actorFrames,encounter:{...snapshot.encounter,enemies:snapshot.encounter.enemies.map(u=>({...u,max:0}))},positions,animations:presentation.animations,time:displayTime,floats:presentation.floats,heroMaxHp:0});
+   drawBattleSliceCanvas(canvas,{manifest:{...manifest,backgrounds:liveAreaBackgrounds(snapshot.areaId,manifest)},images,actorFrames,encounter:{...snapshot.encounter,enemies:snapshot.encounter.enemies.map(u=>({...u,max:0}))},positions,animations:presentation.animations,time:displayTime,floats:presentation.floats,heroMaxHp:0});
    const c=canvas.getContext('2d');const bars=liveBattleBars(snapshot.encounter,positions,presentation.animations,displayTime,{heroMaxHp,manifest});drawBattleSliceBars(c,bars);const target=snapshot.encounter.targetId;
    for(const u of snapshot.units){const p=positions[u.id];if(!p||u.hp<=0)continue;const x=presentationActorX(p,presentation.animations.get(u.id),displayTime);if(u.id===target){c.fillStyle='#e4c587';c.fillRect(Math.round(x-14),p.y+5,28,2);c.fillRect(Math.round(x-17),p.y+2,3,5);c.fillRect(Math.round(x+14),p.y+2,3,5);const top=(bars.find(b=>b.id===u.id)?.y??p.y-70)-4;c.fillRect(Math.round(x-35),top,8,2);c.fillRect(Math.round(x-35),top,2,8);c.fillRect(Math.round(x+27),top,8,2);c.fillRect(Math.round(x+33),top,2,8);}
     const effects=readEnemyEffectRows(snapshot.encounter,u.id),baseY=(bars.find(b=>b.id===u.id)?.y??p.y-80)-9;

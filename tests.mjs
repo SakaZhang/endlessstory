@@ -125,3 +125,6 @@ for(const file of ['potion-catalog-tests.mjs','potion-expansion-tests.mjs','poti
 
 // v0.42 normal battle presentation observes committed live events only.
 for(const file of ['live-combat-events-tests.mjs','live-battle-view-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.43 actual A02 identities, follower visual variants and area-only background layers.
+runAffixSourceTest(process.execPath,[new URL('./live-battle-a02-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});

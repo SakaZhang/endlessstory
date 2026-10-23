@@ -1,0 +1,47 @@
+import assert from 'node:assert/strict';
+import {createRequire} from 'node:module';
+import {readFileSync,mkdirSync,writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import * as E from './dist/engine.js';
+import {quoteSkillTreeChange,prepareSkillTreeChange} from './dist/skill-tree-state.js';
+import {createLiveBattlePresentation,liveActorSprite,liveAreaBackgrounds} from './dist/live-battle-view.js';
+import {captureCombatDisplay} from './dist/combat-display-bridge.js';
+const {createCanvas,loadImage}=createRequire(import.meta.url)('@napi-rs/canvas');
+const manifest=JSON.parse(readFileSync(new URL('./dist/battle-assets/manifest.json',import.meta.url))),images=new Map(),out=new URL('./qa/live-battle-a02-v043/',import.meta.url);mkdirSync(out,{recursive:true});
+for(const f of [...manifest.backgrounds,...Object.values(manifest.sprites).flatMap(s=>s.frames)])if(!images.has(f.file))images.set(f.file,await loadImage(new URL('./dist/battle-assets/'+f.file,import.meta.url).pathname));
+const originalRandom=Math.random;let rng=4302;Math.random=()=>{rng=(Math.imul(rng,1664525)+1013904223)>>>0;return rng/4294967296};
+const records=[],now=1770000000000;
+try{
+ const setup=(level=1)=>{let s=E.fresh();s.level=level;E.normalizeHealth(s,now);E.normalizeExpedition(s);s.areaProgress.dwarf={unlocked:[1,2],cleared:[1]};return s;};
+ const capture=(name,s,e,{at=0,drawNow=s.lastHealthClock}={})=>{
+  const view=createLiveBattlePresentation({manifest,images}),canvas=createCanvas(480,270),ctx=canvas.getContext('2d'),calls=[];
+  const proxy=new Proxy(ctx,{get(t,k){if(k==='drawImage')return(...args)=>{calls.push(args[0]);return t.drawImage(...args)};const v=t[k];return typeof v==='function'?v.bind(t):v;},set(t,k,v){t[k]=v;return true}}),facade={width:480,height:270,getContext:()=>proxy};
+  const input=JSON.stringify(s),content=JSON.stringify(manifest),old=Math.random;Math.random=()=>{throw Error('Presentation consumed RNG')};
+  try{assert.equal(view.sync(s,e,{now:drawNow,presentationTime:at,running:s.running,visible:true}).mode,'ready');assert(view.draw(facade,at));assert.equal(JSON.stringify(s),input);assert.equal(JSON.stringify(manifest),content);}finally{Math.random=old;}
+  const expected=liveAreaBackgrounds(e.areaId,manifest);assert.deepEqual(view.status.backgroundIds,expected.map(x=>x.id));for(const bg of manifest.backgrounds)assert.equal(calls.includes(images.get(bg.file)),expected.includes(bg),'draw ONLY '+e.areaId+' background '+bg.id);
+  const png=canvas.toBuffer('image/png');writeFileSync(new URL(name+'.png',out),png);writeFileSync(new URL(name+'.html',out),view.detailsHtml);
+  records.push({name,sha256:createHash('sha256').update(png).digest('hex'),actorCount:e.enemies.length+1,level:s.level,round:e.round,dungeonStage:e.dungeonStage??null,weapon:s.inventory.find(x=>x.id===s.equip.weapon)?.weaponType,area:e.areaId,observationClock:drawNow,backgroundIds:view.status.backgroundIds,actors:e.enemies.map(u=>({unitId:u.id,definitionId:u.definitionId,monsterId:u.monsterId,name:u.name,follower:u.follower,sprite:view.positions[u.id].sprite,x:view.positions[u.id].x,y:view.positions[u.id].y,hp:u.hp,max:u.max,shield:u.shield,preparing:u.control?.preparing??null})),targetId:e.targetId});return {view,canvas};
+ };
+ assert.deepEqual(liveAreaBackgrounds('dwarf.a01.field',manifest).map(x=>x.id),['cave','stage']);assert.deepEqual(liveAreaBackgrounds('dwarf.a02.dungeon',manifest).map(x=>x.id),['rift-cave','rift-platform']);assert.deepEqual(liveAreaBackgrounds('dwarf.a03',manifest),[]);
+ const seen=new Set();let group=false;
+ for(let i=0;i<800&&(seen.size<3||!group);i++){const s=setup(),e=E.startInstanceEncounter(s,'dwarf.a02.field',now);assert(e);if(!seen.has(e.enemies[0].definitionId)){const {view}=capture(e.enemies[0].definitionId,s,e);if(e.enemies[0].definitionId==='dwarf.a02.normal.2')assert.equal(view.positions[e.enemies[0].id].y,203,'bat hover already in image; no extra offset');seen.add(e.enemies[0].definitionId);view.dispose();}if(e.enemies.length===3&&!group){capture('a02-real-three-enemies',s,e).view.dispose();group=true;}}
+ assert.equal(seen.size,3);assert(group);
+ let s=setup(30);for(const skillId of ['iron_vigil','forge_breath','scatter_ash']){const q=quoteSkillTreeChange(s,E.SKILL_TREE_DEFINITION,{type:'unlock',skillId});assert(q);s=prepareSkillTreeChange(s,q,E.SKILL_TREE_DEFINITION).game;}const q=quoteSkillTreeChange(s,E.SKILL_TREE_DEFINITION,{type:'slots',active:['iron_vigil','forge_breath','scatter_ash',null],conditions:['always','always','always','always']});assert(q);s=prepareSkillTreeChange(s,q,E.SKILL_TREE_DEFINITION).game;
+ let e=E.startInstanceEncounter(s,'dwarf.a02.dungeon',now);for(let stage=1;stage<3;stage++){assert.equal(e.dungeonStage,stage);E.setMultiPaused(s,false,s.lastHealthClock);for(let turn=0;turn<250&&!e.done;turn++)E.step(s,e,s.nextActionAt);assert(e.done&&e.win,'real A02 stage clear');E.reward(s,e,s.lastHealthClock);e=E.startRoutedEncounter(s,s.nextActionAt);assert(e);}
+ assert.equal(e.enemies.length,3);assert.equal(e.enemies.filter(u=>u.follower).length,2);assert.equal(new Set(e.enemies.map(u=>u.definitionId)).size,1,'production followers really retain mother definitionId');
+ const opening=capture('a02-real-brood-and-two-young',s,e),mother=e.enemies.find(u=>!u.follower),young=e.enemies.filter(u=>u.follower);
+ assert.equal(opening.view.positions[mother.id].sprite,'brood-rock-lizard');for(const child of young)assert.equal(opening.view.positions[child.id].sprite,'rock-lizard-young');
+ for(const u of e.enemies){const p=opening.view.positions[u.id];assert.equal(opening.view.targetAt({clientX:p.x,clientY:p.y-10},{left:0,top:0,width:480,height:270}),u.id);}
+ const prior=opening.view.positions;const reordered={...e,enemies:[...e.enemies].reverse()};opening.view.sync(s,reordered,{now:s.lastHealthClock,running:s.running});assert.deepEqual(opening.view.positions,prior,'stable actor IDs survive reorder');opening.view.dispose();
+ assert(E.setCombatTarget(s,young[1].id));capture('a02-real-young-target',s,e).view.dispose();
+ const noVariants={...manifest,actorVariants:[]};assert.equal(liveActorSprite(young[0],noVariants),null,'no mother sprite substitution when explicit child mapping is absent');const incomplete=createLiveBattlePresentation({manifest:noVariants,images});incomplete.sync(s,e,{now:s.lastHealthClock});assert.equal(incomplete.status.reason,'monster-not-covered');assert.equal(incomplete.draw(createCanvas(480,270),0),false);incomplete.dispose();
+ E.setMultiPaused(s,false,s.lastHealthClock);const stream=createLiveBattlePresentation({manifest,images});stream.sync(s,e,{now:s.lastHealthClock,running:true});let casting=false,animationTime=0;
+ for(let turn=0;turn<150&&!e.done;turn++){const batch=captureCombatDisplay(e,()=>E.step(s,e,s.nextActionAt));animationTime+=1100;stream.sync(s,e,{now:s.lastHealthClock,running:s.running});stream.enqueue(batch.events,animationTime);assert(stream.draw(createCanvas(480,270),animationTime+300));if(mother.control.preparing){const result=capture('a02-real-brood-casting',s,e,{at:animationTime,drawNow:s.lastHealthClock});assert(result.view.detailsHtml.includes('秒'));result.view.dispose();const midpoint=mother.control.preparing.startedAt+Math.floor(mother.control.preparing.duration/2);const mid=capture('a02-real-brood-casting-midpoint',s,e,{at:animationTime+550,drawNow:midpoint});assert(mid.view.detailsHtml.includes('0.6秒'));mid.view.dispose();casting=true;break;}}
+ assert(casting,'actual production A02 mother enters genuine preparing state');
+ for(let turn=0;turn<80&&young[1].hp>0&&!e.done;turn++){const batch=captureCombatDisplay(e,()=>E.step(s,e,s.nextActionAt));animationTime+=1100;stream.sync(s,e,{now:s.lastHealthClock,running:s.running});stream.enqueue(batch.events,animationTime);stream.draw(createCanvas(480,270),animationTime+600);}
+ assert(young[1].hp<=0);const death=capture('a02-real-young-death',s,e);assert.equal(death.view.positions[young[1].id].sprite,'rock-lizard-young');death.view.dispose();stream.dispose();
+ // A03 remains completely unsupported, even though its monster art exists in legacy renderer.
+ const later=setup();later.areaProgress.dwarf={unlocked:[1,2,3],cleared:[1,2]};const a03=E.startInstanceEncounter(later,'dwarf.a03.field',now);const fallback=createLiveBattlePresentation({manifest,images});fallback.sync(later,a03,{now:later.lastHealthClock});assert.equal(fallback.status.reason,'area-not-covered');assert.equal(fallback.draw(createCanvas(480,270),0),false);fallback.dispose();
+ writeFileSync(new URL('evidence.json',out),JSON.stringify({capture:'Native actual production live renderer, NOT browser screenshot',generationSeed:4302,accessFixture:'legal A02 unlocked/cleared records; normal images use E.fresh level1, actual dungeon progression uses level30 + lawful iron_vigil/forge_breath/scatter_ash quotes; no raw monster/HP/cast modifications. Midpoint frame reads the actual pending cast at startedAt+duration/2 without stepping or mutating game state (normal presentation interpolation)',variantContract:'mother and children retain same real definitionId; follower:true uses explicit young sprite; no vertical hover offset',records},null,2));
+ console.log('PASS A02 real 3 normals / 3-enemy field / 3-stage elite+2 explicit young / actual cast / real target IDs / stable reorder / area-only layers / readonly no RNG / missing-variant fallback / A03 remains fallback.');
+}finally{Math.random=originalRandom;}

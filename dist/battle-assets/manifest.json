@@ -1,5 +1,5 @@
 {
-  "version": "2.2-a01-axe-hammer-frozen",
+  "version": "2.3-a01-a02",
   "provenance": "Original generated raster art via built-in image_gen. User-approved original concept used as visual reference. No third-party game assets. No separate license grant implied.",
   "logicalScene": [
     480,
@@ -1456,6 +1456,1016 @@
         96,
         105
       ]
+    },
+    "brown-rock-lizard": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.18,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/brown-rock-lizard-idle.png",
+          "sourceCrop": [
+            0,
+            0,
+            550,
+            550
+          ],
+          "sourceAnchor": [
+            280,
+            479
+          ],
+          "alphaBBox": [
+            53,
+            107,
+            142,
+            188
+          ],
+          "solidBBox": [
+            55,
+            135,
+            138,
+            176
+          ],
+          "durationMs": 150
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/brown-rock-lizard-anticipation.png",
+          "sourceCrop": [
+            550,
+            0,
+            1020,
+            550
+          ],
+          "sourceAnchor": [
+            780,
+            479
+          ],
+          "alphaBBox": [
+            56,
+            93,
+            140,
+            188
+          ],
+          "solidBBox": [
+            57,
+            122,
+            136,
+            176
+          ],
+          "durationMs": 150
+        },
+        {
+          "id": "strike",
+          "file": "sprites/brown-rock-lizard-strike.png",
+          "sourceCrop": [
+            1020,
+            0,
+            1536,
+            550
+          ],
+          "sourceAnchor": [
+            1300,
+            479
+          ],
+          "alphaBBox": [
+            49,
+            98,
+            136,
+            180
+          ],
+          "solidBBox": [
+            50,
+            128,
+            134,
+            176
+          ],
+          "durationMs": 150
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/brown-rock-lizard-recovery.png",
+          "sourceCrop": [
+            0,
+            550,
+            550,
+            1024
+          ],
+          "sourceAnchor": [
+            280,
+            895
+          ],
+          "alphaBBox": [
+            55,
+            119,
+            145,
+            192
+          ],
+          "solidBBox": [
+            56,
+            126,
+            139,
+            176
+          ],
+          "durationMs": 150
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/brown-rock-lizard-hurt.png",
+          "sourceCrop": [
+            550,
+            550,
+            1020,
+            1024
+          ],
+          "sourceAnchor": [
+            790,
+            898
+          ],
+          "alphaBBox": [
+            57,
+            121,
+            138,
+            191
+          ],
+          "solidBBox": [
+            58,
+            130,
+            138,
+            175
+          ],
+          "durationMs": 150
+        },
+        {
+          "id": "death",
+          "file": "sprites/brown-rock-lizard-death.png",
+          "sourceCrop": [
+            1020,
+            550,
+            1536,
+            1024
+          ],
+          "sourceAnchor": [
+            1300,
+            900
+          ],
+          "alphaBBox": [
+            46,
+            117,
+            135,
+            187
+          ],
+          "solidBBox": [
+            50,
+            149,
+            134,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 135,
+      "healthBarAnchor": [
+        96,
+        126
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      },
+      "groundAnchored": true,
+      "isFlying": false
+    },
+    "rift-bat": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.17,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/rift-bat-idle.png",
+          "sourceCrop": [
+            0,
+            0,
+            550,
+            550
+          ],
+          "sourceAnchor": [
+            260,
+            610
+          ],
+          "alphaBBox": [
+            57,
+            75,
+            146,
+            166
+          ],
+          "solidBBox": [
+            58,
+            95,
+            139,
+            145
+          ],
+          "durationMs": 150
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/rift-bat-anticipation.png",
+          "sourceCrop": [
+            550,
+            0,
+            1020,
+            550
+          ],
+          "sourceAnchor": [
+            790,
+            610
+          ],
+          "alphaBBox": [
+            57,
+            73,
+            135,
+            162
+          ],
+          "solidBBox": [
+            62,
+            99,
+            133,
+            151
+          ],
+          "durationMs": 150
+        },
+        {
+          "id": "strike",
+          "file": "sprites/rift-bat-strike.png",
+          "sourceCrop": [
+            1020,
+            0,
+            1536,
+            550
+          ],
+          "sourceAnchor": [
+            1300,
+            610
+          ],
+          "alphaBBox": [
+            50,
+            81,
+            131,
+            161
+          ],
+          "solidBBox": [
+            67,
+            90,
+            122,
+            154
+          ],
+          "durationMs": 150
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/rift-bat-recovery.png",
+          "sourceCrop": [
+            0,
+            550,
+            550,
+            1024
+          ],
+          "sourceAnchor": [
+            260,
+            1060
+          ],
+          "alphaBBox": [
+            56,
+            89,
+            146,
+            165
+          ],
+          "solidBBox": [
+            57,
+            103,
+            142,
+            147
+          ],
+          "durationMs": 150
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/rift-bat-hurt.png",
+          "sourceCrop": [
+            550,
+            550,
+            1020,
+            1024
+          ],
+          "sourceAnchor": [
+            790,
+            1060
+          ],
+          "alphaBBox": [
+            55,
+            96,
+            135,
+            167
+          ],
+          "solidBBox": [
+            65,
+            97,
+            123,
+            151
+          ],
+          "durationMs": 150
+        },
+        {
+          "id": "death",
+          "file": "sprites/rift-bat-death.png",
+          "sourceCrop": [
+            1020,
+            550,
+            1536,
+            1024
+          ],
+          "sourceAnchor": [
+            1290,
+            932
+          ],
+          "alphaBBox": [
+            50,
+            118,
+            133,
+            180
+          ],
+          "solidBBox": [
+            57,
+            146,
+            132,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 95,
+      "healthBarAnchor": [
+        96,
+        86
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      },
+      "groundAnchored": true,
+      "isFlying": true
+    },
+    "iron-throat-crab": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.19,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/iron-throat-crab-idle.png",
+          "sourceCrop": [
+            15,
+            185,
+            535,
+            435
+          ],
+          "sourceAnchor": [
+            350,
+            421
+          ],
+          "alphaBBox": [
+            32,
+            131,
+            131,
+            179
+          ],
+          "solidBBox": [
+            34,
+            133,
+            129,
+            176
+          ],
+          "durationMs": 150
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/iron-throat-crab-anticipation.png",
+          "sourceCrop": [
+            550,
+            160,
+            990,
+            440
+          ],
+          "sourceAnchor": [
+            810,
+            431
+          ],
+          "alphaBBox": [
+            47,
+            125,
+            131,
+            178
+          ],
+          "solidBBox": [
+            49,
+            127,
+            129,
+            176
+          ],
+          "durationMs": 150
+        },
+        {
+          "id": "strike",
+          "file": "sprites/iron-throat-crab-strike.png",
+          "sourceCrop": [
+            1015,
+            210,
+            1525,
+            440
+          ],
+          "sourceAnchor": [
+            1350,
+            431
+          ],
+          "alphaBBox": [
+            32,
+            134,
+            129,
+            178
+          ],
+          "solidBBox": [
+            34,
+            136,
+            128,
+            176
+          ],
+          "durationMs": 150
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/iron-throat-crab-recovery.png",
+          "sourceCrop": [
+            15,
+            635,
+            550,
+            905
+          ],
+          "sourceAnchor": [
+            350,
+            891
+          ],
+          "alphaBBox": [
+            32,
+            127,
+            134,
+            178
+          ],
+          "solidBBox": [
+            34,
+            129,
+            133,
+            175
+          ],
+          "durationMs": 150
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/iron-throat-crab-hurt.png",
+          "sourceCrop": [
+            620,
+            580,
+            1010,
+            940
+          ],
+          "sourceAnchor": [
+            820,
+            925
+          ],
+          "alphaBBox": [
+            58,
+            110,
+            132,
+            178
+          ],
+          "solidBBox": [
+            60,
+            112,
+            130,
+            175
+          ],
+          "durationMs": 150
+        },
+        {
+          "id": "death",
+          "file": "sprites/iron-throat-crab-death.png",
+          "sourceCrop": [
+            1015,
+            705,
+            1525,
+            925
+          ],
+          "sourceAnchor": [
+            1340,
+            912
+          ],
+          "alphaBBox": [
+            34,
+            137,
+            131,
+            179
+          ],
+          "solidBBox": [
+            36,
+            139,
+            129,
+            177
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 133,
+      "healthBarAnchor": [
+        96,
+        124
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      },
+      "groundAnchored": true,
+      "isFlying": false
+    },
+    "brood-rock-lizard": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.23,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/brood-rock-lizard-idle.png",
+          "sourceCrop": [
+            0,
+            0,
+            550,
+            550
+          ],
+          "sourceAnchor": [
+            270,
+            504
+          ],
+          "alphaBBox": [
+            41,
+            86,
+            160,
+            179
+          ],
+          "solidBBox": [
+            42,
+            108,
+            150,
+            175
+          ],
+          "durationMs": 150
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/brood-rock-lizard-anticipation.png",
+          "sourceCrop": [
+            550,
+            170,
+            990,
+            515
+          ],
+          "sourceAnchor": [
+            770,
+            504
+          ],
+          "alphaBBox": [
+            47,
+            100,
+            146,
+            177
+          ],
+          "solidBBox": [
+            48,
+            101,
+            142,
+            175
+          ],
+          "durationMs": 150
+        },
+        {
+          "id": "strike",
+          "file": "sprites/brood-rock-lizard-strike.png",
+          "sourceCrop": [
+            1000,
+            220,
+            1536,
+            530
+          ],
+          "sourceAnchor": [
+            1310,
+            499
+          ],
+          "alphaBBox": [
+            25,
+            113,
+            141,
+            183
+          ],
+          "solidBBox": [
+            26,
+            114,
+            140,
+            180
+          ],
+          "durationMs": 150
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/brood-rock-lizard-recovery.png",
+          "sourceCrop": [
+            0,
+            550,
+            550,
+            1024
+          ],
+          "sourceAnchor": [
+            270,
+            940
+          ],
+          "alphaBBox": [
+            39,
+            97,
+            159,
+            182
+          ],
+          "solidBBox": [
+            40,
+            106,
+            149,
+            176
+          ],
+          "durationMs": 150
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/brood-rock-lizard-hurt.png",
+          "sourceCrop": [
+            550,
+            550,
+            1020,
+            1024
+          ],
+          "sourceAnchor": [
+            780,
+            939
+          ],
+          "alphaBBox": [
+            46,
+            90,
+            151,
+            178
+          ],
+          "solidBBox": [
+            48,
+            119,
+            146,
+            176
+          ],
+          "durationMs": 150
+        },
+        {
+          "id": "death",
+          "file": "sprites/brood-rock-lizard-death.png",
+          "sourceCrop": [
+            1020,
+            550,
+            1536,
+            1024
+          ],
+          "sourceAnchor": [
+            1300,
+            939
+          ],
+          "alphaBBox": [
+            32,
+            90,
+            151,
+            179
+          ],
+          "solidBBox": [
+            34,
+            134,
+            148,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 108,
+      "healthBarAnchor": [
+        96,
+        99
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      },
+      "groundAnchored": true,
+      "isFlying": false
+    },
+    "rock-lizard-young": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "uniformSourceScale": 0.11699999999999999,
+      "frames": [
+        {
+          "id": "idle",
+          "file": "sprites/rock-lizard-young-idle.png",
+          "sourceCrop": [
+            0,
+            0,
+            550,
+            550
+          ],
+          "sourceAnchor": [
+            280,
+            479
+          ],
+          "alphaBBox": [
+            68,
+            129,
+            126,
+            183
+          ],
+          "solidBBox": [
+            69,
+            149,
+            123,
+            176
+          ],
+          "durationMs": 150
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/rock-lizard-young-anticipation.png",
+          "sourceCrop": [
+            550,
+            0,
+            1020,
+            550
+          ],
+          "sourceAnchor": [
+            780,
+            479
+          ],
+          "alphaBBox": [
+            70,
+            122,
+            124,
+            176
+          ],
+          "solidBBox": [
+            70,
+            141,
+            121,
+            176
+          ],
+          "durationMs": 150
+        },
+        {
+          "id": "strike",
+          "file": "sprites/rock-lizard-young-strike.png",
+          "sourceCrop": [
+            1020,
+            0,
+            1536,
+            550
+          ],
+          "sourceAnchor": [
+            1300,
+            479
+          ],
+          "alphaBBox": [
+            65,
+            125,
+            121,
+            178
+          ],
+          "solidBBox": [
+            66,
+            144,
+            120,
+            176
+          ],
+          "durationMs": 150
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/rock-lizard-young-recovery.png",
+          "sourceCrop": [
+            0,
+            550,
+            550,
+            1024
+          ],
+          "sourceAnchor": [
+            280,
+            895
+          ],
+          "alphaBBox": [
+            69,
+            142,
+            127,
+            187
+          ],
+          "solidBBox": [
+            70,
+            144,
+            123,
+            176
+          ],
+          "durationMs": 150
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/rock-lizard-young-hurt.png",
+          "sourceCrop": [
+            550,
+            550,
+            1020,
+            1024
+          ],
+          "sourceAnchor": [
+            790,
+            898
+          ],
+          "alphaBBox": [
+            70,
+            140,
+            123,
+            187
+          ],
+          "solidBBox": [
+            71,
+            146,
+            123,
+            175
+          ],
+          "durationMs": 150
+        },
+        {
+          "id": "death",
+          "file": "sprites/rock-lizard-young-death.png",
+          "sourceCrop": [
+            1020,
+            550,
+            1536,
+            1024
+          ],
+          "sourceAnchor": [
+            1300,
+            900
+          ],
+          "alphaBBox": [
+            63,
+            138,
+            120,
+            184
+          ],
+          "solidBBox": [
+            66,
+            158,
+            120,
+            176
+          ],
+          "durationMs": 650
+        }
+      ],
+      "headY": 149,
+      "healthBarAnchor": [
+        96,
+        140
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "strike",
+          "recovery",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      },
+      "groundAnchored": true,
+      "isFlying": false,
+      "derivedFrom": {
+        "spriteKey": "brown-rock-lizard",
+        "scale": 0.65,
+        "newMonsterDefinition": false
+      }
     }
   },
   "backgrounds": [
@@ -1480,6 +2490,28 @@
       "z": 1,
       "parallax": 1,
       "hasAlpha": true
+    },
+    {
+      "id": "rift-cave",
+      "file": "backgrounds/rift-cave.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0,
+      "hasAlpha": false,
+      "parallax": 0.15
+    },
+    {
+      "id": "rift-platform",
+      "file": "backgrounds/rift-platform.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 1,
+      "hasAlpha": true,
+      "parallax": 1
     }
   ],
   "limitations": [
@@ -1499,17 +2531,40 @@
     "dwarf.a01.normal.1": "raider",
     "dwarf.a01.normal.2": "pit-rat",
     "dwarf.a01.normal.3": "golem",
-    "dwarf.a01.elite": "shield-captain"
+    "dwarf.a01.elite": "shield-captain",
+    "dwarf.a02.normal.1": "brown-rock-lizard",
+    "dwarf.a02.normal.2": "rift-bat",
+    "dwarf.a02.normal.3": "iron-throat-crab",
+    "dwarf.a02.elite": "brood-rock-lizard"
   },
   "areaBackgrounds": {
     "dwarf.a01": [
       "cave",
       "stage"
+    ],
+    "dwarf.a02": [
+      "rift-cave",
+      "rift-platform"
     ]
   },
   "coveragePolicy": "Only explicit monsterSprites AND areaBackgrounds mappings are allowed; missing coverage must use legacy renderer, never index/modulo or generic substitution.",
   "heroWeaponSprites": {
     "axe": "dwarf",
     "hammer": "dwarf-hammer"
+  },
+  "actorVariants": [
+    {
+      "match": {
+        "definitionId": "dwarf.a02.elite",
+        "follower": true
+      },
+      "spriteKey": "rock-lizard-young",
+      "priority": 100,
+      "reason": "Production followers retain elite definitionId; name 褐背幼蜥. Visual-only juvenile derivation from brown-rock-lizard, 65% size."
+    }
+  ],
+  "batchSources": {
+    "a01": "2.2-a01-axe-hammer-frozen",
+    "a02": "a02-nextbatch-1"
   }
 }
