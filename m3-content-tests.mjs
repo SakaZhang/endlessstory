@@ -6,7 +6,7 @@ import {createControl} from './dist/multi-control.js';
 const original=dwarfParameterSet();
 const additions=Object.values(DWARF_MONSTERS).filter(d=>d.area>=4&&d.area<=6);
 assert.equal(Object.keys(DWARF_MONSTERS).length,44);
-assert.equal(additions.length,13);assert.equal(dwarfEligibleMonsters('dwarf.a07.field','normal').length,0);
+assert.equal(additions.length,13);assert(configureDwarfParameters({...original,areas:[1,2,3,4,5,6]}));assert.equal(dwarfEligibleMonsters('dwarf.a07.field','normal').length,0,'explicit historical six-area gate');assert(configureDwarfParameters(original));
 const expected=[
  ['dwarf.a04.normal.1','渣火蜥','fire',1.05],['dwarf.a04.normal.2','烟囱灰蝠','wind',1.2],['dwarf.a04.normal.3','积盐炉壳','fire',1.4],['dwarf.a04.elite','鼓风监炉官','fire',1.45],
  ['dwarf.a05.normal.1','泉壁苔兽','water',1.2],['dwarf.a05.normal.2','冷雾晶蛾','water',1.15],['dwarf.a05.normal.3','石胆菌甲虫',null,0],['dwarf.a05.elite','寒泉汲髓兽','water',1.35],
