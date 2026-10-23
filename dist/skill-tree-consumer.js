@@ -48,7 +48,7 @@ export function ironVigilCounterEligible({weaponType,shieldBefore,directEnemyHit
 export const IRON_VIGIL_COUNTER_PROVENANCE=freeze({reaperEligible:false,multicastEligible:false,activeCastCount:0,recursiveCounter:false});
 
 const fractureFinite=(x,min=0)=>Number.isFinite(x)&&x>=min;
-export const SKILL_SLOT_CONTRACT=freeze({activeSlots:4,passiveSlots:2,allocationScope:'per-loadout',allocationCosts:'pending'});
+export const SKILL_SLOT_CONTRACT=freeze({activeSlots:4,passiveSlots:2,allocationScope:'per-loadout',allocationCosts:'reviewed-initial-99'});
 function planFractureStrike({castId,targetId,weaponType,config}={}){
  if(typeof castId!=='string'||!castId||typeof targetId!=='string'||!targetId||!config||!fractureFinite(config.cooldownMs)||!fractureFinite(config.genericCoefficient)||!Array.isArray(config.axeCoefficients)||config.axeCoefficients.length!==2||!config.axeCoefficients.every(x=>fractureFinite(x))||config.axeCoefficients[1]<=config.axeCoefficients[0]||!fractureFinite(config.hammerCoefficient)||!config.armorBreak||!fractureFinite(config.armorBreak.amount)||!fractureFinite(config.armorBreak.durationMs,Number.MIN_VALUE)||!['before-hit','after-hit'].includes(config.armorBreak.timing))return null;
  const branch=weaponType==='axe'?'axe':weaponType==='hammer'?'hammer':'generic';
