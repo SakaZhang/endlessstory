@@ -1,3 +1,8 @@
+import {TREE_TUNING} from './skill-tree-tuning.js';
+import {resolveTreePassives,derivePassiveStats,passiveReceivedHeal} from './skill-tree-passives.js';
+import {SKILL_TREE_DEFINITION} from './skill-tree-definition.js';
+import {validSkillTree,normalizeSkillTree,quoteSkillTreeChange,prepareSkillTreeChange} from './skill-tree-state.js';
+export {SKILL_TREE_DEFINITION,skillTreeNode} from './skill-tree-definition.js';
 import {validRegionNavigation,normalizeRegionNavigation,getRegionNavigation,recordNodeExplored,recordMaterialDiscovered,toggleFavoriteNode,setFavoriteNode} from './region-navigation-state.js';
 export {validRegionNavigation,normalizeRegionNavigation,getRegionNavigation,toggleFavoriteNode,setFavoriteNode} from './region-navigation-state.js';
 import {LEGENDARY_EQUIPMENT_DEFINITIONS,createLegendaryEquipment,validLegendaryEquipmentMetadata} from './legendary-equipment.js';
@@ -34,7 +39,7 @@ import {SKILL_UNLOCK_LEVELS,validSkillProgression,normalizeSkillProgression,skil
 export {SKILL_UNLOCK_LEVELS,normalizeSkillProgression,skillUnlocked};
 import {BAG_LIMITS,INVENTORY_SAVE_LIMIT,bagCounts,canReceiveEquipment,canReceiveMaterial,canReceiveItem,validLootFilters,normalizeInventoryState,setLootFilter,shouldDiscardLoot,emptyLootSummary,validLootSummary,mergeLootSummary} from './inventory-schema.js';
 export {BAG_LIMITS,bagCounts,canReceiveEquipment,canReceiveMaterial,canReceiveItem,normalizeInventoryState,setLootFilter,shouldDiscardLoot} from './inventory-schema.js';
-import {validDungeonCarry,captureDungeonPlayerState,applyDungeonPlayerState} from './dungeon-player-state.js';
+import {validDungeonCarry,captureDungeonPlayerState,applyDungeonPlayerState,restoreDungeonSkillShieldLayers} from './dungeon-player-state.js';
 import {validEquipmentLevelMetadata,normalizeEquipmentLevels,rollDropEquipmentLevel,rollEquipmentFusionLevel} from './equipment-level-schema.js';
 export {normalizeEquipmentLevels,rollDropEquipmentLevel,rollEquipmentFusionLevel,EQUIPMENT_LEVEL_SOURCES} from './equipment-level-schema.js';
 import {AREAS,SITES,INSTANCES,PLANNED_INSTANCES,RACE_KEYS,areaLevelRange,resolveLegacySite,instanceCooldownMs,pickRoute,areaGearLevel} from './location-schema.js';
@@ -331,11 +336,13 @@ export function applyLoadout(s,index,battleActive=false){
  if(s.running||battleActive||!Number.isInteger(index)||index<0||index>2||!validLoadoutSlots(s))return false;
  const loadout=s.loadouts?.[index];if(!validLoadout(s,loadout))return false;
  const nextEquip={...loadout.equip};if(!applyEquipmentRuntimeChange(s,s.equip,nextEquip))return false;
- s.equip=nextEquip;s.skills=[...loadout.skills];s.conditions=[...loadout.conditions];normalizeSkillSlots(s);capHealth(s);return true;
+ s.equip=nextEquip;s.skills=[...loadout.skills];s.conditions=[...loadout.conditions];if(s.skillTree){s.skillTree.selectedPreset=index;s.skillTree.revision++;}normalizeSkillSlots(s);capHealth(s);return true;
 }
-export function fresh(){
+export function fresh({legacySkillModel=false}={}){
  const inventory=SOCKETS.map(socket=>{let type=SOCKET_TYPE[socket],it=item(type,1,null,0,{levelSource:'starter'});it.affixes=[];return it;});
- return {version:SCHEMA_VERSION,supportGrantEligible:false,race:'dwarf',hero:'布洛克',level:1,xp:0,gold:100,location:0,siteId:'dwarf.a01',contentMigration:{version:1,legacyDrain:false,reselectRequired:false},expedition:{mode:'field',fieldId:'dwarf.a01.field',targetInstanceId:null,loop:false},build:'custom',skillRulesVersion:1,skillAccess:{legacyAll:false,notified:['break','mark','guard','interrupt']},inventory,equip:Object.fromEntries(SOCKETS.map((socket,i)=>[socket,inventory[i].id])),skills:['break','mark','guard','interrupt'],conditions:['always','always','always','charge'],materialStacks:{'铁屑|0':5,'炉火晶|0':2,'誓约残片|0':1},offlineLuck:0,talents:Object.fromEntries(Object.keys(TALENTS).map(k=>[k,0])),consumables:{memoryFruit:0,refundCredits:0,reforgeToken:0},potionSlot:{key:null,auto:false,priority:'low',priorityVersion:1},kills:0,normalWins:[0,0,0],bossWins:[0,0,0],bossReady:[0,0,0],stock:3,loadouts:[null,null,null],chapters:[],chronicle:['灰冠历317年：你带着旧炉装备，离开黑炉堡寻找失踪商队。'],momentum:0,lastSeen:Date.now(),running:false};
+ const s={version:SCHEMA_VERSION,supportGrantEligible:false,race:'dwarf',hero:'布洛克',level:1,xp:0,gold:100,location:0,siteId:'dwarf.a01',contentMigration:{version:1,legacyDrain:false,reselectRequired:false},expedition:{mode:'field',fieldId:'dwarf.a01.field',targetInstanceId:null,loop:false},build:'custom',skillRulesVersion:1,skillAccess:{legacyAll:false,notified:['break','mark','guard','interrupt']},inventory,equip:Object.fromEntries(SOCKETS.map((socket,i)=>[socket,inventory[i].id])),skills:['break','mark','guard','interrupt'],conditions:['always','always','always','charge'],materialStacks:{'铁屑|0':5,'炉火晶|0':2,'誓约残片|0':1},offlineLuck:0,talents:Object.fromEntries(Object.keys(TALENTS).map(k=>[k,0])),consumables:{memoryFruit:0,refundCredits:0,reforgeToken:0},potionSlot:{key:null,auto:false,priority:'low',priorityVersion:1},kills:0,normalWins:[0,0,0],bossWins:[0,0,0],bossReady:[0,0,0],stock:3,loadouts:[null,null,null],chapters:[],chronicle:['灰冠历317年：你带着旧炉装备，离开黑炉堡寻找失踪商队。'],momentum:0,lastSeen:Date.now(),running:false};
+ if(!legacySkillModel){s.skills=[null,null,null,null];s.conditions=['always','always','always','always'];normalizeSkillTree(s,SKILL_TREE_DEFINITION);s.skillTree.mode='active';}
+ return s;
 }
 export function equipItem(s,id,socket){
  const it=s.inventory.find(i=>i.id===id);if(!it)return false;
@@ -344,7 +351,7 @@ export function equipItem(s,id,socket){
  const nextEquip={...s.equip};for(const k of SOCKETS)if(k!==socket&&nextEquip[k]===id){if(it.slot==='ring')nextEquip[k]=nextEquip[socket]??null;else return false;}
  nextEquip[socket]=id;if(!applyEquipmentRuntimeChange(s,s.equip,nextEquip))return false;s.equip=nextEquip;capHealth(s);return true;
 }
-export function stats(s){
+export function baseStats(s){
  const ids=[...new Set(Object.values(s.equip).filter(Boolean))],gear=ids.map(id=>s.inventory.find(i=>i.id===id)).filter(Boolean),count={},specials={};
  let atk=14+s.level*3+s.talents.power*3+potionBuffStrength(s,'strength'),armor=5+s.level+s.talents.steel*3,hp=120+s.level*14+s.talents.heart*20;
  const bonus=Object.fromEntries(Object.keys(AFFIX_DEFS).map(k=>[k,0]));
@@ -356,6 +363,20 @@ export function stats(s){
  const elementResistance=Object.fromEntries(ELEMENT_KEYS.map(k=>[k,(s.talents.elementResist??0)*5+(bonus[k+'Resist']??0)+(k==='fire'?potionBuffStrength(s,'fireResist'):0)]));
  return {atk,armor,hp,penetration:(s.talents.penetration??0)*2,elementAttack,elementResistance,elementResist:.5*ratingFactor(elementResistance.fire),block:.35*ratingFactor((s.talents.block??0)*4),shieldBonus:(s.talents.shield??0)*4,healingBonus:(s.talents.healing??0)*3,resolveReduction:Math.floor((s.talents.resolve??0)/5),luck:Math.min(1000,Math.max(0,(s.talents.luck??0)+bonus.luck)),lifesteal:bonus.lifesteal,lifestealRating:bonus.lifesteal,lifestealRate:lifestealRate(bonus.lifesteal),lifestealCap:hp*.08,hit:clamp(.9+.1*ratingFactor(bonus.hit),.5,.995),crit:clamp(.05+.55*ratingFactor(bonus.crit),0,.6),critDamage:clamp(1.5+ratingFactor(bonus.critDamage),1.5,2.5),element:bonus.element,hitRating:bonus.hit,critRating:bonus.crit,critDamageRating:bonus.critDamage,count,specials,legend:false,bonus};
 }
+// Candidate overrides are execution-local only; never serialized into a save.
+const treeCandidatePolicies=new WeakMap();
+function treePolicy(s){return treeCandidatePolicies.get(s)??(s.skillTree?.mode==='active'?TREE_TUNING:null);}
+export function treePassiveContext(s,policy=treePolicy(s)){
+ const p=s.skillTree?.presets?.[s.skillTree.selectedPreset];if(!policy?.passiveConfig||!p)return null;
+ const weapon=s.inventory.find(it=>it.id===s.equip.weapon);
+ return resolveTreePassives({passive:p.passive,unlocked:p.unlocked,weaponType:weapon?.weaponType??'generic',config:policy.passiveConfig});
+}
+export function stats(s){
+ const base=baseStats(s),context=treePassiveContext(s);if(!context)return base;
+ const e=s.activeEncounter,layers=e&&!e.done?e.playerShieldLayers:null;
+ return derivePassiveStats(base,context,{shieldLayers:layers,combatClock:layers?.clock??0,currentHp:s.heroHp??base.hp})?.stats??base;
+}
+export function reconcileSkillTreeHealth(s){if(!validSkillTree(s,SKILL_TREE_DEFINITION))return false;capHealth(s);return true;}
 export function effectiveLuck(s){return stats(s).luck;}
 export function preset(s,id){const b=BUILD.find(x=>x.id===id);if(!b||!b.skills.every(k=>k===null||skillUnlocked(s,k)))return null;s.build=id;s.skills=[...b.skills];s.conditions=['always','always','charge','always'];return b;}
 export const POTIONS={
@@ -448,7 +469,7 @@ export function drinkPotion(s,key=undefined,now=Date.now(),battle=s.activeEncoun
  const current=potionBuff(s,type),active=current.endAt>clock;if(type!=='healing'&&active&&quality<current.quality)return false;
  const end=type==='healing'?0:(active&&quality===current.quality?current.endAt:clock)+effect.durationMs;if(end>1e15||clock+POTION_COOLDOWN_MS>1e15)return false;
  normalizePotions(s);s.potionStacks[parsed.key]--;s.potionReadyAt=clock+POTION_COOLDOWN_MS;
- if(type==='healing'){s.heroHp=Math.min(max,s.heroHp+max*effect.heal);if(battle&&!battle.done)battle.heroHp=s.heroHp;}
+ if(type==='healing'){const context=treePassiveContext(s),amount=context?passiveReceivedHeal(context,{amount:max*effect.heal,currentHp:s.heroHp,maxHp:max}):Math.min(max-s.heroHp,max*effect.heal);s.heroHp=Math.min(max,s.heroHp+amount);if(battle&&!battle.done)battle.heroHp=s.heroHp;}
  else s.potionBuffs[type]={quality,endAt:end};
  return true;
 }
@@ -595,7 +616,7 @@ function validEncounter(e){
  if(!e.cd||typeof e.cd!=='object'||Array.isArray(e.cd)||!Object.entries(e.cd).every(([k,n])=>Object.hasOwn(SKILLS,k)&&number(n,100)))return false;
  if(!['warcry','ironcoat','blunt','scorch','barrier','barrierShield','heroBurn','heroBurnPower','weakness','nextHeavy','luck'].every(k=>e[k]===undefined||number(e[k])))return false;
  if((e.win!==undefined&&typeof e.win!=='boolean')||(e.heavyDelayed!==undefined&&typeof e.heavyDelayed!=='boolean')||typeof e.shelterUsed!=='boolean')return false;
- if(![null,'active','burn','counter','legendary'].includes(e.killSource))return false;
+ if(![null,'active','burn','poison','counter','legendary'].includes(e.killSource))return false;
  return (e.rewardNotes===undefined||(Array.isArray(e.rewardNotes)&&e.rewardNotes.length<=20&&e.rewardNotes.every(t=>typeof t==='string'&&t.length<=300)))&&(e.materialLoot===undefined||(Array.isArray(e.materialLoot)&&e.materialLoot.length<=12&&e.materialLoot.every(l=>parseMaterialKey(l.key)?.key===l.key&&number(l.count,100))));
 }
 function validHealth(s){
@@ -648,6 +669,7 @@ export function startInstanceEncounter(s,instanceId,now=Date.now()){
 }
 
 function startDwarfEncounter(s,instance,now){
+ const treeCarry=s.dungeonRun?.carry;
  const area=AREAS[instance.areaId];if(!dwarfBudgetReady()||!getAreaProgress(s)?.unlocked.includes(area.number))return null;
  const stage=s.dungeonRun?.stage??1,rank=instance.kind==='boss'?'boss':instance.kind==='dungeon'&&stage===3?'elite':'normal',pool=dwarfEligibleMonsters(instance.id,rank);
  if(!pool.length)return null;
@@ -674,7 +696,11 @@ function startDwarfEncounter(s,instance,now){
  }
  if(instance.kind==='field'&&s.expedition.mode!=='dungeon')s.expedition={mode:'field',targetInstanceId:null,fieldId:instance.id,loop:false};
  if(instance.kind==='dungeon'&&!INSTANCES[s.expedition.fieldId]?.contentVersion)s.expedition.fieldId=area.id+'.field';
- initializeEncounterAffixes(e,st);if(s.equipmentShieldCarry){e.playerShieldLayers=structuredClone(s.equipmentShieldCarry);delete s.equipmentShieldCarry;}e.targetId=e.enemies[0].id;syncMultiTarget(e);s.contentMigration={version:1,legacyDrain:false,reselectRequired:false};s.location=e.location;s.siteId=instance.siteId;s.activeEncounter=e;s.running=true;s.nextActionAt=s.lastHealthClock+1100;recordEncounteredMonsters(s,e);recordNodeExplored(s,e);return e;
+ if(s.skillTree?.mode==='active')e.skillResolver='tree-v1';initializeEncounterAffixes(e,st);if(s.equipmentShieldCarry){e.playerShieldLayers=structuredClone(s.equipmentShieldCarry);delete s.equipmentShieldCarry;}if(treeCarry&&!restoreDungeonSkillShieldLayers(e,treeCarry))return null;
+ // Each fresh field encounter starts a new skill clock. Preserve carried shield
+ // lifetime, not its previous encounter's absolute clock origin.
+ if(e.skillResolver==='tree-v1'&&e.playerShieldLayers){const clock=e.treeEffects?.clock??e.treeCombatClock??0,offset=clock-e.playerShieldLayers.clock;e.playerShieldLayers={...e.playerShieldLayers,clock,layers:e.playerShieldLayers.layers.map(l=>({...l,expiresAt:l.expiresAt===null?null:l.expiresAt+offset}))};}
+ e.targetId=e.enemies[0].id;syncMultiTarget(e);s.contentMigration={version:1,legacyDrain:false,reselectRequired:false};s.location=e.location;s.siteId=instance.siteId;s.activeEncounter=e;s.running=true;s.nextActionAt=s.lastHealthClock+1100;recordEncounteredMonsters(s,e);recordNodeExplored(s,e);return e;
 }
 // Explicit developer entry: callers isolate the supplied save; no production random trigger.
 export function startDeveloperGroup(s,options={},now=Date.now()){
@@ -763,10 +789,10 @@ export function combatStatuses(e){
  for(const layer of e.playerShieldLayers?.layers??[])if(layer.source.startsWith('reactor:')&&layer.remaining>0)out.push({key:'fire',name:'余热护盾 '+Math.round(layer.remaining),remainingSeconds:layer.expiresAt===null?0:Math.max(0,(layer.expiresAt-e.playerShieldLayers.clock)/1000),turns:0,side:'hero'});
  if(e.heavyDelayed)out.push({key:'delay',name:'重击延后',turns:Math.max(1,e.nextHeavy-e.round),side:'enemy'});return out;
 }
-export function step(s,e,now=Date.now()){
+function stepImpl(s,e,now=Date.now(),treeSkills=null){
  if(!e||e!==s.activeEncounter||e.done||e.pauseAt!==undefined||!normalizeHealth(s,now)||s.restUntil>0)return[];
  ensureEncounterAffixes(e);e.heroHp=Math.min(e.heroHp,stats(s).hp);s.heroHp=e.heroHp;const drank=autoDrinkPotion(s,e,now);
- const turn={burnAtStart:e.heroBurn??0,burnTicked:false},logs=e.multiVersion===1?withMultiRng(e,()=>stepMulti(s,e,turn,{stats,SKILLS,skillUnlocked,resolveElementDamage,now:s.lastHealthClock,makeSummon:(u,n)=>normalizeEncounterElements(makeMultiUnit(e.id+'-summon-'+n,u.location,u.sourceInstanceId,LOCS[u.location],s.lastHealthClock))})):combatStep(s,e,turn);
+ const turn={burnAtStart:e.heroBurn??0,burnTicked:false},logs=e.multiVersion===1?withMultiRng(e,()=>stepMulti(s,e,turn,{stats:treeSkills?baseStats:stats,SKILLS,skillUnlocked,resolveElementDamage,treeSkills,now:s.lastHealthClock,makeSummon:(u,n)=>normalizeEncounterElements(makeMultiUnit(e.id+'-summon-'+n,u.location,u.sourceInstanceId,LOCS[u.location],s.lastHealthClock))})):combatStep(s,e,turn);
  // Every executed player round consumes one turn of temporary player statuses,
  // including an early lethal hit. Do not run skipped damage phases.
  for(const field of ['guard','warcry','ironcoat','barrier','weakness'])e[field]=Math.max(0,(e[field]??0)-1);
@@ -776,6 +802,24 @@ export function step(s,e,now=Date.now()){
  s.nextActionAt=s.lastHealthClock+1100;if(drank)logs.unshift('自动饮用 · '+POTIONS[parsePotionKey(s.potionSlot.key).type].name);s.heroHp=Math.max(0,Math.min(stats(s).hp,e.heroHp));
  if(s.heroHp<=0){const resume=!e.developmentFixture&&!!s.running&&!e.boss&&!s.stopAfterBattle&&(e.kind!=='dungeon'||!!s.expedition?.loop);startRest(s,now,resume);completeLegacyHandoff(s);s.stopAfterBattle=false;}return logs;
 }
+function selectedTreeRules(s,parameters=TREE_TUNING){
+ const p=s.skillTree?.presets?.[s.skillTree.selectedPreset];if(!p)return null;
+ const weapon=s.inventory.find(it=>it.id===s.equip.weapon),configs=typeof parameters.configs==='function'?parameters.configs(stats(s)):parameters.configs;
+ return {...parameters,configs,active:[...p.active],conditions:[...p.conditions],unlocked:[...p.unlocked],passive:[...p.passive],weaponType:weapon?.weaponType??'generic'};
+}
+export function step(s,e,now=Date.now()){return stepImpl(s,e,now,e?.skillResolver==='tree-v1'&&s.skillTree?.mode==='active'?selectedTreeRules(s):null);}
+// Explicit candidate harness for the SAME real encounter step and enemy/reward pipeline.
+// Not called by normal App selection until activation and numerical review are complete.
+export function stepSkillTreeCandidate(s,e,parameters,now=Date.now()){
+ if(!validSave(s)||s.skillTree?.mode!=='prepared'||e!==s.activeEncounter||e?.multiVersion!==1||!parameters||typeof parameters!=='object')return null;
+ treeCandidatePolicies.set(s,parameters);try{
+ const p=s.skillTree.presets[s.skillTree.selectedPreset],base=stats(s),configs=typeof parameters.configs==='function'?parameters.configs(base):parameters.configs;
+ if(!configs||!parameters.attributeConfig||!parameters.periodic)return null;
+ const weapon=s.inventory.find(it=>it.id===s.equip.weapon),treeSkills={...parameters,configs,active:[...p.active],conditions:[...p.conditions],unlocked:[...p.unlocked],passive:[...p.passive],weaponType:weapon?.weaponType??'generic'};
+ return stepImpl(s,e,now,treeSkills);
+ }finally{treeCandidatePolicies.delete(s);}
+}
+
 function combatStep(s,e,turn){
  if(e.done)return[];normalizeEncounterElements(e);const st=stats(s),logs=[];e.round++;
  for(const field of ['warcry','ironcoat','blunt','scorch','barrier','barrierShield','heroBurn','weakness'])e[field]??=0;
@@ -1103,8 +1147,20 @@ export function codexState(s,id){
  const collected=validCodexCollection(s)&&s.codexCollection?.legendaries.includes(id)===true;
  return {collected,status:collected?'已收集':'未收集'};
 }
+// Preparation-only integration. Real new-skill combat must be reviewed before activation.
+export function quoteSkillTreePreparation(s,change){
+ if(!validSave(s)||change?.type==='activate'||s.skillTree?.mode==='active')return null;
+ return quoteSkillTreeChange(s,SKILL_TREE_DEFINITION,change);
+}
+export function prepareSkillTreePreparation(s,quote){
+ if(!validSave(s)||quote?.change?.type==='activate'||quote?.after?.mode!=='prepared')return null;
+ const result=prepareSkillTreeChange(s,quote,SKILL_TREE_DEFINITION);
+ return result&&validSave(result.game)?result:null;
+}
 export function validSave(s){
  try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;
+ if(!validSkillTree(s,SKILL_TREE_DEFINITION))return false;
+ if(s.activeEncounter?.skillResolver!==undefined&&(s.activeEncounter.skillResolver!=='tree-v1'||s.skillTree?.mode!=='active'||s.activeEncounter.multiVersion!==1))return false;
  if(s.supportGrantEligible!==undefined&&typeof s.supportGrantEligible!=='boolean')return false;
  if(s.developmentEquipmentSandbox!==undefined&&s.developmentEquipmentSandbox!==true)return false;
  if(s.version!==SCHEMA_VERSION||s.race!=='dwarf'||s.hero!=='布洛克'||!Number.isInteger(s.level)||s.level<1||s.level>=100000||!num(s.xp)||!num(s.gold)||!Number.isInteger(s.location)||s.location<0||s.location>2)return false;
@@ -1123,7 +1179,7 @@ export function validSave(s){
 export function grantDevelopmentSupport(s){if(s?.supportGrantEligible===false||!validSave(s)||s.testGrants?.[DEVELOPMENT_GRANT_ID]||s.gold>1e12-5000||(s.bonusTalentPoints??0)>1000000-30||(s.consumables?.memoryFruit??0)>1e9-3)return false;normalizeTalents(s);s.gold+=5000;s.bonusTalentPoints=(s.bonusTalentPoints??0)+30;s.consumables.memoryFruit+=3;s.testGrants={...s.testGrants,[DEVELOPMENT_GRANT_ID]:true};return true;}
 
 export function skillUnlockLevelForBuild(id){const b=BUILD.find(x=>x.id===id);return b?Math.max(...b.skills.filter(Boolean).map(k=>SKILL_UNLOCK_LEVELS[k])):null;}
-export function collectSkillUnlockNotices(s){return collectSkillUnlockKeys(s).map(key=>({key,name:SKILLS[key].name,level:SKILL_UNLOCK_LEVELS[key]}));}
+export function collectSkillUnlockNotices(s){if(s.skillTree?.mode==='active')return [];return collectSkillUnlockKeys(s).map(key=>({key,name:SKILLS[key].name,level:SKILL_UNLOCK_LEVELS[key]}));}
 
 function batchSaleEligible(s,it,slot,qualities){
  return it.slot===slot&&qualities.includes(it.legendaryId?4:it.rarity)&&!it.locked&&!Object.values(s.equip).includes(it.id)&&!isProtected(s,it.id);

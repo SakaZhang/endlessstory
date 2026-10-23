@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import * as E from './dist/engine.js';
+import {createSkillEffectState,applySkillEffect,advanceSkillEffectState} from './dist/skill-tree-effects.js';
+import {skillTreeHeroStats,skillTreeEnemyAttributes} from './dist/skill-tree-attributes.js';
+const game=E.fresh(),base=E.stats(game),original=structuredClone(base);let effects=createSkillEffectState(['enemy'],0);
+for(const [type,amount] of [['attackUp',10],['defenseUp',8],['critUp',8],['lifestealUp',8],['dodgeUp',8]])effects=applySkillEffect(effects,'self',{type,amount,durationMs:3000,sourceId:type}).state;
+const st=skillTreeHeroStats(base,effects,{dodgeCap:.35});assert.equal(st.atk,base.atk+10);assert.equal(st.armor,base.armor+8);assert(st.crit<.1&&st.crit>base.crit);assert(st.dodge<.03);assert.equal(st.lifesteal,8);assert.deepEqual(base,original);assert.equal(skillTreeHeroStats(base,effects),null,'dodge tuning must be explicit');
+let none=advanceSkillEffectState(effects,3000).state;assert.equal(skillTreeHeroStats(base,none,{dodgeCap:.35}).atk,base.atk);
+for(const [type,amount] of [['armorDown',20],['fireResistDown',4],['attackDown',5],['hitDown',8]])effects=applySkillEffect(effects,'enemy',{type,amount,durationMs:3000,sourceId:type}).state;
+const enemy={id:'enemy',armor:10,atk:10,elementResistance:{earth:9,water:9,fire:7,wind:9,light:9,dark:9}},saved=structuredClone(enemy);const next=skillTreeEnemyAttributes(enemy,effects);assert.equal(next.armor,0);assert.equal(next.atk,5);assert.equal(next.elementResistance.fire,3);assert.equal(next.elementResistance.earth,9);assert.equal(next.hitDownRating,8);assert.deepEqual(enemy,saved);
+console.log('PASS tree attributes: actual production base, flat temporary amounts, crit/lifesteal/dodge rating not percentages, expiry, source isolation, no mutation');

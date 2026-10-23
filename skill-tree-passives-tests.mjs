@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import * as P from './dist/skill-tree-passives.js';
+import {createPlayerShieldLayers,grantPlayerShieldLayer} from './dist/player-shield-layers.js';
+// Explicit test tuning, not a production default.
+const config={axe_fervor:{damageMultiplier:1.12,armorMultiplier:.9},hammer_penetration:{physicalPenetrationPerBaseAtk:.15},fire_affinity:{firePowerRating:16,fireResistanceRating:16},shield_reserve:{armorMultiplier:1.15},mountain_vitality:{maxHpMultiplier:1.12,receivedHealingMultiplier:1.12},forged_resilience:{negativeDurationMultiplier:.8}};
+const make=(passive,weaponType='axe')=>P.resolveTreePassives({passive,unlocked:P.TREE_PASSIVE_IDS,weaponType,config});
+const base={atk:100,hp:100,armor:100,penetration:3,elementAttack:{fire:5},elementResistance:{fire:7}};
+for(const passive of [['axe_fervor','axe_fervor'],['axe_fervor'],['fracture_strike',null],[undefined,null]])assert.equal(make(passive),null);
+assert.equal(P.resolveTreePassives({passive:['axe_fervor',null],unlocked:[],weaponType:'axe',config}),null);
+const axe=make(['axe_fervor','fire_affinity']);const derived=P.derivePassiveStats(base,axe,{currentHp:50});assert.equal(derived.stats.armor,90);assert.equal(derived.stats.elementAttack.fire,21);assert.equal(derived.stats.elementResistance.fire,23);assert.equal(derived.currentHp,50);assert.equal(base.armor,100);
+for(const kind of ['skill','basic','counter','legendary','dot'])assert.equal(P.passiveDamageMultiplier(axe,{damageType:'fire',source:{kind}}),1.12,'fire rating applied by existing elemental resolver, not multiplied twice');
+for(const kind of ['poison','poison-percent-max-hp'])assert.equal(P.passiveDamageMultiplier(axe,{damageType:'fire',source:{kind}}),1);
+const wrongWeapon=make(['axe_fervor','hammer_penetration'],'sword');assert.equal(P.derivePassiveStats(base,wrongWeapon,{currentHp:50}).stats.armor,100);assert.equal(P.passiveDamageMultiplier(wrongWeapon,{damageType:'physical',source:{kind:'skill'}}),1);
+const hammer=P.derivePassiveStats(base,make(['hammer_penetration',null],'hammer'),{currentHp:50}).stats;assert.equal(hammer.penetration,18);assert.equal(hammer.armor,100);assert.equal(hammer.elementResistance.fire,7);
+let layers=createPlayerShieldLayers();for(const source of ['skill:iron_vigil','shelter','reactor:item'])layers=grantPlayerShieldLayer(layers,{source,capacity:10,durationMs:1000,clock:0,hp:50}).state;
+const shield=make(['shield_reserve',null]);assert.equal(P.derivePassiveStats(base,shield,{currentHp:50,shieldLayers:layers}).stats.armor,114.99999999999999);assert.equal(P.derivePassiveStats(base,shield,{currentHp:50,shieldLayers:layers,combatClock:1000}).stats.armor,100);
+const vital=make(['mountain_vitality','forged_resilience']);assert.equal(P.derivePassiveStats(base,vital,{currentHp:50}).currentHp,50);assert.equal(P.derivePassiveStats(base,make([null,null]),{currentHp:112}).currentHp,100);assert.equal(P.passiveReceivedHeal(vital,{amount:10,currentHp:50,maxHp:112}),11.200000000000001);assert.equal(P.passiveReceivedHeal(vital,{amount:100,currentHp:110,maxHp:112}),2);assert.equal(P.passiveReceivedHeal(vital,{amount:10,currentHp:0,maxHp:112}),0);
+assert.equal(P.passiveNegativeDuration(vital,1000),800);assert(P.passiveNegativeDuration(vital,Number.MIN_VALUE)>0);assert.equal(P.passiveNegativeDuration(vital,0),0);
+const none=make([null,null]);assert.equal(P.passiveDamageMultiplier(none,{damageType:'fire',source:{kind:'skill'}}),1);assert.deepEqual(P.derivePassiveStats(base,none,{currentHp:50}).stats,base);
+console.log('PASS six parameterized passives: two unlocked slots only, weapon conditions, poison excluded, physical penetration/fire ratings, shield once/expiry, no free HP or resurrection, nonimmune duration');

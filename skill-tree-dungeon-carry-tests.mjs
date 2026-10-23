@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {captureDungeonPlayerState,applyDungeonPlayerState,validDungeonCarry,restoreDungeonSkillShieldLayers} from './dist/dungeon-player-state.js';
+import {createSkillEffectState,applySkillEffect} from './dist/skill-tree-effects.js';
+import {createPlayerShieldLayers,grantPlayerShieldLayer} from './dist/player-shield-layers.js';
+const e={id:'stage1',enemies:[{id:'oldEnemy'}],cd:{break:2},treeSkillCooldowns:{anvil_cry:4},treeCombatClock:1000,treeEffects:createSkillEffectState(['oldEnemy'],1000),poisonState:{fixture:'not carried'},affixState:{nirvanaUsed:true}};
+for(const [id,type] of [['self','attackUp'],['oldEnemy','armorDown']])e.treeEffects=applySkillEffect(e.treeEffects,id,{sourceId:'anvil_cry',type,amount:10,durationMs:3000}).state;
+e.playerShieldLayers=createPlayerShieldLayers(1000);for(const source of ['skill:iron_vigil','reactor:item','shelter'])e.playerShieldLayers=grantPlayerShieldLayer(e.playerShieldLayers,{source,capacity:20,durationMs:3000,clock:1000,hp:100,ownerItemId:source==='reactor:item'?'item':null}).state;
+e.playerShieldLayers.layers[0].remaining=7;
+const carry=JSON.parse(JSON.stringify(captureDungeonPlayerState(e)));assert(validDungeonCarry(carry,{break:{}}));assert.equal(carry.treeSkillShieldLayers.layers.length,1);assert.equal(carry.treeSkillShieldLayers.layers[0].remaining,7);assert(!carry.poisonState&&!carry.affixState);assert(!carry.treeEffects.enemies);
+const next={enemies:[{id:'newEnemy'}],affixState:{nirvanaUsed:false}};applyDungeonPlayerState(next,carry);assert.equal(next.treeSkillCooldowns.anvil_cry,4);assert.equal(next.treeCombatClock,1000);assert.equal(next.treeEffects.hero.sources.length,1);assert.deepEqual(next.treeEffects.enemies.newEnemy.sources,[]);assert.equal(next.affixState.nirvanaUsed,false);
+next.playerShieldLayers=grantPlayerShieldLayer(createPlayerShieldLayers(1000),{source:'shelter',capacity:50,clock:1000,hp:100}).state;assert(restoreDungeonSkillShieldLayers(next,carry));assert.equal(next.playerShieldLayers.layers.length,2);assert.equal(next.playerShieldLayers.layers.find(x=>x.source==='skill:iron_vigil').remaining,7);assert(restoreDungeonSkillShieldLayers(next,carry));assert.equal(next.playerShieldLayers.layers.length,2);
+next.treeEffects.hero.sources[0].amount=999;assert.equal(carry.treeEffects.hero.sources[0].amount,10);
+for(const mutate of [x=>x.treeSkillCooldowns.fake=1,x=>x.treeSkillCooldowns.anvil_cry=101,x=>x.treeCombatClock=2000,x=>x.treeEffects.enemies={},x=>x.treeSkillShieldLayers.layers[0].source='reactor:item']){const bad=structuredClone(carry);mutate(bad);assert(!validDungeonCarry(bad,{break:{}}));}
+const legacy=captureDungeonPlayerState({cd:{break:1}});assert(validDungeonCarry(legacy,{break:{}}));const clean={enemies:[{id:'fresh'}]};applyDungeonPlayerState(clean,undefined);assert.equal(clean.treeEffects,undefined);
+console.log('PASS tree dungeon carry: hero effects/CD/clock JSON, enemy/poison/encounter procs excluded, remaining skill shield exactly once after opening layers, legacy unchanged, malformed rejected');

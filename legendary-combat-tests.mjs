@@ -29,3 +29,18 @@ console.log('PASS multicast true extra outgoing action, reactor crit without ext
 // Prototype-like owned IDs must receive own numeric runtime records, not built-ins.
 {const s={equip:{weapon:'constructor'},inventory:[{id:'constructor',legendaryId:'first-forge-oathhammer'}]};advanceLegendaryCombat(s,{damageAction:true,resolve:()=>null});assert(Object.hasOwn(s.equipmentRuntime.byId,'constructor'));assert.equal(s.equipmentRuntime.byId.constructor.attackCount,1);}
 {const f=fixture(),old=Math.random;Math.random=()=>.5;try{f.st.shieldBonus=20;stepMulti(f.state,f.e,{},f.ctx);assert.equal(f.e.legendaryShield,28);f.state.equipmentRuntime.byId.reactor.combatMs=11900;stepMulti(f.state,f.e,{},f.ctx);assert.equal(f.e.legendaryShield,28,'refresh uses 8% + one bonus, not old remainder');assert.equal(f.e.playerShieldLayers.layers.filter(l=>l.source==='reactor:reactor').length,1);}finally{Math.random=old;}}
+// Tree timed damage can finish an encounter before the equipment pulse phase.
+// Elapsed combat time is still earned; no proc is spent on corpses or during travel.
+{
+ const state={equip:{amulet:'r'},inventory:[{id:'r',legendaryId:'everburning-reactor'}],equipmentRuntime:{version:1,byId:{r:{combatMs:11500,attackCount:0,castCount:0}}}};
+ let count=0;const resolve=()=>{count++;return {};};
+ advanceLegendaryCombat(state,{combatDeltaMs:1100,hasTargets:false,deferProcs:true,resolve});
+ assert.equal(count,0);assert.equal(state.equipmentRuntime.byId.r.combatMs,12600);
+ const resumed=JSON.parse(JSON.stringify(state));
+ advanceLegendaryCombat(resumed,{combatDeltaMs:0,hasTargets:false,resolve});
+ assert.equal(count,0);assert.equal(resumed.equipmentRuntime.byId.r.combatMs,12600);
+ advanceLegendaryCombat(resumed,{combatDeltaMs:1100,hasTargets:true,resolve});
+ assert.equal(count,1);assert.equal(resumed.equipmentRuntime.byId.r.combatMs,1700);
+ const dead=JSON.parse(JSON.stringify(state));advanceLegendaryCombat(dead,{combatDeltaMs:1100,alive:false,hasTargets:false,deferProcs:true,resolve});assert.deepEqual(dead,state);
+}
+console.log('PASS timer-clear charge conservation, no corpse pulse/travel advancement, JSON next-target release once.');

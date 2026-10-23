@@ -4,7 +4,7 @@ import * as E from './dist/engine.js';
 import {DWARF_MONSTERS,configureDwarfParameters} from './dist/dwarf-content.js';
 export const FIXTURE_BUDGET={id:'explicit-test-only',reviewed:false,testOnly:true,fieldGroupChance:.04,clearRewards:{1:{gold:20,xp:40,materialRounds:1,gearChance:.35,markChance:.02},2:{gold:30,xp:50,materialRounds:1,gearChance:.35,markChance:.02},3:{gold:40,xp:60,materialRounds:1,gearChance:.35,markChance:.02}},monsters:Object.fromEntries(Object.keys(DWARF_MONSTERS).map(id=>[id,{hp:150,atk:5,armor:10,elementalPower:7,basicIntervalMs:2200,rewardGold:4,rewardXp:20}]))};
 assert(configureDwarfParameters(FIXTURE_BUDGET));
-const setup=()=>{const s=E.fresh();E.normalizeHealth(s,s.lastSeen);E.normalizeExpedition(s);E.normalizeContentMigration(s);s.areaProgress.dwarf.unlocked=[1,2,3];s.areaProgress.dwarf.cleared=[1,2];s.contentMigration.reselectRequired=false;s.expedition={mode:'field',fieldId:'dwarf.a01.field',targetInstanceId:null,loop:false};return s;};
+const setup=(options)=>{const s=E.fresh(options);E.normalizeHealth(s,s.lastSeen);E.normalizeExpedition(s);E.normalizeContentMigration(s);s.areaProgress.dwarf.unlocked=[1,2,3];s.areaProgress.dwarf.cleared=[1,2];s.contentMigration.reselectRequired=false;s.expedition={mode:'field',fieldId:'dwarf.a01.field',targetInstanceId:null,loop:false};return s;};
 for(const row of E.plannedNodes(setup())){
  const s=setup(),e=E.startInstanceEncounter(s,row.id,s.lastSeen);assert(e,row.id);assert.equal(e.contentVersion,'dwarf-m2-v1');assert(E.validSave(s),'save '+row.id);for(let i=0;i<300&&!e.done;i++)E.step(s,e,s.nextActionAt);assert(e.done);if(e.win)E.reward(s,e,s.lastHealthClock);assert(E.validSave(s),'after '+row.id);
 }
@@ -57,7 +57,7 @@ configureDwarfParameters(null);
 {
  const control=Control;
  const tuned=structuredClone(FIXTURE_BUDGET);tuned.skillOverrides={'dwarf.a03.boss:0':{castMs:3300}};tuned.controlReduction={boss:.5,elite:.25,normal:0};tuned.interruptStopMs=550;assert(configureDwarfParameters(tuned));
- const s=setup();s.skills=[null,null,null,null];const e=E.startInstanceEncounter(s,'dwarf.a03.boss',s.lastSeen),u=e.enemies[0],skill='dwarf.a03.boss:0';u.hp=u.max=100000;u.control.cooldowns[skill]=s.lastSeen;const old=Math.random;
+ const s=setup({legacySkillModel:true});s.skills=[null,null,null,null];const e=E.startInstanceEncounter(s,'dwarf.a03.boss',s.lastSeen),u=e.enemies[0],skill='dwarf.a03.boss:0';u.hp=u.max=100000;u.control.cooldowns[skill]=s.lastSeen;const old=Math.random;
  E.step(s,e,s.nextActionAt);assert(u.control.preparing);const begun=u.control.preparing.completesAt,unstunned=structuredClone(s);
  const stun=control.applyStun(u.control,{now:s.lastHealthClock,baseDuration:1100,reduction:u.profile.controlReduction,diminishingFactors:[1,.5,.25],recoveryWindow:6600,minDuration:550,refreshMode:'max'});assert(stun);assert.equal(stun.duration,550);u.control=stun.state;E.step(s,e,s.nextActionAt);assert.equal(u.control.preparing.completesAt,begun+550,'stun pauses rather than completes cast');
  const delayed=structuredClone(s);for(const c of [unstunned,delayed])while(c.nextActionAt<=begun)E.step(c,c.activeEncounter,c.nextActionAt);assert.equal(unstunned.activeEncounter.enemies[0].skillUses[skill],1);assert.equal(delayed.activeEncounter.enemies[0].skillUses[skill]??0,0,'sub-turn550ms stun actually postpones the completed heavy attack');E.step(delayed,delayed.activeEncounter,delayed.nextActionAt);assert.equal(delayed.activeEncounter.enemies[0].skillUses[skill],1);
