@@ -23,3 +23,6 @@
 /* Fusion selection and quality artwork stay independent of legacy rarity glows. */
 .fusionGearCard.fusionSelected:has(svg[data-equipment-quality]) { outline:2px solid #e6d8a0; outline-offset:3px; }
 svg[data-equipment-quality] { filter:none!important; }
+/* Legendary identity is independent of the four ordinary roll tiers. */
+:is(.itemCell,.equipSlot,.detailIcon,.forgeResult,.loadoutGearSlot,.batchSaleItem):has(svg[data-equipment-quality="4"]) { background:#5a4524!important; }
+:is(.itemCell,.equipSlot,.detailIcon):has(svg[data-equipment-quality="4"]) { box-shadow:inset 0 0 0 1px #c7a361; }

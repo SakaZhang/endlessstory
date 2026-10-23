@@ -1,0 +1,28 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
+const html=readFileSync('dist/index.html','utf8'),css=readFileSync('dist/pixel-shell.css','utf8'),map=readFileSync('dist/adjacent-region.css','utf8');
+const baseline=execFileSync('git',['show','9c66588:dist/index.html'],{encoding:'utf8'});
+const ids=s=>[...s.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
+for(const id of ids(baseline))assert.equal(ids(html).filter(x=>x===id).length,1,`preserve unique live hook ${id}`);
+assert.equal(new Set(ids(html)).size,ids(html).length);
+assert(html.indexOf('id="dock"')<html.indexOf('id="view"'),'navigation before page, not buried below long inventory');
+assert.match(html,/id="view" tabindex="-1" aria-labelledby="viewTitle"/);
+assert.match(html,/href="#view"/);
+assert.match(html,/id="settingsBtn"[^>]*aria-label="打开存档设置"/);
+assert.match(html,/id="helpBtn"[^>]*aria-label="打开玩法说明"/);
+assert(!html.includes('⚙'),'no emoji setting control');
+assert.match(html,/pixel-shell\.css/);assert.match(html,/heroIdentity/);assert.match(html,/heroProgress/);assert.match(html,/railLoadouts/);
+assert.match(css,/grid-template-columns:208px minmax\(0,1fr\)/);
+assert.match(css,/grid-template-columns:repeat\(4,minmax\(0,1fr\)\)/);
+for(const token of ['focus-visible','prefers-reduced-motion','min-height:44px','image-rendering:pixelated'])assert(css.includes(token),token);
+assert(![...css.matchAll(/font-size:(\d+)px/g)].some(m=>+m[1]<12),'new shell does not use sub-12px text');
+assert.match(map,/\.localNode:hover/);assert.match(map,/button:disabled/);assert.match(map,/font-size:12px/);
+const disclosure=html.match(/<details id="heroDetails" class="heroDetails">([\s\S]*?)<\/details>/)?.[1];assert(disclosure,'native default-closed role panel');assert(!html.includes('<details class="heroDetails" open'));assert.match(disclosure,/<summary class="heroDetailsSummary">[\s\S]*id="stats"[\s\S]*<\/summary>/);for(const id of ['buildPicker','talentBtn','saveStatus'])assert(disclosure.includes('id="'+id+'"'),id+' remains in native disclosure');assert.match(css,/heroDetails:not\(\[open\]\) \.railStat:not\(:last-child\)/);assert.match(css,/heroDetails:not\(\[open\]\) \.heroDetailsBody\{display:none\}/);assert.match(css,/heroDetails::details-content\{display:contents;content-visibility:visible\}/);assert.match(css,/heroDetailsSummary:focus-visible/);
+console.log('PASS pixel shell: all existing live DOM hooks retained once, nav reordered, keyboard/touch labels and skip entry, desktop/mobile structural layouts, minimum12px shell/map copy; no gameplay source changes.');
+
+const {bindPixelHeroDisclosure}=await import('./dist/pixel-shell.js');
+let listener,toggle;const drawer={open:false,addEventListener(k,fn){toggle=fn},removeEventListener(){}};const media={matches:false,addEventListener(k,fn){listener=fn},removeEventListener(){}};
+const unbind=bindPixelHeroDisclosure({getElementById:()=>drawer},{matchMedia:()=>media});
+assert.equal(drawer.open,true,'desktop native details actually open');media.matches=true;listener();assert.equal(drawer.open,false,'mobile first use closed');drawer.open=true;toggle();media.matches=false;listener();media.matches=true;listener();assert.equal(drawer.open,true,'preserve mobile explicit expansion across resize');unbind();
+console.log('PASS responsive native drawer desktop open/mobile initially collapsed; explicit mobile toggle survives resize without game state');
