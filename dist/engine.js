@@ -1,3 +1,4 @@
+import {makeAffixSourceRange,affixOwnRange,validAffixSource} from './affix-range.js';
 import {deriveNewItemBudget,validItemBudgetMetadata} from './equipment-budget-adapter.js';
 import {applyExperience} from './character-progression.js';
 import {DWARF_MONSTERS,dwarfParameters,dwarfParameterSet,dwarfBudgetReady,dwarfGroupChance,dwarfEligibleMonsters} from './dwarf-content.js';
@@ -110,8 +111,8 @@ export const AFFIX_DEFS={
 export const ACTIVE_AFFIX_KEYS=Object.freeze(['atk','hp','armor','hit','crit','critDamage',...Object.keys(ELEMENT_AFFIX_DEFS),...Object.keys(NEW_ORDINARY_AFFIX_DEFS)]);
 // Roll color is derived from the original roll, never from divine gains.
 export function affixRollInfo(a){
- const def=AFFIX_DEFS[a?.stat];if(!def)return null;
- const ratio=Math.max(0,Math.min(1,(a.value-def.min)/(def.max-def.min)));
+ const def=affixOwnRange(a,AFFIX_DEFS);if(!def)return null;
+ const ratio=Math.max(0,Math.min(1,(a.value-def.min)/(def.max-def.min||1)));
  const tier=Math.min(3,Math.floor(ratio*4));
  return {min:def.min,max:def.max,raw:a.value,tier,color:['#e4e5e7','#69b9f0','#bc8cf2','#f07878'][tier]};
 }
@@ -131,7 +132,7 @@ const bases={weapon:{atk:12,armor:1,hp:5},helm:{atk:1,armor:4,hp:18},armor:{atk:
 function weighted(entries){let roll=Math.random()*entries.reduce((n,[,w])=>n+w,0);for(const [key,w] of entries){roll-=w;if(roll<0)return key;}return entries.at(-1)[0];}
 export const ACTIVE_SPECIAL_KEYS=Object.freeze(Object.keys(SPECIALS).filter(k=>SPECIALS[k].enabled!==false));
 const activeSpecialKeys=()=>ACTIVE_SPECIAL_KEYS;
-function rollAffixes(quality){const pool=[...ACTIVE_AFFIX_KEYS];const count=quality===0?rand(0,1):quality+1,affixes=[];for(let i=0;i<count;i++){const key=pool.splice(rand(0,pool.length-1),1)[0],def=AFFIX_DEFS[key];affixes.push({stat:key,value:rand(def.min,def.max)});}return affixes;}
+function rollAffixes(quality){const pool=[...ACTIVE_AFFIX_KEYS];const count=quality===0?rand(0,1):quality+1,affixes=[];for(let i=0;i<count;i++){const key=pool.splice(rand(0,pool.length-1),1)[0],sourceRange=makeAffixSourceRange(AFFIX_DEFS[key],quality);affixes.push({stat:key,value:rand(sourceRange.min,sourceRange.max),sourceRange});}return affixes;}
 export function item(slot,level=1,set=null,rarity=0,levelMetadata={}){
  if(!SLOTS.includes(slot))throw new Error('Unsupported item family');
  rarity=clamp(Math.floor(rarity),0,3);level=Math.max(1,Math.floor(level));
@@ -165,7 +166,7 @@ export function eligibleReforgeDonors(s,targetId,index=0){
  const target=s?.inventory?.find(it=>it.id===targetId);
  if(!target||!Number.isInteger(index)||index<0||index>=target.affixes.length||s.pendingReforge)return [];
  const occupied=new Set(target.affixes.filter((a,i)=>i!==index).map(a=>a.stat));
- const legalDonor=it=>Array.isArray(it.affixes)&&new Set(it.affixes.map(a=>a?.stat)).size===it.affixes.length&&it.affixes.every(a=>a&&Object.hasOwn(AFFIX_DEFS,a.stat)&&Number.isInteger(a.value)&&a.value>=AFFIX_DEFS[a.stat].min&&a.value<=AFFIX_DEFS[a.stat].max);
+ const legalDonor=it=>Array.isArray(it.affixes)&&new Set(it.affixes.map(a=>a?.stat)).size===it.affixes.length&&it.affixes.every(a=>validAffixSource(a,AFFIX_DEFS));
  return s.inventory.filter(it=>it.id!==targetId&&legalDonor(it)&&!it.locked&&!it.legendaryId&&!Object.values(s.equip).includes(it.id)&&!isProtected(s,it.id)).map(it=>({item:it,affixes:it.affixes.filter(a=>Object.hasOwn(AFFIX_DEFS,a.stat)&&!occupied.has(a.stat))})).filter(x=>x.affixes.length);
 }
 export const REFORGE_DIVINE_CONFIG=Object.freeze({chance:0.03});
@@ -177,7 +178,7 @@ const sameReforgeData=(a,b)=>{
 function reforgeCandidateItem(it,p){
  const candidate=structuredClone(it);candidate.affixes=structuredClone(p.newAffixes);
  if(p.ruleVersion>=2)candidate.special=structuredClone(p.newSpecial);
- if(p.ruleVersion===5){if(p.newDivine===null)delete candidate.divine;else candidate.divine=structuredClone(p.newDivine);}
+ if(p.ruleVersion>=5&&p.mode==='all'){if(p.newDivine===null)delete candidate.divine;else candidate.divine=structuredClone(p.newDivine);}
  else if(divineMultiplier(candidate)>1)candidate.divine.bonus.affixes=candidate.affixes.map(a=>({stat:a.stat,value:a.value/10}));
  return candidate;
 }
@@ -192,7 +193,7 @@ export function reforge(s,itemId,mode,index=0,donorId){
  const it=s.inventory.find(i=>i.id===itemId),cost=getReforgeCost(it,mode);
  if(!cost||!SLOTS.includes(it.slot)||it.affixes.length>Object.keys(AFFIX_DEFS).length||it.affixes.some(a=>!a||typeof a!=='object'))return null;
  if(divineMultiplier(it)>1&&(!it.divine.bonus||typeof it.divine.bonus!=='object'))return null;
- if(new Set(it.affixes.map(a=>a.stat)).size!==it.affixes.length||!it.affixes.every(a=>Object.hasOwn(AFFIX_DEFS,a.stat)&&Number.isInteger(a.value)&&a.value>=AFFIX_DEFS[a.stat].min&&a.value<=AFFIX_DEFS[a.stat].max))return null;
+ if(new Set(it.affixes.map(a=>a.stat)).size!==it.affixes.length||!it.affixes.every(a=>validAffixSource(a,AFFIX_DEFS)))return null;
  if(mode!=='all'&&(!Number.isInteger(index)||index<0||index>=it.affixes.length))return null;
  if(mode==='all'&&it.affixes.length>ACTIVE_AFFIX_KEYS.length)return null;
  if(!Number.isFinite(s.gold)||s.gold<cost.gold||!validMaterials(s)||!validConsumables(s)||Object.entries(cost.materials).some(([key,n])=>materialCount(s,key,0)<n)||Object.entries(cost.consumables??{}).some(([key,n])=>(s.consumables?.[key]??0)<n))return null;
@@ -200,12 +201,12 @@ export function reforge(s,itemId,mode,index=0,donorId){
  if(mode==='replace'&&!donor)return null;
  if(!validCodexCollection(s))return null;
  if(mode==='all'&&it.divine!==undefined&&!sameReforgeData(it.divine,canonicalReforgeDivine(it)))return null;
- const before=it.affixes.map(a=>({...a})),after=before.map(a=>({...a}));
- const roll=stat=>({stat,value:luckyRoll(()=>rand(AFFIX_DEFS[stat].min,AFFIX_DEFS[stat].max),effectiveLuck(s))});
- if(mode==='value')after[index]=roll(after[index].stat);
+ const before=structuredClone(it.affixes),after=structuredClone(before);
+ const roll=(stat,original)=>{const sourceRange=original?original.sourceRange:makeAffixSourceRange(AFFIX_DEFS[stat],it.rarity),range=original?affixOwnRange(original,AFFIX_DEFS):sourceRange;return {stat,value:luckyRoll(()=>rand(range.min,range.max),effectiveLuck(s)),...(sourceRange?{sourceRange:structuredClone(sourceRange)}:{})};};
+ if(mode==='value')after[index]=roll(after[index].stat,after[index]);
  else if(mode==='replace'){
   const chosen=donor.affixes[rand(0,donor.affixes.length-1)];
-  after[index]={stat:chosen.stat,value:chosen.value};
+  after[index]=structuredClone(chosen);
  }else{
   const pool=[...ACTIVE_AFFIX_KEYS];
   for(let i=0;i<after.length;i++)after[i]=roll(pool.splice(rand(0,pool.length-1),1)[0]);
@@ -224,15 +225,16 @@ export function reforge(s,itemId,mode,index=0,donorId){
  if(donor)normalizeCodexCollection(s);
  if(donor)s.inventory.splice(s.inventory.findIndex(x=>x.id===donor.item.id),1);
  const operationId='reforge-'+Date.now().toString(36)+'-'+(++serial).toString(36);
- s.pendingReforge={ruleVersion:mode==='all'?5:mode==='replace'?4:2,operationId,itemId:it.id,mode,index:mode==='all'?null:index,oldAffixes:before,newAffixes:after,oldSpecial,newSpecial,cost,...divineSnapshot,...(donor?{donor:{id:donor.item.id,name:donor.item.name,slot:donor.item.slot,eligibleStats:donor.affixes.map(a=>a.stat),eligibleAffixes:donor.affixes.map(a=>({stat:a.stat,value:a.value})),selectedAffix:{...after[index]}}}:{})};
- return {item:it,operationId,mode,index:mode==='all'?null:index,cost,before:before.map(a=>({...a})),after:after.map(a=>({...a})),oldSpecial,newSpecial,pending:true};
+ s.pendingReforge={ruleVersion:6,operationId,itemId:it.id,mode,index:mode==='all'?null:index,oldAffixes:before,newAffixes:after,oldSpecial,newSpecial,cost,...divineSnapshot,...(donor?{donor:{id:donor.item.id,name:donor.item.name,slot:donor.item.slot,eligibleStats:donor.affixes.map(a=>a.stat),eligibleAffixes:structuredClone(donor.affixes),selectedAffix:structuredClone(after[index])}}:{})};
+ return {item:it,operationId,mode,index:mode==='all'?null:index,cost,before:structuredClone(before),after:structuredClone(after),oldSpecial,newSpecial,pending:true};
 }
 export function validPendingReforge(s){
  const p=s.pendingReforge;if(p===undefined||p===null)return true;
  if(!p||typeof p!=='object'||Array.isArray(p)||typeof p.operationId!=='string'||p.operationId.length<1||p.operationId.length>160)return false;
- if(p.ruleVersion!==undefined&&p.ruleVersion!==2&&p.ruleVersion!==3&&p.ruleVersion!==4&&p.ruleVersion!==5)return false;
+ if(p.ruleVersion!==undefined&&p.ruleVersion!==2&&p.ruleVersion!==3&&p.ruleVersion!==4&&p.ruleVersion!==5&&p.ruleVersion!==6)return false;
  if((p.ruleVersion===3||p.ruleVersion===4)&&p.mode!=='replace'||p.ruleVersion===5&&p.mode!=='all')return false;
  const it=s.inventory?.find(i=>i.id===p.itemId),cost=p.ruleVersion>=2?getReforgeCost(it,p.mode):legacyReforgeCost(it,p.mode);
+ if(it&&p.ruleVersion!==6&&it.affixes.some(a=>Object.hasOwn(a,'sourceRange')))return false;
  if(!it||!cost||!p.cost||p.cost.gold!==cost.gold||!p.cost.materials||Object.keys(p.cost.materials).length!==Object.keys(cost.materials).length||!Object.entries(cost.materials).every(([k,v])=>p.cost.materials[k]===v))return false;
  if((p.cost.equipment??0)!==(cost.equipment??0))return false;
  const expectedConsumables=cost.consumables??{},actualConsumables=p.cost.consumables??{};
@@ -242,8 +244,8 @@ export function validPendingReforge(s){
    const d=p.donor;
    if(!d||typeof d.id!=='string'||!d.id||d.id===p.itemId||s.inventory.some(it=>it.id===d.id)||typeof d.name!=='string'||d.name.length>200||!SLOTS.includes(d.slot)||!Array.isArray(d.eligibleStats)||!d.eligibleStats.length||d.eligibleStats.length>4||new Set(d.eligibleStats).size!==d.eligibleStats.length||!d.eligibleStats.every(k=>Object.hasOwn(AFFIX_DEFS,k)&&!it.affixes.some((a,i)=>a.stat===k&&(p.ruleVersion<4||i!==p.index)))||!d.eligibleStats.includes(p.newAffixes?.[p.index]?.stat))return false;
    if(p.ruleVersion>=3){
-    const legal=a=>a&&Object.hasOwn(AFFIX_DEFS,a.stat)&&Number.isInteger(a.value)&&a.value>=AFFIX_DEFS[a.stat].min&&a.value<=AFFIX_DEFS[a.stat].max;
-    const same=(a,b)=>a?.stat===b?.stat&&a?.value===b?.value;
+    const legal=a=>validAffixSource(a,AFFIX_DEFS)&&(p.ruleVersion===6||!Object.hasOwn(a,'sourceRange'));
+    const same=(a,b)=>p.ruleVersion===6?sameReforgeData(a,b):a?.stat===b?.stat&&a?.value===b?.value;
     if(!Array.isArray(d.eligibleAffixes)||d.eligibleAffixes.length!==d.eligibleStats.length||!d.eligibleAffixes.every((a,i)=>legal(a)&&a.stat===d.eligibleStats[i])||!legal(d.selectedAffix)||!d.eligibleAffixes.some(a=>same(a,d.selectedAffix))||!same(d.selectedAffix,p.newAffixes?.[p.index]))return false;
    }
   }else if(p.donor!==undefined)return false;
@@ -252,19 +254,19 @@ export function validPendingReforge(s){
   if(p.mode==='all'&&!it.set&&it.rarity>=2&&!it.legendaryId){if(!p.newSpecial)return false;}
   else if((p.oldSpecial?.id??null)!==(p.newSpecial?.id??null))return false;
  }
- const legal=list=>Array.isArray(list)&&list.length===it.affixes.length&&new Set(list.map(a=>a?.stat)).size===list.length&&list.every(a=>a&&Object.hasOwn(AFFIX_DEFS,a.stat)&&Number.isInteger(a.value)&&a.value>=AFFIX_DEFS[a.stat].min&&a.value<=AFFIX_DEFS[a.stat].max);
- const equal=(a,b)=>a.stat===b.stat&&a.value===b.value;
+ const legal=list=>Array.isArray(list)&&list.length===it.affixes.length&&new Set(list.map(a=>a?.stat)).size===list.length&&list.every(a=>validAffixSource(a,AFFIX_DEFS)&&(p.ruleVersion===6||!Object.hasOwn(a,'sourceRange')));
+ const equal=(a,b)=>p.ruleVersion===6?sameReforgeData(a,b):a.stat===b.stat&&a.value===b.value;
  if(!legal(p.oldAffixes)||!legal(p.newAffixes)||!p.oldAffixes.every((a,i)=>equal(a,it.affixes[i])))return false;
- if(p.ruleVersion===5){
+ if(p.ruleVersion>=5&&p.mode==='all'){
   if(!Object.hasOwn(p,'oldDivine')||!Object.hasOwn(p,'newDivine')||!sameReforgeData(p.oldDivine,it.divine??null))return false;
   if(p.oldDivine!==null&&!sameReforgeData(p.oldDivine,canonicalReforgeDivine(it)))return false;
   const expected=structuredClone(it);expected.affixes=structuredClone(p.newAffixes);expected.special=structuredClone(p.newSpecial);
   if(p.newDivine!==null&&!sameReforgeData(p.newDivine,canonicalReforgeDivine(expected)))return false;
   if(p.oldDivine!==null&&p.newDivine===null)return false;
  }else if(p.oldDivine!==undefined||p.newDivine!==undefined)return false;
- if(p.mode==='all')return p.index===null&&p.newAffixes.every(a=>ACTIVE_AFFIX_KEYS.includes(a.stat));
+ if(p.mode==='all')return p.index===null&&p.newAffixes.every(a=>ACTIVE_AFFIX_KEYS.includes(a.stat)&&(p.ruleVersion!==6||sameReforgeData(a.sourceRange,makeAffixSourceRange(AFFIX_DEFS[a.stat],it.rarity))));
  if(!Number.isInteger(p.index)||p.index<0||p.index>=it.affixes.length||!p.newAffixes.every((a,i)=>i===p.index||equal(a,p.oldAffixes[i])))return false;
- return p.mode==='value'?p.newAffixes[p.index].stat===p.oldAffixes[p.index].stat:(p.ruleVersion===4||p.newAffixes[p.index].stat!==p.oldAffixes[p.index].stat)&&(p.ruleVersion>=2?p.donor.eligibleStats.includes(p.newAffixes[p.index].stat):ACTIVE_AFFIX_KEYS.includes(p.newAffixes[p.index].stat));
+ return p.mode==='value'?p.newAffixes[p.index].stat===p.oldAffixes[p.index].stat&&(p.ruleVersion!==6||sameReforgeData(p.newAffixes[p.index].sourceRange,p.oldAffixes[p.index].sourceRange)):(p.ruleVersion>=4||p.newAffixes[p.index].stat!==p.oldAffixes[p.index].stat)&&(p.ruleVersion>=2?p.donor.eligibleStats.includes(p.newAffixes[p.index].stat):ACTIVE_AFFIX_KEYS.includes(p.newAffixes[p.index].stat));
 }
 export function resolveReforge(s,accept,expectedOperationId){
  const p=s?.pendingReforge;
@@ -272,9 +274,9 @@ export function resolveReforge(s,accept,expectedOperationId){
  const it=s.inventory.find(i=>i.id===p.itemId);
  if(accept&&Object.values(s.equip).includes(it.id)&&(s.running||(s.activeEncounter&&!s.activeEncounter.done)))return null;
  if(accept){
-  it.affixes=p.newAffixes.map(a=>({...a}));
+  it.affixes=structuredClone(p.newAffixes);
   if(p.ruleVersion>=2)it.special=p.newSpecial?{...p.newSpecial}:null;
-  if(p.ruleVersion===5){if(p.newDivine===null)delete it.divine;else it.divine=structuredClone(p.newDivine);}
+  if(p.ruleVersion>=5&&p.mode==='all'){if(p.newDivine===null)delete it.divine;else it.divine=structuredClone(p.newDivine);}
   else if(divineMultiplier(it)>1)it.divine.bonus.affixes=it.affixes.map(a=>({stat:a.stat,value:a.value/10}));
  }
  s.pendingReforge=null;capHealth(s);
@@ -932,7 +934,7 @@ function earnedMaterials(s,material,count,boss=false,luck=0,weights=null,summary
 }
 const MERCHANT_STOCK={'铁屑':[6,12],'炉火晶':[3,7],'誓约残片':[2,5],'灰根草':[4,8],'dwarf.blackvein_ore':[6,12],'dwarf.rock_lizard_sinew':[3,7]};
 export const MERCHANT_CYCLE_MS=30*60*1000;
-function validEquipment(i){try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;return validItemBudgetMetadata(i)&&validEquipmentTemplateMetadata(i)&&validEnhancementMetadata(i)&&validEquipmentLevelMetadata(i)&&typeof i.id==='string'&&typeof i.name==='string'&&SLOTS.includes(i.slot)&&Number.isInteger(i.rarity)&&i.rarity>=0&&i.rarity<=3&&(!i.set||(BUILD.some(b=>b.id===i.set)&&SET_SLOTS.includes(i.slot)&&i.rarity===3))&&num(i.atk)&&num(i.hp)&&num(i.armor)&&num(i.level)&&num(i.bless,5)&&Array.isArray(i.affixes)&&(i.rarity===0?i.affixes.length<=1:i.affixes.length===i.rarity+1)&&new Set(i.affixes.map(a=>a.stat)).size===i.affixes.length&&i.affixes.every(a=>Object.hasOwn(AFFIX_DEFS,a.stat)&&Number.isInteger(a.value)&&num(a.value,50))&&(!i.special||(!i.set&&i.rarity>=2&&Object.hasOwn(SPECIALS,i.special.id)))&&(i.legendaryId===null||LEGENDARY_CODEX.some(def=>def.id===i.legendaryId&&def.implemented&&def.slot===i.slot&&!i.set))&&(i.divine===undefined||(i.divine?.id==='forge-favor'&&i.divine.name==='神赐·炉火眷顾'&&i.divine.model==='raw-v1'&&['atk','armor','hp'].every(k=>num(i.divine.bonus?.[k]))));}catch{return false;}}
+function validEquipment(i){try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;return validItemBudgetMetadata(i)&&validEquipmentTemplateMetadata(i)&&validEnhancementMetadata(i)&&validEquipmentLevelMetadata(i)&&typeof i.id==='string'&&typeof i.name==='string'&&SLOTS.includes(i.slot)&&Number.isInteger(i.rarity)&&i.rarity>=0&&i.rarity<=3&&(!i.set||(BUILD.some(b=>b.id===i.set)&&SET_SLOTS.includes(i.slot)&&i.rarity===3))&&num(i.atk)&&num(i.hp)&&num(i.armor)&&num(i.level)&&num(i.bless,5)&&Array.isArray(i.affixes)&&(i.rarity===0?i.affixes.length<=1:i.affixes.length===i.rarity+1)&&new Set(i.affixes.map(a=>a.stat)).size===i.affixes.length&&i.affixes.every(a=>validAffixSource(a,AFFIX_DEFS,{legacyWide:true}))&&(!i.special||(!i.set&&i.rarity>=2&&Object.hasOwn(SPECIALS,i.special.id)))&&(i.legendaryId===null||LEGENDARY_CODEX.some(def=>def.id===i.legendaryId&&def.implemented&&def.slot===i.slot&&!i.set))&&(i.divine===undefined||(i.divine?.id==='forge-favor'&&i.divine.name==='神赐·炉火眷顾'&&i.divine.model==='raw-v1'&&['atk','armor','hp'].every(k=>num(i.divine.bonus?.[k]))));}catch{return false;}}
 function validMerchant(merchant){
  if(!merchant||merchant.version!==1||!Number.isFinite(merchant.generatedAt)||merchant.generatedAt<0||merchant.generatedAt>1e15||!Array.isArray(merchant.offers))return false;
  const rows=merchant.offers,legacy=rows.length>=2&&rows.length<=3&&rows.every(o=>o&&!o.type);

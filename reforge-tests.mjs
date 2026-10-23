@@ -17,7 +17,7 @@ try{
   if(mode==='value')assert.equal(it.affixes[index].stat,before[index].stat);
   if(mode==='replace')assert.notEqual(it.affixes[index].stat,before[index].stat);
   if(mode!=='all')it.affixes.forEach((a,j)=>{if(j!==index)assert.deepEqual(a,before[j]);});
-  for(const a of it.affixes){const d=AFFIX_DEFS[a.stat];assert(a.value>=d.min&&a.value<=d.max);assert.equal(affixRollInfo(a).raw,a.value);assert.equal(it.divine.bonus.affixes.find(b=>b.stat===a.stat).value,a.value/10);}
+  for(const a of it.affixes){const d=affixRollInfo(a);assert(a.value>=d.min&&a.value<=d.max);assert.equal(affixRollInfo(a).raw,a.value);assert.equal(it.divine.bonus.affixes.find(b=>b.stat===a.stat).value,a.value/10);}
  }
  assert(validSave(s));assert.deepEqual(stats(JSON.parse(JSON.stringify(s))),stats(s));
  let snapshot=JSON.stringify(s);s.gold=0;s.consumables.reforgeToken=0;let noMoney=JSON.stringify(s);c=calls;assert.equal(reforge(s,it.id,'all'),null);assert.equal(JSON.stringify(s),noMoney);assert.equal(calls,c);Object.assign(s,JSON.parse(snapshot));

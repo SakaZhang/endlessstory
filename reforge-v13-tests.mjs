@@ -11,11 +11,12 @@ try{
   assert.equal(!!r.newSpecial,!set&&q>=2);assert(validSave(s));assert(resolveReforge(s,true,r.operationId));assert.equal(!!it.special,!set&&q>=2);assert(validSave(s));
  }
  const seen=new Set();for(let i=0;i<100;i++){const s=fresh(),it=target(s);s.consumables.reforgeToken=1;const r=reforge(s,it.id,'all');seen.add(r.newSpecial.id);assert(resolveReforge(s,false));assert.equal(s.consumables.reforgeToken,0);}assert.equal(seen.size,Object.keys(SPECIALS).length);
+ const legacyAffix=a=>({stat:a.stat,value:Math.min(AFFIX_DEFS[a.stat].max,Math.max(AFFIX_DEFS[a.stat].min,a.value))});
  // Old v0.12 pending quotes resolve under their original rules, with no token.
  for(const mode of ['all','replace']){
-  const s=fresh(),it=target(s);it.special={id:'knowledge'};s.consumables.reforgeToken=1;
+  const s=fresh(),it=target(s);it.affixes=it.affixes.map(legacyAffix);it.special={id:'knowledge'};s.consumables.reforgeToken=1;
   let donor;if(mode==='replace'){donor=item('ring',1,null,0);const stat=Object.keys(AFFIX_DEFS).find(k=>!it.affixes.some(a=>a.stat===k));donor.affixes=[{stat,value:AFFIX_DEFS[stat].min}];s.inventory.push(donor);}
-  assert(reforge(s,it.id,mode,0,donor?.id));const p=s.pendingReforge;delete p.ruleVersion;delete p.oldDivine;delete p.newDivine;delete p.oldSpecial;delete p.newSpecial;delete p.donor;p.cost=mode==='all'?{gold:90,materials:{'铁屑':3,'炉火晶':2}}:{gold:45,materials:{'铁屑':2,'炉火晶':1}};
+  assert(reforge(s,it.id,mode,0,donor?.id));const p=s.pendingReforge;p.newAffixes=p.newAffixes.map(legacyAffix);delete p.ruleVersion;delete p.oldDivine;delete p.newDivine;delete p.oldSpecial;delete p.newSpecial;delete p.donor;p.cost=mode==='all'?{gold:90,materials:{'铁屑':3,'炉火晶':2}}:{gold:45,materials:{'铁屑':2,'炉火晶':1}};
   assert(validSave(s));const oldGold=s.gold;assert(resolveReforge(s,true));assert.equal(it.special.id,'knowledge');assert.equal(s.gold,oldGold);
  }
  // Donors contribute an eligible ordinary stat and its original raw value (v0.29).

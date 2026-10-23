@@ -93,3 +93,5 @@ import "./dwarf-monster-portrait-ui-tests.mjs";
 // Native pixel export regression: node dwarf-art-tests.mjs (requires optional QA canvas renderer).
 
 import "./m2-production-activation-tests.mjs";
+
+import "./affix-source-tests.mjs";
