@@ -13,7 +13,7 @@ for(let index=0;index<E.ACTIVE_SPECIAL_KEYS.length;index++){
  const s=state(),target=E.item('gloves',1,null,3);target.special=null;s.inventory.push(target);s.consumables.reforgeToken=1;const rolls=Array(12).fill(.4);rolls.push((index+.1)/7); /* Four type/value/favor gates; .4 does not request a second value roll. */const {result:p}=randomWith(rolls,()=>E.reforge(s,target.id,'all'));assert(p);assert.equal(s.pendingReforge.newSpecial.id,expected,'full reforge '+expected);assert(E.resolveReforge(s,true));assert.equal(target.special.id,expected);
 }
 for(const [stat,value] of [['luck',3],['lifesteal',8]]){
- const s=state(),target=E.item('gloves',1,null,1),donor=E.item('ring',1,null,0);target.affixes=[currentAffix('atk',3),currentAffix('hp',15)];donor.affixes=[currentAffix(stat,value)];E.applyForgeFavor(donor);s.inventory.push(target,donor);assert(E.reforge(s,target.id,'replace',0,donor.id));assert.equal(s.pendingReforge.newAffixes[0].value,value);assert.equal(s.pendingReforge.newAffixes[0].stat,stat);assert(E.resolveReforge(s,true));assert.equal(target.affixes[0].value,value);
+ const s=state(),target=E.item('gloves',1,null,1),donor=E.item('gloves',1,null,0);target.affixes=[currentAffix('atk',3),currentAffix('hp',15)];donor.affixes=[currentAffix(stat,value)];E.applyForgeFavor(donor);s.inventory.push(target,donor);assert(E.reforge(s,target.id,'replace',0,donor.id));assert.equal(s.pendingReforge.newAffixes[0].value,value);assert.equal(s.pendingReforge.newAffixes[0].stat,stat);assert(E.resolveReforge(s,true));assert.equal(target.affixes[0].value,value);
 }
 // Retired single-target exact-roll cases replaced by current multi-affix/host suites.
 {
