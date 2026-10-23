@@ -15,7 +15,7 @@ const sourceMaterials=new Set(first.drops.map(d=>d.materialId));assert(!sourceMa
 const recovery=Object.entries(D.DWARF_MATERIAL_REGISTRY).filter(([,m])=>m.functionalTags.includes('recoveryBase'));assert(recovery.length>=4);
 for(const [key]of recovery)for(let quality=0;quality<4;quality++){const plan=recoveryInputPlan(quality,[{key:key+'|'+quality,quantity:3}],D.DWARF_MATERIAL_REGISTRY);assert(plan);assert.equal(plan.quantity,3);assert.equal(plan.gold,(quality+1)*3);assert.equal(recoveryInputPlan(quality,[{key:key+'|'+((quality+1)%4),quantity:3}],D.DWARF_MATERIAL_REGISTRY),null);}
 assert.equal(recoveryInputPlan(0,[{key:'铁屑|0',quantity:1}],D.DWARF_MATERIAL_REGISTRY),null);
-console.log('PASS dwarf materials:18 registry/13 identities, strict all source pairs, no invented fallback, old4 keys, independent channels, sequential gem ownership/reacquire, no summons/story materials, same-quality recovery substitution.');
+console.log('PASS dwarf materials:18 registry/26 identities, strict all source pairs, no invented fallback, old4 keys, independent channels, sequential gem ownership/reacquire, no summons/story materials, same-quality recovery substitution.');
 
 assert.equal(Object.values(D.DWARF_MATERIAL_REGISTRY).filter(m=>m.merchantAllowed).length,6);
 assert.equal(D.DWARF_MATERIAL_REGISTRY['dwarf.blackvein_ore'].merchantBasePrice,3);

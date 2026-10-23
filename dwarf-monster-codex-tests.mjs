@@ -14,4 +14,4 @@ assert(M.materialMonsterSources(s,'dwarf.ashroot').some(r=>r.instanceId==='dwarf
 assert.equal(M.materialMonsterSources(s,'dwarf.return_token_dwarf').length,0);
 const old=JSON.parse(state);assert(M.validMonsterLedger(old));assert(M.monsterCodexEntry(old,'grayflag-raider').encountered);
 const routes=U.renderMaterialSources(s,'dwarf.blackvein_ore');assert(routes.includes('黑脉矿 · 获取途径'));assert(!routes.includes('dwarf.blackvein_ore · 获取途径'));
-console.log('PASS M2 monster codex:13 new +7 legacy, encounter-only unlock, fixture/wrong source rejected, actual per-monster material routes and Chinese names, A03 boss recovery valid, no story random source, old ledger retained.');
+console.log('PASS M2 monster codex:26 dwarf +7 legacy, encounter-only unlock, fixture/wrong source rejected, actual per-monster material routes and Chinese names, A03 boss recovery valid, no story random source, old ledger retained.');
