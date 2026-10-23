@@ -36,7 +36,19 @@ function drawSkillEffects(c,effects,positions,time,reduced){
  for(const f of effects){const p=positions[f.targetId],age=time-f.at;if(!p||age<0||age>650)continue;const t=age/650,x=p.x,y=p.y;c.save();c.globalAlpha=Math.min(1,(1-t)*2);const drift=reduced?0:t;
  if(f.visual==='axeFirst'||f.visual==='axeHeavy'){const heavy=f.visual==='axeHeavy';c.fillStyle=heavy?'#ffe7a3':'#d9edf4';for(let i=0;i<15;i++){const a=(-1.3+i*.15)*(heavy?-1:1),r=heavy?36:25;px(x+Math.cos(a)*r-12,y-56+Math.sin(a)*r,heavy?6:3,heavy?4:3);}if(heavy){c.fillStyle='#fff8dd';for(let i=0;i<5;i++)px(x-8+i*5,y-54+i*3,4,4);}}
  else if(f.visual==='hammerCrack'){c.fillStyle='#f1d399';for(let i=0;i<13;i++){px(x-38+i*6,y-3+(i%3)*3,7,3);px(x+(i%2?-1:1)*i*3,y-7-i*3-drift*10,3,4);}c.fillStyle='#fff0c2';px(x-6,y-37,12,34);}
- else if(f.visual==='eruption'){for(let i=0;i<7;i++){const h=20+((i*17)%37);c.fillStyle=i%2?'#ffd46c':'#ff7139';px(x-24+i*7,y-h-drift*8,5,h);}c.fillStyle='#f8df92';px(x-25,y-2,50,3);}
+ else if(f.visual==='eruption'){
+  const seed=[...f.targetId].reduce((n,ch)=>(n*31+ch.charCodeAt(0))>>>0,0),phase=(seed%19)/19,grid=v=>Math.round(v/2)*2;
+  // Deterministic display-only flame tongues: stepped taper, layered cores, no RNG.
+  for(let i=0;i<5;i++){const baseX=x-22+i*11,variation=(seed>>>((i*5)%24))&15,h=22+variation*2+Math.sin((t*3+phase+i*.37)*Math.PI)*6,w=8+(i%2)*3;
+   for(let row=0;row<h;row+=4){const z=row/h,sway=Math.sin(z*4+phase*6+i)*z*7,half=Math.max(1,grid(w*(1-z)**.8)),xx=grid(baseX+sway),yy=grid(y-row-4);
+    c.fillStyle='#d84b2d';px(xx-half,yy,half*2,4);
+    if(z<.84){const core=Math.max(2,grid(half*.64));c.fillStyle='#ff922f';px(xx-core,yy,core*2,4);}
+    if(z<.52){const core=Math.max(1,grid(half*.28));c.fillStyle='#ffe684';px(xx-core,yy,core*2,4);}
+   }
+  }
+  for(let i=0;i<16;i++){const a=i*Math.PI/8,rr=26+Math.sin(t*8+phase*4)*3;c.fillStyle=i%3?'#f37b36':'#ffd77b';px(grid(x+Math.cos(a)*rr),grid(y-1+Math.sin(a)*5),4,2);}
+  for(let i=0;i<6;i++){const q=(phase+i*.163+t*.7)%1;c.fillStyle=i%2?'#ffcc61':'#f77930';px(grid(x-23+((seed+i*17)%47)),grid(y-22-q*45),2,2);}
+ }
  else if(f.visual==='emberSeal'||f.visual==='emberTick'){const r=f.visual==='emberTick'?10:23;c.fillStyle='#ff8b42';for(let i=0;i<16;i++){const a=i*Math.PI/8;px(x+Math.cos(a)*r,y-54+Math.sin(a)*r,4,4);}c.fillStyle='#ffe5a0';px(x-2,y-68,4,28);px(x-12,y-57,24,4);px(x-8,y-65,4,4);px(x+5,y-47,4,4);}
  else if(f.visual==='ash'){for(let i=0;i<26;i++){c.fillStyle=['#a6a7a3','#767e83','#ccd0c5'][i%3];px(x-28+(i*13)%56+drift*(i%2?9:-9),y-75+(i*19)%53-drift*8,3+i%3,3);}}
  else if(f.visual==='poison'){c.fillStyle='#b8eb60';for(let i=0;i<5;i++)px(x-13+i*6,y-61-((i%2)*8)-drift*13,4,6);c.fillStyle='#6aab4c';px(x-8,y-40,17,3);}
