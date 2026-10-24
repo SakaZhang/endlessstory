@@ -1,3 +1,4 @@
+import {validRacialLegendaryRuntime,clearRemovedRacialLegendaryRuntime} from './racial-legendary-runtime.js';
 import {validPlayerShieldLayers,removePlayerShieldLayersByOwner} from './player-shield-layers.js';
 /** Per-item accumulation lifecycle; effect consumers live in legendary-combat.js.
  * Runtime counters survive saves, pauses, and encounter transitions. Only a true
@@ -25,15 +26,15 @@ function validRuntime(runtime,ids){
 function normalized(runtime,ids){return {version:1,byId:Object.fromEntries([...ids].map(id=>[id,runtime&&Object.hasOwn(runtime.byId,id)?{...runtime.byId[id]}:zero()]))};}
 function validShields(s,ids){const ledger=s.activeEncounter?.playerShieldLayers;return ledger===undefined||(validPlayerShieldLayers(ledger)&&ledger.layers.every(layer=>layer.ownerItemId==null||ids.has(layer.ownerItemId)));}
 function validCarry(s,ids){const ledger=s.equipmentShieldCarry;return ledger===undefined||(validPlayerShieldLayers(ledger)&&ledger.layers.every(layer=>typeof layer.ownerItemId==='string'&&ids.has(layer.ownerItemId)&&layer.source==='reactor:'+layer.ownerItemId&&s.inventory.some(it=>it.id===layer.ownerItemId&&it.legendaryId==='everburning-reactor')));}
-export function validEquipmentRuntime(s){const ids=equippedIds(s,s?.equip);return !!ids&&validRuntime(s.equipmentRuntime,ids)&&validShields(s,ids)&&validCarry(s,ids);}
+export function validEquipmentRuntime(s){const ids=equippedIds(s,s?.equip);return !!ids&&validRacialLegendaryRuntime(s)&&validRuntime(s.equipmentRuntime,ids)&&validShields(s,ids)&&validCarry(s,ids);}
 export function normalizeEquipmentRuntime(s){const ids=equippedIds(s,s?.equip);if(!ids||!validRuntime(s.equipmentRuntime,ids)||!validShields(s,ids)||!validCarry(s,ids))return false;s.equipmentRuntime=normalized(s.equipmentRuntime,ids);return true;}
 /** Call before changing s.equip. A stale beforeEquip is rejected atomically. */
 export function applyEquipmentRuntimeChange(s,beforeEquip,nextEquip){
  const before=equippedIds(s,beforeEquip),next=equippedIds(s,nextEquip);
- if(!before||!next||!Object.keys(SOCKET_TYPE).filter(k=>k!=='core'||s.race==='ashen').every(k=>s.equip?.[k]===beforeEquip[k])||!validRuntime(s.equipmentRuntime,before)||!validShields(s,before)||!validCarry(s,before))return false;
+ if(!before||!next||!validRacialLegendaryRuntime(s)||!Object.keys(SOCKET_TYPE).filter(k=>k!=='core'||s.race==='ashen').every(k=>s.equip?.[k]===beforeEquip[k])||!validRuntime(s.equipmentRuntime,before)||!validShields(s,before)||!validCarry(s,before))return false;
  let shields=s.activeEncounter?.playerShieldLayers;if(shields!==undefined&&!validPlayerShieldLayers(shields))return false;
  for(const id of before)if(!next.has(id)&&shields!==undefined){shields=removePlayerShieldLayersByOwner(shields,id);if(!shields)return false;}
  let carry=s.equipmentShieldCarry;for(const id of before)if(!next.has(id)&&carry!==undefined){carry=removePlayerShieldLayersByOwner(carry,id);if(!carry)return false;}
  const current=normalized(s.equipmentRuntime,before),byId=Object.fromEntries([...next].map(id=>[id,before.has(id)?current.byId[id]:zero()]));
- s.equipmentRuntime={version:1,byId};if(shields!==undefined)s.activeEncounter.playerShieldLayers=shields;if(carry!==undefined)s.equipmentShieldCarry=carry;return true;
+ clearRemovedRacialLegendaryRuntime(s,next);s.equipmentRuntime={version:1,byId};if(shields!==undefined)s.activeEncounter.playerShieldLayers=shields;if(carry!==undefined)s.equipmentShieldCarry=carry;return true;
 }
