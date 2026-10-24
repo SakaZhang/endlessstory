@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import * as E from './dist/engine.js';
 import * as T from './dist/skill-tree-state.js';
 function prepare(s,change){const q=T.quoteSkillTreeChange(s,E.SKILL_TREE_DEFINITION,change);assert(q,JSON.stringify(change));const p=T.prepareSkillTreeChange(s,q,E.SKILL_TREE_DEFINITION);assert(p);return p.game;}
-let s=E.fresh();s.level=30;for(const id of ['fracture_strike','anvil_cry','ember_brand','furnace_wave','cinder_barrage'])s=prepare(s,{type:'unlock',skillId:id});s=prepare(s,{type:'slots',active:['anvil_cry','cinder_barrage','fracture_strike',null],conditions:['always','always','always','always']});
+let s=E.fresh();s.level=30;for(const id of ['fracture_strike','anvil_cry','ember_brand','furnace_etch','scatter_ash','furnace_wave','cinder_barrage'])s=prepare(s,{type:'unlock',skillId:id});s=prepare(s,{type:'slots',active:['anvil_cry','cinder_barrage','fracture_strike',null],conditions:['always','always','always','always']});
 s.heroHp=E.stats(s).hp;s.lastHealthClock=s.lastSeen=10000;s.restUntil=0;s.nextBattleAt=0;const e=E.startRoutedEncounter(s,10000);assert(e);for(const u of e.enemies)u.hp=u.max=1e6;
 
 let logs=E.step(s,e,11100);assert(logs);assert.equal(e.lastCast.skillId,'anvil_cry');assert(e.treeEffects.hero.sources.some(x=>x.type==='attackUp'));assert(E.validSave(s));

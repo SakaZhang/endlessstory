@@ -1,10 +1,11 @@
+import {SCHEMA_VERSION} from './dist/save-generation.js';
 import {currentAffix} from './current-equipment-test-fixture.mjs';
 import {fresh} from './dist/engine.js';
 import assert from 'node:assert/strict';
 import {item,stats,preset,encounter,step,reward,offline,forge,applyForgeFavor,validSave,SOCKETS,SOCKET_TYPE,SLOTS,SET_SLOTS,RARITY,BUILD,AFFIX_DEFS,equipItem,LEGENDARY_CODEX,codexState,affixRollInfo,divineMultiplier,itemTotals} from './dist/engine.js';
 const originalRandom=Math.random;let seed=93812;const rng=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};Math.random=rng;
 try{
- const s=fresh();assert(validSave(s));assert.equal(s.version,3);assert.equal(SOCKETS.length,8);assert.equal(s.inventory.length,8);assert.deepEqual(RARITY,['普通','稀有','优良','至臻']);assert(s.inventory.every(i=>!i.set&&i.rarity===0&&!i.special&&i.affixes.length===0));assert.equal(new Set(Object.values(s.equip)).size,8);
+ const s=fresh();assert(validSave(s));assert.equal(s.version,SCHEMA_VERSION);assert.equal(SOCKETS.length,8);assert.equal(s.inventory.length,8);assert.deepEqual(RARITY,['普通','稀有','优良','至臻']);assert(s.inventory.every(i=>!i.set&&i.rarity===0&&!i.special&&i.affixes.length===0));assert.equal(new Set(Object.values(s.equip)).size,8);
  const ring1=s.equip.ring1,ring2=s.equip.ring2;assert(equipItem(s,ring1,'ring2'));assert.equal(s.equip.ring1,ring2);assert.equal(s.equip.ring2,ring1);assert(validSave(s));let bad=structuredClone(s);bad.equip.ring1=bad.equip.ring2;assert(!validSave(bad));bad=structuredClone(s);bad.version=1;assert(!validSave(bad));assert(!equipItem(s,ring1,'weapon'));
  for(let quality=0;quality<4;quality++)for(let j=0;j<300;j++){const it=item(SLOTS[j%SLOTS.length],5,null,quality);assert(quality===0?it.affixes.length<=1:it.affixes.length===quality+1);assert.equal(new Set(it.affixes.map(a=>a.stat)).size,it.affixes.length);assert(it.affixes.every(a=>AFFIX_DEFS[a.stat]));if(quality<2)assert(!it.special);}
  for(const slot of SLOTS)for(const b of BUILD){const it=item(slot,4,b.id,0);if(SET_SLOTS.includes(slot)){assert.equal(it.rarity,3);assert.equal(it.set,b.id);assert.equal(it.affixes.length,4);assert(!it.special);}else assert.equal(it.set,null);}
