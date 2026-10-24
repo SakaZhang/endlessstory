@@ -19,7 +19,8 @@ export function planSkill({skillId,castId,weaponType,selectedTargetId,targets=[]
  const live=targets.filter(t=>t.alive===true),chosen=meta.scope==='all'?live:meta.scope==='self'?[]:live.filter(t=>t.id===selectedTargetId);if(meta.scope!=='self'&&!chosen.length)return null;
  const rt=context.runtime??context.elf??context.raceRuntime?.elf??createRuntime();if(!validRuntime(rt))return null;const next={...rt,lastBranch:meta.branch},actions=[];let idx=0;
  const effect=(type,amount,durationMs=6000,extra={})=>({type,amount,durationMs,sourceId:skillId,...extra});
- const hit=(t,c,damageType='physical',effects=[])=>actions.push({kind:'hit',targetId:t.id,hitId:`${castId}:${idx}:${t.id}`,hitIndex:idx++,damageType,coefficient:c,independentHit:true,independentCrit:true,reaperEligible:true,effects});
+ const perTargetHits={};
+ const hit=(t,c,damageType='physical',effects=[])=>actions.push({kind:'hit',castId,targetId:t.id,hitId:`${castId}:${idx++}:${t.id}`,hitIndex:(perTargetHits[t.id]=(perTargetHits[t.id]??-1)+1),damageType,coefficient:c,independentHit:true,independentCrit:true,reaperEligible:true,effects});
  const self=effects=>actions.push({kind:'effects',targetId:'self',effects}); const key=skillId.slice(4);const el=ELEMENTS[rt.elementIndex];
  if(meta.branch==='bow'){
   next.bowSequence=key==='moon_finisher'?0:Math.min(3,rt.lastBranch==='bow'?rt.bowSequence+1:1);
