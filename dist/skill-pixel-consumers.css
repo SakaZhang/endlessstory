@@ -76,3 +76,14 @@
 .skillTreeEditor .treeInspect{font-size:11px;width:140px;height:24px;padding:0;border:1px solid #4c6577;background:#122332;color:#bdd0dc}
 .skillTreeEditor .treeSelection{padding:12px;border:1px solid #a68a53;background:#1e2e39;margin:12px 0;line-height:1.7}
 @media(max-width:640px){.skillTreeEditor .treeGraphViewport{max-height:720px}.skillTreeEditor .treeGraphToolbar{font-size:11px}.skillTreeEditor .treeBranches{padding:6px}.skillTreeEditor .treeSelection{padding:8px}}
+/* Compact selection-first nodes: details live in a single shared panel. */
+.skillTreeEditor .treeNodeCard{height:108px;background:transparent}
+.skillTreeEditor .treeNodeCard .treeNode{height:108px;min-height:108px;gap:4px;padding:8px 18px 8px 8px}
+.skillTreeEditor .treeNodeCard.selected .treeNode{outline:2px solid #f4e0ac;outline-offset:3px}
+.skillTreeEditor .treeQuickAction{position:absolute;bottom:4px;right:4px;display:grid;place-items:center;padding:0;width:26px;height:26px;min-height:26px;border:1px solid #a48d60;color:#eed6a3;background:#152735;font-size:19px;line-height:1}
+.skillTreeEditor .treeQuickAction:disabled{border-color:#455a6a;color:#6e8190}
+.skillTreeEditor .treeSelection button{margin:4px 0 8px}
+.skillTreeEditor .treeSelection{position:fixed;right:20px;bottom:20px;width:360px;max-width:calc(100vw - 32px);max-height:55vh;overflow:auto;box-sizing:border-box;z-index:80;box-shadow:0 4px 24px #080f18;border:2px solid #b2965a;background:#172b3b}
+.skillTreeEditor .treeSelection h3{padding-right:28px;margin-top:0}
+.skillTreeEditor .treeDetailClose{float:right;width:28px;height:28px;padding:0;font-size:20px;line-height:24px}
+@media(max-width:640px){.skillTreeEditor .treeSelection{right:12px;bottom:12px;max-width:calc(100vw - 24px);max-height:48vh}}

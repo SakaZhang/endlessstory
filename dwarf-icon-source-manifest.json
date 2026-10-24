@@ -1,0 +1,83 @@
+{
+  "generator": "built-in image_gen",
+  "purpose": "Replacement of nine geometric draft glyphs with detailed raster skill sprites",
+  "sources": {
+    "ore_rally": "/workspace/scratch/81f4d6a709c0/generated_images/exec-071dab56-3499-4223-8eae-92503de9aea4.png",
+    "crag_verdict": "/workspace/scratch/81f4d6a709c0/generated_images/exec-82acb97b-ff56-40da-be0e-0b80f2a8aa90.png",
+    "bellows_ward": "/workspace/scratch/81f4d6a709c0/generated_images/exec-1e264955-da0d-46a9-b373-c8316dc82f72.png",
+    "stone_anchor": "/workspace/scratch/81f4d6a709c0/generated_images/exec-d3a8d411-609c-4645-ab3b-8a9031d25733.png",
+    "shield_relay": "/workspace/scratch/81f4d6a709c0/generated_images/exec-20034c28-5f7e-48e9-9fff-5b2ffa5072d3.png",
+    "prospectors_mark": "/workspace/scratch/81f4d6a709c0/generated_images/exec-78f08863-e97f-4757-8366-c1a627fb1fa5.png",
+    "ember_temper": "/workspace/scratch/81f4d6a709c0/generated_images/exec-5a5c724a-b87e-4317-a1ad-148f356e324d.png",
+    "anvil_balance": "/workspace/scratch/81f4d6a709c0/generated_images/exec-a65116b3-2e98-48d1-8be2-1a2b1b9f6872.png",
+    "patient_craft": "/workspace/scratch/81f4d6a709c0/generated_images/exec-1259b35f-bcc1-4a07-ad2d-661774cb562c.png"
+  },
+  "promptTemplate": "Production fantasy RPG skill inventory icon. Premium intricate hand-painted pixel art sprite, miniature metallic detail, centered full silhouette, transparent margins, designed to downsample crisply to native32x32 pixels, sharp stepped square clusters, rich12-20tone palette, tiny highlights, dark navy outlines, strong readable silhouette, no flat vector blocks, no3D render, no typography, no border/background/shadow.",
+  "subjects": {
+    "ore_rally": "Dwarf pickaxe raised across luminous gold ore vein, steel chips, crimson pennant",
+    "crag_verdict": "Silver dwarf axe crashing into fractured slate, white impact shards, gold edge",
+    "bellows_ward": "Ornate steel shield wrapped in amber furnace flame and healing sparks",
+    "stone_anchor": "Granite anchor-stone with blue steel rune and binding bands",
+    "shield_relay": "Layered ornate blue steel bucklers, counter motion and gold arc",
+    "prospectors_mark": "Dark ore slab with red chiseled weakpoint cross and silver chisel",
+    "ember_temper": "Silver breastplate over glowing coals and rising sparks",
+    "anvil_balance": "Ornate silver anvil beneath brass balance beam",
+    "patient_craft": "Steel brass hourglass with golden sand and craft hammer"
+  },
+  "production": {
+    "ore_rally": {
+      "path": "dist/skill-assets/ore_rally.png",
+      "width": 32,
+      "height": 32,
+      "sha256": "26b2060b0ce0fc59b20fbdb548570f599f8d18ac1651a5a4918f034af7622250"
+    },
+    "crag_verdict": {
+      "path": "dist/skill-assets/crag_verdict.png",
+      "width": 32,
+      "height": 32,
+      "sha256": "f2b12f8a24edeaf677c3b53ef2bcc58a9fbd5e0717f69f590694edc172f503e2"
+    },
+    "bellows_ward": {
+      "path": "dist/skill-assets/bellows_ward.png",
+      "width": 32,
+      "height": 32,
+      "sha256": "f4dd580a0fca02bc74292598b7a958f62b6e8a361d05cf3ccec59643c325adcc"
+    },
+    "stone_anchor": {
+      "path": "dist/skill-assets/stone_anchor.png",
+      "width": 32,
+      "height": 32,
+      "sha256": "0ec17089737ab3a04f748c47421b832515bf3ef2612b0637aec6a7a297448d9e"
+    },
+    "shield_relay": {
+      "path": "dist/skill-assets/shield_relay.png",
+      "width": 32,
+      "height": 32,
+      "sha256": "383da35c039a848185da0a6045ef8ea4ec4b7f0142989915fa33ea17b21acfc1"
+    },
+    "prospectors_mark": {
+      "path": "dist/skill-assets/prospectors_mark.png",
+      "width": 32,
+      "height": 32,
+      "sha256": "45fab544a0c650ab3fcf9e4724ed32aa997d8cb57c90f38a295e6997729bc9c4"
+    },
+    "ember_temper": {
+      "path": "dist/skill-assets/ember_temper.png",
+      "width": 32,
+      "height": 32,
+      "sha256": "5b83f1bef0e63db9a1a03af6fd2644dd05c153a392c465d3bc6a45421dacf63e"
+    },
+    "anvil_balance": {
+      "path": "dist/skill-assets/anvil_balance.png",
+      "width": 32,
+      "height": 32,
+      "sha256": "4dd5e980e7bd0b5458af89e0f202a763bacffda9199c304e3b9e9ee682489c90"
+    },
+    "patient_craft": {
+      "path": "dist/skill-assets/patient_craft.png",
+      "width": 32,
+      "height": 32,
+      "sha256": "8039bbfcf89a85a5a0a4bbe76306253b3c96df3d53b60caa64e85c62f298e5d7"
+    }
+  }
+}

@@ -1,0 +1,3 @@
+// Generated detailed raster sources; native 32px production raster conversion only.
+const sharp=require('sharp'),fs=require('fs'),manifest=require('../dwarf-icon-source-manifest.json');
+(async()=>{for(const [id,source]of Object.entries(manifest.sources)){const meta=await sharp(source).metadata();if(!meta.hasAlpha)throw Error('Missing alpha:'+id);await sharp(source).trim({threshold:10}).resize(30,30,{fit:'inside',kernel:'lanczos3'}).extend({top:1,bottom:1,left:1,right:1,background:{r:0,g:0,b:0,alpha:0}}).resize(32,32,{fit:'contain',background:{r:0,g:0,b:0,alpha:0},kernel:'nearest'}).png().toFile(`dist/skill-assets/${id}.png`);}})();
