@@ -159,7 +159,7 @@ export function item(slot,level=1,set=null,rarity=0,levelMetadata={}){
  rarity=clamp(Math.floor(rarity),0,3);level=Math.max(1,Math.floor(level));
  if(set&&(!SET_SLOTS.includes(slot)||!BUILD.some(b=>b.id===set)))set=null;
  if(set)rarity=3;
- const originRace=levelMetadata.originRace??'dwarf';if(!fusionOriginTemplates(originRace,{slot,setId:set}).length)throw new Error('Equipment origin has no registered template');
+ const originRace=levelMetadata.originRace??(set?BUILD.find(b=>b.id===set)?.originRace:null)??(slot==='core'?'ashen':'dwarf');if(!fusionOriginTemplates(originRace,{slot,setId:set}).length)throw new Error('Equipment origin has no registered template');
  const name=(set?BUILD.find(x=>x.id===set).name+'·':'旅铸·')+names[slot];
  const baseLevel=levelMetadata.baseLevel??level,levelSource=levelMetadata.levelSource??'generated';
  if(!validEquipmentLevelMetadata({baseLevel,levelSource}))throw new RangeError('Invalid equipment level provenance');
@@ -379,7 +379,7 @@ export function stats(s){
 }
 export function reconcileSkillTreeHealth(s){if(!validSkillTree(s,getSkillTreeDefinition(s)))return false;capHealth(s);return true;}
 export function effectiveLuck(s){return stats(s).luck;}
-export function preset(s,id){const b=BUILD.find(x=>x.id===id);if(!b||!b.skills.every(k=>k===null||skillUnlocked(s,k)))return null;s.build=id;s.skills=[...b.skills];s.conditions=['always','always','charge','always'];return b;}
+export function preset(s,id){const b=BUILD.find(x=>x.id===id);if(!b||b.skills.length!==4||!b.skills.every(k=>k===null||skillUnlocked(s,k)))return null;s.build=id;s.skills=[...b.skills];s.conditions=['always','always','charge','always'];return b;}
 export const POTIONS=POTION_CATALOG;
 export const RECIPES=POTION_RECIPE_CATALOG;
 function validRecipes(s){return s.learnedRecipes===undefined||(Array.isArray(s.learnedRecipes)&&s.learnedRecipes.length<=Object.keys(RECIPES).length&&new Set(s.learnedRecipes).size===s.learnedRecipes.length&&s.learnedRecipes.every(id=>Object.hasOwn(RECIPES,id)));}
@@ -991,7 +991,7 @@ export const FUSION_TAGS={
  '灰根草':{slots:{weapon:0,helm:0,armor:0,gloves:0,boots:0,ring:0,amulet:0}},
  '誓约残片':{slots:{weapon:0,helm:1,armor:0,gloves:0,boots:1,ring:2,amulet:2}}
 };
-export function fusionWeights(selection){const slots=Object.fromEntries(SLOTS.map(k=>[k,2]));for(const key of selection){const parsed=parseMaterialKey(key),tag=parsed?FUSION_TAGS[parsed.material]:null;if(!tag)continue;for(const slot of SLOTS)slots[slot]+=tag.slots[slot];}return {slots};}
+export function fusionWeights(selection){const slots=Object.fromEntries(SLOTS.map(k=>[k,2]));for(const key of selection){const parsed=parseMaterialKey(key),tag=parsed?FUSION_TAGS[parsed.material]:null;if(!tag)continue;for(const slot of SLOTS)slots[slot]+=tag.slots[slot]??0;}return {slots};}
 export function eligibleFusionEquipment(s){
  return s.inventory.filter(it=>validEquipment(it)&&!it.locked&&!Object.values(s.equip).includes(it.id)&&!isProtected(s,it.id));
 }
@@ -1013,7 +1013,7 @@ export function forge(s,selection){
   if(canReceiveItem(s,key))s.potionStacks[key]=(s.potionStacks[key]??0)+1;else s.pendingForgeClaim={kind:'potion',potion:result};return result;
  }
  const originRace=chooseFusionOrigin({heroRace:s.race,equipment:gear});if(originRace===null)return null;
- const weights=fusionWeights(materials),slot=weighted(Object.entries(weights.slots)),quality=gear.some(it=>it.legendaryId)?3:forgeLuckyRoll(()=>gear.length?rollEquipmentInputQuality(inputs):rollQuality(qualityWeights),effectiveLuck(s),s.race);
+ const weights=fusionWeights(materials),slot=weighted(Object.entries(weights.slots).filter(([slot])=>slot!=='core'||originRace==='ashen')),quality=gear.some(it=>it.legendaryId)?3:forgeLuckyRoll(()=>gear.length?rollEquipmentInputQuality(inputs):rollQuality(qualityWeights),effectiveLuck(s),s.race);
  const level=gear.length?rollEquipmentFusionLevel(gear):{level:s.level,baseLevel:s.level,levelSource:'material'};
  const it=item(slot,level.level,null,quality,{...level,originRace,luck:effectiveLuck(s),forgeRace:s.race});if(Math.random()<dwarfDivineChance(divineProbability(fusionDivineChance(inputs),effectiveLuck(s)),s.race,DWARF_FORGE_FAVOR_CONFIG))applyForgeFavor(it);
  // Record actual owned inputs before their one-time consumption.
