@@ -20,7 +20,7 @@ export function reduceLegendaryEvent({legendaryId,state,event,context={}}={}){
    next.seenElements.push(event.damageType);next.ready=next.seenElements.length===3;
   }
   if(kind==='castEnd'&&next.pendingCastId===context.castId){
-   for(const damageType of elements)commands.push({type:'damage',targetId:next.pendingTargetId,coefficient:.18,damageType,crit:true,lifesteal:true,sourceKind:'equipmentProc',procId:`${context.castId}:elf-sixfold-echo`,reaperEligible:false,multicastEligible:false,activeCastCount:0});
+   for(const damageType of elements)commands.push({type:'damage',targetId:next.pendingTargetId,coefficient:.18,damageType,crit:true,lifesteal:true,hitCheck:true,sourceKind:'equipmentProc',procId:`${context.castId}:elf-sixfold-echo`,reaperEligible:false,multicastEligible:false,activeCastCount:0});
    next.pendingCastId=null;next.pendingTargetId=null;
   }
  }
