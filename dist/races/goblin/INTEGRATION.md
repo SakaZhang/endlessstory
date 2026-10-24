@@ -1,0 +1,11 @@
+# Goblin candidate pack
+
+43 separate monster designs + hero, each 8 generated poses, 192x192 anchor [96,176], LEFT facing per frame. 10 unique 480x270 backgrounds; existing camp reused. 50 equipment, 30 skill and 18 material raster icons. `asset-manifest.json` paths relative dist. Source atlas row identity is unique for each monster; no hue-swap substitutes. Built-in imagegen used; native proof contact sheets inspected and row crops corrected.
+
+21 active / 9 passive / 99 unlock points; branch26 leaves18 points at level45 for utilities. Active4/passive2/presets3/free resets metadata. Poison unchanged2%/3s/max5/shield-first/no crit/no amp. Ambush uses >75% and <30% target HP conditions, not crit. Contraptions finite action-reactive charges and hitDown/attackDown, never immunity or timer suppression.
+
+Integrator requirements: dispatch `raceReactive` to `applyReactiveEffect(runtime,effect,clock)`; call `onEnemyAction` once after direct enemy action with runtime/event/hero/targets. Persist runtime within encounter and carry across normal dungeon3 stages. Reactive action hits have reaperEligible:false, independentCrit:false, activeCastCount:0, recursiveCounter:false. Do not feed them back into enemy-action hook. Pass full target hp/maxHp/poisonLayers; `spore_transfer` requires selected poisoned target. Material IDs retain potion recipe `goblin.mat.01–16` IDs.
+
+Legendary fixed effects proposed for central host: goblin-ration-opening direct damage x1.12 if target HP>75%; goblin-decoy-reserve reactive debuffs +1500ms. Own-race boss total5% policy central. New dagger_balanced/sword_balanced budgets central. Innate uncommon material-quality tendency metadata needs central loot hook, excludes unique/story.
+
+Validation: `node goblin-pack-tests.mjs` passes 63 skill plans through actual typed effect host (69 applications), canonical source eligibility, all10 recovery+gem, 43 unique sprite rows, finite reactive JSON continuation, poison cap/tick invariant. Native art proof is assets, not actual production UI proof. Full engine activation/build/4h life calibration is integrator stage, not claimed passed here. Parameters copied from current approved dwarf budget by corresponding area/rank as initial comparable candidate, not final approved balance. No deployment.

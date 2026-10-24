@@ -1,0 +1,565 @@
+export const materials = {
+  "goblin.mat.01": {
+    "id": "goblin.mat.01",
+    "name": "灰帽菌",
+    "description": "菌盖覆着干灰，在石缝间成片生长，切开后仍能保持湿润。",
+    "use": "生命恢复药剂的基础菌浆；融合偏向生命属性；生命药剂主原料（提取湿润菌肉制成恢复菌浆）。",
+    "rarity": "常见",
+    "kind": "菌植",
+    "category": "常规",
+    "icon": "soul",
+    "tags": [
+      "菌植"
+    ],
+    "functionalTags": [
+      "recoveryBase"
+    ],
+    "sources": [
+      "goblin.a01.field",
+      "goblin.a02.field",
+      "goblin.a03.field",
+      "goblin.a01.dungeon",
+      "goblin.a02.dungeon",
+      "goblin.a03.dungeon",
+      "goblin.a03.boss"
+    ],
+    "qualityRange": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "uniqueHeld": false,
+    "storyOnly": false
+  },
+  "goblin.mat.02": {
+    "id": "goblin.mat.02",
+    "name": "旧铆铁",
+    "description": "从旧支架与弃甲中回收的铁料，去锈后依然坚韧。",
+    "use": "护甲、头盔与手套锻造；融合偏向防御。",
+    "rarity": "常见",
+    "kind": "金属",
+    "category": "常规",
+    "icon": "soul",
+    "tags": [
+      "金属"
+    ],
+    "functionalTags": [],
+    "sources": [
+      "goblin.a01.field",
+      "goblin.a02.field",
+      "goblin.a04.field",
+      "goblin.a01.dungeon",
+      "goblin.a02.dungeon",
+      "goblin.a04.dungeon",
+      "goblin.a03.boss"
+    ],
+    "qualityRange": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "uniqueHeld": false,
+    "storyOnly": false
+  },
+  "goblin.mat.03": {
+    "id": "goblin.mat.03",
+    "name": "韧苔纤维",
+    "description": "贴地苔毯下的长纤维，搓成细绳后不易被湿气侵蚀。",
+    "use": "鞋靴衬层与绑缚部件；融合偏向闪避。",
+    "rarity": "常见",
+    "kind": "纤维",
+    "category": "常规",
+    "icon": "soul",
+    "tags": [
+      "纤维"
+    ],
+    "functionalTags": [],
+    "sources": [
+      "goblin.a01.field",
+      "goblin.a03.field",
+      "goblin.a04.field",
+      "goblin.a01.dungeon",
+      "goblin.a03.dungeon",
+      "goblin.a04.dungeon",
+      "goblin.a03.boss"
+    ],
+    "qualityRange": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "uniqueHeld": false,
+    "storyOnly": false
+  },
+  "goblin.mat.04": {
+    "id": "goblin.mat.04",
+    "name": "盲鼠皮膜",
+    "description": "穴居兽的薄皮，顺着纹理拉伸后几乎不会发出摩擦声。",
+    "use": "轻甲与鞋靴内衬；融合偏向速度。",
+    "rarity": "常见",
+    "kind": "兽材",
+    "category": "常规",
+    "icon": "soul",
+    "tags": [
+      "兽材"
+    ],
+    "functionalTags": [],
+    "sources": [
+      "goblin.a02.field",
+      "goblin.a03.field",
+      "goblin.a05.field",
+      "goblin.a02.dungeon",
+      "goblin.a03.dungeon",
+      "goblin.a05.dungeon",
+      "goblin.a03.boss"
+    ],
+    "qualityRange": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "uniqueHeld": false,
+    "storyOnly": false
+  },
+  "goblin.mat.05": {
+    "id": "goblin.mat.05",
+    "name": "苦鳃菌",
+    "description": "菌褶带有刺鼻苦味，穴民会先滤去汁液中的杂质。",
+    "use": "削弱类药剂及相关融合素材；生命药剂主原料（滤去苦汁与杂质，提取菌肉制成恢复菌浆）。",
+    "rarity": "少见",
+    "kind": "菌植",
+    "category": "常规",
+    "icon": "soul",
+    "tags": [
+      "菌植"
+    ],
+    "functionalTags": [
+      "recoveryBase"
+    ],
+    "sources": [
+      "goblin.a03.field",
+      "goblin.a04.field",
+      "goblin.a05.field",
+      "goblin.a03.dungeon",
+      "goblin.a04.dungeon",
+      "goblin.a05.dungeon",
+      "goblin.a03.boss"
+    ],
+    "qualityRange": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "uniqueHeld": false,
+    "storyOnly": false
+  },
+  "goblin.mat.06": {
+    "id": "goblin.mat.06",
+    "name": "钩牙骨",
+    "description": "弯曲牙骨带有倒钩状天然棱线，适合制作小型刃口。",
+    "use": "武器锋部与戒指骨托；融合偏向攻击。",
+    "rarity": "常见",
+    "kind": "兽材",
+    "category": "常规",
+    "icon": "soul",
+    "tags": [
+      "兽材"
+    ],
+    "functionalTags": [],
+    "sources": [
+      "goblin.a04.field",
+      "goblin.a05.field",
+      "goblin.a06.field",
+      "goblin.a04.dungeon",
+      "goblin.a05.dungeon",
+      "goblin.a06.dungeon",
+      "goblin.a06.boss"
+    ],
+    "qualityRange": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "uniqueHeld": false,
+    "storyOnly": false
+  },
+  "goblin.mat.07": {
+    "id": "goblin.mat.07",
+    "name": "沉河砂铜",
+    "description": "暗河沉积中的铜颗粒，清洗后呈现深沉的暖色。",
+    "use": "护符导流部件；融合偏向水元素抗性。",
+    "rarity": "常见",
+    "kind": "矿物",
+    "category": "常规",
+    "icon": "soul",
+    "tags": [
+      "矿物"
+    ],
+    "functionalTags": [],
+    "sources": [
+      "goblin.a04.field",
+      "goblin.a06.field",
+      "goblin.a07.field",
+      "goblin.a04.dungeon",
+      "goblin.a06.dungeon",
+      "goblin.a07.dungeon",
+      "goblin.a06.boss"
+    ],
+    "qualityRange": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "uniqueHeld": false,
+    "storyOnly": false
+  },
+  "goblin.mat.08": {
+    "id": "goblin.mat.08",
+    "name": "冷光孢粉",
+    "description": "微弱荧光来自孢壳而非明火，藏在掌心也不会发热。",
+    "use": "光元素增幅药剂及护符融合；生命药剂主原料（提取孢粉内的滋养成分制成恢复菌浆）。",
+    "rarity": "少见",
+    "kind": "菌植",
+    "category": "常规",
+    "icon": "soul",
+    "tags": [
+      "菌植"
+    ],
+    "functionalTags": [
+      "recoveryBase"
+    ],
+    "sources": [
+      "goblin.a05.field",
+      "goblin.a06.field",
+      "goblin.a08.field",
+      "goblin.a05.dungeon",
+      "goblin.a06.dungeon",
+      "goblin.a08.dungeon",
+      "goblin.a06.boss"
+    ],
+    "qualityRange": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "uniqueHeld": false,
+    "storyOnly": false
+  },
+  "goblin.mat.09": {
+    "id": "goblin.mat.09",
+    "name": "回声石",
+    "description": "敲击后会留下短促的双响，被用来校准地下传讯声。",
+    "use": "命中类装备融合；风元素抗性药剂的矿基。",
+    "rarity": "少见",
+    "kind": "矿物",
+    "category": "常规",
+    "icon": "soul",
+    "tags": [
+      "矿物"
+    ],
+    "functionalTags": [],
+    "sources": [
+      "goblin.a06.field",
+      "goblin.a07.field",
+      "goblin.a09.field",
+      "goblin.a06.dungeon",
+      "goblin.a07.dungeon",
+      "goblin.a09.dungeon",
+      "goblin.a06.boss",
+      "goblin.a09.boss"
+    ],
+    "qualityRange": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "uniqueHeld": false,
+    "storyOnly": false
+  },
+  "goblin.mat.10": {
+    "id": "goblin.mat.10",
+    "name": "沉影菌髓",
+    "description": "菌柄内部的深紫色凝髓，离开岩隙后颜色会缓慢变浅。",
+    "use": "暗元素增幅药剂；暗元素相关装备融合；生命药剂主原料（提纯凝髓制成恢复菌浆）。",
+    "rarity": "少见",
+    "kind": "菌植",
+    "category": "常规",
+    "icon": "soul",
+    "tags": [
+      "菌植"
+    ],
+    "functionalTags": [
+      "recoveryBase"
+    ],
+    "sources": [
+      "goblin.a07.field",
+      "goblin.a08.field",
+      "goblin.a09.field",
+      "goblin.a07.dungeon",
+      "goblin.a08.dungeon",
+      "goblin.a09.dungeon",
+      "goblin.a09.boss"
+    ],
+    "qualityRange": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "uniqueHeld": false,
+    "storyOnly": false
+  },
+  "goblin.mat.11": {
+    "id": "goblin.mat.11",
+    "name": "赤须兽筋",
+    "description": "细密筋束能承受反复绷紧，是制作机关与扣带的好料。",
+    "use": "武器张力部件；融合偏向暴击数值。",
+    "rarity": "常见",
+    "kind": "兽材",
+    "category": "常规",
+    "icon": "soul",
+    "tags": [
+      "兽材"
+    ],
+    "functionalTags": [],
+    "sources": [
+      "goblin.a08.field",
+      "goblin.a09.field",
+      "goblin.a10.field",
+      "goblin.a08.dungeon",
+      "goblin.a09.dungeon",
+      "goblin.a10.dungeon",
+      "goblin.a09.boss"
+    ],
+    "qualityRange": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "uniqueHeld": false,
+    "storyOnly": false
+  },
+  "goblin.mat.12": {
+    "id": "goblin.mat.12",
+    "name": "穴壁黏晶",
+    "description": "附在深穴岩面的黏性晶粒，受压后会逐渐硬化。",
+    "use": "地元素抗性药剂；护甲类融合的稳定结合料；生命药剂主原料（通过炼金分离晶内凝胶，制成恢复矿液）。",
+    "rarity": "少见",
+    "kind": "矿物",
+    "category": "常规",
+    "icon": "soul",
+    "tags": [
+      "矿物"
+    ],
+    "functionalTags": [
+      "recoveryBase"
+    ],
+    "sources": [
+      "goblin.a08.field",
+      "goblin.a09.field",
+      "goblin.a10.field",
+      "goblin.a08.dungeon",
+      "goblin.a09.dungeon",
+      "goblin.a10.dungeon",
+      "goblin.a09.boss"
+    ],
+    "qualityRange": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "uniqueHeld": false,
+    "storyOnly": false
+  },
+  "goblin.mat.13": {
+    "id": "goblin.mat.13",
+    "name": "蜕影囊",
+    "description": "薄囊内层像叠了数道暗纹，翻动时会遮去一点反光。",
+    "use": "暗抗药剂的特殊基料；闪避、暗抗类装备改造材料。",
+    "rarity": "珍奇",
+    "kind": "兽材",
+    "category": "特殊",
+    "icon": "soul",
+    "tags": [
+      "兽材"
+    ],
+    "functionalTags": [],
+    "sources": [
+      "goblin.a03.field",
+      "goblin.a04.field",
+      "goblin.a03.dungeon",
+      "goblin.a04.dungeon",
+      "goblin.a03.boss"
+    ],
+    "qualityRange": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "uniqueHeld": false,
+    "storyOnly": false
+  },
+  "goblin.mat.14": {
+    "id": "goblin.mat.14",
+    "name": "渡河凝珠",
+    "description": "暗河细砂在多年冲刷中结成的光滑凝珠，内部留有流纹。",
+    "use": "水元素增幅药剂的特殊基料；水元素装备融合。",
+    "rarity": "珍奇",
+    "kind": "矿物",
+    "category": "特殊",
+    "icon": "soul",
+    "tags": [
+      "矿物"
+    ],
+    "functionalTags": [],
+    "sources": [
+      "goblin.a05.field",
+      "goblin.a06.field",
+      "goblin.a05.dungeon",
+      "goblin.a06.dungeon",
+      "goblin.a06.boss"
+    ],
+    "qualityRange": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "uniqueHeld": false,
+    "storyOnly": false
+  },
+  "goblin.mat.15": {
+    "id": "goblin.mat.15",
+    "name": "断响晶簇",
+    "description": "晶枝彼此接触时，周围细碎的回声会突然短暂停止。",
+    "use": "风元素增幅药剂的特殊基料；命中类词条数值洗练材料。",
+    "rarity": "珍奇",
+    "kind": "矿物",
+    "category": "特殊",
+    "icon": "soul",
+    "tags": [
+      "矿物"
+    ],
+    "functionalTags": [],
+    "sources": [
+      "goblin.a07.field",
+      "goblin.a09.field",
+      "goblin.a07.dungeon",
+      "goblin.a09.dungeon",
+      "goblin.a09.boss"
+    ],
+    "qualityRange": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "uniqueHeld": false,
+    "storyOnly": false
+  },
+  "goblin.mat.16": {
+    "id": "goblin.mat.16",
+    "name": "穴王菌核",
+    "description": "大型菌群埋在岩层中的坚实母核，脱离菌丝后仍温润有弹性。",
+    "use": "高品质生命恢复药剂的特殊基料；生命类装备洗练材料。",
+    "rarity": "珍奇",
+    "kind": "菌植",
+    "category": "特殊",
+    "icon": "soul",
+    "tags": [
+      "菌植"
+    ],
+    "functionalTags": [],
+    "sources": [
+      "goblin.a08.field",
+      "goblin.a10.field",
+      "goblin.a08.dungeon",
+      "goblin.a10.dungeon",
+      "goblin.a09.boss"
+    ],
+    "qualityRange": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "uniqueHeld": false,
+    "storyOnly": false
+  },
+  "goblin.infinity_gem_goblin": {
+    "id": "goblin.infinity_gem_goblin",
+    "name": "诡影紫石",
+    "description": "紫色石心中浮着错位的轮廓，换一个角度看又像空无一物。",
+    "use": "无限手套隐藏配方的裂穴诸部宝石；具体配方后续确定。",
+    "rarity": "珍奇",
+    "kind": "宝石",
+    "category": "特殊",
+    "icon": "soul",
+    "tags": [
+      "宝石"
+    ],
+    "functionalTags": [],
+    "sources": [
+      "goblin.a01.field",
+      "goblin.a02.field",
+      "goblin.a03.field",
+      "goblin.a04.field",
+      "goblin.a05.field",
+      "goblin.a06.field",
+      "goblin.a07.field",
+      "goblin.a08.field",
+      "goblin.a09.field",
+      "goblin.a10.field",
+      "goblin.a01.dungeon",
+      "goblin.a02.dungeon",
+      "goblin.a03.dungeon",
+      "goblin.a04.dungeon",
+      "goblin.a05.dungeon",
+      "goblin.a06.dungeon",
+      "goblin.a07.dungeon",
+      "goblin.a08.dungeon",
+      "goblin.a09.dungeon",
+      "goblin.a10.dungeon",
+      "goblin.a03.boss",
+      "goblin.a06.boss",
+      "goblin.a09.boss"
+    ],
+    "qualityRange": [
+      3
+    ],
+    "uniqueHeld": true,
+    "storyOnly": false
+  },
+  "goblin.return_token_goblin": {
+    "id": "goblin.return_token_goblin",
+    "name": "打结的铜丝",
+    "description": "几段粗细不同的旧铜丝被仔细打结，边缘已磨得圆滑。",
+    "use": "归途之环隐藏配方材料；获取配方前不展示此用途。",
+    "rarity": "珍奇",
+    "kind": "旧物",
+    "category": "特殊",
+    "icon": "soul",
+    "tags": [
+      "旧物"
+    ],
+    "functionalTags": [],
+    "sources": [],
+    "qualityRange": [
+      3
+    ],
+    "uniqueHeld": false,
+    "storyOnly": true
+  }
+};
