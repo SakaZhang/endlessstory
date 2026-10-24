@@ -1,0 +1,266 @@
+{
+  "method": "Actual E.item(setId), E.equipItem, E.stats set counts, E.step and active effect ledger. Normalize actual skill amounts by actual per-loadout ATK/HP, not falsely identical raw gear stats. 0/2/4 pieces of all three registered sets; shield and four-piece healing both tested.",
+  "rows": [
+    {
+      "setId": "human_blood_oath",
+      "count": 0,
+      "skillId": "human.cut",
+      "stats": {
+        "atk": 536,
+        "hp": 1995,
+        "shieldBonus": 0
+      },
+      "effect": {
+        "sourceId": "human.cut",
+        "type": "dot",
+        "amount": 58.96,
+        "endAt": 7100,
+        "source": {
+          "kind": "skill",
+          "id": "human.cut"
+        },
+        "status": "bleed",
+        "damageType": "physical",
+        "tickIntervalMs": 2000,
+        "nextTickAt": 3100
+      }
+    },
+    {
+      "setId": "human_blood_oath",
+      "count": 2,
+      "skillId": "human.cut",
+      "stats": {
+        "atk": 577,
+        "hp": 4083,
+        "shieldBonus": 0
+      },
+      "effect": {
+        "sourceId": "human.cut",
+        "type": "dot",
+        "amount": 76.164,
+        "endAt": 7100,
+        "source": {
+          "kind": "skill",
+          "id": "human.cut"
+        },
+        "status": "bleed",
+        "damageType": "physical",
+        "tickIntervalMs": 2000,
+        "nextTickAt": 3100
+      }
+    },
+    {
+      "setId": "human_blood_oath",
+      "count": 4,
+      "skillId": "human.cut",
+      "stats": {
+        "atk": 599,
+        "hp": 5664,
+        "shieldBonus": 0
+      },
+      "effect": {
+        "sourceId": "human.cut",
+        "type": "dot",
+        "amount": 79.068,
+        "endAt": 9100,
+        "source": {
+          "kind": "skill",
+          "id": "human.cut"
+        },
+        "status": "bleed",
+        "damageType": "physical",
+        "tickIntervalMs": 2000,
+        "nextTickAt": 3100
+      }
+    },
+    {
+      "setId": "human_royal_edge",
+      "count": 0,
+      "skillId": "human.opening",
+      "stats": {
+        "atk": 574,
+        "hp": 2010,
+        "shieldBonus": 0
+      },
+      "effect": {
+        "sourceId": "human.opening",
+        "type": "critUp",
+        "amount": 16,
+        "endAt": 7700,
+        "source": {
+          "kind": "skill",
+          "id": "human.opening"
+        }
+      }
+    },
+    {
+      "setId": "human_royal_edge",
+      "count": 2,
+      "skillId": "human.opening",
+      "stats": {
+        "atk": 586,
+        "hp": 2929,
+        "shieldBonus": 0
+      },
+      "effect": {
+        "sourceId": "human.opening",
+        "type": "critUp",
+        "amount": 22,
+        "endAt": 7700,
+        "source": {
+          "kind": "skill",
+          "id": "human.opening"
+        }
+      }
+    },
+    {
+      "setId": "human_royal_edge",
+      "count": 4,
+      "skillId": "human.opening",
+      "stats": {
+        "atk": 605,
+        "hp": 3800,
+        "shieldBonus": 0
+      },
+      "effect": {
+        "sourceId": "human.opening",
+        "type": "critUp",
+        "amount": 22,
+        "endAt": 9900,
+        "source": {
+          "kind": "skill",
+          "id": "human.opening"
+        }
+      }
+    },
+    {
+      "setId": "human_last_bastion",
+      "count": 0,
+      "skillId": "human.oath_guard",
+      "stats": {
+        "atk": 536,
+        "hp": 1999,
+        "shieldBonus": 0
+      },
+      "effect": {
+        "sourceId": "human.oath_guard",
+        "type": "shield",
+        "amount": 419.78999999999996,
+        "endAt": 7700,
+        "source": {
+          "kind": "skill",
+          "id": "human.oath_guard"
+        },
+        "counterEligible": true
+      }
+    },
+    {
+      "setId": "human_last_bastion",
+      "count": 2,
+      "skillId": "human.oath_guard",
+      "stats": {
+        "atk": 538,
+        "hp": 3005,
+        "shieldBonus": 0
+      },
+      "effect": {
+        "sourceId": "human.oath_guard",
+        "type": "shield",
+        "amount": 757.2599999999999,
+        "endAt": 7700,
+        "source": {
+          "kind": "skill",
+          "id": "human.oath_guard"
+        },
+        "counterEligible": true
+      }
+    },
+    {
+      "setId": "human_last_bastion",
+      "count": 4,
+      "skillId": "human.oath_guard",
+      "stats": {
+        "atk": 658,
+        "hp": 3754,
+        "shieldBonus": 0
+      },
+      "effect": {
+        "sourceId": "human.oath_guard",
+        "type": "shield",
+        "amount": 946.0079999999998,
+        "endAt": 7700,
+        "source": {
+          "kind": "skill",
+          "id": "human.oath_guard"
+        },
+        "counterEligible": true
+      }
+    },
+    {
+      "setId": "human_last_bastion",
+      "count": 0,
+      "skillId": "human.field_dressing",
+      "stats": {
+        "atk": 526,
+        "hp": 2030,
+        "shieldBonus": 0
+      },
+      "effect": {
+        "sourceId": "human.field_dressing",
+        "type": "healOverTime",
+        "amount": 24.36,
+        "endAt": 7100,
+        "source": {
+          "kind": "skill",
+          "id": "human.field_dressing"
+        },
+        "tickIntervalMs": 2000,
+        "nextTickAt": 3100
+      }
+    },
+    {
+      "setId": "human_last_bastion",
+      "count": 2,
+      "skillId": "human.field_dressing",
+      "stats": {
+        "atk": 538,
+        "hp": 2981,
+        "shieldBonus": 0
+      },
+      "effect": {
+        "sourceId": "human.field_dressing",
+        "type": "healOverTime",
+        "amount": 35.772,
+        "endAt": 7100,
+        "source": {
+          "kind": "skill",
+          "id": "human.field_dressing"
+        },
+        "tickIntervalMs": 2000,
+        "nextTickAt": 3100
+      }
+    },
+    {
+      "setId": "human_last_bastion",
+      "count": 4,
+      "skillId": "human.field_dressing",
+      "stats": {
+        "atk": 601,
+        "hp": 3867,
+        "shieldBonus": 0
+      },
+      "effect": {
+        "sourceId": "human.field_dressing",
+        "type": "healOverTime",
+        "amount": 53.3646,
+        "endAt": 7100,
+        "source": {
+          "kind": "skill",
+          "id": "human.field_dressing"
+        },
+        "tickIntervalMs": 2000,
+        "nextTickAt": 3100
+      }
+    }
+  ]
+}
