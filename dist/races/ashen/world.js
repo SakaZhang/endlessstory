@@ -1,3 +1,4 @@
+import {buildMaterialPools} from '../../material-loot-profile.js';
 // Candidate numeric calibration; canonical identities and source whitelists retained.
 export const areas=[
   {
@@ -3279,89 +3280,47 @@ export const materials={
     "sourceNote": "中期第5区剧情占位（第4–6区内可调整）；一次性，可永久错过"
   }
 };
-export const materialPools={
+export const materialAssociations={
   "ashen.a01.normal.1|ashen.a01.field": {
     "monsterId": "ashen.a01.normal.1",
     "nodeId": "ashen.a01.field",
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.cold_ash_sand",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.porous_basalt",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00005,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -3373,82 +3332,40 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.cold_ash_sand",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.porous_basalt",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -3460,82 +3377,40 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.cold_ash_sand",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.porous_basalt",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00005,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -3547,82 +3422,40 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.cold_ash_sand",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.porous_basalt",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -3634,82 +3467,40 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.cold_ash_sand",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.porous_basalt",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00005,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -3721,82 +3512,40 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.cold_ash_sand",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.porous_basalt",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -3808,82 +3557,40 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.cold_ash_sand",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.porous_basalt",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -3895,82 +3602,40 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.cold_ash_sand",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.weathered_mica",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -3982,82 +3647,40 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.cold_ash_sand",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.weathered_mica",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0002,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -4069,82 +3692,40 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.cold_ash_sand",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.weathered_mica",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -4156,82 +3737,40 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.cold_ash_sand",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.weathered_mica",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0002,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -4243,82 +3782,40 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.cold_ash_sand",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.weathered_mica",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -4330,82 +3827,40 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.cold_ash_sand",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.weathered_mica",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0002,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -4417,82 +3872,40 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.cold_ash_sand",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.weathered_mica",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0002,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -4504,103 +3917,49 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.cold_ash_sand",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.porous_basalt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.glass_grain",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dew_salt",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.living_vein_bud",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00015000000000000001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -4612,103 +3971,49 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.cold_ash_sand",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.porous_basalt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.glass_grain",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dew_salt",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.living_vein_bud",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00030000000000000003,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -4720,103 +4025,49 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.cold_ash_sand",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.porous_basalt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.glass_grain",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dew_salt",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.living_vein_bud",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00015000000000000001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -4828,103 +4079,49 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.cold_ash_sand",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.porous_basalt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.glass_grain",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dew_salt",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.living_vein_bud",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00030000000000000003,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -4936,103 +4133,49 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.cold_ash_sand",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.porous_basalt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.glass_grain",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dew_salt",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.living_vein_bud",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00015000000000000001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -5044,103 +4187,49 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.cold_ash_sand",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.porous_basalt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.glass_grain",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dew_salt",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.living_vein_bud",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00030000000000000003,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -5152,103 +4241,49 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.cold_ash_sand",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.porous_basalt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.glass_grain",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dew_salt",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.living_vein_bud",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00030000000000000003,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -5260,133 +4295,61 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.weathered_mica",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.glass_grain",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.2
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.living_vein_bud",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0002,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -5398,133 +4361,61 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.weathered_mica",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.glass_grain",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.2
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.living_vein_bud",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0004,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -5536,133 +4427,61 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.weathered_mica",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.glass_grain",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.2
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.living_vein_bud",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0002,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -5674,133 +4493,61 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.weathered_mica",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.glass_grain",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.2
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.living_vein_bud",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0004,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -5812,133 +4559,61 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.weathered_mica",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.glass_grain",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.2
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.living_vein_bud",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0002,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -5950,133 +4625,61 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.weathered_mica",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.glass_grain",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.2
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.living_vein_bud",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0004,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -6088,133 +4691,61 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.weathered_mica",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.glass_grain",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.2
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.living_vein_bud",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0004,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -6226,153 +4757,69 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.8,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.cold_ash_sand",
-            "weight": 0.14285714285714285,
-            "qualityWeights": [
-              0.75,
-              0.19,
-              0.054,
-              0.006
-            ]
+            "weight": 0.14285714285714285
           },
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.14285714285714285,
-            "qualityWeights": [
-              0.75,
-              0.19,
-              0.054,
-              0.006
-            ]
+            "weight": 0.14285714285714285
           },
           {
             "materialId": "ashen.porous_basalt",
-            "weight": 0.14285714285714285,
-            "qualityWeights": [
-              0.75,
-              0.19,
-              0.054,
-              0.006
-            ]
+            "weight": 0.14285714285714285
           },
           {
             "materialId": "ashen.weathered_mica",
-            "weight": 0.14285714285714285,
-            "qualityWeights": [
-              0.75,
-              0.19,
-              0.054,
-              0.006
-            ]
+            "weight": 0.14285714285714285
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.14285714285714285,
-            "qualityWeights": [
-              0.75,
-              0.19,
-              0.054,
-              0.006
-            ]
+            "weight": 0.14285714285714285
           },
           {
             "materialId": "ashen.glass_grain",
-            "weight": 0.14285714285714285,
-            "qualityWeights": [
-              0.75,
-              0.19,
-              0.054,
-              0.006
-            ]
+            "weight": 0.14285714285714285
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.14285714285714285,
-            "qualityWeights": [
-              0.75,
-              0.19,
-              0.054,
-              0.006
-            ]
+            "weight": 0.14285714285714285
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.9,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.salt_shell",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.75,
-              0.19,
-              0.054,
-              0.006
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.75,
-              0.19,
-              0.054,
-              0.006
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.75,
-              0.19,
-              0.054,
-              0.006
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.09,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.living_vein_bud",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.19,
-              0.054,
-              0.006
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0006000000000000001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -6384,102 +4831,48 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.porous_basalt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.singing_crystal",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -6491,102 +4884,48 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.porous_basalt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.singing_crystal",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0005,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -6598,102 +4937,48 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.porous_basalt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.singing_crystal",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -6705,102 +4990,48 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.porous_basalt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.singing_crystal",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0005,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -6812,102 +5043,48 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.porous_basalt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.singing_crystal",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -6919,102 +5096,48 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.porous_basalt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.singing_crystal",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0005,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -7026,102 +5149,48 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.porous_basalt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.singing_crystal",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dew_salt",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0005,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -7133,103 +5202,49 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.glass_grain",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.singing_crystal",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.obsidian_glass",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.upwind_salt",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00030000000000000003,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -7241,103 +5256,49 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.glass_grain",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.singing_crystal",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.obsidian_glass",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.upwind_salt",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0006000000000000001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -7349,103 +5310,49 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.glass_grain",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.singing_crystal",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.obsidian_glass",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.upwind_salt",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00030000000000000003,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -7457,103 +5364,49 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.glass_grain",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.singing_crystal",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.obsidian_glass",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.upwind_salt",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0006000000000000001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -7565,103 +5418,49 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.glass_grain",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.singing_crystal",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.obsidian_glass",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.upwind_salt",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00030000000000000003,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -7673,103 +5472,49 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.glass_grain",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.singing_crystal",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.obsidian_glass",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.upwind_salt",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0006000000000000001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -7781,103 +5526,49 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.glass_grain",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.singing_crystal",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.obsidian_glass",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.red_vein_ore",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.upwind_salt",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0006000000000000001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -7889,103 +5580,49 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.weathered_mica",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.singing_crystal",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.obsidian_glass",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.upwind_salt",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -7997,103 +5634,49 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.weathered_mica",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.singing_crystal",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.obsidian_glass",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.upwind_salt",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0007,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -8105,103 +5688,49 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.weathered_mica",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.singing_crystal",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.obsidian_glass",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.upwind_salt",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -8213,103 +5742,49 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.weathered_mica",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.singing_crystal",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.obsidian_glass",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.upwind_salt",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0007,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -8321,103 +5796,49 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.weathered_mica",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.singing_crystal",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.obsidian_glass",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.upwind_salt",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -8429,103 +5850,49 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.weathered_mica",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.singing_crystal",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.obsidian_glass",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.upwind_salt",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0007,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -8537,103 +5904,49 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.weathered_mica",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.singing_crystal",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.obsidian_glass",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.upwind_salt",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0007,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -8645,113 +5958,53 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.8,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.weathered_mica",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.75,
-              0.19,
-              0.054,
-              0.006
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.singing_crystal",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.75,
-              0.19,
-              0.054,
-              0.006
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.obsidian_glass",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.75,
-              0.19,
-              0.054,
-              0.006
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.75,
-              0.19,
-              0.054,
-              0.006
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.9,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.19,
-              0.054,
-              0.006
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.09,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.upwind_salt",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.75,
-              0.19,
-              0.054,
-              0.006
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.refracted_glassheart",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.75,
-              0.19,
-              0.054,
-              0.006
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00105,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -8763,113 +6016,53 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.obsidian_glass",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.refractory_stone",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.refracted_glassheart",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0004,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -8881,113 +6074,53 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.obsidian_glass",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.refractory_stone",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.refracted_glassheart",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0008,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -8999,113 +6132,53 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.obsidian_glass",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.refractory_stone",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.refracted_glassheart",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0004,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -9117,113 +6190,53 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.obsidian_glass",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.refractory_stone",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.refracted_glassheart",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0008,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -9235,113 +6248,53 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.obsidian_glass",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.refractory_stone",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.refracted_glassheart",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0004,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -9353,113 +6306,53 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.obsidian_glass",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.refractory_stone",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.refracted_glassheart",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0008,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -9471,113 +6364,53 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.obsidian_glass",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "ashen.refractory_stone",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.25
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.refracted_glassheart",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0008,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -9589,113 +6422,53 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.refractory_stone",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.refracted_glassheart",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.undying_ember",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00045000000000000004,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -9707,113 +6480,53 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.refractory_stone",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.refracted_glassheart",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.undying_ember",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0009000000000000001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -9825,113 +6538,53 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.refractory_stone",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.refracted_glassheart",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.undying_ember",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00045000000000000004,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -9943,113 +6596,53 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.refractory_stone",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.refracted_glassheart",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.undying_ember",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0009000000000000001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -10061,113 +6654,53 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.refractory_stone",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.refracted_glassheart",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.undying_ember",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00045000000000000004,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -10179,113 +6712,53 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.refractory_stone",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.refracted_glassheart",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.undying_ember",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0009000000000000001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -10297,113 +6770,53 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "ashen.refractory_stone",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.white_salt_marrow",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.refracted_glassheart",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.undying_ember",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0009000000000000001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -10415,83 +6828,41 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.refractory_stone",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.undying_ember",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0005,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -10503,83 +6874,41 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.refractory_stone",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.undying_ember",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -10591,83 +6920,41 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.refractory_stone",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.undying_ember",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0005,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -10679,83 +6966,41 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.refractory_stone",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.undying_ember",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -10767,83 +7012,41 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.refractory_stone",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.undying_ember",
-            "weight": 1,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0005,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -10855,83 +7058,41 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.refractory_stone",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.undying_ember",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -10943,83 +7104,41 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.5,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.refractory_stone",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.75,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.025,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.undying_ember",
-            "weight": 1,
-            "qualityWeights": [
-              0.7999999999999999,
-              0.155,
-              0.041,
-              0.004
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -11031,86 +7150,45 @@ export const materialPools={
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.8,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.75,
-              0.19,
-              0.054,
-              0.006
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "ashen.refractory_stone",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.75,
-              0.19,
-              0.054,
-              0.006
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.9,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.dim_crystal_sand",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.19,
-              0.054,
-              0.006
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.09,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.undying_ember",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.19,
-              0.054,
-              0.006
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0015,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "ashen.infinity_gem_ashen",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
     ]
   }
 };
+export const materialPools=buildMaterialPools({materials,monsters,associations:materialAssociations});
