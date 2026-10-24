@@ -1,0 +1,342 @@
+{
+  "candidate": true,
+  "method": "Level100 A10 field, frozen identical seven armor/jewelry items, quality2 alternate racial weapon allocations (reported separately), middle rolls atk/armor/crit; optional lifesteal replaces crit all slots; no sets/exclusives/passives. Sword-shield offensive selection retains intentional defensive weapon rider; greatsword noSustain is pure offense. 4h real scheduler and presentation observer telemetry, no production numerical changes.",
+  "results": [
+    {
+      "race": "dwarf",
+      "weapon": "hammer",
+      "style": "noSustain",
+      "drain": false,
+      "weaponStats": {
+        "atk": 257,
+        "armor": 51,
+        "hp": 171
+      },
+      "stats": {
+        "hp": 6177,
+        "atk": 981,
+        "armor": 840,
+        "lifesteal": 0
+      },
+      "potions": 47,
+      "kills": 1327,
+      "rests": 0,
+      "rounds": 10919,
+      "hpDamage": 32297.16,
+      "shieldAbsorbed": 0,
+      "shieldGranted": 0,
+      "lifesteal": 0,
+      "skillHealing": 0,
+      "potionHealing": 0,
+      "otherHealing": 29031.900000000023
+    },
+    {
+      "race": "dwarf",
+      "weapon": "hammer",
+      "style": "balanced",
+      "drain": false,
+      "weaponStats": {
+        "atk": 257,
+        "armor": 51,
+        "hp": 171
+      },
+      "stats": {
+        "hp": 6177,
+        "atk": 981,
+        "armor": 840,
+        "lifesteal": 0
+      },
+      "potions": 3,
+      "kills": 1247,
+      "rests": 0,
+      "rounds": 11050,
+      "hpDamage": 5035.980000000007,
+      "shieldAbsorbed": 33134.96000000002,
+      "shieldGranted": 1960320.3659999832,
+      "lifesteal": 0,
+      "skillHealing": 0,
+      "potionHealing": 0,
+      "otherHealing": 1853.1000000000004
+    },
+    {
+      "race": "dwarf",
+      "weapon": "hammer",
+      "style": "sustain",
+      "drain": false,
+      "weaponStats": {
+        "atk": 257,
+        "armor": 51,
+        "hp": 171
+      },
+      "stats": {
+        "hp": 6177,
+        "atk": 981,
+        "armor": 840,
+        "lifesteal": 0
+      },
+      "potions": 0,
+      "kills": 946,
+      "rests": 0,
+      "rounds": 11542,
+      "hpDamage": 14962.160000000018,
+      "shieldAbsorbed": 26963.000000000007,
+      "shieldGranted": 1949813.2889999836,
+      "lifesteal": 0,
+      "skillHealing": 14962.160000000018,
+      "potionHealing": 0,
+      "otherHealing": 0
+    },
+    {
+      "race": "dwarf",
+      "weapon": "hammer",
+      "style": "balanced",
+      "drain": true,
+      "weaponStats": {
+        "atk": 257,
+        "armor": 51,
+        "hp": 171
+      },
+      "stats": {
+        "hp": 6177,
+        "atk": 981,
+        "armor": 840,
+        "lifesteal": 48
+      },
+      "potions": 0,
+      "kills": 1150,
+      "rests": 0,
+      "rounds": 11209,
+      "hpDamage": 6775.860000000015,
+      "shieldAbsorbed": 32346.54000000001,
+      "shieldGranted": 1849245.5519999876,
+      "lifesteal": 6775.860000000017,
+      "skillHealing": 0,
+      "potionHealing": 0,
+      "otherHealing": 0
+    },
+    {
+      "race": "human",
+      "weapon": "greatsword",
+      "style": "noSustain",
+      "drain": false,
+      "weaponStats": {
+        "atk": 274,
+        "armor": 0,
+        "hp": 343
+      },
+      "stats": {
+        "hp": 6349,
+        "atk": 998,
+        "armor": 789,
+        "lifesteal": 0
+      },
+      "potions": 31,
+      "kills": 1215,
+      "rests": 0,
+      "rounds": 11514,
+      "hpDamage": 23075.40000000016,
+      "shieldAbsorbed": 0,
+      "shieldGranted": 0,
+      "lifesteal": 0,
+      "skillHealing": 0,
+      "potionHealing": 0,
+      "otherHealing": 19681.9
+    },
+    {
+      "race": "human",
+      "weapon": "greatsword",
+      "style": "balanced",
+      "drain": false,
+      "weaponStats": {
+        "atk": 274,
+        "armor": 0,
+        "hp": 343
+      },
+      "stats": {
+        "hp": 6349,
+        "atk": 998,
+        "armor": 789,
+        "lifesteal": 0
+      },
+      "potions": 5,
+      "kills": 1134,
+      "rests": 0,
+      "rounds": 11611,
+      "hpDamage": 6414,
+      "shieldAbsorbed": 14759.780000000093,
+      "shieldGranted": 1294180.1600000092,
+      "lifesteal": 0,
+      "skillHealing": 0,
+      "potionHealing": 0,
+      "otherHealing": 3174.5000000000005
+    },
+    {
+      "race": "human",
+      "weapon": "greatsword",
+      "style": "sustain",
+      "drain": false,
+      "weaponStats": {
+        "atk": 274,
+        "armor": 0,
+        "hp": 343
+      },
+      "stats": {
+        "hp": 6349,
+        "atk": 998,
+        "armor": 789,
+        "lifesteal": 0
+      },
+      "potions": 0,
+      "kills": 872,
+      "rests": 0,
+      "rounds": 12016,
+      "hpDamage": 9681,
+      "shieldAbsorbed": 12295.880000000068,
+      "shieldGranted": 1400843.360000018,
+      "lifesteal": 36,
+      "skillHealing": 9645,
+      "potionHealing": 0,
+      "otherHealing": 0
+    },
+    {
+      "race": "human",
+      "weapon": "greatsword",
+      "style": "balanced",
+      "drain": true,
+      "weaponStats": {
+        "atk": 274,
+        "armor": 0,
+        "hp": 343
+      },
+      "stats": {
+        "hp": 6349,
+        "atk": 998,
+        "armor": 789,
+        "lifesteal": 48
+      },
+      "potions": 0,
+      "kills": 1022,
+      "rests": 0,
+      "rounds": 11770,
+      "hpDamage": 8179,
+      "shieldAbsorbed": 14361.980000000089,
+      "shieldGranted": 1273863.3600000076,
+      "lifesteal": 8179.000000000002,
+      "skillHealing": 0,
+      "potionHealing": 0,
+      "otherHealing": 0
+    },
+    {
+      "race": "human",
+      "weapon": "sword_shield",
+      "style": "noSustain",
+      "drain": false,
+      "weaponStats": {
+        "atk": 257,
+        "armor": 51,
+        "hp": 171
+      },
+      "stats": {
+        "hp": 6177,
+        "atk": 981,
+        "armor": 840,
+        "lifesteal": 0
+      },
+      "potions": 10,
+      "kills": 1131,
+      "rests": 0,
+      "rounds": 11631,
+      "hpDamage": 9825.8,
+      "shieldAbsorbed": 8160.299999999967,
+      "shieldGranted": 433254.7799999956,
+      "lifesteal": 0,
+      "skillHealing": 0,
+      "potionHealing": 0,
+      "otherHealing": 6176.999999999999
+    },
+    {
+      "race": "human",
+      "weapon": "sword_shield",
+      "style": "balanced",
+      "drain": false,
+      "weaponStats": {
+        "atk": 257,
+        "armor": 51,
+        "hp": 171
+      },
+      "stats": {
+        "hp": 6177,
+        "atk": 981,
+        "armor": 840,
+        "lifesteal": 0
+      },
+      "potions": 3,
+      "kills": 1050,
+      "rests": 0,
+      "rounds": 11733,
+      "hpDamage": 5521,
+      "shieldAbsorbed": 13515.66000000008,
+      "shieldGranted": 2041004.3400000264,
+      "lifesteal": 0,
+      "skillHealing": 0,
+      "potionHealing": 0,
+      "otherHealing": 1853.0999999999995
+    },
+    {
+      "race": "human",
+      "weapon": "sword_shield",
+      "style": "sustain",
+      "drain": false,
+      "weaponStats": {
+        "atk": 257,
+        "armor": 51,
+        "hp": 171
+      },
+      "stats": {
+        "hp": 6177,
+        "atk": 981,
+        "armor": 840,
+        "lifesteal": 0
+      },
+      "potions": 0,
+      "kills": 748,
+      "rests": 0,
+      "rounds": 12365,
+      "hpDamage": 10391,
+      "shieldAbsorbed": 12455.320000000089,
+      "shieldGranted": 1739504.969999975,
+      "lifesteal": 0,
+      "skillHealing": 10391,
+      "potionHealing": 0,
+      "otherHealing": 0
+    },
+    {
+      "race": "human",
+      "weapon": "sword_shield",
+      "style": "balanced",
+      "drain": true,
+      "weaponStats": {
+        "atk": 257,
+        "armor": 51,
+        "hp": 171
+      },
+      "stats": {
+        "hp": 6177,
+        "atk": 981,
+        "armor": 840,
+        "lifesteal": 48
+      },
+      "potions": 0,
+      "kills": 950,
+      "rests": 0,
+      "rounds": 11885,
+      "hpDamage": 6363,
+      "shieldAbsorbed": 13489.16000000008,
+      "shieldGranted": 2095485.4800000282,
+      "lifesteal": 6358.999999999996,
+      "skillHealing": 0,
+      "potionHealing": 0,
+      "otherHealing": 0
+    }
+  ]
+}

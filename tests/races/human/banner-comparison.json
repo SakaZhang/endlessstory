@@ -1,0 +1,66 @@
+{
+  "candidate": true,
+  "method": "Actual equipped same level100 survival amulet, ordinary supreme versus shelter special versus legendary budget; shared starting HP40%, two direct15%-max incoming hits, then six seconds recovery. No claim of identical raw stats or general superiority; banner needs threshold, shelter protects immediately.",
+  "rows": [
+    {
+      "mode": "ordinary",
+      "stats": {
+        "hp": 2669,
+        "atk": 404,
+        "armor": 274
+      },
+      "openingShield": 0,
+      "afterFirst": {
+        "hp": 667.6000000000001,
+        "shield": 0
+      },
+      "afterSecond": {
+        "hp": 267.60000000000014,
+        "shield": 0
+      },
+      "afterHot": 267.60000000000014,
+      "hotActual": 0,
+      "icd": null
+    },
+    {
+      "mode": "shelter",
+      "stats": {
+        "hp": 2669,
+        "atk": 404,
+        "armor": 274
+      },
+      "openingShield": 400,
+      "afterFirst": {
+        "hp": 1067.6000000000001,
+        "shield": 0
+      },
+      "afterSecond": {
+        "hp": 667.6000000000001,
+        "shield": 0
+      },
+      "afterHot": 667.6000000000001,
+      "hotActual": 0,
+      "icd": null
+    },
+    {
+      "mode": "banner",
+      "stats": {
+        "hp": 2759,
+        "atk": 409,
+        "armor": 287
+      },
+      "openingShield": 0,
+      "afterFirst": {
+        "hp": 689.6000000000001,
+        "shield": 496.62
+      },
+      "afterSecond": {
+        "hp": 689.6000000000001,
+        "shield": 82.62
+      },
+      "afterHot": 937.9100000000001,
+      "hotActual": 248.30999999999995,
+      "icd": 31100
+    }
+  ]
+}

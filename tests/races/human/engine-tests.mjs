@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-const root=process.env.PIXEL_RPG_HOST??new URL('../../../',import.meta.url).pathname;
+const root=(process.env.PIXEL_RPG_HOST??new URL('../../../',import.meta.url).pathname).replace(/\/?$/, '/');
 const E=await import(root+'dist/engine.js');
 const {normalizeSkillTree}=await import(root+'dist/skill-tree-state.js');
 const {RACE_PACK}=await import(root+'dist/races/human/index.js');
