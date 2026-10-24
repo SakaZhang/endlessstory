@@ -1,0 +1,1405 @@
+{
+  "kind": "native actual live renderer, presentation-only 4–7 target stress fixtures derived from actual engine field units; NOT naturally spawned 6/7 encounters or browser",
+  "report": [
+    {
+      "race": "dwarf",
+      "count": 4,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "dwarf-hammer",
+          "ranged": false
+        },
+        "formation-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.7226890756302521,
+          "sprite": "golem"
+        },
+        "formation-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.4789915966386555,
+          "sprite": "golem"
+        },
+        "formation-2": {
+          "x": 385,
+          "y": 203,
+          "scale": 0.4789915966386555,
+          "sprite": "golem"
+        },
+        "formation-3": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.4789915966386555,
+          "sprite": "golem"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        }
+      ]
+    },
+    {
+      "race": "dwarf",
+      "count": 5,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "dwarf-hammer",
+          "ranged": false
+        },
+        "formation-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.7226890756302521,
+          "sprite": "golem"
+        },
+        "formation-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.2969187675070028,
+          "sprite": "golem"
+        },
+        "formation-2": {
+          "x": 363.3333333333333,
+          "y": 203,
+          "scale": 0.2969187675070028,
+          "sprite": "golem"
+        },
+        "formation-3": {
+          "x": 406.6666666666667,
+          "y": 203,
+          "scale": 0.2969187675070028,
+          "sprite": "golem"
+        },
+        "formation-4": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.2969187675070028,
+          "sprite": "golem"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        },
+        {
+          "id": "formation-4",
+          "atFeet": "formation-4"
+        }
+      ]
+    },
+    {
+      "race": "dwarf",
+      "count": 6,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "dwarf-hammer",
+          "ranged": false
+        },
+        "formation-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.9772727272727273,
+          "sprite": "pit-rat"
+        },
+        "formation-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.2784090909090909,
+          "sprite": "pit-rat"
+        },
+        "formation-2": {
+          "x": 352.5,
+          "y": 203,
+          "scale": 0.2784090909090909,
+          "sprite": "pit-rat"
+        },
+        "formation-3": {
+          "x": 385,
+          "y": 203,
+          "scale": 0.2784090909090909,
+          "sprite": "pit-rat"
+        },
+        "formation-4": {
+          "x": 417.5,
+          "y": 203,
+          "scale": 0.2784090909090909,
+          "sprite": "pit-rat"
+        },
+        "formation-5": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.2784090909090909,
+          "sprite": "pit-rat"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        },
+        {
+          "id": "formation-4",
+          "atFeet": "formation-4"
+        },
+        {
+          "id": "formation-5",
+          "atFeet": "formation-5"
+        }
+      ]
+    },
+    {
+      "race": "dwarf",
+      "count": 7,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "dwarf",
+          "ranged": false
+        },
+        "formation-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.8349514563106796,
+          "sprite": "raider"
+        },
+        "formation-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.17475728155339806,
+          "sprite": "raider"
+        },
+        "formation-2": {
+          "x": 346,
+          "y": 203,
+          "scale": 0.17475728155339806,
+          "sprite": "raider"
+        },
+        "formation-3": {
+          "x": 372,
+          "y": 203,
+          "scale": 0.17475728155339806,
+          "sprite": "raider"
+        },
+        "formation-4": {
+          "x": 398,
+          "y": 203,
+          "scale": 0.17475728155339806,
+          "sprite": "raider"
+        },
+        "formation-5": {
+          "x": 424,
+          "y": 203,
+          "scale": 0.17475728155339806,
+          "sprite": "raider"
+        },
+        "formation-6": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.17475728155339806,
+          "sprite": "raider"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        },
+        {
+          "id": "formation-4",
+          "atFeet": "formation-4"
+        },
+        {
+          "id": "formation-5",
+          "atFeet": "formation-5"
+        },
+        {
+          "id": "formation-6",
+          "atFeet": "formation-6"
+        }
+      ]
+    },
+    {
+      "race": "human",
+      "count": 4,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-human-sword_shield",
+          "ranged": false
+        },
+        "formation-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.5850340136054422,
+          "sprite": "race-human.a01.normal.3"
+        },
+        "formation-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.3877551020408163,
+          "sprite": "race-human.a01.normal.3"
+        },
+        "formation-2": {
+          "x": 385,
+          "y": 203,
+          "scale": 0.3877551020408163,
+          "sprite": "race-human.a01.normal.3"
+        },
+        "formation-3": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.3877551020408163,
+          "sprite": "race-human.a01.normal.3"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        }
+      ]
+    },
+    {
+      "race": "human",
+      "count": 5,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-human-greatsword",
+          "ranged": false
+        },
+        "formation-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.5850340136054422,
+          "sprite": "race-human.a01.normal.3"
+        },
+        "formation-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.24036281179138325,
+          "sprite": "race-human.a01.normal.3"
+        },
+        "formation-2": {
+          "x": 363.3333333333333,
+          "y": 203,
+          "scale": 0.24036281179138325,
+          "sprite": "race-human.a01.normal.3"
+        },
+        "formation-3": {
+          "x": 406.6666666666667,
+          "y": 203,
+          "scale": 0.24036281179138325,
+          "sprite": "race-human.a01.normal.3"
+        },
+        "formation-4": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.24036281179138325,
+          "sprite": "race-human.a01.normal.3"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        },
+        {
+          "id": "formation-4",
+          "atFeet": "formation-4"
+        }
+      ]
+    },
+    {
+      "race": "human",
+      "count": 6,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-human-sword_shield",
+          "ranged": false
+        },
+        "formation-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.5850340136054422,
+          "sprite": "race-human.a01.normal.1"
+        },
+        "formation-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.16666666666666666,
+          "sprite": "race-human.a01.normal.1"
+        },
+        "formation-2": {
+          "x": 352.5,
+          "y": 203,
+          "scale": 0.16666666666666666,
+          "sprite": "race-human.a01.normal.1"
+        },
+        "formation-3": {
+          "x": 385,
+          "y": 203,
+          "scale": 0.16666666666666666,
+          "sprite": "race-human.a01.normal.1"
+        },
+        "formation-4": {
+          "x": 417.5,
+          "y": 203,
+          "scale": 0.16666666666666666,
+          "sprite": "race-human.a01.normal.1"
+        },
+        "formation-5": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.16666666666666666,
+          "sprite": "race-human.a01.normal.1"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        },
+        {
+          "id": "formation-4",
+          "atFeet": "formation-4"
+        },
+        {
+          "id": "formation-5",
+          "atFeet": "formation-5"
+        }
+      ]
+    },
+    {
+      "race": "human",
+      "count": 7,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-human-greatsword",
+          "ranged": false
+        },
+        "formation-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.5850340136054422,
+          "sprite": "race-human.a01.normal.3"
+        },
+        "formation-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.12244897959183673,
+          "sprite": "race-human.a01.normal.3"
+        },
+        "formation-2": {
+          "x": 346,
+          "y": 203,
+          "scale": 0.12244897959183673,
+          "sprite": "race-human.a01.normal.3"
+        },
+        "formation-3": {
+          "x": 372,
+          "y": 203,
+          "scale": 0.12244897959183673,
+          "sprite": "race-human.a01.normal.3"
+        },
+        "formation-4": {
+          "x": 398,
+          "y": 203,
+          "scale": 0.12244897959183673,
+          "sprite": "race-human.a01.normal.3"
+        },
+        "formation-5": {
+          "x": 424,
+          "y": 203,
+          "scale": 0.12244897959183673,
+          "sprite": "race-human.a01.normal.3"
+        },
+        "formation-6": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.12244897959183673,
+          "sprite": "race-human.a01.normal.3"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        },
+        {
+          "id": "formation-4",
+          "atFeet": "formation-4"
+        },
+        {
+          "id": "formation-5",
+          "atFeet": "formation-5"
+        },
+        {
+          "id": "formation-6",
+          "atFeet": "formation-6"
+        }
+      ]
+    },
+    {
+      "race": "elf",
+      "count": 4,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-elf-bow",
+          "ranged": true
+        },
+        "formation-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.7818181818181819,
+          "sprite": "race-elf.a01.normal.3"
+        },
+        "formation-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.5181818181818182,
+          "sprite": "race-elf.a01.normal.3"
+        },
+        "formation-2": {
+          "x": 385,
+          "y": 203,
+          "scale": 0.5181818181818182,
+          "sprite": "race-elf.a01.normal.3"
+        },
+        "formation-3": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.5181818181818182,
+          "sprite": "race-elf.a01.normal.3"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        }
+      ]
+    },
+    {
+      "race": "elf",
+      "count": 5,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-elf-staff",
+          "ranged": true
+        },
+        "formation-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.8958333333333334,
+          "sprite": "race-elf.a01.normal.1"
+        },
+        "formation-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.3680555555555556,
+          "sprite": "race-elf.a01.normal.1"
+        },
+        "formation-2": {
+          "x": 363.3333333333333,
+          "y": 203,
+          "scale": 0.3680555555555556,
+          "sprite": "race-elf.a01.normal.1"
+        },
+        "formation-3": {
+          "x": 406.6666666666667,
+          "y": 203,
+          "scale": 0.3680555555555556,
+          "sprite": "race-elf.a01.normal.1"
+        },
+        "formation-4": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.3680555555555556,
+          "sprite": "race-elf.a01.normal.1"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        },
+        {
+          "id": "formation-4",
+          "atFeet": "formation-4"
+        }
+      ]
+    },
+    {
+      "race": "elf",
+      "count": 6,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-elf-bow",
+          "ranged": true
+        },
+        "formation-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.6277372262773723,
+          "sprite": "race-elf.a01.normal.2"
+        },
+        "formation-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.17883211678832117,
+          "sprite": "race-elf.a01.normal.2"
+        },
+        "formation-2": {
+          "x": 352.5,
+          "y": 203,
+          "scale": 0.17883211678832117,
+          "sprite": "race-elf.a01.normal.2"
+        },
+        "formation-3": {
+          "x": 385,
+          "y": 203,
+          "scale": 0.17883211678832117,
+          "sprite": "race-elf.a01.normal.2"
+        },
+        "formation-4": {
+          "x": 417.5,
+          "y": 203,
+          "scale": 0.17883211678832117,
+          "sprite": "race-elf.a01.normal.2"
+        },
+        "formation-5": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.17883211678832117,
+          "sprite": "race-elf.a01.normal.2"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        },
+        {
+          "id": "formation-4",
+          "atFeet": "formation-4"
+        },
+        {
+          "id": "formation-5",
+          "atFeet": "formation-5"
+        }
+      ]
+    },
+    {
+      "race": "elf",
+      "count": 7,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-elf-bow",
+          "ranged": true
+        },
+        "formation-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.7818181818181819,
+          "sprite": "race-elf.a01.normal.3"
+        },
+        "formation-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.16363636363636364,
+          "sprite": "race-elf.a01.normal.3"
+        },
+        "formation-2": {
+          "x": 346,
+          "y": 203,
+          "scale": 0.16363636363636364,
+          "sprite": "race-elf.a01.normal.3"
+        },
+        "formation-3": {
+          "x": 372,
+          "y": 203,
+          "scale": 0.16363636363636364,
+          "sprite": "race-elf.a01.normal.3"
+        },
+        "formation-4": {
+          "x": 398,
+          "y": 203,
+          "scale": 0.16363636363636364,
+          "sprite": "race-elf.a01.normal.3"
+        },
+        "formation-5": {
+          "x": 424,
+          "y": 203,
+          "scale": 0.16363636363636364,
+          "sprite": "race-elf.a01.normal.3"
+        },
+        "formation-6": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.16363636363636364,
+          "sprite": "race-elf.a01.normal.3"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        },
+        {
+          "id": "formation-4",
+          "atFeet": "formation-4"
+        },
+        {
+          "id": "formation-5",
+          "atFeet": "formation-5"
+        },
+        {
+          "id": "formation-6",
+          "atFeet": "formation-6"
+        }
+      ]
+    },
+    {
+      "race": "goblin",
+      "count": 4,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-dagger",
+          "ranged": false
+        },
+        "formation-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.5212121212121212,
+          "sprite": "race-goblin.a01.normal.1"
+        },
+        "formation-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.34545454545454546,
+          "sprite": "race-goblin.a01.normal.1"
+        },
+        "formation-2": {
+          "x": 385,
+          "y": 203,
+          "scale": 0.34545454545454546,
+          "sprite": "race-goblin.a01.normal.1"
+        },
+        "formation-3": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.34545454545454546,
+          "sprite": "race-goblin.a01.normal.1"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        }
+      ]
+    },
+    {
+      "race": "goblin",
+      "count": 5,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-dagger",
+          "ranged": false
+        },
+        "formation-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.5212121212121212,
+          "sprite": "race-goblin.a01.normal.3"
+        },
+        "formation-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.21414141414141416,
+          "sprite": "race-goblin.a01.normal.3"
+        },
+        "formation-2": {
+          "x": 363.3333333333333,
+          "y": 203,
+          "scale": 0.21414141414141416,
+          "sprite": "race-goblin.a01.normal.3"
+        },
+        "formation-3": {
+          "x": 406.6666666666667,
+          "y": 203,
+          "scale": 0.21414141414141416,
+          "sprite": "race-goblin.a01.normal.3"
+        },
+        "formation-4": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.21414141414141416,
+          "sprite": "race-goblin.a01.normal.3"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        },
+        {
+          "id": "formation-4",
+          "atFeet": "formation-4"
+        }
+      ]
+    },
+    {
+      "race": "goblin",
+      "count": 6,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-dagger",
+          "ranged": false
+        },
+        "formation-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.5212121212121212,
+          "sprite": "race-goblin.a01.normal.2"
+        },
+        "formation-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.1484848484848485,
+          "sprite": "race-goblin.a01.normal.2"
+        },
+        "formation-2": {
+          "x": 352.5,
+          "y": 203,
+          "scale": 0.1484848484848485,
+          "sprite": "race-goblin.a01.normal.2"
+        },
+        "formation-3": {
+          "x": 385,
+          "y": 203,
+          "scale": 0.1484848484848485,
+          "sprite": "race-goblin.a01.normal.2"
+        },
+        "formation-4": {
+          "x": 417.5,
+          "y": 203,
+          "scale": 0.1484848484848485,
+          "sprite": "race-goblin.a01.normal.2"
+        },
+        "formation-5": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.1484848484848485,
+          "sprite": "race-goblin.a01.normal.2"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        },
+        {
+          "id": "formation-4",
+          "atFeet": "formation-4"
+        },
+        {
+          "id": "formation-5",
+          "atFeet": "formation-5"
+        }
+      ]
+    },
+    {
+      "race": "goblin",
+      "count": 7,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-sword",
+          "ranged": false
+        },
+        "formation-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.5212121212121212,
+          "sprite": "race-goblin.a01.normal.1"
+        },
+        "formation-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.10909090909090909,
+          "sprite": "race-goblin.a01.normal.1"
+        },
+        "formation-2": {
+          "x": 346,
+          "y": 203,
+          "scale": 0.10909090909090909,
+          "sprite": "race-goblin.a01.normal.1"
+        },
+        "formation-3": {
+          "x": 372,
+          "y": 203,
+          "scale": 0.10909090909090909,
+          "sprite": "race-goblin.a01.normal.1"
+        },
+        "formation-4": {
+          "x": 398,
+          "y": 203,
+          "scale": 0.10909090909090909,
+          "sprite": "race-goblin.a01.normal.1"
+        },
+        "formation-5": {
+          "x": 424,
+          "y": 203,
+          "scale": 0.10909090909090909,
+          "sprite": "race-goblin.a01.normal.1"
+        },
+        "formation-6": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.10909090909090909,
+          "sprite": "race-goblin.a01.normal.1"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        },
+        {
+          "id": "formation-4",
+          "atFeet": "formation-4"
+        },
+        {
+          "id": "formation-5",
+          "atFeet": "formation-5"
+        },
+        {
+          "id": "formation-6",
+          "atFeet": "formation-6"
+        }
+      ]
+    },
+    {
+      "race": "ashen",
+      "count": 4,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-ashen-hammer",
+          "ranged": false
+        },
+        "formation-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.581081081081081,
+          "sprite": "race-ashen.a01.normal.3"
+        },
+        "formation-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.38513513513513514,
+          "sprite": "race-ashen.a01.normal.3"
+        },
+        "formation-2": {
+          "x": 385,
+          "y": 203,
+          "scale": 0.38513513513513514,
+          "sprite": "race-ashen.a01.normal.3"
+        },
+        "formation-3": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.38513513513513514,
+          "sprite": "race-ashen.a01.normal.3"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        }
+      ]
+    },
+    {
+      "race": "ashen",
+      "count": 5,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-ashen-hammer",
+          "ranged": false
+        },
+        "formation-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.581081081081081,
+          "sprite": "race-ashen.a01.normal.3"
+        },
+        "formation-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.23873873873873874,
+          "sprite": "race-ashen.a01.normal.3"
+        },
+        "formation-2": {
+          "x": 363.3333333333333,
+          "y": 203,
+          "scale": 0.23873873873873874,
+          "sprite": "race-ashen.a01.normal.3"
+        },
+        "formation-3": {
+          "x": 406.6666666666667,
+          "y": 203,
+          "scale": 0.23873873873873874,
+          "sprite": "race-ashen.a01.normal.3"
+        },
+        "formation-4": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.23873873873873874,
+          "sprite": "race-ashen.a01.normal.3"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        },
+        {
+          "id": "formation-4",
+          "atFeet": "formation-4"
+        }
+      ]
+    },
+    {
+      "race": "ashen",
+      "count": 6,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-ashen-hammer",
+          "ranged": false
+        },
+        "formation-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.5771812080536913,
+          "sprite": "race-ashen.a01.normal.1"
+        },
+        "formation-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.1644295302013423,
+          "sprite": "race-ashen.a01.normal.1"
+        },
+        "formation-2": {
+          "x": 352.5,
+          "y": 203,
+          "scale": 0.1644295302013423,
+          "sprite": "race-ashen.a01.normal.1"
+        },
+        "formation-3": {
+          "x": 385,
+          "y": 203,
+          "scale": 0.1644295302013423,
+          "sprite": "race-ashen.a01.normal.1"
+        },
+        "formation-4": {
+          "x": 417.5,
+          "y": 203,
+          "scale": 0.1644295302013423,
+          "sprite": "race-ashen.a01.normal.1"
+        },
+        "formation-5": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.1644295302013423,
+          "sprite": "race-ashen.a01.normal.1"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        },
+        {
+          "id": "formation-4",
+          "atFeet": "formation-4"
+        },
+        {
+          "id": "formation-5",
+          "atFeet": "formation-5"
+        }
+      ]
+    },
+    {
+      "race": "ashen",
+      "count": 7,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-ashen-armguard",
+          "ranged": false
+        },
+        "formation-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.5771812080536913,
+          "sprite": "race-ashen.a01.normal.1"
+        },
+        "formation-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.12080536912751678,
+          "sprite": "race-ashen.a01.normal.1"
+        },
+        "formation-2": {
+          "x": 346,
+          "y": 203,
+          "scale": 0.12080536912751678,
+          "sprite": "race-ashen.a01.normal.1"
+        },
+        "formation-3": {
+          "x": 372,
+          "y": 203,
+          "scale": 0.12080536912751678,
+          "sprite": "race-ashen.a01.normal.1"
+        },
+        "formation-4": {
+          "x": 398,
+          "y": 203,
+          "scale": 0.12080536912751678,
+          "sprite": "race-ashen.a01.normal.1"
+        },
+        "formation-5": {
+          "x": 424,
+          "y": 203,
+          "scale": 0.12080536912751678,
+          "sprite": "race-ashen.a01.normal.1"
+        },
+        "formation-6": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.12080536912751678,
+          "sprite": "race-ashen.a01.normal.1"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        },
+        {
+          "id": "formation-4",
+          "atFeet": "formation-4"
+        },
+        {
+          "id": "formation-5",
+          "atFeet": "formation-5"
+        },
+        {
+          "id": "formation-6",
+          "atFeet": "formation-6"
+        }
+      ]
+    }
+  ]
+}

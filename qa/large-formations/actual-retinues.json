@@ -1,0 +1,709 @@
+{
+  "kind": "12 actual host retinue spawns and first-step captured combat; native production renderer, no browser",
+  "records": [
+    {
+      "monster": "human.a06.elite",
+      "ids": [
+        {
+          "id": "m2-15600-11-enemy-0"
+        },
+        {
+          "id": "m2-15600-11-enemy-1",
+          "followerMonsterId": "human.a06.normal.2"
+        },
+        {
+          "id": "m2-15600-11-enemy-2",
+          "followerMonsterId": "human.a06.normal.2"
+        },
+        {
+          "id": "m2-15600-11-enemy-3",
+          "followerMonsterId": "human.a06.normal.2"
+        },
+        {
+          "id": "m2-15600-11-enemy-4",
+          "followerMonsterId": "human.a06.normal.2"
+        }
+      ],
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-human-sword_shield",
+          "ranged": false
+        },
+        "m2-15600-11-enemy-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.5850340136054422,
+          "sprite": "race-human.a06.elite"
+        },
+        "m2-15600-11-enemy-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.24036281179138325,
+          "sprite": "race-human.a06.normal.2"
+        },
+        "m2-15600-11-enemy-2": {
+          "x": 363.3333333333333,
+          "y": 203,
+          "scale": 0.24036281179138325,
+          "sprite": "race-human.a06.normal.2"
+        },
+        "m2-15600-11-enemy-3": {
+          "x": 406.6666666666667,
+          "y": 203,
+          "scale": 0.24036281179138325,
+          "sprite": "race-human.a06.normal.2"
+        },
+        "m2-15600-11-enemy-4": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.24036281179138325,
+          "sprite": "race-human.a06.normal.2"
+        }
+      }
+    },
+    {
+      "monster": "human.a08.elite",
+      "ids": [
+        {
+          "id": "m2-15600-22-enemy-0"
+        },
+        {
+          "id": "m2-15600-22-enemy-1",
+          "followerMonsterId": "human.a08.normal.1"
+        },
+        {
+          "id": "m2-15600-22-enemy-2",
+          "followerMonsterId": "human.a08.normal.1"
+        },
+        {
+          "id": "m2-15600-22-enemy-3",
+          "followerMonsterId": "human.a08.normal.1"
+        },
+        {
+          "id": "m2-15600-22-enemy-4",
+          "followerMonsterId": "human.a08.normal.1"
+        }
+      ],
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-human-sword_shield",
+          "ranged": false
+        },
+        "m2-15600-22-enemy-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.5850340136054422,
+          "sprite": "race-human.a08.elite"
+        },
+        "m2-15600-22-enemy-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.2560386473429952,
+          "sprite": "race-human.a08.normal.1"
+        },
+        "m2-15600-22-enemy-2": {
+          "x": 363.3333333333333,
+          "y": 203,
+          "scale": 0.2560386473429952,
+          "sprite": "race-human.a08.normal.1"
+        },
+        "m2-15600-22-enemy-3": {
+          "x": 406.6666666666667,
+          "y": 203,
+          "scale": 0.2560386473429952,
+          "sprite": "race-human.a08.normal.1"
+        },
+        "m2-15600-22-enemy-4": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.2560386473429952,
+          "sprite": "race-human.a08.normal.1"
+        }
+      }
+    },
+    {
+      "monster": "human.a09.boss",
+      "ids": [
+        {
+          "id": "m2-10000-31-enemy-0"
+        },
+        {
+          "id": "m2-10000-31-enemy-1",
+          "followerMonsterId": "human.a09.normal.1"
+        },
+        {
+          "id": "m2-10000-31-enemy-2",
+          "followerMonsterId": "human.a09.normal.1"
+        },
+        {
+          "id": "m2-10000-31-enemy-3",
+          "followerMonsterId": "human.a09.normal.1"
+        }
+      ],
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-human-sword_shield",
+          "ranged": false
+        },
+        "m2-10000-31-enemy-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.581081081081081,
+          "sprite": "race-human.a09.boss"
+        },
+        "m2-10000-31-enemy-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.40559440559440557,
+          "sprite": "race-human.a09.normal.1"
+        },
+        "m2-10000-31-enemy-2": {
+          "x": 385,
+          "y": 203,
+          "scale": 0.40559440559440557,
+          "sprite": "race-human.a09.normal.1"
+        },
+        "m2-10000-31-enemy-3": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.40559440559440557,
+          "sprite": "race-human.a09.normal.1"
+        }
+      }
+    },
+    {
+      "monster": "elf.a05.elite",
+      "ids": [
+        {
+          "id": "m2-15600-42-enemy-0"
+        },
+        {
+          "id": "m2-15600-42-enemy-1",
+          "followerMonsterId": "elf.a05.normal.2"
+        },
+        {
+          "id": "m2-15600-42-enemy-2",
+          "followerMonsterId": "elf.a05.normal.2"
+        },
+        {
+          "id": "m2-15600-42-enemy-3",
+          "followerMonsterId": "elf.a05.normal.2"
+        },
+        {
+          "id": "m2-15600-42-enemy-4",
+          "followerMonsterId": "elf.a05.normal.2"
+        }
+      ],
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-elf-bow",
+          "ranged": true
+        },
+        "m2-15600-42-enemy-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.5341614906832298,
+          "sprite": "race-elf.a05.elite"
+        },
+        "m2-15600-42-enemy-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.32415902140672787,
+          "sprite": "race-elf.a05.normal.2"
+        },
+        "m2-15600-42-enemy-2": {
+          "x": 363.3333333333333,
+          "y": 203,
+          "scale": 0.32415902140672787,
+          "sprite": "race-elf.a05.normal.2"
+        },
+        "m2-15600-42-enemy-3": {
+          "x": 406.6666666666667,
+          "y": 203,
+          "scale": 0.32415902140672787,
+          "sprite": "race-elf.a05.normal.2"
+        },
+        "m2-15600-42-enemy-4": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.32415902140672787,
+          "sprite": "race-elf.a05.normal.2"
+        }
+      }
+    },
+    {
+      "monster": "elf.a08.elite",
+      "ids": [
+        {
+          "id": "m2-15600-53-enemy-0"
+        },
+        {
+          "id": "m2-15600-53-enemy-1",
+          "followerMonsterId": "elf.a08.normal.2"
+        },
+        {
+          "id": "m2-15600-53-enemy-2",
+          "followerMonsterId": "elf.a08.normal.2"
+        },
+        {
+          "id": "m2-15600-53-enemy-3",
+          "followerMonsterId": "elf.a08.normal.2"
+        },
+        {
+          "id": "m2-15600-53-enemy-4",
+          "followerMonsterId": "elf.a08.normal.2"
+        }
+      ],
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-elf-bow",
+          "ranged": true
+        },
+        "m2-15600-53-enemy-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.5408805031446541,
+          "sprite": "race-elf.a08.elite"
+        },
+        "m2-15600-53-enemy-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.22362869198312238,
+          "sprite": "race-elf.a08.normal.2"
+        },
+        "m2-15600-53-enemy-2": {
+          "x": 363.3333333333333,
+          "y": 203,
+          "scale": 0.22362869198312238,
+          "sprite": "race-elf.a08.normal.2"
+        },
+        "m2-15600-53-enemy-3": {
+          "x": 406.6666666666667,
+          "y": 203,
+          "scale": 0.22362869198312238,
+          "sprite": "race-elf.a08.normal.2"
+        },
+        "m2-15600-53-enemy-4": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.22362869198312238,
+          "sprite": "race-elf.a08.normal.2"
+        }
+      }
+    },
+    {
+      "monster": "elf.a10.boss",
+      "ids": [
+        {
+          "id": "m2-10000-62-enemy-0"
+        },
+        {
+          "id": "m2-10000-62-enemy-1",
+          "followerMonsterId": "elf.a10.normal.2"
+        },
+        {
+          "id": "m2-10000-62-enemy-2",
+          "followerMonsterId": "elf.a10.normal.2"
+        },
+        {
+          "id": "m2-10000-62-enemy-3",
+          "followerMonsterId": "elf.a10.normal.2"
+        }
+      ],
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-elf-bow",
+          "ranged": true
+        },
+        "m2-10000-62-enemy-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.5149700598802395,
+          "sprite": "race-elf.a10.boss"
+        },
+        "m2-10000-62-enemy-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.4789915966386555,
+          "sprite": "race-elf.a10.normal.2"
+        },
+        "m2-10000-62-enemy-2": {
+          "x": 385,
+          "y": 203,
+          "scale": 0.4789915966386555,
+          "sprite": "race-elf.a10.normal.2"
+        },
+        "m2-10000-62-enemy-3": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.4789915966386555,
+          "sprite": "race-elf.a10.normal.2"
+        }
+      }
+    },
+    {
+      "monster": "goblin.a06.elite",
+      "ids": [
+        {
+          "id": "m2-15600-73-enemy-0"
+        },
+        {
+          "id": "m2-15600-73-enemy-1",
+          "followerMonsterId": "goblin.a06.normal.1"
+        },
+        {
+          "id": "m2-15600-73-enemy-2",
+          "followerMonsterId": "goblin.a06.normal.1"
+        },
+        {
+          "id": "m2-15600-73-enemy-3",
+          "followerMonsterId": "goblin.a06.normal.1"
+        },
+        {
+          "id": "m2-15600-73-enemy-4",
+          "followerMonsterId": "goblin.a06.normal.1"
+        }
+      ],
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-dagger",
+          "ranged": false
+        },
+        "m2-15600-73-enemy-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.5212121212121212,
+          "sprite": "race-goblin.a06.elite"
+        },
+        "m2-15600-73-enemy-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.21414141414141416,
+          "sprite": "race-goblin.a06.normal.1"
+        },
+        "m2-15600-73-enemy-2": {
+          "x": 363.3333333333333,
+          "y": 203,
+          "scale": 0.21414141414141416,
+          "sprite": "race-goblin.a06.normal.1"
+        },
+        "m2-15600-73-enemy-3": {
+          "x": 406.6666666666667,
+          "y": 203,
+          "scale": 0.21414141414141416,
+          "sprite": "race-goblin.a06.normal.1"
+        },
+        "m2-15600-73-enemy-4": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.21414141414141416,
+          "sprite": "race-goblin.a06.normal.1"
+        }
+      }
+    },
+    {
+      "monster": "goblin.a07.elite",
+      "ids": [
+        {
+          "id": "m2-15600-84-enemy-0"
+        },
+        {
+          "id": "m2-15600-84-enemy-1",
+          "followerMonsterId": "goblin.a07.normal.1"
+        },
+        {
+          "id": "m2-15600-84-enemy-2",
+          "followerMonsterId": "goblin.a07.normal.1"
+        },
+        {
+          "id": "m2-15600-84-enemy-3",
+          "followerMonsterId": "goblin.a07.normal.1"
+        },
+        {
+          "id": "m2-15600-84-enemy-4",
+          "followerMonsterId": "goblin.a07.normal.1"
+        }
+      ],
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-sword",
+          "ranged": false
+        },
+        "m2-15600-84-enemy-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.5212121212121212,
+          "sprite": "race-goblin.a07.elite"
+        },
+        "m2-15600-84-enemy-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.21414141414141416,
+          "sprite": "race-goblin.a07.normal.1"
+        },
+        "m2-15600-84-enemy-2": {
+          "x": 363.3333333333333,
+          "y": 203,
+          "scale": 0.21414141414141416,
+          "sprite": "race-goblin.a07.normal.1"
+        },
+        "m2-15600-84-enemy-3": {
+          "x": 406.6666666666667,
+          "y": 203,
+          "scale": 0.21414141414141416,
+          "sprite": "race-goblin.a07.normal.1"
+        },
+        "m2-15600-84-enemy-4": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.21414141414141416,
+          "sprite": "race-goblin.a07.normal.1"
+        }
+      }
+    },
+    {
+      "monster": "goblin.a09.boss",
+      "ids": [
+        {
+          "id": "m2-10000-93-enemy-0"
+        },
+        {
+          "id": "m2-10000-93-enemy-1",
+          "followerMonsterId": "goblin.a09.normal.2"
+        },
+        {
+          "id": "m2-10000-93-enemy-2",
+          "followerMonsterId": "goblin.a09.normal.2"
+        },
+        {
+          "id": "m2-10000-93-enemy-3",
+          "followerMonsterId": "goblin.a09.normal.2"
+        }
+      ],
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-dagger",
+          "ranged": false
+        },
+        "m2-10000-93-enemy-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.5212121212121212,
+          "sprite": "race-goblin.a09.boss"
+        },
+        "m2-10000-93-enemy-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.34545454545454546,
+          "sprite": "race-goblin.a09.normal.2"
+        },
+        "m2-10000-93-enemy-2": {
+          "x": 385,
+          "y": 203,
+          "scale": 0.34545454545454546,
+          "sprite": "race-goblin.a09.normal.2"
+        },
+        "m2-10000-93-enemy-3": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.34545454545454546,
+          "sprite": "race-goblin.a09.normal.2"
+        }
+      }
+    },
+    {
+      "monster": "ashen.a06.elite",
+      "ids": [
+        {
+          "id": "m2-15600-105-enemy-0"
+        },
+        {
+          "id": "m2-15600-105-enemy-1",
+          "followerMonsterId": "ashen.a06.normal.3"
+        },
+        {
+          "id": "m2-15600-105-enemy-2",
+          "followerMonsterId": "ashen.a06.normal.3"
+        },
+        {
+          "id": "m2-15600-105-enemy-3",
+          "followerMonsterId": "ashen.a06.normal.3"
+        },
+        {
+          "id": "m2-15600-105-enemy-4",
+          "followerMonsterId": "ashen.a06.normal.3"
+        }
+      ],
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-ashen-armguard",
+          "ranged": false
+        },
+        "m2-15600-105-enemy-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.5771812080536913,
+          "sprite": "race-ashen.a06.elite"
+        },
+        "m2-15600-105-enemy-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.24200913242009134,
+          "sprite": "race-ashen.a06.normal.3"
+        },
+        "m2-15600-105-enemy-2": {
+          "x": 363.3333333333333,
+          "y": 203,
+          "scale": 0.24200913242009134,
+          "sprite": "race-ashen.a06.normal.3"
+        },
+        "m2-15600-105-enemy-3": {
+          "x": 406.6666666666667,
+          "y": 203,
+          "scale": 0.24200913242009134,
+          "sprite": "race-ashen.a06.normal.3"
+        },
+        "m2-15600-105-enemy-4": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.24200913242009134,
+          "sprite": "race-ashen.a06.normal.3"
+        }
+      }
+    },
+    {
+      "monster": "ashen.a09.elite",
+      "ids": [
+        {
+          "id": "m2-15600-117-enemy-0"
+        },
+        {
+          "id": "m2-15600-117-enemy-1",
+          "followerMonsterId": "ashen.a09.normal.2"
+        },
+        {
+          "id": "m2-15600-117-enemy-2",
+          "followerMonsterId": "ashen.a09.normal.2"
+        },
+        {
+          "id": "m2-15600-117-enemy-3",
+          "followerMonsterId": "ashen.a09.normal.2"
+        },
+        {
+          "id": "m2-15600-117-enemy-4",
+          "followerMonsterId": "ashen.a09.normal.2"
+        }
+      ],
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-ashen-armguard",
+          "ranged": false
+        },
+        "m2-15600-117-enemy-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.5771812080536913,
+          "sprite": "race-ashen.a09.elite"
+        },
+        "m2-15600-117-enemy-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.23713646532438482,
+          "sprite": "race-ashen.a09.normal.2"
+        },
+        "m2-15600-117-enemy-2": {
+          "x": 363.3333333333333,
+          "y": 203,
+          "scale": 0.23713646532438482,
+          "sprite": "race-ashen.a09.normal.2"
+        },
+        "m2-15600-117-enemy-3": {
+          "x": 406.6666666666667,
+          "y": 203,
+          "scale": 0.23713646532438482,
+          "sprite": "race-ashen.a09.normal.2"
+        },
+        "m2-15600-117-enemy-4": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.23713646532438482,
+          "sprite": "race-ashen.a09.normal.2"
+        }
+      }
+    },
+    {
+      "monster": "ashen.a10.boss",
+      "ids": [
+        {
+          "id": "m2-10000-127-enemy-0"
+        },
+        {
+          "id": "m2-10000-127-enemy-1",
+          "followerMonsterId": "ashen.a10.normal.3"
+        },
+        {
+          "id": "m2-10000-127-enemy-2",
+          "followerMonsterId": "ashen.a10.normal.3"
+        },
+        {
+          "id": "m2-10000-127-enemy-3",
+          "followerMonsterId": "ashen.a10.normal.3"
+        }
+      ],
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-ashen-armguard",
+          "ranged": false
+        },
+        "m2-10000-127-enemy-0": {
+          "x": 240,
+          "y": 203,
+          "scale": 0.5029239766081871,
+          "sprite": "race-ashen.a10.boss"
+        },
+        "m2-10000-127-enemy-1": {
+          "x": 320,
+          "y": 203,
+          "scale": 0.38513513513513514,
+          "sprite": "race-ashen.a10.normal.3"
+        },
+        "m2-10000-127-enemy-2": {
+          "x": 385,
+          "y": 203,
+          "scale": 0.38513513513513514,
+          "sprite": "race-ashen.a10.normal.3"
+        },
+        "m2-10000-127-enemy-3": {
+          "x": 450,
+          "y": 203,
+          "scale": 0.38513513513513514,
+          "sprite": "race-ashen.a10.normal.3"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,1385 @@
+{
+  "kind": "native actual live renderer, presentation-only 4–7 target stress fixtures derived from actual engine field units; NOT naturally spawned 6/7 encounters or browser",
+  "report": [
+    {
+      "race": "dwarf",
+      "count": 4,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "dwarf-hammer"
+        },
+        "formation-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "golem"
+        },
+        "formation-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "golem"
+        },
+        "formation-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "golem"
+        },
+        "formation-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "golem"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        }
+      ]
+    },
+    {
+      "race": "dwarf",
+      "count": 5,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "dwarf-hammer"
+        },
+        "formation-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "golem"
+        },
+        "formation-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "golem"
+        },
+        "formation-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "golem"
+        },
+        "formation-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "golem"
+        },
+        "formation-4": {
+          "x": 385,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "golem"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        },
+        {
+          "id": "formation-4",
+          "atFeet": "formation-4"
+        }
+      ]
+    },
+    {
+      "race": "dwarf",
+      "count": 6,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "dwarf-hammer"
+        },
+        "formation-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "pit-rat"
+        },
+        "formation-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "pit-rat"
+        },
+        "formation-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "pit-rat"
+        },
+        "formation-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "pit-rat"
+        },
+        "formation-4": {
+          "x": 385,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "pit-rat"
+        },
+        "formation-5": {
+          "x": 445,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "pit-rat"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        },
+        {
+          "id": "formation-4",
+          "atFeet": "formation-4"
+        },
+        {
+          "id": "formation-5",
+          "atFeet": "formation-5"
+        }
+      ]
+    },
+    {
+      "race": "dwarf",
+      "count": 7,
+      "status": "fallback",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "dwarf"
+        },
+        "formation-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "raider"
+        },
+        "formation-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "raider"
+        },
+        "formation-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "raider"
+        },
+        "formation-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "raider"
+        },
+        "formation-4": {
+          "x": 385,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "raider"
+        },
+        "formation-5": {
+          "x": 445,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "raider"
+        },
+        "formation-6": {
+          "x": 275,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "raider"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": null
+        },
+        {
+          "id": "formation-1",
+          "atFeet": null
+        },
+        {
+          "id": "formation-2",
+          "atFeet": null
+        },
+        {
+          "id": "formation-3",
+          "atFeet": null
+        },
+        {
+          "id": "formation-4",
+          "atFeet": null
+        },
+        {
+          "id": "formation-5",
+          "atFeet": null
+        },
+        {
+          "id": "formation-6",
+          "atFeet": null
+        }
+      ]
+    },
+    {
+      "race": "human",
+      "count": 4,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-human-sword_shield"
+        },
+        "formation-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-human.a01.normal.3"
+        },
+        "formation-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-human.a01.normal.3"
+        },
+        "formation-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-human.a01.normal.3"
+        },
+        "formation-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-human.a01.normal.3"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        }
+      ]
+    },
+    {
+      "race": "human",
+      "count": 5,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-human-greatsword"
+        },
+        "formation-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-human.a01.normal.3"
+        },
+        "formation-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-human.a01.normal.3"
+        },
+        "formation-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-human.a01.normal.3"
+        },
+        "formation-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-human.a01.normal.3"
+        },
+        "formation-4": {
+          "x": 385,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-human.a01.normal.3"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        },
+        {
+          "id": "formation-4",
+          "atFeet": "formation-4"
+        }
+      ]
+    },
+    {
+      "race": "human",
+      "count": 6,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-human-sword_shield"
+        },
+        "formation-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-human.a01.normal.1"
+        },
+        "formation-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-human.a01.normal.1"
+        },
+        "formation-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-human.a01.normal.1"
+        },
+        "formation-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-human.a01.normal.1"
+        },
+        "formation-4": {
+          "x": 385,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-human.a01.normal.1"
+        },
+        "formation-5": {
+          "x": 445,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-human.a01.normal.1"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        },
+        {
+          "id": "formation-4",
+          "atFeet": "formation-4"
+        },
+        {
+          "id": "formation-5",
+          "atFeet": "formation-5"
+        }
+      ]
+    },
+    {
+      "race": "human",
+      "count": 7,
+      "status": "fallback",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-human-greatsword"
+        },
+        "formation-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-human.a01.normal.3"
+        },
+        "formation-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-human.a01.normal.3"
+        },
+        "formation-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-human.a01.normal.3"
+        },
+        "formation-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-human.a01.normal.3"
+        },
+        "formation-4": {
+          "x": 385,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-human.a01.normal.3"
+        },
+        "formation-5": {
+          "x": 445,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-human.a01.normal.3"
+        },
+        "formation-6": {
+          "x": 275,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-human.a01.normal.3"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": null
+        },
+        {
+          "id": "formation-1",
+          "atFeet": null
+        },
+        {
+          "id": "formation-2",
+          "atFeet": null
+        },
+        {
+          "id": "formation-3",
+          "atFeet": null
+        },
+        {
+          "id": "formation-4",
+          "atFeet": null
+        },
+        {
+          "id": "formation-5",
+          "atFeet": null
+        },
+        {
+          "id": "formation-6",
+          "atFeet": null
+        }
+      ]
+    },
+    {
+      "race": "elf",
+      "count": 4,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-elf-bow"
+        },
+        "formation-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-elf.a01.normal.3"
+        },
+        "formation-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-elf.a01.normal.3"
+        },
+        "formation-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-elf.a01.normal.3"
+        },
+        "formation-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-elf.a01.normal.3"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        }
+      ]
+    },
+    {
+      "race": "elf",
+      "count": 5,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-elf-staff"
+        },
+        "formation-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-elf.a01.normal.1"
+        },
+        "formation-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-elf.a01.normal.1"
+        },
+        "formation-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-elf.a01.normal.1"
+        },
+        "formation-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-elf.a01.normal.1"
+        },
+        "formation-4": {
+          "x": 385,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-elf.a01.normal.1"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        },
+        {
+          "id": "formation-4",
+          "atFeet": "formation-4"
+        }
+      ]
+    },
+    {
+      "race": "elf",
+      "count": 6,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-elf-bow"
+        },
+        "formation-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-elf.a01.normal.2"
+        },
+        "formation-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-elf.a01.normal.2"
+        },
+        "formation-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-elf.a01.normal.2"
+        },
+        "formation-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-elf.a01.normal.2"
+        },
+        "formation-4": {
+          "x": 385,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-elf.a01.normal.2"
+        },
+        "formation-5": {
+          "x": 445,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-elf.a01.normal.2"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        },
+        {
+          "id": "formation-4",
+          "atFeet": "formation-4"
+        },
+        {
+          "id": "formation-5",
+          "atFeet": "formation-5"
+        }
+      ]
+    },
+    {
+      "race": "elf",
+      "count": 7,
+      "status": "fallback",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-elf-bow"
+        },
+        "formation-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-elf.a01.normal.3"
+        },
+        "formation-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-elf.a01.normal.3"
+        },
+        "formation-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-elf.a01.normal.3"
+        },
+        "formation-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-elf.a01.normal.3"
+        },
+        "formation-4": {
+          "x": 385,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-elf.a01.normal.3"
+        },
+        "formation-5": {
+          "x": 445,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-elf.a01.normal.3"
+        },
+        "formation-6": {
+          "x": 275,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-elf.a01.normal.3"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": null
+        },
+        {
+          "id": "formation-1",
+          "atFeet": null
+        },
+        {
+          "id": "formation-2",
+          "atFeet": null
+        },
+        {
+          "id": "formation-3",
+          "atFeet": null
+        },
+        {
+          "id": "formation-4",
+          "atFeet": null
+        },
+        {
+          "id": "formation-5",
+          "atFeet": null
+        },
+        {
+          "id": "formation-6",
+          "atFeet": null
+        }
+      ]
+    },
+    {
+      "race": "goblin",
+      "count": 4,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-dagger"
+        },
+        "formation-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-goblin.a01.normal.1"
+        },
+        "formation-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a01.normal.1"
+        },
+        "formation-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a01.normal.1"
+        },
+        "formation-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-goblin.a01.normal.1"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        }
+      ]
+    },
+    {
+      "race": "goblin",
+      "count": 5,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-dagger"
+        },
+        "formation-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-goblin.a01.normal.3"
+        },
+        "formation-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a01.normal.3"
+        },
+        "formation-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a01.normal.3"
+        },
+        "formation-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-goblin.a01.normal.3"
+        },
+        "formation-4": {
+          "x": 385,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-goblin.a01.normal.3"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        },
+        {
+          "id": "formation-4",
+          "atFeet": "formation-4"
+        }
+      ]
+    },
+    {
+      "race": "goblin",
+      "count": 6,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-dagger"
+        },
+        "formation-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-goblin.a01.normal.2"
+        },
+        "formation-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a01.normal.2"
+        },
+        "formation-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a01.normal.2"
+        },
+        "formation-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-goblin.a01.normal.2"
+        },
+        "formation-4": {
+          "x": 385,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-goblin.a01.normal.2"
+        },
+        "formation-5": {
+          "x": 445,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-goblin.a01.normal.2"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        },
+        {
+          "id": "formation-4",
+          "atFeet": "formation-4"
+        },
+        {
+          "id": "formation-5",
+          "atFeet": "formation-5"
+        }
+      ]
+    },
+    {
+      "race": "goblin",
+      "count": 7,
+      "status": "fallback",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-sword"
+        },
+        "formation-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-goblin.a01.normal.1"
+        },
+        "formation-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a01.normal.1"
+        },
+        "formation-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a01.normal.1"
+        },
+        "formation-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-goblin.a01.normal.1"
+        },
+        "formation-4": {
+          "x": 385,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-goblin.a01.normal.1"
+        },
+        "formation-5": {
+          "x": 445,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-goblin.a01.normal.1"
+        },
+        "formation-6": {
+          "x": 275,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a01.normal.1"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": null
+        },
+        {
+          "id": "formation-1",
+          "atFeet": null
+        },
+        {
+          "id": "formation-2",
+          "atFeet": null
+        },
+        {
+          "id": "formation-3",
+          "atFeet": null
+        },
+        {
+          "id": "formation-4",
+          "atFeet": null
+        },
+        {
+          "id": "formation-5",
+          "atFeet": null
+        },
+        {
+          "id": "formation-6",
+          "atFeet": null
+        }
+      ]
+    },
+    {
+      "race": "ashen",
+      "count": 4,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-ashen-hammer"
+        },
+        "formation-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-ashen.a01.normal.3"
+        },
+        "formation-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-ashen.a01.normal.3"
+        },
+        "formation-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-ashen.a01.normal.3"
+        },
+        "formation-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-ashen.a01.normal.3"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        }
+      ]
+    },
+    {
+      "race": "ashen",
+      "count": 5,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-ashen-hammer"
+        },
+        "formation-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-ashen.a01.normal.3"
+        },
+        "formation-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-ashen.a01.normal.3"
+        },
+        "formation-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-ashen.a01.normal.3"
+        },
+        "formation-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-ashen.a01.normal.3"
+        },
+        "formation-4": {
+          "x": 385,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-ashen.a01.normal.3"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        },
+        {
+          "id": "formation-4",
+          "atFeet": "formation-4"
+        }
+      ]
+    },
+    {
+      "race": "ashen",
+      "count": 6,
+      "status": "ready",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-ashen-hammer"
+        },
+        "formation-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-ashen.a01.normal.1"
+        },
+        "formation-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-ashen.a01.normal.1"
+        },
+        "formation-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-ashen.a01.normal.1"
+        },
+        "formation-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-ashen.a01.normal.1"
+        },
+        "formation-4": {
+          "x": 385,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-ashen.a01.normal.1"
+        },
+        "formation-5": {
+          "x": 445,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-ashen.a01.normal.1"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": "formation-0"
+        },
+        {
+          "id": "formation-1",
+          "atFeet": "formation-1"
+        },
+        {
+          "id": "formation-2",
+          "atFeet": "formation-2"
+        },
+        {
+          "id": "formation-3",
+          "atFeet": "formation-3"
+        },
+        {
+          "id": "formation-4",
+          "atFeet": "formation-4"
+        },
+        {
+          "id": "formation-5",
+          "atFeet": "formation-5"
+        }
+      ]
+    },
+    {
+      "race": "ashen",
+      "count": 7,
+      "status": "fallback",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-ashen-armguard"
+        },
+        "formation-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-ashen.a01.normal.1"
+        },
+        "formation-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-ashen.a01.normal.1"
+        },
+        "formation-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-ashen.a01.normal.1"
+        },
+        "formation-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-ashen.a01.normal.1"
+        },
+        "formation-4": {
+          "x": 385,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-ashen.a01.normal.1"
+        },
+        "formation-5": {
+          "x": 445,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-ashen.a01.normal.1"
+        },
+        "formation-6": {
+          "x": 275,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-ashen.a01.normal.1"
+        }
+      },
+      "hits": [
+        {
+          "id": "formation-0",
+          "atFeet": null
+        },
+        {
+          "id": "formation-1",
+          "atFeet": null
+        },
+        {
+          "id": "formation-2",
+          "atFeet": null
+        },
+        {
+          "id": "formation-3",
+          "atFeet": null
+        },
+        {
+          "id": "formation-4",
+          "atFeet": null
+        },
+        {
+          "id": "formation-5",
+          "atFeet": null
+        },
+        {
+          "id": "formation-6",
+          "atFeet": null
+        }
+      ]
+    }
+  ]
+}
