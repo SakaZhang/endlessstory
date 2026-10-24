@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';import * as E from './dist/engine.js';import {EXPANSION_PACKS} from './dist/race-packs.js';import {monsterParameters} from './dist/world-content.js';import {markVictory} from './current-combat-test-fixture.mjs';
+let total=0;
+for(const pack of EXPANSION_PACKS)for(const d of Object.values(pack.monsters).filter(d=>d.trait?.type==='followers')){
+ const s=E.fresh(pack.id);s.level=100;E.normalizeHealth(s,10000);E.normalizeAreaProgress(s);s.areaProgress[pack.id]={unlocked:[1,2,3,4,5,6,7,8,9,10],cleared:[1,2,3,4,5,6,7,8,9,10]};const node=d.nodes.find(n=>n.endsWith(d.rank==='boss'?'.boss':'.dungeon'));if(d.rank!=='boss')assert(E.configureExpedition(s,{mode:'dungeon',targetInstanceId:node,fieldId:node.replace('.dungeon','.field'),loop:false}));let e=E.startInstanceEncounter(s,node,10000);
+ if(d.rank!=='boss')for(let i=0;i<2;i++){markVictory(e);E.reward(s,e,s.lastHealthClock+1000);assert(e.rewarded);e=E.startRoutedEncounter(s,s.nextBattleAt);assert(e);}
+ assert.equal(e.rewardDefinitionId,d.id);assert.equal(e.enemies.length,d.trait.shares.length);assert.equal(e.enemies.filter(u=>u.follower).length,d.trait.shares.length-1);for(const u of e.enemies.filter(u=>u.follower)){assert.equal(u.followerMonsterId,d.trait.followerMonsterId);assert.equal(u.independentRewards,false);assert.equal(u.name,pack.monsters[u.followerMonsterId].name);}
+ const p=monsterParameters(d.id);assert(Math.abs(e.enemies.reduce((n,u)=>n+u.max,0)-p.hp)<1e-7);assert(Math.abs(e.enemies.reduce((n,u)=>n+u.atk,0)-p.atk)<1e-7);assert.equal(e.rewardGold,p.rewardGold);assert.equal(e.rewardXp,p.rewardXp);assert(E.validSave(s));assert(E.validSave(JSON.parse(JSON.stringify(s))));
+ e.enemies.find(u=>!u.follower).hp=0;assert.equal(E.reward(s,e,20000),null);assert.equal(e.done,false);assert(e.enemies.some(u=>u.follower&&u.hp>0));total++;
+}
+assert.equal(total,12);console.log('PASS12 actual retinue spawns:5targetelites/4targetbosses, explicitordinarychild identity, summed parentHP/ATK budget, parentreward unchanged, killleader insufficient, JSON save.');
