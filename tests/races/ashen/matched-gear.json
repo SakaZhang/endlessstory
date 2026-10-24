@@ -1,0 +1,533 @@
+{
+  "weapon": {
+    "id": "mvm4owc8-h-41ctt",
+    "slot": "weapon",
+    "set": null,
+    "rarity": 2,
+    "level": 100,
+    "baseLevel": 100,
+    "levelSource": "generated",
+    "name": "琉心短锤",
+    "atk": 257,
+    "armor": 51,
+    "hp": 171,
+    "affixes": [
+      {
+        "stat": "waterResist",
+        "value": 10,
+        "sourceRange": {
+          "model": "quality-v1",
+          "quality": 2,
+          "min": 5,
+          "max": 13
+        }
+      },
+      {
+        "stat": "armor",
+        "value": 2,
+        "sourceRange": {
+          "model": "quality-v1",
+          "quality": 2,
+          "min": 2,
+          "max": 7
+        }
+      },
+      {
+        "stat": "earthResist",
+        "value": 10,
+        "sourceRange": {
+          "model": "quality-v1",
+          "quality": 2,
+          "min": 5,
+          "max": 13
+        }
+      }
+    ],
+    "special": null,
+    "legendaryId": null,
+    "locked": false,
+    "bless": 0,
+    "templateId": "ashen.scatter.06",
+    "baseVariant": "hammer_balanced",
+    "weaponType": "hammer",
+    "originRace": "ashen",
+    "visualKey": "ashen.scatter.06",
+    "visualVariant": "ashen.scatter.06",
+    "iconKey": "weapon",
+    "baseBudgetModel": "equipment-budget-m2-v1",
+    "budgetLevel": 100,
+    "budgetSourceLevel": 100
+  },
+  "helm": {
+    "id": "mvm4owc8-i-gn06h",
+    "slot": "helm",
+    "set": null,
+    "rarity": 2,
+    "level": 100,
+    "baseLevel": 100,
+    "levelSource": "generated",
+    "name": "白盐头环",
+    "atk": 11,
+    "armor": 78,
+    "hp": 668,
+    "affixes": [
+      {
+        "stat": "lightAtk",
+        "value": 5,
+        "sourceRange": {
+          "model": "quality-v1",
+          "quality": 2,
+          "min": 2,
+          "max": 8
+        }
+      },
+      {
+        "stat": "lightResist",
+        "value": 12,
+        "sourceRange": {
+          "model": "quality-v1",
+          "quality": 2,
+          "min": 5,
+          "max": 13
+        }
+      },
+      {
+        "stat": "windAtk",
+        "value": 5,
+        "sourceRange": {
+          "model": "quality-v1",
+          "quality": 2,
+          "min": 2,
+          "max": 8
+        }
+      }
+    ],
+    "special": null,
+    "legendaryId": null,
+    "locked": false,
+    "bless": 0,
+    "templateId": "ashen.scatter.10",
+    "baseVariant": "helm_vitality",
+    "weaponType": null,
+    "originRace": "ashen",
+    "visualKey": "ashen.scatter.10",
+    "visualVariant": "ashen.scatter.10",
+    "iconKey": "helm",
+    "baseBudgetModel": "equipment-budget-m2-v1",
+    "budgetLevel": 100,
+    "budgetSourceLevel": 100
+  },
+  "armor": {
+    "id": "mvm4owc9-j-myax6",
+    "slot": "armor",
+    "set": null,
+    "rarity": 2,
+    "level": 100,
+    "baseLevel": 100,
+    "levelSource": "generated",
+    "name": "赤纹胸甲",
+    "atk": 0,
+    "armor": 276,
+    "hp": 591,
+    "affixes": [
+      {
+        "stat": "lightAtk",
+        "value": 2,
+        "sourceRange": {
+          "model": "quality-v1",
+          "quality": 2,
+          "min": 2,
+          "max": 8
+        }
+      },
+      {
+        "stat": "atk",
+        "value": 8,
+        "sourceRange": {
+          "model": "quality-v1",
+          "quality": 2,
+          "min": 3,
+          "max": 9
+        }
+      },
+      {
+        "stat": "darkAtk",
+        "value": 4,
+        "sourceRange": {
+          "model": "quality-v1",
+          "quality": 2,
+          "min": 2,
+          "max": 8
+        }
+      }
+    ],
+    "special": null,
+    "legendaryId": null,
+    "locked": false,
+    "bless": 0,
+    "templateId": "ashen.scatter.13",
+    "baseVariant": "armor_armor",
+    "weaponType": null,
+    "originRace": "ashen",
+    "visualKey": "ashen.scatter.13",
+    "visualVariant": "ashen.scatter.13",
+    "iconKey": "armor",
+    "baseBudgetModel": "equipment-budget-m2-v1",
+    "budgetLevel": 100,
+    "budgetSourceLevel": 100
+  },
+  "gloves": {
+    "id": "mvm4owc9-k-0sls4",
+    "slot": "gloves",
+    "set": null,
+    "rarity": 2,
+    "level": 100,
+    "baseLevel": 100,
+    "levelSource": "generated",
+    "name": "琉砂指护",
+    "atk": 45,
+    "armor": 56,
+    "hp": 613,
+    "affixes": [
+      {
+        "stat": "critDamage",
+        "value": 18,
+        "sourceRange": {
+          "model": "quality-v1",
+          "quality": 2,
+          "min": 8,
+          "max": 22
+        }
+      },
+      {
+        "stat": "fireResist",
+        "value": 13,
+        "sourceRange": {
+          "model": "quality-v1",
+          "quality": 2,
+          "min": 5,
+          "max": 13
+        }
+      },
+      {
+        "stat": "hp",
+        "value": 32,
+        "sourceRange": {
+          "model": "quality-v1",
+          "quality": 2,
+          "min": 16,
+          "max": 44
+        }
+      }
+    ],
+    "special": null,
+    "legendaryId": null,
+    "locked": false,
+    "bless": 0,
+    "templateId": "ashen.scatter.16",
+    "baseVariant": "gloves_vitality",
+    "weaponType": null,
+    "originRace": "ashen",
+    "visualKey": "ashen.scatter.16",
+    "visualVariant": "ashen.scatter.16",
+    "iconKey": "gloves",
+    "baseBudgetModel": "equipment-budget-m2-v1",
+    "budgetLevel": 100,
+    "budgetSourceLevel": 100
+  },
+  "boots": {
+    "id": "mvm4owc9-l-ekkrr",
+    "slot": "boots",
+    "set": null,
+    "rarity": 2,
+    "level": 100,
+    "baseLevel": 100,
+    "levelSource": "generated",
+    "name": "晶砂轻履",
+    "atk": 11,
+    "armor": 67,
+    "hp": 724,
+    "affixes": [
+      {
+        "stat": "windResist",
+        "value": 8,
+        "sourceRange": {
+          "model": "quality-v1",
+          "quality": 2,
+          "min": 5,
+          "max": 13
+        }
+      },
+      {
+        "stat": "crit",
+        "value": 14,
+        "sourceRange": {
+          "model": "quality-v1",
+          "quality": 2,
+          "min": 5,
+          "max": 17
+        }
+      },
+      {
+        "stat": "lightAtk",
+        "value": 6,
+        "sourceRange": {
+          "model": "quality-v1",
+          "quality": 2,
+          "min": 2,
+          "max": 8
+        }
+      }
+    ],
+    "special": null,
+    "legendaryId": null,
+    "locked": false,
+    "bless": 0,
+    "templateId": "ashen.scatter.22",
+    "baseVariant": "boots_vitality",
+    "weaponType": null,
+    "originRace": "ashen",
+    "visualKey": "ashen.scatter.22",
+    "visualVariant": "ashen.scatter.22",
+    "iconKey": "boots",
+    "baseBudgetModel": "equipment-budget-m2-v1",
+    "budgetLevel": 100,
+    "budgetSourceLevel": 100
+  },
+  "ring1": {
+    "id": "mvm4owc9-m-y88ba",
+    "slot": "ring",
+    "set": null,
+    "rarity": 2,
+    "level": 100,
+    "baseLevel": 100,
+    "levelSource": "generated",
+    "name": "折辉指轮",
+    "atk": 123,
+    "armor": 27,
+    "hp": 617,
+    "affixes": [
+      {
+        "stat": "hp",
+        "value": 22,
+        "sourceRange": {
+          "model": "quality-v1",
+          "quality": 2,
+          "min": 16,
+          "max": 44
+        }
+      },
+      {
+        "stat": "waterResist",
+        "value": 8,
+        "sourceRange": {
+          "model": "quality-v1",
+          "quality": 2,
+          "min": 5,
+          "max": 13
+        }
+      },
+      {
+        "stat": "darkAtk",
+        "value": 5,
+        "sourceRange": {
+          "model": "quality-v1",
+          "quality": 2,
+          "min": 2,
+          "max": 8
+        }
+      }
+    ],
+    "special": null,
+    "legendaryId": null,
+    "locked": false,
+    "bless": 0,
+    "templateId": "ashen.scatter.26",
+    "baseVariant": "ring_element",
+    "weaponType": null,
+    "originRace": "ashen",
+    "visualKey": "ashen.scatter.26",
+    "visualVariant": "ashen.scatter.26",
+    "iconKey": "ring",
+    "baseBudgetModel": "equipment-budget-m2-v1",
+    "budgetLevel": 100,
+    "budgetSourceLevel": 100
+  },
+  "ring2": {
+    "id": "mvm4owc9-n-60l1p",
+    "slot": "ring",
+    "set": null,
+    "rarity": 2,
+    "level": 100,
+    "baseLevel": 100,
+    "levelSource": "generated",
+    "name": "白盐骨环",
+    "atk": 55,
+    "armor": 96,
+    "hp": 617,
+    "affixes": [
+      {
+        "stat": "luck",
+        "value": 2,
+        "sourceRange": {
+          "model": "quality-v1",
+          "quality": 2,
+          "min": 1,
+          "max": 4
+        }
+      },
+      {
+        "stat": "fireAtk",
+        "value": 8,
+        "sourceRange": {
+          "model": "quality-v1",
+          "quality": 2,
+          "min": 2,
+          "max": 8
+        }
+      },
+      {
+        "stat": "waterAtk",
+        "value": 6,
+        "sourceRange": {
+          "model": "quality-v1",
+          "quality": 2,
+          "min": 2,
+          "max": 8
+        }
+      }
+    ],
+    "special": null,
+    "legendaryId": null,
+    "locked": false,
+    "bless": 0,
+    "templateId": "ashen.scatter.25",
+    "baseVariant": "ring_survival",
+    "weaponType": null,
+    "originRace": "ashen",
+    "visualKey": "ashen.scatter.25",
+    "visualVariant": "ashen.scatter.25",
+    "iconKey": "ring",
+    "baseBudgetModel": "equipment-budget-m2-v1",
+    "budgetLevel": 100,
+    "budgetSourceLevel": 100
+  },
+  "amulet": {
+    "id": "mvm4owc9-o-710y6",
+    "slot": "amulet",
+    "set": null,
+    "rarity": 2,
+    "level": 100,
+    "baseLevel": 100,
+    "levelSource": "generated",
+    "name": "沉辉晶坠",
+    "atk": 117,
+    "armor": 44,
+    "hp": 656,
+    "affixes": [
+      {
+        "stat": "hp",
+        "value": 43,
+        "sourceRange": {
+          "model": "quality-v1",
+          "quality": 2,
+          "min": 16,
+          "max": 44
+        }
+      },
+      {
+        "stat": "earthResist",
+        "value": 9,
+        "sourceRange": {
+          "model": "quality-v1",
+          "quality": 2,
+          "min": 5,
+          "max": 13
+        }
+      },
+      {
+        "stat": "lightResist",
+        "value": 9,
+        "sourceRange": {
+          "model": "quality-v1",
+          "quality": 2,
+          "min": 5,
+          "max": 13
+        }
+      }
+    ],
+    "special": null,
+    "legendaryId": null,
+    "locked": false,
+    "bless": 0,
+    "templateId": "ashen.scatter.29",
+    "baseVariant": "amulet_element",
+    "weaponType": null,
+    "originRace": "ashen",
+    "visualKey": "ashen.scatter.29",
+    "visualVariant": "ashen.scatter.29",
+    "iconKey": "amulet",
+    "baseBudgetModel": "equipment-budget-m2-v1",
+    "budgetLevel": 100,
+    "budgetSourceLevel": 100
+  },
+  "core": {
+    "id": "mvm4owca-x-oy6sf",
+    "slot": "core",
+    "set": null,
+    "rarity": 2,
+    "level": 100,
+    "baseLevel": 100,
+    "levelSource": "generated",
+    "name": "熔核",
+    "atk": 137,
+    "armor": 137,
+    "hp": 0,
+    "affixes": [
+      {
+        "stat": "lifesteal",
+        "value": 3,
+        "sourceRange": {
+          "model": "quality-v1",
+          "quality": 2,
+          "min": 3,
+          "max": 9
+        }
+      },
+      {
+        "stat": "lightAtk",
+        "value": 2,
+        "sourceRange": {
+          "model": "quality-v1",
+          "quality": 2,
+          "min": 2,
+          "max": 8
+        }
+      },
+      {
+        "stat": "darkResist",
+        "value": 12,
+        "sourceRange": {
+          "model": "quality-v1",
+          "quality": 2,
+          "min": 5,
+          "max": 13
+        }
+      }
+    ],
+    "special": null,
+    "legendaryId": null,
+    "locked": false,
+    "bless": 0,
+    "templateId": "ashen.scatter.34",
+    "baseVariant": "core_molten",
+    "weaponType": null,
+    "originRace": "ashen",
+    "visualKey": "ashen.scatter.34",
+    "visualVariant": "ashen.scatter.34",
+    "iconKey": "core",
+    "baseBudgetModel": "equipment-budget-m2-v1",
+    "budgetLevel": 100,
+    "budgetSourceLevel": 100
+  }
+}
