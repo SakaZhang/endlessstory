@@ -6,6 +6,7 @@
     "test:release": "node release-cache-tests.mjs",
     "test:races": "node race-expansion-tests.mjs",
     "test:equipment-parity": "node equipment-slot-parity-tests.mjs",
-    "audit:equipment": "node equipment-catalog-audit.mjs"
+    "audit:equipment": "node equipment-catalog-audit.mjs",
+    "test:goblin-ashen": "node goblin-ashen-catalog-parity-tests.mjs && node goblin-ashen-drop-settlement-tests.mjs"
   }
 }
