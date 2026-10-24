@@ -1,0 +1,3777 @@
+{
+  "candidate": true,
+  "parameterId": "elf-balance-candidate-v3-area-curve",
+  "description": "Actual engine 10-area field and three dungeon stages, four bosses, legal level-end q2 bow midpoint gear profiles. Levels below core prerequisite cost retain starter skills; standalone Lv1 uses untouched starter gear. 600-round cap per fight; no enemy stat edits. Parameter injection only isolates candidate before integration.",
+  "rows": [
+    {
+      "area": 1,
+      "kind": "field",
+      "style": "noSustain",
+      "level": 10,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a01.normal.2",
+          "hp": 540,
+          "atk": 3,
+          "power": 4
+        }
+      ],
+      "rounds": 6,
+      "win": true,
+      "done": true,
+      "hpDamage": 4.315384615384573,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "area": 1,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 10,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a01.normal.1",
+          "hp": 600,
+          "atk": 3,
+          "power": 3
+        }
+      ],
+      "rounds": 5,
+      "win": true,
+      "done": true,
+      "hpDamage": 3,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "area": 1,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 10,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a01.normal.2",
+          "hp": 540,
+          "atk": 3,
+          "power": 4
+        }
+      ],
+      "rounds": 6,
+      "win": true,
+      "done": true,
+      "hpDamage": 4.315384615384573,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "area": 1,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 10,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a01.elite",
+          "hp": 1140,
+          "atk": 4,
+          "power": 6
+        }
+      ],
+      "rounds": 10,
+      "win": true,
+      "done": true,
+      "hpDamage": 17.888461538461456,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "area": 1,
+      "kind": "field",
+      "style": "balanced",
+      "level": 10,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a01.normal.2",
+          "hp": 540,
+          "atk": 3,
+          "power": 4
+        }
+      ],
+      "rounds": 6,
+      "win": true,
+      "done": true,
+      "hpDamage": 4.315384615384573,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "area": 1,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 10,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a01.normal.1",
+          "hp": 600,
+          "atk": 3,
+          "power": 3
+        }
+      ],
+      "rounds": 5,
+      "win": true,
+      "done": true,
+      "hpDamage": 3,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "area": 1,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 10,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a01.normal.2",
+          "hp": 540,
+          "atk": 3,
+          "power": 4
+        }
+      ],
+      "rounds": 6,
+      "win": true,
+      "done": true,
+      "hpDamage": 4.315384615384573,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "area": 1,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 10,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a01.elite",
+          "hp": 1140,
+          "atk": 4,
+          "power": 6
+        }
+      ],
+      "rounds": 10,
+      "win": true,
+      "done": true,
+      "hpDamage": 17.888461538461456,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "area": 1,
+      "kind": "field",
+      "style": "sustain",
+      "level": 10,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a01.normal.2",
+          "hp": 540,
+          "atk": 3,
+          "power": 4
+        }
+      ],
+      "rounds": 6,
+      "win": true,
+      "done": true,
+      "hpDamage": 4.315384615384573,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "area": 1,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 10,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a01.normal.1",
+          "hp": 600,
+          "atk": 3,
+          "power": 3
+        }
+      ],
+      "rounds": 5,
+      "win": true,
+      "done": true,
+      "hpDamage": 3,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "area": 1,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 10,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a01.normal.2",
+          "hp": 540,
+          "atk": 3,
+          "power": 4
+        }
+      ],
+      "rounds": 6,
+      "win": true,
+      "done": true,
+      "hpDamage": 4.315384615384573,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "area": 1,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 10,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a01.elite",
+          "hp": 1140,
+          "atk": 4,
+          "power": 6
+        }
+      ],
+      "rounds": 10,
+      "win": true,
+      "done": true,
+      "hpDamage": 17.888461538461456,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "area": 2,
+      "kind": "field",
+      "style": "noSustain",
+      "level": 20,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a02.normal.2",
+          "hp": 1296,
+          "atk": 6.06666667,
+          "power": 4.33333333
+        }
+      ],
+      "rounds": 5,
+      "win": true,
+      "done": true,
+      "hpDamage": 4.6749999964038125,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 2,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 20,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a02.normal.1",
+          "hp": 1440,
+          "atk": 6.06666667,
+          "power": 3.46666667
+        }
+      ],
+      "rounds": 6,
+      "win": true,
+      "done": true,
+      "hpDamage": 7,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 2,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 20,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a02.normal.2",
+          "hp": 1296,
+          "atk": 6.06666667,
+          "power": 4.33333333
+        }
+      ],
+      "rounds": 7,
+      "win": true,
+      "done": true,
+      "hpDamage": 6.6749999964038125,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 2,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 20,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a02.elite",
+          "hp": 2736,
+          "atk": 8.66666667,
+          "power": 6.06666667
+        }
+      ],
+      "rounds": 11,
+      "win": true,
+      "done": true,
+      "hpDamage": 22.065000008826928,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 2,
+      "kind": "boss",
+      "style": "noSustain",
+      "level": 20,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a02.boss",
+          "hp": 10080,
+          "atk": 11.26666667,
+          "power": 6.93333333
+        }
+      ],
+      "rounds": 43,
+      "win": true,
+      "done": true,
+      "hpDamage": 94.51999998725,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 2,
+      "kind": "field",
+      "style": "balanced",
+      "level": 20,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a02.normal.2",
+          "hp": 1296,
+          "atk": 6.06666667,
+          "power": 4.33333333
+        }
+      ],
+      "rounds": 10,
+      "win": true,
+      "done": true,
+      "hpDamage": 0,
+      "shieldAbsorbed": 8.674999996403841,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 2,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 20,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a02.normal.1",
+          "hp": 1440,
+          "atk": 6.06666667,
+          "power": 3.46666667
+        }
+      ],
+      "rounds": 9,
+      "win": true,
+      "done": true,
+      "hpDamage": 2,
+      "shieldAbsorbed": 7,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 2,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 20,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a02.normal.2",
+          "hp": 1296,
+          "atk": 6.06666667,
+          "power": 4.33333333
+        }
+      ],
+      "rounds": 8,
+      "win": true,
+      "done": true,
+      "hpDamage": 4.6749999964038125,
+      "shieldAbsorbed": 2,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 2,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 20,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a02.elite",
+          "hp": 2736,
+          "atk": 8.66666667,
+          "power": 6.06666667
+        }
+      ],
+      "rounds": 13,
+      "win": true,
+      "done": true,
+      "hpDamage": 16.065000008826928,
+      "shieldAbsorbed": 9,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 2,
+      "kind": "boss",
+      "style": "balanced",
+      "level": 20,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a02.boss",
+          "hp": 10080,
+          "atk": 11.26666667,
+          "power": 6.93333333
+        }
+      ],
+      "rounds": 53,
+      "win": true,
+      "done": true,
+      "hpDamage": 49.679999991500154,
+      "shieldAbsorbed": 72.67999999150001,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 2,
+      "kind": "field",
+      "style": "sustain",
+      "level": 20,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a02.normal.2",
+          "hp": 1296,
+          "atk": 6.06666667,
+          "power": 4.33333333
+        }
+      ],
+      "rounds": 15,
+      "win": true,
+      "done": true,
+      "hpDamage": 6.6749999964038125,
+      "shieldAbsorbed": 10.674999996403812,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 2,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 20,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a02.normal.1",
+          "hp": 1440,
+          "atk": 6.06666667,
+          "power": 3.46666667
+        }
+      ],
+      "rounds": 12,
+      "win": true,
+      "done": true,
+      "hpDamage": 5,
+      "shieldAbsorbed": 6,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 2,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 20,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a02.normal.2",
+          "hp": 1296,
+          "atk": 6.06666667,
+          "power": 4.33333333
+        }
+      ],
+      "rounds": 12,
+      "win": true,
+      "done": true,
+      "hpDamage": 6.6749999964038125,
+      "shieldAbsorbed": 8.674999996403812,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 2,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 20,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a02.elite",
+          "hp": 2736,
+          "atk": 8.66666667,
+          "power": 6.06666667
+        }
+      ],
+      "rounds": 20,
+      "win": true,
+      "done": true,
+      "hpDamage": 6,
+      "shieldAbsorbed": 30.395000013403802,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 2,
+      "kind": "boss",
+      "style": "sustain",
+      "level": 20,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a02.boss",
+          "hp": 10080,
+          "atk": 11.26666667,
+          "power": 6.93333333
+        }
+      ],
+      "rounds": 68,
+      "win": true,
+      "done": true,
+      "hpDamage": 46.51999998725023,
+      "shieldAbsorbed": 95.67999999149998,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 3,
+      "kind": "field",
+      "style": "noSustain",
+      "level": 30,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a03.normal.2",
+          "hp": 2052,
+          "atk": 8.06666667,
+          "power": 4.4
+        }
+      ],
+      "rounds": 8,
+      "win": true,
+      "done": true,
+      "hpDamage": 7.746923076923167,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 3,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 30,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a03.normal.1",
+          "hp": 2280,
+          "atk": 8.8,
+          "power": 3.66666667
+        }
+      ],
+      "rounds": 8,
+      "win": true,
+      "done": true,
+      "hpDamage": 12,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 3,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 30,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a03.normal.2",
+          "hp": 2052,
+          "atk": 8.06666667,
+          "power": 4.4
+        }
+      ],
+      "rounds": 8,
+      "win": true,
+      "done": true,
+      "hpDamage": 7.746923076923167,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 3,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 30,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a03.elite",
+          "hp": 4332,
+          "atk": 11,
+          "power": 5.86666667
+        }
+      ],
+      "rounds": 16,
+      "win": true,
+      "done": true,
+      "hpDamage": 39.590769244173316,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 3,
+      "kind": "field",
+      "style": "balanced",
+      "level": 30,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a03.normal.2",
+          "hp": 2052,
+          "atk": 8.06666667,
+          "power": 4.4
+        }
+      ],
+      "rounds": 11,
+      "win": true,
+      "done": true,
+      "hpDamage": 3,
+      "shieldAbsorbed": 10.746923076923082,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 3,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 30,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a03.normal.1",
+          "hp": 2280,
+          "atk": 8.8,
+          "power": 3.66666667
+        }
+      ],
+      "rounds": 11,
+      "win": true,
+      "done": true,
+      "hpDamage": 9,
+      "shieldAbsorbed": 9,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 3,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 30,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a03.normal.2",
+          "hp": 2052,
+          "atk": 8.06666667,
+          "power": 4.4
+        }
+      ],
+      "rounds": 10,
+      "win": true,
+      "done": true,
+      "hpDamage": 4.746923076923167,
+      "shieldAbsorbed": 6,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 3,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 30,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a03.elite",
+          "hp": 4332,
+          "atk": 11,
+          "power": 5.86666667
+        }
+      ],
+      "rounds": 19,
+      "win": true,
+      "done": true,
+      "hpDamage": 28.11076923992323,
+      "shieldAbsorbed": 15.480000004250002,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 3,
+      "kind": "field",
+      "style": "sustain",
+      "level": 30,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a03.normal.2",
+          "hp": 2052,
+          "atk": 8.06666667,
+          "power": 4.4
+        }
+      ],
+      "rounds": 17,
+      "win": true,
+      "done": true,
+      "hpDamage": 7.746923076923167,
+      "shieldAbsorbed": 12.74692307692311,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 3,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 30,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a03.normal.1",
+          "hp": 2280,
+          "atk": 8.8,
+          "power": 3.66666667
+        }
+      ],
+      "rounds": 16,
+      "win": true,
+      "done": true,
+      "hpDamage": 9,
+      "shieldAbsorbed": 12,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 3,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 30,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a03.normal.2",
+          "hp": 2052,
+          "atk": 8.06666667,
+          "power": 4.4
+        }
+      ],
+      "rounds": 14,
+      "win": true,
+      "done": true,
+      "hpDamage": 6,
+      "shieldAbsorbed": 11.493846153846192,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 3,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 30,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a03.elite",
+          "hp": 4332,
+          "atk": 11,
+          "power": 5.86666667
+        }
+      ],
+      "rounds": 22,
+      "win": true,
+      "done": true,
+      "hpDamage": 24.11076923992323,
+      "shieldAbsorbed": 20.96000000850003,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 4,
+      "kind": "field",
+      "style": "noSustain",
+      "level": 40,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a04.normal.2",
+          "hp": 2808,
+          "atk": 9,
+          "power": 4.2
+        }
+      ],
+      "rounds": 9,
+      "win": true,
+      "done": true,
+      "hpDamage": 10.531153846153757,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 4,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 40,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a04.normal.1",
+          "hp": 3120,
+          "atk": 9.6,
+          "power": 3.6
+        }
+      ],
+      "rounds": 9,
+      "win": true,
+      "done": true,
+      "hpDamage": 12,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 4,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 40,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a04.normal.2",
+          "hp": 2808,
+          "atk": 9,
+          "power": 4.2
+        }
+      ],
+      "rounds": 9,
+      "win": true,
+      "done": true,
+      "hpDamage": 10.531153846153757,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 4,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 40,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a04.elite",
+          "hp": 5928,
+          "atk": 12.6,
+          "power": 5.4
+        }
+      ],
+      "rounds": 17,
+      "win": true,
+      "done": true,
+      "hpDamage": 37.71423076923088,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 4,
+      "kind": "field",
+      "style": "balanced",
+      "level": 40,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a04.normal.2",
+          "hp": 2808,
+          "atk": 9,
+          "power": 4.2
+        }
+      ],
+      "rounds": 12,
+      "win": true,
+      "done": true,
+      "hpDamage": 7.531153846153757,
+      "shieldAbsorbed": 10.531153846153842,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 4,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 40,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a04.normal.1",
+          "hp": 3120,
+          "atk": 9.6,
+          "power": 3.6
+        }
+      ],
+      "rounds": 12,
+      "win": true,
+      "done": true,
+      "hpDamage": 9,
+      "shieldAbsorbed": 9,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 4,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 40,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a04.normal.2",
+          "hp": 2808,
+          "atk": 9,
+          "power": 4.2
+        }
+      ],
+      "rounds": 12,
+      "win": true,
+      "done": true,
+      "hpDamage": 7.531153846153757,
+      "shieldAbsorbed": 10.531153846153842,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 4,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 40,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a04.elite",
+          "hp": 5928,
+          "atk": 12.6,
+          "power": 5.4
+        }
+      ],
+      "rounds": 19,
+      "win": true,
+      "done": true,
+      "hpDamage": 12,
+      "shieldAbsorbed": 29.714230769230767,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 4,
+      "kind": "field",
+      "style": "sustain",
+      "level": 40,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a04.normal.2",
+          "hp": 2808,
+          "atk": 9,
+          "power": 4.2
+        }
+      ],
+      "rounds": 18,
+      "win": true,
+      "done": true,
+      "hpDamage": 7.531153846153757,
+      "shieldAbsorbed": 12.531153846153813,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 4,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 40,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a04.normal.1",
+          "hp": 3120,
+          "atk": 9.6,
+          "power": 3.6
+        }
+      ],
+      "rounds": 17,
+      "win": true,
+      "done": true,
+      "hpDamage": 9,
+      "shieldAbsorbed": 15,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 4,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 40,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a04.normal.2",
+          "hp": 2808,
+          "atk": 9,
+          "power": 4.2
+        }
+      ],
+      "rounds": 16,
+      "win": true,
+      "done": true,
+      "hpDamage": 3,
+      "shieldAbsorbed": 16.062307692307684,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 4,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 40,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a04.elite",
+          "hp": 5928,
+          "atk": 12.6,
+          "power": 5.4
+        }
+      ],
+      "rounds": 27,
+      "win": true,
+      "done": true,
+      "hpDamage": 30.82923076923089,
+      "shieldAbsorbed": 30.18461538461537,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 5,
+      "kind": "field",
+      "style": "noSustain",
+      "level": 50,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a05.normal.2",
+          "hp": 3564,
+          "atk": 13.3,
+          "power": 5.6
+        }
+      ],
+      "rounds": 9,
+      "win": true,
+      "done": true,
+      "hpDamage": 12.041538461538494,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 5,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 50,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a05.normal.1",
+          "hp": 3960,
+          "atk": 14.7,
+          "power": 4.9
+        }
+      ],
+      "rounds": 9,
+      "win": true,
+      "done": true,
+      "hpDamage": 16,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 5,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 50,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a05.normal.2",
+          "hp": 3564,
+          "atk": 13.3,
+          "power": 5.6
+        }
+      ],
+      "rounds": 9,
+      "win": true,
+      "done": true,
+      "hpDamage": 12.041538461538494,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 5,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 50,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a05.elite",
+          "hp": 4514.4,
+          "atk": 11.339999999999998,
+          "power": 4.2
+        },
+        {
+          "id": "elf.a05.elite",
+          "hp": 752.4000000000001,
+          "atk": 1.89,
+          "power": 0.7000000000000001
+        },
+        {
+          "id": "elf.a05.elite",
+          "hp": 752.4000000000001,
+          "atk": 1.89,
+          "power": 0.7000000000000001
+        },
+        {
+          "id": "elf.a05.elite",
+          "hp": 752.4000000000001,
+          "atk": 1.89,
+          "power": 0.7000000000000001
+        },
+        {
+          "id": "elf.a05.elite",
+          "hp": 752.4000000000001,
+          "atk": 1.89,
+          "power": 0.7000000000000001
+        }
+      ],
+      "rounds": 18,
+      "win": true,
+      "done": true,
+      "hpDamage": 42.12192307692294,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 5,
+      "kind": "boss",
+      "style": "noSustain",
+      "level": 50,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a05.boss",
+          "hp": 27720,
+          "atk": 24.5,
+          "power": 7.7
+        }
+      ],
+      "rounds": 66,
+      "win": true,
+      "done": true,
+      "hpDamage": 205.08750000000055,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 5,
+      "kind": "field",
+      "style": "balanced",
+      "level": 50,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a05.normal.2",
+          "hp": 3564,
+          "atk": 13.3,
+          "power": 5.6
+        }
+      ],
+      "rounds": 13,
+      "win": true,
+      "done": true,
+      "hpDamage": 9.041538461538494,
+      "shieldAbsorbed": 12.041538461538437,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 5,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 50,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a05.normal.1",
+          "hp": 3960,
+          "atk": 14.7,
+          "power": 4.9
+        }
+      ],
+      "rounds": 13,
+      "win": true,
+      "done": true,
+      "hpDamage": 16,
+      "shieldAbsorbed": 12,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 5,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 50,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a05.normal.2",
+          "hp": 3564,
+          "atk": 13.3,
+          "power": 5.6
+        }
+      ],
+      "rounds": 12,
+      "win": true,
+      "done": true,
+      "hpDamage": 12.041538461538494,
+      "shieldAbsorbed": 9.041538461538437,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 5,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 50,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a05.elite",
+          "hp": 4514.4,
+          "atk": 11.339999999999998,
+          "power": 4.2
+        },
+        {
+          "id": "elf.a05.elite",
+          "hp": 752.4000000000001,
+          "atk": 1.89,
+          "power": 0.7000000000000001
+        },
+        {
+          "id": "elf.a05.elite",
+          "hp": 752.4000000000001,
+          "atk": 1.89,
+          "power": 0.7000000000000001
+        },
+        {
+          "id": "elf.a05.elite",
+          "hp": 752.4000000000001,
+          "atk": 1.89,
+          "power": 0.7000000000000001
+        },
+        {
+          "id": "elf.a05.elite",
+          "hp": 752.4000000000001,
+          "atk": 1.89,
+          "power": 0.7000000000000001
+        }
+      ],
+      "rounds": 18,
+      "win": true,
+      "done": true,
+      "hpDamage": 14,
+      "shieldAbsorbed": 33.12192307692305,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 5,
+      "kind": "boss",
+      "style": "balanced",
+      "level": 50,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a05.boss",
+          "hp": 27720,
+          "atk": 24.5,
+          "power": 7.7
+        }
+      ],
+      "rounds": 81,
+      "win": true,
+      "done": true,
+      "hpDamage": 105.27000000000044,
+      "shieldAbsorbed": 143.635,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 5,
+      "kind": "field",
+      "style": "sustain",
+      "level": 50,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a05.normal.2",
+          "hp": 3564,
+          "atk": 13.3,
+          "power": 5.6
+        }
+      ],
+      "rounds": 19,
+      "win": true,
+      "done": true,
+      "hpDamage": 9.041538461538494,
+      "shieldAbsorbed": 21.04153846153838,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 5,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 50,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a05.normal.1",
+          "hp": 3960,
+          "atk": 14.7,
+          "power": 4.9
+        }
+      ],
+      "rounds": 17,
+      "win": true,
+      "done": true,
+      "hpDamage": 12,
+      "shieldAbsorbed": 16,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 5,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 50,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a05.normal.2",
+          "hp": 3564,
+          "atk": 13.3,
+          "power": 5.6
+        }
+      ],
+      "rounds": 16,
+      "win": true,
+      "done": true,
+      "hpDamage": 3,
+      "shieldAbsorbed": 21.083076923076817,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 5,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 50,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a05.elite",
+          "hp": 4514.4,
+          "atk": 11.339999999999998,
+          "power": 4.2
+        },
+        {
+          "id": "elf.a05.elite",
+          "hp": 752.4000000000001,
+          "atk": 1.89,
+          "power": 0.7000000000000001
+        },
+        {
+          "id": "elf.a05.elite",
+          "hp": 752.4000000000001,
+          "atk": 1.89,
+          "power": 0.7000000000000001
+        },
+        {
+          "id": "elf.a05.elite",
+          "hp": 752.4000000000001,
+          "atk": 1.89,
+          "power": 0.7000000000000001
+        },
+        {
+          "id": "elf.a05.elite",
+          "hp": 752.4000000000001,
+          "atk": 1.89,
+          "power": 0.7000000000000001
+        }
+      ],
+      "rounds": 31,
+      "win": true,
+      "done": true,
+      "hpDamage": 29.76692307692292,
+      "shieldAbsorbed": 39.12192307692311,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 5,
+      "kind": "boss",
+      "style": "sustain",
+      "level": 50,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a05.boss",
+          "hp": 27720,
+          "atk": 24.5,
+          "power": 7.7
+        }
+      ],
+      "rounds": 100,
+      "win": true,
+      "done": true,
+      "hpDamage": 99.27000000000044,
+      "shieldAbsorbed": 185.26999999999987,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 6,
+      "kind": "field",
+      "style": "noSustain",
+      "level": 60,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a06.normal.2",
+          "hp": 4320,
+          "atk": 17.6,
+          "power": 7.2
+        }
+      ],
+      "rounds": 9,
+      "win": true,
+      "done": true,
+      "hpDamage": 15.767692307692414,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 6,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 60,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a06.normal.1",
+          "hp": 4800,
+          "atk": 20,
+          "power": 6.4
+        }
+      ],
+      "rounds": 9,
+      "win": true,
+      "done": true,
+      "hpDamage": 17,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 6,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 60,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a06.normal.2",
+          "hp": 4320,
+          "atk": 17.6,
+          "power": 7.2
+        }
+      ],
+      "rounds": 9,
+      "win": true,
+      "done": true,
+      "hpDamage": 15.767692307692414,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 6,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 60,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a06.elite",
+          "hp": 9120,
+          "atk": 25.6,
+          "power": 8.8
+        }
+      ],
+      "rounds": 18,
+      "win": true,
+      "done": true,
+      "hpDamage": 59.386153846153775,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 6,
+      "kind": "field",
+      "style": "balanced",
+      "level": 60,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a06.normal.2",
+          "hp": 4320,
+          "atk": 17.6,
+          "power": 7.2
+        }
+      ],
+      "rounds": 13,
+      "win": true,
+      "done": true,
+      "hpDamage": 11.767692307692414,
+      "shieldAbsorbed": 15.7676923076923,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 6,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 60,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a06.normal.1",
+          "hp": 4800,
+          "atk": 20,
+          "power": 6.4
+        }
+      ],
+      "rounds": 13,
+      "win": true,
+      "done": true,
+      "hpDamage": 17,
+      "shieldAbsorbed": 13,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 6,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 60,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a06.normal.2",
+          "hp": 4320,
+          "atk": 17.6,
+          "power": 7.2
+        }
+      ],
+      "rounds": 13,
+      "win": true,
+      "done": true,
+      "hpDamage": 15.767692307692414,
+      "shieldAbsorbed": 11.7676923076923,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 6,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 60,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a06.elite",
+          "hp": 9120,
+          "atk": 25.6,
+          "power": 8.8
+        }
+      ],
+      "rounds": 20,
+      "win": true,
+      "done": true,
+      "hpDamage": 23.2199999999998,
+      "shieldAbsorbed": 42.16615384615386,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 6,
+      "kind": "field",
+      "style": "sustain",
+      "level": 60,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a06.normal.2",
+          "hp": 4320,
+          "atk": 17.6,
+          "power": 7.2
+        }
+      ],
+      "rounds": 19,
+      "win": true,
+      "done": true,
+      "hpDamage": 11.767692307692414,
+      "shieldAbsorbed": 22.7676923076923,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 6,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 60,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a06.normal.1",
+          "hp": 4800,
+          "atk": 20,
+          "power": 6.4
+        }
+      ],
+      "rounds": 18,
+      "win": true,
+      "done": true,
+      "hpDamage": 13,
+      "shieldAbsorbed": 26,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 6,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 60,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a06.normal.2",
+          "hp": 4320,
+          "atk": 17.6,
+          "power": 7.2
+        }
+      ],
+      "rounds": 16,
+      "win": true,
+      "done": true,
+      "hpDamage": 11.767692307692414,
+      "shieldAbsorbed": 16.7676923076923,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 6,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 60,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a06.elite",
+          "hp": 9120,
+          "atk": 25.6,
+          "power": 8.8
+        }
+      ],
+      "rounds": 30,
+      "win": true,
+      "done": true,
+      "hpDamage": 36.08307692307699,
+      "shieldAbsorbed": 67.60615384615397,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 7,
+      "kind": "field",
+      "style": "noSustain",
+      "level": 70,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a07.normal.2",
+          "hp": 5076,
+          "atk": 23.4,
+          "power": 9
+        }
+      ],
+      "rounds": 9,
+      "win": true,
+      "done": true,
+      "hpDamage": 17.709615384615518,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 7,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 70,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a07.normal.1",
+          "hp": 5640,
+          "atk": 26.1,
+          "power": 8.1
+        }
+      ],
+      "rounds": 9,
+      "win": true,
+      "done": true,
+      "hpDamage": 21,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 7,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 70,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a07.normal.2",
+          "hp": 5076,
+          "atk": 23.4,
+          "power": 9
+        }
+      ],
+      "rounds": 9,
+      "win": true,
+      "done": true,
+      "hpDamage": 17.709615384615518,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 7,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 70,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a07.elite",
+          "hp": 10716,
+          "atk": 34.2,
+          "power": 10.8
+        }
+      ],
+      "rounds": 18,
+      "win": true,
+      "done": true,
+      "hpDamage": 71.42846153846176,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 7,
+      "kind": "field",
+      "style": "balanced",
+      "level": 70,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a07.normal.2",
+          "hp": 5076,
+          "atk": 23.4,
+          "power": 9
+        }
+      ],
+      "rounds": 13,
+      "win": true,
+      "done": true,
+      "hpDamage": 13.709615384615518,
+      "shieldAbsorbed": 17.709615384615404,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 7,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 70,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a07.normal.1",
+          "hp": 5640,
+          "atk": 26.1,
+          "power": 8.1
+        }
+      ],
+      "rounds": 13,
+      "win": true,
+      "done": true,
+      "hpDamage": 21,
+      "shieldAbsorbed": 16,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 7,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 70,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a07.normal.2",
+          "hp": 5076,
+          "atk": 23.4,
+          "power": 9
+        }
+      ],
+      "rounds": 13,
+      "win": true,
+      "done": true,
+      "hpDamage": 17.709615384615518,
+      "shieldAbsorbed": 13.709615384615404,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 7,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 70,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a07.elite",
+          "hp": 10716,
+          "atk": 34.2,
+          "power": 10.8
+        }
+      ],
+      "rounds": 20,
+      "win": true,
+      "done": true,
+      "hpDamage": 27.769999999999982,
+      "shieldAbsorbed": 50.65846153846155,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 7,
+      "kind": "field",
+      "style": "sustain",
+      "level": 70,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a07.normal.2",
+          "hp": 5076,
+          "atk": 23.4,
+          "power": 9
+        }
+      ],
+      "rounds": 19,
+      "win": true,
+      "done": true,
+      "hpDamage": 13.709615384615518,
+      "shieldAbsorbed": 29.709615384615404,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 7,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 70,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a07.normal.1",
+          "hp": 5640,
+          "atk": 26.1,
+          "power": 8.1
+        }
+      ],
+      "rounds": 18,
+      "win": true,
+      "done": true,
+      "hpDamage": 16,
+      "shieldAbsorbed": 26,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 7,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 70,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a07.normal.2",
+          "hp": 5076,
+          "atk": 23.4,
+          "power": 9
+        }
+      ],
+      "rounds": 15,
+      "win": true,
+      "done": true,
+      "hpDamage": 13.709615384615518,
+      "shieldAbsorbed": 21.709615384615404,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 7,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 70,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a07.elite",
+          "hp": 10716,
+          "atk": 34.2,
+          "power": 10.8
+        }
+      ],
+      "rounds": 31,
+      "win": true,
+      "done": true,
+      "hpDamage": 57.65846153846178,
+      "shieldAbsorbed": 66.36923076923074,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 8,
+      "kind": "field",
+      "style": "noSustain",
+      "level": 80,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a08.normal.2",
+          "hp": 5832,
+          "atk": 32.5,
+          "power": 11.91666667
+        }
+      ],
+      "rounds": 9,
+      "win": true,
+      "done": true,
+      "hpDamage": 22.85625000359596,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 8,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 80,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a08.normal.1",
+          "hp": 6480,
+          "atk": 36.83333333,
+          "power": 10.83333333
+        }
+      ],
+      "rounds": 9,
+      "win": true,
+      "done": true,
+      "hpDamage": 25,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 8,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 80,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a08.normal.2",
+          "hp": 5832,
+          "atk": 32.5,
+          "power": 11.91666667
+        }
+      ],
+      "rounds": 9,
+      "win": true,
+      "done": true,
+      "hpDamage": 22.85625000359596,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 8,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 80,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a08.elite",
+          "hp": 7387.2,
+          "atk": 28.600000001999998,
+          "power": 8.449999998
+        },
+        {
+          "id": "elf.a08.elite",
+          "hp": 1231.2,
+          "atk": 4.766666667,
+          "power": 1.408333333
+        },
+        {
+          "id": "elf.a08.elite",
+          "hp": 1231.2,
+          "atk": 4.766666667,
+          "power": 1.408333333
+        },
+        {
+          "id": "elf.a08.elite",
+          "hp": 1231.2,
+          "atk": 4.766666667,
+          "power": 1.408333333
+        },
+        {
+          "id": "elf.a08.elite",
+          "hp": 1231.2,
+          "atk": 4.766666667,
+          "power": 1.408333333
+        }
+      ],
+      "rounds": 18,
+      "win": true,
+      "done": true,
+      "hpDamage": 57.37624999470427,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 8,
+      "kind": "boss",
+      "style": "noSustain",
+      "level": 80,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a08.boss",
+          "hp": 45360,
+          "atk": 61.75,
+          "power": 15.16666667
+        }
+      ],
+      "rounds": 67,
+      "win": true,
+      "done": true,
+      "hpDamage": 346.68750002125034,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 8,
+      "kind": "field",
+      "style": "balanced",
+      "level": 80,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a08.normal.2",
+          "hp": 5832,
+          "atk": 32.5,
+          "power": 11.91666667
+        }
+      ],
+      "rounds": 13,
+      "win": true,
+      "done": true,
+      "hpDamage": 17.85625000359596,
+      "shieldAbsorbed": 22.85625000359613,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 8,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 80,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a08.normal.1",
+          "hp": 6480,
+          "atk": 36.83333333,
+          "power": 10.83333333
+        }
+      ],
+      "rounds": 13,
+      "win": true,
+      "done": true,
+      "hpDamage": 25,
+      "shieldAbsorbed": 19,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 8,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 80,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a08.normal.2",
+          "hp": 5832,
+          "atk": 32.5,
+          "power": 11.91666667
+        }
+      ],
+      "rounds": 12,
+      "win": true,
+      "done": true,
+      "hpDamage": 22.85625000359596,
+      "shieldAbsorbed": 17.85625000359613,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 8,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 80,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a08.elite",
+          "hp": 7387.2,
+          "atk": 28.600000001999998,
+          "power": 8.449999998
+        },
+        {
+          "id": "elf.a08.elite",
+          "hp": 1231.2,
+          "atk": 4.766666667,
+          "power": 1.408333333
+        },
+        {
+          "id": "elf.a08.elite",
+          "hp": 1231.2,
+          "atk": 4.766666667,
+          "power": 1.408333333
+        },
+        {
+          "id": "elf.a08.elite",
+          "hp": 1231.2,
+          "atk": 4.766666667,
+          "power": 1.408333333
+        },
+        {
+          "id": "elf.a08.elite",
+          "hp": 1231.2,
+          "atk": 4.766666667,
+          "power": 1.408333333
+        }
+      ],
+      "rounds": 18,
+      "win": true,
+      "done": true,
+      "hpDamage": 18,
+      "shieldAbsorbed": 46.37624999470387,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 8,
+      "kind": "boss",
+      "style": "balanced",
+      "level": 80,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a08.boss",
+          "hp": 45360,
+          "atk": 61.75,
+          "power": 15.16666667
+        }
+      ],
+      "rounds": 82,
+      "win": true,
+      "done": true,
+      "hpDamage": 197.35000001700018,
+      "shieldAbsorbed": 233.67500000849998,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 8,
+      "kind": "field",
+      "style": "sustain",
+      "level": 80,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a08.normal.2",
+          "hp": 5832,
+          "atk": 32.5,
+          "power": 11.91666667
+        }
+      ],
+      "rounds": 19,
+      "win": true,
+      "done": true,
+      "hpDamage": 17.85625000359596,
+      "shieldAbsorbed": 37.85625000359619,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 8,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 80,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a08.normal.1",
+          "hp": 6480,
+          "atk": 36.83333333,
+          "power": 10.83333333
+        }
+      ],
+      "rounds": 18,
+      "win": true,
+      "done": true,
+      "hpDamage": 19,
+      "shieldAbsorbed": 32,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 8,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 80,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a08.normal.2",
+          "hp": 5832,
+          "atk": 32.5,
+          "power": 11.91666667
+        }
+      ],
+      "rounds": 15,
+      "win": true,
+      "done": true,
+      "hpDamage": 17.85625000359596,
+      "shieldAbsorbed": 27.856250003596188,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 8,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 80,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a08.elite",
+          "hp": 7387.2,
+          "atk": 28.600000001999998,
+          "power": 8.449999998
+        },
+        {
+          "id": "elf.a08.elite",
+          "hp": 1231.2,
+          "atk": 4.766666667,
+          "power": 1.408333333
+        },
+        {
+          "id": "elf.a08.elite",
+          "hp": 1231.2,
+          "atk": 4.766666667,
+          "power": 1.408333333
+        },
+        {
+          "id": "elf.a08.elite",
+          "hp": 1231.2,
+          "atk": 4.766666667,
+          "power": 1.408333333
+        },
+        {
+          "id": "elf.a08.elite",
+          "hp": 1231.2,
+          "atk": 4.766666667,
+          "power": 1.408333333
+        }
+      ],
+      "rounds": 31,
+      "win": true,
+      "done": true,
+      "hpDamage": 41.6024999972542,
+      "shieldAbsorbed": 51.376249994703926,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 8,
+      "kind": "boss",
+      "style": "sustain",
+      "level": 80,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a08.boss",
+          "hp": 45360,
+          "atk": 61.75,
+          "power": 15.16666667
+        }
+      ],
+      "rounds": 100,
+      "win": true,
+      "done": true,
+      "hpDamage": 177.35000001699882,
+      "shieldAbsorbed": 305.350000017,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 9,
+      "kind": "field",
+      "style": "noSustain",
+      "level": 90,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a09.normal.2",
+          "hp": 6588,
+          "atk": 43.06666667,
+          "power": 15.2
+        }
+      ],
+      "rounds": 9,
+      "win": true,
+      "done": true,
+      "hpDamage": 28.39846153846156,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 9,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 90,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a09.normal.1",
+          "hp": 7320,
+          "atk": 48.13333333,
+          "power": 13.93333333
+        }
+      ],
+      "rounds": 9,
+      "win": true,
+      "done": true,
+      "hpDamage": 29,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 9,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 90,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a09.normal.2",
+          "hp": 6588,
+          "atk": 43.06666667,
+          "power": 15.2
+        }
+      ],
+      "rounds": 9,
+      "win": true,
+      "done": true,
+      "hpDamage": 28.39846153846156,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 9,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 90,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a09.elite",
+          "hp": 13908,
+          "atk": 63.33333333,
+          "power": 17.73333333
+        }
+      ],
+      "rounds": 17,
+      "win": true,
+      "done": true,
+      "hpDamage": 107.30846152505728,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 9,
+      "kind": "field",
+      "style": "balanced",
+      "level": 90,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a09.normal.2",
+          "hp": 6588,
+          "atk": 43.06666667,
+          "power": 15.2
+        }
+      ],
+      "rounds": 12,
+      "win": true,
+      "done": true,
+      "hpDamage": 22.39846153846156,
+      "shieldAbsorbed": 28.39846153846156,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 9,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 90,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a09.normal.1",
+          "hp": 7320,
+          "atk": 48.13333333,
+          "power": 13.93333333
+        }
+      ],
+      "rounds": 12,
+      "win": true,
+      "done": true,
+      "hpDamage": 22,
+      "shieldAbsorbed": 22,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 9,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 90,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a09.normal.2",
+          "hp": 6588,
+          "atk": 43.06666667,
+          "power": 15.2
+        }
+      ],
+      "rounds": 12,
+      "win": true,
+      "done": true,
+      "hpDamage": 22.39846153846156,
+      "shieldAbsorbed": 28.39846153846156,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 9,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 90,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a09.elite",
+          "hp": 13908,
+          "atk": 63.33333333,
+          "power": 17.73333333
+        }
+      ],
+      "rounds": 21,
+      "win": true,
+      "done": true,
+      "hpDamage": 27,
+      "shieldAbsorbed": 111.91846152080757,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 9,
+      "kind": "field",
+      "style": "sustain",
+      "level": 90,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a09.normal.2",
+          "hp": 6588,
+          "atk": 43.06666667,
+          "power": 15.2
+        }
+      ],
+      "rounds": 18,
+      "win": true,
+      "done": true,
+      "hpDamage": 22.39846153846156,
+      "shieldAbsorbed": 36.39846153846156,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 9,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 90,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a09.normal.1",
+          "hp": 7320,
+          "atk": 48.13333333,
+          "power": 13.93333333
+        }
+      ],
+      "rounds": 17,
+      "win": true,
+      "done": true,
+      "hpDamage": 22,
+      "shieldAbsorbed": 30,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 9,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 90,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a09.normal.2",
+          "hp": 6588,
+          "atk": 43.06666667,
+          "power": 15.2
+        }
+      ],
+      "rounds": 16,
+      "win": true,
+      "done": true,
+      "hpDamage": 6,
+      "shieldAbsorbed": 48.79692307692312,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 9,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 90,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a09.elite",
+          "hp": 13908,
+          "atk": 63.33333333,
+          "power": 17.73333333
+        }
+      ],
+      "rounds": 27,
+      "win": true,
+      "done": true,
+      "hpDamage": 84.69846152930768,
+      "shieldAbsorbed": 90.56923075615396,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 10,
+      "kind": "field",
+      "style": "noSustain",
+      "level": 100,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a10.normal.2",
+          "hp": 7344,
+          "atk": 55.1,
+          "power": 18.85
+        }
+      ],
+      "rounds": 9,
+      "win": true,
+      "done": true,
+      "hpDamage": 32.33625000000029,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 10,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 100,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a10.normal.1",
+          "hp": 8160,
+          "atk": 62.35,
+          "power": 17.4
+        }
+      ],
+      "rounds": 9,
+      "win": true,
+      "done": true,
+      "hpDamage": 29,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 10,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 100,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a10.normal.2",
+          "hp": 7344,
+          "atk": 55.1,
+          "power": 18.85
+        }
+      ],
+      "rounds": 8,
+      "win": true,
+      "done": true,
+      "hpDamage": 26.33625000000029,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 10,
+      "kind": "dungeon",
+      "style": "noSustain",
+      "level": 100,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a10.elite",
+          "hp": 15504,
+          "atk": 79.75,
+          "power": 21.75
+        }
+      ],
+      "rounds": 16,
+      "win": true,
+      "done": true,
+      "hpDamage": 123.46009615384628,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 10,
+      "kind": "boss",
+      "style": "noSustain",
+      "level": 100,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a10.boss",
+          "hp": 36556.8,
+          "atk": 66.816,
+          "power": 14.847999999999999
+        },
+        {
+          "id": "elf.a10.boss",
+          "hp": 6854.4,
+          "atk": 12.528,
+          "power": 2.784
+        },
+        {
+          "id": "elf.a10.boss",
+          "hp": 6854.4,
+          "atk": 12.528,
+          "power": 2.784
+        },
+        {
+          "id": "elf.a10.boss",
+          "hp": 6854.4,
+          "atk": 12.528,
+          "power": 2.784
+        }
+      ],
+      "rounds": 51,
+      "win": true,
+      "done": true,
+      "hpDamage": 219.79359999999997,
+      "shieldAbsorbed": 0,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.pursuit",
+        "elf.moon_finisher"
+      ]
+    },
+    {
+      "area": 10,
+      "kind": "field",
+      "style": "balanced",
+      "level": 100,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a10.normal.2",
+          "hp": 7344,
+          "atk": 55.1,
+          "power": 18.85
+        }
+      ],
+      "rounds": 12,
+      "win": true,
+      "done": true,
+      "hpDamage": 26.33625000000029,
+      "shieldAbsorbed": 32.33624999999995,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 10,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 100,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a10.normal.1",
+          "hp": 8160,
+          "atk": 62.35,
+          "power": 17.4
+        }
+      ],
+      "rounds": 12,
+      "win": true,
+      "done": true,
+      "hpDamage": 22,
+      "shieldAbsorbed": 22,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 10,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 100,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a10.normal.2",
+          "hp": 7344,
+          "atk": 55.1,
+          "power": 18.85
+        }
+      ],
+      "rounds": 11,
+      "win": true,
+      "done": true,
+      "hpDamage": 6,
+      "shieldAbsorbed": 32.33624999999995,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 10,
+      "kind": "dungeon",
+      "style": "balanced",
+      "level": 100,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a10.elite",
+          "hp": 15504,
+          "atk": 79.75,
+          "power": 21.75
+        }
+      ],
+      "rounds": 20,
+      "win": true,
+      "done": true,
+      "hpDamage": 65.86442307692323,
+      "shieldAbsorbed": 66.59567307692316,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 10,
+      "kind": "boss",
+      "style": "balanced",
+      "level": 100,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a10.boss",
+          "hp": 36556.8,
+          "atk": 66.816,
+          "power": 14.847999999999999
+        },
+        {
+          "id": "elf.a10.boss",
+          "hp": 6854.4,
+          "atk": 12.528,
+          "power": 2.784
+        },
+        {
+          "id": "elf.a10.boss",
+          "hp": 6854.4,
+          "atk": 12.528,
+          "power": 2.784
+        },
+        {
+          "id": "elf.a10.boss",
+          "hp": 6854.4,
+          "atk": 12.528,
+          "power": 2.784
+        }
+      ],
+      "rounds": 57,
+      "win": true,
+      "done": true,
+      "hpDamage": 126.86239999999998,
+      "shieldAbsorbed": 129.9312,
+      "potions": 0,
+      "skills": [
+        "elf.twin_arrow",
+        "elf.thread_volley",
+        "elf.leaf_ward",
+        "elf.pursuit"
+      ]
+    },
+    {
+      "area": 10,
+      "kind": "field",
+      "style": "sustain",
+      "level": 100,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a10.normal.2",
+          "hp": 7344,
+          "atk": 55.1,
+          "power": 18.85
+        }
+      ],
+      "rounds": 18,
+      "win": true,
+      "done": true,
+      "hpDamage": 26.33625000000029,
+      "shieldAbsorbed": 40.336250000000064,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 10,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 100,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a10.normal.1",
+          "hp": 8160,
+          "atk": 62.35,
+          "power": 17.4
+        }
+      ],
+      "rounds": 17,
+      "win": true,
+      "done": true,
+      "hpDamage": 22,
+      "shieldAbsorbed": 31,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 10,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 100,
+      "stage": 1,
+      "ids": [
+        {
+          "id": "elf.a10.normal.2",
+          "hp": 7344,
+          "atk": 55.1,
+          "power": 18.85
+        }
+      ],
+      "rounds": 15,
+      "win": true,
+      "done": true,
+      "hpDamage": 6,
+      "shieldAbsorbed": 56.672500000000014,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 10,
+      "kind": "dungeon",
+      "style": "sustain",
+      "level": 100,
+      "stage": 2,
+      "ids": [
+        {
+          "id": "elf.a10.elite",
+          "hp": 15504,
+          "atk": 79.75,
+          "power": 21.75
+        }
+      ],
+      "rounds": 24,
+      "win": true,
+      "done": true,
+      "hpDamage": 77.72884615384646,
+      "shieldAbsorbed": 87.46250000000009,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "area": 10,
+      "kind": "boss",
+      "style": "sustain",
+      "level": 100,
+      "stage": 0,
+      "ids": [
+        {
+          "id": "elf.a10.boss",
+          "hp": 36556.8,
+          "atk": 66.816,
+          "power": 14.847999999999999
+        },
+        {
+          "id": "elf.a10.boss",
+          "hp": 6854.4,
+          "atk": 12.528,
+          "power": 2.784
+        },
+        {
+          "id": "elf.a10.boss",
+          "hp": 6854.4,
+          "atk": 12.528,
+          "power": 2.784
+        },
+        {
+          "id": "elf.a10.boss",
+          "hp": 6854.4,
+          "atk": 12.528,
+          "power": 2.784
+        }
+      ],
+      "rounds": 93,
+      "win": true,
+      "done": true,
+      "hpDamage": 102.86239999999998,
+      "shieldAbsorbed": 217.86239999999998,
+      "potions": 0,
+      "skills": [
+        "elf.leaf_ward",
+        "elf.resonant_guard",
+        "elf.dew_mending",
+        "elf.root_strike"
+      ]
+    },
+    {
+      "starter": true,
+      "level": 1,
+      "rounds": 11,
+      "win": true,
+      "done": true,
+      "hp": 463.68461538461537
+    }
+  ]
+}
