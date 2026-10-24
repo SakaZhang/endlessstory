@@ -672,12 +672,12 @@ function startDwarfEncounter(s,instance,now){
  withMultiRng(e,()=>{
   const group=instance.kind==='field'&&Math.random()<raceGroupChance(area.race),count=group?rand(2,3):1; e.fieldGroup=group;
   for(let i=0;i<count;i++){
-   const def=pool[rand(0,pool.length-1)],p=monsterParameters(def.id),followers=def.trait?.type==='followers';
+   const eligible=group?pool.filter(d=>d.trait?.type!=='followers'):pool,def=eligible[rand(0,eligible.length-1)],p=monsterParameters(def.id),followers=def.trait?.type==='followers';
    const shares=followers?def.trait.shares:[1];
    for(let j=0;j<shares.length;j++){
     const u=makeMultiUnit(id+'-enemy-'+e.enemies.length,e.location,instance.id,{enemy:def.name,hp:p.hp,atk:p.atk,armor:p.armor},s.lastHealthClock,{});
     const adjusted={...p,hp:p.hp*(group?1.5/count:1),atk:p.atk*(group?1.2/count:1),elementalPower:p.elementalPower*(group?1.2/count:1)};
-    initializeDwarfActor(u,def,adjusted,s.lastHealthClock,{share:shares[j],follower:j>0});u.main=e.enemies.length===0;e.enemies.push(u);
+    initializeDwarfActor(u,def,adjusted,s.lastHealthClock,{share:shares[j],follower:j>0});if(j>0&&def.trait.followerMonsterId){u.followerMonsterId=def.trait.followerMonsterId;u.name=ALL_MONSTERS[u.followerMonsterId]?.name??def.trait.name;u.independentRewards=false;}u.main=e.enemies.length===0;e.enemies.push(u);
    }
    if(i===0){e.rewardGold=p.rewardGold;e.rewardXp=p.rewardXp;e.rewardDefinitionId=def.id;}
   }
