@@ -1,3 +1,4 @@
+import {heroPresentationScale,HERO_REFERENCE_HEIGHTS} from './hero-proportions.js';
 import {cooldownDisplaySeconds} from './cooldown-label.js';
 import {extendBattleManifest} from './race-art.js';
 import {getSkillMetadata} from './race-registry.js';
@@ -33,7 +34,7 @@ export function drawLiveHeroPortrait(canvas,state,{manifest,images,time=0}={}){
  if(!sprite)return drawPixelNotice(canvas,manifest?'角色外观暂不可用':'角色外观加载中',{width,height});
  const ids=sprite.animations.idle,frame=sprite.frames.find(f=>f.id===ids[Math.floor(time/500)%ids.length]),img=images?.get(frame?.file);
  if(!img)return drawPixelNotice(canvas,'角色素材待加载 · 可重试',{width,height});
- const c=canvas.getContext('2d');c.imageSmoothingEnabled=false;c.clearRect(0,0,width,height);const box=frame.solidBBox??[0,0,192,192],w=box[2]-box[0]+1,h=box[3]-box[1]+1,scale=Math.max(.5,Math.min((width-12)/w,(height-10)/h));
+ const c=canvas.getContext('2d');c.imageSmoothingEnabled=false;c.clearRect(0,0,width,height);const box=frame.solidBBox??[0,0,192,192],w=box[2]-box[0]+1,h=box[3]-box[1]+1,fitScale=Math.max(.5,Math.min((width-12)/w,(height-10)/h)),scale=HERO_REFERENCE_HEIGHTS[state.race]?Math.min(fitScale,(height-10)/100*heroPresentationScale(sprite,state.race)):fitScale;
  c.drawImage(img,Math.round((width-w*scale)/2-box[0]*scale),Math.round(height-5-(box[3]+1)*scale),Math.round(192*scale),Math.round(192*scale));return true;
 }
 export const LIVE_MONSTER_SPRITES=Object.freeze({'dwarf.a01.normal.1':'raider','dwarf.a01.normal.2':'pit-rat','dwarf.a01.normal.3':'golem','dwarf.a01.elite':'shield-captain'});
@@ -98,7 +99,7 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
   const baseline=snapshot.campRace?(manifest?.campBackgrounds?.[snapshot.campRace]?.baseline??195):manifest?.areaBaselines?.[areaKey(snapshot.areaId)]??203;
   positions.hero={x:snapshot.campRace?144:100,y:baseline,sprite:heroSpriteFor(metadata.hero?.weaponType,manifest,metadata.hero?.race),ranged:['bow','staff'].includes(metadata.hero?.weaponType)};
   const heroSprite=manifest?.sprites?.[positions.hero.sprite],heroIdle=heroSprite?.frames.find(f=>f.id===heroSprite.animations.idle[0]),heroBox=heroIdle?.solidBBox??heroIdle?.alphaBBox;
-  if(heroBox)positions.hero.scale=Math.min(1,94/(heroBox[3]-heroBox[1]+1));
+  if(heroBox)positions.hero.scale=heroPresentationScale(heroSprite,metadata.hero?.race);
   for(const u of units){
    const n=slots.get(u.id),dense=slots.size>3,cell=dense?(slots.size<=5?([[260,0],[365,0],[435,0],[335,24],[410,24]][n]):([[250,0],[345,0],[410,0],[300,26],[355,26],[410,26],[455,26]][n])):null;
    const key=liveActorSprite(u,manifest),sprite=manifest?.sprites?.[key],boxes=sprite?.frames.map(f=>f.solidBBox??f.alphaBBox).filter(Boolean)??[];
