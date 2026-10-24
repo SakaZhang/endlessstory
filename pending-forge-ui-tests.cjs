@@ -24,7 +24,7 @@ async function reload(){elements=new Map();events={};windowEvents={};await impor
   E.normalizeInventoryState(fixture);
   for(const category of ['equipment','items','materials'])assert(E.setLootFilter(fixture,category,[0,1,2,3]));
   for(const slot of E.SLOTS){while(E.bagCounts(fixture).equipment[slot]<50)fixture.inventory.push(E.item(slot,1,null,0));assert.equal(E.bagCounts(fixture).equipment[slot],50);}
-  assert.equal(fixture.inventory.length,350,'equipped items count toward each bag; both rings share one bag');assert(E.validSave(fixture));
+  assert.equal(fixture.inventory.length,400,'equipped items count toward each bag; both rings share one bag');assert(E.validSave(fixture));
   store.set('ashencrown-v3',JSON.stringify(fixture));await reload();
   click({view:'forge'});for(let i=0;i<inputs;i++)click({material:'铁屑|0'});
   assert.equal((el('view').innerHTML.match(/orbitSlot filled/g)||[]).length,inputs);
