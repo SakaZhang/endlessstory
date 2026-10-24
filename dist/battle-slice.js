@@ -1,3 +1,4 @@
+import {getSkillMetadata} from './race-registry.js';
 import {potionIcon,bindConsumablePixelErrors} from './consumable-pixel-art.js';
 import {renderSkillPixelIcon} from './skill-pixel-icons.js';
 import {readEnemyEffectRows,normalizeBattleEnemies,readPlayerShieldRows} from './multi-battle-ui.js';
@@ -44,6 +45,7 @@ export function skillVisualForEvent(event,weaponType=null){
  if(event.kind==='poison')return 'poison';
  if(event.skillId==='iron_vigil'&&event.kind==='shield'&&event.shieldDelta>0)return 'shieldRune';
  if(event.skillId==='forge_breath'&&event.kind==='heal'&&event.hpDelta>0)return 'healing';
+ const meta=getSkillMetadata(event.skillId);if(meta){if(event.kind==='shield'&&event.shieldDelta>0)return 'shieldRune';if(event.kind==='heal'&&event.hpDelta>0)return 'healing';if(event.kind==='hit'||event.kind==='dot'){if(meta.visual)return meta.visual;if(event.skillId.startsWith('elf.'))return weaponType==='bow'?'arrowVolley':'crystalPulse';if(event.skillId.startsWith('human.'))return meta.branch==='bleed'?'bleedArc':meta.branch==='guard'?'hammerCrack':'axeHeavy';if(event.skillId.startsWith('goblin.'))return meta.branch==='trap'||meta.branch==='contraption'?'trapSnap':'shadowCut';if(event.skillId.startsWith('ashen.'))return meta.branch==='heat'?'eruption':meta.branch==='shell'?'hammerCrack':'crystalPulse';}}
  if(event.kind!=='hit'&&event.kind!=='dot')return null;
  if(event.skillId==='fracture_strike'&&event.kind==='hit')return weaponType==='axe'?(event.segmentIndex>0?'axeHeavy':'axeFirst'):weaponType==='hammer'?'hammerCrack':null;
  if(event.skillId==='furnace_wave'&&event.kind==='hit')return 'eruption';
@@ -54,7 +56,14 @@ export function sliceActorMetadata(state){return {hero:{weaponType:state.invento
 function drawSkillEffects(c,effects,positions,time,reduced){
  const px=(x,y,w=3,h=w)=>c.fillRect(Math.round(x),Math.round(y),w,h);
  for(const f of effects){const p=positions[f.targetId],age=time-f.at;if(!p||age<0||age>650)continue;const t=age/650,x=p.x,y=p.y;c.save();c.globalAlpha=Math.min(1,(1-t)*2);const drift=reduced?0:t;
- if(f.visual==='axeFirst'||f.visual==='axeHeavy'){const heavy=f.visual==='axeHeavy';c.fillStyle=heavy?'#ffe7a3':'#d9edf4';for(let i=0;i<15;i++){const a=(-1.3+i*.15)*(heavy?-1:1),r=heavy?36:25;px(x+Math.cos(a)*r-12,y-56+Math.sin(a)*r,heavy?6:3,heavy?4:3);}if(heavy){c.fillStyle='#fff8dd';for(let i=0;i<5;i++)px(x-8+i*5,y-54+i*3,4,4);}}
+ if(['arrowVolley','crystalPulse','bleedArc','shadowCut','trapSnap'].includes(f.visual)){
+  const color={arrowVolley:'#c7e6aa',crystalPulse:'#b5dff5',bleedArc:'#dc6475',shadowCut:'#b0b181',trapSnap:'#e4b66b'}[f.visual];c.fillStyle=color;
+  if(f.visual==='arrowVolley'){for(let n=0;n<3;n++){const xx=x-70+Math.min(1,t*3)*70,yy=y-65+n*11;px(xx-26,yy,28,2);px(xx,yy-3,5,8);px(xx-23,yy-4,3,9);}}
+  else if(f.visual==='crystalPulse'){for(let n=0;n<6;n++){const a=n*Math.PI/3+t*1.6,rr=14+t*36;px(x+Math.cos(a)*rr,y-55+Math.sin(a)*rr,4,8);}for(let n=-2;n<=2;n++)px(x+n*5,y-55-Math.abs(n)*4,4,8);}
+  else if(f.visual==='trapSnap'){for(let n=0;n<7;n++){px(x-24+n*8,y-6,5,4);px(x-24+n*8,y-10-12*(1-t),3,10);}px(x-22,y-3,46,3);}
+  else{for(let n=0;n<16;n++){const a=-1.2+n*.16,rr=18+t*12;px(x+Math.cos(a)*rr-12,y-58+Math.sin(a)*rr,5,3);}if(f.visual==='bleedArc')for(let n=0;n<5;n++)px(x-10+n*6,y-40+t*24+n%2*5,3,4);}
+ }
+ else if(f.visual==='axeFirst'||f.visual==='axeHeavy'){const heavy=f.visual==='axeHeavy';c.fillStyle=heavy?'#ffe7a3':'#d9edf4';for(let i=0;i<15;i++){const a=(-1.3+i*.15)*(heavy?-1:1),r=heavy?36:25;px(x+Math.cos(a)*r-12,y-56+Math.sin(a)*r,heavy?6:3,heavy?4:3);}if(heavy){c.fillStyle='#fff8dd';for(let i=0;i<5;i++)px(x-8+i*5,y-54+i*3,4,4);}}
  else if(f.visual==='hammerCrack'){c.fillStyle='#f1d399';for(let i=0;i<13;i++){px(x-38+i*6,y-3+(i%3)*3,7,3);px(x+(i%2?-1:1)*i*3,y-7-i*3-drift*10,3,4);}c.fillStyle='#fff0c2';px(x-6,y-37,12,34);}
  else if(f.visual==='eruption'){
   const seed=[...f.targetId].reduce((n,ch)=>(n*31+ch.charCodeAt(0))>>>0,0),phase=(seed%19)/19,grid=v=>Math.round(v/2)*2;

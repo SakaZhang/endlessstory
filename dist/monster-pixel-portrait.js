@@ -1,8 +1,9 @@
+import {raceArt} from './race-art.js';
 // Read-only portraits from exact current battle idle assets, never procedural monster fallback.
 import {MONSTER_PIXEL_REGISTRY as registry} from './monster-pixel-registry.js';
 import {MONSTER_CATALOG} from './monster-codex-schema.js';
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-export function monsterPixelDescriptor(id,{follower=false}={}){
+export function monsterPixelDescriptor(id,{follower=false}={}){const native=raceArt(String(id).split('.')[0])?.monsters?.[id];if(native&&!follower){const frame=native.frames.find(f=>f.id===native.animations.idle[0]),box=frame.solidBBox??frame.alphaBBox??[16,16,176,176];return {id,spriteKey:'race-'+id,follower:false,file:frame.file,frameSize:native.frameSize??[192,192],crop:box};}
  if(typeof id!=='string'||!Object.hasOwn(registry.monsters,id))return null;
  const variant=follower?registry.variants.find(v=>v.match.definitionId===id&&v.match.follower===true):null;
  if(follower&&!variant)return null;const spriteKey=variant?.spriteKey??registry.monsters[id],sprite=registry.sprites[spriteKey];return sprite?{...sprite,spriteKey,id,follower:!!follower}:null;
