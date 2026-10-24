@@ -1,7 +1,17 @@
-import assert from 'node:assert/strict';import{createLegendaryState as create,validLegendaryState as valid,reduceLegendaryEvent as reduce}from'../../../dist/races/elf/legendary.js';
-const staff='elf-sixfold-heartwood',amulet='elf-dew-covenant';let s=create(staff);const c={clock:0,castId:'cast1',weaponType:'staff',committed:true,damageActionCount:1,targetId:'enemy',maxHp:1000};
-function event(type,data={},context=c){const r=reduce({legendaryId:staff,state:s,event:{type,...data},context});assert(r);s=r.state;assert(valid(staff,s));return r.commands;}
-event('beforeCast');for(const damageType of ['fire','fire','water','wind'])event('directHit',{sourceKind:'skill',damageType,hpLost:10,shieldLost:0});assert(s.ready);assert.equal(event('castEnd').length,0,'same cast cannot consume newly filled meter');
-assert.equal(event('directHit',{sourceKind:'equipmentProc',damageType:'dark',hpLost:99,shieldLost:0}).length,0);assert.deepEqual(s.seenElements,['fire','water','wind']);
-event('beforeCast',{}, {...c,castId:'support',damageActionCount:0});assert(s.ready,'self support preserves ready');assert.equal(event('castEnd',{}, {...c,castId:'support',damageActionCount:0}).length,0);event('beforeCast',{}, {...c,castId:'failed',committed:false});assert(s.ready,'uncommitted cast preserves ready');assert.equal(event('castEnd',{}, {...c,castId:'failed',committed:false}).length,0);const c2={...c,clock:1000,castId:'cast2'};event('beforeCast',{},c2);assert(!s.ready);event('directHit',{sourceKind:'skill',damageType:'earth',hpLost:0,shieldLost:10},c2);assert.deepEqual(s.seenElements,['earth']);const hits=event('castEnd',{},c2);assert.equal(hits.length,6);assert.equal(new Set(hits.map(h=>h.damageType)).size,6);assert(hits.every(h=>!h.reaperEligible&&!h.multicastEligible&&h.sourceKind==='equipmentProc'&&h.activeCastCount===0));assert.equal(event('castEnd',{},c2).length,0,'no duplicate echo');assert.deepEqual(s.seenElements,['earth'],'original cast begins next cycle, echoes do not');
-let a=create(amulet);for(const [clock,removedCount,count,capacity] of [[0,0,0,0],[0,2,1,140],[1000,2,0,0],[12000,9,1,180]]){const r=reduce({legendaryId:amulet,state:a,event:{type:'cleanseResult',removedCount},context:{clock,maxHp:1000}});assert(r);a=r.state;assert.equal(r.commands.length,count);if(count)assert.equal(r.commands[0].capacity,capacity);assert(valid(amulet,JSON.parse(JSON.stringify(a))));}assert.deepEqual(create(staff).seenElements,[]);assert.equal(create(amulet).nextWardAt,0);console.log('PASS elf per-item legend transitions: next-cast 3-distinct meter, separate six echo commands, no recursion, shield-hit marks, cleanse actual-count/ICD/cap/roundtrip.');
+import assert from 'node:assert/strict';
+import {createLegendaryState as create,validLegendaryState as valid,reduceLegendaryEvent as reduce} from '../../../dist/races/elf/legendary.js';
+const staff='elf-sixfold-heartwood';let state=create(staff);let cast=0;
+const context={clock:0,castId:'c0',weaponType:'staff',committed:true,damageActionCount:2,targetId:'enemy'};
+function event(e,c={}){const r=reduce({legendaryId:staff,state,event:e,context:{...context,...c}});assert(r);assert.deepEqual(r.commands,[]);state=r.state;assert(valid(staff,JSON.parse(JSON.stringify(state))));}
+for(const damageType of ['earth','earth','fire','water'])event({type:'directHit',sourceKind:'skill',damageType,hpLost:1,shieldLost:0});assert(!state.ready);assert.equal(state.seenElements.length,3);
+event({type:'directHit',sourceKind:'skill',damageType:'light',hpLost:0,shieldLost:0});assert(!state.ready);
+event({type:'directHit',sourceKind:'equipmentProc',damageType:'light',hpLost:1,shieldLost:0});assert(!state.ready);
+event({type:'directHit',sourceKind:'skill',damageType:'light',hpLost:0,shieldLost:1});assert(state.ready);assert.equal(state.pendingCastId,null);
+event({type:'beforeCast'},{committed:false});assert(state.ready);
+event({type:'beforeCast'},{castId:'support',damageActionCount:0});assert(state.ready);
+event({type:'beforeCast'},{castId:'attack'});assert(!state.ready);assert.equal(state.pendingCastId,'attack');
+for(const damageType of ['earth','water','fire','wind'])event({type:'directHit',sourceKind:'skill',damageType,hpLost:1,shieldLost:0});assert(state.ready);
+event({type:'beforeCast'},{castId:'attack'});assert(state.ready,'duplicate commit cannot consume second charge');
+event({type:'castEnd'},{castId:'attack'});assert(state.ready);assert.equal(state.pendingCastId,null);
+assert(valid('elf-last-string',create('elf-last-string')));assert.equal(create('elf-dew-covenant'),null);
+console.log('PASS Elf four-distinct positive damage, shield, failed/support casts, next cast only, no synthetic recursion, one charge per cast');

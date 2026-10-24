@@ -21,3 +21,18 @@ export function racialLegendaryStatBonuses(s){
  }
  return bonus;
 }
+
+// Direct damage modifiers are queried after committed beforeCast, before mitigation.
+// Never mutate charge here: a multihit cast shares one pendingCastId.
+export function racialLegendaryHitModifiers(s,{castId,weaponType,sourceKind,damageType,isFinalPhysicalSegment=false}={}){
+ const item=s.inventory?.find(i=>i.id===s.equip?.weapon),type=weaponType??item?.weaponType;
+ let damageMultiplier=1,armorMultiplier=1;
+ if(item?.legendaryId==='elf-sixfold-heartwood'&&type==='staff'){
+  if(['earth','water','fire','wind','light','dark'].includes(damageType))damageMultiplier*=1.3;
+  if(sourceKind==='skill'&&['physical','earth','water','fire','wind','light','dark'].includes(damageType)&&typeof castId==='string'&&s.legendaryRuntime?.byId?.[item.id]?.state.pendingCastId===castId)damageMultiplier*=2;
+ }
+ if(item?.legendaryId==='elf-last-string'&&type==='bow'&&sourceKind==='skill'&&damageType==='physical'){
+  armorMultiplier=.7;if(isFinalPhysicalSegment)damageMultiplier*=1.5;
+ }
+ return {damageMultiplier,armorMultiplier};
+}
