@@ -15,7 +15,7 @@ Current production remains v0.58 / Sites67. Expanded content is an unreleased ca
 - `race-expansion-integration-tests.mjs`: five saves/JSON, all40areas/node starts,72 material pools,8 legend equips, aliases, innate, retained existing progress and native file references.
 - `tests/races/elf/actual-host.test.mjs`:63 actual equipped bow/staff/axe casts and24 nodes; JSON valid.
 - `tests/races/ashen/host.test.mjs`:63 actual casts,23nodes, deterministic JSON continuation, dungeon resource carry, non-Ashen core ownership/equip restriction.
-- `goblin-production-tests.mjs`:21skills/23nodes and equipped2/4-set scenarios. Strict comparative legendary-effect assertions being expanded.
+- `goblin-production-tests.mjs`:21skills/23nodes and equipped2/4-set scenarios. Strict comparative legendary-effect and triggered online/offline assertions pass.
 - `race-retinue-host-tests.mjs`: all12 actual encounter budgets, independent reward exclusions, JSON and leader-only defeat rejection.
 - `live-battle-scoped-loading-tests.mjs`: scoped asset readiness, navigation, bounded concurrency, retry and disposal (mock loader).
 - `racial-economy-tests.mjs`: actual five-race merchant/enhancement/fusion transactions, no gear resale arbitrage, fixed material costs, extra-material exclusions.
@@ -37,9 +37,9 @@ Current production remains v0.58 / Sites67. Expanded content is an unreleased ca
 
 ## Fresh-player evidence (no grants)
 The shared fixture uses actual fresh gear, earned loot/skill points, paid merchant refreshes, recipe purchase, craft/use, dungeon completion and real A02 entry. These are fixed-seed observations, not promised universal progression times.
-- Human: ~580s, Lv4,0 deaths,4 paid refreshes126gold.
+- Human after shared loot correction:578.865s, Lv4,0 deaths,4 paid refreshes126gold.
 - Elf with installed per-area curve and +12 innate: ~407s, Lv5,0 deaths; actual recipe purchase/craft/use and A02 entry verified.
-- Goblin:2222s, Lv8,2 deaths,8 paid refreshes.
+- Goblin after shared loot correction:2223.8s, Lv8,2 deaths,8 paid refreshes.
 - Ashen:2427s, Lv8,2 deaths,9 paid refreshes360gold.
 - Dwarf:2569s, Lv9,2 deaths,10 paid refreshes410gold.
 Random early healing-recipe access is a shared onboarding friction point; starting100gold/0potions/0skillpoints were unchanged. Ashen route-only diagnostic reaches A02 in620s but explicitly does not replace the full craft/use gate.
@@ -60,4 +60,9 @@ Root accepted Human/Goblin/Ashen initial content budgets after matched controls 
 - All-eight equipped legendary basic online/offline parity passes; deliberately triggered per-race proc continuation tests also pass for all eight new legends, including exact ledger/ICD/shield/HP and applicable event parity.
 
 ## Material contract correction before release
-Independent documentation review exposed race-local material-rate/quality drift. The new common `material-loot-profile.js` exactly reproduces all237 populated original Dwarf channels and297 quality vectors (1e-12 tolerance). New packs are regenerated from creature associations only (IDs and relative weights), preserving canonical source whitelists and story exclusions. Regular35/50/75%, eligible recovery60/75/90%, one item per channel; special/gem area-and-rank formulas and area×node quality curves are shared. Human special materials are separated from its ordinary channel. Goblin extra ordinary-unit innate remains a separately tested exception. Final313-pool and120,000-settlement audit gates publication.
+Independent documentation review exposed race-local material-rate/quality drift. The new common `material-loot-profile.js` exactly reproduces all237 populated original Dwarf channels and297 quality vectors (1e-12 tolerance). New packs are regenerated from creature associations only (IDs and relative weights), preserving canonical source whitelists and story exclusions. Regular35/50/75%, eligible recovery60/75/90%, one item per channel; special/gem area-and-rank formulas and area×node quality curves are shared. Human special materials are separated from its ordinary channel. Goblin extra ordinary-unit innate remains a separately tested exception. Final313-pool/1,857-entry audit and120,000 actual settlements pass exact occurrence, quantity, quality, category and source checks.
+
+## v0.59 phase scope and final handoff
+Production data frozen at `b9a040e`; later changes only add tests, evidence and this handoff. Initial release-review gates pass for all four new races (numeric, native art and actual equipped set/legend effects). Four new selectable heroes and their ten-area content are prepared for v0.59; Dwarf remains its current21-node tree and current save allocations. Dwarf30 is implemented but inactive pending user consent. No save-version/key change, no automatic reset, no push or publication by the integration worker.
+
+After common-loot correction all four genuine fresh-player craft/use/dungeon/A02 journeys were rerun; Human/Elf refreshed evidence, Goblin/Ashen results remain reproducible. The shared early healing-recipe merchant RNG friction remains disclosed, not silently replaced by a grant.
