@@ -20,15 +20,15 @@ export function validDwarfActor(u){const d=DWARF_MONSTERS[u.definitionId];return
 export function expireDwarfShield(u,now){if(u.typedProfile&&u.shieldUntil>0&&now>=u.shieldUntil){u.shield=0;u.shieldUntil=0;}}
 // Timed DOT keeps source power and type, never newly-selected enemy attack.
 export function applyDwarfDot(e,u,skill,effect,now){
- e.typedDots??=[];const raw=u[effect.powerBasis]*effect.coefficientPerSecond,existing=e.typedDots.find(d=>d.key===skill.id);
+ e.typedDots??=[];const raw=u[effect.powerBasis]*effect.coefficientPerSecond,existing=e.typedDots.find(d=>d.key===skill.id&&d.sourceId===u.id);
  if(existing){existing.raw=Math.max(existing.raw,raw);existing.endAt=Math.max(existing.endAt,now+effect.seconds*1000);}
- else e.typedDots.push({key:skill.id,type:effect.damageType,raw,nextAt:now+1000,endAt:now+effect.seconds*1000});
+ else e.typedDots.push({key:skill.id,sourceId:u.id,type:effect.damageType,raw,nextAt:now+1000,endAt:now+effect.seconds*1000});
 }
 export function tickDwarfDots(e,now,damage){
  for(const dot of e.typedDots??[]){while(dot.nextAt<=now&&dot.nextAt<=dot.endAt){damage(dot);dot.nextAt+=1000;if(e.heroHp<=0)return;}}
  e.typedDots=(e.typedDots??[]).filter(dot=>dot.nextAt<=dot.endAt);
 }
-export function validDwarfDots(dots){return dots===undefined||(Array.isArray(dots)&&dots.length<=20&&new Set(dots.map(d=>d.key)).size===dots.length&&dots.every(d=>typeof d.key==='string'&&['physical',...elements].includes(d.type)&&Number.isFinite(d.raw)&&d.raw>=0&&d.raw<=1e12&&['nextAt','endAt'].every(k=>Number.isFinite(d[k])&&d[k]>=0&&d[k]<=1e15+60000)));}
+export function validDwarfDots(dots){return dots===undefined||(Array.isArray(dots)&&dots.length<=20&&new Set(dots.map(d=>JSON.stringify([d.key,d.sourceId??null]))).size===dots.length&&dots.every(d=>(d.sourceId===undefined||typeof d.sourceId==='string'&&d.sourceId.length>0&&d.sourceId.length<=200)&&typeof d.key==='string'&&['physical',...elements].includes(d.type)&&Number.isFinite(d.raw)&&d.raw>=0&&d.raw<=1e12&&['nextAt','endAt'].every(k=>Number.isFinite(d[k])&&d[k]>=0&&d[k]<=1e15+60000)));}
 // Returns a typed action, shared by online/offline. Numerical damage goes through
 // production physical / elemental resolvers in multi-combat, not a second formula.
 export function nextDwarfAction(u,now){

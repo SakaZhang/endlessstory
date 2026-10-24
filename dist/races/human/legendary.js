@@ -1,11 +1,11 @@
 // Per-equipped-item pure reducers. Host clock advances only combat time and survives fields/stages.
 // Source events are supplied after shield-first HP settlement; these commands never count as casts.
-const sword='human-oathblade',banner='human-last-banner';
+const sword='human-oathblade',banner='human-banner-armor';
 const finite=x=>Number.isFinite(x)&&x>=0&&x<=1e15;
 const plain=x=>!!x&&typeof x==='object'&&!Array.isArray(x);
 const exact=(x,keys)=>plain(x)&&Object.keys(x).length===keys.length&&keys.every(k=>Object.hasOwn(x,k));
-export function createLegendaryState(id){return id===sword?{version:1,targetId:null,markedAt:0,expiresAt:0,lastCastId:null,nextReadyAt:0}:id===banner?{version:1,nextReadyAt:0}:null;}
-export function validLegendaryState(id,s){if(id===sword)return exact(s,['version','targetId','markedAt','expiresAt','lastCastId','nextReadyAt'])&&s.version===1&&(s.targetId===null||typeof s.targetId==='string'&&s.targetId.length>0)&&(s.lastCastId===null||typeof s.lastCastId==='string'&&s.lastCastId.length>0)&&[s.markedAt,s.expiresAt,s.nextReadyAt].every(finite)&&s.expiresAt>=s.markedAt&&(s.targetId===null?s.lastCastId===null:s.lastCastId!==null);return id===banner&&exact(s,['version','nextReadyAt'])&&s.version===1&&finite(s.nextReadyAt);}
+export function createLegendaryState(id){return id===sword?{version:1,targetId:null,markedAt:0,expiresAt:0,lastCastId:null,nextReadyAt:0}:id===banner?{version:1}:null;}
+export function validLegendaryState(id,s){if(id===sword)return exact(s,['version','targetId','markedAt','expiresAt','lastCastId','nextReadyAt'])&&s.version===1&&(s.targetId===null||typeof s.targetId==='string'&&s.targetId.length>0)&&(s.lastCastId===null||typeof s.lastCastId==='string'&&s.lastCastId.length>0)&&[s.markedAt,s.expiresAt,s.nextReadyAt].every(finite)&&s.expiresAt>=s.markedAt&&(s.targetId===null?s.lastCastId===null:s.lastCastId!==null);return id===banner&&exact(s,['version'])&&s.version===1;}
 const clearMark=s=>Object.assign(s,{targetId:null,markedAt:0,expiresAt:0,lastCastId:null});
 export function reduceLegendaryEvent({legendaryId,state,event,context={}}={}){
  if(!validLegendaryState(legendaryId,state)||!plain(event)||typeof event.type!=='string'||!finite(context.clock))return null;
@@ -24,10 +24,11 @@ export function reduceLegendaryEvent({legendaryId,state,event,context={}}={}){
    }else if(s.targetId!==targetId||s.targetId===null){s.targetId=targetId;s.markedAt=clock;s.expiresAt=clock+6000;s.lastCastId=castId;}
   }
  }
- if(legendaryId===banner&&event.type==='enemyDirectDamage'&&event.heroAlive===true&&event.recursive!==true&&Number.isFinite(event.actualHpLost)&&event.actualHpLost>0&&Number.isFinite(context.maxHp)&&context.maxHp>0&&Number.isFinite(event.hpBefore)&&Number.isFinite(event.hpAfter)&&event.hpBefore>context.maxHp*.3&&event.hpAfter>0&&event.hpAfter<=context.maxHp*.3&&clock>=s.nextReadyAt){
-  commands.push({type:'shield',capacity:context.maxHp*.18,durationMs:6000});
-  commands.push({type:'healOverTime',amount:context.maxHp*.03,durationMs:6000,tickIntervalMs:2000});
-  s.nextReadyAt=clock+30000;
+ // Received segments are already mitigated and capped to actual shield + HP loss.
+ // A lethal segment still reflects before the host resolves death/Nirvana.
+ if(legendaryId===banner&&event.type==='enemyDamageSegment'&&event.recursive!==true&&['enemy-direct','enemy-dot'].includes(event.sourceKind)&&typeof event.attackerId==='string'&&event.attackerId&&finite(event.actualHpLost)&&finite(event.actualShieldAbsorbed)){
+  const amount=(event.actualHpLost+event.actualShieldAbsorbed)*.5;
+  if(amount>0)commands.push({type:'reflectDamage',targetId:event.attackerId,amount,crit:false,lifesteal:false,reaperEligible:false,multicastEligible:false,activeCastCount:0,recursive:false});
  }
  return {state:s,commands};
 }

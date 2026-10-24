@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {E,pack,ARMOR} from './reflect-fixture.mjs';
+import {deriveNewItemBudget} from '../../../dist/equipment-budget-adapter.js';
+import {prepareLegendaryDrop,LEGENDARY_DROP_BASE_PROBABILITY,LEGENDARY_DROP_CANDIDATES} from '../../../dist/legendary-drop.js';
+assert.equal(LEGENDARY_DROP_BASE_PROBABILITY,.05);assert.deepEqual(LEGENDARY_DROP_CANDIDATES.human.map(x=>x.id),['human-oathblade',ARMOR]);assert.equal(E.legendaryItem('human-last-banner',30),null);
+const definition=pack.legendaries.find(x=>x.id===ARMOR);assert.equal(definition.slot,'armor');assert.equal(definition.baseVariant,'armor_armor');assert.equal(definition.randomNormalAffixes,4);assert.equal(definition.fixedEffect.fraction,.5);
+for(const level of [1,30,100]){const item=E.legendaryItem(ARMOR,level),supreme=deriveNewItemBudget({slot:'armor',baseVariant:'armor_armor',level,quality:3});assert.equal(item.affixes.length,4);assert.equal(new Set(item.affixes.map(x=>x.stat)).size,4);assert(item.affixes.every(x=>x.sourceRange?.quality===4));assert.equal(item.exclusive.id,'human-oath-reflection');assert.equal(item.special,null);assert.equal(item.set,null);assert(item.armor>supreme.armor);assert(item.hp>supreme.hp);const s=E.fresh('human');s.inventory.push(item);assert(E.equipItem(s,item.id));assert.equal(s.equip.armor,item.id);assert(E.validSave(JSON.parse(JSON.stringify(s))));}
+const draw=xs=>()=>xs.shift(),event={settlementId:'human-repeat-1',nodeId:'human.a03.boss',regionRace:'human',kind:'boss',won:true};
+for(const nodeId of definition.bossPool){for(let i=0;i<2;i++){const r=prepareLegendaryDrop({...event,nodeId,settlementId:nodeId+'-'+i},{probability:.05,random:draw([.049999,.75])});assert.equal(r.legendaryId,ARMOR);}assert.equal(prepareLegendaryDrop({...event,nodeId},{probability:.05,random:()=>.05}).outcome,'miss');}
+for(const race of ['elf','goblin','ashen','dwarf'])assert(!LEGENDARY_DROP_CANDIDATES[race].some(x=>x.id===ARMOR));for(const kind of ['field','dungeon','merchant','forge'])assert.equal(prepareLegendaryDrop({...event,kind},{probability:.05,random:()=>0}).outcome,'ineligible');
+console.log('PASS Human armor catalog/factory: retired amulet removed, weapon retained, 4 random ordinary q4 affixes + exclusive, >Supreme bases, armor slot/save, repeatable own-race pool and aggregate 5% boundary.');

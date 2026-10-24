@@ -7,10 +7,6 @@ for(const shielded of [false,true]){const f=setup('human-oathblade');f.s.skillTr
 {
  const f=setup('human-oathblade');for(let i=0;i<8;i++)tick(f);assert.equal(f.s.legendaryRuntime.byId[f.item.id].state.targetId,null,'basic-only never marks');
 }
-{
- const f=setup('human-last-banner'),st=E.stats(f.s),u=f.e.enemies[0];f.e.heroHp=f.s.heroHp=st.hp*.4;u.atk=st.hp*.15*(100+st.armor)/100;u.nextBasicAt=f.s.nextActionAt;tick(f);let row=f.s.legendaryRuntime.byId[f.item.id],layer=f.e.playerShieldLayers?.layers.find(x=>x.ownerItemId===f.item.id);assert.ok(layer,'actual direct HP crossing creates equipment shield');assert.ok(Math.abs(layer.capacity-(st.hp*.18+st.shieldBonus))<1e-8);assert.ok(f.e.treeEffects.hero.sources.some(x=>x.source.kind==='equipment'&&x.type==='healOverTime'));assert.equal(row.state.nextReadyAt,row.clock+30000);const until=row.state.nextReadyAt;u.atk=0;u.nextBasicAt=T+1e8;const hp=f.e.heroHp;for(let i=0;i<6;i++)tick(f);assert.ok(f.e.heroHp>hp,'real periodic heals occur and clamp');assert.equal(f.s.legendaryRuntime.byId[f.item.id].state.nextReadyAt,until);assert(!f.e.treeEffects.hero.sources.some(x=>x.source.kind==='equipment'&&x.type==='healOverTime'),'sixsecond HOT expires');
-}
-{
- const f=setup('human-last-banner'),st=E.stats(f.s),u=f.e.enemies[0];f.e.heroHp=f.s.heroHp=st.hp*.4;f.e.shield=st.hp;u.atk=st.hp*.15*(100+st.armor)/100;u.nextBasicAt=f.s.nextActionAt;tick(f);assert.equal(f.s.legendaryRuntime.byId[f.item.id].state.nextReadyAt,0,'fullyabsorbed hit never triggers laststand');
-}
-console.log('PASS real equipped human legends: hit/mark/separatecast burst+equipmentbleed, shieldfirst, no basicfalseproc, JSON/RNG, pauseclock, fieldICDcarry/markclear, unequipreset; lowHPcross shield+HOT, expiry and shieldabsorbed no-trigger.');
+console.log('PASS preserved actual Human oathblade host behavior.');
+await import('./reflect-host-tests.mjs');
+await import('./reflect-catalog-tests.mjs');

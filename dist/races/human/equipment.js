@@ -800,31 +800,19 @@ export const HUMAN_LEGENDARIES=[
     "exclusiveDescription": "成功的物理技能命中留下6秒誓痕；另一施放在至少2.2秒后命中同一目标时，引爆0.8倍攻击物理伤害并附加每2秒0.08倍攻击的流血，持续6秒。触发后冷却10秒，多段同次施放不触发。"
   },
   {
-    "id": "human-last-banner",
+    "id": "human-banner-armor",
     "ready": true,
     "name": "遗旗 · 不坠之誓",
-    "slot": "amulet",
-    "baseVariant": "amulet_survival",
+    "slot": "armor",
+    "baseVariant": "armor_armor",
     "originRace": "human",
-    "exclusiveId": "human-last-stand",
-    "description": "染成深蓝的旧军旗被裁成细带，仔细缠在银色坠托上。线脚虽旧，金色纹章仍在风中挺直。",
-    "fixedEffect": {
-      "type": "low-hp-last-stand",
-      "threshold": 0.3,
-      "shieldFraction": 0.18,
-      "durationMs": 6000,
-      "healFractionPerTick": 0.03,
-      "tickIntervalMs": 2000,
-      "cooldownMs": 30000
-    },
-    "bossPool": [
-      "human.a03.boss",
-      "human.a06.boss",
-      "human.a09.boss"
-    ],
+    "exclusiveId": "human-oath-reflection",
+    "description": "最后一面军旗没有留在城头。幸存的守卫将它缝进胸甲内衬，让每一次落在身上的重击，都替未归之人讨回回响。",
+    "fixedEffect": {"type": "received-damage-reflection", "fraction": 0.5},
+    "bossPool": ["human.a03.boss", "human.a06.boss", "human.a09.boss"],
     "randomNormalAffixes": 4,
-    "exclusiveName": "最后军旗",
-    "exclusiveDescription": "直接敌伤将生命从30%以上压至30%或以下且仍存活时，获得18%最大生命护盾6秒，并每2秒恢复3%最大生命，共3次。冷却30秒，不会复活。"
+    "exclusiveName": "誓伤回敬",
+    "exclusiveDescription": "每次承受敌方伤害后，将减伤后实际生命损失与护盾吸收之和的50%反弹给伤害来源。普通攻击、技能、持续伤害均逐段结算；全护盾吸收仍反弹，过量伤害不计入。反弹不暴击、不吸血、不触发斩杀或再次反弹，不计作施放；致命受击也结算反弹，但不会复活。"
   }
 ];
 export const HUMAN_LEGENDARY_DROP={race:"human",totalProbability:.05,splitWeights:[1,1],ownRaceBossOnly:true};
