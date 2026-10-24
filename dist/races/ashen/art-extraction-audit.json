@@ -1,0 +1,2929 @@
+{
+  "method": "Actual empty-alpha gutters selected near intended cell boundaries; no connected components deleted. All cropped actors include their own detached shards and complete silhouettes. 8 new spaced atlases replace rejected dense source.",
+  "frames": [
+    {
+      "id": "ashen.a01.normal.1",
+      "source": "exec-b98a2489-a135-4dcd-a487-4655d557f813.png",
+      "sourceCrop": [
+        0,
+        0,
+        247,
+        272
+      ],
+      "visibleBBox": [
+        31,
+        91,
+        220,
+        237
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a01.normal.1",
+      "source": "exec-b98a2489-a135-4dcd-a487-4655d557f813.png",
+      "sourceCrop": [
+        247,
+        0,
+        522,
+        272
+      ],
+      "visibleBBox": [
+        28,
+        71,
+        248,
+        237
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a01.normal.1",
+      "source": "exec-b98a2489-a135-4dcd-a487-4655d557f813.png",
+      "sourceCrop": [
+        522,
+        0,
+        760,
+        272
+      ],
+      "visibleBBox": [
+        29,
+        91,
+        207,
+        235
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a01.normal.1",
+      "source": "exec-b98a2489-a135-4dcd-a487-4655d557f813.png",
+      "sourceCrop": [
+        760,
+        0,
+        1024,
+        272
+      ],
+      "visibleBBox": [
+        32,
+        135,
+        238,
+        237
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a01.normal.2",
+      "source": "exec-b98a2489-a135-4dcd-a487-4655d557f813.png",
+      "sourceCrop": [
+        0,
+        272,
+        247,
+        517
+      ],
+      "visibleBBox": [
+        32,
+        83,
+        216,
+        213
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a01.normal.2",
+      "source": "exec-b98a2489-a135-4dcd-a487-4655d557f813.png",
+      "sourceCrop": [
+        247,
+        272,
+        524,
+        517
+      ],
+      "visibleBBox": [
+        32,
+        75,
+        244,
+        213
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a01.normal.2",
+      "source": "exec-b98a2489-a135-4dcd-a487-4655d557f813.png",
+      "sourceCrop": [
+        524,
+        272,
+        766,
+        517
+      ],
+      "visibleBBox": [
+        35,
+        65,
+        214,
+        213
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a01.normal.2",
+      "source": "exec-b98a2489-a135-4dcd-a487-4655d557f813.png",
+      "sourceCrop": [
+        766,
+        272,
+        1024,
+        517
+      ],
+      "visibleBBox": [
+        29,
+        103,
+        232,
+        213
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a01.normal.3",
+      "source": "exec-b98a2489-a135-4dcd-a487-4655d557f813.png",
+      "sourceCrop": [
+        0,
+        517,
+        251,
+        760
+      ],
+      "visibleBBox": [
+        25,
+        72,
+        240,
+        217
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a01.normal.3",
+      "source": "exec-b98a2489-a135-4dcd-a487-4655d557f813.png",
+      "sourceCrop": [
+        251,
+        517,
+        531,
+        760
+      ],
+      "visibleBBox": [
+        13,
+        67,
+        262,
+        219
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a01.normal.3",
+      "source": "exec-b98a2489-a135-4dcd-a487-4655d557f813.png",
+      "sourceCrop": [
+        531,
+        517,
+        776,
+        760
+      ],
+      "visibleBBox": [
+        20,
+        34,
+        226,
+        217
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a01.normal.3",
+      "source": "exec-b98a2489-a135-4dcd-a487-4655d557f813.png",
+      "sourceCrop": [
+        776,
+        517,
+        1024,
+        760
+      ],
+      "visibleBBox": [
+        20,
+        124,
+        227,
+        218
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a01.elite",
+      "source": "exec-b98a2489-a135-4dcd-a487-4655d557f813.png",
+      "sourceCrop": [
+        0,
+        760,
+        241,
+        1049
+      ],
+      "visibleBBox": [
+        36,
+        25,
+        222,
+        269
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a01.elite",
+      "source": "exec-b98a2489-a135-4dcd-a487-4655d557f813.png",
+      "sourceCrop": [
+        241,
+        760,
+        533,
+        1049
+      ],
+      "visibleBBox": [
+        21,
+        80,
+        263,
+        268
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a01.elite",
+      "source": "exec-b98a2489-a135-4dcd-a487-4655d557f813.png",
+      "sourceCrop": [
+        533,
+        760,
+        758,
+        1049
+      ],
+      "visibleBBox": [
+        46,
+        35,
+        209,
+        269
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a01.elite",
+      "source": "exec-b98a2489-a135-4dcd-a487-4655d557f813.png",
+      "sourceCrop": [
+        758,
+        760,
+        1024,
+        1049
+      ],
+      "visibleBBox": [
+        18,
+        135,
+        245,
+        269
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a02.normal.1",
+      "source": "exec-b98a2489-a135-4dcd-a487-4655d557f813.png",
+      "sourceCrop": [
+        0,
+        1049,
+        251,
+        1302
+      ],
+      "visibleBBox": [
+        28,
+        60,
+        241,
+        224
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a02.normal.1",
+      "source": "exec-b98a2489-a135-4dcd-a487-4655d557f813.png",
+      "sourceCrop": [
+        251,
+        1049,
+        531,
+        1302
+      ],
+      "visibleBBox": [
+        11,
+        21,
+        255,
+        224
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a02.normal.1",
+      "source": "exec-b98a2489-a135-4dcd-a487-4655d557f813.png",
+      "sourceCrop": [
+        531,
+        1049,
+        769,
+        1302
+      ],
+      "visibleBBox": [
+        26,
+        35,
+        227,
+        224
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a02.normal.1",
+      "source": "exec-b98a2489-a135-4dcd-a487-4655d557f813.png",
+      "sourceCrop": [
+        769,
+        1049,
+        1024,
+        1302
+      ],
+      "visibleBBox": [
+        12,
+        149,
+        236,
+        225
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a02.normal.2",
+      "source": "exec-b98a2489-a135-4dcd-a487-4655d557f813.png",
+      "sourceCrop": [
+        0,
+        1302,
+        258,
+        1536
+      ],
+      "visibleBBox": [
+        26,
+        86,
+        243,
+        187
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a02.normal.2",
+      "source": "exec-b98a2489-a135-4dcd-a487-4655d557f813.png",
+      "sourceCrop": [
+        258,
+        1302,
+        534,
+        1536
+      ],
+      "visibleBBox": [
+        17,
+        62,
+        255,
+        188
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a02.normal.2",
+      "source": "exec-b98a2489-a135-4dcd-a487-4655d557f813.png",
+      "sourceCrop": [
+        534,
+        1302,
+        770,
+        1536
+      ],
+      "visibleBBox": [
+        22,
+        32,
+        224,
+        188
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a02.normal.2",
+      "source": "exec-b98a2489-a135-4dcd-a487-4655d557f813.png",
+      "sourceCrop": [
+        770,
+        1302,
+        1024,
+        1536
+      ],
+      "visibleBBox": [
+        14,
+        105,
+        228,
+        189
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a02.normal.3",
+      "source": "exec-0217fcdd-9079-486f-9baf-a95e619a6019.png",
+      "sourceCrop": [
+        0,
+        0,
+        232,
+        279
+      ],
+      "visibleBBox": [
+        76,
+        57,
+        181,
+        248
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a02.normal.3",
+      "source": "exec-0217fcdd-9079-486f-9baf-a95e619a6019.png",
+      "sourceCrop": [
+        232,
+        0,
+        524,
+        279
+      ],
+      "visibleBBox": [
+        29,
+        53,
+        253,
+        247
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a02.normal.3",
+      "source": "exec-0217fcdd-9079-486f-9baf-a95e619a6019.png",
+      "sourceCrop": [
+        524,
+        0,
+        757,
+        279
+      ],
+      "visibleBBox": [
+        48,
+        73,
+        208,
+        247
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a02.normal.3",
+      "source": "exec-0217fcdd-9079-486f-9baf-a95e619a6019.png",
+      "sourceCrop": [
+        757,
+        0,
+        1024,
+        279
+      ],
+      "visibleBBox": [
+        26,
+        174,
+        235,
+        253
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a02.elite",
+      "source": "exec-0217fcdd-9079-486f-9baf-a95e619a6019.png",
+      "sourceCrop": [
+        0,
+        279,
+        244,
+        533
+      ],
+      "visibleBBox": [
+        38,
+        28,
+        225,
+        227
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a02.elite",
+      "source": "exec-0217fcdd-9079-486f-9baf-a95e619a6019.png",
+      "sourceCrop": [
+        244,
+        279,
+        538,
+        533
+      ],
+      "visibleBBox": [
+        21,
+        63,
+        286,
+        225
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a02.elite",
+      "source": "exec-0217fcdd-9079-486f-9baf-a95e619a6019.png",
+      "sourceCrop": [
+        538,
+        279,
+        753,
+        533
+      ],
+      "visibleBBox": [
+        10,
+        38,
+        191,
+        224
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a02.elite",
+      "source": "exec-0217fcdd-9079-486f-9baf-a95e619a6019.png",
+      "sourceCrop": [
+        753,
+        279,
+        1024,
+        533
+      ],
+      "visibleBBox": [
+        25,
+        135,
+        241,
+        228
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a03.normal.1",
+      "source": "exec-0217fcdd-9079-486f-9baf-a95e619a6019.png",
+      "sourceCrop": [
+        0,
+        533,
+        244,
+        780
+      ],
+      "visibleBBox": [
+        38,
+        47,
+        230,
+        209
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a03.normal.1",
+      "source": "exec-0217fcdd-9079-486f-9baf-a95e619a6019.png",
+      "sourceCrop": [
+        244,
+        533,
+        526,
+        780
+      ],
+      "visibleBBox": [
+        16,
+        28,
+        259,
+        201
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a03.normal.1",
+      "source": "exec-0217fcdd-9079-486f-9baf-a95e619a6019.png",
+      "sourceCrop": [
+        526,
+        533,
+        765,
+        780
+      ],
+      "visibleBBox": [
+        24,
+        43,
+        219,
+        209
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a03.normal.1",
+      "source": "exec-0217fcdd-9079-486f-9baf-a95e619a6019.png",
+      "sourceCrop": [
+        765,
+        533,
+        1024,
+        780
+      ],
+      "visibleBBox": [
+        22,
+        135,
+        234,
+        208
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a03.normal.2",
+      "source": "exec-0217fcdd-9079-486f-9baf-a95e619a6019.png",
+      "sourceCrop": [
+        0,
+        780,
+        228,
+        1011
+      ],
+      "visibleBBox": [
+        28,
+        49,
+        212,
+        206
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a03.normal.2",
+      "source": "exec-0217fcdd-9079-486f-9baf-a95e619a6019.png",
+      "sourceCrop": [
+        228,
+        780,
+        532,
+        1011
+      ],
+      "visibleBBox": [
+        18,
+        49,
+        275,
+        203
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a03.normal.2",
+      "source": "exec-0217fcdd-9079-486f-9baf-a95e619a6019.png",
+      "sourceCrop": [
+        532,
+        780,
+        764,
+        1011
+      ],
+      "visibleBBox": [
+        31,
+        55,
+        213,
+        208
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a03.normal.2",
+      "source": "exec-0217fcdd-9079-486f-9baf-a95e619a6019.png",
+      "sourceCrop": [
+        764,
+        780,
+        1024,
+        1011
+      ],
+      "visibleBBox": [
+        21,
+        98,
+        233,
+        211
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a03.normal.3",
+      "source": "exec-0217fcdd-9079-486f-9baf-a95e619a6019.png",
+      "sourceCrop": [
+        0,
+        1011,
+        252,
+        1270
+      ],
+      "visibleBBox": [
+        54,
+        21,
+        233,
+        234
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a03.normal.3",
+      "source": "exec-0217fcdd-9079-486f-9baf-a95e619a6019.png",
+      "sourceCrop": [
+        252,
+        1011,
+        536,
+        1270
+      ],
+      "visibleBBox": [
+        20,
+        22,
+        259,
+        235
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a03.normal.3",
+      "source": "exec-0217fcdd-9079-486f-9baf-a95e619a6019.png",
+      "sourceCrop": [
+        536,
+        1011,
+        759,
+        1270
+      ],
+      "visibleBBox": [
+        26,
+        34,
+        208,
+        236
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a03.normal.3",
+      "source": "exec-0217fcdd-9079-486f-9baf-a95e619a6019.png",
+      "sourceCrop": [
+        759,
+        1011,
+        1024,
+        1270
+      ],
+      "visibleBBox": [
+        16,
+        113,
+        243,
+        241
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a03.elite",
+      "source": "exec-0217fcdd-9079-486f-9baf-a95e619a6019.png",
+      "sourceCrop": [
+        0,
+        1270,
+        249,
+        1536
+      ],
+      "visibleBBox": [
+        33,
+        27,
+        233,
+        220
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a03.elite",
+      "source": "exec-0217fcdd-9079-486f-9baf-a95e619a6019.png",
+      "sourceCrop": [
+        249,
+        1270,
+        528,
+        1536
+      ],
+      "visibleBBox": [
+        18,
+        20,
+        257,
+        220
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a03.elite",
+      "source": "exec-0217fcdd-9079-486f-9baf-a95e619a6019.png",
+      "sourceCrop": [
+        528,
+        1270,
+        757,
+        1536
+      ],
+      "visibleBBox": [
+        24,
+        27,
+        213,
+        220
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a03.elite",
+      "source": "exec-0217fcdd-9079-486f-9baf-a95e619a6019.png",
+      "sourceCrop": [
+        757,
+        1270,
+        1024,
+        1536
+      ],
+      "visibleBBox": [
+        18,
+        103,
+        242,
+        220
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a04.normal.1",
+      "source": "exec-14681492-cd7e-42c5-af4e-faf4a4826a4a.png",
+      "sourceCrop": [
+        0,
+        0,
+        264,
+        244
+      ],
+      "visibleBBox": [
+        27,
+        92,
+        242,
+        208
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a04.normal.1",
+      "source": "exec-14681492-cd7e-42c5-af4e-faf4a4826a4a.png",
+      "sourceCrop": [
+        264,
+        0,
+        527,
+        244
+      ],
+      "visibleBBox": [
+        23,
+        89,
+        237,
+        208
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a04.normal.1",
+      "source": "exec-14681492-cd7e-42c5-af4e-faf4a4826a4a.png",
+      "sourceCrop": [
+        527,
+        0,
+        763,
+        244
+      ],
+      "visibleBBox": [
+        28,
+        97,
+        220,
+        208
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a04.normal.1",
+      "source": "exec-14681492-cd7e-42c5-af4e-faf4a4826a4a.png",
+      "sourceCrop": [
+        763,
+        0,
+        1024,
+        244
+      ],
+      "visibleBBox": [
+        17,
+        121,
+        244,
+        207
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a04.normal.2",
+      "source": "exec-14681492-cd7e-42c5-af4e-faf4a4826a4a.png",
+      "sourceCrop": [
+        0,
+        244,
+        256,
+        500
+      ],
+      "visibleBBox": [
+        32,
+        48,
+        231,
+        225
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a04.normal.2",
+      "source": "exec-14681492-cd7e-42c5-af4e-faf4a4826a4a.png",
+      "sourceCrop": [
+        256,
+        244,
+        531,
+        500
+      ],
+      "visibleBBox": [
+        27,
+        37,
+        244,
+        226
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a04.normal.2",
+      "source": "exec-14681492-cd7e-42c5-af4e-faf4a4826a4a.png",
+      "sourceCrop": [
+        531,
+        244,
+        774,
+        500
+      ],
+      "visibleBBox": [
+        55,
+        50,
+        236,
+        230
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a04.normal.2",
+      "source": "exec-14681492-cd7e-42c5-af4e-faf4a4826a4a.png",
+      "sourceCrop": [
+        774,
+        244,
+        1024,
+        500
+      ],
+      "visibleBBox": [
+        9,
+        118,
+        224,
+        230
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a04.normal.3",
+      "source": "exec-14681492-cd7e-42c5-af4e-faf4a4826a4a.png",
+      "sourceCrop": [
+        0,
+        500,
+        246,
+        742
+      ],
+      "visibleBBox": [
+        42,
+        31,
+        232,
+        220
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a04.normal.3",
+      "source": "exec-14681492-cd7e-42c5-af4e-faf4a4826a4a.png",
+      "sourceCrop": [
+        246,
+        500,
+        538,
+        742
+      ],
+      "visibleBBox": [
+        16,
+        27,
+        268,
+        220
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a04.normal.3",
+      "source": "exec-14681492-cd7e-42c5-af4e-faf4a4826a4a.png",
+      "sourceCrop": [
+        538,
+        500,
+        753,
+        742
+      ],
+      "visibleBBox": [
+        47,
+        28,
+        201,
+        220
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a04.normal.3",
+      "source": "exec-14681492-cd7e-42c5-af4e-faf4a4826a4a.png",
+      "sourceCrop": [
+        753,
+        500,
+        1024,
+        742
+      ],
+      "visibleBBox": [
+        16,
+        119,
+        255,
+        221
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a04.elite",
+      "source": "exec-14681492-cd7e-42c5-af4e-faf4a4826a4a.png",
+      "sourceCrop": [
+        0,
+        742,
+        226,
+        1001
+      ],
+      "visibleBBox": [
+        69,
+        22,
+        196,
+        233
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a04.elite",
+      "source": "exec-14681492-cd7e-42c5-af4e-faf4a4826a4a.png",
+      "sourceCrop": [
+        226,
+        742,
+        534,
+        1001
+      ],
+      "visibleBBox": [
+        22,
+        51,
+        279,
+        233
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a04.elite",
+      "source": "exec-14681492-cd7e-42c5-af4e-faf4a4826a4a.png",
+      "sourceCrop": [
+        534,
+        742,
+        738,
+        1001
+      ],
+      "visibleBBox": [
+        34,
+        41,
+        181,
+        232
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a04.elite",
+      "source": "exec-14681492-cd7e-42c5-af4e-faf4a4826a4a.png",
+      "sourceCrop": [
+        738,
+        742,
+        1024,
+        1001
+      ],
+      "visibleBBox": [
+        22,
+        94,
+        255,
+        230
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a05.normal.1",
+      "source": "exec-14681492-cd7e-42c5-af4e-faf4a4826a4a.png",
+      "sourceCrop": [
+        0,
+        1001,
+        271,
+        1235
+      ],
+      "visibleBBox": [
+        27,
+        39,
+        260,
+        194
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a05.normal.1",
+      "source": "exec-14681492-cd7e-42c5-af4e-faf4a4826a4a.png",
+      "sourceCrop": [
+        271,
+        1001,
+        538,
+        1235
+      ],
+      "visibleBBox": [
+        12,
+        28,
+        252,
+        194
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a05.normal.1",
+      "source": "exec-14681492-cd7e-42c5-af4e-faf4a4826a4a.png",
+      "sourceCrop": [
+        538,
+        1001,
+        763,
+        1235
+      ],
+      "visibleBBox": [
+        17,
+        56,
+        217,
+        195
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a05.normal.1",
+      "source": "exec-14681492-cd7e-42c5-af4e-faf4a4826a4a.png",
+      "sourceCrop": [
+        763,
+        1001,
+        1024,
+        1235
+      ],
+      "visibleBBox": [
+        9,
+        113,
+        249,
+        194
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a05.normal.2",
+      "source": "exec-14681492-cd7e-42c5-af4e-faf4a4826a4a.png",
+      "sourceCrop": [
+        0,
+        1235,
+        261,
+        1536
+      ],
+      "visibleBBox": [
+        16,
+        40,
+        252,
+        249
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a05.normal.2",
+      "source": "exec-14681492-cd7e-42c5-af4e-faf4a4826a4a.png",
+      "sourceCrop": [
+        261,
+        1235,
+        531,
+        1536
+      ],
+      "visibleBBox": [
+        11,
+        8,
+        249,
+        248
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a05.normal.2",
+      "source": "exec-14681492-cd7e-42c5-af4e-faf4a4826a4a.png",
+      "sourceCrop": [
+        531,
+        1235,
+        754,
+        1536
+      ],
+      "visibleBBox": [
+        23,
+        64,
+        213,
+        249
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a05.normal.2",
+      "source": "exec-14681492-cd7e-42c5-af4e-faf4a4826a4a.png",
+      "sourceCrop": [
+        754,
+        1235,
+        1024,
+        1536
+      ],
+      "visibleBBox": [
+        12,
+        116,
+        259,
+        246
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a05.normal.3",
+      "source": "exec-48d5670f-128b-46f1-9a84-8f45d0e86484.png",
+      "sourceCrop": [
+        0,
+        0,
+        252,
+        249
+      ],
+      "visibleBBox": [
+        31,
+        106,
+        218,
+        225
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a05.normal.3",
+      "source": "exec-48d5670f-128b-46f1-9a84-8f45d0e86484.png",
+      "sourceCrop": [
+        252,
+        0,
+        521,
+        249
+      ],
+      "visibleBBox": [
+        36,
+        56,
+        228,
+        225
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a05.normal.3",
+      "source": "exec-48d5670f-128b-46f1-9a84-8f45d0e86484.png",
+      "sourceCrop": [
+        521,
+        0,
+        758,
+        249
+      ],
+      "visibleBBox": [
+        45,
+        88,
+        202,
+        225
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a05.normal.3",
+      "source": "exec-48d5670f-128b-46f1-9a84-8f45d0e86484.png",
+      "sourceCrop": [
+        758,
+        0,
+        1024,
+        249
+      ],
+      "visibleBBox": [
+        36,
+        137,
+        243,
+        225
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a05.elite",
+      "source": "exec-48d5670f-128b-46f1-9a84-8f45d0e86484.png",
+      "sourceCrop": [
+        0,
+        249,
+        249,
+        517
+      ],
+      "visibleBBox": [
+        22,
+        28,
+        230,
+        254
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a05.elite",
+      "source": "exec-48d5670f-128b-46f1-9a84-8f45d0e86484.png",
+      "sourceCrop": [
+        249,
+        249,
+        524,
+        517
+      ],
+      "visibleBBox": [
+        21,
+        30,
+        256,
+        254
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a05.elite",
+      "source": "exec-48d5670f-128b-46f1-9a84-8f45d0e86484.png",
+      "sourceCrop": [
+        524,
+        249,
+        764,
+        517
+      ],
+      "visibleBBox": [
+        20,
+        26,
+        226,
+        254
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a05.elite",
+      "source": "exec-48d5670f-128b-46f1-9a84-8f45d0e86484.png",
+      "sourceCrop": [
+        764,
+        249,
+        1024,
+        517
+      ],
+      "visibleBBox": [
+        15,
+        120,
+        245,
+        254
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a06.normal.1",
+      "source": "exec-48d5670f-128b-46f1-9a84-8f45d0e86484.png",
+      "sourceCrop": [
+        0,
+        517,
+        258,
+        764
+      ],
+      "visibleBBox": [
+        27,
+        19,
+        234,
+        236
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a06.normal.1",
+      "source": "exec-48d5670f-128b-46f1-9a84-8f45d0e86484.png",
+      "sourceCrop": [
+        258,
+        517,
+        528,
+        764
+      ],
+      "visibleBBox": [
+        26,
+        16,
+        237,
+        235
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a06.normal.1",
+      "source": "exec-48d5670f-128b-46f1-9a84-8f45d0e86484.png",
+      "sourceCrop": [
+        528,
+        517,
+        763,
+        764
+      ],
+      "visibleBBox": [
+        34,
+        19,
+        219,
+        236
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a06.normal.1",
+      "source": "exec-48d5670f-128b-46f1-9a84-8f45d0e86484.png",
+      "sourceCrop": [
+        763,
+        517,
+        1024,
+        764
+      ],
+      "visibleBBox": [
+        18,
+        129,
+        246,
+        235
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a06.normal.2",
+      "source": "exec-48d5670f-128b-46f1-9a84-8f45d0e86484.png",
+      "sourceCrop": [
+        0,
+        764,
+        256,
+        1024
+      ],
+      "visibleBBox": [
+        28,
+        23,
+        242,
+        245
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a06.normal.2",
+      "source": "exec-48d5670f-128b-46f1-9a84-8f45d0e86484.png",
+      "sourceCrop": [
+        256,
+        764,
+        523,
+        1024
+      ],
+      "visibleBBox": [
+        15,
+        13,
+        250,
+        245
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a06.normal.2",
+      "source": "exec-48d5670f-128b-46f1-9a84-8f45d0e86484.png",
+      "sourceCrop": [
+        523,
+        764,
+        765,
+        1024
+      ],
+      "visibleBBox": [
+        18,
+        30,
+        227,
+        246
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a06.normal.2",
+      "source": "exec-48d5670f-128b-46f1-9a84-8f45d0e86484.png",
+      "sourceCrop": [
+        765,
+        764,
+        1024,
+        1024
+      ],
+      "visibleBBox": [
+        16,
+        137,
+        244,
+        252
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a06.normal.3",
+      "source": "exec-48d5670f-128b-46f1-9a84-8f45d0e86484.png",
+      "sourceCrop": [
+        0,
+        1024,
+        256,
+        1267
+      ],
+      "visibleBBox": [
+        20,
+        25,
+        243,
+        234
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a06.normal.3",
+      "source": "exec-48d5670f-128b-46f1-9a84-8f45d0e86484.png",
+      "sourceCrop": [
+        256,
+        1024,
+        522,
+        1267
+      ],
+      "visibleBBox": [
+        15,
+        10,
+        250,
+        234
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a06.normal.3",
+      "source": "exec-48d5670f-128b-46f1-9a84-8f45d0e86484.png",
+      "sourceCrop": [
+        522,
+        1024,
+        762,
+        1267
+      ],
+      "visibleBBox": [
+        18,
+        37,
+        226,
+        235
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a06.normal.3",
+      "source": "exec-48d5670f-128b-46f1-9a84-8f45d0e86484.png",
+      "sourceCrop": [
+        762,
+        1024,
+        1024,
+        1267
+      ],
+      "visibleBBox": [
+        16,
+        94,
+        247,
+        228
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a06.elite",
+      "source": "exec-48d5670f-128b-46f1-9a84-8f45d0e86484.png",
+      "sourceCrop": [
+        0,
+        1267,
+        253,
+        1536
+      ],
+      "visibleBBox": [
+        20,
+        46,
+        238,
+        222
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a06.elite",
+      "source": "exec-48d5670f-128b-46f1-9a84-8f45d0e86484.png",
+      "sourceCrop": [
+        253,
+        1267,
+        531,
+        1536
+      ],
+      "visibleBBox": [
+        17,
+        9,
+        258,
+        222
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a06.elite",
+      "source": "exec-48d5670f-128b-46f1-9a84-8f45d0e86484.png",
+      "sourceCrop": [
+        531,
+        1267,
+        768,
+        1536
+      ],
+      "visibleBBox": [
+        22,
+        39,
+        228,
+        222
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a06.elite",
+      "source": "exec-48d5670f-128b-46f1-9a84-8f45d0e86484.png",
+      "sourceCrop": [
+        768,
+        1267,
+        1024,
+        1536
+      ],
+      "visibleBBox": [
+        11,
+        89,
+        241,
+        222
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a07.normal.1",
+      "source": "exec-ff55400a-3fae-4209-81e4-0baf59bdd43e.png",
+      "sourceCrop": [
+        0,
+        0,
+        239,
+        261
+      ],
+      "visibleBBox": [
+        27,
+        68,
+        227,
+        233
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a07.normal.1",
+      "source": "exec-ff55400a-3fae-4209-81e4-0baf59bdd43e.png",
+      "sourceCrop": [
+        239,
+        0,
+        532,
+        261
+      ],
+      "visibleBBox": [
+        14,
+        75,
+        281,
+        233
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a07.normal.1",
+      "source": "exec-ff55400a-3fae-4209-81e4-0baf59bdd43e.png",
+      "sourceCrop": [
+        532,
+        0,
+        742,
+        261
+      ],
+      "visibleBBox": [
+        14,
+        84,
+        201,
+        236
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a07.normal.1",
+      "source": "exec-ff55400a-3fae-4209-81e4-0baf59bdd43e.png",
+      "sourceCrop": [
+        742,
+        0,
+        1024,
+        261
+      ],
+      "visibleBBox": [
+        10,
+        156,
+        251,
+        233
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a07.normal.2",
+      "source": "exec-ff55400a-3fae-4209-81e4-0baf59bdd43e.png",
+      "sourceCrop": [
+        0,
+        261,
+        242,
+        495
+      ],
+      "visibleBBox": [
+        36,
+        27,
+        218,
+        214
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a07.normal.2",
+      "source": "exec-ff55400a-3fae-4209-81e4-0baf59bdd43e.png",
+      "sourceCrop": [
+        242,
+        261,
+        536,
+        495
+      ],
+      "visibleBBox": [
+        25,
+        27,
+        272,
+        220
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a07.normal.2",
+      "source": "exec-ff55400a-3fae-4209-81e4-0baf59bdd43e.png",
+      "sourceCrop": [
+        536,
+        261,
+        763,
+        495
+      ],
+      "visibleBBox": [
+        24,
+        68,
+        210,
+        217
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a07.normal.2",
+      "source": "exec-ff55400a-3fae-4209-81e4-0baf59bdd43e.png",
+      "sourceCrop": [
+        763,
+        261,
+        1024,
+        495
+      ],
+      "visibleBBox": [
+        18,
+        136,
+        245,
+        220
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a07.normal.3",
+      "source": "exec-ff55400a-3fae-4209-81e4-0baf59bdd43e.png",
+      "sourceCrop": [
+        0,
+        495,
+        249,
+        746
+      ],
+      "visibleBBox": [
+        25,
+        44,
+        247,
+        230
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a07.normal.3",
+      "source": "exec-ff55400a-3fae-4209-81e4-0baf59bdd43e.png",
+      "sourceCrop": [
+        249,
+        495,
+        546,
+        746
+      ],
+      "visibleBBox": [
+        4,
+        16,
+        291,
+        229
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a07.normal.3",
+      "source": "exec-ff55400a-3fae-4209-81e4-0baf59bdd43e.png",
+      "sourceCrop": [
+        546,
+        495,
+        773,
+        746
+      ],
+      "visibleBBox": [
+        7,
+        47,
+        223,
+        229
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a07.normal.3",
+      "source": "exec-ff55400a-3fae-4209-81e4-0baf59bdd43e.png",
+      "sourceCrop": [
+        773,
+        495,
+        1024,
+        746
+      ],
+      "visibleBBox": [
+        6,
+        117,
+        234,
+        237
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a07.elite",
+      "source": "exec-ff55400a-3fae-4209-81e4-0baf59bdd43e.png",
+      "sourceCrop": [
+        0,
+        746,
+        237,
+        1005
+      ],
+      "visibleBBox": [
+        46,
+        55,
+        226,
+        238
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a07.elite",
+      "source": "exec-ff55400a-3fae-4209-81e4-0baf59bdd43e.png",
+      "sourceCrop": [
+        237,
+        746,
+        541,
+        1005
+      ],
+      "visibleBBox": [
+        13,
+        16,
+        285,
+        239
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a07.elite",
+      "source": "exec-ff55400a-3fae-4209-81e4-0baf59bdd43e.png",
+      "sourceCrop": [
+        541,
+        746,
+        760,
+        1005
+      ],
+      "visibleBBox": [
+        20,
+        51,
+        212,
+        244
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a07.elite",
+      "source": "exec-ff55400a-3fae-4209-81e4-0baf59bdd43e.png",
+      "sourceCrop": [
+        760,
+        746,
+        1024,
+        1005
+      ],
+      "visibleBBox": [
+        8,
+        157,
+        250,
+        243
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a08.normal.1",
+      "source": "exec-ff55400a-3fae-4209-81e4-0baf59bdd43e.png",
+      "sourceCrop": [
+        0,
+        1005,
+        260,
+        1241
+      ],
+      "visibleBBox": [
+        27,
+        30,
+        253,
+        207
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a08.normal.1",
+      "source": "exec-ff55400a-3fae-4209-81e4-0baf59bdd43e.png",
+      "sourceCrop": [
+        260,
+        1005,
+        527,
+        1241
+      ],
+      "visibleBBox": [
+        9,
+        17,
+        254,
+        215
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a08.normal.1",
+      "source": "exec-ff55400a-3fae-4209-81e4-0baf59bdd43e.png",
+      "sourceCrop": [
+        527,
+        1005,
+        753,
+        1241
+      ],
+      "visibleBBox": [
+        14,
+        48,
+        218,
+        210
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a08.normal.1",
+      "source": "exec-ff55400a-3fae-4209-81e4-0baf59bdd43e.png",
+      "sourceCrop": [
+        753,
+        1005,
+        1024,
+        1241
+      ],
+      "visibleBBox": [
+        9,
+        118,
+        254,
+        215
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a08.normal.2",
+      "source": "exec-ff55400a-3fae-4209-81e4-0baf59bdd43e.png",
+      "sourceCrop": [
+        0,
+        1241,
+        236,
+        1536
+      ],
+      "visibleBBox": [
+        34,
+        18,
+        214,
+        246
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a08.normal.2",
+      "source": "exec-ff55400a-3fae-4209-81e4-0baf59bdd43e.png",
+      "sourceCrop": [
+        236,
+        1241,
+        537,
+        1536
+      ],
+      "visibleBBox": [
+        23,
+        13,
+        290,
+        245
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a08.normal.2",
+      "source": "exec-ff55400a-3fae-4209-81e4-0baf59bdd43e.png",
+      "sourceCrop": [
+        537,
+        1241,
+        751,
+        1536
+      ],
+      "visibleBBox": [
+        13,
+        16,
+        203,
+        245
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a08.normal.2",
+      "source": "exec-ff55400a-3fae-4209-81e4-0baf59bdd43e.png",
+      "sourceCrop": [
+        751,
+        1241,
+        1024,
+        1536
+      ],
+      "visibleBBox": [
+        13,
+        113,
+        259,
+        245
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a08.normal.3",
+      "source": "exec-78a05da8-b920-4a52-a96f-31ef348bdbb7.png",
+      "sourceCrop": [
+        0,
+        0,
+        245,
+        280
+      ],
+      "visibleBBox": [
+        20,
+        92,
+        225,
+        249
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a08.normal.3",
+      "source": "exec-78a05da8-b920-4a52-a96f-31ef348bdbb7.png",
+      "sourceCrop": [
+        245,
+        0,
+        528,
+        280
+      ],
+      "visibleBBox": [
+        22,
+        109,
+        260,
+        249
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a08.normal.3",
+      "source": "exec-78a05da8-b920-4a52-a96f-31ef348bdbb7.png",
+      "sourceCrop": [
+        528,
+        0,
+        772,
+        280
+      ],
+      "visibleBBox": [
+        25,
+        103,
+        221,
+        253
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a08.normal.3",
+      "source": "exec-78a05da8-b920-4a52-a96f-31ef348bdbb7.png",
+      "sourceCrop": [
+        772,
+        0,
+        1024,
+        280
+      ],
+      "visibleBBox": [
+        25,
+        153,
+        227,
+        253
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a08.elite",
+      "source": "exec-78a05da8-b920-4a52-a96f-31ef348bdbb7.png",
+      "sourceCrop": [
+        0,
+        280,
+        255,
+        528
+      ],
+      "visibleBBox": [
+        42,
+        32,
+        245,
+        220
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a08.elite",
+      "source": "exec-78a05da8-b920-4a52-a96f-31ef348bdbb7.png",
+      "sourceCrop": [
+        255,
+        280,
+        530,
+        528
+      ],
+      "visibleBBox": [
+        12,
+        44,
+        256,
+        218
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a08.elite",
+      "source": "exec-78a05da8-b920-4a52-a96f-31ef348bdbb7.png",
+      "sourceCrop": [
+        530,
+        280,
+        781,
+        528
+      ],
+      "visibleBBox": [
+        21,
+        41,
+        231,
+        218
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a08.elite",
+      "source": "exec-78a05da8-b920-4a52-a96f-31ef348bdbb7.png",
+      "sourceCrop": [
+        781,
+        280,
+        1024,
+        528
+      ],
+      "visibleBBox": [
+        21,
+        91,
+        229,
+        220
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a09.normal.1",
+      "source": "exec-78a05da8-b920-4a52-a96f-31ef348bdbb7.png",
+      "sourceCrop": [
+        0,
+        528,
+        243,
+        774
+      ],
+      "visibleBBox": [
+        49,
+        29,
+        218,
+        224
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a09.normal.1",
+      "source": "exec-78a05da8-b920-4a52-a96f-31ef348bdbb7.png",
+      "sourceCrop": [
+        243,
+        528,
+        537,
+        774
+      ],
+      "visibleBBox": [
+        27,
+        46,
+        269,
+        226
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a09.normal.1",
+      "source": "exec-78a05da8-b920-4a52-a96f-31ef348bdbb7.png",
+      "sourceCrop": [
+        537,
+        528,
+        769,
+        774
+      ],
+      "visibleBBox": [
+        36,
+        36,
+        207,
+        234
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a09.normal.1",
+      "source": "exec-78a05da8-b920-4a52-a96f-31ef348bdbb7.png",
+      "sourceCrop": [
+        769,
+        528,
+        1024,
+        774
+      ],
+      "visibleBBox": [
+        26,
+        123,
+        231,
+        219
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a09.normal.2",
+      "source": "exec-78a05da8-b920-4a52-a96f-31ef348bdbb7.png",
+      "sourceCrop": [
+        0,
+        774,
+        240,
+        1031
+      ],
+      "visibleBBox": [
+        31,
+        14,
+        227,
+        224
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a09.normal.2",
+      "source": "exec-78a05da8-b920-4a52-a96f-31ef348bdbb7.png",
+      "sourceCrop": [
+        240,
+        774,
+        531,
+        1031
+      ],
+      "visibleBBox": [
+        15,
+        24,
+        273,
+        218
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a09.normal.2",
+      "source": "exec-78a05da8-b920-4a52-a96f-31ef348bdbb7.png",
+      "sourceCrop": [
+        531,
+        774,
+        765,
+        1031
+      ],
+      "visibleBBox": [
+        20,
+        33,
+        216,
+        230
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a09.normal.2",
+      "source": "exec-78a05da8-b920-4a52-a96f-31ef348bdbb7.png",
+      "sourceCrop": [
+        765,
+        774,
+        1024,
+        1031
+      ],
+      "visibleBBox": [
+        20,
+        119,
+        241,
+        233
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a09.normal.3",
+      "source": "exec-78a05da8-b920-4a52-a96f-31ef348bdbb7.png",
+      "sourceCrop": [
+        0,
+        1031,
+        246,
+        1252
+      ],
+      "visibleBBox": [
+        25,
+        48,
+        239,
+        192
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a09.normal.3",
+      "source": "exec-78a05da8-b920-4a52-a96f-31ef348bdbb7.png",
+      "sourceCrop": [
+        246,
+        1031,
+        534,
+        1252
+      ],
+      "visibleBBox": [
+        9,
+        25,
+        277,
+        194
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a09.normal.3",
+      "source": "exec-78a05da8-b920-4a52-a96f-31ef348bdbb7.png",
+      "sourceCrop": [
+        534,
+        1031,
+        766,
+        1252
+      ],
+      "visibleBBox": [
+        13,
+        45,
+        219,
+        200
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a09.normal.3",
+      "source": "exec-78a05da8-b920-4a52-a96f-31ef348bdbb7.png",
+      "sourceCrop": [
+        766,
+        1031,
+        1024,
+        1252
+      ],
+      "visibleBBox": [
+        15,
+        114,
+        243,
+        203
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a09.elite",
+      "source": "exec-78a05da8-b920-4a52-a96f-31ef348bdbb7.png",
+      "sourceCrop": [
+        0,
+        1252,
+        248,
+        1536
+      ],
+      "visibleBBox": [
+        16,
+        19,
+        242,
+        221
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a09.elite",
+      "source": "exec-78a05da8-b920-4a52-a96f-31ef348bdbb7.png",
+      "sourceCrop": [
+        248,
+        1252,
+        541,
+        1536
+      ],
+      "visibleBBox": [
+        7,
+        64,
+        282,
+        221
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a09.elite",
+      "source": "exec-78a05da8-b920-4a52-a96f-31ef348bdbb7.png",
+      "sourceCrop": [
+        541,
+        1252,
+        764,
+        1536
+      ],
+      "visibleBBox": [
+        13,
+        24,
+        215,
+        221
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a09.elite",
+      "source": "exec-78a05da8-b920-4a52-a96f-31ef348bdbb7.png",
+      "sourceCrop": [
+        764,
+        1252,
+        1024,
+        1536
+      ],
+      "visibleBBox": [
+        10,
+        107,
+        245,
+        224
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a10.normal.1",
+      "source": "exec-afc13abf-41b7-4743-b835-7290b380c768.png",
+      "sourceCrop": [
+        0,
+        0,
+        239,
+        251
+      ],
+      "visibleBBox": [
+        31,
+        109,
+        225,
+        221
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a10.normal.1",
+      "source": "exec-afc13abf-41b7-4743-b835-7290b380c768.png",
+      "sourceCrop": [
+        239,
+        0,
+        527,
+        251
+      ],
+      "visibleBBox": [
+        16,
+        99,
+        257,
+        221
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a10.normal.1",
+      "source": "exec-afc13abf-41b7-4743-b835-7290b380c768.png",
+      "sourceCrop": [
+        527,
+        0,
+        763,
+        251
+      ],
+      "visibleBBox": [
+        33,
+        68,
+        206,
+        221
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a10.normal.1",
+      "source": "exec-afc13abf-41b7-4743-b835-7290b380c768.png",
+      "sourceCrop": [
+        763,
+        0,
+        1024,
+        251
+      ],
+      "visibleBBox": [
+        32,
+        147,
+        231,
+        222
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a10.normal.2",
+      "source": "exec-afc13abf-41b7-4743-b835-7290b380c768.png",
+      "sourceCrop": [
+        0,
+        251,
+        247,
+        472
+      ],
+      "visibleBBox": [
+        21,
+        31,
+        235,
+        200
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a10.normal.2",
+      "source": "exec-afc13abf-41b7-4743-b835-7290b380c768.png",
+      "sourceCrop": [
+        247,
+        251,
+        523,
+        472
+      ],
+      "visibleBBox": [
+        13,
+        57,
+        256,
+        200
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a10.normal.2",
+      "source": "exec-afc13abf-41b7-4743-b835-7290b380c768.png",
+      "sourceCrop": [
+        523,
+        251,
+        766,
+        472
+      ],
+      "visibleBBox": [
+        22,
+        32,
+        232,
+        201
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a10.normal.2",
+      "source": "exec-afc13abf-41b7-4743-b835-7290b380c768.png",
+      "sourceCrop": [
+        766,
+        251,
+        1024,
+        472
+      ],
+      "visibleBBox": [
+        12,
+        92,
+        244,
+        208
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a10.normal.3",
+      "source": "exec-afc13abf-41b7-4743-b835-7290b380c768.png",
+      "sourceCrop": [
+        0,
+        472,
+        218,
+        731
+      ],
+      "visibleBBox": [
+        52,
+        13,
+        198,
+        221
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a10.normal.3",
+      "source": "exec-afc13abf-41b7-4743-b835-7290b380c768.png",
+      "sourceCrop": [
+        218,
+        472,
+        526,
+        731
+      ],
+      "visibleBBox": [
+        14,
+        67,
+        301,
+        220
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a10.normal.3",
+      "source": "exec-afc13abf-41b7-4743-b835-7290b380c768.png",
+      "sourceCrop": [
+        526,
+        472,
+        753,
+        731
+      ],
+      "visibleBBox": [
+        9,
+        34,
+        223,
+        220
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a10.normal.3",
+      "source": "exec-afc13abf-41b7-4743-b835-7290b380c768.png",
+      "sourceCrop": [
+        753,
+        472,
+        1024,
+        731
+      ],
+      "visibleBBox": [
+        6,
+        134,
+        260,
+        223
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a10.elite",
+      "source": "exec-afc13abf-41b7-4743-b835-7290b380c768.png",
+      "sourceCrop": [
+        0,
+        731,
+        232,
+        993
+      ],
+      "visibleBBox": [
+        17,
+        15,
+        226,
+        232
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a10.elite",
+      "source": "exec-afc13abf-41b7-4743-b835-7290b380c768.png",
+      "sourceCrop": [
+        232,
+        731,
+        539,
+        993
+      ],
+      "visibleBBox": [
+        7,
+        16,
+        292,
+        237
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a10.elite",
+      "source": "exec-afc13abf-41b7-4743-b835-7290b380c768.png",
+      "sourceCrop": [
+        539,
+        731,
+        752,
+        993
+      ],
+      "visibleBBox": [
+        17,
+        31,
+        204,
+        231
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a10.elite",
+      "source": "exec-afc13abf-41b7-4743-b835-7290b380c768.png",
+      "sourceCrop": [
+        752,
+        731,
+        1024,
+        993
+      ],
+      "visibleBBox": [
+        10,
+        116,
+        256,
+        244
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a04.boss",
+      "source": "exec-afc13abf-41b7-4743-b835-7290b380c768.png",
+      "sourceCrop": [
+        0,
+        993,
+        246,
+        1255
+      ],
+      "visibleBBox": [
+        14,
+        19,
+        243,
+        233
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a04.boss",
+      "source": "exec-afc13abf-41b7-4743-b835-7290b380c768.png",
+      "sourceCrop": [
+        246,
+        993,
+        540,
+        1255
+      ],
+      "visibleBBox": [
+        5,
+        27,
+        279,
+        237
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a04.boss",
+      "source": "exec-afc13abf-41b7-4743-b835-7290b380c768.png",
+      "sourceCrop": [
+        540,
+        993,
+        752,
+        1255
+      ],
+      "visibleBBox": [
+        17,
+        28,
+        207,
+        239
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a04.boss",
+      "source": "exec-afc13abf-41b7-4743-b835-7290b380c768.png",
+      "sourceCrop": [
+        752,
+        993,
+        1024,
+        1255
+      ],
+      "visibleBBox": [
+        7,
+        82,
+        260,
+        244
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a10.boss",
+      "source": "exec-5d9a8510-35e2-4b97-9f34-b3e5c1e97b06.png",
+      "sourceCrop": [
+        0,
+        0,
+        623,
+        632
+      ],
+      "visibleBBox": [
+        78,
+        112,
+        606,
+        548
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a10.boss",
+      "source": "exec-5d9a8510-35e2-4b97-9f34-b3e5c1e97b06.png",
+      "sourceCrop": [
+        623,
+        0,
+        1254,
+        632
+      ],
+      "visibleBBox": [
+        18,
+        105,
+        581,
+        547
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a10.boss",
+      "source": "exec-5d9a8510-35e2-4b97-9f34-b3e5c1e97b06.png",
+      "sourceCrop": [
+        0,
+        632,
+        618,
+        1254
+      ],
+      "visibleBBox": [
+        93,
+        85,
+        594,
+        485
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a10.boss",
+      "source": "exec-5d9a8510-35e2-4b97-9f34-b3e5c1e97b06.png",
+      "sourceCrop": [
+        618,
+        632,
+        1254,
+        1254
+      ],
+      "visibleBBox": [
+        25,
+        239,
+        580,
+        499
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a07.boss",
+      "source": "exec-74d9d160-b5a3-4091-a70e-4f4dbe38ea6d.png",
+      "sourceCrop": [
+        0,
+        0,
+        590,
+        644
+      ],
+      "visibleBBox": [
+        60,
+        62,
+        575,
+        598
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a07.boss",
+      "source": "exec-74d9d160-b5a3-4091-a70e-4f4dbe38ea6d.png",
+      "sourceCrop": [
+        590,
+        0,
+        1264,
+        644
+      ],
+      "visibleBBox": [
+        17,
+        86,
+        645,
+        594
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a07.boss",
+      "source": "exec-74d9d160-b5a3-4091-a70e-4f4dbe38ea6d.png",
+      "sourceCrop": [
+        0,
+        644,
+        633,
+        1244
+      ],
+      "visibleBBox": [
+        74,
+        48,
+        590,
+        495
+      ],
+      "boundaryInk": 0
+    },
+    {
+      "id": "ashen.a07.boss",
+      "source": "exec-74d9d160-b5a3-4091-a70e-4f4dbe38ea6d.png",
+      "sourceCrop": [
+        633,
+        644,
+        1264,
+        1244
+      ],
+      "visibleBBox": [
+        45,
+        223,
+        606,
+        508
+      ],
+      "boundaryInk": 0
+    }
+  ]
+}

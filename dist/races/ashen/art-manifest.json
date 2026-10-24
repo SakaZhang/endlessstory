@@ -26,10 +26,10 @@
         "file": "races/ashen/art/hero-strike.png",
         "durationMs": 160,
         "alphaBBox": [
-          15,
-          23,
-          176,
-          173
+          10,
+          74,
+          182,
+          176
         ]
       },
       {
@@ -108,10 +108,16 @@
           "file": "races/ashen/art/ashen.a01.normal.1.png",
           "durationMs": 160,
           "alphaBBox": [
-            22,
-            67,
-            170,
+            32,
+            78,
+            159,
             176
+          ],
+          "sourceCrop": [
+            0,
+            0,
+            247,
+            272
           ]
         },
         {
@@ -120,9 +126,15 @@
           "durationMs": 160,
           "alphaBBox": [
             22,
-            69,
+            64,
             170,
             176
+          ],
+          "sourceCrop": [
+            247,
+            0,
+            522,
+            272
           ]
         },
         {
@@ -130,10 +142,16 @@
           "file": "races/ashen/art/ashen.a01.normal.1-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            26,
-            66,
-            166,
+            36,
+            79,
+            156,
             176
+          ],
+          "sourceCrop": [
+            522,
+            0,
+            760,
+            272
           ]
         },
         {
@@ -141,10 +159,16 @@
           "file": "races/ashen/art/ashen.a01.normal.1-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            22,
-            62,
-            170,
+            26,
+            107,
+            165,
             176
+          ],
+          "sourceCrop": [
+            760,
+            0,
+            1024,
+            272
           ]
         }
       ],
@@ -188,10 +212,16 @@
           "file": "races/ashen/art/ashen.a01.normal.2.png",
           "durationMs": 160,
           "alphaBBox": [
-            22,
-            49,
-            170,
+            32,
+            85,
+            160,
             176
+          ],
+          "sourceCrop": [
+            0,
+            272,
+            247,
+            517
           ]
         },
         {
@@ -200,9 +230,15 @@
           "durationMs": 160,
           "alphaBBox": [
             22,
-            53,
+            80,
             170,
             176
+          ],
+          "sourceCrop": [
+            247,
+            272,
+            524,
+            517
           ]
         },
         {
@@ -210,10 +246,16 @@
           "file": "races/ashen/art/ashen.a01.normal.2-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            22,
-            53,
-            170,
+            33,
+            73,
+            158,
             176
+          ],
+          "sourceCrop": [
+            524,
+            272,
+            766,
+            517
           ]
         },
         {
@@ -221,10 +263,16 @@
           "file": "races/ashen/art/ashen.a01.normal.2-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            22,
-            87,
-            170,
+            25,
+            99,
+            167,
             176
+          ],
+          "sourceCrop": [
+            766,
+            272,
+            1024,
+            517
           ]
         }
       ],
@@ -268,10 +316,16 @@
           "file": "races/ashen/art/ashen.a01.normal.3.png",
           "durationMs": 160,
           "alphaBBox": [
-            22,
-            38,
-            169,
+            32,
+            90,
+            160,
             176
+          ],
+          "sourceCrop": [
+            0,
+            517,
+            251,
+            760
           ]
         },
         {
@@ -279,10 +333,16 @@
           "file": "races/ashen/art/ashen.a01.normal.3-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            22,
-            52,
-            169,
+            23,
+            86,
+            170,
             176
+          ],
+          "sourceCrop": [
+            251,
+            517,
+            531,
+            760
           ]
         },
         {
@@ -290,10 +350,16 @@
           "file": "races/ashen/art/ashen.a01.normal.3-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            22,
-            66,
-            169,
+            35,
+            67,
+            157,
             176
+          ],
+          "sourceCrop": [
+            531,
+            517,
+            776,
+            760
           ]
         },
         {
@@ -301,10 +367,16 @@
           "file": "races/ashen/art/ashen.a01.normal.3-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            22,
-            64,
-            169,
+            34,
+            120,
+            156,
             176
+          ],
+          "sourceCrop": [
+            776,
+            517,
+            1024,
+            760
           ]
         }
       ],
@@ -348,10 +420,16 @@
           "file": "races/ashen/art/ashen.a01.elite.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
+            43,
             38,
-            165,
+            148,
             176
+          ],
+          "sourceCrop": [
+            0,
+            760,
+            241,
+            1049
           ]
         },
         {
@@ -360,9 +438,15 @@
           "durationMs": 160,
           "alphaBBox": [
             27,
-            38,
-            165,
+            70,
+            164,
             176
+          ],
+          "sourceCrop": [
+            241,
+            760,
+            533,
+            1049
           ]
         },
         {
@@ -370,10 +454,16 @@
           "file": "races/ashen/art/ashen.a01.elite-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            50,
+            44,
+            142,
             176
+          ],
+          "sourceCrop": [
+            533,
+            760,
+            758,
+            1049
           ]
         },
         {
@@ -381,10 +471,16 @@
           "file": "races/ashen/art/ashen.a01.elite-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            68,
-            165,
+            32,
+            100,
+            160,
             176
+          ],
+          "sourceCrop": [
+            758,
+            760,
+            1024,
+            1049
           ]
         }
       ],
@@ -428,10 +524,16 @@
           "file": "races/ashen/art/ashen.a02.normal.1.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            50,
-            165,
+            31,
+            77,
+            160,
             176
+          ],
+          "sourceCrop": [
+            0,
+            1049,
+            251,
+            1302
           ]
         },
         {
@@ -439,10 +541,16 @@
           "file": "races/ashen/art/ashen.a02.normal.1-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            22,
+            53,
+            170,
             176
+          ],
+          "sourceCrop": [
+            251,
+            1049,
+            531,
+            1302
           ]
         },
         {
@@ -450,10 +558,16 @@
           "file": "races/ashen/art/ashen.a02.normal.1-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            28,
-            49,
-            163,
+            35,
+            61,
+            157,
             176
+          ],
+          "sourceCrop": [
+            531,
+            1049,
+            769,
+            1302
           ]
         },
         {
@@ -461,10 +575,16 @@
           "file": "races/ashen/art/ashen.a02.normal.1-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            46,
-            165,
+            28,
+            130,
+            164,
             176
+          ],
+          "sourceCrop": [
+            769,
+            1049,
+            1024,
+            1302
           ]
         }
       ],
@@ -508,10 +628,16 @@
           "file": "races/ashen/art/ashen.a02.normal.2.png",
           "durationMs": 160,
           "alphaBBox": [
-            22,
-            60,
-            170,
+            28,
+            113,
+            163,
             176
+          ],
+          "sourceCrop": [
+            0,
+            1302,
+            258,
+            1536
           ]
         },
         {
@@ -520,9 +646,15 @@
           "durationMs": 160,
           "alphaBBox": [
             22,
-            62,
+            98,
             170,
             176
+          ],
+          "sourceCrop": [
+            258,
+            1302,
+            534,
+            1536
           ]
         },
         {
@@ -530,10 +662,16 @@
           "file": "races/ashen/art/ashen.a02.normal.2-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            26,
-            66,
-            166,
+            33,
+            79,
+            159,
             176
+          ],
+          "sourceCrop": [
+            534,
+            1302,
+            770,
+            1536
           ]
         },
         {
@@ -541,10 +679,16 @@
           "file": "races/ashen/art/ashen.a02.normal.2-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            22,
-            57,
-            170,
+            29,
+            124,
+            162,
             176
+          ],
+          "sourceCrop": [
+            770,
+            1302,
+            1024,
+            1536
           ]
         }
       ],
@@ -588,10 +732,16 @@
           "file": "races/ashen/art/ashen.a02.normal.3.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            61,
+            50,
+            130,
             176
+          ],
+          "sourceCrop": [
+            0,
+            0,
+            232,
+            279
           ]
         },
         {
@@ -599,10 +749,16 @@
           "file": "races/ashen/art/ashen.a02.normal.3-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            22,
+            48,
+            170,
             176
+          ],
+          "sourceCrop": [
+            232,
+            0,
+            524,
+            279
           ]
         },
         {
@@ -610,10 +766,16 @@
           "file": "races/ashen/art/ashen.a02.normal.3-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            43,
+            61,
+            149,
             176
+          ],
+          "sourceCrop": [
+            524,
+            0,
+            757,
+            279
           ]
         },
         {
@@ -622,9 +784,15 @@
           "durationMs": 650,
           "alphaBBox": [
             27,
-            87,
+            124,
             165,
             176
+          ],
+          "sourceCrop": [
+            757,
+            0,
+            1024,
+            279
           ]
         }
       ],
@@ -668,10 +836,16 @@
           "file": "races/ashen/art/ashen.a02.elite.png",
           "durationMs": 160,
           "alphaBBox": [
-            22,
-            49,
-            170,
+            44,
+            65,
+            148,
             176
+          ],
+          "sourceCrop": [
+            0,
+            279,
+            244,
+            533
           ]
         },
         {
@@ -680,9 +854,15 @@
           "durationMs": 160,
           "alphaBBox": [
             22,
-            62,
+            86,
             170,
             176
+          ],
+          "sourceCrop": [
+            244,
+            279,
+            538,
+            533
           ]
         },
         {
@@ -690,10 +870,16 @@
           "file": "races/ashen/art/ashen.a02.elite-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            26,
-            46,
-            166,
+            45,
+            72,
+            146,
             176
+          ],
+          "sourceCrop": [
+            538,
+            279,
+            753,
+            533
           ]
         },
         {
@@ -701,10 +887,16 @@
           "file": "races/ashen/art/ashen.a02.elite-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            22,
-            74,
-            170,
+            35,
+            124,
+            156,
             176
+          ],
+          "sourceCrop": [
+            753,
+            279,
+            1024,
+            533
           ]
         }
       ],
@@ -748,10 +940,16 @@
           "file": "races/ashen/art/ashen.a03.normal.1.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            37,
+            77,
+            154,
             176
+          ],
+          "sourceCrop": [
+            0,
+            533,
+            244,
+            780
           ]
         },
         {
@@ -759,10 +957,16 @@
           "file": "races/ashen/art/ashen.a03.normal.1-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            22,
+            71,
+            170,
             176
+          ],
+          "sourceCrop": [
+            244,
+            533,
+            526,
+            780
           ]
         },
         {
@@ -770,10 +974,16 @@
           "file": "races/ashen/art/ashen.a03.normal.1-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            40,
-            165,
-            176
+            36,
+            75,
+            155,
+            175
+          ],
+          "sourceCrop": [
+            526,
+            533,
+            765,
+            780
           ]
         },
         {
@@ -781,10 +991,16 @@
           "file": "races/ashen/art/ashen.a03.normal.1-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            31,
+            132,
+            159,
             176
+          ],
+          "sourceCrop": [
+            765,
+            533,
+            1024,
+            780
           ]
         }
       ],
@@ -828,10 +1044,16 @@
           "file": "races/ashen/art/ashen.a03.normal.2.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            43,
+            86,
+            149,
             176
+          ],
+          "sourceCrop": [
+            0,
+            780,
+            228,
+            1011
           ]
         },
         {
@@ -839,10 +1061,16 @@
           "file": "races/ashen/art/ashen.a03.normal.2-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            39,
-            165,
+            22,
+            87,
+            170,
             176
+          ],
+          "sourceCrop": [
+            228,
+            780,
+            532,
+            1011
           ]
         },
         {
@@ -850,10 +1078,16 @@
           "file": "races/ashen/art/ashen.a03.normal.2-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            164,
+            43,
+            88,
+            148,
             176
+          ],
+          "sourceCrop": [
+            532,
+            780,
+            764,
+            1011
           ]
         },
         {
@@ -861,10 +1095,16 @@
           "file": "races/ashen/art/ashen.a03.normal.2-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            39,
-            165,
+            36,
+            111,
+            157,
             176
+          ],
+          "sourceCrop": [
+            764,
+            780,
+            1024,
+            1011
           ]
         }
       ],
@@ -908,10 +1148,16 @@
           "file": "races/ashen/art/ashen.a03.normal.3.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            40,
+            44,
+            151,
             176
+          ],
+          "sourceCrop": [
+            0,
+            1011,
+            252,
+            1270
           ]
         },
         {
@@ -919,10 +1165,16 @@
           "file": "races/ashen/art/ashen.a03.normal.3-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            22,
+            44,
+            170,
             176
+          ],
+          "sourceCrop": [
+            252,
+            1011,
+            536,
+            1270
           ]
         },
         {
@@ -930,10 +1182,16 @@
           "file": "races/ashen/art/ashen.a03.normal.3-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            29,
-            40,
-            162,
+            39,
+            51,
+            152,
             176
+          ],
+          "sourceCrop": [
+            536,
+            1011,
+            759,
+            1270
           ]
         },
         {
@@ -941,10 +1199,16 @@
           "file": "races/ashen/art/ashen.a03.normal.3-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            25,
+            97,
+            166,
             176
+          ],
+          "sourceCrop": [
+            759,
+            1011,
+            1024,
+            1270
           ]
         }
       ],
@@ -988,10 +1252,16 @@
           "file": "races/ashen/art/ashen.a03.elite.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            34,
+            56,
+            158,
             176
+          ],
+          "sourceCrop": [
+            0,
+            1270,
+            249,
+            1536
           ]
         },
         {
@@ -999,10 +1269,16 @@
           "file": "races/ashen/art/ashen.a03.elite-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            22,
+            52,
+            170,
             176
+          ],
+          "sourceCrop": [
+            249,
+            1270,
+            528,
+            1536
           ]
         },
         {
@@ -1010,10 +1286,16 @@
           "file": "races/ashen/art/ashen.a03.elite-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            37,
+            56,
+            154,
             176
+          ],
+          "sourceCrop": [
+            528,
+            1270,
+            757,
+            1536
           ]
         },
         {
@@ -1021,10 +1303,16 @@
           "file": "races/ashen/art/ashen.a03.elite-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            38,
+            26,
+            104,
             165,
             176
+          ],
+          "sourceCrop": [
+            757,
+            1270,
+            1024,
+            1536
           ]
         }
       ],
@@ -1068,10 +1356,16 @@
           "file": "races/ashen/art/ashen.a04.normal.1.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            26,
+            100,
+            166,
             176
+          ],
+          "sourceCrop": [
+            0,
+            0,
+            264,
+            244
           ]
         },
         {
@@ -1079,10 +1373,16 @@
           "file": "races/ashen/art/ashen.a04.normal.1-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            26,
+            98,
+            166,
             176
+          ],
+          "sourceCrop": [
+            264,
+            0,
+            527,
+            244
           ]
         },
         {
@@ -1090,10 +1390,16 @@
           "file": "races/ashen/art/ashen.a04.normal.1-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            39,
-            165,
+            33,
+            104,
+            158,
             176
+          ],
+          "sourceCrop": [
+            527,
+            0,
+            763,
+            244
           ]
         },
         {
@@ -1101,10 +1407,16 @@
           "file": "races/ashen/art/ashen.a04.normal.1-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            22,
+            120,
+            170,
             176
+          ],
+          "sourceCrop": [
+            763,
+            0,
+            1024,
+            244
           ]
         }
       ],
@@ -1148,10 +1460,16 @@
           "file": "races/ashen/art/ashen.a04.normal.2.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            28,
+            55,
+            164,
             176
+          ],
+          "sourceCrop": [
+            0,
+            244,
+            256,
+            500
           ]
         },
         {
@@ -1159,10 +1477,16 @@
           "file": "races/ashen/art/ashen.a04.normal.2-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            22,
+            47,
+            170,
             176
+          ],
+          "sourceCrop": [
+            256,
+            244,
+            531,
+            500
           ]
         },
         {
@@ -1170,10 +1494,16 @@
           "file": "races/ashen/art/ashen.a04.normal.2-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            34,
+            53,
+            157,
             176
+          ],
+          "sourceCrop": [
+            531,
+            244,
+            774,
+            500
           ]
         },
         {
@@ -1181,10 +1511,16 @@
           "file": "races/ashen/art/ashen.a04.normal.2-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            22,
+            100,
+            169,
             176
+          ],
+          "sourceCrop": [
+            774,
+            244,
+            1024,
+            500
           ]
         }
       ],
@@ -1228,10 +1564,16 @@
           "file": "races/ashen/art/ashen.a04.normal.3.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            40,
+            65,
+            152,
             176
+          ],
+          "sourceCrop": [
+            0,
+            500,
+            246,
+            742
           ]
         },
         {
@@ -1239,10 +1581,16 @@
           "file": "races/ashen/art/ashen.a04.normal.3-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            22,
+            63,
+            170,
             176
+          ],
+          "sourceCrop": [
+            246,
+            500,
+            538,
+            742
           ]
         },
         {
@@ -1250,10 +1598,16 @@
           "file": "races/ashen/art/ashen.a04.normal.3-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            51,
+            63,
+            141,
             176
+          ],
+          "sourceCrop": [
+            538,
+            500,
+            753,
+            742
           ]
         },
         {
@@ -1261,10 +1615,16 @@
           "file": "races/ashen/art/ashen.a04.normal.3-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            26,
+            116,
+            166,
             176
+          ],
+          "sourceCrop": [
+            753,
+            500,
+            1024,
+            742
           ]
         }
       ],
@@ -1308,10 +1668,16 @@
           "file": "races/ashen/art/ashen.a04.elite.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            59,
+            54,
+            132,
             176
+          ],
+          "sourceCrop": [
+            0,
+            742,
+            226,
+            1001
           ]
         },
         {
@@ -1319,10 +1685,16 @@
           "file": "races/ashen/art/ashen.a04.elite-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            23,
+            71,
+            170,
             176
+          ],
+          "sourceCrop": [
+            226,
+            742,
+            534,
+            1001
           ]
         },
         {
@@ -1330,10 +1702,16 @@
           "file": "races/ashen/art/ashen.a04.elite-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            50,
-            165,
+            53,
+            66,
+            138,
             176
+          ],
+          "sourceCrop": [
+            534,
+            742,
+            738,
+            1001
           ]
         },
         {
@@ -1341,10 +1719,16 @@
           "file": "races/ashen/art/ashen.a04.elite-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            79,
-            165,
+            30,
+            98,
+            163,
             176
+          ],
+          "sourceCrop": [
+            738,
+            742,
+            1024,
+            1001
           ]
         }
       ],
@@ -1388,10 +1772,16 @@
           "file": "races/ashen/art/ashen.a05.normal.1.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            24,
+            80,
+            168,
             176
+          ],
+          "sourceCrop": [
+            0,
+            1001,
+            271,
+            1235
           ]
         },
         {
@@ -1399,10 +1789,16 @@
           "file": "races/ashen/art/ashen.a05.normal.1-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            22,
+            74,
+            170,
             176
+          ],
+          "sourceCrop": [
+            271,
+            1001,
+            538,
+            1235
           ]
         },
         {
@@ -1410,10 +1806,16 @@
           "file": "races/ashen/art/ashen.a05.normal.1-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            32,
-            47,
-            160,
+            34,
+            90,
+            157,
             176
+          ],
+          "sourceCrop": [
+            538,
+            1001,
+            763,
+            1235
           ]
         },
         {
@@ -1421,10 +1823,16 @@
           "file": "races/ashen/art/ashen.a05.normal.1-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            59,
-            165,
+            22,
+            126,
+            170,
             176
+          ],
+          "sourceCrop": [
+            763,
+            1001,
+            1024,
+            1235
           ]
         }
       ],
@@ -1468,10 +1876,16 @@
           "file": "races/ashen/art/ashen.a05.normal.2.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            28,
+            56,
+            164,
             176
+          ],
+          "sourceCrop": [
+            0,
+            1235,
+            261,
+            1536
           ]
         },
         {
@@ -1480,9 +1894,15 @@
           "durationMs": 160,
           "alphaBBox": [
             27,
-            44,
-            165,
+            38,
+            164,
             176
+          ],
+          "sourceCrop": [
+            261,
+            1235,
+            531,
+            1536
           ]
         },
         {
@@ -1490,10 +1910,16 @@
           "file": "races/ashen/art/ashen.a05.normal.2-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            41,
+            70,
+            150,
             176
+          ],
+          "sourceCrop": [
+            531,
+            1235,
+            754,
+            1536
           ]
         },
         {
@@ -1501,10 +1927,16 @@
           "file": "races/ashen/art/ashen.a05.normal.2-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            67,
-            165,
+            25,
+            101,
+            167,
             176
+          ],
+          "sourceCrop": [
+            754,
+            1235,
+            1024,
+            1536
           ]
         }
       ],
@@ -1548,10 +1980,16 @@
           "file": "races/ashen/art/ashen.a05.normal.3.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            29,
+            91,
+            163,
             176
+          ],
+          "sourceCrop": [
+            0,
+            0,
+            252,
+            249
           ]
         },
         {
@@ -1560,9 +1998,15 @@
           "durationMs": 160,
           "alphaBBox": [
             27,
-            38,
-            165,
+            55,
+            164,
             176
+          ],
+          "sourceCrop": [
+            252,
+            0,
+            521,
+            249
           ]
         },
         {
@@ -1570,10 +2014,16 @@
           "file": "races/ashen/art/ashen.a05.normal.3-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            56,
-            165,
+            40,
+            78,
+            152,
             176
+          ],
+          "sourceCrop": [
+            521,
+            0,
+            758,
+            249
           ]
         },
         {
@@ -1581,10 +2031,16 @@
           "file": "races/ashen/art/ashen.a05.normal.3-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            22,
+            113,
+            170,
             176
+          ],
+          "sourceCrop": [
+            758,
+            0,
+            1024,
+            249
           ]
         }
       ],
@@ -1628,10 +2084,16 @@
           "file": "races/ashen/art/ashen.a05.elite.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            33,
+            39,
+            159,
             176
+          ],
+          "sourceCrop": [
+            0,
+            249,
+            249,
+            517
           ]
         },
         {
@@ -1639,10 +2101,16 @@
           "file": "races/ashen/art/ashen.a05.elite-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            25,
+            41,
+            167,
             176
+          ],
+          "sourceCrop": [
+            249,
+            249,
+            524,
+            517
           ]
         },
         {
@@ -1650,10 +2118,16 @@
           "file": "races/ashen/art/ashen.a05.elite-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
+            33,
             38,
-            165,
+            158,
             176
+          ],
+          "sourceCrop": [
+            524,
+            249,
+            764,
+            517
           ]
         },
         {
@@ -1661,10 +2135,16 @@
           "file": "races/ashen/art/ashen.a05.elite-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            40,
+            26,
+            95,
             165,
-            175
+            176
+          ],
+          "sourceCrop": [
+            764,
+            249,
+            1024,
+            517
           ]
         }
       ],
@@ -1708,10 +2188,16 @@
           "file": "races/ashen/art/ashen.a06.normal.1.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            31,
+            39,
+            160,
             176
+          ],
+          "sourceCrop": [
+            0,
+            517,
+            258,
+            764
           ]
         },
         {
@@ -1719,10 +2205,16 @@
           "file": "races/ashen/art/ashen.a06.normal.1-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
+            29,
             38,
-            165,
+            162,
             176
+          ],
+          "sourceCrop": [
+            258,
+            517,
+            528,
+            764
           ]
         },
         {
@@ -1730,10 +2222,16 @@
           "file": "races/ashen/art/ashen.a06.normal.1-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            51,
-            165,
+            37,
+            39,
+            153,
             176
+          ],
+          "sourceCrop": [
+            528,
+            517,
+            763,
+            764
           ]
         },
         {
@@ -1741,10 +2239,16 @@
           "file": "races/ashen/art/ashen.a06.normal.1-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            24,
+            109,
+            168,
             176
+          ],
+          "sourceCrop": [
+            763,
+            517,
+            1024,
+            764
           ]
         }
       ],
@@ -1788,10 +2292,16 @@
           "file": "races/ashen/art/ashen.a06.normal.2.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            32,
+            44,
+            159,
             176
+          ],
+          "sourceCrop": [
+            0,
+            764,
+            256,
+            1024
           ]
         },
         {
@@ -1799,10 +2309,16 @@
           "file": "races/ashen/art/ashen.a06.normal.2-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
+            26,
             38,
-            165,
+            166,
             176
+          ],
+          "sourceCrop": [
+            256,
+            764,
+            523,
+            1024
           ]
         },
         {
@@ -1810,10 +2326,16 @@
           "file": "races/ashen/art/ashen.a06.normal.2-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            34,
+            48,
+            158,
             176
+          ],
+          "sourceCrop": [
+            523,
+            764,
+            765,
+            1024
           ]
         },
         {
@@ -1821,10 +2343,16 @@
           "file": "races/ashen/art/ashen.a06.normal.2-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            29,
+            108,
+            164,
             176
+          ],
+          "sourceCrop": [
+            765,
+            764,
+            1024,
+            1024
           ]
         }
       ],
@@ -1869,9 +2397,15 @@
           "durationMs": 160,
           "alphaBBox": [
             27,
-            40,
-            165,
+            47,
+            164,
             176
+          ],
+          "sourceCrop": [
+            0,
+            1024,
+            256,
+            1267
           ]
         },
         {
@@ -1879,10 +2413,16 @@
           "file": "races/ashen/art/ashen.a06.normal.3-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            43,
-            165,
+            23,
+            38,
+            168,
             176
+          ],
+          "sourceCrop": [
+            256,
+            1024,
+            522,
+            1267
           ]
         },
         {
@@ -1890,10 +2430,16 @@
           "file": "races/ashen/art/ashen.a06.normal.3-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            43,
-            165,
+            32,
+            54,
+            160,
             176
+          ],
+          "sourceCrop": [
+            522,
+            1024,
+            762,
+            1267
           ]
         },
         {
@@ -1901,10 +2447,16 @@
           "file": "races/ashen/art/ashen.a06.normal.3-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            25,
+            93,
+            167,
             176
+          ],
+          "sourceCrop": [
+            762,
+            1024,
+            1024,
+            1267
           ]
         }
       ],
@@ -1948,10 +2500,16 @@
           "file": "races/ashen/art/ashen.a06.elite.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            29,
+            69,
+            163,
             176
+          ],
+          "sourceCrop": [
+            0,
+            1267,
+            253,
+            1536
           ]
         },
         {
@@ -1959,10 +2517,16 @@
           "file": "races/ashen/art/ashen.a06.elite-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            41,
-            165,
+            22,
+            45,
+            170,
             176
+          ],
+          "sourceCrop": [
+            253,
+            1267,
+            531,
+            1536
           ]
         },
         {
@@ -1970,10 +2534,16 @@
           "file": "races/ashen/art/ashen.a06.elite-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            46,
-            164,
+            32,
+            64,
+            159,
             176
+          ],
+          "sourceCrop": [
+            531,
+            1267,
+            768,
+            1536
           ]
         },
         {
@@ -1981,10 +2551,16 @@
           "file": "races/ashen/art/ashen.a06.elite-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            25,
+            94,
+            166,
             176
+          ],
+          "sourceCrop": [
+            768,
+            1267,
+            1024,
+            1536
           ]
         }
       ],
@@ -2028,10 +2604,16 @@
           "file": "races/ashen/art/ashen.a07.normal.1.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            40,
+            85,
+            151,
             176
+          ],
+          "sourceCrop": [
+            0,
+            0,
+            239,
+            261
           ]
         },
         {
@@ -2039,10 +2621,16 @@
           "file": "races/ashen/art/ashen.a07.normal.1-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            22,
+            88,
+            170,
             176
+          ],
+          "sourceCrop": [
+            239,
+            0,
+            532,
+            261
           ]
         },
         {
@@ -2050,10 +2638,16 @@
           "file": "races/ashen/art/ashen.a07.normal.1-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            32,
-            38,
-            160,
+            44,
+            92,
+            148,
             176
+          ],
+          "sourceCrop": [
+            532,
+            0,
+            742,
+            261
           ]
         },
         {
@@ -2061,10 +2655,16 @@
           "file": "races/ashen/art/ashen.a07.normal.1-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            46,
-            165,
+            30,
+            133,
+            163,
             176
+          ],
+          "sourceCrop": [
+            742,
+            0,
+            1024,
+            261
           ]
         }
       ],
@@ -2108,10 +2708,16 @@
           "file": "races/ashen/art/ashen.a07.normal.2.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            41,
+            64,
+            150,
             176
+          ],
+          "sourceCrop": [
+            0,
+            261,
+            242,
+            495
           ]
         },
         {
@@ -2119,10 +2725,16 @@
           "file": "races/ashen/art/ashen.a07.normal.2-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            22,
+            60,
+            170,
             176
+          ],
+          "sourceCrop": [
+            242,
+            261,
+            536,
+            495
           ]
         },
         {
@@ -2130,10 +2742,16 @@
           "file": "races/ashen/art/ashen.a07.normal.2-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            40,
+            87,
+            151,
             176
+          ],
+          "sourceCrop": [
+            536,
+            261,
+            763,
+            495
           ]
         },
         {
@@ -2141,10 +2759,16 @@
           "file": "races/ashen/art/ashen.a07.normal.2-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            70,
-            165,
+            28,
+            126,
+            164,
             176
+          ],
+          "sourceCrop": [
+            763,
+            261,
+            1024,
+            495
           ]
         }
       ],
@@ -2188,10 +2812,16 @@
           "file": "races/ashen/art/ashen.a07.normal.3.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            39,
+            81,
+            153,
             176
+          ],
+          "sourceCrop": [
+            0,
+            495,
+            249,
+            746
           ]
         },
         {
@@ -2199,10 +2829,16 @@
           "file": "races/ashen/art/ashen.a07.normal.3-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            22,
+            66,
+            169,
             176
+          ],
+          "sourceCrop": [
+            249,
+            495,
+            546,
+            746
           ]
         },
         {
@@ -2210,10 +2846,16 @@
           "file": "races/ashen/art/ashen.a07.normal.3-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            40,
+            82,
+            151,
             176
+          ],
+          "sourceCrop": [
+            546,
+            495,
+            773,
+            746
           ]
         },
         {
@@ -2221,10 +2863,16 @@
           "file": "races/ashen/art/ashen.a07.normal.3-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            48,
-            165,
+            37,
+            114,
+            155,
             176
+          ],
+          "sourceCrop": [
+            773,
+            495,
+            1024,
+            746
           ]
         }
       ],
@@ -2268,10 +2916,16 @@
           "file": "races/ashen/art/ashen.a07.elite.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            47,
+            76,
+            145,
             176
+          ],
+          "sourceCrop": [
+            0,
+            746,
+            237,
+            1005
           ]
         },
         {
@@ -2279,10 +2933,16 @@
           "file": "races/ashen/art/ashen.a07.elite-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            22,
+            55,
+            170,
             176
+          ],
+          "sourceCrop": [
+            237,
+            746,
+            541,
+            1005
           ]
         },
         {
@@ -2290,10 +2950,16 @@
           "file": "races/ashen/art/ashen.a07.elite-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            47,
-            165,
+            44,
+            71,
+            148,
             176
+          ],
+          "sourceCrop": [
+            541,
+            746,
+            760,
+            1005
           ]
         },
         {
@@ -2301,10 +2967,16 @@
           "file": "races/ashen/art/ashen.a07.elite-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            53,
-            165,
+            31,
+            129,
+            162,
             176
+          ],
+          "sourceCrop": [
+            760,
+            746,
+            1024,
+            1005
           ]
         }
       ],
@@ -2349,9 +3021,15 @@
           "durationMs": 160,
           "alphaBBox": [
             27,
-            38,
-            165,
+            69,
+            164,
             176
+          ],
+          "sourceCrop": [
+            0,
+            1005,
+            260,
+            1241
           ]
         },
         {
@@ -2359,10 +3037,16 @@
           "file": "races/ashen/art/ashen.a08.normal.1-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            43,
-            165,
+            22,
+            56,
+            170,
             176
+          ],
+          "sourceCrop": [
+            260,
+            1005,
+            527,
+            1241
           ]
         },
         {
@@ -2370,10 +3054,16 @@
           "file": "races/ashen/art/ashen.a08.normal.1-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            49,
-            165,
+            34,
+            78,
+            157,
             176
+          ],
+          "sourceCrop": [
+            527,
+            1005,
+            753,
+            1241
           ]
         },
         {
@@ -2381,10 +3071,16 @@
           "file": "races/ashen/art/ashen.a08.normal.1-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            50,
-            165,
+            22,
+            117,
+            170,
             176
+          ],
+          "sourceCrop": [
+            753,
+            1005,
+            1024,
+            1241
           ]
         }
       ],
@@ -2428,10 +3124,16 @@
           "file": "races/ashen/art/ashen.a08.normal.2.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            46,
+            50,
+            146,
             176
+          ],
+          "sourceCrop": [
+            0,
+            1241,
+            236,
+            1536
           ]
         },
         {
@@ -2439,10 +3141,16 @@
           "file": "races/ashen/art/ashen.a08.normal.2-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            43,
-            165,
+            22,
+            47,
+            170,
             176
+          ],
+          "sourceCrop": [
+            236,
+            1241,
+            537,
+            1536
           ]
         },
         {
@@ -2450,10 +3158,16 @@
           "file": "races/ashen/art/ashen.a08.normal.2-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            43,
+            49,
+            148,
             176
+          ],
+          "sourceCrop": [
+            537,
+            1241,
+            751,
+            1536
           ]
         },
         {
@@ -2461,10 +3175,16 @@
           "file": "races/ashen/art/ashen.a08.normal.2-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            28,
+            103,
+            164,
             176
+          ],
+          "sourceCrop": [
+            751,
+            1241,
+            1024,
+            1536
           ]
         }
       ],
@@ -2508,10 +3228,16 @@
           "file": "races/ashen/art/ashen.a08.normal.3.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            45,
-            165,
+            32,
+            78,
+            159,
             176
+          ],
+          "sourceCrop": [
+            0,
+            0,
+            245,
+            280
           ]
         },
         {
@@ -2519,10 +3245,16 @@
           "file": "races/ashen/art/ashen.a08.normal.3-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            43,
-            165,
+            22,
+            89,
+            170,
             176
+          ],
+          "sourceCrop": [
+            245,
+            0,
+            528,
+            280
           ]
         },
         {
@@ -2530,10 +3262,16 @@
           "file": "races/ashen/art/ashen.a08.normal.3-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            56,
-            165,
+            35,
+            83,
+            157,
             176
+          ],
+          "sourceCrop": [
+            528,
+            0,
+            772,
+            280
           ]
         },
         {
@@ -2541,10 +3279,16 @@
           "file": "races/ashen/art/ashen.a08.normal.3-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            33,
+            114,
+            159,
             176
+          ],
+          "sourceCrop": [
+            772,
+            0,
+            1024,
+            280
           ]
         }
       ],
@@ -2588,10 +3332,16 @@
           "file": "races/ashen/art/ashen.a08.elite.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            34,
+            62,
+            157,
             176
+          ],
+          "sourceCrop": [
+            0,
+            280,
+            255,
+            528
           ]
         },
         {
@@ -2599,10 +3349,16 @@
           "file": "races/ashen/art/ashen.a08.elite-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            22,
+            70,
+            170,
             176
+          ],
+          "sourceCrop": [
+            255,
+            280,
+            530,
+            528
           ]
         },
         {
@@ -2610,10 +3366,16 @@
           "file": "races/ashen/art/ashen.a08.elite-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            31,
-            38,
-            161,
+            32,
+            69,
+            159,
             176
+          ],
+          "sourceCrop": [
+            530,
+            280,
+            781,
+            528
           ]
         },
         {
@@ -2621,10 +3383,16 @@
           "file": "races/ashen/art/ashen.a08.elite-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            33,
+            98,
+            159,
             176
+          ],
+          "sourceCrop": [
+            781,
+            280,
+            1024,
+            528
           ]
         }
       ],
@@ -2668,10 +3436,16 @@
           "file": "races/ashen/art/ashen.a09.normal.1.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            44,
+            57,
+            147,
             176
+          ],
+          "sourceCrop": [
+            0,
+            528,
+            243,
+            774
           ]
         },
         {
@@ -2679,10 +3453,16 @@
           "file": "races/ashen/art/ashen.a09.normal.1-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            22,
+            66,
+            170,
             176
+          ],
+          "sourceCrop": [
+            243,
+            528,
+            537,
+            774
           ]
         },
         {
@@ -2690,10 +3470,16 @@
           "file": "races/ashen/art/ashen.a09.normal.1-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            43,
+            55,
+            148,
             176
+          ],
+          "sourceCrop": [
+            537,
+            528,
+            769,
+            774
           ]
         },
         {
@@ -2701,10 +3487,16 @@
           "file": "races/ashen/art/ashen.a09.normal.1-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            47,
-            165,
+            33,
+            117,
+            158,
             176
+          ],
+          "sourceCrop": [
+            769,
+            528,
+            1024,
+            774
           ]
         }
       ],
@@ -2748,10 +3540,16 @@
           "file": "races/ashen/art/ashen.a09.normal.2.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            39,
-            165,
+            40,
+            56,
+            152,
             176
+          ],
+          "sourceCrop": [
+            0,
+            774,
+            240,
+            1031
           ]
         },
         {
@@ -2759,10 +3557,16 @@
           "file": "races/ashen/art/ashen.a09.normal.2-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            22,
+            65,
+            170,
             176
+          ],
+          "sourceCrop": [
+            240,
+            774,
+            531,
+            1031
           ]
         },
         {
@@ -2770,10 +3574,16 @@
           "file": "races/ashen/art/ashen.a09.normal.2-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            43,
-            165,
+            40,
+            63,
+            152,
             176
+          ],
+          "sourceCrop": [
+            531,
+            774,
+            765,
+            1031
           ]
         },
         {
@@ -2781,10 +3591,16 @@
           "file": "races/ashen/art/ashen.a09.normal.2-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            48,
-            165,
+            32,
+            111,
+            159,
             176
+          ],
+          "sourceCrop": [
+            765,
+            774,
+            1024,
+            1031
           ]
         }
       ],
@@ -2828,10 +3644,16 @@
           "file": "races/ashen/art/ashen.a09.normal.3.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            37,
+            96,
+            155,
             176
+          ],
+          "sourceCrop": [
+            0,
+            1031,
+            246,
+            1252
           ]
         },
         {
@@ -2839,10 +3661,16 @@
           "file": "races/ashen/art/ashen.a09.normal.3-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            22,
+            83,
+            170,
             176
+          ],
+          "sourceCrop": [
+            246,
+            1031,
+            534,
+            1252
           ]
         },
         {
@@ -2850,10 +3678,16 @@
           "file": "races/ashen/art/ashen.a09.normal.3-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            39,
+            90,
+            153,
             176
+          ],
+          "sourceCrop": [
+            534,
+            1031,
+            766,
+            1252
           ]
         },
         {
@@ -2861,10 +3695,16 @@
           "file": "races/ashen/art/ashen.a09.normal.3-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            42,
-            165,
+            33,
+            127,
+            159,
             176
+          ],
+          "sourceCrop": [
+            766,
+            1031,
+            1024,
+            1252
           ]
         }
       ],
@@ -2908,10 +3748,16 @@
           "file": "races/ashen/art/ashen.a09.elite.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            36,
+            67,
+            157,
             176
+          ],
+          "sourceCrop": [
+            0,
+            1252,
+            248,
+            1536
           ]
         },
         {
@@ -2919,10 +3765,16 @@
           "file": "races/ashen/art/ashen.a09.elite-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            22,
+            93,
+            170,
             176
+          ],
+          "sourceCrop": [
+            248,
+            1252,
+            541,
+            1536
           ]
         },
         {
@@ -2930,10 +3782,16 @@
           "file": "races/ashen/art/ashen.a09.elite-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            41,
+            70,
+            150,
             176
+          ],
+          "sourceCrop": [
+            541,
+            1252,
+            764,
+            1536
           ]
         },
         {
@@ -2941,10 +3799,16 @@
           "file": "races/ashen/art/ashen.a09.elite-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            40,
-            165,
+            33,
+            113,
+            159,
             176
+          ],
+          "sourceCrop": [
+            764,
+            1252,
+            1024,
+            1536
           ]
         }
       ],
@@ -2988,10 +3852,16 @@
           "file": "races/ashen/art/ashen.a10.normal.1.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            36,
+            107,
+            155,
             176
+          ],
+          "sourceCrop": [
+            0,
+            0,
+            239,
+            251
           ]
         },
         {
@@ -2999,10 +3869,16 @@
           "file": "races/ashen/art/ashen.a10.normal.1-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            65,
-            165,
+            22,
+            101,
+            170,
             176
+          ],
+          "sourceCrop": [
+            239,
+            0,
+            527,
+            251
           ]
         },
         {
@@ -3010,10 +3886,16 @@
           "file": "races/ashen/art/ashen.a10.normal.1-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            57,
-            165,
+            43,
+            82,
+            149,
             176
+          ],
+          "sourceCrop": [
+            527,
+            0,
+            763,
+            251
           ]
         },
         {
@@ -3021,10 +3903,16 @@
           "file": "races/ashen/art/ashen.a10.normal.1-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            76,
-            165,
+            35,
+            130,
+            157,
             176
+          ],
+          "sourceCrop": [
+            763,
+            0,
+            1024,
+            251
           ]
         }
       ],
@@ -3068,10 +3956,16 @@
           "file": "races/ashen/art/ashen.a10.normal.2.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            31,
+            73,
+            161,
             176
+          ],
+          "sourceCrop": [
+            0,
+            251,
+            247,
+            472
           ]
         },
         {
@@ -3079,10 +3973,16 @@
           "file": "races/ashen/art/ashen.a10.normal.2-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            40,
-            165,
+            22,
+            89,
+            170,
             176
+          ],
+          "sourceCrop": [
+            247,
+            251,
+            523,
+            472
           ]
         },
         {
@@ -3090,10 +3990,16 @@
           "file": "races/ashen/art/ashen.a10.normal.2-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            32,
+            73,
+            160,
             176
+          ],
+          "sourceCrop": [
+            523,
+            251,
+            766,
+            472
           ]
         },
         {
@@ -3101,10 +4007,16 @@
           "file": "races/ashen/art/ashen.a10.normal.2-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            25,
+            105,
+            166,
             176
+          ],
+          "sourceCrop": [
+            766,
+            251,
+            1024,
+            472
           ]
         }
       ],
@@ -3148,10 +4060,16 @@
           "file": "races/ashen/art/ashen.a10.normal.3.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            58,
+            69,
+            133,
             176
+          ],
+          "sourceCrop": [
+            0,
+            472,
+            218,
+            731
           ]
         },
         {
@@ -3159,10 +4077,16 @@
           "file": "races/ashen/art/ashen.a10.normal.3-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            23,
+            97,
+            170,
             176
+          ],
+          "sourceCrop": [
+            218,
+            472,
+            526,
+            731
           ]
         },
         {
@@ -3170,10 +4094,16 @@
           "file": "races/ashen/art/ashen.a10.normal.3-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            41,
+            80,
+            151,
             176
+          ],
+          "sourceCrop": [
+            526,
+            472,
+            753,
+            731
           ]
         },
         {
@@ -3181,10 +4111,16 @@
           "file": "races/ashen/art/ashen.a10.normal.3-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            43,
-            165,
+            30,
+            130,
+            161,
             176
+          ],
+          "sourceCrop": [
+            753,
+            472,
+            1024,
+            731
           ]
         }
       ],
@@ -3228,10 +4164,16 @@
           "file": "races/ashen/art/ashen.a10.elite.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            41,
+            63,
+            150,
             176
+          ],
+          "sourceCrop": [
+            0,
+            731,
+            232,
+            993
           ]
         },
         {
@@ -3239,10 +4181,16 @@
           "file": "races/ashen/art/ashen.a10.elite-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            23,
+            61,
+            170,
             176
+          ],
+          "sourceCrop": [
+            232,
+            731,
+            539,
+            993
           ]
         },
         {
@@ -3250,10 +4198,16 @@
           "file": "races/ashen/art/ashen.a10.elite-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            27,
-            38,
-            165,
+            47,
+            72,
+            144,
             176
+          ],
+          "sourceCrop": [
+            539,
+            731,
+            752,
+            993
           ]
         },
         {
@@ -3261,10 +4215,16 @@
           "file": "races/ashen/art/ashen.a10.elite-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            27,
-            46,
-            165,
+            32,
+            110,
+            160,
             176
+          ],
+          "sourceCrop": [
+            752,
+            731,
+            1024,
+            993
           ]
         }
       ],
@@ -3308,10 +4268,16 @@
           "file": "races/ashen/art/ashen.a04.boss.png",
           "durationMs": 160,
           "alphaBBox": [
-            18,
-            20,
-            174,
+            25,
+            43,
+            167,
             176
+          ],
+          "sourceCrop": [
+            0,
+            993,
+            246,
+            1255
           ]
         },
         {
@@ -3319,10 +4285,16 @@
           "file": "races/ashen/art/ashen.a04.boss-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            18,
-            20,
-            174,
+            11,
+            46,
+            181,
             176
+          ],
+          "sourceCrop": [
+            246,
+            993,
+            540,
+            1255
           ]
         },
         {
@@ -3330,10 +4302,16 @@
           "file": "races/ashen/art/ashen.a04.boss-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            18,
-            38,
-            173,
+            37,
+            45,
+            155,
             176
+          ],
+          "sourceCrop": [
+            540,
+            993,
+            752,
+            1255
           ]
         },
         {
@@ -3342,9 +4320,15 @@
           "durationMs": 650,
           "alphaBBox": [
             18,
-            20,
+            75,
             174,
             176
+          ],
+          "sourceCrop": [
+            752,
+            993,
+            1024,
+            1255
           ]
         }
       ],
@@ -3388,10 +4372,16 @@
           "file": "races/ashen/art/ashen.a07.boss.png",
           "durationMs": 160,
           "alphaBBox": [
-            18,
-            20,
-            174,
+            26,
+            31,
+            165,
             176
+          ],
+          "sourceCrop": [
+            0,
+            0,
+            590,
+            644
           ]
         },
         {
@@ -3399,10 +4389,16 @@
           "file": "races/ashen/art/ashen.a07.boss-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            18,
-            20,
-            174,
+            11,
+            38,
+            181,
             176
+          ],
+          "sourceCrop": [
+            590,
+            0,
+            1264,
+            644
           ]
         },
         {
@@ -3410,10 +4406,16 @@
           "file": "races/ashen/art/ashen.a07.boss-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            18,
-            20,
-            174,
+            26,
+            55,
+            166,
             176
+          ],
+          "sourceCrop": [
+            0,
+            644,
+            633,
+            1244
           ]
         },
         {
@@ -3421,10 +4423,16 @@
           "file": "races/ashen/art/ashen.a07.boss-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            18,
-            52,
-            174,
+            20,
+            99,
+            172,
             176
+          ],
+          "sourceCrop": [
+            633,
+            644,
+            1264,
+            1244
           ]
         }
       ],
@@ -3468,10 +4476,16 @@
           "file": "races/ashen/art/ashen.a10.boss.png",
           "durationMs": 160,
           "alphaBBox": [
-            18,
-            20,
-            174,
+            16,
+            44,
+            175,
             176
+          ],
+          "sourceCrop": [
+            0,
+            0,
+            623,
+            632
           ]
         },
         {
@@ -3479,10 +4493,16 @@
           "file": "races/ashen/art/ashen.a10.boss-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            18,
-            20,
-            174,
+            11,
+            43,
+            181,
             176
+          ],
+          "sourceCrop": [
+            623,
+            0,
+            1254,
+            632
           ]
         },
         {
@@ -3490,10 +4510,16 @@
           "file": "races/ashen/art/ashen.a10.boss-hurt.png",
           "durationMs": 160,
           "alphaBBox": [
-            18,
             20,
-            174,
+            55,
+            171,
             176
+          ],
+          "sourceCrop": [
+            0,
+            632,
+            618,
+            1254
           ]
         },
         {
@@ -3501,10 +4527,16 @@
           "file": "races/ashen/art/ashen.a10.boss-death.png",
           "durationMs": 650,
           "alphaBBox": [
-            18,
-            20,
-            174,
+            12,
+            97,
+            180,
             176
+          ],
+          "sourceCrop": [
+            618,
+            632,
+            1254,
+            1254
           ]
         }
       ],
@@ -4222,10 +5254,10 @@
           "file": "races/ashen/art/hero-strike.png",
           "durationMs": 160,
           "alphaBBox": [
-            15,
-            23,
-            176,
-            173
+            10,
+            74,
+            182,
+            176
           ]
         },
         {
