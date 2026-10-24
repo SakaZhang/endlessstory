@@ -778,25 +778,26 @@ export const HUMAN_LEGENDARIES=[
     "baseVariant": "axe_balanced",
     "weaponType": "greatsword",
     "originRace": "human",
-    "exclusiveId": "human-fourth-oath",
-    "description": "每第四次实际主动施放强化该次首个物理命中，追加0.55攻击系数；多段不重复计数。",
+    "exclusiveId": "human-duel-oath",
+    "description": "旧王领的护卫曾将折断的剑尖重新锻入剑身。明亮的接缝没有被磨去，握住它的人会记得自己为何出剑。",
     "fixedEffect": {
-      "type": "fourth-active-physical",
-      "every": 4,
-      "coefficient": 0.55,
-      "exclude": [
-        "dot",
-        "counter",
-        "poison",
-        "equipmentProc"
-      ]
+      "type": "duel-oath-mark",
+      "markDurationMs": 6000,
+      "minimumDelayMs": 2200,
+      "cooldownMs": 10000,
+      "coefficient": 0.8,
+      "bleedCoefficient": 0.08,
+      "bleedTickMs": 2000,
+      "bleedDurationMs": 6000
     },
     "bossPool": [
       "human.a03.boss",
       "human.a06.boss",
       "human.a09.boss"
     ],
-    "randomNormalAffixes": 4
+    "randomNormalAffixes": 4,
+    "exclusiveName": "决斗誓痕",
+    "exclusiveDescription": "成功的物理技能命中留下6秒誓痕；另一施放在至少2.2秒后命中同一目标时，引爆0.8倍攻击物理伤害并附加每2秒0.08倍攻击的流血，持续6秒。触发后冷却10秒，多段同次施放不触发。"
   },
   {
     "id": "human-last-banner",
@@ -805,25 +806,25 @@ export const HUMAN_LEGENDARIES=[
     "slot": "amulet",
     "baseVariant": "amulet_survival",
     "originRace": "human",
-    "exclusiveId": "human-banner-sustain",
-    "description": "技能来源护盾提高15%，技能直接及持续治疗提高10%；不影响药剂和吸血。",
+    "exclusiveId": "human-last-stand",
+    "description": "染成深蓝的旧军旗被裁成细带，仔细缠在银色坠托上。线脚虽旧，金色纹章仍在风中挺直。",
     "fixedEffect": {
-      "type": "skill-sustain",
-      "shieldMultiplier": 1.15,
-      "healingMultiplier": 1.1,
-      "sourceKind": "skill",
-      "exclude": [
-        "potion",
-        "lifesteal",
-        "equipment"
-      ]
+      "type": "low-hp-last-stand",
+      "threshold": 0.3,
+      "shieldFraction": 0.18,
+      "durationMs": 6000,
+      "healFractionPerTick": 0.03,
+      "tickIntervalMs": 2000,
+      "cooldownMs": 30000
     },
     "bossPool": [
       "human.a03.boss",
       "human.a06.boss",
       "human.a09.boss"
     ],
-    "randomNormalAffixes": 4
+    "randomNormalAffixes": 4,
+    "exclusiveName": "最后军旗",
+    "exclusiveDescription": "直接敌伤将生命从30%以上压至30%或以下且仍存活时，获得18%最大生命护盾6秒，并每2秒恢复3%最大生命，共3次。冷却30秒，不会复活。"
   }
 ];
 export const HUMAN_LEGENDARY_DROP={race:"human",totalProbability:.05,splitWeights:[1,1],ownRaceBossOnly:true};
