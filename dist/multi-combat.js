@@ -276,7 +276,7 @@ function typedEnemyReaction(u,hpLost,st,now,resolveElementDamage){
 }
 
 function racialLegendEvent(s,e,event,{st,resolveElementDamage,logs=[],castId=e.lastCast?.id,skillId=e.lastCast?.skillId,weaponType,branch,targetId=e.targetId}={}){
- const context={castId,skillId,weaponType:weaponType??s.inventory.find(i=>i.id===s.equip.weapon)?.weaponType,branch:branch??getSkillMetadata(skillId)?.branch,maxHp:st.hp,stats:st,targetId,activeSkillIds:s.skillTree?.presets?.[s.skillTree.selectedPreset]?.active??[],cooldowns:e.treeSkillCooldowns??{}};
+ const context={castId,skillId,weaponType:weaponType??s.inventory?.find(i=>i.id===s.equip?.weapon)?.weaponType,branch:branch??getSkillMetadata(skillId)?.branch,maxHp:st.hp,stats:st,targetId,activeSkillIds:s.skillTree?.presets?.[s.skillTree.selectedPreset]?.active??[],cooldowns:e.treeSkillCooldowns??{}};
  const commands=dispatchRacialLegendaryEvent(s,event,context);let index=0;
  for(const c of commands){const procId=(c.procId??castId??e.id)+':legend:'+c.ownerItemId+':'+index++;
   if(c.type==='stealShield'){const target=e.enemies.find(u=>u.id===c.targetId&&u.hp>0);if(!target)continue;const amount=Math.min(target.shield,c.amount);target.shield-=amount;if(amount>0){e.playerShieldLayers??=createPlayerShieldLayers(e.treeCombatClock??0);const grant=grantPlayerShieldLayer(e.playerShieldLayers,{source:'legendary:'+c.ownerItemId,ownerItemId:c.ownerItemId,capacity:amount+(st.shieldBonus??0),durationMs:c.durationMs,clock:e.playerShieldLayers.clock,hp:e.heroHp});if(grant?.applied)e.playerShieldLayers=grant.state;emitCombatDisplay(e,{kind:'shield',sourceId:'hero',targetId:target.id,skillId:c.legendaryId,shieldDelta:-amount});emitCombatDisplay(e,{kind:'shield',skillId:c.legendaryId,shieldDelta:amount+(st.shieldBonus??0)});}}
