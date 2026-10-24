@@ -47,3 +47,32 @@
 @media(max-width:640px){.skillTreeEditor .treeBranches{grid-template-columns:minmax(0,1fr)}.skillTreeEditor .treeBranch-shared .treeNodes{grid-template-columns:repeat(2,minmax(0,1fr))}.skillTreeEditor .treeBranch{padding:8px}.skillTreeEditor .treeBranch:not(.treeBranch-shared) .treeNodes{grid-template-columns:repeat(2,minmax(0,1fr))}.skillTreeEditor .treeBranch:not(.treeBranch-shared) .treeNodeCard:first-child{grid-column:1/-1}.skillTreeEditor header{gap:8px}.skillTreeEditor header h2{font-size:16px}.skillTreeEditor header .primary{min-height:40px}}
 @media(max-width:380px){.skillTreeEditor .treeBranch-shared .treeNodes,.skillTreeEditor .treeBranch:not(.treeBranch-shared) .treeNodes{grid-template-columns:minmax(0,1fr)}.treeSlotSection-passive{grid-template-columns:minmax(0,1fr)}}
 .treeStatusBar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.treeStatusBar .treeStatus{flex:1;min-width:180px}.treeStatusBar>button{min-height:40px;font-size:12px}
+
+/* Expanded DAG tree. Geometry is shared with native proof/tests; no clipped nodes. */
+.skillTreeEditor .treeGraphToolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:14px 0;color:#b6c8d5;font-size:12px}
+.skillTreeEditor .treeGraphToolbar select{background:#142333;color:#ead4a7;padding:8px;max-width:100%}
+.skillTreeEditor .treeGraphViewport{overflow:auto;max-width:100%;max-height:980px;overscroll-behavior:contain;border:1px solid #4c6577;scrollbar-color:#a28a5d #172735}
+.skillTreeEditor .treeBranches{display:grid;grid-template-columns:repeat(3,504px);width:max-content;gap:12px;margin:0;padding:12px;align-items:start}
+.skillTreeEditor .treeBranches.isFiltered{grid-template-columns:504px}
+.skillTreeEditor .treeBranch{padding:10px;width:504px;box-sizing:border-box}
+.skillTreeEditor .treeBranch-shared{grid-column:2}
+.skillTreeEditor .treeBranches.isFiltered .treeBranch-shared{grid-column:1}
+.skillTreeEditor .treeBranch:not(.treeBranch-shared){grid-row:2}
+.skillTreeEditor .treeBranches.isFiltered .treeBranch{grid-row:1}
+.skillTreeEditor .treeBranch .treeNodes{display:block;position:relative;margin:0;max-width:none}
+.skillTreeEditor .treeEdges{position:absolute;inset:0;pointer-events:none;overflow:visible}
+.skillTreeEditor .treeEdges path{fill:none;stroke:#5e6b78;stroke-width:2;stroke-dasharray:4 4}
+.skillTreeEditor .treeEdges path.available{stroke:#77b5bd;stroke-dasharray:none}
+.skillTreeEditor .treeEdges path.learned{stroke:#e5bd6c;stroke-width:3;stroke-dasharray:none}
+.skillTreeEditor .treeNodeCard{position:absolute;width:140px;height:150px;box-sizing:border-box;background:#172a38;border:0}
+.skillTreeEditor .treeNodeState{display:block;font-size:11px;line-height:18px;height:18px;color:#c4d3dd;text-align:center}
+.skillTreeEditor .treeNodeCard .treeNode{display:flex;flex-direction:column;justify-content:center;gap:2px;min-height:108px;height:108px;padding:5px;width:140px;border:2px solid #596575;box-sizing:border-box}
+.skillTreeEditor .treeNode.available{border-color:#78bac2;background:#1e3b46}
+.skillTreeEditor .treeNode.learned{border-color:#e5bd6c;background:#3c3426}
+.skillTreeEditor .treeNode.locked{background:#1c2935}
+.skillTreeEditor .treeNodeArt{width:32px;height:32px;align-self:center}
+.skillTreeEditor .treeNode strong{font-size:12px;line-height:17px}
+.skillTreeEditor .treeNode small{font-size:10px;line-height:14px}
+.skillTreeEditor .treeInspect{font-size:11px;width:140px;height:24px;padding:0;border:1px solid #4c6577;background:#122332;color:#bdd0dc}
+.skillTreeEditor .treeSelection{padding:12px;border:1px solid #a68a53;background:#1e2e39;margin:12px 0;line-height:1.7}
+@media(max-width:640px){.skillTreeEditor .treeGraphViewport{max-height:720px}.skillTreeEditor .treeGraphToolbar{font-size:11px}.skillTreeEditor .treeBranches{padding:6px}.skillTreeEditor .treeSelection{padding:8px}}
