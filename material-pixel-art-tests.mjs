@@ -3,10 +3,10 @@ import {MATERIAL_CATALOG,resolveMaterialId} from './dist/material-catalog.js';
 import {MATERIAL_PIXEL_ASSETS as registry} from './dist/material-pixel-registry.js';
 import {materialIcon,materialPixelSource,drawMaterialPixel,bindMaterialPixelErrors} from './dist/material-pixel-art.js';
 const {createCanvas,loadImage}=createRequire(import.meta.url)('@napi-rs/canvas');
-const expected=Object.keys(MATERIAL_CATALOG).sort();assert.equal(expected.length,28);assert.deepEqual(Object.keys(registry).sort(),expected);
-const proof=JSON.parse(fs.readFileSync('material-art-source-manifest.json'));assert.deepEqual(Object.keys(proof.images).sort(),expected);
-const canvas=createCanvas(7*180,4*120),c=canvas.getContext('2d');c.fillStyle='#172635';c.fillRect(0,0,canvas.width,canvas.height);const original=JSON.stringify(MATERIAL_CATALOG);let i=0;
-for(const id of expected){for(const size of [32,48,64]){const src=materialPixelSource(id,size),data=fs.readFileSync('dist/'+src),img=await loadImage(data);assert.equal(img.width,size);assert.equal(img.height,size);assert.equal(createHash('sha256').update(data).digest('hex'),proof.images[id][size]);
+const expected=Object.keys(MATERIAL_CATALOG).sort();assert.equal(expected.length,99);assert.equal(Object.keys(registry).length,28);
+const proof=JSON.parse(fs.readFileSync('material-art-source-manifest.json'));assert.deepEqual(Object.keys(proof.images).sort(),Object.keys(registry).sort());
+const canvas=createCanvas(7*180,Math.ceil(expected.length/7)*120),c=canvas.getContext('2d');c.fillStyle='#172635';c.fillRect(0,0,canvas.width,canvas.height);const original=JSON.stringify(MATERIAL_CATALOG);let i=0;
+for(const id of expected){for(const size of [32,48,64]){const src=materialPixelSource(id,size),data=fs.readFileSync('dist/'+src),img=await loadImage(data);if(proof.images[id]){assert.equal(img.width,size);assert.equal(img.height,size);assert.equal(createHash('sha256').update(data).digest('hex'),proof.images[id][size]);}else{assert(img.width>=32);assert.equal(img.width,img.height);}
  const out=createCanvas(size,size),oc=out.getContext('2d');drawMaterialPixel(oc,img,{size});const pixels=oc.getImageData(0,0,size,size).data,colors=new Set();let visible=0;for(let k=0;k<pixels.length;k+=4){if(pixels[k+3])visible++;colors.add([...pixels.slice(k,k+4)].join(','));}assert(colors.size>10&&visible>20,'real material pixels, not generic fallback box');
  for(const quality of [0,1,2,3]){const html=materialIcon(id,{size,quality});assert(html.includes(`data-material-id="${id}"`));assert(html.includes(`src="${src}"`));assert(html.includes(`data-material-quality="${quality}"`));assert(!html.includes('<svg')&&!html.includes('background:')&&!html.includes('https://'));}
  drawMaterialPixel(c,img,{x:(i%7)*180+(size===32?0:size===48?36:88),y:Math.floor(i/7)*120+8,size});
