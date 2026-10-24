@@ -16,7 +16,15 @@ export function liveHeroWeaponType(state){
  const item=state?.inventory?.find(it=>it.id===state?.equip?.weapon);
  return item?.slot==='weapon'?item.weaponType??null:null;
 }
-const heroSpriteFor=(weapon,manifest,race='dwarf')=>manifest?.raceHeroWeaponSprites?.[race]?.[weapon]??manifest?.raceHeroSprites?.[race]??({...LIVE_HERO_SPRITES,...(manifest?.heroWeaponSprites??manifest?.heroSprites??{})})[weapon]??(manifest?.sprites?.['hero-neutral']?'hero-neutral':null);
+// Foreign gear keeps its gameplay stats, but only explicit same-race art may represent it.
+export function liveHeroSpriteFor(weapon,manifest,race='dwarf'){
+ const native=manifest?.raceHeroWeaponSprites?.[race]?.[weapon];
+ if(native)return native;
+ if(race!=='dwarf')return manifest?.raceHeroNeutralSprites?.[race]??null;
+ return ({...LIVE_HERO_SPRITES,...(manifest?.heroWeaponSprites??manifest?.heroSprites??{})})[weapon]??(manifest?.sprites?.['hero-neutral']?'hero-neutral':null);
+}
+const heroSpriteFor=liveHeroSpriteFor;
+const neutralHero=(key,manifest)=>key==='hero-neutral'||Object.values(manifest?.raceHeroNeutralSprites??{}).includes(key);
 // These placeholders are intentionally not legacy art or substitute equipment.
 function drawPixelNotice(canvas,label,{width=480,height=270}={}){if(!canvas?.getContext)return false;canvas.width=width;canvas.height=height;const c=canvas.getContext('2d');c.imageSmoothingEnabled=false;c.fillStyle='#132232';c.fillRect(0,0,width,height);c.strokeStyle='#516b80';c.lineWidth=2;c.strokeRect(6,6,width-12,height-12);c.fillStyle='#e7cb8d';c.font='12px sans-serif';c.textAlign='center';c.fillText(label,width/2,height/2,Math.max(24,width-20));return true;}
 export function drawLiveHeroPortrait(canvas,state,{manifest,images,time=0}={}){
@@ -82,7 +90,7 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
   const sprites=[heroSprite,...new Set(rows.map(r=>r.sprite))];
   const files=[...backgrounds,...sprites.flatMap(key=>manifest.sprites?.[key]?.frames??[])];
   if(sprites.some(key=>!manifest.sprites?.[key]?.animations?.idle?.length)||files.some(f=>!images.get(f.file)))return {...base,reason:'asset-frames-missing',label:'像素帧尚未完整加载',coverage:rows};
-  return {...base,mode:'ready',reason:null,label:snapshot.campRace?RACIAL_CAMPS[snapshot.campRace]:snapshot.idle?'野外待机':'实时像素战斗',campRace:snapshot.campRace,heroAppearance:heroSprite==='hero-neutral'?'neutral-idle':'equipped-weapon',heroAppearanceNote:heroSprite==='hero-neutral'?'中立待机外观 · 当前武器外观未覆盖':'',backgroundIds:backgrounds.map(bg=>bg.id),coverage:rows};
+  return {...base,mode:'ready',reason:null,label:snapshot.campRace?RACIAL_CAMPS[snapshot.campRace]:snapshot.idle?'野外待机':'实时像素战斗',campRace:snapshot.campRace,heroAppearance:neutralHero(heroSprite,manifest)?heroSprite==='hero-neutral'?'neutral-idle':'neutral-generic':'equipped-weapon',heroAppearanceNote:neutralHero(heroSprite,manifest)?'中立外观 · 当前武器外观未覆盖':'',backgroundIds:backgrounds.map(bg=>bg.id),coverage:rows};
  };
  function rebuildPositions(){
   const units=snapshot.encounter.enemies;for(const u of units)if(!slots.has(u.id))slots.set(u.id,slots.size);
@@ -170,7 +178,7 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
    const drawPositions=heroUnavailable?Object.fromEntries(Object.entries(positions).filter(([id])=>id!=='hero')):positions;
    const actorFrames={};for(const u of [{id:'hero',hp:snapshot.encounter.heroHp},...snapshot.encounter.enemies]){if(u.hp>0||!drawPositions[u.id])continue;const sprite=manifest.sprites[positions[u.id].sprite],frames=sprite.animations.death;if(frames?.length){const start=deathStarts.get(u.id);actorFrames[u.id]=start===undefined?frames.at(-1):displayTime<start?sprite.animations.idle[0]:frames[Math.min(frames.length-1,Math.floor((displayTime-start)/110))];}}
    drawBattleSliceCanvas(canvas,{manifest:{...manifest,areaBackgrounds:undefined,backgrounds:liveSceneBackgrounds(snapshot,manifest)},images,actorFrames,encounter:{...snapshot.encounter,enemies:snapshot.encounter.enemies.map(u=>({...u,max:0}))},positions:drawPositions,animations,time:displayTime,floats:presentation.floats,heroMaxHp:0});
-   const c=canvas.getContext('2d');const bars=liveBattleBars(snapshot.encounter,drawPositions,animations,displayTime,{heroMaxHp,manifest});drawBattleSliceBars(c,bars);if(heroUnavailable||positions.hero?.sprite==='hero-neutral'&&(metadata.hero?.weaponType||snapshot.encounter.heroHp<=0)){c.fillStyle='#142334ee';c.fillRect(20,210,160,26);c.fillStyle='#e7cb8d';c.font='12px sans-serif';c.textAlign='center';c.fillText(heroUnavailable?'角色外观暂不可用':snapshot.encounter.heroHp<=0?'已倒下 · 中立外观':'中立待机 · 未覆盖武器外观',100,227);}const target=snapshot.encounter.targetId;
+   const c=canvas.getContext('2d');const bars=liveBattleBars(snapshot.encounter,drawPositions,animations,displayTime,{heroMaxHp,manifest});drawBattleSliceBars(c,bars);if(heroUnavailable||neutralHero(positions.hero?.sprite,manifest)&&(metadata.hero?.weaponType||positions.hero?.sprite==='hero-neutral'&&snapshot.encounter.heroHp<=0)){c.fillStyle='#142334ee';c.fillRect(20,210,160,26);c.fillStyle='#e7cb8d';c.font='12px sans-serif';c.textAlign='center';c.fillText(heroUnavailable?'角色外观暂不可用':snapshot.encounter.heroHp<=0?'已倒下 · 中立外观':positions.hero?.sprite==='hero-neutral'?'中立待机 · 未覆盖武器外观':'中立外观 · 未覆盖武器外观',100,227);}const target=snapshot.encounter.targetId;
    for(const u of snapshot.units){const p=positions[u.id];if(!p||u.hp<=0)continue;const x=presentationActorX(p,animations.get(u.id),displayTime);if(u.id===target){c.fillStyle='#e4c587';c.fillRect(Math.round(x-14),p.y+5,28,2);c.fillRect(Math.round(x-17),p.y+2,3,5);c.fillRect(Math.round(x+14),p.y+2,3,5);const top=(bars.find(b=>b.id===u.id)?.y??p.y-70)-4;c.fillRect(Math.round(x-21),top,8,2);c.fillRect(Math.round(x-21),top,2,8);c.fillRect(Math.round(x+13),top,8,2);c.fillRect(Math.round(x+19),top,2,8);}
     const effects=readEnemyEffectRows(snapshot.encounter,u.id),baseY=(bars.find(b=>b.id===u.id)?.y??p.y-80)-9;
     effects.slice(0,4).forEach((effect,i)=>{c.fillStyle=effect.key==='poison'?'#b7dc70':effect.key==='burn'?'#e69b57':'#b9c8d0';c.fillRect(Math.round(x-12+i*7),baseY,5,5);c.fillStyle='#25333a';c.fillRect(Math.round(x-11+i*7),baseY+2,3,1);if(effect.layers){c.font='bold 7px monospace';c.fillStyle='#e7f5b2';c.fillText(String(effect.layers),Math.round(x-12+i*7),baseY-1);}});

@@ -1,3 +1,4 @@
+import {HERO_NEUTRAL} from './art-neutral.js';
 import {createLegendaryState,validLegendaryState,reduceLegendaryEvent} from './legendary.js';
 export {createLegendaryState,validLegendaryState,reduceLegendaryEvent};
 import {HUMAN_AREAS,HUMAN_MONSTERS,HUMAN_PARAMETERS,HUMAN_MATERIAL_POOLS} from './content.js';
@@ -10,4 +11,4 @@ export {planSkill,modifySkillPlan};
 export function modifyLegendaryPlan(plan){return plan?structuredClone(plan):null;}
 export const HUMAN_TRADE_TRAIT={id:'human-fair-bargain',name:'商路熟稔',discount:.10,rounding:'ceil',minimumPositiveCost:1,eligibleOperations:['merchant-buy','recipe-buy','forge','reforge','enhance','fusion','potion-craft'],exclude:['sell','rewards','material-quantity','item-quantity'],status:'candidate-root-calibration'};
 export function humanGoldCost(baseCost,{race='human',operation='forge'}={}){if(!Number.isSafeInteger(baseCost)||baseCost<0)return null;if(baseCost===0)return 0;return race==='human'&&HUMAN_TRADE_TRAIT.eligibleOperations.includes(operation)?Math.max(1,Math.ceil(baseCost*(1-HUMAN_TRADE_TRAIT.discount))):baseCost;}
-export const RACE_PACK={planSkill,modifySkillPlan,modifyLegendaryPlan,humanGoldCost,createLegendaryState,validLegendaryState,reduceLegendaryEvent,id:'human',name:'人族',heroName:'王领旅卫',weapons:['sword_shield','greatsword'],areas:HUMAN_AREAS,monsters:HUMAN_MONSTERS,parameters:HUMAN_PARAMETERS,materials:HUMAN_MATERIALS,materialPools:HUMAN_MATERIAL_POOLS,equipment:HUMAN_EQUIPMENT,sets:HUMAN_SETS,legendaries:HUMAN_LEGENDARIES,tree:HUMAN_TREE,skills:HUMAN_SKILLS,passives:HUMAN_PASSIVES,art:HUMAN_ART,trait:HUMAN_TRADE_TRAIT};
+export const RACE_PACK={planSkill,modifySkillPlan,modifyLegendaryPlan,humanGoldCost,createLegendaryState,validLegendaryState,reduceLegendaryEvent,id:'human',name:'人族',heroName:'王领旅卫',weapons:['sword_shield','greatsword'],areas:HUMAN_AREAS,monsters:HUMAN_MONSTERS,parameters:HUMAN_PARAMETERS,materials:HUMAN_MATERIALS,materialPools:HUMAN_MATERIAL_POOLS,equipment:HUMAN_EQUIPMENT,sets:HUMAN_SETS,legendaries:HUMAN_LEGENDARIES,tree:HUMAN_TREE,skills:HUMAN_SKILLS,passives:HUMAN_PASSIVES,art:{...HUMAN_ART,heroNeutral:HERO_NEUTRAL},trait:HUMAN_TRADE_TRAIT};

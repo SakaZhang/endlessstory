@@ -1,3 +1,4 @@
+import {HERO_NEUTRAL} from './art-neutral.js';
 import {createLegendaryState,validLegendaryState,reduceLegendaryEvent} from './legends.js';
 import {areas} from './areas.js';
 import {monsters} from './monsters.js';
@@ -10,4 +11,4 @@ import {art} from './art.js';
 export {planSkill,modifySkillPlan,createLegendaryState,validLegendaryState,reduceLegendaryEvent};
 import {createRuntime,validRuntime,applyReactiveEffect,onEnemyAction} from './runtime.js';
 export {createRuntime,validRuntime,applyReactiveEffect,onEnemyAction};
-export const RACE_PACK={createLegendaryState,validLegendaryState,reduceLegendaryEvent,planSkill,modifySkillPlan,createRuntime,validRuntime,applyReactiveEffect,onEnemyAction,id:'goblin',name:'裂穴诸部',heroName:'部族斥候',weapons:['dagger','sword'],areas,monsters,parameters,materials,materialPools,equipment,sets,legendaries,tree,skills,passives,art,innate:{id:'goblin-material-sense',name:'拾荒直觉',description:'常规渠道取得常规材料时，候选10%概率额外取得同来源常规材料1份；不改变品质，不作用于特殊、剧情、宝石、果实或印记。',regularCommonExtraChance:.1,extraQuantity:1,qualityPolicy:'normal',excludedChannels:['special','story','gem','fruit','mark'],excludeUnique:true,excludeStory:true}};
+export const RACE_PACK={createLegendaryState,validLegendaryState,reduceLegendaryEvent,planSkill,modifySkillPlan,createRuntime,validRuntime,applyReactiveEffect,onEnemyAction,id:'goblin',name:'裂穴诸部',heroName:'部族斥候',weapons:['dagger','sword'],areas,monsters,parameters,materials,materialPools,equipment,sets,legendaries,tree,skills,passives,art:{...art,heroNeutral:HERO_NEUTRAL},innate:{id:'goblin-material-sense',name:'拾荒直觉',description:'常规渠道取得常规材料时，候选10%概率额外取得同来源常规材料1份；不改变品质，不作用于特殊、剧情、宝石、果实或印记。',regularCommonExtraChance:.1,extraQuantity:1,qualityPolicy:'normal',excludedChannels:['special','story','gem','fruit','mark'],excludeUnique:true,excludeStory:true}};
