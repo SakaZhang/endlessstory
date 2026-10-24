@@ -6,7 +6,7 @@
   "legendaryRuntime": {
     "version": 1,
     "byId": {
-      "mvm5pqhp-9-yxuz9": {
+      "ml4kasqo-9-xdcj5": {
         "legendaryId": "elf-sixfold-heartwood",
         "clock": 33000,
         "state": {
@@ -19,7 +19,7 @@
           "lastCastId": "m2-10000-11:tree:30"
         }
       },
-      "mvm5pqhq-a-vl7fl": {
+      "ml4kasqo-a-hjmfy": {
         "legendaryId": "elf-dew-covenant",
         "clock": 33000,
         "state": {
@@ -28,7 +28,7 @@
       }
     }
   },
-  "hp": 3161,
+  "hp": 3214,
   "cooldowns": {
     "elf.clear_moon": 0,
     "elf.sixfold_chorus": 11,
