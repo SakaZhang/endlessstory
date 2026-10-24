@@ -1833,7 +1833,8 @@ export const monsters={
 };
 export const parameters={
   "id": "ashen-a01-a10-candidate-v1",
-  "reviewed": true,
+  "reviewed": false,
+  "testOnly": true,
   "status": "candidate-needs-four-hour-calibration",
   "fieldGroupChance": 0.04,
   "clearRewards": {
