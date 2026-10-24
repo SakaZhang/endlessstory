@@ -1,0 +1,1136 @@
+{
+  "candidate": true,
+  "method": "Levels40/70/100 matchingA04/A07/A10 fields. Both Goblin dagger/sword shared identically with Dwarf control (cross-race equip allowed, generic Dwarf weapon branch). Frozen matched-gear-ashen-baseline.json first8 armor/jewelry withGoblinweapon template substitution,levelrecalculationthroughproductionbudget.Identical8 quality2 +0 gear perprofile, midpoint atk/armor/crit, no sets/specials/divine/passives/talents. 5000quality0healing auto40%/10s sharedCD, no buffs. Seeds5531gear/2026fresh/331combat. Legal prerequisite closure;4offensive baseline,balancedshield/heal,dedicatedsustain.4h actual scheduler/HP telemetry; not arbitrary offline multiplier. Dwarf canonicalhammer baseline provided separately by Ashen comparator.",
+  "results": [
+    {
+      "race": "goblin",
+      "style": "noSustain",
+      "drain": false,
+      "level": 100,
+      "area": 10,
+      "weapon": "sword",
+      "skills": [
+        "goblin.venom_cut",
+        "goblin.opening_cut",
+        "goblin.finish_cut",
+        "goblin.tangle_cut"
+      ],
+      "avgFightSeconds": 12.539575289575291,
+      "equipment": [
+        {
+          "slot": "weapon",
+          "weaponType": "sword",
+          "baseVariant": "sword_balanced",
+          "level": 100,
+          "rarity": 2,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 6,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "armor",
+              "value": 5,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 2,
+                "max": 7
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 11,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": null
+        },
+        {
+          "slot": "helm",
+          "weaponType": null,
+          "baseVariant": "helm_vitality",
+          "level": 100,
+          "rarity": 2,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 6,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "armor",
+              "value": 5,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 2,
+                "max": 7
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 11,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": null
+        },
+        {
+          "slot": "armor",
+          "weaponType": null,
+          "baseVariant": "armor_armor",
+          "level": 100,
+          "rarity": 2,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 6,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "armor",
+              "value": 5,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 2,
+                "max": 7
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 11,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": null
+        },
+        {
+          "slot": "gloves",
+          "weaponType": null,
+          "baseVariant": "gloves_vitality",
+          "level": 100,
+          "rarity": 2,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 6,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "armor",
+              "value": 5,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 2,
+                "max": 7
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 11,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": null
+        },
+        {
+          "slot": "boots",
+          "weaponType": null,
+          "baseVariant": "boots_vitality",
+          "level": 100,
+          "rarity": 2,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 6,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "armor",
+              "value": 5,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 2,
+                "max": 7
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 11,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": null
+        },
+        {
+          "slot": "ring",
+          "weaponType": null,
+          "baseVariant": "ring_element",
+          "level": 100,
+          "rarity": 2,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 6,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "armor",
+              "value": 5,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 2,
+                "max": 7
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 11,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": null
+        },
+        {
+          "slot": "ring",
+          "weaponType": null,
+          "baseVariant": "ring_survival",
+          "level": 100,
+          "rarity": 2,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 6,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "armor",
+              "value": 5,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 2,
+                "max": 7
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 11,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": null
+        },
+        {
+          "slot": "amulet",
+          "weaponType": null,
+          "baseVariant": "amulet_element",
+          "level": 100,
+          "rarity": 2,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 6,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "armor",
+              "value": 5,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 2,
+                "max": 7
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 11,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": null
+        }
+      ],
+      "talents": {
+        "power": 0,
+        "heart": 0,
+        "steel": 0,
+        "precision": 0,
+        "crit": 0,
+        "critDamage": 0,
+        "penetration": 0,
+        "element": 0,
+        "elementResist": 0,
+        "block": 0,
+        "shield": 0,
+        "healing": 0,
+        "resolve": 0,
+        "luck": 0
+      },
+      "unlocked": [
+        "goblin.venom_cut",
+        "goblin.opening_cut",
+        "goblin.finish_cut",
+        "goblin.snare_wire",
+        "goblin.tangle_cut"
+      ],
+      "stats": {
+        "hp": 6177,
+        "atk": 998,
+        "armor": 823,
+        "lifesteal": 0
+      },
+      "potions": 34,
+      "kills": 1036,
+      "rests": 0,
+      "rounds": 11810,
+      "hpDamage": 24093.599999999613,
+      "shieldAbsorbed": 0,
+      "shieldGranted": 0,
+      "lifesteal": 0,
+      "skillHealing": 0,
+      "potionHealing": 21001.800000000014,
+      "otherHealing": 0
+    },
+    {
+      "race": "goblin",
+      "style": "pureOffense",
+      "drain": false,
+      "level": 100,
+      "area": 10,
+      "weapon": "sword",
+      "skills": [
+        "goblin.opening_cut",
+        "goblin.finish_cut",
+        "goblin.crossing_blade",
+        "goblin.bitter_wound"
+      ],
+      "avgFightSeconds": 13.177800201816348,
+      "equipment": [
+        {
+          "slot": "weapon",
+          "weaponType": "sword",
+          "baseVariant": "sword_balanced",
+          "level": 100,
+          "rarity": 2,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 6,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "armor",
+              "value": 5,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 2,
+                "max": 7
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 11,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": null
+        },
+        {
+          "slot": "helm",
+          "weaponType": null,
+          "baseVariant": "helm_vitality",
+          "level": 100,
+          "rarity": 2,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 6,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "armor",
+              "value": 5,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 2,
+                "max": 7
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 11,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": null
+        },
+        {
+          "slot": "armor",
+          "weaponType": null,
+          "baseVariant": "armor_armor",
+          "level": 100,
+          "rarity": 2,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 6,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "armor",
+              "value": 5,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 2,
+                "max": 7
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 11,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": null
+        },
+        {
+          "slot": "gloves",
+          "weaponType": null,
+          "baseVariant": "gloves_vitality",
+          "level": 100,
+          "rarity": 2,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 6,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "armor",
+              "value": 5,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 2,
+                "max": 7
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 11,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": null
+        },
+        {
+          "slot": "boots",
+          "weaponType": null,
+          "baseVariant": "boots_vitality",
+          "level": 100,
+          "rarity": 2,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 6,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "armor",
+              "value": 5,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 2,
+                "max": 7
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 11,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": null
+        },
+        {
+          "slot": "ring",
+          "weaponType": null,
+          "baseVariant": "ring_element",
+          "level": 100,
+          "rarity": 2,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 6,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "armor",
+              "value": 5,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 2,
+                "max": 7
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 11,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": null
+        },
+        {
+          "slot": "ring",
+          "weaponType": null,
+          "baseVariant": "ring_survival",
+          "level": 100,
+          "rarity": 2,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 6,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "armor",
+              "value": 5,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 2,
+                "max": 7
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 11,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": null
+        },
+        {
+          "slot": "amulet",
+          "weaponType": null,
+          "baseVariant": "amulet_element",
+          "level": 100,
+          "rarity": 2,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 6,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "armor",
+              "value": 5,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 2,
+                "max": 7
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 11,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": null
+        }
+      ],
+      "talents": {
+        "power": 0,
+        "heart": 0,
+        "steel": 0,
+        "precision": 0,
+        "crit": 0,
+        "critDamage": 0,
+        "penetration": 0,
+        "element": 0,
+        "elementResist": 0,
+        "block": 0,
+        "shield": 0,
+        "healing": 0,
+        "resolve": 0,
+        "luck": 0
+      },
+      "unlocked": [
+        "goblin.opening_cut",
+        "goblin.finish_cut",
+        "goblin.crossing_blade",
+        "goblin.venom_cut",
+        "goblin.bitter_wound"
+      ],
+      "stats": {
+        "hp": 6177,
+        "atk": 998,
+        "armor": 823,
+        "lifesteal": 0
+      },
+      "potions": 44,
+      "kills": 991,
+      "rests": 0,
+      "rounds": 11872,
+      "hpDamage": 30505.369999999282,
+      "shieldAbsorbed": 0,
+      "shieldGranted": 0,
+      "lifesteal": 0,
+      "skillHealing": 0,
+      "potionHealing": 27178.80000000002,
+      "otherHealing": 0
+    },
+    {
+      "race": "dwarf",
+      "style": "noSustain",
+      "drain": false,
+      "level": 100,
+      "area": 10,
+      "weapon": "sword",
+      "skills": [
+        "fracture_strike",
+        "fault_sweep",
+        "breach_followup",
+        "ember_brand"
+      ],
+      "avgFightSeconds": 11.13737646001797,
+      "equipment": [
+        {
+          "slot": "weapon",
+          "weaponType": "sword",
+          "baseVariant": "sword_balanced",
+          "level": 100,
+          "rarity": 2,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 6,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "armor",
+              "value": 5,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 2,
+                "max": 7
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 11,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": null
+        },
+        {
+          "slot": "helm",
+          "weaponType": null,
+          "baseVariant": "helm_vitality",
+          "level": 100,
+          "rarity": 2,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 6,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "armor",
+              "value": 5,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 2,
+                "max": 7
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 11,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": null
+        },
+        {
+          "slot": "armor",
+          "weaponType": null,
+          "baseVariant": "armor_armor",
+          "level": 100,
+          "rarity": 2,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 6,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "armor",
+              "value": 5,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 2,
+                "max": 7
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 11,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": null
+        },
+        {
+          "slot": "gloves",
+          "weaponType": null,
+          "baseVariant": "gloves_vitality",
+          "level": 100,
+          "rarity": 2,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 6,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "armor",
+              "value": 5,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 2,
+                "max": 7
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 11,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": null
+        },
+        {
+          "slot": "boots",
+          "weaponType": null,
+          "baseVariant": "boots_vitality",
+          "level": 100,
+          "rarity": 2,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 6,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "armor",
+              "value": 5,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 2,
+                "max": 7
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 11,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": null
+        },
+        {
+          "slot": "ring",
+          "weaponType": null,
+          "baseVariant": "ring_element",
+          "level": 100,
+          "rarity": 2,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 6,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "armor",
+              "value": 5,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 2,
+                "max": 7
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 11,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": null
+        },
+        {
+          "slot": "ring",
+          "weaponType": null,
+          "baseVariant": "ring_survival",
+          "level": 100,
+          "rarity": 2,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 6,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "armor",
+              "value": 5,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 2,
+                "max": 7
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 11,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": null
+        },
+        {
+          "slot": "amulet",
+          "weaponType": null,
+          "baseVariant": "amulet_element",
+          "level": 100,
+          "rarity": 2,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 6,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "armor",
+              "value": 5,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 2,
+                "max": 7
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 11,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 2,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": null
+        }
+      ],
+      "talents": {
+        "power": 0,
+        "heart": 0,
+        "steel": 0,
+        "precision": 0,
+        "crit": 0,
+        "critDamage": 0,
+        "penetration": 0,
+        "element": 0,
+        "elementResist": 0,
+        "block": 0,
+        "shield": 0,
+        "healing": 0,
+        "resolve": 0,
+        "luck": 0
+      },
+      "unlocked": [
+        "fracture_strike",
+        "fault_sweep",
+        "breach_followup",
+        "ember_brand"
+      ],
+      "stats": {
+        "hp": 6177,
+        "atk": 998,
+        "armor": 823,
+        "lifesteal": 0
+      },
+      "potions": 58,
+      "kills": 1113,
+      "rests": 0,
+      "rounds": 11269,
+      "hpDamage": 39464.259999999966,
+      "shieldAbsorbed": 0,
+      "shieldGranted": 0,
+      "lifesteal": 0,
+      "skillHealing": 0,
+      "potionHealing": 35826.60000000001,
+      "otherHealing": 0
+    }
+  ]
+}
