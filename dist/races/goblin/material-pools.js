@@ -1,76 +1,46 @@
-export const materialPools = {
+import {buildMaterialPools} from '../../material-loot-profile.js';
+import {materials} from './materials.js';
+import {monsters} from './monsters.js';
+
+// Creature eligibility and relative weights only. Probability, quantity and quality
+// are the shared established area/node/rank policy; innate bonus is separate.
+export const materialAssociations = {
   "goblin.a01.normal.1|goblin.a01.field": {
     "monsterId": "goblin.a01.normal.1",
     "nodeId": "goblin.a01.field",
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.02",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 4.8e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -82,72 +52,36 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.02",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 8.16e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -159,72 +93,36 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.02",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.03",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 4.8e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -236,72 +134,36 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.02",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.03",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 8.16e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -313,72 +175,36 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.03",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.01",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 4.8e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -390,72 +216,36 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.03",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.01",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 8.16e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -467,72 +257,36 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.02",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 8.16e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -544,72 +298,36 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.02",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.04",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 5.6e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -621,72 +339,36 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.02",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.04",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 9.52e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -698,72 +380,36 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.04",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.01",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 5.6e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -775,72 +421,36 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.04",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.01",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 9.52e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -852,72 +462,36 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.02",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 5.6e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -929,72 +503,36 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.02",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 9.52e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -1006,72 +544,36 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.02",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.04",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0,
-        "quantity": 1,
         "entries": []
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 9.52e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -1083,93 +585,45 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.05",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.01",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.05",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.13",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 6.400000000000001e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -1181,93 +635,45 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.05",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.01",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.05",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.13",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00010880000000000002,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -1279,93 +685,45 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.03",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.05",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.13",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 6.400000000000001e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -1377,93 +735,45 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.03",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.05",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.13",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00010880000000000002,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -1475,93 +785,45 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.03",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.04",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.05",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.13",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 6.400000000000001e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -1573,93 +835,45 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.03",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.04",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.05",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.13",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00010880000000000002,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -1671,93 +885,45 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.04",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.05",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.05",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.13",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00010880000000000002,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -1769,93 +935,45 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.03",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.04",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.01",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.05",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.13",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00019200000000000003,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -1867,83 +985,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.06",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.07",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.05",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.13",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 7.2e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -1955,83 +1031,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.06",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.07",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.05",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.13",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0001224,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -2043,83 +1077,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.07",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.02",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.05",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.13",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 7.2e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -2131,83 +1123,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.07",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.02",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.05",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.13",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0001224,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -2219,83 +1169,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.02",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.03",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.05",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.13",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 7.2e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -2307,83 +1215,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.02",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.03",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.05",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.13",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0001224,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -2395,83 +1261,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.02",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.03",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.05",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.13",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0001224,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -2483,93 +1307,45 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.05",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.06",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.05",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.08",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.14",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 8e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -2581,93 +1357,45 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.05",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.06",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.05",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.08",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.14",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.000136,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -2679,93 +1407,45 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.06",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.08",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.05",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.08",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.14",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 8e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -2777,93 +1457,45 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.06",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.08",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.05",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.08",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.14",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.000136,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -2875,93 +1507,45 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.08",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.04",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.05",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.08",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.14",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 8e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -2973,93 +1557,45 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.08",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.04",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.05",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.08",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.14",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.000136,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -3071,93 +1607,45 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.04",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.05",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.05",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.08",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.14",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.000136,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -3169,83 +1657,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.08",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.09",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.08",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.14",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 8.800000000000001e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -3257,83 +1703,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.08",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.09",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.08",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.14",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0001496,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -3345,83 +1749,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.09",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.06",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.08",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.14",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 8.800000000000001e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -3433,83 +1795,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.09",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.06",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.08",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.14",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0001496,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -3521,83 +1841,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.06",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.07",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.08",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.14",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 8.800000000000001e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -3609,83 +1887,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.06",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.07",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.08",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.14",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0001496,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -3697,83 +1933,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.07",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.08",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.08",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.14",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0001496,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -3785,83 +1979,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.07",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.08",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.08",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.14",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.000264,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -3873,83 +2025,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.07",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.09",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.10",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.15",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 9.600000000000002e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -3961,83 +2071,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.07",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.09",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.10",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.15",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0001632,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -4049,83 +2117,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.09",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.10",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.10",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.15",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 9.600000000000002e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -4137,83 +2163,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.09",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.10",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.10",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.15",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0001632,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -4225,83 +2209,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.10",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.07",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.10",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.15",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 9.600000000000002e-05,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -4313,83 +2255,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.10",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.07",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.10",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.15",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0001632,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -4401,83 +2301,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.07",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.09",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.10",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.15",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0001632,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -4489,103 +2347,49 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.08",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.10",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.08",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "goblin.mat.10",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.16",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00010400000000000001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -4597,103 +2401,49 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.08",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.10",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.08",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "goblin.mat.10",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.16",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00017680000000000001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -4705,103 +2455,49 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.10",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.11",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.08",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "goblin.mat.10",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.16",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00010400000000000001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -4813,103 +2509,49 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.10",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.11",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.08",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "goblin.mat.10",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.16",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00017680000000000001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -4921,103 +2563,49 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.11",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.08",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "goblin.mat.10",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.16",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00010400000000000001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -5029,103 +2617,49 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.11",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.08",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "goblin.mat.10",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.16",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00017680000000000001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -5137,103 +2671,49 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.08",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.08",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "goblin.mat.10",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           },
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.3333333333333333,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.3333333333333333
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.16",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00017680000000000001,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -5245,93 +2725,45 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.10",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.11",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.10",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.15",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.000112,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -5343,93 +2775,45 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.10",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.11",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.10",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.15",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0001904,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -5441,93 +2825,45 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.11",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.10",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.15",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.000112,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -5539,93 +2875,45 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.11",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.10",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.15",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0001904,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -5637,93 +2925,45 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.09",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.10",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.15",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.000112,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -5735,93 +2975,45 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.09",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.10",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.15",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0001904,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -5833,93 +3025,45 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.09",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.10",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.10",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.15",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.0001904,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -5931,103 +3075,49 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.09",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.10",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.10",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.15",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.16",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.000336,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -6039,83 +3129,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.11",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.12",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.16",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00012000000000000002,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -6127,83 +3175,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.11",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.12",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.16",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00020400000000000003,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -6215,83 +3221,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.11",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.12",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.16",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00012000000000000002,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -6303,83 +3267,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.11",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.12",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.16",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00020400000000000003,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -6391,83 +3313,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.11",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.12",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.16",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00012000000000000002,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -6479,83 +3359,41 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.11",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.12",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.16",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00020400000000000003,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
@@ -6567,86 +3405,45 @@ export const materialPools = {
     "channels": [
       {
         "channel": "regular",
-        "id": "regular",
-        "hitProbability": 0.35,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.11",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "goblin.mat.12",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 0.5
           }
         ]
       },
       {
         "channel": "recovery",
-        "id": "recovery",
-        "hitProbability": 0.6,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.12",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "special",
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.mat.16",
-            "weight": 1.0,
-            "qualityWeights": [
-              0.85,
-              0.12,
-              0.028,
-              0.002
-            ]
+            "weight": 1
           }
         ]
       },
       {
         "channel": "gem",
-        "id": "gem",
-        "hitProbability": 0.00020400000000000003,
-        "quantity": 1,
         "entries": [
           {
             "materialId": "goblin.infinity_gem_goblin",
-            "weight": 1.0,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
         ]
       }
     ]
   }
 };
+export const materialPools = buildMaterialPools({materials,monsters,associations:materialAssociations});
