@@ -15,7 +15,7 @@ export function liveHeroWeaponType(state){
  const item=state?.inventory?.find(it=>it.id===state?.equip?.weapon);
  return item?.slot==='weapon'?item.weaponType??null:null;
 }
-const heroSpriteFor=(weapon,manifest,race='dwarf')=>manifest?.raceHeroSprites?.[race]??({...LIVE_HERO_SPRITES,...(manifest?.heroWeaponSprites??manifest?.heroSprites??{})})[weapon]??(manifest?.sprites?.['hero-neutral']?'hero-neutral':null);
+const heroSpriteFor=(weapon,manifest,race='dwarf')=>manifest?.raceHeroWeaponSprites?.[race]?.[weapon]??manifest?.raceHeroSprites?.[race]??({...LIVE_HERO_SPRITES,...(manifest?.heroWeaponSprites??manifest?.heroSprites??{})})[weapon]??(manifest?.sprites?.['hero-neutral']?'hero-neutral':null);
 // These placeholders are intentionally not legacy art or substitute equipment.
 function drawPixelNotice(canvas,label,{width=480,height=270}={}){if(!canvas?.getContext)return false;canvas.width=width;canvas.height=height;const c=canvas.getContext('2d');c.imageSmoothingEnabled=false;c.fillStyle='#132232';c.fillRect(0,0,width,height);c.strokeStyle='#516b80';c.lineWidth=2;c.strokeRect(6,6,width-12,height-12);c.fillStyle='#e7cb8d';c.font='12px sans-serif';c.textAlign='center';c.fillText(label,width/2,height/2,Math.max(24,width-20));return true;}
 export function drawLiveHeroPortrait(canvas,state,{manifest,images,time=0}={}){

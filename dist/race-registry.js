@@ -8,7 +8,7 @@ export const RACE_PACKS=Object.freeze({dwarf,...Object.fromEntries(EXPANSION_PAC
 export const PLAYABLE_RACES=Object.freeze(Object.keys(RACE_PACKS));
 export function getRacePack(race){return RACE_PACKS[typeof race==='string'?race:race?.race]??null;}
 export function getSkillTreeDefinition(raceOrState='dwarf'){return getRacePack(raceOrState)?.tree??null;}
-export function getSkillMetadata(id){for(const pack of Object.values(RACE_PACKS)){const metadata=pack.skills?.[id]??pack.passives?.[id]??pack.tree.nodes.find(n=>n.id===id);if(metadata)return metadata;}return null;}
+export function getSkillMetadata(id){for(const pack of Object.values(RACE_PACKS)){const metadata=pack.skills?.[id]??pack.passives?.[id]??pack.tree.nodes.find(n=>n.id===id);if(metadata){const node=pack.tree.nodes.find(n=>n.id===id);return {...node,...metadata,kind:node?.kind??metadata.kind};}}return null;}
 export function getSkillOwner(id){return Object.values(RACE_PACKS).find(p=>p.skills?.[id]||p.passives?.[id]||p.tree.nodes.some(n=>n.id===id))??null;}
 export function getRaceSkillPlanner(id){return DWARF_NEW_ACTIVE_IDS.includes(id)?planDwarfExpansion:getSkillOwner(id)?.planSkill??null;}
 export function getRaceTuning(race){const p=getRacePack(race);if(!p)return null;if(p.id==='dwarf')return {...TREE_TUNING,configs:stats=>({...TREE_TUNING.configs(stats),...dwarfExpansionConfigs(stats)}),passiveConfig:{...TREE_TUNING.passiveConfig,...DWARF_ADDED_PASSIVE_METADATA}};return {...TREE_TUNING,configs:Object.fromEntries(Object.entries(p.skills??{}).map(([id,s])=>[id,{cooldownMs:s.cooldownMs}])),passiveConfig:p.passives??{},race:p.id};}

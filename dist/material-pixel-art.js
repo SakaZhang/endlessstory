@@ -1,9 +1,10 @@
+import {raceIconAsset} from './race-art.js';
 // Read-only material art: exact catalogue identity, never generic icon category.
 import {MATERIAL_CATALOG,resolveMaterialId} from './material-catalog.js';
 import {MATERIAL_PIXEL_ASSETS} from './material-pixel-registry.js';
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function materialPixelSize(size=48){return size===32?32:size===64?64:48;}
-export function materialPixelSource(key,size=48){const id=resolveMaterialId(key);return id&&Object.hasOwn(MATERIAL_PIXEL_ASSETS,id)?MATERIAL_PIXEL_ASSETS[id][materialPixelSize(size)]:null;}
+export function materialPixelSource(key,size=48){const id=resolveMaterialId(key);const racial=raceIconAsset('materials',id,materialPixelSize(size));if(racial)return racial;return id&&Object.hasOwn(MATERIAL_PIXEL_ASSETS,id)?MATERIAL_PIXEL_ASSETS[id][materialPixelSize(size)]:null;}
 export function materialIcon(key,{quality=0,size=48}={}){
  const id=resolveMaterialId(key),px=materialPixelSize(size),src=materialPixelSource(id,px),q=Number.isInteger(quality)&&quality>=0&&quality<=3?quality:0;
  if(!src)return '<span class="materialPixelUnknown" role="img" aria-label="材料图像未提供">暂无图像</span>';
