@@ -1,7 +1,7 @@
 # Named hero selection
 
 - Central registry proper names: 布洛克 / 罗什福尔 / 莱姆斯 / 奇克 / 砾恩. Titles and short identities are separate.
-- Selection cards use the actual current native weapon idle PNGs (including slim Elf bow), not generated alternate art. Responsive 5/3/2/1-column rules, visible focus/hover/active, native keyboard buttons, image alt text.
+- Selection cards use the actual current native weapon idle PNGs (including slim Elf bow), not generated alternate art. Shared live `heroPresentationScale` with body-reference calibration (Elf 98 / Goblin 62) and a consistent foot baseline; responsive 5/3/2/1-column rules, visible focus/hover/active, native keyboard buttons, image alt text.
 - HUD, combat status, preview HUD and exported-save filename resolve the registry name.
 - Original immediate card selection + existing destructive confirmation, cancel, atomic write failure, reload and stale pagehide protection are preserved.
 - No balance, save migration, legacy name alias or schema change. Strict existing validator remains unchanged. Integrator owns development generation reset.
