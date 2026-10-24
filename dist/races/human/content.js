@@ -2589,25 +2589,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.03",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -2621,10 +2622,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -2639,25 +2641,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.03",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -2671,10 +2674,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -2689,25 +2693,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.01",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.02",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -2721,10 +2726,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -2739,25 +2745,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.01",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.02",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -2771,10 +2778,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -2789,15 +2797,16 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 3,
+            "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -2811,10 +2820,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -2829,15 +2839,16 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 3,
+            "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -2851,10 +2862,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -2869,25 +2881,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.01",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.02",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -2901,10 +2914,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -2919,25 +2933,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.01",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.02",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -2951,10 +2966,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -2969,25 +2985,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.03",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -3001,10 +3018,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -3019,25 +3037,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.03",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -3051,10 +3070,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -3069,25 +3089,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.01",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.02",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -3101,10 +3122,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -3119,25 +3141,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.01",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.02",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -3151,10 +3174,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -3169,25 +3193,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.04",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -3198,13 +3223,14 @@ export const HUMAN_MATERIAL_POOLS={
             "materialId": "human.mat.13",
             "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -3218,10 +3244,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -3236,25 +3263,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.04",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -3265,13 +3293,14 @@ export const HUMAN_MATERIAL_POOLS={
             "materialId": "human.mat.13",
             "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -3285,10 +3314,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -3303,25 +3333,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.01",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.02",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -3332,13 +3363,14 @@ export const HUMAN_MATERIAL_POOLS={
             "materialId": "human.mat.13",
             "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -3352,10 +3384,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -3370,25 +3403,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.01",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.02",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -3399,13 +3433,14 @@ export const HUMAN_MATERIAL_POOLS={
             "materialId": "human.mat.13",
             "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -3419,10 +3454,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -3437,35 +3473,36 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 3,
+            "weight": 0.375,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.03",
-            "weight": 2,
+            "weight": 0.25,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.05",
-            "weight": 3,
+            "weight": 0.375,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -3479,10 +3516,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -3497,35 +3535,36 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 3,
+            "weight": 0.375,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.03",
-            "weight": 2,
+            "weight": 0.25,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.05",
-            "weight": 3,
+            "weight": 0.375,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -3539,10 +3578,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -3557,45 +3597,46 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 3,
+            "weight": 0.3,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.04",
-            "weight": 2,
+            "weight": 0.2,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.05",
-            "weight": 3,
+            "weight": 0.3,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.06",
-            "weight": 2,
+            "weight": 0.2,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -3606,13 +3647,14 @@ export const HUMAN_MATERIAL_POOLS={
             "materialId": "human.mat.13",
             "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -3626,10 +3668,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -3644,45 +3687,46 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 3,
+            "weight": 0.3,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.04",
-            "weight": 2,
+            "weight": 0.2,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.05",
-            "weight": 3,
+            "weight": 0.3,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.06",
-            "weight": 2,
+            "weight": 0.2,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -3693,13 +3737,14 @@ export const HUMAN_MATERIAL_POOLS={
             "materialId": "human.mat.13",
             "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -3713,10 +3758,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -3731,35 +3777,36 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.01",
-            "weight": 2,
+            "weight": 0.25,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.02",
-            "weight": 3,
+            "weight": 0.375,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.05",
-            "weight": 3,
+            "weight": 0.375,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -3773,10 +3820,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -3791,35 +3839,36 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.01",
-            "weight": 2,
+            "weight": 0.25,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.02",
-            "weight": 3,
+            "weight": 0.375,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.05",
-            "weight": 3,
+            "weight": 0.375,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -3833,10 +3882,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -3851,45 +3901,46 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 3,
+            "weight": 0.3,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.04",
-            "weight": 2,
+            "weight": 0.2,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.05",
-            "weight": 3,
+            "weight": 0.3,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.06",
-            "weight": 2,
+            "weight": 0.2,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -3900,13 +3951,14 @@ export const HUMAN_MATERIAL_POOLS={
             "materialId": "human.mat.13",
             "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -3920,10 +3972,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -3938,45 +3991,46 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 3,
+            "weight": 0.3,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.04",
-            "weight": 2,
+            "weight": 0.2,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.05",
-            "weight": 3,
+            "weight": 0.3,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.06",
-            "weight": 2,
+            "weight": 0.2,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -3987,13 +4041,14 @@ export const HUMAN_MATERIAL_POOLS={
             "materialId": "human.mat.13",
             "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -4007,10 +4062,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -4025,25 +4081,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.07",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -4057,10 +4114,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -4075,25 +4133,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.07",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -4107,10 +4166,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -4125,15 +4185,16 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 3,
+            "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -4147,10 +4208,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -4165,15 +4227,16 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 3,
+            "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -4187,10 +4250,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -4205,35 +4269,36 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.04",
-            "weight": 2,
+            "weight": 0.2857142857142857,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.05",
-            "weight": 3,
+            "weight": 0.42857142857142855,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.06",
-            "weight": 2,
+            "weight": 0.2857142857142857,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -4247,10 +4312,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -4265,35 +4331,36 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.04",
-            "weight": 2,
+            "weight": 0.2857142857142857,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.05",
-            "weight": 3,
+            "weight": 0.42857142857142855,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.06",
-            "weight": 2,
+            "weight": 0.2857142857142857,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -4307,10 +4374,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -4325,15 +4393,16 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 3,
+            "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -4347,10 +4416,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -4365,15 +4435,16 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 3,
+            "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -4387,10 +4458,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -4405,35 +4477,36 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 3,
+            "weight": 0.375,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.07",
-            "weight": 2,
+            "weight": 0.25,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.09",
-            "weight": 3,
+            "weight": 0.375,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -4447,10 +4520,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -4465,35 +4539,36 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 3,
+            "weight": 0.375,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.07",
-            "weight": 2,
+            "weight": 0.25,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.09",
-            "weight": 3,
+            "weight": 0.375,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -4507,10 +4582,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -4525,35 +4601,36 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 3,
+            "weight": 0.375,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.08",
-            "weight": 2,
+            "weight": 0.25,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.09",
-            "weight": 3,
+            "weight": 0.375,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -4567,10 +4644,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -4585,35 +4663,36 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 3,
+            "weight": 0.375,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.08",
-            "weight": 2,
+            "weight": 0.25,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.09",
-            "weight": 3,
+            "weight": 0.375,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -4627,10 +4706,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -4645,35 +4725,36 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 3,
+            "weight": 0.375,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.08",
-            "weight": 2,
+            "weight": 0.25,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.09",
-            "weight": 3,
+            "weight": 0.375,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -4687,10 +4768,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -4705,35 +4787,36 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 3,
+            "weight": 0.375,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.08",
-            "weight": 2,
+            "weight": 0.25,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.09",
-            "weight": 3,
+            "weight": 0.375,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -4747,10 +4830,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -4765,35 +4849,36 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 3,
+            "weight": 0.375,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.08",
-            "weight": 2,
+            "weight": 0.25,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.09",
-            "weight": 3,
+            "weight": 0.375,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -4804,13 +4889,14 @@ export const HUMAN_MATERIAL_POOLS={
             "materialId": "human.mat.14",
             "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -4824,10 +4910,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -4842,35 +4929,36 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 3,
+            "weight": 0.375,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.08",
-            "weight": 2,
+            "weight": 0.25,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.09",
-            "weight": 3,
+            "weight": 0.375,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -4881,13 +4969,14 @@ export const HUMAN_MATERIAL_POOLS={
             "materialId": "human.mat.14",
             "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -4901,10 +4990,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -4919,35 +5009,36 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.07",
-            "weight": 2,
+            "weight": 0.2857142857142857,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.09",
-            "weight": 3,
+            "weight": 0.42857142857142855,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.10",
-            "weight": 2,
+            "weight": 0.2857142857142857,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -4961,10 +5052,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -4979,35 +5071,36 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.07",
-            "weight": 2,
+            "weight": 0.2857142857142857,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.09",
-            "weight": 3,
+            "weight": 0.42857142857142855,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.10",
-            "weight": 2,
+            "weight": 0.2857142857142857,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -5021,10 +5114,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -5039,25 +5133,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.08",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.09",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -5071,10 +5166,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -5089,25 +5185,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.08",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.09",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -5121,10 +5218,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -5139,25 +5237,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.09",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.10",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -5171,10 +5270,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -5189,25 +5289,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.09",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.10",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -5221,10 +5322,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -5239,25 +5341,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.08",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.09",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -5268,13 +5371,14 @@ export const HUMAN_MATERIAL_POOLS={
             "materialId": "human.mat.14",
             "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -5288,10 +5392,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -5306,25 +5411,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.08",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.09",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -5335,13 +5441,14 @@ export const HUMAN_MATERIAL_POOLS={
             "materialId": "human.mat.14",
             "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -5355,10 +5462,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -5373,25 +5481,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.08",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.09",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -5405,10 +5514,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -5423,25 +5533,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.08",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.09",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -5455,10 +5566,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -5473,25 +5585,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.08",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.09",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -5505,10 +5618,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -5523,25 +5637,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.08",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.09",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -5555,10 +5670,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -5573,25 +5689,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.09",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.10",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -5605,10 +5722,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -5623,25 +5741,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.09",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.10",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -5655,10 +5774,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -5673,25 +5793,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.08",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.09",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -5705,10 +5826,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -5723,25 +5845,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.08",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.09",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -5755,10 +5878,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -5773,25 +5897,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.10",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.12",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -5805,10 +5930,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -5823,25 +5949,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.10",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.12",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -5855,10 +5982,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -5873,25 +6001,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.12",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -5902,13 +6031,14 @@ export const HUMAN_MATERIAL_POOLS={
             "materialId": "human.mat.15",
             "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -5922,10 +6052,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -5940,25 +6071,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.12",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -5969,13 +6101,14 @@ export const HUMAN_MATERIAL_POOLS={
             "materialId": "human.mat.15",
             "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -5989,10 +6122,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -6007,15 +6141,16 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.12",
-            "weight": 3,
+            "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -6026,13 +6161,14 @@ export const HUMAN_MATERIAL_POOLS={
             "materialId": "human.mat.15",
             "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -6046,10 +6182,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -6064,15 +6201,16 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.12",
-            "weight": 3,
+            "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -6083,13 +6221,14 @@ export const HUMAN_MATERIAL_POOLS={
             "materialId": "human.mat.15",
             "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -6103,10 +6242,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -6121,25 +6261,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.12",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -6150,13 +6291,14 @@ export const HUMAN_MATERIAL_POOLS={
             "materialId": "human.mat.15",
             "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -6170,10 +6312,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -6188,25 +6331,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.12",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -6217,13 +6361,14 @@ export const HUMAN_MATERIAL_POOLS={
             "materialId": "human.mat.15",
             "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -6237,10 +6382,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -6255,25 +6401,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.12",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -6282,25 +6429,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.15",
-            "weight": 1,
+            "weight": 0.5,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.16",
-            "weight": 1,
+            "weight": 0.5,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -6314,10 +6462,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -6332,25 +6481,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.12",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -6359,25 +6509,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.15",
-            "weight": 1,
+            "weight": 0.5,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.16",
-            "weight": 1,
+            "weight": 0.5,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -6391,10 +6542,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -6409,15 +6561,16 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.12",
-            "weight": 3,
+            "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -6426,25 +6579,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.15",
-            "weight": 1,
+            "weight": 0.5,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.16",
-            "weight": 1,
+            "weight": 0.5,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -6458,10 +6612,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -6476,15 +6631,16 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.12",
-            "weight": 3,
+            "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -6493,25 +6649,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.15",
-            "weight": 1,
+            "weight": 0.5,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.16",
-            "weight": 1,
+            "weight": 0.5,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -6525,10 +6682,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -6543,15 +6701,16 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.12",
-            "weight": 3,
+            "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -6560,25 +6719,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.15",
-            "weight": 1,
+            "weight": 0.5,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.16",
-            "weight": 1,
+            "weight": 0.5,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -6592,10 +6752,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -6610,15 +6771,16 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.12",
-            "weight": 3,
+            "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -6627,25 +6789,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.15",
-            "weight": 1,
+            "weight": 0.5,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.16",
-            "weight": 1,
+            "weight": 0.5,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -6659,10 +6822,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -6677,25 +6841,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.12",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -6704,25 +6869,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.15",
-            "weight": 1,
+            "weight": 0.5,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.16",
-            "weight": 1,
+            "weight": 0.5,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -6736,10 +6902,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -6754,25 +6921,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.12",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -6781,25 +6949,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.15",
-            "weight": 1,
+            "weight": 0.5,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.16",
-            "weight": 1,
+            "weight": 0.5,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -6813,10 +6982,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -6831,25 +7001,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.12",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -6860,13 +7031,14 @@ export const HUMAN_MATERIAL_POOLS={
             "materialId": "human.mat.16",
             "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -6880,10 +7052,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -6898,25 +7071,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.12",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -6927,13 +7101,14 @@ export const HUMAN_MATERIAL_POOLS={
             "materialId": "human.mat.16",
             "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -6947,10 +7122,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -6965,15 +7141,16 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.12",
-            "weight": 3,
+            "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -6984,13 +7161,14 @@ export const HUMAN_MATERIAL_POOLS={
             "materialId": "human.mat.16",
             "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -7004,10 +7182,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -7022,15 +7201,16 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.12",
-            "weight": 3,
+            "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -7041,13 +7221,14 @@ export const HUMAN_MATERIAL_POOLS={
             "materialId": "human.mat.16",
             "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -7061,10 +7242,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -7079,25 +7261,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.12",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -7111,10 +7294,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -7129,25 +7313,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.12",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "gem",
@@ -7161,10 +7346,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -7179,25 +7365,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.12",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -7208,13 +7395,14 @@ export const HUMAN_MATERIAL_POOLS={
             "materialId": "human.mat.16",
             "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -7228,10 +7416,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -7246,25 +7435,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.12",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -7275,13 +7465,14 @@ export const HUMAN_MATERIAL_POOLS={
             "materialId": "human.mat.16",
             "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -7295,10 +7486,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -7313,45 +7505,46 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 3,
+            "weight": 0.3,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.04",
-            "weight": 2,
+            "weight": 0.2,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.05",
-            "weight": 3,
+            "weight": 0.3,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.06",
-            "weight": 2,
+            "weight": 0.2,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -7362,13 +7555,14 @@ export const HUMAN_MATERIAL_POOLS={
             "materialId": "human.mat.13",
             "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -7382,10 +7576,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -7400,25 +7595,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.08",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.09",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -7429,13 +7625,14 @@ export const HUMAN_MATERIAL_POOLS={
             "materialId": "human.mat.14",
             "weight": 1,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -7449,10 +7646,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   },
@@ -7467,25 +7665,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 2,
+            "weight": 0.4,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.12",
-            "weight": 3,
+            "weight": 0.6,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "main"
       },
       {
         "id": "special",
@@ -7494,25 +7693,26 @@ export const HUMAN_MATERIAL_POOLS={
         "entries": [
           {
             "materialId": "human.mat.15",
-            "weight": 1,
+            "weight": 0.5,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           },
           {
             "materialId": "human.mat.16",
-            "weight": 1,
+            "weight": 0.5,
             "qualityWeights": [
-              75,
-              20,
-              4.5,
-              0.5
+              0.75,
+              0.2,
+              0.045,
+              0.005
             ]
           }
-        ]
+        ],
+        "channel": "special"
       },
       {
         "id": "gem",
@@ -7526,10 +7726,11 @@ export const HUMAN_MATERIAL_POOLS={
               0,
               0,
               0,
-              100
+              1
             ]
           }
-        ]
+        ],
+        "channel": "gem"
       }
     ]
   }
