@@ -1,3 +1,4 @@
+import {rollGoblinExtraMaterial} from './race-loot.js';
 import {racialGoldCost} from './race-economy.js';
 export {racialGoldCost} from './race-economy.js';
 import {EXPANSION_PACKS} from './race-packs.js';
@@ -65,7 +66,7 @@ export const CORE_SOCKET = {socket:'core',type:'core',race:'ashen',playable:true
 export const SLOTNAME = {weapon:'武器',helm:'头盔',armor:'护甲',gloves:'手套',boots:'靴子',ring:'戒指',ring1:'戒指左',ring2:'戒指右',amulet:'项链',core:'核心'};
 export const RARITY = ['普通','稀有','优良','至臻'];
 export const SET_SLOTS = ['helm','armor','gloves','boots'];
-export const BUILD = [...EXPANSION_PACKS.flatMap(p=>p.sets.map(s=>({...s,skills:[],bonus:s.description??''}))),
+export const BUILD = [...EXPANSION_PACKS.flatMap(p=>p.sets.map(s=>({...s,originRace:p.id,skills:[],bonus:[s.two?.description,s.four?.description].filter(Boolean).join('；')||s.description||''}))),
  {id:'anvil',name:'碎砧',sub:'裂甲 · 重击',skills:['break','heavy','interrupt',null],bonus:'2件：裂甲锤伤害 +25%；战吼延长1回合；4件：重锻击伤害 +35%。'},
  {id:'rune',name:'炉纹',sub:'铭火 · 引燃',skills:['mark','ignite','interrupt',null],bonus:'2件：铭火灼烧 +30%；炉蚀延长1回合；4件：引燃伤害 +35%。'},
  {id:'guard',name:'守冢',sub:'坚守 · 反击',skills:['guard','break','interrupt',null],bonus:'2件：坚守主动伤害 +30%；铁衣延长1回合；4件：坚守反击提高到100%攻击，铸壁获得2回合坚守。'}
@@ -725,7 +726,8 @@ function rewardDwarf(s,e,now){
   const materialRound=u=>{
    const result=rollMonsterMaterials(s,e,u,{random:Math.random,luck:e.luck??0,rollQuality:(weights,luck)=>luckyRoll(()=>rollQuality(weights),luck),owned:(save,id)=>[0,1,2,3].some(q=>materialCount(save,toDwarfInventoryKey(id),q)>0),receive:(save,row)=>{
     const key=materialKey(row.material,row.quality),received=receiveBattleLoot(save,{kind:'material',key,quantity:row.quantity},e.lootSummary);
-    if(received)e.materialLoot.push({key,material:row.material,quality:row.quality,count:row.quantity,channel:row.channel,monsterId:row.monsterId,nodeId:row.nodeId});return received;
+    if(received)e.materialLoot.push({key,material:row.material,quality:row.quality,count:row.quantity,channel:row.channel,monsterId:row.monsterId,nodeId:row.nodeId});
+    if(received&&rollGoblinExtraMaterial(save.race,row,MATERIALS[row.material],Math.random)&&receiveBattleLoot(save,{kind:'material',key,quantity:1},e.lootSummary)){e.materialLoot.push({key,material:row.material,quality:row.quality,count:1,channel:'racial-scavenging',monsterId:row.monsterId,nodeId:row.nodeId});e.rewardNotes.push('拾荒直觉：额外材料 +1');}return received;
    }});return result.ok;
   };
   for(const u of sources){materialRound(u);
