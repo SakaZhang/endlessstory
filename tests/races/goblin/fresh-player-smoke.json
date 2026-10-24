@@ -98,7 +98,7 @@
       "budgetSourceLevel": 1
     }
   },
-  "elapsedSeconds": 2222,
+  "elapsedSeconds": 2223.8,
   "deaths": 2,
   "battles": 137,
   "dungeonAttempts": 2,
@@ -310,6 +310,13 @@
       "level": 8,
       "gold": 28,
       "dungeonAttempts": 2
+    },
+    {
+      "event": "entered-next-area",
+      "seconds": 2223.8,
+      "level": 8,
+      "gold": 28,
+      "instanceId": "goblin.a02.field"
     }
   ]
 }
