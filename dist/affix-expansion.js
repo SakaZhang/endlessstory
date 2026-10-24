@@ -13,7 +13,9 @@ export const SPECIAL_AFFIX_EXPANSION=freeze({
  reaper:{name:'死神',desc:'每个命中段、每个仍存活目标独立2%判定；首领同样有效。',chance:.02,sourceApproved:true,mechanicsReady:true,enabled:true},
  multicast:{name:'多重施法',desc:'主动技能后15%概率追加一次，不递归、不额外消耗或重置冷却；算一次真实主动施法，无存活敌人则不追加。',chance:.15,sourceApproved:true,mechanicsReady:true,enabled:true}
 });
-export const LIFESTEAL_CANDIDATE_CONFIG=freeze({enabled:true,ratingScale:100,maximumRate:.12,maximumHpFractionPerCast:.08,eligibleSources:['basic','active']});
+// Player lifesteal: every 10 rating converts 1% of eligible actual HP damage.
+// Only missing HP limits recovery; no diminishing returns or per-cast HP ceiling.
+export const LIFESTEAL_CANDIDATE_CONFIG=freeze({enabled:true,ratingScale:1000,eligibleSources:['basic','active']});
 // Already-effective equipment rating may include divine's approved normal-affix modifier.
 // No clock is read internally: the caller supplies the simulation clock for online/offline parity.
 export function effectiveLuck({talent=0,equipment=0,potion=null,now=0}={}){
@@ -22,12 +24,12 @@ export function effectiveLuck({talent=0,equipment=0,potion=null,now=0}={}){
  const total=talent+equipment+active;return nonnegative(total)?total:null;
 }
 export function calculateLifesteal({rating,maxHp,currentHp,hits},config=LIFESTEAL_CANDIDATE_CONFIG){
- if(!nonnegative(rating)||!nonnegative(maxHp)||maxHp<=0||!nonnegative(currentHp)||currentHp>maxHp||!Array.isArray(hits)||!config||typeof config.enabled!=='boolean'||!nonnegative(config.ratingScale)||config.ratingScale<=0||!nonnegative(config.maximumRate)||config.maximumRate>1||!nonnegative(config.maximumHpFractionPerCast)||config.maximumHpFractionPerCast>1||!Array.isArray(config.eligibleSources))return null;
+ if(!nonnegative(rating)||!nonnegative(maxHp)||maxHp<=0||!nonnegative(currentHp)||currentHp>maxHp||!Array.isArray(hits)||!config||typeof config.enabled!=='boolean'||!nonnegative(config.ratingScale)||config.ratingScale<=0||!Array.isArray(config.eligibleSources))return null;
  const seen=new Set();let actualHpDamage=0;
  for(const h of hits){if(!h||!id(h.hitId)||seen.has(h.hitId)||!nonnegative(h.hpBefore)||!nonnegative(h.hpAfter)||typeof h.source!=='string')return null;seen.add(h.hitId);if(config.eligibleSources.includes(h.source))actualHpDamage+=Math.max(0,h.hpBefore-h.hpAfter);}
  if(!Number.isFinite(actualHpDamage))return null;
- const rate=config.enabled?config.maximumRate*rating/(config.ratingScale+rating):0,cap=maxHp*config.maximumHpFractionPerCast;
- return {heal:currentHp<=0?0:Math.min(maxHp-currentHp,cap,actualHpDamage*rate),actualHpDamage,rate,cap};
+ const rate=config.enabled?rating/config.ratingScale:0,cap=maxHp-currentHp;
+ return {heal:currentHp<=0?0:Math.min(cap,actualHpDamage*rate),actualHpDamage,rate,cap};
 }
 export function openingShelterShield({hasShelter,maxHp,flatBonus=0,alreadyApplied=false}){
  if(typeof hasShelter!=='boolean'||typeof alreadyApplied!=='boolean'||!nonnegative(maxHp)||!nonnegative(flatBonus))return null;
@@ -59,10 +61,10 @@ export function tryMulticast(context,{enabled=true,eligibleSources=['active'],al
 export const NEW_ORDINARY_AFFIX_DEFS=ORDINARY_AFFIX_CANDIDATES;
 export const NEW_SPECIAL_DEFS=SPECIAL_AFFIX_EXPANSION;
 export const READY_SPECIAL_KEYS=Object.freeze(Object.keys(NEW_SPECIAL_DEFS).filter(k=>NEW_SPECIAL_DEFS[k].mechanicsReady&&NEW_SPECIAL_DEFS[k].enabled));
-export function lifestealRate(rating){return nonnegative(rating)?.12*rating/(100+rating):0;}
+export function lifestealRate(rating){return nonnegative(rating)?rating/LIFESTEAL_CANDIDATE_CONFIG.ratingScale:0;}
 export function lifestealHeal({rating,damage,maxHp,currentHp,alreadyHealed=0}){
  if(![rating,damage,maxHp,currentHp,alreadyHealed].every(nonnegative)||maxHp<=0||currentHp<=0||currentHp>maxHp)return 0;
- return Math.min(maxHp-currentHp,Math.max(0,maxHp*.08-alreadyHealed),damage*lifestealRate(rating));
+ return Math.min(maxHp-currentHp,damage*lifestealRate(rating));
 }
 // Convenience adapters for a caller that already processes each hit exactly once.
 export function rollReaper({hit,targetAlive,equipped},random=Math.random){if(!equipped||hit!==true||targetAlive!==true||typeof random!=='function')return false;let roll;try{roll=random();}catch{return false;}return Number.isFinite(roll)&&roll>=0&&roll<.02;}

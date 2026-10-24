@@ -54,6 +54,7 @@ import './equipment-presentation-css-tests.mjs';
 import './reforge-inheritance-tests.mjs';
 
 import './affix-expansion-tests.mjs';
+import './lifesteal-linear-tests.mjs';
 import './multi-affix-tests.mjs';
 
 import './affix-production-tests.mjs';

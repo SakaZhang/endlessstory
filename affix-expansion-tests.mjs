@@ -4,8 +4,8 @@ assert.equal(ORDINARY_AFFIX_CANDIDATES.lifesteal.enabled,true);assert.equal(SPEC
 assert.equal(effectiveLuck({talent:10,equipment:4,potion:{value:3,endAt:100},now:99}),17);assert.equal(effectiveLuck({talent:10,equipment:4,potion:{value:3,endAt:100},now:100}),14);assert.equal(effectiveLuck({equipment:NaN}),null);
 const hit={hitId:'cast1:a:0',hpBefore:100,hpAfter:50,source:'active'},cfg={...LIFESTEAL_CANDIDATE_CONFIG,enabled:true};
 assert.equal(calculateLifesteal({rating:100,maxHp:100,currentHp:1,hits:[hit]},{...LIFESTEAL_CANDIDATE_CONFIG,enabled:false}).heal,0);
-assert.equal(calculateLifesteal({rating:100,maxHp:100,currentHp:1,hits:[hit]},cfg).heal,3);
-assert.equal(calculateLifesteal({rating:100,maxHp:100,currentHp:1,hits:[hit,{...hit,hitId:'cast1:b:0',hpBefore:1000,hpAfter:0}]},cfg).heal,8);
+assert.equal(calculateLifesteal({rating:100,maxHp:100,currentHp:1,hits:[hit]},cfg).heal,5);
+assert.equal(calculateLifesteal({rating:100,maxHp:100,currentHp:1,hits:[hit,{...hit,hitId:'cast1:b:0',hpBefore:1000,hpAfter:0}]},cfg).heal,99);
 assert.equal(calculateLifesteal({rating:100,maxHp:100,currentHp:99,hits:[hit]},cfg).heal,1);
 assert.equal(calculateLifesteal({rating:100,maxHp:100,currentHp:1,hits:[{...hit,hpAfter:100}]},cfg).heal,0);
 assert.equal(calculateLifesteal({rating:100,maxHp:100,currentHp:1,hits:[hit,hit]},cfg),null);
@@ -30,6 +30,6 @@ assert.equal(tryMulticast({source:'active',triggered:false,hasLivingEnemies:true
 assert(!tryMulticast({source:'active',triggered:false,hasLivingEnemies:true},undefined,()=>.15).triggered);
 {
  const {applyNirvana,lifestealHeal,lifestealRate,rollReaper}=await import('./dist/affix-expansion.js');const e={affixState:createBattleAffixState('stage1'),heroHp:-7,cd:{break:5},shield:23,activeCastCount:8};const before=structuredClone(e);assert(applyNirvana(e,200,{nirvana:true},[]));assert.equal(e.heroHp,200);assert.deepEqual(e.cd,before.cd);assert.equal(e.shield,23);assert.equal(e.activeCastCount,8);e.heroHp=0;assert(!applyNirvana(e,200,{nirvana:true},[]));assert.equal(e.heroHp,0);
- assert.equal(lifestealRate(100),.06);assert.equal(lifestealHeal({rating:100,damage:1000,maxHp:100,currentHp:20,alreadyHealed:6}),2);assert.equal(lifestealHeal({rating:100,damage:1000,maxHp:100,currentHp:0}),0);
+ assert.equal(lifestealRate(100),.1);assert.equal(lifestealHeal({rating:100,damage:1000,maxHp:100,currentHp:20,alreadyHealed:6}),80);assert.equal(lifestealHeal({rating:100,damage:1000,maxHp:100,currentHp:0}),0);
  assert(rollReaper({hit:true,targetAlive:true,equipped:true},()=>.019));assert(!rollReaper({hit:true,targetAlive:true,equipped:true},()=>.02));assert(!rollReaper({hit:true,targetAlive:true,equipped:true},()=>-1));assert(!rollReaper({hit:true,targetAlive:false,equipped:true},()=>{throw Error('no roll on dead');}));
 }
