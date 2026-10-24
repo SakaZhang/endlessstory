@@ -31,7 +31,7 @@ for(const race of PARITY_RACES){const seen=new Map();for(const t of [...T.filter
  for(const size of [32,48,64]){const path=equipmentRasterSource(t,size);assert(path,`${t.id}: missing ${size} raster`);assert(fs.existsSync('dist/'+path));assert(equipmentIcon(t.kind==='scatter'||t.kind==='set'?t:{legendaryId:t.id,rarity:3},{size}).includes(t.id));}
  const path=equipmentRasterSource(t,64),im=await loadImage('dist/'+path),c=createCanvas(64,64),ctx=c.getContext('2d');ctx.imageSmoothingEnabled=false;ctx.drawImage(im,0,0,64,64);const bytes=ctx.getImageData(0,0,64,64).data,h=hash(bytes);assert(!seen.has(h),`${race}: cross-item image collision ${seen.get(h)} / ${t.id}`);seen.set(h,t.id);
  assert(bytes.some((v,i)=>i%4===3&&v>0),`${t.id}: blank image`);
- if(!baseline.templates[t.id]&&!baseline.legends[t.id]){assert.equal(im.width,64);assert.equal(im.height,64);for(let i=0;i<64;i++)for(const p of[i,63*64+i,i*64,i*64+63])assert.equal(bytes[p*4+3],0,`${t.id}: clipped edge alpha`);}
+ if(baseline.art[t.id]!==hash(fs.readFileSync('dist/'+path))){assert.equal(im.width,64);assert.equal(im.height,64);for(let i=0;i<64;i++)for(const p of[i,63*64+i,i*64,i*64+63])assert.equal(bytes[p*4+3],0,`${t.id}: clipped edge alpha`);}
  decoded.push({id:t.id,race,path,sourceSize:[im.width,im.height],normalized64Sha256:h});
 }}
 const original=Math.random;let seed=62057;Math.random=()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0)/2**32);
