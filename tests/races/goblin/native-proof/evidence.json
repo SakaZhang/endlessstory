@@ -9,30 +9,31 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-goblin-dagger",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.6811594202898551
         },
-        "m2-1792830591754-17-enemy-0": {
-          "x": 240,
+        "m2-1792831402443-17-enemy-0": {
+          "x": 260,
           "y": 203,
-          "scale": 0.5212121212121212,
+          "scale": 0.7225806451612903,
           "sprite": "race-goblin.a09.boss"
         },
-        "m2-1792830591754-17-enemy-1": {
-          "x": 320,
+        "m2-1792831402443-17-enemy-1": {
+          "x": 365,
           "y": 203,
-          "scale": 0.34545454545454546,
+          "scale": 0.4,
           "sprite": "race-goblin.a09.normal.2"
         },
-        "m2-1792830591754-17-enemy-2": {
-          "x": 385,
+        "m2-1792831402443-17-enemy-2": {
+          "x": 435,
           "y": 203,
-          "scale": 0.34545454545454546,
+          "scale": 0.4,
           "sprite": "race-goblin.a09.normal.2"
         },
-        "m2-1792830591754-17-enemy-3": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.34545454545454546,
+        "m2-1792831402443-17-enemy-3": {
+          "x": 335,
+          "y": 227,
+          "scale": 0.4,
           "sprite": "race-goblin.a09.normal.2"
         }
       },
@@ -53,30 +54,31 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-goblin-dagger",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.6811594202898551
         },
-        "m2-1792830591754-17-enemy-0": {
-          "x": 240,
+        "m2-1792831402443-17-enemy-0": {
+          "x": 260,
           "y": 203,
-          "scale": 0.5212121212121212,
+          "scale": 0.7225806451612903,
           "sprite": "race-goblin.a09.boss"
         },
-        "m2-1792830591754-17-enemy-1": {
-          "x": 320,
+        "m2-1792831402443-17-enemy-1": {
+          "x": 365,
           "y": 203,
-          "scale": 0.34545454545454546,
+          "scale": 0.4,
           "sprite": "race-goblin.a09.normal.2"
         },
-        "m2-1792830591754-17-enemy-2": {
-          "x": 385,
+        "m2-1792831402443-17-enemy-2": {
+          "x": 435,
           "y": 203,
-          "scale": 0.34545454545454546,
+          "scale": 0.4,
           "sprite": "race-goblin.a09.normal.2"
         },
-        "m2-1792830591754-17-enemy-3": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.34545454545454546,
+        "m2-1792831402443-17-enemy-3": {
+          "x": 335,
+          "y": 227,
+          "scale": 0.4,
           "sprite": "race-goblin.a09.normal.2"
         }
       },
@@ -90,19 +92,19 @@
         {
           "kind": "cast",
           "sourceId": "hero",
-          "targetId": "m2-1792830591754-17-enemy-0",
+          "targetId": "m2-1792831402443-17-enemy-0",
           "skillId": "goblin.opening_cut"
         },
         {
           "kind": "hit",
           "sourceId": "hero",
-          "targetId": "m2-1792830591754-17-enemy-0",
+          "targetId": "m2-1792831402443-17-enemy-0",
           "skillId": "goblin.opening_cut"
         },
         {
           "kind": "hit",
           "sourceId": "hero",
-          "targetId": "m2-1792830591754-17-enemy-0",
+          "targetId": "m2-1792831402443-17-enemy-0",
           "skillId": "goblin.opening_cut"
         }
       ],
@@ -116,30 +118,31 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-goblin-dagger",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.6811594202898551
         },
-        "m2-1792830591754-17-enemy-0": {
-          "x": 240,
+        "m2-1792831402443-17-enemy-0": {
+          "x": 260,
           "y": 203,
-          "scale": 0.5212121212121212,
+          "scale": 0.7225806451612903,
           "sprite": "race-goblin.a09.boss"
         },
-        "m2-1792830591754-17-enemy-1": {
-          "x": 320,
+        "m2-1792831402443-17-enemy-1": {
+          "x": 365,
           "y": 203,
-          "scale": 0.34545454545454546,
+          "scale": 0.4,
           "sprite": "race-goblin.a09.normal.2"
         },
-        "m2-1792830591754-17-enemy-2": {
-          "x": 385,
+        "m2-1792831402443-17-enemy-2": {
+          "x": 435,
           "y": 203,
-          "scale": 0.34545454545454546,
+          "scale": 0.4,
           "sprite": "race-goblin.a09.normal.2"
         },
-        "m2-1792830591754-17-enemy-3": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.34545454545454546,
+        "m2-1792831402443-17-enemy-3": {
+          "x": 335,
+          "y": 227,
+          "scale": 0.4,
           "sprite": "race-goblin.a09.normal.2"
         }
       },
@@ -153,72 +156,72 @@
         {
           "kind": "cast",
           "sourceId": "hero",
-          "targetId": "m2-1792830591754-17-enemy-0",
+          "targetId": "m2-1792831402443-17-enemy-0",
           "skillId": "goblin.venom_cut"
         },
         {
           "kind": "hit",
           "sourceId": "hero",
-          "targetId": "m2-1792830591754-17-enemy-0",
+          "targetId": "m2-1792831402443-17-enemy-0",
           "skillId": "goblin.venom_cut"
         },
         {
           "kind": "hit",
           "sourceId": "hero",
-          "targetId": "m2-1792830591754-17-enemy-0",
+          "targetId": "m2-1792831402443-17-enemy-0",
           "skillId": "goblin.venom_cut"
         },
         {
           "kind": "hit",
           "sourceId": "hero",
-          "targetId": "m2-1792830591754-17-enemy-0",
+          "targetId": "m2-1792831402443-17-enemy-0",
           "skillId": "goblin.venom_cut"
         },
         {
           "kind": "cast",
-          "sourceId": "m2-1792830591754-17-enemy-0",
+          "sourceId": "m2-1792831402443-17-enemy-0",
           "targetId": "hero",
           "skillId": "basic"
         },
         {
           "kind": "hit",
-          "sourceId": "m2-1792830591754-17-enemy-0",
+          "sourceId": "m2-1792831402443-17-enemy-0",
           "targetId": "hero",
           "skillId": "basic"
         },
         {
           "kind": "cast",
-          "sourceId": "m2-1792830591754-17-enemy-1",
+          "sourceId": "m2-1792831402443-17-enemy-1",
           "targetId": "hero",
           "skillId": "basic"
         },
         {
           "kind": "hit",
-          "sourceId": "m2-1792830591754-17-enemy-1",
+          "sourceId": "m2-1792831402443-17-enemy-1",
           "targetId": "hero",
           "skillId": "basic"
         },
         {
           "kind": "cast",
-          "sourceId": "m2-1792830591754-17-enemy-2",
+          "sourceId": "m2-1792831402443-17-enemy-2",
           "targetId": "hero",
           "skillId": "basic"
         },
         {
           "kind": "hit",
-          "sourceId": "m2-1792830591754-17-enemy-2",
+          "sourceId": "m2-1792831402443-17-enemy-2",
           "targetId": "hero",
           "skillId": "basic"
         },
         {
           "kind": "cast",
-          "sourceId": "m2-1792830591754-17-enemy-3",
+          "sourceId": "m2-1792831402443-17-enemy-3",
           "targetId": "hero",
           "skillId": "basic"
         },
         {
           "kind": "hit",
-          "sourceId": "m2-1792830591754-17-enemy-3",
+          "sourceId": "m2-1792831402443-17-enemy-3",
           "targetId": "hero",
           "skillId": "basic"
         }
@@ -233,30 +236,31 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-goblin-dagger",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.6811594202898551
         },
-        "m2-1792830591754-17-enemy-0": {
-          "x": 240,
+        "m2-1792831402443-17-enemy-0": {
+          "x": 260,
           "y": 203,
-          "scale": 0.5212121212121212,
+          "scale": 0.7225806451612903,
           "sprite": "race-goblin.a09.boss"
         },
-        "m2-1792830591754-17-enemy-1": {
-          "x": 320,
+        "m2-1792831402443-17-enemy-1": {
+          "x": 365,
           "y": 203,
-          "scale": 0.34545454545454546,
+          "scale": 0.4,
           "sprite": "race-goblin.a09.normal.2"
         },
-        "m2-1792830591754-17-enemy-2": {
-          "x": 385,
+        "m2-1792831402443-17-enemy-2": {
+          "x": 435,
           "y": 203,
-          "scale": 0.34545454545454546,
+          "scale": 0.4,
           "sprite": "race-goblin.a09.normal.2"
         },
-        "m2-1792830591754-17-enemy-3": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.34545454545454546,
+        "m2-1792831402443-17-enemy-3": {
+          "x": 335,
+          "y": 227,
+          "scale": 0.4,
           "sprite": "race-goblin.a09.normal.2"
         }
       },
@@ -268,16 +272,22 @@
       ],
       "events": [
         {
+          "kind": "poison",
+          "sourceId": "hero",
+          "targetId": "m2-1792831402443-17-enemy-3",
+          "skillId": "scatter_ash"
+        },
+        {
           "kind": "cast",
           "sourceId": "hero",
-          "targetId": "m2-1792830591754-17-enemy-3",
-          "skillId": "basic"
+          "targetId": "m2-1792831402443-17-enemy-3",
+          "skillId": "goblin.venom_cut"
         },
         {
           "kind": "hit",
           "sourceId": "hero",
-          "targetId": "m2-1792830591754-17-enemy-3",
-          "skillId": "basic"
+          "targetId": "m2-1792831402443-17-enemy-3",
+          "skillId": "goblin.venom_cut"
         },
         {
           "kind": "heal",
@@ -302,30 +312,31 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-goblin-sword",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.752
         },
-        "m2-1792830591965-46-enemy-0": {
-          "x": 240,
+        "m2-1792831402700-44-enemy-0": {
+          "x": 260,
           "y": 203,
-          "scale": 0.5212121212121212,
+          "scale": 0.7225806451612903,
           "sprite": "race-goblin.a09.boss"
         },
-        "m2-1792830591965-46-enemy-1": {
-          "x": 320,
+        "m2-1792831402700-44-enemy-1": {
+          "x": 365,
           "y": 203,
-          "scale": 0.34545454545454546,
+          "scale": 0.4,
           "sprite": "race-goblin.a09.normal.2"
         },
-        "m2-1792830591965-46-enemy-2": {
-          "x": 385,
+        "m2-1792831402700-44-enemy-2": {
+          "x": 435,
           "y": 203,
-          "scale": 0.34545454545454546,
+          "scale": 0.4,
           "sprite": "race-goblin.a09.normal.2"
         },
-        "m2-1792830591965-46-enemy-3": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.34545454545454546,
+        "m2-1792831402700-44-enemy-3": {
+          "x": 335,
+          "y": 227,
+          "scale": 0.4,
           "sprite": "race-goblin.a09.normal.2"
         }
       },
@@ -346,30 +357,31 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-goblin-sword",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.752
         },
-        "m2-1792830591965-46-enemy-0": {
-          "x": 240,
+        "m2-1792831402700-44-enemy-0": {
+          "x": 260,
           "y": 203,
-          "scale": 0.5212121212121212,
+          "scale": 0.7225806451612903,
           "sprite": "race-goblin.a09.boss"
         },
-        "m2-1792830591965-46-enemy-1": {
-          "x": 320,
+        "m2-1792831402700-44-enemy-1": {
+          "x": 365,
           "y": 203,
-          "scale": 0.34545454545454546,
+          "scale": 0.4,
           "sprite": "race-goblin.a09.normal.2"
         },
-        "m2-1792830591965-46-enemy-2": {
-          "x": 385,
+        "m2-1792831402700-44-enemy-2": {
+          "x": 435,
           "y": 203,
-          "scale": 0.34545454545454546,
+          "scale": 0.4,
           "sprite": "race-goblin.a09.normal.2"
         },
-        "m2-1792830591965-46-enemy-3": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.34545454545454546,
+        "m2-1792831402700-44-enemy-3": {
+          "x": 335,
+          "y": 227,
+          "scale": 0.4,
           "sprite": "race-goblin.a09.normal.2"
         }
       },
@@ -383,13 +395,13 @@
         {
           "kind": "cast",
           "sourceId": "hero",
-          "targetId": "m2-1792830591965-46-enemy-0",
+          "targetId": "m2-1792831402700-44-enemy-0",
           "skillId": "goblin.opening_cut"
         },
         {
           "kind": "hit",
           "sourceId": "hero",
-          "targetId": "m2-1792830591965-46-enemy-0",
+          "targetId": "m2-1792831402700-44-enemy-0",
           "skillId": "goblin.opening_cut"
         }
       ],
@@ -403,30 +415,31 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-goblin-sword",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.752
         },
-        "m2-1792830591965-46-enemy-0": {
-          "x": 240,
+        "m2-1792831402700-44-enemy-0": {
+          "x": 260,
           "y": 203,
-          "scale": 0.5212121212121212,
+          "scale": 0.7225806451612903,
           "sprite": "race-goblin.a09.boss"
         },
-        "m2-1792830591965-46-enemy-1": {
-          "x": 320,
+        "m2-1792831402700-44-enemy-1": {
+          "x": 365,
           "y": 203,
-          "scale": 0.34545454545454546,
+          "scale": 0.4,
           "sprite": "race-goblin.a09.normal.2"
         },
-        "m2-1792830591965-46-enemy-2": {
-          "x": 385,
+        "m2-1792831402700-44-enemy-2": {
+          "x": 435,
           "y": 203,
-          "scale": 0.34545454545454546,
+          "scale": 0.4,
           "sprite": "race-goblin.a09.normal.2"
         },
-        "m2-1792830591965-46-enemy-3": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.34545454545454546,
+        "m2-1792831402700-44-enemy-3": {
+          "x": 335,
+          "y": 227,
+          "scale": 0.4,
           "sprite": "race-goblin.a09.normal.2"
         }
       },
@@ -440,66 +453,66 @@
         {
           "kind": "cast",
           "sourceId": "hero",
-          "targetId": "m2-1792830591965-46-enemy-0",
+          "targetId": "m2-1792831402700-44-enemy-0",
           "skillId": "goblin.venom_cut"
         },
         {
           "kind": "hit",
           "sourceId": "hero",
-          "targetId": "m2-1792830591965-46-enemy-0",
+          "targetId": "m2-1792831402700-44-enemy-0",
           "skillId": "goblin.venom_cut"
         },
         {
           "kind": "hit",
           "sourceId": "hero",
-          "targetId": "m2-1792830591965-46-enemy-0",
+          "targetId": "m2-1792831402700-44-enemy-0",
           "skillId": "goblin.venom_cut"
         },
         {
           "kind": "cast",
-          "sourceId": "m2-1792830591965-46-enemy-0",
+          "sourceId": "m2-1792831402700-44-enemy-0",
           "targetId": "hero",
           "skillId": "basic"
         },
         {
           "kind": "hit",
-          "sourceId": "m2-1792830591965-46-enemy-0",
+          "sourceId": "m2-1792831402700-44-enemy-0",
           "targetId": "hero",
           "skillId": "basic"
         },
         {
           "kind": "cast",
-          "sourceId": "m2-1792830591965-46-enemy-1",
+          "sourceId": "m2-1792831402700-44-enemy-1",
           "targetId": "hero",
           "skillId": "basic"
         },
         {
           "kind": "hit",
-          "sourceId": "m2-1792830591965-46-enemy-1",
+          "sourceId": "m2-1792831402700-44-enemy-1",
           "targetId": "hero",
           "skillId": "basic"
         },
         {
           "kind": "cast",
-          "sourceId": "m2-1792830591965-46-enemy-2",
+          "sourceId": "m2-1792831402700-44-enemy-2",
           "targetId": "hero",
           "skillId": "basic"
         },
         {
           "kind": "hit",
-          "sourceId": "m2-1792830591965-46-enemy-2",
+          "sourceId": "m2-1792831402700-44-enemy-2",
           "targetId": "hero",
           "skillId": "basic"
         },
         {
           "kind": "cast",
-          "sourceId": "m2-1792830591965-46-enemy-3",
+          "sourceId": "m2-1792831402700-44-enemy-3",
           "targetId": "hero",
           "skillId": "basic"
         },
         {
           "kind": "hit",
-          "sourceId": "m2-1792830591965-46-enemy-3",
+          "sourceId": "m2-1792831402700-44-enemy-3",
           "targetId": "hero",
           "skillId": "basic"
         }
@@ -514,30 +527,31 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-goblin-sword",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.752
         },
-        "m2-1792830591965-46-enemy-0": {
-          "x": 240,
+        "m2-1792831402700-44-enemy-0": {
+          "x": 260,
           "y": 203,
-          "scale": 0.5212121212121212,
+          "scale": 0.7225806451612903,
           "sprite": "race-goblin.a09.boss"
         },
-        "m2-1792830591965-46-enemy-1": {
-          "x": 320,
+        "m2-1792831402700-44-enemy-1": {
+          "x": 365,
           "y": 203,
-          "scale": 0.34545454545454546,
+          "scale": 0.4,
           "sprite": "race-goblin.a09.normal.2"
         },
-        "m2-1792830591965-46-enemy-2": {
-          "x": 385,
+        "m2-1792831402700-44-enemy-2": {
+          "x": 435,
           "y": 203,
-          "scale": 0.34545454545454546,
+          "scale": 0.4,
           "sprite": "race-goblin.a09.normal.2"
         },
-        "m2-1792830591965-46-enemy-3": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.34545454545454546,
+        "m2-1792831402700-44-enemy-3": {
+          "x": 335,
+          "y": 227,
+          "scale": 0.4,
           "sprite": "race-goblin.a09.normal.2"
         }
       },
@@ -551,20 +565,14 @@
         {
           "kind": "cast",
           "sourceId": "hero",
-          "targetId": "m2-1792830591965-46-enemy-3",
-          "skillId": "goblin.opening_cut"
+          "targetId": "m2-1792831402700-44-enemy-3",
+          "skillId": "basic"
         },
         {
           "kind": "hit",
           "sourceId": "hero",
-          "targetId": "m2-1792830591965-46-enemy-3",
-          "skillId": "goblin.opening_cut"
-        },
-        {
-          "kind": "heal",
-          "sourceId": "hero",
-          "targetId": "hero",
-          "skillId": "lifesteal"
+          "targetId": "m2-1792831402700-44-enemy-3",
+          "skillId": "basic"
         }
       ],
       "done": true,
@@ -583,9 +591,10 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-goblin-dagger",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.6811594202898551
         },
-        "m2-1792830592164-73-enemy-0": {
+        "m2-1792831402947-71-enemy-0": {
           "x": 350,
           "y": 203,
           "scale": 1,
@@ -606,17 +615,18 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-goblin-dagger",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.6811594202898551
         },
-        "m2-1792830592184-95-enemy-0": {
+        "m2-1792831402966-88-enemy-0": {
           "x": 350,
           "y": 203,
           "scale": 1,
-          "sprite": "race-goblin.a02.normal.3"
+          "sprite": "race-goblin.a02.normal.2"
         }
       },
       "enemySprites": [
-        "race-goblin.a02.normal.3"
+        "race-goblin.a02.normal.2"
       ],
       "events": [],
       "done": false
@@ -629,9 +639,10 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-goblin-dagger",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.6811594202898551
         },
-        "m2-1792830592207-113-enemy-0": {
+        "m2-1792831402984-107-enemy-0": {
           "x": 350,
           "y": 203,
           "scale": 1,
@@ -652,17 +663,18 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-goblin-dagger",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.6811594202898551
         },
-        "m2-1792830592226-132-enemy-0": {
+        "m2-1792831403009-125-enemy-0": {
           "x": 350,
           "y": 203,
           "scale": 1,
-          "sprite": "race-goblin.a04.normal.1"
+          "sprite": "race-goblin.a04.normal.3"
         }
       },
       "enemySprites": [
-        "race-goblin.a04.normal.1"
+        "race-goblin.a04.normal.3"
       ],
       "events": [],
       "done": false
@@ -675,17 +687,18 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-goblin-dagger",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.6811594202898551
         },
-        "m2-1792830592245-149-enemy-0": {
+        "m2-1792831403028-145-enemy-0": {
           "x": 350,
           "y": 203,
           "scale": 1,
-          "sprite": "race-goblin.a05.normal.1"
+          "sprite": "race-goblin.a05.normal.3"
         }
       },
       "enemySprites": [
-        "race-goblin.a05.normal.1"
+        "race-goblin.a05.normal.3"
       ],
       "events": [],
       "done": false
@@ -698,17 +711,18 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-goblin-dagger",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.6811594202898551
         },
-        "m2-1792830592266-167-enemy-0": {
+        "m2-1792831403049-162-enemy-0": {
           "x": 350,
           "y": 203,
           "scale": 1,
-          "sprite": "race-goblin.a06.normal.2"
+          "sprite": "race-goblin.a06.normal.1"
         }
       },
       "enemySprites": [
-        "race-goblin.a06.normal.2"
+        "race-goblin.a06.normal.1"
       ],
       "events": [],
       "done": false
@@ -721,9 +735,10 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-goblin-dagger",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.6811594202898551
         },
-        "m2-1792830592286-185-enemy-0": {
+        "m2-1792831403078-180-enemy-0": {
           "x": 350,
           "y": 203,
           "scale": 1,
@@ -744,9 +759,10 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-goblin-dagger",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.6811594202898551
         },
-        "m2-1792830592304-208-enemy-0": {
+        "m2-1792831403096-197-enemy-0": {
           "x": 350,
           "y": 203,
           "scale": 1,
@@ -767,9 +783,10 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-goblin-dagger",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.6811594202898551
         },
-        "m2-1792830592322-226-enemy-0": {
+        "m2-1792831403114-214-enemy-0": {
           "x": 350,
           "y": 203,
           "scale": 1,
@@ -790,17 +807,18 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-goblin-dagger",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.6811594202898551
         },
-        "m2-1792830592345-247-enemy-0": {
+        "m2-1792831403139-231-enemy-0": {
           "x": 350,
           "y": 203,
           "scale": 1,
-          "sprite": "race-goblin.a10.normal.1"
+          "sprite": "race-goblin.a10.normal.3"
         }
       },
       "enemySprites": [
-        "race-goblin.a10.normal.1"
+        "race-goblin.a10.normal.3"
       ],
       "events": [],
       "done": false
@@ -813,36 +831,37 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-goblin-sword",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.752
         },
-        "m2-1792830614666-266-enemy-0": {
-          "x": 240,
+        "m2-1792831416665-251-enemy-0": {
+          "x": 260,
           "y": 203,
-          "scale": 0.5212121212121212,
+          "scale": 0.8067226890756303,
           "sprite": "race-goblin.a06.elite"
         },
-        "m2-1792830614666-266-enemy-1": {
-          "x": 320,
+        "m2-1792831416665-251-enemy-1": {
+          "x": 365,
           "y": 203,
-          "scale": 0.21414141414141416,
+          "scale": 0.4,
           "sprite": "race-goblin.a06.normal.1"
         },
-        "m2-1792830614666-266-enemy-2": {
-          "x": 363.3333333333333,
+        "m2-1792831416665-251-enemy-2": {
+          "x": 435,
           "y": 203,
-          "scale": 0.21414141414141416,
+          "scale": 0.4,
           "sprite": "race-goblin.a06.normal.1"
         },
-        "m2-1792830614666-266-enemy-3": {
-          "x": 406.6666666666667,
-          "y": 203,
-          "scale": 0.21414141414141416,
+        "m2-1792831416665-251-enemy-3": {
+          "x": 335,
+          "y": 227,
+          "scale": 0.4,
           "sprite": "race-goblin.a06.normal.1"
         },
-        "m2-1792830614666-266-enemy-4": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.21414141414141416,
+        "m2-1792831416665-251-enemy-4": {
+          "x": 410,
+          "y": 227,
+          "scale": 0.4,
           "sprite": "race-goblin.a06.normal.1"
         }
       },
@@ -864,36 +883,37 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-goblin-sword",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.752
         },
-        "m2-1792830614666-266-enemy-0": {
-          "x": 240,
+        "m2-1792831416665-251-enemy-0": {
+          "x": 260,
           "y": 203,
-          "scale": 0.5212121212121212,
+          "scale": 0.8067226890756303,
           "sprite": "race-goblin.a06.elite"
         },
-        "m2-1792830614666-266-enemy-1": {
-          "x": 320,
+        "m2-1792831416665-251-enemy-1": {
+          "x": 365,
           "y": 203,
-          "scale": 0.21414141414141416,
+          "scale": 0.4,
           "sprite": "race-goblin.a06.normal.1"
         },
-        "m2-1792830614666-266-enemy-2": {
-          "x": 363.3333333333333,
+        "m2-1792831416665-251-enemy-2": {
+          "x": 435,
           "y": 203,
-          "scale": 0.21414141414141416,
+          "scale": 0.4,
           "sprite": "race-goblin.a06.normal.1"
         },
-        "m2-1792830614666-266-enemy-3": {
-          "x": 406.6666666666667,
-          "y": 203,
-          "scale": 0.21414141414141416,
+        "m2-1792831416665-251-enemy-3": {
+          "x": 335,
+          "y": 227,
+          "scale": 0.4,
           "sprite": "race-goblin.a06.normal.1"
         },
-        "m2-1792830614666-266-enemy-4": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.21414141414141416,
+        "m2-1792831416665-251-enemy-4": {
+          "x": 410,
+          "y": 227,
+          "scale": 0.4,
           "sprite": "race-goblin.a06.normal.1"
         }
       },
@@ -908,13 +928,13 @@
         {
           "kind": "cast",
           "sourceId": "hero",
-          "targetId": "m2-1792830614666-266-enemy-0",
+          "targetId": "m2-1792831416665-251-enemy-0",
           "skillId": "basic"
         },
         {
           "kind": "hit",
           "sourceId": "hero",
-          "targetId": "m2-1792830614666-266-enemy-0",
+          "targetId": "m2-1792831416665-251-enemy-0",
           "skillId": "basic"
         }
       ],
@@ -928,36 +948,37 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-goblin-sword",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.752
         },
-        "m2-1792830607027-285-enemy-0": {
-          "x": 240,
+        "m2-1792831421140-270-enemy-0": {
+          "x": 260,
           "y": 203,
-          "scale": 0.5212121212121212,
+          "scale": 0.6,
           "sprite": "race-goblin.a07.elite"
         },
-        "m2-1792830607027-285-enemy-1": {
-          "x": 320,
+        "m2-1792831421140-270-enemy-1": {
+          "x": 365,
           "y": 203,
-          "scale": 0.21414141414141416,
+          "scale": 0.4,
           "sprite": "race-goblin.a07.normal.1"
         },
-        "m2-1792830607027-285-enemy-2": {
-          "x": 363.3333333333333,
+        "m2-1792831421140-270-enemy-2": {
+          "x": 435,
           "y": 203,
-          "scale": 0.21414141414141416,
+          "scale": 0.4,
           "sprite": "race-goblin.a07.normal.1"
         },
-        "m2-1792830607027-285-enemy-3": {
-          "x": 406.6666666666667,
-          "y": 203,
-          "scale": 0.21414141414141416,
+        "m2-1792831421140-270-enemy-3": {
+          "x": 335,
+          "y": 227,
+          "scale": 0.4,
           "sprite": "race-goblin.a07.normal.1"
         },
-        "m2-1792830607027-285-enemy-4": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.21414141414141416,
+        "m2-1792831421140-270-enemy-4": {
+          "x": 410,
+          "y": 227,
+          "scale": 0.4,
           "sprite": "race-goblin.a07.normal.1"
         }
       },
@@ -979,36 +1000,37 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-goblin-sword",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.752
         },
-        "m2-1792830607027-285-enemy-0": {
-          "x": 240,
+        "m2-1792831421140-270-enemy-0": {
+          "x": 260,
           "y": 203,
-          "scale": 0.5212121212121212,
+          "scale": 0.6,
           "sprite": "race-goblin.a07.elite"
         },
-        "m2-1792830607027-285-enemy-1": {
-          "x": 320,
+        "m2-1792831421140-270-enemy-1": {
+          "x": 365,
           "y": 203,
-          "scale": 0.21414141414141416,
+          "scale": 0.4,
           "sprite": "race-goblin.a07.normal.1"
         },
-        "m2-1792830607027-285-enemy-2": {
-          "x": 363.3333333333333,
+        "m2-1792831421140-270-enemy-2": {
+          "x": 435,
           "y": 203,
-          "scale": 0.21414141414141416,
+          "scale": 0.4,
           "sprite": "race-goblin.a07.normal.1"
         },
-        "m2-1792830607027-285-enemy-3": {
-          "x": 406.6666666666667,
-          "y": 203,
-          "scale": 0.21414141414141416,
+        "m2-1792831421140-270-enemy-3": {
+          "x": 335,
+          "y": 227,
+          "scale": 0.4,
           "sprite": "race-goblin.a07.normal.1"
         },
-        "m2-1792830607027-285-enemy-4": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.21414141414141416,
+        "m2-1792831421140-270-enemy-4": {
+          "x": 410,
+          "y": 227,
+          "scale": 0.4,
           "sprite": "race-goblin.a07.normal.1"
         }
       },
@@ -1023,14 +1045,20 @@
         {
           "kind": "cast",
           "sourceId": "hero",
-          "targetId": "m2-1792830607027-285-enemy-0",
-          "skillId": "basic"
+          "targetId": "m2-1792831421140-270-enemy-0",
+          "skillId": "goblin.venom_cut"
         },
         {
           "kind": "hit",
           "sourceId": "hero",
-          "targetId": "m2-1792830607027-285-enemy-0",
-          "skillId": "basic"
+          "targetId": "m2-1792831421140-270-enemy-0",
+          "skillId": "goblin.venom_cut"
+        },
+        {
+          "kind": "hit",
+          "sourceId": "hero",
+          "targetId": "m2-1792831421140-270-enemy-0",
+          "skillId": "goblin.venom_cut"
         }
       ],
       "done": false
