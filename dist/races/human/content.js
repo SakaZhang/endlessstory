@@ -1,3 +1,5 @@
+import {buildMaterialPools} from '../../material-loot-profile.js';
+import {HUMAN_MATERIALS} from './materials.js';
 // Numeric values are initial candidates, pending integrated long-run calibration.
 export const HUMAN_AREAS=[
   {
@@ -121,56 +123,32 @@ export const HUMAN_AREAS=[
     "description": "空旷宫柱内不再有王座，银籽在荒庭石缝萌生。"
   }
 ];
-export const HUMAN_MATERIAL_POOLS={
+export const HUMAN_MATERIAL_ASSOCIATIONS={
   "human.a01.normal.1|human.a01.field": {
     "monsterId": "human.a01.normal.1",
     "nodeId": "human.a01.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           },
           {
             "materialId": "human.mat.03",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.0001,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -179,50 +157,26 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a01.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           },
           {
             "materialId": "human.mat.03",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.0002,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -231,50 +185,26 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a01.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.01",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.02",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.0001,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -283,50 +213,26 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a01.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.01",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.02",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.0002,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -335,40 +241,22 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a01.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.0001,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -377,40 +265,22 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a01.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.0002,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -419,50 +289,26 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a01.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.01",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.02",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.0001,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -471,50 +317,26 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a01.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.01",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.02",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.0002,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -523,50 +345,26 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a02.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           },
           {
             "materialId": "human.mat.03",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00012000000000000002,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -575,50 +373,26 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a02.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           },
           {
             "materialId": "human.mat.03",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00024000000000000003,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -627,50 +401,26 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a02.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.01",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.02",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00012000000000000002,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -679,50 +429,26 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a02.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.01",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.02",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00024000000000000003,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -731,68 +457,35 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a02.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           },
           {
             "materialId": "human.mat.04",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.13",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00012000000000000002,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -801,68 +494,35 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a02.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           },
           {
             "materialId": "human.mat.04",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.13",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00024000000000000003,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -871,68 +531,35 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a02.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.01",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.02",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.13",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00012000000000000002,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -941,68 +568,35 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a02.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.01",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.02",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.13",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00024000000000000003,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -1011,60 +605,30 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a03.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 0.375,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.375
           },
           {
             "materialId": "human.mat.03",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "human.mat.05",
-            "weight": 0.375,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.375
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00014000000000000001,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -1073,60 +637,30 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a03.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 0.375,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.375
           },
           {
             "materialId": "human.mat.03",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "human.mat.05",
-            "weight": 0.375,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.375
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00028000000000000003,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -1135,88 +669,43 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a03.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 0.3,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.3
           },
           {
             "materialId": "human.mat.04",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "human.mat.05",
-            "weight": 0.3,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.3
           },
           {
             "materialId": "human.mat.06",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.2
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.13",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00014000000000000001,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -1225,88 +714,43 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a03.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 0.3,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.3
           },
           {
             "materialId": "human.mat.04",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "human.mat.05",
-            "weight": 0.3,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.3
           },
           {
             "materialId": "human.mat.06",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.2
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.13",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00028000000000000003,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -1315,60 +759,30 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a03.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.01",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "human.mat.02",
-            "weight": 0.375,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.375
           },
           {
             "materialId": "human.mat.05",
-            "weight": 0.375,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.375
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00014000000000000001,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -1377,60 +791,30 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a03.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.01",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "human.mat.02",
-            "weight": 0.375,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.375
           },
           {
             "materialId": "human.mat.05",
-            "weight": 0.375,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.375
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00028000000000000003,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -1439,88 +823,43 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a03.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 0.3,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.3
           },
           {
             "materialId": "human.mat.04",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "human.mat.05",
-            "weight": 0.3,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.3
           },
           {
             "materialId": "human.mat.06",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.2
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.13",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00014000000000000001,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -1529,88 +868,43 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a03.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 0.3,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.3
           },
           {
             "materialId": "human.mat.04",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "human.mat.05",
-            "weight": 0.3,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.3
           },
           {
             "materialId": "human.mat.06",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.2
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.13",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00028000000000000003,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -1619,50 +913,26 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a04.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           },
           {
             "materialId": "human.mat.07",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00016,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -1671,50 +941,26 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a04.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           },
           {
             "materialId": "human.mat.07",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00032,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -1723,40 +969,22 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a04.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00016,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -1765,40 +993,22 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a04.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00032,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -1807,60 +1017,30 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a04.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.04",
-            "weight": 0.2857142857142857,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.2857142857142857
           },
           {
             "materialId": "human.mat.05",
-            "weight": 0.42857142857142855,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.42857142857142855
           },
           {
             "materialId": "human.mat.06",
-            "weight": 0.2857142857142857,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.2857142857142857
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00016,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -1869,60 +1049,30 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a04.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.04",
-            "weight": 0.2857142857142857,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.2857142857142857
           },
           {
             "materialId": "human.mat.05",
-            "weight": 0.42857142857142855,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.42857142857142855
           },
           {
             "materialId": "human.mat.06",
-            "weight": 0.2857142857142857,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.2857142857142857
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00032,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -1931,40 +1081,22 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a04.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00016,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -1973,40 +1105,22 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a04.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00032,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -2015,60 +1129,30 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a05.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 0.375,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.375
           },
           {
             "materialId": "human.mat.07",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "human.mat.09",
-            "weight": 0.375,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.375
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00018,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -2077,60 +1161,30 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a05.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 0.375,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.375
           },
           {
             "materialId": "human.mat.07",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "human.mat.09",
-            "weight": 0.375,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.375
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00036,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -2139,60 +1193,30 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a05.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 0.375,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.375
           },
           {
             "materialId": "human.mat.08",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "human.mat.09",
-            "weight": 0.375,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.375
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00018,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -2201,60 +1225,30 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a05.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 0.375,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.375
           },
           {
             "materialId": "human.mat.08",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "human.mat.09",
-            "weight": 0.375,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.375
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00036,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -2263,60 +1257,30 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a05.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 0.375,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.375
           },
           {
             "materialId": "human.mat.08",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "human.mat.09",
-            "weight": 0.375,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.375
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00018,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -2325,60 +1289,30 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a05.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 0.375,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.375
           },
           {
             "materialId": "human.mat.08",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "human.mat.09",
-            "weight": 0.375,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.375
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00036,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -2387,78 +1321,39 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a05.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 0.375,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.375
           },
           {
             "materialId": "human.mat.08",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "human.mat.09",
-            "weight": 0.375,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.375
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.14",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00018,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -2467,78 +1362,39 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a05.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.05",
-            "weight": 0.375,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.375
           },
           {
             "materialId": "human.mat.08",
-            "weight": 0.25,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.25
           },
           {
             "materialId": "human.mat.09",
-            "weight": 0.375,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.375
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.14",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00036,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -2547,60 +1403,30 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a06.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.07",
-            "weight": 0.2857142857142857,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.2857142857142857
           },
           {
             "materialId": "human.mat.09",
-            "weight": 0.42857142857142855,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.42857142857142855
           },
           {
             "materialId": "human.mat.10",
-            "weight": 0.2857142857142857,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.2857142857142857
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00020000000000000004,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -2609,60 +1435,30 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a06.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.07",
-            "weight": 0.2857142857142857,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.2857142857142857
           },
           {
             "materialId": "human.mat.09",
-            "weight": 0.42857142857142855,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.42857142857142855
           },
           {
             "materialId": "human.mat.10",
-            "weight": 0.2857142857142857,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.2857142857142857
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.0004000000000000001,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -2671,50 +1467,26 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a06.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.08",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.09",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00020000000000000004,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -2723,50 +1495,26 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a06.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.08",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.09",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.0004000000000000001,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -2775,50 +1523,26 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a06.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.09",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           },
           {
             "materialId": "human.mat.10",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00020000000000000004,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -2827,50 +1551,26 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a06.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.09",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           },
           {
             "materialId": "human.mat.10",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.0004000000000000001,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -2879,68 +1579,35 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a06.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.08",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.09",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.14",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00020000000000000004,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -2949,68 +1616,35 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a06.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.08",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.09",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.14",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.0004000000000000001,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -3019,50 +1653,26 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a07.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.08",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.09",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00022000000000000003,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -3071,50 +1681,26 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a07.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.08",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.09",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00044000000000000007,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -3123,50 +1709,26 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a07.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.08",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.09",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00022000000000000003,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -3175,50 +1737,26 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a07.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.08",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.09",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00044000000000000007,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -3227,50 +1765,26 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a07.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.09",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           },
           {
             "materialId": "human.mat.10",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00022000000000000003,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -3279,50 +1793,26 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a07.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.09",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           },
           {
             "materialId": "human.mat.10",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00044000000000000007,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -3331,50 +1821,26 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a07.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.08",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.09",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00022000000000000003,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -3383,50 +1849,26 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a07.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.08",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.09",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00044000000000000007,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -3435,50 +1877,26 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a08.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.10",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.12",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00024000000000000003,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -3487,50 +1905,26 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a08.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.10",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.12",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00048000000000000007,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -3539,68 +1933,35 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a08.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.12",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.15",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00024000000000000003,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -3609,68 +1970,35 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a08.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.12",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.15",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00048000000000000007,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -3679,58 +2007,31 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a08.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.12",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.15",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00024000000000000003,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -3739,58 +2040,31 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a08.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.12",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.15",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00048000000000000007,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -3799,68 +2073,35 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a08.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.12",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.15",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00024000000000000003,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -3869,68 +2110,35 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a08.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.12",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.15",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00048000000000000007,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -3939,78 +2147,39 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a09.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.12",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.15",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "human.mat.16",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.5
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00026000000000000003,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -4019,78 +2188,39 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a09.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.12",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.15",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "human.mat.16",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.5
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.0005200000000000001,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -4099,68 +2229,35 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a09.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.12",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.15",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "human.mat.16",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.5
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00026000000000000003,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -4169,68 +2266,35 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a09.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.12",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.15",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "human.mat.16",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.5
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.0005200000000000001,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -4239,68 +2303,35 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a09.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.12",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.15",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "human.mat.16",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.5
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00026000000000000003,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -4309,68 +2340,35 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a09.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.12",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.15",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "human.mat.16",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.5
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.0005200000000000001,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -4379,78 +2377,39 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a09.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.12",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.15",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "human.mat.16",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.5
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00026000000000000003,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -4459,78 +2418,39 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a09.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.12",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.15",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "human.mat.16",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.5
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.0005200000000000001,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -4539,68 +2459,35 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a10.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.12",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.16",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00028000000000000003,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -4609,68 +2496,35 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a10.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.12",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.16",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.0005600000000000001,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -4679,58 +2533,31 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a10.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.12",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.16",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00028000000000000003,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -4739,58 +2566,31 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a10.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.12",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.16",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.0005600000000000001,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -4799,50 +2599,26 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a10.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.12",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00028000000000000003,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -4851,50 +2627,26 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a10.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.12",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.0005600000000000001,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -4903,68 +2655,35 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a10.field",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.12",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.012,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.16",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.00028000000000000003,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -4973,68 +2692,35 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a10.dungeon",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 0.72,
-        "quantity": 1,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.12",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.035,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.16",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.0005600000000000001,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -5043,88 +2729,43 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a03.boss",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 1,
-        "quantity": 2,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.02",
-            "weight": 0.3,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.3
           },
           {
             "materialId": "human.mat.04",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.2
           },
           {
             "materialId": "human.mat.05",
-            "weight": 0.3,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.3
           },
           {
             "materialId": "human.mat.06",
-            "weight": 0.2,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.2
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.14,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.13",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.0007000000000000001,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -5133,68 +2774,35 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a06.boss",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 1,
-        "quantity": 2,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.08",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.09",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.14,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.14",
-            "weight": 1,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.0010000000000000002,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   },
@@ -5203,78 +2811,39 @@ export const HUMAN_MATERIAL_POOLS={
     "nodeId": "human.a09.boss",
     "channels": [
       {
-        "id": "main",
-        "hitProbability": 1,
-        "quantity": 2,
+        "channel": "main",
         "entries": [
           {
             "materialId": "human.mat.11",
-            "weight": 0.4,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.4
           },
           {
             "materialId": "human.mat.12",
-            "weight": 0.6,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.6
           }
-        ],
-        "channel": "main"
+        ]
       },
       {
-        "id": "special",
-        "hitProbability": 0.14,
-        "quantity": 1,
+        "channel": "special",
         "entries": [
           {
             "materialId": "human.mat.15",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.5
           },
           {
             "materialId": "human.mat.16",
-            "weight": 0.5,
-            "qualityWeights": [
-              0.75,
-              0.2,
-              0.045,
-              0.005
-            ]
+            "weight": 0.5
           }
-        ],
-        "channel": "special"
+        ]
       },
       {
-        "id": "gem",
-        "hitProbability": 0.0013000000000000002,
-        "quantity": 1,
+        "channel": "gem",
         "entries": [
           {
             "materialId": "human.mat.17",
-            "weight": 1,
-            "qualityWeights": [
-              0,
-              0,
-              0,
-              1
-            ]
+            "weight": 1
           }
-        ],
-        "channel": "gem"
+        ]
       }
     ]
   }
@@ -7805,3 +5374,4 @@ export const HUMAN_PARAMETERS={
   },
   "interruptStopMs": 1100
 };
+export const HUMAN_MATERIAL_POOLS=buildMaterialPools({materials:HUMAN_MATERIALS,monsters:HUMAN_MONSTERS,associations:HUMAN_MATERIAL_ASSOCIATIONS});
