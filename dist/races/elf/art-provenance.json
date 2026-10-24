@@ -13,10 +13,17 @@
     "exec-ee8e50bc-95e8-4ea9-8f51-97056be58e96.png",
     "exec-271c1f65-85c0-47b8-b767-17876e52ff7c.png",
     "exec-d4dd8b1a-bc69-4ed6-a95c-b13749f74fcc.png",
-    "exec-1647ef74-fca8-40a2-9953-e0d74db2e4f6.png"
+    "exec-1647ef74-fca8-40a2-9953-e0d74db2e4f6.png",
+    "exec-3214e30f-41ce-4fdb-87c7-09f0fb1c543d.png",
+    "exec-e879ca5f-6ce2-4dfd-9be1-8566d22d266f.png",
+    "exec-ddc3f67d-69d2-49ad-bdd4-0bf72f37f963.png",
+    "exec-121aea39-f475-47f9-b5d9-c436ffb262d4.png",
+    "exec-9cdc7475-c847-4194-bfc0-40080fdc798e.png",
+    "exec-fa0f8faa-1b0a-42d6-8e97-644693a1234e.png",
+    "exec-c36e0219-6ab6-40f3-bbf6-4306dcf387c6.png"
   ],
   "inspected": true,
-  "scope": "16 hero frames;44 distinct monster identities, monsters initially one pose each;10 scenes;64 detailed icons. Not complete monster action animation.",
+  "scope": "16 hero bow/staff action frames;44 monster identities each idle+anticipation+strike+hurt+death (220 frames);10 scenes;64 detailed icons.",
   "proofsAre": "native asset composites, NOT live-engine screenshots",
   "heroStyle": "Regenerated using approved dwarf-idle-0 reference; young priest with white emerald ceremonial robes; roughly100px full weapon height"
 }
