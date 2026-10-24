@@ -3,7 +3,7 @@ import {SCHEMA_VERSION,SAVE_KEY} from './save-generation.js';
 export {SAVE_KEY} from './save-generation.js';
 export const LEGACY_KEY='ashencrown-v1';
 export const BACKUP_PREFIX='ashencrown-backup-';
-export const RETIRED_SAVE_KEYS=Object.freeze(['ashencrown-v1','ashencrown-v2','ashencrown-v3','ashencrown-v4']);
+export const RETIRED_SAVE_KEYS=Object.freeze(['ashencrown-v1','ashencrown-v2','ashencrown-v3','ashencrown-v4','ashencrown-v5']);
 export const RETIRED_BACKUP_PREFIX='ashencrown-backup-';
 const blockedStores=new WeakSet();
 const validCurrent=game=>{try{return game?.version===SCHEMA_VERSION&&validSave(game)&&game.developmentEquipmentSandbox!==true;}catch{return false;}};
