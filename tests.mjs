@@ -179,3 +179,5 @@ for(const file of ['expedition-automation-tests.mjs','battle-potion-owned-tests.
 runAffixSourceTest(process.execPath,[new URL('./reforge-same-slot-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
 // Stat-label consistency is presentation-only; retain rating/rate distinctions.
 runAffixSourceTest(process.execPath,[new URL('./stat-label-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+// v0.58 native frame-facing and renderer lifecycle regression.
+runAffixSourceTest(process.execPath,[new URL('./monster-facing-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
