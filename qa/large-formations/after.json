@@ -755,7 +755,7 @@
           "y": 203,
           "sprite": "hero-elf-bow",
           "ranged": true,
-          "scale": 0.6811594202898551
+          "scale": 1
         },
         "formation-0": {
           "x": 260,
@@ -827,7 +827,7 @@
           "y": 203,
           "sprite": "hero-elf-staff",
           "ranged": true,
-          "scale": 0.6064516129032258
+          "scale": 1
         },
         "formation-0": {
           "x": 260,
@@ -913,7 +913,7 @@
           "y": 203,
           "sprite": "hero-elf-bow",
           "ranged": true,
-          "scale": 0.6811594202898551
+          "scale": 1
         },
         "formation-0": {
           "x": 250,
@@ -1013,7 +1013,7 @@
           "y": 203,
           "sprite": "hero-elf-bow",
           "ranged": true,
-          "scale": 0.6811594202898551
+          "scale": 1
         },
         "formation-0": {
           "x": 250,

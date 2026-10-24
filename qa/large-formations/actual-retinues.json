@@ -229,7 +229,7 @@
           "y": 203,
           "sprite": "hero-elf-bow",
           "ranged": true,
-          "scale": 0.6811594202898551
+          "scale": 1
         },
         "m2-15600-42-enemy-0": {
           "x": 260,
@@ -299,7 +299,7 @@
           "y": 203,
           "sprite": "hero-elf-bow",
           "ranged": true,
-          "scale": 0.6811594202898551
+          "scale": 1
         },
         "m2-15600-53-enemy-0": {
           "x": 260,
@@ -365,7 +365,7 @@
           "y": 203,
           "sprite": "hero-elf-bow",
           "ranged": true,
-          "scale": 0.6811594202898551
+          "scale": 1
         },
         "m2-10000-62-enemy-0": {
           "x": 260,
