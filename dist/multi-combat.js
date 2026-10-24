@@ -1,3 +1,4 @@
+import {dispatchRacialLegendaryEvent,advanceRacialLegendaryClock} from './racial-legendary-runtime.js';
 import {getRacePack,getSkillMetadata} from './race-registry.js';
 import {validRaceRuntime,raceRuntimeContext,commitRaceRuntime,applyRaceRuntimeEffect,equipmentSkillContext,countEquippedSkillCast} from './race-runtime.js';
 import {emitCombatDisplay,combatDisplayHealthSnapshot,emitCombatDisplayRecovery} from './combat-display-bridge.js';
@@ -99,6 +100,7 @@ function treeHeal(context,e,amount,maxHp){return context?passiveReceivedHeal(con
 export function stepMulti(s,e,turn,ctx){
  const {stats,SKILLS,skillUnlocked,resolveElementDamage,now,makeSummon}=ctx,passives=treePassiveContext(ctx),baseStats=stats(s),st=treePassiveStats(baseStats,e,passives),logs=[];if(!ctx.basicOnly)e.round++;else {delete e.pendingBasicAt;delete e.pendingBasicDelayMs;}
  const refreshStats=()=>Object.assign(st,treePassiveStats(e.treeEffects?skillTreeHeroStats(baseStats,e.treeEffects,ctx.treeSkills.attributeConfig):baseStats,e,passives));
+ advanceRacialLegendaryClock(s,ctx.combatDeltaMs??1100);
  e.affixState??=createBattleAffixState(e.id);
  if(ctx.treeSkills){const beforeClock=e.treeEffects?.clock??e.treeCombatClock??0;if(e.treePoison)advanceTreePoisons(e,beforeClock+(ctx.combatDeltaMs??1100),now,logs);runTreePlayerPhase(s,e,{...ctx,treeTimersOnly:true,onDamageAction:()=>{},onHeroDeath:()=>false},logs);if(e.done){advanceLegendaryCombat(s,{combatDeltaMs:Math.max(0,(e.treeCombatClock??beforeClock)-beforeClock),alive:e.heroHp>0,hasTargets:false,deferProcs:true,resolve:()=>({stop:true})});return logs;}}
  for(const u of e.enemies){expireDwarfShield(u,now);if(u.timedReflect?.endsAt<=now)delete u.timedReflect;}
@@ -271,6 +273,16 @@ function typedEnemyReaction(u,hpLost,st,now,resolveElementDamage){
  return null;
 }
 
+function racialLegendEvent(s,e,event,{st,resolveElementDamage,logs=[],castId=e.lastCast?.id,skillId=e.lastCast?.skillId,weaponType,branch,targetId=e.targetId}={}){
+ const context={castId,skillId,weaponType:weaponType??s.inventory.find(i=>i.id===s.equip.weapon)?.weaponType,branch:branch??getSkillMetadata(skillId)?.branch,maxHp:st.hp,stats:st,targetId,activeSkillIds:s.skillTree?.presets?.[s.skillTree.selectedPreset]?.active??[],cooldowns:e.treeSkillCooldowns??{}};
+ const commands=dispatchRacialLegendaryEvent(s,event,context);let index=0;
+ for(const c of commands){const procId=(c.procId??castId??e.id)+':legend:'+c.ownerItemId+':'+index++;
+  if(c.type==='shield'){e.playerShieldLayers??=createPlayerShieldLayers(e.treeCombatClock??0);const grant=grantPlayerShieldLayer(e.playerShieldLayers,{source:'legendary:'+c.ownerItemId,ownerItemId:c.ownerItemId,capacity:c.capacity+(st.shieldBonus??0),durationMs:c.durationMs,clock:e.playerShieldLayers.clock,hp:e.heroHp});if(grant?.applied){e.playerShieldLayers=grant.state;emitCombatDisplay(e,{kind:'shield',sourceId:'hero',skillId:c.legendaryId,shieldDelta:c.capacity+(st.shieldBonus??0)});}}
+  else if(c.type==='damage'){const u=e.enemies.find(u=>u.id===c.targetId&&u.hp>0);if(!u||e.heroHp<=0)continue;const crit=c.crit===true&&Math.random()<st.crit,raw=st.atk*c.coefficient*(crit?st.critDamage:1),adjusted=e.treeEffects?skillTreeEnemyAttributes(u,e.treeEffects):null,damage=c.damageType==='physical'?physical(raw,Math.max(0,(adjusted?.armor??u.armor)-st.penetration)):resolveElementDamage(raw,c.damageType,st.elementAttack[c.damageType],(adjusted?.elementResistance??u.elementResistance)[c.damageType],u.elementTags);const hpBefore=u.hp;hitEnemy(u,damage,e,{kind:'legend',sourceId:'hero',castId:procId,hitId:procId,skillId:c.legendaryId,element:c.damageType,crit});if(c.lifesteal&&e.heroHp>0){const heal=calculateLifesteal({rating:st.lifesteal??0,maxHp:st.hp,currentHp:e.heroHp,hits:[{hitId:procId,hpBefore,hpAfter:u.hp,source:'active'}]});if(heal?.heal>0){e.heroHp+=heal.heal;emitCombatDisplay(e,{kind:'heal',skillId:'lifesteal',hpDelta:heal.heal});}}logs.push('传说回响 → '+u.name);}
+ }
+ return commands;
+}
+
 export function executeTreePlayerAction(s,e,ctx){
  const {stats,resolveElementDamage,now,input,effects,onDamageAction,onHeroDeath}=ctx??{};
  if(!e||e.done||!Array.isArray(e.enemies)||typeof stats!=='function'||typeof resolveElementDamage!=='function'||!Number.isFinite(now)||!effects||typeof effects.apply!=='function'||typeof onDamageAction!=='function'||typeof onHeroDeath!=='function')return null;
@@ -282,14 +294,14 @@ export function executeTreePlayerAction(s,e,ctx){
  const host={
   heroAlive:()=>e.heroHp>0,isAlive:id=>(byId(id)?.hp??0)>0,hasLivingTargets:()=>e.enemies.some(u=>u.hp>0),random:()=>Math.random(),
   consumeCooldown:({skillId,cooldownMs})=>{if((e.treeSkillCooldowns?.[skillId]??0)>0||cooldownMs>110000)return false;e.treeSkillCooldowns??={};e.treeSkillCooldowns[skillId]=Math.ceil(cooldownMs/1100);return true;},
-  onActiveCast:event=>{commitRaceRuntime(e,s.race,event.runtimePatch);countEquippedSkillCast(s);emitCombatDisplay(e,{kind:'cast',castId:event.castId,skillId:event.skillId,targetId:e.targetId??'hero',outcome:'none'});counter=null;lifestealHits=[];e.activeCastCount++;if(initialPlan.actions.every(a=>a.kind!=='hit'))logs.push('施放 · '+(skillTreeNode(event.skillId)?.name??event.skillId));e.lastCast={recordVersion:2,id:event.castId,skillId:event.skillId,scope:initialPlan.scope,hits:[]};},
+  onActiveCast:event=>{racialLegendEvent(s,e,{type:'beforeCast'},{st,resolveElementDamage,logs,castId:event.castId,skillId:event.skillId,weaponType:input.weaponType});commitRaceRuntime(e,s.race,event.runtimePatch);countEquippedSkillCast(s);emitCombatDisplay(e,{kind:'cast',castId:event.castId,skillId:event.skillId,targetId:e.targetId??'hero',outcome:'none'});counter=null;lifestealHits=[];e.activeCastCount++;if(initialPlan.actions.every(a=>a.kind!=='hit'))logs.push('施放 · '+(skillTreeNode(event.skillId)?.name??event.skillId));e.lastCast={recordVersion:2,id:event.castId,skillId:event.skillId,scope:initialPlan.scope,hits:[]};},
   applyEffect:(target,effect,event)=>effects.apply(target,effect,event),
   resolveEffectHit:action=>{const u=byId(action.targetId),hit=Math.random()<st.hit,record={id:action.hitId,targetId:u.id,hitIndex:action.hitIndex,hit,hpBefore:u.hp,hpAfter:u.hp,actualHpLost:0,killProcHpLost:0};emitCombatDisplay(e,{castId:action.castId??e.lastCast.id,hitId:action.hitId,targetId:u.id,skillId:action.skillId??e.lastCast.skillId,outcome:hit?'hit':'miss',segmentIndex:action.hitIndex??0});if(!hit)logs.push(u.name+' · 未命中');return record;},
   applyPoison:(target,descriptor)=>{const clock=e.treeCombatClock??e.treeEffects?.clock??0;e.treePoison??={};let ledger=e.treePoison[target]??createSkillPoison(target,descriptor.timing,clock);if(ledger.clock!==clock){const advanced=advanceSkillPoison(ledger,{enemyId:target,combatClock:clock,targetMaxHp:byId(target).max});if(!advanced||advanced.ticks.length)throw Error('Unsettled poison before application');ledger=advanced.state;}const next=applySkillPoison(ledger,{enemyId:target,sourceId:descriptor.sourceId,combatClock:clock});if(!next)throw Error('Invalid poison application');e.treePoison[target]=next;logs.push(byId(target).name+' · 中毒 '+next.layers.length+'层');},
   applyArmorBreak:effect=>effects.applyArmorBreak?.(effect),
   consumeStatus:(target,status,event)=>effects.consume?.(target,status,event),
   interrupt:(target,effect)=>{const u=byId(target),r=interruptPreparing(u.control,{now,briefStop:u.profile.interruptStop??1100});if(!r)return false;u.control=r.state;return r.interrupted===true;},
-  cleanse:(ids,count,effect)=>effects.cleanse?.(ids,count,effect)??0,
+  cleanse:(ids,count,effect)=>{const removed=effects.cleanse?.(ids,count,effect)??0;racialLegendEvent(s,e,{type:'cleanseResult',removedCount:removed},{st,resolveElementDamage,logs});return removed;},
   resolveHit:(action,event)=>{
    const u=byId(action.targetId),hit=Math.random()<st.hit,record={id:action.hitId,targetId:u.id,hitIndex:action.hitIndex,hit,hpBefore:u.hp,hpAfter:u.hp,actualHpLost:0,killProcHpLost:0};e.lastCast.hits.push(record);
    if(!hit){emitCombatDisplay(e,{castId:event.castId,hitId:action.hitId,skillId:event.skillId,targetId:u.id,outcome:'miss',segmentIndex:action.hitIndex,element:action.damageType});logs.push(u.name+' · 未命中');return record;}
@@ -298,7 +310,7 @@ export function executeTreePlayerAction(s,e,ctx){
    const linked=ctx.setConfig?resolveSetLinkedHit({...action,baseDamage,conditionalBonus},st.count,ctx.setConfig):{totalDamage:baseDamage+conditionalBonus};if(!linked)throw Error('Incomplete set tuning');
    const adjusted=e.treeEffects?skillTreeEnemyAttributes(u,e.treeEffects,{hasStatus:effects.has}):null,enemyArmor=adjusted?.armor??u.armor,enemyResistance=adjusted?.elementResistance??u.elementResistance;
    const crit=Math.random()<st.crit,raw=linked.totalDamage*(crit?st.critDamage:1)*treeDamage(passives,action.damageType),dealt=action.damageType==='physical'?physical(raw,Math.max(0,enemyArmor*(u.broken?.75:1)-st.penetration)):resolveElementDamage(raw,action.damageType,st.elementAttack[action.damageType],enemyResistance[action.damageType],u.elementTags);
-   const hpBefore=u.hp,hpLost=hitEnemy(u,dealt,e,{castId:event.castId,hitId:action.hitId,skillId:event.skillId,crit,element:action.damageType,segmentIndex:action.hitIndex});Object.assign(record,{hpBefore,hpAfter:u.hp,actualHpLost:hpLost});lifestealHits.push({hitId:action.hitId,hpBefore,hpAfter:u.hp,source:'active'});
+   const hpBefore=u.hp,shieldBefore=u.shield,hpLost=hitEnemy(u,dealt,e,{castId:event.castId,hitId:action.hitId,skillId:event.skillId,crit,element:action.damageType,segmentIndex:action.hitIndex});Object.assign(record,{hpBefore,hpAfter:u.hp,actualHpLost:hpLost});racialLegendEvent(s,e,{type:'directHit',sourceKind:'skill',damageType:action.damageType,hpLost,shieldLost:Math.max(0,shieldBefore-u.shield),shieldBefore},{st,resolveElementDamage,logs,targetId:u.id});lifestealHits.push({hitId:action.hitId,hpBefore,hpAfter:u.hp,source:'active'});
    const execute=tryReaperHit(e.affixState,{battleId:e.id,castId:event.castId,hitIndex:action.hitIndex,targetId:u.id,hit:true,targetHp:u.hp,hasReaper:!!st.specials.reaper});if(execute){e.affixState=execute.state;if(execute.triggered){record.killProcHpLost=u.hp;emitCombatDisplay(e,{castId:event.castId,hitId:action.hitId+':reaper',skillId:'reaper',targetId:u.id,hpDelta:-u.hp,element:null});u.hp=0;logs.push('死神 → '+u.name);}}
    logs.push((skillTreeNode(event.skillId)?.name??event.skillId)+' → '+u.name+' · '+Number(dealt.toFixed(1)));if(u.hp===0&&st.specials.momentum)s.momentum=1;
    if(!counter)counter=typedEnemyReaction(u,hpLost,{...st,ironcoatActive:e.ironcoat>0},now,resolveElementDamage);
@@ -306,6 +318,7 @@ export function executeTreePlayerAction(s,e,ctx){
    return record;
   },
   onCastEnd:event=>{
+   racialLegendEvent(s,e,{type:'castEnd'},{st,resolveElementDamage,logs,castId:event.castId,skillId:event.skillId,weaponType:input.weaponType});
    if(counter&&(byId(counter.sourceId)?.hp??0)>0){const loss=hitHero(e,counter.amount,{kind:'counter',sourceId:counter.sourceId,element:counter.element??'physical'});logs.push(counter.name+' · 反伤 '+Number(loss.toFixed(1)));}
    if(e.heroHp>0){const recovery=calculateLifesteal({rating:st.lifesteal??0,maxHp:st.hp,currentHp:e.heroHp,hits:lifestealHits},ctx.lifestealConfig);if(recovery?.heal>0){const received=treeHeal(passives,e,recovery.heal,st.hp);e.heroHp+=received;emitCombatDisplay(e,{kind:'heal',skillId:'lifesteal',hpDelta:received});e.lastCast.lifesteal=received;}}
    if(e.heroHp<=0){onHeroDeath();if(e.heroHp<=0)return;}

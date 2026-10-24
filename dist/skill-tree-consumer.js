@@ -111,8 +111,6 @@ export function planTreeSkill(input={}){
   plan={...p,damageActionCount:1,actions:p.hits.map(h=>({...h,kind:'hit',effects:[],armorBreak:p.armorBreak?clone(p.armorBreak):null}))};delete plan.hits;delete plan.armorBreak;
  }else{plan=planApprovedSkill(input);if(!plan)return null;plan=clone(plan);}
  for(const pack of Object.values(RACE_PACKS))if(pack.modifyLegendaryPlan)plan=pack.modifyLegendaryPlan(plan,{...input,...input.context});
- if(input.context?.exclusiveIds?.includes('elf-sixfold-echo')&&getSkillOwner(input.skillId)?.id==='elf'&&getSkillOwner(input.skillId)?.skills?.[input.skillId]?.branch==='staff')for(const a of plan.actions)if(a.kind==='hit'&&a.damageType!=='physical')a.coefficient+=.20;
- if(input.context?.exclusiveIds?.includes('elf-dewguard'))for(const a of plan.actions)for(const fx of a.effects??[])if(['shield','heal'].includes(fx.type))fx.amount*=1.2;
  if(input.context?.exclusiveIds?.includes('goblin-ration-opening'))for(const a of plan.actions){const target=input.targets.find(t=>t.id===a.targetId);if(a.kind==='hit'&&target?.hp>target?.maxHp*.75)a.coefficient*=1.12;}
  for(const a of plan.actions){
   a.source={kind:'skill',skillId:plan.skillId};a.skillId=plan.skillId;a.weaponType=input.weaponType??'generic';
