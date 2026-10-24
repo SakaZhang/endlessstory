@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import * as E from './dist/engine.js';
+import {EXPANSION_PACKS} from './dist/race-packs.js';
 import {POTION_BUFF_KEYS,POTION_IMPORT_MATERIALS,potionRecipeAllows,potionMaterialId} from './dist/potion-catalog.js';
 import {commitGameTransaction,SAVE_KEY} from './dist/storage.js';
 import {materialMonsterSources} from './dist/monster-codex-schema.js';
@@ -24,7 +25,7 @@ try{
  // A non-healing batch also uses the one conserved pending slot at numeric stack capacity.
  const full=state();E.learnRecipe(full,'potion-luck');full.materialStacks['human.mat.12|3']=1998;full.potionStacks['luck|3']=1e9;const fq=E.quotePotionRecipe(full,'potion-luck',3,{mainKey:'human.mat.12|3',auxKey:'human.mat.12|3',quantity:999});assert(fq);assert.equal(E.quotePotionRecipe(full,'potion-luck',3,{mainKey:'human.mat.12|3',auxKey:'human.mat.12|3',quantity:1000}),null);const paid=E.craftPotionRecipe(full,fq);assert.equal(paid.quantity,999);assert.equal(full.pendingForgeClaim.potion.quantity,999);assert.equal(full.materialStacks['human.mat.12|3'],0);assert(E.validSave(full));const fullSnapshot=JSON.stringify(full);assert.equal(E.claimForgeResult(full),null);assert.equal(JSON.stringify(full),fullSnapshot);full.potionStacks['luck|3']-=999;assert.equal(E.claimForgeResult(full).quantity,999);assert.equal(full.potionStacks['luck|3'],1e9);assert.equal(E.claimForgeResult(full),null);
  // Real merchant stock -> purchase -> discover -> save. Expanded racial materials retain their canonical natural sources.
- const importIds=new Set(Object.keys(POTION_IMPORT_MATERIALS).map(potionMaterialId));let shop=state(),seenBooks=new Set(),seenImports=new Set();
+ const importIds=new Set(Object.keys(POTION_IMPORT_MATERIALS).map(id=>EXPANSION_PACKS.reduce((value,p)=>p.materialAliases?.[value]??value,id)));let shop=state(),seenBooks=new Set(),seenImports=new Set();
  for(let n=0;n<500&&(seenBooks.size<15||seenImports.size<10);n++){
   const m=E.ensureMerchant(shop,clock);assert.equal(m.offers.length,8);for(const o of [...m.offers]){if(o.type==='recipe'){assert(E.purchaseRecipe(shop,o.offerId,m.revision,clock));seenBooks.add(o.recipeId);}if(o.type==='material'&&importIds.has(o.material)){assert(E.buyMaterial(shop,E.materialKey(o.material,o.quality),1,m.revision,clock));seenImports.add(o.material);assert(shop.regionNavigation.discoveredMaterialIds.includes(o.material));assert(materialMonsterSources(shop,o.material).length>0,'expanded racial material retains its real source routes');}}assert(E.validSave(shop));shop=JSON.parse(JSON.stringify(shop));clock=m.nextRefreshAt;
  }
