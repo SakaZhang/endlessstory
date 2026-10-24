@@ -71,3 +71,6 @@ export function planSkill({skillId,castId,weaponType,selectedTargetId,targets=[]
  return {skillId,castId,scope:m.scope,branch:weaponType??'generic',cooldownMs:m.cooldownMs,activeCastCount:1,damageActionCount:actions.some(a=>a.kind==='hit')?1:0,actions};
 }
 tree.groups=Object.entries(branches).map(([branch,name])=>({id:branch==='common'?'shared':branch,name,ids:tree.nodes.filter(n=>n.branch===branch).map(n=>n.id)}));
+
+const passiveText={spore_lore:'自身负面状态持续时间缩短12%。',bitter_edge:'获得基础攻击8%的物理穿透。',light_pack:'基础攻击提高7%。',scout_breath:'受到的治疗提高12%。',copper_brace:'基础护甲提高12%。',tendon_knots:'最大生命提高8%。',tunnel_survivor:'最大生命提高6%。',ration_sense:'受到的治疗提高10%。',quiet_step:'自身负面状态持续时间缩短10%。'};
+for(const [key,description]of Object.entries(passiveText)){passives[sid(key)].description=description;tree.nodes.find(n=>n.id===sid(key)).description=description;}
