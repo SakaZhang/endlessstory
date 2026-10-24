@@ -63,11 +63,11 @@ export function validMultiEncounter(e,instances){
 export function validMultiCastRecord(c,enemies){
  if(!c||typeof c!=='object'||Array.isArray(c)||typeof c.id!=='string'||!c.id||c.id.length>500||!['single','all','self'].includes(c.scope)||typeof c.skillId!=='string'||!Array.isArray(c.hits)||!Array.isArray(enemies))return false;
  const multihit=c.recordVersion===2;if(c.recordVersion!==undefined&&!multihit)return false;
- if(c.hits.length>enemies.length*(multihit?3:1))return false;
+ if(c.hits.length>enemies.length*(multihit?8:1))return false;
  const ids=new Set(),segments=new Set();
  for(const h of c.hits){
   if(!h||typeof h.id!=='string'||!h.id||h.id.length>700||typeof h.hit!=='boolean'||!enemies.some(u=>u.id===h.targetId))return false;
-  if(multihit){if(!Number.isSafeInteger(h.hitIndex)||h.hitIndex<0||h.hitIndex>2||ids.has(h.id))return false;const segment=h.targetId+':'+h.hitIndex;if(segments.has(segment))return false;ids.add(h.id);segments.add(segment);}
+  if(multihit){if(!Number.isSafeInteger(h.hitIndex)||h.hitIndex<0||h.hitIndex>7||ids.has(h.id))return false;const segment=h.targetId+':'+h.hitIndex;if(segments.has(segment))return false;ids.add(h.id);segments.add(segment);}
  }
  return true;
 }
@@ -284,7 +284,7 @@ export function executeTreePlayerAction(s,e,ctx){
   consumeCooldown:({skillId,cooldownMs})=>{if((e.treeSkillCooldowns?.[skillId]??0)>0||cooldownMs>110000)return false;e.treeSkillCooldowns??={};e.treeSkillCooldowns[skillId]=Math.ceil(cooldownMs/1100);return true;},
   onActiveCast:event=>{commitRaceRuntime(e,s.race,event.runtimePatch);countEquippedSkillCast(s);emitCombatDisplay(e,{kind:'cast',castId:event.castId,skillId:event.skillId,targetId:e.targetId??'hero',outcome:'none'});counter=null;lifestealHits=[];e.activeCastCount++;if(initialPlan.actions.every(a=>a.kind!=='hit'))logs.push('施放 · '+(skillTreeNode(event.skillId)?.name??event.skillId));e.lastCast={recordVersion:2,id:event.castId,skillId:event.skillId,scope:initialPlan.scope,hits:[]};},
   applyEffect:(target,effect,event)=>effects.apply(target,effect,event),
-  resolveEffectHit:action=>{const u=byId(action.targetId),hit=Math.random()<st.hit,record={id:action.hitId,targetId:u.id,hitIndex:action.hitIndex,hit,hpBefore:u.hp,hpAfter:u.hp,actualHpLost:0,killProcHpLost:0};e.lastCast.hits.push(record);emitCombatDisplay(e,{castId:action.castId??e.lastCast.id,hitId:action.hitId,targetId:u.id,skillId:action.skillId??e.lastCast.skillId,outcome:hit?'hit':'miss',segmentIndex:action.hitIndex??0});if(!hit)logs.push(u.name+' · 未命中');return record;},
+  resolveEffectHit:action=>{const u=byId(action.targetId),hit=Math.random()<st.hit,record={id:action.hitId,targetId:u.id,hitIndex:action.hitIndex,hit,hpBefore:u.hp,hpAfter:u.hp,actualHpLost:0,killProcHpLost:0};emitCombatDisplay(e,{castId:action.castId??e.lastCast.id,hitId:action.hitId,targetId:u.id,skillId:action.skillId??e.lastCast.skillId,outcome:hit?'hit':'miss',segmentIndex:action.hitIndex??0});if(!hit)logs.push(u.name+' · 未命中');return record;},
   applyPoison:(target,descriptor)=>{const clock=e.treeCombatClock??e.treeEffects?.clock??0;e.treePoison??={};let ledger=e.treePoison[target]??createSkillPoison(target,descriptor.timing,clock);if(ledger.clock!==clock){const advanced=advanceSkillPoison(ledger,{enemyId:target,combatClock:clock,targetMaxHp:byId(target).max});if(!advanced||advanced.ticks.length)throw Error('Unsettled poison before application');ledger=advanced.state;}const next=applySkillPoison(ledger,{enemyId:target,sourceId:descriptor.sourceId,combatClock:clock});if(!next)throw Error('Invalid poison application');e.treePoison[target]=next;logs.push(byId(target).name+' · 中毒 '+next.layers.length+'层');},
   applyArmorBreak:effect=>effects.applyArmorBreak?.(effect),
   consumeStatus:(target,status,event)=>effects.consume?.(target,status,event),
