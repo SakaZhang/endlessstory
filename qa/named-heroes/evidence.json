@@ -1,0 +1,56 @@
+{
+  "kind": "Native canvas contact sheet of actual modal image sources, NOT browser layout",
+  "browser": "Chromium blocked: socket() Operation not permitted. No retry.",
+  "rows": [
+    {
+      "race": "dwarf",
+      "name": "布洛克",
+      "title": "战士",
+      "file": "battle-assets/sprites/dwarf-idle-0.png",
+      "scale": 1,
+      "footBaseline": 190,
+      "width": 192,
+      "height": 192
+    },
+    {
+      "race": "human",
+      "name": "罗什福尔",
+      "title": "骑士",
+      "file": "races/human/assets/hero-idle-0.png",
+      "scale": 1,
+      "footBaseline": 190,
+      "width": 192,
+      "height": 192
+    },
+    {
+      "race": "elf",
+      "name": "莱姆斯",
+      "title": "年轻祭司",
+      "file": "races/elf/assets/hero-bow-0.png",
+      "scale": 1.1951219512195121,
+      "footBaseline": 190,
+      "width": 192,
+      "height": 192
+    },
+    {
+      "race": "goblin",
+      "name": "奇克",
+      "title": "盗贼",
+      "file": "races/goblin/assets/hero-dagger-0.png",
+      "scale": 0.4492753623188406,
+      "footBaseline": 190,
+      "width": 192,
+      "height": 192
+    },
+    {
+      "race": "ashen",
+      "name": "砾恩",
+      "title": "矿石行者",
+      "file": "races/ashen/art/hero-armguard-idle.png",
+      "scale": 0.7642276422764228,
+      "footBaseline": 190,
+      "width": 192,
+      "height": 192
+    }
+  ]
+}

@@ -1,0 +1,3978 @@
+{
+  "passed": true,
+  "errors": [],
+  "matrix": {
+    "dwarf": {
+      "slots": {
+        "weapon": 16,
+        "helm": 6,
+        "armor": 6,
+        "gloves": 6,
+        "boots": 6,
+        "ring": 6,
+        "amulet": 6
+      },
+      "nativeWeaponFamilies": {
+        "axe": 8,
+        "hammer": 8
+      },
+      "common": 52,
+      "extraCores": 0,
+      "setParts": 12,
+      "setIds": [
+        "anvil",
+        "rune",
+        "guard"
+      ],
+      "legends": 2
+    },
+    "human": {
+      "slots": {
+        "weapon": 16,
+        "helm": 6,
+        "armor": 6,
+        "gloves": 6,
+        "boots": 6,
+        "ring": 6,
+        "amulet": 6
+      },
+      "nativeWeaponFamilies": {
+        "sword_shield": 8,
+        "greatsword": 8
+      },
+      "common": 52,
+      "extraCores": 0,
+      "setParts": 12,
+      "setIds": [
+        "human_blood_oath",
+        "human_royal_edge",
+        "human_last_bastion"
+      ],
+      "legends": 2
+    },
+    "elf": {
+      "slots": {
+        "weapon": 16,
+        "helm": 6,
+        "armor": 6,
+        "gloves": 6,
+        "boots": 6,
+        "ring": 6,
+        "amulet": 6
+      },
+      "nativeWeaponFamilies": {
+        "bow": 8,
+        "staff": 8
+      },
+      "common": 52,
+      "extraCores": 0,
+      "setParts": 12,
+      "setIds": [
+        "elf_arrow",
+        "elf_prism",
+        "elf_root"
+      ],
+      "legends": 2
+    },
+    "goblin": {
+      "slots": {
+        "weapon": 16,
+        "helm": 6,
+        "armor": 6,
+        "gloves": 6,
+        "boots": 6,
+        "ring": 6,
+        "amulet": 6
+      },
+      "nativeWeaponFamilies": {
+        "dagger": 8,
+        "sword": 8
+      },
+      "common": 52,
+      "extraCores": 0,
+      "setParts": 12,
+      "setIds": [
+        "goblin_spore",
+        "goblin_ambush",
+        "goblin_snare"
+      ],
+      "legends": 2
+    },
+    "ashen": {
+      "slots": {
+        "weapon": 16,
+        "helm": 6,
+        "armor": 6,
+        "gloves": 6,
+        "boots": 6,
+        "ring": 6,
+        "amulet": 6
+      },
+      "nativeWeaponFamilies": {
+        "armguard": 8,
+        "hammer": 8
+      },
+      "common": 52,
+      "extraCores": 3,
+      "setParts": 12,
+      "setIds": [
+        "ashen.caldera",
+        "ashen.strata",
+        "ashen.prism"
+      ],
+      "legends": 4
+    }
+  },
+  "totals": {
+    "common": 260,
+    "ordinary": 263,
+    "sets": 60,
+    "legends": 12,
+    "definitions": 335
+  },
+  "reservedStory": [
+    "ashen-primal-core"
+  ],
+  "acquisition": {
+    "dwarf": {
+      "generated": 64,
+      "fused": 52
+    },
+    "human": {
+      "generated": 64,
+      "fused": 52
+    },
+    "elf": {
+      "generated": 64,
+      "fused": 52
+    },
+    "goblin": {
+      "generated": 64,
+      "fused": 52
+    },
+    "ashen": {
+      "generated": 67,
+      "fused": 55
+    },
+    "trader": 263
+  },
+  "changedArt": [
+    {
+      "id": "dwarf_scatter_coppermoon_axe",
+      "race": "dwarf",
+      "existing": false
+    },
+    {
+      "id": "dwarf_scatter_greenbind_axe",
+      "race": "dwarf",
+      "existing": false
+    },
+    {
+      "id": "dwarf_scatter_quarrywedge_axe",
+      "race": "dwarf",
+      "existing": false
+    },
+    {
+      "id": "dwarf_scatter_redhook_axe",
+      "race": "dwarf",
+      "existing": false
+    },
+    {
+      "id": "dwarf_scatter_sixface_hammer",
+      "race": "dwarf",
+      "existing": false
+    },
+    {
+      "id": "dwarf_scatter_pileiron_hammer",
+      "race": "dwarf",
+      "existing": false
+    },
+    {
+      "id": "dwarf_scatter_brassdrum_hammer",
+      "race": "dwarf",
+      "existing": false
+    },
+    {
+      "id": "dwarf_scatter_forkpeen_hammer",
+      "race": "dwarf",
+      "existing": false
+    },
+    {
+      "id": "dwarf_scatter_copperbrow_helm",
+      "race": "dwarf",
+      "existing": false
+    },
+    {
+      "id": "dwarf_scatter_earplate_hood",
+      "race": "dwarf",
+      "existing": false
+    },
+    {
+      "id": "dwarf_scatter_trackscale_armor",
+      "race": "dwarf",
+      "existing": false
+    },
+    {
+      "id": "dwarf_scatter_crossbuckle_apron",
+      "race": "dwarf",
+      "existing": false
+    },
+    {
+      "id": "dwarf_scatter_redcuff_gloves",
+      "race": "dwarf",
+      "existing": false
+    },
+    {
+      "id": "dwarf_scatter_brassknuckle_gloves",
+      "race": "dwarf",
+      "existing": false
+    },
+    {
+      "id": "dwarf_scatter_squaretoe_boots",
+      "race": "dwarf",
+      "existing": false
+    },
+    {
+      "id": "dwarf_scatter_furlip_boots",
+      "race": "dwarf",
+      "existing": false
+    },
+    {
+      "id": "human_scatter_bluecrest_helm",
+      "race": "human",
+      "existing": false
+    },
+    {
+      "id": "human_scatter_wayfarer_hood",
+      "race": "human",
+      "existing": false
+    },
+    {
+      "id": "human_scatter_bluesash_armor",
+      "race": "human",
+      "existing": false
+    },
+    {
+      "id": "human_scatter_quiltcoat_armor",
+      "race": "human",
+      "existing": false
+    },
+    {
+      "id": "human_scatter_bluecuff_gloves",
+      "race": "human",
+      "existing": false
+    },
+    {
+      "id": "human_scatter_trailgrip_gloves",
+      "race": "human",
+      "existing": false
+    },
+    {
+      "id": "human_scatter_silvergreave_boots",
+      "race": "human",
+      "existing": false
+    },
+    {
+      "id": "human_scatter_courier_boots",
+      "race": "human",
+      "existing": false
+    },
+    {
+      "id": "human_scatter_wheat_amulet",
+      "race": "human",
+      "existing": false
+    },
+    {
+      "id": "human_scatter_compass_amulet",
+      "race": "human",
+      "existing": false
+    },
+    {
+      "id": "human_scatter_bell_amulet",
+      "race": "human",
+      "existing": false
+    },
+    {
+      "id": "human_scatter_oath_amulet",
+      "race": "human",
+      "existing": false
+    },
+    {
+      "id": "elf_scatter_helm_5",
+      "race": "elf",
+      "existing": true
+    },
+    {
+      "id": "elf_scatter_helm_6",
+      "race": "elf",
+      "existing": true
+    },
+    {
+      "id": "elf_scatter_armor_5",
+      "race": "elf",
+      "existing": true
+    },
+    {
+      "id": "elf_scatter_armor_6",
+      "race": "elf",
+      "existing": true
+    },
+    {
+      "id": "elf_arrow_helm",
+      "race": "elf",
+      "existing": true
+    },
+    {
+      "id": "elf_arrow_armor",
+      "race": "elf",
+      "existing": true
+    },
+    {
+      "id": "elf_arrow_gloves",
+      "race": "elf",
+      "existing": true
+    },
+    {
+      "id": "elf_arrow_boots",
+      "race": "elf",
+      "existing": true
+    },
+    {
+      "id": "elf_prism_helm",
+      "race": "elf",
+      "existing": true
+    },
+    {
+      "id": "elf_prism_armor",
+      "race": "elf",
+      "existing": true
+    },
+    {
+      "id": "elf_prism_gloves",
+      "race": "elf",
+      "existing": true
+    },
+    {
+      "id": "elf_prism_boots",
+      "race": "elf",
+      "existing": true
+    },
+    {
+      "id": "elf_root_helm",
+      "race": "elf",
+      "existing": true
+    },
+    {
+      "id": "elf_root_armor",
+      "race": "elf",
+      "existing": true
+    },
+    {
+      "id": "elf_root_gloves",
+      "race": "elf",
+      "existing": true
+    },
+    {
+      "id": "elf_root_boots",
+      "race": "elf",
+      "existing": true
+    },
+    {
+      "id": "elf_scatter_weapon_9",
+      "race": "elf",
+      "existing": false
+    },
+    {
+      "id": "elf_scatter_weapon_10",
+      "race": "elf",
+      "existing": false
+    },
+    {
+      "id": "elf_scatter_weapon_11",
+      "race": "elf",
+      "existing": false
+    },
+    {
+      "id": "elf_scatter_weapon_12",
+      "race": "elf",
+      "existing": false
+    },
+    {
+      "id": "elf_scatter_weapon_13",
+      "race": "elf",
+      "existing": false
+    },
+    {
+      "id": "elf_scatter_weapon_14",
+      "race": "elf",
+      "existing": false
+    },
+    {
+      "id": "elf_scatter_weapon_15",
+      "race": "elf",
+      "existing": false
+    },
+    {
+      "id": "elf_scatter_weapon_16",
+      "race": "elf",
+      "existing": false
+    },
+    {
+      "id": "elf_scatter_gloves_5",
+      "race": "elf",
+      "existing": false
+    },
+    {
+      "id": "elf_scatter_gloves_6",
+      "race": "elf",
+      "existing": false
+    },
+    {
+      "id": "elf_scatter_boots_5",
+      "race": "elf",
+      "existing": false
+    },
+    {
+      "id": "elf_scatter_boots_6",
+      "race": "elf",
+      "existing": false
+    },
+    {
+      "id": "elf_scatter_amulet_5",
+      "race": "elf",
+      "existing": false
+    },
+    {
+      "id": "elf_scatter_amulet_6",
+      "race": "elf",
+      "existing": false
+    },
+    {
+      "id": "elf-sixfold-heartwood",
+      "race": "elf",
+      "existing": true
+    },
+    {
+      "id": "elf-last-string",
+      "race": "elf",
+      "existing": true
+    },
+    {
+      "id": "goblin_scatter_weapon_7",
+      "race": "goblin",
+      "existing": false
+    },
+    {
+      "id": "goblin_scatter_weapon_8",
+      "race": "goblin",
+      "existing": false
+    },
+    {
+      "id": "goblin_scatter_weapon_9",
+      "race": "goblin",
+      "existing": false
+    },
+    {
+      "id": "goblin_scatter_weapon_10",
+      "race": "goblin",
+      "existing": false
+    },
+    {
+      "id": "goblin_scatter_weapon_11",
+      "race": "goblin",
+      "existing": false
+    },
+    {
+      "id": "goblin_scatter_weapon_12",
+      "race": "goblin",
+      "existing": false
+    },
+    {
+      "id": "goblin_scatter_weapon_13",
+      "race": "goblin",
+      "existing": false
+    },
+    {
+      "id": "goblin_scatter_weapon_14",
+      "race": "goblin",
+      "existing": false
+    },
+    {
+      "id": "goblin_scatter_weapon_15",
+      "race": "goblin",
+      "existing": false
+    },
+    {
+      "id": "goblin_scatter_weapon_16",
+      "race": "goblin",
+      "existing": false
+    },
+    {
+      "id": "goblin_scatter_helm_6",
+      "race": "goblin",
+      "existing": false
+    },
+    {
+      "id": "goblin_scatter_armor_6",
+      "race": "goblin",
+      "existing": false
+    },
+    {
+      "id": "goblin_scatter_gloves_6",
+      "race": "goblin",
+      "existing": false
+    },
+    {
+      "id": "goblin_scatter_boots_6",
+      "race": "goblin",
+      "existing": false
+    },
+    {
+      "id": "goblin_scatter_amulet_6",
+      "race": "goblin",
+      "existing": false
+    },
+    {
+      "id": "ashen.scatter.38",
+      "race": "ashen",
+      "existing": false
+    },
+    {
+      "id": "ashen.scatter.39",
+      "race": "ashen",
+      "existing": false
+    },
+    {
+      "id": "ashen.scatter.40",
+      "race": "ashen",
+      "existing": false
+    },
+    {
+      "id": "ashen.scatter.41",
+      "race": "ashen",
+      "existing": false
+    },
+    {
+      "id": "ashen.scatter.42",
+      "race": "ashen",
+      "existing": false
+    },
+    {
+      "id": "ashen.scatter.43",
+      "race": "ashen",
+      "existing": false
+    },
+    {
+      "id": "ashen.scatter.44",
+      "race": "ashen",
+      "existing": false
+    },
+    {
+      "id": "ashen.scatter.45",
+      "race": "ashen",
+      "existing": false
+    },
+    {
+      "id": "ashen.scatter.46",
+      "race": "ashen",
+      "existing": false
+    },
+    {
+      "id": "ashen.scatter.47",
+      "race": "ashen",
+      "existing": false
+    },
+    {
+      "id": "ashen.scatter.48",
+      "race": "ashen",
+      "existing": false
+    },
+    {
+      "id": "ashen.scatter.49",
+      "race": "ashen",
+      "existing": false
+    },
+    {
+      "id": "ashen.scatter.50",
+      "race": "ashen",
+      "existing": false
+    },
+    {
+      "id": "ashen.scatter.51",
+      "race": "ashen",
+      "existing": false
+    },
+    {
+      "id": "ashen.scatter.52",
+      "race": "ashen",
+      "existing": false
+    },
+    {
+      "id": "ashen.scatter.53",
+      "race": "ashen",
+      "existing": false
+    },
+    {
+      "id": "ashen.scatter.54",
+      "race": "ashen",
+      "existing": false
+    },
+    {
+      "id": "ashen.scatter.55",
+      "race": "ashen",
+      "existing": false
+    }
+  ],
+  "art": [
+    {
+      "id": "dwarf_scatter_cleft_axe",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_cleft_axe.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "4a3ccd223f90b3ef4098a6f9a81d4d98f15d157759eba84fc960c9e35ca513fa"
+    },
+    {
+      "id": "dwarf_scatter_veincut_axe",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_veincut_axe.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "c82925902903266c394e1af62af4bc3aacc1826f9aa2a411971cdc9e0f301bce"
+    },
+    {
+      "id": "dwarf_scatter_rivet_hammer",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_rivet_hammer.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "828978b5f878433f957a7d727b08b40f46573627ab31773827ac78e64cf15286"
+    },
+    {
+      "id": "dwarf_scatter_deepforge_hammer",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_deepforge_hammer.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "d3d1ad79cc10ca30364a44e7af8f2c66e14c6831690fd7d7d7306ae8d6caa641"
+    },
+    {
+      "id": "dwarf_scatter_mineguard_helm",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_mineguard_helm.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "f80277f044a5bbfe60e45e4d426013e845eba4ee4a989a3b057344cc48e7e951"
+    },
+    {
+      "id": "dwarf_scatter_forger_hood",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_forger_hood.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "c76075b6265cff7c7229a1d7af5b905a24551dd11a53e2e994d9219532feafa2"
+    },
+    {
+      "id": "dwarf_scatter_blackforge_plate",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_blackforge_plate.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "e20afac7dd38e3dc352863b4a6542138f1ff97f4443999afe94dc962864a8899"
+    },
+    {
+      "id": "dwarf_scatter_rocklizard_hide",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_rocklizard_hide.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "e7f8658e479d3e46f0a6d0d46a2e1932cafc86e2763b5c20848c808857fbe75e"
+    },
+    {
+      "id": "dwarf_scatter_forge_ironhands",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_forge_ironhands.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "2799d0d04e35418163aa6ab8461eb71c57206a76d87d082cacc816257982d517"
+    },
+    {
+      "id": "dwarf_scatter_haulrope_grips",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_haulrope_grips.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "c1d8c56ba907632ff5b64dbd4f1205bf77465408fb0fbbf39fde8f2ce3b7e8d7"
+    },
+    {
+      "id": "dwarf_scatter_ironsole_boots",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_ironsole_boots.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "d10dd43ec3afbb488080e470d3061c32ddf6d69dcdb079320c9eff0069cde789"
+    },
+    {
+      "id": "dwarf_scatter_stonepath_boots",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_stonepath_boots.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "a79a5f80f3e025c72b4bf1dc5fc553c86694dd8ed7bcf870c3bb12812edc5151"
+    },
+    {
+      "id": "dwarf_scatter_anvil_seal_ring",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_anvil_seal_ring.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "57a5e55108247417226c060a6fc782ab1d2c77e046a35338635d0fa9bb91d4d5"
+    },
+    {
+      "id": "dwarf_scatter_engraved_ring",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_engraved_ring.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "957588d128fc56ef02709e7617afe75803b7516f6d910bde8d3170501f0f9a91"
+    },
+    {
+      "id": "dwarf_scatter_oathkeeper_ring",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_oathkeeper_ring.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "f3b685697a4a827e20bfb0b36841c18527c0583a010de4acb0d57a75a985cbb2"
+    },
+    {
+      "id": "dwarf_scatter_hearth_pendant",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_hearth_pendant.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "2fa07a72a41a4498c4de8d3660c945326e56ec7e095a814b70e321dcb4cba656"
+    },
+    {
+      "id": "dwarf_scatter_stone_marrow_pendant",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_stone_marrow_pendant.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "575c9df7fd66a029c1733f11e5a937366d21acaade4516f1be9da04415b2e259"
+    },
+    {
+      "id": "dwarf_scatter_old_oath_charm",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_old_oath_charm.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "4e23e3c901c6658284b582f8a30016fde97a05fc4112de38b28245879d95baf7"
+    },
+    {
+      "id": "dwarf_scatter_slagtooth_axe",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_slagtooth_axe.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "07450fe96bc48c48665053b3f484a528fa274ef12ec86fab0bea6d4bab8ad3c5"
+    },
+    {
+      "id": "dwarf_scatter_copperedge_axe",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_copperedge_axe.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "3fcfe13722622ab215b0368514348bace983c432f7838e4679d39737f2950b0a"
+    },
+    {
+      "id": "dwarf_scatter_squareforge_hammer",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_squareforge_hammer.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "3aac2fb454fa8fae987a7b70df0151e5ff7ebbf5317a6727bc383e944a1fdd0e"
+    },
+    {
+      "id": "dwarf_scatter_coalmark_hammer",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_coalmark_hammer.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "325719c49bb7ea639b5e97fbb054288c3a1e3b8d5b79da449857504e0bb1a5f7"
+    },
+    {
+      "id": "dwarf_scatter_riveted_helm",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_riveted_helm.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "5da99b0b004dfa057537b8182739e31f7e27829d125a685f5a83cabc0460fcc9"
+    },
+    {
+      "id": "dwarf_scatter_sootcloth_hood",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_sootcloth_hood.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "51579ff7f96a5e72d3a6ef7b7cd5d8f3e6e35074ed3c2a4e907d5a8a27c33bb3"
+    },
+    {
+      "id": "dwarf_scatter_riveted_cuirass",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_riveted_cuirass.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "c8659356fe90da5bd0c565f8a9697112c6eb1ba1519da2c9d332f1a3d821acdb"
+    },
+    {
+      "id": "dwarf_scatter_minehide_coat",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_minehide_coat.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "51e95e480b69aa2047214c7bb00497b26906268b0b94a4450100b7f8c6be05eb"
+    },
+    {
+      "id": "dwarf_scatter_copperknuckle_gloves",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_copperknuckle_gloves.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "32d3733dfd482adbf9fddecdaa0e7f9ba58cb3bd401029c928b2769906bc3ea7"
+    },
+    {
+      "id": "dwarf_scatter_hempbound_grips",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_hempbound_grips.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "dab4310d0788a4213b805aafa84397b6d517ac7d3e59339ebb3fa28433147c5e"
+    },
+    {
+      "id": "dwarf_scatter_rivetheel_boots",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_rivetheel_boots.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "9d7b2a5aefbc60d9fa156ca1adfed0cb983e94c3c75e5aa8087d0e5ff8a3ecc7"
+    },
+    {
+      "id": "dwarf_scatter_shaftwalker_boots",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_shaftwalker_boots.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "1f23165dfd252a4df0c1e2e639b8bbd4fb543038b7ec096b354dddbf832be89c"
+    },
+    {
+      "id": "dwarf_scatter_hammermark_ring",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_hammermark_ring.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "e1f3c56cab5c5a0c233c083b8b72b8ab07296f60531fcfe214db339983404fb7"
+    },
+    {
+      "id": "dwarf_scatter_copperglyph_ring",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_copperglyph_ring.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "4c05236d1503d32f1b96db9a2c0e8f4da72ccd8a34d7d3bc7ae5234be2cd85a9"
+    },
+    {
+      "id": "dwarf_scatter_stonebound_ring",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_stonebound_ring.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "f6e16f93eb42bbf882fee5b5bc5c85dd39e48acce756da2f7d46415f2d4d1046"
+    },
+    {
+      "id": "dwarf_scatter_forgechip_pendant",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_forgechip_pendant.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "b752ba632c997d549c1ba1c413229e676f25c3d4b2bca15654e18bb2d7a51c59"
+    },
+    {
+      "id": "dwarf_scatter_deepstone_charm",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_deepstone_charm.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "ade21cde7ebb90002b641f3aed3b40ddef889cb2786baf0577ef8c7aaaab3b48"
+    },
+    {
+      "id": "dwarf_scatter_inscribedplate_charm",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_inscribedplate_charm.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "d5ba0ec71db51610383489ebc334157738a18ecf33fac235447690a629a6b30c"
+    },
+    {
+      "id": "dwarf_set_anvil_helm",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_set_anvil_helm.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "03c57fc9c58b0c0242f1e7ba5067d053daec4f2e9c3b2f2c4f8da5889c9de3ec"
+    },
+    {
+      "id": "dwarf_set_anvil_armor",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_set_anvil_armor.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "05d9b43fa963d536b336859fda146d8a174478a21ca78bdf5ccc593d94e22647"
+    },
+    {
+      "id": "dwarf_set_anvil_gloves",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_set_anvil_gloves.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "8906ba899bd5b00910d24945ceddc96282baffb3bf5f51f5145f435a144d50f0"
+    },
+    {
+      "id": "dwarf_set_anvil_boots",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_set_anvil_boots.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "3361d87179764cce5d35b446eb99aec3cbcb9d403394c079167459a029e9a1fc"
+    },
+    {
+      "id": "dwarf_set_rune_helm",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_set_rune_helm.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "36a7b4fb8ab564a18f6e4d1533da1aa3faf62b47dc5debbaaa940ad942424d55"
+    },
+    {
+      "id": "dwarf_set_rune_armor",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_set_rune_armor.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "9c3ddb8dfdd7620ddd547e5cfd7be7301f653072c69f58c80ef011c3bf018bfb"
+    },
+    {
+      "id": "dwarf_set_rune_gloves",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_set_rune_gloves.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "4381c1db538a029bd3a5b9f3e2d242606f832e18988c03b79931c0c61df07307"
+    },
+    {
+      "id": "dwarf_set_rune_boots",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_set_rune_boots.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "3f6e80c503626a47b09a65615a7d42c8e6d143a71b7af702599d9deb6f17674b"
+    },
+    {
+      "id": "dwarf_set_guard_helm",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_set_guard_helm.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "d7c76e394efbe01dc3c7b6269efd1c4d9e56dcc2eae65ad6c1067c524d12147b"
+    },
+    {
+      "id": "dwarf_set_guard_armor",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_set_guard_armor.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "78d00f43ed132300b048e8ea15bda941f9387e7108ba6ad826f2dcb6ca9b8f36"
+    },
+    {
+      "id": "dwarf_set_guard_gloves",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_set_guard_gloves.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "549959b96f9968a0a020f72e4c48b7eafb80d810b93e1c5a64fd00ebeb6ab6cb"
+    },
+    {
+      "id": "dwarf_set_guard_boots",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_set_guard_boots.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "a6da65f947ca37e43b1091e8913da84ceeb29df1930ec912ac0ce4e22d5f321d"
+    },
+    {
+      "id": "dwarf_scatter_coppermoon_axe",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_coppermoon_axe.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "db163ff37b7c19da21e734b013e0ad6053de0484b1df1c8c615984fa74907b39"
+    },
+    {
+      "id": "dwarf_scatter_greenbind_axe",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_greenbind_axe.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "8124b374d870269c1ea90d833f451ae0dbe78b4c47da029122f659994c86bb6a"
+    },
+    {
+      "id": "dwarf_scatter_quarrywedge_axe",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_quarrywedge_axe.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "22a154968736a55b3d5d04faa28445b41711f4a217fde1fd0b0c2cc7139aa933"
+    },
+    {
+      "id": "dwarf_scatter_redhook_axe",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_redhook_axe.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "afca85b043723c6b2567a2dbcf2e05174345176cbfd43d8ecd4a8b54bbbb642e"
+    },
+    {
+      "id": "dwarf_scatter_sixface_hammer",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_sixface_hammer.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "eb611ad20e81b3e8f895ae875164a80bb2a452fc57da683a0d2ce59d100270a1"
+    },
+    {
+      "id": "dwarf_scatter_pileiron_hammer",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_pileiron_hammer.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "6c01b984dfc7cc3c5c1d43d2c530f763e1c1bcb3e4103e3a7abe3ccfa69b7563"
+    },
+    {
+      "id": "dwarf_scatter_brassdrum_hammer",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_brassdrum_hammer.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "8926a31b7761a55fd445724daf2f7ed302c51b40b95f30e8c5b01df24459f4cc"
+    },
+    {
+      "id": "dwarf_scatter_forkpeen_hammer",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_forkpeen_hammer.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "8a04e7a7950b19ac134647497b27816a064f7c3c66b91926be0f62dcd508be96"
+    },
+    {
+      "id": "dwarf_scatter_copperbrow_helm",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_copperbrow_helm.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "fa5366d540da750454c84bb07777c447b4fb95a26918662459ceb7afae9e0c9c"
+    },
+    {
+      "id": "dwarf_scatter_earplate_hood",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_earplate_hood.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "636e17dc508886480c5a2426308df4354401d3120885cff8625d2e9a3b119d25"
+    },
+    {
+      "id": "dwarf_scatter_trackscale_armor",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_trackscale_armor.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "c23402da6cd0a188e8bea9a9a4b0ac3217aa152a99889e3bc9d094fd6dacf93f"
+    },
+    {
+      "id": "dwarf_scatter_crossbuckle_apron",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_crossbuckle_apron.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "daedd7aa49d63c6fa26c2ced99bebf99e2289084439440322524072428bd2c50"
+    },
+    {
+      "id": "dwarf_scatter_redcuff_gloves",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_redcuff_gloves.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "117ebc3597d94b0b151f66b3e1ac8bb1374ade6f145258b5342a783b326cc5cf"
+    },
+    {
+      "id": "dwarf_scatter_brassknuckle_gloves",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_brassknuckle_gloves.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "9560d6fbdefba56bb73bb94a271f7fd4e1ffb92fd3202f8dcec74637d419ca89"
+    },
+    {
+      "id": "dwarf_scatter_squaretoe_boots",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_squaretoe_boots.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "a5d13b6eaa0a598c675d60dd522a673b7ca387fd488e897ecfcd1350f670a754"
+    },
+    {
+      "id": "dwarf_scatter_furlip_boots",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/dwarf_scatter_furlip_boots.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "b083d5e4953f9de88c50b478de8439dec2a6f8ee1c7801864b4ba12b720d1b0d"
+    },
+    {
+      "id": "first-forge-oathhammer",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/first-forge-oathhammer.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "5655f9b5630b8778478a2f96ae643025864f7c99972d1fc8e3bd7e99ef7d6487"
+    },
+    {
+      "id": "everburning-reactor",
+      "race": "dwarf",
+      "path": "./equipment-assets/64/everburning-reactor.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "28480f8ea7a9be6a6526eb2b14d610f3cf39a930a0431be36c29b97ab327e17a"
+    },
+    {
+      "id": "human_scatter_shield_0",
+      "race": "human",
+      "path": "races/human/assets/equipment-00.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "a311027f24c10068a4361061ee7718777f6bca37de0af09c43c88e7ea92c0618"
+    },
+    {
+      "id": "human_scatter_shield_1",
+      "race": "human",
+      "path": "races/human/assets/equipment-01.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "ecf9701e19f8651e09cbbb77c25b017c440cdeb2ebcd2a556df6ae10a563ae2c"
+    },
+    {
+      "id": "human_scatter_shield_2",
+      "race": "human",
+      "path": "races/human/assets/equipment-02.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "b07db3f47be55e5cafda3d8d7aa229a97bae6b606ccc0ec41feedd2e9f215a7d"
+    },
+    {
+      "id": "human_scatter_shield_3",
+      "race": "human",
+      "path": "races/human/assets/equipment-03.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "1fd97bec0963102d45e2d0a689c57beb179854c8f1abdd3beef91f974dfabdb9"
+    },
+    {
+      "id": "human_scatter_shield_4",
+      "race": "human",
+      "path": "races/human/assets/equipment-04.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "88b9b0bb6a61582b6562f70e8b45d9fd7c7e631c72f5cf5672e02135919f73cd"
+    },
+    {
+      "id": "human_scatter_shield_5",
+      "race": "human",
+      "path": "races/human/assets/equipment-05.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "53af3e886d9c39561d5fc77f2f299d1465cadb6d3c7a7c0444f9fa8d696dd88c"
+    },
+    {
+      "id": "human_scatter_shield_6",
+      "race": "human",
+      "path": "races/human/assets/equipment-06.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "2078c34762e78f879ea9411bd2eb19a33b58aee7d2a81fa2654c6a5eb222cf08"
+    },
+    {
+      "id": "human_scatter_shield_7",
+      "race": "human",
+      "path": "races/human/assets/equipment-07.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "6c00c8177869b44e61371609eaca32d615ae021813c94f4d1e8affd36009144f"
+    },
+    {
+      "id": "human_scatter_sword_0",
+      "race": "human",
+      "path": "races/human/assets/equipment-08.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "5cf9a9676904e287e4f6dea21f9c895968e9816ec5c400ae4d95804b52c4e1e9"
+    },
+    {
+      "id": "human_scatter_sword_1",
+      "race": "human",
+      "path": "races/human/assets/equipment-09.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "75a3ccb3c9a71405748f9527d055ed0dd7d5e7d9896f590614e6d4904126e9b8"
+    },
+    {
+      "id": "human_scatter_sword_2",
+      "race": "human",
+      "path": "races/human/assets/equipment-10.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "09162cb650e8f864ebc95c379cd34e60227387a58e6eb3097b96ae6524601414"
+    },
+    {
+      "id": "human_scatter_sword_3",
+      "race": "human",
+      "path": "races/human/assets/equipment-11.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "fd2d5e6ffe68137332de0b320198716c5411d4472cedde48d4107800456d59dc"
+    },
+    {
+      "id": "human_scatter_sword_4",
+      "race": "human",
+      "path": "races/human/assets/equipment-12.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "dec2d93e620c4f02258749d551b975b81303878e120c6815161edb2f251fc35f"
+    },
+    {
+      "id": "human_scatter_sword_5",
+      "race": "human",
+      "path": "races/human/assets/equipment-13.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "dcd25d9ecae6f3d8af62466a000ec9771fffd45b9a2ae6ada2b18c6c4ba9b7a9"
+    },
+    {
+      "id": "human_scatter_sword_6",
+      "race": "human",
+      "path": "races/human/assets/equipment-14.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "4a6d35cfe7ef202ae99c79ba00b7936bb1b25df00187c8a2b0bb9a020b1c5507"
+    },
+    {
+      "id": "human_scatter_sword_7",
+      "race": "human",
+      "path": "races/human/assets/equipment-15.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "1e4c2555e0ce781ae7322596ada892f0de6985c383771ac3109c397c248bab8c"
+    },
+    {
+      "id": "human_scatter_helm_0",
+      "race": "human",
+      "path": "races/human/assets/equipment-16.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "ed722d8dee4b8d10f120c04cd16834f27c4c14397ad6f29bdc0d08ddb8aac285"
+    },
+    {
+      "id": "human_scatter_helm_1",
+      "race": "human",
+      "path": "races/human/assets/equipment-17.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "844cfcec7dcb9e3e1d9972836dc7c494db5e8df8c1827a917bccf69f3075e851"
+    },
+    {
+      "id": "human_scatter_helm_2",
+      "race": "human",
+      "path": "races/human/assets/equipment-18.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "4b2a2a8933cbcd41d9a32d3e0bfc99eeb83a9ba840dacaabe0c4c59b7b91d42d"
+    },
+    {
+      "id": "human_scatter_helm_3",
+      "race": "human",
+      "path": "races/human/assets/equipment-19.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "84cd98a79da68300aad7c025ea53bfe6701183d0f8c362427683c109ffb9871d"
+    },
+    {
+      "id": "human_scatter_armor_0",
+      "race": "human",
+      "path": "races/human/assets/equipment-24.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "64a5002a2d8b56cc3ef5d8b65d62961e7fda0d286a65a5cd943c2410d7a28b72"
+    },
+    {
+      "id": "human_scatter_armor_1",
+      "race": "human",
+      "path": "races/human/assets/equipment-25.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "5ecd08f19f1ccb5cb7e0007cab5896a323becd9585d42557acaf335a7be341e0"
+    },
+    {
+      "id": "human_scatter_armor_2",
+      "race": "human",
+      "path": "races/human/assets/equipment-26.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "1a77b9261bc764877e7ca9e71d1f5723eea296fcb340c7e93b7599bebb3252ea"
+    },
+    {
+      "id": "human_scatter_armor_3",
+      "race": "human",
+      "path": "races/human/assets/equipment-27.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "fcaacd45debad0e1e8804f67ac30005966578feb017e9f72e89110aecfb572b4"
+    },
+    {
+      "id": "human_scatter_gloves_0",
+      "race": "human",
+      "path": "races/human/assets/equipment-32.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "7d9b785e3790fba246653fe36baa9f41d0fe8e151f073ecbfad395fd06278a01"
+    },
+    {
+      "id": "human_scatter_gloves_1",
+      "race": "human",
+      "path": "races/human/assets/equipment-33.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "5147b2a7560cabfacdebfd796001b5751eded0cfd4d0003377a54d9b5f0f3d1d"
+    },
+    {
+      "id": "human_scatter_gloves_2",
+      "race": "human",
+      "path": "races/human/assets/equipment-34.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "b519980d722cee2dd6d080999b12a376e49f91ca4d939d0d244271a79732992c"
+    },
+    {
+      "id": "human_scatter_gloves_3",
+      "race": "human",
+      "path": "races/human/assets/equipment-35.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "7fc6f3b3b3af792db14f85512afd5d68c3122f9c43818e2e1cf95fbed7c5cba0"
+    },
+    {
+      "id": "human_scatter_boots_0",
+      "race": "human",
+      "path": "races/human/assets/equipment-40.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "3e6d929c43044bde3fe5874ccfe73228449a109e457ff6a4115ebcdd0a203d73"
+    },
+    {
+      "id": "human_scatter_boots_1",
+      "race": "human",
+      "path": "races/human/assets/equipment-41.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "797ea2a360357148d8b4f66590404a0cc176b03ce321934463ee9839d2d15603"
+    },
+    {
+      "id": "human_scatter_boots_2",
+      "race": "human",
+      "path": "races/human/assets/equipment-42.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "9d6fa35b749a1d2039ecdd7d7285f3b95c0a443f839fdb674754f45dfcbaae3b"
+    },
+    {
+      "id": "human_scatter_boots_3",
+      "race": "human",
+      "path": "races/human/assets/equipment-43.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "8cc181632f1967852c3c036b4f941f7998581144f1361c8c832f36a2eff0d9f3"
+    },
+    {
+      "id": "human_scatter_jewel_0",
+      "race": "human",
+      "path": "races/human/assets/materials-18.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "c7e69aeac23beac8538d62dc2308c48856e0bdbfc0f3657d6e61b5db18275d3f"
+    },
+    {
+      "id": "human_scatter_jewel_1",
+      "race": "human",
+      "path": "races/human/assets/materials-19.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "3cf39d7aa29652336ff93657457f53e34e8689c1c73a7b09cbb29d862fb7131b"
+    },
+    {
+      "id": "human_scatter_jewel_2",
+      "race": "human",
+      "path": "races/human/assets/materials-20.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "be6b80ec873e66c55dca191d58b92c61aff1773ca16d07d737318483f5448814"
+    },
+    {
+      "id": "human_scatter_jewel_3",
+      "race": "human",
+      "path": "races/human/assets/materials-21.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "b4c43b0b79efa5cdf2907702398eacf3e5cb3e8f236f5db21b5f53f7de8d6b76"
+    },
+    {
+      "id": "human_blood_oath_helm",
+      "race": "human",
+      "path": "races/human/assets/equipment-20.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "97c00b1a2b0781c34dde449c7cffc3d4324ec627f75b374145b7668c878a3739"
+    },
+    {
+      "id": "human_blood_oath_armor",
+      "race": "human",
+      "path": "races/human/assets/equipment-28.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "ac7db4bef4976e219b015a715c2fa931116fe524a569f8efdb24674dc7cc0123"
+    },
+    {
+      "id": "human_blood_oath_gloves",
+      "race": "human",
+      "path": "races/human/assets/equipment-36.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "41350c91a2b5122d8044e052b27ad364aec6cca147b20ecc3e0ebe69cef731b2"
+    },
+    {
+      "id": "human_blood_oath_boots",
+      "race": "human",
+      "path": "races/human/assets/equipment-44.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "e8f1d9d98e1ca9c0b310d67bcc26aec19fafb61eedb1629e7b54cf6e8b6a0d08"
+    },
+    {
+      "id": "human_royal_edge_helm",
+      "race": "human",
+      "path": "races/human/assets/equipment-21.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "8a9b0dc231094b6b46b5b5c71b4b4ebd2c7d0b39733ab91508aceeb6b5c1debd"
+    },
+    {
+      "id": "human_royal_edge_armor",
+      "race": "human",
+      "path": "races/human/assets/equipment-29.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "439beadd5127dd22838164e64d2cd97b44ec04491f2911720fd57204439839db"
+    },
+    {
+      "id": "human_royal_edge_gloves",
+      "race": "human",
+      "path": "races/human/assets/equipment-37.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "e9231c9f81556c0df9b907eed17a0bc422789c90ea7a19096144619b348e0454"
+    },
+    {
+      "id": "human_royal_edge_boots",
+      "race": "human",
+      "path": "races/human/assets/equipment-45.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "8c5c3076d13dfeadb7b3f77ef0a889b640c88f6147a5a5b8d1487e968a6e2be4"
+    },
+    {
+      "id": "human_last_bastion_helm",
+      "race": "human",
+      "path": "races/human/assets/equipment-22.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "63a8985a3b890ea21b9f7befbeab010c68a58619e7bee396e4e510232d893e22"
+    },
+    {
+      "id": "human_last_bastion_armor",
+      "race": "human",
+      "path": "races/human/assets/equipment-30.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "f9f0252939ece9199e0c6cafd29e1bdc0449772dddde0128d88f3e32d3fc09b9"
+    },
+    {
+      "id": "human_last_bastion_gloves",
+      "race": "human",
+      "path": "races/human/assets/equipment-38.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "117c366addc7516a2b9b6cc7e82472a3a0c405579393a96183eb143dcd0d98de"
+    },
+    {
+      "id": "human_last_bastion_boots",
+      "race": "human",
+      "path": "races/human/assets/equipment-46.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "f9de4833b14e4522105034099960c232e7f838b0cf718f362f214efba7a2f4fa"
+    },
+    {
+      "id": "human_scatter_ring_wheat",
+      "race": "human",
+      "path": "races/human/assets/human_scatter_ring_wheat.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "c9c7bf23d8beb6d9de01a26ecad1cfd8070082d4441143fd0a2731fe428e645f"
+    },
+    {
+      "id": "human_scatter_ring_watch",
+      "race": "human",
+      "path": "races/human/assets/human_scatter_ring_watch.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "05c4dd65933d26609415c368d5925428a5594319468c08f24dcc3d55119d17bf"
+    },
+    {
+      "id": "human_scatter_ring_lantern",
+      "race": "human",
+      "path": "races/human/assets/human_scatter_ring_lantern.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "1c7662404e974e9b0ccbb939c29348297659138dbcfe9d8ec78efc471e0ed133"
+    },
+    {
+      "id": "human_scatter_ring_oath",
+      "race": "human",
+      "path": "races/human/assets/human_scatter_ring_oath.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "9e3e786ba26cf8df725399e621043c9cfb056ac5b12296c2b31ae85b57d384ee"
+    },
+    {
+      "id": "human_scatter_bluecrest_helm",
+      "race": "human",
+      "path": "./equipment-assets/64/human_scatter_bluecrest_helm.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "a77c6f45d500570b273d398b83e4f627c5bc033116df95990187c71b8726a3f7"
+    },
+    {
+      "id": "human_scatter_wayfarer_hood",
+      "race": "human",
+      "path": "./equipment-assets/64/human_scatter_wayfarer_hood.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "73d84c5c3fea1c776f411c05155ac15af9b1154e6fcd983bf005f00037f6624e"
+    },
+    {
+      "id": "human_scatter_bluesash_armor",
+      "race": "human",
+      "path": "./equipment-assets/64/human_scatter_bluesash_armor.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "695ed038d6434915a3e0a7fa75d37935eb1d1b2b27afd90acf890c772bfaa60f"
+    },
+    {
+      "id": "human_scatter_quiltcoat_armor",
+      "race": "human",
+      "path": "./equipment-assets/64/human_scatter_quiltcoat_armor.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "9603402a1a06658ee024db8cfa50c3af1b200118db80128e4e6ad8d145107999"
+    },
+    {
+      "id": "human_scatter_bluecuff_gloves",
+      "race": "human",
+      "path": "./equipment-assets/64/human_scatter_bluecuff_gloves.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "411138b1cad6f034bf65268c0076f1b77b286f4435e90d11293ee366f7966786"
+    },
+    {
+      "id": "human_scatter_trailgrip_gloves",
+      "race": "human",
+      "path": "./equipment-assets/64/human_scatter_trailgrip_gloves.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "333bcd3fb18fa188bf39e58040467dd330ff4304c4a2744f30a2d57744d4631f"
+    },
+    {
+      "id": "human_scatter_silvergreave_boots",
+      "race": "human",
+      "path": "./equipment-assets/64/human_scatter_silvergreave_boots.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "4084b093290467b6dfd8b22dfb52a397275cfd641e55758b1b216b01d59fb0de"
+    },
+    {
+      "id": "human_scatter_courier_boots",
+      "race": "human",
+      "path": "./equipment-assets/64/human_scatter_courier_boots.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "d145ed23af7b47afbafe64249b90e59be704162915249fc99b0c055c9cce09b3"
+    },
+    {
+      "id": "human_scatter_wheat_amulet",
+      "race": "human",
+      "path": "./equipment-assets/64/human_scatter_wheat_amulet.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "ff089ba8bcd007d89f80f4df8a5fb60a8c0e4409c8163f3a870f750d6bd01c29"
+    },
+    {
+      "id": "human_scatter_compass_amulet",
+      "race": "human",
+      "path": "./equipment-assets/64/human_scatter_compass_amulet.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "5150370e81b838412b9295561d2f36170e9a5cfe34114c2086e6d0a6471a654a"
+    },
+    {
+      "id": "human_scatter_bell_amulet",
+      "race": "human",
+      "path": "./equipment-assets/64/human_scatter_bell_amulet.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "85b0adc647f88befeb620a2e159ccc57e01450a717ecf56886749673a3d99665"
+    },
+    {
+      "id": "human_scatter_oath_amulet",
+      "race": "human",
+      "path": "./equipment-assets/64/human_scatter_oath_amulet.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "6ad136cf1a4f440fc43369fafe1bd8f1e9bf94b6afe97e59d093152be3c14fcf"
+    },
+    {
+      "id": "human-oathblade",
+      "race": "human",
+      "path": "races/human/assets/materials-22.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "a141064e0806cde47a58694ba35ec6969d1e52c807a89b546e0c0753a994ff37"
+    },
+    {
+      "id": "human-banner-armor",
+      "race": "human",
+      "path": "races/human/assets/human-banner-armor.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "1c40acf0b03d286c644426a19c9a63e941e9ee31826e279bcb83ac430788934c"
+    },
+    {
+      "id": "elf_scatter_weapon_1",
+      "race": "elf",
+      "path": "races/elf/assets/icon-00.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "ce9ecf0c6c333a211c1dff862afc1d90f74865a78787cd631e69b30a0ca8d80a"
+    },
+    {
+      "id": "elf_scatter_weapon_2",
+      "race": "elf",
+      "path": "races/elf/assets/icon-01.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "42d3b6103c6b3fa492f04b0769693ce72257bcb7c70608daf9bf4074ae041d15"
+    },
+    {
+      "id": "elf_scatter_weapon_3",
+      "race": "elf",
+      "path": "races/elf/assets/icon-02.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "9d78edbee038ee44dd50c19bf425c1508d044a565ec2803308d18503eeed78d2"
+    },
+    {
+      "id": "elf_scatter_weapon_4",
+      "race": "elf",
+      "path": "races/elf/assets/icon-03.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "3f90991153ac3fb655a017f5130489a31ae77bf30b8cb57f9a93c4fd85fe737c"
+    },
+    {
+      "id": "elf_scatter_weapon_5",
+      "race": "elf",
+      "path": "races/elf/assets/icon-04.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "92ac738e4cf741f070ba1eb9068bed8a5bc2212a48205e1e77f536a8d91c8bae"
+    },
+    {
+      "id": "elf_scatter_weapon_6",
+      "race": "elf",
+      "path": "races/elf/assets/icon-05.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "799c2eacda7fe72f6b3bf0b5f6ff23181f2fdd73926fa0a56710b388fc55e760"
+    },
+    {
+      "id": "elf_scatter_weapon_7",
+      "race": "elf",
+      "path": "races/elf/assets/icon-06.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "14fad6ebc2557352b874ee17fe48b539006fb62cb97230cfc07dfe18785de27d"
+    },
+    {
+      "id": "elf_scatter_weapon_8",
+      "race": "elf",
+      "path": "races/elf/assets/icon-07.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "76485623b595e0066345869ee21eb51e30495b39ee53da43c60297c691401a77"
+    },
+    {
+      "id": "elf_scatter_helm_1",
+      "race": "elf",
+      "path": "races/elf/assets/icon-08.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "d7153e33a2c8de8bf8a58a05acd64dc242c048eb2821410228363b84c9effee2"
+    },
+    {
+      "id": "elf_scatter_helm_2",
+      "race": "elf",
+      "path": "races/elf/assets/icon-09.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "71269aa4956a5d6274c28cef269c52ab2e7dbed75e671ac0104eff58eb00703f"
+    },
+    {
+      "id": "elf_scatter_helm_3",
+      "race": "elf",
+      "path": "races/elf/assets/icon-10.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "bcf0970fa92754efa71e36534147c6ef79825d6fc698ce90e7ec2dc18bc9589d"
+    },
+    {
+      "id": "elf_scatter_helm_4",
+      "race": "elf",
+      "path": "races/elf/assets/icon-11.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "8afe989f1a67f461b0693fb7719ec197be974b79be72c8343b922070ec8690db"
+    },
+    {
+      "id": "elf_scatter_helm_5",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_scatter_helm_5.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "763af5de33f997fb9c1aca522c755f60c00a95e2e351b65556fe50d0deabe66d"
+    },
+    {
+      "id": "elf_scatter_helm_6",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_scatter_helm_6.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "8c520477c7fe0acfe13321a6c0b9ee6245516b69f680c67127097bc97eec4b94"
+    },
+    {
+      "id": "elf_scatter_armor_1",
+      "race": "elf",
+      "path": "races/elf/assets/icon-12.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "c605b7362428be183677958f598f977f1dfddd4cdf63590c9134fcb7aca3b0c2"
+    },
+    {
+      "id": "elf_scatter_armor_2",
+      "race": "elf",
+      "path": "races/elf/assets/icon-13.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "4a459d1283af8286922a6f95b24edc3448eb31a7e5ca9fa46305463e53d3df58"
+    },
+    {
+      "id": "elf_scatter_armor_3",
+      "race": "elf",
+      "path": "races/elf/assets/icon-14.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "290c26649f18350158d50d80e9918504c842249291a8302faf93be98626919fc"
+    },
+    {
+      "id": "elf_scatter_armor_4",
+      "race": "elf",
+      "path": "races/elf/assets/icon-15.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "b89b5a94298b929705d45ff93f2063ac142574025bfaa1a7fd39bb1a0ffb1036"
+    },
+    {
+      "id": "elf_scatter_armor_5",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_scatter_armor_5.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "f45f9915d668795fdc2d08d4021fd85acef97dab8682c83c31c0ba733a8e039b"
+    },
+    {
+      "id": "elf_scatter_armor_6",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_scatter_armor_6.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "29c65576eb40a9c928e305de75888126bab818d9d8090415a1829f66c3ca95e1"
+    },
+    {
+      "id": "elf_scatter_gloves_1",
+      "race": "elf",
+      "path": "races/elf/assets/icon-16.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "0328dcd4be4127bca2bdcc8e25f5a3be8f49c4b6ccfe76d5932fbbda397bca25"
+    },
+    {
+      "id": "elf_scatter_gloves_2",
+      "race": "elf",
+      "path": "races/elf/assets/icon-17.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "34df6d5d879491f8e5184a6dd8ec423c082a5036ba1c41281dfb215f6da773cb"
+    },
+    {
+      "id": "elf_scatter_gloves_3",
+      "race": "elf",
+      "path": "races/elf/assets/icon-18.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "e5f0ffd396c4758e38c52beea42add1e6f6f3ea799e56a387cb1ae6e54a7fd73"
+    },
+    {
+      "id": "elf_scatter_gloves_4",
+      "race": "elf",
+      "path": "races/elf/assets/icon-19.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "003a9dcb0f7dfc08603b02e0e259da32b162d2df889f342947f827b0214de718"
+    },
+    {
+      "id": "elf_scatter_boots_1",
+      "race": "elf",
+      "path": "races/elf/assets/icon-20.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "6cbb9f05d01bd3024aef5171e8091414f56b8a338cc60434c242b36e3d9edef8"
+    },
+    {
+      "id": "elf_scatter_boots_2",
+      "race": "elf",
+      "path": "races/elf/assets/icon-21.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "379bbfd8c691c1aac99e93e8eda44791bc290c7941aa174350a47a4fdf7ad15f"
+    },
+    {
+      "id": "elf_scatter_boots_3",
+      "race": "elf",
+      "path": "races/elf/assets/icon-22.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "7b08d70cfaef60a69fd9139c718edcacdef8ec2c5f0c3cc17ff081b4e6d9b830"
+    },
+    {
+      "id": "elf_scatter_boots_4",
+      "race": "elf",
+      "path": "races/elf/assets/icon-23.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "7a21ce23465df1d01699ea82095b6e59075d9ede5a107c81220de1e71a28eae6"
+    },
+    {
+      "id": "elf_scatter_ring_1",
+      "race": "elf",
+      "path": "races/elf/assets/icon-24.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "41ccef6b01a9375a2cc64889b4e2b327ca3a532acb0a47cbd02cbc76971107b4"
+    },
+    {
+      "id": "elf_scatter_ring_2",
+      "race": "elf",
+      "path": "races/elf/assets/icon-25.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "339b275b8dcfe6cd3161a22251021ed2ff3063ebf8dc1a73d4c74074c6480a71"
+    },
+    {
+      "id": "elf_scatter_ring_3",
+      "race": "elf",
+      "path": "races/elf/assets/icon-26.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "e2c98eb249271de82ed4296b7985905af98ab99383888d3ae5f7c000633d5fbf"
+    },
+    {
+      "id": "elf_scatter_ring_4",
+      "race": "elf",
+      "path": "races/elf/assets/icon-27.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "add421b3f58e1fb4c9118397224a470887e7bf04d88aac7df5d9ce935fa662d1"
+    },
+    {
+      "id": "elf_scatter_amulet_1",
+      "race": "elf",
+      "path": "races/elf/assets/icon-28.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "f62e197aed5bce167719bb57351dd4d9dac9d3a3afe30e5d029de8aaf46a50a3"
+    },
+    {
+      "id": "elf_scatter_amulet_2",
+      "race": "elf",
+      "path": "races/elf/assets/icon-29.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "0c415088436ea5d4443e0c0356b5876f736882362ae87311435054fdbdcba02c"
+    },
+    {
+      "id": "elf_scatter_amulet_3",
+      "race": "elf",
+      "path": "races/elf/assets/icon-30.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "a0bd5abdd416779148cc138588652250400feb85d1d04ab1351dc76188982825"
+    },
+    {
+      "id": "elf_scatter_amulet_4",
+      "race": "elf",
+      "path": "races/elf/assets/icon-31.png",
+      "sourceSize": [
+        96,
+        96
+      ],
+      "normalized64Sha256": "97e5a0f59069acf06c33c2103e9219e5c10e045fc6b31d95b9afa45ec1343b90"
+    },
+    {
+      "id": "elf_arrow_helm",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_arrow_helm.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "3a06bef7295f86a16bf705823dc30a4dc35b4a5209a0420e517355bf5e5f332d"
+    },
+    {
+      "id": "elf_arrow_armor",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_arrow_armor.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "e2d5d0e435cbec3c6455e73c52ad4a11bcc587573096e2c4afa849e57b744ec8"
+    },
+    {
+      "id": "elf_arrow_gloves",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_arrow_gloves.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "3c17364e52e52fb7a8b4c40e086c5aa5ba977b8b335b5a34d68bb6e86fe3704b"
+    },
+    {
+      "id": "elf_arrow_boots",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_arrow_boots.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "37e877b0e8faa9c4bde6918087ad909493841ab9037c57dffe9a014fc83639d7"
+    },
+    {
+      "id": "elf_prism_helm",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_prism_helm.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "3f410aaeb743304b6afb4cc7831f331d985391a29c1392766470b106e0f20c14"
+    },
+    {
+      "id": "elf_prism_armor",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_prism_armor.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "67b1e4c433f956b59d7b7f8095700982280ff64fa25646502eb52f7287e40b58"
+    },
+    {
+      "id": "elf_prism_gloves",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_prism_gloves.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "8b8dad0b4c2972e8fd62786a3df1afdc329d5e85f451c74b9da52f818950242a"
+    },
+    {
+      "id": "elf_prism_boots",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_prism_boots.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "e6042eb1da1d71651cd3e7ffb5706c5e26c18f3ca71e34c85b25080282dafa4f"
+    },
+    {
+      "id": "elf_root_helm",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_root_helm.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "91758d59cd20b78726528c4429cff9c4b3743f323639aac849bd4c59f53a84d4"
+    },
+    {
+      "id": "elf_root_armor",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_root_armor.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "5186b552379856f932255f7da529721196ac6ef118e474021d0d43dd0deb3bed"
+    },
+    {
+      "id": "elf_root_gloves",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_root_gloves.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "8beda903df074a9e810247fd22067940e84e0dbbc2c6cbdad30227f80bcd154c"
+    },
+    {
+      "id": "elf_root_boots",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_root_boots.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "cb738931ef7a56fcdcb069dc73d4046081f9d7a1cc0f02cbcd3181550d3d5080"
+    },
+    {
+      "id": "elf_scatter_ring_5",
+      "race": "elf",
+      "path": "races/elf/assets/elf_scatter_ring_5.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "13f66717d856e849d840f9d90ac823d0830052de93b85bda4440fcb28a037f6c"
+    },
+    {
+      "id": "elf_scatter_ring_6",
+      "race": "elf",
+      "path": "races/elf/assets/elf_scatter_ring_6.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "672503f7cb4155fa1c6d04e927244ad5804bed9a3eb72fead21ad5c4d4e3df24"
+    },
+    {
+      "id": "elf_scatter_weapon_9",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_scatter_weapon_9.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "cbc40162113572b2c5505795d45d64725e742a2c8b17767416b11e3c5764fde7"
+    },
+    {
+      "id": "elf_scatter_weapon_10",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_scatter_weapon_10.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "21cd44e9e0951ee41011909ccadbfd4d0d4cf245569e1c4a05f9a59dc1a0841e"
+    },
+    {
+      "id": "elf_scatter_weapon_11",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_scatter_weapon_11.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "36c655a57816813785abdade85c87f66806151c85824036cae1fd5c7af79060b"
+    },
+    {
+      "id": "elf_scatter_weapon_12",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_scatter_weapon_12.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "276a3fd54602a4c07a3fd8e1b49817680402b92a881f99734652054d7cd0279d"
+    },
+    {
+      "id": "elf_scatter_weapon_13",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_scatter_weapon_13.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "2410d21f1dd490c4d43ca9b6d2fba1171b9ba308ede5e63650f7a3a1eec53465"
+    },
+    {
+      "id": "elf_scatter_weapon_14",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_scatter_weapon_14.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "61e64bf773c40dae435b8eef337f899a069a99f48d6ba4784775200551cde160"
+    },
+    {
+      "id": "elf_scatter_weapon_15",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_scatter_weapon_15.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "8e7de6e84dadd985a9ddf48616d095515291ab689063001266422cfec9924dba"
+    },
+    {
+      "id": "elf_scatter_weapon_16",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_scatter_weapon_16.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "8b48ad0360810ff476e785233f40c1d174ac7ff3df84f6ba416fc2c4ee8b9e52"
+    },
+    {
+      "id": "elf_scatter_gloves_5",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_scatter_gloves_5.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "4ec0f1f35b7aa46942ed3093c530ad91aae0ef667568e3e4d6edeaeec0b3e2df"
+    },
+    {
+      "id": "elf_scatter_gloves_6",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_scatter_gloves_6.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "6a0cd2b43a5c06ad13392fc146d5eccea9d5a1560e085da2fa6cd5e0bc9758ba"
+    },
+    {
+      "id": "elf_scatter_boots_5",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_scatter_boots_5.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "504417ad5ce44314af555b6883ac525b99af6c14e394e8d897fb972d8df56294"
+    },
+    {
+      "id": "elf_scatter_boots_6",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_scatter_boots_6.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "651010ee844a59c3c652d73beabf6357b649587682f4456e58e265611b045eec"
+    },
+    {
+      "id": "elf_scatter_amulet_5",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_scatter_amulet_5.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "754c8eb9b20426c5e6874bab38ef8710b7c0e059056b4a4b8450aa636244fdc0"
+    },
+    {
+      "id": "elf_scatter_amulet_6",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf_scatter_amulet_6.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "31805a89a3ca7468ce56591cec15426dba86787e594bb40ed172f45562ad268e"
+    },
+    {
+      "id": "elf-sixfold-heartwood",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf-sixfold-heartwood.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "16d092d046e50af9d83dda49bd236ae22bd3595c4a50cb62ee0d0e6c1abc8200"
+    },
+    {
+      "id": "elf-last-string",
+      "race": "elf",
+      "path": "races/elf/assets/equipment/64/elf-last-string.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "bcca271bba1afd7815af8e4f690bf42bafaabed95f708d625b785d09053c1e9c"
+    },
+    {
+      "id": "goblin_scatter_weapon_1",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_weapon_1.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "d062aeecd1bf4dd4cc4c318b3ca95b9b2b5490c42793bb515133435fb04b626a"
+    },
+    {
+      "id": "goblin_scatter_weapon_2",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_weapon_2.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "b4709153f1c9c3c308691f6233a93b31023c7ff412a5e7a729413759c1fc7530"
+    },
+    {
+      "id": "goblin_scatter_weapon_3",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_weapon_3.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "e242db1bbfc8d582849b718878745cf45b573f1f614eb7cf900e44f6edef5ca3"
+    },
+    {
+      "id": "goblin_scatter_weapon_4",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_weapon_4.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "9e169379c94ba6f35a21c0188659bb0ffa674bf1933060154859ab7522ea4b1e"
+    },
+    {
+      "id": "goblin_scatter_weapon_5",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_weapon_5.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "c793c1d9a99d4bfe14f337181f226d649bf58f30248671b37dc482f08664c8f7"
+    },
+    {
+      "id": "goblin_scatter_weapon_6",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_weapon_6.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "acbdbfcb91bc3a1ca68bc9aedcfe0193ed8d55affa034f55d3d689379a419116"
+    },
+    {
+      "id": "goblin_scatter_helm_1",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_helm_1.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "7e829ea52e9580e7a0d0509597b80be04baa279371890485762ba9eca20d475f"
+    },
+    {
+      "id": "goblin_scatter_helm_2",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_helm_2.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "080b86edb110bcce43b26183e4b798ec20e4c66f67deb0ee6b43f473083c36fb"
+    },
+    {
+      "id": "goblin_scatter_helm_3",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_helm_3.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "a4f75495642cabe2279b716d95e20f6296e9e6c6ed95a3305fdfe77e20cb27e2"
+    },
+    {
+      "id": "goblin_scatter_helm_4",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_helm_4.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "ea48f175e358f41db6d302803c90bfdd515aa7799d5bc779536c835f76217f9d"
+    },
+    {
+      "id": "goblin_scatter_helm_5",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_helm_5.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "ac4a08a63d1d57201aa6d90b3e2544115373ffedeeea4cdb8a142290d1719551"
+    },
+    {
+      "id": "goblin_scatter_armor_1",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_armor_1.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "f11983dbb0cda371f1430a1ff7c57bb702ba0eb40146b523b54273ab6aa0b7ad"
+    },
+    {
+      "id": "goblin_scatter_armor_2",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_armor_2.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "5d0ecbe901ea8053dbdc3c93118ec3d64b250ce27a9c86db627183c274e1459b"
+    },
+    {
+      "id": "goblin_scatter_armor_3",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_armor_3.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "c0fd99e098bcec55674ee3e19a0836dec7f463eadbd374fd51e2955b1f33d0de"
+    },
+    {
+      "id": "goblin_scatter_armor_4",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_armor_4.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "1dac4d46988a0ec3b1b2076c085ef00b13690fedf7f487b46d76effa96a2c717"
+    },
+    {
+      "id": "goblin_scatter_armor_5",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_armor_5.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "3746866fe05ce499148922e70e25dbe2e25b7421f5159451128162050b0ff53a"
+    },
+    {
+      "id": "goblin_scatter_gloves_1",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_gloves_1.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "8afbb5164aedbebe35a1eda7ed623471ad78006e1d14356759f6acd5089a6bb7"
+    },
+    {
+      "id": "goblin_scatter_gloves_2",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_gloves_2.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "dcc6d1485bb164d9f791ee4b2854b9d0e8597f53217616ef03b281be69658336"
+    },
+    {
+      "id": "goblin_scatter_gloves_3",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_gloves_3.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "fe0fab395b259f4894e508cb6ad824c86f2676e67d85378840662cc0155ef937"
+    },
+    {
+      "id": "goblin_scatter_gloves_4",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_gloves_4.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "5a598fd44417d9864228a8218f352e085c53801b90af1ca9f15a0e496b8594ae"
+    },
+    {
+      "id": "goblin_scatter_gloves_5",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_gloves_5.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "58d49cd2a8618ba399d086e80f1ed94736e91be68da099e4fdbb4dac437396ad"
+    },
+    {
+      "id": "goblin_scatter_boots_1",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_boots_1.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "028eb5f70b5f1b2765a0cb4fe598023ce471e89bed2f123851023001451ab1b3"
+    },
+    {
+      "id": "goblin_scatter_boots_2",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_boots_2.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "3d72c9cea1a44c0299bde9586961b9d010441a2867161667d659a4070e814789"
+    },
+    {
+      "id": "goblin_scatter_boots_3",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_boots_3.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "05fea025a0470c767f9c1be821e941b2119eb4d17821c90ca333c7a9675903a8"
+    },
+    {
+      "id": "goblin_scatter_boots_4",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_boots_4.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "05f038b2d97cb3cac19cfd5e7c2ad40a8e9a0f536d2f44a061a27d207c278540"
+    },
+    {
+      "id": "goblin_scatter_boots_5",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_boots_5.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "3d66e3c7923ff2f97c92869fa6e1fa2d13c64bd2af4ddc74ed1ce12983300cdf"
+    },
+    {
+      "id": "goblin_scatter_ring_1",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_ring_1.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "b9fa1c889eb2f8aa6585c1f73d2114643edd16c91f7301869921558534fd970b"
+    },
+    {
+      "id": "goblin_scatter_ring_2",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_ring_2.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "047d7d761408eb36a30d6ae7650bd38c613a9c83f7971118e88b32ee13542aed"
+    },
+    {
+      "id": "goblin_scatter_ring_3",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_ring_3.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "2f15c756097a3bf9dcbcd00bd0864dab7f0d5541ae7e7d460141d74c6ebe70d4"
+    },
+    {
+      "id": "goblin_scatter_ring_4",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_ring_4.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "a6e164f3cd9fd00448e87015639a39457d1d388d1d68932759cc2b3f1acc16cf"
+    },
+    {
+      "id": "goblin_scatter_ring_5",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_ring_5.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "82c3c90342b369aa92b00c30b1a8b543f928e1d34b254b0f72059076b9fdae30"
+    },
+    {
+      "id": "goblin_scatter_amulet_1",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_amulet_1.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "70a0ed3073abd38f856ab1c23124544b90b633891137648024e7c7578d78c338"
+    },
+    {
+      "id": "goblin_scatter_amulet_2",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_amulet_2.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "7d2c48bd1f7e552a60a2d0911fd8c5d9c267f0db6aa810ccbf78ecdf81128008"
+    },
+    {
+      "id": "goblin_scatter_amulet_3",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_amulet_3.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "dafd5187afaee24120a1cec2d0408b326ce73505eec00695df7f7fffe10b64c0"
+    },
+    {
+      "id": "goblin_scatter_amulet_4",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_amulet_4.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "c66edc4b8a93deb6dadb5550896d29bd614e3da933034c993638d4029b430b41"
+    },
+    {
+      "id": "goblin_scatter_amulet_5",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_scatter_amulet_5.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "9d63fb8b94095ab2b03414badb1d8c8f4497939b40052db140a5db8b7713c242"
+    },
+    {
+      "id": "goblin_spore_helm",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_spore_helm.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "f0c72603947bbc2788266a8dbd6a4664485432e9530ab43dd9b5e7c46e22e3fe"
+    },
+    {
+      "id": "goblin_spore_armor",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_spore_armor.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "1f5d13eb634a27274389a94cdc8de18fde4e6acb9ee5b18a84538bf0215d5166"
+    },
+    {
+      "id": "goblin_spore_gloves",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_spore_gloves.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "d2b6ff308605ad4c6c46fa9cf96debc9c92b656c23e5d87480985b8c68f77fbf"
+    },
+    {
+      "id": "goblin_spore_boots",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_spore_boots.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "cec152c5c18371c8400a8dced1b528b5bd5ae96a3833ba7cba67f3f8b06c56fb"
+    },
+    {
+      "id": "goblin_ambush_helm",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_ambush_helm.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "0cbce1dccfe179773ddfc1f4c031e7fe7c57b78c0eeec654371719b018021664"
+    },
+    {
+      "id": "goblin_ambush_armor",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_ambush_armor.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "c06f589fbbefc678d0db0789a7c2f6648dd9a9b419cd921727bd73e758b15bad"
+    },
+    {
+      "id": "goblin_ambush_gloves",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_ambush_gloves.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "3546533fa56293872476831905576604461de7bceba3a91f0a09e6721bca4a7c"
+    },
+    {
+      "id": "goblin_ambush_boots",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_ambush_boots.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "a155e6d3ca455e9f11c8ea5dee814a58a3dbc2c6e68d6c33c57c9bf23e8561d2"
+    },
+    {
+      "id": "goblin_snare_helm",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_snare_helm.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "e0ff6f195a5785d13f5ba6ba20a99d9b7e1241caf280db5de551a9447f617663"
+    },
+    {
+      "id": "goblin_snare_armor",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_snare_armor.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "64710bdd172270e04ea983afce6dd164cdc073a4b7153f074aabd8995f7ff011"
+    },
+    {
+      "id": "goblin_snare_gloves",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_snare_gloves.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "e63827a2a33378ac6f976fe5016152cbe6723267657cfabf0c1e847caf0059f2"
+    },
+    {
+      "id": "goblin_snare_boots",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin_snare_boots.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "b488849e58e1fd72ec0b5174818685528b162c17eac3dc2265405e91cf1b4f36"
+    },
+    {
+      "id": "goblin_scatter_ring_6",
+      "race": "goblin",
+      "path": "races/goblin/assets/goblin_scatter_ring_6.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "1cb4e584d9cf4db1ee88c3a84b998f30d4fb0d05d2e6742807e78320a5706cb7"
+    },
+    {
+      "id": "goblin_scatter_weapon_7",
+      "race": "goblin",
+      "path": "races/goblin/assets/goblin_scatter_weapon_7.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "b9e957c0edd100c2ce4d9669aae5ad6524e56a1ababa1c17ebfbe45f5a4b5068"
+    },
+    {
+      "id": "goblin_scatter_weapon_8",
+      "race": "goblin",
+      "path": "races/goblin/assets/goblin_scatter_weapon_8.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "707b59bddf95543be13cb2671303fa4c385da31e5718187c4f98ba5b812a1bc6"
+    },
+    {
+      "id": "goblin_scatter_weapon_9",
+      "race": "goblin",
+      "path": "races/goblin/assets/goblin_scatter_weapon_9.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "12a54fcdf9079d6853b215152a25c72b996e30aaa5ad358f874a7c7183aa5a8e"
+    },
+    {
+      "id": "goblin_scatter_weapon_10",
+      "race": "goblin",
+      "path": "races/goblin/assets/goblin_scatter_weapon_10.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "f4f7e93ec18ff4c34d76ea687fb406ec5e0323f5a47a1d4d0416991642c8f1dd"
+    },
+    {
+      "id": "goblin_scatter_weapon_11",
+      "race": "goblin",
+      "path": "races/goblin/assets/goblin_scatter_weapon_11.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "69060d6707e84eab1569a3bbd86df7c1e74dc9e0e5b3a77952ce5e200ecedf34"
+    },
+    {
+      "id": "goblin_scatter_weapon_12",
+      "race": "goblin",
+      "path": "races/goblin/assets/goblin_scatter_weapon_12.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "f8c5ea9936e1e5f382b2d33be6972b27e88f240d87e8a5942153f2f5ea0773e8"
+    },
+    {
+      "id": "goblin_scatter_weapon_13",
+      "race": "goblin",
+      "path": "races/goblin/assets/goblin_scatter_weapon_13.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "1acddba1b41f794fb23b69d79aad6ac48b503470fb68c5983231fee662311960"
+    },
+    {
+      "id": "goblin_scatter_weapon_14",
+      "race": "goblin",
+      "path": "races/goblin/assets/goblin_scatter_weapon_14.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "8c1ebbf5bc70b18cbdce03c4a2bac6fa0c8cb6afb98a756865df937e6d40e9eb"
+    },
+    {
+      "id": "goblin_scatter_weapon_15",
+      "race": "goblin",
+      "path": "races/goblin/assets/goblin_scatter_weapon_15.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "6a26d895526f326233e8490db7861948c453e2877c106effe060871724e5c643"
+    },
+    {
+      "id": "goblin_scatter_weapon_16",
+      "race": "goblin",
+      "path": "races/goblin/assets/goblin_scatter_weapon_16.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "cf8be28145c936feda97f3ecfa080ff33848220ae96e3c4055c9174a8b725dda"
+    },
+    {
+      "id": "goblin_scatter_helm_6",
+      "race": "goblin",
+      "path": "races/goblin/assets/goblin_scatter_helm_6.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "c517e79f343b485ed2a89748ff57d418441289cc94de5fd87dd13fc32c03fcc5"
+    },
+    {
+      "id": "goblin_scatter_armor_6",
+      "race": "goblin",
+      "path": "races/goblin/assets/goblin_scatter_armor_6.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "0c0305c5e3e8f9a810937d30ca064dfee7a1a33b8f6cca222856b692e93733d9"
+    },
+    {
+      "id": "goblin_scatter_gloves_6",
+      "race": "goblin",
+      "path": "races/goblin/assets/goblin_scatter_gloves_6.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "a715e7b3241ba540f0bf6e6ba5f4b21d294c6d3262da8259ab6d6a21bc370afc"
+    },
+    {
+      "id": "goblin_scatter_boots_6",
+      "race": "goblin",
+      "path": "races/goblin/assets/goblin_scatter_boots_6.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "628f2335391bb2c856003fd5bb309d6689a8e68ec331b834fb94822aaf95da6a"
+    },
+    {
+      "id": "goblin_scatter_amulet_6",
+      "race": "goblin",
+      "path": "races/goblin/assets/goblin_scatter_amulet_6.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "410f8e0b3620e07aa01b3f73efc546dc5d47279eebcbb3f4f881082449b1174b"
+    },
+    {
+      "id": "goblin-silent-ration",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin-silent-ration.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "701dec64413c2a01026fc61df957593c38fcde12f48b804c9308b66188078423"
+    },
+    {
+      "id": "goblin-silent-steps",
+      "race": "goblin",
+      "path": "races/goblin/assets/icon-goblin-silent-steps.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "17479233f40f29ce562e3d6327111b5e6f04ff1fdc5a2fe32aee4a9a5ad4a6bf"
+    },
+    {
+      "id": "ashen.scatter.01",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.01.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "e111ff7a3f4b8bb35dd6830978612b12585b1eed03329aec59e8175f1cfbb9d2"
+    },
+    {
+      "id": "ashen.scatter.02",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.02.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "0dc3f67b472f27ca30597dd03c87be9b8f7d4197b19e895d10af7392638b4bc7"
+    },
+    {
+      "id": "ashen.scatter.03",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.03.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "1da06fafbc28ca65059f337ea40f9933813f871cda625c959a974f8ce177384b"
+    },
+    {
+      "id": "ashen.scatter.04",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.04.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "8f22c3456b39624e399e13f7ff68cb2020b20e2a02a9e789f83e11b438fb6201"
+    },
+    {
+      "id": "ashen.scatter.05",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.05.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "f2459c4b4738d10fd6e0d10b0b1bf5c17789f04b5f3b1e38e246ebc46b9d2d8c"
+    },
+    {
+      "id": "ashen.scatter.06",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.06.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "49c98dfe794774bc738532eeca6b58ed7fb184aa6724c9d30103bdac9cd7f607"
+    },
+    {
+      "id": "ashen.scatter.07",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.07.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "050da3ec01414c7f3d5c0859fa6ccf808f7c74bb32edf9c09dccb446a35d78d6"
+    },
+    {
+      "id": "ashen.scatter.08",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.08.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "66b9b13f7e74217a50f1db0677a40d38fc7514ca3a8540b5a5c8a4c6011dcdba"
+    },
+    {
+      "id": "ashen.scatter.09",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.09.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "81a8fce8f3759206ffd7f16ba9874e0bac69d00d3415555f3d3e0b53f04e8123"
+    },
+    {
+      "id": "ashen.scatter.10",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.10.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "a2a941bb424c2e0e91356b08ea43b21e7da5853b8c9abc34f11d9f11c9388ca7"
+    },
+    {
+      "id": "ashen.scatter.11",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.11.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "a9f400e7c07d4c1f6d19d6b7e7e59017f42002f807bd2f94296eccb567a4bdcc"
+    },
+    {
+      "id": "ashen.scatter.12",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.12.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "cb6757a7582c71ccec62a1f60d5922e6750d8197e3791cb102985cd49c820343"
+    },
+    {
+      "id": "ashen.scatter.13",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.13.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "684a674abb16606aa9ba04cece92d3a7a9d7f67f175a91b810a057afc57823bd"
+    },
+    {
+      "id": "ashen.scatter.14",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.14.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "23512a25ae522d4922c4b5f8a1d73426891c6f45293ae8631d9348d8ab9302a2"
+    },
+    {
+      "id": "ashen.scatter.15",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.15.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "b03adf70686e98071a8579ebe1fd78d3cb06bd2e9f997991c4071a681a15b7f7"
+    },
+    {
+      "id": "ashen.scatter.16",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.16.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "f87d8deeb08fb236314457e39e083632d3f2a9cb8efe52a0050c27cc1c33ff49"
+    },
+    {
+      "id": "ashen.scatter.17",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.17.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "8836dbcaa9828794d9e24e0bacf14f2bac6e275dc5fe4672e11e428c62e36be5"
+    },
+    {
+      "id": "ashen.scatter.18",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.18.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "f8fb14a392e647faff0f53a7c4997f3cd504839a7c332f839f5d12d662358213"
+    },
+    {
+      "id": "ashen.scatter.19",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.19.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "113d0813d143e78651b53a170cbfe5134ee5175f02493f2fac71fa633eda2a49"
+    },
+    {
+      "id": "ashen.scatter.20",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.20.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "4d929a20201d3938a3dd9a1d6c6bc645015414b2a7d36d52458040ca2e48f628"
+    },
+    {
+      "id": "ashen.scatter.21",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.21.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "dcec7267e6ba78e898430bd69b5b2364bf06540972d5c9914c6b4de7022d6664"
+    },
+    {
+      "id": "ashen.scatter.22",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.22.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "208bfd0fc2042b33e0c8735cdc5cd7491d88d55c3451404f1ccd5964e1342e87"
+    },
+    {
+      "id": "ashen.scatter.23",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.23.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "16e5c304f4db05f4941a185867b9b5ff4bbdd23307721329221375827e6a18e7"
+    },
+    {
+      "id": "ashen.scatter.24",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.24.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "1d58de7e1e57dab5acee3cf5cc1ebef25e392d8331c5f150ddbf8184f8cb3b4e"
+    },
+    {
+      "id": "ashen.scatter.25",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.25.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "37a654c7f091238d01411a4204f529255ececdd712347595bf8f577ceeb96579"
+    },
+    {
+      "id": "ashen.scatter.26",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.26.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "2712eb58a4c9c33cdbdbb8cbd87db5e95be080edbfe413fa7dd425274d955484"
+    },
+    {
+      "id": "ashen.scatter.27",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.27.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "cc19efaa3b31a3337b9c198c58e18175aa48d02d3d79c06b2dc2aa9286873a0a"
+    },
+    {
+      "id": "ashen.scatter.28",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.28.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "9f5de56062812cc5b0614641d446294b76395a2d1927d4c0c2255a0277bb02dd"
+    },
+    {
+      "id": "ashen.scatter.29",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.29.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "9e22ff35b8628ab1fb25038f5247d361a8d3eeb6ae8ca7ad4d4f0afd8bf80c18"
+    },
+    {
+      "id": "ashen.scatter.30",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.30.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "fd6f57edc7a9912d6a37cb02cce2088f4132097a9da1f3a559f30c8bff5c456b"
+    },
+    {
+      "id": "ashen.scatter.31",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.31.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "23255d66060fbc86d33e01b6f2262938693080f44fafe0644d44735ff750c662"
+    },
+    {
+      "id": "ashen.scatter.32",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.32.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "4f2a78c9ec5349d4ee2c5d20dfe472d798f25c5799bdc9a9a65acfede16fee32"
+    },
+    {
+      "id": "ashen.scatter.33",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.33.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "63e6a07961cb616580419ad7fbf76f99ff15cf6bca7d4bd9e9c620b8e80135db"
+    },
+    {
+      "id": "ashen.scatter.34",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.34.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "dfdcba0bd54db4585c22db40bb5e5db020ebed907576e57b3b9b73503429d0c1"
+    },
+    {
+      "id": "ashen.scatter.35",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.35.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "12d104cb220dc4b4659d21e68777923c282eecae6c874985910f649ddfd386ca"
+    },
+    {
+      "id": "ashen.scatter.36",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.scatter.36.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "d85a2e4af04011cb724974bd8c791b07a870ca1feb4d1a8b9b9b504bbcb46d68"
+    },
+    {
+      "id": "ashen.caldera.helm",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.caldera.helm.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "5f4b410f46bc8a15247b5984bcc4dccac699add207f77b7c5bf7d3fb931b5db7"
+    },
+    {
+      "id": "ashen.caldera.armor",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.caldera.armor.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "5ed8352679367c17d03ad00e09702fbee2a808c0bbfbdbc4f249de786f03223f"
+    },
+    {
+      "id": "ashen.caldera.gloves",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.caldera.gloves.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "390bb0dea35a9211a961aa70f2361144f145826dd515821270950ceae9b25947"
+    },
+    {
+      "id": "ashen.caldera.boots",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.caldera.boots.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "abccf0bb10a5691641263606e73fed9b6a099e3596ee2da7ae1840c6c7c9f748"
+    },
+    {
+      "id": "ashen.strata.helm",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.strata.helm.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "f2c2f986ca8d0da592333bd154eedd9364b84ce1f4e32e7da3c8a9af0dd344c8"
+    },
+    {
+      "id": "ashen.strata.armor",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.strata.armor.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "af2ad49066eceacec2a958bb475f967bc06d2ea6e1b36836d48ccc70762fbee0"
+    },
+    {
+      "id": "ashen.strata.gloves",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.strata.gloves.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "79cba2aa2334643093be67abfe9f6948bc936efdadf67c673ef0725fd4f4fb1c"
+    },
+    {
+      "id": "ashen.strata.boots",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.strata.boots.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "b397d080f30f0e519db039823fcb1f51ae65df86ed5a02901ee3ba4b1a9a1a59"
+    },
+    {
+      "id": "ashen.prism.helm",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.prism.helm.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "774e3a69d3e0ce961ca4680ae683882aa68cfbe3d4f726589089e9ae1d3b9c08"
+    },
+    {
+      "id": "ashen.prism.armor",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.prism.armor.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "0f2649a8c6c21a8b1dec3498d328453a2a58e63df520c6a01ca760e22effccb5"
+    },
+    {
+      "id": "ashen.prism.gloves",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.prism.gloves.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "6a1fa1007da170de12effe91ea46300708cd00fa94639c4b9900b30b632c7e8d"
+    },
+    {
+      "id": "ashen.prism.boots",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen.prism.boots.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "c36d7bd4c1b4b63f7f4011af65175fb7946d04d51878795c9eb777aaa79f4c6c"
+    },
+    {
+      "id": "ashen.scatter.37",
+      "race": "ashen",
+      "path": "races/ashen/assets/ashen.scatter.37.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "6909aeb571c91acb6eaeecfaf1663d52ed7e3ae5d0d1e72dd5853b8bea070f0c"
+    },
+    {
+      "id": "ashen.scatter.38",
+      "race": "ashen",
+      "path": "races/ashen/assets/ashen.scatter.38.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "26a09e69db746d02671e39ace87d6ad44e1aa6a1913f0939cfdcf08387549a7a"
+    },
+    {
+      "id": "ashen.scatter.39",
+      "race": "ashen",
+      "path": "races/ashen/assets/ashen.scatter.39.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "27311d015a1b07400d864a7a67d4627f0866ce0665dd5b2fdc81316604aaf592"
+    },
+    {
+      "id": "ashen.scatter.40",
+      "race": "ashen",
+      "path": "races/ashen/assets/ashen.scatter.40.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "5460395c503d8fdcad27de4abf7400ffa03205308697b20b199f3f7958be9fb7"
+    },
+    {
+      "id": "ashen.scatter.41",
+      "race": "ashen",
+      "path": "races/ashen/assets/ashen.scatter.41.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "3a4a810d5a94427f22f85c387e5b3fe4d492637fd235861888d1cbd5f845fbee"
+    },
+    {
+      "id": "ashen.scatter.42",
+      "race": "ashen",
+      "path": "races/ashen/assets/ashen.scatter.42.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "f326719ecfa49fd382ff71d221325d0e32e3710030991c5d7bddbe662c40f827"
+    },
+    {
+      "id": "ashen.scatter.43",
+      "race": "ashen",
+      "path": "races/ashen/assets/ashen.scatter.43.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "855c6429897bf2153c38d6f67a5f6007c0e43cf8df5917834c87e3a09a4dca3e"
+    },
+    {
+      "id": "ashen.scatter.44",
+      "race": "ashen",
+      "path": "races/ashen/assets/ashen.scatter.44.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "5125e30750ff56659b604e18d21a55622522941cca41502aab2832ce800e1583"
+    },
+    {
+      "id": "ashen.scatter.45",
+      "race": "ashen",
+      "path": "races/ashen/assets/ashen.scatter.45.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "363d75060b84fa037bc8231d805e529aa51b077e4da121f64fd023a316998f5b"
+    },
+    {
+      "id": "ashen.scatter.46",
+      "race": "ashen",
+      "path": "races/ashen/assets/ashen.scatter.46.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "bb8f783d074aab26cfed81a73826b3b12622b49ecdbafc9722c2273bbc8630bd"
+    },
+    {
+      "id": "ashen.scatter.47",
+      "race": "ashen",
+      "path": "races/ashen/assets/ashen.scatter.47.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "49d1e2b38f923ce875750b4814d315fb7a3b009c43ab3a123ab94d15d8c6cde1"
+    },
+    {
+      "id": "ashen.scatter.48",
+      "race": "ashen",
+      "path": "races/ashen/assets/ashen.scatter.48.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "643e891cb3c8710a6d17cfac867b38e1389630abfeffbf5ac262fd3ca7337c40"
+    },
+    {
+      "id": "ashen.scatter.49",
+      "race": "ashen",
+      "path": "races/ashen/assets/ashen.scatter.49.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "a7fd0fecf67f21fa2119dea7d72a10356376c099dca3b64cd376567eeda362a6"
+    },
+    {
+      "id": "ashen.scatter.50",
+      "race": "ashen",
+      "path": "races/ashen/assets/ashen.scatter.50.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "6652e45fac6b0b59df62f5088f1959f570e725462c6db8e62d00b20a8cace692"
+    },
+    {
+      "id": "ashen.scatter.51",
+      "race": "ashen",
+      "path": "races/ashen/assets/ashen.scatter.51.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "0e761476f5cf8beb799d1b8eb6bacd7778f6940ef12bf066eab2cc276728e2ed"
+    },
+    {
+      "id": "ashen.scatter.52",
+      "race": "ashen",
+      "path": "races/ashen/assets/ashen.scatter.52.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "52e7d3f786fee397bd89611a7725e14c84b768c1d2bbbf44606352659baed202"
+    },
+    {
+      "id": "ashen.scatter.53",
+      "race": "ashen",
+      "path": "races/ashen/assets/ashen.scatter.53.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "6a447a505a7875278f3582cec65a993130ebb0d86315ca5331c3d545fdecb517"
+    },
+    {
+      "id": "ashen.scatter.54",
+      "race": "ashen",
+      "path": "races/ashen/assets/ashen.scatter.54.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "f21d4d42d0804e13486bdba0930e5106592c4ae555a1b3291373d2b1bd8029af"
+    },
+    {
+      "id": "ashen.scatter.55",
+      "race": "ashen",
+      "path": "races/ashen/assets/ashen.scatter.55.png",
+      "sourceSize": [
+        64,
+        64
+      ],
+      "normalized64Sha256": "af92bb6b2b4c4f1a6867908d963f5dbcbcf664f664ec9219bc3b8ab0004cb394"
+    },
+    {
+      "id": "ashen-molten-core",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen-molten-core.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "5f49e10d14973280e2240a2497ecdca26f435481ee17843a20c79e076ae7fefe"
+    },
+    {
+      "id": "ashen-stone-core",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen-stone-core.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "572be67d9681884c8db1c9ba50e4629c48047b6cd6e73433eda6e19ea3048331"
+    },
+    {
+      "id": "ashen-crystal-core",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen-crystal-core.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "d63e5654f457e5501229bfcc5141edb93393c2ba79c6901b42f7f65f53c17313"
+    },
+    {
+      "id": "ashen-primal-core",
+      "race": "ashen",
+      "path": "races/ashen/art/equipment-ashen-primal-core.png",
+      "sourceSize": [
+        48,
+        48
+      ],
+      "normalized64Sha256": "08e5f24f15bafea543facbd6cbb82564bdd35fed908d8eed73e1f85e4cd06f52"
+    }
+  ]
+}

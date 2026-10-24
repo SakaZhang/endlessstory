@@ -32,3 +32,13 @@ The equipment art gate hashes decoded, nearest-neighbor 64px pixels across every
 Workshop counts and full catalog entries derive from the actual registry. Inventory and forge render the owned family dynamically, including the last item; they are scroll grids, not truncated fixed-count pages. Set/legend codex renders those collections only, not ordinary equipment. Existing per-family bag capacity is unchanged.
 
 Verification status and exact release hash are recorded in the integration report, not implied by this contract. Native contact sheets require root visual approval before release freeze/publication.
+
+## Frozen acceptance evidence
+
+- Final aggregate: **64/64 race gates passed**, including strict all-slot matrix, all five production reward-settlement paths, named-character App DOM flows, and generation-six failure/reload handling.
+- All **263 ordinary identities** reached actual generator, fusion and trader paths. All 323 ordinary/set entries rendered without truncation in the tested production consumers; all 335 definition art identities have per-race unique decoded 64px hashes.
+- **75 new ordinary identities + 18 existing Elf art corrections = 93 changed art sources**. Eight Goblin/Ashen outputs received whole-image nearest-neighbor fitting inside a transparent 2px border; originals are retained, output hashes reproduce exactly, and root reapproved the native contact.
+- Build: **2644 files**, content hash `538452b92bcaac1f089faa5694987d5ce9dc75c7c40c9a7bcd8b2a6567b2d5fd`.
+- Strict release-cache verification passed: 2642 resource URLs, 8051 dependency edges, four cache-mutation classes. The exact fourteen QA-only exclusions are unchanged; their total is 10,999,236 bytes. Independent emitted inventory/hash checks passed.
+- Source/test evidence: `qa/equipment-parity/audit.json`, `qa/race-expansion-tests/results.json`, `qa/named-heroes/`, and `tests/art/goblin-ashen-parity/padded-contact.png`.
+- Native canvas/DOM-shim proofs are not browser-layout screenshots. Browser launch and Sites helper were unavailable in this executor; publication is owned by the parent task. No full `npm test` rerun is claimed.

@@ -7,9 +7,10 @@ const rows=await readTree('dist'),selected=releaseAssetRows(rows),paths=new Set(
 assert.equal(RELEASE_QA_EXCLUSIONS.length,14);assert.equal(new Set(RELEASE_QA_EXCLUSIONS).size,14);
 for(const excluded of RELEASE_QA_EXCLUSIONS){assert(rows.some(r=>r.path===excluded));assert(!paths.has(excluded));}
 for(const row of rows)if(!RELEASE_QA_EXCLUSIONS.includes(row.path))assert(paths.has(row.path),'no broad filename filter');
-function verify(value){if(typeof value==='string'&&/\.(png|webp)$/.test(value))assert(paths.has(value.replace(/^\.\.\//,'')),value+' live art missing');else if(value&&typeof value==='object')Object.values(value).forEach(verify);}
+function verify(value){if(typeof value==='string'&&/\.(png|webp)$/.test(value))assert(paths.has(value.replace(/^\.\.?\//,'')),value+' live art missing');else if(value&&typeof value==='object')Object.values(value).forEach(verify);}
 for(const pack of EXPANSION_PACKS)verify(pack.art);
 const proof=rows.find(r=>RELEASE_QA_EXCLUSIONS.includes(r.path));
+assert.throws(()=>verify('./'+proof.path),/live art missing/,'dot-prefixed excluded proof must still be rejected');
 assert.throws(()=>releaseAssetRows([...rows,{path:'runtime-proof-consumer.js',bytes:Buffer.from('const image="'+proof.path+'";')}]),/referenced by runtime-proof-consumer/);
 const bytes=rows.filter(r=>RELEASE_QA_EXCLUSIONS.includes(r.path)).reduce((n,r)=>n+r.bytes.length,0);
 console.log('PASS explicit14 QA PNG exclusions, '+bytes+' bytes; every pack.art image retained; synthetic runtime dependency rejected; all other files retained.');

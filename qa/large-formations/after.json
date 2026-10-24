@@ -753,9 +753,9 @@
         "hero": {
           "x": 100,
           "y": 203,
-          "sprite": "hero-elf-bow",
+          "sprite": "hero-elf-staff",
           "ranged": true,
-          "scale": 1.1951219512195121
+          "scale": 1.3066666666666666
         },
         "formation-0": {
           "x": 260,
@@ -825,9 +825,9 @@
         "hero": {
           "x": 100,
           "y": 203,
-          "sprite": "hero-elf-staff",
+          "sprite": "hero-elf-bow",
           "ranged": true,
-          "scale": 1.3066666666666666
+          "scale": 1.1951219512195121
         },
         "formation-0": {
           "x": 260,
@@ -911,9 +911,9 @@
         "hero": {
           "x": 100,
           "y": 203,
-          "sprite": "hero-elf-bow",
+          "sprite": "hero-elf-staff",
           "ranged": true,
-          "scale": 1.1951219512195121
+          "scale": 1.3066666666666666
         },
         "formation-0": {
           "x": 250,
@@ -1125,9 +1125,9 @@
         "hero": {
           "x": 100,
           "y": 203,
-          "sprite": "hero-goblin-dagger",
+          "sprite": "hero-goblin-sword",
           "ranged": false,
-          "scale": 0.4492753623188406
+          "scale": 0.496
         },
         "formation-0": {
           "x": 260,
@@ -1383,9 +1383,9 @@
         "hero": {
           "x": 100,
           "y": 203,
-          "sprite": "hero-goblin-sword",
+          "sprite": "hero-goblin-dagger",
           "ranged": false,
-          "scale": 0.496
+          "scale": 0.4492753623188406
         },
         "formation-0": {
           "x": 250,
