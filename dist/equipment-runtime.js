@@ -4,14 +4,14 @@ import {validPlayerShieldLayers,removePlayerShieldLayersByOwner} from './player-
  * equipped-ID removal clears its record; socket movement is not removal.
  * Every operation validates before writing and touches no encounter flags.
  */
-const SOCKET_TYPE={weapon:'weapon',helm:'helm',armor:'armor',gloves:'gloves',boots:'boots',ring1:'ring',ring2:'ring',amulet:'amulet'};
+const SOCKET_TYPE={weapon:'weapon',helm:'helm',armor:'armor',gloves:'gloves',boots:'boots',ring1:'ring',ring2:'ring',amulet:'amulet',core:'core'};
 const FIELDS=['combatMs','attackCount','castCount'];
 const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
 const exact=(x,keys)=>object(x)&&Object.keys(x).length===keys.length&&keys.every(k=>Object.hasOwn(x,k));
 const counter=(x,integer=false)=>Number.isFinite(x)&&x>=0&&x<=Number.MAX_SAFE_INTEGER&&(!integer||Number.isSafeInteger(x));
 const zero=()=>({combatMs:0,attackCount:0,castCount:0});
 function equippedIds(s,equip){
- if(!exact(equip,Object.keys(SOCKET_TYPE))||!Array.isArray(s?.inventory))return null;
+ if(!exact(equip,Object.keys(SOCKET_TYPE).filter(k=>k!=='core'||s.race==='ashen'))||!Array.isArray(s?.inventory))return null;
  const owned=new Map();for(const it of s.inventory){if(!it||typeof it.id!=='string'||!it.id||owned.has(it.id))return null;owned.set(it.id,it);}
  const ids=new Set();for(const [socket,id]of Object.entries(equip)){
   if(id===null)continue;const it=owned.get(id);if(typeof id!=='string'||!it||it.slot!==SOCKET_TYPE[socket]||ids.has(id))return null;ids.add(id);
@@ -30,7 +30,7 @@ export function normalizeEquipmentRuntime(s){const ids=equippedIds(s,s?.equip);i
 /** Call before changing s.equip. A stale beforeEquip is rejected atomically. */
 export function applyEquipmentRuntimeChange(s,beforeEquip,nextEquip){
  const before=equippedIds(s,beforeEquip),next=equippedIds(s,nextEquip);
- if(!before||!next||!Object.keys(SOCKET_TYPE).every(k=>s.equip?.[k]===beforeEquip[k])||!validRuntime(s.equipmentRuntime,before)||!validShields(s,before)||!validCarry(s,before))return false;
+ if(!before||!next||!Object.keys(SOCKET_TYPE).filter(k=>k!=='core'||s.race==='ashen').every(k=>s.equip?.[k]===beforeEquip[k])||!validRuntime(s.equipmentRuntime,before)||!validShields(s,before)||!validCarry(s,before))return false;
  let shields=s.activeEncounter?.playerShieldLayers;if(shields!==undefined&&!validPlayerShieldLayers(shields))return false;
  for(const id of before)if(!next.has(id)&&shields!==undefined){shields=removePlayerShieldLayersByOwner(shields,id);if(!shields)return false;}
  let carry=s.equipmentShieldCarry;for(const id of before)if(!next.has(id)&&carry!==undefined){carry=removePlayerShieldLayersByOwner(carry,id);if(!carry)return false;}

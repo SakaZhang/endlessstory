@@ -1,4 +1,4 @@
-export const EQUIPMENT_BAG_TYPES=Object.freeze(['weapon','helm','armor','gloves','boots','ring','amulet']);
+export const EQUIPMENT_BAG_TYPES=Object.freeze(['weapon','helm','armor','gloves','boots','ring','amulet','core']);
 export const BAG_LIMITS=Object.freeze({equipment:50,materials:100,items:100});
 export const INVENTORY_SAVE_LIMIT=10000;
 export const LOOT_CATEGORIES=Object.freeze(['equipment','materials','items']);

@@ -1,6 +1,7 @@
+import {EXPANSION_PACKS} from './race-packs.js';
 import {lootOccurrenceProbability} from './luck-policy.js';
 // Policy only: no future playable areas or set content are created here.
-export const RACIAL_SET_POOLS=Object.freeze({dwarf:Object.freeze(['anvil','rune','guard']),human:Object.freeze([]),elf:Object.freeze([]),goblin:Object.freeze([]),ashen:Object.freeze([])});
+export const RACIAL_SET_POOLS=Object.freeze({dwarf:Object.freeze(['anvil','rune','guard']),human:Object.freeze([]),elf:Object.freeze([]),goblin:Object.freeze([]),ashen:Object.freeze([]),...Object.fromEntries(EXPANSION_PACKS.map(p=>[p.id,Object.freeze(p.sets.map(s=>s.id))]))});
 const slots=Object.freeze(['helm','armor','gloves','boots']);
 export function rollSourceSet({source,kind,areaNumber,race,luck=0},random=Math.random){
  const pool=RACIAL_SET_POOLS[race];

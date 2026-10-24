@@ -1,3 +1,5 @@
+import {EXPANSION_PACKS} from './race-packs.js';
+const RACIAL_SET_IDS=['anvil','rune','guard',...EXPANSION_PACKS.flatMap(p=>p.sets.map(s=>s.id))];
 // Approved dwarf names and identity only. No candidate base allocation, costs or bonuses.
 // Origin and race weapon pools are provenance/generation metadata, NOT equip restrictions.
 const deepFreeze=x=>{if(x&&typeof x==='object'){Object.values(x).forEach(deepFreeze);Object.freeze(x);}return x;};
@@ -722,19 +724,19 @@ export const EQUIPMENT_TEMPLATES=deepFreeze([
   "visualKey": "dwarf_set_guard_boots",
   "iconKey": "boots"
  }
-]);
+,...EXPANSION_PACKS.flatMap(p=>p.equipment.filter(t=>t.kind!=='legendary'))]);
 export const RACE_WEAPON_POOLS=deepFreeze({"dwarf": ["axe", "hammer"], "elf": ["bow", "staff"], "human": ["sword_shield", "greatsword"], "goblin": ["dagger", "sword"], "ashen": ["armguard", "hammer"]});
 export const EQUIPMENT_TEMPLATE_BY_ID=deepFreeze(Object.fromEntries(EQUIPMENT_TEMPLATES.map(x=>[x.id,x])));
 export const EQUIPMENT_WEAPON_TYPES=Object.freeze([...new Set(Object.values(RACE_WEAPON_POOLS).flat())]);
 export const EQUIPMENT_TYPE_NAMES=Object.freeze({axe:'斧',hammer:'锤',bow:'弓',staff:'法杖',sword_shield:'剑盾',greatsword:'巨剑',dagger:'匕首',sword:'剑',armguard:'臂铠'});
-const slots=['weapon','helm','armor','gloves','boots','ring','amulet'];
+const slots=['weapon','helm','armor','gloves','boots','ring','amulet','core'];
 export function validateEquipmentTemplates(templates=EQUIPMENT_TEMPLATES){
- return Array.isArray(templates)&&new Set(templates.map(x=>x?.id)).size===templates.length&&new Set(templates.map(x=>x?.name)).size===templates.length&&templates.every(t=>t&&typeof t.id==='string'&&typeof t.name==='string'&&slots.includes(t.slot)&&Object.hasOwn(RACE_WEAPON_POOLS,t.originRace)&&t.iconKey===t.slot&&t.visualKey===t.id&&(t.slot==='weapon'?RACE_WEAPON_POOLS[t.originRace].includes(t.weaponType):t.weaponType===null)&&(t.kind==='scatter'?t.setId===null:t.kind==='set'&&['anvil','rune','guard'].includes(t.setId)&&['helm','armor','gloves','boots'].includes(t.slot))&&!Object.hasOwn(t,'allocation')&&!Object.hasOwn(t,'multiplier'));
+ return Array.isArray(templates)&&new Set(templates.map(x=>x?.id)).size===templates.length&&new Set(templates.map(x=>x?.name)).size===templates.length&&templates.every(t=>t&&typeof t.id==='string'&&typeof t.name==='string'&&slots.includes(t.slot)&&Object.hasOwn(RACE_WEAPON_POOLS,t.originRace)&&t.iconKey===t.slot&&t.visualKey===t.id&&(t.slot==='weapon'?RACE_WEAPON_POOLS[t.originRace].includes(t.weaponType):t.weaponType===null)&&(t.kind==='scatter'?t.setId===null:t.kind==='set'&&RACIAL_SET_IDS.includes(t.setId)&&['helm','armor','gloves','boots'].includes(t.slot))&&!Object.hasOwn(t,'allocation')&&!Object.hasOwn(t,'multiplier'));
 }
 export function listEquipmentTemplates({slot,setId=null,originRace='dwarf'}={}){
  // Ring sockets are intentionally normalized to the shared ring item family.
  const family=slot==='ring1'||slot==='ring2'?'ring':slot;
- if(!slots.includes(family)||!Object.hasOwn(RACE_WEAPON_POOLS,originRace)||!(setId===null||['anvil','rune','guard'].includes(setId)))return [];
+ if(!slots.includes(family)||!Object.hasOwn(RACE_WEAPON_POOLS,originRace)||!(setId===null||RACIAL_SET_IDS.includes(setId)))return [];
  return EQUIPMENT_TEMPLATES.filter(t=>t.slot===family&&t.setId===setId&&t.originRace===originRace);
 }
 export function selectEquipmentTemplate(options,random){

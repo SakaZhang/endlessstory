@@ -1,3 +1,4 @@
+import {EXPANSION_PACKS} from './race-packs.js';
 import {getRacePack,getSkillTreeDefinition,getSkillMetadata,getRaceTuning,raceSockets,PLAYABLE_RACES} from './race-registry.js';
 import {WORLD_MONSTERS as ALL_MONSTERS,monsterParameters,raceParameterSet,areaBudgetReady,raceGroupChance,eligibleMonsters} from './world-content.js';
 import {POTION_CATALOG,POTION_BUFF_KEYS,POTION_RECIPE_CATALOG,POTION_IMPORT_MATERIALS,potionCatalogEffect,potionRecipeAllows} from './potion-catalog.js';
@@ -55,14 +56,14 @@ import {ELEMENT_KEYS,ELEMENT_AFFIX_DEFS,resolveElementDamage} from './element-sc
 export {ELEMENT_KEYS,resolveElementDamage} from './element-schema.js';
 // v0.4 equipment foundation. Item families and equipment sockets are intentionally separate.
 export const SCHEMA_VERSION = 3;
-export const SLOTS = ['weapon','helm','armor','gloves','boots','ring','amulet'];
+export const SLOTS = ['weapon','helm','armor','gloves','boots','ring','amulet','core'];
 export const SOCKETS = ['weapon','helm','armor','gloves','boots','ring1','ring2','amulet'];
 export const SOCKET_TYPE = Object.fromEntries([...SOCKETS,'core'].map(k=>[k,k.startsWith('ring')?'ring':k]));
 export const CORE_SOCKET = {socket:'core',type:'core',race:'ashen',playable:true};
 export const SLOTNAME = {weapon:'武器',helm:'头盔',armor:'护甲',gloves:'手套',boots:'靴子',ring:'戒指',ring1:'戒指左',ring2:'戒指右',amulet:'项链',core:'核心'};
 export const RARITY = ['普通','稀有','优良','至臻'];
 export const SET_SLOTS = ['helm','armor','gloves','boots'];
-export const BUILD = [
+export const BUILD = [...EXPANSION_PACKS.flatMap(p=>p.sets.map(s=>({...s,skills:[],bonus:s.description??''}))),
  {id:'anvil',name:'碎砧',sub:'裂甲 · 重击',skills:['break','heavy','interrupt',null],bonus:'2件：裂甲锤伤害 +25%；战吼延长1回合；4件：重锻击伤害 +35%。'},
  {id:'rune',name:'炉纹',sub:'铭火 · 引燃',skills:['mark','ignite','interrupt',null],bonus:'2件：铭火灼烧 +30%；炉蚀延长1回合；4件：引燃伤害 +35%。'},
  {id:'guard',name:'守冢',sub:'坚守 · 反击',skills:['guard','break','interrupt',null],bonus:'2件：坚守主动伤害 +30%；铁衣延长1回合；4件：坚守反击提高到100%攻击，铸壁获得2回合坚守。'}
@@ -808,7 +809,7 @@ function rollDrop(s,boss,luck=0,instanceId=resolveLegacySite(s.location).id+'-fi
  const instance=INSTANCES[instanceId],area=AREAS[instance?.areaId];if(!instance||!area)return null;
  const dungeon=instance.kind==='dungeon';if(Math.random()>=lootOccurrenceProbability(chanceOverride??(boss?.65:clear?.35:.18),luck))return null;
  const setRoll=rollSourceSet({source:'drop',kind:instance.kind,areaNumber:area.number,race:area.race,luck});
- const slot=setRoll?.slot??SLOTS[rand(0,SLOTS.length-1)],set=setRoll?.set??null,quality=setRoll?.rarity??luckyRoll(()=>rollQuality(boss?[50,35,13,2]:dungeon?[55,34,10,1]:[65,28,6.5,.5]),luck);
+ const dropSlots=SLOTS.filter(k=>k!=='core'||area.race==='ashen'),slot=setRoll?.slot??dropSlots[rand(0,dropSlots.length-1)],set=setRoll?.set??null,quality=setRoll?.rarity??luckyRoll(()=>rollQuality(boss?[50,35,13,2]:dungeon?[55,34,10,1]:[65,28,6.5,.5]),luck);
  const rolled=rollDropEquipmentLevel(areaGearLevel(instanceId),area.levelRange),it=item(slot,rolled.level,set,quality,{...rolled,luck,originRace:area.race});
  return receiveBattleLoot(s,{kind:'equipment',item:it},lootSummary)?it:null;
 }
@@ -1023,7 +1024,7 @@ export function applyForgeFavor(it){
  bonus.affixes=it.affixes.map(a=>({stat:a.stat,value:a.value/10}));
  it.divine={id:'forge-favor',name:'神赐·炉火眷顾',model:'raw-v1',bonus};return true;
 }
-export const LEGENDARY_CODEX=[{id:'first-forge-oathhammer',name:'王统·初炉誓锤',slot:'weapon',icon:'firstforge',implemented:true,lore:'每一代矮人王继承此锤时，都会重新锻造它，并刻下自己的名字。旧王的誓言留在锤身，新王的名字融入炉火。',affix:'祖王回响',effect:'普攻或主动伤害技能每5次出手，向当前目标追加140%攻击的单体重击，穿透30%护甲。',acquisition:'矮人地区首领额外掉落，可重复获得。',attributes:'4条随机普通词条与固定专属；基础和普通词条区间高于同等级至臻。',tuning:'首轮调优数值；回响可暴击、实际生命伤害可吸血，不触发死神、多重或累计。'},{id:'everburning-reactor',name:'不熄之炉',slot:'amulet',icon:'fire',implemented:true,lore:'矮人机械产物：一座可佩戴的微型反应炉，以战斗中的余热驱动火焰脉冲与防护层。',affix:'余热循环',effect:'每12秒实际战斗时间自动向全体释放75%攻击火焰脉冲，并获得8%最大生命加通用护盾增幅的护盾，持续3秒战斗时间；同源护盾刷新不叠加。',acquisition:'矮人地区首领额外掉落，可重复获得。',attributes:'4条随机普通词条与固定专属；基础和普通词条区间高于同等级至臻。',tuning:'首轮调优数值；实际卸下清空充能并移除自身护盾。'}];
+export const LEGENDARY_CODEX=[...EXPANSION_PACKS.flatMap(p=>p.legendaries.map(d=>({...d,implemented:true,lore:d.lore??d.description??'',affix:d.exclusiveName??d.exclusiveId,effect:d.effect??d.description??'',acquisition:p.name+'地区首领额外掉落',attributes:'4条随机普通词条与固定专属',icon:d.icon??d.slot}))),{id:'first-forge-oathhammer',name:'王统·初炉誓锤',slot:'weapon',icon:'firstforge',implemented:true,lore:'每一代矮人王继承此锤时，都会重新锻造它，并刻下自己的名字。旧王的誓言留在锤身，新王的名字融入炉火。',affix:'祖王回响',effect:'普攻或主动伤害技能每5次出手，向当前目标追加140%攻击的单体重击，穿透30%护甲。',acquisition:'矮人地区首领额外掉落，可重复获得。',attributes:'4条随机普通词条与固定专属；基础和普通词条区间高于同等级至臻。',tuning:'首轮调优数值；回响可暴击、实际生命伤害可吸血，不触发死神、多重或累计。'},{id:'everburning-reactor',name:'不熄之炉',slot:'amulet',icon:'fire',implemented:true,lore:'矮人机械产物：一座可佩戴的微型反应炉，以战斗中的余热驱动火焰脉冲与防护层。',affix:'余热循环',effect:'每12秒实际战斗时间自动向全体释放75%攻击火焰脉冲，并获得8%最大生命加通用护盾增幅的护盾，持续3秒战斗时间；同源护盾刷新不叠加。',acquisition:'矮人地区首领额外掉落，可重复获得。',attributes:'4条随机普通词条与固定专属；基础和普通词条区间高于同等级至臻。',tuning:'首轮调优数值；实际卸下清空充能并移除自身护盾。'}];
 export const SET_CODEX=BUILD.map(b=>({id:b.id,name:b.name,icon:b.id,parts:[...SET_SLOTS],bonus:b.bonus}));
 function validCodexCollection(s){return validCollectionLedger(s,SET_CODEX,LEGENDARY_CODEX);}
 export function normalizeCodexCollection(s){return normalizeCollectionLedger(s,SET_CODEX,LEGENDARY_CODEX,validEquipment);}

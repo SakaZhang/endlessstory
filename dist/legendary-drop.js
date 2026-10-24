@@ -1,7 +1,8 @@
+import {EXPANSION_PACKS} from './race-packs.js';
 // Independent legendary settlement policy, used by the production boss reward adapter.
 // Item generation and inventory acceptance are injected and independently validated.
 export const LEGENDARY_DROP_BASE_PROBABILITY=.05;
-export const LEGENDARY_DROP_CANDIDATES=Object.freeze({dwarf:Object.freeze([
+export const LEGENDARY_DROP_CANDIDATES=Object.freeze({...Object.fromEntries(EXPANSION_PACKS.map(p=>[p.id,p.legendaries.filter(d=>!d.questOnly).map(d=>({id:d.id,weight:1,registration:'race-content'}))])),dwarf:Object.freeze([
  Object.freeze({id:'first-forge-oathhammer',weight:1,registration:'candidate'}),
  Object.freeze({id:'everburning-reactor',weight:1,registration:'candidate'})
 ])});
