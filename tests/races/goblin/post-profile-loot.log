@@ -1,0 +1,6 @@
+PASS actual retinue elite 6 5targets splitbudget/stageclear/singleencounterreward
+PASS actual retinue elite 7 5targets splitbudget/stageclear/singleencounterreward
+PASS actual source settlements {"node":"goblin.a01.field","seeds":1000,"legends":0,"materialDrops":1030,"seen":["goblin.mat.03","goblin.mat.01","goblin.mat.02"]}
+PASS actual source settlements {"node":"goblin.a03.boss","seeds":1000,"legends":69,"materialDrops":1888,"seen":["goblin.mat.04","goblin.mat.05","goblin.mat.01","goblin.mat.03","goblin.mat.13","goblin.infinity_gem_goblin"]}
+PASS actual source settlements {"node":"goblin.a09.boss","seeds":1000,"legends":66,"materialDrops":1901,"seen":["goblin.mat.10","goblin.mat.12","goblin.mat.09","goblin.mat.15","goblin.mat.16","goblin.infinity_gem_goblin"]}
+PASS goblinlegend cross-raceequip legal; ringstorymaterial neverrandom
