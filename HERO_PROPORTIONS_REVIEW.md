@@ -42,3 +42,12 @@ unlock fixture at line49 (`assert(q)`). Reproduced with the unmodified base
 `36268e6` renderer in this same checkout; not introduced by this patch.
 
 Local review only. No publication authorized or performed by this change.
+
+Additional passes: release-cache-tests (2416 file hashes / 7799 dependency edges;
+Sites helper stage unavailable), live-battle-scoped-loading-tests,
+race-art-alpha-bounds-tests (1108 frame bounds).
+
+`node hero-proportions-native-proof.mjs` reproducibly writes 45 native canvas
+captures (all 15 native/neutral race variants × camp, real battle, portrait) and
+`qa/hero-proportions/evidence.json`. These are actual live renderer images, not
+resized raw asset comparisons. Proof PNGs are local QA outputs, not runtime assets.
