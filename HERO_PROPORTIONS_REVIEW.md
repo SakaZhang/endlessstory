@@ -14,7 +14,7 @@ exaggerates this mismatch further and is not a truthful live-scale comparison.
 |---|---:|---:|
 | Dwarf | 60 / 63 | 60 / 63 unchanged |
 | Human | 90 / 91 | 90 / 91 unchanged |
-| Elf | 82 / 84 | 98 / 98 |
+| Elf body (excluding staff tip) | 82 / 75 | 98 / 98 |
 | Goblin | 138 / 125 | 62 / 62 |
 | Ashen | 123 / 138 | 94 / 94 unchanged |
 
@@ -26,7 +26,7 @@ Health-bar positioning already consumes the actor scale. Enemy target hitboxes a
 gameplay hit calculations are untouched; heroes are not clickable enemy targets.
 
 Camp and battle use the same size function. The two adjusted races' full-body
-portraits use a common 100px reference display envelope instead of making both
+portraits use a common 112px reference display envelope instead of making both
 fill the entire height, preserving the new relative stature in portraits too.
 Other race portrait sizing is untouched.
 
@@ -51,3 +51,8 @@ race-art-alpha-bounds-tests (1108 frame bounds).
 captures (all 15 native/neutral race variants × camp, real battle, portrait) and
 `qa/hero-proportions/evidence.json`. These are actual live renderer images, not
 resized raw asset comparisons. Proof PNGs are local QA outputs, not runtime assets.
+
+Body bounds are explicit inclusive idle head/hood-to-foot Y ranges in manifest
+metadata. Elf staff uses101–175 (75px), excluding staff-tip92–100, so both
+native Elf bodies reach98px. Its gear extends to~110px. A112px portrait envelope
+keeps this tip visible without shrinking the staff body relative to bow.
