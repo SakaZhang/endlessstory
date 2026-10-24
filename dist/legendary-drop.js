@@ -12,7 +12,7 @@ const id=x=>typeof x==='string'&&x.length>0&&x.length<=200&&!['__proto__','const
 const probability=x=>Number.isFinite(x)&&x>=0&&x<=1;
 const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 function canonicalEvent(e){if(!e||!id(e.settlementId)||!id(e.nodeId)||!id(e.regionRace)||!['boss','field','dungeon','merchant','forge'].includes(e.kind)||typeof e.won!=='boolean')return null;return {settlementId:e.settlementId,nodeId:e.nodeId,regionRace:e.regionRace,kind:e.kind,won:e.won};}
-function eligible(e){return e.kind==='boss'&&e.won&&Object.hasOwn(LEGENDARY_DROP_CANDIDATES,e.regionRace);}
+function eligible(e){return e.kind==='boss'&&e.won&&e.nodeId.startsWith(e.regionRace+'.')&&e.nodeId.endsWith('.boss')&&Object.hasOwn(LEGENDARY_DROP_CANDIDATES,e.regionRace);}
 function draw(random){const n=random();if(!Number.isFinite(n)||n<0||n>=1)throw new RangeError('RNG must be finite in [0,1)');return n;}
 export function validLegendaryDropReceipt(r,validateItem){
  try{
