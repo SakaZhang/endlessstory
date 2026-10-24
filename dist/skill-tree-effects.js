@@ -2,8 +2,8 @@
 const clone=x=>structuredClone(x),plain=x=>!!x&&typeof x==='object'&&!Array.isArray(x);
 const safeId=x=>typeof x==='string'&&x.length>0&&x.length<=200&&!['__proto__','constructor','prototype','self'].includes(x);
 const time=x=>Number.isFinite(x)&&x>=0&&x<=1e15,num=x=>Number.isFinite(x)&&x>=0&&x<=1e12;
-const types=['armorDown','fireResistDown','attackDown','hitDown','attackUp','critUp','penetrationUp','defenseUp','dodgeUp','lifestealUp','dot','healOverTime','shield'];
-const sourceKey=s=>s.source.kind+'|'+s.source.id+'|'+s.sourceId+'|'+s.type+'|'+(s.status??'');
+const types=['armorDown','elementResistDown','fireResistDown','attackDown','hitDown','attackUp','critUp','penetrationUp','defenseUp','dodgeUp','lifestealUp','dot','healOverTime','shield'];
+const sourceKey=s=>s.source.kind+'|'+s.source.id+'|'+s.sourceId+'|'+s.type+'|'+(s.status??'')+'|'+(s.type==='elementResistDown'?s.damageType??'':'');
 function normalizeSourceDescriptor(source){
  if(!plain(source)||Object.keys(source).length!==2||!Object.hasOwn(source,'kind'))return null;
  if(source.kind==='skill'&&Object.hasOwn(source,'skillId')&&safeId(source.skillId))return {kind:'skill',id:source.skillId};

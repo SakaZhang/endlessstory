@@ -1,3 +1,5 @@
+import {getRacePack,getSkillTreeDefinition,getSkillMetadata,getRaceTuning,raceSockets,PLAYABLE_RACES} from './race-registry.js';
+import {WORLD_MONSTERS as ALL_MONSTERS,monsterParameters,raceParameterSet,areaBudgetReady,raceGroupChance,eligibleMonsters} from './world-content.js';
 import {POTION_CATALOG,POTION_BUFF_KEYS,POTION_RECIPE_CATALOG,POTION_IMPORT_MATERIALS,potionCatalogEffect,potionRecipeAllows} from './potion-catalog.js';
 import {emitCombatDisplay} from './combat-display-bridge.js';
 import {TREE_TUNING} from './skill-tree-tuning.js';
@@ -18,7 +20,8 @@ export {validEquipmentRuntime,normalizeEquipmentRuntime,applyEquipmentRuntimeCha
 import {makeAffixSourceRange,affixOwnRange,validAffixSource} from './affix-range.js';
 import {deriveNewItemBudget,validItemBudgetMetadata} from './equipment-budget-adapter.js';
 import {applyExperience} from './character-progression.js';
-import {DWARF_MONSTERS,dwarfParameters,dwarfParameterSet,dwarfBudgetReady,dwarfGroupChance,dwarfEligibleMonsters} from './dwarf-content.js';
+import {dwarfBudgetReady} from './dwarf-content.js';
+const DWARF_MONSTERS=ALL_MONSTERS;
 export {configureDwarfParameters,dwarfBudgetReady} from './dwarf-content.js';
 import {initializeDwarfActor} from './dwarf-effects.js';
 import {DWARF_MATERIAL_REGISTRY,rollMonsterMaterials,toDwarfInventoryKey,getDwarfMaterialPool} from './dwarf-material-catalog.js';
@@ -54,8 +57,8 @@ export {ELEMENT_KEYS,resolveElementDamage} from './element-schema.js';
 export const SCHEMA_VERSION = 3;
 export const SLOTS = ['weapon','helm','armor','gloves','boots','ring','amulet'];
 export const SOCKETS = ['weapon','helm','armor','gloves','boots','ring1','ring2','amulet'];
-export const SOCKET_TYPE = Object.fromEntries(SOCKETS.map(k=>[k,k.startsWith('ring')?'ring':k]));
-export const CORE_SOCKET = {socket:'core',type:'core',race:'ashen',playable:false};
+export const SOCKET_TYPE = Object.fromEntries([...SOCKETS,'core'].map(k=>[k,k.startsWith('ring')?'ring':k]));
+export const CORE_SOCKET = {socket:'core',type:'core',race:'ashen',playable:true};
 export const SLOTNAME = {weapon:'武器',helm:'头盔',armor:'护甲',gloves:'手套',boots:'靴子',ring:'戒指',ring1:'戒指左',ring2:'戒指右',amulet:'项链',core:'核心'};
 export const RARITY = ['普通','稀有','优良','至臻'];
 export const SET_SLOTS = ['helm','armor','gloves','boots'];
@@ -307,8 +310,8 @@ export function normalizeSkillSlots(s){
  return true;
 }
 function validLoadout(s,loadout){
- if(!loadout||typeof loadout.name!=='string'||loadout.name.length<1||loadout.name.length>20||!loadout.equip||Object.keys(loadout.equip).length!==SOCKETS.length)return false;
- if(!SOCKETS.every(k=>loadout.equip[k]===null||s.inventory.some(it=>it.id===loadout.equip[k]&&it.slot===SOCKET_TYPE[k])))return false;
+ if(!loadout||typeof loadout.name!=='string'||loadout.name.length<1||loadout.name.length>20||!loadout.equip||Object.keys(loadout.equip).length!==raceSockets(s.race).length)return false;
+ if(!raceSockets(s.race).every(k=>loadout.equip[k]===null||s.inventory.some(it=>it.id===loadout.equip[k]&&it.slot===SOCKET_TYPE[k])))return false;
  const ids=Object.values(loadout.equip).filter(Boolean);if(new Set(ids).size!==ids.length)return false;
  return validSkillSlots(loadout.skills,loadout.conditions)&&loadout.skills.every(k=>k===null||skillUnlocked(s,k));
 }
@@ -332,17 +335,19 @@ export function applyLoadout(s,index,battleActive=false){
  const nextEquip={...loadout.equip};if(!applyEquipmentRuntimeChange(s,s.equip,nextEquip))return false;
  s.equip=nextEquip;s.skills=[...loadout.skills];s.conditions=[...loadout.conditions];if(s.skillTree){s.skillTree.selectedPreset=index;s.skillTree.revision++;}normalizeSkillSlots(s);capHealth(s);return true;
 }
-export function fresh(){
- const inventory=SOCKETS.map(socket=>{let type=SOCKET_TYPE[socket],it=item(type,1,null,0,{levelSource:'starter'});it.affixes=[];return it;});
- const s={version:SCHEMA_VERSION,race:'dwarf',hero:'布洛克',atCamp:true,level:1,xp:0,gold:100,location:0,siteId:'dwarf.a01',expedition:{mode:'field',fieldId:'dwarf.a01.field',targetInstanceId:null,loop:false},build:'custom',inventory,equip:Object.fromEntries(SOCKETS.map((socket,i)=>[socket,inventory[i].id])),skills:[null,null,null,null],conditions:['always','always','always','always'],materialStacks:{'铁屑|0':5,'炉火晶|0':2,'誓约残片|0':1},offlineLuck:0,talents:Object.fromEntries(Object.keys(TALENTS).map(k=>[k,0])),consumables:{memoryFruit:0,refundCredits:0,reforgeToken:0},potionSlot:{key:null,auto:false,priority:'low',priorityVersion:1},kills:0,normalWins:[0,0,0],bossWins:[0,0,0],bossReady:[0,0,0],stock:3,loadouts:[null,null,null],chapters:[],chronicle:['灰冠历317年：你带着旧炉装备，离开黑炉堡寻找失踪商队。'],momentum:0,lastSeen:Date.now(),running:false};
- normalizeSkillTree(s,SKILL_TREE_DEFINITION);s.skillTree.mode='active';
+export function fresh(race='dwarf'){
+ const pack=getRacePack(race);if(!pack)throw new RangeError('Unknown playable race');const sockets=raceSockets(race);
+ const inventory=sockets.map(socket=>{let type=SOCKET_TYPE[socket]??socket,it=item(type,1,null,0,{levelSource:'starter',originRace:race});it.affixes=[];return it;});
+ const s={version:SCHEMA_VERSION,race,hero:pack.heroName,atCamp:true,level:1,xp:0,gold:100,location:0,siteId:race+'.a01',expedition:{mode:'field',fieldId:race+'.a01.field',targetInstanceId:null,loop:false},build:'custom',inventory,equip:Object.fromEntries(sockets.map((socket,i)=>[socket,inventory[i].id])),skills:[null,null,null,null],conditions:['always','always','always','always'],materialStacks:{'铁屑|0':5,'炉火晶|0':2,'誓约残片|0':1},offlineLuck:0,talents:Object.fromEntries(Object.keys(TALENTS).map(k=>[k,0])),consumables:{memoryFruit:0,refundCredits:0,reforgeToken:0},potionSlot:{key:null,auto:false,priority:'low',priorityVersion:1},kills:0,normalWins:[0,0,0],bossWins:[0,0,0],bossReady:[0,0,0],stock:3,loadouts:[null,null,null],chapters:[],chronicle:['灰冠历317年：你带着旧炉装备，离开黑炉堡寻找失踪商队。'],momentum:0,lastSeen:Date.now(),running:false};
+ if(race!=='dwarf'){s.materialStacks={};s.chronicle=['你从'+pack.name+'的营地开始旅程。'];}
+ normalizeSkillTree(s,getSkillTreeDefinition(s));s.skillTree.mode='active';
  return s;
 }
 export function equipItem(s,id,socket){
  const it=s.inventory.find(i=>i.id===id);if(!it)return false;
  if(!socket){if(it.slot==='ring'){socket=!s.equip.ring1?'ring1':!s.equip.ring2?'ring2':'ring1';}else socket=it.slot;}
- if(!SOCKETS.includes(socket)||SOCKET_TYPE[socket]!==it.slot)return false;
- const nextEquip={...s.equip};for(const k of SOCKETS)if(k!==socket&&nextEquip[k]===id){if(it.slot==='ring')nextEquip[k]=nextEquip[socket]??null;else return false;}
+ if(!raceSockets(s.race).includes(socket)||SOCKET_TYPE[socket]!==it.slot)return false;
+ const nextEquip={...s.equip};for(const k of raceSockets(s.race))if(k!==socket&&nextEquip[k]===id){if(it.slot==='ring')nextEquip[k]=nextEquip[socket]??null;else return false;}
  nextEquip[socket]=id;if(!applyEquipmentRuntimeChange(s,s.equip,nextEquip))return false;s.equip=nextEquip;capHealth(s);return true;
 }
 export function baseStats(s){
@@ -357,7 +362,7 @@ export function baseStats(s){
  const elementResistance=Object.fromEntries(ELEMENT_KEYS.map(k=>[k,(s.talents.elementResist??0)*5+(bonus[k+'Resist']??0)+potionBuffStrength(s,k+'Resist')]));
  return {atk,armor,hp,penetration:(s.talents.penetration??0)*2,elementAttack,elementResistance,elementResist:.5*ratingFactor(elementResistance.fire),block:.35*ratingFactor((s.talents.block??0)*4),shieldBonus:(s.talents.shield??0)*4,healingBonus:(s.talents.healing??0)*3,resolveReduction:Math.floor((s.talents.resolve??0)/5),luck:Math.min(1000,Math.max(0,(s.talents.luck??0)+bonus.luck+potionBuffStrength(s,'luck'))),lifesteal:bonus.lifesteal,lifestealRating:bonus.lifesteal,lifestealRate:lifestealRate(bonus.lifesteal),hit:clamp(.9+.1*ratingFactor(bonus.hit),.5,.995),crit:clamp(.05+.55*ratingFactor(bonus.crit),0,.6),critDamage:clamp(1.5+ratingFactor(bonus.critDamage),1.5,2.5),element:bonus.element,hitRating:bonus.hit,critRating:bonus.crit,critDamageRating:bonus.critDamage,count,specials,legend:false,bonus};
 }
-function treePolicy(s){return s.skillTree?.mode==='active'?TREE_TUNING:null;}
+function treePolicy(s){return s.skillTree?.mode==='active'?getRaceTuning(s.race):null;}
 export function treePassiveContext(s,policy=treePolicy(s)){
  const p=s.skillTree?.presets?.[s.skillTree.selectedPreset];if(!policy?.passiveConfig||!p)return null;
  const weapon=s.inventory.find(it=>it.id===s.equip.weapon);
@@ -368,7 +373,7 @@ export function stats(s){
  const e=s.activeEncounter,layers=e&&!e.done?e.playerShieldLayers:null;
  return derivePassiveStats(base,context,{shieldLayers:layers,combatClock:layers?.clock??0,currentHp:s.heroHp??base.hp})?.stats??base;
 }
-export function reconcileSkillTreeHealth(s){if(!validSkillTree(s,SKILL_TREE_DEFINITION))return false;capHealth(s);return true;}
+export function reconcileSkillTreeHealth(s){if(!validSkillTree(s,getSkillTreeDefinition(s)))return false;capHealth(s);return true;}
 export function effectiveLuck(s){return stats(s).luck;}
 export function preset(s,id){const b=BUILD.find(x=>x.id===id);if(!b||!b.skills.every(k=>k===null||skillUnlocked(s,k)))return null;s.build=id;s.skills=[...b.skills];s.conditions=['always','always','charge','always'];return b;}
 export const POTIONS=POTION_CATALOG;
@@ -484,7 +489,7 @@ export function validAreaProgress(s){
   const p=progress[race];if(!p||!Array.isArray(p.unlocked)||!Array.isArray(p.cleared)||p.unlocked.length>10||p.cleared.length>10)return false;
   if(!p.unlocked.every((n,i)=>Number.isInteger(n)&&n===i+1)||!p.cleared.every((n,i)=>Number.isInteger(n)&&n===i+1))return false;
   if(p.cleared.some(n=>!p.unlocked.includes(n)))return false;
-  if(race==='dwarf'&&!p.unlocked.length)return false;
+  if(race===s.race&&!p.unlocked.length)return false;
   // No unreleased race has an entry point yet. Opening one requires actual content.
   if(p.unlocked.length&&!Object.values(AREAS).some(a=>a.race===race))return false;
   return !p.unlocked.length?p.cleared.length===0:p.unlocked.length===Math.min(p.cleared.length+1,10);
@@ -492,12 +497,12 @@ export function validAreaProgress(s){
 }
 export function normalizeAreaProgress(s){
  if(!validAreaProgress(s))return false;
- s.areaProgress??=Object.fromEntries(RACE_KEYS.map(race=>[race,{unlocked:race==='dwarf'?[1]:[],cleared:[]}]));
+ s.areaProgress??=Object.fromEntries(RACE_KEYS.map(race=>[race,{unlocked:PLAYABLE_RACES.includes(race)?[1]:[],cleared:[]}]));
  return true;
 }
-export function getAreaProgress(s,race='dwarf'){
+export function getAreaProgress(s,race=AREAS[s.siteId]?.race??s.race??'dwarf'){
  if(!RACE_KEYS.includes(race)||!validAreaProgress(s))return null;
- const p=s.areaProgress?.[race]??{unlocked:race==='dwarf'?[1]:[],cleared:[]};
+ const p=s.areaProgress?.[race]??{unlocked:PLAYABLE_RACES.includes(race)?[1]:[],cleared:[]};
  return {unlocked:[...p.unlocked],cleared:[...p.cleared]};
 }
 export function getMerchantEquipmentLevelRange(s){
@@ -515,7 +520,7 @@ function recordDungeonAreaClear(s,e){
  return true;
 }
 export function plannedNodes(s,now=Date.now()){
- const unlocked=getAreaProgress(s)?.unlocked??[1];return Object.values(PLANNED_INSTANCES).map(n=>({...n,name:n.name,areaNumber:AREAS[n.areaId].number,levelRange:[...AREAS[n.areaId].levelRange],unlocked:unlocked.includes(AREAS[n.areaId].number),budgetReady:dwarfBudgetReady(AREAS[n.areaId].number),readyAt:s.instanceCooldowns?.[n.id]??0,fieldId:n.areaId+'.field'}));
+ return Object.values(PLANNED_INSTANCES).map(n=>({...n,name:n.name,areaNumber:AREAS[n.areaId].number,levelRange:[...AREAS[n.areaId].levelRange],unlocked:getAreaProgress(s,AREAS[n.areaId].race)?.unlocked.includes(AREAS[n.areaId].number),budgetReady:areaBudgetReady(AREAS[n.areaId].number,AREAS[n.areaId].race),readyAt:s.instanceCooldowns?.[n.id]??0,fieldId:n.areaId+'.field'}));
 }
 export function validExpeditionState(s){
  const ex=s.expedition,cd=s.instanceCooldowns;
@@ -530,7 +535,7 @@ export function normalizeExpedition(s){
  if(s.version!==SCHEMA_VERSION||!validExpeditionState(s)||!normalizeAreaProgress(s))return false;
  const site=resolveLegacySite(s.siteId??s.location);if(!site)return false;
  s.siteId??=site.id;
- s.expedition??={mode:'field',targetInstanceId:null,fieldId:site.id+(site.id.startsWith('dwarf.a')?'.field':'-field'),loop:false};
+ s.expedition??={mode:'field',targetInstanceId:null,fieldId:site.id+(!!PLANNED_INSTANCES[site.id+'.field']?'.field':'-field'),loop:false};
  s.instanceCooldowns??={};
 
  return true;
@@ -540,7 +545,7 @@ export function nextEncounterRoute(s,now=Date.now()){
 }
 export function configureExpedition(s,config){
  if(s.version!==SCHEMA_VERSION||s.running||(s.activeEncounter&&!s.activeEncounter.rewarded)||s.dungeonRun||!config)return false;
- if(INSTANCES[config.fieldId]?.contentVersion&&!getAreaProgress(s)?.unlocked.includes(AREAS[INSTANCES[config.fieldId].areaId].number))return false;
+ if(INSTANCES[config.fieldId]?.contentVersion&&!getAreaProgress(s,AREAS[INSTANCES[config.fieldId].areaId].race)?.unlocked.includes(AREAS[INSTANCES[config.fieldId].areaId].number))return false;
  const candidate={mode:config.mode,targetInstanceId:config.targetInstanceId??null,fieldId:config.fieldId,loop:config.loop,...Object.fromEntries(['autoDungeon','autoBoss'].filter(k=>config[k]!==undefined).map(k=>[k,config[k]]))};
  if(!validExpeditionState({...s,expedition:candidate})||(candidate.mode==='dungeon'&&!INSTANCES[candidate.targetInstanceId]?.enabled))return false;
  if(!normalizeExpedition(s))return false;s.expedition=candidate;return true;
@@ -654,14 +659,14 @@ export function startInstanceEncounter(s,instanceId,now=Date.now()){
 
 function startDwarfEncounter(s,instance,now){
  const treeCarry=s.dungeonRun?.carry;
- const area=AREAS[instance.areaId];if(!dwarfBudgetReady(area.number)||!getAreaProgress(s)?.unlocked.includes(area.number))return null;
- const stage=s.dungeonRun?.stage??1,rank=instance.kind==='boss'?'boss':instance.kind==='dungeon'&&stage===3?'elite':'normal',pool=dwarfEligibleMonsters(instance.id,rank);
+ const area=AREAS[instance.areaId];if(!areaBudgetReady(area.number,area.race)||!getAreaProgress(s,area.race)?.unlocked.includes(area.number))return null;
+ const stage=s.dungeonRun?.stage??1,rank=instance.kind==='boss'?'boss':instance.kind==='dungeon'&&stage===3?'elite':'normal',pool=eligibleMonsters(instance.id,rank);
  if(!pool.length)return null;
  const st=stats(s),id='m2-'+Math.floor(now)+'-'+(++serial),seed=rand(0,0xffffffff),e={contentVersion:'dwarf-m2-v1',location:area.number-1,siteId:instance.siteId,areaId:instance.areaId,instanceId:instance.id,kind:instance.kind,luck:st.luck,boss:instance.kind==='boss',heroHp:s.heroHp,round:0,warcry:0,ironcoat:0,barrier:0,barrierShield:0,heroBurn:0,heroBurnPower:0,weakness:0,guard:0,cd:{},shelterUsed:false,shield:0,done:false,rewarded:false,killSource:null,multiVersion:1,id,rngState:seed,rngDraws:0,itemSerial:0,summonSerial:0,activeCastCount:0,enemies:[],typedDots:[]};
  withMultiRng(e,()=>{
-  const group=instance.kind==='field'&&Math.random()<dwarfGroupChance(),count=group?rand(2,3):1; e.fieldGroup=group;
+  const group=instance.kind==='field'&&Math.random()<raceGroupChance(area.race),count=group?rand(2,3):1; e.fieldGroup=group;
   for(let i=0;i<count;i++){
-   const def=pool[rand(0,pool.length-1)],p=dwarfParameters(def.id),followers=def.trait?.type==='followers';
+   const def=pool[rand(0,pool.length-1)],p=monsterParameters(def.id),followers=def.trait?.type==='followers';
    const shares=followers?def.trait.shares:[1];
    for(let j=0;j<shares.length;j++){
     const u=makeMultiUnit(id+'-enemy-'+e.enemies.length,e.location,instance.id,{enemy:def.name,hp:p.hp,atk:p.atk,armor:p.armor},s.lastHealthClock,{});
@@ -672,7 +677,7 @@ function startDwarfEncounter(s,instance,now){
   }
  });
  if(instance.kind==='dungeon'){
-  e.clearRewards=structuredClone(dwarfParameterSet()?.clearRewards?.[area.number]??null);
+  e.clearRewards=structuredClone(raceParameterSet(area.race)?.clearRewards?.[area.number]??null);
   if(!s.dungeonRun)s.dungeonRun={instanceId:instance.id,runId:'run-'+id,stage:1};
   e.dungeonStage=s.dungeonRun.stage;e.runId=s.dungeonRun.runId;
   if(s.dungeonRun.carry){applyDungeonPlayerState(e,s.dungeonRun.carry);delete s.dungeonRun.carry;}
@@ -787,7 +792,7 @@ function stepImpl(s,e,now=Date.now(),treeSkills=null){
  if(e.multiVersion===1){e.lastCombatEventAt=eventAt;if(basicOnly)e.basicMicroElapsed=combatDeltaMs;else {delete e.basicMicroElapsed;e.nextRegularAt=eventAt+1100;}s.nextActionAt=Math.min(e.nextRegularAt??eventAt+1100,e.pendingBasicAt??Infinity);}else s.nextActionAt=eventAt+1100;if(drank)logs.unshift('自动饮用 · '+POTIONS.healing.name);s.heroHp=Math.max(0,Math.min(stats(s).hp,e.heroHp));
  if(s.heroHp<=0){const resume=!e.developmentFixture&&!!s.running&&(!e.boss||!!s.expedition?.autoBoss)&&!s.stopAfterBattle&&!s.stopAfterDungeon&&(e.kind!=='dungeon'||!!s.expedition?.loop||!!s.expedition?.autoDungeon||!!s.expedition?.autoBoss);startRest(s,now,resume);s.stopAfterBattle=false;s.stopAfterDungeon=false;}return logs;
 }
-function selectedTreeRules(s,parameters=TREE_TUNING){
+function selectedTreeRules(s,parameters=getRaceTuning(s.race)){
  const p=s.skillTree?.presets?.[s.skillTree.selectedPreset];if(!p)return null;
  const weapon=s.inventory.find(it=>it.id===s.equip.weapon),configs=typeof parameters.configs==='function'?parameters.configs(stats(s)):parameters.configs;
  return {...parameters,configs,active:[...p.active],conditions:[...p.conditions],unlocked:[...p.unlocked],passive:[...p.passive],weaponType:weapon?.weaponType??'generic'};
@@ -804,7 +809,7 @@ function rollDrop(s,boss,luck=0,instanceId=resolveLegacySite(s.location).id+'-fi
  const dungeon=instance.kind==='dungeon';if(Math.random()>=lootOccurrenceProbability(chanceOverride??(boss?.65:clear?.35:.18),luck))return null;
  const setRoll=rollSourceSet({source:'drop',kind:instance.kind,areaNumber:area.number,race:area.race,luck});
  const slot=setRoll?.slot??SLOTS[rand(0,SLOTS.length-1)],set=setRoll?.set??null,quality=setRoll?.rarity??luckyRoll(()=>rollQuality(boss?[50,35,13,2]:dungeon?[55,34,10,1]:[65,28,6.5,.5]),luck);
- const rolled=rollDropEquipmentLevel(areaGearLevel(instanceId),area.levelRange),it=item(slot,rolled.level,set,quality,{...rolled,luck});
+ const rolled=rollDropEquipmentLevel(areaGearLevel(instanceId),area.levelRange),it=item(slot,rolled.level,set,quality,{...rolled,luck,originRace:area.race});
  return receiveBattleLoot(s,{kind:'equipment',item:it},lootSummary)?it:null;
 }
 export function reward(s,e,now=Date.now()){
@@ -1039,11 +1044,11 @@ export function codexState(s,id){
 }
 export function validSave(s){
  try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;
- if(!validSkillTree(s,SKILL_TREE_DEFINITION)||s.skillTree?.mode!=='active')return false;
+ if(!validSkillTree(s,getSkillTreeDefinition(s))||s.skillTree?.mode!=='active')return false;
  if(s.activeEncounter?.skillResolver!==undefined&&(s.activeEncounter.skillResolver!=='tree-v1'||s.skillTree?.mode!=='active'||s.activeEncounter.multiVersion!==1))return false;
  if(s.supportGrantEligible!==undefined||s.testGrants!==undefined||s.bonusTalentPoints!==undefined||s.skillRulesVersion!==undefined||s.skillAccess!==undefined)return false;
  if(s.developmentEquipmentSandbox!==undefined&&s.developmentEquipmentSandbox!==true)return false;
- if(s.version!==SCHEMA_VERSION||s.race!=='dwarf'||s.hero!=='布洛克'||!Number.isInteger(s.level)||s.level<1||s.level>=100000||!num(s.xp)||!num(s.gold)||!Number.isInteger(s.location)||s.location<0||!(Object.values(PLANNED_INSTANCES).some(x=>AREAS[x.areaId].number-1===s.location&&s.siteId===x.siteId)))return false;
+ if(s.version!==SCHEMA_VERSION||!PLAYABLE_RACES.includes(s.race)||s.hero!==getRacePack(s.race)?.heroName||!Number.isInteger(s.level)||s.level<1||s.level>=100000||!num(s.xp)||!num(s.gold)||!Number.isInteger(s.location)||s.location<0||!(Object.values(PLANNED_INSTANCES).some(x=>AREAS[x.areaId].number-1===s.location&&s.siteId===x.siteId)))return false;
  if(s.atCamp!==undefined&&typeof s.atCamp!=='boolean')return false;
  if(s.activeEncounter?.pauseAt!==undefined&&s.running)return false;
  if(s.activeEncounter?.kind==='dungeon'&&(!s.dungeonRun||s.activeEncounter.runId!==s.dungeonRun.runId||s.activeEncounter.dungeonStage!==s.dungeonRun.stage))return false;
@@ -1052,7 +1057,7 @@ export function validSave(s){
  if(!validRegionNavigation(s)||!validEquipmentRuntime(s)||!validMonsterLedger(s)||!validCodexCollection(s)||!validLootFilters(s)||!validPendingForgeClaim(s)||!validAreaProgress(s)||!validExpeditionState(s)||!Array.isArray(s.inventory)||s.inventory.length>INVENTORY_SAVE_LIMIT||!s.inventory.every(validEquipment)||!validPendingReforge(s))return false;
  if(s.merchant?.offers?.some(o=>o.type==='equipment'&&o.stock===1&&s.inventory.some(it=>it.id===o.item?.id)))return false;
  if((s.nextActionAt!==undefined&&(!Number.isFinite(s.nextActionAt)||s.nextActionAt<0||s.nextActionAt>1e15))||(s.restResume!==undefined&&typeof s.restResume!=='boolean')||(s.nextBattleAt!==undefined&&(!Number.isFinite(s.nextBattleAt)||s.nextBattleAt<0||s.nextBattleAt>1e15))||!validRecipes(s)||!validEncounter(s.activeEncounter)||!validPotions(s)||!validHealth(s)||!validLoadoutSlots(s)||(s.merchant!==undefined&&!validMerchant(s.merchant)))return false;
- if(new Set(s.inventory.map(i=>i.id)).size!==s.inventory.length||!s.equip||Object.keys(s.equip).length!==SOCKETS.length||!SOCKETS.every(k=>s.equip[k]===null||s.inventory.some(i=>i.id===s.equip[k]&&i.slot===SOCKET_TYPE[k])))return false;
+ if(new Set(s.inventory.map(i=>i.id)).size!==s.inventory.length||!s.equip||Object.keys(s.equip).length!==raceSockets(s.race).length||!raceSockets(s.race).every(k=>s.equip[k]===null||s.inventory.some(i=>i.id===s.equip[k]&&i.slot===SOCKET_TYPE[k])))return false;
  const equipped=Object.values(s.equip).filter(Boolean);if(new Set(equipped).size!==equipped.length)return false;
  return validSkillSlots(s.skills,s.conditions)&&s.skills.every(k=>k===null||skillUnlocked(s,k))&&validMaterials(s)&&(s.offlineLuck===undefined||num(s.offlineLuck,1000))&&validTalents(s)&&validConsumables(s)&&['bossWins','bossReady','normalWins'].every(k=>Array.isArray(s[k])&&s[k].length===3&&s[k].every(n=>num(n,1e15)))&&Array.isArray(s.chapters)&&s.chapters.every(n=>Number.isInteger(n)&&n>=0&&n<3)&&Array.isArray(s.chronicle)&&s.chronicle.length<=100&&s.chronicle.every(t=>typeof t==='string'&&t.length<2000)&&num(s.kills)&&num(s.stock,3)&&num(s.lastSeen,1e15)&&[0,1].includes(s.momentum)&&typeof s.running==='boolean';
  }catch{return false;}

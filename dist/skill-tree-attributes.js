@@ -15,5 +15,6 @@ export function skillTreeHeroStats(base,effects,{dodgeCap}={}){
 export function skillTreeEnemyAttributes(unit,effects,{hasStatus}={}){
  if(!unit||!validSkillEffectState(effects)||typeof unit.id!=='string'||!['atk','armor'].every(k=>Number.isFinite(unit[k])&&unit[k]>=0)||!unit.elementResistance)return null;
  const value=type=>skillEffectValue(effects,unit.id,type,{hasStatus});if(value('armorDown')===null)return null;
- return {atk:Math.max(0,unit.atk-value('attackDown')),armor:Math.max(0,unit.armor-value('armorDown')),hitDownRating:value('hitDown'),elementResistance:{...unit.elementResistance,fire:Math.max(0,unit.elementResistance.fire-value('fireResistDown'))}};
+ const res={...unit.elementResistance};for(const element of Object.keys(res)){const sources=effects.enemies[unit.id]?.sources??[];const reduction=sources.filter(x=>x.type==='elementResistDown'&&x.damageType===element&&x.endAt>effects.clock).reduce((n,x)=>Math.max(n,x.amount),0);res[element]=Math.max(0,res[element]-Math.max(reduction,element==='fire'?value('fireResistDown'):0));}
+ return {atk:Math.max(0,unit.atk-value('attackDown')),armor:Math.max(0,unit.armor-value('armorDown')),hitDownRating:value('hitDown'),elementResistance:res};
 }

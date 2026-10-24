@@ -1,4 +1,4 @@
-import {DWARF_MONSTERS} from './dwarf-content.js';
+import {WORLD_MONSTERS as DWARF_MONSTERS} from './world-content.js';
 import {beginPreparing,claimCompletedCast,controlAllowsAction} from './multi-control.js';
 const elements=['earth','water','fire','wind','light','dark'];
 const lifestealCap=d=>Math.max(d.trait?.type==='lifesteal'?d.trait.encounterCap:0,...d.skills.flatMap(s=>s.effects.filter(e=>e.type==='lifesteal').map(e=>e.encounterCap)));

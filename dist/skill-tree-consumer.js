@@ -1,3 +1,4 @@
+import {getRaceSkillPlanner,getSkillOwner,RACE_PACKS} from './race-registry.js';
 import {validPoisonTiming} from './skill-tree-poison.js';
 // Production adapter plans for the new tree. No live registry activation or numeric defaults.
 // Approved action shapes; host owns combat math and state mutation.
@@ -87,8 +88,8 @@ export function resolveSetLinkedEffect(effect,counts,config){
  }catch{return null;}
 }
 
-export const TREE_ACTIVE_SKILL_IDS=Object.freeze(['fracture_strike',...APPROVED_SKILLS]);
-export const TREE_MAX_HITS_PER_TARGET=3;
+export const TREE_ACTIVE_SKILL_IDS=Object.freeze(['fracture_strike',...APPROVED_SKILLS,...Object.values(RACE_PACKS).filter(p=>p.id!=='dwarf').flatMap(p=>p.tree.nodes.filter(n=>n.kind==='active').map(n=>n.id))]);
+export const TREE_MAX_HITS_PER_TARGET=8;
 const validId=x=>typeof x==='string'&&x.length>0&&x.length<=250;
 const plain=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
 /** Build only with explicit complete numeric tuning. Pending poison has no production fallback.
@@ -102,7 +103,9 @@ export function planTreeSkill(input={}){
  if(input.skillId==='scatter_ash'&&input.weaponType==='axe'&&(!validPoisonTiming(input.config.poisonTiming)||input.config.poisonTiming.maxLayers!==5))return null;
  if(!Number.isFinite(input.config.cooldownMs)||input.config.cooldownMs<=0)return null;
  let plan;
- if(input.skillId==='fracture_strike'){
+ const external=getRaceSkillPlanner(input.skillId);
+ if(external){plan=external(input);if(!plan)return null;plan=clone(plan);const owner=getSkillOwner(input.skillId);if(owner?.modifySkillPlan)plan=owner.modifySkillPlan(plan,{...input,stats:input.stats,setCounts:input.stats?.count??{}});if(!plan)return null;}
+ else if(input.skillId==='fracture_strike'){
   if(!input.targets.some(t=>t.id===input.selectedTargetId&&t.alive))return null;
   const p=planFractureStrike({...input,targetId:input.selectedTargetId});if(!p)return null;
   plan={...p,damageActionCount:1,actions:p.hits.map(h=>({...h,kind:'hit',effects:[],armorBreak:p.armorBreak?clone(p.armorBreak):null}))};delete plan.hits;delete plan.armorBreak;
@@ -157,7 +160,7 @@ export function executeTreeSkill(plan,host={},options={}){
  if(effects.some(e=>e.type==='interrupt')&&typeof host.interrupt!=='function'||effects.some(e=>e.type==='cleanse')&&typeof host.cleanse!=='function'||effects.some(e=>e.chance!==undefined)&&typeof host.random!=='function'||plan.actions.some(a=>a.consumeStatusOnHit)&&typeof host.consumeStatus!=='function'||plan.actions.some(a=>a.armorBreak)&&typeof host.applyArmorBreak!=='function')return null;
  if(!host.heroAlive()||!host.hasLivingTargets()||plan.scope!=='self'&&!plan.actions.some(a=>host.isAlive(a.targetId)))return {cast:false,hits:[],activeCastCount:0};
  if(!extra&&host.consumeCooldown({skillId:plan.skillId,cooldownMs:plan.cooldownMs,castId:plan.castId})===false)return {cast:false,hits:[],activeCastCount:0};
- const event={castId:plan.castId,skillId:plan.skillId,source:'active',extra,activeCastCount:1,damageActionCount:plan.damageActionCount,multicastEligible:!extra};
+ const event={castId:plan.castId,skillId:plan.skillId,source:'active',extra,activeCastCount:1,damageActionCount:plan.damageActionCount,multicastEligible:!extra,...(plan.runtimePatch?{runtimePatch:clone(plan.runtimePatch)}:{})};
  host.onActiveCast({...event});
  const hits=[],once=new Set();
  const apply=(e,target)=>{

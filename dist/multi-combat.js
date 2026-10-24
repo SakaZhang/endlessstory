@@ -8,7 +8,7 @@ import {validSkillPoison,createSkillPoison,applySkillPoison,advanceSkillPoison} 
 import {executeTreeSkillTurn,planTreeSkill,resolveSetLinkedHit,resolveSetLinkedEffect,TREE_ACTIVE_SKILL_IDS} from './skill-tree-consumer.js';
 import {advanceLegendaryCombat} from './legendary-combat.js';
 import {createPlayerShieldLayers,expirePlayerShieldLayers,grantPlayerShieldLayer,absorbPlayerShieldDamage} from './player-shield-layers.js';
-import {DWARF_MONSTERS} from './dwarf-content.js';
+import {WORLD_MONSTERS as DWARF_MONSTERS} from './world-content.js';
 import {validDwarfActor,expireDwarfShield,nextDwarfAction,applyDwarfDot,tickDwarfDots,validDwarfDots} from './dwarf-effects.js';
 import {createBattleAffixState,validBattleAffixState,tryNirvana,tryReaperHit,calculateLifesteal,tryMulticast} from './affix-expansion.js';
 import {createControl,validControl,advanceControlClock,controlAllowsAction,beginPreparing,claimCompletedCast,interruptPreparing,applyStun,preparingProgress} from './multi-control.js';
