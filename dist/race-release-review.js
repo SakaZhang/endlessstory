@@ -1,0 +1,8 @@
+// Initial-release evidence, not a browser QA or final-global-balance assertion.
+// Approval records are separate from executable content and remain fail-closed.
+export const RACE_RELEASE_REVIEW=Object.freeze({
+ human:{artApproved:true,actualSetAndLegendTests:false,artReview:{date:'2026-10-24',scope:'Native knight/weapon lifecycle, retinue formations and actual skill FX; root visual review plus all-asset checks.',evidence:['tests/races/human/native-skill-fx.mjs','qa/large-formations/actual-human.a09.boss.png']}},
+ goblin:{artApproved:true,actualSetAndLegendTests:false,artReview:{date:'2026-10-24',scope:'43 clean creature identities, gear icons, actual A03/A06/A09/A10 grounded scenes and retinues; native review, not browser.',evidence:['tests/races/goblin/native-proof','tests/races/goblin/grounded-scenes-proof.png']}},
+ ashen:{artApproved:true,actualSetAndLegendTests:false,artReview:{date:'2026-10-24',scope:'43 clean creature frame sets, both weapon states, ten-scene overview and grounded four-target boss; native review, not browser.',evidence:['tests/races/ashen/native-proof/native-engine-clean-proof.png','qa/large-formations/actual-ashen.a10.boss.png']}},
+ elf:{artApproved:false,actualSetAndLegendTests:false}
+});
