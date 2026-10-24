@@ -32,3 +32,22 @@ export function modifySkillPlan(plan,{setCounts={},targets=[]}={}){
   }
  }return p;
 }
+
+// Ordinary rings share one item family; sockets are equip destinations, not drop types.
+equipment.push(...[
+  {
+    "id": "goblin_scatter_ring_6",
+    "name": "铜簧菌戒",
+    "slot": "ring",
+    "weaponType": null,
+    "baseVariant": "ring_element",
+    "originRace": "goblin",
+    "kind": "scatter",
+    "setId": null,
+    "description": "裂穴匠人用废铜簧绕成戒圈，再以苔线绑住一朵冷光菌，照亮最窄的锁孔。",
+    "pixelAppearance": "歪铜戒圈、紫菌盖、绿色绳结",
+    "visualVariant": "goblin_scatter_ring_6",
+    "visualKey": "goblin_scatter_ring_6",
+    "iconKey": "ring"
+  }
+]);

@@ -10,4 +10,4 @@ try{
  for(let q=0;q<4;q++)for(const set of [null,'anvil']){const old={name:'旧存档装备',slot:'weapon',rarity:q,set},before=JSON.stringify(old),raw=icon('weapon',set||'anvil',q),inner=raw.slice(raw.indexOf('>')+1,raw.lastIndexOf('</svg>')),svg=equipmentIcon(old);assert(svg.includes(inner));assert(svg.includes(`data-equipment-quality="${set?3:q}"`));assert(!svg.includes('data-equipment-visual'));assert.equal(JSON.stringify(old),before);}
  assert.equal(equipmentPresentation({rarity:NaN}).quality,0);assert.equal(equipmentPresentation({rarity:Infinity}).quality,0);
 }finally{Math.random=random;}
-console.log('PASS quality presentation: all240 × four qualities; backgrounds independent of neutral/set frames; supreme red set background; legacy geometry/fallback retained; no state/RNG mutation.');
+console.log('PASS quality presentation: all248 × four qualities; backgrounds independent of neutral/set frames; supreme red set background; legacy geometry/fallback retained; no state/RNG mutation.');

@@ -816,3 +816,67 @@ export const HUMAN_LEGENDARIES=[
   }
 ];
 export const HUMAN_LEGENDARY_DROP={race:"human",totalProbability:.05,splitWeights:[1,1],ownRaceBossOnly:true};
+
+// Ordinary rings share one item family; sockets are equip destinations, not drop types.
+HUMAN_EQUIPMENT.push(...[
+  {
+    "id": "human_scatter_ring_wheat",
+    "name": "麦穗印戒",
+    "slot": "ring",
+    "weaponType": null,
+    "baseVariant": "ring_attack",
+    "originRace": "human",
+    "kind": "scatter",
+    "setId": null,
+    "description": "王领农户将丰收的第一束麦穗刻入金印，出征时便把故乡带在指间。",
+    "pixelAppearance": "金色方印、麦穗刻纹",
+    "visualVariant": "human_scatter_ring_wheat",
+    "visualKey": "human_scatter_ring_wheat",
+    "iconKey": "ring"
+  },
+  {
+    "id": "human_scatter_ring_watch",
+    "name": "守更铁环",
+    "slot": "ring",
+    "weaponType": null,
+    "baseVariant": "ring_survival",
+    "originRace": "human",
+    "kind": "scatter",
+    "setId": null,
+    "description": "城门守夜人以深蓝塔印记下轮值，铁环内侧磨出了长年握枪的亮痕。",
+    "pixelAppearance": "铁灰环身、深蓝塔印",
+    "visualVariant": "human_scatter_ring_watch",
+    "visualKey": "human_scatter_ring_watch",
+    "iconKey": "ring"
+  },
+  {
+    "id": "human_scatter_ring_lantern",
+    "name": "灯誓铜戒",
+    "slot": "ring",
+    "weaponType": null,
+    "baseVariant": "ring_element",
+    "originRace": "human",
+    "kind": "scatter",
+    "setId": null,
+    "description": "驿道灯匠把一粒琥珀嵌在铜灯座中，约定归来时仍在原处点灯。",
+    "pixelAppearance": "黄铜镂空灯座、琥珀光心",
+    "visualVariant": "human_scatter_ring_lantern",
+    "visualKey": "human_scatter_ring_lantern",
+    "iconKey": "ring"
+  },
+  {
+    "id": "human_scatter_ring_oath",
+    "name": "赤盾银戒",
+    "slot": "ring",
+    "weaponType": null,
+    "baseVariant": "ring_element",
+    "originRace": "human",
+    "kind": "scatter",
+    "setId": null,
+    "description": "边城誓友各留一缕银线编成戒身，赤色小盾记着彼此未曾撤回的承诺。",
+    "pixelAppearance": "编银戒身、红色盾形石",
+    "visualVariant": "human_scatter_ring_oath",
+    "visualKey": "human_scatter_ring_oath",
+    "iconKey": "ring"
+  }
+]);

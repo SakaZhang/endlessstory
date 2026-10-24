@@ -23,3 +23,22 @@ export const coreVariants={core_molten:{slot:'core',atk:.5,armor:.5,hp:0},core_s
 export const weaponVariants={armguard_balanced:{slot:'weapon',atk:.75,armor:.15,hp:.10},armguard_attack:{slot:'weapon',atk:.85,armor:.10,hp:.05},armguard_defensive:{slot:'weapon',atk:.65,armor:.25,hp:.10}};
 // Historical planner hook is intentionally a no-op: live mechanics use item-scoped event reducers.
 export function modifyLegendaryPlan(plan){return structuredClone(plan);}
+
+// Ordinary rings share one item family; sockets are equip destinations, not drop types.
+equipment.push(...[
+  {
+    "id": "ashen.scatter.37",
+    "name": "熔纹曜环",
+    "slot": "ring",
+    "weaponType": null,
+    "baseVariant": "ring_attack",
+    "originRace": "ashen",
+    "kind": "scatter",
+    "setId": null,
+    "description": "迁行者从冷却的黑曜脉中磨出戒圈，一道橙红矿纹仍指向昔日火山的方向。",
+    "pixelAppearance": "黑曜棱面、橙红熔纹、三角琥珀晶",
+    "visualVariant": "ashen.scatter.37",
+    "visualKey": "ashen.scatter.37",
+    "iconKey": "ring"
+  }
+]);

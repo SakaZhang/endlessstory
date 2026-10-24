@@ -4,7 +4,7 @@ import {RACE_PACK as p,planSkill,modifySkillPlan,createRuntime,validRuntime,appl
 import {createTreeEffectHost} from './dist/skill-tree-effect-host.js';
 import {createSkillPoison,applySkillPoison,advanceSkillPoison} from './dist/skill-tree-poison.js';
 import {poisonTiming} from './dist/races/goblin/skills.js';
-assert.equal(p.areas.length,10);assert.equal(Object.keys(p.monsters).length,43);assert.equal(Object.keys(p.materials).length,18);assert.equal(p.equipment.filter(x=>x.kind==='scatter').length,36);assert.equal(p.equipment.filter(x=>x.kind==='set').length,12);assert.equal(p.legendaries.length,2);
+assert.equal(p.areas.length,10);assert.equal(Object.keys(p.monsters).length,43);assert.equal(Object.keys(p.materials).length,18);assert.equal(p.equipment.filter(x=>x.kind==='scatter').length,37);assert.equal(p.equipment.filter(x=>x.kind==='set').length,12);assert.equal(p.legendaries.length,2);
 assert.equal(p.tree.nodes.length,30);assert.equal(p.tree.nodes.filter(n=>n.kind==='active').length,21);assert.equal(p.tree.nodes.reduce((n,x)=>n+x.cost,0),99);
 for(const branch of ['poison','ambush','contraption']){const nodes=p.tree.nodes.filter(n=>n.branch===branch);assert.equal(nodes.reduce((n,x)=>n+x.cost,0),26);assert.equal(nodes.filter(n=>n.kind==='active').length,6);}
 for(const n of p.tree.nodes)for(const pre of n.requires)assert(p.tree.nodes.some(n=>n.id===pre));
@@ -23,7 +23,7 @@ for(let n=0;n<2;n++){const out=onEnemyAction({runtime:JSON.parse(JSON.stringify(
 for(const [id,row]of Object.entries(p.art.monsters)){assert.equal(row.frames.length,9);assert.equal(row.facing,'left');for(const f of row.frames)assert(fs.existsSync('dist/'+f.file),id);}
 assert.equal(new Set(Object.values(p.art.monsters).map(r=>r.sourceAtlas+':'+r.sourceRow)).size,43);
 for(const kind of ['equipment','skills','materials','areas'])for(const row of Object.values(p.art[kind]))assert(fs.existsSync('dist/'+row.file));
-console.log(`PASS goblin: 43 unique monster rows, 18 canonical materials, 10 recovery/gem regions, 36+12 equipment, 2 legends, 99 points; ${plans} plans / ${effects} actual effect-host applications; capped poison and finite reactive save roundtrip.`);
+console.log(`PASS goblin: 43 unique monster rows, 18 canonical materials, 10 recovery/gem regions, 37+12 equipment, 2 legends, 99 points; ${plans} plans / ${effects} actual effect-host applications; capped poison and finite reactive save roundtrip.`);
 for(const id of ['goblin.a06.elite','goblin.a07.elite','goblin.a09.boss']){const trait=p.monsters[id].trait;assert.equal(trait.type,'followers');assert(Math.abs(trait.shares.reduce((a,b)=>a+b,0)-1)<1e-10);assert.equal(trait.shares.length,id.endsWith('boss')?4:5);assert(p.art.monsters[trait.followerMonsterId]);assert.equal(p.monsters[trait.followerMonsterId].area,p.monsters[id].area);}
 console.log('PASS Goblin retinues: A06/A07 elite5targets, A09boss4targets, budgetshares sum1, samearea ordinarynativeart.');
 for(const baseAtk of [0,1,20,100,10000]){

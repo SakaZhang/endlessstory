@@ -9521,3 +9521,5 @@ export const art = {
     }
   }
 };
+
+art.equipment['goblin_scatter_ring_6']={file:'races/goblin/assets/goblin_scatter_ring_6.png',width:64,height:64};

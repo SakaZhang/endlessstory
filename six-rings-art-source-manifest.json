@@ -1,0 +1,62 @@
+{
+  "generator": "built-in image_gen.imagegen",
+  "packaging": "Direct generated output resized to 64x64 using nearest-neighbor canvas; alpha preserved. No existing raster edited.",
+  "entries": [
+    {
+      "id": "human_scatter_ring_wheat",
+      "file": "dist/races/human/assets/human_scatter_ring_wheat.png",
+      "sha256": "366596983fbf4f25380687d96e98e0de3e64e818b12708b47b359409d2fc3e27",
+      "description": "金色方印、麦穗刻纹",
+      "sourceGeneratedFilename": "exec-8c9340e9-e75e-4868-bce8-40d7334856b0.png"
+    },
+    {
+      "id": "human_scatter_ring_watch",
+      "file": "dist/races/human/assets/human_scatter_ring_watch.png",
+      "sha256": "528192cdb9e5b611cf02476c002ea9fc1838a2577caf3b5805bd959b18e59b33",
+      "description": "铁灰环身、深蓝塔印",
+      "sourceGeneratedFilename": "exec-30793107-b05b-49c6-8217-22c75cb23dd8.png"
+    },
+    {
+      "id": "human_scatter_ring_lantern",
+      "file": "dist/races/human/assets/human_scatter_ring_lantern.png",
+      "sha256": "c930892c8f3c606dac9781847cac11e66ba81f95b25a1a9a6a2f5a2afd98cb9f",
+      "description": "黄铜镂空灯座、琥珀光心",
+      "sourceGeneratedFilename": "exec-8ca67700-0fcb-4c43-bf03-569272ba6245.png"
+    },
+    {
+      "id": "human_scatter_ring_oath",
+      "file": "dist/races/human/assets/human_scatter_ring_oath.png",
+      "sha256": "3c58707894208a26b106db70eb40bab2d38ec4eaa1462a0a48ebfc0d96fd2122",
+      "description": "编银戒身、红色盾形石",
+      "sourceGeneratedFilename": "exec-79342681-e770-4f32-897b-7dc8a91e78f6.png"
+    },
+    {
+      "id": "elf_scatter_ring_5",
+      "file": "dist/races/elf/assets/elf_scatter_ring_5.png",
+      "sha256": "6ea1824ee49e3e229d3af1c9dc4e7aa86a2cb1c3262a467de649c77de89c25a4",
+      "description": "根银弯月、淡紫晶面、叶形戒爪",
+      "sourceGeneratedFilename": "exec-01e537fb-ff79-4d3b-935b-22b7df969916.png"
+    },
+    {
+      "id": "elf_scatter_ring_6",
+      "file": "dist/races/elf/assets/elf_scatter_ring_6.png",
+      "sha256": "12fc121d20def0001cd5f730088d7f1588a5ab99ace5dbf53ea750f999ce7fef",
+      "description": "深色盘根、青露石、双嫩叶",
+      "sourceGeneratedFilename": "exec-0df32a4a-4c6c-4fd6-bc94-8d892b65fd2f.png"
+    },
+    {
+      "id": "goblin_scatter_ring_6",
+      "file": "dist/races/goblin/assets/goblin_scatter_ring_6.png",
+      "sha256": "7119190403b635c6d8cb3b6e054077d45faaf7bef3ed60664b04edd4137df951",
+      "description": "歪铜戒圈、紫菌盖、绿色绳结",
+      "sourceGeneratedFilename": "exec-6e74f68a-24f1-44e8-8302-be5e490e9c1a.png"
+    },
+    {
+      "id": "ashen.scatter.37",
+      "file": "dist/races/ashen/assets/ashen.scatter.37.png",
+      "sha256": "b22b2196ae3741fb8f7ddc2dadd492de0f60187316e85d576e06fc15a0fa4959",
+      "description": "黑曜棱面、橙红熔纹、三角琥珀晶",
+      "sourceGeneratedFilename": "exec-ebd0f6ba-588e-4649-ad85-63516dcdbd73.png"
+    }
+  ]
+}

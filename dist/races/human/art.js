@@ -6422,3 +6422,8 @@ const hero={
   }
 };
 export const HUMAN_ART={hero,heroWeapons:{sword_shield:hero,greatsword},monsters:lifecycle,areas:Object.fromEntries(Array.from({length:10},(_,i)=>[`human.a${pad(i+1)}`,{map:root+`maps-${pad(i+1)}.png`,background:root+`backgrounds-${pad(i+1)}.png`,size:[480,270]}])),camp:{background:'battle-assets/backgrounds/camp-human.png',reuseExisting:true},equipment:{...Object.fromEntries(HUMAN_EQUIPMENT.map(g=>[g.id,root+(g.iconIndex<48?`equipment-${pad(g.iconIndex)}`:`materials-${pad(g.iconIndex-30)}`)+'.png'])),'human-oathblade':root+'materials-22.png','human-last-banner':root+'materials-23.png'},skills:Object.fromEntries(HUMAN_TREE.nodes.map((n,i)=>[n.id,root+`skills-${pad(i)}.png`])),materials:Object.fromEntries(Array.from({length:18},(_,i)=>[`human.mat.${pad(i+1)}`,root+`materials-${pad(i)}.png`]))};
+
+HUMAN_ART.equipment['human_scatter_ring_wheat']='races/human/assets/human_scatter_ring_wheat.png';
+HUMAN_ART.equipment['human_scatter_ring_watch']='races/human/assets/human_scatter_ring_watch.png';
+HUMAN_ART.equipment['human_scatter_ring_lantern']='races/human/assets/human_scatter_ring_lantern.png';
+HUMAN_ART.equipment['human_scatter_ring_oath']='races/human/assets/human_scatter_ring_oath.png';

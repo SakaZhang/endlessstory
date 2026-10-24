@@ -5321,3 +5321,5 @@ export const art={
     }
   }
 };
+
+art.equipment['ashen.scatter.37']={file:'races/ashen/assets/ashen.scatter.37.png',width:64,height:64};

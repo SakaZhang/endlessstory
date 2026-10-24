@@ -8,3 +8,40 @@ for(const [sidx,set] of sets.entries())for(const [i,slot] of ['helm','armor','gl
 export const legendaries=[{id:'elf-sixfold-heartwood',ready:true,name:'六相·心木初鸣',slot:'weapon',baseVariant:'staff_balanced',weaponType:'staff',originRace:'elf',exclusiveId:'elf-sixfold-charge',exclusiveName:'六相蓄鸣',description:'第一位守林者将六种光留在杖端。每一种真实的元素回应，都为下一次攻击积蓄力量。',lore:'历代守林者将这柄杖视作交接守护职责的凭证。',exclusiveDescription:'持杖时六种元素伤害提高30%（不含毒素）。实际造成四种不同元素伤害后，下一次成功施放的攻击技能全部直接伤害翻倍（物理与元素段，不含毒素）；辅助、治疗与自身增益不消耗。触发蓄满的当次不翻倍；翻倍攻击可重新积累元素，跨战斗保留，卸下清空。'},{id:'elf-last-string',ready:true,name:'归林·最后一弦',slot:'weapon',baseVariant:'bow_attack',weaponType:'bow',originRace:'elf',exclusiveId:'elf-last-string-pierce',exclusiveName:'归林贯弦',description:'归途中的最后一箭穿过密林，只留下一线月银的弦声。',lore:'守林者将最后一弦留给阻挡归途的敌人。',exclusiveDescription:'持弓释放攻击技能时，物理伤害无视目标30%护甲；多段技能对每个目标的最后一段物理伤害再提高50%。不增加攻击次数，不触发额外反击；普通攻击和其他武器不生效。'}];
 equipmentArt['elf-sixfold-heartwood']='races/elf/assets/icon-04.png';equipmentArt['elf-last-string']='races/elf/assets/icon-02.png';
 export const legendaryPolicy={totalBossPoolProbability:.05,ownRaceOnly:true,repeatsAllowed:true,crossRaceEquipAllowed:true,randomAffixes:4,fixedExclusiveAffixes:1};
+
+// Ordinary rings share one item family; sockets are equip destinations, not drop types.
+equipment.push(...[
+  {
+    "id": "elf_scatter_ring_5",
+    "name": "弦月藤戒",
+    "slot": "ring",
+    "weaponType": null,
+    "baseVariant": "ring_element",
+    "originRace": "elf",
+    "kind": "scatter",
+    "setId": null,
+    "description": "月庭工匠让细藤沿根银弯月攀生，将夜巡时听见的风声封在淡紫晶中。",
+    "pixelAppearance": "根银弯月、淡紫晶面、叶形戒爪",
+    "visualVariant": "elf_scatter_ring_5",
+    "visualKey": "elf_scatter_ring_5",
+    "iconKey": "ring"
+  },
+  {
+    "id": "elf_scatter_ring_6",
+    "name": "露根守环",
+    "slot": "ring",
+    "weaponType": null,
+    "baseVariant": "ring_survival",
+    "originRace": "elf",
+    "kind": "scatter",
+    "setId": null,
+    "description": "巡林者把折下的老根盘成指环，青露石旁的两片新叶记着归林的季节。",
+    "pixelAppearance": "深色盘根、青露石、双嫩叶",
+    "visualVariant": "elf_scatter_ring_6",
+    "visualKey": "elf_scatter_ring_6",
+    "iconKey": "ring"
+  }
+]);
+
+equipmentArt['elf_scatter_ring_5']='races/elf/assets/elf_scatter_ring_5.png';
+equipmentArt['elf_scatter_ring_6']='races/elf/assets/elf_scatter_ring_6.png';
