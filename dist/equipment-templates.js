@@ -748,7 +748,7 @@ export function applyEquipmentTemplate(item,templateId){
  const t=Object.hasOwn(EQUIPMENT_TEMPLATE_BY_ID,templateId)?EQUIPMENT_TEMPLATE_BY_ID[templateId]:null;
  if(!item||typeof item!=='object'||Array.isArray(item)||!t||item.slot!==t.slot||itemSet(item)!==t.setId||item.legendaryId||item.templateId&&item.templateId!==templateId||item.set!==undefined&&item.setId!==undefined&&item.set!==item.setId)return null;
  // Call only for a NEW generated item. No automatic old-inventory reassignment exists.
- return {...structuredClone(item),templateId:t.id,name:t.name,baseVariant:t.baseVariant,weaponType:t.weaponType,originRace:t.originRace,visualKey:t.visualKey,visualVariant:t.visualVariant,iconKey:t.iconKey};
+ return {...structuredClone(item),templateId:t.id,name:t.name,baseVariant:t.baseVariant,...(t.weaponType===undefined?{}:{weaponType:t.weaponType}),originRace:t.originRace,visualKey:t.visualKey,visualVariant:t.visualVariant,iconKey:t.iconKey};
 }
 export function validEquipmentTemplateMetadata(item){
  if(!item||typeof item!=='object'||Array.isArray(item))return false;
