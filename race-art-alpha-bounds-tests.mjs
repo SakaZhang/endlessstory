@@ -3,7 +3,8 @@
 // tolerance for pre-existing inclusive/exclusive edge conventions. This catches
 // stale metadata after resizing/cropping without discarding translucent effects.
 import assert from 'node:assert/strict';
-import {createCanvas,loadImage} from '@napi-rs/canvas';
+import {createRequire} from 'node:module';
+const {createCanvas,loadImage}=createRequire(import.meta.url)('@napi-rs/canvas');
 import {EXPANSION_PACKS} from './dist/race-packs.js';
 let count=0;const seen=new Set();
 async function walk(value){
