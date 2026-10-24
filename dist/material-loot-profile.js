@@ -18,7 +18,7 @@ export function buildMaterialPools({materials,monsters,associations}){
  const monsterMap=Array.isArray(monsters)?Object.fromEntries(monsters.map(m=>[m.id,m])):monsters,out={};
  for(const [key,source]of Object.entries(associations)){
   const {monsterId,nodeId}=source,match=/^[^.]+\.a(\d{2})\.(field|dungeon|boss)$/.exec(nodeId),monster=monsterMap[monsterId];
-  if(!match||!monster||key!==monsterId+'|'+nodeId||!monster.sources.includes(nodeId))throw Error('Invalid material association '+key);
+  if(!match||!monster||key!==monsterId+'|'+nodeId||!(monster.sources??monster.nodes??[]).includes(nodeId))throw Error('Invalid material association '+key);
   const area=Number(match[1]),kind=match[2],rank=monster.rank,by={regular:new Map(),recovery:new Map(),special:new Map(),gem:new Map()},explicitRecovery=new Map();
   for(const channel of source.channels){
    if('hitProbability'in channel||'quantity'in channel)throw Error('Associations must not contain independent probability policy');
