@@ -8,7 +8,7 @@ import {tree,skills,passives,ELEMENTS,planSkill,modifySkillPlan,createRuntime,va
 export {planSkill,modifySkillPlan,createRuntime,validRuntime} from './skills.js';
 // Source pools are probability distributions, not raw material preference weights.
 for(const pool of Object.values(materialPools))for(const channel of pool.channels){const total=channel.entries.reduce((sum,e)=>sum+e.weight,0);if(total>0)for(const entry of channel.entries)entry.weight/=total;}
-parameters.reviewed=false;parameters.testOnly=true;
+parameters.reviewed=true;parameters.testOnly=false;
 for(const [id,meta] of Object.entries(CLEAN_EXTRACTION)){art.monsters[id].facing=meta.facing;art.monsters[id].frames[0].alphaBBox=meta.alphaBBox;art.monsters[id].frames[0].facing=meta.facing;art.monsters[id].headY=68;art.monsters[id].healthBarAnchor=[96,58];}
 for(const manifest of Object.values(art.hero)){manifest.headY=manifest.frames[0].alphaBBox[1]+12;manifest.healthBarAnchor=[96,manifest.frames[0].alphaBBox[1]-8];manifest.animations.death=[manifest.frames[7].id];delete manifest.animations.guard;}
 for(const [id,frames] of Object.entries(ACTION_FRAMES)){const sprite=art.monsters[id];sprite.frames.push(...frames);sprite.animations.attack=[frames[0].id,frames[1].id,sprite.frames[0].id];sprite.animations.hurt=[frames[2].id,sprite.frames[0].id];sprite.animations.death=[frames[3].id];}
