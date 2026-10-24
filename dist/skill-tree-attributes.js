@@ -9,7 +9,7 @@ export function skillTreeHeroStats(base,effects,{dodgeCap}={}){
  out.atk+=value('attackUp');out.armor+=value('defenseUp');out.penetration+=value('penetrationUp');
  out.critRating+=value('critUp');out.crit=Math.min(.6,.05+.55*rating(out.critRating));
  out.lifesteal=out.lifestealRating=(base.lifestealRating??base.lifesteal??0)+value('lifestealUp');out.lifestealRate=lifestealRate(out.lifesteal);
- out.dodgeRating=value('dodgeUp');out.dodge=dodgeCap*rating(out.dodgeRating);
+ out.dodgeRating=(base.dodgeRating??0)+value('dodgeUp');out.dodge=dodgeCap*rating(out.dodgeRating);
  return out;
 }
 export function skillTreeEnemyAttributes(unit,effects,{hasStatus}={}){

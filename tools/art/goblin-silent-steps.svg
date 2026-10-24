@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" shape-rendering="crispEdges">
+<!-- Original code-native pixel silhouette: paired soft thief boots, no necklace. -->
+<path fill="#171b21" d="M7 7h14v18h4v6h-2v6H3v-8h4zM28 11h14v19h4v8h-2v4H24V31h4z"/>
+<path fill="#395343" d="M9 9h10v18h4v6H5v-2h4zM30 13h10v19h4v6H26v-5h4z"/>
+<path fill="#59765c" d="M9 9h10v4H9zM30 13h10v4H30zM9 25h4v4H7v2H5v-2h4zM30 29h4v4h-6v2h-2v-2h4z"/>
+<path fill="#273530" d="M15 15h4v14h4v4h-8zM36 19h4v15h4v4h-8z"/>
+<path fill="#8a6999" d="M7 13h14v4H7zM28 17h14v4H28z"/>
+<path fill="#dab470" d="M13 13h4v4h-4zM34 17h4v4h-4zM11 20h2v2h-2zM11 24h2v2h-2zM32 24h2v2h-2zM32 28h2v2h-2z"/>
+<path fill="#a8b98a" d="M5 33h18v2H5zM26 38h18v2H26z"/>
+<path fill="#d4bd78" d="M23 4h2v2h-2zM21 6h6v2h-6zM23 8h2v2h-2z"/>
+</svg>

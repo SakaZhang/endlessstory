@@ -16,7 +16,7 @@ for(const set of sets)for(const [i,slot]of ['helm','armor','gloves','boots'].ent
 }
 export const legendaries=[
 {id:'goblin-silent-ration',ready:true,name:'留一口 · 无声刃',slot:'weapon',baseVariant:'dagger_balanced',weaponType:'dagger',originRace:'goblin',exclusiveId:'goblin-ration-opening',description:'刃背刻着分粮刻度；旧斥候用它切过食物，也割断过困住同伴的绳。留在刃背的刻度提醒持有者为同伴留一口。',exclusiveName:'先借一口',exclusiveDescription:'对每名敌人的首次成功直接命中，先窃取当前护盾40%（至多自身最大生命8%）转为6秒护盾；敌人无盾时追加70%攻击的物理刺击。追加可暴击、吸血，不触发死神、连施或其他传说追击。',fixedEffect:{type:'firstTargetShieldTheft',shieldFraction:.4,maxHpCap:.08,durationMs:6000,fallbackCoefficient:.7}},
-{id:'goblin-returning-spring',ready:true,name:'回扣铜簧',slot:'amulet',baseVariant:'amulet_survival',originRace:'goblin',exclusiveId:'goblin-decoy-reserve',description:'磨亮的铜簧每次回扣都留下短促轻响，帮助识别敌方动作。机关匠把轻响记作下一次回扣的时机。',exclusiveName:'错步回扣',exclusiveDescription:'敌方直接攻击未命中时，使已装备主动技能中剩余冷却最长者缩短2.2秒，最低归零；每6.6秒战斗时间至多一次，无可缩短技能时不消耗触发。',fixedEffect:{type:'enemyMissCooldownRewind',rounds:2,cooldownMs:6600}}
+{id:'goblin-silent-steps',ready:true,name:'溜影 · 无声足',slot:'boots',baseVariant:'boots_vitality',originRace:'goblin',exclusiveId:'goblin-thief-evasion',description:'哥布林盗贼把软苔缝进靴底，偷走守卫腰间的钥匙后，贴着墙根悄然脱身。追来的刀锋只割下了一缕鞋带。',exclusiveName:'溜影',exclusiveDescription:'装备时固定提供闪避+100；与其他闪避数值共同按现有递减公式计算，并非100%闪避。卸下即失效，同名传说效果不叠加。',fixedEffect:{type:'statBonus',stats:{dodgeRating:100}}}
 ];
 export function modifySkillPlan(plan,{setCounts={},targets=[]}={}){
  if(!plan)return null;const p=structuredClone(plan),branch=p.skillId.split('.')[1],spore=setCounts.goblin_spore??0,ambush=setCounts.goblin_ambush??0,snare=setCounts.goblin_snare??0;

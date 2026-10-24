@@ -1,12 +1,9 @@
 import assert from 'node:assert/strict';import{createLegendaryState,validLegendaryState,reduceLegendaryEvent as reduce}from './dist/races/goblin/legends.js';
-const blade='goblin-silent-ration',spring='goblin-returning-spring';let state=createLegendaryState(blade);const context={clock:0,maxHp:1000,targetId:'a'};
+const blade='goblin-silent-ration',boots='goblin-silent-steps';let state=createLegendaryState(blade);const context={clock:0,maxHp:1000,targetId:'a'};
 let r=reduce({legendaryId:blade,state,event:{type:'beforeDirectHit',hit:true,sourceKind:'skill',shieldBefore:1000},context});assert.equal(r.commands[0].amount,80);assert.equal(r.commands[0].durationMs,6000);state=r.state;
 assert.equal(reduce({legendaryId:blade,state,event:{type:'beforeDirectHit',hit:true,sourceKind:'basic',shieldBefore:1000},context}).commands.length,0);
 r=reduce({legendaryId:blade,state,event:{type:'beforeDirectHit',hit:true,sourceKind:'basic',shieldBefore:0},context:{...context,targetId:'b'}});assert.equal(r.commands[0].coefficient,.7);assert(r.commands[0].crit&&r.commands[0].lifesteal);assert.equal(r.commands[0].reaperEligible,false);
 assert.equal(reduce({legendaryId:blade,state:r.state,event:{type:'directHit',shieldBefore:0},context:{...context,targetId:'c'}}).commands.length,0);
 assert.deepEqual(reduce({legendaryId:blade,state:r.state,event:{type:'encounterStart'},context}).state.seenTargetIds,[]);
-state=createLegendaryState(spring);r=reduce({legendaryId:spring,state,event:{type:'enemyMiss'},context:{clock:1100,activeSkillIds:['a','b','c'],cooldowns:{a:5,b:9,c:9}}});assert.equal(r.commands[0].skillId,'b');assert.equal(r.commands[0].rounds,2);assert.equal(r.state.nextReadyAt,7700);
-state=reduce({legendaryId:spring,state:r.state,event:{type:'encounterStart'},context:{clock:1200}}).state;assert.equal(state.nextReadyAt,7700);assert.equal(reduce({legendaryId:spring,state,event:{type:'enemyMiss'},context:{clock:7699,activeSkillIds:['a'],cooldowns:{a:9}}}).commands.length,0);
-r=reduce({legendaryId:spring,state,event:{type:'enemyMiss'},context:{clock:7700,activeSkillIds:['a'],cooldowns:{a:0}}});assert.equal(r.commands.length,0);assert.equal(r.state.nextReadyAt,7700);
-r=reduce({legendaryId:spring,state,event:{type:'enemyMiss'},context:{clock:7700,activeSkillIds:['a'],cooldowns:{a:1}}});assert.equal(r.commands[0].rounds,1);assert(validLegendaryState(spring,JSON.parse(JSON.stringify(r.state))));
-console.log('PASS goblin legends: capped first-target shieldtheft/fallback provenance; peritem longestCDmiss rewind, tieorder,6600mscrossfight carry/noeligible nocharge/JSON.');
+state=createLegendaryState(boots);r=reduce({legendaryId:boots,state,event:{type:'enemyMiss'},context:{clock:1100,activeSkillIds:['a'],cooldowns:{a:9}}});assert.deepEqual(r,{state:{version:1,passive:true},commands:[]});assert(validLegendaryState(boots,JSON.parse(JSON.stringify(r.state))));assert.equal(createLegendaryState('goblin-returning-spring'),null);
+console.log('PASS Goblin dagger unchanged; boots passive state/JSON, no cooldown rewind, old amulet retired.');

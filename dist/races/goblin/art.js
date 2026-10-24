@@ -8971,8 +8971,8 @@ export const art = {
       "width": 48,
       "height": 48
     },
-    "goblin-returning-spring": {
-      "file": "races/goblin/assets/icon-goblin-returning-spring.png",
+    "goblin-silent-steps": {
+      "file": "races/goblin/assets/icon-goblin-silent-steps.png",
       "width": 48,
       "height": 48
     }

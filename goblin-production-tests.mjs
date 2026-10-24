@@ -26,7 +26,7 @@ for(const [setId,skillId]of [['goblin_spore','goblin.venom_cut'],['goblin_ambush
  setRecords.push(result);
 }
 console.log('GOBLIN_ACTUAL_2_4_SETS',JSON.stringify(setRecords));
-for(const id of ['goblin-silent-ration','goblin-returning-spring']){
+for(const id of ['goblin-silent-ration','goblin-silent-steps']){
  const s=setup(),item=E.legendaryItem(id,100);assert(item,id);assert.equal(item.affixes.length,4);s.inventory.push(item);assert(E.equipItem(s,item.id));s.skillTree.presets[0].unlocked=pack.tree.nodes.map(n=>n.id);s.skillTree.presets[0].active=[id==='goblin-silent-ration'?'goblin.opening_cut':'goblin.rattle_decoy',null,null,null];s.heroHp=E.stats(s).hp;
  const e=E.startInstanceEncounter(s,'goblin.a09.boss',s.lastSeen);e.rngState=12345;for(let i=0;i<8&&!e.done;i++)E.step(s,e,s.nextActionAt);assert(E.validSave(s));assert(E.validSave(JSON.parse(JSON.stringify(s))));console.log('GOBLIN_ACTUAL_LEGEND',JSON.stringify({id,castCount:s.equipmentRuntime?.byId[item.id]?.castCount,runtime:e.raceRuntime,enemyEffects:e.treeEffects.enemies}));
 }
