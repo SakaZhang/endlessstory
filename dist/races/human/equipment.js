@@ -1,3 +1,4 @@
+import {HUMAN_DWARF_EQUIPMENT_ADDITIONS} from '../../human-dwarf-equipment-additions.js';
 // Base variants reuse the existing budget allocations, without equipping restrictions.
 export const HUMAN_EQUIPMENT=[
   {
@@ -880,3 +881,5 @@ HUMAN_EQUIPMENT.push(...[
     "iconKey": "ring"
   }
 ]);
+
+HUMAN_EQUIPMENT.push(...HUMAN_DWARF_EQUIPMENT_ADDITIONS.filter(t=>t.originRace==='human'));

@@ -1,3 +1,4 @@
+import {HUMAN_DWARF_EQUIPMENT_ASSETS} from '../../human-dwarf-equipment-assets.js';
 const lifecycle={
   "human.a01.normal.1": {
     "frameSize": [
@@ -6427,3 +6428,5 @@ HUMAN_ART.equipment['human_scatter_ring_wheat']='races/human/assets/human_scatte
 HUMAN_ART.equipment['human_scatter_ring_watch']='races/human/assets/human_scatter_ring_watch.png';
 HUMAN_ART.equipment['human_scatter_ring_lantern']='races/human/assets/human_scatter_ring_lantern.png';
 HUMAN_ART.equipment['human_scatter_ring_oath']='races/human/assets/human_scatter_ring_oath.png';
+
+Object.assign(HUMAN_ART.equipment,Object.fromEntries(Object.entries(HUMAN_DWARF_EQUIPMENT_ASSETS).filter(([id])=>id.startsWith('human_'))));

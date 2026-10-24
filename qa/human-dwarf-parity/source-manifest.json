@@ -1,0 +1,684 @@
+{
+  "generator": "built-in image_gen",
+  "source": "qa/human-dwarf-parity/source-atlas.png",
+  "sourceSha256": "4d56c8ccafbc97c86cf216a6a44425734ef1d07efc8a59999082b1a454d244c7",
+  "sourceSize": [
+    948,
+    1659
+  ],
+  "method": "4x7 visually verified row-boundary crop, transparent trim, nearest-neighbor contain; no painting or recoloring",
+  "entries": [
+    {
+      "id": "dwarf_scatter_coppermoon_axe",
+      "name": "铜月劈石斧",
+      "crop": {
+        "left": 0,
+        "top": 0,
+        "width": 237,
+        "height": 244
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/dwarf_scatter_coppermoon_axe.png",
+          "sha256": "11b5b817ab0c75393c371847736a381d0aa180d1111e3552fdb59a6615d9a1ae"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/dwarf_scatter_coppermoon_axe.png",
+          "sha256": "cdc21e1d1a9da1cbd2ef2f1f1e68c945d063a559a63e633a617eb2e49202c1fb"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/dwarf_scatter_coppermoon_axe.png",
+          "sha256": "d8a732c624e0ab03efc82981f2e1d94e159224640d070f0311351f010d48d40b"
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_greenbind_axe",
+      "name": "绿绳双缺斧",
+      "crop": {
+        "left": 237,
+        "top": 0,
+        "width": 237,
+        "height": 244
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/dwarf_scatter_greenbind_axe.png",
+          "sha256": "00199b5d6803bca30d534f406461383505a272e24362f9e7f9a5cddca3e4acd3"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/dwarf_scatter_greenbind_axe.png",
+          "sha256": "607ab4ad9d9e150c2b4d792cca23841ecc1d465362cf416e9c733e70085c5e96"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/dwarf_scatter_greenbind_axe.png",
+          "sha256": "8ed1e977126e0871b021aea04082692f8bcd512165f45bd7fb59cf8068580f0e"
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_quarrywedge_axe",
+      "name": "采岩楔斧",
+      "crop": {
+        "left": 474,
+        "top": 0,
+        "width": 237,
+        "height": 244
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/dwarf_scatter_quarrywedge_axe.png",
+          "sha256": "d334464eb9d5d720133683e84a34c5c6f67432cf867ad92afc08845bc938a3be"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/dwarf_scatter_quarrywedge_axe.png",
+          "sha256": "4d1027e7903a190829f3e454250c29b62f40a15e7f505af643f2854a395d0a20"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/dwarf_scatter_quarrywedge_axe.png",
+          "sha256": "7e5186aa42ed702c20e7dd1a600c656be42570e3865e048aec988b9171caa6c0"
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_redhook_axe",
+      "name": "赤结钩背斧",
+      "crop": {
+        "left": 711,
+        "top": 0,
+        "width": 237,
+        "height": 244
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/dwarf_scatter_redhook_axe.png",
+          "sha256": "d201ec20408e204985bf012433d31bf3dd91813bf1f1ba7db0f2ee400ae1b236"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/dwarf_scatter_redhook_axe.png",
+          "sha256": "c8b55c71b45cde439a06980968240511bd2e790112123d2dc7f0e90ae87d8a57"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/dwarf_scatter_redhook_axe.png",
+          "sha256": "8bbef371cb09da280d7fdc0539ab1317920fb46043bae4adbb8a1f3228c1ee84"
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_sixface_hammer",
+      "name": "六棱铜锤",
+      "crop": {
+        "left": 0,
+        "top": 244,
+        "width": 237,
+        "height": 236
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/dwarf_scatter_sixface_hammer.png",
+          "sha256": "3a84892a63a63dfff733209cb936bf93bfd820f05ca81a661e9f39fdd708752a"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/dwarf_scatter_sixface_hammer.png",
+          "sha256": "cfd2cc272192754205b502bfb3b35bb25129cd3a928ea9d0da9b9103c0aeaa8b"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/dwarf_scatter_sixface_hammer.png",
+          "sha256": "e1b2a38c27d4c5acaffefeb20491052909409e809116eb1825286d6e50300972"
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_pileiron_hammer",
+      "name": "沉桩铁锤",
+      "crop": {
+        "left": 237,
+        "top": 244,
+        "width": 237,
+        "height": 236
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/dwarf_scatter_pileiron_hammer.png",
+          "sha256": "be960fab552bad48a3961aaa74c0d8063e85919c087ebcdf73180070c31c5042"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/dwarf_scatter_pileiron_hammer.png",
+          "sha256": "ea5a9d04da9a33694bf63f36ffcbae21dd97b7a05bb860d95f85d02b88b0cf30"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/dwarf_scatter_pileiron_hammer.png",
+          "sha256": "945f3b5ff5dc9235e69a8c7a03e9329fa7bedea79df2c61fc359fc7afef9c16f"
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_brassdrum_hammer",
+      "name": "铜鼓平口锤",
+      "crop": {
+        "left": 474,
+        "top": 244,
+        "width": 237,
+        "height": 236
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/dwarf_scatter_brassdrum_hammer.png",
+          "sha256": "dfdc770b5272f57189c3298927f61f1e23c960d60135daf67ed0d468a33dd7b8"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/dwarf_scatter_brassdrum_hammer.png",
+          "sha256": "71d87e4e7cdaf89ac125efc50858ee172c70e8bce607c4e1d512b19b47803f82"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/dwarf_scatter_brassdrum_hammer.png",
+          "sha256": "14df046760742379dd51a9191cd668d606263974071bc2edae38d7d91b6a4587"
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_forkpeen_hammer",
+      "name": "岔尾岩钢锤",
+      "crop": {
+        "left": 711,
+        "top": 244,
+        "width": 237,
+        "height": 236
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/dwarf_scatter_forkpeen_hammer.png",
+          "sha256": "5e245158a401fe6069ac4a3ed2838aca293b19b76db4251dfd6760acde391c6d"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/dwarf_scatter_forkpeen_hammer.png",
+          "sha256": "73541451a84f499793e60a5f63f4a73a375e859eed99fb2d18a1b522edd69ab2"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/dwarf_scatter_forkpeen_hammer.png",
+          "sha256": "98761c4c882e48dc34bd568fcde8cfa264c8d4f8493651229e4863b30a6c2109"
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_copperbrow_helm",
+      "name": "铜眉井巡盔",
+      "crop": {
+        "left": 0,
+        "top": 480,
+        "width": 237,
+        "height": 242
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/dwarf_scatter_copperbrow_helm.png",
+          "sha256": "632446c3868b2f91feb9fa26a79ed1b07ce4e43958dcb1ddfb856be4fe2e2d40"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/dwarf_scatter_copperbrow_helm.png",
+          "sha256": "49b4e6713b6475f18dbe56c1ff43c8aa51cbac1d41989bc4e9e6aa729ce7dac6"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/dwarf_scatter_copperbrow_helm.png",
+          "sha256": "361c9b2f3d5edafdd1cd927c542c15a500c957685e5590483681e0d3ecb6feb9"
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_earplate_hood",
+      "name": "铁耳厚毡帽",
+      "crop": {
+        "left": 237,
+        "top": 480,
+        "width": 237,
+        "height": 242
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/dwarf_scatter_earplate_hood.png",
+          "sha256": "83a0abec4b34a13afd407d3b0ec0b9b5b4a8918b2b49623745034042ec202498"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/dwarf_scatter_earplate_hood.png",
+          "sha256": "60e725a43ec0e8109849c531f3990f7fab28e6da6cd9306539eb261e81e17f9d"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/dwarf_scatter_earplate_hood.png",
+          "sha256": "aa09c28623be9853c955eb9861f200b8364dfd69ffc0e6040ed2ab0dac63ae73"
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_trackscale_armor",
+      "name": "轨卫叠片甲",
+      "crop": {
+        "left": 474,
+        "top": 480,
+        "width": 237,
+        "height": 242
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/dwarf_scatter_trackscale_armor.png",
+          "sha256": "0c02cc8efc037bc98811685b317c9d8a5c16af0d197834013fdfc67046cc35ab"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/dwarf_scatter_trackscale_armor.png",
+          "sha256": "0b220d2134682848780ffbf0d4c082408f6f35a09920d4c8ef9b5d9b49038c0b"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/dwarf_scatter_trackscale_armor.png",
+          "sha256": "9e62eacef0a875757a2a430b2d8be51fbba2f1d684b8d7a50444831533da55c2"
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_crossbuckle_apron",
+      "name": "铜扣炉前衣",
+      "crop": {
+        "left": 711,
+        "top": 480,
+        "width": 237,
+        "height": 242
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/dwarf_scatter_crossbuckle_apron.png",
+          "sha256": "33427a8cf5941d5b2b3b4ffb6d0809cac7fe5c501289626492a578140b28ffd7"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/dwarf_scatter_crossbuckle_apron.png",
+          "sha256": "892b76734cbd779ba6ec694c7a3612a9a959e0bcfa93ccfc72b07b0a6521680f"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/dwarf_scatter_crossbuckle_apron.png",
+          "sha256": "dcad781a807bdac6ca41fd01b8e957f8fbada0ffa008ba151c8a3f520c626499"
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_redcuff_gloves",
+      "name": "赤袖铆铁手",
+      "crop": {
+        "left": 0,
+        "top": 722,
+        "width": 237,
+        "height": 210
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/dwarf_scatter_redcuff_gloves.png",
+          "sha256": "d46c35286b05d8e7b8df8c78dba613a8b7df0e2f9cc2f5512768a973bcc2d233"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/dwarf_scatter_redcuff_gloves.png",
+          "sha256": "63db9e74d1234bd1efa04c7a90af11e456fbd407ff4bd6b58392d979ccb68136"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/dwarf_scatter_redcuff_gloves.png",
+          "sha256": "a0a33a7a4b6de644b75092a9b7ff9418d9f087db726dbafd06826354f67afc1c"
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_brassknuckle_gloves",
+      "name": "铜节搬矿手",
+      "crop": {
+        "left": 237,
+        "top": 722,
+        "width": 237,
+        "height": 210
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/dwarf_scatter_brassknuckle_gloves.png",
+          "sha256": "a7801caa812b69863cb31ed597fa6afe77d57b42213f3fb0f3de9cd8fe7b1f44"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/dwarf_scatter_brassknuckle_gloves.png",
+          "sha256": "24e5087a5fb72db89b653005b77c406fa2d57523bea08d7c2202d77cf7f355f5"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/dwarf_scatter_brassknuckle_gloves.png",
+          "sha256": "4430410f9f5f33948fdd54628ef86209b89e42280ba3052ddd8cd1987814b460"
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_squaretoe_boots",
+      "name": "铜扣方头靴",
+      "crop": {
+        "left": 474,
+        "top": 722,
+        "width": 237,
+        "height": 210
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/dwarf_scatter_squaretoe_boots.png",
+          "sha256": "01196b5dc7780d4128a2155c676011bbb0cbdec31b4663feb02cbdc819d6dbd8"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/dwarf_scatter_squaretoe_boots.png",
+          "sha256": "76ac3b1b8b72a93adb4ba2d61221c0289e2a7d95037e0d5012ace12b13f51d0d"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/dwarf_scatter_squaretoe_boots.png",
+          "sha256": "2bd5c78468515964e361595541bb201c536788144cd661145a08c99ddb342a14"
+        }
+      }
+    },
+    {
+      "id": "dwarf_scatter_furlip_boots",
+      "name": "霜井毛沿靴",
+      "crop": {
+        "left": 711,
+        "top": 722,
+        "width": 237,
+        "height": 210
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/dwarf_scatter_furlip_boots.png",
+          "sha256": "4643bb64b1e146fa383dedb57c66bfb161d366e3ece6acc638c57009d1287388"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/dwarf_scatter_furlip_boots.png",
+          "sha256": "bcdebc8ee7ee8c74afac50b08fcbde9567fed169046b296a26d0d64ceb4cb3ce"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/dwarf_scatter_furlip_boots.png",
+          "sha256": "c5498c35d6b8ada3404d324f068fbd6680b022d3905610b76acba53bdafe7a9b"
+        }
+      }
+    },
+    {
+      "id": "human_scatter_bluecrest_helm",
+      "name": "蓝缨巡城盔",
+      "crop": {
+        "left": 0,
+        "top": 932,
+        "width": 237,
+        "height": 238
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/human_scatter_bluecrest_helm.png",
+          "sha256": "e21cb864579655f2ea2e301da32aaf6586cb7636540d538bfd028f45900c1480"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/human_scatter_bluecrest_helm.png",
+          "sha256": "9bdf04942a84a14ae0619ce65f06bee3357738fc1b6de04197f202b58d7533d5"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/human_scatter_bluecrest_helm.png",
+          "sha256": "ce16adae93f801a3328ac20db3c75994323772a79b9d335e71e37b2ae82a492d"
+        }
+      }
+    },
+    {
+      "id": "human_scatter_wayfarer_hood",
+      "name": "驿路蓝兜帽",
+      "crop": {
+        "left": 237,
+        "top": 932,
+        "width": 237,
+        "height": 238
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/human_scatter_wayfarer_hood.png",
+          "sha256": "1b1c0d7eec9af449fad8a06ddbc712976d820cc2cb17045b746c61bf4bcd4d75"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/human_scatter_wayfarer_hood.png",
+          "sha256": "93d6046ae9278fdc7cfc4a092dc1735cbc0e84a1549733080ff930c10a7ccf39"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/human_scatter_wayfarer_hood.png",
+          "sha256": "4a1ee199fae71aec320edc9f982fa54ebcecbc67bb7586af8cba041f3b208a9d"
+        }
+      }
+    },
+    {
+      "id": "human_scatter_bluesash_armor",
+      "name": "蓝绶守桥甲",
+      "crop": {
+        "left": 474,
+        "top": 932,
+        "width": 237,
+        "height": 238
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/human_scatter_bluesash_armor.png",
+          "sha256": "e3f8db0cd45ed25db5152b16279869e95061c421f9076fb768006cb07e5d0a96"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/human_scatter_bluesash_armor.png",
+          "sha256": "597bf052bfd364285cc4b08a488060600458a639a45f9de8a0082c30fbb2fda9"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/human_scatter_bluesash_armor.png",
+          "sha256": "f8c9be5a410c8a40acc038eeeeaa1cabd19354f86a0ff584312fddbe6ed3a009"
+        }
+      }
+    },
+    {
+      "id": "human_scatter_quiltcoat_armor",
+      "name": "麦原绗缝衣",
+      "crop": {
+        "left": 711,
+        "top": 932,
+        "width": 237,
+        "height": 238
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/human_scatter_quiltcoat_armor.png",
+          "sha256": "324910d32e6e545cbe9f7fe1fe391db3fa185c2a7e0bfe88ccface613381e709"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/human_scatter_quiltcoat_armor.png",
+          "sha256": "76559b1ea36b3cbe565d00e4b3e40ba9f5ccc30a3fbb4580ce2d59d78a8ac24e"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/human_scatter_quiltcoat_armor.png",
+          "sha256": "b8392ce480d55098c8fc71ed4c889f58c13c19d76ca754e2303d6078a0129452"
+        }
+      }
+    },
+    {
+      "id": "human_scatter_bluecuff_gloves",
+      "name": "蓝袖护卫手",
+      "crop": {
+        "left": 0,
+        "top": 1170,
+        "width": 237,
+        "height": 220
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/human_scatter_bluecuff_gloves.png",
+          "sha256": "59bbebf4a86e8974de9c287893e9d74dd9b55438f54cc01d3138203c193ec394"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/human_scatter_bluecuff_gloves.png",
+          "sha256": "9847c001a2c49a7f56346cbf897d96bc41fd1d79b87607fb443c93034494d0ae"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/human_scatter_bluecuff_gloves.png",
+          "sha256": "28f4604c0c427cc42f41ab8767883b1f16cac4e59a9843ef73ba73c0a4d74b51"
+        }
+      }
+    },
+    {
+      "id": "human_scatter_trailgrip_gloves",
+      "name": "行路扣革手",
+      "crop": {
+        "left": 237,
+        "top": 1170,
+        "width": 237,
+        "height": 220
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/human_scatter_trailgrip_gloves.png",
+          "sha256": "166ca6ea1203c6fd4ab9534dc634bffae0755781272e8e715d5a72cbf908491a"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/human_scatter_trailgrip_gloves.png",
+          "sha256": "e0e39a5db9792ddfd2170067ac14c6b7c218c228e9810168577068c3d86e548c"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/human_scatter_trailgrip_gloves.png",
+          "sha256": "4d7e7eb6dfd1b076e526a3aafbf2d7cac51d5c90e0dc37ed6aee960a6af501ac"
+        }
+      }
+    },
+    {
+      "id": "human_scatter_silvergreave_boots",
+      "name": "银胫桥卫靴",
+      "crop": {
+        "left": 474,
+        "top": 1170,
+        "width": 237,
+        "height": 220
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/human_scatter_silvergreave_boots.png",
+          "sha256": "f203745f543794293f4fda6603ded63b1293cde65a76aa7afd457462118fa7f7"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/human_scatter_silvergreave_boots.png",
+          "sha256": "e89716690d7b75c58b78aac82ed892dc60695274577f0d31e2aadd4184f7fb45"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/human_scatter_silvergreave_boots.png",
+          "sha256": "c30a8550d540884df842181641e809338758db855e4e8cca5297fdb3b4c8e66c"
+        }
+      }
+    },
+    {
+      "id": "human_scatter_courier_boots",
+      "name": "折沿驿骑靴",
+      "crop": {
+        "left": 711,
+        "top": 1170,
+        "width": 237,
+        "height": 220
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/human_scatter_courier_boots.png",
+          "sha256": "bfbdc0771a3c189426dd5a60d46b885bb4198e7c604e017fc6c7035fdb54b16f"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/human_scatter_courier_boots.png",
+          "sha256": "b415766601252b4717ff4c526c3e001948e503d128389c0831b523c9c574a7d1"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/human_scatter_courier_boots.png",
+          "sha256": "74fedc3a0ad22ecd8f8b0954759b54148caa3035436a7fff389d369c2b4da0dd"
+        }
+      }
+    },
+    {
+      "id": "human_scatter_wheat_amulet",
+      "name": "归仓麦穗坠",
+      "crop": {
+        "left": 0,
+        "top": 1390,
+        "width": 237,
+        "height": 269
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/human_scatter_wheat_amulet.png",
+          "sha256": "ab830b53f26e123ab3e6d8727649c84b2ed38ab152c4f78a4431183f8dc66383"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/human_scatter_wheat_amulet.png",
+          "sha256": "3d351f6a53bf83d774cde93b5adb9a528bb82797514c3c2c6c1da63802b034f2"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/human_scatter_wheat_amulet.png",
+          "sha256": "23c7bc99caa666151393ace40d200c880adfc68cf897e1c45317e5a57e214c93"
+        }
+      }
+    },
+    {
+      "id": "human_scatter_compass_amulet",
+      "name": "蓝心指路坠",
+      "crop": {
+        "left": 237,
+        "top": 1390,
+        "width": 237,
+        "height": 269
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/human_scatter_compass_amulet.png",
+          "sha256": "4fa197dcde40fd295340e3f98f0984aecac6a0d0f0c6b3e3a789017a806b0b47"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/human_scatter_compass_amulet.png",
+          "sha256": "6dc29eca8751233a36ccb0554697b6e04fa4bba24db54b9cc80025b451721794"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/human_scatter_compass_amulet.png",
+          "sha256": "d9b85eb60424be2527b658026884e2c149892896f0be7bdd8801c6b79ee3a243"
+        }
+      }
+    },
+    {
+      "id": "human_scatter_bell_amulet",
+      "name": "驿亭铜铃坠",
+      "crop": {
+        "left": 474,
+        "top": 1390,
+        "width": 237,
+        "height": 269
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/human_scatter_bell_amulet.png",
+          "sha256": "3972e8d6d40a98e48bb34bdfade6216f178f219c024b1b1b9a590de20481f79b"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/human_scatter_bell_amulet.png",
+          "sha256": "a1e8abd3c20d372465faf90f60f4e87a8fa2d9b4a893ffbff4cbb13ebbc6b818"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/human_scatter_bell_amulet.png",
+          "sha256": "7190586a9de6a9e1559741f11a0c2db37df639757cc5bfe17ecd4a07213c76a6"
+        }
+      }
+    },
+    {
+      "id": "human_scatter_oath_amulet",
+      "name": "蓝盾誓约牌",
+      "crop": {
+        "left": 711,
+        "top": 1390,
+        "width": 237,
+        "height": 269
+      },
+      "rasters": {
+        "32": {
+          "path": "dist/equipment-assets/32/human_scatter_oath_amulet.png",
+          "sha256": "55cf12f0b8359b55af59ea607f4f1e06c7a428b207009aaadc8dd664afdd1095"
+        },
+        "48": {
+          "path": "dist/equipment-assets/48/human_scatter_oath_amulet.png",
+          "sha256": "2353c9e83b16787085ef2c0db473fab3ababb9adc85df853a613a5938b84ce39"
+        },
+        "64": {
+          "path": "dist/equipment-assets/64/human_scatter_oath_amulet.png",
+          "sha256": "257b1105d385f09e64bc395c27ac379bbae51e88fb1e904f51324784ab36b347"
+        }
+      }
+    }
+  ]
+}

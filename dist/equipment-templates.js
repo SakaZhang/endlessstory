@@ -1,3 +1,4 @@
+import {HUMAN_DWARF_EQUIPMENT_ADDITIONS} from './human-dwarf-equipment-additions.js';
 import {EXPANSION_PACKS} from './race-packs.js';
 const RACIAL_SET_IDS=['anvil','rune','guard',...EXPANSION_PACKS.flatMap(p=>p.sets.map(s=>s.id))];
 // Approved dwarf names and identity only. No candidate base allocation, costs or bonuses.
@@ -724,7 +725,7 @@ export const EQUIPMENT_TEMPLATES=deepFreeze([
   "visualKey": "dwarf_set_guard_boots",
   "iconKey": "boots"
  }
-,...EXPANSION_PACKS.flatMap(p=>p.equipment.filter(t=>t.kind!=='legendary'))]);
+,...HUMAN_DWARF_EQUIPMENT_ADDITIONS.filter(t=>t.originRace==='dwarf'),...EXPANSION_PACKS.flatMap(p=>p.equipment.filter(t=>t.kind!=='legendary'))]);
 export const RACE_WEAPON_POOLS=deepFreeze({"dwarf": ["axe", "hammer"], "elf": ["bow", "staff"], "human": ["sword_shield", "greatsword"], "goblin": ["dagger", "sword"], "ashen": ["armguard", "hammer"]});
 export const EQUIPMENT_TEMPLATE_BY_ID=deepFreeze(Object.fromEntries(EQUIPMENT_TEMPLATES.map(x=>[x.id,x])));
 export const EQUIPMENT_WEAPON_TYPES=Object.freeze([...new Set(Object.values(RACE_WEAPON_POOLS).flat())]);

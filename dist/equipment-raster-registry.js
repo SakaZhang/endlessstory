@@ -1,5 +1,7 @@
+import {HUMAN_DWARF_EQUIPMENT_ASSETS} from './human-dwarf-equipment-assets.js';
 // Original raster files: exact identities, no item or gameplay changes.
 export const EQUIPMENT_RASTER_ASSETS=Object.freeze({
+  ...HUMAN_DWARF_EQUIPMENT_ASSETS,
   "dwarf_scatter_cleft_axe": {
     "32": "./equipment-assets/32/dwarf_scatter_cleft_axe.png",
     "48": "./equipment-assets/48/dwarf_scatter_cleft_axe.png",
