@@ -5,27 +5,36 @@
     {
       "node": "ashen.a01.field",
       "weapon": "armguard",
-      "encounterId": "m2-1000-12",
+      "encounterId": "m2-1000-11",
       "enemyIds": [
-        "ashen.a01.normal.1"
+        {
+          "definitionId": "ashen.a01.normal.2",
+          "followerMonsterId": null
+        }
       ],
       "validSave": true
     },
     {
       "node": "ashen.a01.field",
       "weapon": "hammer",
-      "encounterId": "m2-1000-28",
+      "encounterId": "m2-1000-25",
       "enemyIds": [
-        "ashen.a01.normal.1"
+        {
+          "definitionId": "ashen.a01.normal.3",
+          "followerMonsterId": null
+        }
       ],
       "validSave": true
     },
     {
       "node": "ashen.a04.boss",
       "weapon": "armguard",
-      "encounterId": "m2-1000-39",
+      "encounterId": "m2-1000-36",
       "enemyIds": [
-        "ashen.a04.boss"
+        {
+          "definitionId": "ashen.a04.boss",
+          "followerMonsterId": null
+        }
       ],
       "actualLastCast": "ashen.kindle",
       "validSave": true
@@ -33,9 +42,12 @@
     {
       "node": "ashen.a04.boss",
       "weapon": "hammer",
-      "encounterId": "m2-1000-53",
+      "encounterId": "m2-1000-48",
       "enemyIds": [
-        "ashen.a04.boss"
+        {
+          "definitionId": "ashen.a04.boss",
+          "followerMonsterId": null
+        }
       ],
       "actualLastCast": "ashen.kindle",
       "validSave": true
@@ -43,12 +55,24 @@
     {
       "node": "ashen.a10.boss",
       "weapon": "armguard",
-      "encounterId": "m2-1000-64",
+      "encounterId": "m2-1000-59",
       "enemyIds": [
-        "ashen.a10.boss",
-        "ashen.a10.boss",
-        "ashen.a10.boss",
-        "ashen.a10.boss"
+        {
+          "definitionId": "ashen.a10.boss",
+          "followerMonsterId": null
+        },
+        {
+          "definitionId": "ashen.a10.boss",
+          "followerMonsterId": "ashen.a10.normal.3"
+        },
+        {
+          "definitionId": "ashen.a10.boss",
+          "followerMonsterId": "ashen.a10.normal.3"
+        },
+        {
+          "definitionId": "ashen.a10.boss",
+          "followerMonsterId": "ashen.a10.normal.3"
+        }
       ],
       "actualLastCast": "ashen.kindle",
       "validSave": true
@@ -56,12 +80,24 @@
     {
       "node": "ashen.a10.boss",
       "weapon": "hammer",
-      "encounterId": "m2-1000-76",
+      "encounterId": "m2-1000-70",
       "enemyIds": [
-        "ashen.a10.boss",
-        "ashen.a10.boss",
-        "ashen.a10.boss",
-        "ashen.a10.boss"
+        {
+          "definitionId": "ashen.a10.boss",
+          "followerMonsterId": null
+        },
+        {
+          "definitionId": "ashen.a10.boss",
+          "followerMonsterId": "ashen.a10.normal.3"
+        },
+        {
+          "definitionId": "ashen.a10.boss",
+          "followerMonsterId": "ashen.a10.normal.3"
+        },
+        {
+          "definitionId": "ashen.a10.boss",
+          "followerMonsterId": "ashen.a10.normal.3"
+        }
       ],
       "actualLastCast": "ashen.kindle",
       "validSave": true
