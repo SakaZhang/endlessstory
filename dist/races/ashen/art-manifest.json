@@ -53,12 +53,21 @@
           141,
           159
         ]
+      },
+      {
+        "id": "death",
+        "file": "races/ashen/art/hero-hammer-death.png",
+        "durationMs": 650,
+        "alphaBBox": [
+          15,
+          128,
+          169,
+          176
+        ]
       }
     ],
     "animations": {
       "idle": [
-        "idle-0",
-        "channel",
         "idle-0"
       ],
       "attack": [
@@ -72,14 +81,15 @@
         "idle-0"
       ],
       "death": [
-        "hurt"
+        "death"
       ]
     },
     "headY": 55,
     "healthBarAnchor": [
       96,
       43
-    ]
+    ],
+    "weaponFamily": "hammer"
   },
   "monsters": {
     "ashen.a01.normal.1": {
@@ -96,10 +106,43 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a01.normal.1.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
             22,
-            68,
+            67,
+            170,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a01.normal.1-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            22,
+            69,
+            170,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a01.normal.1-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            26,
+            66,
+            166,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a01.normal.1-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            22,
+            62,
             170,
             176
           ]
@@ -110,13 +153,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -139,10 +186,43 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a01.normal.2.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
             22,
             49,
+            170,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a01.normal.2-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            22,
+            53,
+            170,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a01.normal.2-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            22,
+            53,
+            170,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a01.normal.2-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            22,
+            87,
             170,
             176
           ]
@@ -153,13 +233,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -182,11 +266,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a01.normal.3.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
             22,
-            37,
-            170,
+            38,
+            169,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a01.normal.3-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            22,
+            52,
+            169,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a01.normal.3-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            22,
+            66,
+            169,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a01.normal.3-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            22,
+            64,
+            169,
             176
           ]
         }
@@ -196,13 +313,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -225,11 +346,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a01.elite.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a01.elite-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a01.elite-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a01.elite-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            68,
+            165,
             176
           ]
         }
@@ -239,13 +393,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -268,11 +426,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a02.normal.1.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            22,
-            42,
-            170,
+            27,
+            50,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a02.normal.1-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a02.normal.1-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            28,
+            49,
+            163,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a02.normal.1-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            46,
+            165,
             176
           ]
         }
@@ -282,13 +473,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -311,10 +506,43 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a02.normal.2.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
             22,
             60,
+            170,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a02.normal.2-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            22,
+            62,
+            170,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a02.normal.2-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            26,
+            66,
+            166,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a02.normal.2-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            22,
+            57,
             170,
             176
           ]
@@ -325,13 +553,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -354,11 +586,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a02.normal.3.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a02.normal.3-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a02.normal.3-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a02.normal.3-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            87,
+            165,
             176
           ]
         }
@@ -368,13 +633,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -397,10 +666,43 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a02.elite.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
             22,
             49,
+            170,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a02.elite-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            22,
+            62,
+            170,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a02.elite-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            26,
+            46,
+            166,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a02.elite-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            22,
+            74,
             170,
             176
           ]
@@ -411,13 +713,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -440,11 +746,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a03.normal.1.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a03.normal.1-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a03.normal.1-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            40,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a03.normal.1-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            38,
+            165,
             176
           ]
         }
@@ -454,13 +793,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -483,11 +826,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a03.normal.2.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a03.normal.2-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            39,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a03.normal.2-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            164,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a03.normal.2-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            39,
+            165,
             176
           ]
         }
@@ -497,13 +873,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -526,11 +906,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a03.normal.3.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a03.normal.3-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a03.normal.3-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            29,
+            40,
+            162,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a03.normal.3-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            38,
+            165,
             176
           ]
         }
@@ -540,13 +953,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -569,11 +986,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a03.elite.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a03.elite-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a03.elite-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a03.elite-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            38,
+            165,
             176
           ]
         }
@@ -583,13 +1033,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -612,11 +1066,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a04.normal.1.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a04.normal.1-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a04.normal.1-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            39,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a04.normal.1-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            38,
+            165,
             176
           ]
         }
@@ -626,13 +1113,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -655,11 +1146,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a04.normal.2.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a04.normal.2-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a04.normal.2-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a04.normal.2-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            38,
+            165,
             176
           ]
         }
@@ -669,13 +1193,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -698,11 +1226,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a04.normal.3.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a04.normal.3-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a04.normal.3-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a04.normal.3-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            38,
+            165,
             176
           ]
         }
@@ -712,13 +1273,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -741,11 +1306,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a04.elite.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a04.elite-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a04.elite-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            50,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a04.elite-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            79,
+            165,
             176
           ]
         }
@@ -755,13 +1353,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -784,11 +1386,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a05.normal.1.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a05.normal.1-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a05.normal.1-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            32,
+            47,
+            160,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a05.normal.1-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            59,
+            165,
             176
           ]
         }
@@ -798,13 +1433,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -827,11 +1466,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a05.normal.2.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a05.normal.2-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            44,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a05.normal.2-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a05.normal.2-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            67,
+            165,
             176
           ]
         }
@@ -841,13 +1513,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -870,11 +1546,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a05.normal.3.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a05.normal.3-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a05.normal.3-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            56,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a05.normal.3-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            38,
+            165,
             176
           ]
         }
@@ -884,13 +1593,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -913,12 +1626,45 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a05.elite.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
             176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a05.elite-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a05.elite-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a05.elite-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            40,
+            165,
+            175
           ]
         }
       ],
@@ -927,13 +1673,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -956,11 +1706,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a06.normal.1.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a06.normal.1-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a06.normal.1-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            51,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a06.normal.1-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            38,
+            165,
             176
           ]
         }
@@ -970,13 +1753,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -999,11 +1786,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a06.normal.2.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a06.normal.2-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a06.normal.2-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a06.normal.2-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            38,
+            165,
             176
           ]
         }
@@ -1013,13 +1833,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -1042,11 +1866,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a06.normal.3.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            25,
-            36,
-            167,
+            27,
+            40,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a06.normal.3-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            43,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a06.normal.3-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            43,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a06.normal.3-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            38,
+            165,
             176
           ]
         }
@@ -1056,13 +1913,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -1085,11 +1946,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a06.elite.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a06.elite-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            41,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a06.elite-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            46,
+            164,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a06.elite-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            38,
+            165,
             176
           ]
         }
@@ -1099,13 +1993,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -1128,11 +2026,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a07.normal.1.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a07.normal.1-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a07.normal.1-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            32,
+            38,
+            160,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a07.normal.1-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            46,
+            165,
             176
           ]
         }
@@ -1142,13 +2073,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -1171,11 +2106,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a07.normal.2.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a07.normal.2-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a07.normal.2-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a07.normal.2-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            70,
+            165,
             176
           ]
         }
@@ -1185,13 +2153,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -1214,11 +2186,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a07.normal.3.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a07.normal.3-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a07.normal.3-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a07.normal.3-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            48,
+            165,
             176
           ]
         }
@@ -1228,13 +2233,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -1257,11 +2266,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a07.elite.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a07.elite-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a07.elite-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            47,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a07.elite-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            53,
+            165,
             176
           ]
         }
@@ -1271,13 +2313,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -1300,11 +2346,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a08.normal.1.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a08.normal.1-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            43,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a08.normal.1-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            49,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a08.normal.1-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            50,
+            165,
             176
           ]
         }
@@ -1314,13 +2393,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -1343,11 +2426,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a08.normal.2.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a08.normal.2-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            43,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a08.normal.2-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a08.normal.2-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            38,
+            165,
             176
           ]
         }
@@ -1357,13 +2473,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -1386,11 +2506,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a08.normal.3.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            22,
-            36,
-            169,
+            27,
+            45,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a08.normal.3-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            43,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a08.normal.3-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            56,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a08.normal.3-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            38,
+            165,
             176
           ]
         }
@@ -1400,13 +2553,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -1429,11 +2586,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a08.elite.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a08.elite-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a08.elite-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            31,
+            38,
+            161,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a08.elite-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            38,
+            165,
             176
           ]
         }
@@ -1443,13 +2633,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -1472,11 +2666,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a09.normal.1.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a09.normal.1-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a09.normal.1-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a09.normal.1-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            47,
+            165,
             176
           ]
         }
@@ -1486,13 +2713,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -1515,11 +2746,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a09.normal.2.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            39,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a09.normal.2-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a09.normal.2-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            43,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a09.normal.2-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            48,
+            165,
             176
           ]
         }
@@ -1529,13 +2793,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -1558,11 +2826,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a09.normal.3.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a09.normal.3-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a09.normal.3-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a09.normal.3-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            42,
+            165,
             176
           ]
         }
@@ -1572,13 +2873,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -1601,11 +2906,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a09.elite.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a09.elite-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a09.elite-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a09.elite-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            40,
+            165,
             176
           ]
         }
@@ -1615,13 +2953,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -1644,11 +2986,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a10.normal.1.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a10.normal.1-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            65,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a10.normal.1-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            57,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a10.normal.1-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            76,
+            165,
             176
           ]
         }
@@ -1658,13 +3033,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -1687,11 +3066,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a10.normal.2.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a10.normal.2-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            40,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a10.normal.2-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a10.normal.2-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            38,
+            165,
             176
           ]
         }
@@ -1701,13 +3113,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -1730,11 +3146,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a10.normal.3.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a10.normal.3-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a10.normal.3-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a10.normal.3-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            43,
+            165,
             176
           ]
         }
@@ -1744,13 +3193,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -1773,11 +3226,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a10.elite.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            26,
-            36,
-            166,
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a10.elite-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a10.elite-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            27,
+            38,
+            165,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a10.elite-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            27,
+            46,
+            165,
             176
           ]
         }
@@ -1787,13 +3273,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 55,
@@ -1816,11 +3306,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a04.boss.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            17,
             18,
-            175,
+            20,
+            174,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a04.boss-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            18,
+            20,
+            174,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a04.boss-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            18,
+            38,
+            173,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a04.boss-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            18,
+            20,
+            174,
             176
           ]
         }
@@ -1830,13 +3353,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 32,
@@ -1859,11 +3386,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a07.boss.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            17,
             18,
-            175,
+            20,
+            174,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a07.boss-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            18,
+            20,
+            174,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a07.boss-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            18,
+            20,
+            174,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a07.boss-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            18,
+            52,
+            174,
             176
           ]
         }
@@ -1873,13 +3433,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 32,
@@ -1902,11 +3466,44 @@
         {
           "id": "idle-0",
           "file": "races/ashen/art/ashen.a10.boss.png",
-          "durationMs": 180,
+          "durationMs": 160,
           "alphaBBox": [
-            17,
             18,
-            175,
+            20,
+            174,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/ashen.a10.boss-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            18,
+            20,
+            174,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/ashen.a10.boss-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            18,
+            20,
+            174,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/ashen.a10.boss-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            18,
+            20,
+            174,
             176
           ]
         }
@@ -1916,13 +3513,17 @@
           "idle-0"
         ],
         "attack": [
+          "idle-0",
+          "strike",
+          "strike",
           "idle-0"
         ],
         "hurt": [
+          "hurt",
           "idle-0"
         ],
         "death": [
-          "idle-0"
+          "death"
         ]
       },
       "headY": 32,
@@ -2015,8 +3616,676 @@
     }
   },
   "camp": "battle-assets/backgrounds/camp-ashen.png",
-  "equipment": {},
-  "skills": {},
-  "materials": {},
-  "provenance": "Original built-in image_gen raster art. Native pixel crops; nearest-neighbor processing only."
+  "equipment": {
+    "ashen.scatter.01": {
+      "file": "races/ashen/art/equipment-ashen.scatter.01.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.02": {
+      "file": "races/ashen/art/equipment-ashen.scatter.02.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.03": {
+      "file": "races/ashen/art/equipment-ashen.scatter.03.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.04": {
+      "file": "races/ashen/art/equipment-ashen.scatter.04.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.05": {
+      "file": "races/ashen/art/equipment-ashen.scatter.05.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.06": {
+      "file": "races/ashen/art/equipment-ashen.scatter.06.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.07": {
+      "file": "races/ashen/art/equipment-ashen.scatter.07.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.08": {
+      "file": "races/ashen/art/equipment-ashen.scatter.08.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.09": {
+      "file": "races/ashen/art/equipment-ashen.scatter.09.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.10": {
+      "file": "races/ashen/art/equipment-ashen.scatter.10.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.11": {
+      "file": "races/ashen/art/equipment-ashen.scatter.11.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.12": {
+      "file": "races/ashen/art/equipment-ashen.scatter.12.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.13": {
+      "file": "races/ashen/art/equipment-ashen.scatter.13.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.14": {
+      "file": "races/ashen/art/equipment-ashen.scatter.14.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.15": {
+      "file": "races/ashen/art/equipment-ashen.scatter.15.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.16": {
+      "file": "races/ashen/art/equipment-ashen.scatter.16.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.17": {
+      "file": "races/ashen/art/equipment-ashen.scatter.17.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.18": {
+      "file": "races/ashen/art/equipment-ashen.scatter.18.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.19": {
+      "file": "races/ashen/art/equipment-ashen.scatter.19.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.20": {
+      "file": "races/ashen/art/equipment-ashen.scatter.20.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.21": {
+      "file": "races/ashen/art/equipment-ashen.scatter.21.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.22": {
+      "file": "races/ashen/art/equipment-ashen.scatter.22.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.23": {
+      "file": "races/ashen/art/equipment-ashen.scatter.23.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.24": {
+      "file": "races/ashen/art/equipment-ashen.scatter.24.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.25": {
+      "file": "races/ashen/art/equipment-ashen.scatter.25.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.26": {
+      "file": "races/ashen/art/equipment-ashen.scatter.26.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.27": {
+      "file": "races/ashen/art/equipment-ashen.scatter.27.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.28": {
+      "file": "races/ashen/art/equipment-ashen.scatter.28.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.29": {
+      "file": "races/ashen/art/equipment-ashen.scatter.29.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.30": {
+      "file": "races/ashen/art/equipment-ashen.scatter.30.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.31": {
+      "file": "races/ashen/art/equipment-ashen.scatter.31.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.32": {
+      "file": "races/ashen/art/equipment-ashen.scatter.32.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.33": {
+      "file": "races/ashen/art/equipment-ashen.scatter.33.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.34": {
+      "file": "races/ashen/art/equipment-ashen.scatter.34.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.35": {
+      "file": "races/ashen/art/equipment-ashen.scatter.35.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.scatter.36": {
+      "file": "races/ashen/art/equipment-ashen.scatter.36.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.caldera.helm": {
+      "file": "races/ashen/art/equipment-ashen.caldera.helm.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.caldera.armor": {
+      "file": "races/ashen/art/equipment-ashen.caldera.armor.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.caldera.gloves": {
+      "file": "races/ashen/art/equipment-ashen.caldera.gloves.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.caldera.boots": {
+      "file": "races/ashen/art/equipment-ashen.caldera.boots.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.strata.helm": {
+      "file": "races/ashen/art/equipment-ashen.strata.helm.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.strata.armor": {
+      "file": "races/ashen/art/equipment-ashen.strata.armor.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.strata.gloves": {
+      "file": "races/ashen/art/equipment-ashen.strata.gloves.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.strata.boots": {
+      "file": "races/ashen/art/equipment-ashen.strata.boots.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.prism.helm": {
+      "file": "races/ashen/art/equipment-ashen.prism.helm.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.prism.armor": {
+      "file": "races/ashen/art/equipment-ashen.prism.armor.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.prism.gloves": {
+      "file": "races/ashen/art/equipment-ashen.prism.gloves.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.prism.boots": {
+      "file": "races/ashen/art/equipment-ashen.prism.boots.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen-veinbreaker": {
+      "file": "races/ashen/art/equipment-ashen-veinbreaker.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen-dusk-prism": {
+      "file": "races/ashen/art/equipment-ashen-dusk-prism.png",
+      "width": 48,
+      "height": 48
+    }
+  },
+  "skills": {
+    "ashen.kindle": {
+      "file": "races/ashen/art/skills-ashen.kindle.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.vent": {
+      "file": "races/ashen/art/skills-ashen.vent.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.anneal": {
+      "file": "races/ashen/art/skills-ashen.anneal.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.surge": {
+      "file": "races/ashen/art/skills-ashen.surge.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.temper": {
+      "file": "races/ashen/art/skills-ashen.temper.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.overload": {
+      "file": "races/ashen/art/skills-ashen.overload.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.mantle": {
+      "file": "races/ashen/art/skills-ashen.mantle.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.cleave": {
+      "file": "races/ashen/art/skills-ashen.cleave.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.fault": {
+      "file": "races/ashen/art/skills-ashen.fault.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.rebuild": {
+      "file": "races/ashen/art/skills-ashen.rebuild.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.quarry": {
+      "file": "races/ashen/art/skills-ashen.quarry.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.fracture": {
+      "file": "races/ashen/art/skills-ashen.fracture.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.tap": {
+      "file": "races/ashen/art/skills-ashen.tap.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.dawn": {
+      "file": "races/ashen/art/skills-ashen.dawn.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.dusk": {
+      "file": "races/ashen/art/skills-ashen.dusk.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.chorus": {
+      "file": "races/ashen/art/skills-ashen.chorus.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.mend": {
+      "file": "races/ashen/art/skills-ashen.mend.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.resound": {
+      "file": "races/ashen/art/skills-ashen.resound.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.salve": {
+      "file": "races/ashen/art/skills-ashen.salve.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.interrupt": {
+      "file": "races/ashen/art/skills-ashen.interrupt.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.purify": {
+      "file": "races/ashen/art/skills-ashen.purify.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.thermal": {
+      "file": "races/ashen/art/skills-ashen.thermal.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.insulation": {
+      "file": "races/ashen/art/skills-ashen.insulation.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.laminate": {
+      "file": "races/ashen/art/skills-ashen.laminate.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.matrix": {
+      "file": "races/ashen/art/skills-ashen.matrix.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.lattice": {
+      "file": "races/ashen/art/skills-ashen.lattice.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.clarity": {
+      "file": "races/ashen/art/skills-ashen.clarity.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.endurance": {
+      "file": "races/ashen/art/skills-ashen.endurance.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.vitality": {
+      "file": "races/ashen/art/skills-ashen.vitality.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.precision": {
+      "file": "races/ashen/art/skills-ashen.precision.png",
+      "width": 48,
+      "height": 48
+    }
+  },
+  "materials": {
+    "ashen.cold_ash_sand": {
+      "file": "races/ashen/art/materials-ashen.cold_ash_sand.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.salt_shell": {
+      "file": "races/ashen/art/materials-ashen.salt_shell.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.porous_basalt": {
+      "file": "races/ashen/art/materials-ashen.porous_basalt.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.weathered_mica": {
+      "file": "races/ashen/art/materials-ashen.weathered_mica.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.dew_salt": {
+      "file": "races/ashen/art/materials-ashen.dew_salt.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.glass_grain": {
+      "file": "races/ashen/art/materials-ashen.glass_grain.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.red_vein_ore": {
+      "file": "races/ashen/art/materials-ashen.red_vein_ore.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.singing_crystal": {
+      "file": "races/ashen/art/materials-ashen.singing_crystal.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.obsidian_glass": {
+      "file": "races/ashen/art/materials-ashen.obsidian_glass.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.white_salt_marrow": {
+      "file": "races/ashen/art/materials-ashen.white_salt_marrow.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.dim_crystal_sand": {
+      "file": "races/ashen/art/materials-ashen.dim_crystal_sand.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.refractory_stone": {
+      "file": "races/ashen/art/materials-ashen.refractory_stone.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.living_vein_bud": {
+      "file": "races/ashen/art/materials-ashen.living_vein_bud.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.upwind_salt": {
+      "file": "races/ashen/art/materials-ashen.upwind_salt.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.refracted_glassheart": {
+      "file": "races/ashen/art/materials-ashen.refracted_glassheart.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.undying_ember": {
+      "file": "races/ashen/art/materials-ashen.undying_ember.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.infinity_gem_ashen": {
+      "file": "races/ashen/art/materials-ashen.infinity_gem_ashen.png",
+      "width": 48,
+      "height": 48
+    },
+    "ashen.silent_crystal": {
+      "file": "races/ashen/art/materials-ashen.silent_crystal.png",
+      "width": 48,
+      "height": 48
+    }
+  },
+  "provenance": "Original built-in image_gen raster art. Native pixel crops; nearest-neighbor processing only.",
+  "heroWeapons": {
+    "armguard": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "right",
+      "frames": [
+        {
+          "id": "idle",
+          "file": "races/ashen/art/hero-armguard-idle.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            45,
+            54,
+            146,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/hero-armguard-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            23,
+            70,
+            168,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/hero-armguard-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            48,
+            69,
+            144,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/hero-armguard-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            35,
+            107,
+            156,
+            176
+          ]
+        }
+      ],
+      "animations": {
+        "idle": [
+          "idle"
+        ],
+        "attack": [
+          "idle",
+          "strike",
+          "strike",
+          "idle"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
+        ]
+      },
+      "headY": 51,
+      "healthBarAnchor": [
+        96,
+        40
+      ],
+      "weaponFamily": "armguard"
+    },
+    "hammer": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "right",
+      "frames": [
+        {
+          "id": "idle-0",
+          "file": "races/ashen/art/hero-idle-0.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            44,
+            39,
+            147,
+            176
+          ]
+        },
+        {
+          "id": "strike",
+          "file": "races/ashen/art/hero-strike.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            15,
+            23,
+            176,
+            173
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/ashen/art/hero-hurt.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            44,
+            22,
+            147,
+            173
+          ]
+        },
+        {
+          "id": "channel",
+          "file": "races/ashen/art/hero-channel.png",
+          "durationMs": 160,
+          "alphaBBox": [
+            51,
+            34,
+            141,
+            159
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/ashen/art/hero-hammer-death.png",
+          "durationMs": 650,
+          "alphaBBox": [
+            15,
+            128,
+            169,
+            176
+          ]
+        }
+      ],
+      "animations": {
+        "idle": [
+          "idle-0"
+        ],
+        "attack": [
+          "idle-0",
+          "strike",
+          "strike",
+          "idle-0"
+        ],
+        "hurt": [
+          "hurt",
+          "idle-0"
+        ],
+        "death": [
+          "death"
+        ]
+      },
+      "headY": 55,
+      "healthBarAnchor": [
+        96,
+        43
+      ],
+      "weaponFamily": "hammer"
+    }
+  }
 }

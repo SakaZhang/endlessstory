@@ -1,0 +1,133 @@
+{
+  "candidate": true,
+  "baseline": "same-level quality2 gear, no sets or special effects, 9 equipped slots, random ordinary affixes; ordinary potions",
+  "results": [
+    {
+      "branch": "heat",
+      "level": 40,
+      "stats": {
+        "hp": 2133,
+        "atk": 316.94,
+        "armor": 216
+      },
+      "potions": 2,
+      "kills": 1045,
+      "rests": 0,
+      "rounds": 11381,
+      "hp": 983.6152305763972
+    },
+    {
+      "branch": "shell",
+      "level": 40,
+      "stats": {
+        "hp": 2010.8000000000002,
+        "atk": 288,
+        "armor": 304.64000000000004
+      },
+      "potions": 1,
+      "kills": 961,
+      "rests": 0,
+      "rounds": 11518,
+      "hp": 906.5884736841683
+    },
+    {
+      "branch": "crystal",
+      "level": 40,
+      "stats": {
+        "hp": 1901,
+        "atk": 352,
+        "armor": 193
+      },
+      "potions": 1,
+      "kills": 1184,
+      "rests": 0,
+      "rounds": 11154,
+      "hp": 895.8978521302892
+    },
+    {
+      "branch": "heat",
+      "level": 70,
+      "stats": {
+        "hp": 3268,
+        "atk": 647.6600000000001,
+        "armor": 520.5600000000001
+      },
+      "potions": 3,
+      "kills": 1058,
+      "rests": 0,
+      "rounds": 11359,
+      "hp": 1587.3953278688125
+    },
+    {
+      "branch": "shell",
+      "level": 70,
+      "stats": {
+        "hp": 4015.0000000000005,
+        "atk": 615,
+        "armor": 450.24000000000007
+      },
+      "potions": 4,
+      "kills": 914,
+      "rests": 0,
+      "rounds": 11595,
+      "hp": 1926.5900000000504
+    },
+    {
+      "branch": "crystal",
+      "level": 70,
+      "stats": {
+        "hp": 3530,
+        "atk": 589,
+        "armor": 453
+      },
+      "potions": 5,
+      "kills": 991,
+      "rests": 0,
+      "rounds": 11469,
+      "hp": 1698.6724545454824
+    },
+    {
+      "branch": "heat",
+      "level": 100,
+      "stats": {
+        "hp": 6492,
+        "atk": 1159.64,
+        "armor": 936.36
+      },
+      "potions": 0,
+      "kills": 986,
+      "rests": 0,
+      "rounds": 11478,
+      "hp": 6489.28170635514
+    },
+    {
+      "branch": "shell",
+      "level": 100,
+      "stats": {
+        "hp": 7885.900000000001,
+        "atk": 1128,
+        "armor": 780.6400000000001
+      },
+      "potions": 0,
+      "kills": 935,
+      "rests": 0,
+      "rounds": 11560,
+      "hp": 7885.900000000001
+    },
+    {
+      "branch": "crystal",
+      "level": 100,
+      "stats": {
+        "hp": 6770,
+        "atk": 1052,
+        "armor": 854
+      },
+      "potions": 0,
+      "kills": 965,
+      "rests": 0,
+      "rounds": 11511,
+      "hp": 6769.1776
+    }
+  ],
+  "parity": true
+}
