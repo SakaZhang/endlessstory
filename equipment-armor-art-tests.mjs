@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import {renderArmorPixels} from './dist/equipment-armor-art.js';
-import {EQUIPMENT_TEMPLATES} from './dist/equipment-templates.js';
+import {EQUIPMENT_TEMPLATES as ALL_EQUIPMENT_TEMPLATES} from './dist/equipment-templates.js';
+// This historical renderer fixture covers the original dwarf pixel/raster collection.
+const EQUIPMENT_TEMPLATES=ALL_EQUIPMENT_TEMPLATES.filter(t=>t.originRace==='dwarf');
 const slots=new Set(['helm','armor','gloves','boots']);
 const expected=EQUIPMENT_TEMPLATES.filter(t=>slots.has(t.slot));
 assert.equal(expected.length,28);

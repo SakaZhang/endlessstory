@@ -37,7 +37,7 @@ const areaKey=id=>String(id).match(/^(?:dwarf|human|elf|goblin|ashen)\.a(?:0[1-9
 export function liveActorSprite(unit,manifest){
  const variant=[...(manifest?.actorVariants??[])].sort((a,b)=>(b.priority??0)-(a.priority??0)).find(row=>row.match&&Object.entries(row.match).every(([key,value])=>(key==='definitionId'?(unit.definitionId??unit.monsterId):unit[key])===value));
  if(variant)return variant.spriteKey;
- if(unit.follower===true)return null; // A child retaining its mother's ID must never silently use her sprite.
+ if(unit.follower===true)return typeof unit.followerMonsterId==='string'?(manifest?.monsterSprites?.[unit.followerMonsterId]??null):null; // Only an explicit child identity; never substitute the parent.
  return ({...LIVE_MONSTER_SPRITES,...(manifest?.monsterSprites??{})})[identity(unit)]??null;
 }
 export function liveAreaBackgrounds(areaId,manifest){const key=areaKey(areaId),ids=manifest?.areaBackgrounds?.[key];if(!key||!Array.isArray(ids)||!ids.length)return [];const selected=ids.map(id=>manifest.backgrounds?.find(bg=>bg.id===id));return selected.every(Boolean)?selected:[];}
@@ -55,7 +55,7 @@ export function liveLivingAnimations(encounter, animations){
 }
 export function liveBattleBars(encounter,positions,animations,time,{heroMaxHp,manifest}){
  const bars=battleSliceBars(encounter,positions,animations,time,{heroMaxHp});
- for(let i=0;i<bars.length;i++){const b=bars[i],sprite=manifest.sprites[positions[b.id].sprite],frame=sprite.frames.find(f=>f.id===sprite.animations.idle[0]);b.y=positions[b.id].y-sprite.anchor[1]+(sprite.healthBarAnchor?.[1]??((frame.solidBBox?.[1]??frame.headY??sprite.anchor[1]-(positions[b.id].sprite==='pit-rat'?46:62))-9));
+ for(let i=0;i<bars.length;i++){const b=bars[i],sprite=manifest.sprites[positions[b.id].sprite],frame=sprite.frames.find(f=>f.id===sprite.animations.idle[0]);b.y=positions[b.id].y+((sprite.healthBarAnchor?.[1]??((frame.solidBBox?.[1]??frame.headY??sprite.anchor[1]-(positions[b.id].sprite==='pit-rat'?46:62))-9))-sprite.anchor[1])*(positions[b.id].scale??1);
   while(bars.slice(0,i).some(r=>Math.abs(r.x-b.x)<36&&Math.abs(r.y-b.y)<6))b.y-=7;
  }return bars;
 }
@@ -88,7 +88,7 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
   const layout=units.length<=1?[350]:units.length===2?[305,405]:[275,350,425];
   const baseline=snapshot.campRace?(manifest?.campBackgrounds?.[snapshot.campRace]?.baseline??195):manifest?.areaBaselines?.[areaKey(snapshot.areaId)]??203;
   positions.hero={x:snapshot.campRace?144:100,y:baseline,sprite:heroSpriteFor(metadata.hero?.weaponType,manifest,metadata.hero?.race)};
-  for(const u of units){const n=slots.get(u.id),row=Math.floor(n/3);positions[u.id]={x:positions[u.id]?.x??layout[n%3]??425,y:baseline-row*51,sprite:liveActorSprite(u,manifest)};}
+  for(const u of units){const n=slots.get(u.id),dense=units.length>3,cell=dense?[[285,0],[365,0],[435,0],[310,-58],[385,-58],[445,-58]][n]:null;positions[u.id]={x:cell?.[0]??layout[n%3]??425,y:baseline+(cell?.[1]??0),scale:u.follower===true?.72:1,sprite:liveActorSprite(u,manifest)};}
   for(const id of Object.keys(positions))if(id!=='hero'&&!units.some(u=>u.id===id))delete positions[id];
  }
  function sceneFiles(){
