@@ -10,7 +10,9 @@ function harness({miss=false,kill=false}={}){
  const host={isAlive:id=>hp.get(id)>0,heroAlive:()=>alive,hasLivingTargets:()=>[...hp.values()].some(v=>v>0),consumeCooldown:e=>events.push(['cd',e]),onActiveCast:e=>events.push(['cast',e]),onCastEnd:e=>events.push(['end',e]),resolveHit(a){events.push(['hit',a]);const before=hp.get(a.targetId);if(!miss){a.beforeMitigation?.();hp.set(a.targetId,kill?0:Math.max(0,before-5));}return {hit:!miss,hpBefore:before,hpAfter:hp.get(a.targetId),actualHpLost:miss?0:before-hp.get(a.targetId)};},applyEffect:(id,e)=>effects.push([id,e]),applyArmorBreak:e=>effects.push([e.targetId,{type:'armorBreak'}]),interrupt:()=>true,cleanse:()=>1,consumeStatus:(id,k)=>events.push(['consume',id,k]),random:()=>0};
  return {host,hp,events,effects,setDead(){alive=false;}};
 }
-for(const id of TREE_ACTIVE_SKILL_IDS)for(const weapon of ['axe','hammer','sword']){
+// This fixed synthetic configuration covers the original fifteen mechanics.
+// Added racial skills are tested with their own complete explicit configs.
+for(const id of TREE_ACTIVE_SKILL_IDS.filter(id=>['fracture_strike','fault_sweep','breach_followup','anvil_cry','breaking_intercept','ember_brand','furnace_wave','cinder_barrage','furnace_etch','scatter_ash','iron_vigil','bastion_blow','repelling_wave','forge_breath','purifying_bulwark'].includes(id)))for(const weapon of ['axe','hammer','sword']){
  const p=plan(input(id,weapon));if(id==='scatter_ash'&&weapon==='axe'){assert.equal(p,null);continue;}assert(p,id+weapon);assert(validTreeSkillPlan(p));assert(Object.isFrozen(p));assert.deepEqual(JSON.parse(JSON.stringify(p)),p);const h=harness();assert(execute(p,h.host).cast,id+weapon);assert.equal(h.events.filter(e=>e[0]==='cast').length,1);assert.equal(h.events.filter(e=>e[0]==='cd').length,1);assert.equal(h.events.filter(e=>e[0]==='end').length,1);
 }
 assert.equal(plan(input('fault_sweep','axe',{config:{}})),null);assert.equal(plan(input('fault_sweep','axe',{config:{...config,cooldownMs:0}})),null);

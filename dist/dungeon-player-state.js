@@ -1,3 +1,4 @@
+import {validRaceRuntime} from './race-runtime.js';
 import {carryHeroSkillEffects,restoreHeroSkillEffects} from './skill-tree-effects.js';
 import {TREE_ACTIVE_SKILL_IDS} from './skill-tree-consumer.js';
 import {validPlayerShieldLayers,createPlayerShieldLayers} from './player-shield-layers.js';
@@ -9,19 +10,19 @@ export const DUNGEON_PLAYER_FIELDS=Object.freeze([
 ]);
 export function validDungeonCarry(carry,skillDefinitions){
  if(carry===undefined)return true;
- if(!carry||typeof carry!=='object'||Array.isArray(carry)||Object.keys(carry).length!==DUNGEON_PLAYER_FIELDS.length+2+['typedDots','treeSkillCooldowns','treeCombatClock','treeEffects','treeSkillShieldLayers'].filter(k=>carry[k]!==undefined).length||!validDwarfDots(carry.typedDots))return false;
- if(!validTreeCarry(carry))return false;
+ if(!carry||typeof carry!=='object'||Array.isArray(carry)||Object.keys(carry).length!==DUNGEON_PLAYER_FIELDS.length+2+['raceRuntime','typedDots','treeSkillCooldowns','treeCombatClock','treeEffects','treeSkillShieldLayers'].filter(k=>carry[k]!==undefined).length||!validDwarfDots(carry.typedDots))return false;
+ if(!validTreeCarry(carry)||!validRaceRuntime(carry.raceRuntime))return false;
  if(!DUNGEON_PLAYER_FIELDS.every(k=>Number.isFinite(carry[k])&&carry[k]>=0&&carry[k]<=1e12)||typeof carry.shelterUsed!=='boolean')return false;
  return carry.cd&&typeof carry.cd==='object'&&!Array.isArray(carry.cd)&&Object.entries(carry.cd).every(([key,n])=>Object.hasOwn(skillDefinitions,key)&&Number.isFinite(n)&&n>=0&&n<=100);
 }
 export function captureDungeonPlayerState(encounter){
  const tree=encounter.treeEffects?carryHeroSkillEffects(encounter.treeEffects):null;
- const extra={};if(encounter.treeSkillCooldowns!==undefined)extra.treeSkillCooldowns=structuredClone(encounter.treeSkillCooldowns);if(encounter.treeCombatClock!==undefined)extra.treeCombatClock=encounter.treeCombatClock;if(tree)extra.treeEffects=tree;
+ const extra={};if(encounter.raceRuntime!==undefined)extra.raceRuntime=structuredClone(encounter.raceRuntime);if(encounter.treeSkillCooldowns!==undefined)extra.treeSkillCooldowns=structuredClone(encounter.treeSkillCooldowns);if(encounter.treeCombatClock!==undefined)extra.treeCombatClock=encounter.treeCombatClock;if(tree)extra.treeEffects=tree;
  if(encounter.playerShieldLayers)extra.treeSkillShieldLayers={version:1,clock:encounter.playerShieldLayers.clock,layers:encounter.playerShieldLayers.layers.filter(x=>x.source.startsWith('skill:')&&!x.ownerItemId).map(x=>structuredClone(x))};
  return {...extra,...Object.fromEntries(DUNGEON_PLAYER_FIELDS.map(k=>[k,encounter[k]??(k==='heroBurnPower'&&encounter.heroBurn>0?Math.max(2,Math.round(encounter.atk*.05)):0)])),...(encounter.typedDots!==undefined?{typedDots:structuredClone(encounter.typedDots)}:{}),shelterUsed:!!encounter.shelterUsed,cd:{...encounter.cd}};
 }
 export function applyDungeonPlayerState(encounter,carry){
- if(!carry)return;
+ if(!carry)return;if(carry.raceRuntime!==undefined)encounter.raceRuntime=structuredClone(carry.raceRuntime);
  for(const key of DUNGEON_PLAYER_FIELDS)encounter[key]=carry[key];
  if(carry.typedDots!==undefined)encounter.typedDots=structuredClone(carry.typedDots);
  if(carry.treeSkillCooldowns!==undefined)encounter.treeSkillCooldowns=structuredClone(carry.treeSkillCooldowns);

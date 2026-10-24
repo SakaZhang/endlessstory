@@ -88,7 +88,7 @@ export function resolveSetLinkedEffect(effect,counts,config){
  }catch{return null;}
 }
 
-export const TREE_ACTIVE_SKILL_IDS=Object.freeze(['fracture_strike',...APPROVED_SKILLS,...Object.values(RACE_PACKS).filter(p=>p.id!=='dwarf').flatMap(p=>p.tree.nodes.filter(n=>n.kind==='active').map(n=>n.id))]);
+export const TREE_ACTIVE_SKILL_IDS=Object.freeze(['fracture_strike',...APPROVED_SKILLS,...Object.values(RACE_PACKS).flatMap(p=>Object.values(p.skills??{}).filter(n=>n.kind==='active'||p.tree.nodes.some(t=>t.id===n.id&&t.kind==='active')).map(n=>n.id)).filter(id=>!['fracture_strike',...APPROVED_SKILLS].includes(id))]);
 export const TREE_MAX_HITS_PER_TARGET=8;
 const validId=x=>typeof x==='string'&&x.length>0&&x.length<=250;
 const plain=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);

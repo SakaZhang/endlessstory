@@ -1,3 +1,5 @@
+import {getSkillMetadata} from './race-registry.js';
+import {lifestealRate} from './affix-expansion.js';
 // Approved passive directions; numeric policy is explicitly injected, not a live default.
 import {playerShieldTotal} from './player-shield-layers.js';
 export const TREE_PASSIVE_IDS=Object.freeze(['axe_fervor','hammer_penetration','fire_affinity','shield_reserve','mountain_vitality','forged_resilience']);
@@ -6,8 +8,8 @@ const fields={axe_fervor:['damageMultiplier','armorMultiplier'],hammer_penetrati
 const freeze=x=>{if(x&&typeof x==='object'){Object.values(x).forEach(freeze);Object.freeze(x);}return x;};
 export function resolveTreePassives({passive,unlocked,weaponType,config}={}){
  if(!Array.isArray(passive)||passive.length!==2||!Array.isArray(unlocked)||!Array.from(unlocked).every(x=>typeof x==='string')||new Set(unlocked).size!==unlocked.length||typeof weaponType!=='string'||!plain(config))return null;
- const selected=Array.from(passive).filter(x=>x!==null);if(selected.some(id=>!TREE_PASSIVE_IDS.includes(id)||!unlocked.includes(id))||new Set(selected).size!==selected.length)return null;
- for(const id of selected){const c=config[id];if(!plain(c)||fields[id].some(key=>!Object.hasOwn(c,key)||!num(c[key])))return null;
+ const selected=Array.from(passive).filter(x=>x!==null);if(selected.some(id=>(!TREE_PASSIVE_IDS.includes(id)&&getSkillMetadata(id)?.kind!=='passive')||!unlocked.includes(id))||new Set(selected).size!==selected.length)return null;
+ for(const id of selected){const c=config[id];if(!plain(c)||(fields[id]?fields[id].some(key=>!Object.hasOwn(c,key)||!num(c[key])):!validGenericPassive(c)))return null;
   if(id==='axe_fervor'&&c.armorMultiplier>1||id==='forged_resilience'&&(c.negativeDurationMultiplier>1||c.negativeDurationMultiplier<=0))return null;
  }
  return freeze({version:1,selected:[...selected],weaponType,config:Object.fromEntries(selected.map(id=>[id,structuredClone(config[id])]))});
@@ -22,6 +24,7 @@ export function derivePassiveStats(base,context,{shieldLayers=null,combatClock=0
  let shieldTotal=0;if(shieldLayers!==null){shieldTotal=playerShieldTotal(shieldLayers,combatClock);if(shieldTotal===null)return null;}
  if(shield&&shieldTotal>0)stats.armor*=shield.armorMultiplier;
  if(vitality)stats.hp*=vitality.maxHpMultiplier;
+ for(const m of genericModifiers(context,{currentHp,maxHp:base.hp,shield:shieldTotal})){stats.atk*=m.attackMultiplier??1;stats.armor*=m.armorMultiplier??1;stats.hp*=m.maxHpMultiplier??1;stats.penetration=(stats.penetration??0)+base.atk*(m.physicalPenetrationPerBaseAtk??0);if(m.critRating!==undefined){stats.critRating=(stats.critRating??0)+m.critRating;stats.crit=Math.min(.6,.05+.55*stats.critRating/(100+stats.critRating));}if(m.lifestealRating!==undefined){stats.lifesteal=(stats.lifesteal??0)+m.lifestealRating;stats.lifestealRating=stats.lifesteal;stats.lifestealRate=lifestealRate(stats.lifesteal);}for(const element of ['earth','water','fire','wind','light','dark']){if(m.elementAttack?.[element]!==undefined)stats.elementAttack[element]=(stats.elementAttack[element]??0)+m.elementAttack[element];if(m.elementResistance?.[element]!==undefined)stats.elementResistance[element]=(stats.elementResistance[element]??0)+m.elementResistance[element];}}
  if(![stats.hp,stats.armor,stats.penetration??0].every(num))return null;
  return {stats,currentHp:Math.min(currentHp,stats.hp),hasShield:shieldTotal>0};
 }
@@ -32,13 +35,18 @@ export function passiveDamageMultiplier(context,{damageType,source}={}){
  if(!['physical','earth','water','fire','wind','light','dark'].includes(damageType))return null;
  let result=1;const axe=active(context,'axe_fervor');
  if(axe&&context.weaponType==='axe')result*=axe.damageMultiplier;
- return Number.isFinite(result)?result:null;
+ for(const m of genericModifiers(context))result*=m.damageMultiplier??1;return Number.isFinite(result)?result:null;
 }
 export function passiveReceivedHeal(context,{amount,currentHp,maxHp}={}){
  if(!context||![amount,currentHp,maxHp].every(num)||maxHp<=0)return null;
- if(currentHp===0)return 0;const c=active(context,'mountain_vitality');return Math.min(Math.max(0,maxHp-currentHp),amount*(c?.receivedHealingMultiplier??1));
+ if(currentHp===0)return 0;const c=active(context,'mountain_vitality');return Math.min(Math.max(0,maxHp-currentHp),amount*(c?.receivedHealingMultiplier??1)*genericModifiers(context,{currentHp,maxHp}).reduce((m,x)=>m*(x.receivedHealingMultiplier??1),1));
 }
 export function passiveNegativeDuration(context,durationMs){
  if(!context||!num(durationMs))return null;if(durationMs===0)return 0;
- const c=active(context,'forged_resilience');return c?Math.max(Number.MIN_VALUE,durationMs*c.negativeDurationMultiplier):durationMs;
+ const c=active(context,'forged_resilience');return Math.max(Number.MIN_VALUE,durationMs*(c?.negativeDurationMultiplier??1)*genericModifiers(context).reduce((m,x)=>m*(x.negativeDurationMultiplier??1),1));
 }
+
+const modifierKeys=['attackMultiplier','armorMultiplier','maxHpMultiplier','damageMultiplier','receivedHealingMultiplier','negativeDurationMultiplier','critRating','lifestealRating','physicalPenetrationPerBaseAtk','elementAttack','elementResistance'];
+function validModifiers(m){return plain(m)&&Object.entries(m).every(([k,v])=>modifierKeys.includes(k)&&(k.startsWith('element')?plain(v)&&Object.entries(v).every(([e,n])=>['earth','water','fire','wind','light','dark'].includes(e)&&num(n)):num(v)));}
+function validGenericPassive(c){return validModifiers(c.modifiers??{})&&(!c.variants||Array.isArray(c.variants)&&c.variants.every(v=>plain(v.when)&&validModifiers(v.modifiers)));}
+function genericModifiers(context,{currentHp,maxHp,shield}={}){const matches=(when={})=>(!when.weaponType||context.weaponType===when.weaponType)&&(!when.excludeWeaponTypes||!when.excludeWeaponTypes.includes(context.weaponType))&&(when.maxHpFraction===undefined||Number.isFinite(currentHp)&&Number.isFinite(maxHp)&&currentHp<=maxHp*when.maxHpFraction)&&(when.shield===undefined||Boolean(shield)===when.shield);return context.selected.flatMap(id=>{if(fields[id])return [];const c=context.config[id];if(!matches(c))return [];return [c.modifiers??{},...(c.variants??[]).filter(v=>matches(v.when)).map(v=>v.modifiers)];});}
