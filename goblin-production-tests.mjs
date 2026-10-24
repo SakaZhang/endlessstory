@@ -8,7 +8,7 @@ let records=[];
 for(const skillId of Object.keys(pack.skills)){
  const s=setup();s.skillTree.presets[0].unlocked=pack.tree.nodes.map(n=>n.id);s.skillTree.presets[0].active=skillId==='goblin.spore_transfer'?['goblin.venom_cut',skillId,null,null]:[skillId,null,null,null];
  assert(E.validSave(s),'setup '+skillId);const e=E.startInstanceEncounter(s,'goblin.a09.boss',s.lastSeen);assert(e);let observed=false;
- for(let i=0;i<30&&!e.done;i++){E.step(s,e,s.nextActionAt);if(e.lastCast?.skillId===skillId||e.treeEffects?.hero.sources.some(x=>x.sourceId===skillId)||e.enemies.some(u=>e.treeEffects?.enemies[u.id]?.sources.some(x=>x.sourceId===skillId)))observed=true;if(!E.validSave(s)){console.log('INVALID',skillId,i,JSON.stringify(s));assert.fail('step '+skillId);}assert(E.validSave(JSON.parse(JSON.stringify(s))),'roundtrip '+skillId);}
+ for(let i=0;i<30&&!e.done;i++){E.step(s,e,s.nextActionAt);if(e.lastCast?.skillId===skillId||e.treeEffects?.hero.sources.some(x=>x.sourceId===skillId)||e.enemies.some(u=>e.treeEffects?.enemies[u.id]?.sources.some(x=>x.sourceId===skillId)))observed=true;assert(E.validSave(s),'step '+skillId);assert(E.validSave(JSON.parse(JSON.stringify(s))),'roundtrip '+skillId);}
  records.push({skillId,observed,rounds:e.round,heroHp:e.heroHp,enemyHp:e.enemies[0].hp,poisonLayers:e.treePoison?.[e.enemies[0].id]?.layers.length??0,runtime:e.raceRuntime});
 }
 console.log('GOBLIN_ACTUAL_SKILLS',JSON.stringify(records));

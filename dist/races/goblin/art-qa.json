@@ -1,5 +1,13 @@
 {
-  "hero": {
+  "hero-dagger": {
+    "distinctFrames": 9,
+    "anchor": [
+      96,
+      176
+    ],
+    "facing": "left"
+  },
+  "hero-sword": {
     "distinctFrames": 9,
     "anchor": [
       96,
