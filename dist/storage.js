@@ -1,11 +1,12 @@
 import {fresh,validSave,effectiveLuck} from './engine.js';
-export const SAVE_KEY='ashencrown-v3';
+import {SCHEMA_VERSION,SAVE_KEY} from './save-generation.js';
+export {SAVE_KEY} from './save-generation.js';
 export const LEGACY_KEY='ashencrown-v1';
 export const BACKUP_PREFIX='ashencrown-backup-';
-export const RETIRED_SAVE_KEYS=Object.freeze(['ashencrown-v1','ashencrown-v2']);
+export const RETIRED_SAVE_KEYS=Object.freeze(['ashencrown-v1','ashencrown-v2','ashencrown-v3']);
 export const RETIRED_BACKUP_PREFIX='ashencrown-backup-';
 const blockedStores=new WeakSet();
-const validCurrent=game=>{try{return game?.version===3&&validSave(game)&&game.developmentEquipmentSandbox!==true;}catch{return false;}};
+const validCurrent=game=>{try{return game?.version===SCHEMA_VERSION&&validSave(game)&&game.developmentEquipmentSandbox!==true;}catch{return false;}};
 function retiredKeys(storage){
  const keys=new Set(RETIRED_SAVE_KEYS);
  for(let i=0;i<storage.length;i++){const key=storage.key(i);if(typeof key==='string'&&key.startsWith(RETIRED_BACKUP_PREFIX))keys.add(key);}
@@ -31,7 +32,7 @@ export function commitGameTransaction(storage,game,operation,{commitOnNoop=false
  if(!value&&!commitOnNoop)return {ok:false,game,value,reason:'rejected'};
  if(!Number.isFinite(now)||now<0)return {ok:false,game,value:null,reason:'operation'};
  candidate.lastSeen=now;candidate.offlineLuck=effectiveLuck(candidate);
- if(candidate?.version!==3)return {ok:false,game,value:null,reason:'invalid-candidate'};
+ if(candidate?.version!==SCHEMA_VERSION)return {ok:false,game,value:null,reason:'invalid-candidate'};
  try{storage.setItem(SAVE_KEY,JSON.stringify(candidate));}catch{return {ok:false,game,value:null,reason:'storage'};}
  return {ok:true,game:candidate,value,reason:null};
 }

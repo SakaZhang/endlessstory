@@ -1,5 +1,5 @@
 import {icon} from './icons.js';
-import {SKILL_TREE_DEFINITION} from './skill-tree-definition.js';
+import {DWARF_EXPANDED_DEFINITION as SKILL_TREE_DEFINITION} from './dwarf-skill-expansion.js';
 import {enemySceneLayout} from './art.js';
 import {renderMonsterPixelPortrait} from './monster-pixel-portrait.js';
 import {DWARF_MONSTERS} from './dwarf-content.js';

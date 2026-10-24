@@ -54,7 +54,7 @@ async function probe(output,report){
  // as explicit inventory roots, separate from the verified runtime dependency graph.
  const runtimeUrls=new Set(urls);
  const auxiliary=report.files.filter(f=>!f.path.endsWith('.html')&&!urls.has(new URL(f.path,release).href));
- for(const f of auxiliary){assert.match(f.path,/^(?:races\/(?:human|elf|goblin|ashen)\/.*\.(?:png|json|md)|dwarf-tree-migration\.js)$/,'unclassified unreachable emitted asset '+f.path);await visit(new URL(f.path,release),'packaged auxiliary inventory');}
+ for(const f of auxiliary){assert.match(f.path,/^(?:races\/(?:human|elf|goblin|ashen)\/.*\.(?:png|json|md))$/,'unclassified unreachable emitted asset '+f.path);await visit(new URL(f.path,release),'packaged auxiliary inventory');}
  assert.equal([...urls].filter(u=>new URL(u).pathname.endsWith('/engine.js')).length,1,'single engine URL in both entry graphs');
  assert.deepEqual([...new Set([...urls].map(u=>new URL(u).pathname.slice(release.pathname.length)))].sort(),report.files.filter(f=>!f.path.endsWith('.html')).map(f=>f.path).sort(),'complete actual non-HTML file graph');
  assert.ok([...urls].some(u=>u.endsWith('/engine.js')));assert.ok([...urls].some(u=>u.endsWith('/style.css')));assert.ok([...urls].some(u=>u.endsWith('/manifest.json')));assert.ok([...urls].some(u=>/\.png$/.test(u)));
@@ -89,7 +89,8 @@ try{
  const links=[...anchor.matchAll(/<a href="([^"]+)"/g)].map(m=>new URL(m[1],base).href);
  assert.deepEqual(links,[root+'battle-preview.html?scenario=poison#x',root+'index.html#help','https://other.example/']);
  assert.throws(()=>rootHtml('<head><base href="/"></head>','index.html',a.release),/Existing base/);
- const storage=await readFile(join(source,'storage.js'),'utf8');assert.match(storage,/SAVE_KEY='ashencrown-v3'/);
+ const storage=await readFile(join(source,'storage.js'),'utf8');assert.match(storage,/from '.\/save-generation\.js'/);
+ const generation=await readFile(join(source,'save-generation.js'),'utf8');assert.match(generation,/SAVE_KEY='ashencrown-v4'/);assert.match(generation,/SCHEMA_VERSION=4/);
  assert.equal(new URL(a.base,root).origin,new URL(root).origin);assert.ok(!legacyHtml.includes('serviceWorker.register'));
  // Exercise the real CLI and official packager in an isolated copy of the current source.
  // Parallel independent gates must never remove one another's shared build/build.tmp.

@@ -1,6 +1,6 @@
 import {renderSkillPixelIcon} from './skill-pixel-icons.js';
-import {SKILL_TREE_DESCRIPTIONS} from './skill-tree-descriptions.js';
-import {SKILL_TREE_DEFINITION as DEFAULT_DEFINITION} from './skill-tree-definition.js';
+import {DWARF_EXPANDED_DESCRIPTIONS as SKILL_TREE_DESCRIPTIONS} from './dwarf-skill-expansion.js';
+import {DWARF_EXPANDED_DEFINITION as DEFAULT_DEFINITION} from './dwarf-skill-expansion.js';
 import {normalizeSkillTree,skillPointBudget,skillPresetCost,validSkillTree} from './skill-tree-state.js';
 import {icon} from './icons.js';
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));

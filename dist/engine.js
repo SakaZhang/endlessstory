@@ -9,9 +9,10 @@ import {POTION_CATALOG,POTION_BUFF_KEYS,POTION_RECIPE_CATALOG,POTION_IMPORT_MATE
 import {emitCombatDisplay} from './combat-display-bridge.js';
 import {TREE_TUNING} from './skill-tree-tuning.js';
 import {resolveTreePassives,derivePassiveStats,passiveReceivedHeal} from './skill-tree-passives.js';
-import {SKILL_TREE_DEFINITION} from './skill-tree-definition.js';
+import {DWARF_EXPANDED_DEFINITION as SKILL_TREE_DEFINITION} from './dwarf-skill-expansion.js';
 import {validSkillTree,normalizeSkillTree,quoteSkillTreeChange,prepareSkillTreeChange} from './skill-tree-state.js';
-export {SKILL_TREE_DEFINITION,skillTreeNode} from './skill-tree-definition.js';
+export {DWARF_EXPANDED_DEFINITION as SKILL_TREE_DEFINITION} from './dwarf-skill-expansion.js';
+export const skillTreeNode=id=>SKILL_TREE_DEFINITION.nodes.find(n=>n.id===id)??null;
 import {validRegionNavigation,normalizeRegionNavigation,getRegionNavigation,recordNodeExplored,recordMaterialDiscovered,toggleFavoriteNode,setFavoriteNode} from './region-navigation-state.js';
 export {validRegionNavigation,normalizeRegionNavigation,getRegionNavigation,toggleFavoriteNode,setFavoriteNode} from './region-navigation-state.js';
 import {LEGENDARY_EQUIPMENT_DEFINITIONS,createLegendaryEquipment,validLegendaryEquipmentMetadata} from './legendary-equipment.js';
@@ -59,7 +60,8 @@ export {AREAS,SITES,INSTANCES,RACE_KEYS,areaLevelRange,resolveLegacySite,instanc
 import {ELEMENT_KEYS,ELEMENT_AFFIX_DEFS,resolveElementDamage} from './element-schema.js';
 export {ELEMENT_KEYS,resolveElementDamage} from './element-schema.js';
 // v0.4 equipment foundation. Item families and equipment sockets are intentionally separate.
-export const SCHEMA_VERSION = 3;
+import {SCHEMA_VERSION} from './save-generation.js';
+export {SCHEMA_VERSION} from './save-generation.js';
 export const SLOTS = ['weapon','helm','armor','gloves','boots','ring','amulet','core'];
 export const SOCKETS = ['weapon','helm','armor','gloves','boots','ring1','ring2','amulet'];
 export const SOCKET_TYPE = Object.fromEntries([...SOCKETS,'core'].map(k=>[k,k.startsWith('ring')?'ring':k]));
@@ -68,9 +70,9 @@ export const SLOTNAME = {weapon:'武器',helm:'头盔',armor:'护甲',gloves:'�
 export const RARITY = ['普通','稀有','优良','至臻'];
 export const SET_SLOTS = ['helm','armor','gloves','boots'];
 export const BUILD = [...EXPANSION_PACKS.flatMap(p=>p.sets.map(s=>({...s,originRace:p.id,skills:[],bonus:[s.two?.description,s.four?.description].filter(Boolean).join('；')||s.description||''}))),
- {id:'anvil',name:'碎砧',sub:'裂甲 · 重击',skills:['break','heavy','interrupt',null],bonus:'2件：裂甲锤伤害 +25%；战吼延长1回合；4件：重锻击伤害 +35%。'},
- {id:'rune',name:'炉纹',sub:'铭火 · 引燃',skills:['mark','ignite','interrupt',null],bonus:'2件：铭火灼烧 +30%；炉蚀延长1回合；4件：引燃伤害 +35%。'},
- {id:'guard',name:'守冢',sub:'坚守 · 反击',skills:['guard','break','interrupt',null],bonus:'2件：坚守主动伤害 +30%；铁衣延长1回合；4件：坚守反击提高到100%攻击，铸壁获得2回合坚守。'}
+ {id:'anvil',name:'碎砧',sub:'裂甲 · 重击',skills:['break','heavy','interrupt',null],bonus:'2件：对流血或破甲目标的物理技能直伤提高20%。4件：破隙追击持斧时，对流血目标的第二击伤害提高60%；持锤时，对破甲目标的条件追加伤害提高75%；其他武器对流血或破甲目标的基础伤害提高25%。'},
+ {id:'rune',name:'炉纹',sub:'铭火 · 引燃',skills:['mark','ignite','interrupt',null],bonus:'2件：灼烧持续伤害提高30%。4件：炉焰迸发持斧时，灼烧施加概率增加25个百分点（最高100%）；持锤时，对灼烧目标的条件追加伤害提高70%；其他武器基础伤害提高30%。'},
+ {id:'guard',name:'守冢',sub:'坚守 · 反击',skills:['guard','break','interrupt',null],bonus:'2件：技能产生的护盾量提高25%。4件：守势重击持斧时，防御提升效果提高50%；持锤且自身有护盾时，条件追加伤害提高60%；其他武器基础伤害提高25%。'}
 ];
 export const SKILLS={break:{name:'裂甲锤',icon:'⌁',cd:4,desc:'120%攻击伤害，削减目标25%护甲，持续6回合。'},heavy:{name:'重锻击',icon:'✦',cd:5,desc:'220%攻击伤害，破甲目标再提高25%。'},interrupt:{name:'断势',icon:'ϟ',cd:6,desc:'115%攻击伤害，打断本回合蓄力重击。'},mark:{name:'铭火',icon:'♨',cd:4,desc:'90%攻击的火元素伤害，附加5回合火焰灼烧；不受护甲影响。'},ignite:{name:'引燃',icon:'✧',cd:5,desc:'160%攻击的火元素伤害，灼烧目标额外80%攻击；不受护甲影响。'},guard:{name:'坚守',icon:'▣',cd:5,desc:'100%攻击伤害，3回合减伤40%并反击。'}};
 Object.assign(SKILLS,{

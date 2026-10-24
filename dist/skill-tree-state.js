@@ -1,3 +1,4 @@
+import {SAVE_KEY} from './save-generation.js';
 // Current-generation skill-tree allocation and atomic draft transactions.
 const clone=x=>structuredClone(x),plain=x=>!!x&&typeof x==='object'&&!Array.isArray(x);
 const id=x=>typeof x==='string'&&/^[a-zA-Z0-9_.-]{1,100}$/.test(x)&&!['__proto__','constructor','prototype'].includes(x);
@@ -61,7 +62,7 @@ export function prepareSkillTreeChange(s,quote,config){
  const next=clone(s);next.skillTree=clone(expected.after);return {game:next,result:{preset:next.skillTree.selectedPreset,revision:next.skillTree.revision}};
  }catch{return null;}
 }
-export function commitSkillTreeChange(storage,s,quote,config,{key='ashencrown-v3'}={}){
+export function commitSkillTreeChange(storage,s,quote,config,{key=SAVE_KEY}={}){
  const prepared=prepareSkillTreeChange(s,quote,config);if(!prepared)return {ok:false,reason:'stale-or-invalid',game:s};
  try{storage.setItem(key,JSON.stringify(prepared.game));return {ok:true,...prepared};}catch{return {ok:false,reason:'storage',game:s};}
 }
@@ -109,7 +110,7 @@ export function prepareSkillTreeDraft(s,quote,config){
   const game=clone(s);game.skillTree=clone(built.preview);return {game,result:{preset:game.skillTree.selectedPreset,revision:game.skillTree.revision}};
  }catch{return null;}
 }
-export function commitSkillTreeDraft(storage,s,quote,config,{key='ashencrown-v3'}={}){
+export function commitSkillTreeDraft(storage,s,quote,config,{key=SAVE_KEY}={}){
  const prepared=prepareSkillTreeDraft(s,quote,config);if(!prepared)return {ok:false,reason:'stale-or-invalid',game:s};
  try{storage.setItem(key,JSON.stringify(prepared.game));return {ok:true,...prepared};}catch{return {ok:false,reason:'storage',game:s};}
 }

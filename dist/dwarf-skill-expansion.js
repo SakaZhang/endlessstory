@@ -17,7 +17,7 @@ const nodes=[],groups=[];
 for(const [branch,name,ids]of rows){groups.push({id:branch,name,ids});const costs=[2,3,3,3,3,4,4,5],parents=[[],[0],[0],[1],[2],[1],[2],[5,6]],positions=[[1,0],[0,1],[2,1],[0,2],[2,2],[0,3],[2,3],[1,4]];ids.forEach((id,i)=>nodes.push({...source[id],cost:costs[i],requires:parents[i].map(j=>ids[j]),branch,column:positions[i][0],row:positions[i][1],setLink:branch==='steel'?'anvil':branch==='fire'?'rune':'guard'}));}
 const common=['mountain_vitality','anvil_cry','forge_breath','forged_resilience','patient_craft','prospectors_mark'];groups.push({id:'shared',name:'共通匠艺',ids:common});
 common.forEach((id,i)=>nodes.push({...source[id],cost:[2,3,3,3,4,3][i],requires:[[],[],[],['forge_breath'],['anvil_cry'],['anvil_cry','forge_breath']][i],branch:'shared',column:[1,0,2,2,0,1][i],row:[0,1,1,2,2,3][i],setLink:null}));
-export const DWARF_EXPANDED_DEFINITION=freeze({id:'dwarf-skill-tree-99-expanded-v2',status:'candidate-expanded',race:'dwarf',groups,nodes});
+export const DWARF_EXPANDED_DEFINITION=freeze({id:'dwarf-skill-tree-99-expanded-v2',status:'active-development-v4',race:'dwarf',groups,nodes});
 export const DWARF_EXPANDED_DESCRIPTIONS=freeze({...OLD_DESCRIPTIONS,
  ore_rally:{base:'短暂提高穿甲，不造成直接伤害；效果存在时不重复施放。',axe:'斧：同时提高命中后的吸血能力。',hammer:'锤：同时提高防御。'},
  crag_verdict:{base:'单体物理重击；流血或破甲目标受到额外伤害。',axe:'斧：流血目标追加较轻一击。',hammer:'锤：命中后降低目标攻击。'},

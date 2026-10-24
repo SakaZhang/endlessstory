@@ -1,9 +1,8 @@
-import {DWARF_EXPANDED_SKILLS,DWARF_ADDED_PASSIVE_METADATA,DWARF_NEW_ACTIVE_IDS,planDwarfExpansion,dwarfExpansionConfigs} from './dwarf-skill-expansion.js';
+import {DWARF_EXPANDED_DEFINITION,DWARF_EXPANDED_SKILLS,DWARF_ADDED_PASSIVE_METADATA,DWARF_NEW_ACTIVE_IDS,planDwarfExpansion,dwarfExpansionConfigs} from './dwarf-skill-expansion.js';
 import {EXPANSION_PACKS} from './race-packs.js';
-import {SKILL_TREE_DEFINITION} from './skill-tree-definition.js';
 import {SKILL_TREE_DESCRIPTIONS} from './skill-tree-descriptions.js';
 import {TREE_TUNING} from './skill-tree-tuning.js';
-const dwarf={id:'dwarf',name:'矮人',heroName:'布洛克',weapons:['axe','hammer'],tree:SKILL_TREE_DEFINITION,skills:DWARF_EXPANDED_SKILLS,passives:DWARF_ADDED_PASSIVE_METADATA,tuning:TREE_TUNING};
+const dwarf={id:'dwarf',name:'矮人',heroName:'布洛克',weapons:['axe','hammer'],tree:DWARF_EXPANDED_DEFINITION,skills:DWARF_EXPANDED_SKILLS,passives:DWARF_ADDED_PASSIVE_METADATA,tuning:TREE_TUNING};
 export const RACE_PACKS=Object.freeze({dwarf,...Object.fromEntries(EXPANSION_PACKS.map(p=>[p.id,p]))});
 export const PLAYABLE_RACES=Object.freeze(Object.keys(RACE_PACKS));
 const ownValue=(object,key)=>object&&typeof key==='string'&&Object.hasOwn(object,key)?object[key]:null;
