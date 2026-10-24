@@ -1,0 +1,24 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {RACE_PACK as p,planSkill,modifySkillPlan,createRuntime,validRuntime} from '../../../dist/races/elf/index.js';
+import {createTreeEffectHost} from '../../../dist/skill-tree-effect-host.js';
+assert.equal(p.areas.length,10);assert.deepEqual(p.areas.filter(a=>a.boss).map(a=>a.number),[2,5,8,10]);assert.equal(Object.keys(p.monsters).length,44);assert.equal(Object.keys(p.materials).length,18);
+assert.equal(p.equipment.filter(e=>e.kind==='scatter').length,36);assert.equal(p.equipment.filter(e=>e.kind==='set').length,12);assert.equal(p.legendaries.length,2);assert.equal(p.tree.nodes.reduce((n,x)=>n+x.cost,0),99);assert.equal(Object.keys(p.skills).length,21);assert.equal(Object.keys(p.passives).length,9);
+const allIds=new Set(p.tree.nodes.map(n=>n.id));for(const n of p.tree.nodes)for(const req of n.requires)assert(allIds.has(req));
+for(const branch of ['bow','elements','staff']){const ns=p.tree.nodes.filter(n=>n.branch===branch);assert.equal(ns.filter(n=>n.kind==='active').length,6);assert.equal(ns.filter(n=>n.kind==='passive').length,2);assert(ns.reduce((v,n)=>v+n.cost,0)<=44);}
+for(const a of p.areas)for(const kind of ['field','dungeon']){const source=a.id+'.'+kind;assert(Object.values(p.materials).some(m=>m.functionalTags.includes('recoveryBase')&&m.sources.includes(source)));assert(p.materials['elf.infinity_gem_elf'].sources.includes(source));}
+for(const pool of Object.values(p.materialPools))for(const ch of pool.channels)for(const e of ch.entries){assert(p.materials[e.materialId].sources.includes(pool.nodeId));assert(!p.materials[e.materialId].storyOnly);assert.equal(e.qualityWeights.length,4);}
+assert.equal(p.materials['elf.return_token_elf'].sources.length,0);assert.equal(p.materials['elf.return_token_elf'].storyOnly,true);
+for(const [id,row] of Object.entries(p.parameters.monsters)){assert(p.monsters[id]);assert(row.hp>0&&row.atk>0);assert.equal(Object.keys(row.elementResistance).length,6);}
+function paths(x){if(typeof x==='string'&&x.startsWith('races/elf/'))assert(fs.existsSync(new URL('../../../dist/'+x,import.meta.url)),x);else if(x&&typeof x==='object')Object.values(x).forEach(paths);}paths(p.art);
+let supported=0,extended=0;const stats={atk:100,hp:1000,armor:80};
+for(const skillId of Object.keys(p.skills))for(const weaponType of ['bow','staff','axe']){
+ const input={skillId,castId:skillId+weaponType,weaponType,selectedTargetId:'enemy1',targets:[{id:'enemy1',alive:true},{id:'enemy2',alive:true}],hero:{hp:500,maxHp:1000,eligibleDebuffIds:['legacy:heroBurn']},stats,context:{runtime:createRuntime()}};
+ const plan=planSkill(input);assert(plan,skillId);assert(validRuntime(plan.runtimePatch));assert.equal(plan.activeCastCount,1);assert(plan.actions.length);assert.equal(new Set(plan.actions.filter(a=>a.kind==='hit').map(a=>a.hitId)).size,plan.actions.filter(a=>a.kind==='hit').length);
+ const s={heroHp:500},e={heroHp:500,heroBurn:1,enemies:[{id:'enemy1',hp:1000},{id:'enemy2',hp:1000}]};const host=createTreeEffectHost(s,e,{stats,combatClock:0});assert(host);
+ for(const action of plan.actions){if(action.kind==='hit')assert(action.coefficient>0&&Number.isFinite(action.coefficient));for(const effect of action.effects??[]){if(effect.type==='elementResistDown'){extended++;continue;}assert.notEqual(host.applyEffect(action.targetId,effect),false,skillId+':'+effect.type);supported++;}}
+ const mod=modifySkillPlan(plan,{setCounts:{elf_arrow:4,elf_prism:4,elf_root:4},weaponType,context:input.context});assert(mod);assert.deepEqual(plan,planSkill(input),'pure planner');
+}
+let runtime=createRuntime();const els=[];for(let i=0;i<6;i++){const plan=planSkill({skillId:'elf.sixfold_shift',castId:'cast'+i,weaponType:'bow',selectedTargetId:'e',targets:[{id:'e',alive:true}],stats,context:{runtime}});els.push(plan.actions[0].damageType);runtime=plan.runtimePatch;}assert.equal(new Set(els).size,6);
+const staff=planSkill({skillId:'elf.root_strike',castId:'split',weaponType:'staff',selectedTargetId:'e',targets:[{id:'e',alive:true}],stats,context:{runtime:createRuntime()}});assert.deepEqual(staff.actions.map(a=>a.damageType),['physical','earth']);assert(Math.abs(staff.actions[0].coefficient/staff.actions[1].coefficient-1.5)<1e-12);
+console.log(JSON.stringify({ok:true,skillWeaponPlans:63,effectHostAccepted:supported,elementExposurePendingCentralExtension:extended,areas:10,monsters:44,materials:18,equipment:48,skills:21,passives:9,totalCost:99}));
