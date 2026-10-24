@@ -1,0 +1,398 @@
+{
+  "passed": true,
+  "tests": [
+    {
+      "file": "development-save-reset-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 710
+    },
+    {
+      "file": "current-save-generation-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 493
+    },
+    {
+      "file": "storage-generation-v3-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 318
+    },
+    {
+      "file": "save-generation-app-ui-tests.cjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 1064
+    },
+    {
+      "file": "ashen-legend-core-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 337
+    },
+    {
+      "file": "ashen-core-beam-visual-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 444
+    },
+    {
+      "file": "elf-slim-art-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 1102
+    },
+    {
+      "file": "combined-legendary-loadout-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 375
+    },
+    {
+      "file": "goblin-evasion-boots-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 4870
+    },
+    {
+      "file": "six-rings-catalog-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 2380
+    },
+    {
+      "file": "human-banner-armor-art-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 821
+    },
+    {
+      "file": "race-expansion-integration-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 885
+    },
+    {
+      "file": "cooldown-label-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 304
+    },
+    {
+      "file": "material-loot-profile-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 119
+    },
+    {
+      "file": "racial-material-contract-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 823
+    },
+    {
+      "file": "tests/races/human/material-profile-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 118
+    },
+    {
+      "file": "tests/races/elf/material-profile.test.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 160
+    },
+    {
+      "file": "tests/races/ashen/material-policy.test.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 139
+    },
+    {
+      "file": "race-retinue-host-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 411
+    },
+    {
+      "file": "racial-economy-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 339
+    },
+    {
+      "file": "racial-legendary-ui-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 517
+    },
+    {
+      "file": "racial-tree-geometry-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 764
+    },
+    {
+      "file": "race-art-routing-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 457
+    },
+    {
+      "file": "race-neutral-hero-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 1691
+    },
+    {
+      "file": "race-art-alpha-bounds-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 16442
+    },
+    {
+      "file": "phased-race-release-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 206
+    },
+    {
+      "file": "clear-restart-ui-tests.cjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 1180
+    },
+    {
+      "file": "review-legend-offline.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 2601
+    },
+    {
+      "file": "tests/races/elf/hero-metadata.test.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 680
+    },
+    {
+      "file": "live-battle-scoped-loading-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 337
+    },
+    {
+      "file": "tests/races/human/pack-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 180
+    },
+    {
+      "file": "tests/races/human/engine-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 3474
+    },
+    {
+      "file": "tests/races/human/legendary-host-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 453
+    },
+    {
+      "file": "tests/races/human/set-host-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 314
+    },
+    {
+      "file": "tests/races/human/legendary-offline-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 415
+    },
+    {
+      "file": "tests/races/elf/pack.test.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 181
+    },
+    {
+      "file": "tests/races/elf/actual-host.test.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 693
+    },
+    {
+      "file": "tests/races/elf/legendary-host.test.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 452
+    },
+    {
+      "file": "tests/races/elf/legendary-offline.test.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 800
+    },
+    {
+      "file": "tests/races/elf/sets-host.test.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 903
+    },
+    {
+      "file": "tests/races/ashen/pack.test.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 255
+    },
+    {
+      "file": "tests/races/ashen/host.test.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 3408
+    },
+    {
+      "file": "tests/races/ashen/percentage-host.test.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 1379
+    },
+    {
+      "file": "tests/races/ashen/core.test.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 339
+    },
+    {
+      "file": "tests/races/ashen/legendary-host.test.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 24247
+    },
+    {
+      "file": "tests/races/ashen/sets-host.test.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 385
+    },
+    {
+      "file": "tests/races/ashen/legendary-offline.test.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 741
+    },
+    {
+      "file": "goblin-pack-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 165
+    },
+    {
+      "file": "goblin-material-profile-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 107
+    },
+    {
+      "file": "goblin-production-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 2941
+    },
+    {
+      "file": "goblin-legend-production-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 397
+    },
+    {
+      "file": "goblin-legend-offline-parity-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 1622
+    },
+    {
+      "file": "goblin-loot-production-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 4794
+    },
+    {
+      "file": "tests/races/goblin/offline-cap-parity.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 1718
+    },
+    {
+      "file": "large-formation-native-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 9987
+    },
+    {
+      "file": "retinue-formation-native-tests.mjs",
+      "passed": true,
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 5333
+    }
+  ],
+  "scope": "Actual host + native/mock presentation; not browser QA, numerical approval or deploy authorization."
+}

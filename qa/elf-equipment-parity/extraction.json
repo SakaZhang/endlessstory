@@ -1,0 +1,546 @@
+[
+  {
+    "id": "elf_scatter_weapon_9",
+    "source": "sources/weapons.png",
+    "cell": [
+      0,
+      0,
+      397,
+      397
+    ],
+    "crop": [
+      96,
+      11,
+      195,
+      371
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_scatter_weapon_10",
+    "source": "sources/weapons.png",
+    "cell": [
+      397,
+      0,
+      793,
+      397
+    ],
+    "crop": [
+      459,
+      6,
+      194,
+      391
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_scatter_weapon_11",
+    "source": "sources/weapons.png",
+    "cell": [
+      793,
+      0,
+      1190,
+      397
+    ],
+    "crop": [
+      853,
+      6,
+      225,
+      391
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_scatter_weapon_12",
+    "source": "sources/weapons.png",
+    "cell": [
+      1190,
+      0,
+      1586,
+      397
+    ],
+    "crop": [
+      1273,
+      7,
+      218,
+      390
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf-last-string",
+    "source": "sources/weapons.png",
+    "cell": [
+      1586,
+      0,
+      1983,
+      397
+    ],
+    "crop": [
+      1649,
+      11,
+      299,
+      386
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_scatter_weapon_13",
+    "source": "sources/weapons.png",
+    "cell": [
+      0,
+      397,
+      397,
+      793
+    ],
+    "crop": [
+      161,
+      398,
+      140,
+      390
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_scatter_weapon_14",
+    "source": "sources/weapons.png",
+    "cell": [
+      397,
+      397,
+      793,
+      793
+    ],
+    "crop": [
+      536,
+      397,
+      125,
+      391
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_scatter_weapon_15",
+    "source": "sources/weapons.png",
+    "cell": [
+      793,
+      397,
+      1190,
+      793
+    ],
+    "crop": [
+      926,
+      397,
+      134,
+      391
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_scatter_weapon_16",
+    "source": "sources/weapons.png",
+    "cell": [
+      1190,
+      397,
+      1586,
+      793
+    ],
+    "crop": [
+      1315,
+      397,
+      142,
+      391
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf-sixfold-heartwood",
+    "source": "sources/weapons.png",
+    "cell": [
+      1586,
+      397,
+      1983,
+      793
+    ],
+    "crop": [
+      1669,
+      397,
+      185,
+      392
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_scatter_helm_5",
+    "source": "sources/ordinary.png",
+    "cell": [
+      0,
+      0,
+      397,
+      397
+    ],
+    "crop": [
+      37,
+      15,
+      342,
+      382
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_scatter_helm_6",
+    "source": "sources/ordinary.png",
+    "cell": [
+      397,
+      0,
+      793,
+      397
+    ],
+    "crop": [
+      421,
+      88,
+      364,
+      253
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_scatter_armor_5",
+    "source": "sources/ordinary.png",
+    "cell": [
+      793,
+      0,
+      1190,
+      397
+    ],
+    "crop": [
+      832,
+      12,
+      358,
+      383
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_scatter_armor_6",
+    "source": "sources/ordinary.png",
+    "cell": [
+      1190,
+      0,
+      1586,
+      397
+    ],
+    "crop": [
+      1190,
+      12,
+      386,
+      385
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_scatter_gloves_5",
+    "source": "sources/ordinary.png",
+    "cell": [
+      1586,
+      0,
+      1983,
+      397
+    ],
+    "crop": [
+      1635,
+      46,
+      321,
+      321
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_scatter_gloves_6",
+    "source": "sources/ordinary.png",
+    "cell": [
+      0,
+      397,
+      397,
+      793
+    ],
+    "crop": [
+      40,
+      427,
+      332,
+      338
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_scatter_boots_5",
+    "source": "sources/ordinary.png",
+    "cell": [
+      397,
+      397,
+      793,
+      793
+    ],
+    "crop": [
+      418,
+      439,
+      329,
+      323
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_scatter_boots_6",
+    "source": "sources/ordinary.png",
+    "cell": [
+      793,
+      397,
+      1190,
+      793
+    ],
+    "crop": [
+      845,
+      412,
+      305,
+      368
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_scatter_amulet_5",
+    "source": "sources/ordinary.png",
+    "cell": [
+      1190,
+      397,
+      1586,
+      793
+    ],
+    "crop": [
+      1265,
+      397,
+      234,
+      375
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_scatter_amulet_6",
+    "source": "sources/ordinary.png",
+    "cell": [
+      1586,
+      397,
+      1983,
+      793
+    ],
+    "crop": [
+      1676,
+      410,
+      236,
+      363
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_arrow_helm",
+    "source": "sources/sets.png",
+    "cell": [
+      0,
+      0,
+      362,
+      362
+    ],
+    "crop": [
+      31,
+      19,
+      313,
+      325
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_arrow_armor",
+    "source": "sources/sets.png",
+    "cell": [
+      362,
+      0,
+      724,
+      362
+    ],
+    "crop": [
+      370,
+      8,
+      322,
+      354
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_arrow_gloves",
+    "source": "sources/sets.png",
+    "cell": [
+      724,
+      0,
+      1086,
+      362
+    ],
+    "crop": [
+      752,
+      47,
+      314,
+      291
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_arrow_boots",
+    "source": "sources/sets.png",
+    "cell": [
+      1086,
+      0,
+      1448,
+      362
+    ],
+    "crop": [
+      1106,
+      9,
+      320,
+      335
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_prism_helm",
+    "source": "sources/sets.png",
+    "cell": [
+      0,
+      362,
+      362,
+      724
+    ],
+    "crop": [
+      34,
+      390,
+      307,
+      334
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_prism_armor",
+    "source": "sources/sets.png",
+    "cell": [
+      362,
+      362,
+      724,
+      724
+    ],
+    "crop": [
+      366,
+      362,
+      353,
+      362
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_prism_gloves",
+    "source": "sources/sets.png",
+    "cell": [
+      724,
+      362,
+      1086,
+      724
+    ],
+    "crop": [
+      757,
+      384,
+      320,
+      311
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_prism_boots",
+    "source": "sources/sets.png",
+    "cell": [
+      1086,
+      362,
+      1448,
+      724
+    ],
+    "crop": [
+      1106,
+      365,
+      334,
+      359
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_root_helm",
+    "source": "sources/sets.png",
+    "cell": [
+      0,
+      724,
+      362,
+      1086
+    ],
+    "crop": [
+      23,
+      724,
+      331,
+      307
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_root_armor",
+    "source": "sources/sets.png",
+    "cell": [
+      362,
+      724,
+      724,
+      1086
+    ],
+    "crop": [
+      369,
+      724,
+      332,
+      354
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_root_gloves",
+    "source": "sources/sets.png",
+    "cell": [
+      724,
+      724,
+      1086,
+      1086
+    ],
+    "crop": [
+      743,
+      729,
+      340,
+      328
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  },
+  {
+    "id": "elf_root_boots",
+    "source": "sources/sets.png",
+    "cell": [
+      1086,
+      724,
+      1448,
+      1086
+    ],
+    "crop": [
+      1111,
+      724,
+      321,
+      335
+    ],
+    "method": "alpha bounds >24; nearest-neighbor; preserved source alpha"
+  }
+]

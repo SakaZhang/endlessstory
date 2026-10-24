@@ -1,0 +1,33 @@
+{
+  "ordinary": 52,
+  "weapons": {
+    "bow": 8,
+    "staff": 8
+  },
+  "otherSlots": 6,
+  "sets": 12,
+  "legendaries": 2,
+  "unique64Decoded": 66,
+  "newIds": [
+    "elf_scatter_weapon_9",
+    "elf_scatter_weapon_10",
+    "elf_scatter_weapon_11",
+    "elf_scatter_weapon_12",
+    "elf_scatter_weapon_13",
+    "elf_scatter_weapon_14",
+    "elf_scatter_weapon_15",
+    "elf_scatter_weapon_16",
+    "elf_scatter_gloves_5",
+    "elf_scatter_gloves_6",
+    "elf_scatter_boots_5",
+    "elf_scatter_boots_6",
+    "elf_scatter_amulet_5",
+    "elf_scatter_amulet_6"
+  ],
+  "newSourceCoverage": {
+    "drop": true,
+    "fusion": true,
+    "trader": true
+  },
+  "baselinePreserved": true
+}
