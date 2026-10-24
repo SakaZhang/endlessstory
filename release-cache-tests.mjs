@@ -90,7 +90,7 @@ try{
  assert.deepEqual(links,[root+'battle-preview.html?scenario=poison#x',root+'index.html#help','https://other.example/']);
  assert.throws(()=>rootHtml('<head><base href="/"></head>','index.html',a.release),/Existing base/);
  const storage=await readFile(join(source,'storage.js'),'utf8');assert.match(storage,/from '.\/save-generation\.js'/);
- const generation=await readFile(join(source,'save-generation.js'),'utf8');assert.match(generation,/SAVE_KEY='ashencrown-v4'/);assert.match(generation,/SCHEMA_VERSION=4/);
+ const generation=await readFile(join(source,'save-generation.js'),'utf8');assert.match(generation,/SAVE_KEY='ashencrown-v5'/);assert.match(generation,/SCHEMA_VERSION=5/);
  assert.equal(new URL(a.base,root).origin,new URL(root).origin);assert.ok(!legacyHtml.includes('serviceWorker.register'));
  // Exercise the real CLI and official packager in an isolated copy of the current source.
  // Parallel independent gates must never remove one another's shared build/build.tmp.
