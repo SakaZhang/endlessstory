@@ -10,49 +10,66 @@
           "x": 100,
           "y": 203,
           "sprite": "dwarf-hammer",
-          "ranged": false
+          "ranged": false,
+          "scale": 1
         },
         "formation-0": {
-          "x": 240,
+          "x": 260,
           "y": 203,
-          "scale": 0.7226890756302521,
+          "scale": 1.3763440860215055,
           "sprite": "golem"
         },
         "formation-1": {
-          "x": 320,
+          "x": 365,
           "y": 203,
-          "scale": 0.4789915966386555,
+          "scale": 0.5546218487394958,
           "sprite": "golem"
         },
         "formation-2": {
-          "x": 385,
+          "x": 435,
           "y": 203,
-          "scale": 0.4789915966386555,
+          "scale": 0.5546218487394958,
           "sprite": "golem"
         },
         "formation-3": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.4789915966386555,
+          "x": 335,
+          "y": 227,
+          "scale": 0.5546218487394958,
           "sprite": "golem"
         }
       },
       "hits": [
         {
           "id": "formation-0",
-          "atFeet": "formation-0"
+          "visibleTapSamples": 772,
+          "point": [
+            178,
+            120
+          ]
         },
         {
           "id": "formation-1",
-          "atFeet": "formation-1"
+          "visibleTapSamples": 128,
+          "point": [
+            330,
+            168
+          ]
         },
         {
           "id": "formation-2",
-          "atFeet": "formation-2"
+          "visibleTapSamples": 150,
+          "point": [
+            402,
+            168
+          ]
         },
         {
           "id": "formation-3",
-          "atFeet": "formation-3"
+          "visibleTapSamples": 150,
+          "point": [
+            302,
+            192
+          ]
         }
       ]
     },
@@ -65,59 +82,80 @@
           "x": 100,
           "y": 203,
           "sprite": "dwarf-hammer",
-          "ranged": false
+          "ranged": false,
+          "scale": 1
         },
         "formation-0": {
-          "x": 240,
+          "x": 260,
           "y": 203,
-          "scale": 0.7226890756302521,
+          "scale": 1.3763440860215055,
           "sprite": "golem"
         },
         "formation-1": {
-          "x": 320,
+          "x": 365,
           "y": 203,
-          "scale": 0.2969187675070028,
+          "scale": 0.5546218487394958,
           "sprite": "golem"
         },
         "formation-2": {
-          "x": 363.3333333333333,
+          "x": 435,
           "y": 203,
-          "scale": 0.2969187675070028,
+          "scale": 0.5546218487394958,
           "sprite": "golem"
         },
         "formation-3": {
-          "x": 406.6666666666667,
-          "y": 203,
-          "scale": 0.2969187675070028,
+          "x": 335,
+          "y": 227,
+          "scale": 0.5546218487394958,
           "sprite": "golem"
         },
         "formation-4": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.2969187675070028,
+          "x": 410,
+          "y": 227,
+          "scale": 0.5546218487394958,
           "sprite": "golem"
         }
       },
       "hits": [
         {
           "id": "formation-0",
-          "atFeet": "formation-0"
+          "visibleTapSamples": 772,
+          "point": [
+            178,
+            120
+          ]
         },
         {
           "id": "formation-1",
-          "atFeet": "formation-1"
+          "visibleTapSamples": 112,
+          "point": [
+            330,
+            168
+          ]
         },
         {
           "id": "formation-2",
-          "atFeet": "formation-2"
+          "visibleTapSamples": 114,
+          "point": [
+            402,
+            168
+          ]
         },
         {
           "id": "formation-3",
-          "atFeet": "formation-3"
+          "visibleTapSamples": 150,
+          "point": [
+            302,
+            192
+          ]
         },
         {
           "id": "formation-4",
-          "atFeet": "formation-4"
+          "visibleTapSamples": 150,
+          "point": [
+            378,
+            192
+          ]
         }
       ]
     },
@@ -130,69 +168,94 @@
           "x": 100,
           "y": 203,
           "sprite": "dwarf-hammer",
-          "ranged": false
+          "ranged": false,
+          "scale": 1
         },
         "formation-0": {
-          "x": 240,
+          "x": 250,
           "y": 203,
-          "scale": 0.9772727272727273,
+          "scale": 1.8636363636363635,
           "sprite": "pit-rat"
         },
         "formation-1": {
-          "x": 320,
+          "x": 345,
           "y": 203,
-          "scale": 0.2784090909090909,
+          "scale": 0.5454545454545454,
           "sprite": "pit-rat"
         },
         "formation-2": {
-          "x": 352.5,
+          "x": 410,
           "y": 203,
-          "scale": 0.2784090909090909,
+          "scale": 0.5454545454545454,
           "sprite": "pit-rat"
         },
         "formation-3": {
-          "x": 385,
-          "y": 203,
-          "scale": 0.2784090909090909,
+          "x": 300,
+          "y": 229,
+          "scale": 0.5454545454545454,
           "sprite": "pit-rat"
         },
         "formation-4": {
-          "x": 417.5,
-          "y": 203,
-          "scale": 0.2784090909090909,
+          "x": 355,
+          "y": 229,
+          "scale": 0.5454545454545454,
           "sprite": "pit-rat"
         },
         "formation-5": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.2784090909090909,
+          "x": 410,
+          "y": 229,
+          "scale": 0.5454545454545454,
           "sprite": "pit-rat"
         }
       },
       "hits": [
         {
           "id": "formation-0",
-          "atFeet": "formation-0"
+          "visibleTapSamples": 720,
+          "point": [
+            178,
+            132
+          ]
         },
         {
           "id": "formation-1",
-          "atFeet": "formation-1"
+          "visibleTapSamples": 91,
+          "point": [
+            322,
+            180
+          ]
         },
         {
           "id": "formation-2",
-          "atFeet": "formation-2"
+          "visibleTapSamples": 91,
+          "point": [
+            386,
+            180
+          ]
         },
         {
           "id": "formation-3",
-          "atFeet": "formation-3"
+          "visibleTapSamples": 91,
+          "point": [
+            278,
+            208
+          ]
         },
         {
           "id": "formation-4",
-          "atFeet": "formation-4"
+          "visibleTapSamples": 84,
+          "point": [
+            334,
+            208
+          ]
         },
         {
           "id": "formation-5",
-          "atFeet": "formation-5"
+          "visibleTapSamples": 91,
+          "point": [
+            386,
+            208
+          ]
         }
       ]
     },
@@ -205,79 +268,108 @@
           "x": 100,
           "y": 203,
           "sprite": "dwarf",
-          "ranged": false
+          "ranged": false,
+          "scale": 1
         },
         "formation-0": {
-          "x": 240,
+          "x": 250,
           "y": 203,
-          "scale": 0.8349514563106796,
+          "scale": 1.5737704918032787,
           "sprite": "raider"
         },
         "formation-1": {
-          "x": 320,
+          "x": 345,
           "y": 203,
-          "scale": 0.17475728155339806,
+          "scale": 0.46601941747572817,
           "sprite": "raider"
         },
         "formation-2": {
-          "x": 346,
+          "x": 410,
           "y": 203,
-          "scale": 0.17475728155339806,
+          "scale": 0.46601941747572817,
           "sprite": "raider"
         },
         "formation-3": {
-          "x": 372,
-          "y": 203,
-          "scale": 0.17475728155339806,
+          "x": 300,
+          "y": 229,
+          "scale": 0.46601941747572817,
           "sprite": "raider"
         },
         "formation-4": {
-          "x": 398,
-          "y": 203,
-          "scale": 0.17475728155339806,
+          "x": 355,
+          "y": 229,
+          "scale": 0.46601941747572817,
           "sprite": "raider"
         },
         "formation-5": {
-          "x": 424,
-          "y": 203,
-          "scale": 0.17475728155339806,
+          "x": 410,
+          "y": 229,
+          "scale": 0.46601941747572817,
           "sprite": "raider"
         },
         "formation-6": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.17475728155339806,
+          "x": 455,
+          "y": 229,
+          "scale": 0.46601941747572817,
           "sprite": "raider"
         }
       },
       "hits": [
         {
           "id": "formation-0",
-          "atFeet": "formation-0"
+          "visibleTapSamples": 788,
+          "point": [
+            170,
+            108
+          ]
         },
         {
           "id": "formation-1",
-          "atFeet": "formation-1"
+          "visibleTapSamples": 72,
+          "point": [
+            318,
+            176
+          ]
         },
         {
           "id": "formation-2",
-          "atFeet": "formation-2"
+          "visibleTapSamples": 60,
+          "point": [
+            386,
+            176
+          ]
         },
         {
           "id": "formation-3",
-          "atFeet": "formation-3"
+          "visibleTapSamples": 99,
+          "point": [
+            274,
+            200
+          ]
         },
         {
           "id": "formation-4",
-          "atFeet": "formation-4"
+          "visibleTapSamples": 99,
+          "point": [
+            330,
+            200
+          ]
         },
         {
           "id": "formation-5",
-          "atFeet": "formation-5"
+          "visibleTapSamples": 90,
+          "point": [
+            386,
+            200
+          ]
         },
         {
           "id": "formation-6",
-          "atFeet": "formation-6"
+          "visibleTapSamples": 99,
+          "point": [
+            430,
+            200
+          ]
         }
       ]
     },
@@ -290,49 +382,66 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-human-sword_shield",
-          "ranged": false
+          "ranged": false,
+          "scale": 1
         },
         "formation-0": {
-          "x": 240,
+          "x": 260,
           "y": 203,
-          "scale": 0.5850340136054422,
+          "scale": 0.7804878048780488,
           "sprite": "race-human.a01.normal.3"
         },
         "formation-1": {
-          "x": 320,
+          "x": 365,
           "y": 203,
-          "scale": 0.3877551020408163,
+          "scale": 0.42276422764227645,
           "sprite": "race-human.a01.normal.3"
         },
         "formation-2": {
-          "x": 385,
+          "x": 435,
           "y": 203,
-          "scale": 0.3877551020408163,
+          "scale": 0.42276422764227645,
           "sprite": "race-human.a01.normal.3"
         },
         "formation-3": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.3877551020408163,
+          "x": 335,
+          "y": 227,
+          "scale": 0.42276422764227645,
           "sprite": "race-human.a01.normal.3"
         }
       },
       "hits": [
         {
           "id": "formation-0",
-          "atFeet": "formation-0"
+          "visibleTapSamples": 572,
+          "point": [
+            218,
+            104
+          ]
         },
         {
           "id": "formation-1",
-          "atFeet": "formation-1"
+          "visibleTapSamples": 150,
+          "point": [
+            342,
+            148
+          ]
         },
         {
           "id": "formation-2",
-          "atFeet": "formation-2"
+          "visibleTapSamples": 180,
+          "point": [
+            414,
+            148
+          ]
         },
         {
           "id": "formation-3",
-          "atFeet": "formation-3"
+          "visibleTapSamples": 180,
+          "point": [
+            314,
+            172
+          ]
         }
       ]
     },
@@ -345,59 +454,80 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-human-greatsword",
-          "ranged": false
+          "ranged": false,
+          "scale": 1
         },
         "formation-0": {
-          "x": 240,
+          "x": 260,
           "y": 203,
-          "scale": 0.5850340136054422,
+          "scale": 0.7804878048780488,
           "sprite": "race-human.a01.normal.3"
         },
         "formation-1": {
-          "x": 320,
+          "x": 365,
           "y": 203,
-          "scale": 0.24036281179138325,
+          "scale": 0.42276422764227645,
           "sprite": "race-human.a01.normal.3"
         },
         "formation-2": {
-          "x": 363.3333333333333,
+          "x": 435,
           "y": 203,
-          "scale": 0.24036281179138325,
+          "scale": 0.42276422764227645,
           "sprite": "race-human.a01.normal.3"
         },
         "formation-3": {
-          "x": 406.6666666666667,
-          "y": 203,
-          "scale": 0.24036281179138325,
+          "x": 335,
+          "y": 227,
+          "scale": 0.42276422764227645,
           "sprite": "race-human.a01.normal.3"
         },
         "formation-4": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.24036281179138325,
+          "x": 410,
+          "y": 227,
+          "scale": 0.42276422764227645,
           "sprite": "race-human.a01.normal.3"
         }
       },
       "hits": [
         {
           "id": "formation-0",
-          "atFeet": "formation-0"
+          "visibleTapSamples": 572,
+          "point": [
+            218,
+            104
+          ]
         },
         {
           "id": "formation-1",
-          "atFeet": "formation-1"
+          "visibleTapSamples": 132,
+          "point": [
+            342,
+            148
+          ]
         },
         {
           "id": "formation-2",
-          "atFeet": "formation-2"
+          "visibleTapSamples": 126,
+          "point": [
+            414,
+            148
+          ]
         },
         {
           "id": "formation-3",
-          "atFeet": "formation-3"
+          "visibleTapSamples": 180,
+          "point": [
+            314,
+            172
+          ]
         },
         {
           "id": "formation-4",
-          "atFeet": "formation-4"
+          "visibleTapSamples": 195,
+          "point": [
+            386,
+            172
+          ]
         }
       ]
     },
@@ -410,69 +540,94 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-human-sword_shield",
-          "ranged": false
+          "ranged": false,
+          "scale": 1
         },
         "formation-0": {
-          "x": 240,
+          "x": 250,
           "y": 203,
-          "scale": 0.5850340136054422,
+          "scale": 0.9696969696969697,
           "sprite": "race-human.a01.normal.1"
         },
         "formation-1": {
-          "x": 320,
+          "x": 345,
           "y": 203,
-          "scale": 0.16666666666666666,
+          "scale": 0.32653061224489793,
           "sprite": "race-human.a01.normal.1"
         },
         "formation-2": {
-          "x": 352.5,
+          "x": 410,
           "y": 203,
-          "scale": 0.16666666666666666,
+          "scale": 0.32653061224489793,
           "sprite": "race-human.a01.normal.1"
         },
         "formation-3": {
-          "x": 385,
-          "y": 203,
-          "scale": 0.16666666666666666,
+          "x": 300,
+          "y": 229,
+          "scale": 0.32653061224489793,
           "sprite": "race-human.a01.normal.1"
         },
         "formation-4": {
-          "x": 417.5,
-          "y": 203,
-          "scale": 0.16666666666666666,
+          "x": 355,
+          "y": 229,
+          "scale": 0.32653061224489793,
           "sprite": "race-human.a01.normal.1"
         },
         "formation-5": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.16666666666666666,
+          "x": 410,
+          "y": 229,
+          "scale": 0.32653061224489793,
           "sprite": "race-human.a01.normal.1"
         }
       },
       "hits": [
         {
           "id": "formation-0",
-          "atFeet": "formation-0"
+          "visibleTapSamples": 779,
+          "point": [
+            190,
+            104
+          ]
         },
         {
           "id": "formation-1",
-          "atFeet": "formation-1"
+          "visibleTapSamples": 83,
+          "point": [
+            326,
+            168
+          ]
         },
         {
           "id": "formation-2",
-          "atFeet": "formation-2"
+          "visibleTapSamples": 77,
+          "point": [
+            390,
+            168
+          ]
         },
         {
           "id": "formation-3",
-          "atFeet": "formation-3"
+          "visibleTapSamples": 120,
+          "point": [
+            278,
+            196
+          ]
         },
         {
           "id": "formation-4",
-          "atFeet": "formation-4"
+          "visibleTapSamples": 120,
+          "point": [
+            334,
+            196
+          ]
         },
         {
           "id": "formation-5",
-          "atFeet": "formation-5"
+          "visibleTapSamples": 110,
+          "point": [
+            390,
+            196
+          ]
         }
       ]
     },
@@ -485,79 +640,108 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-human-greatsword",
-          "ranged": false
+          "ranged": false,
+          "scale": 1
         },
         "formation-0": {
-          "x": 240,
+          "x": 250,
           "y": 203,
-          "scale": 0.5850340136054422,
+          "scale": 0.7804878048780488,
           "sprite": "race-human.a01.normal.3"
         },
         "formation-1": {
-          "x": 320,
+          "x": 345,
           "y": 203,
-          "scale": 0.12244897959183673,
+          "scale": 0.32653061224489793,
           "sprite": "race-human.a01.normal.3"
         },
         "formation-2": {
-          "x": 346,
+          "x": 410,
           "y": 203,
-          "scale": 0.12244897959183673,
+          "scale": 0.32653061224489793,
           "sprite": "race-human.a01.normal.3"
         },
         "formation-3": {
-          "x": 372,
-          "y": 203,
-          "scale": 0.12244897959183673,
+          "x": 300,
+          "y": 229,
+          "scale": 0.32653061224489793,
           "sprite": "race-human.a01.normal.3"
         },
         "formation-4": {
-          "x": 398,
-          "y": 203,
-          "scale": 0.12244897959183673,
+          "x": 355,
+          "y": 229,
+          "scale": 0.32653061224489793,
           "sprite": "race-human.a01.normal.3"
         },
         "formation-5": {
-          "x": 424,
-          "y": 203,
-          "scale": 0.12244897959183673,
+          "x": 410,
+          "y": 229,
+          "scale": 0.32653061224489793,
           "sprite": "race-human.a01.normal.3"
         },
         "formation-6": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.12244897959183673,
+          "x": 455,
+          "y": 229,
+          "scale": 0.32653061224489793,
           "sprite": "race-human.a01.normal.3"
         }
       },
       "hits": [
         {
           "id": "formation-0",
-          "atFeet": "formation-0"
+          "visibleTapSamples": 552,
+          "point": [
+            210,
+            104
+          ]
         },
         {
           "id": "formation-1",
-          "atFeet": "formation-1"
+          "visibleTapSamples": 85,
+          "point": [
+            326,
+            160
+          ]
         },
         {
           "id": "formation-2",
-          "atFeet": "formation-2"
+          "visibleTapSamples": 70,
+          "point": [
+            394,
+            160
+          ]
         },
         {
           "id": "formation-3",
-          "atFeet": "formation-3"
+          "visibleTapSamples": 120,
+          "point": [
+            282,
+            188
+          ]
         },
         {
           "id": "formation-4",
-          "atFeet": "formation-4"
+          "visibleTapSamples": 120,
+          "point": [
+            338,
+            188
+          ]
         },
         {
           "id": "formation-5",
-          "atFeet": "formation-5"
+          "visibleTapSamples": 120,
+          "point": [
+            394,
+            188
+          ]
         },
         {
           "id": "formation-6",
-          "atFeet": "formation-6"
+          "visibleTapSamples": 120,
+          "point": [
+            438,
+            188
+          ]
         }
       ]
     },
@@ -570,49 +754,66 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-elf-bow",
-          "ranged": true
+          "ranged": true,
+          "scale": 0.6811594202898551
         },
         "formation-0": {
-          "x": 240,
+          "x": 260,
           "y": 203,
-          "scale": 0.7818181818181819,
+          "scale": 1.0786516853932584,
           "sprite": "race-elf.a01.normal.3"
         },
         "formation-1": {
-          "x": 320,
+          "x": 365,
           "y": 203,
-          "scale": 0.5181818181818182,
+          "scale": 0.5842696629213483,
           "sprite": "race-elf.a01.normal.3"
         },
         "formation-2": {
-          "x": 385,
+          "x": 435,
           "y": 203,
-          "scale": 0.5181818181818182,
+          "scale": 0.5842696629213483,
           "sprite": "race-elf.a01.normal.3"
         },
         "formation-3": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.5181818181818182,
+          "x": 335,
+          "y": 227,
+          "scale": 0.5842696629213483,
           "sprite": "race-elf.a01.normal.3"
         }
       },
       "hits": [
         {
           "id": "formation-0",
-          "atFeet": "formation-0"
+          "visibleTapSamples": 634,
+          "point": [
+            210,
+            108
+          ]
         },
         {
           "id": "formation-1",
-          "atFeet": "formation-1"
+          "visibleTapSamples": 154,
+          "point": [
+            338,
+            152
+          ]
         },
         {
           "id": "formation-2",
-          "atFeet": "formation-2"
+          "visibleTapSamples": 210,
+          "point": [
+            406,
+            152
+          ]
         },
         {
           "id": "formation-3",
-          "atFeet": "formation-3"
+          "visibleTapSamples": 210,
+          "point": [
+            306,
+            176
+          ]
         }
       ]
     },
@@ -625,59 +826,80 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-elf-staff",
-          "ranged": true
+          "ranged": true,
+          "scale": 0.6064516129032258
         },
         "formation-0": {
-          "x": 240,
+          "x": 260,
           "y": 203,
-          "scale": 0.8958333333333334,
+          "scale": 1.0786516853932584,
           "sprite": "race-elf.a01.normal.1"
         },
         "formation-1": {
-          "x": 320,
+          "x": 365,
           "y": 203,
-          "scale": 0.3680555555555556,
+          "scale": 0.5842696629213483,
           "sprite": "race-elf.a01.normal.1"
         },
         "formation-2": {
-          "x": 363.3333333333333,
+          "x": 435,
           "y": 203,
-          "scale": 0.3680555555555556,
+          "scale": 0.5842696629213483,
           "sprite": "race-elf.a01.normal.1"
         },
         "formation-3": {
-          "x": 406.6666666666667,
-          "y": 203,
-          "scale": 0.3680555555555556,
+          "x": 335,
+          "y": 227,
+          "scale": 0.5842696629213483,
           "sprite": "race-elf.a01.normal.1"
         },
         "formation-4": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.3680555555555556,
+          "x": 410,
+          "y": 227,
+          "scale": 0.5842696629213483,
           "sprite": "race-elf.a01.normal.1"
         }
       },
       "hits": [
         {
           "id": "formation-0",
-          "atFeet": "formation-0"
+          "visibleTapSamples": 600,
+          "point": [
+            214,
+            108
+          ]
         },
         {
           "id": "formation-1",
-          "atFeet": "formation-1"
+          "visibleTapSamples": 126,
+          "point": [
+            342,
+            152
+          ]
         },
         {
           "id": "formation-2",
-          "atFeet": "formation-2"
+          "visibleTapSamples": 126,
+          "point": [
+            410,
+            152
+          ]
         },
         {
           "id": "formation-3",
-          "atFeet": "formation-3"
+          "visibleTapSamples": 182,
+          "point": [
+            310,
+            176
+          ]
         },
         {
           "id": "formation-4",
-          "atFeet": "formation-4"
+          "visibleTapSamples": 182,
+          "point": [
+            386,
+            176
+          ]
         }
       ]
     },
@@ -690,69 +912,94 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-elf-bow",
-          "ranged": true
+          "ranged": true,
+          "scale": 0.6811594202898551
         },
         "formation-0": {
-          "x": 240,
+          "x": 250,
           "y": 203,
-          "scale": 0.6277372262773723,
+          "scale": 1.0786516853932584,
           "sprite": "race-elf.a01.normal.2"
         },
         "formation-1": {
-          "x": 320,
+          "x": 345,
           "y": 203,
-          "scale": 0.17883211678832117,
+          "scale": 0.35036496350364965,
           "sprite": "race-elf.a01.normal.2"
         },
         "formation-2": {
-          "x": 352.5,
+          "x": 410,
           "y": 203,
-          "scale": 0.17883211678832117,
+          "scale": 0.35036496350364965,
           "sprite": "race-elf.a01.normal.2"
         },
         "formation-3": {
-          "x": 385,
-          "y": 203,
-          "scale": 0.17883211678832117,
+          "x": 300,
+          "y": 229,
+          "scale": 0.35036496350364965,
           "sprite": "race-elf.a01.normal.2"
         },
         "formation-4": {
-          "x": 417.5,
-          "y": 203,
-          "scale": 0.17883211678832117,
+          "x": 355,
+          "y": 229,
+          "scale": 0.35036496350364965,
           "sprite": "race-elf.a01.normal.2"
         },
         "formation-5": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.17883211678832117,
+          "x": 410,
+          "y": 229,
+          "scale": 0.35036496350364965,
           "sprite": "race-elf.a01.normal.2"
         }
       },
       "hits": [
         {
           "id": "formation-0",
-          "atFeet": "formation-0"
+          "visibleTapSamples": 915,
+          "point": [
+            174,
+            108
+          ]
         },
         {
           "id": "formation-1",
-          "atFeet": "formation-1"
+          "visibleTapSamples": 84,
+          "point": [
+            318,
+            172
+          ]
         },
         {
           "id": "formation-2",
-          "atFeet": "formation-2"
+          "visibleTapSamples": 78,
+          "point": [
+            386,
+            172
+          ]
         },
         {
           "id": "formation-3",
-          "atFeet": "formation-3"
+          "visibleTapSamples": 140,
+          "point": [
+            274,
+            196
+          ]
         },
         {
           "id": "formation-4",
-          "atFeet": "formation-4"
+          "visibleTapSamples": 130,
+          "point": [
+            330,
+            196
+          ]
         },
         {
           "id": "formation-5",
-          "atFeet": "formation-5"
+          "visibleTapSamples": 130,
+          "point": [
+            386,
+            196
+          ]
         }
       ]
     },
@@ -765,79 +1012,108 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-elf-bow",
-          "ranged": true
+          "ranged": true,
+          "scale": 0.6811594202898551
         },
         "formation-0": {
-          "x": 240,
+          "x": 250,
           "y": 203,
-          "scale": 0.7818181818181819,
+          "scale": 1.0786516853932584,
           "sprite": "race-elf.a01.normal.3"
         },
         "formation-1": {
-          "x": 320,
+          "x": 345,
           "y": 203,
-          "scale": 0.16363636363636364,
+          "scale": 0.43636363636363634,
           "sprite": "race-elf.a01.normal.3"
         },
         "formation-2": {
-          "x": 346,
+          "x": 410,
           "y": 203,
-          "scale": 0.16363636363636364,
+          "scale": 0.43636363636363634,
           "sprite": "race-elf.a01.normal.3"
         },
         "formation-3": {
-          "x": 372,
-          "y": 203,
-          "scale": 0.16363636363636364,
+          "x": 300,
+          "y": 229,
+          "scale": 0.43636363636363634,
           "sprite": "race-elf.a01.normal.3"
         },
         "formation-4": {
-          "x": 398,
-          "y": 203,
-          "scale": 0.16363636363636364,
+          "x": 355,
+          "y": 229,
+          "scale": 0.43636363636363634,
           "sprite": "race-elf.a01.normal.3"
         },
         "formation-5": {
-          "x": 424,
-          "y": 203,
-          "scale": 0.16363636363636364,
+          "x": 410,
+          "y": 229,
+          "scale": 0.43636363636363634,
           "sprite": "race-elf.a01.normal.3"
         },
         "formation-6": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.16363636363636364,
+          "x": 455,
+          "y": 229,
+          "scale": 0.43636363636363634,
           "sprite": "race-elf.a01.normal.3"
         }
       },
       "hits": [
         {
           "id": "formation-0",
-          "atFeet": "formation-0"
+          "visibleTapSamples": 620,
+          "point": [
+            198,
+            108
+          ]
         },
         {
           "id": "formation-1",
-          "atFeet": "formation-1"
+          "visibleTapSamples": 82,
+          "point": [
+            322,
+            164
+          ]
         },
         {
           "id": "formation-2",
-          "atFeet": "formation-2"
+          "visibleTapSamples": 66,
+          "point": [
+            390,
+            164
+          ]
         },
         {
           "id": "formation-3",
-          "atFeet": "formation-3"
+          "visibleTapSamples": 144,
+          "point": [
+            278,
+            188
+          ]
         },
         {
           "id": "formation-4",
-          "atFeet": "formation-4"
+          "visibleTapSamples": 132,
+          "point": [
+            334,
+            188
+          ]
         },
         {
           "id": "formation-5",
-          "atFeet": "formation-5"
+          "visibleTapSamples": 132,
+          "point": [
+            390,
+            188
+          ]
         },
         {
           "id": "formation-6",
-          "atFeet": "formation-6"
+          "visibleTapSamples": 132,
+          "point": [
+            434,
+            188
+          ]
         }
       ]
     },
@@ -850,49 +1126,66 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-goblin-dagger",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.6811594202898551
         },
         "formation-0": {
-          "x": 240,
+          "x": 260,
           "y": 203,
-          "scale": 0.5212121212121212,
+          "scale": 0.8495575221238938,
           "sprite": "race-goblin.a01.normal.1"
         },
         "formation-1": {
-          "x": 320,
+          "x": 365,
           "y": 203,
-          "scale": 0.34545454545454546,
+          "scale": 0.4,
           "sprite": "race-goblin.a01.normal.1"
         },
         "formation-2": {
-          "x": 385,
+          "x": 435,
           "y": 203,
-          "scale": 0.34545454545454546,
+          "scale": 0.4,
           "sprite": "race-goblin.a01.normal.1"
         },
         "formation-3": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.34545454545454546,
+          "x": 335,
+          "y": 227,
+          "scale": 0.4,
           "sprite": "race-goblin.a01.normal.1"
         }
       },
       "hits": [
         {
           "id": "formation-0",
-          "atFeet": "formation-0"
+          "visibleTapSamples": 801,
+          "point": [
+            194,
+            108
+          ]
         },
         {
           "id": "formation-1",
-          "atFeet": "formation-1"
+          "visibleTapSamples": 158,
+          "point": [
+            334,
+            156
+          ]
         },
         {
           "id": "formation-2",
-          "atFeet": "formation-2"
+          "visibleTapSamples": 221,
+          "point": [
+            402,
+            156
+          ]
         },
         {
           "id": "formation-3",
-          "atFeet": "formation-3"
+          "visibleTapSamples": 221,
+          "point": [
+            302,
+            180
+          ]
         }
       ]
     },
@@ -905,59 +1198,80 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-goblin-dagger",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.6811594202898551
         },
         "formation-0": {
-          "x": 240,
+          "x": 260,
           "y": 203,
-          "scale": 0.5212121212121212,
+          "scale": 0.6193548387096774,
           "sprite": "race-goblin.a01.normal.3"
         },
         "formation-1": {
-          "x": 320,
+          "x": 365,
           "y": 203,
-          "scale": 0.21414141414141416,
+          "scale": 0.33548387096774196,
           "sprite": "race-goblin.a01.normal.3"
         },
         "formation-2": {
-          "x": 363.3333333333333,
+          "x": 435,
           "y": 203,
-          "scale": 0.21414141414141416,
+          "scale": 0.33548387096774196,
           "sprite": "race-goblin.a01.normal.3"
         },
         "formation-3": {
-          "x": 406.6666666666667,
-          "y": 203,
-          "scale": 0.21414141414141416,
+          "x": 335,
+          "y": 227,
+          "scale": 0.33548387096774196,
           "sprite": "race-goblin.a01.normal.3"
         },
         "formation-4": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.21414141414141416,
+          "x": 410,
+          "y": 227,
+          "scale": 0.33548387096774196,
           "sprite": "race-goblin.a01.normal.3"
         }
       },
       "hits": [
         {
           "id": "formation-0",
-          "atFeet": "formation-0"
+          "visibleTapSamples": 550,
+          "point": [
+            218,
+            108
+          ]
         },
         {
           "id": "formation-1",
-          "atFeet": "formation-1"
+          "visibleTapSamples": 120,
+          "point": [
+            342,
+            152
+          ]
         },
         {
           "id": "formation-2",
-          "atFeet": "formation-2"
+          "visibleTapSamples": 120,
+          "point": [
+            414,
+            152
+          ]
         },
         {
           "id": "formation-3",
-          "atFeet": "formation-3"
+          "visibleTapSamples": 168,
+          "point": [
+            314,
+            176
+          ]
         },
         {
           "id": "formation-4",
-          "atFeet": "formation-4"
+          "visibleTapSamples": 182,
+          "point": [
+            386,
+            176
+          ]
         }
       ]
     },
@@ -970,69 +1284,94 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-goblin-dagger",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.6811594202898551
         },
         "formation-0": {
-          "x": 240,
+          "x": 250,
           "y": 203,
-          "scale": 0.5212121212121212,
+          "scale": 0.7559055118110236,
           "sprite": "race-goblin.a01.normal.2"
         },
         "formation-1": {
-          "x": 320,
+          "x": 345,
           "y": 203,
-          "scale": 0.1484848484848485,
+          "scale": 0.2909090909090909,
           "sprite": "race-goblin.a01.normal.2"
         },
         "formation-2": {
-          "x": 352.5,
+          "x": 410,
           "y": 203,
-          "scale": 0.1484848484848485,
+          "scale": 0.2909090909090909,
           "sprite": "race-goblin.a01.normal.2"
         },
         "formation-3": {
-          "x": 385,
-          "y": 203,
-          "scale": 0.1484848484848485,
+          "x": 300,
+          "y": 229,
+          "scale": 0.2909090909090909,
           "sprite": "race-goblin.a01.normal.2"
         },
         "formation-4": {
-          "x": 417.5,
-          "y": 203,
-          "scale": 0.1484848484848485,
+          "x": 355,
+          "y": 229,
+          "scale": 0.2909090909090909,
           "sprite": "race-goblin.a01.normal.2"
         },
         "formation-5": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.1484848484848485,
+          "x": 410,
+          "y": 229,
+          "scale": 0.2909090909090909,
           "sprite": "race-goblin.a01.normal.2"
         }
       },
       "hits": [
         {
           "id": "formation-0",
-          "atFeet": "formation-0"
+          "visibleTapSamples": 693,
+          "point": [
+            194,
+            108
+          ]
         },
         {
           "id": "formation-1",
-          "atFeet": "formation-1"
+          "visibleTapSamples": 92,
+          "point": [
+            322,
+            164
+          ]
         },
         {
           "id": "formation-2",
-          "atFeet": "formation-2"
+          "visibleTapSamples": 91,
+          "point": [
+            386,
+            164
+          ]
         },
         {
           "id": "formation-3",
-          "atFeet": "formation-3"
+          "visibleTapSamples": 132,
+          "point": [
+            278,
+            192
+          ]
         },
         {
           "id": "formation-4",
-          "atFeet": "formation-4"
+          "visibleTapSamples": 132,
+          "point": [
+            334,
+            192
+          ]
         },
         {
           "id": "formation-5",
-          "atFeet": "formation-5"
+          "visibleTapSamples": 143,
+          "point": [
+            386,
+            192
+          ]
         }
       ]
     },
@@ -1045,79 +1384,108 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-goblin-sword",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.752
         },
         "formation-0": {
-          "x": 240,
+          "x": 250,
           "y": 203,
-          "scale": 0.5212121212121212,
+          "scale": 0.8495575221238938,
           "sprite": "race-goblin.a01.normal.1"
         },
         "formation-1": {
-          "x": 320,
+          "x": 345,
           "y": 203,
-          "scale": 0.10909090909090909,
+          "scale": 0.2909090909090909,
           "sprite": "race-goblin.a01.normal.1"
         },
         "formation-2": {
-          "x": 346,
+          "x": 410,
           "y": 203,
-          "scale": 0.10909090909090909,
+          "scale": 0.2909090909090909,
           "sprite": "race-goblin.a01.normal.1"
         },
         "formation-3": {
-          "x": 372,
-          "y": 203,
-          "scale": 0.10909090909090909,
+          "x": 300,
+          "y": 229,
+          "scale": 0.2909090909090909,
           "sprite": "race-goblin.a01.normal.1"
         },
         "formation-4": {
-          "x": 398,
-          "y": 203,
-          "scale": 0.10909090909090909,
+          "x": 355,
+          "y": 229,
+          "scale": 0.2909090909090909,
           "sprite": "race-goblin.a01.normal.1"
         },
         "formation-5": {
-          "x": 424,
-          "y": 203,
-          "scale": 0.10909090909090909,
+          "x": 410,
+          "y": 229,
+          "scale": 0.2909090909090909,
           "sprite": "race-goblin.a01.normal.1"
         },
         "formation-6": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.10909090909090909,
+          "x": 455,
+          "y": 229,
+          "scale": 0.2909090909090909,
           "sprite": "race-goblin.a01.normal.1"
         }
       },
       "hits": [
         {
           "id": "formation-0",
-          "atFeet": "formation-0"
+          "visibleTapSamples": 795,
+          "point": [
+            186,
+            108
+          ]
         },
         {
           "id": "formation-1",
-          "atFeet": "formation-1"
+          "visibleTapSamples": 97,
+          "point": [
+            322,
+            168
+          ]
         },
         {
           "id": "formation-2",
-          "atFeet": "formation-2"
+          "visibleTapSamples": 91,
+          "point": [
+            386,
+            168
+          ]
         },
         {
           "id": "formation-3",
-          "atFeet": "formation-3"
+          "visibleTapSamples": 120,
+          "point": [
+            278,
+            196
+          ]
         },
         {
           "id": "formation-4",
-          "atFeet": "formation-4"
+          "visibleTapSamples": 120,
+          "point": [
+            334,
+            196
+          ]
         },
         {
           "id": "formation-5",
-          "atFeet": "formation-5"
+          "visibleTapSamples": 120,
+          "point": [
+            386,
+            196
+          ]
         },
         {
           "id": "formation-6",
-          "atFeet": "formation-6"
+          "visibleTapSamples": 120,
+          "point": [
+            434,
+            196
+          ]
         }
       ]
     },
@@ -1130,49 +1498,66 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-ashen-hammer",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.6811594202898551
         },
         "formation-0": {
-          "x": 240,
+          "x": 260,
           "y": 203,
-          "scale": 0.581081081081081,
+          "scale": 1.103448275862069,
           "sprite": "race-ashen.a01.normal.3"
         },
         "formation-1": {
-          "x": 320,
+          "x": 365,
           "y": 203,
-          "scale": 0.38513513513513514,
+          "scale": 0.44594594594594594,
           "sprite": "race-ashen.a01.normal.3"
         },
         "formation-2": {
-          "x": 385,
+          "x": 435,
           "y": 203,
-          "scale": 0.38513513513513514,
+          "scale": 0.44594594594594594,
           "sprite": "race-ashen.a01.normal.3"
         },
         "formation-3": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.38513513513513514,
+          "x": 335,
+          "y": 227,
+          "scale": 0.44594594594594594,
           "sprite": "race-ashen.a01.normal.3"
         }
       },
       "hits": [
         {
           "id": "formation-0",
-          "atFeet": "formation-0"
+          "visibleTapSamples": 879,
+          "point": [
+            190,
+            108
+          ]
         },
         {
           "id": "formation-1",
-          "atFeet": "formation-1"
+          "visibleTapSamples": 131,
+          "point": [
+            334,
+            164
+          ]
         },
         {
           "id": "formation-2",
-          "atFeet": "formation-2"
+          "visibleTapSamples": 176,
+          "point": [
+            406,
+            164
+          ]
         },
         {
           "id": "formation-3",
-          "atFeet": "formation-3"
+          "visibleTapSamples": 176,
+          "point": [
+            306,
+            188
+          ]
         }
       ]
     },
@@ -1185,59 +1570,80 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-ashen-hammer",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.6811594202898551
         },
         "formation-0": {
-          "x": 240,
+          "x": 260,
           "y": 203,
-          "scale": 0.581081081081081,
+          "scale": 1.103448275862069,
           "sprite": "race-ashen.a01.normal.3"
         },
         "formation-1": {
-          "x": 320,
+          "x": 365,
           "y": 203,
-          "scale": 0.23873873873873874,
+          "scale": 0.44594594594594594,
           "sprite": "race-ashen.a01.normal.3"
         },
         "formation-2": {
-          "x": 363.3333333333333,
+          "x": 435,
           "y": 203,
-          "scale": 0.23873873873873874,
+          "scale": 0.44594594594594594,
           "sprite": "race-ashen.a01.normal.3"
         },
         "formation-3": {
-          "x": 406.6666666666667,
-          "y": 203,
-          "scale": 0.23873873873873874,
+          "x": 335,
+          "y": 227,
+          "scale": 0.44594594594594594,
           "sprite": "race-ashen.a01.normal.3"
         },
         "formation-4": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.23873873873873874,
+          "x": 410,
+          "y": 227,
+          "scale": 0.44594594594594594,
           "sprite": "race-ashen.a01.normal.3"
         }
       },
       "hits": [
         {
           "id": "formation-0",
-          "atFeet": "formation-0"
+          "visibleTapSamples": 879,
+          "point": [
+            190,
+            108
+          ]
         },
         {
           "id": "formation-1",
-          "atFeet": "formation-1"
+          "visibleTapSamples": 111,
+          "point": [
+            334,
+            164
+          ]
         },
         {
           "id": "formation-2",
-          "atFeet": "formation-2"
+          "visibleTapSamples": 131,
+          "point": [
+            406,
+            164
+          ]
         },
         {
           "id": "formation-3",
-          "atFeet": "formation-3"
+          "visibleTapSamples": 176,
+          "point": [
+            306,
+            188
+          ]
         },
         {
           "id": "formation-4",
-          "atFeet": "formation-4"
+          "visibleTapSamples": 165,
+          "point": [
+            382,
+            188
+          ]
         }
       ]
     },
@@ -1250,69 +1656,94 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-ashen-hammer",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.6811594202898551
         },
         "formation-0": {
-          "x": 240,
+          "x": 250,
           "y": 203,
-          "scale": 0.5771812080536913,
+          "scale": 0.9696969696969697,
           "sprite": "race-ashen.a01.normal.1"
         },
         "formation-1": {
-          "x": 320,
+          "x": 345,
           "y": 203,
-          "scale": 0.1644295302013423,
+          "scale": 0.3221476510067114,
           "sprite": "race-ashen.a01.normal.1"
         },
         "formation-2": {
-          "x": 352.5,
+          "x": 410,
           "y": 203,
-          "scale": 0.1644295302013423,
+          "scale": 0.3221476510067114,
           "sprite": "race-ashen.a01.normal.1"
         },
         "formation-3": {
-          "x": 385,
-          "y": 203,
-          "scale": 0.1644295302013423,
+          "x": 300,
+          "y": 229,
+          "scale": 0.3221476510067114,
           "sprite": "race-ashen.a01.normal.1"
         },
         "formation-4": {
-          "x": 417.5,
-          "y": 203,
-          "scale": 0.1644295302013423,
+          "x": 355,
+          "y": 229,
+          "scale": 0.3221476510067114,
           "sprite": "race-ashen.a01.normal.1"
         },
         "formation-5": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.1644295302013423,
+          "x": 410,
+          "y": 229,
+          "scale": 0.3221476510067114,
           "sprite": "race-ashen.a01.normal.1"
         }
       },
       "hits": [
         {
           "id": "formation-0",
-          "atFeet": "formation-0"
+          "visibleTapSamples": 795,
+          "point": [
+            186,
+            108
+          ]
         },
         {
           "id": "formation-1",
-          "atFeet": "formation-1"
+          "visibleTapSamples": 78,
+          "point": [
+            322,
+            172
+          ]
         },
         {
           "id": "formation-2",
-          "atFeet": "formation-2"
+          "visibleTapSamples": 66,
+          "point": [
+            390,
+            172
+          ]
         },
         {
           "id": "formation-3",
-          "atFeet": "formation-3"
+          "visibleTapSamples": 120,
+          "point": [
+            278,
+            196
+          ]
         },
         {
           "id": "formation-4",
-          "atFeet": "formation-4"
+          "visibleTapSamples": 120,
+          "point": [
+            334,
+            196
+          ]
         },
         {
           "id": "formation-5",
-          "atFeet": "formation-5"
+          "visibleTapSamples": 110,
+          "point": [
+            390,
+            196
+          ]
         }
       ]
     },
@@ -1325,79 +1756,108 @@
           "x": 100,
           "y": 203,
           "sprite": "hero-ashen-armguard",
-          "ranged": false
+          "ranged": false,
+          "scale": 0.7642276422764228
         },
         "formation-0": {
-          "x": 240,
+          "x": 250,
           "y": 203,
-          "scale": 0.5771812080536913,
+          "scale": 0.9696969696969697,
           "sprite": "race-ashen.a01.normal.1"
         },
         "formation-1": {
-          "x": 320,
+          "x": 345,
           "y": 203,
-          "scale": 0.12080536912751678,
+          "scale": 0.3221476510067114,
           "sprite": "race-ashen.a01.normal.1"
         },
         "formation-2": {
-          "x": 346,
+          "x": 410,
           "y": 203,
-          "scale": 0.12080536912751678,
+          "scale": 0.3221476510067114,
           "sprite": "race-ashen.a01.normal.1"
         },
         "formation-3": {
-          "x": 372,
-          "y": 203,
-          "scale": 0.12080536912751678,
+          "x": 300,
+          "y": 229,
+          "scale": 0.3221476510067114,
           "sprite": "race-ashen.a01.normal.1"
         },
         "formation-4": {
-          "x": 398,
-          "y": 203,
-          "scale": 0.12080536912751678,
+          "x": 355,
+          "y": 229,
+          "scale": 0.3221476510067114,
           "sprite": "race-ashen.a01.normal.1"
         },
         "formation-5": {
-          "x": 424,
-          "y": 203,
-          "scale": 0.12080536912751678,
+          "x": 410,
+          "y": 229,
+          "scale": 0.3221476510067114,
           "sprite": "race-ashen.a01.normal.1"
         },
         "formation-6": {
-          "x": 450,
-          "y": 203,
-          "scale": 0.12080536912751678,
+          "x": 455,
+          "y": 229,
+          "scale": 0.3221476510067114,
           "sprite": "race-ashen.a01.normal.1"
         }
       },
       "hits": [
         {
           "id": "formation-0",
-          "atFeet": "formation-0"
+          "visibleTapSamples": 795,
+          "point": [
+            186,
+            108
+          ]
         },
         {
           "id": "formation-1",
-          "atFeet": "formation-1"
+          "visibleTapSamples": 78,
+          "point": [
+            322,
+            172
+          ]
         },
         {
           "id": "formation-2",
-          "atFeet": "formation-2"
+          "visibleTapSamples": 66,
+          "point": [
+            390,
+            172
+          ]
         },
         {
           "id": "formation-3",
-          "atFeet": "formation-3"
+          "visibleTapSamples": 120,
+          "point": [
+            278,
+            196
+          ]
         },
         {
           "id": "formation-4",
-          "atFeet": "formation-4"
+          "visibleTapSamples": 120,
+          "point": [
+            334,
+            196
+          ]
         },
         {
           "id": "formation-5",
-          "atFeet": "formation-5"
+          "visibleTapSamples": 110,
+          "point": [
+            390,
+            196
+          ]
         },
         {
           "id": "formation-6",
-          "atFeet": "formation-6"
+          "visibleTapSamples": 120,
+          "point": [
+            434,
+            196
+          ]
         }
       ]
     }

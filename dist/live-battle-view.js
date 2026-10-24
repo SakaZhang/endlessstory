@@ -88,12 +88,16 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
   const layout=units.length<=1?[350]:units.length===2?[305,405]:[275,350,425];
   const baseline=snapshot.campRace?(manifest?.campBackgrounds?.[snapshot.campRace]?.baseline??195):manifest?.areaBaselines?.[areaKey(snapshot.areaId)]??203;
   positions.hero={x:snapshot.campRace?144:100,y:baseline,sprite:heroSpriteFor(metadata.hero?.weaponType,manifest,metadata.hero?.race),ranged:['bow','staff'].includes(metadata.hero?.weaponType)};
+  const heroSprite=manifest?.sprites?.[positions.hero.sprite],heroIdle=heroSprite?.frames.find(f=>f.id===heroSprite.animations.idle[0]),heroBox=heroIdle?.solidBBox??heroIdle?.alphaBBox;
+  if(heroBox)positions.hero.scale=Math.min(1,94/(heroBox[3]-heroBox[1]+1));
   for(const u of units){
-   const n=slots.get(u.id),dense=slots.size>3,cell=dense?[n===0?240:320+(n-1)*130/(slots.size-2),0]:null;
+   const n=slots.get(u.id),dense=slots.size>3,cell=dense?(slots.size<=5?([[260,0],[365,0],[435,0],[335,24],[410,24]][n]):([[250,0],[345,0],[410,0],[300,26],[355,26],[410,26],[455,26]][n])):null;
    const key=liveActorSprite(u,manifest),sprite=manifest?.sprites?.[key],boxes=sprite?.frames.map(f=>f.solidBBox??f.alphaBBox).filter(Boolean)??[];
-   // Fit the complete native lifecycle, not just idle, into separated grounded cells; background platforms have no upper floor.
+   // Shallow foreground depth preserves readable hierarchy without inventing an elevated floor.
+   // Idle height sets visual hierarchy; the full lifecycle bounds constrain clipping.
    const width=Math.max(1,...boxes.map(b=>b[2]-b[0]+1)),height=Math.max(1,...boxes.map(b=>b[3]-b[1]+1));
-   const scale=Math.min(u.follower===true?.72:1,...(dense?[(n===0?86:Math.min(58,130/(slots.size-2)-8))/width,(n===0?100:58)/height]:[]));
+   const idle=sprite?.frames.find(f=>f.id===sprite.animations.idle[0]),box=idle?.solidBBox??idle?.alphaBBox,idleHeight=box?box[3]-box[1]+1:height;
+   const scale=dense?Math.min((n===0?(String(identity(u)).endsWith('.boss')?112:96):slots.size<=5?52:42)/idleHeight,(n===0?164:slots.size<=5?66:48)/width,128/height):u.follower===true?.72:1;
    positions[u.id]={x:cell?.[0]??layout[n%3]??425,y:baseline+(cell?.[1]??0),scale,sprite:key};
   }
   for(const id of Object.keys(positions))if(id!=='hero'&&!units.some(u=>u.id===id))delete positions[id];
@@ -178,9 +182,10 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
   const bounds=canvas?.getBoundingClientRect?.()??canvas;if(!bounds?.width||!bounds?.height)return null;
   const x=(event.clientX-bounds.left)*480/bounds.width,y=(event.clientY-bounds.top)*270/bounds.height;
   // Same depth order, frame, facing and scale as the renderer; frontmost solid box wins.
-  for(const u of [...snapshot.encounter.enemies].sort((a,b)=>positions[b.id].y-positions[a.id].y)){
-   if(u.hp<=0)continue;const p=positions[u.id],sprite=manifest.sprites[p.sprite],anim=presentation.animations.get(u.id),mode=anim&&displayTime-anim.at<600?anim.kind:'idle',frames=battleSpriteFrames(sprite,mode,anim?.skillId);
-   const index=mode==='idle'?Math.floor(displayTime/500)%frames.length:Math.max(0,Math.min(frames.length-1,Math.floor((displayTime-anim.at)/110))),f=sprite.frames.find(f=>f.id===frames[index]),box=f.solidBBox??f.alphaBBox??[0,0,191,191],scale=p.scale??1,xx=presentationActorX(p,anim,displayTime),heroX=presentationActorX(positions.hero,presentation.animations.get('hero'),displayTime),flip=battleSpriteFlipX(sprite,f,xx,heroX);
+  const animations=liveLivingAnimations(snapshot.encounter,presentation.animations);if(positions.hero?.sprite==='hero-neutral')animations.delete('hero');
+  for(const u of [...snapshot.encounter.enemies].sort((a,b)=>positions[b.id].y-positions[a.id].y||slots.get(b.id)-slots.get(a.id))){
+   if(u.hp<=0)continue;const p=positions[u.id],sprite=manifest.sprites[p.sprite],anim=animations.get(u.id),mode=anim&&displayTime-anim.at<600?anim.kind:'idle',frames=battleSpriteFrames(sprite,mode,anim?.skillId);
+   const index=mode==='idle'?Math.floor(displayTime/500)%frames.length:Math.max(0,Math.min(frames.length-1,Math.floor((displayTime-anim.at)/110))),f=sprite.frames.find(f=>f.id===frames[index]),box=f.solidBBox??f.alphaBBox??[0,0,191,191],scale=p.scale??1,xx=presentationActorX(p,anim,displayTime),heroX=presentationActorX(positions.hero,animations.get('hero'),displayTime),flip=battleSpriteFlipX(sprite,f,xx,heroX);
    const left=xx+(flip?sprite.anchor[0]-box[2]-1:box[0]-sprite.anchor[0])*scale,right=xx+(flip?sprite.anchor[0]-box[0]:box[2]+1-sprite.anchor[0])*scale,top=p.y+(box[1]-sprite.anchor[1])*scale,bottom=p.y+(box[3]+1-sprite.anchor[1])*scale;
    if(x>=left-3&&x<=right+3&&y>=top-3&&y<=bottom+3)return u.id;
   }return null;
