@@ -8,7 +8,7 @@ const qualityClass=p=>Number.isInteger(p?.quality)&&p.quality>=0&&p.quality<=3?'
 const qualityTitle=p=>p?.qualityName?' · '+p.qualityName:'';
 const clock=seconds=>`${Math.floor(seconds/60)}:${String(seconds%60).padStart(2,'0')}`;
 const elementNames={earth:'地',water:'水',fire:'火',wind:'风',light:'光',dark:'暗'};
-export function potionDescription(type,quality){const f=potionEffect(type,quality);if(!f)return '';if(type==='healing')return `恢复${Math.round(f.healFraction*100)}%最大生命；自动：生命不高于40%时饮用。`;const label=f.kind==='attack'?'攻击 +'+f.attack:f.kind==='luckPoints'?'幸运 +'+f.luck:f.kind==='elementAttack'?elementNames[f.element]+'元素技能增幅 +'+f.elementAttack:elementNames[f.element]+'抗性值 +'+f.elementResistance;return label+'，持续5分钟；同品质延长时长，高品质替换，低品质不消耗。';}
+export function potionDescription(type,quality){const f=potionEffect(type,quality);if(!f)return '';if(type==='healing')return `恢复${Math.round(f.healFraction*100)}%最大生命；自动：生命不高于40%时饮用。`;const label=f.kind==='attack'?'攻击 +'+f.attack:f.kind==='luckPoints'?'幸运 +'+f.luck:f.kind==='elementAttack'?elementNames[f.element]+'元素技能增幅 +'+f.elementAttack:elementNames[f.element]+'抗性 +'+f.elementResistance;return label+'，持续5分钟；同品质延长时长，高品质替换，低品质不消耗。';}
 /** Pure renderer. Times are epoch milliseconds; potions/buffs contain display-ready descriptions. */
 export function renderPotionPanel(s,{potions=[],selected=null,auto=false,now=Date.now(),cooldownUntil=0,buffs=[],restUntil=0}={}){
  const carried=potions.find(p=>p.id===selected),rest=remaining(restUntil,now),cooldown=remaining(cooldownUntil,now),active=buffs.filter(b=>remaining(b.endAt,now)>0),count=Math.max(0,Number(carried?.count)||0),disabled=rest>0||cooldown>0||!carried||count<1;

@@ -176,3 +176,5 @@ runAffixSourceTest(process.execPath,[new URL('./recipe-batch-limits-tests.mjs',i
 for(const file of ['expedition-automation-tests.mjs','battle-potion-owned-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
 // v0.57 same-slot affix transplant, exact source inheritance and ring socket names.
 runAffixSourceTest(process.execPath,[new URL('./reforge-same-slot-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+// Stat-label consistency is presentation-only; retain rating/rate distinctions.
+runAffixSourceTest(process.execPath,[new URL('./stat-label-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
