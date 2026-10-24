@@ -1,3 +1,4 @@
+import {cooldownDisplaySeconds} from './cooldown-label.js';
 import {extendBattleManifest} from './race-art.js';
 import {getSkillMetadata} from './race-registry.js';
 import {renderSkillPixelIcon} from './skill-pixel-icons.js';
@@ -43,7 +44,7 @@ export function liveActorSprite(unit,manifest){
 export function liveAreaBackgrounds(areaId,manifest){const key=areaKey(areaId),ids=manifest?.areaBackgrounds?.[key];if(!key||!Array.isArray(ids)||!ids.length)return [];const selected=ids.map(id=>manifest.backgrounds?.find(bg=>bg.id===id));return selected.every(Boolean)?selected:[];}
 export function renderLiveBattleHud(s,e){
  const tree=s?.skillTree,p=tree?.presets?.[tree.selectedPreset];if(tree?.mode!=='active')return `<div class="liveBattleSkills isLegacy" aria-label="旧战技四槽 · 只读">${Array.from({length:4},(_,i)=>{const id=s?.skills?.[i];return `<span class="liveBattleSkill" data-live-slot="legacy-${i}">${icon(id?'sword':'bag')}<span>${esc(SKILLS[id]?.name??'空槽')}</span></span>`;}).join('')}</div>`;if(!p)return '';
- return `<div class="liveBattleSkills" aria-label="当前装备技能 · 只读">${[...Array.from({length:4},(_,i)=>({id:p.active?.[i],i,passive:false})),...Array.from({length:2},(_,i)=>({id:p.passive?.[i],i,passive:true}))].map(({id,i,passive})=>{const cd=id?(e?.treeSkillCooldowns?.[id]??e?.cd?.[id]??0):0;return `<span class="liveBattleSkill ${passive?'isPassive':''}" title="${esc(getSkillMetadata(id)?.name??skillNames[id]??'空槽')}" data-live-skill="${esc(id??'')}" data-live-slot="${passive?'passive':'active'}-${i}">${renderSkillPixelIcon(id)}<span>${esc(getSkillMetadata(id)?.name??skillNames[id]??'空槽')}</span>${!passive&&cd>0?`<small>${Math.ceil(cd)}回</small>`:''}</span>`;}).join('')}</div>`;
+ return `<div class="liveBattleSkills" aria-label="当前装备技能 · 只读">${[...Array.from({length:4},(_,i)=>({id:p.active?.[i],i,passive:false})),...Array.from({length:2},(_,i)=>({id:p.passive?.[i],i,passive:true}))].map(({id,i,passive})=>{const cd=id?(e?.treeSkillCooldowns?.[id]??e?.cd?.[id]??0):0;return `<span class="liveBattleSkill ${passive?'isPassive':''}" title="${esc(getSkillMetadata(id)?.name??skillNames[id]??'空槽')}" data-live-skill="${esc(id??'')}" data-live-slot="${passive?'passive':'active'}-${i}">${renderSkillPixelIcon(id)}<span>${esc(getSkillMetadata(id)?.name??skillNames[id]??'空槽')}</span>${!passive&&cd>0?`<small>${cooldownDisplaySeconds(cd)}秒</small>`:''}</span>`;}).join('')}</div>`;
 }
 // Death is authoritative even while the shared presentation retains timed attacks.
 // Derive draw-only state: never remove real damage floats or mutate event queues.
