@@ -18,13 +18,14 @@ for fi,(f,group) in enumerate(zip(files,ids)):
   for c in range(1,8):
    center=round(w*c/8);radius=25;proj=(arr[edges[row]:edges[row+1],center-radius:center+radius]>70).sum(axis=0);xedges.append(center-radius+int(np.argmin(proj)))
   xedges.append(w)
+  if id=='hero':xedges=[round(w*c/8) for c in range(9)]
   for col in range(8):
    box=(xedges[col],edges[row],xedges[col+1],edges[row+1]);tile=im.crop(box);bbox=tile.getchannel('A').point(lambda p:255 if p>70 else 0).getbbox();tile=tile.crop(bbox) if bbox else tile;tiles.append((tile,box))
   scale=min(164/max(t[0].width for t in tiles),160/max(t[0].height for t in tiles)); frames=[]
   for col,(tile,box) in enumerate(tiles):
    tile=tile.resize((max(1,round(tile.width*scale)),max(1,round(tile.height*scale))),Image.Resampling.NEAREST);canvas=Image.new('RGBA',(192,192));canvas.alpha_composite(tile,(96-tile.width//2,176-tile.height));name=id.replace('.','-')+f'-{col}.png';canvas.save(out/name)
    frames.append({'id':['idle-0','idle-1','ready','step','anticipation','attack','hurt','recover'][col],'file':'races/goblin/assets/'+name,'durationMs':120,'facing':'left','alphaBBox':canvas.getbbox(),'sourceCrop':box})
-  rowDef={'frameSize':[192,192],'anchor':[96,176],'facing':'left','frames':frames,'sourceAtlas':f,'sourceRow':row,'animations':{'idle':[0,1],'attack':[4,5,7],'hurt':[6],'move':[2,3]}}
+  rowDef={'frameSize':[192,192],'anchor':[96,176],'facing':'left','frames':frames,'sourceAtlas':f,'sourceRow':row,'animations':{'idle':['idle-0','idle-1'],'attack':['anticipation','attack','recover'],'hurt':['hurt'],'move':['ready','step'],'anticipation':['anticipation'],'recovery':['recover'],'death':['death']}}
   if id=='hero':manifest['hero']=rowDef
   else:manifest['monsters']['goblin.'+id]=rowDef
 im=Image.open(src/'exec-f33d6487-4d78-4025-af5c-5916d1ea7ada.png').convert('RGB');w,h=im.size
@@ -52,6 +53,10 @@ for i in range(16):icon(f'goblin.mat.{i+1:02}','materials',0,32+i)
 icon('goblin.infinity_gem_goblin','materials',1,21);icon('goblin.return_token_goblin','materials',1,22)
 keys=['venom_cut','spore_fan','bitter_wound','spore_transfer','toxic_feint','mire_seal','opening_cut','seam_step','finish_cut','stolen_moment','crossing_blade','ration_rush','snare_wire','rattle_decoy','tangle_cut','spring_scatter','jam_joint','braced_lure','patch_ration','dust_escape','shed_binding','spore_lore','bitter_edge','light_pack','scout_breath','copper_brace','tendon_knots','tunnel_survivor','ration_sense','quiet_step']
 for i,key in enumerate(keys):icon('goblin.'+key,'skills',1,24+i)
+# True collapsed lifecycle art derived from the complete identity contact sheet.
+im=Image.open(src/'exec-472a31cd-bcba-4a49-9a76-b51264e3bb03.png').convert('RGBA');w,h=im.size
+for i,(id,row) in enumerate(list(manifest['monsters'].items())+[('hero',manifest['hero'])]):
+ c=i%8;r=i//8;tile=im.crop((round(c*w/8),round(r*h/6),round((c+1)*w/8),round((r+1)*h/6)));bbox=tile.getchannel('A').point(lambda p:255 if p>70 else 0).getbbox();tile=tile.crop(bbox) if bbox else tile;scale=min(164/tile.width,150/tile.height);tile=tile.resize((max(1,round(tile.width*scale)),max(1,round(tile.height*scale))),Image.Resampling.NEAREST);can=Image.new('RGBA',(192,192));can.alpha_composite(tile,(96-tile.width//2,176-tile.height));name=id.replace('goblin.','').replace('.','-')+'-death.png';can.save(out/name);row['frames'].append({'id':'death','file':'races/goblin/assets/'+name,'durationMs':240,'facing':'left','alphaBBox':can.getbbox()})
 manifest['camp']='battle-assets/backgrounds/camp-goblin.png'
 (root/'art.js').write_text('export const art = '+json.dumps(manifest,ensure_ascii=False,indent=2)+';\n')
 (root/'asset-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2))

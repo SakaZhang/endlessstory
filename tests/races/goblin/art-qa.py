@@ -13,5 +13,5 @@ for kind in ['equipment','skills','materials']:
   im=Image.open(root/'dist'/row['file']);assert im.size==(48,48);assert im.getbbox();hashes.append(hashlib.sha256(im.tobytes()).hexdigest())
  assert len(set(hashes))==len(hashes),kind
 for row in m['areas'].values():assert Image.open(root/'dist'/row['file']).size==(480,270)
-print('PASS 352 actorframes, all44 identities ≥6 unique poses, left-facing metadata, 192/176 anchors; 98 unique category icons;10 exact480x270 scenes.')
+print('PASS 396 actorframes, all44 identities ≥6 unique poses, left-facing metadata, 192/176 anchors; 98 unique category icons;10 exact480x270 scenes.')
 (p/'art-qa.json').write_text(json.dumps(report,indent=2))

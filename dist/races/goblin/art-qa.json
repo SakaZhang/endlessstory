@@ -1,6 +1,6 @@
 {
   "hero": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -8,7 +8,7 @@
     "facing": "left"
   },
   "goblin.a01.normal.1": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -16,7 +16,7 @@
     "facing": "left"
   },
   "goblin.a01.normal.2": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -24,7 +24,7 @@
     "facing": "left"
   },
   "goblin.a04.normal.1": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -32,7 +32,7 @@
     "facing": "left"
   },
   "goblin.a01.normal.3": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -40,7 +40,7 @@
     "facing": "left"
   },
   "goblin.a03.normal.2": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -48,7 +48,7 @@
     "facing": "left"
   },
   "goblin.a03.boss": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -56,7 +56,7 @@
     "facing": "left"
   },
   "goblin.a06.boss": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -64,7 +64,7 @@
     "facing": "left"
   },
   "goblin.a09.boss": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -72,7 +72,7 @@
     "facing": "left"
   },
   "goblin.a08.normal.1": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -80,7 +80,7 @@
     "facing": "left"
   },
   "goblin.a09.normal.2": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -88,7 +88,7 @@
     "facing": "left"
   },
   "goblin.a08.normal.2": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -96,7 +96,7 @@
     "facing": "left"
   },
   "goblin.a01.elite": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -104,7 +104,7 @@
     "facing": "left"
   },
   "goblin.a02.normal.1": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -112,7 +112,7 @@
     "facing": "left"
   },
   "goblin.a02.normal.2": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -120,7 +120,7 @@
     "facing": "left"
   },
   "goblin.a02.normal.3": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -128,7 +128,7 @@
     "facing": "left"
   },
   "goblin.a02.elite": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -136,7 +136,7 @@
     "facing": "left"
   },
   "goblin.a03.normal.1": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -144,7 +144,7 @@
     "facing": "left"
   },
   "goblin.a03.normal.3": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -152,7 +152,7 @@
     "facing": "left"
   },
   "goblin.a03.elite": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -160,7 +160,7 @@
     "facing": "left"
   },
   "goblin.a04.normal.2": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -168,7 +168,7 @@
     "facing": "left"
   },
   "goblin.a04.normal.3": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -176,7 +176,7 @@
     "facing": "left"
   },
   "goblin.a04.elite": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -184,7 +184,7 @@
     "facing": "left"
   },
   "goblin.a05.normal.1": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -192,7 +192,7 @@
     "facing": "left"
   },
   "goblin.a05.normal.2": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -200,7 +200,7 @@
     "facing": "left"
   },
   "goblin.a05.normal.3": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -208,7 +208,7 @@
     "facing": "left"
   },
   "goblin.a05.elite": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -216,7 +216,7 @@
     "facing": "left"
   },
   "goblin.a06.normal.1": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -224,7 +224,7 @@
     "facing": "left"
   },
   "goblin.a06.normal.2": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -232,7 +232,7 @@
     "facing": "left"
   },
   "goblin.a06.normal.3": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -240,7 +240,7 @@
     "facing": "left"
   },
   "goblin.a06.elite": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -248,7 +248,7 @@
     "facing": "left"
   },
   "goblin.a07.normal.1": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -256,7 +256,7 @@
     "facing": "left"
   },
   "goblin.a07.normal.2": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -264,7 +264,7 @@
     "facing": "left"
   },
   "goblin.a07.normal.3": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -272,7 +272,7 @@
     "facing": "left"
   },
   "goblin.a07.elite": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -280,7 +280,7 @@
     "facing": "left"
   },
   "goblin.a08.normal.3": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -288,7 +288,7 @@
     "facing": "left"
   },
   "goblin.a08.elite": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -296,7 +296,7 @@
     "facing": "left"
   },
   "goblin.a09.normal.1": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -304,7 +304,7 @@
     "facing": "left"
   },
   "goblin.a09.normal.3": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -312,7 +312,7 @@
     "facing": "left"
   },
   "goblin.a09.elite": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -320,7 +320,7 @@
     "facing": "left"
   },
   "goblin.a10.normal.1": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -328,7 +328,7 @@
     "facing": "left"
   },
   "goblin.a10.normal.2": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -336,7 +336,7 @@
     "facing": "left"
   },
   "goblin.a10.normal.3": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176
@@ -344,7 +344,7 @@
     "facing": "left"
   },
   "goblin.a10.elite": {
-    "distinctFrames": 8,
+    "distinctFrames": 9,
     "anchor": [
       96,
       176

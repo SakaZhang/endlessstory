@@ -16,15 +16,15 @@
         "durationMs": 120,
         "facing": "left",
         "alphaBBox": [
-          44,
-          56,
-          149,
+          31,
+          26,
+          161,
           176
         ],
         "sourceCrop": [
           0,
           0,
-          161,
+          181,
           194
         ]
       },
@@ -34,15 +34,15 @@
         "durationMs": 120,
         "facing": "left",
         "alphaBBox": [
-          43,
-          55,
-          149,
+          30,
+          26,
+          162,
           176
         ],
         "sourceCrop": [
-          161,
+          181,
           0,
-          337,
+          362,
           194
         ]
       },
@@ -52,15 +52,15 @@
         "durationMs": 120,
         "facing": "left",
         "alphaBBox": [
-          40,
-          58,
-          152,
+          26,
+          29,
+          166,
           176
         ],
         "sourceCrop": [
-          337,
+          362,
           0,
-          519,
+          543,
           194
         ]
       },
@@ -70,15 +70,15 @@
         "durationMs": 120,
         "facing": "left",
         "alphaBBox": [
-          38,
-          54,
-          155,
+          24,
+          25,
+          169,
           176
         ],
         "sourceCrop": [
-          519,
+          543,
           0,
-          704,
+          724,
           194
         ]
       },
@@ -88,15 +88,15 @@
         "durationMs": 120,
         "facing": "left",
         "alphaBBox": [
-          43,
-          53,
-          149,
+          21,
+          23,
+          171,
           176
         ],
         "sourceCrop": [
-          704,
+          724,
           0,
-          885,
+          905,
           194
         ]
       },
@@ -107,14 +107,14 @@
         "facing": "left",
         "alphaBBox": [
           14,
-          61,
+          34,
           178,
           176
         ],
         "sourceCrop": [
-          885,
+          905,
           0,
-          1110,
+          1086,
           194
         ]
       },
@@ -124,15 +124,15 @@
         "durationMs": 120,
         "facing": "left",
         "alphaBBox": [
-          38,
-          62,
-          155,
+          14,
+          34,
+          178,
           176
         ],
         "sourceCrop": [
-          1110,
+          1086,
           0,
-          1270,
+          1267,
           194
         ]
       },
@@ -142,13 +142,13 @@
         "durationMs": 120,
         "facing": "left",
         "alphaBBox": [
-          46,
-          56,
-          147,
+          25,
+          26,
+          168,
           176
         ],
         "sourceCrop": [
-          1270,
+          1267,
           0,
           1448,
           194
@@ -159,20 +159,29 @@
     "sourceRow": 0,
     "animations": {
       "idle": [
-        0,
-        1
+        "idle-0",
+        "idle-1"
       ],
       "attack": [
-        4,
-        5,
-        7
+        "anticipation",
+        "attack",
+        "recover"
       ],
       "hurt": [
-        6
+        "hurt"
       ],
       "move": [
-        2,
-        3
+        "ready",
+        "step"
+      ],
+      "anticipation": [
+        "anticipation"
+      ],
+      "recovery": [
+        "recover"
+      ],
+      "death": [
+        "death"
       ]
     }
   },
@@ -337,20 +346,29 @@
       "sourceRow": 1,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -514,20 +532,29 @@
       "sourceRow": 2,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -691,20 +718,29 @@
       "sourceRow": 3,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -868,20 +904,29 @@
       "sourceRow": 4,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -1045,20 +1090,29 @@
       "sourceRow": 5,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -1222,20 +1276,29 @@
       "sourceRow": 0,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -1399,20 +1462,29 @@
       "sourceRow": 1,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -1576,20 +1648,29 @@
       "sourceRow": 2,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -1753,20 +1834,29 @@
       "sourceRow": 3,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -1930,20 +2020,29 @@
       "sourceRow": 4,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -2107,20 +2206,29 @@
       "sourceRow": 5,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -2284,20 +2392,29 @@
       "sourceRow": 0,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -2461,20 +2578,29 @@
       "sourceRow": 1,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -2638,20 +2764,29 @@
       "sourceRow": 2,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -2815,20 +2950,29 @@
       "sourceRow": 3,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -2992,20 +3136,29 @@
       "sourceRow": 4,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -3169,20 +3322,29 @@
       "sourceRow": 5,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -3346,20 +3508,29 @@
       "sourceRow": 0,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -3523,20 +3694,29 @@
       "sourceRow": 1,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -3700,20 +3880,29 @@
       "sourceRow": 2,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -3877,20 +4066,29 @@
       "sourceRow": 3,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -4054,20 +4252,29 @@
       "sourceRow": 4,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -4231,20 +4438,29 @@
       "sourceRow": 5,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -4408,20 +4624,29 @@
       "sourceRow": 0,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -4585,20 +4810,29 @@
       "sourceRow": 1,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -4762,20 +4996,29 @@
       "sourceRow": 2,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -4939,20 +5182,29 @@
       "sourceRow": 3,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -5116,20 +5368,29 @@
       "sourceRow": 4,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -5293,20 +5554,29 @@
       "sourceRow": 5,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -5470,20 +5740,29 @@
       "sourceRow": 0,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -5647,20 +5926,29 @@
       "sourceRow": 1,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -5824,20 +6112,29 @@
       "sourceRow": 2,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -6001,20 +6298,29 @@
       "sourceRow": 3,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -6178,20 +6484,29 @@
       "sourceRow": 4,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -6355,20 +6670,29 @@
       "sourceRow": 5,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -6532,20 +6856,29 @@
       "sourceRow": 0,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -6709,20 +7042,29 @@
       "sourceRow": 1,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -6886,20 +7228,29 @@
       "sourceRow": 2,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -7063,20 +7414,29 @@
       "sourceRow": 3,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -7240,20 +7600,29 @@
       "sourceRow": 4,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -7417,20 +7786,29 @@
       "sourceRow": 5,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -7594,20 +7972,29 @@
       "sourceRow": 6,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -7771,20 +8158,29 @@
       "sourceRow": 7,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     }

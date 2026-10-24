@@ -16,15 +16,15 @@ export const art = {
         "durationMs": 120,
         "facing": "left",
         "alphaBBox": [
-          44,
-          56,
-          149,
+          31,
+          26,
+          161,
           176
         ],
         "sourceCrop": [
           0,
           0,
-          161,
+          181,
           194
         ]
       },
@@ -34,15 +34,15 @@ export const art = {
         "durationMs": 120,
         "facing": "left",
         "alphaBBox": [
-          43,
-          55,
-          149,
+          30,
+          26,
+          162,
           176
         ],
         "sourceCrop": [
-          161,
+          181,
           0,
-          337,
+          362,
           194
         ]
       },
@@ -52,15 +52,15 @@ export const art = {
         "durationMs": 120,
         "facing": "left",
         "alphaBBox": [
-          40,
-          58,
-          152,
+          26,
+          29,
+          166,
           176
         ],
         "sourceCrop": [
-          337,
+          362,
           0,
-          519,
+          543,
           194
         ]
       },
@@ -70,15 +70,15 @@ export const art = {
         "durationMs": 120,
         "facing": "left",
         "alphaBBox": [
-          38,
-          54,
-          155,
+          24,
+          25,
+          169,
           176
         ],
         "sourceCrop": [
-          519,
+          543,
           0,
-          704,
+          724,
           194
         ]
       },
@@ -88,15 +88,15 @@ export const art = {
         "durationMs": 120,
         "facing": "left",
         "alphaBBox": [
-          43,
-          53,
-          149,
+          21,
+          23,
+          171,
           176
         ],
         "sourceCrop": [
-          704,
+          724,
           0,
-          885,
+          905,
           194
         ]
       },
@@ -107,14 +107,14 @@ export const art = {
         "facing": "left",
         "alphaBBox": [
           14,
-          61,
+          34,
           178,
           176
         ],
         "sourceCrop": [
-          885,
+          905,
           0,
-          1110,
+          1086,
           194
         ]
       },
@@ -124,15 +124,15 @@ export const art = {
         "durationMs": 120,
         "facing": "left",
         "alphaBBox": [
-          38,
-          62,
-          155,
+          14,
+          34,
+          178,
           176
         ],
         "sourceCrop": [
-          1110,
+          1086,
           0,
-          1270,
+          1267,
           194
         ]
       },
@@ -142,16 +142,28 @@ export const art = {
         "durationMs": 120,
         "facing": "left",
         "alphaBBox": [
-          46,
-          56,
-          147,
+          25,
+          26,
+          168,
           176
         ],
         "sourceCrop": [
-          1270,
+          1267,
           0,
           1448,
           194
+        ]
+      },
+      {
+        "id": "death",
+        "file": "races/goblin/assets/hero-death.png",
+        "durationMs": 240,
+        "facing": "left",
+        "alphaBBox": [
+          14,
+          102,
+          178,
+          176
         ]
       }
     ],
@@ -159,20 +171,29 @@ export const art = {
     "sourceRow": 0,
     "animations": {
       "idle": [
-        0,
-        1
+        "idle-0",
+        "idle-1"
       ],
       "attack": [
-        4,
-        5,
-        7
+        "anticipation",
+        "attack",
+        "recover"
       ],
       "hurt": [
-        6
+        "hurt"
       ],
       "move": [
-        2,
-        3
+        "ready",
+        "step"
+      ],
+      "anticipation": [
+        "anticipation"
+      ],
+      "recovery": [
+        "recover"
+      ],
+      "death": [
+        "death"
       ]
     }
   },
@@ -331,26 +352,47 @@ export const art = {
             1448,
             351
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a01-normal-1-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            107,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "978b344c-caf7-45f6-982b-f78f878eab61",
       "sourceRow": 1,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -508,26 +550,47 @@ export const art = {
             1448,
             515
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a01-normal-2-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            78,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "978b344c-caf7-45f6-982b-f78f878eab61",
       "sourceRow": 2,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -685,26 +748,47 @@ export const art = {
             1448,
             638
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a04-normal-1-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            113,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "978b344c-caf7-45f6-982b-f78f878eab61",
       "sourceRow": 3,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -862,26 +946,47 @@ export const art = {
             1448,
             835
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a01-normal-3-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            95,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "978b344c-caf7-45f6-982b-f78f878eab61",
       "sourceRow": 4,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -1039,26 +1144,47 @@ export const art = {
             1448,
             1086
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a03-normal-2-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            107,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "978b344c-caf7-45f6-982b-f78f878eab61",
       "sourceRow": 5,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -1216,26 +1342,47 @@ export const art = {
             1448,
             227
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a03-boss-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            95,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "cf6674f7-29c2-4d8e-8abb-def3efac2dda",
       "sourceRow": 0,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -1393,26 +1540,47 @@ export const art = {
             1448,
             410
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a06-boss-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            90,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "cf6674f7-29c2-4d8e-8abb-def3efac2dda",
       "sourceRow": 1,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -1570,26 +1738,47 @@ export const art = {
             1448,
             632
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a09-boss-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            97,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "cf6674f7-29c2-4d8e-8abb-def3efac2dda",
       "sourceRow": 2,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -1747,26 +1936,47 @@ export const art = {
             1448,
             802
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a08-normal-1-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            91,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "cf6674f7-29c2-4d8e-8abb-def3efac2dda",
       "sourceRow": 3,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -1924,26 +2134,47 @@ export const art = {
             1448,
             954
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a09-normal-2-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            100,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "cf6674f7-29c2-4d8e-8abb-def3efac2dda",
       "sourceRow": 4,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -2101,26 +2332,47 @@ export const art = {
             1448,
             1086
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a08-normal-2-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            116,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "cf6674f7-29c2-4d8e-8abb-def3efac2dda",
       "sourceRow": 5,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -2278,26 +2530,47 @@ export const art = {
             1448,
             194
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a01-elite-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            83,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "6e5636c2-839c-47cf-a430-73a244c13a8f",
       "sourceRow": 0,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -2455,26 +2728,47 @@ export const art = {
             1448,
             339
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a02-normal-1-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            105,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "6e5636c2-839c-47cf-a430-73a244c13a8f",
       "sourceRow": 1,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -2632,26 +2926,47 @@ export const art = {
             1448,
             521
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a02-normal-2-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            22,
+            26,
+            170,
+            176
+          ]
         }
       ],
       "sourceAtlas": "6e5636c2-839c-47cf-a430-73a244c13a8f",
       "sourceRow": 2,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -2809,26 +3124,47 @@ export const art = {
             1448,
             689
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a02-normal-3-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            26,
+            26,
+            166,
+            176
+          ]
         }
       ],
       "sourceAtlas": "6e5636c2-839c-47cf-a430-73a244c13a8f",
       "sourceRow": 3,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -2986,26 +3322,47 @@ export const art = {
             1448,
             886
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a02-elite-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            91,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "6e5636c2-839c-47cf-a430-73a244c13a8f",
       "sourceRow": 4,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -3163,26 +3520,47 @@ export const art = {
             1448,
             1086
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a03-normal-1-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            28,
+            26,
+            164,
+            176
+          ]
         }
       ],
       "sourceAtlas": "6e5636c2-839c-47cf-a430-73a244c13a8f",
       "sourceRow": 5,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -3340,26 +3718,47 @@ export const art = {
             1448,
             181
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a03-normal-3-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            104,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "46497eb8-dce8-4e22-add5-e409b0b7abc1",
       "sourceRow": 0,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -3517,26 +3916,47 @@ export const art = {
             1448,
             365
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a03-elite-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            22,
+            26,
+            170,
+            176
+          ]
         }
       ],
       "sourceAtlas": "46497eb8-dce8-4e22-add5-e409b0b7abc1",
       "sourceRow": 1,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -3694,26 +4114,47 @@ export const art = {
             1448,
             558
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a04-normal-2-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            23,
+            26,
+            170,
+            176
+          ]
         }
       ],
       "sourceAtlas": "46497eb8-dce8-4e22-add5-e409b0b7abc1",
       "sourceRow": 2,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -3871,26 +4312,47 @@ export const art = {
             1448,
             707
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a04-normal-3-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            99,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "46497eb8-dce8-4e22-add5-e409b0b7abc1",
       "sourceRow": 3,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -4048,26 +4510,47 @@ export const art = {
             1448,
             906
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a04-elite-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            23,
+            26,
+            169,
+            176
+          ]
         }
       ],
       "sourceAtlas": "46497eb8-dce8-4e22-add5-e409b0b7abc1",
       "sourceRow": 4,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -4225,26 +4708,47 @@ export const art = {
             1448,
             1086
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a05-normal-1-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            100,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "46497eb8-dce8-4e22-add5-e409b0b7abc1",
       "sourceRow": 5,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -4402,26 +4906,47 @@ export const art = {
             1448,
             169
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a05-normal-2-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            30,
+            26,
+            163,
+            176
+          ]
         }
       ],
       "sourceAtlas": "2248bfaa-d2cd-43e7-b783-6cba568e3229",
       "sourceRow": 0,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -4579,26 +5104,47 @@ export const art = {
             1448,
             354
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a05-normal-3-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            92,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "2248bfaa-d2cd-43e7-b783-6cba568e3229",
       "sourceRow": 1,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -4756,26 +5302,47 @@ export const art = {
             1448,
             535
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a05-elite-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            88,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "2248bfaa-d2cd-43e7-b783-6cba568e3229",
       "sourceRow": 2,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -4933,26 +5500,47 @@ export const art = {
             1448,
             688
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a06-normal-1-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            20,
+            26,
+            172,
+            176
+          ]
         }
       ],
       "sourceAtlas": "2248bfaa-d2cd-43e7-b783-6cba568e3229",
       "sourceRow": 3,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -5110,26 +5698,47 @@ export const art = {
             1448,
             869
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a06-normal-2-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            23,
+            26,
+            170,
+            176
+          ]
         }
       ],
       "sourceAtlas": "2248bfaa-d2cd-43e7-b783-6cba568e3229",
       "sourceRow": 4,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -5287,26 +5896,47 @@ export const art = {
             1448,
             1086
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a06-normal-3-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            91,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "2248bfaa-d2cd-43e7-b783-6cba568e3229",
       "sourceRow": 5,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -5464,26 +6094,47 @@ export const art = {
             1448,
             170
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a06-elite-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            22,
+            26,
+            170,
+            176
+          ]
         }
       ],
       "sourceAtlas": "79be6794-a642-4e28-b3a8-0cc362903235",
       "sourceRow": 0,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -5641,26 +6292,47 @@ export const art = {
             1448,
             345
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a07-normal-1-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            27,
+            26,
+            166,
+            176
+          ]
         }
       ],
       "sourceAtlas": "79be6794-a642-4e28-b3a8-0cc362903235",
       "sourceRow": 1,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -5818,26 +6490,47 @@ export const art = {
             1448,
             520
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a07-normal-2-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            97,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "79be6794-a642-4e28-b3a8-0cc362903235",
       "sourceRow": 2,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -5995,26 +6688,47 @@ export const art = {
             1448,
             683
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a07-normal-3-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            98,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "79be6794-a642-4e28-b3a8-0cc362903235",
       "sourceRow": 3,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -6172,26 +6886,47 @@ export const art = {
             1448,
             872
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a07-elite-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            68,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "79be6794-a642-4e28-b3a8-0cc362903235",
       "sourceRow": 4,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -6349,26 +7084,47 @@ export const art = {
             1448,
             1086
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a08-normal-3-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            81,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "79be6794-a642-4e28-b3a8-0cc362903235",
       "sourceRow": 5,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -6526,26 +7282,47 @@ export const art = {
             1402,
             145
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a08-elite-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            99,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "372de008-3015-4369-9790-96d999743f37",
       "sourceRow": 0,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -6703,26 +7480,47 @@ export const art = {
             1402,
             291
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a09-normal-1-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            103,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "372de008-3015-4369-9790-96d999743f37",
       "sourceRow": 1,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -6880,26 +7678,47 @@ export const art = {
             1402,
             418
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a09-normal-3-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            103,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "372de008-3015-4369-9790-96d999743f37",
       "sourceRow": 2,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -7057,26 +7876,47 @@ export const art = {
             1402,
             553
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a09-elite-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            93,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "372de008-3015-4369-9790-96d999743f37",
       "sourceRow": 3,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -7234,26 +8074,47 @@ export const art = {
             1402,
             688
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a10-normal-1-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            93,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "372de008-3015-4369-9790-96d999743f37",
       "sourceRow": 4,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -7411,26 +8272,47 @@ export const art = {
             1402,
             800
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a10-normal-2-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            15,
+            26,
+            177,
+            176
+          ]
         }
       ],
       "sourceAtlas": "372de008-3015-4369-9790-96d999743f37",
       "sourceRow": 5,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -7588,26 +8470,47 @@ export const art = {
             1402,
             924
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a10-normal-3-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            95,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "372de008-3015-4369-9790-96d999743f37",
       "sourceRow": 6,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     },
@@ -7765,26 +8668,47 @@ export const art = {
             1402,
             1122
           ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/a10-elite-death.png",
+          "durationMs": 240,
+          "facing": "left",
+          "alphaBBox": [
+            14,
+            36,
+            178,
+            176
+          ]
         }
       ],
       "sourceAtlas": "372de008-3015-4369-9790-96d999743f37",
       "sourceRow": 7,
       "animations": {
         "idle": [
-          0,
-          1
+          "idle-0",
+          "idle-1"
         ],
         "attack": [
-          4,
-          5,
-          7
+          "anticipation",
+          "attack",
+          "recover"
         ],
         "hurt": [
-          6
+          "hurt"
         ],
         "move": [
-          2,
-          3
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
         ]
       }
     }
