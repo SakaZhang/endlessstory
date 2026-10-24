@@ -1,0 +1,305 @@
+{
+  "kind": "actual engine start/step + native createLiveBattlePresentation/drawBattleSliceCanvas; not browser screenshot",
+  "records": [
+    {
+      "name": "dagger-idle",
+      "sprite": "hero-goblin-dagger",
+      "enemySprites": [
+        "race-goblin.a09.boss"
+      ],
+      "events": [],
+      "done": false
+    },
+    {
+      "name": "dagger-attack",
+      "sprite": "hero-goblin-dagger",
+      "enemySprites": [
+        "race-goblin.a09.boss"
+      ],
+      "events": [
+        {
+          "kind": "cast",
+          "sourceId": "hero",
+          "targetId": "m2-1792829337487-17-enemy-0",
+          "skillId": "goblin.opening_cut"
+        },
+        {
+          "kind": "hit",
+          "sourceId": "hero",
+          "targetId": "m2-1792829337487-17-enemy-0",
+          "skillId": "goblin.opening_cut"
+        },
+        {
+          "kind": "hit",
+          "sourceId": "hero",
+          "targetId": "m2-1792829337487-17-enemy-0",
+          "skillId": "goblin.opening_cut"
+        }
+      ],
+      "done": false
+    },
+    {
+      "name": "dagger-hurt",
+      "sprite": "hero-goblin-dagger",
+      "enemySprites": [
+        "race-goblin.a09.boss"
+      ],
+      "events": [
+        {
+          "kind": "cast",
+          "sourceId": "hero",
+          "targetId": "m2-1792829337487-17-enemy-0",
+          "skillId": "goblin.venom_cut"
+        },
+        {
+          "kind": "hit",
+          "sourceId": "hero",
+          "targetId": "m2-1792829337487-17-enemy-0",
+          "skillId": "goblin.venom_cut"
+        },
+        {
+          "kind": "hit",
+          "sourceId": "hero",
+          "targetId": "m2-1792829337487-17-enemy-0",
+          "skillId": "goblin.venom_cut"
+        },
+        {
+          "kind": "hit",
+          "sourceId": "hero",
+          "targetId": "m2-1792829337487-17-enemy-0",
+          "skillId": "goblin.venom_cut"
+        },
+        {
+          "kind": "cast",
+          "sourceId": "m2-1792829337487-17-enemy-0",
+          "targetId": "hero",
+          "skillId": "basic"
+        },
+        {
+          "kind": "hit",
+          "sourceId": "m2-1792829337487-17-enemy-0",
+          "targetId": "hero",
+          "skillId": "basic"
+        }
+      ],
+      "done": false
+    },
+    {
+      "name": "dagger-enemy-death",
+      "sprite": "hero-goblin-dagger",
+      "enemySprites": [
+        "race-goblin.a09.boss"
+      ],
+      "events": [
+        {
+          "kind": "poison",
+          "sourceId": "hero",
+          "targetId": "m2-1792829337487-17-enemy-0",
+          "skillId": "scatter_ash"
+        }
+      ],
+      "done": true,
+      "win": true
+    },
+    {
+      "name": "dagger-hero-defeat",
+      "kind": "direct native renderer, actual terminal combat state before camp transition",
+      "heroHp": 0
+    },
+    {
+      "name": "sword-idle",
+      "sprite": "hero-goblin-sword",
+      "enemySprites": [
+        "race-goblin.a09.boss"
+      ],
+      "events": [],
+      "done": false
+    },
+    {
+      "name": "sword-attack",
+      "sprite": "hero-goblin-sword",
+      "enemySprites": [
+        "race-goblin.a09.boss"
+      ],
+      "events": [
+        {
+          "kind": "cast",
+          "sourceId": "hero",
+          "targetId": "m2-1792829337685-47-enemy-0",
+          "skillId": "goblin.opening_cut"
+        },
+        {
+          "kind": "hit",
+          "sourceId": "hero",
+          "targetId": "m2-1792829337685-47-enemy-0",
+          "skillId": "goblin.opening_cut"
+        }
+      ],
+      "done": false
+    },
+    {
+      "name": "sword-hurt",
+      "sprite": "hero-goblin-sword",
+      "enemySprites": [
+        "race-goblin.a09.boss"
+      ],
+      "events": [
+        {
+          "kind": "cast",
+          "sourceId": "hero",
+          "targetId": "m2-1792829337685-47-enemy-0",
+          "skillId": "goblin.venom_cut"
+        },
+        {
+          "kind": "hit",
+          "sourceId": "hero",
+          "targetId": "m2-1792829337685-47-enemy-0",
+          "skillId": "goblin.venom_cut"
+        },
+        {
+          "kind": "hit",
+          "sourceId": "hero",
+          "targetId": "m2-1792829337685-47-enemy-0",
+          "skillId": "goblin.venom_cut"
+        },
+        {
+          "kind": "cast",
+          "sourceId": "m2-1792829337685-47-enemy-0",
+          "targetId": "hero",
+          "skillId": "basic"
+        },
+        {
+          "kind": "hit",
+          "sourceId": "m2-1792829337685-47-enemy-0",
+          "targetId": "hero",
+          "skillId": "basic"
+        }
+      ],
+      "done": false
+    },
+    {
+      "name": "sword-enemy-death",
+      "sprite": "hero-goblin-sword",
+      "enemySprites": [
+        "race-goblin.a09.boss"
+      ],
+      "events": [
+        {
+          "kind": "cast",
+          "sourceId": "hero",
+          "targetId": "m2-1792829337685-47-enemy-0",
+          "skillId": "goblin.opening_cut"
+        },
+        {
+          "kind": "hit",
+          "sourceId": "hero",
+          "targetId": "m2-1792829337685-47-enemy-0",
+          "skillId": "goblin.opening_cut"
+        },
+        {
+          "kind": "heal",
+          "sourceId": "hero",
+          "targetId": "hero",
+          "skillId": "lifesteal"
+        }
+      ],
+      "done": true,
+      "win": true
+    },
+    {
+      "name": "sword-hero-defeat",
+      "kind": "direct native renderer, actual terminal combat state before camp transition",
+      "heroHp": 0
+    },
+    {
+      "name": "area-01",
+      "sprite": "hero-goblin-dagger",
+      "enemySprites": [
+        "race-goblin.a01.normal.3"
+      ],
+      "events": [],
+      "done": false
+    },
+    {
+      "name": "area-02",
+      "sprite": "hero-goblin-dagger",
+      "enemySprites": [
+        "race-goblin.a02.normal.1"
+      ],
+      "events": [],
+      "done": false
+    },
+    {
+      "name": "area-03",
+      "sprite": "hero-goblin-dagger",
+      "enemySprites": [
+        "race-goblin.a03.normal.3"
+      ],
+      "events": [],
+      "done": false
+    },
+    {
+      "name": "area-04",
+      "sprite": "hero-goblin-dagger",
+      "enemySprites": [
+        "race-goblin.a04.normal.1"
+      ],
+      "events": [],
+      "done": false
+    },
+    {
+      "name": "area-05",
+      "sprite": "hero-goblin-dagger",
+      "enemySprites": [
+        "race-goblin.a05.normal.1"
+      ],
+      "events": [],
+      "done": false
+    },
+    {
+      "name": "area-06",
+      "sprite": "hero-goblin-dagger",
+      "enemySprites": [
+        "race-goblin.a06.normal.2"
+      ],
+      "events": [],
+      "done": false
+    },
+    {
+      "name": "area-07",
+      "sprite": "hero-goblin-dagger",
+      "enemySprites": [
+        "race-goblin.a07.normal.3"
+      ],
+      "events": [],
+      "done": false
+    },
+    {
+      "name": "area-08",
+      "sprite": "hero-goblin-dagger",
+      "enemySprites": [
+        "race-goblin.a08.normal.3"
+      ],
+      "events": [],
+      "done": false
+    },
+    {
+      "name": "area-09",
+      "sprite": "hero-goblin-dagger",
+      "enemySprites": [
+        "race-goblin.a09.normal.1"
+      ],
+      "events": [],
+      "done": false
+    },
+    {
+      "name": "area-10",
+      "sprite": "hero-goblin-dagger",
+      "enemySprites": [
+        "race-goblin.a10.normal.1"
+      ],
+      "events": [],
+      "done": false
+    }
+  ]
+}
