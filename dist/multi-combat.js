@@ -7,7 +7,7 @@ import {skillTreeHeroStats,skillTreeEnemyAttributes} from './skill-tree-attribut
 import {createTreeEffectHost} from './skill-tree-effect-host.js';
 import {applySkillEffect,validSkillEffectState} from './skill-tree-effects.js';
 import {validSkillPoison,createSkillPoison,applySkillPoison,advanceSkillPoison} from './skill-tree-poison.js';
-import {executeTreeSkillTurn,planTreeSkill,resolveSetLinkedHit,resolveSetLinkedEffect,TREE_ACTIVE_SKILL_IDS} from './skill-tree-consumer.js';
+import {executeTreeSkillTurn,planTreeSkill,resolveSetLinkedHit,resolveSetLinkedEffect,TREE_ACTIVE_SKILL_IDS,TREE_MAX_HITS_PER_TARGET} from './skill-tree-consumer.js';
 import {advanceLegendaryCombat} from './legendary-combat.js';
 import {createPlayerShieldLayers,expirePlayerShieldLayers,grantPlayerShieldLayer,absorbPlayerShieldDamage} from './player-shield-layers.js';
 import {WORLD_MONSTERS as DWARF_MONSTERS} from './world-content.js';
@@ -63,11 +63,11 @@ export function validMultiEncounter(e,instances){
 export function validMultiCastRecord(c,enemies){
  if(!c||typeof c!=='object'||Array.isArray(c)||typeof c.id!=='string'||!c.id||c.id.length>500||!['single','all','self'].includes(c.scope)||typeof c.skillId!=='string'||!Array.isArray(c.hits)||!Array.isArray(enemies))return false;
  const multihit=c.recordVersion===2;if(c.recordVersion!==undefined&&!multihit)return false;
- if(c.hits.length>enemies.length*(multihit?8:1))return false;
+ if(c.hits.length>enemies.length*(multihit?TREE_MAX_HITS_PER_TARGET:1))return false;
  const ids=new Set(),segments=new Set();
  for(const h of c.hits){
   if(!h||typeof h.id!=='string'||!h.id||h.id.length>700||typeof h.hit!=='boolean'||!enemies.some(u=>u.id===h.targetId))return false;
-  if(multihit){if(!Number.isSafeInteger(h.hitIndex)||h.hitIndex<0||h.hitIndex>7||ids.has(h.id))return false;const segment=h.targetId+':'+h.hitIndex;if(segments.has(segment))return false;ids.add(h.id);segments.add(segment);}
+  if(multihit){if(!Number.isSafeInteger(h.hitIndex)||h.hitIndex<0||h.hitIndex>=TREE_MAX_HITS_PER_TARGET||ids.has(h.id))return false;const segment=h.targetId+':'+h.hitIndex;if(segments.has(segment))return false;ids.add(h.id);segments.add(segment);}
  }
  return true;
 }
