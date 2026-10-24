@@ -1,0 +1,6 @@
+import {EXPANSION_PACKS} from './race-packs.js';
+export const raceArt=(race)=>EXPANSION_PACKS.find(p=>p.id===race)?.art??null;
+const relative=file=>file?.startsWith('../')?file:'../'+file;
+function sprite(row){return {...structuredClone(row),frames:row.frames.map(f=>({...f,file:relative(f.file),solidBBox:f.solidBBox??f.alphaBBox})),animations:{...row.animations}};}
+export function extendBattleManifest(base){const m=structuredClone(base);m.sprites??={};m.backgrounds??=[];m.monsterSprites??={};m.areaBackgrounds??={};m.areaBaselines??={};m.raceHeroSprites??={};for(const p of EXPANSION_PACKS){const a=p.art;if(!a)continue;if(a.hero?.frames){const key='hero-'+p.id;m.sprites[key]=sprite(a.hero);m.raceHeroSprites[p.id]=key;}for(const [id,row]of Object.entries(a.monsters??{})){const key='race-'+id;m.sprites[key]=sprite(row);m.monsterSprites[id]=key;}for(const [id,row]of Object.entries(a.areas??{})){const key='race-bg-'+id;if(!m.backgrounds.some(x=>x.id===key))m.backgrounds.push({id:key,file:relative(row.file),size:row.logicalSize??[480,270],z:0});m.areaBackgrounds[id]=[key];m.areaBaselines[id]=row.baselineY??203;}}return m;}
+export function raceIconAsset(kind,id,size=32){for(const p of EXPANSION_PACKS){const row=p.art?.[kind]?.[id];if(row)return typeof row==='string'?row:row[size]??row.file??null;}return null;}

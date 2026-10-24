@@ -1,3 +1,5 @@
+import {extendBattleManifest} from './race-art.js';
+import {getSkillMetadata} from './race-registry.js';
 import {renderSkillPixelIcon} from './skill-pixel-icons.js';
 // Read-only adapter for the real game. No model creation, stepping, timers, storage or RNG.
 import {createBattleSlicePresentation,drawBattleSliceCanvas,presentationActorX,battleSliceBars,drawBattleSliceBars} from './battle-slice.js';
@@ -13,12 +15,12 @@ export function liveHeroWeaponType(state){
  const item=state?.inventory?.find(it=>it.id===state?.equip?.weapon);
  return item?.slot==='weapon'?item.weaponType??null:null;
 }
-const heroSpriteFor=(weapon,manifest)=>({...LIVE_HERO_SPRITES,...(manifest?.heroWeaponSprites??manifest?.heroSprites??{})})[weapon]??(manifest?.sprites?.['hero-neutral']?'hero-neutral':null);
+const heroSpriteFor=(weapon,manifest,race='dwarf')=>manifest?.raceHeroSprites?.[race]??({...LIVE_HERO_SPRITES,...(manifest?.heroWeaponSprites??manifest?.heroSprites??{})})[weapon]??(manifest?.sprites?.['hero-neutral']?'hero-neutral':null);
 // These placeholders are intentionally not legacy art or substitute equipment.
 function drawPixelNotice(canvas,label,{width=480,height=270}={}){if(!canvas?.getContext)return false;canvas.width=width;canvas.height=height;const c=canvas.getContext('2d');c.imageSmoothingEnabled=false;c.fillStyle='#132232';c.fillRect(0,0,width,height);c.strokeStyle='#516b80';c.lineWidth=2;c.strokeRect(6,6,width-12,height-12);c.fillStyle='#e7cb8d';c.font='12px sans-serif';c.textAlign='center';c.fillText(label,width/2,height/2,Math.max(24,width-20));return true;}
 export function drawLiveHeroPortrait(canvas,state,{manifest,images,time=0}={}){
  const width=canvas?.width??160,height=canvas?.height??150;
- const key=heroSpriteFor(liveHeroWeaponType(state),manifest),sprite=manifest?.sprites?.[key];
+ const key=heroSpriteFor(liveHeroWeaponType(state),manifest,state.race),sprite=manifest?.sprites?.[key];
  if(!sprite)return drawPixelNotice(canvas,manifest?'角色外观暂不可用':'角色外观加载中',{width,height});
  const ids=sprite.animations.idle,frame=sprite.frames.find(f=>f.id===ids[Math.floor(time/500)%ids.length]),img=images?.get(frame?.file);
  if(!img)return drawPixelNotice(canvas,'角色素材待加载 · 可重试',{width,height});
@@ -31,7 +33,7 @@ const areaOf=(s,e)=>e?.areaId??e?.instanceId??s?.siteId??'';
 export const RACIAL_CAMPS=Object.freeze({dwarf:'黑炉营地',human:'边境营地',elf:'林间营地',goblin:'拾荒者营地',ashen:'余烬营地'});
 export function liveCampRace(state){if(state?.atCamp!==true&&!(state?.restUntil>0))return null;const territory=String(state.siteId??'').split('.')[0];return Object.hasOwn(RACIAL_CAMPS,territory)?territory:Object.hasOwn(RACIAL_CAMPS,state.race)?state.race:'dwarf';}
 export function liveSceneBackgrounds(snapshot,manifest){if(snapshot?.campRace){const row=manifest?.campBackgrounds?.[snapshot.campRace];return row?[row]:[];}return liveAreaBackgrounds(snapshot?.areaId,manifest);}
-const areaKey=id=>String(id).match(/^dwarf\.a(?:0[1-9]|10)(?=\.|$)/)?.[0]??null;
+const areaKey=id=>String(id).match(/^(?:dwarf|human|elf|goblin|ashen)\.a(?:0[1-9]|10)(?=\.|$)/)?.[0]??null;
 export function liveActorSprite(unit,manifest){
  const variant=[...(manifest?.actorVariants??[])].sort((a,b)=>(b.priority??0)-(a.priority??0)).find(row=>row.match&&Object.entries(row.match).every(([key,value])=>(key==='definitionId'?(unit.definitionId??unit.monsterId):unit[key])===value));
  if(variant)return variant.spriteKey;
@@ -41,7 +43,7 @@ export function liveActorSprite(unit,manifest){
 export function liveAreaBackgrounds(areaId,manifest){const key=areaKey(areaId),ids=manifest?.areaBackgrounds?.[key];if(!key||!Array.isArray(ids)||!ids.length)return [];const selected=ids.map(id=>manifest.backgrounds?.find(bg=>bg.id===id));return selected.every(Boolean)?selected:[];}
 export function renderLiveBattleHud(s,e){
  const tree=s?.skillTree,p=tree?.presets?.[tree.selectedPreset];if(tree?.mode!=='active')return `<div class="liveBattleSkills isLegacy" aria-label="旧战技四槽 · 只读">${Array.from({length:4},(_,i)=>{const id=s?.skills?.[i];return `<span class="liveBattleSkill" data-live-slot="legacy-${i}">${icon(id?'sword':'bag')}<span>${esc(SKILLS[id]?.name??'空槽')}</span></span>`;}).join('')}</div>`;if(!p)return '';
- return `<div class="liveBattleSkills" aria-label="当前装备技能 · 只读">${[...Array.from({length:4},(_,i)=>({id:p.active?.[i],i,passive:false})),...Array.from({length:2},(_,i)=>({id:p.passive?.[i],i,passive:true}))].map(({id,i,passive})=>{const cd=id?(e?.treeSkillCooldowns?.[id]??e?.cd?.[id]??0):0;return `<span class="liveBattleSkill ${passive?'isPassive':''}" title="${esc(skillNames[id]??'空槽')}" data-live-skill="${esc(id??'')}" data-live-slot="${passive?'passive':'active'}-${i}">${renderSkillPixelIcon(id)}<span>${esc(skillNames[id]??'空槽')}</span>${!passive&&cd>0?`<small>${Math.ceil(cd)}回</small>`:''}</span>`;}).join('')}</div>`;
+ return `<div class="liveBattleSkills" aria-label="当前装备技能 · 只读">${[...Array.from({length:4},(_,i)=>({id:p.active?.[i],i,passive:false})),...Array.from({length:2},(_,i)=>({id:p.passive?.[i],i,passive:true}))].map(({id,i,passive})=>{const cd=id?(e?.treeSkillCooldowns?.[id]??e?.cd?.[id]??0):0;return `<span class="liveBattleSkill ${passive?'isPassive':''}" title="${esc(getSkillMetadata(id)?.name??skillNames[id]??'空槽')}" data-live-skill="${esc(id??'')}" data-live-slot="${passive?'passive':'active'}-${i}">${renderSkillPixelIcon(id)}<span>${esc(getSkillMetadata(id)?.name??skillNames[id]??'空槽')}</span>${!passive&&cd>0?`<small>${Math.ceil(cd)}回</small>`:''}</span>`;}).join('')}</div>`;
 }
 // Death is authoritative even while the shared presentation retains timed attacks.
 // Derive draw-only state: never remove real damage floats or mutate event queues.
@@ -74,7 +76,7 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
   const missing=rows.filter(r=>!r.sprite||!manifest.sprites?.[r.sprite]);
   if(missing.length)return {...base,reason:'monster-not-covered',label:'当前怪物尚未全部覆盖像素外观',missingIds:missing.map(r=>r.monsterId??r.unitId),coverage:rows};
   if(rows.length>6)return {...base,reason:'formation-not-covered',label:'当前编队尚未覆盖像素布局',coverage:rows};
-  const heroSprite=heroSpriteFor(metadata.hero?.weaponType,manifest);if(!heroSprite||!manifest.sprites?.[heroSprite])return {...base,reason:'hero-weapon-not-covered',label:'当前角色外观暂不可用',coverage:rows,heroWeapon:metadata.hero?.weaponType??null};
+  const heroSprite=heroSpriteFor(metadata.hero?.weaponType,manifest,metadata.hero?.race);if(!heroSprite||!manifest.sprites?.[heroSprite])return {...base,reason:'hero-weapon-not-covered',label:'当前角色外观暂不可用',coverage:rows,heroWeapon:metadata.hero?.weaponType??null};
   const sprites=[heroSprite,...new Set(rows.map(r=>r.sprite))];
   const files=[...backgrounds,...sprites.flatMap(key=>manifest.sprites?.[key]?.frames??[])];
   if(sprites.some(key=>!manifest.sprites?.[key]?.animations?.idle?.length)||files.some(f=>!images.get(f.file)))return {...base,reason:'asset-frames-missing',label:'像素帧尚未完整加载',coverage:rows};
@@ -84,14 +86,14 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
   const units=snapshot.encounter.enemies;for(const u of units)if(!slots.has(u.id))slots.set(u.id,slots.size);
   const layout=units.length<=1?[350]:units.length===2?[305,405]:[275,350,425];
   const baseline=snapshot.campRace?(manifest?.campBackgrounds?.[snapshot.campRace]?.baseline??195):manifest?.areaBaselines?.[areaKey(snapshot.areaId)]??203;
-  positions.hero={x:snapshot.campRace?144:100,y:baseline,sprite:heroSpriteFor(metadata.hero?.weaponType,manifest)};
+  positions.hero={x:snapshot.campRace?144:100,y:baseline,sprite:heroSpriteFor(metadata.hero?.weaponType,manifest,metadata.hero?.race)};
   for(const u of units){const n=slots.get(u.id),row=Math.floor(n/3);positions[u.id]={x:positions[u.id]?.x??layout[n%3]??425,y:baseline-row*51,sprite:liveActorSprite(u,manifest)};}
   for(const id of Object.keys(positions))if(id!=='hero'&&!units.some(u=>u.id===id))delete positions[id];
  }
  async function load(){
   if(disposed)return false;if(manifest&&providedImages)return coverage().reason!=='asset-frames-missing';if(loadPromise)return loadPromise;
   if(typeof globalThis.fetch!=='function'||typeof globalThis.Image!=='function'){loadError='Image/fetch unavailable';return false;}
-  loading=true;loadError=null;loadPromise=(async()=>{try{if(!manifest){const response=await fetch(assetRoot+'manifest.json');if(!response.ok)throw Error('Manifest HTTP '+response.status);manifest=await response.json();}
+  loading=true;loadError=null;loadPromise=(async()=>{try{if(!manifest){const response=await fetch(assetRoot+'manifest.json');if(!response.ok)throw Error('Manifest HTTP '+response.status);manifest=extendBattleManifest(await response.json());}
    const files=[...new Set([...(manifest.backgrounds??[]),...Object.values(manifest.campBackgrounds??{}),...Object.values(manifest.sprites??{}).flatMap(s=>s.frames??[])].map(f=>f.file))];
    // Unrelated area failures cannot invalidate already usable current-area assets.
    await Promise.allSettled(files.map(async file=>{if(images.has(file))return;const img=new Image();img.src=assetRoot+file;await img.decode();if(!disposed)images.set(file,img);}));if(snapshot)rebuildPositions();return !disposed&&(!snapshot||coverage().mode==='ready');
@@ -109,7 +111,7 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
   const displayEncounter=idle?{heroHp:state.heroHp??heroMaxHp,enemies:[],areaId:areaOf(state,null),targetId:null}:encounter;
   // Detached snapshots guarantee later game mutations cannot race a presentation frame.
   snapshot={idle,campRace,encounter:{...structuredClone(displayEncounter),heroHp:idle||encounter.done?state.heroHp??heroMaxHp:displayEncounter.heroHp},areaId:areaOf(state,displayEncounter),units:idle?[]:normalizeBattleEnemies(encounter,now),gameNow:now};
-  heroMaxHp=stats(structuredClone(state)).hp;Object.assign(metadata,{hero:{weaponType:liveHeroWeaponType(state)}});rebuildPositions();return coverage();
+  heroMaxHp=stats(structuredClone(state)).hp;Object.assign(metadata,{hero:{weaponType:liveHeroWeaponType(state),race:state.race}});rebuildPositions();return coverage();
  }
  function enqueue(events,at){
   if(disposed||!snapshot||!visible||coverage().mode!=='ready')return {accepted:0,reason:'not-presenting'};

@@ -1,3 +1,5 @@
+import {getSkillMetadata} from './race-registry.js';
+import {raceIconAsset} from './race-art.js';
 // Exact canonical skill identity registry. Pure markup; no game state or resource loading.
 const registry={
   "fracture_strike": {
@@ -88,7 +90,9 @@ const registry={
 export const SKILL_PIXEL_ICONS=Object.freeze(Object.fromEntries(Object.entries(registry).map(([id,row])=>[id,Object.freeze(row)])));
 const esc=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function renderSkillPixelIcon(id,{size=32,decorative=true}={}){
- const row=typeof id==='string'&&Object.hasOwn(SKILL_PIXEL_ICONS,id)?SKILL_PIXEL_ICONS[id]:null;
+ const row=typeof id==='string'?(getSkillMetadata(id)??SKILL_PIXEL_ICONS[id]):null;
  const px=size===64?64:32,label=row?.name??'空技能槽';
+ const asset=raceIconAsset('skills',id,px)??(row?.icon&&!Object.hasOwn(SKILL_PIXEL_ICONS,id)?row.icon:null);
+ if(asset)return `<span class="skillPixelIcon" data-skill-icon="${esc(id)}" data-skill-icon-size="${px}" ${decorative?'aria-hidden="true"':`role="img" aria-label="${esc(label)}"`} style="background-image:url('${esc(asset)}');background-size:contain;image-rendering:pixelated"></span>`;
  return `<span class="skillPixelIcon${row?'':' isEmpty'}" data-skill-icon="${row?id:'empty'}" data-skill-icon-size="${px}" ${decorative?'aria-hidden="true"':`role="img" aria-label="${esc(label)}"`}></span>`;
 }

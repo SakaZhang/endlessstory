@@ -25,7 +25,7 @@ import {dwarfBudgetReady} from './dwarf-content.js';
 const DWARF_MONSTERS=ALL_MONSTERS;
 export {configureDwarfParameters,dwarfBudgetReady} from './dwarf-content.js';
 import {initializeDwarfActor} from './dwarf-effects.js';
-import {DWARF_MATERIAL_REGISTRY,rollMonsterMaterials,toDwarfInventoryKey,getDwarfMaterialPool} from './dwarf-material-catalog.js';
+import {WORLD_MATERIAL_REGISTRY as DWARF_MATERIAL_REGISTRY,rollWorldMaterials as rollMonsterMaterials,worldInventoryKey as toDwarfInventoryKey,getWorldMaterialPool as getDwarfMaterialPool} from './world-materials.js';
 import {chooseFusionOrigin,fusionOriginTemplates,fusionOriginWeights} from './fusion-origin.js';
 export {chooseFusionOrigin,fusionOriginWeights} from './fusion-origin.js';
 import {NEW_ORDINARY_AFFIX_DEFS,NEW_SPECIAL_DEFS,createBattleAffixState,validBattleAffixState,tryNirvana,tryReaperHit,lifestealRate,lifestealHeal,openingShelterShield} from './affix-expansion.js';
@@ -924,7 +924,7 @@ function rollMerchantOffers(s,revision){
  const [minGearLevel,maxGearLevel]=getMerchantEquipmentLevelRange(s);
  const pool=Object.keys(MATERIALS).filter(k=>MATERIALS[k].merchantEnabled!==false),offers=[],count=rand(2,3);
  for(let i=0;i<count;i++){const material=weighted(pool.map(key=>[key,MATERIALS[key].weight??1]));pool.splice(pool.indexOf(material),1);const [min,max]=MERCHANT_STOCK[material];const quality=rollQuality([75,20,4.5,.5]);offers.push({type:'material',material,quality,price:materialPrice(material,quality),stock:rand(min,max)});}
- while(offers.length<8){const slot=SLOTS[rand(0,SLOTS.length-1)],it=item(slot,rand(minGearLevel,maxGearLevel),null,rollQuality(),{levelSource:'merchant'});offers.push({type:'equipment',item:it,price:15+sellValue(it)*4+it.level*3,stock:1});}
+ while(offers.length<8){const originRace=PLAYABLE_RACES[rand(0,PLAYABLE_RACES.length-1)],available=SLOTS.filter(slot=>slot!=='core'||originRace==='ashen'),slot=available[rand(0,available.length-1)],it=item(slot,rand(minGearLevel,maxGearLevel),null,rollQuality(),{levelSource:'merchant',originRace});offers.push({type:'equipment',item:it,price:15+sellValue(it)*4+it.level*3,stock:1});}
  if(Math.random()<.03)offers[7]={type:'consumable',consumable:'memoryFruit',price:200,stock:1};
  if(Math.random()<.10){const index=offers.findLastIndex(o=>o.type==='equipment');offers[index]={type:'consumable',consumable:'reforgeToken',price:120,stock:1};}
  const unknown=Object.keys(RECIPES).filter(id=>RECIPES[id].enabled&&!recipeKnown(s,id));

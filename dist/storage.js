@@ -19,7 +19,7 @@ export function loadProgress(storage){
   if(raw!==null){reason='invalid-current-save';const parsed=JSON.parse(raw);if(!validCurrent(parsed))return fail();game=parsed;}
   else{game=fresh();game.lastSeen=Date.now();game.offlineLuck=effectiveLuck(game);if(!validCurrent(game)){game=null;reason='invalid-candidate';return fail();}reason='storage-write';storage.setItem(SAVE_KEY,JSON.stringify(game));initialized=true;}
   reason='storage-cleanup';for(const key of keys)if(storage.getItem(key)!==null)storage.removeItem(key);
-  blockedStores.delete(storage);return {game,notice:initialized?'已启用新版独立存档；旧开发进度及备份已清除。':null,blocked:false,reason:null};
+  blockedStores.delete(storage);return {game,initialized,notice:initialized?'已启用新版独立存档；旧开发进度及备份已清除。':null,blocked:false,reason:null};
  }catch{return fail();}
 }
 // User-visible resource operations commit storage before adopting their candidate.

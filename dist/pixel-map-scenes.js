@@ -1,5 +1,6 @@
+import {extendBattleManifest} from './race-art.js';
 // Read-only map pixels. No combat, travel, save writes, clocks or RNG.
-const supported=id=>id==='world'||/^dwarf\.a(?:0[1-9]|10)$/.test(id);
+const supported=id=>id==='world'||/^(?:dwarf|human|elf|goblin|ashen)\.a(?:0[1-9]|10)$/.test(id);
 function layersFor(manifest,scene){
  if(scene==='world')return manifest?.image&&manifest.size?.[0]===960&&manifest.size?.[1]===540?[{file:manifest.image}]:null;
  const ids=manifest?.areaBackgrounds?.[scene];if(!Array.isArray(ids)||!ids.length)return null;
@@ -18,7 +19,7 @@ export function createPixelMapScenes({assetRoot='./map-assets/',battleAssetRoot=
  const family=scene=>scene==='world'?'world':'battle';const root=scene=>scene==='world'?assetRoot:battleAssetRoot;
  function status(scene){if(disposed)return {mode:'disposed',label:'地图已释放'};if(!supported(scene))return {mode:'unavailable',label:'地图暂不可用'};const state=states.get(scene);if(state)return state;return {mode:'idle',label:'地图素材准备中'};}
  function publish(scene,value){states.set(scene,value);try{onStatus?.(scene,status(scene));}catch{}}
- async function getManifest(scene){const key=family(scene);if(manifests[key])return manifests[key];if(!manifestPending[key])manifestPending[key]=(async()=>{let response;if(scene==='world')response=await fetch(assetRoot+'manifest.json');else response=await fetch(battleAssetRoot+'manifest.json');if(!response.ok)throw Error('Manifest HTTP '+response.status);return manifests[key]=await response.json();})().finally(()=>{delete manifestPending[key]});return manifestPending[key];}
+ async function getManifest(scene){const key=family(scene);if(manifests[key])return manifests[key];if(!manifestPending[key])manifestPending[key]=(async()=>{let response;if(scene==='world')response=await fetch(assetRoot+'manifest.json');else response=await fetch(battleAssetRoot+'manifest.json');if(!response.ok)throw Error('Manifest HTTP '+response.status);const raw=await response.json();return manifests[key]=key==='battle'?extendBattleManifest(raw):raw;})().finally(()=>{delete manifestPending[key]});return manifestPending[key];}
  async function load(scene,{retry=false}={}){
   if(disposed||!supported(scene))return false;if(pending.has(scene))return pending.get(scene);if(status(scene).mode==='ready')return true;if(status(scene).mode==='failed'&&!retry)return false;
   publish(scene,{mode:'loading',label:'地图素材加载中'});

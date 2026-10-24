@@ -3,7 +3,7 @@ import {icon} from './icons.js';
 import * as Engine from './engine.js';
 import {PLANNED_AREAS,areaGearLevel} from './location-schema.js';
 import {MONSTER_CATALOG,monsterMaterialPool} from './monster-codex-schema.js';
-import {DWARF_MATERIALS,resolveDwarfMaterialId} from './dwarf-material-catalog.js';
+import {WORLD_MATERIALS as DWARF_MATERIALS,worldMaterialId as resolveDwarfMaterialId} from './world-materials.js';
 import {renderLegacyHandoff as legacyHandoff} from './dwarf-region-ui.js';
 import {discoveredMaterials} from './adjacent-region-discovery.js';
 const esc = x => String(x ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -111,7 +111,7 @@ export function buildRegionSnapshot(s, now=Date.now(), sourceFocus=null, overrid
   const monstersByNode=Object.fromEntries(nodes.map(n=>[n.id,Object.values(MONSTER_CATALOG).filter(m=>m.sources.includes(n.id))]));
   const materialIdsByNode=Object.fromEntries(nodes.map(n=>[n.id,[...new Set(monstersByNode[n.id].flatMap(m=>monsterMaterialPool(m.id,n.id)).map(resolveDwarfMaterialId).filter(Boolean))]]));
   return {automationAreaId:Engine.INSTANCES[s.expedition?.fieldId]?.areaId,automation:{autoDungeon:s.expedition?.autoDungeon===true||s.expedition?.loop===true,autoBoss:s.expedition?.autoBoss===true},now,nodes,areas,sourceFocus,exploredAreaIds:[...exploredAreaIds],favoriteNodeIds:[...(overrides.favoriteNodeIds??navigation.favoriteNodeIds)],
-    adjacency:Object.fromEntries(Object.values(PLANNED_AREAS).map(a=>[a.id,[...(a.number>1?[{areaId:'dwarf.a'+String(a.number-1).padStart(2,'0'),side:'left'}]:[]),...(a.number<10?[{areaId:'dwarf.a'+String(a.number+1).padStart(2,'0'),side:'right'}]:[])]])),
+    adjacency:Object.fromEntries(Object.values(PLANNED_AREAS).map(a=>[a.id,[...(a.number>1?[{areaId:a.race+'.a'+String(a.number-1).padStart(2,'0'),side:'left'}]:[]),...(a.number<10?[{areaId:a.race+'.a'+String(a.number+1).padStart(2,'0'),side:'right'}]:[])]])),
     monstersByNode,materialIdsByNode,materialCatalog:DWARF_MATERIALS,
     encounteredMonsterIds:Object.keys(s.monsterLedger?.encountered??{}).filter(id=>s.monsterLedger.encountered[id]===true),
     discoveryLedger:overrides.discoveryLedger??navigation.discoveryLedger,migration:s.contentMigration,
