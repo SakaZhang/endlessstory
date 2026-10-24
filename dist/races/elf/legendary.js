@@ -9,10 +9,10 @@ export function reduceLegendaryEvent({legendaryId,state,event,context={}}={}){
  if(!validLegendaryState(legendaryId,state)||!plain(event)||!Number.isFinite(context.clock)||context.clock<0)return null;
  const next=structuredClone(state),commands=[],kind=event.type??event.kind;
  if(legendaryId===staff){
-  if(kind==='beforeCast'&&typeof context.castId==='string'&&context.castId!==next.lastCastId){
+  if(kind==='beforeCast'&&context.committed===true&&typeof context.castId==='string'&&context.castId!==next.lastCastId){
    next.lastCastId=context.castId;
    // Read readiness before any hit in this cast, never retroactively trigger it.
-   if(next.ready&&context.weaponType==='staff'&&typeof context.targetId==='string'){
+   if(next.ready&&context.weaponType==='staff'&&context.damageActionCount>0&&typeof context.targetId==='string'){
     next.seenElements=[];next.ready=false;next.pendingCastId=context.castId;next.pendingTargetId=context.targetId;
    }
   }
