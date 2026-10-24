@@ -1,0 +1,4 @@
+import assert from 'node:assert/strict';import{monsters}from'../../../dist/races/ashen/world.js';import{RACE_PACK}from'../../../dist/races/ashen/index.js';
+const groups=Object.values(monsters).filter(m=>m.trait?.type==='followers');assert.equal(groups.length,3);assert.equal(groups.filter(m=>m.rank==='elite').length,2);assert.equal(groups.filter(m=>m.rank==='boss').length,1);
+for(const m of groups){const t=m.trait,child=monsters[t.followerMonsterId];assert(child);assert.equal(child.rank,'normal');assert.equal(child.area,m.area);assert.equal(t.shares.length,m.rank==='boss'?4:5);assert(Math.abs(t.shares.reduce((a,b)=>a+b,0)-1)<1e-9);assert(t.shares.every(x=>x>0&&x<1));assert(RACE_PACK.art.monsters[child.id]);assert.notEqual(child.id,m.id);}
+console.log('PASS 3 native follower groups: two five-target elites, one four-target boss; total budget 1, same-area ordinary art identities.');

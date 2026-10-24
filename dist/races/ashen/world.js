@@ -1081,9 +1081,15 @@ export const monsters={
       }
     ],
     "trait": {
-      "type": "openingShield",
-      "fraction": 0.08,
-      "durationMs": 6000
+      "type": "followers",
+      "shares": [
+        0.52,
+        0.12,
+        0.12,
+        0.12,
+        0.12
+      ],
+      "followerMonsterId": "ashen.a06.normal.3"
     }
   },
   "ashen.a07.normal.1": {
@@ -1601,9 +1607,15 @@ export const monsters={
       }
     ],
     "trait": {
-      "type": "openingShield",
-      "fraction": 0.08,
-      "durationMs": 6000
+      "type": "followers",
+      "shares": [
+        0.52,
+        0.12,
+        0.12,
+        0.12,
+        0.12
+      ],
+      "followerMonsterId": "ashen.a09.normal.2"
     }
   },
   "ashen.a10.normal.1": {
@@ -1828,7 +1840,16 @@ export const monsters={
         "maxCasts": 1
       }
     ],
-    "trait": null
+    "trait": {
+      "type": "followers",
+      "shares": [
+        0.64,
+        0.12,
+        0.12,
+        0.12
+      ],
+      "followerMonsterId": "ashen.a10.normal.3"
+    }
   }
 };
 export const parameters={
