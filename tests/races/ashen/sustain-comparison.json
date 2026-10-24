@@ -1,0 +1,182 @@
+{
+  "candidate": true,
+  "method": "Level100 A10 field, fixed identical first8 equipment items/hammer quality2, middle rolls atk/armor/crit; optional lifesteal replacescrit on allslots; Ashen adds canonical ninth core; no sets/exclusives/passives. 4h real scheduler and presentation observer telemetry, no production numerical changes.",
+  "results": [
+    {
+      "race": "dwarf",
+      "style": "noSustain",
+      "drain": false,
+      "stats": {
+        "hp": 5970,
+        "atk": 908,
+        "armor": 953,
+        "lifesteal": 0
+      },
+      "potions": 50,
+      "kills": 1251,
+      "rests": 0,
+      "rounds": 11043,
+      "hpDamage": 32850.20000000002,
+      "shieldAbsorbed": 0,
+      "shieldGranted": 0,
+      "lifesteal": 0,
+      "skillHealing": 0,
+      "potionHealing": 0,
+      "otherHealing": 29850
+    },
+    {
+      "race": "dwarf",
+      "style": "balanced",
+      "drain": false,
+      "stats": {
+        "hp": 5970,
+        "atk": 908,
+        "armor": 953,
+        "lifesteal": 0
+      },
+      "potions": 5,
+      "kills": 1183,
+      "rests": 0,
+      "rounds": 11155,
+      "hpDamage": 6241.040000000002,
+      "shieldAbsorbed": 31553.460000000025,
+      "shieldGranted": 1830796.0199999698,
+      "lifesteal": 0,
+      "skillHealing": 0,
+      "potionHealing": 0,
+      "otherHealing": 2985
+    },
+    {
+      "race": "dwarf",
+      "style": "sustain",
+      "drain": false,
+      "stats": {
+        "hp": 5970,
+        "atk": 908,
+        "armor": 953,
+        "lifesteal": 0
+      },
+      "potions": 0,
+      "kills": 891,
+      "rests": 0,
+      "rounds": 11632,
+      "hpDamage": 15733.920000000013,
+      "shieldAbsorbed": 25936.659999999993,
+      "shieldGranted": 1881570.8699999684,
+      "lifesteal": 0,
+      "skillHealing": 15729.920000000013,
+      "potionHealing": 0,
+      "otherHealing": 0
+    },
+    {
+      "race": "dwarf",
+      "style": "balanced",
+      "drain": true,
+      "stats": {
+        "hp": 5970,
+        "atk": 908,
+        "armor": 953,
+        "lifesteal": 48
+      },
+      "potions": 0,
+      "kills": 1104,
+      "rests": 0,
+      "rounds": 11284,
+      "hpDamage": 7343.080000000012,
+      "shieldAbsorbed": 31517.580000000016,
+      "shieldGranted": 1740851.999999972,
+      "lifesteal": 7343.0800000000145,
+      "skillHealing": 0,
+      "potionHealing": 0,
+      "otherHealing": 0
+    },
+    {
+      "race": "ashen",
+      "style": "noSustain",
+      "drain": false,
+      "stats": {
+        "hp": 5970,
+        "atk": 1051,
+        "armor": 1095,
+        "lifesteal": 0
+      },
+      "potions": 33,
+      "kills": 1153,
+      "rests": 0,
+      "rounds": 11204,
+      "hpDamage": 23232.201000000034,
+      "shieldAbsorbed": 0,
+      "shieldGranted": 0,
+      "lifesteal": 0,
+      "skillHealing": 0,
+      "potionHealing": 0,
+      "otherHealing": 19701
+    },
+    {
+      "race": "ashen",
+      "style": "balanced",
+      "drain": false,
+      "stats": {
+        "hp": 5970,
+        "atk": 1051,
+        "armor": 1095,
+        "lifesteal": 0
+      },
+      "potions": 3,
+      "kills": 1007,
+      "rests": 0,
+      "rounds": 11443,
+      "hpDamage": 5186.52199999992,
+      "shieldAbsorbed": 18640.244000000082,
+      "shieldGranted": 1094566.2419999712,
+      "lifesteal": 0,
+      "skillHealing": 0,
+      "potionHealing": 0,
+      "otherHealing": 1791
+    },
+    {
+      "race": "ashen",
+      "style": "sustain",
+      "drain": false,
+      "stats": {
+        "hp": 5970,
+        "atk": 1051,
+        "armor": 1095,
+        "lifesteal": 0
+      },
+      "potions": 0,
+      "kills": 802,
+      "rests": 0,
+      "rounds": 11778,
+      "hpDamage": 6223.738999999933,
+      "shieldAbsorbed": 18787.996000000196,
+      "shieldGranted": 1485120.4500000323,
+      "lifesteal": 0,
+      "skillHealing": 6223.243999999923,
+      "potionHealing": 0,
+      "otherHealing": 0
+    },
+    {
+      "race": "ashen",
+      "style": "balanced",
+      "drain": true,
+      "stats": {
+        "hp": 5970,
+        "atk": 1051,
+        "armor": 1095,
+        "lifesteal": 54
+      },
+      "potions": 0,
+      "kills": 915,
+      "rests": 0,
+      "rounds": 11593,
+      "hpDamage": 6702.876999999929,
+      "shieldAbsorbed": 17754.252000000066,
+      "shieldGranted": 1045129.2059999736,
+      "lifesteal": 6702.876999999918,
+      "skillHealing": 0,
+      "potionHealing": 0,
+      "otherHealing": 0
+    }
+  ]
+}
