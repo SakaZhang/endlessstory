@@ -1,0 +1,362 @@
+[
+  {
+    "variant": "bow",
+    "frame": "hero-bow-0",
+    "sourceBBox": [
+      122,
+      218,
+      327,
+      432
+    ],
+    "scale": 0.3813953488372093,
+    "alphaBBox": [
+      57,
+      94,
+      135,
+      175
+    ],
+    "bodyReferenceTop": 218
+  },
+  {
+    "variant": "bow",
+    "frame": "hero-bow-1",
+    "sourceBBox": [
+      131,
+      226,
+      348,
+      432
+    ],
+    "scale": 0.3813953488372093,
+    "alphaBBox": [
+      55,
+      97,
+      137,
+      175
+    ],
+    "bodyReferenceTop": 218
+  },
+  {
+    "variant": "bow",
+    "frame": "hero-bow-2",
+    "sourceBBox": [
+      137,
+      212,
+      342,
+      432
+    ],
+    "scale": 0.3813953488372093,
+    "alphaBBox": [
+      57,
+      92,
+      135,
+      175
+    ],
+    "bodyReferenceTop": 218
+  },
+  {
+    "variant": "bow",
+    "frame": "hero-bow-3",
+    "sourceBBox": [
+      133,
+      183,
+      380,
+      432
+    ],
+    "scale": 0.3813953488372093,
+    "alphaBBox": [
+      49,
+      81,
+      143,
+      175
+    ],
+    "bodyReferenceTop": 218
+  },
+  {
+    "variant": "bow",
+    "frame": "hero-bow-4",
+    "sourceBBox": [
+      115,
+      159,
+      333,
+      392
+    ],
+    "scale": 0.3813953488372093,
+    "alphaBBox": [
+      54,
+      87,
+      137,
+      175
+    ],
+    "bodyReferenceTop": 218
+  },
+  {
+    "variant": "bow",
+    "frame": "hero-bow-5",
+    "sourceBBox": [
+      137,
+      181,
+      341,
+      392
+    ],
+    "scale": 0.3813953488372093,
+    "alphaBBox": [
+      57,
+      95,
+      134,
+      175
+    ],
+    "bodyReferenceTop": 218
+  },
+  {
+    "variant": "bow",
+    "frame": "hero-bow-6",
+    "sourceBBox": [
+      126,
+      184,
+      366,
+      392
+    ],
+    "scale": 0.3813953488372093,
+    "alphaBBox": [
+      50,
+      96,
+      141,
+      175
+    ],
+    "bodyReferenceTop": 218
+  },
+  {
+    "variant": "bow",
+    "frame": "hero-bow-7",
+    "sourceBBox": [
+      111,
+      253,
+      395,
+      392
+    ],
+    "scale": 0.3813953488372093,
+    "alphaBBox": [
+      42,
+      123,
+      150,
+      175
+    ],
+    "bodyReferenceTop": 218
+  },
+  {
+    "variant": "staff",
+    "frame": "hero-staff-0",
+    "sourceBBox": [
+      125,
+      215,
+      321,
+      418
+    ],
+    "scale": 0.4143646408839779,
+    "alphaBBox": [
+      55,
+      91,
+      136,
+      175
+    ],
+    "bodyReferenceTop": 238
+  },
+  {
+    "variant": "staff",
+    "frame": "hero-staff-1",
+    "sourceBBox": [
+      127,
+      222,
+      339,
+      417
+    ],
+    "scale": 0.4143646408839779,
+    "alphaBBox": [
+      52,
+      95,
+      139,
+      175
+    ],
+    "bodyReferenceTop": 238
+  },
+  {
+    "variant": "staff",
+    "frame": "hero-staff-2",
+    "sourceBBox": [
+      135,
+      180,
+      334,
+      418
+    ],
+    "scale": 0.4143646408839779,
+    "alphaBBox": [
+      55,
+      77,
+      137,
+      175
+    ],
+    "bodyReferenceTop": 238
+  },
+  {
+    "variant": "staff",
+    "frame": "hero-staff-3",
+    "sourceBBox": [
+      112,
+      241,
+      360,
+      417
+    ],
+    "scale": 0.4143646408839779,
+    "alphaBBox": [
+      45,
+      103,
+      147,
+      175
+    ],
+    "bodyReferenceTop": 238
+  },
+  {
+    "variant": "staff",
+    "frame": "hero-staff-4",
+    "sourceBBox": [
+      95,
+      212,
+      377,
+      395
+    ],
+    "scale": 0.4143646408839779,
+    "alphaBBox": [
+      38,
+      100,
+      154,
+      175
+    ],
+    "bodyReferenceTop": 238
+  },
+  {
+    "variant": "staff",
+    "frame": "hero-staff-5",
+    "sourceBBox": [
+      105,
+      212,
+      380,
+      395
+    ],
+    "scale": 0.4143646408839779,
+    "alphaBBox": [
+      39,
+      100,
+      152,
+      175
+    ],
+    "bodyReferenceTop": 238
+  },
+  {
+    "variant": "staff",
+    "frame": "hero-staff-6",
+    "sourceBBox": [
+      145,
+      209,
+      362,
+      395
+    ],
+    "scale": 0.4143646408839779,
+    "alphaBBox": [
+      51,
+      99,
+      140,
+      175
+    ],
+    "bodyReferenceTop": 238
+  },
+  {
+    "variant": "staff",
+    "frame": "hero-staff-7",
+    "sourceBBox": [
+      123,
+      268,
+      362,
+      395
+    ],
+    "scale": 0.4143646408839779,
+    "alphaBBox": [
+      47,
+      123,
+      145,
+      175
+    ],
+    "bodyReferenceTop": 238
+  },
+  {
+    "variant": "neutral",
+    "frame": "idle",
+    "sourceBBox": [
+      230,
+      322,
+      418,
+      592
+    ],
+    "scale": 0.3025830258302583,
+    "alphaBBox": [
+      68,
+      95,
+      124,
+      176
+    ],
+    "bodyReferenceTop": 322
+  },
+  {
+    "variant": "neutral",
+    "frame": "strike",
+    "sourceBBox": [
+      222,
+      337,
+      463,
+      592
+    ],
+    "scale": 0.3025830258302583,
+    "alphaBBox": [
+      60,
+      100,
+      132,
+      176
+    ],
+    "bodyReferenceTop": 322
+  },
+  {
+    "variant": "neutral",
+    "frame": "hurt",
+    "sourceBBox": [
+      200,
+      315,
+      447,
+      575
+    ],
+    "scale": 0.3025830258302583,
+    "alphaBBox": [
+      59,
+      98,
+      133,
+      176
+    ],
+    "bodyReferenceTop": 322
+  },
+  {
+    "variant": "neutral",
+    "frame": "death",
+    "sourceBBox": [
+      173,
+      466,
+      518,
+      576
+    ],
+    "scale": 0.3025830258302583,
+    "alphaBBox": [
+      44,
+      143,
+      148,
+      176
+    ],
+    "bodyReferenceTop": 322
+  }
+]

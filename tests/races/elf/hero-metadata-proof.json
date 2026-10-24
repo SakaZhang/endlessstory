@@ -4,7 +4,7 @@
       "weapon": "bow",
       "id": "hero-bow-0",
       "alphaBBox": [
-        56,
+        57,
         94,
         135,
         175
@@ -22,9 +22,9 @@
       "weapon": "bow",
       "id": "hero-bow-1",
       "alphaBBox": [
-        52,
+        55,
         97,
-        138,
+        137,
         175
       ],
       "actualOpaqueHeight": 79,
@@ -40,117 +40,9 @@
       "weapon": "bow",
       "id": "hero-bow-2",
       "alphaBBox": [
-        53,
-        90,
-        137,
-        175
-      ],
-      "actualOpaqueHeight": 86,
-      "nativeScale": 1,
-      "anchor": [
-        96,
-        176
-      ],
-      "worldBaseline": 203,
-      "lastPixelWorldY": 202
-    },
-    {
-      "weapon": "bow",
-      "id": "hero-bow-3",
-      "alphaBBox": [
-        45,
-        76,
-        146,
-        175
-      ],
-      "actualOpaqueHeight": 100,
-      "nativeScale": 1,
-      "anchor": [
-        96,
-        176
-      ],
-      "worldBaseline": 203,
-      "lastPixelWorldY": 202
-    },
-    {
-      "weapon": "bow",
-      "id": "hero-bow-4",
-      "alphaBBox": [
-        51,
-        82,
-        139,
-        175
-      ],
-      "actualOpaqueHeight": 94,
-      "nativeScale": 1,
-      "anchor": [
-        96,
-        176
-      ],
-      "worldBaseline": 203,
-      "lastPixelWorldY": 202
-    },
-    {
-      "weapon": "bow",
-      "id": "hero-bow-5",
-      "alphaBBox": [
-        55,
-        94,
-        136,
-        175
-      ],
-      "actualOpaqueHeight": 82,
-      "nativeScale": 1,
-      "anchor": [
-        96,
-        176
-      ],
-      "worldBaseline": 203,
-      "lastPixelWorldY": 202
-    },
-    {
-      "weapon": "bow",
-      "id": "hero-bow-6",
-      "alphaBBox": [
-        48,
-        97,
-        142,
-        175
-      ],
-      "actualOpaqueHeight": 79,
-      "nativeScale": 1,
-      "anchor": [
-        96,
-        176
-      ],
-      "worldBaseline": 203,
-      "lastPixelWorldY": 202
-    },
-    {
-      "weapon": "bow",
-      "id": "hero-bow-7",
-      "alphaBBox": [
-        41,
-        121,
-        149,
-        175
-      ],
-      "actualOpaqueHeight": 55,
-      "nativeScale": 1,
-      "anchor": [
-        96,
-        176
-      ],
-      "worldBaseline": 203,
-      "lastPixelWorldY": 202
-    },
-    {
-      "weapon": "staff",
-      "id": "hero-staff-0",
-      "alphaBBox": [
-        53,
+        57,
         92,
-        137,
+        135,
         175
       ],
       "actualOpaqueHeight": 84,
@@ -163,12 +55,120 @@
       "lastPixelWorldY": 202
     },
     {
+      "weapon": "bow",
+      "id": "hero-bow-3",
+      "alphaBBox": [
+        49,
+        81,
+        143,
+        175
+      ],
+      "actualOpaqueHeight": 95,
+      "nativeScale": 1,
+      "anchor": [
+        96,
+        176
+      ],
+      "worldBaseline": 203,
+      "lastPixelWorldY": 202
+    },
+    {
+      "weapon": "bow",
+      "id": "hero-bow-4",
+      "alphaBBox": [
+        54,
+        87,
+        137,
+        175
+      ],
+      "actualOpaqueHeight": 89,
+      "nativeScale": 1,
+      "anchor": [
+        96,
+        176
+      ],
+      "worldBaseline": 203,
+      "lastPixelWorldY": 202
+    },
+    {
+      "weapon": "bow",
+      "id": "hero-bow-5",
+      "alphaBBox": [
+        57,
+        95,
+        134,
+        175
+      ],
+      "actualOpaqueHeight": 81,
+      "nativeScale": 1,
+      "anchor": [
+        96,
+        176
+      ],
+      "worldBaseline": 203,
+      "lastPixelWorldY": 202
+    },
+    {
+      "weapon": "bow",
+      "id": "hero-bow-6",
+      "alphaBBox": [
+        50,
+        96,
+        141,
+        175
+      ],
+      "actualOpaqueHeight": 80,
+      "nativeScale": 1,
+      "anchor": [
+        96,
+        176
+      ],
+      "worldBaseline": 203,
+      "lastPixelWorldY": 202
+    },
+    {
+      "weapon": "bow",
+      "id": "hero-bow-7",
+      "alphaBBox": [
+        42,
+        123,
+        150,
+        175
+      ],
+      "actualOpaqueHeight": 53,
+      "nativeScale": 1,
+      "anchor": [
+        96,
+        176
+      ],
+      "worldBaseline": 203,
+      "lastPixelWorldY": 202
+    },
+    {
+      "weapon": "staff",
+      "id": "hero-staff-0",
+      "alphaBBox": [
+        55,
+        91,
+        136,
+        175
+      ],
+      "actualOpaqueHeight": 85,
+      "nativeScale": 1,
+      "anchor": [
+        96,
+        176
+      ],
+      "worldBaseline": 203,
+      "lastPixelWorldY": 202
+    },
+    {
       "weapon": "staff",
       "id": "hero-staff-1",
       "alphaBBox": [
-        49,
+        52,
         95,
-        141,
+        139,
         175
       ],
       "actualOpaqueHeight": 81,
@@ -184,12 +184,12 @@
       "weapon": "staff",
       "id": "hero-staff-2",
       "alphaBBox": [
-        52,
-        76,
-        138,
+        55,
+        77,
+        137,
         175
       ],
-      "actualOpaqueHeight": 100,
+      "actualOpaqueHeight": 99,
       "nativeScale": 1,
       "anchor": [
         96,
@@ -202,7 +202,7 @@
       "weapon": "staff",
       "id": "hero-staff-3",
       "alphaBBox": [
-        43,
+        45,
         103,
         147,
         175
@@ -220,45 +220,9 @@
       "weapon": "staff",
       "id": "hero-staff-4",
       "alphaBBox": [
-        40,
-        102,
-        151,
-        175
-      ],
-      "actualOpaqueHeight": 74,
-      "nativeScale": 1,
-      "anchor": [
-        96,
-        176
-      ],
-      "worldBaseline": 203,
-      "lastPixelWorldY": 202
-    },
-    {
-      "weapon": "staff",
-      "id": "hero-staff-5",
-      "alphaBBox": [
-        41,
-        102,
-        149,
-        175
-      ],
-      "actualOpaqueHeight": 74,
-      "nativeScale": 1,
-      "anchor": [
-        96,
-        176
-      ],
-      "worldBaseline": 203,
-      "lastPixelWorldY": 202
-    },
-    {
-      "weapon": "staff",
-      "id": "hero-staff-6",
-      "alphaBBox": [
-        50,
+        38,
         100,
-        140,
+        154,
         175
       ],
       "actualOpaqueHeight": 76,
@@ -272,14 +236,50 @@
     },
     {
       "weapon": "staff",
+      "id": "hero-staff-5",
+      "alphaBBox": [
+        39,
+        100,
+        152,
+        175
+      ],
+      "actualOpaqueHeight": 76,
+      "nativeScale": 1,
+      "anchor": [
+        96,
+        176
+      ],
+      "worldBaseline": 203,
+      "lastPixelWorldY": 202
+    },
+    {
+      "weapon": "staff",
+      "id": "hero-staff-6",
+      "alphaBBox": [
+        51,
+        99,
+        140,
+        175
+      ],
+      "actualOpaqueHeight": 77,
+      "nativeScale": 1,
+      "anchor": [
+        96,
+        176
+      ],
+      "worldBaseline": 203,
+      "lastPixelWorldY": 202
+    },
+    {
+      "weapon": "staff",
       "id": "hero-staff-7",
       "alphaBBox": [
-        45,
-        125,
+        47,
+        123,
         145,
         175
       ],
-      "actualOpaqueHeight": 51,
+      "actualOpaqueHeight": 53,
       "nativeScale": 1,
       "anchor": [
         96,
