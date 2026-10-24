@@ -12,163 +12,113 @@
     "frames": [
       {
         "id": "idle-0",
-        "file": "races/goblin/assets/hero-0.png",
+        "file": "races/goblin/assets/hero-dagger-0.png",
         "durationMs": 120,
         "facing": "left",
         "alphaBBox": [
-          31,
-          26,
-          161,
+          38,
+          39,
+          154,
           176
-        ],
-        "sourceCrop": [
-          0,
-          0,
-          181,
-          194
         ]
       },
       {
         "id": "idle-1",
-        "file": "races/goblin/assets/hero-1.png",
+        "file": "races/goblin/assets/hero-dagger-1.png",
         "durationMs": 120,
         "facing": "left",
         "alphaBBox": [
-          30,
-          26,
-          162,
+          42,
+          38,
+          150,
           176
-        ],
-        "sourceCrop": [
-          181,
-          0,
-          362,
-          194
         ]
       },
       {
         "id": "ready",
-        "file": "races/goblin/assets/hero-2.png",
+        "file": "races/goblin/assets/hero-dagger-2.png",
         "durationMs": 120,
         "facing": "left",
         "alphaBBox": [
-          26,
-          29,
-          166,
+          35,
+          42,
+          158,
           176
-        ],
-        "sourceCrop": [
-          362,
-          0,
-          543,
-          194
         ]
       },
       {
         "id": "step",
-        "file": "races/goblin/assets/hero-3.png",
+        "file": "races/goblin/assets/hero-dagger-3.png",
         "durationMs": 120,
         "facing": "left",
         "alphaBBox": [
-          24,
-          25,
-          169,
+          32,
+          39,
+          160,
           176
-        ],
-        "sourceCrop": [
-          543,
-          0,
-          724,
-          194
         ]
       },
       {
         "id": "anticipation",
-        "file": "races/goblin/assets/hero-4.png",
+        "file": "races/goblin/assets/hero-dagger-4.png",
         "durationMs": 120,
         "facing": "left",
         "alphaBBox": [
-          21,
-          23,
-          171,
+          39,
+          31,
+          153,
           176
-        ],
-        "sourceCrop": [
-          724,
-          0,
-          905,
-          194
         ]
       },
       {
         "id": "attack",
-        "file": "races/goblin/assets/hero-5.png",
+        "file": "races/goblin/assets/hero-dagger-5.png",
         "durationMs": 120,
         "facing": "left",
         "alphaBBox": [
-          14,
-          34,
-          178,
+          9,
+          42,
+          183,
           176
-        ],
-        "sourceCrop": [
-          905,
-          0,
-          1086,
-          194
         ]
       },
       {
         "id": "hurt",
-        "file": "races/goblin/assets/hero-6.png",
+        "file": "races/goblin/assets/hero-dagger-6.png",
         "durationMs": 120,
         "facing": "left",
         "alphaBBox": [
-          14,
-          34,
-          178,
+          41,
+          46,
+          152,
           176
-        ],
-        "sourceCrop": [
-          1086,
-          0,
-          1267,
-          194
         ]
       },
       {
         "id": "recover",
-        "file": "races/goblin/assets/hero-7.png",
+        "file": "races/goblin/assets/hero-dagger-7.png",
         "durationMs": 120,
         "facing": "left",
         "alphaBBox": [
-          25,
-          26,
-          168,
+          44,
+          39,
+          149,
           176
-        ],
-        "sourceCrop": [
-          1267,
-          0,
-          1448,
-          194
         ]
       },
       {
         "id": "death",
-        "file": "races/goblin/assets/hero-death.png",
-        "durationMs": 240,
+        "file": "races/goblin/assets/hero-dagger-8.png",
+        "durationMs": 120,
         "facing": "left",
         "alphaBBox": [
-          14,
-          102,
-          178,
+          23,
+          100,
+          170,
           176
         ]
       }
     ],
-    "sourceAtlas": "978b344c-caf7-45f6-982b-f78f878eab61",
-    "sourceRow": 0,
     "animations": {
       "idle": [
         "idle-0",
@@ -9271,5 +9221,303 @@
       "height": 48
     }
   },
-  "camp": "battle-assets/backgrounds/camp-goblin.png"
+  "camp": "battle-assets/backgrounds/camp-goblin.png",
+  "heroWeapons": {
+    "dagger": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "frames": [
+        {
+          "id": "idle-0",
+          "file": "races/goblin/assets/hero-dagger-0.png",
+          "durationMs": 120,
+          "facing": "left",
+          "alphaBBox": [
+            38,
+            39,
+            154,
+            176
+          ]
+        },
+        {
+          "id": "idle-1",
+          "file": "races/goblin/assets/hero-dagger-1.png",
+          "durationMs": 120,
+          "facing": "left",
+          "alphaBBox": [
+            42,
+            38,
+            150,
+            176
+          ]
+        },
+        {
+          "id": "ready",
+          "file": "races/goblin/assets/hero-dagger-2.png",
+          "durationMs": 120,
+          "facing": "left",
+          "alphaBBox": [
+            35,
+            42,
+            158,
+            176
+          ]
+        },
+        {
+          "id": "step",
+          "file": "races/goblin/assets/hero-dagger-3.png",
+          "durationMs": 120,
+          "facing": "left",
+          "alphaBBox": [
+            32,
+            39,
+            160,
+            176
+          ]
+        },
+        {
+          "id": "anticipation",
+          "file": "races/goblin/assets/hero-dagger-4.png",
+          "durationMs": 120,
+          "facing": "left",
+          "alphaBBox": [
+            39,
+            31,
+            153,
+            176
+          ]
+        },
+        {
+          "id": "attack",
+          "file": "races/goblin/assets/hero-dagger-5.png",
+          "durationMs": 120,
+          "facing": "left",
+          "alphaBBox": [
+            9,
+            42,
+            183,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/goblin/assets/hero-dagger-6.png",
+          "durationMs": 120,
+          "facing": "left",
+          "alphaBBox": [
+            41,
+            46,
+            152,
+            176
+          ]
+        },
+        {
+          "id": "recover",
+          "file": "races/goblin/assets/hero-dagger-7.png",
+          "durationMs": 120,
+          "facing": "left",
+          "alphaBBox": [
+            44,
+            39,
+            149,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/hero-dagger-8.png",
+          "durationMs": 120,
+          "facing": "left",
+          "alphaBBox": [
+            23,
+            100,
+            170,
+            176
+          ]
+        }
+      ],
+      "animations": {
+        "idle": [
+          "idle-0",
+          "idle-1"
+        ],
+        "attack": [
+          "anticipation",
+          "attack",
+          "recover"
+        ],
+        "hurt": [
+          "hurt"
+        ],
+        "move": [
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    },
+    "sword": {
+      "frameSize": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        176
+      ],
+      "facing": "left",
+      "frames": [
+        {
+          "id": "idle-0",
+          "file": "races/goblin/assets/hero-sword-0.png",
+          "durationMs": 120,
+          "facing": "left",
+          "alphaBBox": [
+            41,
+            52,
+            151,
+            176
+          ]
+        },
+        {
+          "id": "idle-1",
+          "file": "races/goblin/assets/hero-sword-1.png",
+          "durationMs": 120,
+          "facing": "left",
+          "alphaBBox": [
+            37,
+            52,
+            155,
+            176
+          ]
+        },
+        {
+          "id": "ready",
+          "file": "races/goblin/assets/hero-sword-2.png",
+          "durationMs": 120,
+          "facing": "left",
+          "alphaBBox": [
+            34,
+            56,
+            158,
+            176
+          ]
+        },
+        {
+          "id": "step",
+          "file": "races/goblin/assets/hero-sword-3.png",
+          "durationMs": 120,
+          "facing": "left",
+          "alphaBBox": [
+            34,
+            53,
+            159,
+            176
+          ]
+        },
+        {
+          "id": "anticipation",
+          "file": "races/goblin/assets/hero-sword-4.png",
+          "durationMs": 120,
+          "facing": "left",
+          "alphaBBox": [
+            46,
+            16,
+            147,
+            176
+          ]
+        },
+        {
+          "id": "attack",
+          "file": "races/goblin/assets/hero-sword-5.png",
+          "durationMs": 120,
+          "facing": "left",
+          "alphaBBox": [
+            12,
+            57,
+            180,
+            176
+          ]
+        },
+        {
+          "id": "hurt",
+          "file": "races/goblin/assets/hero-sword-6.png",
+          "durationMs": 120,
+          "facing": "left",
+          "alphaBBox": [
+            44,
+            64,
+            149,
+            176
+          ]
+        },
+        {
+          "id": "recover",
+          "file": "races/goblin/assets/hero-sword-7.png",
+          "durationMs": 120,
+          "facing": "left",
+          "alphaBBox": [
+            47,
+            53,
+            145,
+            176
+          ]
+        },
+        {
+          "id": "death",
+          "file": "races/goblin/assets/hero-sword-8.png",
+          "durationMs": 120,
+          "facing": "left",
+          "alphaBBox": [
+            30,
+            108,
+            162,
+            176
+          ]
+        }
+      ],
+      "animations": {
+        "idle": [
+          "idle-0",
+          "idle-1"
+        ],
+        "attack": [
+          "anticipation",
+          "attack",
+          "recover"
+        ],
+        "hurt": [
+          "hurt"
+        ],
+        "move": [
+          "ready",
+          "step"
+        ],
+        "anticipation": [
+          "anticipation"
+        ],
+        "recovery": [
+          "recover"
+        ],
+        "death": [
+          "death"
+        ]
+      }
+    }
+  }
 }
