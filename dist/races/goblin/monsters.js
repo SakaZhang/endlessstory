@@ -1486,15 +1486,15 @@ for(const m of Object.values(monsters)){
  const s=m.skills[0];s.requiresHitForEffects=true;m.basicAttackType='physical';
  if(/鼠|齿|牙|爪|攀/.test(m.name)){s.name='裂齿掠咬';s.effects[0].damageType='physical';s.effects[0].powerBasis='atk';s.effects.push({type:'dot',damageType:'physical',powerBasis:'atk',coefficientPerSecond:.065,seconds:3,refresh:'same_skill',mitigation:'armor_only'});}
  else if(/械|傀|绞/.test(m.name)){s.name='铜簧蓄撞';s.castMs=1400;s.cooldownMs=10500;s.effects[0].coefficient=1.6;}
- else if(/菌|孢/.test(m.name)){s.name='菌尘封路';s.effects.push({type:'next_basic_slow',multiplier:1.18});s.cooldownMs=12000;}
+ else if(/菌|孢/.test(m.name)){s.name='菌尘封路';s.effects.push({type:'next_basic_slow',multiplier:1.15});s.cooldownMs=12000;}
  else if(/蛾|螳|影/.test(m.name)){s.name='翅刃回响';s.cooldownMs=9000;s.effects[0].damageType='wind';s.effects[0].powerBasis='elementalPower';}
  else if(/鳌|壳|晶/.test(m.name)){s.name='覆壳横扫';s.castMs=1000;s.effects[0].damageType='earth';s.effects[0].powerBasis='elementalPower';}
  if(m.rank==='elite')m.trait=m.area%3===0?{type:'reflect',chance:.15,coefficient:.3,cooldownMs:5000}:m.area%3===1?{type:'openingShield',fraction:.1,durationMs:7000}:{type:'lifesteal',fraction:.08,perActionCap:.02,encounterCap:.12};
 }
 const bosses={
- 'goblin.a03.boss':[{name:'灯群喷孢',type:'dark',coefficient:1.25,castMs:0,effects:[{type:'next_basic_slow',multiplier:1.25}]},{name:'母核震根',type:'earth',coefficient:1.7,castMs:1700,effects:[]}],
+ 'goblin.a03.boss':[{name:'灯群喷孢',type:'dark',coefficient:1.25,castMs:0,effects:[{type:'next_basic_slow',multiplier:1.15}]},{name:'母核震根',type:'earth',coefficient:1.7,castMs:1700,effects:[]}],
  'goblin.a06.boss':[{name:'旋流夹击',type:'water',coefficient:1.5,castMs:1300,effects:[]},{name:'砂铜回甲',type:'physical',coefficient:.8,castMs:0,effects:[{type:'reflect',seconds:5,charges:1,coefficient:.3,damageType:'physical',powerBasis:'atk'}]}],
- 'goblin.a09.boss':[{name:'断响翼刃',type:'wind',coefficient:1.65,castMs:1500,effects:[]},{name:'蜕影掠身',type:'dark',coefficient:1.1,castMs:0,effects:[{type:'next_basic_slow',multiplier:1.2}]}]
+ 'goblin.a09.boss':[{name:'断响翼刃',type:'wind',coefficient:1.65,castMs:1500,effects:[]},{name:'蜕影掠身',type:'dark',coefficient:1.1,castMs:0,effects:[{type:'next_basic_slow',multiplier:1.15}]}]
 };
 for(const[id,rows]of Object.entries(bosses)){
  const m=monsters[id],shield=m.skills[1];shield.name=id.includes('a03')?'覆灯菌衣':id.includes('a06')?'沉河壳壁':'蜕影囊膜';shield.requiresHitForEffects=false;shield.trigger='cooldown_limited_two_casts';
