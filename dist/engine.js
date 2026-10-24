@@ -1,3 +1,5 @@
+import {racialGoldCost} from './race-economy.js';
+export {racialGoldCost} from './race-economy.js';
 import {EXPANSION_PACKS} from './race-packs.js';
 import {getRacePack,getSkillTreeDefinition,getSkillMetadata,getRaceTuning,raceSockets,PLAYABLE_RACES} from './race-registry.js';
 import {WORLD_MONSTERS as ALL_MONSTERS,monsterParameters,raceParameterSet,areaBudgetReady,raceGroupChance,eligibleMonsters} from './world-content.js';
@@ -170,11 +172,11 @@ export function legendaryItem(legendaryId,level,metadata={}){return createLegend
 export function itemTotals(it,{development=false}={}){const m=divineMultiplier(it),base=enhancedItemBase(it,{development})??it;return {atk:base.atk*m,armor:base.armor*m,hp:base.hp*m};}
 export function sellValue(it){return [2,4,8,16][it.rarity]+Math.floor(it.level/3);}
 // Cost previews are deterministic and never consume random rolls.
-export function getReforgeCost(it,mode){
+export function getReforgeCost(it,mode,s=null){
  if(!it||!Number.isInteger(it.rarity)||it.rarity<0||it.rarity>3||!Array.isArray(it.affixes)||!it.affixes.length)return null;
  if(mode==='all')return {gold:0,materials:{},consumables:{reforgeToken:1}};
  if(mode==='replace')return {gold:0,materials:{},equipment:1};
- return mode==='value'?{gold:10+5*it.rarity,materials:{'铁屑':1}}:null;
+ return mode==='value'?{gold:racialGoldCost(s,10+5*it.rarity),materials:{'铁屑':1}}:null;
 }
 export function eligibleReforgeDonors(s,targetId,index=0){
  const target=s?.inventory?.find(it=>it.id===targetId);
@@ -204,7 +206,7 @@ export function getPendingReforgeCandidate(s){
 function canonicalReforgeDivine(it){const copy=structuredClone(it);delete copy.divine;applyForgeFavor(copy);return copy.divine;}
 export function reforge(s,itemId,mode,index=0,donorId){
  if(!s||!Array.isArray(s.inventory)||s.pendingReforge)return null;
- const it=s.inventory.find(i=>i.id===itemId),cost=getReforgeCost(it,mode);
+ const it=s.inventory.find(i=>i.id===itemId),cost=getReforgeCost(it,mode,s);
  if(!cost||!validEquipment(it)||!SLOTS.includes(it.slot)||it.affixes.length>Object.keys(AFFIX_DEFS).length||it.affixes.some(a=>!a||typeof a!=='object'))return null;
  if(divineMultiplier(it)>1&&(!it.divine.bonus||typeof it.divine.bonus!=='object'))return null;
  if(new Set(it.affixes.map(a=>a.stat)).size!==it.affixes.length||!it.affixes.every(a=>validAffixSource(a,AFFIX_DEFS)))return null;
@@ -246,7 +248,7 @@ export function validPendingReforge(s){
  const p=s.pendingReforge;if(p===undefined||p===null)return true;
  if(!p||typeof p!=='object'||Array.isArray(p)||typeof p.operationId!=='string'||p.operationId.length<1||p.operationId.length>160)return false;
  if(p.ruleVersion!==6)return false;
- const it=s.inventory?.find(i=>i.id===p.itemId),cost=getReforgeCost(it,p.mode);
+ const it=s.inventory?.find(i=>i.id===p.itemId),cost=getReforgeCost(it,p.mode,s);
  if(!it||!cost||!p.cost||p.cost.gold!==cost.gold||!p.cost.materials||Object.keys(p.cost.materials).length!==Object.keys(cost.materials).length||!Object.entries(cost.materials).every(([k,v])=>p.cost.materials[k]===v))return false;
  if((p.cost.equipment??0)!==(cost.equipment??0))return false;
  const expectedConsumables=cost.consumables??{},actualConsumables=p.cost.consumables??{};
@@ -393,7 +395,7 @@ export function learnRecipe(s,id){
 export function eligibleRecoveryMaterials(s,quality){return materialEntries(s).filter(row=>row.quality===quality&&MATERIALS[row.material]?.functionalTags?.includes('recoveryBase'));}
 export function quoteRecoveryRecipe(s,quality,inputs){
  if(s.pendingForgeClaim||!RECIPES['potion-healing'].enabled||!recipeKnown(s,'potion-healing')||!validRecipes(s)||!validMaterials(s)||!validPotions(s))return null;
- const quote=recoveryInputPlan(quality,inputs,MATERIALS);if(!quote||!Number.isFinite(s.gold)||s.gold<quote.gold)return null;
+ const raw=recoveryInputPlan(quality,inputs,MATERIALS),quote=raw?{...raw,gold:racialGoldCost(s,raw.gold)}:null;if(!quote||!Number.isFinite(s.gold)||s.gold<quote.gold)return null;
  for(const row of quote.inputs){const p=parseMaterialKey(row.key);if(!p||materialCount(s,p.material,p.quality)<row.quantity)return null;}
  return quote;
 }
@@ -411,7 +413,7 @@ export function quotePotionRecipe(s,id,quality,{mainKey,auxKey,quantity=1}={}){
  const recipe=RECIPES[id];if(!recipe||id==='potion-healing'||!recipe.enabled||!recipeKnown(s,id)||s.pendingForgeClaim||!validRecipes(s)||!validMaterials(s)||!validPotions(s)||!Number.isInteger(quality)||quality<0||quality>3||!Number.isSafeInteger(quantity)||quantity<1||quantity>999)return null;
  const main=parseMaterialKey(mainKey),aux=parseMaterialKey(auxKey);if(!main||!aux||main.quality!==quality||aux.quality!==quality||!potionRecipeAllows(id,'main',main.material)||!potionRecipeAllows(id,'aux',aux.material))return null;
  const counts={};for(const row of [main,aux])counts[row.key]=(counts[row.key]??0)+quantity;
- const inputs=Object.entries(counts).sort(([a],[b])=>a.localeCompare(b)).map(([key,quantity])=>({key,quantity})),gold=recipe.craftGoldByQuality?.[quality]*quantity;
+ const inputs=Object.entries(counts).sort(([a],[b])=>a.localeCompare(b)).map(([key,quantity])=>({key,quantity})),gold=racialGoldCost(s,recipe.craftGoldByQuality?.[quality]*quantity);
  if(!Number.isSafeInteger(gold)||gold<0||!Number.isFinite(s.gold)||s.gold<gold||inputs.some(row=>{const p=parseMaterialKey(row.key);return materialCount(s,p.material,p.quality)<row.quantity;}))return null;
  return {recipeId:id,quality,quantity,gold,mainKey:main.key,auxKey:aux.key,inputs};
 }
@@ -499,11 +501,12 @@ export function validAreaProgress(s){
 export function normalizeAreaProgress(s){
  if(!validAreaProgress(s))return false;
  s.areaProgress??=Object.fromEntries(RACE_KEYS.map(race=>[race,{unlocked:PLAYABLE_RACES.includes(race)?[1]:[],cleared:[]}]));
+ for(const race of PLAYABLE_RACES)if(s.areaProgress[race]?.unlocked.length===0&&s.areaProgress[race].cleared.length===0)s.areaProgress[race].unlocked=[1];
  return true;
 }
 export function getAreaProgress(s,race=AREAS[s.siteId]?.race??s.race??'dwarf'){
  if(!RACE_KEYS.includes(race)||!validAreaProgress(s))return null;
- const p=s.areaProgress?.[race]??{unlocked:PLAYABLE_RACES.includes(race)?[1]:[],cleared:[]};
+ const stored=s.areaProgress?.[race],p=stored?.unlocked.length?stored:{unlocked:PLAYABLE_RACES.includes(race)?[1]:[],cleared:[]};
  return {unlocked:[...p.unlocked],cleared:[...p.cleared]};
 }
 export function getMerchantEquipmentLevelRange(s){
@@ -929,7 +932,7 @@ function rollMerchantOffers(s,revision){
  if(Math.random()<.10){const index=offers.findLastIndex(o=>o.type==='equipment');offers[index]={type:'consumable',consumable:'reforgeToken',price:120,stock:1};}
  const unknown=Object.keys(RECIPES).filter(id=>RECIPES[id].enabled&&!recipeKnown(s,id));
  if(unknown.length){const count=Math.min(unknown.length,rand(1,2));for(let i=0;i<count;i++){const id=unknown.splice(rand(0,unknown.length-1),1)[0],index=offers.findLastIndex(o=>o.type==='equipment');if(index>=0)offers[index]={type:'recipe',recipeId:id,price:RECIPES[id].price,stock:1};}}
- return offers.map((offer,index)=>({...offer,offerId:`merchant-${revision}-${index}`}));
+ return offers.map((offer,index)=>({...offer,price:racialGoldCost(s,offer.price),offerId:`merchant-${revision}-${index}`}));
 }
 export function ensureMerchant(s,now=Date.now()){
  if(!validRecipes(s)||!normalizeAreaProgress(s))return null;
@@ -944,7 +947,7 @@ export function ensureMerchant(s,now=Date.now()){
  }
  return m;
 }
-export function getMerchantRefreshCost(s){const n=s.merchant?.paidRefreshes??0;return 20+10*n;}
+export function getMerchantRefreshCost(s){const n=s.merchant?.paidRefreshes??0;return racialGoldCost(s,20+10*n);}
 export function paidRefreshMerchant(s,now=Date.now(),expectedRevision){
  const m=ensureMerchant(s,now);
  if(!m||!Number.isSafeInteger(expectedRevision)||m.revision!==expectedRevision||m.paidRefreshes>=1e9)return false;
@@ -991,7 +994,7 @@ export function eligibleFusionEquipment(s){
  return s.inventory.filter(it=>validEquipment(it)&&!it.locked&&!Object.values(s.equip).includes(it.id)&&!isProtected(s,it.id));
 }
 export function forge(s,selection){
- if(!validCodexCollection(s)||!Array.isArray(selection)||selection.length<1||selection.length>5||!Number.isFinite(s.gold)||s.gold<40||s.pendingForgeClaim||!validMaterials(s))return null;
+ if(!validCodexCollection(s)||!Array.isArray(selection)||selection.length<1||selection.length>5||!Number.isFinite(s.gold)||s.gold<racialGoldCost(s,40)||s.pendingForgeClaim||!validMaterials(s))return null;
  const counts={},parsed=[],gear=[],ids=new Set(),inputs=[],materials=[],eligible=new Map(eligibleFusionEquipment(s).map(it=>[it.id,it]));
  for(const input of selection){
   if(typeof input==='string'){const entry=parseMaterialKey(input);if(!entry)return null;parsed.push(entry);materials.push(entry.key);inputs.push({kind:'material',quality:entry.quality});counts[entry.key]=(counts[entry.key]||0)+1;}
@@ -1003,7 +1006,7 @@ export function forge(s,selection){
  if(!gear.length&&herbs&&!validPotions(s))return null;
  if(!gear.length&&herbs&&Math.random()<.35+.5*herbs/n){
   const quality=forgeLuckyRoll(()=>rollQuality(qualityWeights),effectiveLuck(s),s.race),type=weighted([['healing',60],['strength',25],['fireResist',15]]),key=potionKey(type,quality);
-  normalizeMaterials(s);normalizePotions(s);Object.entries(counts).forEach(([key,v])=>s.materialStacks[key]-=v);s.gold-=40;
+  normalizeMaterials(s);normalizePotions(s);Object.entries(counts).forEach(([key,v])=>s.materialStacks[key]-=v);s.gold-=racialGoldCost(s,40);
   const result={kind:'potion',potionType:type,quality,name:POTIONS[type].name,quantity:1,key};
   if(canReceiveItem(s,key))s.potionStacks[key]=(s.potionStacks[key]??0)+1;else s.pendingForgeClaim={kind:'potion',potion:result};return result;
  }
@@ -1013,7 +1016,7 @@ export function forge(s,selection){
  const it=item(slot,level.level,null,quality,{...level,originRace,luck:effectiveLuck(s),forgeRace:s.race});if(Math.random()<dwarfDivineChance(divineProbability(fusionDivineChance(inputs),effectiveLuck(s)),s.race,DWARF_FORGE_FAVOR_CONFIG))applyForgeFavor(it);
  // Record actual owned inputs before their one-time consumption.
  if(gear.length)normalizeCodexCollection(s);
- normalizeMaterials(s);Object.entries(counts).forEach(([key,v])=>s.materialStacks[key]-=v);s.inventory=s.inventory.filter(it=>!ids.has(it.id));s.gold-=40;
+ normalizeMaterials(s);Object.entries(counts).forEach(([key,v])=>s.materialStacks[key]-=v);s.inventory=s.inventory.filter(it=>!ids.has(it.id));s.gold-=racialGoldCost(s,40);
  if(canReceiveEquipment(s,it)){s.inventory.push(it);recordCollectedEquipment(s,it);}else s.pendingForgeClaim={kind:'equipment',item:it};return it;
 }
 export function applyForgeFavor(it){

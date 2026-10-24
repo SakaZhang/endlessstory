@@ -1,3 +1,4 @@
+import {racialGoldCost} from './race-economy.js';
 import {dwarfEnhancementChance} from './dwarf-forge-favor.js';
 import {DWARF_FORGE_FAVOR_CONFIG} from './dwarf-forge-favor-config.js';
 import {validLegendaryEquipmentMetadata} from './legendary-equipment.js';
@@ -41,7 +42,7 @@ export function quoteEnhancement(s,itemId){
  const it=s?.inventory?.find(i=>i.id===itemId),equipped=Object.values(s?.equip??{}).includes(itemId);
  if(!it||(it.legendaryId&&!validLegendaryEquipmentMetadata(it))||!validEnhancementMetadata(it)||it.enhancement?.model===DEVELOPMENT_ENHANCEMENT_CONFIG.id||s?.pendingReforge?.itemId===itemId||equipped&&(s.running||s.activeEncounter&&!s.activeEncounter.done))return bad('unavailable');
  const level=enhancementLevel(it);if(level===5)return bad('at-maximum');
- let gold;try{gold=enhancementFee({level:it.level,quality:it.legendaryId?4:it.rarity,target:level+1});}catch{return bad('invalid-item');}
+ let gold;try{gold=racialGoldCost(s,enhancementFee({level:it.level,quality:it.legendaryId?4:it.rarity,target:level+1}));}catch{return bad('invalid-item');}
  if(!Number.isSafeInteger(gold)||gold<1||gold>1e12||!number(s.gold)||s.gold<gold)return bad('insufficient-gold');
  const bases={current:formalBase(it,level),success:formalBase(it,level+1),failure:formalBase(it,Math.max(0,level-1))};if(Object.values(bases).some(x=>!x))return bad('invalid-base');
  return freeze({ok:true,version:2,model:FORMAL_BUDGET.id,itemId,fromLevel:level,targetLevel:level+1,baseSuccessRate:FORMAL_BUDGET.successRates[level],successRate:dwarfEnhancementChance(FORMAL_BUDGET.successRates[level],s.race??'legacy',DWARF_FORGE_FAVOR_CONFIG),finalSuccessRate:dwarfEnhancementChance(FORMAL_BUDGET.successRates[level],s.race??'legacy',DWARF_FORGE_FAVOR_CONFIG),cost:{gold,materials:[]},bases,stateFingerprint:formalFingerprint(s,itemId)});
