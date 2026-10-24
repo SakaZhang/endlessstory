@@ -5,7 +5,8 @@ const skillTreeNode=getSkillMetadata;
 import {resolveTreePassives,derivePassiveStats,passiveDamageMultiplier,passiveReceivedHeal,passiveNegativeDuration} from './skill-tree-passives.js';
 import {skillTreeHeroStats,skillTreeEnemyAttributes} from './skill-tree-attributes.js';
 import {createTreeEffectHost} from './skill-tree-effect-host.js';
-import {validSkillEffectState} from './skill-tree-effects.js';
+import {getRacePack} from './race-registry.js';
+import {applySkillEffect,validSkillEffectState} from './skill-tree-effects.js';
 import {validSkillPoison,createSkillPoison,applySkillPoison,advanceSkillPoison} from './skill-tree-poison.js';
 import {executeTreeSkillTurn,planTreeSkill,resolveSetLinkedHit,resolveSetLinkedEffect,TREE_ACTIVE_SKILL_IDS} from './skill-tree-consumer.js';
 import {advanceLegendaryCombat} from './legendary-combat.js';
@@ -189,6 +190,7 @@ export function stepMulti(s,e,turn,ctx){
  if(ctx.basicOnly){if(!cleared(e,'active'))syncMultiTarget(e);return logs;}
  const treeCounterReady=()=>!!ctx.treeSkills&&e.treeEffects?.hero.sources.some(x=>x.counterEligible===true&&x.endAt>e.treeEffects.clock)&&((e.playerShieldLayers?.layers.reduce((n,l)=>n+l.remaining,0)??((e.shield??0)+(e.barrierShield??0)))>0);
  const treeCounter=(u,ready,hpLoss)=>{if(!ready||hpLoss<=0||e.heroHp<=0||u.hp<=0)return;const coefficient=ctx.treeSkills.counterCoefficient;if(!Number.isFinite(coefficient)||coefficient<0)throw Error('Missing iron vigil counter coefficient');refreshStats();const damage=physical(st.atk*coefficient*treeDamage(passives,'physical','counter'),Math.max(0,u.armor-st.penetration));hitEnemy(u,damage,e,{kind:'counter',skillId:'iron_vigil'});logs.push('铁幕反击 → '+u.name+' · '+damage);};
+ const racialReaction=(attacker,direct,hpLoss=0)=>{const pack=getRacePack(s.race);if(!pack?.onEnemyAction||!direct||e.heroHp<=0)return;raceRuntimeContext(e,s.race);const targets=e.enemies.map(u=>({id:u.id,alive:u.hp>0,hp:u.hp,maxHp:u.max,poisonLayers:e.treePoison?.[u.id]?.layers.length??0}));const result=pack.onEnemyAction({runtime:structuredClone(e.raceRuntime.state),event:{clock:e.treeCombatClock??0,attackerId:attacker.id,direct:true,recursive:false,actualHpLost:hpLoss},hero:{hp:e.heroHp,maxHp:st.hp},targets,...equipmentSkillContext(s)});if(!result||!pack.validRuntime(result.runtime))throw Error('Invalid racial reaction');e.raceRuntime.state=result.runtime;for(const action of result.actions){const u=e.enemies.find(x=>x.id===action.targetId&&x.hp>0);if(!u)continue;if(Math.random()>=st.hit){emitCombatDisplay(e,{kind:'counter',castId:action.castId,sourceId:'hero',targetId:u.id,outcome:'miss'});continue;}const adjusted=e.treeEffects?skillTreeEnemyAttributes(u,e.treeEffects):null;hitEnemy(u,physical(st.atk*action.coefficient,Math.max(0,(adjusted?.armor??u.armor)-st.penetration)),e,{kind:'counter',castId:action.castId,hitId:action.hitId,skillId:'goblin.trap_reaction'});if(u.hp<=0)continue;for(const fx of action.effects??[]){const durationMs=fx.durationMs+(equipmentSkillContext(s).exclusiveIds.includes('goblin-decoy-reserve')?1500:0),r=applySkillEffect(e.treeEffects,u.id,{...fx,durationMs,source:{kind:'skill',skillId:fx.sourceId}});if(!r)throw Error('Invalid reactive debuff');e.treeEffects=r.state;}}};
  const acting=[...e.enemies];
  for(const u of acting){if(u.hp<=0)continue;refreshStats();u.round++;const enemyCastId=e.id+':enemy:'+u.id+':'+u.round;let multiplier=1,perform=true;
   const treeEnemy=ctx.treeSkills&&e.treeEffects?skillTreeEnemyAttributes(u,e.treeEffects,{hasStatus:(id,status)=>e.treeEffects.enemies[id]?.sources.some(x=>x.status===status&&x.endAt>e.treeEffects.clock)}):null,enemyAtk=treeEnemy?.atk??u.atk;
@@ -209,6 +211,7 @@ export function stepMulti(s,e,turn,ctx){
    }
    const drain=action.effects.find(f=>f.type==='lifesteal')??DWARF_MONSTERS[u.definitionId]?.trait;if(drain?.type==='lifesteal'&&u.hp>0&&actionHpLoss>0){const heal=Math.max(0,Math.min(u.max-u.hp,actionHpLoss*drain.fraction,u.max*drain.perActionCap,u.max*drain.encounterCap-(u.lifestealHealed??0)));u.hp+=heal;u.lifestealHealed=(u.lifestealHealed??0)+heal;emitCombatDisplay(e,{kind:'heal',castId:enemyCastId,sourceId:u.id,targetId:u.id,skillId:'lifesteal',hpDelta:heal});}
    if(direct&&e.heroHp>0&&e.guard>0){const counter=physical(st.atk*(e.warcry>0?1.25:1)*(e.weakness>0?.8:1)*(st.count.guard>=4?1:.6)*treeDamage(passives,'physical','counter'),Math.max(0,u.armor-st.penetration));hitEnemy(u,counter,e,{kind:'counter',skillId:'guard'});logs.push('坚守反击 → '+u.name+' · '+counter);}
+   racialReaction(u,direct,actionHpLoss);
    continue;
   }
   if(u.stun){u.stun=0;perform=false;logs.push(u.name+' · 蓄力被打断');}
@@ -225,6 +228,7 @@ export function stepMulti(s,e,turn,ctx){
    const counterReady=treeCounterReady(),loss=hitHero(e,hurt,{castId:enemyCastId,sourceId:u.id,skillId:typeof action!=='undefined'?action.id:'basic',element:typeof effect!=='undefined'?effect.damageType:'physical'});treeCounter(u,counterReady,loss);logs.push(u.name+' · 攻击 -'+Number(loss.toFixed(1)));
    if(u.profile.lifestealRatio>0){const heal=Math.min(u.max-u.hp,loss*u.profile.lifestealRatio,u.profile.lifestealCap??0);u.hp+=heal;emitCombatDisplay(e,{kind:'heal',sourceId:u.id,targetId:u.id,skillId:'lifesteal',hpDelta:heal});}
    if(heroDied())return logs;
+   racialReaction(u,true,loss);
    if(e.heroHp>0&&e.guard>0){const counter=physical(st.atk*(e.warcry>0?1.25:1)*(e.weakness>0?.8:1)*(st.count.guard>=4?1:.6)*treeDamage(passives,'physical','counter'),Math.max(0,u.armor-st.penetration));hitEnemy(u,counter,e,{kind:'counter',skillId:'guard'});logs.push('坚守反击 → '+u.name+' · '+counter);}
    if(u.location===1&&u.round%5===0){e.heroBurn=Math.max(1,Math.ceil((3-st.resolveReduction)*(passives?passiveNegativeDuration(passives,1):1)));e.heroBurnPower=Math.max(2,Math.round(u.atk*.05));}
    if(u.location===2&&u.round%6===0)e.weakness=Math.max(1,Math.ceil((2-st.resolveReduction)*(passives?passiveNegativeDuration(passives,1):1)))+1;
