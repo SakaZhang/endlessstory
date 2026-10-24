@@ -17,8 +17,9 @@ import {renderCodex} from './dist/codex-ui.js';
 import {SCHEMA_VERSION} from './dist/save-generation.js';
 const hash=x=>createHash('sha256').update(x).digest('hex'),baseline=JSON.parse(fs.readFileSync('tests/fixtures/equipment-v061-identities.json'));
 const identity=t=>Object.fromEntries(Object.entries(t).filter(([k])=>!['pixelAppearance','visualVariant','visualKey','iconKey','icon'].includes(k)));
-for(const [path,h]of Object.entries(baseline.unchangedRuntime))assert.equal(hash(fs.readFileSync('dist/'+path)),h,`${path}: no gameplay/rate/quality/save changes authorized`);
-const report=auditEquipmentCatalog();assert(report.passed,report.errors.join('\n'));assert(validateEquipmentTemplates());assert.equal(SCHEMA_VERSION,5);
+// Name-selection scope subsequently authorizes generation 6; equipment gameplay remains pinned.
+for(const [path,h]of Object.entries(baseline.unchangedRuntime).filter(([path])=>path!=='save-generation.js'))assert.equal(hash(fs.readFileSync('dist/'+path)),h,`${path}: no gameplay/rate/quality/save changes authorized`);
+const report=auditEquipmentCatalog();assert(report.passed,report.errors.join('\n'));assert(validateEquipmentTemplates());assert.equal(SCHEMA_VERSION,6);
 for(const t of T)if(baseline.templates[t.id])assert.equal(hash(JSON.stringify(identity(t))),baseline.templates[t.id],`${t.id}: preserve existing identity/name/stats metadata`);
 for(const [id,h]of Object.entries(baseline.templates))assert(T.some(t=>t.id===id),`${id}: removed existing template`);
 for(const [id,h]of Object.entries(baseline.legends))assert.equal(hash(JSON.stringify(identity(L[id]))),h,`${id}: preserve legend definition`);
@@ -62,4 +63,4 @@ try{
 const workshop=renderEquipmentWorkshop(fresh());assert(workshop.includes('263 基础 · 60 套装'));for(const t of T)assert(workshop.includes(`data-workshop-template="${t.id}"`));assert.equal((workshop.match(/data-workshop-template=/g)||[]).length,T.length);
 const engine=fs.readFileSync('dist/engine.js','utf8');assert(engine.includes('originRace:area.race'),'battle drop passes region race to tested item generator');
 fs.mkdirSync('qa/equipment-parity',{recursive:true});fs.writeFileSync('qa/equipment-parity/audit.json',JSON.stringify({...report,acquisition,changedArt,art:decoded},null,2));
-console.log('PASS all five strict slot/native-family/set/core/legend matrices; 335 definitions; baseline identity preservation; unique raster identities; actual drop generator/fusion/trader coverage; all workshop/inventory/forge/codex entries, no truncation; save generation 5 unchanged.');
+console.log('PASS all five strict slot/native-family/set/core/legend matrices; 335 definitions; baseline identity preservation; unique raster identities; actual drop generator/fusion/trader coverage; all workshop/inventory/forge/codex entries, no truncation; strict named-character save generation 6.');

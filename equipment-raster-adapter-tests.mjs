@@ -13,7 +13,7 @@ let i=0;for(const id of expected){const t=templates[id]??legends[id],item={id:'f
  }
  assert.equal(JSON.stringify(item),before);c.fillStyle='#d8c7a7';c.font='9px monospace';c.fillText(id.replace('dwarf_','').slice(0,20),(i%10)*100+2,Math.floor(i/10)*155+78);i++;
 }
-for(const n of [32,48,64])assert.equal(fs.readdirSync('dist/equipment-assets/'+n).length,50);
+for(const n of [32,48,64]){const registered=new Set(expected.map(id=>equipmentRasterSource(templates[id]??legends[id],n)).filter(path=>path.startsWith('./equipment-assets/'+n+'/')).map(path=>path.split('/').at(-1)));assert.deepEqual(fs.readdirSync('dist/equipment-assets/'+n).sort(),[...registered].sort(),'every packaged resolution source is registered');}
 const manifest=JSON.parse(fs.readFileSync('equipment-art-source-manifest.json'));assert.equal(manifest.entries.length,50);for(const e of manifest.entries)for(const n of [32,48,64])assert.equal(createHash('sha256').update(fs.readFileSync('dist/'+registry[e.id][n])).digest('hex'),e.rasters[n].sha256);
 assert.equal(renderEquipmentRaster({legendaryId:'everburning-reactor'},templates[expected.find(x=>templates[x])]),null,'legend cannot borrow a normal template');assert.equal(equipmentRasterSource({id:'__proto__'}),null);
 const listeners={},attrs={},classes=new Set(),error={hidden:true},img={dataset:{equipmentRasterImage:'true'},alt:'测试装备',hidden:false,getAttribute:()=> './equipment-assets/48/test.png'},wrapper={classList:{toggle:(k,on)=>on?classes.add(k):classes.delete(k),contains:k=>classes.has(k)},querySelector:q=>q==='.equipmentRasterError'?error:img,setAttribute:(k,v)=>attrs[k]=v,removeAttribute:k=>delete attrs[k]};img.closest=()=>wrapper;

@@ -1,6 +1,6 @@
 # v062 — complete equipment slot parity
 
-Approved scope: append ordinary identities only, correct Elf repeated artwork, and verify every shared slot independently. Existing IDs, names, stat families, rates, quality rules and save generation 5 remain unchanged. No migration or reset.
+Approved scope: append ordinary identities only, correct Elf repeated artwork, and verify every shared slot independently. Existing equipment IDs, names, stat families, rates and quality rules remain unchanged. Equipment append/icon corrections alone require no reset. The separately authorized named-character selection change requires strict generation 6: old development saves are retired, including the exact game-owned v5 key, with no aliases or migration.
 
 ## Permanent release contract
 
@@ -19,7 +19,7 @@ Total: 260 common ordinary + 3 extra ordinary cores + 60 set parts + 12 legendar
 ## Reproducible checks
 
 - `npm run audit:equipment`: actual catalog-derived slot matrix and invariant errors; a total alone is insufficient.
-- `npm run test:equipment-parity`: matrix, deliberately incorrect slot/family negative controls, existing identity/name/stat hashes, unchanged gameplay-source hashes, actual item/fusion/trader coverage, and real production-renderer coverage.
+- `npm run test:equipment-parity`: matrix, deliberately incorrect slot/family negative controls, existing identity/name/stat hashes, unchanged equipment gameplay-source hashes, actual item/fusion/trader coverage, and real production-renderer coverage.
 - `npm run test:races`: existing 56 race gates plus the new parity gate.
 - `npm run test:release`: immutable asset/cache graph and unchanged explicit fourteen QA exclusions.
 
