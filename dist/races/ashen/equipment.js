@@ -45,3 +45,26 @@ equipment.push(...[
     "iconKey": "ring"
   }
 ]);
+
+// Append after the historical indexed catalog (including cores and the sixth ring).
+// Explicit IDs prevent additions from renumbering saved Ashen equipment.
+for (const [id,name,slot,baseVariant,weaponType,description,pixelAppearance] of [
+ ['ashen.scatter.38','呼岩护臂','weapon','armguard_balanced','armguard','细孔沿护臂起伏，像冷却岩层缓慢的呼吸；迁行者只磨去会刮伤同伴的外缘。','多孔灰岩臂壳、橙色细脉、开口腕环'],
+ ['ashen.scatter.39','层蜕臂甲','weapon','armguard_defensive','armguard','旧矿壳从臂甲边缘逐层剥落，新生石面在下面显出淡色；脱落的薄片被留在来路作记号。','层叠片岩臂甲、翘起薄壳、深色腕口'],
+ ['ashen.scatter.40','晶芽腕壳','weapon','armguard_attack','armguard','细小晶芽从腕壳接缝中长出，朝着指节弯曲；每次休息，持有者都会拂去芽间的砂。','簇生短晶尖、琥珀芽点、黑曜腕壳'],
+ ['ashen.scatter.41','潮脉环臂','weapon','armguard_balanced','armguard','盐色矿脉环绕前臂，深浅交替如荒原早已退去的潮；石环之间留着可以屈伸的缝隙。','分节矿石臂环、波纹盐脉、青灰棱面'],
+ ['ashen.scatter.42','苔晶方锤','weapon','hammer_balanced','hammer','方晶表面的薄苔只在阴面生长，持有者用它辨认归路；锤柄上的矿纹与掌心缓缓相合。','方形晶石锤头、单面苔斑、短岩柄'],
+ ['ashen.scatter.43','蜂孔岩槌','weapon','hammer_defensive','hammer','石槌内部留着相连的气孔，挥动时发出低低的风声；那些孔洞曾是熔岩里最后逃出的气泡。','蜂孔圆柱槌头、粗矿柄、暗红孔心'],
+ ['ashen.scatter.44','断层双棱锤','weapon','hammer_defensive','hammer','两片断层沿锤头错开，夹缝里仍有新晶缓慢填补；迁行者不催促它，只定期拂去碎屑。','错位双棱锤头、中缝晶芽、扁石柄'],
+ ['ashen.scatter.45','泪盐垂锤','weapon','hammer_balanced','hammer','盐水沿锤头沉成一枚下垂的白滴，干裂后又被晨露接续；一路迁行的湿痕就这样留在石中。','泪滴白盐锤头、环状盐纹、细暗柄'],
+ ['ashen.scatter.46','赤髓节锤','weapon','hammer_balanced','hammer','红色矿髓把数节石块连成锤头，外壳冷却时会发出轻响；每一道节缝都给生长留了余地。','分节横向岩锤、红色髓线、粗短柄'],
+ ['ashen.scatter.47','空鸣晶锤','weapon','hammer_defensive','hammer','中空晶腔保留着矿层的回音，敲击后余声比脚步更久；持有者以掌心贴住它，等声音慢慢平息。','空心环晶锤头、紫灰内腔、晶棱柄'],
+ ['ashen.scatter.48','褶岩颅冠','helm','helm_armor',null,'薄岩沿额顶折出一道道缓坡，裂缝中透出新生的浅纹；它随持有者的矿壳缓慢改变形状。','褶皱片岩冠、层状额沿、浅金矿缝'],
+ ['ashen.scatter.49','芽晶额甲','helm','helm_vitality',null,'额甲两侧的晶芽长得并不对称，靠近晨光的一侧总先明亮；磨损的旧晶仍被留在中央。','不对称晶芽额甲、中央旧晶、低石眉脊'],
+ ['ashen.scatter.50','层生胸壳','armor','armor_armor',null,'胸壳一层层包住旧裂痕，像矿层记住每次受压的方向；侧面的薄壳尚未长齐，露出温暗的内纹。','叠层胸壳、斜向岩板、侧面暗橙缝'],
+ ['ashen.scatter.51','脉孔岩衣','armor','armor_vitality',null,'相连的孔洞贯穿岩衣，盐脉在孔边结成细网；荒原的风穿过时，矿壳不必承受所有重量。','网脉多孔胸甲、圆孔肩片、灰白盐边'],
+ ['ashen.scatter.52','盐芽掌甲','gloves','gloves_armor',null,'掌甲背面结着细小盐芽，指缝处仍柔软可动；持有者将过长的芽轻轻掰下，撒回走过的盐地。','白盐芽掌甲、短簇晶背、深灰分指'],
+ ['ashen.scatter.53','叠晶护指','gloves','gloves_vitality',null,'薄晶沿指节交叠，弯曲时露出下面尚未磨亮的晶面；每根手指都留下了不同的生长纹。','层叠晶片手套、阶梯指节、琥珀缝线'],
+ ['ashen.scatter.54','熔脉石履','boots','boots_armor',null,'鞋侧的暗红矿脉停在脚踝处，外壳早已冷却；每次落脚，细砂都会从旧熔沟中抖落。','厚底黑岩靴、红色侧脉、裂缝脚踝'],
+ ['ashen.scatter.55','浮孔岩靴','boots','boots_vitality',null,'轻岩里的细孔把脚步声留在靴壳中，盐尘渐渐填满最旧的几个孔；新生石缘仍保持着浅灰色。','浅灰浮石靴、多孔脚面、浅色新生靴沿']
+]) equipment.push({id,name,slot,baseVariant,weaponType,originRace:'ashen',kind:'scatter',setId:null,description,pixelAppearance,visualVariant:id,visualKey:id,iconKey:slot});

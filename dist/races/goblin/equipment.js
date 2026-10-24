@@ -51,3 +51,23 @@ equipment.push(...[
     "iconKey": "ring"
   }
 ]);
+
+// Append-only catalog parity: stable IDs keep existing saves and art references intact.
+// These are ordinary salvage pieces, using the existing shared stat budgets.
+for (const [id,name,slot,baseVariant,weaponType,description,pixelAppearance] of [
+ ['goblin_scatter_weapon_7','锁舌窄匕','weapon','dagger_balanced','dagger','盗贼把废锁的锁舌磨成窄刃；柄上的旧钥匙孔被苔绳封住，免得逃跑时吹响。','窄锁舌刃、方孔铜柄、苔绳绑带'],
+ ['goblin_scatter_weapon_8','断锯短剑','weapon','sword_balanced','sword','拆车场剩下的半截锯条被修成短剑，只有朝外的一侧留齿，贴身藏起时不会割破暗袋。','断锯齿剑身、歪斜护手、旧皮柄'],
+ ['goblin_scatter_weapon_9','弯钉刺','weapon','dagger_balanced','dagger','从货箱上起出的弯钉被反复敲直；尾端仍保留一个钩，方便盗贼从袖口迅速抽出。','细长铁钉尖、弯钩尾柄、铜丝束口'],
+ ['goblin_scatter_weapon_10','铜尺藏锋','weapon','sword_balanced','sword','货摊上的旧铜尺少了一边刻度，多了一道锋口；持有者总先量门缝，再决定从哪里溜走。','平直铜尺刃、残缺刻线、短横护手'],
+ ['goblin_scatter_weapon_11','瓶颈割刀','weapon','dagger_balanced','dagger','裂穴拾荒者将厚瓶颈包入皮套，只让一段玻璃锋露出；剩下的瓶身还在盛着今晚的菌汤。','弧形绿玻璃刃、瓶口环脊、破皮握柄'],
+ ['goblin_scatter_weapon_12','门闩单剑','weapon','sword_balanced','sword','失修仓门的铁闩被磨出了刃，铆头留作护手；偷渡者说它终于学会了替人开路。','宽扁门闩剑、突起铆头、铜扣护手'],
+ ['goblin_scatter_weapon_13','鼠牙钩匕','weapon','dagger_balanced','dagger','盗贼用废钩托住一枚巨鼠旧牙，既能割绳，也能把掉进砖缝的铜币勾回来。','弯曲骨牙刃、铜钩底座、细皮绳柄'],
+ ['goblin_scatter_weapon_14','车辐细剑','weapon','sword_balanced','sword','弯轮中拆下的钢辐条被锤成细剑，轮毂垫圈成了圆护手；它比原来的车跑得更轻。','长细辐条剑、圆垫圈护手、木柄'],
+ ['goblin_scatter_weapon_15','钱袋挑刃','weapon','dagger_balanced','dagger','短刃顶端留着挑绳的小钩，钩口裹了一点软铜；靠墙摸过时，钱袋扣也不会发出碰响。','短弯挑钩刃、软铜钩口、黑皮柄'],
+ ['goblin_scatter_weapon_16','铲片护手剑','weapon','sword_balanced','sword','破铲的窄边被切成剑身，宽边弯成护手；失主还在找铲子，裂穴里已经多了一名剑客。','斜切铲片剑、宽弧片护手、旧木握柄'],
+ ['goblin_scatter_helm_6','罐沿潜帽','helm','helm_vitality',null,'盗贼把废罐的软沿藏进兜帽，遮住眼上的菌灯反光；帽后的小补丁还能塞下一枚备用钥匙。','低垂苔色兜帽、歪锡罐沿、侧面补丁'],
+ ['goblin_scatter_armor_6','暗袋补衣','armor','armor_vitality',null,'每块补布下面都藏着一个暗袋，零钱与开锁针被分开收好；胸前看似装饰的旧扣其实没有扣眼。','短身拼补背心、层叠暗袋、错位铜扣'],
+ ['goblin_scatter_gloves_6','窃钥指套','gloves','gloves_vitality',null,'两根指尖露在外面摸索锁齿，其余指节缝着软苔；盗贼只在归还钥匙时才摘下它。','露指皮手套、细铜钥匙、苔垫指节'],
+ ['goblin_scatter_boots_6','翻墙绳履','boots','boots_vitality',null,'回收麻绳绕过旧靴底，鞋跟留着攀墙的小环；湿砖上留下的绳纹很快就被苔水抹平。','麻绳交叉绑靴、低软鞋底、后跟铜环'],
+ ['goblin_scatter_amulet_6','失锁铜牌','amulet','amulet_survival',null,'只剩半边的锁牌挂在细绳上，盗贼把它当作离开牢房的纪念；背面的旧编号已经磨成了浅坑。','破锁形铜吊牌、断开的锁梁、细苔绳']
+]) equipment.push({id,name,slot,baseVariant,weaponType,originRace:'goblin',kind:'scatter',setId:null,description,pixelAppearance,visualVariant:id,visualKey:id,iconKey:slot});
