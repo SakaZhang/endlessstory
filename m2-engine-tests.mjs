@@ -5,7 +5,7 @@ import {DWARF_MONSTERS,configureDwarfParameters} from './dist/dwarf-content.js';
 export const FIXTURE_BUDGET={id:'explicit-test-only',reviewed:false,testOnly:true,fieldGroupChance:.04,clearRewards:{1:{gold:20,xp:40,materialRounds:1,gearChance:.35,markChance:.02},2:{gold:30,xp:50,materialRounds:1,gearChance:.35,markChance:.02},3:{gold:40,xp:60,materialRounds:1,gearChance:.35,markChance:.02}},monsters:Object.fromEntries(Object.keys(DWARF_MONSTERS).map(id=>[id,{hp:150,atk:5,armor:10,elementalPower:7,basicIntervalMs:2200,rewardGold:4,rewardXp:20}]))};
 assert(configureDwarfParameters(FIXTURE_BUDGET));
 const setup=(options)=>{const s=E.fresh(options);E.normalizeHealth(s,s.lastSeen);E.normalizeExpedition(s);s.areaProgress.dwarf.unlocked=[1,2,3];s.areaProgress.dwarf.cleared=[1,2];s.expedition={mode:'field',fieldId:'dwarf.a01.field',targetInstanceId:null,loop:false};return s;};
-for(const row of E.plannedNodes(setup()).filter(row=>row.areaNumber<=3)){
+for(const row of E.plannedNodes(setup()).filter(row=>row.id.startsWith('dwarf.')&&row.areaNumber<=3)){
  const s=setup(),e=E.startInstanceEncounter(s,row.id,s.lastSeen);assert(e,row.id);assert.equal(e.contentVersion,'dwarf-m2-v1');assert(E.validSave(s),'save '+row.id);for(let i=0;i<300&&!e.done;i++)E.step(s,e,s.nextActionAt);assert(e.done);if(e.win)E.reward(s,e,s.lastHealthClock);assert(E.validSave(s),'after '+row.id);
 }
 console.log('PASS M2 actual 7-node spawn/step/save/settlement with explicit test budget');
