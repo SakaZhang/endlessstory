@@ -33,3 +33,17 @@
 .areaProgressNotice{display:grid;gap:6px;padding:14px 16px;border:2px solid #705a39;background:#201c1a;color:#d8c5a0;font-size:13px;line-height:1.6}.areaProgressNotice strong{color:#f3dc9c}.merchantProgressNote{padding:10px 12px;border-left:3px solid #b58a42;background:#29251e;font-size:13px;line-height:1.6;color:#e7cf9b}.merchantProgressNote small{color:#b9ad96}
 
 .developmentNotice{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:12px;border:2px solid #b28c55;background:#29251d;margin-bottom:12px}.developmentNotice strong{color:#f3cf87}.developmentNotice span{flex:1;font-size:12px;min-width:180px}.developmentControls{margin:12px 0;padding:10px;border:1px dashed #6a6c58}.developmentControls p{font-size:12px;color:#b7beb4}.sourceFocused{outline:3px solid #e1bf74!important;box-shadow:0 0 20px #e1bf7488}
+
+/* Native pixel hero selection: real buttons retain Enter/Space and confirmation flow. */
+.heroSelection{width:100%;min-width:0}.heroSelection>p{color:var(--muted)}
+.raceHeroChoices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:stretch}
+.raceHeroChoice{min-width:0;display:flex;flex-direction:column;align-items:center;text-align:center;padding:12px 10px;border:2px solid var(--line);background:linear-gradient(#263a36,#152321);color:var(--text);cursor:pointer;white-space:normal}
+.raceHeroPortrait{display:flex;width:100%;height:180px;align-items:flex-end;justify-content:center;overflow:hidden;background:radial-gradient(ellipse at 50% 90%,#59705d66,transparent 65%);border-bottom:1px solid var(--line);margin-bottom:10px}
+.raceHeroPortrait img{width:192px;height:192px;max-width:none;object-fit:contain;image-rendering:pixelated;flex-shrink:0}
+.raceHeroChoice strong{font-size:20px;color:var(--gold);line-height:1.4}.raceHeroIdentity{font-size:12px;margin:5px 0}.raceHeroDescription{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px}.raceHeroAction{font-size:12px;margin-top:auto;color:var(--gold)}
+.raceHeroChoice:hover,.raceHeroChoice:focus-visible{border-color:var(--gold);background:#30483c;outline:3px solid #d2b67866;outline-offset:2px}.raceHeroChoice:active{background:#405740;box-shadow:inset 0 0 0 2px var(--gold)}
+@media(max-width:600px){.raceHeroChoices{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.raceHeroChoice{padding:10px 6px}.raceHeroPortrait{height:158px}.raceHeroChoice strong{font-size:18px}}
+@media(max-width:340px){.raceHeroChoices{grid-template-columns:minmax(0,1fr)}}
+dialog:has(.heroSelection){max-width:920px;max-height:calc(100dvh - 32px);overflow-y:auto}
+@media(min-width:1000px){.raceHeroChoices{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media(max-width:600px){dialog:has(.heroSelection){padding:20px 14px}}
