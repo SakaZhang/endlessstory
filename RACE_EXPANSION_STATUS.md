@@ -7,9 +7,9 @@ Current production remains v0.58 / Sites67. Expanded content is an unreleased ca
 - Four complete10-area packs, field/normal nodes everywhere, canonical boss locations only.72 canonical materials preserve source whitelists, quality/rarity and potion aliases.
 - Three sets/race,36 ordinary templates/race, two boss-pool legends/race; equipment origin and weapon families, Ashen core slot, cross-race equipment permitted except core socket.
 - Actual skill planners, passive/effect host, six-element resistance reductions, persistent Ashen resources, finite Goblin reactions, typed per-item legendary clocks/state and approved distinct trigger mechanics. Shared8-hit cap supports Elf six-element attacks; poison probes are not damage records.
-- Actual human candidate10% gold discount; Goblin candidate10% extra ordinary material unit only; Elf candidate+4 six-element attack/resist. Dwarf existing forge favor unchanged. Numeric effects remain subject to comparative balance review.
+- Actual human candidate10% gold discount; Goblin candidate10% extra ordinary material unit only; Elf initial+12 six-element attack/resist. Dwarf existing forge favor unchanged. Numeric effects remain subject to comparative balance review.
 - Race art/weapon routes, frame references/facing, skill FX, inventory/forge/map/camp/portrait/catalog mappings. Current-scene-only image loading, six concurrent decodes, obsolete-scene cache eviction and disposal are tested.
-- Twelve budget-split retinue encounters: two five-target elite encounters and one four-target boss per new race. Explicit ordinary follower identities, parent-only rewards, and kill-all completion are verified; native formation acceptance is pending.
+- Twelve budget-split retinue encounters: two five-target elite encounters and one four-target boss per new race. Explicit ordinary follower identities, parent-only rewards, and kill-all completion are verified; native formation was accepted after readable hero/leader/follower revision.
 
 ## Verified evidence
 - `race-expansion-integration-tests.mjs`: five saves/JSON, all40areas/node starts,72 material pools,8 legend equips, aliases, innate, retained existing progress and native file references.
@@ -38,7 +38,7 @@ Current production remains v0.58 / Sites67. Expanded content is an unreleased ca
 ## Fresh-player evidence (no grants)
 The shared fixture uses actual fresh gear, earned loot/skill points, paid merchant refreshes, recipe purchase, craft/use, dungeon completion and real A02 entry. These are fixed-seed observations, not promised universal progression times.
 - Human: ~580s, Lv4,0 deaths,4 paid refreshes126gold.
-- Elf: ~703s, Lv5,1 death,5 paid refreshes200gold.
+- Elf with installed per-area curve and +12 innate: ~407s, Lv5,0 deaths; actual recipe purchase/craft/use and A02 entry verified.
 - Goblin:2222s, Lv8,2 deaths,8 paid refreshes.
 - Ashen:2427s, Lv8,2 deaths,9 paid refreshes360gold.
 - Dwarf:2569s, Lv9,2 deaths,10 paid refreshes410gold.
@@ -48,4 +48,13 @@ Random early healing-recipe access is a shared onboarding friction point; starti
 Historical suites were advanced in segments, retaining exact numerical/source assertions while updating obsolete single-race catalog assumptions. A complete available-suite rerun excludes only the three externally missing fixture tests listed above; this is not a claim that unmodified npm test passes. Native/mock evidence is not browser QA. Release cache/hash graph independently passed with2396 retained files and audited14-proof exclusions; Sites helper was unavailable.
 
 ## Initial numeric review
-Root accepted Human/Goblin/Ashen initial content budgets after matched controls and actual source-specific host regressions on2026-10-24. These three providers are reviewed for initial production use, not declared globally final-balanced. Intentional shielding/control/lifesteal and Ashen core advantages may reduce potion usage below40 per4h. Elf per-area curve remains gated on installed-matrix confirmation. Artwork, exact release approval and pending Dwarf30 activation stay independent gates.
+Root accepted Human/Goblin/Ashen initial content budgets after matched controls and actual source-specific host regressions on2026-10-24. These three providers are reviewed for initial production use, not declared globally final-balanced. Intentional shielding/control/lifesteal and Ashen core advantages may reduce potion usage below40 per4h. Elf per-area curve was accepted as initial baseline; +12 innate exact effect is +4.720–5.843% elemental output and -5.357% incoming elemental damage, with final representative profile rerun pending. Artwork, exact release approval and pending Dwarf30 activation stay independent gates.
+
+## Latest review and regression closure
+- Full historical available-suite run completed exit0, excluding only the three missing external-fixture imports. Unmodified `npm test` remains blocked by those missing files.
+- Root accepted all four native art directions for initial release; this is not browser QA or a claim of finished visual polish. Decoded per-frame bounds are checked against actual PNG alpha with a documented 2px inclusive-edge tolerance.
+- Actual equipment detail and discovered codex text for all eight new legends match current reducer mechanics, numeric descriptions and gold exclusive styling.
+- Current Dwarf21 save and all three skill presets are preserved by a dedicated phased-release test; Dwarf30 activation still requires user consent.
+- Direct App restart regression found and fixed pagehide overwriting a newly selected character: successful restart now adopts the durable fresh state and freezes prior lifecycle writes before reload. Failed writes preserve current journey.
+- Independent reviewer found nondeterministic Ashen legend test due to random extra field enemies; deterministic single-target fixture correction is pending, not hidden as a runtime pass.
+- All-eight equipped legendary basic online/offline parity passes; deliberately triggered per-race proc continuation tests are being added separately.
