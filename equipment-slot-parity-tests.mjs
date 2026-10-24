@@ -26,14 +26,17 @@ for(const [id,h]of Object.entries(baseline.legends))assert.equal(hash(JSON.strin
 const corrupt=structuredClone(T),first=corrupt.find(t=>t.kind==='scatter'&&t.slot==='amulet');first.slot='ring';assert(!auditEquipmentCatalog(corrupt).passed);
 const wrongFamily=structuredClone(T),weapon=wrongFamily.find(t=>t.kind==='scatter'&&t.slot==='weapon');weapon.weaponType='staff';assert(!auditEquipmentCatalog(wrongFamily).passed);
 const {createCanvas,loadImage}=createRequire(import.meta.url)('@napi-rs/canvas');
-const decoded=[];
+const decoded=[],changedArt=[];
 for(const race of PARITY_RACES){const seen=new Map();for(const t of [...T.filter(t=>t.originRace===race),...Object.values(L).filter(t=>t.originRace===race)]){
  for(const size of [32,48,64]){const path=equipmentRasterSource(t,size);assert(path,`${t.id}: missing ${size} raster`);assert(fs.existsSync('dist/'+path));assert(equipmentIcon(t.kind==='scatter'||t.kind==='set'?t:{legendaryId:t.id,rarity:3},{size}).includes(t.id));}
  const path=equipmentRasterSource(t,64),im=await loadImage('dist/'+path),c=createCanvas(64,64),ctx=c.getContext('2d');ctx.imageSmoothingEnabled=false;ctx.drawImage(im,0,0,64,64);const bytes=ctx.getImageData(0,0,64,64).data,h=hash(bytes);assert(!seen.has(h),`${race}: cross-item image collision ${seen.get(h)} / ${t.id}`);seen.set(h,t.id);
  assert(bytes.some((v,i)=>i%4===3&&v>0),`${t.id}: blank image`);
- if(baseline.art[t.id]!==hash(fs.readFileSync('dist/'+path))){assert.equal(im.width,64);assert.equal(im.height,64);for(let i=0;i<64;i++)for(const p of[i,63*64+i,i*64,i*64+63])assert.equal(bytes[p*4+3],0,`${t.id}: clipped edge alpha`);}
+ if(baseline.art[t.id]!==hash(fs.readFileSync('dist/'+path))){changedArt.push({id:t.id,race,existing:!!baseline.art[t.id]});assert.equal(im.width,64);assert.equal(im.height,64);for(let i=0;i<64;i++)for(const p of[i,63*64+i,i*64,i*64+63])assert.equal(bytes[p*4+3],0,`${t.id}: clipped edge alpha`);}
  decoded.push({id:t.id,race,path,sourceSize:[im.width,im.height],normalized64Sha256:h});
 }}
+assert.equal(T.filter(t=>!baseline.templates[t.id]).length,75,'exactly 75 ordinary additions');
+assert.equal(changedArt.length,93,'75 new sources plus 18 corrected Elf sources');
+assert.equal(changedArt.filter(t=>t.existing).length,18);assert(changedArt.filter(t=>t.existing).every(t=>t.race==='elf'),'only approved existing Elf art corrected');
 const original=Math.random;let seed=62057;Math.random=()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0)/2**32);
 const acquisition={};
 try{
@@ -58,5 +61,5 @@ try{
 }finally{Math.random=original;}
 const workshop=renderEquipmentWorkshop(fresh());assert(workshop.includes('263 基础 · 60 套装'));for(const t of T)assert(workshop.includes(`data-workshop-template="${t.id}"`));assert.equal((workshop.match(/data-workshop-template=/g)||[]).length,T.length);
 const engine=fs.readFileSync('dist/engine.js','utf8');assert(engine.includes('originRace:area.race'),'battle drop passes region race to tested item generator');
-fs.mkdirSync('qa/equipment-parity',{recursive:true});fs.writeFileSync('qa/equipment-parity/audit.json',JSON.stringify({...report,acquisition,art:decoded},null,2));
+fs.mkdirSync('qa/equipment-parity',{recursive:true});fs.writeFileSync('qa/equipment-parity/audit.json',JSON.stringify({...report,acquisition,changedArt,art:decoded},null,2));
 console.log('PASS all five strict slot/native-family/set/core/legend matrices; 335 definitions; baseline identity preservation; unique raster identities; actual drop generator/fusion/trader coverage; all workshop/inventory/forge/codex entries, no truncation; save generation 5 unchanged.');
