@@ -60,7 +60,7 @@
     ]
   },
   "elf.a02.normal.1": {
-    "facing": "left",
+    "facing": "right",
     "alphaBBox": [
       45,
       88,
@@ -90,7 +90,7 @@
     ]
   },
   "elf.a02.normal.3": {
-    "facing": "left",
+    "facing": "right",
     "alphaBBox": [
       34,
       88,
@@ -120,7 +120,7 @@
     ]
   },
   "elf.a03.normal.1": {
-    "facing": "left",
+    "facing": "right",
     "alphaBBox": [
       56,
       88,
@@ -180,7 +180,7 @@
     ]
   },
   "elf.a04.normal.1": {
-    "facing": "left",
+    "facing": "right",
     "alphaBBox": [
       44,
       88,
@@ -225,7 +225,7 @@
     ]
   },
   "elf.a04.elite": {
-    "facing": "left",
+    "facing": "right",
     "alphaBBox": [
       45,
       68,
@@ -270,7 +270,7 @@
     ]
   },
   "elf.a05.normal.3": {
-    "facing": "left",
+    "facing": "right",
     "alphaBBox": [
       52,
       88,
@@ -315,7 +315,7 @@
     ]
   },
   "elf.a06.normal.2": {
-    "facing": "left",
+    "facing": "right",
     "alphaBBox": [
       42,
       88,
@@ -390,7 +390,7 @@
     ]
   },
   "elf.a07.normal.3": {
-    "facing": "left",
+    "facing": "right",
     "alphaBBox": [
       31,
       88,
@@ -450,7 +450,7 @@
     ]
   },
   "elf.a08.normal.3": {
-    "facing": "left",
+    "facing": "right",
     "alphaBBox": [
       40,
       88,
@@ -480,7 +480,7 @@
     ]
   },
   "elf.a09.normal.1": {
-    "facing": "left",
+    "facing": "right",
     "alphaBBox": [
       42,
       88,
@@ -510,7 +510,7 @@
     ]
   },
   "elf.a09.normal.3": {
-    "facing": "left",
+    "facing": "right",
     "alphaBBox": [
       37,
       88,
@@ -540,7 +540,7 @@
     ]
   },
   "elf.a10.normal.1": {
-    "facing": "left",
+    "facing": "right",
     "alphaBBox": [
       48,
       88,
@@ -555,7 +555,7 @@
     ]
   },
   "elf.a10.normal.2": {
-    "facing": "left",
+    "facing": "right",
     "alphaBBox": [
       37,
       88,
@@ -570,7 +570,7 @@
     ]
   },
   "elf.a10.normal.3": {
-    "facing": "left",
+    "facing": "right",
     "alphaBBox": [
       43,
       88,
@@ -585,7 +585,7 @@
     ]
   },
   "elf.a10.elite": {
-    "facing": "left",
+    "facing": "right",
     "alphaBBox": [
       35,
       68,
