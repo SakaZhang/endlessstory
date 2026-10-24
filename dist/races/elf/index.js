@@ -2,12 +2,12 @@ import {createLegendaryState,validLegendaryState,reduceLegendaryEvent} from './l
 export {createLegendaryState,validLegendaryState,reduceLegendaryEvent} from './legendary.js';
 import {ACTION_FRAMES} from './art-actions.js';
 import {CLEAN_EXTRACTION} from './art-clean.js';
-import {areas,monsters,parameters,materials,materialPools,art} from './content.js';
+import {areas,monsters,parameters,materials,materialAssociations,art} from './content.js';
 import {equipment,sets,legendaries,equipmentArt,legendaryPolicy} from './equipment.js';
 import {tree,skills,passives,ELEMENTS,planSkill,modifySkillPlan,createRuntime,validRuntime} from './skills.js';
 export {planSkill,modifySkillPlan,createRuntime,validRuntime} from './skills.js';
-// Source pools are probability distributions, not raw material preference weights.
-for(const pool of Object.values(materialPools))for(const channel of pool.channels){const total=channel.entries.reduce((sum,e)=>sum+e.weight,0);if(total>0)for(const entry of channel.entries)entry.weight/=total;}
+import {buildMaterialPools} from '../../material-loot-profile.js';
+export const materialPools=buildMaterialPools({materials,monsters:Object.fromEntries(Object.entries(monsters).map(([id,m])=>[id,{...m,sources:m.sources??m.nodes}])),associations:materialAssociations});
 parameters.reviewed=true;parameters.testOnly=false;
 for(const [id,meta] of Object.entries(CLEAN_EXTRACTION)){art.monsters[id].facing=meta.facing;art.monsters[id].frames[0].alphaBBox=meta.alphaBBox;art.monsters[id].frames[0].facing=meta.facing;art.monsters[id].headY=68;art.monsters[id].healthBarAnchor=[96,58];}
 for(const manifest of Object.values(art.hero)){manifest.headY=manifest.frames[0].alphaBBox[1]+12;manifest.healthBarAnchor=[96,manifest.frames[0].alphaBBox[1]-8];manifest.animations.death=[manifest.frames[7].id];delete manifest.animations.guard;}
