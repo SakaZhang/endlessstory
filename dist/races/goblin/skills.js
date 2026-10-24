@@ -80,3 +80,28 @@ for(const [key,description]of Object.entries(passiveText)){passives[sid(key)].de
 for(const branch of ['poison','ambush','contraption']){const nodes=tree.nodes.filter(n=>n.branch===branch);const positions=[[0,1],[1,0],[1,2],[2,0],[2,2],[3,1],[4,0],[4,2]];nodes.forEach((n,i)=>{[n.row,n.column]=positions[i];});}
 
 for(const key of ['venom_cut','mire_seal','snare_wire','braced_lure']){skills[sid(key)].description+=' 减攻至多为目标基础攻击的25%，不同减攻来源只取最强。';tree.nodes.find(n=>n.id===sid(key)).description=skills[sid(key)].description;}
+// Tooltips mirror typed plans; descriptions are never parsed by the combat host.
+const detail={
+venom_cut:'造成65%攻击的物理伤害并尝试施加1层毒。匕首追加25%攻击轻刺；单手剑降低目标攻击，数值为自身攻击8%、最多目标基础攻击25%，持续6秒。毒每层每3秒扣目标最大生命2%，持续9秒，上限5层，先扣盾且不暴击、不受增伤。',
+spore_fan:'对全体造成25%攻击物理伤害，各尝试施加1层标准毒，并降低12点命中6秒。',
+bitter_wound:'造成105%攻击物理伤害；目标已有毒时，降低相当于自身攻击15%的护甲6秒。',
+spore_transfer:'仅主目标已有毒时可用。对全体造成20%攻击物理伤害，各尝试施加1层标准毒；不转移或放大毒层伤害，上限仍为5层。',
+toxic_feint:'获得20点闪避与相当于自身攻击12%的物理穿透，持续6秒。',
+mire_seal:'造成50%攻击物理伤害、尝试施加1层标准毒，并降低自身攻击14%数值的敌方攻击6秒，最多目标基础攻击25%；施放前已有5层毒时，额外降低22点命中6秒。',
+opening_cut:'匕首依次造成65%与30%攻击物理伤害；单手剑造成105%。目标生命高于75%时首段额外增加50%攻击的伤害，不保证暴击。',
+seam_step:'获得26点闪避与相当于自身攻击16%的物理穿透，持续6秒；不隐身、不免疫。',
+finish_cut:'造成95%攻击物理伤害，单手剑为115%；目标生命低于30%时额外增加85%攻击的伤害，不会强制斩杀。',
+stolen_moment:'造成75%攻击物理伤害并尝试打断目标蓄势；成功打断后自身攻击提高14%，持续5秒。',
+crossing_blade:'匕首仅对主目标造成130%攻击物理伤害；单手剑对全体造成70%。受击目标生命低于30%时再增加25%攻击的伤害。',
+ration_rush:'恢复自身最大生命6%，并提高12%攻击，持续6秒。',
+snare_wire:'布置8秒伏索。下一次敌方直接行动后，对行动者造成70%攻击物理反击，并削弱其攻击5秒：自身攻击12%，最多目标基础攻击25%。只触发1次，不触发暴击、吸血或递归反击。',
+rattle_decoy:'布置10秒响壳。接下来2次敌方直接行动后，各对行动者造成15%攻击物理反击并降低24点命中5秒；同来源只刷新，不叠加。',
+tangle_cut:'造成95%攻击物理伤害，降低18点命中6秒；单手剑另降低相当于自身攻击10%的护甲6秒。',
+spring_scatter:'布置8秒簧片。下一次敌方直接行动后，对所有活敌造成50%攻击物理反击，并降低10点命中5秒；只触发1次，不递归触发机关。',
+jam_joint:'造成60%攻击物理伤害，尝试打断蓄势并眩晕0.65秒。首领按共同控制折减与递减规则处理，保留正控制时长。',
+braced_lure:'获得最大生命7%的护盾8秒，并布置8秒诱阵。下次敌方直接行动后造成25%攻击物理反击，削弱行动者攻击5秒：自身攻击16%，最多目标基础攻击25%；只触发1次。',
+patch_ration:'恢复最大生命12%；单手剑另获得最大生命4%的护盾6秒。',
+dust_escape:'全体敌人降低20点命中6秒；自身获得18点闪避6秒。',
+shed_binding:'清除1个符合规则的自身负面状态，并获得最大生命9%的护盾7秒；没有负面状态时仍可获得护盾。'
+};
+for(const[key,description]of Object.entries(detail)){const skill=skills[sid(key)];skill.description=description+' 冷却'+skill.cooldownMs/1000+'秒。';tree.nodes.find(n=>n.id===skill.id).description=skill.description;}
