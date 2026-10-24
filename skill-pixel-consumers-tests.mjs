@@ -18,7 +18,7 @@ assert.equal((tree.match(/data-tree-slot="active"/g)||[]).length,4);assert.equal
 const quick=renderQuickLoadouts(s);assert(quick.includes('data-skill-icon="fracture_strike"'));assert.equal((quick.match(/data-skill-icon="empty"/g)||[]).length,2,'unsaved plans do not invent skills');
 const plans=renderLoadouts(s,{wardrobeIds:()=>new Set(),bagItems:()=>[]});for(const id of [...p.active,...p.passive])assert(plans.includes(`data-skill-icon="${id}"`));
 const hud=renderLiveBattleHud(s,{treeSkillCooldowns:{fracture_strike:3}});for(const id of [...p.active,...p.passive])assert(hud.includes(`data-skill-icon="${id}"`));assert(hud.includes('3回'));
-const locked=renderSkillTree({draft:fresh,index:0,busy:false,blocked:false});assert.equal((locked.match(/class="skillPixelLock"/g)||[]).length,21);assert.equal((locked.match(/data-skill-icon="empty"/g)||[]).length,6);assert(locked.includes('未学习'));
+const locked=renderSkillTree({draft:fresh,index:0,busy:false,blocked:false});assert.equal((locked.match(/class="skillPixelLock"/g)||[]).length,21);assert.equal((locked.match(/data-skill-icon="empty"/g)||[]).length,6);assert(locked.includes('未满足条件'));
 assert.equal(JSON.stringify(s),before);
 }finally{Math.random=oldRandom;}
 for(const html of ['index.html','battle-preview.html']){const text=fs.readFileSync('dist/'+html,'utf8');for(const css of ['skill-pixel-icons.css','skill-pixel-consumers.css'])assert(text.includes(css));}
