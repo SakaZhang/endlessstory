@@ -1,0 +1,369 @@
+{
+  "sourceFiles": {
+    "hero": "exec-98f7b5c0-1e66-40dc-ae65-aae08d331b63.png",
+    "monsters": "exec-549c1e08-e001-48b5-a1ec-613d5e97e02c.png",
+    "attacks": "exec-b9531370-73e0-4f24-a1ba-beb06f5fab0a.png",
+    "equipment": "exec-8926b69e-d68f-4601-a0ff-9576efbde1bf.png",
+    "skills": "exec-106126b7-abaa-4b99-84b6-cd5b5571aadf.png",
+    "materials": "exec-a940987c-bb34-4dbc-8827-467b0150f9e1.png",
+    "maps": "exec-1829d9b1-0938-4a98-8c92-f7820336161a.png",
+    "backgrounds": "exec-d3a7e5ab-8d8d-4c77-a901-2a08d48b2355.png"
+  },
+  "provenance": "Original built-in image_gen art; crop/anchor normalization only; no third-party game assets.",
+  "frameSize": [
+    192,
+    192
+  ],
+  "anchor": [
+    96,
+    176
+  ],
+  "hero": {
+    "idle-0": {
+      "file": "races/human/assets/hero-idle-0.png",
+      "durationMs": 120,
+      "alphaBBox": [
+        30,
+        37,
+        167,
+        176
+      ]
+    },
+    "idle-1": {
+      "file": "races/human/assets/hero-idle-1.png",
+      "durationMs": 120,
+      "alphaBBox": [
+        25,
+        37,
+        166,
+        176
+      ]
+    },
+    "anticipation": {
+      "file": "races/human/assets/hero-anticipation.png",
+      "durationMs": 180,
+      "alphaBBox": [
+        28,
+        43,
+        166,
+        176
+      ]
+    },
+    "attack": {
+      "file": "races/human/assets/hero-attack.png",
+      "durationMs": 180,
+      "alphaBBox": [
+        25,
+        41,
+        167,
+        176
+      ]
+    },
+    "recovery": {
+      "file": "races/human/assets/hero-recovery.png",
+      "durationMs": 180,
+      "alphaBBox": [
+        25,
+        34,
+        167,
+        159
+      ]
+    },
+    "hurt": {
+      "file": "races/human/assets/hero-hurt.png",
+      "durationMs": 180,
+      "alphaBBox": [
+        25,
+        34,
+        166,
+        170
+      ]
+    },
+    "guard": {
+      "file": "races/human/assets/hero-guard.png",
+      "durationMs": 180,
+      "alphaBBox": [
+        25,
+        34,
+        167,
+        169
+      ]
+    },
+    "death": {
+      "file": "races/human/assets/hero-death.png",
+      "durationMs": 180,
+      "alphaBBox": [
+        25,
+        34,
+        167,
+        156
+      ]
+    }
+  },
+  "monsters": {
+    "0": {
+      "idle": {
+        "file": "races/human/assets/monster-00-idle.png",
+        "durationMs": 200,
+        "alphaBBox": [
+          26,
+          53,
+          166,
+          174
+        ]
+      },
+      "attack": {
+        "file": "races/human/assets/monster-00-attack.png",
+        "durationMs": 200,
+        "alphaBBox": [
+          26,
+          57,
+          166,
+          176
+        ]
+      }
+    },
+    "1": {
+      "idle": {
+        "file": "races/human/assets/monster-01-idle.png",
+        "durationMs": 200,
+        "alphaBBox": [
+          26,
+          50,
+          166,
+          176
+        ]
+      },
+      "attack": {
+        "file": "races/human/assets/monster-01-attack.png",
+        "durationMs": 200,
+        "alphaBBox": [
+          26,
+          57,
+          166,
+          176
+        ]
+      }
+    },
+    "2": {
+      "idle": {
+        "file": "races/human/assets/monster-02-idle.png",
+        "durationMs": 200,
+        "alphaBBox": [
+          26,
+          42,
+          166,
+          176
+        ]
+      },
+      "attack": {
+        "file": "races/human/assets/monster-02-attack.png",
+        "durationMs": 200,
+        "alphaBBox": [
+          26,
+          56,
+          166,
+          176
+        ]
+      }
+    },
+    "3": {
+      "idle": {
+        "file": "races/human/assets/monster-03-idle.png",
+        "durationMs": 200,
+        "alphaBBox": [
+          26,
+          60,
+          166,
+          176
+        ]
+      },
+      "attack": {
+        "file": "races/human/assets/monster-03-attack.png",
+        "durationMs": 200,
+        "alphaBBox": [
+          26,
+          73,
+          166,
+          176
+        ]
+      }
+    },
+    "4": {
+      "idle": {
+        "file": "races/human/assets/monster-04-idle.png",
+        "durationMs": 200,
+        "alphaBBox": [
+          26,
+          40,
+          166,
+          176
+        ]
+      },
+      "attack": {
+        "file": "races/human/assets/monster-04-attack.png",
+        "durationMs": 200,
+        "alphaBBox": [
+          26,
+          36,
+          166,
+          176
+        ]
+      }
+    },
+    "5": {
+      "idle": {
+        "file": "races/human/assets/monster-05-idle.png",
+        "durationMs": 200,
+        "alphaBBox": [
+          26,
+          36,
+          166,
+          176
+        ]
+      },
+      "attack": {
+        "file": "races/human/assets/monster-05-attack.png",
+        "durationMs": 200,
+        "alphaBBox": [
+          26,
+          53,
+          166,
+          175
+        ]
+      }
+    },
+    "6": {
+      "idle": {
+        "file": "races/human/assets/monster-06-idle.png",
+        "durationMs": 200,
+        "alphaBBox": [
+          26,
+          39,
+          166,
+          176
+        ]
+      },
+      "attack": {
+        "file": "races/human/assets/monster-06-attack.png",
+        "durationMs": 200,
+        "alphaBBox": [
+          26,
+          42,
+          166,
+          176
+        ]
+      }
+    },
+    "7": {
+      "idle": {
+        "file": "races/human/assets/monster-07-idle.png",
+        "durationMs": 200,
+        "alphaBBox": [
+          26,
+          36,
+          166,
+          176
+        ]
+      },
+      "attack": {
+        "file": "races/human/assets/monster-07-attack.png",
+        "durationMs": 200,
+        "alphaBBox": [
+          26,
+          36,
+          166,
+          176
+        ]
+      }
+    },
+    "8": {
+      "idle": {
+        "file": "races/human/assets/monster-08-idle.png",
+        "durationMs": 200,
+        "alphaBBox": [
+          26,
+          46,
+          166,
+          176
+        ]
+      },
+      "attack": {
+        "file": "races/human/assets/monster-08-attack.png",
+        "durationMs": 200,
+        "alphaBBox": [
+          26,
+          44,
+          166,
+          171
+        ]
+      }
+    },
+    "9": {
+      "idle": {
+        "file": "races/human/assets/monster-09-idle.png",
+        "durationMs": 200,
+        "alphaBBox": [
+          26,
+          45,
+          166,
+          174
+        ]
+      },
+      "attack": {
+        "file": "races/human/assets/monster-09-attack.png",
+        "durationMs": 200,
+        "alphaBBox": [
+          26,
+          46,
+          166,
+          173
+        ]
+      }
+    },
+    "10": {
+      "idle": {
+        "file": "races/human/assets/monster-10-idle.png",
+        "durationMs": 200,
+        "alphaBBox": [
+          26,
+          43,
+          166,
+          175
+        ]
+      },
+      "attack": {
+        "file": "races/human/assets/monster-10-attack.png",
+        "durationMs": 200,
+        "alphaBBox": [
+          26,
+          36,
+          166,
+          166
+        ]
+      }
+    },
+    "11": {
+      "idle": {
+        "file": "races/human/assets/monster-11-idle.png",
+        "durationMs": 200,
+        "alphaBBox": [
+          26,
+          46,
+          166,
+          175
+        ]
+      },
+      "attack": {
+        "file": "races/human/assets/monster-11-attack.png",
+        "durationMs": 200,
+        "alphaBBox": [
+          26,
+          36,
+          166,
+          171
+        ]
+      }
+    }
+  }
+}

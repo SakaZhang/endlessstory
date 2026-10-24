@@ -1,0 +1,10 @@
+import {HUMAN_AREAS,HUMAN_MONSTERS,HUMAN_PARAMETERS,HUMAN_MATERIAL_POOLS} from './content.js';
+import {HUMAN_MATERIALS} from './materials.js';
+import {HUMAN_EQUIPMENT,HUMAN_LEGENDARIES} from './equipment.js';
+import {HUMAN_TREE,HUMAN_SKILLS,HUMAN_PASSIVES,HUMAN_SETS,planSkill,modifySkillPlan} from './skills.js';
+import {HUMAN_ART} from './art.js';
+export {planSkill,modifySkillPlan};
+export function modifyLegendaryPlan(plan,{exclusiveIds=[],equippedLegends=[]}={}){if(!plan)return null;let p=structuredClone(plan);const sword=equippedLegends.find(i=>i.exclusiveId==='human-fourth-oath');if(sword&&Number.isSafeInteger(sword.castCount)&&(sword.castCount+1)%4===0){const hit=p.actions.find(a=>a.kind==='hit'&&a.damageType==='physical');if(hit)hit.coefficient+=.55;}if(exclusiveIds.includes('human-banner-sustain')||equippedLegends.some(i=>i.exclusiveId==='human-banner-sustain'))for(const action of p.actions)for(const e of action.effects??[]){if(e.type==='shield')e.amount*=1.15;if(['heal','healOverTime'].includes(e.type))e.amount*=1.1;}return p;}
+export const HUMAN_TRADE_TRAIT={id:'human-fair-bargain',name:'商路熟稔',discount:.10,rounding:'ceil',minimumPositiveCost:1,eligibleOperations:['merchant-buy','recipe-buy','forge','reforge','enhance','fusion','potion-craft'],exclude:['sell','rewards','material-quantity','item-quantity'],status:'candidate-root-calibration'};
+export function humanGoldCost(baseCost,{race='human',operation='forge'}={}){if(!Number.isSafeInteger(baseCost)||baseCost<0)return null;if(baseCost===0)return 0;return race==='human'&&HUMAN_TRADE_TRAIT.eligibleOperations.includes(operation)?Math.max(1,Math.ceil(baseCost*(1-HUMAN_TRADE_TRAIT.discount))):baseCost;}
+export const RACE_PACK={id:'human',name:'人族',heroName:'王领旅卫',weapons:['sword_shield','greatsword'],areas:HUMAN_AREAS,monsters:HUMAN_MONSTERS,parameters:HUMAN_PARAMETERS,materials:HUMAN_MATERIALS,materialPools:HUMAN_MATERIAL_POOLS,equipment:HUMAN_EQUIPMENT,sets:HUMAN_SETS,legendaries:HUMAN_LEGENDARIES,tree:HUMAN_TREE,skills:HUMAN_SKILLS,passives:HUMAN_PASSIVES,art:HUMAN_ART,trait:HUMAN_TRADE_TRAIT};
