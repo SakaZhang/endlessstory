@@ -97,14 +97,17 @@ const plain=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
  * eligibleDebuffIds,activeBuffIds}; all facts are captured from the current live cast.
  */
 export function planTreeSkill(input={}){
- if(!plain(input)||!TREE_ACTIVE_SKILL_IDS.includes(input.skillId)||!validId(input.castId)||!plain(input.config)||!Array.isArray(input.targets)||input.targets.length>100000||input.targets.some(t=>!plain(t)||!validId(t.id)||typeof t.alive!=='boolean')||new Set(input.targets.map(t=>t.id)).size!==input.targets.length)return null;
+ if(!plain(input)||(!TREE_ACTIVE_SKILL_IDS.includes(input.skillId)&&input.skillId!=='ashen-prism-beam')||!validId(input.castId)||!plain(input.config)||!Array.isArray(input.targets)||input.targets.length>100000||input.targets.some(t=>!plain(t)||!validId(t.id)||typeof t.alive!=='boolean')||new Set(input.targets.map(t=>t.id)).size!==input.targets.length)return null;
  // Poison is approved as a separate percentage effect, NOT an elemental damage type.
  // Its fixed 2% target maxHP and shield-before-HP policy are approved. Timing must be explicit.
  if(input.skillId==='scatter_ash'&&input.weaponType==='axe'&&(!validPoisonTiming(input.config.poisonTiming)||input.config.poisonTiming.maxLayers!==5))return null;
  if(!Number.isFinite(input.config.cooldownMs)||input.config.cooldownMs<=0)return null;
  let plan;
  const external=getRaceSkillPlanner(input.skillId);
- if(external){plan=external(input);if(!plan)return null;plan=clone(plan);const owner=getSkillOwner(input.skillId);if(owner?.modifySkillPlan)plan=owner.modifySkillPlan(plan,{...input,stats:input.stats,setCounts:input.stats?.count??{}});if(!plan)return null;}
+ if(input.skillId==='ashen-prism-beam'){
+  if(!input.context?.equippedLegends?.some(x=>x.legendaryId==='ashen-crystal-core')||input.config.cooldownMs!==30000||!input.targets.some(t=>t.id===input.selectedTargetId&&t.alive))return null;
+  plan={skillId:input.skillId,castId:input.castId,scope:'single',branch:'equipment',cooldownMs:30000,activeCastCount:1,damageActionCount:1,actions:[{kind:'hit',castId:input.castId,hitId:input.castId+':beam',targetId:input.selectedTargetId,hitIndex:0,damageType:'light',coefficient:2,independentHit:true,independentCrit:true,reaperEligible:true,ignoreArmor:true,ignoreElementResistance:true,effects:[]}]};
+ }else if(external){plan=external(input);if(!plan)return null;plan=clone(plan);const owner=getSkillOwner(input.skillId);if(owner?.modifySkillPlan)plan=owner.modifySkillPlan(plan,{...input,stats:input.stats,setCounts:input.stats?.count??{}});if(!plan)return null;}
  else if(input.skillId==='fracture_strike'){
   if(!input.targets.some(t=>t.id===input.selectedTargetId&&t.alive))return null;
   const p=planFractureStrike({...input,targetId:input.selectedTargetId});if(!p)return null;
@@ -134,7 +137,7 @@ export function planTreeSkill(input={}){
 }
 /** The plan is internal, not a substitute for save/allocation validation. Validate before hooks fire. */
 export function validTreeSkillPlan(p){
- if(!plain(p)||!TREE_ACTIVE_SKILL_IDS.includes(p.skillId)||!validId(p.castId)||!['single','all','self'].includes(p.scope)||!Number.isFinite(p.cooldownMs)||p.cooldownMs<=0||!Array.isArray(p.actions)||p.actions.length>300000||p.activeCastCount!==1||![0,1].includes(p.damageActionCount))return false;
+ if(!plain(p)||(!TREE_ACTIVE_SKILL_IDS.includes(p.skillId)&&p.skillId!=='ashen-prism-beam')||!validId(p.castId)||!['single','all','self'].includes(p.scope)||!Number.isFinite(p.cooldownMs)||p.cooldownMs<=0||!Array.isArray(p.actions)||p.actions.length>300000||p.activeCastCount!==1||![0,1].includes(p.damageActionCount))return false;
  const ids=new Set(),positions=new Set();let direct=0;const perTarget=new Map();
  const effectValid=e=>plain(e)&&typeof e.type==='string'&&(!('amount'in e)||Number.isFinite(e.amount)&&e.amount>=0)&&(!('durationMs'in e)||Number.isFinite(e.durationMs)&&e.durationMs>=0)&&(!('chance'in e)||Number.isFinite(e.chance)&&e.chance>=0&&e.chance<=1)&&e.mechanicsReady!==false&&(e.type!=='poison'||e.fractionPerLayer===.02&&e.element===null&&e.globalDamageMultiplierApplies===false&&e.shieldPolicy==='absorb-shield-before-hp'&&e.requiresHit===true&&validPoisonTiming(e.timing)&&e.timing.maxLayers===5)&&(!e.onSuccess||Array.isArray(e.onSuccess)&&e.onSuccess.every(effectValid));
  for(const a of p.actions){

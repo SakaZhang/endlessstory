@@ -4889,15 +4889,37 @@ export const art={
       "width": 48,
       "height": 48
     },
-    "ashen-veinbreaker": {
-      "file": "races/ashen/art/equipment-ashen-veinbreaker.png",
-      "width": 48,
-      "height": 48
+    "ashen-molten-core": {
+      "file": "races/ashen/art/equipment-ashen-molten-core.png",
+      "frameSize": [
+        48,
+        48
+      ],
+      "pixelArt": true
     },
-    "ashen-dusk-prism": {
-      "file": "races/ashen/art/equipment-ashen-dusk-prism.png",
-      "width": 48,
-      "height": 48
+    "ashen-stone-core": {
+      "file": "races/ashen/art/equipment-ashen-stone-core.png",
+      "frameSize": [
+        48,
+        48
+      ],
+      "pixelArt": true
+    },
+    "ashen-crystal-core": {
+      "file": "races/ashen/art/equipment-ashen-crystal-core.png",
+      "frameSize": [
+        48,
+        48
+      ],
+      "pixelArt": true
+    },
+    "ashen-primal-core": {
+      "file": "races/ashen/art/equipment-ashen-primal-core.png",
+      "frameSize": [
+        48,
+        48
+      ],
+      "pixelArt": true
     }
   },
   "skills": {

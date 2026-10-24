@@ -12,12 +12,12 @@ function draw(random){const r=random();if(!Number.isFinite(r)||r<0||r>=1)throw n
 export function createLegendaryEquipment({id,legendaryId,level,baseLevel=level,levelSource='drop',definition=LEGENDARY_EQUIPMENT_DEFINITIONS[legendaryId],affixDefs,random=Math.random,rollValue=null}={}){
  try{
   if(typeof id!=='string'||!id||typeof legendaryId!=='string'||!legendaryId||!definition||definition.id!==legendaryId||definition.ready!==true||typeof definition.name!=='string'||!definition.name||typeof definition.exclusiveId!=='string'||!definition.exclusiveId||!Number.isSafeInteger(level)||level<1||level>1e12||!Number.isSafeInteger(baseLevel)||baseLevel<1||baseLevel>1e12||!['drop','material','equipment','generated','merchant','legacy','starter'].includes(levelSource))return null;
-  const keys=Object.keys(affixDefs??{});if(keys.length<4||(rollValue!==null&&typeof rollValue!=='function'))return null;
+  const count=definition.ordinaryAffixCount??4;const keys=Object.keys(affixDefs??{});if(keys.length<count||(rollValue!==null&&typeof rollValue!=='function'))return null;
   // Validate the full injected pool before drawing; no partial RNG consumption on bad definitions.
   for(const key of keys)affixRange(affixDefs[key],4);
   const raw=deriveEquipmentBase({slot:definition.slot,baseVariant:definition.baseVariant,level:Math.min(level,100),quality:4,enhancement:0});
   const affixes=[];const pool=[...keys];
-  for(let i=0;i<4;i++){
+  for(let i=0;i<count;i++){
    const stat=pool.splice(Math.floor(draw(random)*pool.length),1)[0],range=affixRange(affixDefs[stat],4);
    const value=rollValue?rollValue({...range},random):range.min+Math.floor(draw(random)*(range.max-range.min+1));
    if(!Number.isSafeInteger(value)||value<range.min||value>range.max)return null;
@@ -42,7 +42,7 @@ export function validLegendaryEquipmentMetadata(it,affixDefs=null){
   const b=it.legendaryBudget;
   if(!b||Array.isArray(b)||Object.keys(b).length!==4||b.model!==CONFIG.id||b.quality!==4||b.budgetLevel!==Math.min(100,it.level)||b.sourceLevel!==it.level)return false;
   const raw=deriveEquipmentBase({slot:d.slot,baseVariant:d.baseVariant,level:b.budgetLevel,quality:4,enhancement:0});
-  if(!['atk','armor','hp'].every(k=>it[k]===raw[k])||!Array.isArray(it.affixes)||it.affixes.length!==4||new Set(it.affixes.map(a=>a?.stat)).size!==4)return false;
+  if(!['atk','armor','hp'].every(k=>it[k]===raw[k])||!Array.isArray(it.affixes)||it.affixes.length!==(d.ordinaryAffixCount??4)||new Set(it.affixes.map(a=>a?.stat)).size!==(d.ordinaryAffixCount??4))return false;
   return it.affixes.every(a=>typeof a?.stat==='string'&&Number.isSafeInteger(a.value)&&(affixDefs?validAffixSource(a,affixDefs):a.value>=0));
  }catch{return false;}
 }

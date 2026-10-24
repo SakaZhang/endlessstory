@@ -20,7 +20,7 @@ for(const legendaryId of Object.keys(LEGENDARY_EQUIPMENT_DEFINITIONS)){
  const owned=create({id:'canonical-'+legendaryId,legendaryId,level:30,affixDefs,random:()=>.5});
  assert(owned);assert(validLegendaryEquipmentMetadata(owned,affixDefs));assert(validItemBudgetMetadata(owned));
  for(const mutate of [x=>x.budgetQuality=3,x=>x.hp++,x=>x.exclusive.id='fake',x=>x.special={id:'reaper'},x=>x.set='anvil',x=>x.legendaryBudget.budgetLevel=29,x=>x.affixes.push(x.affixes[0])]){const bad=structuredClone(owned);mutate(bad);assert(!validLegendaryEquipmentMetadata(bad,affixDefs));}
- const transferred=structuredClone(owned.affixes[0]);assert(validAffixSource(transferred,affixDefs));assert.equal(affixOwnRange(transferred,affixDefs).max,transferred.sourceRange.max);transferred.sourceRange.max++;assert(!validAffixSource(transferred,affixDefs));
+ if(owned.affixes.length===0)continue;const transferred=structuredClone(owned.affixes[0]);assert(validAffixSource(transferred,affixDefs));assert.equal(affixOwnRange(transferred,affixDefs).max,transferred.sourceRange.max);transferred.sourceRange.max++;assert(!validAffixSource(transferred,affixDefs));
 }
 for(const field of ['budgetQuality','legendaryBudget','exclusive'])assert(!validItemBudgetMetadata({[field]:4}));
 console.log('PASS canonical legendary identities, q4 source transferable, raw budget and exclusive tamper rejected');
