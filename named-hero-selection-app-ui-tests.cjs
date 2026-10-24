@@ -13,7 +13,7 @@ assert.equal([...html.matchAll(/data-new-hero-race=/g)].length,5);
 assert.equal([...html.matchAll(/<img /g)].length,5);
 assert.equal(new Set(Object.values(expected)).size,5);assert.equal(H.heroPortraitScale('elf'),98/82);assert.equal(H.heroPortraitScale('goblin'),62/138);for(const race of Object.keys(expected))assert(html.includes('--hero-scale:'+H.heroPortraitScale(race)));
 for(const [race,name] of Object.entries(expected)){assert.equal(R.heroName(race),name);assert.equal(E.fresh(race).hero,name);const wrong=E.fresh(race);wrong.hero='not-the-registered-name';assert.equal(E.validSave(wrong),false);assert(html.includes('<strong>'+name+'</strong>'));assert(html.includes('aria-label="选择'+name));assert(html.includes('alt="'+name+'的持武器像素形象"'));assert(fs.existsSync('dist/'+H.heroPortrait(race)));}
-assert.match(html,/哥布林 · 盗贼/);assert.match(html,/矮人 · 战士/);assert(!html.includes('裂穴诸部'));assert(!html.includes('矮人 · 矮人战士'));assert.equal(R.getRacePack('goblin').name,'裂穴诸部','territory name remains canonical');
+assert.match(html,/哥布林 · 盗贼/);assert.match(html,/矮人 · 战士/);assert(!html.includes('裂穴诸部 · 盗贼'));assert(html.includes('aria-label="选择奇克，哥布林，盗贼"'));assert(!html.includes('矮人 · 矮人战士'));assert.equal(R.getRacePack('goblin').name,'裂穴诸部','territory name remains canonical');
 assert.match(html,/年轻祭司/);assert.match(html,/大祭司的接班人/);assert.match(html,/盗贼/);assert.match(html,/寻找自己的身世/);assert(!html.includes('斥候'));assert(!html.includes('战争兵器'));
 assert.equal([...html.matchAll(/type="button"/g)].length,5,'native buttons support keyboard Enter and Space');
 el('helpBtn').onclick();const help=el('modalBody').innerHTML;assert(help.includes('选择一位旅人'));for(const obsolete of ['v0.59','现有矮人技能方案保持不变','已有套装继续保留'])assert(!help.includes(obsolete));
