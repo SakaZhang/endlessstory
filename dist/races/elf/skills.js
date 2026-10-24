@@ -42,7 +42,7 @@ export function planSkill({skillId,castId,weaponType,selectedTargetId,targets=[]
  }
  if(meta.branch==='staff'){
   next.resonance=key==='heartwood_release'?0:Math.min(3,rt.resonance+1);let ratio=weaponType==='staff'?.6:.5;const coeff={root_strike:1.65,moon_sweep:1.1,prism_impact:1.9,dusk_reversal:1.7,heartwood_release:2+.2*rt.resonance}[key];const element={root_strike:'earth',moon_sweep:'water',prism_impact:'light',dusk_reversal:'dark',heartwood_release:el}[key];
-  if(coeff)for(const t of chosen){hit(t,coeff*ratio);hit(t,coeff*(1-ratio),element,key==='dusk_reversal'?[effect('attackDown',stats.atk*.12)]:[]);}
+  if(coeff)for(const t of chosen){hit(t,coeff*ratio);hit(t,coeff*(1-ratio),element,key==='dusk_reversal'?[effect('attackDown',stats.atk*.035)]:[]);}
   if(key==='resonant_guard')self([effect('shield',stats.hp*.16,7000),effect('defenseUp',stats.armor*.18,7000)]);
  }
  if(key==='dew_mending'){if(hero.hp>=hero.maxHp)return null;self([effect('heal',stats.hp*.13,0),effect('healOverTime',stats.hp*.018,6000,{tickIntervalMs:2000})]);}
