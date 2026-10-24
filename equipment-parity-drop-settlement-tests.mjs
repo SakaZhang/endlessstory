@@ -6,7 +6,8 @@ import {listEquipmentTemplates} from './dist/equipment-templates.js';
 
 // Exercise the production reward -> rollDrop -> item -> receiveBattleLoot path.
 // Generator-only checks cannot cover regional routing, inventory acceptance, or replay guards.
-for(const race of PARITY_RACES){
+const races=process.argv.length>2?process.argv.slice(2):PARITY_RACES;assert(races.every(race=>PARITY_RACES.includes(race)));
+for(const race of races){
  const state=E.fresh(race);state.level=100;
  E.normalizeHealth(state,state.lastSeen);E.normalizeExpedition(state);state.heroHp=E.stats(state).hp;
  const encounter=E.startInstanceEncounter(state,`${race}.a01.field`,state.lastHealthClock);
