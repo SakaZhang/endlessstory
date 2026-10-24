@@ -41,21 +41,22 @@ export function planSkill({skillId,castId,weaponType,selectedTargetId,targets=[]
  const id=skillId.slice(prefix.length),A=stats.atk,H=stats.hp,D=stats.armor,S=weaponType==='sword_shield',G=weaponType==='greatsword',branch=S?'sword_shield':G?'greatsword':'generic',actions=[];
  const live=targets.filter(t=>t.alive===true),chosen=meta.scope==='all'?live:meta.scope==='single'?live.filter(t=>t.id===selectedTargetId):[];if(meta.scope!=='self'&&!chosen.length)return null;
  const e=(type,amount,durationMs=6000,extra={})=>({type,amount,durationMs,sourceId:skillId,stacking:'refresh-source',...extra});
+ const weaken=(t,ratio=.12)=>Math.min(A*ratio,Math.max(0,t.baseAtk??t.atk??0)*.20); // cap from immutable enemy base ATK, not already-debuffed value
  const bleed=(mult=.11,duration=6000)=>e('dot',A*mult,duration,{status:'bleed',damageType:'physical',tickIntervalMs:2000,reaperEligible:false,activeCastCount:0});
  const fx=(targetId,effects)=>actions.push({kind:'effects',targetId,effects});
  const hit=(t,c,effects=[],extra={})=>{let hitIndex=actions.filter(a=>a.targetId===t.id&&a.kind==='hit').length;actions.push({kind:'hit',castId,hitId:`${castId}:${t.id}:${hitIndex}`,targetId:t.id,hitIndex,damageType:'physical',coefficient:c,independentHit:true,independentCrit:true,reaperEligible:true,effects,...extra});};
  for(const t of chosen){
- if(id==='cut')hit(t,1.1,[bleed(.11,G?8000:6000),...(S?[e('attackDown',A*.1)]:[])]);
+ if(id==='cut')hit(t,1.1,[bleed(.11,G?8000:6000),...(S?[e('attackDown',weaken(t,.1))]:[])]);
  if(id==='red_sweep')hit(t,.7,[bleed(.08,G?8000:6000),...(S?[e('hitDown',8,4000)]:[])]);
- if(id==='open_wound'){hit(t,1.3+(t.bleeding?.35:0),S?[e('attackDown',A*.12,4000)]:[]);if(G&&t.bleeding)hit(t,.45);}
- if(id==='blood_mark')fx(t.id,[bleed(G?.16:.12,8000),e('armorDown',A*.18,6000),...(S?[e('attackDown',A*.12,6000)]:[])]);
+ if(id==='open_wound'){hit(t,1.3+(t.bleeding?.35:0),S?[e('attackDown',weaken(t),4000)]:[]);if(G&&t.bleeding)hit(t,.45);}
+ if(id==='blood_mark')fx(t.id,[bleed(G?.16:.12,8000),e('armorDown',A*.18,6000),...(S?[e('attackDown',weaken(t),6000)]:[])]);
  if(id==='sever')hit(t,1.65+(t.bleeding?(G?.95:.65):0),S?[e('shield',H*.06,4000,{target:'self',oncePerCast:true})]:[],{consumeStatusOnHit:t.bleeding?'bleed':null});
  if(id==='precise_cut')hit(t,G?1.45:1.2,[e('critUp',S?10:8,3300,{target:'self'})]);
  if(id==='cross_cut'){hit(t,G?.75:.65);hit(t,G?.95:.8,S?[e('armorDown',A*.14,5000)]:[]);}
  if(id==='expose')fx(t.id,[e('armorDown',A*(G?.26:.2),S?8000:6000),e('hitDown',10,S?8000:6000)]);
  if(id==='decisive')hit(t,1.5+(t.armorBroken?(G?1:.65):0),S?[e('defenseUp',D*.12,4400,{target:'self'})]:[]);
  if(id==='flash_arc')hit(t,G?1:.8,[e('hitDown',10,4000),...(S?[e('critUp',12,4000,{target:'self',oncePerCast:true})]:[])]);
- if(id==='shield_bash')hit(t,1+(S&&hero.shield>0?.45:0),G?[e('attackDown',A*.12,4400)]:[],{flatDefenseContribution:Math.min(D*.5,A*.45)});
+ if(id==='shield_bash')hit(t,1+(S&&hero.shield>0?.45:0),G?[e('attackDown',weaken(t),4400)]:[],{flatDefenseContribution:Math.min(D*.5,A*.45)});
  if(id==='repulse')hit(t,.5,[e('stun',0,S?1650:1100,{pausePreparing:true,bossScale:'host-control-policy',minimumPositive:true}),...(G?[e('armorDown',A*.12,4000)]:[])]);
  if(id==='return_cut')hit(t,1.15+(hero.shield>0?.6:0),S?[e('shield',H*.06,4400,{target:'self',counterEligible:true})]:G?[e('penetrationUp',A*.12,4400,{target:'self'})]:[]);
  if(id==='intercept')hit(t,1.05,[{type:'interrupt',sourceId:skillId,requiresPreparing:true,onSuccess:S?[e('stun',0,1100,{bossScale:'host-control-policy',minimumPositive:true})]:G?[e('attackUp',A*.12,3300,{target:'self'})]:[]}]);
