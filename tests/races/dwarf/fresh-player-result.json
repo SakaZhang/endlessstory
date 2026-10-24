@@ -1,0 +1,336 @@
+{
+  "race": "dwarf",
+  "seed": 61027,
+  "passed": true,
+  "initial": {
+    "gold": 100,
+    "level": 1,
+    "stats": {
+      "atk": 67,
+      "armor": 51,
+      "hp": 488,
+      "penetration": 0,
+      "elementAttack": {
+        "earth": 0,
+        "water": 0,
+        "fire": 0,
+        "wind": 0,
+        "light": 0,
+        "dark": 0
+      },
+      "elementResistance": {
+        "earth": 0,
+        "water": 0,
+        "fire": 0,
+        "wind": 0,
+        "light": 0,
+        "dark": 0
+      },
+      "elementResist": 0,
+      "block": 0,
+      "shieldBonus": 0,
+      "healingBonus": 0,
+      "resolveReduction": 0,
+      "luck": 0,
+      "lifesteal": 0,
+      "lifestealRating": 0,
+      "lifestealRate": 0,
+      "hit": 0.9,
+      "crit": 0.05,
+      "critDamage": 1.5,
+      "element": 0,
+      "hitRating": 0,
+      "critRating": 0,
+      "critDamageRating": 0,
+      "count": {},
+      "specials": {},
+      "legend": false,
+      "bonus": {
+        "atk": 0,
+        "hp": 0,
+        "armor": 0,
+        "hit": 0,
+        "crit": 0,
+        "critDamage": 0,
+        "element": 0,
+        "earthAtk": 0,
+        "earthResist": 0,
+        "waterAtk": 0,
+        "waterResist": 0,
+        "fireAtk": 0,
+        "fireResist": 0,
+        "windAtk": 0,
+        "windResist": 0,
+        "lightAtk": 0,
+        "lightResist": 0,
+        "darkAtk": 0,
+        "darkResist": 0,
+        "lifesteal": 0,
+        "luck": 0
+      }
+    },
+    "weapon": {
+      "id": "mywpiww0-1-vxull",
+      "slot": "weapon",
+      "set": null,
+      "rarity": 0,
+      "level": 1,
+      "baseLevel": 1,
+      "levelSource": "starter",
+      "name": "铆钉锤",
+      "atk": 19,
+      "armor": 4,
+      "hp": 13,
+      "affixes": [],
+      "special": null,
+      "legendaryId": null,
+      "locked": false,
+      "bless": 0,
+      "templateId": "dwarf_scatter_rivet_hammer",
+      "baseVariant": "hammer_balanced",
+      "weaponType": "hammer",
+      "originRace": "dwarf",
+      "visualKey": "dwarf_scatter_rivet_hammer",
+      "visualVariant": "dwarf_scatter_rivet_hammer",
+      "iconKey": "weapon",
+      "baseBudgetModel": "equipment-budget-m2-v1",
+      "budgetLevel": 1,
+      "budgetSourceLevel": 1
+    }
+  },
+  "elapsedSeconds": 2568.8,
+  "deaths": 2,
+  "battles": 182,
+  "dungeonAttempts": 2,
+  "level": 9,
+  "gold": 28,
+  "learned": true,
+  "firstMaterial": true,
+  "crafted": true,
+  "used": true,
+  "areaProgress": {
+    "unlocked": [
+      1,
+      2
+    ],
+    "cleared": [
+      1
+    ]
+  },
+  "log": [
+    {
+      "event": "fresh",
+      "seconds": 0,
+      "level": 1,
+      "gold": 100,
+      "weapon": "hammer",
+      "stats": {
+        "atk": 67,
+        "armor": 51,
+        "hp": 488,
+        "penetration": 0,
+        "elementAttack": {
+          "earth": 0,
+          "water": 0,
+          "fire": 0,
+          "wind": 0,
+          "light": 0,
+          "dark": 0
+        },
+        "elementResistance": {
+          "earth": 0,
+          "water": 0,
+          "fire": 0,
+          "wind": 0,
+          "light": 0,
+          "dark": 0
+        },
+        "elementResist": 0,
+        "block": 0,
+        "shieldBonus": 0,
+        "healingBonus": 0,
+        "resolveReduction": 0,
+        "luck": 0,
+        "lifesteal": 0,
+        "lifestealRating": 0,
+        "lifestealRate": 0,
+        "hit": 0.9,
+        "crit": 0.05,
+        "critDamage": 1.5,
+        "element": 0,
+        "hitRating": 0,
+        "critRating": 0,
+        "critDamageRating": 0,
+        "count": {},
+        "specials": {},
+        "legend": false,
+        "bonus": {
+          "atk": 0,
+          "hp": 0,
+          "armor": 0,
+          "hit": 0,
+          "crit": 0,
+          "critDamage": 0,
+          "element": 0,
+          "earthAtk": 0,
+          "earthResist": 0,
+          "waterAtk": 0,
+          "waterResist": 0,
+          "fireAtk": 0,
+          "fireResist": 0,
+          "windAtk": 0,
+          "windResist": 0,
+          "lightAtk": 0,
+          "lightResist": 0,
+          "darkAtk": 0,
+          "darkResist": 0,
+          "lifesteal": 0,
+          "luck": 0
+        }
+      }
+    },
+    {
+      "event": "paid-natural-stock-refresh",
+      "seconds": 0,
+      "level": 1,
+      "gold": 80,
+      "cost": 20
+    },
+    {
+      "event": "real-recovery-drop",
+      "seconds": 12.1,
+      "level": 1,
+      "gold": 82,
+      "materials": [
+        {
+          "key": "灰根草|2",
+          "material": "灰根草",
+          "quality": 2,
+          "count": 1,
+          "q": 2
+        }
+      ]
+    },
+    {
+      "event": "paid-natural-stock-refresh",
+      "seconds": 12.1,
+      "level": 1,
+      "gold": 52,
+      "cost": 30
+    },
+    {
+      "event": "paid-natural-stock-refresh",
+      "seconds": 269.6,
+      "level": 3,
+      "gold": 50,
+      "cost": 40
+    },
+    {
+      "event": "first-earned-skill",
+      "seconds": 404.2,
+      "level": 4,
+      "gold": 70,
+      "skillId": "fracture_strike",
+      "cost": 3
+    },
+    {
+      "event": "paid-natural-stock-refresh",
+      "seconds": 568.7,
+      "level": 4,
+      "gold": 50,
+      "cost": 50
+    },
+    {
+      "event": "death-rest",
+      "seconds": 842.5,
+      "level": 5,
+      "gold": 100,
+      "until": 1800001142500
+    },
+    {
+      "event": "paid-natural-stock-refresh",
+      "seconds": 1186,
+      "level": 6,
+      "gold": 50,
+      "cost": 60
+    },
+    {
+      "event": "paid-natural-stock-refresh",
+      "seconds": 1513.8,
+      "level": 7,
+      "gold": 50,
+      "cost": 70
+    },
+    {
+      "event": "paid-natural-stock-refresh",
+      "seconds": 1808.7,
+      "level": 8,
+      "gold": 90,
+      "cost": 20
+    },
+    {
+      "event": "paid-natural-stock-refresh",
+      "seconds": 1820.4,
+      "level": 8,
+      "gold": 62,
+      "cost": 30
+    },
+    {
+      "event": "paid-natural-stock-refresh",
+      "seconds": 1960,
+      "level": 8,
+      "gold": 50,
+      "cost": 40
+    },
+    {
+      "event": "paid-natural-stock-refresh",
+      "seconds": 2194.2,
+      "level": 9,
+      "gold": 50,
+      "cost": 50
+    },
+    {
+      "event": "bought-and-learned-recipe",
+      "seconds": 2194.2,
+      "level": 9,
+      "gold": 5,
+      "cost": 45
+    },
+    {
+      "event": "crafted-real-recovery",
+      "seconds": 2194.2,
+      "level": 9,
+      "gold": 4,
+      "key": "healing|0",
+      "cost": 1
+    },
+    {
+      "event": "used-crafted-potion",
+      "seconds": 2194.2,
+      "level": 9,
+      "gold": 4,
+      "actualHeal": 58.30000000000001
+    },
+    {
+      "event": "death-rest",
+      "seconds": 2219.4,
+      "level": 9,
+      "gold": 8,
+      "until": 1800002519400
+    },
+    {
+      "event": "next-area-unlocked",
+      "seconds": 2567,
+      "level": 9,
+      "gold": 28,
+      "dungeonAttempts": 2
+    },
+    {
+      "event": "entered-next-area",
+      "seconds": 2568.8,
+      "level": 9,
+      "gold": 28,
+      "instanceId": "dwarf.a02.field"
+    }
+  ]
+}

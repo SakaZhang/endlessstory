@@ -1,0 +1,280 @@
+{
+  "race": "human",
+  "seed": 61027,
+  "passed": true,
+  "initial": {
+    "gold": 100,
+    "level": 1,
+    "stats": {
+      "atk": 68,
+      "armor": 51,
+      "hp": 478,
+      "penetration": 0,
+      "elementAttack": {
+        "earth": 0,
+        "water": 0,
+        "fire": 0,
+        "wind": 0,
+        "light": 0,
+        "dark": 0
+      },
+      "elementResistance": {
+        "earth": 0,
+        "water": 0,
+        "fire": 0,
+        "wind": 0,
+        "light": 0,
+        "dark": 0
+      },
+      "elementResist": 0,
+      "block": 0,
+      "shieldBonus": 0,
+      "healingBonus": 0,
+      "resolveReduction": 0,
+      "luck": 0,
+      "lifesteal": 0,
+      "lifestealRating": 0,
+      "lifestealRate": 0,
+      "hit": 0.9,
+      "crit": 0.05,
+      "critDamage": 1.5,
+      "element": 0,
+      "hitRating": 0,
+      "critRating": 0,
+      "critDamageRating": 0,
+      "count": {},
+      "specials": {},
+      "legend": false,
+      "bonus": {
+        "atk": 0,
+        "hp": 0,
+        "armor": 0,
+        "hit": 0,
+        "crit": 0,
+        "critDamage": 0,
+        "element": 0,
+        "earthAtk": 0,
+        "earthResist": 0,
+        "waterAtk": 0,
+        "waterResist": 0,
+        "fireAtk": 0,
+        "fireResist": 0,
+        "windAtk": 0,
+        "windResist": 0,
+        "lightAtk": 0,
+        "lightResist": 0,
+        "darkAtk": 0,
+        "darkResist": 0,
+        "lifesteal": 0,
+        "luck": 0
+      }
+    },
+    "weapon": {
+      "id": "mywpiww0-1-vxull",
+      "slot": "weapon",
+      "set": null,
+      "rarity": 0,
+      "level": 1,
+      "baseLevel": 1,
+      "levelSource": "starter",
+      "name": "黑钢剑盾",
+      "atk": 16,
+      "armor": 6,
+      "hp": 13,
+      "affixes": [],
+      "special": null,
+      "legendaryId": null,
+      "locked": false,
+      "bless": 0,
+      "templateId": "human_scatter_shield_5",
+      "baseVariant": "hammer_defensive",
+      "weaponType": "sword_shield",
+      "originRace": "human",
+      "visualKey": "human_scatter_shield_5",
+      "visualVariant": "human_scatter_shield_5",
+      "iconKey": "weapon",
+      "baseBudgetModel": "equipment-budget-m2-v1",
+      "budgetLevel": 1,
+      "budgetSourceLevel": 1
+    }
+  },
+  "elapsedSeconds": 579.965,
+  "deaths": 0,
+  "battles": 41,
+  "dungeonAttempts": 1,
+  "level": 4,
+  "gold": 22,
+  "learned": true,
+  "firstMaterial": true,
+  "crafted": true,
+  "used": true,
+  "areaProgress": {
+    "unlocked": [
+      1,
+      2
+    ],
+    "cleared": [
+      1
+    ]
+  },
+  "log": [
+    {
+      "event": "fresh",
+      "seconds": 0,
+      "level": 1,
+      "gold": 100,
+      "weapon": "sword_shield",
+      "stats": {
+        "atk": 68,
+        "armor": 51,
+        "hp": 478,
+        "penetration": 0,
+        "elementAttack": {
+          "earth": 0,
+          "water": 0,
+          "fire": 0,
+          "wind": 0,
+          "light": 0,
+          "dark": 0
+        },
+        "elementResistance": {
+          "earth": 0,
+          "water": 0,
+          "fire": 0,
+          "wind": 0,
+          "light": 0,
+          "dark": 0
+        },
+        "elementResist": 0,
+        "block": 0,
+        "shieldBonus": 0,
+        "healingBonus": 0,
+        "resolveReduction": 0,
+        "luck": 0,
+        "lifesteal": 0,
+        "lifestealRating": 0,
+        "lifestealRate": 0,
+        "hit": 0.9,
+        "crit": 0.05,
+        "critDamage": 1.5,
+        "element": 0,
+        "hitRating": 0,
+        "critRating": 0,
+        "critDamageRating": 0,
+        "count": {},
+        "specials": {},
+        "legend": false,
+        "bonus": {
+          "atk": 0,
+          "hp": 0,
+          "armor": 0,
+          "hit": 0,
+          "crit": 0,
+          "critDamage": 0,
+          "element": 0,
+          "earthAtk": 0,
+          "earthResist": 0,
+          "waterAtk": 0,
+          "waterResist": 0,
+          "fireAtk": 0,
+          "fireResist": 0,
+          "windAtk": 0,
+          "windResist": 0,
+          "lightAtk": 0,
+          "lightResist": 0,
+          "darkAtk": 0,
+          "darkResist": 0,
+          "lifesteal": 0,
+          "luck": 0
+        }
+      }
+    },
+    {
+      "event": "paid-natural-stock-refresh",
+      "seconds": 0,
+      "level": 1,
+      "gold": 82,
+      "cost": 18
+    },
+    {
+      "event": "paid-natural-stock-refresh",
+      "seconds": 13.2,
+      "level": 1,
+      "gold": 57,
+      "cost": 27
+    },
+    {
+      "event": "real-recovery-drop",
+      "seconds": 46.665,
+      "level": 1,
+      "gold": 61,
+      "materials": [
+        {
+          "key": "human.mat.02|0",
+          "material": "human.mat.02",
+          "quality": 0,
+          "count": 1,
+          "q": 0
+        }
+      ]
+    },
+    {
+      "event": "paid-natural-stock-refresh",
+      "seconds": 226.265,
+      "level": 3,
+      "gold": 51,
+      "cost": 36
+    },
+    {
+      "event": "first-earned-skill",
+      "seconds": 424.165,
+      "level": 4,
+      "gold": 79,
+      "skillId": "human.cut",
+      "cost": 3
+    },
+    {
+      "event": "paid-natural-stock-refresh",
+      "seconds": 521.065,
+      "level": 4,
+      "gold": 50,
+      "cost": 45
+    },
+    {
+      "event": "bought-and-learned-recipe",
+      "seconds": 521.065,
+      "level": 4,
+      "gold": 9,
+      "cost": 41
+    },
+    {
+      "event": "crafted-real-recovery",
+      "seconds": 521.065,
+      "level": 4,
+      "gold": 8,
+      "key": "healing|0",
+      "cost": 1
+    },
+    {
+      "event": "used-crafted-potion",
+      "seconds": 521.065,
+      "level": 4,
+      "gold": 8,
+      "actualHeal": 52
+    },
+    {
+      "event": "next-area-unlocked",
+      "seconds": 578.165,
+      "level": 4,
+      "gold": 22,
+      "dungeonAttempts": 1
+    },
+    {
+      "event": "entered-next-area",
+      "seconds": 579.965,
+      "level": 4,
+      "gold": 22,
+      "instanceId": "human.a02.field"
+    }
+  ]
+}
