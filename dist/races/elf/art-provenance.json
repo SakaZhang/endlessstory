@@ -25,5 +25,21 @@
   "inspected": true,
   "scope": "16 hero bow/staff action frames;44 monster identities each idle+anticipation+strike+hurt+death (220 frames);10 scenes;64 detailed icons.",
   "proofsAre": "native asset composites, NOT live-engine screenshots",
-  "heroStyle": "Regenerated using approved dwarf-idle-0 reference; young priest with white emerald ceremonial robes; roughly100px full weapon height"
+  "heroStyle": "Regenerated using approved dwarf-idle-0 reference; young priest with white emerald ceremonial robes; roughly100px full weapon height",
+  "sourceHashes": {
+    "exec-0048809d-15a9-4672-b92f-c68195fc9bc3.png": "e768a340adaa54839da2c44e5aed8afcddc1ae337b030b66ce6bb7b74ae97e70",
+    "exec-b9ebd4d2-3056-4188-b4dc-e22b7d271557.png": "f922f5ede49faedea6c8b8285f78c23cd027857302c383a28b1fd6226fe8727a",
+    "exec-57bf8d4c-1cef-4c4e-8da4-35e846f0ea2e.png": "1f6a88b6388a004e3c89ae6e492fdb547ddfde4d83275bc5650642cbed9b6cf1",
+    "exec-ee8e50bc-95e8-4ea9-8f51-97056be58e96.png": "6ad0db2cba6e97aa32eec55f9a9d163afafefff66d37d46851b865fbcaeffbfd",
+    "exec-271c1f65-85c0-47b8-b767-17876e52ff7c.png": "f9ec1fd0794d6107f55c5b21ca94ae16b7203cdf4f51a2a49f172926fd7a8a02",
+    "exec-d4dd8b1a-bc69-4ed6-a95c-b13749f74fcc.png": "3521fa1f13761cb41ad3b786eb9f7cffe16ed64a5ba3109a01cedf96d0123c3e",
+    "exec-1647ef74-fca8-40a2-9953-e0d74db2e4f6.png": "d9fe196cf68755cb7fc5bb34d7b2c3a6021e28afaf78baa81b5e96f3c21f44cf",
+    "exec-3214e30f-41ce-4fdb-87c7-09f0fb1c543d.png": "07138fb5b2d01bbf6c41d5dfa2a6d1dd3193331e28af56105189a0a1ee05698c",
+    "exec-e879ca5f-6ce2-4dfd-9be1-8566d22d266f.png": "b85531e3493a8cfea1924eacbccaf7cc93e3bed0e7b01eec1713c27149cb769a",
+    "exec-ddc3f67d-69d2-49ad-bdd4-0bf72f37f963.png": "865712827534a9f1402e54cb667701b754f5cddaa5ffd24915e3fe4bacb5d187",
+    "exec-121aea39-f475-47f9-b5d9-c436ffb262d4.png": "8b839b492e96512824b350a2623c5abd6e24d4b33da4326470ec92e3e60e8ed6",
+    "exec-9cdc7475-c847-4194-bfc0-40080fdc798e.png": "1db61b0206f791815427299a62e1025b22819e4a4110ffd31750a52aa5eed75d",
+    "exec-fa0f8faa-1b0a-42d6-8e97-644693a1234e.png": "dbed6aaa857f2d2b00d8745d3b0a37cea8901a1d75def4e19345ee7e84a7ddd2",
+    "exec-c36e0219-6ab6-40f3-bbf6-4306dcf387c6.png": "da80ba0bcbd0b73b736ce0be8fc89a533614f8753f5081c147883f8f3b279600"
+  }
 }
