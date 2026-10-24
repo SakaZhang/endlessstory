@@ -1,0 +1,70 @@
+{
+  "kind": "actual integrated production engine + createLiveBattlePresentation driven by real captured combat events; not browser screenshot",
+  "manifestFrom": "/workspace/scratch/81f4d6a709c0/pixel-rpg-live-hotfix",
+  "scenes": [
+    {
+      "node": "ashen.a01.field",
+      "weapon": "armguard",
+      "encounterId": "m2-1000-11",
+      "enemyIds": [
+        "ashen.a01.normal.2"
+      ],
+      "validSave": true
+    },
+    {
+      "node": "ashen.a01.field",
+      "weapon": "hammer",
+      "encounterId": "m2-1000-22",
+      "enemyIds": [
+        "ashen.a01.normal.1"
+      ],
+      "validSave": true
+    },
+    {
+      "node": "ashen.a04.boss",
+      "weapon": "armguard",
+      "encounterId": "m2-1000-33",
+      "enemyIds": [
+        "ashen.a04.boss"
+      ],
+      "actualLastCast": "ashen.kindle",
+      "validSave": true
+    },
+    {
+      "node": "ashen.a04.boss",
+      "weapon": "hammer",
+      "encounterId": "m2-1000-45",
+      "enemyIds": [
+        "ashen.a04.boss"
+      ],
+      "actualLastCast": "ashen.kindle",
+      "validSave": true
+    },
+    {
+      "node": "ashen.a10.boss",
+      "weapon": "armguard",
+      "encounterId": "m2-1000-58",
+      "enemyIds": [
+        "ashen.a10.boss",
+        "ashen.a10.boss",
+        "ashen.a10.boss",
+        "ashen.a10.boss"
+      ],
+      "actualLastCast": "ashen.kindle",
+      "validSave": true
+    },
+    {
+      "node": "ashen.a10.boss",
+      "weapon": "hammer",
+      "encounterId": "m2-1000-70",
+      "enemyIds": [
+        "ashen.a10.boss",
+        "ashen.a10.boss",
+        "ashen.a10.boss",
+        "ashen.a10.boss"
+      ],
+      "actualLastCast": "ashen.kindle",
+      "validSave": true
+    }
+  ]
+}
