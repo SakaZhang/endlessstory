@@ -229,7 +229,7 @@
           "y": 203,
           "sprite": "hero-elf-bow",
           "ranged": true,
-          "scale": 1
+          "scale": 1.1951219512195121
         },
         "m2-15600-42-enemy-0": {
           "x": 260,
@@ -299,7 +299,7 @@
           "y": 203,
           "sprite": "hero-elf-bow",
           "ranged": true,
-          "scale": 1
+          "scale": 1.1951219512195121
         },
         "m2-15600-53-enemy-0": {
           "x": 260,
@@ -365,7 +365,7 @@
           "y": 203,
           "sprite": "hero-elf-bow",
           "ranged": true,
-          "scale": 1
+          "scale": 1.1951219512195121
         },
         "m2-10000-62-enemy-0": {
           "x": 260,
@@ -428,7 +428,7 @@
           "y": 203,
           "sprite": "hero-goblin-dagger",
           "ranged": false,
-          "scale": 0.6811594202898551
+          "scale": 0.4492753623188406
         },
         "m2-15600-73-enemy-0": {
           "x": 260,
@@ -498,7 +498,7 @@
           "y": 203,
           "sprite": "hero-goblin-sword",
           "ranged": false,
-          "scale": 0.752
+          "scale": 0.496
         },
         "m2-15600-84-enemy-0": {
           "x": 260,
@@ -564,7 +564,7 @@
           "y": 203,
           "sprite": "hero-goblin-dagger",
           "ranged": false,
-          "scale": 0.6811594202898551
+          "scale": 0.4492753623188406
         },
         "m2-10000-93-enemy-0": {
           "x": 260,

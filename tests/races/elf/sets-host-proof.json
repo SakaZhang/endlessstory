@@ -5,24 +5,24 @@
       "set": "elf_arrow",
       "count": 0,
       "skill": "elf.twin_arrow",
-      "atk": 605,
+      "atk": 610,
       "maxHp": 2000,
       "shield": 0,
       "hits": [
         {
           "element": "physical",
-          "damage": 333,
-          "normalized": 0.5504132231404959
+          "damage": 336,
+          "normalized": 0.5508196721311476
         },
         {
           "element": "physical",
-          "damage": 484,
+          "damage": 488,
           "normalized": 0.8
         },
         {
           "element": "physical",
-          "damage": 212,
-          "normalized": 0.3504132231404959
+          "damage": 214,
+          "normalized": 0.35081967213114756
         }
       ],
       "equipped": [
@@ -51,13 +51,13 @@
           "slot": "boots"
         },
         {
-          "templateId": "elf_scatter_ring_3",
+          "templateId": "elf_scatter_ring_4",
           "set": null,
           "rarity": 0,
           "slot": "ring"
         },
         {
-          "templateId": "elf_scatter_ring_1",
+          "templateId": "elf_scatter_ring_2",
           "set": null,
           "rarity": 0,
           "slot": "ring"
@@ -81,24 +81,24 @@
       "set": "elf_arrow",
       "count": 2,
       "skill": "elf.twin_arrow",
-      "atk": 597,
-      "maxHp": 3104,
+      "atk": 583,
+      "maxHp": 3114,
       "shield": 0,
       "hits": [
         {
           "element": "physical",
-          "damage": 361,
-          "normalized": 0.6046901172529313
+          "damage": 353,
+          "normalized": 0.6054888507718696
         },
         {
           "element": "physical",
-          "damage": 525,
-          "normalized": 0.8793969849246231
+          "damage": 513,
+          "normalized": 0.8799313893653516
         },
         {
           "element": "physical",
-          "damage": 230,
-          "normalized": 0.3852596314907873
+          "damage": 224,
+          "normalized": 0.38421955403087477
         }
       ],
       "equipped": [
@@ -115,13 +115,13 @@
           "slot": "boots"
         },
         {
-          "templateId": "elf_scatter_ring_2",
+          "templateId": "elf_scatter_ring_3",
           "set": null,
           "rarity": 0,
           "slot": "ring"
         },
         {
-          "templateId": "elf_scatter_ring_4",
+          "templateId": "elf_scatter_ring_6",
           "set": null,
           "rarity": 0,
           "slot": "ring"
@@ -159,24 +159,24 @@
       "set": "elf_arrow",
       "count": 4,
       "skill": "elf.twin_arrow",
-      "atk": 659,
+      "atk": 654,
       "maxHp": 3892,
       "shield": 0,
       "hits": [
         {
           "element": "physical",
-          "damage": 399,
-          "normalized": 0.6054628224582701
+          "damage": 396,
+          "normalized": 0.6055045871559633
         },
         {
           "element": "physical",
-          "damage": 684,
-          "normalized": 1.0379362670713201
+          "damage": 679,
+          "normalized": 1.0382262996941896
         },
         {
           "element": "physical",
-          "damage": 299,
-          "normalized": 0.4537177541729894
+          "damage": 297,
+          "normalized": 0.4541284403669725
         }
       ],
       "equipped": [
@@ -187,7 +187,7 @@
           "slot": "ring"
         },
         {
-          "templateId": "elf_scatter_ring_2",
+          "templateId": "elf_scatter_ring_3",
           "set": null,
           "rarity": 0,
           "slot": "ring"
@@ -303,14 +303,14 @@
       "set": "elf_prism",
       "count": 2,
       "skill": "elf.sixfold_shift",
-      "atk": 573,
+      "atk": 578,
       "maxHp": 3109,
       "shield": 0,
       "hits": [
         {
           "element": "water",
-          "damage": 1059.1853839289397,
-          "normalized": 1.8484910714292142
+          "damage": 1068.4278392866254,
+          "normalized": 1.8484910714301477
         }
       ],
       "equipped": [
@@ -327,13 +327,13 @@
           "slot": "boots"
         },
         {
-          "templateId": "elf_scatter_ring_3",
+          "templateId": "elf_scatter_ring_4",
           "set": null,
           "rarity": 0,
           "slot": "ring"
         },
         {
-          "templateId": "elf_scatter_ring_4",
+          "templateId": "elf_scatter_ring_5",
           "set": null,
           "rarity": 0,
           "slot": "ring"
@@ -371,14 +371,14 @@
       "set": "elf_prism",
       "count": 4,
       "skill": "elf.sixfold_shift",
-      "atk": 673,
+      "atk": 668,
       "maxHp": 3820,
       "shield": 0,
       "hits": [
         {
           "element": "water",
-          "damage": 1430.6396647319198,
-          "normalized": 2.1257647321425255
+          "damage": 1420.0108410716057,
+          "normalized": 2.1257647321431223
         }
       ],
       "equipped": [
@@ -389,7 +389,7 @@
           "slot": "ring"
         },
         {
-          "templateId": "elf_scatter_ring_2",
+          "templateId": "elf_scatter_ring_3",
           "set": null,
           "rarity": 0,
           "slot": "ring"
@@ -439,19 +439,19 @@
       "set": "elf_root",
       "count": 0,
       "skill": "elf.root_strike",
-      "atk": 555,
-      "maxHp": 2110,
+      "atk": 564,
+      "maxHp": 2100,
       "shield": 0,
       "hits": [
         {
           "element": "physical",
-          "damage": 549,
-          "normalized": 0.9891891891891892
+          "damage": 558,
+          "normalized": 0.9893617021276596
         },
         {
           "element": "earth",
-          "damage": 385.9232142865658,
-          "normalized": 0.6953571428586771
+          "damage": 392.181428572163,
+          "normalized": 0.695357142858445
         }
       ],
       "equipped": [
@@ -486,7 +486,7 @@
           "slot": "ring"
         },
         {
-          "templateId": "elf_scatter_ring_3",
+          "templateId": "elf_scatter_ring_4",
           "set": null,
           "rarity": 0,
           "slot": "ring"
@@ -510,19 +510,19 @@
       "set": "elf_root",
       "count": 2,
       "skill": "elf.root_strike",
-      "atk": 603,
+      "atk": 593,
       "maxHp": 4173,
       "shield": 0,
       "hits": [
         {
           "element": "physical",
-          "damage": 657,
-          "normalized": 1.0895522388059702
+          "damage": 646,
+          "normalized": 1.0893760539629005
         },
         {
           "element": "earth",
-          "damage": 461.2303928565234,
-          "normalized": 0.7648928571418299
+          "damage": 453.58146428503096,
+          "normalized": 0.7648928571417049
         }
       ],
       "equipped": [
@@ -539,13 +539,13 @@
           "slot": "boots"
         },
         {
-          "templateId": "elf_scatter_ring_2",
+          "templateId": "elf_scatter_ring_3",
           "set": null,
           "rarity": 0,
           "slot": "ring"
         },
         {
-          "templateId": "elf_scatter_ring_2",
+          "templateId": "elf_scatter_ring_3",
           "set": null,
           "rarity": 0,
           "slot": "ring"
@@ -583,19 +583,19 @@
       "set": "elf_root",
       "count": 4,
       "skill": "elf.root_strike",
-      "atk": 644,
-      "maxHp": 5721,
+      "atk": 635,
+      "maxHp": 5731,
       "shield": 0,
       "hits": [
         {
           "element": "physical",
-          "damage": 701,
-          "normalized": 1.0885093167701863
+          "damage": 692,
+          "normalized": 1.089763779527559
         },
         {
           "element": "earth",
-          "damage": 591.1092000007629,
-          "normalized": 0.9178714285726133
+          "damage": 582.8483571428806,
+          "normalized": 0.9178714285714654
         }
       ],
       "equipped": [
@@ -606,7 +606,7 @@
           "slot": "ring"
         },
         {
-          "templateId": "elf_scatter_ring_4",
+          "templateId": "elf_scatter_ring_6",
           "set": null,
           "rarity": 0,
           "slot": "ring"
@@ -656,7 +656,7 @@
       "set": "elf_root",
       "count": 2,
       "skill": "elf.resonant_guard",
-      "atk": 577,
+      "atk": 582,
       "maxHp": 4205,
       "shield": 672.8000000000001,
       "hits": [],
@@ -674,13 +674,13 @@
           "slot": "boots"
         },
         {
-          "templateId": "elf_scatter_ring_1",
+          "templateId": "elf_scatter_ring_2",
           "set": null,
           "rarity": 0,
           "slot": "ring"
         },
         {
-          "templateId": "elf_scatter_ring_3",
+          "templateId": "elf_scatter_ring_4",
           "set": null,
           "rarity": 0,
           "slot": "ring"

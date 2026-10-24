@@ -6,14 +6,14 @@
       "count": 0,
       "skillId": "human.cut",
       "stats": {
-        "atk": 536,
-        "hp": 1995,
+        "atk": 527,
+        "hp": 2005,
         "shieldBonus": 0
       },
       "effect": {
         "sourceId": "human.cut",
         "type": "dot",
-        "amount": 58.96,
+        "amount": 57.97,
         "endAt": 7100,
         "source": {
           "kind": "skill",
@@ -30,14 +30,14 @@
       "count": 2,
       "skillId": "human.cut",
       "stats": {
-        "atk": 577,
+        "atk": 582,
         "hp": 4083,
         "shieldBonus": 0
       },
       "effect": {
         "sourceId": "human.cut",
         "type": "dot",
-        "amount": 76.164,
+        "amount": 76.824,
         "endAt": 7100,
         "source": {
           "kind": "skill",
@@ -54,14 +54,14 @@
       "count": 4,
       "skillId": "human.cut",
       "stats": {
-        "atk": 599,
+        "atk": 609,
         "hp": 5664,
         "shieldBonus": 0
       },
       "effect": {
         "sourceId": "human.cut",
         "type": "dot",
-        "amount": 79.068,
+        "amount": 80.38799999999999,
         "endAt": 9100,
         "source": {
           "kind": "skill",
@@ -78,8 +78,8 @@
       "count": 0,
       "skillId": "human.opening",
       "stats": {
-        "atk": 574,
-        "hp": 2010,
+        "atk": 565,
+        "hp": 2020,
         "shieldBonus": 0
       },
       "effect": {
@@ -98,8 +98,8 @@
       "count": 2,
       "skillId": "human.opening",
       "stats": {
-        "atk": 586,
-        "hp": 2929,
+        "atk": 577,
+        "hp": 2939,
         "shieldBonus": 0
       },
       "effect": {
@@ -118,7 +118,7 @@
       "count": 4,
       "skillId": "human.opening",
       "stats": {
-        "atk": 605,
+        "atk": 610,
         "hp": 3800,
         "shieldBonus": 0
       },
@@ -138,7 +138,7 @@
       "count": 0,
       "skillId": "human.oath_guard",
       "stats": {
-        "atk": 536,
+        "atk": 541,
         "hp": 1999,
         "shieldBonus": 0
       },
@@ -180,14 +180,14 @@
       "count": 4,
       "skillId": "human.oath_guard",
       "stats": {
-        "atk": 658,
-        "hp": 3754,
+        "atk": 649,
+        "hp": 3764,
         "shieldBonus": 0
       },
       "effect": {
         "sourceId": "human.oath_guard",
         "type": "shield",
-        "amount": 946.0079999999998,
+        "amount": 948.5279999999999,
         "endAt": 7700,
         "source": {
           "kind": "skill",
@@ -201,7 +201,7 @@
       "count": 0,
       "skillId": "human.field_dressing",
       "stats": {
-        "atk": 526,
+        "atk": 531,
         "hp": 2030,
         "shieldBonus": 0
       },
@@ -245,7 +245,7 @@
       "count": 4,
       "skillId": "human.field_dressing",
       "stats": {
-        "atk": 601,
+        "atk": 606,
         "hp": 3867,
         "shieldBonus": 0
       },
