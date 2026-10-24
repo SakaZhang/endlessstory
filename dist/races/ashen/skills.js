@@ -7,13 +7,13 @@ const defs=[
 ['heat','vent','泄压冲','all',10000,'消耗至多40热量强化火焰冲击；无热量仍有基础伤害。'],
 ['heat','anneal','退火壳','self',16000,'消耗至多30热量，将矿脉余热转为护盾；不是消耗敌人灼烧。'],
 ['heat','surge','赤脉连震','single',11500,'连续两次火焰打击，积蓄15热量。'],
-['heat','temper','稳核增压','self',18000,'积蓄25热量并短时提升攻击。'],
+['heat','temper','稳核增压','self',18000,'积蓄25热量，攻击提高12%，持续6.5秒。'],
 ['heat','overload','熔核过载','single',18000,'消耗至多70热量打出高压物理重击；锤强化转换效率。'],
 ['shell','mantle','凝岩披甲','self',14000,'生成独立护盾与2枚岩片；不通过反伤叠加。'],
 ['shell','cleave','裂壳横击','all',10000,'消耗至多3枚岩片增加群体物理压力。'],
-['shell','fault','断纹钉','single',9000,'物理刺击与短时破甲，获得1枚岩片。'],
-['shell','rebuild','碎壳重构','self',18000,'消耗至多3枚岩片修复生命并获得防御。'],
-['shell','quarry','沉岩震踏','all',15000,'地元素震击并削弱攻击，获得1枚岩片。'],
+['shell','fault','断纹钉','single',9000,'物理刺击并降低目标防御12%，持续6秒；获得1枚岩片。'],
+['shell','rebuild','碎壳重构','self',18000,'消耗至多3枚岩片修复生命；防御提高12%，每枚消耗岩片再提高2.5个百分点（最多19.5%），持续6秒。'],
+['shell','quarry','沉岩震踏','all',15000,'地元素震击并降低各目标攻击10%，持续5秒；获得1枚岩片。'],
 ['shell','fracture','岩壳裂变','all',20000,'消耗至多6枚岩片形成一次性群体碎晶冲击，绝不触发自身连锁。'],
 ['crystal','tap','叩晶','single',6000,'物理脉冲；与上一次不同相位时获得1晶鸣。'],
 ['crystal','dawn','折光脉','single',8000,'光脉冲；异相序列获得1晶鸣。'],
@@ -30,26 +30,29 @@ const passiveDefs=[['heat','thermal','内热导流',{attackMultiplier:1.06,eleme
 export const passives=Object.fromEntries(passiveDefs.map(([branch,key,name,modifiers])=>['ashen.'+key,{id:'ashen.'+key,name,kind:'passive',branch,description:({thermal:'攻击提高6%，火元素增幅增加8。',insulation:'防御提高8%，火元素抗性增加12。',laminate:'防御提高12%。',matrix:'最大生命提高10%；提高上限不会直接回复生命。',lattice:'光与暗元素增幅各增加8。',clarity:'受到的治疗提高12%。',endurance:'受到的负面状态持续时间缩短10%。',vitality:'最大生命提高6%；提高上限不会直接回复生命。',precision:'暴击等级增加10。'})[key],modifiers}]));
 const nodes=[];for(const branch of ['heat','shell','crystal']){const ds=defs.filter(d=>d[0]===branch);ds.forEach((d,i)=>nodes.push({id:'ashen.'+d[1],name:d[2],kind:'active',cost:[2,3,3,4,4,5][i],requires:i?[`ashen.${ds[Math.max(0,i-2)][1]}`]:[],branch,row:[0,1,1,2,2,3][i],column:[1,0,2,0,2,1][i],description:d[5]}));passiveDefs.filter(d=>d[0]===branch).forEach((d,i)=>nodes.push({id:'ashen.'+d[1],name:d[2],kind:'passive',cost:3,requires:['ashen.'+ds[i][1]],branch,row:4,column:i*2,description:passives['ashen.'+d[1]].description}));}defs.filter(d=>d[0]==='common').forEach((d,i)=>nodes.push({id:'ashen.'+d[1],name:d[2],kind:'active',cost:3,requires:[],branch:'common',row:0,column:i,description:d[5]}));passiveDefs.filter(d=>d[0]==='common').forEach((d,i)=>nodes.push({id:'ashen.'+d[1],name:d[2],kind:'passive',cost:3,requires:[],branch:'common',row:1,column:i,description:passives['ashen.'+d[1]].description}));
 export const tree={id:'ashen-tree-v1',nodes,groups:[{id:'heat',name:'熔核过载',ids:nodes.filter(n=>n.branch==='heat').map(n=>n.id)},{id:'shell',name:'岩壳裂变',ids:nodes.filter(n=>n.branch==='shell').map(n=>n.id)},{id:'crystal',name:'晶脉共振',ids:nodes.filter(n=>n.branch==='crystal').map(n=>n.id)},{id:'shared',name:'矿躯共通',ids:nodes.filter(n=>n.branch==='common').map(n=>n.id)}]};
-export function planSkill({skillId,castId,weaponType,selectedTargetId,targets=[],hero={},stats={},context={}}={}){
+export function planSkill({skillId,castId,weaponType,selectedTargetId,targets=[],hero={},stats={},snapshotStats=stats,context={}}={}){
 const meta=skills[skillId],r=context.runtime??context.ashen??createRuntime();if(!meta||typeof castId!=='string'||!castId||!validRuntime(r)||!Array.isArray(targets))return null;
 const chosen=meta.scope==='all'?targets.filter(t=>t.alive):meta.scope==='single'?targets.filter(t=>t.alive&&t.id===selectedTargetId):[];if(meta.scope!=='self'&&!chosen.length)return null;
 const atk=Number.isFinite(stats.atk)?Math.max(0,stats.atk):0,hp=Number.isFinite(stats.hp)?Math.max(0,stats.hp):(hero.maxHp??0),armor=Number.isFinite(stats.armor)?Math.max(0,stats.armor):(hero.defense??0),key=skillId.slice(6),actions=[],bonus=weaponType==='hammer'?1.10:1;
+// Host flat additions precede passive multipliers: snapshot the unbuffed input basis.
+const baseAtk=Math.max(0,snapshotStats.atk??0),baseArmor=Math.max(0,snapshotStats.armor??0);
+const targetBase=(t,key)=>Math.max(0,t[key]??0);
 const eff=(type,amount,durationMs=6000,extra={})=>({type,amount,durationMs,sourceId:skillId,source:{kind:'skill',id:skillId},...extra});
 const self=(effects)=>actions.push({kind:'effects',targetId:'self',effects});
 const resource=(resource,operation,amount)=>self([{type:'raceResource',resource,operation,amount,sourceId:skillId}]);
 const spend=(res,max)=>{const n=Math.min(r[res],max);resource(res,'spend',n);return n;};
-const hit=(type,coefficient,effects=[],index=0)=>chosen.forEach(t=>actions.push({kind:'hit',castId,targetId:t.id,hitId:`${castId}:${t.id}:${index}`,hitIndex:index,damageType:type,coefficient,independentHit:true,independentCrit:true,reaperEligible:true,effects:structuredClone(effects)}));
+const hit=(type,coefficient,effects=[],index=0)=>chosen.forEach(t=>actions.push({kind:'hit',castId,targetId:t.id,hitId:`${castId}:${t.id}:${index}`,hitIndex:index,damageType:type,coefficient,independentHit:true,independentCrit:true,reaperEligible:true,effects:structuredClone(typeof effects==='function'?effects(t):effects)}));
 if(key==='kindle'){hit('physical',1.05);resource('heat','add',weaponType==='armguard'?25:20);}
 if(key==='vent'){const n=spend('heat',40);hit('fire',.65+n*.018);}
 if(key==='anneal'){const n=spend('heat',30);self([eff('shield',(hp*.07+armor*.5+n*atk*.009)*bonus,8000)]);}
 if(key==='surge'){hit('fire',.58,[],0);hit('fire',.58,[],1);resource('heat','add',15);}
-if(key==='temper'){resource('heat','add',25);self([eff('attackUp',.12,6500)]);}
+if(key==='temper'){resource('heat','add',25);self([eff('attackUp',baseAtk*.12,6500)]);}
 if(key==='overload'){const n=spend('heat',70);hit('physical',1.1+n*.023*bonus);}
 if(key==='mantle'){self([eff('shield',hp*.09+armor*.65,8000)]);resource('shards','add',2);}
 if(key==='cleave'){const n=spend('shards',3);hit('physical',.75+n*.23*bonus);}
-if(key==='fault'){hit('physical',.95,[eff('armorDown',.12,6000)]);resource('shards','add',1);}
-if(key==='rebuild'){const n=spend('shards',3);self([eff('heal',hp*(.04+n*.022),0),eff('defenseUp',.12+n*.025,6000)]);}
-if(key==='quarry'){hit('earth',.85,[eff('attackDown',.10,5000)]);resource('shards','add',1);}
+if(key==='fault'){hit('physical',.95,t=>[eff('armorDown',targetBase(t,'baseArmor')*.12,6000)]);resource('shards','add',1);}
+if(key==='rebuild'){const n=spend('shards',3);self([eff('heal',hp*(.04+n*.022),0),eff('defenseUp',baseArmor*(.12+n*.025),6000)]);}
+if(key==='quarry'){hit('earth',.85,t=>[eff('attackDown',targetBase(t,'baseAtk')*.10,5000)]);resource('shards','add',1);}
 if(key==='fracture'){const n=spend('shards',6);hit('physical',.8+n*.22*bonus);}
 if(['tap','dawn','dusk'].includes(key)){const pulse={tap:'physical',dawn:'light',dusk:'dark'}[key];hit(pulse,1.05+(weaponType==='armguard'?.08:0));self([{type:'raceResource',operation:'pulse',pulse,sourceId:skillId}]);}
 if(key==='chorus'){const n=spend('resonance',3);self([eff('shield',hp*(.06+n*.035),8500)]);}
