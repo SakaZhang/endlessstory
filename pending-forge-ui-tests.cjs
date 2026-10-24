@@ -6,7 +6,7 @@ function el(id){
  const canvas=createCanvas(960,540),obj={id,style:{},classList:{add(){},remove(){}},open:false,showModal(){this.open=true},close(){this.open=false},addEventListener(){},click(){this.onclick?.()},getContext(...args){return canvas.getContext(...args)}};
  let html='';Object.defineProperty(obj,'innerHTML',{get:()=>html,set:value=>{html=value;for(const m of value.matchAll(/id="([^"]+)"/g))el(m[1]);}});elements.set(id,obj);return obj;
 }
-global.document={hidden:false,getElementById:el,addEventListener:(k,f)=>(events[k]??=[]).push(f),createElement:()=>({click(){}})};
+global.document={hidden:false,getElementById:el,querySelector:selector=>selector==='.heroIdentity'?{querySelector:tag=>el('heroIdentity-'+tag)}:null,addEventListener:(k,f)=>(events[k]??=[]).push(f),createElement:()=>({click(){}})};
 global.window={addEventListener:(k,f)=>(windowEvents[k]??=[]).push(f),matchMedia:()=>({matches:true})};
 global.localStorage={getItem:k=>store.get(k)||null,setItem:(k,v)=>{if(failPrimary&&k==='ashencrown-v3')throw Error('QuotaExceededError');store.set(k,v)},get length(){return store.size},key:i=>[...store.keys()][i]};
 global.requestAnimationFrame=()=>{};global.setInterval=()=>0;global.setTimeout=()=>0;global.clearTimeout=()=>{};global.confirm=()=>true;
