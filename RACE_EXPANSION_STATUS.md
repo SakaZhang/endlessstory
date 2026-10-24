@@ -25,8 +25,8 @@ Current production remains v0.58 / Sites67. Expanded content is an unreleased ca
 
 ## Open gates
 - Dwarf expanded30-node definition is staged; activating v2/free skill-only reset awaits user approval. Do not auto-reset any saved allocation.
-- Human63 real equipped-weapon skill scenarios and new Human/Elf/Ashen legendary host tests are integrated. Remaining exact Goblin legendary comparisons and cross-race equipment checks continue. Matched four-hour balance and innate impact at levels1/40/70/100 remain candidate review gates.
-- Native art approval: clean extraction, correct scale/facing, real lifecycle poses, both native weapon variants, meaningful skill FX. All race lifecycle/weapon assets are integrated; root visual review and retinue native formation proofs remain pending.
+- Human63 real equipped-weapon skill scenarios and new Human/Elf/Ashen legendary host tests are integrated. All four race legendary host suites pass, including Goblin actual steal/critical/lifesteal/clock behavior and Elf support/missed-echo boundaries. Matched four-hour balance and innate impact at levels1/40/70/100 remain candidate review gates.
+- Native art approval: clean extraction, correct scale/facing, real lifecycle poses, both native weapon variants, meaningful skill FX. All race lifecycle/weapon assets are integrated; root visual review remains pending; actual12-retinue and five-race4–7-target native proofs are recorded, with readable-scale refinement under review.
 - Browser UI QA unavailable in current environment; do not label native/mock-canvas evidence as browser screenshots.
 - `node race-expansion-release-gate.mjs` intentionally fails until numeric/art/actual equipment review records exist.
 
@@ -34,3 +34,15 @@ Current production remains v0.58 / Sites67. Expanded content is an unreleased ca
 - `/workspace/shared/dwarf-m3-a04-a06/provider-candidate.json`
 - `/workspace/shared/dwarf-m3-a04-a06/final-provider.json` expected SHA8889b7f4f9087825d3e99e168e95b43bcb7c9120eb097c173a8acf6f4195644d
 - `/workspace/shared/dwarf-m3-a07-a10/final-provider.json` expected SHA9975fd7379d2b3d6212edc5c7f9ab7980276d989a6a5b295edbb2da97a4cb9ff
+
+## Fresh-player evidence (no grants)
+The shared fixture uses actual fresh gear, earned loot/skill points, paid merchant refreshes, recipe purchase, craft/use, dungeon completion and real A02 entry. These are fixed-seed observations, not promised universal progression times.
+- Human: ~580s, Lv4,0 deaths,4 paid refreshes126gold.
+- Elf: ~703s, Lv5,1 death,5 paid refreshes200gold.
+- Goblin:2222s, Lv8,2 deaths,8 paid refreshes.
+- Ashen:2427s, Lv8,2 deaths,9 paid refreshes360gold.
+- Dwarf:2569s, Lv9,2 deaths,10 paid refreshes410gold.
+Random early healing-recipe access is a shared onboarding friction point; starting100gold/0potions/0skillpoints were unchanged. Ashen route-only diagnostic reaches A02 in620s but explicitly does not replace the full craft/use gate.
+
+## Regression status
+Historical suites were advanced in segments, retaining exact numerical/source assertions while updating obsolete single-race catalog assumptions. A complete available-suite rerun excludes only the three externally missing fixture tests listed above; this is not a claim that unmodified npm test passes. Native/mock evidence is not browser QA. Release cache/hash graph independently passed with2396 retained files and audited14-proof exclusions; Sites helper was unavailable.
