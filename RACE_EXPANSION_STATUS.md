@@ -46,3 +46,6 @@ Random early healing-recipe access is a shared onboarding friction point; starti
 
 ## Regression status
 Historical suites were advanced in segments, retaining exact numerical/source assertions while updating obsolete single-race catalog assumptions. A complete available-suite rerun excludes only the three externally missing fixture tests listed above; this is not a claim that unmodified npm test passes. Native/mock evidence is not browser QA. Release cache/hash graph independently passed with2396 retained files and audited14-proof exclusions; Sites helper was unavailable.
+
+## Initial numeric review
+Root accepted Human/Goblin/Ashen initial content budgets after matched controls and actual source-specific host regressions on2026-10-24. These three providers are reviewed for initial production use, not declared globally final-balanced. Intentional shielding/control/lifesteal and Ashen core advantages may reduce potion usage below40 per4h. Elf per-area curve remains gated on installed-matrix confirmation. Artwork, exact release approval and pending Dwarf30 activation stay independent gates.

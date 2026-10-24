@@ -6977,9 +6977,9 @@ export const HUMAN_MONSTER_SPRITES={
 };
 export const HUMAN_PARAMETERS={
   "id": "human-initial-calibration-v1",
-  "reviewed": false,
-  "testOnly": true,
-  "status": "candidate-requires-full-host-calibration",
+  "reviewed": true,
+  "testOnly": false,
+  "status": "initial-budget-reviewed-matched-host-evidence",
   "areas": [
     1,
     2,

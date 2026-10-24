@@ -1,8 +1,8 @@
 export const parameters = {
   "id": "goblin-initial-candidate-v1",
-  "reviewed": false,
-  "testOnly": true,
-  "status": "candidate-calibration",
+  "reviewed": true,
+  "testOnly": false,
+  "status": "initial-budget-reviewed-matched-host-evidence",
   "areas": [
     1,
     2,

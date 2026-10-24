@@ -1854,9 +1854,9 @@ export const monsters={
 };
 export const parameters={
   "id": "ashen-a01-a10-candidate-v1",
-  "reviewed": false,
-  "testOnly": true,
-  "status": "candidate-needs-four-hour-calibration",
+  "reviewed": true,
+  "testOnly": false,
+  "status": "initial-budget-reviewed-matched-host-evidence",
   "fieldGroupChance": 0.04,
   "clearRewards": {
     "1": {
