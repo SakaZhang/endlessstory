@@ -8,7 +8,7 @@
       "encounterId": "m2-1000-11",
       "enemyIds": [
         {
-          "definitionId": "ashen.a01.normal.2",
+          "definitionId": "ashen.a01.normal.1",
           "followerMonsterId": null
         }
       ],
@@ -17,10 +17,10 @@
     {
       "node": "ashen.a01.field",
       "weapon": "hammer",
-      "encounterId": "m2-1000-25",
+      "encounterId": "m2-1000-23",
       "enemyIds": [
         {
-          "definitionId": "ashen.a01.normal.3",
+          "definitionId": "ashen.a01.normal.1",
           "followerMonsterId": null
         }
       ],
@@ -29,7 +29,7 @@
     {
       "node": "ashen.a04.boss",
       "weapon": "armguard",
-      "encounterId": "m2-1000-36",
+      "encounterId": "m2-1000-35",
       "enemyIds": [
         {
           "definitionId": "ashen.a04.boss",
@@ -42,7 +42,7 @@
     {
       "node": "ashen.a04.boss",
       "weapon": "hammer",
-      "encounterId": "m2-1000-48",
+      "encounterId": "m2-1000-46",
       "enemyIds": [
         {
           "definitionId": "ashen.a04.boss",
@@ -55,7 +55,7 @@
     {
       "node": "ashen.a10.boss",
       "weapon": "armguard",
-      "encounterId": "m2-1000-59",
+      "encounterId": "m2-1000-57",
       "enemyIds": [
         {
           "definitionId": "ashen.a10.boss",
@@ -80,7 +80,7 @@
     {
       "node": "ashen.a10.boss",
       "weapon": "hammer",
-      "encounterId": "m2-1000-70",
+      "encounterId": "m2-1000-68",
       "enemyIds": [
         {
           "definitionId": "ashen.a10.boss",
