@@ -26,3 +26,9 @@ for(const kind of ['equipment','skills','materials','areas'])for(const row of Ob
 console.log(`PASS goblin: 43 unique monster rows, 18 canonical materials, 10 recovery/gem regions, 36+12 equipment, 2 legends, 99 points; ${plans} plans / ${effects} actual effect-host applications; capped poison and finite reactive save roundtrip.`);
 for(const id of ['goblin.a06.elite','goblin.a07.elite','goblin.a09.boss']){const trait=p.monsters[id].trait;assert.equal(trait.type,'followers');assert(Math.abs(trait.shares.reduce((a,b)=>a+b,0)-1)<1e-10);assert.equal(trait.shares.length,id.endsWith('boss')?4:5);assert(p.art.monsters[trait.followerMonsterId]);assert.equal(p.monsters[trait.followerMonsterId].area,p.monsters[id].area);}
 console.log('PASS Goblin retinues: A06/A07 elite5targets, A09boss4targets, budgetshares sum1, samearea ordinarynativeart.');
+for(const baseAtk of [0,1,20,100,10000]){
+ const plan=planSkill({skillId:'goblin.venom_cut',castId:'cap'+baseAtk,weaponType:'sword',selectedTargetId:'a',targets:[{id:'a',alive:true,baseAtk}],stats:{atk:100,hp:100}}),fx=plan.actions[0].effects.find(e=>e.type==='attackDown');assert.equal(fx.amount,Math.min(8,baseAtk*.25));
+ const host=createTreeEffectHost({heroHp:100},{heroHp:100,enemies:[{id:'a',hp:100}]},{stats:{hp:100}});assert(host.applyEffect('a',fx));assert(host.applyEffect('a',fx));assert.equal(host.get('a','attackDown'),fx.amount);
+ const trap=planSkill({skillId:'goblin.snare_wire',castId:'trapcap',stats:{atk:100,hp:100}}).actions[0].effects[0],runtime=applyReactiveEffect(createRuntime(),trap,0),r=onEnemyAction({runtime,event:{direct:true,attackerId:'a',clock:1000},hero:{hp:100},targets:[{id:'a',alive:true,baseAtk}]});const down=r.actions[0].effects.find(e=>e.type==='attackDown');assert.equal(down?.amount??0,Math.min(12,baseAtk*.25));
+}
+console.log('PASS Goblin-only25%baseATK weakeningcap: zero/low/high/bossbaselines, repeatedsource noadditivepile, reactiveper-target cap.');

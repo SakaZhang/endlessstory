@@ -13,7 +13,7 @@ export function onEnemyAction({runtime,event,hero,targets=[]}={}){
  for(const trap of r.traps){
   const chosen=trap.splash?targets.filter(t=>t.alive):[attacker],castId=`goblin-reactive:${r.serial++}`;
   for(const target of chosen){
-   const effects=[];for(const [type,amount]of [['hitDown',trap.hitDown],['attackDown',trap.attackDown]])if(amount>0)effects.push({type,amount,durationMs:5000,sourceId:trap.sourceId});
+   const effects=[];for(const [type,amount]of [['hitDown',trap.hitDown],['attackDown',Math.min(trap.attackDown,Number.isFinite(target.baseAtk)&&target.baseAtk>=0?target.baseAtk*.25:0)]])if(amount>0)effects.push({type,amount,durationMs:5000,sourceId:trap.sourceId});
    actions.push({kind:'hit',castId,hitId:`${castId}:${target.id}`,targetId:target.id,hitIndex:0,damageType:'physical',coefficient:trap.coefficient,independentHit:true,independentCrit:false,reaperEligible:false,multicastEligible:false,recursiveCounter:false,activeCastCount:0,effects});
   }trap.charges--;
  }

@@ -36,6 +36,7 @@ export const poisonTiming={tickIntervalMs:3000,layerDurationMs:9000,maxLayers:5,
 export function planSkill({skillId,castId,weaponType,selectedTargetId,targets=[],hero={},stats={}}={}){
  const m=skills[skillId];if(!m||!castId)return null;
  const live=targets.filter(t=>t.alive),chosen=m.scope==='all'?live:m.scope==='single'?live.filter(t=>t.id===selectedTargetId):[];if(m.scope!=='self'&&!chosen.length)return null;
+ const weaken=(target,amount)=>Math.min(amount,Number.isFinite(target?.baseAtk)&&target.baseAtk>=0?target.baseAtk*.25:0);
  const key=skillId.split('.')[1],dagger=weaponType==='dagger',sword=weaponType==='sword',atk=Math.max(0,stats.atk??1),hp=Math.max(1,stats.hp??hero.maxHp??1),actions=[];
  const ef=(type,amount,durationMs=6000,extra={})=>({type,amount,durationMs,sourceId:skillId,...extra});
  const effect=(targetId,effects)=>actions.push({kind:'effects',targetId,effects});
@@ -44,11 +45,11 @@ export function planSkill({skillId,castId,weaponType,selectedTargetId,targets=[]
  const reactive=(charges,coefficient,hitDown,attackDown,splash=false,durationMs=8000)=>ef('raceReactive',0,durationMs,{charges,coefficient,hitDown,attackDown,splash,trigger:'enemy-direct-action',nonRecursive:true,damageType:'physical'});
  for(const t of chosen){
   const ratio=Number.isFinite(t.hp)&&t.maxHp>0?t.hp/t.maxHp:1,layers=t.poisonLayers??0;
-  if(key==='venom_cut'){hit(t,.65,[poison(),...(sword?[ef('attackDown',atk*.08)]:[])]);if(dagger)hit(t,.25,[],1);}
+  if(key==='venom_cut'){hit(t,.65,[poison(),...(sword?[ef('attackDown',weaken(t,atk*.08))]:[])]);if(dagger)hit(t,.25,[],1);}
   if(key==='spore_fan')hit(t,.25,[poison(),ef('hitDown',12)]);
   if(key==='bitter_wound')hit(t,1.05,layers?[ef('armorDown',atk*.15)]:[]);
   if(key==='spore_transfer'){const origin=live.find(x=>x.id===selectedTargetId);if((origin?.poisonLayers??0)>0)hit(t,.2,[poison()]);}
-  if(key==='mire_seal')hit(t,.5,[poison(),ef('attackDown',atk*.14),...(layers>=5?[ef('hitDown',22)]:[])]);
+  if(key==='mire_seal')hit(t,.5,[poison(),ef('attackDown',weaken(t,atk*.14)),...(layers>=5?[ef('hitDown',22)]:[])]);
   if(key==='opening_cut'){const bonus=ratio>.75?.5:0;hit(t,(dagger?.65:1.05)+bonus);if(dagger)hit(t,.3,[],1);}
   if(key==='finish_cut')hit(t,(sword?1.15:.95)+(ratio<.3?.85:0));
   if(key==='stolen_moment')hit(t,.75,[{type:'interrupt',sourceId:skillId,requiresPreparing:true,onSuccess:[ef('attackUp',atk*.14,5000,{target:'self'})]}]);
@@ -77,3 +78,5 @@ for(const [key,description]of Object.entries(passiveText)){passives[sid(key)].de
 
 // Downward-only prerequisite edges; independent passives remain on the final row.
 for(const branch of ['poison','ambush','contraption']){const nodes=tree.nodes.filter(n=>n.branch===branch);const positions=[[0,1],[1,0],[1,2],[2,0],[2,2],[3,1],[4,0],[4,2]];nodes.forEach((n,i)=>{[n.row,n.column]=positions[i];});}
+
+for(const key of ['venom_cut','mire_seal','snare_wire','braced_lure']){skills[sid(key)].description+=' 减攻至多为目标基础攻击的25%，不同减攻来源只取最强。';tree.nodes.find(n=>n.id===sid(key)).description=skills[sid(key)].description;}
