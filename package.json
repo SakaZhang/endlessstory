@@ -3,6 +3,7 @@
   "scripts": {
     "test": "node tests.mjs",
     "build": "node build-release.mjs",
-    "test:release": "node release-cache-tests.mjs"
+    "test:release": "node release-cache-tests.mjs",
+    "test:races": "node race-expansion-tests.mjs"
   }
 }
