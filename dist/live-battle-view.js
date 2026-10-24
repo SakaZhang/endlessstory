@@ -61,6 +61,7 @@ export function liveBattleBars(encounter,positions,animations,time,{heroMaxHp,ma
 }
 export function createLiveBattlePresentation({assetRoot='./battle-assets/',manifest:providedManifest=null,images:providedImages=null}={}){
  let manifest=providedManifest,images=providedImages??new Map(),loadPromise=null,loadError=null,loading=false,disposed=false,snapshot=null,battleId=null,paused=true,visible=true,displayTime=0,heroMaxHp=1;
+ let manifestPromise=null,scopeKey=null,desiredFiles=new Set(),activeLoads=0;const pendingImages=new Map(),activeImages=new Map(),imageQueue=[];
  let positions={},metadata={},presentation=createBattleSlicePresentation(positions,metadata,{preserveAttack:true}),seen=new Set(),slots=new Map(),deathStarts=new Map();
  const reset=(dropHistory=true)=>{presentation.clear();if(dropHistory)seen.clear();deathStarts.clear();positions={};metadata={};slots=new Map();presentation=createBattleSlicePresentation(positions,metadata,{preserveAttack:true});};
  const coverage=()=>{
@@ -90,28 +91,56 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
   for(const u of units){const n=slots.get(u.id),row=Math.floor(n/3);positions[u.id]={x:positions[u.id]?.x??layout[n%3]??425,y:baseline-row*51,sprite:liveActorSprite(u,manifest)};}
   for(const id of Object.keys(positions))if(id!=='hero'&&!units.some(u=>u.id===id))delete positions[id];
  }
+ function sceneFiles(){
+  if(!manifest||!snapshot)return [];
+  const sprites=[heroSpriteFor(metadata.hero?.weaponType,manifest,metadata.hero?.race),...snapshot.encounter.enemies.map(u=>liveActorSprite(u,manifest))];
+  return [...new Set([...liveSceneBackgrounds(snapshot,manifest),...sprites.flatMap(key=>manifest.sprites?.[key]?.frames??[])].map(f=>f.file))];
+ }
+ function updateScope(){
+  const files=sceneFiles(),key=files.slice().sort().join('\n');desiredFiles=new Set(files);
+  // Current scene only: retained decoded memory cannot grow with world exploration.
+  if(!providedImages)for(const file of images.keys())if(!desiredFiles.has(file))images.delete(file);
+  const changed=scopeKey!==key;scopeKey=key;if(changed)loadError=null;return changed;
+ }
+ function pumpImages(){
+  while(activeLoads<6&&imageQueue.length){const job=imageQueue.shift();
+   if(disposed||!desiredFiles.has(job.file)){pendingImages.delete(job.file);job.resolve(false);continue;}
+   activeLoads++;
+   (async()=>{try{const img=new Image();activeImages.set(job.file,img);img.src=assetRoot+job.file;await img.decode();if(!disposed&&desiredFiles.has(job.file))images.set(job.file,img);job.resolve(true);}catch{job.resolve(false);}finally{activeLoads--;activeImages.delete(job.file);pendingImages.delete(job.file);pumpImages();}})();
+  }
+ }
+ function requestImage(file){
+  if(images.has(file))return Promise.resolve(true);if(pendingImages.has(file))return pendingImages.get(file);
+  const promise=new Promise(resolve=>imageQueue.push({file,resolve}));pendingImages.set(file,promise);pumpImages();return promise;
+ }
  async function load(){
-  if(disposed)return false;if(manifest&&providedImages)return coverage().reason!=='asset-frames-missing';if(loadPromise)return loadPromise;
+  if(disposed)return false;if(manifest&&providedImages)return coverage().reason!=='asset-frames-missing';
   if(typeof globalThis.fetch!=='function'||typeof globalThis.Image!=='function'){loadError='Image/fetch unavailable';return false;}
-  loading=true;loadError=null;loadPromise=(async()=>{try{if(!manifest){const response=await fetch(assetRoot+'manifest.json');if(!response.ok)throw Error('Manifest HTTP '+response.status);manifest=extendBattleManifest(await response.json());}
-   const files=[...new Set([...(manifest.backgrounds??[]),...Object.values(manifest.campBackgrounds??{}),...Object.values(manifest.sprites??{}).flatMap(s=>s.frames??[])].map(f=>f.file))];
-   // Unrelated area failures cannot invalidate already usable current-area assets.
-   await Promise.allSettled(files.map(async file=>{if(images.has(file))return;const img=new Image();img.src=assetRoot+file;await img.decode();if(!disposed)images.set(file,img);}));if(snapshot)rebuildPositions();return !disposed&&(!snapshot||coverage().mode==='ready');
-  }catch(error){loadError=String(error?.message??error);return false;}finally{loading=false;loadPromise=null;}})();return loadPromise;
+  try{
+   if(!manifest){manifestPromise??=(async()=>{const response=await fetch(assetRoot+'manifest.json');if(!response.ok)throw Error('Manifest HTTP '+response.status);return extendBattleManifest(await response.json());})().catch(error=>{manifestPromise=null;throw error;});manifest=await manifestPromise;}
+   if(disposed)return false;updateScope();const key=scopeKey;
+   // A navigation does not wait for an obsolete scene's Promise; queued obsolete work is skipped.
+   if(loadPromise?.key===key)return loadPromise.promise;
+   loading=true;loadError=null;
+   const promise=(async()=>{await Promise.all([...desiredFiles].map(requestImage));if(disposed)return false;if(scopeKey!==key)return false;
+    if(snapshot)rebuildPositions();return !snapshot||coverage().mode==='ready';
+   })().finally(()=>{if(loadPromise?.key===key){loadPromise=null;loading=false;}});
+   loadPromise={key,promise};return promise;
+  }catch(error){if(!disposed)loadError=String(error?.message??error);return false;}
  }
  function sync(state,encounter,options={}){
   if(disposed)return coverage();if(typeof options==='number')options={now:options};
   const now=Number.isFinite(options.now??options.gameNow)?(options.now??options.gameNow):0,newVisible=options.visible??true,newPaused=!(options.running??state?.running)&&!encounter?.done||Number.isFinite(encounter?.pauseAt),changed=(encounter?.id??null)!==battleId||snapshot?.areaId!==areaOf(state,encounter);
   if(changed||newPaused!==paused||newVisible!==visible){reset(changed);}
   battleId=encounter?.id??null;paused=newPaused;visible=newVisible;displayTime=Number.isFinite(options.presentationTime)?options.presentationTime:displayTime;
-  if(!state){snapshot=null;return coverage();}
+  if(!state){snapshot=null;if(!providedImages)updateScope();return coverage();}
   heroMaxHp=stats(structuredClone(state)).hp;
   const campRace=liveCampRace(state);
   const idle=!!campRace||!encounter||!Array.isArray(encounter.enemies);
   const displayEncounter=idle?{heroHp:state.heroHp??heroMaxHp,enemies:[],areaId:areaOf(state,null),targetId:null}:encounter;
   // Detached snapshots guarantee later game mutations cannot race a presentation frame.
   snapshot={idle,campRace,encounter:{...structuredClone(displayEncounter),heroHp:idle||encounter.done?state.heroHp??heroMaxHp:displayEncounter.heroHp},areaId:areaOf(state,displayEncounter),units:idle?[]:normalizeBattleEnemies(encounter,now),gameNow:now};
-  heroMaxHp=stats(structuredClone(state)).hp;Object.assign(metadata,{hero:{weaponType:liveHeroWeaponType(state),race:state.race}});rebuildPositions();return coverage();
+  heroMaxHp=stats(structuredClone(state)).hp;Object.assign(metadata,{hero:{weaponType:liveHeroWeaponType(state),race:state.race}});rebuildPositions();if(!providedImages&&updateScope())void load();return coverage();
  }
  function enqueue(events,at){
   if(disposed||!snapshot||!visible||coverage().mode!=='ready')return {accepted:0,reason:'not-presenting'};
@@ -144,5 +173,5 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
   let closest=null,distance=Infinity;for(const u of snapshot.encounter.enemies){if(u.hp<=0)continue;const p=positions[u.id],xx=presentationActorX(p,presentation.animations.get(u.id),displayTime);if(Math.abs(x-xx)<=37&&y>=p.y-83&&y<=p.y+10&&Math.abs(x-xx)<distance){closest=u.id;distance=Math.abs(x-xx);}}return closest;
  }
  function detailHtml(){if(!snapshot)return '';return snapshot.units.filter(u=>u.hp>0).map(u=>`<button class="liveBattleDetail" data-monster-detail="${esc(u.definitionId??identity(snapshot.encounter.enemies.find(e=>e.id===u.id)))}" data-unit-detail="${esc(u.id)}" aria-label="查看${esc(u.name)}状态">${esc(u.name)}${u.preparing?` · ${esc(u.preparing.name)} · ${Math.max(0,((snapshot.encounter.enemies.find(e=>e.id===u.id)?.control?.preparing?.duration??0)*(1-u.preparing.progress))/1000).toFixed(1)}秒${u.preparing.paused?'（暂停）':''}`:''}${readEnemyEffectRows(snapshot.encounter,u.id).map(r=>' · '+esc(r.label)+(r.layers?' ×'+r.layers:'')).join('')} ⓘ</button><button class="liveBattleDetail" data-enemy-effects="${esc(u.id)}" aria-label="查看${esc(u.name)}状态来源与剩余">状态详情</button>`).join('');}
- return Object.freeze({load,sync,enqueue,draw,targetAt,drawPortrait(canvas,state,options={}){return drawLiveHeroPortrait(canvas,state,{manifest,images,...options});},get status(){return coverage();},get positions(){return structuredClone(positions);},get detailsHtml(){return detailHtml();},get debug(){return {battleId,paused,visible,floats:presentation.floats.length,deferredHurts:presentation.deferredHurtCount,effects:presentation.effects.length,seen:seen.size,deathActors:[...deathStarts.keys()]};},dispose(){disposed=true;reset();snapshot=null;images=new Map();}});
+ return Object.freeze({load,sync,enqueue,draw,targetAt,drawPortrait(canvas,state,options={}){return drawLiveHeroPortrait(canvas,state,{manifest,images,...options});},get status(){return coverage();},get positions(){return structuredClone(positions);},get detailsHtml(){return detailHtml();},get debug(){return {battleId,paused,visible,floats:presentation.floats.length,deferredHurts:presentation.deferredHurtCount,effects:presentation.effects.length,imageCacheSize:images.size,imageLoads:activeLoads,imageQueueSize:imageQueue.length,seen:seen.size,deathActors:[...deathStarts.keys()]};},dispose(){disposed=true;reset();snapshot=null;desiredFiles.clear();for(const img of activeImages.values())img.src='';activeImages.clear();pumpImages();images=new Map();}});
 }
