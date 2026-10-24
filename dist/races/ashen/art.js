@@ -61,7 +61,7 @@ export const art={
         "alphaBBox": [
           15,
           128,
-          169,
+          176,
           176
         ]
       }
@@ -5289,7 +5289,7 @@ export const art={
           "alphaBBox": [
             15,
             128,
-            169,
+            176,
             176
           ]
         }
