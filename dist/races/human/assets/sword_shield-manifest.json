@@ -1,0 +1,173 @@
+{
+  "frameSize": [
+    192,
+    192
+  ],
+  "anchor": [
+    96,
+    176
+  ],
+  "facing": "right",
+  "frames": [
+    {
+      "id": "idle-0",
+      "file": "races/human/assets/hero-idle-0.png",
+      "durationMs": 180,
+      "sourceCrop": [
+        78,
+        163,
+        354,
+        442
+      ],
+      "alphaBBox": [
+        40,
+        87,
+        128,
+        176
+      ]
+    },
+    {
+      "id": "idle-1",
+      "file": "races/human/assets/hero-idle-1.png",
+      "durationMs": 180,
+      "sourceCrop": [
+        520,
+        163,
+        796,
+        442
+      ],
+      "alphaBBox": [
+        40,
+        87,
+        128,
+        176
+      ]
+    },
+    {
+      "id": "anticipation",
+      "file": "races/human/assets/hero-anticipation.png",
+      "durationMs": 180,
+      "sourceCrop": [
+        909,
+        114,
+        1225,
+        442
+      ],
+      "alphaBBox": [
+        27,
+        71,
+        128,
+        176
+      ]
+    },
+    {
+      "id": "attack",
+      "file": "races/human/assets/hero-attack.png",
+      "durationMs": 180,
+      "sourceCrop": [
+        1314,
+        115,
+        1766,
+        443
+      ],
+      "alphaBBox": [
+        41,
+        71,
+        186,
+        176
+      ]
+    },
+    {
+      "id": "recovery",
+      "file": "races/human/assets/hero-recovery.png",
+      "durationMs": 180,
+      "sourceCrop": [
+        71,
+        533,
+        369,
+        807
+      ],
+      "alphaBBox": [
+        37,
+        88,
+        132,
+        176
+      ]
+    },
+    {
+      "id": "hurt",
+      "file": "races/human/assets/hero-hurt.png",
+      "durationMs": 180,
+      "sourceCrop": [
+        528,
+        528,
+        813,
+        807
+      ],
+      "alphaBBox": [
+        30,
+        87,
+        121,
+        176
+      ]
+    },
+    {
+      "id": "guard",
+      "file": "races/human/assets/hero-guard.png",
+      "durationMs": 180,
+      "sourceCrop": [
+        924,
+        515,
+        1300,
+        808
+      ],
+      "alphaBBox": [
+        30,
+        82,
+        150,
+        176
+      ]
+    },
+    {
+      "id": "death",
+      "file": "races/human/assets/hero-death.png",
+      "durationMs": 180,
+      "sourceCrop": [
+        1363,
+        614,
+        1723,
+        813
+      ],
+      "alphaBBox": [
+        30,
+        112,
+        145,
+        176
+      ]
+    }
+  ],
+  "animations": {
+    "idle": [
+      "idle-0",
+      "idle-1"
+    ],
+    "anticipation": [
+      "anticipation"
+    ],
+    "attack": [
+      "attack"
+    ],
+    "recovery": [
+      "recovery"
+    ],
+    "hurt": [
+      "hurt"
+    ],
+    "guard": [
+      "guard"
+    ],
+    "death": [
+      "death"
+    ]
+  }
+}

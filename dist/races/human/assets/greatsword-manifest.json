@@ -1,0 +1,173 @@
+{
+  "frameSize": [
+    192,
+    192
+  ],
+  "anchor": [
+    96,
+    176
+  ],
+  "facing": "right",
+  "frames": [
+    {
+      "id": "idle-0",
+      "file": "races/human/assets/hero-greatsword-idle-0.png",
+      "durationMs": 180,
+      "sourceCrop": [
+        35,
+        163,
+        468,
+        445
+      ],
+      "alphaBBox": [
+        39,
+        86,
+        178,
+        176
+      ]
+    },
+    {
+      "id": "idle-1",
+      "file": "races/human/assets/hero-greatsword-idle-1.png",
+      "durationMs": 180,
+      "sourceCrop": [
+        479,
+        163,
+        887,
+        445
+      ],
+      "alphaBBox": [
+        36,
+        86,
+        167,
+        176
+      ]
+    },
+    {
+      "id": "anticipation",
+      "file": "races/human/assets/hero-greatsword-anticipation.png",
+      "durationMs": 180,
+      "sourceCrop": [
+        825,
+        44,
+        1157,
+        445
+      ],
+      "alphaBBox": [
+        14,
+        48,
+        120,
+        176
+      ]
+    },
+    {
+      "id": "attack",
+      "file": "races/human/assets/hero-greatsword-attack.png",
+      "durationMs": 180,
+      "sourceCrop": [
+        1219,
+        65,
+        1774,
+        446
+      ],
+      "alphaBBox": [
+        14,
+        54,
+        192,
+        176
+      ]
+    },
+    {
+      "id": "recovery",
+      "file": "races/human/assets/hero-greatsword-recovery.png",
+      "durationMs": 180,
+      "sourceCrop": [
+        30,
+        542,
+        473,
+        822
+      ],
+      "alphaBBox": [
+        25,
+        86,
+        167,
+        176
+      ]
+    },
+    {
+      "id": "hurt",
+      "file": "races/human/assets/hero-greatsword-hurt.png",
+      "durationMs": 180,
+      "sourceCrop": [
+        491,
+        535,
+        909,
+        821
+      ],
+      "alphaBBox": [
+        29,
+        84,
+        163,
+        176
+      ]
+    },
+    {
+      "id": "guard",
+      "file": "races/human/assets/hero-greatsword-guard.png",
+      "durationMs": 180,
+      "sourceCrop": [
+        906,
+        456,
+        1312,
+        821
+      ],
+      "alphaBBox": [
+        33,
+        59,
+        163,
+        176
+      ]
+    },
+    {
+      "id": "death",
+      "file": "races/human/assets/hero-greatsword-death.png",
+      "durationMs": 180,
+      "sourceCrop": [
+        1299,
+        637,
+        1763,
+        832
+      ],
+      "alphaBBox": [
+        0,
+        114,
+        148,
+        176
+      ]
+    }
+  ],
+  "animations": {
+    "idle": [
+      "idle-0",
+      "idle-1"
+    ],
+    "anticipation": [
+      "anticipation"
+    ],
+    "attack": [
+      "attack"
+    ],
+    "recovery": [
+      "recovery"
+    ],
+    "hurt": [
+      "hurt"
+    ],
+    "guard": [
+      "guard"
+    ],
+    "death": [
+      "death"
+    ]
+  }
+}
