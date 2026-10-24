@@ -1,7 +1,7 @@
 // Adapter only: the caller owns combat formulas, activation gating and transaction clones.
 import {createSkillEffectState,validSkillEffectState,applySkillEffect,advanceSkillEffectState,skillEffectValue} from './skill-tree-effects.js';
 import {createPlayerShieldLayers,validPlayerShieldLayers,grantPlayerShieldLayer,expirePlayerShieldLayers} from './player-shield-layers.js';
-const negative=new Set(['armorDown','fireResistDown','attackDown','hitDown','dot']);
+const negative=new Set(['armorDown','elementResistDown','fireResistDown','attackDown','hitDown','dot']);
 const copy=x=>structuredClone(x);
 export function createTreeEffectHost(s,e,{stats,combatClock=0,resolveDot,applyStun,interrupt,shieldBonus=0,tickIntervalMs,receivedHeal,negativeDuration,onHeal,onShield}={}){
  const st=()=>typeof stats==='function'?stats(s,e):stats;

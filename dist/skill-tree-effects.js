@@ -17,7 +17,7 @@ function validSource(s){
  if(s.counterEligible!==undefined&&typeof s.counterEligible!=='boolean')return false;
  if(s.type==='dot'&&( !['burn','bleed'].includes(s.status)||!['physical','earth','water','fire','wind','light','dark'].includes(s.damageType)))return false;
  if(['dot','healOverTime'].includes(s.type))return time(s.nextTickAt)&&num(s.tickIntervalMs)&&s.tickIntervalMs>0;
- return s.nextTickAt===undefined&&s.tickIntervalMs===undefined&&s.status===undefined&&s.damageType===undefined;
+ return s.nextTickAt===undefined&&s.tickIntervalMs===undefined&&s.status===undefined&&(s.type==='elementResistDown'?['earth','water','fire','wind','light','dark'].includes(s.damageType):s.damageType===undefined);
 }
 const validTarget=t=>plain(t)&&Object.keys(t).length===1&&Array.isArray(t.sources)&&t.sources.length<=200&&Array.from(t.sources).every(validSource)&&new Set(t.sources.map(sourceKey)).size===t.sources.length;
 export function createSkillEffectState(enemyIds=[],clock=0){if(!Array.isArray(enemyIds)||enemyIds.length>100||new Set(enemyIds).size!==enemyIds.length||!Array.from(enemyIds).every(safeId)||!time(clock))return null;return {version:1,clock,hero:{sources:[]},enemies:Object.fromEntries(enemyIds.map(id=>[id,{sources:[]}]))};}

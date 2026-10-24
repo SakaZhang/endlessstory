@@ -7,5 +7,6 @@ import {equipment,sets,legendaries,modifySkillPlan} from './equipment.js';
 import {tree,skills,passives,planSkill} from './skills.js';
 import {art} from './art.js';
 export {planSkill,modifySkillPlan};
-export {createRuntime,validRuntime,applyReactiveEffect,onEnemyAction} from './runtime.js';
-export const RACE_PACK={id:'goblin',name:'裂穴诸部',heroName:'部族斥候',weapons:['dagger','sword'],areas,monsters,parameters,materials,materialPools,equipment,sets,legendaries,tree,skills,passives,art,innate:{id:'goblin-material-sense',name:'拾荒直觉',description:'偏向寻获超凡品质常规材料，不增加珍奇唯一宝石数量。',materialQualityWeights:[.82,.14,.038,.002],excludeUnique:true,excludeStory:true}};
+import {createRuntime,validRuntime,applyReactiveEffect,onEnemyAction} from './runtime.js';
+export {createRuntime,validRuntime,applyReactiveEffect,onEnemyAction};
+export const RACE_PACK={planSkill,modifySkillPlan,createRuntime,validRuntime,applyReactiveEffect,onEnemyAction,id:'goblin',name:'裂穴诸部',heroName:'部族斥候',weapons:['dagger','sword'],areas,monsters,parameters,materials,materialPools,equipment,sets,legendaries,tree,skills,passives,art,innate:{id:'goblin-material-sense',name:'拾荒直觉',description:'偏向寻获超凡品质常规材料，不增加珍奇唯一宝石数量。',materialQualityWeights:[.82,.14,.038,.002],excludeUnique:true,excludeStory:true}};

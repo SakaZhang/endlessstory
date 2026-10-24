@@ -1,3 +1,5 @@
+import {EXPANSION_PACKS} from './race-packs.js';
+const canonicalMaterial=id=>EXPANSION_PACKS.reduce((value,p)=>p.materialAliases?.[value]??value,id);
 // v041 approved integration scope; numerical tuning remains development candidate until release.
 // Pure catalog only: no state, engine imports, RNG, clocks, or I/O.
 const freeze=x=>{for(const v of Object.values(x))if(v&&typeof v==='object')freeze(v);return Object.freeze(x);};
@@ -10,14 +12,14 @@ export const POTION_TYPES=Object.freeze(Object.keys(POTION_CATALOG));
 export const POTION_BUFF_KEYS=Object.freeze(POTION_TYPES.filter(type=>POTION_CATALOG[type].buff));
 export function potionMaterialId(key){if(typeof key!=='string'||!key)return null;return Object.hasOwn(POTION_MATERIAL_ALIASES,key)?POTION_MATERIAL_ALIASES[key]:key;}
 export function potionInventoryKey(id){if(typeof id!=='string'||!id)return null;return Object.keys(POTION_MATERIAL_ALIASES).find(key=>POTION_MATERIAL_ALIASES[key]===id)??id;}
-export function potionRecipeAllows(recipeId,role,material){const r=Object.hasOwn(POTION_RECIPE_CATALOG,recipeId)?POTION_RECIPE_CATALOG[recipeId]:null,id=potionMaterialId(material);return !!r?.roles.some(g=>g.role===role&&g.materialIds.includes(id));}
+export function potionRecipeAllows(recipeId,role,material){const r=Object.hasOwn(POTION_RECIPE_CATALOG,recipeId)?POTION_RECIPE_CATALOG[recipeId]:null,id=potionMaterialId(material);return !!r?.roles.some(g=>g.role===role&&g.materialIds.some(x=>canonicalMaterial(x)===canonicalMaterial(id)));}
 export function potionCatalogEffect(type,quality=0){if(!Object.hasOwn(POTION_CATALOG,type)||!Number.isInteger(quality)||quality<0||quality>3)return null;const p=POTION_CATALOG[type],value=p.values[quality];return {kind:p.kind,element:p.element,value,healFraction:p.kind==='heal'?value:0,durationMs:p.durationMs,attack:p.kind==='attack'?value:0,resistance:p.kind==='elementResistance'?value:0,elementAttack:p.kind==='elementAttack'?value:0,elementResistance:p.kind==='elementResistance'?value:0,luck:p.kind==='luckPoints'?value:0};}
 // Each explicit allocation has a role, materialId (or existing inventory material key), quality and optional quantity.
 // Split same-role allocations are legal; their sum must equal batch. Aggregate physical units BEFORE stock checks.
 export function aggregatePotionRecipeInputs(recipeId,quality,selections,batch=1){
  const r=Object.hasOwn(POTION_RECIPE_CATALOG,recipeId)?POTION_RECIPE_CATALOG[recipeId]:null;if(!r||!Number.isInteger(quality)||quality<0||quality>3||!Number.isSafeInteger(batch)||batch<1||batch>POTION_CATALOG_RULES.maxBatch||!Array.isArray(selections)||!selections.length)return null;
  const totals=new Map(),inputs=new Map();
- for(const s of selections){if(!s||typeof s!=='object')return null;const g=r.roles.find(g=>g.role===s.role),id=potionMaterialId(s.materialId??s.material),quantity=s.quantity??batch;if(!g||s.quality!==quality||!g.materialIds.includes(id)||!Number.isSafeInteger(quantity)||quantity<1)return null;totals.set(g.role,(totals.get(g.role)??0)+quantity);const material=potionInventoryKey(id),key=material+'|'+quality;const row=inputs.get(key)??{materialId:id,material,key,quality,quantity:0};row.quantity+=quantity;if(!Number.isSafeInteger(row.quantity))return null;inputs.set(key,row);}
+ for(const s of selections){if(!s||typeof s!=='object')return null;const g=r.roles.find(g=>g.role===s.role),id=potionMaterialId(s.materialId??s.material),quantity=s.quantity??batch;if(!g||s.quality!==quality||!g.materialIds.some(x=>canonicalMaterial(x)===canonicalMaterial(id))||!Number.isSafeInteger(quantity)||quantity<1)return null;totals.set(g.role,(totals.get(g.role)??0)+quantity);const material=potionInventoryKey(id),key=material+'|'+quality;const row=inputs.get(key)??{materialId:id,material,key,quality,quantity:0};row.quantity+=quantity;if(!Number.isSafeInteger(row.quantity))return null;inputs.set(key,row);}
  if(r.roles.some(g=>totals.get(g.role)!==batch*g.unitsPerBottle))return null;
  return [...inputs.values()].sort((a,b)=>a.key.localeCompare(b.key));
 }
