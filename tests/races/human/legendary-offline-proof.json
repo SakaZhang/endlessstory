@@ -1,0 +1,59 @@
+{
+  "seconds": 33,
+  "rounds": 30,
+  "burstEvents": 2,
+  "bannerHealEvents": 3,
+  "bannerActualHealing": 289.2600000000001,
+  "checkpointLegendaryRuntime": {
+    "version": 1,
+    "byId": {
+      "ml4kasqo-9-xdcj5": {
+        "legendaryId": "human-oathblade",
+        "clock": 1100,
+        "state": {
+          "version": 1,
+          "targetId": "m2-10000-11-enemy-0",
+          "markedAt": 1100,
+          "expiresAt": 7100,
+          "lastCastId": "m2-10000-11:tree:1",
+          "nextReadyAt": 0
+        }
+      },
+      "ml4kasqo-a-hjmfy": {
+        "legendaryId": "human-last-banner",
+        "clock": 1100,
+        "state": {
+          "version": 1,
+          "nextReadyAt": 31100
+        }
+      }
+    }
+  },
+  "finalLegendaryRuntime": {
+    "version": 1,
+    "byId": {
+      "ml4kasqo-9-xdcj5": {
+        "legendaryId": "human-oathblade",
+        "clock": 34100,
+        "state": {
+          "version": 1,
+          "targetId": null,
+          "markedAt": 0,
+          "expiresAt": 0,
+          "lastCastId": null,
+          "nextReadyAt": 33100
+        }
+      },
+      "ml4kasqo-a-hjmfy": {
+        "legendaryId": "human-last-banner",
+        "clock": 34100,
+        "state": {
+          "version": 1,
+          "nextReadyAt": 31100
+        }
+      }
+    }
+  },
+  "hp": 1323.5600000000009,
+  "method": "Both real equipped human legends. Actual first skill marks and direct shield-first hit crosses30% to create18% banner shield/HOT/30sICD. Serialize injured checkpoint; zero subsequent enemyattack isolates continuation. Actual online E.step versus E.offline: exact encounter, all events, legendary/equipment ledgers, HP, potions and scheduler equality; subsequent separatecast oath bursts and banner HOT explicitly asserted."
+}
