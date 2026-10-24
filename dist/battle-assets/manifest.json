@@ -3101,7 +3101,8 @@
             150,
             176
           ],
-          "durationMs": 160
+          "durationMs": 160,
+          "facing": "right"
         },
         {
           "id": "anticipation",
@@ -3128,7 +3129,8 @@
             143,
             176
           ],
-          "durationMs": 160
+          "durationMs": 160,
+          "facing": "right"
         },
         {
           "id": "strike",
@@ -3182,7 +3184,8 @@
             154,
             176
           ],
-          "durationMs": 160
+          "durationMs": 160,
+          "facing": "right"
         },
         {
           "id": "hurt",
@@ -3236,7 +3239,8 @@
             162,
             177
           ],
-          "durationMs": 650
+          "durationMs": 650,
+          "facing": "right"
         }
       ],
       "headY": 105,

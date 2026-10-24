@@ -1,0 +1,14 @@
+// Native production renderer evidence only; not browser screenshots.
+import fs from 'node:fs';import {execFileSync} from 'node:child_process';import {createRequire} from 'node:module';import {drawBattleSliceCanvas} from './dist/battle-slice.js';
+const {createCanvas,loadImage}=createRequire(import.meta.url)('@napi-rs/canvas');
+const out=process.argv[2]??'qa/facing';fs.mkdirSync(out,{recursive:true});const baseline='0b2a28d';
+fs.writeFileSync('dist/.facing-before.js',execFileSync('git',['show',baseline+':dist/battle-slice.js']));
+try{const beforeDraw=(await import('./dist/.facing-before.js')).drawBattleSliceCanvas;
+const manifest=JSON.parse(fs.readFileSync('dist/battle-assets/manifest.json')),beforeManifest=JSON.parse(execFileSync('git',['show',baseline+':dist/battle-assets/manifest.json'])),images=new Map();for(const f of [...manifest.backgrounds,...Object.values(manifest.sprites).flatMap(s=>s.frames)])images.set(f.file,await loadImage('dist/battle-assets/'+f.file));
+const all=[...Object.entries(manifest.monsterSprites),...manifest.actorVariants.map(v=>[v.match.definitionId+' follower',v.spriteKey])];
+function sheet(name,rows){const sheet=createCanvas(960,rows.length*294),ctx=sheet.getContext('2d');ctx.fillStyle='#162536';ctx.fillRect(0,0,sheet.width,sheet.height);ctx.font='13px monospace';ctx.fillStyle='white';rows.forEach(([identity,key,frame='idle',heroX=100],i)=>{for(let side=0;side<2;side++){const canvas=createCanvas(480,270),m=side?manifest:beforeManifest,draw=side?drawBattleSliceCanvas:beforeDraw;const areaId=identity.match(/dwarf\.a\d+/)?.[0]??'dwarf.a03';draw(canvas,{manifest:m,images,encounter:{areaId,heroHp:100,enemies:[{id:'enemy',hp:frame==='death'?0:100,max:100}]},positions:{hero:{x:heroX,y:203,sprite:'dwarf'},enemy:{x:heroX===100?350:140,y:203,sprite:key}},actorFrames:{enemy:frame},time:0,heroMaxHp:100});ctx.drawImage(canvas,side*480,i*294+24);ctx.fillText(`${side?'AFTER':'BEFORE'} ${identity} ${key} ${frame}`,side*480+4,i*294+16);}});fs.writeFileSync(`${out}/${name}.png`,sheet.toBuffer('image/png'));}
+sheet('executioner-before-after',manifest.sprites['tablet-executioner'].frames.map(f=>['dwarf.a03.elite','tablet-executioner',f.id]));
+sheet('relative-position-before-after',[['dwarf.a01.normal.1','raider','idle',390],['dwarf.a03.elite','tablet-executioner','idle',390],['dwarf.a03.elite','tablet-executioner','strike',390]]);
+for(let n=0;n<all.length;n+=10)sheet(`all-actors-${n}`,all.slice(n,n+10));
+fs.writeFileSync(`${out}/native-evidence.json`,JSON.stringify({kind:'native actual drawBattleSliceCanvas before/after; NOT browser',baseline,identities:44,variants:manifest.actorVariants,artChanged:false,sourceAudit:'sources-0/12/24/36.png; detail-0/1.png; extra-0/1.png; last-0/1.png',changedFrames:{'tablet-executioner':['idle','anticipation','recovery','death']}},null,2));
+}finally{fs.unlinkSync('dist/.facing-before.js');}
