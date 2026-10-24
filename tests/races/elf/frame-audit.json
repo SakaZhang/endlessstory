@@ -1,0 +1,2656 @@
+{
+  "monsters": 44,
+  "monsterFrames": 220,
+  "heroFrames": 16,
+  "frameSize": [
+    192,
+    192
+  ],
+  "anchor": [
+    96,
+    176
+  ],
+  "sourcePixelValuesPreserved": true,
+  "rows": [
+    {
+      "id": "elf.a01.normal.1",
+      "frame": "elf.a01.normal.1",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a01.normal.1.png",
+      "bounds": [
+        56,
+        88,
+        135,
+        176
+      ]
+    },
+    {
+      "id": "elf.a01.normal.1",
+      "frame": "elf.a01.normal.1-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a01.normal.1-anticipation.png",
+      "bounds": [
+        56,
+        88,
+        136,
+        176
+      ]
+    },
+    {
+      "id": "elf.a01.normal.1",
+      "frame": "elf.a01.normal.1-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a01.normal.1-strike.png",
+      "bounds": [
+        48,
+        89,
+        143,
+        176
+      ]
+    },
+    {
+      "id": "elf.a01.normal.1",
+      "frame": "elf.a01.normal.1-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a01.normal.1-hurt.png",
+      "bounds": [
+        62,
+        100,
+        130,
+        176
+      ]
+    },
+    {
+      "id": "elf.a01.normal.1",
+      "frame": "elf.a01.normal.1-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a01.normal.1-death.png",
+      "bounds": [
+        48,
+        134,
+        143,
+        176
+      ]
+    },
+    {
+      "id": "elf.a01.normal.2",
+      "frame": "elf.a01.normal.2",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a01.normal.2.png",
+      "bounds": [
+        28,
+        88,
+        164,
+        176
+      ]
+    },
+    {
+      "id": "elf.a01.normal.2",
+      "frame": "elf.a01.normal.2-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a01.normal.2-anticipation.png",
+      "bounds": [
+        55,
+        106,
+        137,
+        176
+      ]
+    },
+    {
+      "id": "elf.a01.normal.2",
+      "frame": "elf.a01.normal.2-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a01.normal.2-strike.png",
+      "bounds": [
+        47,
+        88,
+        145,
+        176
+      ]
+    },
+    {
+      "id": "elf.a01.normal.2",
+      "frame": "elf.a01.normal.2-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a01.normal.2-hurt.png",
+      "bounds": [
+        54,
+        100,
+        137,
+        176
+      ]
+    },
+    {
+      "id": "elf.a01.normal.2",
+      "frame": "elf.a01.normal.2-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a01.normal.2-death.png",
+      "bounds": [
+        50,
+        132,
+        141,
+        176
+      ]
+    },
+    {
+      "id": "elf.a01.normal.3",
+      "frame": "elf.a01.normal.3",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a01.normal.3.png",
+      "bounds": [
+        51,
+        88,
+        141,
+        176
+      ]
+    },
+    {
+      "id": "elf.a01.normal.3",
+      "frame": "elf.a01.normal.3-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a01.normal.3-anticipation.png",
+      "bounds": [
+        45,
+        93,
+        146,
+        176
+      ]
+    },
+    {
+      "id": "elf.a01.normal.3",
+      "frame": "elf.a01.normal.3-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a01.normal.3-strike.png",
+      "bounds": [
+        48,
+        91,
+        145,
+        176
+      ]
+    },
+    {
+      "id": "elf.a01.normal.3",
+      "frame": "elf.a01.normal.3-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a01.normal.3-hurt.png",
+      "bounds": [
+        56,
+        88,
+        136,
+        176
+      ]
+    },
+    {
+      "id": "elf.a01.normal.3",
+      "frame": "elf.a01.normal.3-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a01.normal.3-death.png",
+      "bounds": [
+        41,
+        123,
+        150,
+        176
+      ]
+    },
+    {
+      "id": "elf.a01.elite",
+      "frame": "elf.a01.elite",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a01.elite.png",
+      "bounds": [
+        36,
+        68,
+        155,
+        176
+      ]
+    },
+    {
+      "id": "elf.a01.elite",
+      "frame": "elf.a01.elite-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a01.elite-anticipation.png",
+      "bounds": [
+        48,
+        82,
+        143,
+        176
+      ]
+    },
+    {
+      "id": "elf.a01.elite",
+      "frame": "elf.a01.elite-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a01.elite-strike.png",
+      "bounds": [
+        39,
+        68,
+        153,
+        176
+      ]
+    },
+    {
+      "id": "elf.a01.elite",
+      "frame": "elf.a01.elite-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a01.elite-hurt.png",
+      "bounds": [
+        47,
+        77,
+        144,
+        176
+      ]
+    },
+    {
+      "id": "elf.a01.elite",
+      "frame": "elf.a01.elite-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a01.elite-death.png",
+      "bounds": [
+        42,
+        118,
+        149,
+        176
+      ]
+    },
+    {
+      "id": "elf.a02.normal.1",
+      "frame": "elf.a02.normal.1",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a02.normal.1.png",
+      "bounds": [
+        45,
+        88,
+        146,
+        176
+      ]
+    },
+    {
+      "id": "elf.a02.normal.1",
+      "frame": "elf.a02.normal.1-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a02.normal.1-anticipation.png",
+      "bounds": [
+        45,
+        106,
+        146,
+        176
+      ]
+    },
+    {
+      "id": "elf.a02.normal.1",
+      "frame": "elf.a02.normal.1-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a02.normal.1-strike.png",
+      "bounds": [
+        37,
+        88,
+        156,
+        176
+      ]
+    },
+    {
+      "id": "elf.a02.normal.1",
+      "frame": "elf.a02.normal.1-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a02.normal.1-hurt.png",
+      "bounds": [
+        49,
+        95,
+        142,
+        175
+      ]
+    },
+    {
+      "id": "elf.a02.normal.1",
+      "frame": "elf.a02.normal.1-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a02.normal.1-death.png",
+      "bounds": [
+        36,
+        123,
+        155,
+        176
+      ]
+    },
+    {
+      "id": "elf.a02.normal.2",
+      "frame": "elf.a02.normal.2",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a02.normal.2.png",
+      "bounds": [
+        53,
+        88,
+        138,
+        176
+      ]
+    },
+    {
+      "id": "elf.a02.normal.2",
+      "frame": "elf.a02.normal.2-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a02.normal.2-anticipation.png",
+      "bounds": [
+        53,
+        91,
+        139,
+        176
+      ]
+    },
+    {
+      "id": "elf.a02.normal.2",
+      "frame": "elf.a02.normal.2-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a02.normal.2-strike.png",
+      "bounds": [
+        45,
+        88,
+        146,
+        176
+      ]
+    },
+    {
+      "id": "elf.a02.normal.2",
+      "frame": "elf.a02.normal.2-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a02.normal.2-hurt.png",
+      "bounds": [
+        49,
+        90,
+        143,
+        176
+      ]
+    },
+    {
+      "id": "elf.a02.normal.2",
+      "frame": "elf.a02.normal.2-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a02.normal.2-death.png",
+      "bounds": [
+        43,
+        128,
+        148,
+        176
+      ]
+    },
+    {
+      "id": "elf.a02.normal.3",
+      "frame": "elf.a02.normal.3",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a02.normal.3.png",
+      "bounds": [
+        34,
+        88,
+        158,
+        176
+      ]
+    },
+    {
+      "id": "elf.a02.normal.3",
+      "frame": "elf.a02.normal.3-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a02.normal.3-anticipation.png",
+      "bounds": [
+        52,
+        101,
+        140,
+        176
+      ]
+    },
+    {
+      "id": "elf.a02.normal.3",
+      "frame": "elf.a02.normal.3-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a02.normal.3-strike.png",
+      "bounds": [
+        53,
+        94,
+        139,
+        176
+      ]
+    },
+    {
+      "id": "elf.a02.normal.3",
+      "frame": "elf.a02.normal.3-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a02.normal.3-hurt.png",
+      "bounds": [
+        64,
+        88,
+        128,
+        176
+      ]
+    },
+    {
+      "id": "elf.a02.normal.3",
+      "frame": "elf.a02.normal.3-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a02.normal.3-death.png",
+      "bounds": [
+        47,
+        128,
+        144,
+        176
+      ]
+    },
+    {
+      "id": "elf.a02.elite",
+      "frame": "elf.a02.elite",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a02.elite.png",
+      "bounds": [
+        47,
+        68,
+        144,
+        176
+      ]
+    },
+    {
+      "id": "elf.a02.elite",
+      "frame": "elf.a02.elite-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a02.elite-anticipation.png",
+      "bounds": [
+        54,
+        69,
+        138,
+        176
+      ]
+    },
+    {
+      "id": "elf.a02.elite",
+      "frame": "elf.a02.elite-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a02.elite-strike.png",
+      "bounds": [
+        39,
+        68,
+        153,
+        176
+      ]
+    },
+    {
+      "id": "elf.a02.elite",
+      "frame": "elf.a02.elite-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a02.elite-hurt.png",
+      "bounds": [
+        50,
+        83,
+        141,
+        176
+      ]
+    },
+    {
+      "id": "elf.a02.elite",
+      "frame": "elf.a02.elite-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a02.elite-death.png",
+      "bounds": [
+        41,
+        112,
+        151,
+        176
+      ]
+    },
+    {
+      "id": "elf.a02.boss",
+      "frame": "elf.a02.boss",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a02.boss.png",
+      "bounds": [
+        14,
+        62,
+        177,
+        176
+      ]
+    },
+    {
+      "id": "elf.a02.boss",
+      "frame": "elf.a02.boss-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a02.boss-anticipation.png",
+      "bounds": [
+        20,
+        64,
+        172,
+        176
+      ]
+    },
+    {
+      "id": "elf.a02.boss",
+      "frame": "elf.a02.boss-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a02.boss-strike.png",
+      "bounds": [
+        13,
+        65,
+        179,
+        176
+      ]
+    },
+    {
+      "id": "elf.a02.boss",
+      "frame": "elf.a02.boss-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a02.boss-hurt.png",
+      "bounds": [
+        37,
+        66,
+        155,
+        176
+      ]
+    },
+    {
+      "id": "elf.a02.boss",
+      "frame": "elf.a02.boss-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a02.boss-death.png",
+      "bounds": [
+        16,
+        89,
+        176,
+        176
+      ]
+    },
+    {
+      "id": "elf.a03.normal.1",
+      "frame": "elf.a03.normal.1",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a03.normal.1.png",
+      "bounds": [
+        56,
+        88,
+        135,
+        176
+      ]
+    },
+    {
+      "id": "elf.a03.normal.1",
+      "frame": "elf.a03.normal.1-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a03.normal.1-anticipation.png",
+      "bounds": [
+        51,
+        88,
+        141,
+        176
+      ]
+    },
+    {
+      "id": "elf.a03.normal.1",
+      "frame": "elf.a03.normal.1-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a03.normal.1-strike.png",
+      "bounds": [
+        39,
+        90,
+        152,
+        176
+      ]
+    },
+    {
+      "id": "elf.a03.normal.1",
+      "frame": "elf.a03.normal.1-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a03.normal.1-hurt.png",
+      "bounds": [
+        45,
+        88,
+        147,
+        176
+      ]
+    },
+    {
+      "id": "elf.a03.normal.1",
+      "frame": "elf.a03.normal.1-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a03.normal.1-death.png",
+      "bounds": [
+        40,
+        118,
+        152,
+        176
+      ]
+    },
+    {
+      "id": "elf.a03.normal.2",
+      "frame": "elf.a03.normal.2",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a03.normal.2.png",
+      "bounds": [
+        42,
+        88,
+        150,
+        176
+      ]
+    },
+    {
+      "id": "elf.a03.normal.2",
+      "frame": "elf.a03.normal.2-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a03.normal.2-anticipation.png",
+      "bounds": [
+        43,
+        97,
+        148,
+        176
+      ]
+    },
+    {
+      "id": "elf.a03.normal.2",
+      "frame": "elf.a03.normal.2-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a03.normal.2-strike.png",
+      "bounds": [
+        37,
+        89,
+        155,
+        176
+      ]
+    },
+    {
+      "id": "elf.a03.normal.2",
+      "frame": "elf.a03.normal.2-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a03.normal.2-hurt.png",
+      "bounds": [
+        43,
+        88,
+        149,
+        176
+      ]
+    },
+    {
+      "id": "elf.a03.normal.2",
+      "frame": "elf.a03.normal.2-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a03.normal.2-death.png",
+      "bounds": [
+        40,
+        100,
+        151,
+        176
+      ]
+    },
+    {
+      "id": "elf.a03.normal.3",
+      "frame": "elf.a03.normal.3",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a03.normal.3.png",
+      "bounds": [
+        47,
+        88,
+        144,
+        176
+      ]
+    },
+    {
+      "id": "elf.a03.normal.3",
+      "frame": "elf.a03.normal.3-anticipation",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a03.normal.3-anticipation.png",
+      "bounds": [
+        55,
+        110,
+        136,
+        176
+      ]
+    },
+    {
+      "id": "elf.a03.normal.3",
+      "frame": "elf.a03.normal.3-strike",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a03.normal.3-strike.png",
+      "bounds": [
+        54,
+        88,
+        137,
+        176
+      ]
+    },
+    {
+      "id": "elf.a03.normal.3",
+      "frame": "elf.a03.normal.3-hurt",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a03.normal.3-hurt.png",
+      "bounds": [
+        58,
+        106,
+        133,
+        176
+      ]
+    },
+    {
+      "id": "elf.a03.normal.3",
+      "frame": "elf.a03.normal.3-death",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a03.normal.3-death.png",
+      "bounds": [
+        52,
+        130,
+        140,
+        176
+      ]
+    },
+    {
+      "id": "elf.a03.elite",
+      "frame": "elf.a03.elite",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a03.elite.png",
+      "bounds": [
+        47,
+        68,
+        144,
+        176
+      ]
+    },
+    {
+      "id": "elf.a03.elite",
+      "frame": "elf.a03.elite-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a03.elite-anticipation.png",
+      "bounds": [
+        45,
+        89,
+        146,
+        176
+      ]
+    },
+    {
+      "id": "elf.a03.elite",
+      "frame": "elf.a03.elite-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a03.elite-strike.png",
+      "bounds": [
+        13,
+        92,
+        179,
+        176
+      ]
+    },
+    {
+      "id": "elf.a03.elite",
+      "frame": "elf.a03.elite-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a03.elite-hurt.png",
+      "bounds": [
+        47,
+        91,
+        145,
+        176
+      ]
+    },
+    {
+      "id": "elf.a03.elite",
+      "frame": "elf.a03.elite-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a03.elite-death.png",
+      "bounds": [
+        22,
+        131,
+        169,
+        176
+      ]
+    },
+    {
+      "id": "elf.a04.normal.1",
+      "frame": "elf.a04.normal.1",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a04.normal.1.png",
+      "bounds": [
+        44,
+        88,
+        148,
+        176
+      ]
+    },
+    {
+      "id": "elf.a04.normal.1",
+      "frame": "elf.a04.normal.1-anticipation",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a04.normal.1-anticipation.png",
+      "bounds": [
+        45,
+        100,
+        147,
+        176
+      ]
+    },
+    {
+      "id": "elf.a04.normal.1",
+      "frame": "elf.a04.normal.1-strike",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a04.normal.1-strike.png",
+      "bounds": [
+        38,
+        112,
+        154,
+        176
+      ]
+    },
+    {
+      "id": "elf.a04.normal.1",
+      "frame": "elf.a04.normal.1-hurt",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a04.normal.1-hurt.png",
+      "bounds": [
+        53,
+        88,
+        139,
+        176
+      ]
+    },
+    {
+      "id": "elf.a04.normal.1",
+      "frame": "elf.a04.normal.1-death",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a04.normal.1-death.png",
+      "bounds": [
+        39,
+        135,
+        153,
+        176
+      ]
+    },
+    {
+      "id": "elf.a04.normal.2",
+      "frame": "elf.a04.normal.2",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a04.normal.2.png",
+      "bounds": [
+        32,
+        88,
+        160,
+        176
+      ]
+    },
+    {
+      "id": "elf.a04.normal.2",
+      "frame": "elf.a04.normal.2-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a04.normal.2-anticipation.png",
+      "bounds": [
+        41,
+        100,
+        151,
+        176
+      ]
+    },
+    {
+      "id": "elf.a04.normal.2",
+      "frame": "elf.a04.normal.2-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a04.normal.2-strike.png",
+      "bounds": [
+        30,
+        88,
+        161,
+        176
+      ]
+    },
+    {
+      "id": "elf.a04.normal.2",
+      "frame": "elf.a04.normal.2-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a04.normal.2-hurt.png",
+      "bounds": [
+        49,
+        103,
+        143,
+        176
+      ]
+    },
+    {
+      "id": "elf.a04.normal.2",
+      "frame": "elf.a04.normal.2-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a04.normal.2-death.png",
+      "bounds": [
+        35,
+        117,
+        156,
+        176
+      ]
+    },
+    {
+      "id": "elf.a04.normal.3",
+      "frame": "elf.a04.normal.3",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a04.normal.3.png",
+      "bounds": [
+        54,
+        88,
+        137,
+        176
+      ]
+    },
+    {
+      "id": "elf.a04.normal.3",
+      "frame": "elf.a04.normal.3-anticipation",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a04.normal.3-anticipation.png",
+      "bounds": [
+        54,
+        111,
+        138,
+        176
+      ]
+    },
+    {
+      "id": "elf.a04.normal.3",
+      "frame": "elf.a04.normal.3-strike",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a04.normal.3-strike.png",
+      "bounds": [
+        46,
+        88,
+        145,
+        176
+      ]
+    },
+    {
+      "id": "elf.a04.normal.3",
+      "frame": "elf.a04.normal.3-hurt",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a04.normal.3-hurt.png",
+      "bounds": [
+        54,
+        96,
+        137,
+        176
+      ]
+    },
+    {
+      "id": "elf.a04.normal.3",
+      "frame": "elf.a04.normal.3-death",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a04.normal.3-death.png",
+      "bounds": [
+        49,
+        131,
+        143,
+        176
+      ]
+    },
+    {
+      "id": "elf.a04.elite",
+      "frame": "elf.a04.elite",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a04.elite.png",
+      "bounds": [
+        45,
+        68,
+        147,
+        176
+      ]
+    },
+    {
+      "id": "elf.a04.elite",
+      "frame": "elf.a04.elite-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a04.elite-anticipation.png",
+      "bounds": [
+        51,
+        68,
+        141,
+        176
+      ]
+    },
+    {
+      "id": "elf.a04.elite",
+      "frame": "elf.a04.elite-strike",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a04.elite-strike.png",
+      "bounds": [
+        41,
+        74,
+        151,
+        176
+      ]
+    },
+    {
+      "id": "elf.a04.elite",
+      "frame": "elf.a04.elite-hurt",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a04.elite-hurt.png",
+      "bounds": [
+        51,
+        75,
+        141,
+        176
+      ]
+    },
+    {
+      "id": "elf.a04.elite",
+      "frame": "elf.a04.elite-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a04.elite-death.png",
+      "bounds": [
+        45,
+        131,
+        147,
+        176
+      ]
+    },
+    {
+      "id": "elf.a05.normal.1",
+      "frame": "elf.a05.normal.1",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a05.normal.1.png",
+      "bounds": [
+        56,
+        88,
+        136,
+        176
+      ]
+    },
+    {
+      "id": "elf.a05.normal.1",
+      "frame": "elf.a05.normal.1-anticipation",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a05.normal.1-anticipation.png",
+      "bounds": [
+        54,
+        92,
+        137,
+        176
+      ]
+    },
+    {
+      "id": "elf.a05.normal.1",
+      "frame": "elf.a05.normal.1-strike",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a05.normal.1-strike.png",
+      "bounds": [
+        51,
+        88,
+        141,
+        176
+      ]
+    },
+    {
+      "id": "elf.a05.normal.1",
+      "frame": "elf.a05.normal.1-hurt",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a05.normal.1-hurt.png",
+      "bounds": [
+        56,
+        92,
+        135,
+        176
+      ]
+    },
+    {
+      "id": "elf.a05.normal.1",
+      "frame": "elf.a05.normal.1-death",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a05.normal.1-death.png",
+      "bounds": [
+        47,
+        132,
+        144,
+        176
+      ]
+    },
+    {
+      "id": "elf.a05.normal.2",
+      "frame": "elf.a05.normal.2",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a05.normal.2.png",
+      "bounds": [
+        46,
+        88,
+        146,
+        176
+      ]
+    },
+    {
+      "id": "elf.a05.normal.2",
+      "frame": "elf.a05.normal.2-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a05.normal.2-anticipation.png",
+      "bounds": [
+        48,
+        124,
+        144,
+        176
+      ]
+    },
+    {
+      "id": "elf.a05.normal.2",
+      "frame": "elf.a05.normal.2-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a05.normal.2-strike.png",
+      "bounds": [
+        42,
+        88,
+        150,
+        175
+      ]
+    },
+    {
+      "id": "elf.a05.normal.2",
+      "frame": "elf.a05.normal.2-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a05.normal.2-hurt.png",
+      "bounds": [
+        50,
+        103,
+        141,
+        176
+      ]
+    },
+    {
+      "id": "elf.a05.normal.2",
+      "frame": "elf.a05.normal.2-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a05.normal.2-death.png",
+      "bounds": [
+        44,
+        125,
+        147,
+        176
+      ]
+    },
+    {
+      "id": "elf.a05.normal.3",
+      "frame": "elf.a05.normal.3",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a05.normal.3.png",
+      "bounds": [
+        52,
+        88,
+        140,
+        176
+      ]
+    },
+    {
+      "id": "elf.a05.normal.3",
+      "frame": "elf.a05.normal.3-anticipation",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a05.normal.3-anticipation.png",
+      "bounds": [
+        51,
+        94,
+        140,
+        176
+      ]
+    },
+    {
+      "id": "elf.a05.normal.3",
+      "frame": "elf.a05.normal.3-strike",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a05.normal.3-strike.png",
+      "bounds": [
+        48,
+        88,
+        144,
+        176
+      ]
+    },
+    {
+      "id": "elf.a05.normal.3",
+      "frame": "elf.a05.normal.3-hurt",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a05.normal.3-hurt.png",
+      "bounds": [
+        57,
+        90,
+        135,
+        176
+      ]
+    },
+    {
+      "id": "elf.a05.normal.3",
+      "frame": "elf.a05.normal.3-death",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a05.normal.3-death.png",
+      "bounds": [
+        46,
+        129,
+        145,
+        176
+      ]
+    },
+    {
+      "id": "elf.a05.elite",
+      "frame": "elf.a05.elite",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a05.elite.png",
+      "bounds": [
+        42,
+        68,
+        149,
+        176
+      ]
+    },
+    {
+      "id": "elf.a05.elite",
+      "frame": "elf.a05.elite-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a05.elite-anticipation.png",
+      "bounds": [
+        46,
+        68,
+        146,
+        176
+      ]
+    },
+    {
+      "id": "elf.a05.elite",
+      "frame": "elf.a05.elite-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a05.elite-strike.png",
+      "bounds": [
+        16,
+        73,
+        176,
+        176
+      ]
+    },
+    {
+      "id": "elf.a05.elite",
+      "frame": "elf.a05.elite-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a05.elite-hurt.png",
+      "bounds": [
+        43,
+        82,
+        148,
+        176
+      ]
+    },
+    {
+      "id": "elf.a05.elite",
+      "frame": "elf.a05.elite-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a05.elite-death.png",
+      "bounds": [
+        25,
+        118,
+        166,
+        176
+      ]
+    },
+    {
+      "id": "elf.a05.boss",
+      "frame": "elf.a05.boss",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a05.boss.png",
+      "bounds": [
+        14,
+        58,
+        178,
+        176
+      ]
+    },
+    {
+      "id": "elf.a05.boss",
+      "frame": "elf.a05.boss-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a05.boss-anticipation.png",
+      "bounds": [
+        20,
+        74,
+        172,
+        176
+      ]
+    },
+    {
+      "id": "elf.a05.boss",
+      "frame": "elf.a05.boss-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a05.boss-strike.png",
+      "bounds": [
+        13,
+        71,
+        179,
+        176
+      ]
+    },
+    {
+      "id": "elf.a05.boss",
+      "frame": "elf.a05.boss-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a05.boss-hurt.png",
+      "bounds": [
+        34,
+        71,
+        157,
+        176
+      ]
+    },
+    {
+      "id": "elf.a05.boss",
+      "frame": "elf.a05.boss-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a05.boss-death.png",
+      "bounds": [
+        15,
+        97,
+        176,
+        176
+      ]
+    },
+    {
+      "id": "elf.a06.normal.1",
+      "frame": "elf.a06.normal.1",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a06.normal.1.png",
+      "bounds": [
+        36,
+        88,
+        156,
+        176
+      ]
+    },
+    {
+      "id": "elf.a06.normal.1",
+      "frame": "elf.a06.normal.1-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a06.normal.1-anticipation.png",
+      "bounds": [
+        41,
+        96,
+        151,
+        176
+      ]
+    },
+    {
+      "id": "elf.a06.normal.1",
+      "frame": "elf.a06.normal.1-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a06.normal.1-strike.png",
+      "bounds": [
+        30,
+        89,
+        161,
+        176
+      ]
+    },
+    {
+      "id": "elf.a06.normal.1",
+      "frame": "elf.a06.normal.1-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a06.normal.1-hurt.png",
+      "bounds": [
+        45,
+        88,
+        147,
+        176
+      ]
+    },
+    {
+      "id": "elf.a06.normal.1",
+      "frame": "elf.a06.normal.1-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a06.normal.1-death.png",
+      "bounds": [
+        32,
+        118,
+        159,
+        176
+      ]
+    },
+    {
+      "id": "elf.a06.normal.2",
+      "frame": "elf.a06.normal.2",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a06.normal.2.png",
+      "bounds": [
+        42,
+        88,
+        150,
+        176
+      ]
+    },
+    {
+      "id": "elf.a06.normal.2",
+      "frame": "elf.a06.normal.2-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a06.normal.2-anticipation.png",
+      "bounds": [
+        51,
+        103,
+        140,
+        176
+      ]
+    },
+    {
+      "id": "elf.a06.normal.2",
+      "frame": "elf.a06.normal.2-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a06.normal.2-strike.png",
+      "bounds": [
+        37,
+        89,
+        155,
+        176
+      ]
+    },
+    {
+      "id": "elf.a06.normal.2",
+      "frame": "elf.a06.normal.2-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a06.normal.2-hurt.png",
+      "bounds": [
+        47,
+        109,
+        145,
+        176
+      ]
+    },
+    {
+      "id": "elf.a06.normal.2",
+      "frame": "elf.a06.normal.2-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a06.normal.2-death.png",
+      "bounds": [
+        42,
+        130,
+        150,
+        176
+      ]
+    },
+    {
+      "id": "elf.a06.normal.3",
+      "frame": "elf.a06.normal.3",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a06.normal.3.png",
+      "bounds": [
+        63,
+        88,
+        128,
+        176
+      ]
+    },
+    {
+      "id": "elf.a06.normal.3",
+      "frame": "elf.a06.normal.3-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a06.normal.3-anticipation.png",
+      "bounds": [
+        56,
+        90,
+        135,
+        176
+      ]
+    },
+    {
+      "id": "elf.a06.normal.3",
+      "frame": "elf.a06.normal.3-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a06.normal.3-strike.png",
+      "bounds": [
+        43,
+        89,
+        148,
+        176
+      ]
+    },
+    {
+      "id": "elf.a06.normal.3",
+      "frame": "elf.a06.normal.3-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a06.normal.3-hurt.png",
+      "bounds": [
+        51,
+        88,
+        140,
+        176
+      ]
+    },
+    {
+      "id": "elf.a06.normal.3",
+      "frame": "elf.a06.normal.3-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a06.normal.3-death.png",
+      "bounds": [
+        42,
+        119,
+        149,
+        176
+      ]
+    },
+    {
+      "id": "elf.a06.elite",
+      "frame": "elf.a06.elite",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a06.elite.png",
+      "bounds": [
+        44,
+        68,
+        147,
+        176
+      ]
+    },
+    {
+      "id": "elf.a06.elite",
+      "frame": "elf.a06.elite-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a06.elite-anticipation.png",
+      "bounds": [
+        48,
+        86,
+        143,
+        176
+      ]
+    },
+    {
+      "id": "elf.a06.elite",
+      "frame": "elf.a06.elite-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a06.elite-strike.png",
+      "bounds": [
+        39,
+        68,
+        152,
+        176
+      ]
+    },
+    {
+      "id": "elf.a06.elite",
+      "frame": "elf.a06.elite-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a06.elite-hurt.png",
+      "bounds": [
+        51,
+        85,
+        140,
+        176
+      ]
+    },
+    {
+      "id": "elf.a06.elite",
+      "frame": "elf.a06.elite-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a06.elite-death.png",
+      "bounds": [
+        42,
+        107,
+        150,
+        176
+      ]
+    },
+    {
+      "id": "elf.a07.normal.1",
+      "frame": "elf.a07.normal.1",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a07.normal.1.png",
+      "bounds": [
+        50,
+        88,
+        142,
+        176
+      ]
+    },
+    {
+      "id": "elf.a07.normal.1",
+      "frame": "elf.a07.normal.1-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a07.normal.1-anticipation.png",
+      "bounds": [
+        50,
+        96,
+        142,
+        176
+      ]
+    },
+    {
+      "id": "elf.a07.normal.1",
+      "frame": "elf.a07.normal.1-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a07.normal.1-strike.png",
+      "bounds": [
+        45,
+        88,
+        146,
+        176
+      ]
+    },
+    {
+      "id": "elf.a07.normal.1",
+      "frame": "elf.a07.normal.1-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a07.normal.1-hurt.png",
+      "bounds": [
+        49,
+        97,
+        143,
+        176
+      ]
+    },
+    {
+      "id": "elf.a07.normal.1",
+      "frame": "elf.a07.normal.1-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a07.normal.1-death.png",
+      "bounds": [
+        43,
+        121,
+        149,
+        176
+      ]
+    },
+    {
+      "id": "elf.a07.normal.2",
+      "frame": "elf.a07.normal.2",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a07.normal.2.png",
+      "bounds": [
+        27,
+        88,
+        165,
+        176
+      ]
+    },
+    {
+      "id": "elf.a07.normal.2",
+      "frame": "elf.a07.normal.2-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a07.normal.2-anticipation.png",
+      "bounds": [
+        40,
+        114,
+        151,
+        176
+      ]
+    },
+    {
+      "id": "elf.a07.normal.2",
+      "frame": "elf.a07.normal.2-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a07.normal.2-strike.png",
+      "bounds": [
+        25,
+        88,
+        167,
+        176
+      ]
+    },
+    {
+      "id": "elf.a07.normal.2",
+      "frame": "elf.a07.normal.2-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a07.normal.2-hurt.png",
+      "bounds": [
+        42,
+        104,
+        150,
+        176
+      ]
+    },
+    {
+      "id": "elf.a07.normal.2",
+      "frame": "elf.a07.normal.2-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a07.normal.2-death.png",
+      "bounds": [
+        36,
+        126,
+        156,
+        176
+      ]
+    },
+    {
+      "id": "elf.a07.normal.3",
+      "frame": "elf.a07.normal.3",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a07.normal.3.png",
+      "bounds": [
+        31,
+        88,
+        160,
+        176
+      ]
+    },
+    {
+      "id": "elf.a07.normal.3",
+      "frame": "elf.a07.normal.3-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a07.normal.3-anticipation.png",
+      "bounds": [
+        48,
+        97,
+        143,
+        176
+      ]
+    },
+    {
+      "id": "elf.a07.normal.3",
+      "frame": "elf.a07.normal.3-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a07.normal.3-strike.png",
+      "bounds": [
+        37,
+        88,
+        154,
+        176
+      ]
+    },
+    {
+      "id": "elf.a07.normal.3",
+      "frame": "elf.a07.normal.3-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a07.normal.3-hurt.png",
+      "bounds": [
+        36,
+        95,
+        155,
+        176
+      ]
+    },
+    {
+      "id": "elf.a07.normal.3",
+      "frame": "elf.a07.normal.3-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a07.normal.3-death.png",
+      "bounds": [
+        41,
+        118,
+        151,
+        176
+      ]
+    },
+    {
+      "id": "elf.a07.elite",
+      "frame": "elf.a07.elite",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a07.elite.png",
+      "bounds": [
+        45,
+        68,
+        147,
+        176
+      ]
+    },
+    {
+      "id": "elf.a07.elite",
+      "frame": "elf.a07.elite-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a07.elite-anticipation.png",
+      "bounds": [
+        45,
+        72,
+        146,
+        175
+      ]
+    },
+    {
+      "id": "elf.a07.elite",
+      "frame": "elf.a07.elite-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a07.elite-strike.png",
+      "bounds": [
+        29,
+        68,
+        162,
+        176
+      ]
+    },
+    {
+      "id": "elf.a07.elite",
+      "frame": "elf.a07.elite-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a07.elite-hurt.png",
+      "bounds": [
+        41,
+        77,
+        150,
+        176
+      ]
+    },
+    {
+      "id": "elf.a07.elite",
+      "frame": "elf.a07.elite-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a07.elite-death.png",
+      "bounds": [
+        35,
+        113,
+        157,
+        176
+      ]
+    },
+    {
+      "id": "elf.a08.normal.1",
+      "frame": "elf.a08.normal.1",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a08.normal.1.png",
+      "bounds": [
+        42,
+        88,
+        149,
+        176
+      ]
+    },
+    {
+      "id": "elf.a08.normal.1",
+      "frame": "elf.a08.normal.1-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a08.normal.1-anticipation.png",
+      "bounds": [
+        56,
+        88,
+        135,
+        176
+      ]
+    },
+    {
+      "id": "elf.a08.normal.1",
+      "frame": "elf.a08.normal.1-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a08.normal.1-strike.png",
+      "bounds": [
+        47,
+        93,
+        145,
+        176
+      ]
+    },
+    {
+      "id": "elf.a08.normal.1",
+      "frame": "elf.a08.normal.1-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a08.normal.1-hurt.png",
+      "bounds": [
+        56,
+        92,
+        135,
+        176
+      ]
+    },
+    {
+      "id": "elf.a08.normal.1",
+      "frame": "elf.a08.normal.1-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a08.normal.1-death.png",
+      "bounds": [
+        49,
+        125,
+        142,
+        176
+      ]
+    },
+    {
+      "id": "elf.a08.normal.2",
+      "frame": "elf.a08.normal.2",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a08.normal.2.png",
+      "bounds": [
+        17,
+        88,
+        174,
+        176
+      ]
+    },
+    {
+      "id": "elf.a08.normal.2",
+      "frame": "elf.a08.normal.2-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a08.normal.2-anticipation.png",
+      "bounds": [
+        51,
+        121,
+        141,
+        176
+      ]
+    },
+    {
+      "id": "elf.a08.normal.2",
+      "frame": "elf.a08.normal.2-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a08.normal.2-strike.png",
+      "bounds": [
+        43,
+        88,
+        148,
+        176
+      ]
+    },
+    {
+      "id": "elf.a08.normal.2",
+      "frame": "elf.a08.normal.2-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a08.normal.2-hurt.png",
+      "bounds": [
+        49,
+        103,
+        143,
+        176
+      ]
+    },
+    {
+      "id": "elf.a08.normal.2",
+      "frame": "elf.a08.normal.2-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a08.normal.2-death.png",
+      "bounds": [
+        45,
+        123,
+        146,
+        176
+      ]
+    },
+    {
+      "id": "elf.a08.normal.3",
+      "frame": "elf.a08.normal.3",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a08.normal.3.png",
+      "bounds": [
+        40,
+        88,
+        152,
+        176
+      ]
+    },
+    {
+      "id": "elf.a08.normal.3",
+      "frame": "elf.a08.normal.3-anticipation",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a08.normal.3-anticipation.png",
+      "bounds": [
+        40,
+        95,
+        152,
+        176
+      ]
+    },
+    {
+      "id": "elf.a08.normal.3",
+      "frame": "elf.a08.normal.3-strike",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a08.normal.3-strike.png",
+      "bounds": [
+        20,
+        93,
+        171,
+        176
+      ]
+    },
+    {
+      "id": "elf.a08.normal.3",
+      "frame": "elf.a08.normal.3-hurt",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a08.normal.3-hurt.png",
+      "bounds": [
+        37,
+        88,
+        154,
+        176
+      ]
+    },
+    {
+      "id": "elf.a08.normal.3",
+      "frame": "elf.a08.normal.3-death",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a08.normal.3-death.png",
+      "bounds": [
+        20,
+        113,
+        171,
+        176
+      ]
+    },
+    {
+      "id": "elf.a08.elite",
+      "frame": "elf.a08.elite",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a08.elite.png",
+      "bounds": [
+        35,
+        68,
+        156,
+        176
+      ]
+    },
+    {
+      "id": "elf.a08.elite",
+      "frame": "elf.a08.elite-anticipation",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a08.elite-anticipation.png",
+      "bounds": [
+        30,
+        76,
+        161,
+        176
+      ]
+    },
+    {
+      "id": "elf.a08.elite",
+      "frame": "elf.a08.elite-strike",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a08.elite-strike.png",
+      "bounds": [
+        17,
+        71,
+        175,
+        176
+      ]
+    },
+    {
+      "id": "elf.a08.elite",
+      "frame": "elf.a08.elite-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a08.elite-hurt.png",
+      "bounds": [
+        27,
+        68,
+        165,
+        176
+      ]
+    },
+    {
+      "id": "elf.a08.elite",
+      "frame": "elf.a08.elite-death",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a08.elite-death.png",
+      "bounds": [
+        20,
+        102,
+        172,
+        176
+      ]
+    },
+    {
+      "id": "elf.a08.boss",
+      "frame": "elf.a08.boss",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a08.boss.png",
+      "bounds": [
+        14,
+        65,
+        178,
+        176
+      ]
+    },
+    {
+      "id": "elf.a08.boss",
+      "frame": "elf.a08.boss-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a08.boss-anticipation.png",
+      "bounds": [
+        17,
+        72,
+        174,
+        176
+      ]
+    },
+    {
+      "id": "elf.a08.boss",
+      "frame": "elf.a08.boss-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a08.boss-strike.png",
+      "bounds": [
+        13,
+        72,
+        179,
+        176
+      ]
+    },
+    {
+      "id": "elf.a08.boss",
+      "frame": "elf.a08.boss-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a08.boss-hurt.png",
+      "bounds": [
+        26,
+        72,
+        166,
+        176
+      ]
+    },
+    {
+      "id": "elf.a08.boss",
+      "frame": "elf.a08.boss-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a08.boss-death.png",
+      "bounds": [
+        15,
+        95,
+        176,
+        176
+      ]
+    },
+    {
+      "id": "elf.a09.normal.1",
+      "frame": "elf.a09.normal.1",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a09.normal.1.png",
+      "bounds": [
+        42,
+        88,
+        150,
+        176
+      ]
+    },
+    {
+      "id": "elf.a09.normal.1",
+      "frame": "elf.a09.normal.1-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a09.normal.1-anticipation.png",
+      "bounds": [
+        33,
+        113,
+        159,
+        176
+      ]
+    },
+    {
+      "id": "elf.a09.normal.1",
+      "frame": "elf.a09.normal.1-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a09.normal.1-strike.png",
+      "bounds": [
+        34,
+        104,
+        157,
+        176
+      ]
+    },
+    {
+      "id": "elf.a09.normal.1",
+      "frame": "elf.a09.normal.1-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a09.normal.1-hurt.png",
+      "bounds": [
+        34,
+        88,
+        157,
+        176
+      ]
+    },
+    {
+      "id": "elf.a09.normal.1",
+      "frame": "elf.a09.normal.1-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a09.normal.1-death.png",
+      "bounds": [
+        29,
+        98,
+        162,
+        176
+      ]
+    },
+    {
+      "id": "elf.a09.normal.2",
+      "frame": "elf.a09.normal.2",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a09.normal.2.png",
+      "bounds": [
+        58,
+        88,
+        133,
+        176
+      ]
+    },
+    {
+      "id": "elf.a09.normal.2",
+      "frame": "elf.a09.normal.2-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a09.normal.2-anticipation.png",
+      "bounds": [
+        58,
+        88,
+        134,
+        176
+      ]
+    },
+    {
+      "id": "elf.a09.normal.2",
+      "frame": "elf.a09.normal.2-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a09.normal.2-strike.png",
+      "bounds": [
+        13,
+        91,
+        179,
+        176
+      ]
+    },
+    {
+      "id": "elf.a09.normal.2",
+      "frame": "elf.a09.normal.2-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a09.normal.2-hurt.png",
+      "bounds": [
+        64,
+        99,
+        127,
+        176
+      ]
+    },
+    {
+      "id": "elf.a09.normal.2",
+      "frame": "elf.a09.normal.2-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a09.normal.2-death.png",
+      "bounds": [
+        33,
+        118,
+        158,
+        176
+      ]
+    },
+    {
+      "id": "elf.a09.normal.3",
+      "frame": "elf.a09.normal.3",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a09.normal.3.png",
+      "bounds": [
+        37,
+        88,
+        155,
+        176
+      ]
+    },
+    {
+      "id": "elf.a09.normal.3",
+      "frame": "elf.a09.normal.3-anticipation",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a09.normal.3-anticipation.png",
+      "bounds": [
+        36,
+        93,
+        156,
+        176
+      ]
+    },
+    {
+      "id": "elf.a09.normal.3",
+      "frame": "elf.a09.normal.3-strike",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a09.normal.3-strike.png",
+      "bounds": [
+        26,
+        97,
+        166,
+        176
+      ]
+    },
+    {
+      "id": "elf.a09.normal.3",
+      "frame": "elf.a09.normal.3-hurt",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a09.normal.3-hurt.png",
+      "bounds": [
+        35,
+        88,
+        157,
+        176
+      ]
+    },
+    {
+      "id": "elf.a09.normal.3",
+      "frame": "elf.a09.normal.3-death",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a09.normal.3-death.png",
+      "bounds": [
+        29,
+        110,
+        163,
+        176
+      ]
+    },
+    {
+      "id": "elf.a09.elite",
+      "frame": "elf.a09.elite",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a09.elite.png",
+      "bounds": [
+        35,
+        68,
+        157,
+        176
+      ]
+    },
+    {
+      "id": "elf.a09.elite",
+      "frame": "elf.a09.elite-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a09.elite-anticipation.png",
+      "bounds": [
+        45,
+        77,
+        147,
+        176
+      ]
+    },
+    {
+      "id": "elf.a09.elite",
+      "frame": "elf.a09.elite-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a09.elite-strike.png",
+      "bounds": [
+        13,
+        81,
+        179,
+        176
+      ]
+    },
+    {
+      "id": "elf.a09.elite",
+      "frame": "elf.a09.elite-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a09.elite-hurt.png",
+      "bounds": [
+        36,
+        81,
+        155,
+        176
+      ]
+    },
+    {
+      "id": "elf.a09.elite",
+      "frame": "elf.a09.elite-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a09.elite-death.png",
+      "bounds": [
+        21,
+        114,
+        171,
+        176
+      ]
+    },
+    {
+      "id": "elf.a10.normal.1",
+      "frame": "elf.a10.normal.1",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a10.normal.1.png",
+      "bounds": [
+        48,
+        88,
+        143,
+        176
+      ]
+    },
+    {
+      "id": "elf.a10.normal.1",
+      "frame": "elf.a10.normal.1-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a10.normal.1-anticipation.png",
+      "bounds": [
+        47,
+        92,
+        144,
+        176
+      ]
+    },
+    {
+      "id": "elf.a10.normal.1",
+      "frame": "elf.a10.normal.1-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a10.normal.1-strike.png",
+      "bounds": [
+        42,
+        88,
+        150,
+        176
+      ]
+    },
+    {
+      "id": "elf.a10.normal.1",
+      "frame": "elf.a10.normal.1-hurt",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a10.normal.1-hurt.png",
+      "bounds": [
+        50,
+        92,
+        141,
+        176
+      ]
+    },
+    {
+      "id": "elf.a10.normal.1",
+      "frame": "elf.a10.normal.1-death",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a10.normal.1-death.png",
+      "bounds": [
+        41,
+        120,
+        151,
+        176
+      ]
+    },
+    {
+      "id": "elf.a10.normal.2",
+      "frame": "elf.a10.normal.2",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a10.normal.2.png",
+      "bounds": [
+        37,
+        88,
+        155,
+        176
+      ]
+    },
+    {
+      "id": "elf.a10.normal.2",
+      "frame": "elf.a10.normal.2-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a10.normal.2-anticipation.png",
+      "bounds": [
+        48,
+        109,
+        143,
+        175
+      ]
+    },
+    {
+      "id": "elf.a10.normal.2",
+      "frame": "elf.a10.normal.2-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a10.normal.2-strike.png",
+      "bounds": [
+        46,
+        88,
+        145,
+        176
+      ]
+    },
+    {
+      "id": "elf.a10.normal.2",
+      "frame": "elf.a10.normal.2-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a10.normal.2-hurt.png",
+      "bounds": [
+        52,
+        95,
+        139,
+        176
+      ]
+    },
+    {
+      "id": "elf.a10.normal.2",
+      "frame": "elf.a10.normal.2-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a10.normal.2-death.png",
+      "bounds": [
+        47,
+        125,
+        144,
+        176
+      ]
+    },
+    {
+      "id": "elf.a10.normal.3",
+      "frame": "elf.a10.normal.3",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a10.normal.3.png",
+      "bounds": [
+        43,
+        88,
+        149,
+        176
+      ]
+    },
+    {
+      "id": "elf.a10.normal.3",
+      "frame": "elf.a10.normal.3-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a10.normal.3-anticipation.png",
+      "bounds": [
+        53,
+        108,
+        138,
+        176
+      ]
+    },
+    {
+      "id": "elf.a10.normal.3",
+      "frame": "elf.a10.normal.3-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a10.normal.3-strike.png",
+      "bounds": [
+        53,
+        88,
+        139,
+        176
+      ]
+    },
+    {
+      "id": "elf.a10.normal.3",
+      "frame": "elf.a10.normal.3-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a10.normal.3-hurt.png",
+      "bounds": [
+        56,
+        100,
+        136,
+        176
+      ]
+    },
+    {
+      "id": "elf.a10.normal.3",
+      "frame": "elf.a10.normal.3-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a10.normal.3-death.png",
+      "bounds": [
+        50,
+        128,
+        141,
+        176
+      ]
+    },
+    {
+      "id": "elf.a10.elite",
+      "frame": "elf.a10.elite",
+      "facing": "right",
+      "file": "races/elf/assets/elf.a10.elite.png",
+      "bounds": [
+        35,
+        68,
+        156,
+        176
+      ]
+    },
+    {
+      "id": "elf.a10.elite",
+      "frame": "elf.a10.elite-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a10.elite-anticipation.png",
+      "bounds": [
+        39,
+        87,
+        153,
+        176
+      ]
+    },
+    {
+      "id": "elf.a10.elite",
+      "frame": "elf.a10.elite-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a10.elite-strike.png",
+      "bounds": [
+        34,
+        68,
+        158,
+        176
+      ]
+    },
+    {
+      "id": "elf.a10.elite",
+      "frame": "elf.a10.elite-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a10.elite-hurt.png",
+      "bounds": [
+        41,
+        79,
+        150,
+        176
+      ]
+    },
+    {
+      "id": "elf.a10.elite",
+      "frame": "elf.a10.elite-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a10.elite-death.png",
+      "bounds": [
+        36,
+        115,
+        155,
+        176
+      ]
+    },
+    {
+      "id": "elf.a10.boss",
+      "frame": "elf.a10.boss",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a10.boss.png",
+      "bounds": [
+        14,
+        69,
+        178,
+        176
+      ]
+    },
+    {
+      "id": "elf.a10.boss",
+      "frame": "elf.a10.boss-anticipation",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a10.boss-anticipation.png",
+      "bounds": [
+        16,
+        76,
+        176,
+        176
+      ]
+    },
+    {
+      "id": "elf.a10.boss",
+      "frame": "elf.a10.boss-strike",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a10.boss-strike.png",
+      "bounds": [
+        13,
+        73,
+        179,
+        176
+      ]
+    },
+    {
+      "id": "elf.a10.boss",
+      "frame": "elf.a10.boss-hurt",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a10.boss-hurt.png",
+      "bounds": [
+        25,
+        75,
+        167,
+        176
+      ]
+    },
+    {
+      "id": "elf.a10.boss",
+      "frame": "elf.a10.boss-death",
+      "facing": "left",
+      "file": "races/elf/assets/elf.a10.boss-death.png",
+      "bounds": [
+        17,
+        97,
+        174,
+        176
+      ]
+    }
+  ]
+}

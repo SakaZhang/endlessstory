@@ -1,0 +1,118 @@
+{
+  "kind": "actual E.step plus production createLiveBattlePresentation native canvas; NOT browser screenshot",
+  "instanceId": "elf.a10.boss",
+  "weapon": "staff",
+  "enemyIds": [
+    {
+      "id": "m2-10000-24-enemy-0",
+      "monsterId": "elf.a10.boss",
+      "follower": false
+    },
+    {
+      "id": "m2-10000-24-enemy-1",
+      "monsterId": "elf.a10.boss",
+      "follower": true
+    },
+    {
+      "id": "m2-10000-24-enemy-2",
+      "monsterId": "elf.a10.boss",
+      "follower": true
+    },
+    {
+      "id": "m2-10000-24-enemy-3",
+      "monsterId": "elf.a10.boss",
+      "follower": true
+    }
+  ],
+  "status": {
+    "mode": "ready",
+    "reason": null,
+    "label": "实时像素战斗",
+    "missingIds": [],
+    "coverage": [
+      {
+        "unitId": "m2-10000-24-enemy-0",
+        "monsterId": "elf.a10.boss",
+        "follower": false,
+        "sprite": "race-elf.a10.boss"
+      },
+      {
+        "unitId": "m2-10000-24-enemy-1",
+        "monsterId": "elf.a10.boss",
+        "follower": true,
+        "sprite": "race-elf.a10.normal.2"
+      },
+      {
+        "unitId": "m2-10000-24-enemy-2",
+        "monsterId": "elf.a10.boss",
+        "follower": true,
+        "sprite": "race-elf.a10.normal.2"
+      },
+      {
+        "unitId": "m2-10000-24-enemy-3",
+        "monsterId": "elf.a10.boss",
+        "follower": true,
+        "sprite": "race-elf.a10.normal.2"
+      }
+    ],
+    "campRace": null,
+    "heroAppearance": "equipped-weapon",
+    "heroAppearanceNote": "",
+    "backgroundIds": [
+      "race-bg-elf.a10"
+    ]
+  },
+  "events": [
+    {
+      "eventId": "m2-10000-24:display-event:1:1",
+      "battleId": "m2-10000-24",
+      "castId": "m2-10000-24:tree:1",
+      "sourceId": "hero",
+      "targetId": "m2-10000-24-enemy-0",
+      "kind": "cast",
+      "hitId": null,
+      "skillId": "elf.root_strike",
+      "element": null,
+      "crit": false,
+      "outcome": "none",
+      "segmentIndex": 0,
+      "hpDelta": 0,
+      "shieldDelta": 0,
+      "combatAt": 1100
+    },
+    {
+      "eventId": "m2-10000-24:display-event:1:2",
+      "battleId": "m2-10000-24",
+      "castId": "m2-10000-24:tree:1",
+      "sourceId": "hero",
+      "targetId": "m2-10000-24-enemy-0",
+      "kind": "hit",
+      "hitId": "m2-10000-24:tree:1:0:m2-10000-24-enemy-0",
+      "skillId": "elf.root_strike",
+      "element": "physical",
+      "crit": false,
+      "outcome": "hit",
+      "segmentIndex": 0,
+      "hpDelta": -426,
+      "shieldDelta": 0,
+      "combatAt": 1100
+    },
+    {
+      "eventId": "m2-10000-24:display-event:1:3",
+      "battleId": "m2-10000-24",
+      "castId": "m2-10000-24:tree:1",
+      "sourceId": "hero",
+      "targetId": "m2-10000-24-enemy-0",
+      "kind": "hit",
+      "hitId": "m2-10000-24:tree:1:1:m2-10000-24-enemy-0",
+      "skillId": "elf.root_strike",
+      "element": "earth",
+      "crit": false,
+      "outcome": "hit",
+      "segmentIndex": 1,
+      "hpDelta": -408.1252293578,
+      "shieldDelta": 0,
+      "combatAt": 1100
+    }
+  ]
+}
