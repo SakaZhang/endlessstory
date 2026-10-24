@@ -22,8 +22,8 @@
       "shieldGranted": 0,
       "lifesteal": 0,
       "skillHealing": 0,
-      "potionHealing": 0,
-      "otherHealing": 29031.900000000023
+      "potionHealing": 29031.900000000023,
+      "otherHealing": 0
     },
     {
       "race": "dwarf",
@@ -45,8 +45,8 @@
       "shieldGranted": 1960320.3659999832,
       "lifesteal": 0,
       "skillHealing": 0,
-      "potionHealing": 0,
-      "otherHealing": 1853.1000000000004
+      "potionHealing": 1853.1000000000004,
+      "otherHealing": 0
     },
     {
       "race": "dwarf",
@@ -114,8 +114,8 @@
       "shieldGranted": 0,
       "lifesteal": 0,
       "skillHealing": 0,
-      "potionHealing": 0,
-      "otherHealing": 21001.800000000014
+      "potionHealing": 21001.800000000014,
+      "otherHealing": 0
     },
     {
       "race": "ashen",
@@ -137,8 +137,8 @@
       "shieldGranted": 1088165.3420000249,
       "lifesteal": 0,
       "skillHealing": 0,
-      "potionHealing": 0,
-      "otherHealing": 1235.3999999999996
+      "potionHealing": 1235.3999999999996,
+      "otherHealing": 0
     },
     {
       "race": "ashen",
