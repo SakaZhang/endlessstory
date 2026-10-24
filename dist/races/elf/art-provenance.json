@@ -1,19 +1,22 @@
 {
   "generatedWith": "built-in image_gen",
   "operations": [
-    "cell crop",
-    "nearest-neighbor fit",
-    "transparent 192 frame padding",
-    "anchor [96,176]"
+    "reviewed actual object crop boxes",
+    "connected intended subject extraction retaining source RGBA pixels",
+    "nearest-neighbor uniform per-hero scale",
+    "transparent frame padding [96,176]"
   ],
   "sources": [
     "exec-0048809d-15a9-4672-b92f-c68195fc9bc3.png",
     "exec-b9ebd4d2-3056-4188-b4dc-e22b7d271557.png",
     "exec-57bf8d4c-1cef-4c4e-8da4-35e846f0ea2e.png",
     "exec-ee8e50bc-95e8-4ea9-8f51-97056be58e96.png",
-    "exec-271c1f65-85c0-47b8-b767-17876e52ff7c.png"
+    "exec-271c1f65-85c0-47b8-b767-17876e52ff7c.png",
+    "exec-d4dd8b1a-bc69-4ed6-a95c-b13749f74fcc.png",
+    "exec-1647ef74-fca8-40a2-9953-e0d74db2e4f6.png"
   ],
   "inspected": true,
   "scope": "16 hero frames;44 distinct monster identities, monsters initially one pose each;10 scenes;64 detailed icons. Not complete monster action animation.",
-  "proofsAre": "native asset composites, NOT live-engine screenshots"
+  "proofsAre": "native asset composites, NOT live-engine screenshots",
+  "heroStyle": "Regenerated using approved dwarf-idle-0 reference; young priest with white emerald ceremonial robes; roughly100px full weapon height"
 }
