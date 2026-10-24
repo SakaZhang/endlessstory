@@ -4,8 +4,42 @@
     {
       "name": "dagger-idle",
       "sprite": "hero-goblin-dagger",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-dagger"
+        },
+        "m2-1792830263284-17-enemy-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-goblin.a09.boss"
+        },
+        "m2-1792830263284-17-enemy-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a09.normal.2"
+        },
+        "m2-1792830263284-17-enemy-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a09.normal.2"
+        },
+        "m2-1792830263284-17-enemy-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-goblin.a09.normal.2"
+        }
+      },
       "enemySprites": [
-        "race-goblin.a09.boss"
+        "race-goblin.a09.boss",
+        "race-goblin.a09.normal.2",
+        "race-goblin.a09.normal.2",
+        "race-goblin.a09.normal.2"
       ],
       "events": [],
       "done": false
@@ -13,26 +47,60 @@
     {
       "name": "dagger-attack",
       "sprite": "hero-goblin-dagger",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-dagger"
+        },
+        "m2-1792830263284-17-enemy-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-goblin.a09.boss"
+        },
+        "m2-1792830263284-17-enemy-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a09.normal.2"
+        },
+        "m2-1792830263284-17-enemy-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a09.normal.2"
+        },
+        "m2-1792830263284-17-enemy-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-goblin.a09.normal.2"
+        }
+      },
       "enemySprites": [
-        "race-goblin.a09.boss"
+        "race-goblin.a09.boss",
+        "race-goblin.a09.normal.2",
+        "race-goblin.a09.normal.2",
+        "race-goblin.a09.normal.2"
       ],
       "events": [
         {
           "kind": "cast",
           "sourceId": "hero",
-          "targetId": "m2-1792829337487-17-enemy-0",
+          "targetId": "m2-1792830263284-17-enemy-0",
           "skillId": "goblin.opening_cut"
         },
         {
           "kind": "hit",
           "sourceId": "hero",
-          "targetId": "m2-1792829337487-17-enemy-0",
+          "targetId": "m2-1792830263284-17-enemy-0",
           "skillId": "goblin.opening_cut"
         },
         {
           "kind": "hit",
           "sourceId": "hero",
-          "targetId": "m2-1792829337487-17-enemy-0",
+          "targetId": "m2-1792830263284-17-enemy-0",
           "skillId": "goblin.opening_cut"
         }
       ],
@@ -41,43 +109,113 @@
     {
       "name": "dagger-hurt",
       "sprite": "hero-goblin-dagger",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-dagger"
+        },
+        "m2-1792830263284-17-enemy-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-goblin.a09.boss"
+        },
+        "m2-1792830263284-17-enemy-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a09.normal.2"
+        },
+        "m2-1792830263284-17-enemy-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a09.normal.2"
+        },
+        "m2-1792830263284-17-enemy-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-goblin.a09.normal.2"
+        }
+      },
       "enemySprites": [
-        "race-goblin.a09.boss"
+        "race-goblin.a09.boss",
+        "race-goblin.a09.normal.2",
+        "race-goblin.a09.normal.2",
+        "race-goblin.a09.normal.2"
       ],
       "events": [
         {
           "kind": "cast",
           "sourceId": "hero",
-          "targetId": "m2-1792829337487-17-enemy-0",
+          "targetId": "m2-1792830263284-17-enemy-0",
           "skillId": "goblin.venom_cut"
         },
         {
           "kind": "hit",
           "sourceId": "hero",
-          "targetId": "m2-1792829337487-17-enemy-0",
+          "targetId": "m2-1792830263284-17-enemy-0",
           "skillId": "goblin.venom_cut"
         },
         {
           "kind": "hit",
           "sourceId": "hero",
-          "targetId": "m2-1792829337487-17-enemy-0",
+          "targetId": "m2-1792830263284-17-enemy-0",
           "skillId": "goblin.venom_cut"
         },
         {
           "kind": "hit",
           "sourceId": "hero",
-          "targetId": "m2-1792829337487-17-enemy-0",
+          "targetId": "m2-1792830263284-17-enemy-0",
           "skillId": "goblin.venom_cut"
         },
         {
           "kind": "cast",
-          "sourceId": "m2-1792829337487-17-enemy-0",
+          "sourceId": "m2-1792830263284-17-enemy-0",
           "targetId": "hero",
           "skillId": "basic"
         },
         {
           "kind": "hit",
-          "sourceId": "m2-1792829337487-17-enemy-0",
+          "sourceId": "m2-1792830263284-17-enemy-0",
+          "targetId": "hero",
+          "skillId": "basic"
+        },
+        {
+          "kind": "cast",
+          "sourceId": "m2-1792830263284-17-enemy-1",
+          "targetId": "hero",
+          "skillId": "basic"
+        },
+        {
+          "kind": "hit",
+          "sourceId": "m2-1792830263284-17-enemy-1",
+          "targetId": "hero",
+          "skillId": "basic"
+        },
+        {
+          "kind": "cast",
+          "sourceId": "m2-1792830263284-17-enemy-2",
+          "targetId": "hero",
+          "skillId": "basic"
+        },
+        {
+          "kind": "hit",
+          "sourceId": "m2-1792830263284-17-enemy-2",
+          "targetId": "hero",
+          "skillId": "basic"
+        },
+        {
+          "kind": "cast",
+          "sourceId": "m2-1792830263284-17-enemy-3",
+          "targetId": "hero",
+          "skillId": "basic"
+        },
+        {
+          "kind": "hit",
+          "sourceId": "m2-1792830263284-17-enemy-3",
           "targetId": "hero",
           "skillId": "basic"
         }
@@ -87,15 +225,73 @@
     {
       "name": "dagger-enemy-death",
       "sprite": "hero-goblin-dagger",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-dagger"
+        },
+        "m2-1792830263284-17-enemy-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-goblin.a09.boss"
+        },
+        "m2-1792830263284-17-enemy-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a09.normal.2"
+        },
+        "m2-1792830263284-17-enemy-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a09.normal.2"
+        },
+        "m2-1792830263284-17-enemy-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-goblin.a09.normal.2"
+        }
+      },
       "enemySprites": [
-        "race-goblin.a09.boss"
+        "race-goblin.a09.boss",
+        "race-goblin.a09.normal.2",
+        "race-goblin.a09.normal.2",
+        "race-goblin.a09.normal.2"
       ],
       "events": [
         {
           "kind": "poison",
           "sourceId": "hero",
-          "targetId": "m2-1792829337487-17-enemy-0",
+          "targetId": "m2-1792830263284-17-enemy-3",
           "skillId": "scatter_ash"
+        },
+        {
+          "kind": "cast",
+          "sourceId": "hero",
+          "targetId": "m2-1792830263284-17-enemy-3",
+          "skillId": "goblin.venom_cut"
+        },
+        {
+          "kind": "hit",
+          "sourceId": "hero",
+          "targetId": "m2-1792830263284-17-enemy-3",
+          "skillId": "goblin.venom_cut"
+        },
+        {
+          "kind": "hit",
+          "sourceId": "hero",
+          "targetId": "m2-1792830263284-17-enemy-3",
+          "skillId": "goblin.venom_cut"
+        },
+        {
+          "kind": "heal",
+          "sourceId": "hero",
+          "targetId": "hero",
+          "skillId": "lifesteal"
         }
       ],
       "done": true,
@@ -109,8 +305,42 @@
     {
       "name": "sword-idle",
       "sprite": "hero-goblin-sword",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-sword"
+        },
+        "m2-1792830263522-44-enemy-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-goblin.a09.boss"
+        },
+        "m2-1792830263522-44-enemy-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a09.normal.2"
+        },
+        "m2-1792830263522-44-enemy-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a09.normal.2"
+        },
+        "m2-1792830263522-44-enemy-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-goblin.a09.normal.2"
+        }
+      },
       "enemySprites": [
-        "race-goblin.a09.boss"
+        "race-goblin.a09.boss",
+        "race-goblin.a09.normal.2",
+        "race-goblin.a09.normal.2",
+        "race-goblin.a09.normal.2"
       ],
       "events": [],
       "done": false
@@ -118,20 +348,54 @@
     {
       "name": "sword-attack",
       "sprite": "hero-goblin-sword",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-sword"
+        },
+        "m2-1792830263522-44-enemy-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-goblin.a09.boss"
+        },
+        "m2-1792830263522-44-enemy-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a09.normal.2"
+        },
+        "m2-1792830263522-44-enemy-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a09.normal.2"
+        },
+        "m2-1792830263522-44-enemy-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-goblin.a09.normal.2"
+        }
+      },
       "enemySprites": [
-        "race-goblin.a09.boss"
+        "race-goblin.a09.boss",
+        "race-goblin.a09.normal.2",
+        "race-goblin.a09.normal.2",
+        "race-goblin.a09.normal.2"
       ],
       "events": [
         {
           "kind": "cast",
           "sourceId": "hero",
-          "targetId": "m2-1792829337685-47-enemy-0",
+          "targetId": "m2-1792830263522-44-enemy-0",
           "skillId": "goblin.opening_cut"
         },
         {
           "kind": "hit",
           "sourceId": "hero",
-          "targetId": "m2-1792829337685-47-enemy-0",
+          "targetId": "m2-1792830263522-44-enemy-0",
           "skillId": "goblin.opening_cut"
         }
       ],
@@ -140,37 +404,107 @@
     {
       "name": "sword-hurt",
       "sprite": "hero-goblin-sword",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-sword"
+        },
+        "m2-1792830263522-44-enemy-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-goblin.a09.boss"
+        },
+        "m2-1792830263522-44-enemy-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a09.normal.2"
+        },
+        "m2-1792830263522-44-enemy-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a09.normal.2"
+        },
+        "m2-1792830263522-44-enemy-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-goblin.a09.normal.2"
+        }
+      },
       "enemySprites": [
-        "race-goblin.a09.boss"
+        "race-goblin.a09.boss",
+        "race-goblin.a09.normal.2",
+        "race-goblin.a09.normal.2",
+        "race-goblin.a09.normal.2"
       ],
       "events": [
         {
           "kind": "cast",
           "sourceId": "hero",
-          "targetId": "m2-1792829337685-47-enemy-0",
+          "targetId": "m2-1792830263522-44-enemy-0",
           "skillId": "goblin.venom_cut"
         },
         {
           "kind": "hit",
           "sourceId": "hero",
-          "targetId": "m2-1792829337685-47-enemy-0",
+          "targetId": "m2-1792830263522-44-enemy-0",
           "skillId": "goblin.venom_cut"
         },
         {
           "kind": "hit",
           "sourceId": "hero",
-          "targetId": "m2-1792829337685-47-enemy-0",
+          "targetId": "m2-1792830263522-44-enemy-0",
           "skillId": "goblin.venom_cut"
         },
         {
           "kind": "cast",
-          "sourceId": "m2-1792829337685-47-enemy-0",
+          "sourceId": "m2-1792830263522-44-enemy-0",
           "targetId": "hero",
           "skillId": "basic"
         },
         {
           "kind": "hit",
-          "sourceId": "m2-1792829337685-47-enemy-0",
+          "sourceId": "m2-1792830263522-44-enemy-0",
+          "targetId": "hero",
+          "skillId": "basic"
+        },
+        {
+          "kind": "cast",
+          "sourceId": "m2-1792830263522-44-enemy-1",
+          "targetId": "hero",
+          "skillId": "basic"
+        },
+        {
+          "kind": "hit",
+          "sourceId": "m2-1792830263522-44-enemy-1",
+          "targetId": "hero",
+          "skillId": "basic"
+        },
+        {
+          "kind": "cast",
+          "sourceId": "m2-1792830263522-44-enemy-2",
+          "targetId": "hero",
+          "skillId": "basic"
+        },
+        {
+          "kind": "hit",
+          "sourceId": "m2-1792830263522-44-enemy-2",
+          "targetId": "hero",
+          "skillId": "basic"
+        },
+        {
+          "kind": "cast",
+          "sourceId": "m2-1792830263522-44-enemy-3",
+          "targetId": "hero",
+          "skillId": "basic"
+        },
+        {
+          "kind": "hit",
+          "sourceId": "m2-1792830263522-44-enemy-3",
           "targetId": "hero",
           "skillId": "basic"
         }
@@ -180,27 +514,55 @@
     {
       "name": "sword-enemy-death",
       "sprite": "hero-goblin-sword",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-sword"
+        },
+        "m2-1792830263522-44-enemy-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-goblin.a09.boss"
+        },
+        "m2-1792830263522-44-enemy-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a09.normal.2"
+        },
+        "m2-1792830263522-44-enemy-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a09.normal.2"
+        },
+        "m2-1792830263522-44-enemy-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-goblin.a09.normal.2"
+        }
+      },
       "enemySprites": [
-        "race-goblin.a09.boss"
+        "race-goblin.a09.boss",
+        "race-goblin.a09.normal.2",
+        "race-goblin.a09.normal.2",
+        "race-goblin.a09.normal.2"
       ],
       "events": [
         {
           "kind": "cast",
           "sourceId": "hero",
-          "targetId": "m2-1792829337685-47-enemy-0",
+          "targetId": "m2-1792830263522-44-enemy-3",
           "skillId": "goblin.opening_cut"
         },
         {
           "kind": "hit",
           "sourceId": "hero",
-          "targetId": "m2-1792829337685-47-enemy-0",
+          "targetId": "m2-1792830263522-44-enemy-3",
           "skillId": "goblin.opening_cut"
-        },
-        {
-          "kind": "heal",
-          "sourceId": "hero",
-          "targetId": "hero",
-          "skillId": "lifesteal"
         }
       ],
       "done": true,
@@ -214,8 +576,21 @@
     {
       "name": "area-01",
       "sprite": "hero-goblin-dagger",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-dagger"
+        },
+        "m2-1792830263713-71-enemy-0": {
+          "x": 350,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-goblin.a01.normal.2"
+        }
+      },
       "enemySprites": [
-        "race-goblin.a01.normal.3"
+        "race-goblin.a01.normal.2"
       ],
       "events": [],
       "done": false
@@ -223,8 +598,21 @@
     {
       "name": "area-02",
       "sprite": "hero-goblin-dagger",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-dagger"
+        },
+        "m2-1792830263735-89-enemy-0": {
+          "x": 350,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-goblin.a02.normal.2"
+        }
+      },
       "enemySprites": [
-        "race-goblin.a02.normal.1"
+        "race-goblin.a02.normal.2"
       ],
       "events": [],
       "done": false
@@ -232,8 +620,21 @@
     {
       "name": "area-03",
       "sprite": "hero-goblin-dagger",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-dagger"
+        },
+        "m2-1792830263757-106-enemy-0": {
+          "x": 350,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-goblin.a03.normal.2"
+        }
+      },
       "enemySprites": [
-        "race-goblin.a03.normal.3"
+        "race-goblin.a03.normal.2"
       ],
       "events": [],
       "done": false
@@ -241,8 +642,21 @@
     {
       "name": "area-04",
       "sprite": "hero-goblin-dagger",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-dagger"
+        },
+        "m2-1792830263785-124-enemy-0": {
+          "x": 350,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-goblin.a04.normal.3"
+        }
+      },
       "enemySprites": [
-        "race-goblin.a04.normal.1"
+        "race-goblin.a04.normal.3"
       ],
       "events": [],
       "done": false
@@ -250,8 +664,21 @@
     {
       "name": "area-05",
       "sprite": "hero-goblin-dagger",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-dagger"
+        },
+        "m2-1792830263812-141-enemy-0": {
+          "x": 350,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-goblin.a05.normal.3"
+        }
+      },
       "enemySprites": [
-        "race-goblin.a05.normal.1"
+        "race-goblin.a05.normal.3"
       ],
       "events": [],
       "done": false
@@ -259,8 +686,21 @@
     {
       "name": "area-06",
       "sprite": "hero-goblin-dagger",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-dagger"
+        },
+        "m2-1792830263840-158-enemy-0": {
+          "x": 350,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-goblin.a06.normal.1"
+        }
+      },
       "enemySprites": [
-        "race-goblin.a06.normal.2"
+        "race-goblin.a06.normal.1"
       ],
       "events": [],
       "done": false
@@ -268,8 +708,21 @@
     {
       "name": "area-07",
       "sprite": "hero-goblin-dagger",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-dagger"
+        },
+        "m2-1792830263867-175-enemy-0": {
+          "x": 350,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-goblin.a07.normal.1"
+        }
+      },
       "enemySprites": [
-        "race-goblin.a07.normal.3"
+        "race-goblin.a07.normal.1"
       ],
       "events": [],
       "done": false
@@ -277,8 +730,21 @@
     {
       "name": "area-08",
       "sprite": "hero-goblin-dagger",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-dagger"
+        },
+        "m2-1792830263893-193-enemy-0": {
+          "x": 350,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-goblin.a08.normal.1"
+        }
+      },
       "enemySprites": [
-        "race-goblin.a08.normal.3"
+        "race-goblin.a08.normal.1"
       ],
       "events": [],
       "done": false
@@ -286,8 +752,21 @@
     {
       "name": "area-09",
       "sprite": "hero-goblin-dagger",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-dagger"
+        },
+        "m2-1792830263919-210-enemy-0": {
+          "x": 350,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-goblin.a09.normal.3"
+        }
+      },
       "enemySprites": [
-        "race-goblin.a09.normal.1"
+        "race-goblin.a09.normal.3"
       ],
       "events": [],
       "done": false
@@ -295,10 +774,255 @@
     {
       "name": "area-10",
       "sprite": "hero-goblin-dagger",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-dagger"
+        },
+        "m2-1792830263941-228-enemy-0": {
+          "x": 350,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-goblin.a10.normal.2"
+        }
+      },
       "enemySprites": [
-        "race-goblin.a10.normal.1"
+        "race-goblin.a10.normal.2"
       ],
       "events": [],
+      "done": false
+    },
+    {
+      "name": "a06-five-target-retinue",
+      "sprite": "hero-goblin-sword",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-sword"
+        },
+        "m2-1792830280760-247-enemy-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-goblin.a06.elite"
+        },
+        "m2-1792830280760-247-enemy-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a06.normal.1"
+        },
+        "m2-1792830280760-247-enemy-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a06.normal.1"
+        },
+        "m2-1792830280760-247-enemy-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-goblin.a06.normal.1"
+        },
+        "m2-1792830280760-247-enemy-4": {
+          "x": 385,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-goblin.a06.normal.1"
+        }
+      },
+      "enemySprites": [
+        "race-goblin.a06.elite",
+        "race-goblin.a06.normal.1",
+        "race-goblin.a06.normal.1",
+        "race-goblin.a06.normal.1",
+        "race-goblin.a06.normal.1"
+      ],
+      "events": [],
+      "done": false
+    },
+    {
+      "name": "a06-five-target-action",
+      "sprite": "hero-goblin-sword",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-sword"
+        },
+        "m2-1792830280760-247-enemy-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-goblin.a06.elite"
+        },
+        "m2-1792830280760-247-enemy-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a06.normal.1"
+        },
+        "m2-1792830280760-247-enemy-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a06.normal.1"
+        },
+        "m2-1792830280760-247-enemy-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-goblin.a06.normal.1"
+        },
+        "m2-1792830280760-247-enemy-4": {
+          "x": 385,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-goblin.a06.normal.1"
+        }
+      },
+      "enemySprites": [
+        "race-goblin.a06.elite",
+        "race-goblin.a06.normal.1",
+        "race-goblin.a06.normal.1",
+        "race-goblin.a06.normal.1",
+        "race-goblin.a06.normal.1"
+      ],
+      "events": [
+        {
+          "kind": "cast",
+          "sourceId": "hero",
+          "targetId": "m2-1792830280760-247-enemy-0",
+          "skillId": "goblin.opening_cut"
+        },
+        {
+          "kind": "hit",
+          "sourceId": "hero",
+          "targetId": "m2-1792830280760-247-enemy-0",
+          "skillId": "goblin.opening_cut"
+        },
+        {
+          "kind": "heal",
+          "sourceId": "hero",
+          "targetId": "hero",
+          "skillId": "lifesteal"
+        }
+      ],
+      "done": false
+    },
+    {
+      "name": "a07-five-target-retinue",
+      "sprite": "hero-goblin-sword",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-sword"
+        },
+        "m2-1792830280826-266-enemy-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-goblin.a07.elite"
+        },
+        "m2-1792830280826-266-enemy-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a07.normal.1"
+        },
+        "m2-1792830280826-266-enemy-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a07.normal.1"
+        },
+        "m2-1792830280826-266-enemy-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-goblin.a07.normal.1"
+        },
+        "m2-1792830280826-266-enemy-4": {
+          "x": 385,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-goblin.a07.normal.1"
+        }
+      },
+      "enemySprites": [
+        "race-goblin.a07.elite",
+        "race-goblin.a07.normal.1",
+        "race-goblin.a07.normal.1",
+        "race-goblin.a07.normal.1",
+        "race-goblin.a07.normal.1"
+      ],
+      "events": [],
+      "done": false
+    },
+    {
+      "name": "a07-five-target-action",
+      "sprite": "hero-goblin-sword",
+      "positions": {
+        "hero": {
+          "x": 100,
+          "y": 203,
+          "sprite": "hero-goblin-sword"
+        },
+        "m2-1792830280826-266-enemy-0": {
+          "x": 285,
+          "y": 203,
+          "scale": 1,
+          "sprite": "race-goblin.a07.elite"
+        },
+        "m2-1792830280826-266-enemy-1": {
+          "x": 365,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a07.normal.1"
+        },
+        "m2-1792830280826-266-enemy-2": {
+          "x": 435,
+          "y": 203,
+          "scale": 0.72,
+          "sprite": "race-goblin.a07.normal.1"
+        },
+        "m2-1792830280826-266-enemy-3": {
+          "x": 310,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-goblin.a07.normal.1"
+        },
+        "m2-1792830280826-266-enemy-4": {
+          "x": 385,
+          "y": 145,
+          "scale": 0.72,
+          "sprite": "race-goblin.a07.normal.1"
+        }
+      },
+      "enemySprites": [
+        "race-goblin.a07.elite",
+        "race-goblin.a07.normal.1",
+        "race-goblin.a07.normal.1",
+        "race-goblin.a07.normal.1",
+        "race-goblin.a07.normal.1"
+      ],
+      "events": [
+        {
+          "kind": "cast",
+          "sourceId": "hero",
+          "targetId": "m2-1792830280826-266-enemy-0",
+          "skillId": "goblin.opening_cut"
+        },
+        {
+          "kind": "hit",
+          "sourceId": "hero",
+          "targetId": "m2-1792830280826-266-enemy-0",
+          "skillId": "goblin.opening_cut"
+        }
+      ],
       "done": false
     }
   ]
