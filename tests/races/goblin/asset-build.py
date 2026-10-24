@@ -31,7 +31,7 @@ for fi,(f,group) in enumerate(zip(files,ids)):
 im=Image.open(src/'exec-f33d6487-4d78-4025-af5c-5916d1ea7ada.png').convert('RGB');w,h=im.size
 for i in range(10):
  c=i%2;r=i//2;bounds=[(0,180),(183,364),(367,560),(563,747),(750,941)];tile=im.crop((c*836+3,bounds[r][0]+2,(c+1)*836-3,bounds[r][1]-2))
- edits={5:'02e176df-6127-49d4-9534-cb6b3b8e8a59',8:'eb37cac7-921a-4fff-bf61-4d9f41fc3f78',9:'befb1066-6ed8-4bc9-9619-00a8dbedb93b'}
+ edits={2:'e395971a-3521-431e-879d-2091333d7881',5:'02e176df-6127-49d4-9534-cb6b3b8e8a59',8:'eb37cac7-921a-4fff-bf61-4d9f41fc3f78',9:'befb1066-6ed8-4bc9-9619-00a8dbedb93b'}
  if i in edits:tile=Image.open(src/('exec-'+edits[i]+'.png')).convert('RGB')
  tile=tile.resize((480,270),Image.Resampling.NEAREST);name=f'area-{i+1:02}.png';tile.save(out/name);manifest['areas'][f'goblin.a{i+1:02}']={'file':'races/goblin/assets/'+name,'width':480,'height':270,'baselineY':203}
 (root/'art-base.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2))
