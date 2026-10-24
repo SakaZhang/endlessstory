@@ -1500,3 +1500,7 @@ for(const[id,rows]of Object.entries(bosses)){
  const m=monsters[id],shield=m.skills[1];shield.name=id.includes('a03')?'覆灯菌衣':id.includes('a06')?'沉河壳壁':'蜕影囊膜';shield.requiresHitForEffects=false;shield.trigger='cooldown_limited_two_casts';
  m.skills=rows.map((r,i)=>({id:id+':phase'+i,name:r.name,cooldownMs:12000+i*5000,firstAtMs:4000+i*4500,castMs:r.castMs,effects:[{type:'damage',coefficient:r.coefficient,damageType:r.type,powerBasis:r.type==='physical'?'atk':'elementalPower'},...r.effects],requiresHitForEffects:true,trigger:null,maxCasts:null})).concat(shield);
 }
+// Retinues divide the existing encounter budget; followers have no separate reward source.
+monsters['goblin.a06.elite'].trait={type:'followers',shares:[.52,.12,.12,.12,.12],name:'砂铜鳌兽',followerMonsterId:'goblin.a06.normal.1'};
+monsters['goblin.a07.elite'].trait={type:'followers',shares:[.52,.12,.12,.12,.12],name:'废垒巡械',followerMonsterId:'goblin.a07.normal.1'};
+monsters['goblin.a09.boss'].trait={type:'followers',shares:[.55,.15,.15,.15],name:'断响晶蛾',followerMonsterId:'goblin.a09.normal.2'};

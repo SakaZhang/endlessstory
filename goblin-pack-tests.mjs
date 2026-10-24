@@ -24,3 +24,5 @@ for(const [id,row]of Object.entries(p.art.monsters)){assert.equal(row.frames.len
 assert.equal(new Set(Object.values(p.art.monsters).map(r=>r.sourceAtlas+':'+r.sourceRow)).size,43);
 for(const kind of ['equipment','skills','materials','areas'])for(const row of Object.values(p.art[kind]))assert(fs.existsSync('dist/'+row.file));
 console.log(`PASS goblin: 43 unique monster rows, 18 canonical materials, 10 recovery/gem regions, 36+12 equipment, 2 legends, 99 points; ${plans} plans / ${effects} actual effect-host applications; capped poison and finite reactive save roundtrip.`);
+for(const id of ['goblin.a06.elite','goblin.a07.elite','goblin.a09.boss']){const trait=p.monsters[id].trait;assert.equal(trait.type,'followers');assert(Math.abs(trait.shares.reduce((a,b)=>a+b,0)-1)<1e-10);assert.equal(trait.shares.length,id.endsWith('boss')?4:5);assert(p.art.monsters[trait.followerMonsterId]);assert.equal(p.monsters[trait.followerMonsterId].area,p.monsters[id].area);}
+console.log('PASS Goblin retinues: A06/A07 elite5targets, A09boss4targets, budgetshares sum1, samearea ordinarynativeart.');
