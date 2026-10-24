@@ -1,0 +1,39 @@
+{
+  "seconds": 33,
+  "rounds": 30,
+  "echoEvents": 18,
+  "wardEvents": 1,
+  "legendaryRuntime": {
+    "version": 1,
+    "byId": {
+      "mvm5pqhp-9-yxuz9": {
+        "legendaryId": "elf-sixfold-heartwood",
+        "clock": 33000,
+        "state": {
+          "seenElements": [
+            "earth"
+          ],
+          "ready": false,
+          "pendingCastId": null,
+          "pendingTargetId": null,
+          "lastCastId": "m2-10000-11:tree:30"
+        }
+      },
+      "mvm5pqhq-a-vl7fl": {
+        "legendaryId": "elf-dew-covenant",
+        "clock": 33000,
+        "state": {
+          "nextWardAt": 13100
+        }
+      }
+    }
+  },
+  "hp": 3161,
+  "cooldowns": {
+    "elf.clear_moon": 0,
+    "elf.sixfold_chorus": 11,
+    "elf.root_strike": 4,
+    "elf.leaf_ward": 12
+  },
+  "method": "Same JSON checkpoint, actual two equipped legends, real sixfold charge/next attacking cast echo and initial two-debuff cleanse. Controlled zero enemy attack/large HP isolates continuation; online E.step vs E.offline complete encounter/ledger/CD/HP/display equality."
+}

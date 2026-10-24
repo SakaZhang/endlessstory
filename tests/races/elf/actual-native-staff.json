@@ -93,7 +93,7 @@
       "crit": false,
       "outcome": "hit",
       "segmentIndex": 0,
-      "hpDelta": -426,
+      "hpDelta": -401,
       "shieldDelta": 0,
       "combatAt": 1100
     },
@@ -110,7 +110,7 @@
       "crit": false,
       "outcome": "hit",
       "segmentIndex": 1,
-      "hpDelta": -408.1252293578,
+      "hpDelta": -384.0806422018359,
       "shieldDelta": 0,
       "combatAt": 1100
     }

@@ -1,0 +1,85 @@
+{
+  "kind": "actual E.step plus production createLiveBattlePresentation native canvas; NOT browser screenshot",
+  "instanceId": "elf.a06.field",
+  "weapon": "staff",
+  "enemyIds": [
+    {
+      "id": "m2-10000-132-enemy-0",
+      "monsterId": "elf.a06.normal.1",
+      "follower": false
+    }
+  ],
+  "status": {
+    "mode": "ready",
+    "reason": null,
+    "label": "实时像素战斗",
+    "missingIds": [],
+    "coverage": [
+      {
+        "unitId": "m2-10000-132-enemy-0",
+        "monsterId": "elf.a06.normal.1",
+        "follower": false,
+        "sprite": "race-elf.a06.normal.1"
+      }
+    ],
+    "campRace": null,
+    "heroAppearance": "equipped-weapon",
+    "heroAppearanceNote": "",
+    "backgroundIds": [
+      "race-bg-elf.a06"
+    ]
+  },
+  "events": [
+    {
+      "eventId": "m2-10000-132:display-event:1:1",
+      "battleId": "m2-10000-132",
+      "castId": "m2-10000-132:tree:1",
+      "sourceId": "hero",
+      "targetId": "m2-10000-132-enemy-0",
+      "kind": "cast",
+      "hitId": null,
+      "skillId": "elf.root_strike",
+      "element": null,
+      "crit": false,
+      "outcome": "none",
+      "segmentIndex": 0,
+      "hpDelta": 0,
+      "shieldDelta": 0,
+      "combatAt": 1100
+    },
+    {
+      "eventId": "m2-10000-132:display-event:1:2",
+      "battleId": "m2-10000-132",
+      "castId": "m2-10000-132:tree:1",
+      "sourceId": "hero",
+      "targetId": "m2-10000-132-enemy-0",
+      "kind": "hit",
+      "hitId": "m2-10000-132:tree:1:0:m2-10000-132-enemy-0",
+      "skillId": "elf.root_strike",
+      "element": "physical",
+      "crit": false,
+      "outcome": "hit",
+      "segmentIndex": 0,
+      "hpDelta": -487,
+      "shieldDelta": 0,
+      "combatAt": 1100
+    },
+    {
+      "eventId": "m2-10000-132:display-event:1:3",
+      "battleId": "m2-10000-132",
+      "castId": "m2-10000-132:tree:1",
+      "sourceId": "hero",
+      "targetId": "m2-10000-132-enemy-0",
+      "kind": "hit",
+      "hitId": "m2-10000-132:tree:1:1:m2-10000-132-enemy-0",
+      "skillId": "elf.root_strike",
+      "element": "earth",
+      "crit": false,
+      "outcome": "hit",
+      "segmentIndex": 1,
+      "hpDelta": -411.69857142857154,
+      "shieldDelta": 0,
+      "combatAt": 1100
+    }
+  ]
+}
