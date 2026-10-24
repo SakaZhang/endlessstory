@@ -155,13 +155,17 @@
       "anticipation"
     ],
     "attack": [
-      "attack"
+      "anticipation",
+      "attack",
+      "recovery",
+      "idle-0"
     ],
     "recovery": [
       "recovery"
     ],
     "hurt": [
-      "hurt"
+      "hurt",
+      "idle-0"
     ],
     "guard": [
       "guard"

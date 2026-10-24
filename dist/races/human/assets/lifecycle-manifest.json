@@ -121,13 +121,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -258,13 +262,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -395,13 +403,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -532,13 +544,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -669,13 +685,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -806,13 +826,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -943,13 +967,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -1080,13 +1108,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -1217,13 +1249,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -1354,13 +1390,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -1491,13 +1531,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -1628,13 +1672,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -1765,13 +1813,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -1902,13 +1954,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -2039,13 +2095,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -2176,13 +2236,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -2313,13 +2377,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -2450,13 +2518,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -2587,13 +2659,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -2724,13 +2800,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -2861,13 +2941,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -2998,13 +3082,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -3135,13 +3223,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -3272,13 +3364,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -3409,13 +3505,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -3546,13 +3646,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -3683,13 +3787,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -3820,13 +3928,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -3957,13 +4069,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -4094,13 +4210,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -4231,13 +4351,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -4368,13 +4492,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -4505,13 +4633,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -4642,13 +4774,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -4779,13 +4915,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -4916,13 +5056,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -5053,13 +5197,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -5190,13 +5338,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -5327,13 +5479,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -5464,13 +5620,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -5601,13 +5761,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -5738,13 +5902,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
@@ -5875,13 +6043,17 @@
         "anticipation"
       ],
       "attack": [
-        "attack"
+        "anticipation",
+        "attack",
+        "recovery",
+        "idle"
       ],
       "recovery": [
         "recovery"
       ],
       "hurt": [
-        "hurt"
+        "hurt",
+        "idle"
       ],
       "death": [
         "death"
