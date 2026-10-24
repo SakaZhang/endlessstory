@@ -1,3 +1,4 @@
+import {dispatchRacialLegendaryEvent} from './racial-legendary-runtime.js';
 import {rollGoblinExtraMaterial} from './race-loot.js';
 import {racialGoldCost} from './race-economy.js';
 export {racialGoldCost} from './race-economy.js';
@@ -694,7 +695,7 @@ function startDwarfEncounter(s,instance,now){
  // Each fresh field encounter starts a new skill clock. Preserve carried shield
  // lifetime, not its previous encounter's absolute clock origin.
  if(e.skillResolver==='tree-v1'&&e.playerShieldLayers){const clock=e.treeEffects?.clock??e.treeCombatClock??0,offset=clock-e.playerShieldLayers.clock;e.playerShieldLayers={...e.playerShieldLayers,clock,layers:e.playerShieldLayers.layers.map(l=>({...l,expiresAt:l.expiresAt===null?null:l.expiresAt+offset}))};}
- e.targetId=e.enemies[0].id;syncMultiTarget(e);s.location=e.location;s.siteId=instance.siteId;s.activeEncounter=e;s.atCamp=false;s.running=true;s.nextActionAt=s.lastHealthClock+1100;recordEncounteredMonsters(s,e);recordNodeExplored(s,e);return e;
+ e.targetId=e.enemies[0].id;dispatchRacialLegendaryEvent(s,{type:'encounterStart',encounterId:e.id},{maxHp:st.hp,stats:st});syncMultiTarget(e);s.location=e.location;s.siteId=instance.siteId;s.activeEncounter=e;s.atCamp=false;s.running=true;s.nextActionAt=s.lastHealthClock+1100;recordEncounteredMonsters(s,e);recordNodeExplored(s,e);return e;
 }
 // Explicit developer entry: callers isolate the supplied save; no production random trigger.
 export function startDeveloperGroup(s,options={},now=Date.now()){

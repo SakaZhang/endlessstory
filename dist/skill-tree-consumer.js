@@ -110,7 +110,7 @@ export function planTreeSkill(input={}){
   const p=planFractureStrike({...input,targetId:input.selectedTargetId});if(!p)return null;
   plan={...p,damageActionCount:1,actions:p.hits.map(h=>({...h,kind:'hit',effects:[],armorBreak:p.armorBreak?clone(p.armorBreak):null}))};delete plan.hits;delete plan.armorBreak;
  }else{plan=planApprovedSkill(input);if(!plan)return null;plan=clone(plan);}
- for(const pack of Object.values(RACE_PACKS))if(pack.modifyLegendaryPlan)plan=pack.modifyLegendaryPlan(plan,{...input,...input.context});
+ for(const pack of Object.values(RACE_PACKS))if(pack.modifyLegendaryPlan&&!pack.createLegendaryState)plan=pack.modifyLegendaryPlan(plan,{...input,...input.context});
  if(input.context?.exclusiveIds?.includes('goblin-ration-opening'))for(const a of plan.actions){const target=input.targets.find(t=>t.id===a.targetId);if(a.kind==='hit'&&target?.hp>target?.maxHp*.75)a.coefficient*=1.12;}
  for(const a of plan.actions){
   a.source={kind:'skill',skillId:plan.skillId};a.skillId=plan.skillId;a.weaponType=input.weaponType??'generic';
