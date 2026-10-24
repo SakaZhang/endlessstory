@@ -1,3 +1,4 @@
+export {ASHEN_STORY_CORE_ID,ASHEN_STORY_CORE_QUESTS,grantAshenStoryCore} from './story-core.js';
 import {HERO_NEUTRAL} from './art-neutral.js';
 import {createLegendaryState,validLegendaryState,reduceLegendaryEvent} from './legendary.js';
 import {areas,monsters,parameters,materials,materialPools} from './world.js';
