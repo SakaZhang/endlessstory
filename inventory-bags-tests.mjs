@@ -8,7 +8,7 @@ const original=Math.random;let seed=751;Math.random=()=>{seed=(Math.imul(seed,16
 const fill=(s,slot,n=50)=>{while(bagCounts(s).equipment[slot]<n)s.inventory.push(item(slot,1,null,0));};
 try{
  const s=fresh(),originalGear=JSON.stringify(s.inventory);assert(normalizeInventoryState(s));assert.deepEqual(s.lootFilters,{equipment:[],materials:[],items:[]});assert.equal(JSON.stringify(s.inventory),originalGear);const initialized=JSON.stringify(s);assert(normalizeInventoryState(s));assert.equal(JSON.stringify(s),initialized);
- assert.equal(bagCounts(s).equipment.ring,2);for(const slot of SLOTS){fill(s,slot);assert(!canReceiveEquipment(s,slot));}assert.equal(s.inventory.length,350);assert(validSave(s));
+ assert.equal(bagCounts(s).equipment.ring,2);for(const slot of SLOTS){fill(s,slot);assert(!canReceiveEquipment(s,slot));}assert.equal(s.inventory.length,SLOTS.length*50);assert(validSave(s));
  fill(s,'ring',75);const over=s.inventory.length;assert(validSave(s));assert(saveLoadout(s,0,'柜'));assert(saveLoadout(s,1,'共用柜'));assert.equal(bagCounts(s).equipment.ring,73);assert(deleteLoadout(s,0));assert(deleteLoadout(s,1));assert.equal(s.inventory.length,over);assert.equal(bagCounts(s).equipment.ring,75);assert(validSave(s));
  // Pure generic-stack fixtures exercise future capacity without inventing registered content.
  const generic=fresh();generic.materialStacks=Object.fromEntries(Array.from({length:100},(_,i)=>['fixture'+i+'|0',1]));assert.equal(bagCounts(generic).materials,100);assert(canReceiveMaterial(generic,'fixture0|0',10));assert(!canReceiveMaterial(generic,'new|0'));generic.materialStacks['fixture1|0']=0;assert(canReceiveMaterial(generic,'new|0'));
@@ -42,5 +42,5 @@ try{
  assert.equal(Object.keys(RECIPES).length,15);assert(Object.values(RECIPES).every(r=>r.enabled));assert(Object.isFrozen(RECIPES));
  // Filters never apply to crafted or purchased items.
  const craft=fresh();setLootFilter(craft,'equipment',[0,1,2,3]);const made=forge(craft,['铁屑|0']);assert(craft.inventory.some(it=>it.id===made.id));assert(validSave(craft));
- console.log('Inventory bags/R04: seven50 caps, preserved overcapacity/wardrobe returns, generic100-stack capacities, filters vs ungraded/protected, separate overflow reports, purchase nocharge, actual forge result pending/reload/exact-once claim: PASS');
+ console.log('Inventory bags/R04: eight50 family caps including cross-race core storage, preserved overcapacity/wardrobe returns, generic100-stack capacities, filters vs ungraded/protected, separate overflow reports, purchase nocharge, actual forge result pending/reload/exact-once claim: PASS');
 }finally{Math.random=original;}
