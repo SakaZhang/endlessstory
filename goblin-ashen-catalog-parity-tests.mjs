@@ -31,9 +31,9 @@ for(const [race,pack] of Object.entries({goblin,ashen})){
 }
 assert.equal(new Set(added.map(t=>t.name)).size,33);
 const skipArt=process.argv.includes('--catalog-only');
-const paths=new Set(),hashes=new Set();
-for(const t of skipArt?[]:added){const path=equipmentRasterSource(t,64);assert(path,`${t.id} raster route`);assert(equipmentIcon(t,{size:64}).includes(path));paths.add(path);const bytes=fs.readFileSync('dist/'+path);hashes.add(hash(bytes));const img=await loadImage(bytes);assert.equal(img.width,64);assert.equal(img.height,64);const canvas=createCanvas(64,64),ctx=canvas.getContext('2d');ctx.drawImage(img,0,0);const px=ctx.getImageData(0,0,64,64).data;let transparent=0,visible=0;for(let i=3;i<px.length;i+=4){if(px[i]===0)transparent++;if(px[i]>0)visible++;}assert(transparent>400&&visible>100,`${t.id} usable alpha silhouette`);}
-if(!skipArt){assert.equal(paths.size,33);assert.equal(hashes.size,33);}
+const paths=new Set(),hashes=new Set(),pixelHashes=new Set(),silhouetteHashes=new Set();
+for(const t of skipArt?[]:added){const path=equipmentRasterSource(t,64);assert(path,`${t.id} raster route`);assert(equipmentIcon(t,{size:64}).includes(path));paths.add(path);const bytes=fs.readFileSync('dist/'+path);hashes.add(hash(bytes));const img=await loadImage(bytes);assert.equal(img.width,64);assert.equal(img.height,64);const canvas=createCanvas(64,64),ctx=canvas.getContext('2d');ctx.drawImage(img,0,0);const px=ctx.getImageData(0,0,64,64).data;pixelHashes.add(hash(px));silhouetteHashes.add(hash(Uint8Array.from({length:4096},(_,i)=>px[i*4+3]>127?255:0)));let transparent=0,visible=0;for(let i=3;i<px.length;i+=4){if(px[i]===0)transparent++;if(px[i]>0)visible++;}assert(transparent>400&&visible>100,`${t.id} usable alpha silhouette`);}
+if(!skipArt){assert.equal(paths.size,33);assert.equal(hashes.size,33);assert.equal(pixelHashes.size,33,'distinct decoded pixels');assert.equal(silhouetteHashes.size,33,'distinct silhouettes, not recolor-only');}
 const original=Math.random;let seed=37219;Math.random=()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0)/2**32);
 try{
  for(const race of ['goblin','ashen']){

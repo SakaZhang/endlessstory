@@ -1,0 +1,26 @@
+=== equipment-template-tests.mjs
+PASS equipment templates:221 scatter+60set identities, slot/ring consistency, race pools informational only, frozen metadata, deterministic selection, original instance/base/affix/divine preservation, no legacy reassignment or candidate numeric rules.
+=== equipment-budget-adapter-tests.mjs
+PASS M2 budget adapter 1120: finite1–100 budget vs preserved source/display levels, explicit overcap provenance, zero preservation, legacy untouched, strict unknown metadata. Not yet engine generation activation.
+=== equipment-level-tests.mjs
+Equipment levels: strict current provenance without legacy backfill, provenance across stock/purchase/shared/pending, bounded drop variance, exact hero forge, 1000 fusion calculations without base ratchet: PASS
+=== equipment-fusion-tests.mjs
+Equipment-input fusion:1161 exact dominance cases;5same20k with racial overlay [ 6274, 6672, 7054, 0 ] divine [ 214, 199, 206, 0 ] ; protected/duplicate no-RNG,1–5 mixed gear, independent blessing, level no-ratchet1000, pending/codex/storage atomics: PASS
+=== fusion-origin-production-tests.mjs
+PASS actual forge origin: live dwarf templates, pure-material exact hero level, historical legacy dwarf even different fixture hero, unregistered source rejected before RNG/cost.
+=== ashen-legend-core-tests.mjs
+PASS Ashen core pool, factory, metadata, race equip restrictions, original-power slots, molten exact stacks/time/remainder/reset, rock CD, crystal timing/beam contract, guarded story grant.
+=== goblin-evasion-boots-tests.mjs
+PASS boots equipped-only / all races / fixed100 / duplicate / ordinary quality4 / diminishing pool / repeat 5% boss pool / actual hit-miss: { hit: 602, miss: 198, rate: 0.2475 }
+=== goblin-pack-tests.mjs
+PASS goblin: 43 unique monster rows, 18 canonical materials, 10 recovery/gem regions, 52+12 equipment, 2 legends, 99 points; 63 plans / 69 actual effect-host applications; capped poison and finite reactive save roundtrip.
+PASS Goblin retinues: A06/A07 elite5targets, A09boss4targets, budgetshares sum1, samearea ordinarynativeart.
+PASS Goblin-only25%baseATK weakeningcap: zero/low/high/bossbaselines, repeatedsource noadditivepile, reactiveper-target cap.
+=== tests/races/ashen/pack.test.mjs
+Ashen pack PASS: canonical sources, 43 actors, 99-point reachable tree, all21 skills ×3 weapons against actual effect host, capped serialized resources, gear and assets.
+=== tests/races/ashen/core.test.mjs
+PASS actual core: all3paired bases×4qualities, Ashen equip, nonAshen bag/fusion/sale+equip rejection, material/equipment fusion core outputs, real field coredrop and savedroundtrip.
+=== goblin-legend-production-tests.mjs
+PASS actual blade fallback once pertarget, no recursive proc/extra active count
+PASS actual shieldtheft prehit capped amount 365.84000000000003 capacity 365.84000000000003 global bonusonce
+PASS actual fallbackstab cancrit and heal via10rating=1% actualHP-loss lifesteal

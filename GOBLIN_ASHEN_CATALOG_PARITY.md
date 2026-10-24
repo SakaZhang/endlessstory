@@ -20,7 +20,8 @@ Ashen additions: explicit `ashen.scatter.38` through `.55`. The original indexed
 - Exact per-slot and per-native-family counts; set/core exceptions.
 - Every original equipment object, set and legend against the pre-change snapshot.
 - Unchanged ordinary/core variant allocations, original 64px art, skills and legendary/story modules.
-- Unique Chinese identities, real distinct 64px PNG paths and bytes, and nonempty transparent silhouettes.
+- Unique Chinese identities, real distinct 64px PNG paths, bytes, decoded pixels and alpha silhouettes, and nonempty transparent silhouettes.
+- Actual production victory → regional reward → inventory acceptance for every addition, including save validation, no overflow and reward idempotency.
 - Every ordinary template reachable by actual drop-item generation and actual forge outputs; all 33 additions reached by seeded trader refreshes.
 - Item stats exactly match the existing budget adapter; no new stat allocation family.
 
