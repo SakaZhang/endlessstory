@@ -1,0 +1,5 @@
+import assert from 'node:assert/strict';
+import {DWARF_MATERIAL_SOURCE_POOLS} from './dist/dwarf-material-catalog.js';
+import {materialQualityWeights,materialChannelProbability} from './dist/material-loot-profile.js';
+let entries=0,channels=0;for(const p of Object.values(DWARF_MATERIAL_SOURCE_POOLS)){const area=Number(p.nodeId.split('.')[1].slice(1)),kind=p.nodeId.split('.').at(-1),rank=p.monsterId.includes('.elite')?'elite':p.monsterId.endsWith('.boss')?'boss':'normal';for(const c of p.channels){if(c.entries.length){assert(Math.abs(c.hitProbability-materialChannelProbability(c.channel,area,kind,rank))<1e-12,JSON.stringify({p,c}));channels++;}for(const e of c.entries){const q=c.channel==='gem'?[0,0,0,1]:materialQualityWeights(area,kind);assert(e.qualityWeights.every((v,i)=>Math.abs(v-q[i])<1e-12),p.nodeId+' '+c.channel);entries++;}assert.equal(c.quantity,1);}}
+console.log(`PASS shared policy exactly matches all existing Dwarf ${channels} populated channels/${entries} quality profiles; quantity1.`);
