@@ -9523,3 +9523,20 @@ export const art = {
 };
 
 art.equipment['goblin_scatter_ring_6']={file:'races/goblin/assets/goblin_scatter_ring_6.png',width:64,height:64};
+
+// Individually image-generated ordinary slot-parity art; original assets unchanged.
+art.equipment['goblin_scatter_amulet_6']={file:'races/goblin/assets/goblin_scatter_amulet_6.png',width:64,height:64};
+art.equipment['goblin_scatter_armor_6']={file:'races/goblin/assets/goblin_scatter_armor_6.png',width:64,height:64};
+art.equipment['goblin_scatter_boots_6']={file:'races/goblin/assets/goblin_scatter_boots_6.png',width:64,height:64};
+art.equipment['goblin_scatter_gloves_6']={file:'races/goblin/assets/goblin_scatter_gloves_6.png',width:64,height:64};
+art.equipment['goblin_scatter_helm_6']={file:'races/goblin/assets/goblin_scatter_helm_6.png',width:64,height:64};
+art.equipment['goblin_scatter_weapon_10']={file:'races/goblin/assets/goblin_scatter_weapon_10.png',width:64,height:64};
+art.equipment['goblin_scatter_weapon_11']={file:'races/goblin/assets/goblin_scatter_weapon_11.png',width:64,height:64};
+art.equipment['goblin_scatter_weapon_12']={file:'races/goblin/assets/goblin_scatter_weapon_12.png',width:64,height:64};
+art.equipment['goblin_scatter_weapon_13']={file:'races/goblin/assets/goblin_scatter_weapon_13.png',width:64,height:64};
+art.equipment['goblin_scatter_weapon_14']={file:'races/goblin/assets/goblin_scatter_weapon_14.png',width:64,height:64};
+art.equipment['goblin_scatter_weapon_15']={file:'races/goblin/assets/goblin_scatter_weapon_15.png',width:64,height:64};
+art.equipment['goblin_scatter_weapon_16']={file:'races/goblin/assets/goblin_scatter_weapon_16.png',width:64,height:64};
+art.equipment['goblin_scatter_weapon_7']={file:'races/goblin/assets/goblin_scatter_weapon_7.png',width:64,height:64};
+art.equipment['goblin_scatter_weapon_8']={file:'races/goblin/assets/goblin_scatter_weapon_8.png',width:64,height:64};
+art.equipment['goblin_scatter_weapon_9']={file:'races/goblin/assets/goblin_scatter_weapon_9.png',width:64,height:64};

@@ -5345,3 +5345,23 @@ export const art={
 };
 
 art.equipment['ashen.scatter.37']={file:'races/ashen/assets/ashen.scatter.37.png',width:64,height:64};
+
+// Individually image-generated ordinary slot-parity art; original assets unchanged.
+art.equipment['ashen.scatter.38']={file:'races/ashen/assets/ashen.scatter.38.png',width:64,height:64};
+art.equipment['ashen.scatter.39']={file:'races/ashen/assets/ashen.scatter.39.png',width:64,height:64};
+art.equipment['ashen.scatter.40']={file:'races/ashen/assets/ashen.scatter.40.png',width:64,height:64};
+art.equipment['ashen.scatter.41']={file:'races/ashen/assets/ashen.scatter.41.png',width:64,height:64};
+art.equipment['ashen.scatter.42']={file:'races/ashen/assets/ashen.scatter.42.png',width:64,height:64};
+art.equipment['ashen.scatter.43']={file:'races/ashen/assets/ashen.scatter.43.png',width:64,height:64};
+art.equipment['ashen.scatter.44']={file:'races/ashen/assets/ashen.scatter.44.png',width:64,height:64};
+art.equipment['ashen.scatter.45']={file:'races/ashen/assets/ashen.scatter.45.png',width:64,height:64};
+art.equipment['ashen.scatter.46']={file:'races/ashen/assets/ashen.scatter.46.png',width:64,height:64};
+art.equipment['ashen.scatter.47']={file:'races/ashen/assets/ashen.scatter.47.png',width:64,height:64};
+art.equipment['ashen.scatter.48']={file:'races/ashen/assets/ashen.scatter.48.png',width:64,height:64};
+art.equipment['ashen.scatter.49']={file:'races/ashen/assets/ashen.scatter.49.png',width:64,height:64};
+art.equipment['ashen.scatter.50']={file:'races/ashen/assets/ashen.scatter.50.png',width:64,height:64};
+art.equipment['ashen.scatter.51']={file:'races/ashen/assets/ashen.scatter.51.png',width:64,height:64};
+art.equipment['ashen.scatter.52']={file:'races/ashen/assets/ashen.scatter.52.png',width:64,height:64};
+art.equipment['ashen.scatter.53']={file:'races/ashen/assets/ashen.scatter.53.png',width:64,height:64};
+art.equipment['ashen.scatter.54']={file:'races/ashen/assets/ashen.scatter.54.png',width:64,height:64};
+art.equipment['ashen.scatter.55']={file:'races/ashen/assets/ashen.scatter.55.png',width:64,height:64};
