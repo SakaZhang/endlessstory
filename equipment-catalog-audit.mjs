@@ -26,3 +26,6 @@ export function auditEquipmentCatalog(templates=EQUIPMENT_TEMPLATES,legends=Obje
  check(totals.common===260&&totals.ordinary===263&&totals.sets===60&&totals.legends===12&&totals.definitions===335,'catalog totals differ from approved contract');
  return {passed:!errors.length,errors,matrix,totals,reservedStory:reserved.map(t=>t.id)};
 }
+if(process.argv[1]&&new URL(import.meta.url).pathname===process.argv[1]){
+ const report=auditEquipmentCatalog();console.table(Object.fromEntries(Object.entries(report.matrix).map(([race,row])=>[race,{...row.slots,common:row.common,extraCores:row.extraCores,setParts:row.setParts,legends:row.legends}])));console.log(JSON.stringify(report,null,2));if(!report.passed)process.exitCode=1;
+}
