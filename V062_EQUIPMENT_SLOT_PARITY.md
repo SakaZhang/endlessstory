@@ -16,11 +16,15 @@ Each race has eight weapons in each of its two native families. Each has three s
 
 Total: 260 common ordinary + 3 extra ordinary cores + 60 set parts + 12 legendary definitions = 335. Thus 263 ordinary, not 260, when including cores.
 
+## Named character selection
+
+The same release shows native hero images at the start of a new journey, with canonical names 布洛克 / 罗什福尔 / 莱姆斯 / 奇克 / 砾恩. Role titles remain secondary labels. Generation 6 retires the old development saves once; equipment quantities themselves did not require a reset.
+
 ## Reproducible checks
 
 - `npm run audit:equipment`: actual catalog-derived slot matrix and invariant errors; a total alone is insufficient.
 - `npm run test:equipment-parity`: matrix, deliberately incorrect slot/family negative controls, existing identity/name/stat hashes, unchanged equipment gameplay-source hashes, actual item/fusion/trader coverage, and real production-renderer coverage.
-- `npm run test:races`: existing 56 race gates plus the new parity gate.
+- `npm run test:races`: existing 56 race gates plus strict equipment, real reward-settlement, worker art/catalog and named-character gates.
 - `npm run test:release`: immutable asset/cache graph and unchanged explicit fourteen QA exclusions.
 
 The equipment art gate hashes decoded, nearest-neighbor 64px pixels across every identity within each race, including legends. Reusing the same identity source at 32/48/64 display sizes is valid; sharing artwork across different identities is not. New ordinary source art must be 64×64, nonblank and clear of clipped alpha edges.
