@@ -2,6 +2,7 @@ import {RACIAL_NPC_EVENTS} from './racial-npc-event-content.js';
 import {worldInventoryKey} from './world-materials.js';
 import {RETURN_RING_EVENTS} from './return-ring-content.js';
 import {CHIK_FAMILY_EVENTS} from './chik-family-events.js';
+import {CHIK_FAMILY_REWARD_POLICY,CHIK_FAMILY_MILESTONE} from './chik-family-event-rewards.js';
 import {AREAS,INSTANCES,instanceCooldownMs} from './location-schema.js';
 import {territoryAccess,nodeAccess} from './war-diplomacy.js';
 const freeze=o=>{if(o&&typeof o==='object'){Object.values(o).forEach(freeze);Object.freeze(o);}return o;};
@@ -19,9 +20,13 @@ const personalHistoryValid=(s,id,e)=>{
  const def=NPC_EVENTS[id];if(!def?.playerRace)return true;
  return s.race===def.playerRace&&scenePrerequisites(s,def)&&hasStoryFlag(s,def.requiresStoryFlag)&&(e.status!=='resolved'||def.choices.some(c=>c.id===e.choiceId));
 };
+const hasTaskClaim=(s,id)=>Array.isArray(s.taskRewardClaims)&&s.taskRewardClaims.includes(id);
+export const completedFamilyEventCount=s=>CHIK_FAMILY_MILESTONE.requiresEventIds.filter(id=>s.npcEvents?.entries?.[id]?.status==='resolved'&&NPC_EVENTS[id].choices.some(c=>c.id===s.npcEvents.entries[id].choiceId)&&hasTaskClaim(s,id)).length;
 export function npcClaimKey(s,id){const def=NPC_EVENTS[id],entry=s.npcEvents?.entries?.[id];return def?.repeatable?id+'.cycle-'+(entry?.cycle??0):id;}
 export function validNpcEventState(s){
- if(!plain(s))return false;if(s.npcEvents===undefined)return true;
+ if(!plain(s))return false;
+ if(hasTaskClaim(s,CHIK_FAMILY_MILESTONE.id)&&completedFamilyEventCount(s)!==CHIK_FAMILY_MILESTONE.requiresEventIds.length)return false;
+ if(s.npcEvents===undefined)return true;
  const n=s.npcEvents;if(!plain(n)||Object.keys(n).length!==2||n.version!==1||!plain(n.entries)||Object.keys(n.entries).length>Object.keys(NPC_EVENTS).length)return false;
  return Object.entries(n.entries).every(([id,e])=>known(id)&&plain(e)&&Object.keys(e).length===7&&['active','resolved','declined'].includes(e.status)&&Number.isSafeInteger(e.count)&&e.count>=0&&e.count<= (NPC_EVENTS[id].objective?.count??0)&&Number.isSafeInteger(e.cycle)&&e.cycle>=0&&e.cycle<=9999&&time(e.readyAt)&&time(e.acceptedAt)&&(e.lastEncounterId===null||typeof e.lastEncounterId==='string'&&e.lastEncounterId.length<=160)&&(!NPC_EVENTS[id].repeatable?e.cycle===0:true)&&(e.choiceId===null||NPC_EVENTS[id].choices?.some(c=>c.id===e.choiceId))&&(e.status==='resolved')===(s.taskRewardClaims?.includes(npcClaimKey(s,id))===true)&&personalHistoryValid(s,id,e));
 }
@@ -84,8 +89,22 @@ export function recordNpcEventVictory(s,e){
   entry.count++;entry.lastEncounterId=e.id;changed=true;
  }return changed;
 }
-export const NPC_TASK_REWARD_REGISTRY=freeze(Object.fromEntries(Object.values(NPC_EVENTS).map(def=>[def.id,{
+// A separate sealed claim avoids losing an earned token if its item stack is
+// full when the sixth scene completes. It is not a seventh quest/character.
+export function familyMilestoneAccess(s){
+ if(!validNpcEventState(s)||s.race!=='goblin'||!CHIK_FAMILY_REWARD_POLICY.approved)return {allowed:false,reason:'阶段补给不可用'};
+ if(s.taskRewardClaims?.includes(CHIK_FAMILY_MILESTONE.id))return {allowed:false,reason:'阶段补给已领取'};
+ if(completedFamilyEventCount(s)!==CHIK_FAMILY_MILESTONE.requiresEventIds.length)return {allowed:false,reason:'先完成六件家人小事'};
+ const access=territoryAccess(s,'goblin');if(!access.allowed)return access;
+ if(!['goblin.a01','goblin.a04'].includes(s.siteId)||!(s.areaProgress?.goblin?.unlocked??[1]).includes(AREAS[s.siteId]?.number))return {allowed:false,reason:'返回本族已开放的家人事件区域领取已整理的补给'};
+ if(s.activeEncounter&&!s.activeEncounter.done||s.running||(s.restUntil??0)>(s.lastHealthClock??0)||s.developmentEquipmentSandbox)return {allowed:false,reason:'结束远征并休息完，再整理行囊'};
+ return {allowed:true,reason:''};
+}
+export const NPC_TASK_REWARD_REGISTRY=freeze({...Object.fromEntries(Object.values(NPC_EVENTS).map(def=>[def.id,{
  isEligible:s=>npcEventReady(s,def.id),materials:npcEventCosts(def),rewards:def.rewards??[],narrativeOnly:def.narrativeOnly===true,
  claimKey:s=>npcClaimKey(s,def.id),
  onClaim:(s,{now})=>{const e=s.npcEvents?.entries?.[def.id];if(!e||e.status!=='active')return false;e.status='resolved';e.readyAt=def.repeatable?now+instanceCooldownMs({kind:'dungeon'}):0;return true;}
-}])));
+}])),[CHIK_FAMILY_MILESTONE.id]:{
+ isEligible:s=>familyMilestoneAccess(s).allowed,materials:[],rewards:CHIK_FAMILY_MILESTONE.rewards,narrativeOnly:false,
+ onClaim:s=>familyMilestoneAccess(s).allowed
+}});

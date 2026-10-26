@@ -207,5 +207,5 @@ for(const file of ['random-war-world-tests.mjs','random-war-story-access-tests.m
 // Presentation-only family identities preserve all canonical story records.
 for(const file of ['chik-family-tests.mjs','chik-family-app-ui-tests.cjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
 
-// Six personal family scenes stay approval-gated until an authorized reward budget.
-for(const file of ['chik-family-event-tests.mjs','chik-family-event-app-ui-tests.cjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+// Six approved personal family scenes: fixed supplies and one earned stage claim.
+for(const file of ['chik-family-event-tests.mjs','chik-family-event-app-ui-tests.cjs','chik-family-reward-tests.mjs','chik-family-reward-app-ui-tests.cjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});

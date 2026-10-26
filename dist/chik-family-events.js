@@ -30,4 +30,12 @@ const rows=[
   {id:'name-together',label:'和他给石纹起个小名字，再请他代为保管',dialogue:'两人看了半天，豆布说像一条不会漏粮的小路。奇克说那就叫“平路”，让他先替自己守好。',outcome:'豆布把石头放回自己的小东西旁，反复念它的名字。石头一点也不发光，但这个名字让豆布很满意。这回是他替哥哥看住一样东西。'}
  ]}
 ];
-export const CHIK_FAMILY_EVENTS=freeze(rows.map(({stage,...d})=>({...d,category:'chik-family',playerRace:'goblin',race:'goblin',requiresStoryFlag:'G_MET_H',conditions:{requiredStorySceneIds:[stage==='early'?'C02.O01.goblin':'C05.O01.goblin'],forbiddenStoryFlags:['INVASION_BEGAN']},repeatable:false,narrativeOnly:false,objective:{kind:'conversation'},materials:[],rewardPolicyId:CHIK_FAMILY_REWARD_POLICY.id,rewardPolicyApproved:CHIK_FAMILY_REWARD_POLICY.approved,rewards:CHIK_FAMILY_EVENT_REWARDS[d.id]??[],decline:{label:'晚些再聊',permanent:false}})));
+const supplyContext={
+ 'family.kalo.footsteps':'咔洛把出门备好的两小瓶治疗药剂裹进布角：这个不响。我替你装好了。',
+ 'family.mirei.missing-grain':'米芮重新扎紧补给包，把两小瓶治疗药剂分进奇克出门的那一份。',
+ 'family.dobu.cracked-bowl':'收拾好木碗，奇克把备好的两小瓶治疗药剂一并装入行囊。豆布认真扶住包口。',
+ 'family.kalo.first-load':'咔洛把出门要用的两小瓶治疗药剂绑好，不再把小东西一股脑堆在肩头。',
+ 'family.mirei.saved-share':'米芮在饭碗旁放下已包好的两小瓶治疗药剂：这份也算过了，不许再漏。',
+ 'family.dobu.trophy':'奇克收好出门备药，豆布帮他数清两小瓶。那块普通石头另放，没有拿去换东西。'
+};
+export const CHIK_FAMILY_EVENTS=freeze(rows.map(({stage,...d})=>({...d,category:'chik-family',playerRace:'goblin',race:'goblin',requiresStoryFlag:'G_MET_H',conditions:{requiredStorySceneIds:[stage==='early'?'C02.O01.goblin':'C05.O01.goblin'],forbiddenStoryFlags:['INVASION_BEGAN']},repeatable:false,narrativeOnly:false,objective:{kind:'conversation'},materials:[],rewardPolicyId:CHIK_FAMILY_REWARD_POLICY.id,rewardPolicyApproved:CHIK_FAMILY_REWARD_POLICY.approved,rewards:CHIK_FAMILY_EVENT_REWARDS[d.id]??[],rewardContext:supplyContext[d.id],decline:{label:'晚些再聊',permanent:false}})));

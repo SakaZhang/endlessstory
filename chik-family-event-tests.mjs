@@ -23,31 +23,19 @@ const fixture=d=>structuredClone(baseSaves.get(d.areaId));
 const resources=s=>JSON.stringify({inventory:s.inventory,materials:s.materialStacks,gold:s.gold,xp:s.xp,recipe:s.returnRing,flags:s.story.flags,knowledge:s.story.knowledge,scenes:s.story.completedScenes,stats:s.stats,level:s.level});
 const store=s=>({raw:JSON.stringify(s),fail:false,getItem(){return this.raw;},setItem(k,v){if(this.fail)throw Error('quota');this.raw=v;}});
 for(const c of Object.values(CHIK_FAMILY_CHARACTERS))assert.equal(CHIK_FAMILY_EVENTS.filter(d=>d.npcId===c.id).length,2);
-if(!CHIK_FAMILY_REWARD_POLICY.approved){
- assert.deepEqual(CHIK_FAMILY_EVENT_REWARDS,{});
- for(const d of CHIK_FAMILY_EVENTS){
-  const s=fixture(d),st=store(s),before=JSON.stringify(s),now=Math.max(s.lastSeen,s.lastHealthClock)+1000;
-  assert.equal(d.rewardPolicyApproved,false);assert.equal(d.narrativeOnly,false);assert.deepEqual(d.rewards,[]);assert.match(npcEventAccess(s,d.id).reason,/奖励方案待确认/);assert(!beginNpcEvent(s,d.id,now));assert(!chooseNpcEventResponse(s,d.id,d.choices[0].id));assert(!claimTaskReward(st,s,d.id,{now}).ok);assert.equal(JSON.stringify(s),before);assert.equal(st.raw,before);
-  const html=renderChikFamilyEventBoard(s,{race:'goblin',areaId:d.areaId});assert(html.includes('奖励方案待确认'));assert(html.includes(d.title));assert(html.includes(`data-npc-event="${d.id}" disabled`));
-  // A valid interrupted candidate ledger remains valid, but cannot settle under
-  // an unapproved budget, even through a forged/stale DOM action.
-  s.npcEvents={version:1,entries:{[d.id]:{status:'active',count:0,cycle:0,readyAt:0,acceptedAt:now,lastEncounterId:null,choiceId:d.choices[0].id}}};assert(E.validSave(s));const pending=JSON.stringify(s),pendingStore=store(s);assert(!npcEventReady(s,d.id));assert(!claimTaskReward(pendingStore,s,d.id,{now}).ok);assert.equal(JSON.stringify(s),pending);assert.equal(pendingStore.raw,pending);
- }
- console.log('PASS reward approval gate: all6 event previews explicit, accept/choose/claim blocked, empty fixed reward config, existing pending choices retained and no storage/resource change. Full reward settlement suite awaits an authorized budget; pre-gate narrative flow was separately verified.');
- process.exit(0);
-}
+assert.equal(CHIK_FAMILY_REWARD_POLICY.approved,true);assert.equal(CHIK_FAMILY_REWARD_POLICY.fullArcRewardImplemented,false);
 
 for(const d of CHIK_FAMILY_EVENTS){
- assert.equal(d.playerRace,'goblin');assert.equal(d.category,'chik-family');assert.equal(d.objective.kind,'conversation');assert(!d.repeatable);assert(d.narrativeOnly);assert.deepEqual(d.materials,[]);assert.deepEqual(d.rewards,[]);assert.equal(d.choices.length,2);assert.notEqual(d.choices[0].outcome,d.choices[1].outcome);assert(d.choices.every(c=>c.dialogue.length>15&&c.outcome.length>25));
+ assert.equal(d.playerRace,'goblin');assert.equal(d.category,'chik-family');assert.equal(d.objective.kind,'conversation');assert(!d.repeatable);assert.equal(d.narrativeOnly,false);assert.deepEqual(d.materials,[]);assert.deepEqual(d.rewards,[{kind:'potion',key:'healing|0',quantity:2}]);assert.deepEqual(CHIK_FAMILY_EVENT_REWARDS[d.id],d.rewards);assert.equal(d.choices.length,2);assert.notEqual(d.choices[0].outcome,d.choices[1].outcome);assert(d.choices.every(c=>c.dialogue.length>15&&c.outcome.length>25));
  const early=preparedStoryGame('goblin');assert(!npcEventAccess(early,d.id).allowed);assert(!beginNpcEvent(early,d.id));assert(!renderChikFamilyEventBoard(early,{race:'goblin',areaId:d.areaId}));
  for(const chosen of d.choices){
   const s=fixture(d),now=Math.max(s.lastSeen,s.lastHealthClock)+1000,unmutated=JSON.stringify(s);assert(E.validSave(s));
   assert(declineNpcEvent(s,d.id));assert.equal(JSON.stringify(s),unmutated,'later creates no permanent miss');assert(beginNpcEvent(s,d.id,now));assert.equal(s.npcEvents.entries[d.id].choiceId,null);assert(!npcEventReady(s,d.id));assert(!beginNpcEvent(s,d.id,now));
   assert(chooseNpcEventResponse(s,d.id,chosen.id));assert(!chooseNpcEventResponse(s,d.id,'invented'));assert(declineNpcEvent(s,d.id));assert.equal(s.npcEvents.entries[d.id].choiceId,chosen.id,'later keeps accepted choice');assert(npcEventReady(s,d.id));
-  const snapshot=JSON.stringify(s),r=resources(s),st=store(s);st.fail=true;let tx=claimTaskReward(st,s,d.id,{now});assert.equal(tx.reason,'storage');assert.equal(JSON.stringify(s),snapshot);assert.equal(st.raw,snapshot);st.fail=false;
-  // A newer snapshot wins even though these events have zero material rewards.
+  const snapshot=JSON.stringify(s),r=resources(s),potions=s.potionStacks?.['healing|0']??0,st=store(s);st.fail=true;let tx=claimTaskReward(st,s,d.id,{now});assert.equal(tx.reason,'storage');assert.equal(JSON.stringify(s),snapshot);assert.equal(st.raw,snapshot);st.fail=false;
+  // A newer snapshot wins before either potions or completion can commit.
   const newer=structuredClone(s);newer.gold+=3;st.raw=JSON.stringify(newer);assert.equal(claimTaskReward(st,s,d.id,{now}).reason,'stale-state');assert.equal(JSON.parse(st.raw).gold,newer.gold);st.raw=snapshot;
-  tx=claimTaskReward(st,s,d.id,{now});assert(tx.ok,tx.reason);assert(E.validSave(tx.game));assert.equal(tx.game.npcEvents.entries[d.id].status,'resolved');assert.equal(tx.game.npcEvents.entries[d.id].choiceId,chosen.id);assert.equal(resources(tx.game),r,'no resource/stat/mainline drift');assert.equal(claimTaskReward(st,tx.game,d.id,{now}).reason,'already-claimed');assert(!beginNpcEvent(tx.game,d.id,now+1e9));assert(!chooseNpcEventResponse(tx.game,d.id,d.choices.find(c=>c!==chosen).id));
+  tx=claimTaskReward(st,s,d.id,{now});assert(tx.ok,tx.reason);assert(E.validSave(tx.game));assert.equal(tx.game.npcEvents.entries[d.id].status,'resolved');assert.equal(tx.game.npcEvents.entries[d.id].choiceId,chosen.id);assert.equal(resources(tx.game),r,'no other resource/stat/mainline drift');assert.equal(tx.game.potionStacks['healing|0'],potions+2);assert.equal(claimTaskReward(st,tx.game,d.id,{now}).reason,'already-claimed');assert(!beginNpcEvent(tx.game,d.id,now+1e9));assert(!chooseNpcEventResponse(tx.game,d.id,d.choices.find(c=>c!==chosen).id));
   const reloaded=JSON.parse(st.raw);assert(E.validSave(reloaded));const html=renderNpcEventBoard(reloaded,{race:'goblin',areaId:d.areaId,now});assert(html.includes('奇克与家人'));assert(html.includes(chosen.outcome));assert(html.includes(CHIK_FAMILY_CHARACTERS[d.npcId].file));assert(!html.includes(`data-npc-event="${d.id}"`),'done card has no replay actions');
   const broken=structuredClone(reloaded);broken.npcEvents.entries[d.id].choiceId=null;assert(!validNpcEventState(broken));
  }
@@ -56,7 +44,7 @@ for(const d of CHIK_FAMILY_EVENTS){
  for(const race of ['human','dwarf','elf','ashen']){const s=preparedStoryGame(race);s.siteId=d.areaId;assert(!npcEventAccess(s,d.id).allowed);assert(!beginNpcEvent(s,d.id));assert.equal(renderChikFamilyEventBoard(s,{race:'goblin',areaId:d.areaId}),'');}
  const war=fixture(d),now=Math.max(war.lastSeen,war.lastHealthClock)+1000;assert(E.startWar(war,{id:'family-test-war-'+d.id,races:['goblin','human']},now));assert(territoryAccess(war,'goblin').allowed,'own home stays open under established war rules');assert(npcEventAccess(war,d.id).allowed);war.siteId='human.a02';assert.equal(territoryAccess(war,'human').code,'war');assert(!npcEventAccess(war,d.id).allowed);assert.equal(renderChikFamilyEventBoard(war,{race:'goblin',areaId:d.areaId}),'','no remote home interaction from blocked enemy territory');
 }
-// Narratives do not require spare bag slots and can never consume a treasured item.
+// A full material bag does not block an item supply; no existing material is consumed.
 const full=fixture(CHIK_FAMILY_EVENTS[0]),d=CHIK_FAMILY_EVENTS[0],now=Math.max(full.lastSeen,full.lastHealthClock)+1000;
 const keys=Object.keys(E.MATERIALS).filter(k=>!E.MATERIALS[k].storyOnly).flatMap(k=>[0,1,2,3].map(q=>E.materialKey(k,q)).filter(Boolean));full.materialStacks=Object.fromEntries(keys.slice(0,100).map(k=>[k,1]));assert(E.validSave(full));assert(beginNpcEvent(full,d.id,now));chooseNpcEventResponse(full,d.id,d.choices[0].id);const r=resources(full),tx=claimTaskReward(store(full),full,d.id,{now});assert(tx.ok);assert.equal(resources(tx.game),r);
 // Current C08 is not silently rewound or promoted to a fabricated C10 home.
@@ -66,4 +54,4 @@ for(const def of CHIK_FAMILY_EVENTS){
  const active=fixture(def),time=Math.max(active.lastSeen,active.lastHealthClock)+1000;beginNpcEvent(active,def.id,time);chooseNpcEventResponse(active,def.id,def.choices[0].id);s.npcEvents=structuredClone(active.npcEvents);assert(E.validSave(s));assert(!npcEventReady(s,def.id));assert(renderChikFamilyEventBoard(s,{race:'goblin',areaId:def.areaId}).includes('已有选择保留'));
  const done=claimTaskReward(store(active),active,def.id,{now:time});assert(done.ok);s.npcEvents=done.game.npcEvents;s.taskRewardClaims=[...done.game.taskRewardClaims];assert(E.validSave(s));assert(renderChikFamilyEventBoard(s,{race:'goblin',areaId:def.areaId}).includes(def.choices[0].outcome));assert(!npcEventAccess(s,def.id).allowed);
 }
-console.log('PASS six one-off family events / 12 distinct branches: narrative-only no resource/stat/mainline changes, explicit choice+confirmation, all quota/stale/repeat/reload gates, C02/C05 progression, current location/safe/war policy, four POV privacy, full bag, C08 pause with visible explanation and preserved pending/completed histories; 60 regional +6 family +5 Ring remain separate.');
+console.log('PASS six one-off family events / 12 distinct branches: fixed2 ordinary healing potions, no other resource/stat/mainline changes, explicit choice+confirmation, all quota/stale/repeat/reload gates, C02/C05 progression, current location/safe/war policy, four POV privacy, full bag, C08 pause with visible explanation and preserved pending/completed histories; 60 regional +6 family +5 Ring remain separate.');
