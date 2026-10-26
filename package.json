@@ -15,13 +15,15 @@
     "test:npc-events": "node npc-event-host-tests.mjs && node return-ring-events-tests.mjs && node return-ring-healing-tests.mjs && node return-ring-drop-tests.mjs && node npc-event-app-ui-tests.cjs",
     "sync:infinity-gems": "node tools/sync-infinity-gem-probabilities.mjs",
     "test:infinity-gems": "node tools/sync-infinity-gem-probabilities.mjs --check && node infinity-gem-base-tests.mjs && node infinity-gem-settlement-tests.mjs",
-    "prebuild": "node tools/sync-infinity-gem-probabilities.mjs --check",
+    "prebuild": "node tools/sync-infinity-gem-probabilities.mjs --check && node tools/sync-story-portrait-crops.mjs --check",
     "test:story-host": "node story-event-controller-tests.mjs && node story-scenario-combat-tests.mjs && node story-event-app-ui-tests.cjs",
     "test:asset-recovery": "node asset-recovery-tests.mjs && node asset-recovery-app-ui-tests.cjs && node test-pixel-map-scenes.mjs && node pixel-service-scenes-tests.mjs && node live-battle-scoped-loading-tests.mjs && node pixel-maps-live-app-ui-tests.cjs && node skill-pixel-icons-tests.mjs && node skill-pixel-consumers-tests.mjs && node skill-pixel-hud-tests.mjs && node equipment-raster-adapter-tests.mjs && node material-pixel-art-tests.mjs && node consumable-pixel-art-tests.mjs && node monster-pixel-portrait-tests.mjs",
     "test:events-release": "npm run test:npc-events && npm run test:npc-expansion && npm run test:story-host && npm run test:story-c08 && npm run test:war && npm run test:random-war && npm run test:authored-slows && node story-ring-integration-tests.mjs && npm run test:infinity-gems && npm run test:asset-recovery && node story-scenario-native-proof.mjs",
     "test:random-war": "node random-war-world-tests.mjs && node random-war-app-ui-tests.cjs && node random-war-story-access-tests.mjs",
     "test:npc-expansion": "node content/racial-npc-events/validate-content.mjs . && node npc-expansion-tests.mjs && node npc-event-host-tests.mjs && node npc-event-app-ui-tests.cjs && node npc-portrait-tests.mjs && node npc-exploration-war-parity-tests.mjs",
     "test:story-c08": "node story-c08-runtime-tests.mjs && node story-c08-app-ui-tests.cjs && node story-c08-native-proof.mjs && node story-cancellation-app-ui-tests.cjs && node story-portrait-recovery-tests.mjs && node v067-cross-system-tests.mjs",
-    "test:chik-family": "node chik-family-tests.mjs && node chik-family-app-ui-tests.cjs"
+    "test:chik-family": "node chik-family-tests.mjs && node chik-family-app-ui-tests.cjs",
+    "test:main-cast": "node main-cast-tests.mjs && node main-cast-app-ui-tests.cjs && node main-cast-native-proof.mjs",
+    "test:art-cast-release": "node v068-art-cast-integration-tests.mjs && npm run test:chik-family && npm run test:main-cast && node brock-redesign-tests.mjs && node hero-proportions-tests.mjs && node live-battle-lifecycle-tests.mjs && node race-neutral-hero-tests.mjs && node race-art-routing-tests.mjs && node goblin-hero-facing-tests.mjs && node live-battle-scoped-loading-tests.mjs && node named-hero-selection-app-ui-tests.cjs && node story-event-app-ui-tests.cjs && node story-c08-app-ui-tests.cjs && node asset-recovery-app-ui-tests.cjs && node npc-portrait-tests.mjs"
   }
 }
