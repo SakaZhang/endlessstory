@@ -1,8 +1,11 @@
+import {validStoryWarState,storyTerritoryAccess} from './story-war-bridge.js';
+import {retreatFromWar} from './war-travel-boundary.js';
+import {STORY_SCENES} from './story-event-registry.js';
 import {freshDiplomacy,validDiplomacy,normalizeDiplomacy,territoryAccess,nodeAccess,applyWarStart,applyWarEnd} from './war-diplomacy.js';
 export {validDiplomacy,normalizeDiplomacy,territoryAccess,nodeAccess} from './war-diplomacy.js';
 import {validReturnRingState,applyReturnRingVictory,returnRingRareBonus} from './return-ring-state.js';
 import {validNpcEventState,recordNpcEventVictory} from './npc-events.js';
-import {validStoryEventState,canStartStoryScenario,recordStoryScenarioResult,recordStoryEncounterVictory} from './story-event-controller.js';
+import {validStoryEventState,canStartStoryScenario,canStartStoryFieldEncounter,recordStoryScenarioResult,recordStoryEncounterVictory} from './story-event-controller.js';
 import {storyScenarioForStart,attachStoryScenario,advanceStoryScenario,finalizeStoryScenario,validStoryScenarioState} from './story-scenario-combat.js';
 import {validTaskRewardState} from './task-reward-transaction.js';
 // Sealed production claim only; trusted registry factory is not an engine API.
@@ -546,6 +549,10 @@ function changeWar(s,mutate){
  if(!result||!validSave(next))return null;
  s.diplomacy=next.diplomacy;stopBlockedWarActivity(s);return result;
 }
+export function retreatWarTerritory(s,returnSiteId){
+ if(!validSave(s))return null;const next=structuredClone(s),result=retreatFromWar(next,returnSiteId);
+ if(!result?.changed||!validSave(next))return null;Object.assign(s,next);return result;
+}
 function stopBlockedWarActivity(s){
  if(s.activeEncounter&&!s.activeEncounter.rewarded)return false;
  if(territoryAccess(s,AREAS[s.siteId]?.race).allowed&&nodeAccess(s,s.expedition?.fieldId).allowed)return false;
@@ -672,6 +679,9 @@ export function startRest(s,now=Date.now(),resume=false){
 }
 export function canStartEncounter(s,now=Date.now(),nodeId=s.siteId+'.field'){
  if(!nodeAccess(s,nodeId).allowed&&!(s.activeEncounter&&!s.activeEncounter.rewarded&&s.activeEncounter.instanceId===nodeId))return false;
+ return canStartEncounterHealth(s,now);
+}
+function canStartEncounterHealth(s,now){
  if(!normalizeHealth(s,now))return false;settleRest(s,now);
  if(s.heroHp<=0&&s.restUntil===0)startRest(s,now);
  return s.restUntil===0&&s.heroHp>0&&s.lastHealthClock>=(s.nextBattleAt??0);
@@ -689,11 +699,25 @@ function reviveEncounter(e,st,logs){const out=tryNirvana(e.affixState,{battleId:
 export function startStoryScenario(s,scenarioId,now=Date.now()){
  if(!validSave(s)||!canStartStoryScenario(s,scenarioId)||!storyScenarioForStart(s,scenarioId)||!Number.isSafeInteger(now)||now<0||now>1e15)return null;
  const next=structuredClone(s),definition=storyScenarioForStart(next,scenarioId),initialHeroHp=next.heroHp??stats(next).hp,returnAtCamp=next.atCamp===true,priorMonsterLedger=structuredClone(next.monsterLedger);
- const e=startInstanceEncounter(next,definition.siteId+'.field',now);
+ const e=startRegisteredStoryEncounter(next,definition.sceneId,now);
  if(!e||!attachStoryScenario(next,e,scenarioId,{initialHeroHp,returnAtCamp}))return null;
  if(priorMonsterLedger===undefined)delete next.monsterLedger;else next.monsterLedger=priorMonsterLedger;
  if(!validSave(next))return null;
  for(const key of Object.keys(s))if(!Object.hasOwn(next,key))delete s[key];Object.assign(s,next);return s.activeEncounter;
+}
+// Not a generic bypass parameter: only the controller's exact registered active
+// scene, node, POV, dialogue choice and unclaimed objective can use this path.
+function startRegisteredStoryEncounter(s,sceneId,now){
+ const d=STORY_SCENES[sceneId],a=s.story?.activeScene,instance=d?.encounter&&PLANNED_INSTANCES[d.encounter.nodeId];
+ if(!d||a?.id!==d.id||d.pov!==s.race||!instance?.enabled||instance.kind!=='field'||instance.siteId!==d.siteId||s.siteId!==d.siteId||!storyTerritoryAccess(s,sceneId).allowed||!canStartEncounterHealth(s,now)||!normalizeExpedition(s))return null;
+ return startDwarfEncounter(s,instance,now);
+}
+export function startStoryFieldEncounter(s,sceneId,now=Date.now()){
+ const d=STORY_SCENES[sceneId];
+ if(!validSave(s)||!d||d.encounter?.kind!=='victory'||!canStartStoryFieldEncounter(s,d.encounter.nodeId)||s.story?.activeScene?.id!==sceneId||!Number.isSafeInteger(now)||now<0||now>1e15)return null;
+ const next=structuredClone(s),e=startRegisteredStoryEncounter(next,sceneId,now);if(!e)return null;
+ next.story.activeScene.encounterId=e.id;next.stopAfterBattle=true;
+ if(!validSave(next))return null;Object.assign(s,next);return s.activeEncounter;
 }
 export function startInstanceEncounter(s,instanceId,now=Date.now()){
  const instance=PLANNED_INSTANCES[instanceId];if(s.version!==SCHEMA_VERSION||!instance?.enabled||!canStartEncounter(s,now,instanceId)||!normalizeExpedition(s))return null;
@@ -1099,7 +1123,7 @@ export function codexState(s,id){
 }
 export function validSave(s){
  try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;
- if(!validTaskRewardState(s)||!validDiplomacy(s)||!validNpcEventState(s)||!validReturnRingState(s)||!validStoryEventState(s)||!validStoryScenarioState(s))return false;
+ if(!validTaskRewardState(s)||!validDiplomacy(s)||!validStoryWarState(s)||!validNpcEventState(s)||!validReturnRingState(s)||!validStoryEventState(s)||!validStoryScenarioState(s))return false;
  if(!validSkillTree(s,getSkillTreeDefinition(s))||s.skillTree?.mode!=='active')return false;
  if(s.activeEncounter?.skillResolver!==undefined&&(s.activeEncounter.skillResolver!=='tree-v1'||s.skillTree?.mode!=='active'||s.activeEncounter.multiVersion!==1))return false;
  if(s.supportGrantEligible!==undefined||s.testGrants!==undefined||s.bonusTalentPoints!==undefined||s.skillRulesVersion!==undefined||s.skillAccess!==undefined)return false;

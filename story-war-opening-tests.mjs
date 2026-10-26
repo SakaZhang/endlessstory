@@ -10,9 +10,9 @@ import {renderStoryEventBoard} from './dist/story-event-ui.js';
 assert.deepEqual(STORY_WAR_ENDINGS,[]);
 for(const race of ['human','dwarf','elf','goblin','ashen']){
  const id=race==='elf'?'C07.E01.elf':race==='ashen'?'C07.A01.ashen':'C07.O01.'+race;
- let s=reachStoryScene(race,id);assert(s.story.flags.includes('return-ring.recipe-revealed'));assert(!s.story.flags.includes('WAR_DECLARED'));assert.equal(s.diplomacy,undefined);assert.equal(C.finishStoryScene(s,id),false,'no click-to-declare before actual route protection');
+ let s=reachStoryScene(race,id);assert(s.story.flags.includes('return-ring.recipe-revealed'));assert(!s.story.flags.includes('WAR_DECLARED'));assert.equal(s.diplomacy?.wars?.length??0,0);assert.equal(C.finishStoryScene(s,id),false,'no click-to-declare before actual route protection');
  playActiveStoryEncounter(s);const before=JSON.stringify(s),now=s.lastSeen;const quota={getItem:k=>k===SAVE_KEY?before:null,setItem(){throw Error('quota')}};
- let tx=C.transactStoryEvent(quota,s,{type:'finish',sceneId:id},{now});assert.equal(tx.ok,false);assert.equal(tx.reason,'storage');assert.equal(JSON.stringify(s),before);assert.equal(s.diplomacy,undefined);
+ let tx=C.transactStoryEvent(quota,s,{type:'finish',sceneId:id},{now});assert.equal(tx.ok,false);assert.equal(tx.reason,'storage');assert.equal(JSON.stringify(s),before);assert.equal(s.diplomacy?.wars?.length??0,0);
  let raw=before,writes=0;const store={getItem:k=>k===SAVE_KEY?raw:null,setItem(k,v){assert.equal(k,SAVE_KEY);raw=v;writes++}};
  tx=C.transactStoryEvent(store,s,{type:'finish',sceneId:id},{now});assert(tx.ok,'finish '+id);s=tx.game;assert(E.validSave(s));assert(validStoryWarState(s));assert(validDiplomacy(s));assert(s.story.flags.includes('WAR_DECLARED'));assert(s.story.flags.includes('C07_OPENING_COMPLETE'));assert.equal(s.diplomacy.wars.length,1);assert.equal(s.diplomacy.wars[0].id,STORY_WAR_ID);assert.equal(s.diplomacy.wars[0].status,'active');assert.equal(s.diplomacy.revision,1);assert.equal(writes,1);
  const reloaded=JSON.parse(raw);assert(validStoryWarState(reloaded));assert.deepEqual(reloaded.story,s.story);assert.equal(C.transactStoryEvent(store,s,{type:'finish',sceneId:id},{now}).ok,false);assert.equal(writes,1);assert.equal(C.beginStoryScene(s,id),false);

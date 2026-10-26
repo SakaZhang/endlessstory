@@ -195,3 +195,5 @@ runAffixSourceTest(process.execPath,[new URL('./war-travel-lock-tests.mjs',impor
 
 // Approved Infinity gem base rates: source invariants, real settlement and offline parity.
 for(const file of ['tools/sync-infinity-gem-probabilities.mjs','infinity-gem-base-tests.mjs','infinity-gem-settlement-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname,...(file.startsWith('tools/')?['--check']:[])],{stdio:'inherit'});
+// Exact story-only war entrances and real C07 declaration transaction.
+for(const file of ['war-story-access-tests.mjs','story-war-opening-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});

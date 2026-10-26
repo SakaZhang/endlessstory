@@ -1,9 +1,9 @@
 import {AREAS,PLANNED_INSTANCES} from './location-schema.js';
 import {territoryAccess,validDiplomacy} from './war-diplomacy.js';
 
-// Candidate evacuation seam: the approved event/story owner supplies a safe
+// Explicit player withdrawal: the caller supplies a safe
 // own-territory camp. No invented timers, forced rest, loot loss or auto-hopping.
-// Not wired to production while the exact return-target policy is pending.
+// Never called automatically at declaration or settlement.
 export function retreatFromWar(s,returnSiteId){
  const area=AREAS[returnSiteId],field=PLANNED_INSTANCES[returnSiteId+'.field'];
  if(!validDiplomacy(s)||!area||!field?.enabled||area.race!==s.race||!territoryAccess(s,area.race).allowed||!(s.areaProgress?.[s.race]?.unlocked??[1]).includes(area.number))return null;

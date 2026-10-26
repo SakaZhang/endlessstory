@@ -1,7 +1,8 @@
+import {territoryAccess} from './war-diplomacy.js';
 import {applyStoryWarTransition,storyTerritoryAccess} from './story-war-bridge.js';
 import {STORY_SCENES,STORY_POVS} from './story-event-registry.js';
 import {AREAS,INSTANCES} from './location-schema.js';
-import {validSave,effectiveLuck,materialCount,AFFIX_DEFS,receiveBattleLoot,equipItem,startStoryScenario,startInstanceEncounter} from './engine.js';
+import {validSave,effectiveLuck,materialCount,AFFIX_DEFS,receiveBattleLoot,equipItem,startStoryScenario,startStoryFieldEncounter,retreatWarTerritory} from './engine.js';
 import {commitGameTransaction,SAVE_KEY} from './storage.js';
 import {createLegendaryEquipment} from './legendary-equipment.js';
 import {grantAshenStoryCore} from './races/ashen/story-core.js';
@@ -60,10 +61,24 @@ export function storySceneLocationAvailable(s,d){
  if(!d||s.siteId!==d.siteId||!AREAS[d.siteId]||!storyTerritoryAccess(s,d.id).allowed)return false;
  const area=AREAS[d.siteId],progress=s.areaProgress?.[area.race];return progress?progress.unlocked?.includes(area.number):area.number===1;
 }
+function sceneAreaUnlocked(s,d){const area=AREAS[d?.siteId],progress=area&&s.areaProgress?.[area.race];return !!area&&(progress?progress.unlocked?.includes(area.number):area.number===1);}
+export function canEnterWarStoryScene(s,id){
+ if(!validStoryEventState(s)||!storySafeToInteract(s))return false;
+ const d=scene(id),st=state(s),access=storyTerritoryAccess(s,id);
+ return !!d&&d.pov===s.race&&!st.completedScenes.includes(id)&&(!st.activeScene||st.activeScene.id===id)&&prerequisites(st,d)&&sceneAreaUnlocked(s,d)&&access.allowed&&access.storyOnly===true&&s.siteId!==d.siteId;
+}
+export function enterWarStoryScene(s,id){
+ if(!canEnterWarStoryScene(s,id))return false;const next=structuredClone(s),d=scene(id),area=AREAS[d.siteId];
+ next.siteId=d.siteId;next.location=area.number-1;next.atCamp=true;next.running=false;next.restResume=false;next.stopAfterBattle=false;next.stopAfterDungeon=false;
+ next.expedition={...next.expedition,mode:'field',fieldId:d.siteId+'.field',targetInstanceId:null,loop:false};
+ if(!next.story?.activeScene&&!beginStoryScene(next,id))return false;
+ if(!validSave(next))return false;Object.assign(s,next);return {sceneId:id,entered:true,storyOnly:true};
+}
+export function warWithdrawalAvailable(s){return validSave(s)&&territoryAccess(s,AREAS[s.siteId]?.race).code==='war'&&(!s.activeEncounter||s.activeEncounter.rewarded===true);}
 export function availableStoryScenes(s){
  if(!validStoryEventState(s))return [];
  const st=state(s);if(st.activeScene)return [];
- return Object.values(STORY_SCENES).filter(d=>d.pov===s.race&&!st.completedScenes.includes(d.id)&&prerequisites(st,d)).map(d=>({...structuredClone(d),atLocation:storySceneLocationAvailable(s,d),available:storySafeToInteract(s)&&storySceneLocationAvailable(s,d)}));
+ return Object.values(STORY_SCENES).filter(d=>d.pov===s.race&&!st.completedScenes.includes(d.id)&&prerequisites(st,d)).map(d=>({...structuredClone(d),atLocation:storySceneLocationAvailable(s,d),available:storySafeToInteract(s)&&storySceneLocationAvailable(s,d),entryAvailable:canEnterWarStoryScene(s,d.id)}));
 }
 export function beginStoryScene(s,id){
  if(!validStoryEventState(s)||!storySafeToInteract(s))return false;
@@ -120,12 +135,14 @@ export function finishStoryScene(s,id,now=s.lastHealthClock??s.lastSeen??Date.no
 }
 export function applyStoryEvent(s,action,{now=Date.now()}={}){
  if(!object(action))return false;
+ if(action.type==='enter')return enterWarStoryScene(s,action.sceneId);
+ if(action.type==='retreat'&&warWithdrawalAvailable(s))return retreatWarTerritory(s,action.returnSiteId);
  if(action.type==='begin')return beginStoryScene(s,action.sceneId);
  if(action.type==='next'&&Number.isSafeInteger(action.cursor)&&action.cursor===s.story?.activeScene?.cursor)return advanceStoryDialogue(s,action.sceneId);
  if(action.type==='choice')return chooseStoryResponse(s,action.sceneId,action.choiceId);
  if(action.type==='finish')return finishStoryScene(s,action.sceneId,now);
  if(action.type==='scenario'&&s.story?.activeScene?.id===action.sceneId&&canStartStoryScenario(s,action.scenarioId))return startStoryScenario(s,action.scenarioId,now);
- if(action.type==='encounter'&&s.story?.activeScene?.id===action.sceneId&&canStartStoryFieldEncounter(s,action.nodeId)){const e=startInstanceEncounter(s,action.nodeId,now);if(!e)return false;s.story.activeScene.encounterId=e.id;s.stopAfterBattle=true;return {sceneId:action.sceneId,encounterId:e.id};}
+ if(action.type==='encounter'&&s.story?.activeScene?.id===action.sceneId&&canStartStoryFieldEncounter(s,action.nodeId)){const e=startStoryFieldEncounter(s,action.sceneId,now);if(!e)return false;s.story.activeScene.encounterId=e.id;s.stopAfterBattle=true;return {sceneId:action.sceneId,encounterId:e.id};}
  return false;
 }
 const failure=(game,reason)=>({ok:false,game,value:null,reason});
@@ -138,7 +155,7 @@ export function transactStoryEvent(storage,game,action,{now=Date.now(),afterComm
 export function storyEventView(s){
  if(!validStoryEventState(s))return {valid:false,active:null,available:[],knowledge:[],complete:false};
  const st=state(s),a=st.activeScene,d=scene(a?.id);
- return {valid:true,active:d?{...structuredClone(d),...structuredClone(a),line:d.lines[a.cursor]??null,receipt:structuredClone(receiptFor(st,d)??null),ready:storySceneReady(s,d.id),safe:storySafeToInteract(s),atLocation:storySceneLocationAvailable(s,d)}:null,available:availableStoryScenes(s),knowledge:structuredClone(st.knowledge),complete:st.flags.includes('C06_COMPLETE'),warDeclared:st.flags.includes('WAR_DECLARED'),warOpeningComplete:st.flags.includes('C07_OPENING_COMPLETE'),completedCount:st.completedScenes.length};
+ return {valid:true,active:d?{...structuredClone(d),...structuredClone(a),line:d.lines[a.cursor]??null,receipt:structuredClone(receiptFor(st,d)??null),ready:storySceneReady(s,d.id),safe:storySafeToInteract(s),atLocation:storySceneLocationAvailable(s,d),entryAvailable:canEnterWarStoryScene(s,d.id)}:null,available:availableStoryScenes(s),knowledge:structuredClone(st.knowledge),complete:st.flags.includes('C06_COMPLETE'),warDeclared:st.flags.includes('WAR_DECLARED'),warOpeningComplete:st.flags.includes('C07_OPENING_COMPLETE'),completedCount:st.completedScenes.length};
 }
 export function canStartStoryScenario(s,scenarioId){
  if(!validStoryEventState(s)||!storySafeToInteract(s))return false;
