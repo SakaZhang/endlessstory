@@ -11,6 +11,7 @@ const canBrowse = a => !!a?.implemented && !!a.visible && !!a.unlocked;
 const range = r => Array.isArray(r) ? r.join('–') : '—';
 export function travelBlockReason(node, snapshot) {
   if (!node?.enabled) return '地点尚未开放';
+  if (node.warLocked) return node.accessReason||'战争封锁：停战后恢复进入。';
   if (!node.unlocked) return '先通关前一区域普通副本';
   if (!node.budgetReady) return '配置准备中';
   if (node.readyAt > snapshot.now) return '地点冷却中';
@@ -31,7 +32,7 @@ export function buildRegionModel(snapshot, ui) {
   const favorites = [...new Set(snapshot.favoriteNodeIds??[])].map(id=>{const n=snapshot.nodes.find(n=>n.id===id);const available=!!n?.enabled&&n.unlocked&&canBrowse(snapshot.areas.find(a=>a.id===n.areaId));return {id,available,name:available?n.name:'地点不可用',areaId:available?n.areaId:null,cooldownSeconds:available?Math.max(0,Math.ceil(((n.readyAt??0)-snapshot.now)/1000)):null};});
   const node = snapshot.nodes.find(n=>n.id===ui.previewNodeId && nodes.some(v=>v.id===n.id));
   // Never copy a raw catalog, pool or unknown definition into render data.
-  const preview = node ? {id:node.id,name:node.name,kind:node.kind,automationLocked:(snapshot.running||snapshot.inBattle||snapshot.inDungeon)&&snapshot.automationAreaId!==node.areaId,hasBoss:snapshot.nodes.some(n=>n.areaId===node.areaId&&n.kind==='boss'&&n.enabled),levelRange:node.levelRange,gearLevelRange:Number.isFinite(areaGearLevel(node.id))?[Math.max(node.levelRange[0],areaGearLevel(node.id)-2),Math.min(node.levelRange[1],areaGearLevel(node.id)+2)]:null,
+  const preview = node ? {id:node.id,name:node.name,kind:node.kind,automationLocked:node.warLocked||((snapshot.running||snapshot.inBattle||snapshot.inDungeon)&&snapshot.automationAreaId!==node.areaId),hasBoss:snapshot.nodes.some(n=>n.areaId===node.areaId&&n.kind==='boss'&&n.enabled),levelRange:node.levelRange,gearLevelRange:Number.isFinite(areaGearLevel(node.id))?[Math.max(node.levelRange[0],areaGearLevel(node.id)-2),Math.min(node.levelRange[1],areaGearLevel(node.id)+2)]:null,
     monsters:(snapshot.monstersByNode[node.id]??[]).map(m=>snapshot.encounteredMonsterIds.includes(m.id)?{name:m.name,skills:(m.skills??[]).map(s=>({name:s.name,description:s.description}))}:{name:'未知怪物',silhouette:true,skills:[]}),
     materials:discoveredMaterials(snapshot.discoveryLedger,snapshot.materialIdsByNode[node.id]??[],snapshot.materialCatalog),
     favorite:(snapshot.favoriteNodeIds??[]).includes(node.id),cooldownSeconds:Math.max(0,Math.ceil(((node.readyAt??0)-snapshot.now)/1000)),blocked:travelBlockReason(node,snapshot)} : null;

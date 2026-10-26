@@ -1,3 +1,5 @@
+import {freshDiplomacy,validDiplomacy,normalizeDiplomacy,territoryAccess,nodeAccess,applyWarStart,applyWarEnd} from './war-diplomacy.js';
+export {validDiplomacy,normalizeDiplomacy,territoryAccess,nodeAccess} from './war-diplomacy.js';
 import {validTaskRewardState} from './task-reward-transaction.js';
 // Sealed production claim only; trusted registry factory is not an engine API.
 export {claimTaskReward} from './task-reward-transaction.js';
@@ -348,7 +350,7 @@ export function applyLoadout(s,index,battleActive=false){
 export function fresh(race='dwarf'){
  const pack=getRacePack(race);if(!pack)throw new RangeError('Unknown playable race');const sockets=raceSockets(race);
  const inventory=sockets.map(socket=>{let type=SOCKET_TYPE[socket]??socket,it=item(type,1,null,0,{levelSource:'starter',originRace:race});it.affixes=[];return it;});
- const s={version:SCHEMA_VERSION,race,hero:pack.heroName,atCamp:true,level:1,xp:0,gold:100,location:0,siteId:race+'.a01',expedition:{mode:'field',fieldId:race+'.a01.field',targetInstanceId:null,loop:false},build:'custom',inventory,equip:Object.fromEntries(sockets.map((socket,i)=>[socket,inventory[i].id])),skills:[null,null,null,null],conditions:['always','always','always','always'],materialStacks:{'铁屑|0':5,'炉火晶|0':2,'誓约残片|0':1},offlineLuck:0,talents:Object.fromEntries(Object.keys(TALENTS).map(k=>[k,0])),consumables:{memoryFruit:0,refundCredits:0,reforgeToken:0},potionSlot:{key:null,auto:false,priority:'low',priorityVersion:1},kills:0,normalWins:[0,0,0],bossWins:[0,0,0],bossReady:[0,0,0],stock:3,loadouts:[null,null,null],chapters:[],chronicle:[race==='dwarf'?'灰冠历317年：你带着旧炉装备，离开黑炉堡寻找失踪商队。':'灰冠历317年：你在'+pack.heroName+'的旅途中踏出了第一步。'],momentum:0,lastSeen:Date.now(),running:false};
+ const s={version:SCHEMA_VERSION,diplomacy:freshDiplomacy(),race,hero:pack.heroName,atCamp:true,level:1,xp:0,gold:100,location:0,siteId:race+'.a01',expedition:{mode:'field',fieldId:race+'.a01.field',targetInstanceId:null,loop:false},build:'custom',inventory,equip:Object.fromEntries(sockets.map((socket,i)=>[socket,inventory[i].id])),skills:[null,null,null,null],conditions:['always','always','always','always'],materialStacks:{'铁屑|0':5,'炉火晶|0':2,'誓约残片|0':1},offlineLuck:0,talents:Object.fromEntries(Object.keys(TALENTS).map(k=>[k,0])),consumables:{memoryFruit:0,refundCredits:0,reforgeToken:0},potionSlot:{key:null,auto:false,priority:'low',priorityVersion:1},kills:0,normalWins:[0,0,0],bossWins:[0,0,0],bossReady:[0,0,0],stock:3,loadouts:[null,null,null],chapters:[],chronicle:[race==='dwarf'?'灰冠历317年：你带着旧炉装备，离开黑炉堡寻找失踪商队。':'灰冠历317年：你在'+pack.heroName+'的旅途中踏出了第一步。'],momentum:0,lastSeen:Date.now(),running:false};
  if(race!=='dwarf'){s.materialStacks={};s.chronicle=['你从'+pack.name+'的营地开始旅程。'];}
  normalizeSkillTree(s,getSkillTreeDefinition(s));s.skillTree.mode='active';
  return s;
@@ -531,8 +533,22 @@ function recordDungeonAreaClear(s,e){
  if(number<10&&!p.unlocked.includes(number+1))p.unlocked.push(number+1);
  return true;
 }
+// Explicit content/event callers persist these mutations with clone-save-adopt.
+// No live caller or scheduler starts a war until the story/event hook is approved.
+export function startWar(s,event,now=Date.now()){return changeWar(s,next=>applyWarStart(next,event,now));}
+export function endWar(s,id,now=Date.now()){return changeWar(s,next=>applyWarEnd(next,id,now));}
+function changeWar(s,mutate){
+ if(!validSave(s))return null;const next=structuredClone(s),result=mutate(next);
+ if(!result||!validSave(next))return null;
+ s.diplomacy=next.diplomacy;stopBlockedWarActivity(s);return result;
+}
+function stopBlockedWarActivity(s){
+ if(s.activeEncounter&&!s.activeEncounter.rewarded)return false;
+ if(territoryAccess(s,AREAS[s.siteId]?.race).allowed&&nodeAccess(s,s.expedition?.fieldId).allowed)return false;
+ s.running=false;s.restResume=false;s.dungeonRun=null;s.stopAfterBattle=false;s.stopAfterDungeon=false;return true;
+}
 export function plannedNodes(s,now=Date.now()){
- return Object.values(PLANNED_INSTANCES).map(n=>({...n,name:n.name,areaNumber:AREAS[n.areaId].number,levelRange:[...AREAS[n.areaId].levelRange],unlocked:getAreaProgress(s,AREAS[n.areaId].race)?.unlocked.includes(AREAS[n.areaId].number),budgetReady:areaBudgetReady(AREAS[n.areaId].number,AREAS[n.areaId].race),readyAt:s.instanceCooldowns?.[n.id]??0,fieldId:n.areaId+'.field'}));
+ return Object.values(PLANNED_INSTANCES).map(n=>({...n,warLocked:!nodeAccess(s,n.id).allowed,accessReason:nodeAccess(s,n.id).reason,name:n.name,areaNumber:AREAS[n.areaId].number,levelRange:[...AREAS[n.areaId].levelRange],unlocked:getAreaProgress(s,AREAS[n.areaId].race)?.unlocked.includes(AREAS[n.areaId].number),budgetReady:areaBudgetReady(AREAS[n.areaId].number,AREAS[n.areaId].race),readyAt:s.instanceCooldowns?.[n.id]??0,fieldId:n.areaId+'.field'}));
 }
 export function validExpeditionState(s){
  const ex=s.expedition,cd=s.instanceCooldowns;
@@ -544,7 +560,7 @@ export function validExpeditionState(s){
  return Object.values(PLANNED_INSTANCES).some(n=>n.siteId===s.siteId);
 }
 export function normalizeExpedition(s){
- if(s.version!==SCHEMA_VERSION||!validExpeditionState(s)||!normalizeAreaProgress(s))return false;
+ if(s.version!==SCHEMA_VERSION||!validExpeditionState(s)||!normalizeDiplomacy(s)||!normalizeAreaProgress(s))return false;
  const site=resolveLegacySite(s.siteId??s.location);if(!site)return false;
  s.siteId??=site.id;
  s.expedition??={mode:'field',targetInstanceId:null,fieldId:site.id+(!!PLANNED_INSTANCES[site.id+'.field']?'.field':'-field'),loop:false};
@@ -553,13 +569,14 @@ export function normalizeExpedition(s){
  return true;
 }
 export function nextEncounterRoute(s,now=Date.now()){
- return validExpeditionState(s)?pickRoute(s.expedition,s.instanceCooldowns??{},now):null;
+ const route=validExpeditionState(s)?pickRoute(s.expedition,s.instanceCooldowns??{},now):null;
+ return route&&nodeAccess(s,route.id).allowed&&nodeAccess(s,s.expedition.fieldId).allowed?route:null;
 }
 export function configureExpedition(s,config){
  if(s.version!==SCHEMA_VERSION||s.running||(s.activeEncounter&&!s.activeEncounter.rewarded)||s.dungeonRun||!config)return false;
  if(INSTANCES[config.fieldId]?.contentVersion&&!getAreaProgress(s,AREAS[INSTANCES[config.fieldId].areaId].race)?.unlocked.includes(AREAS[INSTANCES[config.fieldId].areaId].number))return false;
  const candidate={mode:config.mode,targetInstanceId:config.targetInstanceId??null,fieldId:config.fieldId,loop:config.loop,...Object.fromEntries(['autoDungeon','autoBoss'].filter(k=>config[k]!==undefined).map(k=>[k,config[k]]))};
- if(!validExpeditionState({...s,expedition:candidate})||(candidate.mode==='dungeon'&&!INSTANCES[candidate.targetInstanceId]?.enabled))return false;
+ if(!validExpeditionState({...s,expedition:candidate})||!nodeAccess(s,candidate.fieldId).allowed||(candidate.mode==='dungeon'&&(!INSTANCES[candidate.targetInstanceId]?.enabled||!nodeAccess(s,candidate.targetInstanceId).allowed)))return false;
  if(!normalizeExpedition(s))return false;s.expedition=candidate;return true;
 }
 // Caller persists the returned mutation using clone-save-adopt. Rejected navigation never changes state.
@@ -568,9 +585,9 @@ export function chooseAdventureNode(s,nodeId,{start=true,loop=false,fieldId=null
  const next=structuredClone(s);
  if(!normalizeExpedition(next)||next.running||(next.activeEncounter&&!next.activeEncounter.rewarded)||next.dungeonRun)return null;
  const time=Math.max(now,next.lastHealthClock??0),node=plannedNodes(next,time).find(x=>x.id===nodeId);
- if(!node?.enabled||!node.unlocked||!node.budgetReady||(next.restUntil??0)>time||node.readyAt>time)return null;
+ if(!node?.enabled||node.warLocked||!node.unlocked||!node.budgetReady||(next.restUntil??0)>time||node.readyAt>time)return null;
  const fallback=fieldId??node.fieldId,field=plannedNodes(next,time).find(x=>x.id===fallback);
- if(!field?.enabled||field.kind!=='field'||!field.unlocked||!field.budgetReady)return null;
+ if(!field?.enabled||field.warLocked||field.kind!=='field'||!field.unlocked||!field.budgetReady)return null;
  const config={mode:node.kind==='dungeon'?'dungeon':'field',targetInstanceId:node.kind==='dungeon'?node.id:null,fieldId:node.kind==='field'?node.id:fallback,loop:node.kind==='dungeon'?loop:false,...Object.fromEntries(['autoDungeon','autoBoss'].filter(k=>next.expedition[k]!==undefined).map(k=>[k,next.expedition[k]]))};
  if(!configureExpedition(next,config))return null;
  let encounter=null;if(start){encounter=startInstanceEncounter(next,node.id,now);if(!encounter)return null;}
@@ -578,14 +595,14 @@ export function chooseAdventureNode(s,nodeId,{start=true,loop=false,fieldId=null
  for(const key of Object.keys(s))if(!Object.hasOwn(next,key))delete s[key];Object.assign(s,next);return {ok:true,nodeId,started:!!encounter,encounter:s.activeEncounter??null};
 }
 export function setExpeditionAutomation(s,kind,enabled){
- if(!['dungeon','boss'].includes(kind)||typeof enabled!=='boolean'||!normalizeExpedition(s))return false;
+ if(!['dungeon','boss'].includes(kind)||typeof enabled!=='boolean'||(enabled&&!nodeAccess(s,s.expedition?.fieldId).allowed)||!normalizeExpedition(s))return false;
  s.expedition[kind==='boss'?'autoBoss':'autoDungeon']=enabled;
  // The new checkbox owns ordinary-repeat behavior once explicitly changed.
  if(kind==='dungeon')s.expedition.loop=enabled;
  return true;
 }
 export function setExpeditionLoop(s,enabled){
- if(typeof enabled!=='boolean'||!normalizeExpedition(s))return false;
+ if(typeof enabled!=='boolean'||(enabled&&!nodeAccess(s,s.expedition?.fieldId).allowed)||!normalizeExpedition(s))return false;
  s.expedition.loop=enabled;
  if(!enabled&&s.restUntil>0&&s.expedition.mode==='dungeon'){s.restResume=false;s.running=false;}
  return true;
@@ -594,8 +611,9 @@ export function startRoutedEncounter(s,now=Date.now()){
  if(s.version!==SCHEMA_VERSION||s.skillTree?.mode!=='active'||!normalizeExpedition(s))return null;
  if(s.activeEncounter&&s.activeEncounter.multiVersion!==1)return null;
  if(s.activeEncounter&&!s.activeEncounter.rewarded)return normalizeEncounterElements(s.activeEncounter);
+ if(stopBlockedWarActivity(s))return null;
  if(s.dungeonRun)return startInstanceEncounter(s,s.dungeonRun.instanceId,now);
- const route=nextEncounterRoute(s,now);return route?startInstanceEncounter(s,route.id,now):null;
+ const route=nextEncounterRoute(s,now);if(!route&&!nodeAccess(s,s.expedition?.fieldId).allowed){s.running=false;s.restResume=false;}return route?startInstanceEncounter(s,route.id,now):null;
 }
 export function normalizeEncounterElements(e){
  if(!e)return e;
@@ -645,9 +663,11 @@ export function settleRest(s,now=Date.now()){
 export function startRest(s,now=Date.now(),resume=false){
  if(!normalizeHealth(s,now))return false;
  if(s.restUntil>0)return false;
+ resume=!!resume&&nodeAccess(s,s.siteId+'.field').allowed;
  s.atCamp=true;s.restUntil=s.lastHealthClock+REST_DURATION_MS;s.activeEncounter=null;s.dungeonRun=null;s.restResume=!!resume;s.running=!!resume;s.nextActionAt=s.restUntil;return true;
 }
-export function canStartEncounter(s,now=Date.now()){
+export function canStartEncounter(s,now=Date.now(),nodeId=s.siteId+'.field'){
+ if(!nodeAccess(s,nodeId).allowed&&!(s.activeEncounter&&!s.activeEncounter.rewarded&&s.activeEncounter.instanceId===nodeId))return false;
  if(!normalizeHealth(s,now))return false;settleRest(s,now);
  if(s.heroHp<=0&&s.restUntil===0)startRest(s,now);
  return s.restUntil===0&&s.heroHp>0&&s.lastHealthClock>=(s.nextBattleAt??0);
@@ -662,7 +682,7 @@ function initializeEncounterAffixes(e,st){e.affixBattleId=e.id??('battle-'+(++se
 function ensureEncounterAffixes(e){e.affixBattleId??=e.id??('legacy-battle-'+(++serial));e.affixState??=createBattleAffixState(e.affixBattleId);}
 function reviveEncounter(e,st,logs){const out=tryNirvana(e.affixState,{battleId:e.affixState.battleId,hasNirvana:!!st.specials.nirvana,hp:e.heroHp,maxHp:st.hp});if(!out)return false;e.affixState=out.state;if(out.revived){e.heroHp=out.hp;logs.push('涅槃 · 满血复活（本场已使用）');}return out.revived;}
 export function startInstanceEncounter(s,instanceId,now=Date.now()){
- const instance=PLANNED_INSTANCES[instanceId];if(s.version!==SCHEMA_VERSION||!instance?.enabled||!canStartEncounter(s,now)||!normalizeExpedition(s))return null;
+ const instance=PLANNED_INSTANCES[instanceId];if(s.version!==SCHEMA_VERSION||!instance?.enabled||!canStartEncounter(s,now,instanceId)||!normalizeExpedition(s))return null;
  if(s.activeEncounter&&!s.activeEncounter.rewarded)return s.activeEncounter.instanceId===instanceId?s.activeEncounter:null;
  if(s.dungeonRun&&s.dungeonRun.instanceId!==instanceId)return null;
  if(instance.kind!=='field'&&!s.dungeonRun&&s.lastHealthClock<(s.instanceCooldowns[instanceId]??0))return null;
@@ -827,7 +847,11 @@ function rollDrop(s,boss,luck=0,instanceId=resolveLegacySite(s.location).id+'-fi
 }
 export function reward(s,e,now=Date.now()){
  if(s.version!==SCHEMA_VERSION||!e||e.multiVersion!==1)return null;
- if(e.contentVersion==='dwarf-m2-v1'&&PLANNED_INSTANCES[e.instanceId])return rewardDwarf(s,e,now);
+ if(e.contentVersion==='dwarf-m2-v1'&&PLANNED_INSTANCES[e.instanceId]){
+  const owned=s.activeEncounter===e,wasRewarded=e.rewarded,result=rewardDwarf(s,e,now);
+  if(owned&&!wasRewarded&&e.rewarded&&!nodeAccess(s,e.instanceId).allowed){s.running=false;s.restResume=false;s.dungeonRun=null;s.stopAfterBattle=false;s.stopAfterDungeon=false;}
+  return result;
+ }
  if(e.developmentFixture===true)return rewardMulti(s,e,now);
  return null;
 }
@@ -1058,7 +1082,7 @@ export function codexState(s,id){
 }
 export function validSave(s){
  try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;
- if(!validTaskRewardState(s))return false;
+ if(!validTaskRewardState(s)||!validDiplomacy(s))return false;
  if(!validSkillTree(s,getSkillTreeDefinition(s))||s.skillTree?.mode!=='active')return false;
  if(s.activeEncounter?.skillResolver!==undefined&&(s.activeEncounter.skillResolver!=='tree-v1'||s.skillTree?.mode!=='active'||s.activeEncounter.multiVersion!==1))return false;
  if(s.supportGrantEligible!==undefined||s.testGrants!==undefined||s.bonusTalentPoints!==undefined||s.skillRulesVersion!==undefined||s.skillAccess!==undefined)return false;

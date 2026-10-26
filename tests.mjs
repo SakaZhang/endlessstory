@@ -187,3 +187,5 @@ runAffixSourceTest(process.execPath,[new URL('./monster-facing-tests.mjs',import
 
 // Goblin selection and portrait facing, plus unchanged battle/camp orientation.
 runAffixSourceTest(process.execPath,[new URL('./goblin-hero-facing-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+// Explicit war state and the shared entry/offline access gate.
+runAffixSourceTest(process.execPath,[new URL('./war-travel-lock-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
