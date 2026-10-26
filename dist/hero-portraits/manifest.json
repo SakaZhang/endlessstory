@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "characters": {
+    "dwarf.brock": {
+      "name": "布洛克",
+      "race": "dwarf",
+      "facing": "right",
+      "usage": "dialogue/head portrait only; retain existing full-body selection/HUD/equipment assets",
+      "assets": {
+        "96": {
+          "file": "hero-portraits/brock-96.png",
+          "size": [
+            96,
+            96
+          ],
+          "contentPadding": 2,
+          "sourceScale": 0.12348993288590604,
+          "sha256": "dbd81ff5c00b81acd8d66d4fcce9319b7c02a13ce277a6a19a1ebcb3ea545cb1",
+          "alphaBBox": [
+            2,
+            2,
+            93,
+            93
+          ],
+          "solidBBox": [
+            3,
+            3,
+            92,
+            92
+          ]
+        }
+      }
+    }
+  }
+}

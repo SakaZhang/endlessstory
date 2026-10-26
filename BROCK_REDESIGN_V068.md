@@ -95,3 +95,16 @@ Final build and release-cache were rerun after the portraitCrop metadata change
 and passed: release `965605c677cef950693612ce3ef51c40ca32a0242256a4bd40ff101969f02d4e`,
 2702 hashes / 8210 dependency edges. No runtime source changed after the approved
 implementation commit; this note only closes the test-status record.
+
+## Dedicated dialogue bust addition
+
+Root additionally approved the native 96px bust on Oct 26 after observing that a
+crop from the 60px battle body was too sparse beside detailed NPC portraits.
+`dist/hero-portraits/brock-96.png` is mechanically cropped/resized from the already
+user-approved horned master (not a new generated design). Its runtime manifest
+exposes only the consumed 96px asset. The 192px inspection/source export stays at
+`art/brock-redesign/horned-bust-192.png`, outside production. Full provenance is in
+`art/brock-redesign/portrait-manifest.json`; `node brock-portrait-tests.mjs` checks
+source/output hashes, exact nearest-neighbor export, RGBA bounds and transparent
+horn safety borders. Integrator owns the dialogue-only direct-bust descriptor;
+selection, HUD, equipment paperdoll and all 25 battle frames remain unchanged.

@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "scope": "Dedicated head/bust contexts only. Do not replace full-body selection, battle, HUD or equipment-paperdoll assets.",
+  "characters": {
+    "dwarf.brock": {
+      "name": "布洛克",
+      "race": "dwarf",
+      "facing": "right",
+      "approvedDesign": "Twin bull-horned battle helmet; user approved existing master with 没问题.",
+      "source": {
+        "file": "art/brock-redesign/horned-master-sheet.png",
+        "sha256": "511a634c1e75a413ba6fa1130477a7d37fdcf655d269ad4f33f7b09455041a6c",
+        "crop": [
+          1018,
+          128,
+          1763,
+          873
+        ],
+        "cropFormat": "left,top,right,bottom exclusive",
+        "method": "Mechanical square crop and uniform nearest-neighbor resize only; original RGBA retained. No new image generation, repainting, alpha mask, sharpening or palette changes."
+      },
+      "assets": {
+        "96": {
+          "file": "hero-portraits/brock-96.png",
+          "size": [
+            96,
+            96
+          ],
+          "contentPadding": 2,
+          "sourceScale": 0.12348993288590604,
+          "sha256": "dbd81ff5c00b81acd8d66d4fcce9319b7c02a13ce277a6a19a1ebcb3ea545cb1",
+          "alphaBBox": [
+            2,
+            2,
+            93,
+            93
+          ],
+          "solidBBox": [
+            3,
+            3,
+            92,
+            92
+          ]
+        },
+        "192": {
+          "file": "art/brock-redesign/horned-bust-192.png",
+          "size": [
+            192,
+            192
+          ],
+          "contentPadding": 4,
+          "sourceScale": 0.24697986577181208,
+          "sha256": "de39d94941dbf77be8048c603dcf2dc34c45feb59e31a8dc79f6f1c3127f9078",
+          "alphaBBox": [
+            4,
+            4,
+            187,
+            187
+          ],
+          "solidBBox": [
+            5,
+            5,
+            186,
+            186
+          ]
+        }
+      }
+    }
+  }
+}
