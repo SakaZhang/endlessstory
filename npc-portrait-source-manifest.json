@@ -1,0 +1,937 @@
+{
+  "version": 1,
+  "method": "builtin image_gen",
+  "notes": "30 independent generated minor-NPC portraits. Original15 stable names/appearance retained. Authored minor ages/genders are visual designs, not preexisting mainline canon. Mechanical nearest-neighbor derived assets only. Runtime files are fixed 96px; no atlas, emoji or generic glyph fallback.",
+  "entries": [
+    {
+      "id": "npc.dwarf.dora",
+      "name": "朵菈",
+      "race": "dwarf",
+      "role": "矿灯修理工",
+      "appearance": "烟灰围裙，额灯罩有一道斜裂；短辫末端缠着旧布。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: one finished square NPC portrait for a Japanese pixel-art fantasy RPG, usable at 64 and 96 pixels. Draw ONE chest-up three-quarter-view portrait of Dora, a female adult dwarf mine-lamp repairer: compact broad dwarf face and shoulders, copper-red short braids tied at their ends with old beige cloth, soot-grey working apron, practical tan shirt, a forehead mining lamp with a clearly diagonal cracked cover, kind firm expression. Show a small lamp-repair hand tool near the bottom as role detail. Crisp hand-placed chunky pixel clusters, hard stepped edges, limited muted warm palette, selective 1px dark outlines, classic 16-bit Japanese RPG dialogue portrait; no smooth painted gradients, no photorealism. Single plain dark desaturated blue-green background (#172c31 family), clean simple silhouette, head takes 55 percent of square height, shoulders visible, no full body. Natural left-front light. Maintain clear readable eyes, braids and broken lamp at very small size. No text, letters, frame, badge, watermark, collage, border, or extra characters. Entire hair and lamp fit inside canvas. This is an original minor NPC, not a protagonist.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.dwarf.dora.png",
+        "sha256": "6be0d47c9a10cbfcf232cee7ba2e5fe0159a580fbceab364bbe4e0327057afb4",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.dwarf.dora.png",
+        "sha256": "5c1727a9e17b0fe6b77a01cff9ee84fc00a8fe26f7f472f71686965f743022b2",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 19925
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.dwarf.hepo",
+      "name": "赫珀",
+      "race": "dwarf",
+      "role": "冷泉配料员",
+      "appearance": "宽布帽裹着耳朵，手套有浅蓝苔痕；腰间挂空量杯。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: one finished square NPC dialogue portrait for a Japanese pixel-art fantasy RPG, readable at 64 and 96 pixels. Subject: Hepo, a middle-aged male dwarf cold-spring ingredient worker: short compact powerful shoulders, broad warm face with a squared cropped sandy beard, wide soft blue-grey cloth cap wrapped over his ears, ochre work vest, gloved hand with pale blue moss marks holding an EMPTY plain measuring cup. Calm exacting expression. No miner lamp. Style: crisp chunky pixel clusters, hard stepped edges, restrained muted natural colors, selective dark outlines, classic 16-bit JRPG portrait, warm left-front light. Composition: ONE chest-up three-quarter-view character, head about 50 percent of square height, shoulders and role prop visible, plain dark desaturated blue-green background (#172c31 family), keep the entire head inside canvas with small top margin. Original ordinary local worker. No text, letters, border, frame, watermark, collage, extra characters, photorealism, smooth painting, 3D, glowing magical aura or protagonist costume.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.dwarf.hepo.png",
+        "sha256": "631a6df6e7be1cbb33fdbeb10ca009674d7ad33268ac6330501ead716fd8e125",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.dwarf.hepo.png",
+        "sha256": "eb262e95fdcf7310edca7c877c3c8d5be6d237412477fb4253731840604d4216",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 19216
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.dwarf.naduo",
+      "name": "纳铎",
+      "race": "dwarf",
+      "role": "矿图修订员",
+      "appearance": "右袖磨破，图筒比背包长；指尖常留粉笔白。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: one finished square NPC dialogue portrait for a Japanese pixel-art fantasy RPG, readable at 64 and 96 pixels. Subject: Naduo, an elderly male dwarf map reviser: short stocky shoulders, weathered broad face, long white sideburns and compact white beard, dark thin eyebrow, brick-red worn coat with frayed right sleeve, a LONG cylindrical map case rises behind one shoulder above his backpack, chalk-white fingertips hold a rolled blank map at lower edge. Patient focused expression. No readable map text. Style: crisp chunky pixel clusters, hard stepped edges, restrained muted natural colors, selective dark outlines, classic 16-bit JRPG portrait, warm left-front light. Composition: ONE chest-up three-quarter-view character, head about 50 percent of square height, shoulders and role prop visible, plain dark desaturated blue-green background (#172c31 family), keep the entire head inside canvas with small top margin. Original ordinary local worker. No text, letters, border, frame, watermark, collage, extra characters, photorealism, smooth painting, 3D, glowing magical aura or protagonist costume.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.dwarf.naduo.png",
+        "sha256": "5d3e19ef4d3c02eec870102971d8d363461c4015b95c62d8a2d51782a6dad4ec",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.dwarf.naduo.png",
+        "sha256": "bfb529e4f493e4344fd7492468e5bb0e49b5736820128bf0aa57a7ff98ddd756",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 21267
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.human.milei",
+      "name": "米蕾",
+      "race": "human",
+      "role": "磨坊管仓员",
+      "appearance": "卷袖沾麦粉，一只耳后夹着短炭笔；围裙缝了许多方补丁。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: one finished square NPC dialogue portrait for a Japanese pixel-art fantasy RPG, readable at 64 and 96 pixels. Subject: Milei, an adult female human mill warehouse keeper: round freckled face, dark-brown curly hair in a practical loose bun, a short black charcoal pencil tucked behind one ear, rolled beige shirt sleeves dusted with white flour, a faded blue apron bearing distinct SQUARE fabric patches. A plain grain scoop held near bottom. Confident kind serious gaze. Ordinary worker, no armor. Style: crisp chunky pixel clusters, hard stepped edges, restrained muted natural colors, selective dark outlines, classic 16-bit JRPG portrait, warm left-front light. Composition: ONE chest-up three-quarter-view character, head about 50 percent of square height, shoulders and role prop visible, plain dark desaturated blue-green background (#172c31 family), keep entire head inside canvas with small top margin. Original ordinary local worker. No text, letters, border, frame, watermark, collage, extra characters, photorealism, smooth painting, 3D, glowing magical aura or protagonist costume.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.human.milei.png",
+        "sha256": "e7284b0c59d2547a66ca7bc8c3627cfa7ef382015ab8563e14e20d5e08f0807b",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.human.milei.png",
+        "sha256": "5c70ddfb8466af0fcf01218959a57f503901c352e3af0267bff7fe35c59f62c1",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 18883
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.human.aoden",
+      "name": "奥登",
+      "race": "human",
+      "role": "驿道记事员",
+      "appearance": "褪色短外套，左肩钉着宽纸袋；鼻尖总沾墨。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: one finished square NPC dialogue portrait for a Japanese pixel-art fantasy RPG, readable at 64 and 96 pixels. Subject: Aoden, a young adult male human roadside scribe: slim shoulders, long expressive face, short untidy dark auburn hair, a small INK SMUDGE on the tip of his nose, faded tan short jacket, broad pale paper satchel fastened at his LEFT shoulder, small blank folded letter held near bottom. Alert curious thoughtful gaze, no spectacles and no beard. Ordinary clerk, no armor. Style: crisp chunky pixel clusters, hard stepped edges, restrained muted natural colors, selective dark outlines, classic 16-bit JRPG portrait, warm left-front light. Composition: ONE chest-up three-quarter-view character, head about 50 percent of square height, shoulders and role prop visible, plain dark desaturated blue-green background (#172c31 family), keep entire head inside canvas with small top margin. Original ordinary local worker. No text, letters, border, frame, watermark, collage, extra characters, photorealism, smooth painting, 3D, glowing magical aura or protagonist costume.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.human.aoden.png",
+        "sha256": "1a0b8fea75487a7eea0a3fbd3facc33ea4779e6409efccecae27cfd6a5c52574",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.human.aoden.png",
+        "sha256": "f862059d748954929cc1766688b23d15876987940f8775b1f6738c0543ff0f91",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 18347
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.human.saifu",
+      "name": "赛芙",
+      "race": "human",
+      "role": "行旅缝补师",
+      "appearance": "深色围裙挂着大小针包，发带由两块不同布拼成。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: one finished square NPC dialogue portrait for a Japanese pixel-art fantasy RPG, readable at 64 and 96 pixels. Subject: Saifu, a middle-aged dark-skinned female human travelling seamstress: rounded strong face with warm smile lines, thick black hair swept into a low knot, headband visibly sewn from two DIFFERENT fabric pieces, one faded teal and one burgundy. Dark apron with several small needle cases and a modest pincushion. Hold folded patched cloth near bottom. Grounded capable expression. Ordinary worker, no armor. Style: crisp chunky pixel clusters, hard stepped edges, restrained muted natural colors, selective dark outlines, classic 16-bit JRPG portrait, warm left-front light. Composition: ONE chest-up three-quarter-view character, head about 50 percent of square height, shoulders and role prop visible, plain dark desaturated blue-green background (#172c31 family), keep entire head inside canvas with small top margin. Original ordinary local worker. No text, letters, border, frame, watermark, collage, extra characters, photorealism, smooth painting, 3D, glowing magical aura or protagonist costume.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.human.saifu.png",
+        "sha256": "d7a93929835cc8a8be5cb759cb1c607c2e8b029675e24a474b4bed3ac46d899d",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.human.saifu.png",
+        "sha256": "905522edfbdf35afd3f18d1f97daafcffa6be4cd6199bfea38857554024dc7d5",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 18799
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.elf.fulan",
+      "name": "芙岚",
+      "race": "elf",
+      "role": "苗圃照管者",
+      "appearance": "浅绿围裙有湿泥印，发辫缀着剪掉的干叶柄。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: one finished square NPC dialogue portrait for a Japanese pixel-art fantasy RPG, readable at 64 and 96 pixels. Subject: Fulan, a slim adult female elf nursery gardener. Narrow delicate shoulders and long tapered ears, pale golden hair braided with tiny clipped dry leaf stems, a light green apron with wet brown soil smudges, a practical moss green blouse. Thoughtful warm almond eyes, calm useful demeanor, not a princess. One small seedling in a plain earthen pot held at the bottom edge. Style: detailed yet crisp chunky pixel clusters, hard stepped edges, restrained muted natural colors, selective dark outlines, classic 16-bit JRPG character portrait, warm left-front light. Composition: ONE chest-up three-quarter-view character, head about 55 percent of square height, shoulders visible, plain dark desaturated blue-green background (#172c31 family), portrait fills canvas without cutting ears/hair. No text, letters, border, frame, watermark, collage, extra characters, photorealism, smooth painting or 3D. The subject is an original ordinary local NPC, no regal armor or magical aura.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.elf.fulan.png",
+        "sha256": "fa7ea393c8a2b178f3ee464ac6dc2d591f46e8328c30cbd701b790771f6e6cca",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.elf.fulan.png",
+        "sha256": "916715a5187acdffd126d26f8dfe8c398a0ec5c1f64525356fbbc9e1deb87a17",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 20010
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.elf.yiluo",
+      "name": "伊萝",
+      "race": "elf",
+      "role": "根桥修护匠",
+      "appearance": "肩上绕着卷好的细藤，袖口整齐地补了浅灰布。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: one finished square NPC dialogue portrait for a Japanese pixel-art fantasy RPG, readable at 64 and 96 pixels. Subject: Yiluo, a mature female elf root-bridge repair artisan: visibly slender frame and long tapered ears, chestnut-brown hair tied back in a low practical ponytail, long angular face, a neatly coiled slender green vine draped over one shoulder, sand-colored work tunic with neatly patched pale grey cuff. Hand holds a small vine knot near bottom. Patient steady eyes, no crown, no regal armor, no weapon. Style: crisp chunky pixel clusters, hard stepped edges, restrained muted natural colors, selective dark outlines, classic 16-bit JRPG portrait, warm left-front light. Composition: ONE chest-up three-quarter-view character, head about 50 percent of square height, shoulders and role prop visible, plain dark desaturated blue-green background (#172c31 family), keep entire head and ears inside canvas with small margin. Original ordinary local worker. No text, letters, border, frame, watermark, collage, extra characters, photorealism, smooth painting, 3D, glowing magical aura or protagonist costume.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.elf.yiluo.png",
+        "sha256": "e15b4e18a45f177ed9a84fae0c890daedac4bcfe82647ac280a6eea296e21d9f",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.elf.yiluo.png",
+        "sha256": "75a4d22d0a9b95b20de906cb781d209facfefdf599035613d51e2a1d499e79ff",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 19013
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.elf.sailin",
+      "name": "赛林",
+      "race": "elf",
+      "role": "林径巡护员",
+      "appearance": "暗绿短披肩，护腕卡着一小片不锋利的木牌。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: one finished square NPC dialogue portrait for a Japanese pixel-art fantasy RPG, readable at 64 and 96 pixels. Subject: Sailin, an adult female elf forest-path patrol worker: very slender shoulders and long tapered ears, short silver-grey practical bob haircut, narrow alert face, dark forest-green short mantle, plain leather wrist guard with a SMALL BLUNT wooden tag tucked into it at chest level. Reserved observant expression. Ordinary ranger but no visible weapon, no regal armor, no magic. Style: crisp chunky pixel clusters, hard stepped edges, restrained muted natural colors, selective dark outlines, classic 16-bit JRPG portrait, warm left-front light. Composition: ONE chest-up three-quarter-view character, head about 50 percent of square height, shoulders and role prop visible, plain dark desaturated blue-green background (#172c31 family), keep entire head and ears inside canvas with small margin. Original ordinary local worker. No text, letters, border, frame, watermark, collage, extra characters, photorealism, smooth painting, 3D, glowing magical aura or protagonist costume.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.elf.sailin.png",
+        "sha256": "1f5113626c459bd437e73ce2b2b2cc06dab24d0049c61e75d26e797697296396",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.elf.sailin.png",
+        "sha256": "ce42c95c4d5c31d39d9ba247284b0d52cae46d5789a6309e40fe99baaa6726e0",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 18445
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.goblin.gudai",
+      "name": "咕黛",
+      "race": "goblin",
+      "role": "菌架看守",
+      "appearance": "顶着折边旧帽，背袋外侧缝着细密的防漏网。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: one finished square NPC dialogue portrait for a Japanese pixel-art fantasy RPG, readable at 64 and 96 pixels. Subject: Gudai, a small adult female goblin mushroom-rack keeper. Visibly goblin, compact slight shoulders, oversized long pointed ears, olive green skin, large amber eyes and blunt small nose, a folded-brim worn brown cloth hat, dark rust tunic, a work bag over one shoulder with a very fine leakproof mesh panel visible. Serious alert caring expression, not a buff orc and not a human woman. One ordinary grey mushroom visible near the bottom beside the bag. Style: detailed yet crisp chunky pixel clusters, hard stepped edges, restrained muted natural colors, selective dark outlines, classic 16-bit JRPG character portrait, warm left-front light. Composition: ONE chest-up three-quarter-view character, head about 55 percent of square height, shoulders visible, plain dark desaturated blue-green background (#172c31 family), portrait fills canvas without cutting ears/hair. No text, letters, border, frame, watermark, collage, extra characters, photorealism, smooth painting or 3D. The subject is an original ordinary local NPC, no regal armor or magical aura.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.goblin.gudai.png",
+        "sha256": "eb42b97a56d86905ea43d4593327b519c5dca6099feebf1314d5ad41f941c582",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.goblin.gudai.png",
+        "sha256": "7b08de827cf4300cf0baa90257d7db75df63c17f0b37e05308b7fbd792c89a53",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 20589
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.goblin.banya",
+      "name": "扳牙",
+      "race": "goblin",
+      "role": "旧铁修补匠",
+      "appearance": "一侧护目镜镜片缺了角，腰带上挂着大小不一的钳子。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: one finished square NPC dialogue portrait for a Japanese pixel-art fantasy RPG, readable at 64 and 96 pixels. Subject: Banya, an adult male goblin scrap-iron repair artisan: very small compact shoulders, moss green skin, long pointed ears, asymmetrical grin with one broad blunt lower tooth, messy charcoal hair, battered brown leather goggles with ONE lens visibly CHIPPED at a corner, dark leather apron with differently sized pliers hanging and one pair held near bottom. Practical shrewd expression, not a large orc, no muscular body. Style: crisp chunky pixel clusters, hard stepped edges, restrained muted natural colors, selective dark outlines, classic 16-bit JRPG portrait, warm left-front light. Composition: ONE chest-up three-quarter-view character, head about 50 percent of square height, shoulders and role prop visible, plain dark desaturated blue-green background (#172c31 family), keep entire head and ears inside canvas with small margin. Original ordinary local worker. No text, letters, border, frame, watermark, collage, extra characters, photorealism, smooth painting, 3D, glowing magical aura or protagonist costume.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.goblin.banya.png",
+        "sha256": "36f3461147acc9ffd1b5e35759a32df26c7ae1c32d7f86f1391b956f00b88d09",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.goblin.banya.png",
+        "sha256": "04f8cdad543b6abb19705f059dcc077b72e139a4d6a2d4254208b66001287bad",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 20116
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.goblin.disuo",
+      "name": "滴索",
+      "race": "goblin",
+      "role": "暗河摆渡员",
+      "appearance": "披着窄油布，裤脚永远卷得高；肩上绳圈收得很紧。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: one finished square NPC dialogue portrait for a Japanese pixel-art fantasy RPG, readable at 64 and 96 pixels. Subject: Disuo, an older male goblin underground-river ferryman: very small lean shoulders, dark olive-green weathered face, oversized long pointed ears, amber steady eyes, a narrow dark navy oilcloth rain cape, a TIGHTLY COILED tan rope over one shoulder. Plain short cap partly hiding grey wisps, serious cautious practical expression. Rope and oilcloth prominent, not a huge orc, no weapons. Style: crisp chunky pixel clusters, hard stepped edges, restrained muted natural colors, selective dark outlines, classic 16-bit JRPG portrait, warm left-front light. Composition: ONE chest-up three-quarter-view character, head about 50 percent of square height, shoulders and role prop visible, plain dark desaturated blue-green background (#172c31 family), keep entire head and ears inside canvas with small margin. Original ordinary local worker. No text, letters, border, frame, watermark, collage, extra characters, photorealism, smooth painting, 3D, glowing magical aura or protagonist costume.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.goblin.disuo.png",
+        "sha256": "e710540749264ed8d25c65b22f0128d54f864b5c544700091a5690555924dda6",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.goblin.disuo.png",
+        "sha256": "8b574b0f3b4802544dbbfc35bd9b07f253abed48ddd6162702ce981345af6523",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 19450
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.ashen.lilu",
+      "name": "砾露",
+      "race": "ashen",
+      "role": "矿露分配员",
+      "appearance": "浅灰矿壳，肩缘有水渍般的深纹；携带带缺口的陶制量器。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: one finished square NPC dialogue portrait for a Japanese pixel-art fantasy RPG, readable at 64 and 96 pixels. Subject: Lilu, a gentle nonhuman living-mineral being who distributes mineral dew: body is solid LIGHT GREY mineral shell, rounded faceted stone head with small restrained cyan crystal eye slits, NO human skin, hair, nose flesh or ears; shoulder edges have darker WATER-STAIN-LIKE natural mineral lines. Modest dark work wrap, a CHIPPED plain terracotta measuring vessel held at chest edge. Friendly capable posture. Entire face visibly carved layered stone, not burned human, not undead, no fire or wounds. Style: crisp chunky pixel clusters, hard stepped edges, restrained muted earth colors, selective dark outlines, classic 16-bit JRPG portrait, warm left-front light. Composition: ONE chest-up three-quarter-view mineral character, head about 45 percent of square height, shoulders and role prop visible, plain dark desaturated blue-green background (#172c31 family), entire head and mineral crest inside canvas with small top margin. Original ordinary local worker. Clear STONE not flesh. No text, letters, border, frame, watermark, collage, extra characters, photorealism, smooth painting, 3D, fire aura or protagonist costume.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.ashen.lilu.png",
+        "sha256": "de1961eb7e987aed39f4d077f1cd7519682025ba4980cb2f161e7cdaeccad2d7",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.ashen.lilu.png",
+        "sha256": "2c65d8308e6a9a0abef487721a9c07d0b9a80e8c139ba7e8d52dc9ca59d7a4d8",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 18289
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.ashen.mingji",
+      "name": "鸣隙",
+      "race": "ashen",
+      "role": "晶音路标匠",
+      "appearance": "深色石壳夹细银线，背着木框；框上晶片彼此隔开。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: one finished square NPC dialogue portrait for a Japanese pixel-art fantasy RPG, readable at 64 and 96 pixels. Subject: Mingji, a nonhuman living-mineral being who makes crystal sound road-markers: dark charcoal STONE shell head and body crossed with FINE SILVER mineral veins, angular face with small warm amber crystal eyes, NO human skin, hair or flesh ears. A rectangular WOODEN frame on the back carries several small pale crystal pieces each hanging SEPARATELY with empty gaps between them. Plain grey woven shoulder strap, attentive listening tilt of head. Not burned human, not undead, not battle robot, no fire. Style: crisp chunky pixel clusters, hard stepped edges, restrained muted earth colors, selective dark outlines, classic 16-bit JRPG portrait, warm left-front light. Composition: ONE chest-up three-quarter-view mineral character, head about 45 percent of square height, shoulders and role prop visible, plain dark desaturated blue-green background (#172c31 family), entire head and mineral crest inside canvas with small top margin. Original ordinary local worker. Clear STONE not flesh. No text, letters, border, frame, watermark, collage, extra characters, photorealism, smooth painting, 3D, fire aura or protagonist costume.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.ashen.mingji.png",
+        "sha256": "50c0eb1afb87d6817129d3266b357bb9748def396d56faa0c238abafc10b6830",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.ashen.mingji.png",
+        "sha256": "ec56e6fdab2df6ea84fbab697e14681432bb1fe640a32750b40f270437b0a790",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 20465
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.ashen.taozhe",
+      "name": "陶褶",
+      "race": "ashen",
+      "role": "陶石棚修护者",
+      "appearance": "浅褐矿壳层叠如折痕，前臂缠着防磨布，随身带平木尺。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: one finished square NPC dialogue portrait for a Japanese pixel-art fantasy RPG, readable at 64 and 96 pixels. Subject: Taozhe, a nonhuman living-mineral shelter artisan: LIGHT TAN clay-stone shell with broad layered folds like pleated strata, stout shoulders and gently rounded geometric head, tiny muted green mineral eyes, no human skin, hair, fleshy nose or ears. Forearms wrapped with protective dark beige abrasion cloth, one hand holding a FLAT wooden measuring ruler with no numerals near the bottom. Calm experienced expression. Not burned human, not undead, no glowing fire, no wounds. Style: crisp chunky pixel clusters, hard stepped edges, restrained muted earth colors, selective dark outlines, classic 16-bit JRPG portrait, warm left-front light. Composition: ONE chest-up three-quarter-view mineral character, head about 45 percent of square height, shoulders and role prop visible, plain dark desaturated blue-green background (#172c31 family), entire head and mineral crest inside canvas with small top margin. Original ordinary local worker. Clear STONE not flesh. No text, letters, border, frame, watermark, collage, extra characters, photorealism, smooth painting, 3D, fire aura or protagonist costume.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.ashen.taozhe.png",
+        "sha256": "2d2738c4d7a077c1380aa0d79a0f91beac09f9e963f8ef333d63e4e1bb3ae5fd",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.ashen.taozhe.png",
+        "sha256": "790042be2b8615fa99ca98487fa2120e4215f9ca1d9aaca3860b046c1df90a17",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 19731
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.dwarf.taolan",
+      "name": "陶兰",
+      "race": "dwarf",
+      "role": "矿车木作匠",
+      "appearance": "铜色卷发别在耳后，短壮肩膀搭着半只木轮；褐围裙上插木楔。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: production Japanese 16-bit pixel RPG NPC portrait. Generate exactly one square chest-up character portrait, head and upper torso fully visible with generous margin; slight three-quarter view, centered. Crisp visible pixel clusters at an approximately 96x96 logical pixel grid, nearest-neighbor upscaled aesthetic, limited muted earthy palette, dark outline and two or three cel-shaded tones per material, readable facial features and occupational silhouette at 64 and 96 pixels. Family style is classic handcrafted Japanese fantasy RPG pixel portraits matching small chibi-adjacent battle sprites, NOT a smooth anime illustration, NOT painterly, NOT photorealistic, NOT 3D. Plain solid dark desaturated blue-green background (#16292b), warm muted directional highlight. No border, frame, letters, words, numbers, logos, watermark, extra characters, scenery or decorative particle effects. Portrait fills about 80 percent of square height. Subject: Adult female dwarf cartwright; compact broad sturdy dwarf head and shoulders, copper curly bob, soot-freckled warm face, confident practical grin, brown leather work apron, a small wooden wheel and spoke tool over one shoulder. Do not make her tall or slim.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.dwarf.taolan.png",
+        "sha256": "484f50aea4147e746902a4368ad90b858e870c324a144112988246f4901cad92",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.dwarf.taolan.png",
+        "sha256": "a338ff4dc97780469fb3248821ae060440ec4a562e7d2d8f0daeafc56dd3a7eb",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 19522
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.dwarf.kelin",
+      "name": "科霖",
+      "race": "dwarf",
+      "role": "轮值盾卫",
+      "appearance": "灰胡子压在旧皮领上，短盾边缘有三块补片；眉毛粗而平。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: production Japanese 16-bit pixel RPG NPC portrait. Generate exactly one square chest-up character portrait, head and upper torso fully visible with generous margin; slight three-quarter view, centered. Crisp visible pixel clusters at an approximately 96x96 logical pixel grid, nearest-neighbor upscaled aesthetic, limited muted earthy palette, dark outline and two or three cel-shaded tones per material, readable facial features and occupational silhouette at 64 and 96 pixels. Family style is classic handcrafted Japanese fantasy RPG pixel portraits matching small chibi-adjacent battle sprites, NOT a smooth anime illustration, NOT painterly, NOT photorealistic, NOT 3D. Plain solid dark desaturated blue-green background (#16292b), warm muted directional highlight. No border, frame, letters, words, numbers, logos, watermark, extra characters, scenery or decorative particle effects. Portrait fills about 80 percent of square height. Subject: Older male dwarf watch guard; compact broad stocky head and shoulders, bushy square gray beard, swept gray eyebrows, patient serious eyes, worn steel shoulder plate over moss-brown tunic, battered short shield visible at lower chest, dignified rather than sinister.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.dwarf.kelin.png",
+        "sha256": "063c1b0537e7deefc0f0ede3101adfa42a12234ca7c2c88c1116ce872fb5a2c8",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.dwarf.kelin.png",
+        "sha256": "9c767d1f2517eeb83ffda4e538a402e8076589ccb4d02bbd4c97cc392bbf96cb",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 19133
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.dwarf.shajia",
+      "name": "莎嘉",
+      "race": "dwarf",
+      "role": "矿队炊事员",
+      "appearance": "红头巾裹着黑色鬓发，壮实手臂挎短柄锅勺；围裙口袋装布包。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: production Japanese 16-bit pixel RPG NPC portrait. Generate exactly one square chest-up character portrait, head and upper torso fully visible with generous margin; slight three-quarter view, centered. Crisp visible pixel clusters at an approximately 96x96 logical pixel grid, nearest-neighbor upscaled aesthetic, limited muted earthy palette, dark outline and two or three cel-shaded tones per material, readable facial features and occupational silhouette at 64 and 96 pixels. Family style is classic handcrafted Japanese fantasy RPG pixel portraits matching small chibi-adjacent battle sprites, NOT a smooth anime illustration, NOT painterly, NOT photorealistic, NOT 3D. Plain solid dark desaturated blue-green background (#16292b), warm muted directional highlight. No border, frame, letters, words, numbers, logos, watermark, extra characters, scenery or decorative particle effects. Portrait fills about 80 percent of square height. Subject: Middle-aged female dwarf communal kitchen keeper; stocky broad shoulders, round warm lined face, red tied headcloth covering dark hair, rolled sleeves and ochre kitchen apron, wooden ladle upright beside shoulder, welcoming but sturdy and practical.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.dwarf.shajia.png",
+        "sha256": "5ff6ccdf8291e9fe9d94af998004b18acdf9e9b1cf7d3604e1b722c8ef9c8901",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.dwarf.shajia.png",
+        "sha256": "c40e11896b66227b68608138d1e48b0a52d867735649993e817d60d0503c47ba",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 18101
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.human.wenna",
+      "name": "温娜",
+      "race": "human",
+      "role": "采药师",
+      "appearance": "银发编成长辫，苔色披巾扣着木别针；肩袋露出整齐的草药包。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: production Japanese 16-bit pixel RPG NPC portrait. Generate exactly one square chest-up character portrait, head and upper torso fully visible with generous margin; slight three-quarter view, centered. Crisp visible pixel clusters at an approximately 96x96 logical pixel grid, nearest-neighbor upscaled aesthetic, limited muted earthy palette, dark outline and two or three cel-shaded tones per material, readable facial features and occupational silhouette at 64 and 96 pixels. Family style is classic handcrafted Japanese fantasy RPG pixel portraits matching small chibi-adjacent battle sprites, NOT a smooth anime illustration, NOT painterly, NOT photorealistic, NOT 3D. Plain solid dark desaturated blue-green background (#16292b), warm muted directional highlight. No border, frame, letters, words, numbers, logos, watermark, extra characters, scenery or decorative particle effects. Portrait fills about 80 percent of square height. Subject: Older adult human female herbalist; long narrow kindly lined face, silver braid draped over shoulder, muted sage shawl over brown travel clothes, herb pack with broad distinctive leaves at shoulder, one small tied herb bundle held near chest; earthy professional not magical.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.human.wenna.png",
+        "sha256": "564c70ee3682edd2f4cca9a5aac804124411e4985fb31870fe91427f37465df8",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.human.wenna.png",
+        "sha256": "38718f10cee35e2e15ec0b5f4779fbc13e3e1d53efedc08e3e52d6be4a43374d",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 19958
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.human.luoen",
+      "name": "洛恩",
+      "race": "human",
+      "role": "桥栏木匠",
+      "appearance": "深棕卷发蓬在旧工帽下，靛蓝工装缝着木尺袋；左肩挂一把短刨。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: production Japanese 16-bit pixel RPG NPC portrait. Generate exactly one square chest-up character portrait, head and upper torso fully visible with generous margin; slight three-quarter view, centered. Crisp visible pixel clusters at an approximately 96x96 logical pixel grid, nearest-neighbor upscaled aesthetic, limited muted earthy palette, dark outline and two or three cel-shaded tones per material, readable facial features and occupational silhouette at 64 and 96 pixels. Family style is classic handcrafted Japanese fantasy RPG pixel portraits matching small chibi-adjacent battle sprites, NOT a smooth anime illustration, NOT painterly, NOT photorealistic, NOT 3D. Plain solid dark desaturated blue-green background (#16292b), warm muted directional highlight. No border, frame, letters, words, numbers, logos, watermark, extra characters, scenery or decorative particle effects. Portrait fills about 80 percent of square height. Subject: Adult human male bridge carpenter; medium brown warm skin, dark curly hair, broad nose, focused friendly expression, indigo workwear with rolled collar and tan leather straps, small carpenter square and wooden peg bundle at chest, no armor.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.human.luoen.png",
+        "sha256": "ea67d369ed0f10e4347feb16b2d5caaf5b73a4d2d832e55b9592a75d81be0a69",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.human.luoen.png",
+        "sha256": "2c2e0edcf294ce839501d16a82ee7e03c96612e5214e963ec254340d376a807e",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 17156
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.human.beila",
+      "name": "贝菈",
+      "race": "human",
+      "role": "高地巡守",
+      "appearance": "雀斑横过鼻梁，蜂蜜色短披巾压在皮肩带下；短矛绑着白布结。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: production Japanese 16-bit pixel RPG NPC portrait. Generate exactly one square chest-up character portrait, head and upper torso fully visible with generous margin; slight three-quarter view, centered. Crisp visible pixel clusters at an approximately 96x96 logical pixel grid, nearest-neighbor upscaled aesthetic, limited muted earthy palette, dark outline and two or three cel-shaded tones per material, readable facial features and occupational silhouette at 64 and 96 pixels. Family style is classic handcrafted Japanese fantasy RPG pixel portraits matching small chibi-adjacent battle sprites, NOT a smooth anime illustration, NOT painterly, NOT photorealistic, NOT 3D. Plain solid dark desaturated blue-green background (#16292b), warm muted directional highlight. No border, frame, letters, words, numbers, logos, watermark, extra characters, scenery or decorative particle effects. Portrait fills about 80 percent of square height. Subject: Adult human female highland watch guard; angular freckled fair face, auburn short side braid, honey-yellow cape pinned over practical brown leather light armor, simple short spear upright behind shoulder, alert approachable eyes.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.human.beila.png",
+        "sha256": "366acc77a3b4443506969b5ed5ae4a327c7ac632f5da935d2296e4ac0b641407",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.human.beila.png",
+        "sha256": "c1c983cf879e7068e417e28a99692a10b9374c0366a064e7f9ee355ae6babd68",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 18101
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.elf.qiwei",
+      "name": "栖苇",
+      "race": "elf",
+      "role": "鸟栖照护者",
+      "appearance": "身形纤细，短绿发夹着褐羽；青布肩袋装空巢垫而非捕鸟笼。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: production Japanese 16-bit pixel RPG NPC portrait. Generate exactly one square chest-up character portrait, head and upper torso fully visible with generous margin; slight three-quarter view, centered. Crisp visible pixel clusters at an approximately 96x96 logical pixel grid, nearest-neighbor upscaled aesthetic, limited muted earthy palette, dark outline and two or three cel-shaded tones per material, readable facial features and occupational silhouette at 64 and 96 pixels. Family style is classic handcrafted Japanese fantasy RPG pixel portraits matching small chibi-adjacent battle sprites, NOT a smooth anime illustration, NOT painterly, NOT photorealistic, NOT 3D. Plain solid dark desaturated blue-green background (#16292b), warm muted directional highlight. No border, frame, letters, words, numbers, logos, watermark, extra characters, scenery or decorative particle effects. Portrait fills about 80 percent of square height. Subject: Youthful adult male elf bird-roost caretaker; visibly slim narrow shoulders and elegant long pointed ears, short leaf-green hair with single pale feather clasp, gentle observant face, muted green tunic and light ochre scarf, small wooden bird perch tool at chest. Not a child, no bulky physique.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.elf.qiwei.png",
+        "sha256": "235061b8f82ed7f50f44d473f2f32b131bcbecbaaca540e855c2c7f1c28f2ba3",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.elf.qiwei.png",
+        "sha256": "a93bc7a0fa92506589f4f38ebdae2912286c11404058760b1f92e512f0b616cf",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 17625
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.elf.luyin",
+      "name": "露茵",
+      "race": "elf",
+      "role": "苇布织工",
+      "appearance": "纤细长臂托着木织梭，紫灰长辫用苇绳扎住；灰绿工作袍磨白了袖口。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: production Japanese 16-bit pixel RPG NPC portrait. Generate exactly one square chest-up character portrait, head and upper torso fully visible with generous margin; slight three-quarter view, centered. Crisp visible pixel clusters at an approximately 96x96 logical pixel grid, nearest-neighbor upscaled aesthetic, limited muted earthy palette, dark outline and two or three cel-shaded tones per material, readable facial features and occupational silhouette at 64 and 96 pixels. Family style is classic handcrafted Japanese fantasy RPG pixel portraits matching small chibi-adjacent battle sprites, NOT a smooth anime illustration, NOT painterly, NOT photorealistic, NOT 3D. Plain solid dark desaturated blue-green background (#16292b), warm muted directional highlight. No border, frame, letters, words, numbers, logos, watermark, extra characters, scenery or decorative particle effects. Portrait fills about 80 percent of square height. Subject: Adult female elf reed-cloth weaver; very slim shoulders, long pointed ears, lavender-gray long braid over one shoulder, contemplative face, soft faded mauve work tunic and sage sash, wooden weaving shuttle with pale reed yarn at chest.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.elf.luyin.png",
+        "sha256": "da1adc1b872bccbf55b62480c8f7648f0fa0b2dc003d61cf297764b75a12cb91",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.elf.luyin.png",
+        "sha256": "7925758569035c1b6ce0cb4c80d33b62d6a0d97a15eadcb1ebe078189afd3fee",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 18114
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.elf.yasen",
+      "name": "雅森",
+      "race": "elf",
+      "role": "泽地守望者",
+      "appearance": "瘦高身形裹着苇色短斗篷，青灰长发束得很低；弓弦包在防潮布里。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: production Japanese 16-bit pixel RPG NPC portrait. Generate exactly one square chest-up character portrait, head and upper torso fully visible with generous margin; slight three-quarter view, centered. Crisp visible pixel clusters at an approximately 96x96 logical pixel grid, nearest-neighbor upscaled aesthetic, limited muted earthy palette, dark outline and two or three cel-shaded tones per material, readable facial features and occupational silhouette at 64 and 96 pixels. Family style is classic handcrafted Japanese fantasy RPG pixel portraits matching small chibi-adjacent battle sprites, NOT a smooth anime illustration, NOT painterly, NOT photorealistic, NOT 3D. Plain solid dark desaturated blue-green background (#16292b), warm muted directional highlight. No border, frame, letters, words, numbers, logos, watermark, extra characters, scenery or decorative particle effects. Portrait fills about 80 percent of square height. Subject: Older adult male elf marsh lookout; slim long neck and narrow shoulders, long pointed ears, blue-gray swept-back hair and lined slender face, reed-woven green-gray cloak, simple bow rising behind shoulder, calm watchful gaze, no bulky armor.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.elf.yasen.png",
+        "sha256": "7f77ed23b01163f61b1aab92e136f9af3968cd5a558a5934716713194c8461b4",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.elf.yasen.png",
+        "sha256": "0cd16327dad1a0fe2ae6db2a6fc64722fc1e87ae237f0f22393251668e07e55b",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 18634
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.goblin.kaba",
+      "name": "咔巴",
+      "race": "goblin",
+      "role": "菌汤厨手",
+      "appearance": "矮小圆脸，浅绿皮肤，白布厨帽歪在长耳间；短勺柄用布缠厚。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: production Japanese 16-bit pixel RPG NPC portrait. Generate exactly one square chest-up character portrait, head and upper torso fully visible with generous margin; slight three-quarter view, centered. Crisp visible pixel clusters at an approximately 96x96 logical pixel grid, nearest-neighbor upscaled aesthetic, limited muted earthy palette, dark outline and two or three cel-shaded tones per material, readable facial features and occupational silhouette at 64 and 96 pixels. Family style is classic handcrafted Japanese fantasy RPG pixel portraits matching small chibi-adjacent battle sprites, NOT a smooth anime illustration, NOT painterly, NOT photorealistic, NOT 3D. Plain solid dark desaturated blue-green background (#16292b), warm muted directional highlight. No border, frame, letters, words, numbers, logos, watermark, extra characters, scenery or decorative particle effects. Portrait fills about 80 percent of square height. Subject: Adult male goblin soup cook; very small compact goblin proportions, round olive-green face, broad pointed ears, tiny yellow-amber eyes and small lower tusk, slouching white cloth chef cap, patched rust-brown apron, simple soup ladle at chest; friendly capable not clownish, not human.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.goblin.kaba.png",
+        "sha256": "44a237069647ab5762f5c30545fb9b83d0a51cf619ab2c87438b81423099c65f",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.goblin.kaba.png",
+        "sha256": "8472b95fcdd635b9016db79d97e23337ba2f9e42462d4416381547728ecdd47e",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 17470
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.goblin.zhiqi",
+      "name": "枝契",
+      "race": "goblin",
+      "role": "货篓编工",
+      "appearance": "小个长耳，橙色背带挎着半编的货篓；深绿短发沾一缕苔纤。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: production Japanese 16-bit pixel RPG NPC portrait. Generate exactly one square chest-up character portrait, head and upper torso fully visible with generous margin; slight three-quarter view, centered. Crisp visible pixel clusters at an approximately 96x96 logical pixel grid, nearest-neighbor upscaled aesthetic, limited muted earthy palette, dark outline and two or three cel-shaded tones per material, readable facial features and occupational silhouette at 64 and 96 pixels. Family style is classic handcrafted Japanese fantasy RPG pixel portraits matching small chibi-adjacent battle sprites, NOT a smooth anime illustration, NOT painterly, NOT photorealistic, NOT 3D. Plain solid dark desaturated blue-green background (#16292b), warm muted directional highlight. No border, frame, letters, words, numbers, logos, watermark, extra characters, scenery or decorative particle effects. Portrait fills about 80 percent of square height. Subject: Adult female goblin basket worker; tiny compact green-skinned body, exceptionally long pointed ears, sharp triangular face with lively amber eyes, short messy dark hair, orange suspenders over olive cloth shirt, wicker basket rim and weaving strip visible by shoulder; no human face or tall body.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.goblin.zhiqi.png",
+        "sha256": "623c30af6b507b52916884c9e1c4687c69dc226b8f2d4604e6dbf6826dbe67c2",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.goblin.zhiqi.png",
+        "sha256": "8143cd13e9e1594428f73ba863e637c4307ed1821cf8dde1c52625bf6e92d522",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 17541
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.goblin.moku",
+      "name": "墨库",
+      "race": "goblin",
+      "role": "洞口护卫",
+      "appearance": "矮小结实，深绿皮肤，稀疏灰鬓贴着耳根；圆盾缀着交错的浅色皮补片。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: production Japanese 16-bit pixel RPG NPC portrait. Generate exactly one square chest-up character portrait, head and upper torso fully visible with generous margin; slight three-quarter view, centered. Crisp visible pixel clusters at an approximately 96x96 logical pixel grid, nearest-neighbor upscaled aesthetic, limited muted earthy palette, dark outline and two or three cel-shaded tones per material, readable facial features and occupational silhouette at 64 and 96 pixels. Family style is classic handcrafted Japanese fantasy RPG pixel portraits matching small chibi-adjacent battle sprites, NOT a smooth anime illustration, NOT painterly, NOT photorealistic, NOT 3D. Plain solid dark desaturated blue-green background (#16292b), warm muted directional highlight. No border, frame, letters, words, numbers, logos, watermark, extra characters, scenery or decorative particle effects. Portrait fills about 80 percent of square height. Subject: Older adult male goblin tunnel guard; short compact broad shoulders, deep green skin with lined angular face, one bent pointed ear, amber eyes and sparse gray brow hair, patched buckler held at chest, dull iron shoulder scrap over dark umber cloth, stalwart rather than villainous.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.goblin.moku.png",
+        "sha256": "b9bb429e41cc91f5ad72578a6a99b4beaa68b2bc05009a8510a511f131925f3a",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.goblin.moku.png",
+        "sha256": "42a0d05881ec35addf62a9d3fc78ede02a5f0c96a0a1447b5af6fd3e421111da",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 18631
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.ashen.shayan",
+      "name": "砂砚",
+      "race": "ashen",
+      "role": "矿粉研配者",
+      "appearance": "砂岩矿壳带天然层线，方颌没有人类皮肉；宽手托着陶研钵与短杵。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: production Japanese 16-bit pixel RPG NPC portrait. Generate exactly one square chest-up character portrait, head and upper torso fully visible with generous margin; slight three-quarter view, centered. Crisp visible pixel clusters at an approximately 96x96 logical pixel grid, nearest-neighbor upscaled aesthetic, limited muted earthy palette, dark outline and two or three cel-shaded tones per material, readable facial features and occupational silhouette at 64 and 96 pixels. Family style is classic handcrafted Japanese fantasy RPG pixel portraits matching small chibi-adjacent battle sprites, NOT a smooth anime illustration, NOT painterly, NOT photorealistic, NOT 3D. Plain solid dark desaturated blue-green background (#16292b), warm muted directional highlight. No border, frame, letters, words, numbers, logos, watermark, extra characters, scenery or decorative particle effects. Portrait fills about 80 percent of square height. Subject: A friendly adult living sandstone mineral being, not human: broad faceted ochre sandstone head with asymmetrical carved brow planes, tiny steady amber eye crystals, no flesh, hair or beard, layered tawny mineral neck and arms. Humble mineral powder workshop worker holding a small stone mortar and pestle at lower chest, rough linen apron. Quietly attentive expression.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.ashen.shayan.png",
+        "sha256": "04a39de18547e3ff37bdc93de50248b8ec1e9e9835b123781bb1cdc50f2b4550",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.ashen.shayan.png",
+        "sha256": "da0673734a648c953c50ae361d12c1b938d5dd3a6f275ff9575f1e00a23f73f1",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 18036
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.ashen.huileng",
+      "name": "灰棱",
+      "race": "ashen",
+      "role": "通风口照管者",
+      "appearance": "灰蓝矿壳有整齐的斜面棱线，头侧嵌淡色片晶；胸前挂轻薄风叶片。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: production Japanese 16-bit pixel RPG NPC portrait. Generate exactly one square chest-up character portrait, head and upper torso fully visible with generous margin; slight three-quarter view, centered. Crisp visible pixel clusters at an approximately 96x96 logical pixel grid, nearest-neighbor upscaled aesthetic, limited muted earthy palette, dark outline and two or three cel-shaded tones per material, readable facial features and occupational silhouette at 64 and 96 pixels. Family style is classic handcrafted Japanese fantasy RPG pixel portraits matching small chibi-adjacent battle sprites, NOT a smooth anime illustration, NOT painterly, NOT photorealistic, NOT 3D. Plain solid dark desaturated blue-green background (#16292b), warm muted directional highlight. No border, frame, letters, words, numbers, logos, watermark, extra characters, scenery or decorative particle effects. Portrait fills about 80 percent of square height. Subject: Adult living gray-blue mineral being, never a burned human: slim angular basalt and slate faceted head and shoulders, pale cyan mineral eyes, asymmetrical high stepped crystal brow, dark stone neck with narrow aqua mineral seams, no flesh/hair/beard. Practical airflow-vent keeper wearing faded ochre work straps, holds a simple wooden airflow vane with three broad blades near chest. Subtle life and attentive character, no magical explosion.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.ashen.huileng.png",
+        "sha256": "bebfa26092b76c1b8ed7ded400e757e21d8c71c4309b01da7b9f09fd12fade18",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.ashen.huileng.png",
+        "sha256": "9c9ff3748591037089abc5591d9a9a5a1224c7cc8d5bfd55701c5637f7104297",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 18102
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    },
+    {
+      "id": "npc.ashen.pucheng",
+      "name": "璞承",
+      "race": "ashen",
+      "role": "石道护行者",
+      "appearance": "黑曜矿壳透出温暗琥珀晶纹，头颅是整块有棱的矿石；陶护肩与短石盾错层相扣。",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: production Japanese 16-bit pixel RPG NPC portrait. Generate exactly one square chest-up character portrait, head and upper torso fully visible with generous margin; slight three-quarter view, centered. Crisp visible pixel clusters at an approximately 96x96 logical pixel grid, nearest-neighbor upscaled aesthetic, limited muted earthy palette, dark outline and two or three cel-shaded tones per material, readable facial features and occupational silhouette at 64 and 96 pixels. Family style is classic handcrafted Japanese fantasy RPG pixel portraits matching small chibi-adjacent battle sprites, NOT a smooth anime illustration, NOT painterly, NOT photorealistic, NOT 3D. Plain solid dark desaturated blue-green background (#16292b), warm muted directional highlight. No border, frame, letters, words, numbers, logos, watermark, extra characters, scenery or decorative particle effects. Portrait fills about 80 percent of square height. Subject: Adult living obsidian mineral being, not a human: sturdy broad dark faceted stone head and upper body with pale bronze mineral seams, two small warm amber crystal eyes, distinct broad low craggy forehead, no flesh/hair/beard. Stoneway guard wearing simple weathered pale ceramic shoulder guards and dark teal cloth sash, small plain stone-and-wood guard staff beside shoulder. Calm reliable protective expression, no glowing fire.",
+      "source": {
+        "path": "source-art/npc-portraits/original/npc.ashen.pucheng.png",
+        "sha256": "6b931e7f1c490dbb21e755f7409ab5d089f9dfe8e34f55fbdc79285599f63f75",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "runtime": {
+        "path": "dist/npc-portraits/npc.ashen.pucheng.png",
+        "sha256": "c686226cade9ac6f78314643beef78cfdaa93d31be8f601fee93bb0af11fb84e",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 18444
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false
+      }
+    }
+  ]
+}

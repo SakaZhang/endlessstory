@@ -6,7 +6,7 @@ import {STORY_SCENES} from './story-event-registry.js';
 import {freshDiplomacy,validDiplomacy,normalizeDiplomacy,territoryAccess,nodeAccess,applyWarStart,applyWarEnd,pruneRandomWarHistory,withWarReplay} from './war-diplomacy.js';
 export {validDiplomacy,normalizeDiplomacy,territoryAccess,nodeAccess} from './war-diplomacy.js';
 import {validReturnRingState,applyReturnRingVictory,returnRingRareBonus} from './return-ring-state.js';
-import {validNpcEventState,recordNpcEventVictory} from './npc-events.js';
+import {validNpcEventState,recordNpcEventVictory,recordNpcEventExploration} from './npc-events.js';
 import {validStoryEventState,canStartStoryScenario,canStartStoryFieldEncounter,recordStoryScenarioResult,recordStoryEncounterVictory} from './story-event-controller.js';
 import {storyScenarioForStart,attachStoryScenario,advanceStoryScenario,finalizeStoryScenario,validStoryScenarioState} from './story-scenario-combat.js';
 import {validTaskRewardState} from './task-reward-transaction.js';
@@ -717,7 +717,7 @@ export function startStoryScenario(s,scenarioId,now=Date.now()){
 function startRegisteredStoryEncounter(s,sceneId,now){
  const d=STORY_SCENES[sceneId],a=s.story?.activeScene,instance=d?.encounter&&PLANNED_INSTANCES[d.encounter.nodeId];
  if(!d||a?.id!==d.id||d.pov!==s.race||!instance?.enabled||instance.kind!=='field'||instance.siteId!==d.siteId||s.siteId!==d.siteId||!storyTerritoryAccess(s,sceneId).allowed||!canStartEncounterHealth(s,now)||!normalizeExpedition(s))return null;
- return startDwarfEncounter(s,instance,now);
+ return startDwarfEncounter(s,instance,now,false);
 }
 export function startStoryFieldEncounter(s,sceneId,now=Date.now()){
  const d=STORY_SCENES[sceneId];
@@ -734,7 +734,7 @@ export function startInstanceEncounter(s,instanceId,now=Date.now()){
  return startDwarfEncounter(s,instance,now);
 }
 
-function startDwarfEncounter(s,instance,now){
+function startDwarfEncounter(s,instance,now,recordLocalExploration=true){
  const treeCarry=s.dungeonRun?.carry;
  const area=AREAS[instance.areaId];if(!areaBudgetReady(area.number,area.race)||!getAreaProgress(s,area.race)?.unlocked.includes(area.number))return null;
  const stage=s.dungeonRun?.stage??1,rank=instance.kind==='boss'?'boss':instance.kind==='dungeon'&&stage===3?'elite':'normal',pool=eligibleMonsters(instance.id,rank);
@@ -766,7 +766,7 @@ function startDwarfEncounter(s,instance,now){
  // Each fresh field encounter starts a new skill clock. Preserve carried shield
  // lifetime, not its previous encounter's absolute clock origin.
  if(e.skillResolver==='tree-v1'&&e.playerShieldLayers){const clock=e.treeEffects?.clock??e.treeCombatClock??0,offset=clock-e.playerShieldLayers.clock;e.playerShieldLayers={...e.playerShieldLayers,clock,layers:e.playerShieldLayers.layers.map(l=>({...l,expiresAt:l.expiresAt===null?null:l.expiresAt+offset}))};}
- e.targetId=e.enemies[0].id;dispatchRacialLegendaryEvent(s,{type:'encounterStart',encounterId:e.id},{maxHp:st.hp,stats:st});syncMultiTarget(e);s.location=e.location;s.siteId=instance.siteId;s.activeEncounter=e;s.atCamp=false;s.running=true;s.nextActionAt=s.lastHealthClock+1100;recordEncounteredMonsters(s,e);recordNodeExplored(s,e);return e;
+ e.targetId=e.enemies[0].id;dispatchRacialLegendaryEvent(s,{type:'encounterStart',encounterId:e.id},{maxHp:st.hp,stats:st});syncMultiTarget(e);s.location=e.location;s.siteId=instance.siteId;s.activeEncounter=e;s.atCamp=false;s.running=true;s.nextActionAt=s.lastHealthClock+1100;recordEncounteredMonsters(s,e);recordNodeExplored(s,e);if(recordLocalExploration)recordNpcEventExploration(s,e,now);return e;
 }
 // Explicit developer entry: callers isolate the supplied save; no production random trigger.
 export function startDeveloperGroup(s,options={},now=Date.now()){

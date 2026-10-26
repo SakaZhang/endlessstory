@@ -19,6 +19,7 @@
     "test:story-host": "node story-event-controller-tests.mjs && node story-scenario-combat-tests.mjs && node story-event-app-ui-tests.cjs",
     "test:asset-recovery": "node asset-recovery-tests.mjs && node asset-recovery-app-ui-tests.cjs && node test-pixel-map-scenes.mjs && node pixel-service-scenes-tests.mjs && node live-battle-scoped-loading-tests.mjs && node pixel-maps-live-app-ui-tests.cjs && node skill-pixel-icons-tests.mjs && node skill-pixel-consumers-tests.mjs && node skill-pixel-hud-tests.mjs && node equipment-raster-adapter-tests.mjs && node material-pixel-art-tests.mjs && node consumable-pixel-art-tests.mjs && node monster-pixel-portrait-tests.mjs",
     "test:events-release": "npm run test:npc-events && npm run test:story-host && npm run test:war && npm run test:authored-slows && node story-ring-integration-tests.mjs && npm run test:infinity-gems && npm run test:asset-recovery && node story-scenario-native-proof.mjs",
-    "test:random-war": "node random-war-world-tests.mjs && node random-war-app-ui-tests.cjs"
+    "test:random-war": "node random-war-world-tests.mjs && node random-war-app-ui-tests.cjs",
+    "test:npc-expansion": "node content/racial-npc-events/validate-content.mjs . && node npc-expansion-tests.mjs && node npc-event-host-tests.mjs && node npc-event-app-ui-tests.cjs && node npc-portrait-tests.mjs"
   }
 }

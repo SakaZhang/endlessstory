@@ -1,0 +1,6087 @@
+// Authored NPC content v2. Stable v1 identities and progress are preserved.
+const freeze = x => { if (x && typeof x === "object" && !Object.isFrozen(x)) { for (const v of Object.values(x)) freeze(v); Object.freeze(x); } return x; };
+export const RACIAL_NPC_EVENT_META = freeze({
+  "formatVersion": 1,
+  "contentId": "racial-npc-events-v2",
+  "status": "production candidate; not published",
+  "sourceCommit": "ddfcc1993a38574a2631916519d94e861c674b9f",
+  "roadmap": {
+    "pageId": "page_689bf5df34dc81918303b00b1f74fad2",
+    "revision": 112
+  },
+  "authorship": "保留15名NPC与30件已上线事件，授权新增15名NPC与30件地方事件；30人均有独立像素肖像。",
+  "scope": "不修改主线／归途材料身份来源；不发环材料、不新增战争触发或时长；不发布。",
+  "gates": [
+    "选择角色不限制跨族接事；必须已有区域解锁且符合战争门禁。",
+    "接取、提交、领取均调用 territoryAccess(save,race)；胜利目标也须 nodeAccess(save,nodeId)。",
+    "封锁期间暂停，不清探索、材料、完成记录或本轮进度；解封继续。",
+    "第一版普通事件没有主线门槛，无秘密对白；故事阶段到来不会自动代玩家答应。"
+  ],
+  "repeatableContract": "20件可重复：10件真实普通材料消耗、10件接取后新胜利；每轮手动接取，成功后冷却300000ms；5件一次性探索须接受后真实节点进入。",
+  "ringNpcPostings": [
+    {
+      "npcId": "npc.dwarf.hepo",
+      "areaId": "dwarf.a05"
+    },
+    {
+      "npcId": "npc.human.aoden",
+      "areaId": "human.a04"
+    },
+    {
+      "npcId": "npc.elf.yiluo",
+      "areaId": "elf.a04"
+    },
+    {
+      "npcId": "npc.goblin.disuo",
+      "areaId": "goblin.a06"
+    },
+    {
+      "npcId": "npc.ashen.lilu",
+      "areaId": "ashen.a06"
+    }
+  ],
+  "ringPostingPolicy": "归途临时驻点沿用同一NPC身份与肖像；五件归途事件独立于60件地方事务，不复制人物。",
+  "visualStatus": "30张独立像素肖像，按当前地区惰性载入；图像失败复用有限自动重试与手动恢复。"
+});
+export const RACIAL_NPCS = freeze([
+  {
+    "id": "npc.dwarf.dora",
+    "name": "朵菈",
+    "race": "dwarf",
+    "role": "矿灯修理工",
+    "areaId": "dwarf.a01",
+    "homeAreaId": "dwarf.a01",
+    "appearance": "烟灰围裙，额灯罩有一道斜裂；短辫末端缠着旧布。",
+    "voice": "先问东西哪里坏了，再说别的；温和但不许逞强。",
+    "plotRelation": "认识来往矿工；布洛克可得到熟人式称呼，但她不是炸矿主线证人，也不知道私卖遗物。",
+    "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+    "areaName": "山麓矿道",
+    "portraitId": "npc.dwarf.dora"
+  },
+  {
+    "id": "npc.dwarf.hepo",
+    "name": "赫珀",
+    "race": "dwarf",
+    "role": "冷泉配料员",
+    "areaId": "dwarf.a05",
+    "homeAreaId": "dwarf.a05",
+    "appearance": "宽布帽裹着耳朵，手套有浅蓝苔痕；腰间挂空量杯。",
+    "voice": "报品名很准，遇到争执就把东西摊开给人看。",
+    "plotRelation": "供应矿工日常配料，不会凭材料认出遗物核心；可复用为归途事件在本区的 NPC。",
+    "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+    "areaName": "冷泉与炉区交界",
+    "portraitId": "npc.dwarf.hepo"
+  },
+  {
+    "id": "npc.dwarf.naduo",
+    "name": "纳铎",
+    "race": "dwarf",
+    "role": "矿图修订员",
+    "areaId": "dwarf.a07",
+    "homeAreaId": "dwarf.a07",
+    "appearance": "右袖磨破，图筒比背包长；指尖常留粉笔白。",
+    "voice": "说得慢，常把“看见”和“听说”纠正一遍。",
+    "plotRelation": "只记录本地现状；第三遗址与炸矿指令由主线自己的证词提供，不能由他提前揭露。",
+    "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+    "areaName": "银纹矿廊",
+    "portraitId": "npc.dwarf.naduo"
+  },
+  {
+    "id": "npc.human.milei",
+    "name": "米蕾",
+    "race": "human",
+    "role": "磨坊管仓员",
+    "areaId": "human.a01",
+    "homeAreaId": "human.a01",
+    "appearance": "卷袖沾麦粉，一只耳后夹着短炭笔；围裙缝了许多方补丁。",
+    "voice": "算账直白，嘴里总分“今天”和“下季”，不训人。",
+    "plotRelation": "承受边境粮食压力，但不是国王密使；知道商队受袭须由主线公开消息而非预知。",
+    "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+    "areaName": "田垄边境",
+    "portraitId": "npc.human.milei"
+  },
+  {
+    "id": "npc.human.aoden",
+    "name": "奥登",
+    "race": "human",
+    "role": "驿道记事员",
+    "areaId": "human.a02",
+    "homeAreaId": "human.a02",
+    "appearance": "褪色短外套，左肩钉着宽纸袋；鼻尖总沾墨。",
+    "voice": "爱把长话压成两行，碰到含混地址就追问。",
+    "plotRelation": "记录普通旅人的消息；不会替罗什福尔判断商队袭击者；归途可临时驻 human.a04。",
+    "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+    "areaName": "旧驿道",
+    "portraitId": "npc.human.aoden"
+  },
+  {
+    "id": "npc.human.saifu",
+    "name": "赛芙",
+    "race": "human",
+    "role": "行旅缝补师",
+    "areaId": "human.a05",
+    "homeAreaId": "human.a05",
+    "appearance": "深色围裙挂着大小针包，发带由两块不同布拼成。",
+    "voice": "习惯先让人坐下再谈事；一句话短，收尾很利落。",
+    "plotRelation": "为路人修布，不是军方情报源；战争中同样遵守地区可达状态，不发通行证。",
+    "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+    "areaName": "圣烛林缘",
+    "portraitId": "npc.human.saifu"
+  },
+  {
+    "id": "npc.elf.fulan",
+    "name": "芙岚",
+    "race": "elf",
+    "role": "苗圃照管者",
+    "areaId": "elf.a01",
+    "homeAreaId": "elf.a01",
+    "appearance": "浅绿围裙有湿泥印，发辫缀着剪掉的干叶柄。",
+    "voice": "细心而不空泛，说植物时用具体动作；不讲全知神谕。",
+    "plotRelation": "照料林缘日常苗木，非枯泉的守林者主角；没有祭坛知识。",
+    "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+    "areaName": "露冠林缘",
+    "portraitId": "npc.elf.fulan"
+  },
+  {
+    "id": "npc.elf.yiluo",
+    "name": "伊萝",
+    "race": "elf",
+    "role": "根桥修护匠",
+    "areaId": "elf.a03",
+    "homeAreaId": "elf.a03",
+    "appearance": "肩上绕着卷好的细藤，袖口整齐地补了浅灰布。",
+    "voice": "先解释为什么不能踩，再让人选办法；耐心不说教。",
+    "plotRelation": "修普通根桥，与枯泉旧结构和解封工具无关；归途可临时驻 elf.a04。",
+    "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+    "areaName": "盘藤坡地",
+    "portraitId": "npc.elf.yiluo"
+  },
+  {
+    "id": "npc.elf.sailin",
+    "name": "赛林",
+    "race": "elf",
+    "role": "林径巡护员",
+    "areaId": "elf.a05",
+    "homeAreaId": "elf.a05",
+    "appearance": "暗绿短披肩，护腕卡着一小片不锋利的木牌。",
+    "voice": "谨慎，常用“我看到的是”；对急躁的人也不摆祭司架子。",
+    "plotRelation": "只知道当前林径状况，不能解释大祭司真意；她不替莱姆斯执行反抗或解封。",
+    "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+    "areaName": "蚀月花径",
+    "portraitId": "npc.elf.sailin"
+  },
+  {
+    "id": "npc.goblin.gudai",
+    "name": "咕黛",
+    "race": "goblin",
+    "role": "菌架看守",
+    "areaId": "goblin.a01",
+    "homeAreaId": "goblin.a01",
+    "appearance": "顶着折边旧帽，背袋外侧缝着细密的防漏网。",
+    "voice": "语速快，先护住眼前那一筐；严肃时不拿饥饿开玩笑。",
+    "plotRelation": "有自己的菌架与邻里，不是奇克的亲属或族群首领；不替奇克解决全家缺粮。",
+    "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+    "areaName": "苔口坡地",
+    "portraitId": "npc.goblin.gudai"
+  },
+  {
+    "id": "npc.goblin.banya",
+    "name": "扳牙",
+    "race": "goblin",
+    "role": "旧铁修补匠",
+    "areaId": "goblin.a02",
+    "homeAreaId": "goblin.a02",
+    "appearance": "一侧护目镜镜片缺了角，腰带上挂着大小不一的钳子。",
+    "voice": "讨价时精明，验修时实在；不把每句话都变成笑话。",
+    "plotRelation": "修普通支架，不参与商队袭击真凶的判定；既不替奇克偷粮，也不认识神秘遗物。",
+    "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+    "areaName": "碎铁旧道",
+    "portraitId": "npc.goblin.banya"
+  },
+  {
+    "id": "npc.goblin.disuo",
+    "name": "滴索",
+    "race": "goblin",
+    "role": "暗河摆渡员",
+    "areaId": "goblin.a06",
+    "homeAreaId": "goblin.a06",
+    "appearance": "披着窄油布，裤脚永远卷得高；肩上绳圈收得很紧。",
+    "voice": "说话短，先算重量和退路；不把所有风险当能赚的钱。",
+    "plotRelation": "运普通人货，不指认商队袭击；不会承诺封锁时仍可摆渡。归途复用本区驻点。",
+    "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+    "areaName": "暗河渡口",
+    "portraitId": "npc.goblin.disuo"
+  },
+  {
+    "id": "npc.ashen.lilu",
+    "name": "砾露",
+    "race": "ashen",
+    "role": "矿露分配员",
+    "areaId": "ashen.a03",
+    "homeAreaId": "ashen.a03",
+    "appearance": "浅灰矿壳，肩缘有水渍般的深纹；携带带缺口的陶制量器。",
+    "voice": "不冷漠，表达具体；先问容器，再问需要，不机械念数字。",
+    "plotRelation": "普通矿物生命，只掌握冷烬浅谷的矿露分配；不知道烬裔起源，也不处理任何人的生命核心。归途可临时驻 ashen.a06。",
+    "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+    "areaName": "冷烬浅谷",
+    "portraitId": "npc.ashen.lilu"
+  },
+  {
+    "id": "npc.ashen.mingji",
+    "name": "鸣隙",
+    "race": "ashen",
+    "role": "晶音路标匠",
+    "areaId": "ashen.a06",
+    "homeAreaId": "ashen.a06",
+    "appearance": "深色石壳夹细银线，背着木框；框上晶片彼此隔开。",
+    "voice": "善听回声但不神秘化；会直说自己也可能听错。",
+    "plotRelation": "校准普通道路声标；不把古神庙提前称为第四祭坛，不解释生命核心与先祖。",
+    "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+    "areaName": "鸣晶断层",
+    "portraitId": "npc.ashen.mingji"
+  },
+  {
+    "id": "npc.ashen.taozhe",
+    "name": "陶褶",
+    "race": "ashen",
+    "role": "陶石棚修护者",
+    "areaId": "ashen.a08",
+    "homeAreaId": "ashen.a08",
+    "appearance": "浅褐矿壳层叠如折痕，前臂缠着防磨布，随身带平木尺。",
+    "voice": "慢声，喜欢先试一小块；对“肯定没事”会追问依据。",
+    "plotRelation": "维护普通遮棚，不是族长、先知或古代创造者证人；不改变族长死亡。",
+    "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+    "areaName": "白盐古盆",
+    "portraitId": "npc.ashen.taozhe"
+  },
+  {
+    "id": "npc.dwarf.taolan",
+    "name": "陶兰",
+    "race": "dwarf",
+    "role": "矿车木作匠",
+    "areaId": "dwarf.a02",
+    "homeAreaId": "dwarf.a02",
+    "appearance": "铜色卷发别在耳后，短壮肩膀搭着半只木轮；褐围裙上插木楔。",
+    "voice": "讲尺寸时干脆，愿意先听推车人的手感。",
+    "plotRelation": "只修普通矿车，不掌握炸矿命令或遗物贸易。",
+    "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+    "areaName": "岩蜥支洞",
+    "portraitId": "npc.dwarf.taolan",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+  },
+  {
+    "id": "npc.dwarf.kelin",
+    "name": "科霖",
+    "race": "dwarf",
+    "role": "轮值盾卫",
+    "areaId": "dwarf.a04",
+    "homeAreaId": "dwarf.a04",
+    "appearance": "灰胡子压在旧皮领上，短盾边缘有三块补片；眉毛粗而平。",
+    "voice": "不夸自己打过多少仗，常问同伴有没有退路。",
+    "plotRelation": "看守当地工作队，不是军官，不改变战争结果或矿难生死。",
+    "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+    "areaName": "废炉外坡",
+    "portraitId": "npc.dwarf.kelin",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+  },
+  {
+    "id": "npc.dwarf.shajia",
+    "name": "莎嘉",
+    "race": "dwarf",
+    "role": "矿队炊事员",
+    "areaId": "dwarf.a08",
+    "homeAreaId": "dwarf.a08",
+    "appearance": "红头巾裹着黑色鬓发，壮实手臂挎短柄锅勺；围裙口袋装布包。",
+    "voice": "嗓音爽利，不许拿饥饿和手抖当玩笑。",
+    "plotRelation": "照顾普通矿队用餐，不替主线救援或粮食政策作决定。",
+    "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+    "areaName": "深脉裂谷",
+    "portraitId": "npc.dwarf.shajia",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+  },
+  {
+    "id": "npc.human.wenna",
+    "name": "温娜",
+    "race": "human",
+    "role": "采药师",
+    "areaId": "human.a03",
+    "homeAreaId": "human.a03",
+    "appearance": "银发编成长辫，苔色披巾扣着木别针；肩袋露出整齐的草药包。",
+    "voice": "有分寸地问症状，不把普通草叶说成神药。",
+    "plotRelation": "帮助当地旅人，不治愈主线必然伤亡，不参与王室密信。",
+    "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+    "areaName": "礼钟丘陵",
+    "portraitId": "npc.human.wenna",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+  },
+  {
+    "id": "npc.human.luoen",
+    "name": "洛恩",
+    "race": "human",
+    "role": "桥栏木匠",
+    "areaId": "human.a07",
+    "homeAreaId": "human.a07",
+    "appearance": "深棕卷发蓬在旧工帽下，靛蓝工装缝着木尺袋；左肩挂一把短刨。",
+    "voice": "手上不停但会停下来听人说，讨厌把临时修补说成永久稳固。",
+    "plotRelation": "修桥栏不等于重夺关隘；不发军方通行或改变领土。",
+    "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+    "areaName": "失守关隘",
+    "portraitId": "npc.human.luoen",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+  },
+  {
+    "id": "npc.human.beila",
+    "name": "贝菈",
+    "race": "human",
+    "role": "高地巡守",
+    "areaId": "human.a08",
+    "homeAreaId": "human.a08",
+    "appearance": "雀斑横过鼻梁，蜂蜜色短披巾压在皮肩带下；短矛绑着白布结。",
+    "voice": "语气明亮，发现不确定处会直接承认。",
+    "plotRelation": "普通高地巡守，不是王族、密使或战争胜负关键人物。",
+    "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+    "areaName": "夜鸦高地",
+    "portraitId": "npc.human.beila",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+  },
+  {
+    "id": "npc.elf.qiwei",
+    "name": "栖苇",
+    "race": "elf",
+    "role": "鸟栖照护者",
+    "areaId": "elf.a02",
+    "homeAreaId": "elf.a02",
+    "appearance": "身形纤细，短绿发夹着褐羽；青布肩袋装空巢垫而非捕鸟笼。",
+    "voice": "轻声但不神秘，愿意让不亲人的鸟保持距离。",
+    "plotRelation": "照管普通林鸟，不传神谕，不知道大祭司与遗址秘密。",
+    "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+    "areaName": "回声树庭",
+    "portraitId": "npc.elf.qiwei",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+  },
+  {
+    "id": "npc.elf.luyin",
+    "name": "露茵",
+    "race": "elf",
+    "role": "苇布织工",
+    "areaId": "elf.a06",
+    "homeAreaId": "elf.a06",
+    "appearance": "纤细长臂托着木织梭，紫灰长辫用苇绳扎住；灰绿工作袍磨白了袖口。",
+    "voice": "说话像收线一样有条理，但愿意让补丁保留旧颜色。",
+    "plotRelation": "织普通苇布，不把焚林新芽解释为主线仪式成败。",
+    "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+    "areaName": "焚林新芽",
+    "portraitId": "npc.elf.luyin",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+  },
+  {
+    "id": "npc.elf.yasen",
+    "name": "雅森",
+    "race": "elf",
+    "role": "泽地守望者",
+    "areaId": "elf.a09",
+    "homeAreaId": "elf.a09",
+    "appearance": "瘦高身形裹着苇色短斗篷，青灰长发束得很低；弓弦包在防潮布里。",
+    "voice": "先问脚下稳不稳，再谈箭准不准，不拿年长压人。",
+    "plotRelation": "只巡本地泽路，不拥有祭坛知识，不替莱姆斯完成主线抉择。",
+    "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+    "areaName": "落潮泽地",
+    "portraitId": "npc.elf.yasen",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+  },
+  {
+    "id": "npc.goblin.kaba",
+    "name": "咔巴",
+    "race": "goblin",
+    "role": "菌汤厨手",
+    "areaId": "goblin.a03",
+    "homeAreaId": "goblin.a03",
+    "appearance": "矮小圆脸，浅绿皮肤，白布厨帽歪在长耳间；短勺柄用布缠厚。",
+    "voice": "动作快，盛汤时反而数得慢，给晚来的人留底。",
+    "plotRelation": "不是奇克亲属或首领，经营小锅汤，不根治族群粮荒。",
+    "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+    "areaName": "菌灯洞群",
+    "portraitId": "npc.goblin.kaba",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+  },
+  {
+    "id": "npc.goblin.zhiqi",
+    "name": "枝契",
+    "race": "goblin",
+    "role": "货篓编工",
+    "areaId": "goblin.a04",
+    "homeAreaId": "goblin.a04",
+    "appearance": "小个长耳，橙色背带挎着半编的货篓；深绿短发沾一缕苔纤。",
+    "voice": "善于估轻重，讨厌把身材小等同于可以多塞一篓。",
+    "plotRelation": "编运普通货篓，不判定商队袭击者，不为抢粮补造证词。",
+    "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+    "areaName": "地下货道",
+    "portraitId": "npc.goblin.zhiqi",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+  },
+  {
+    "id": "npc.goblin.moku",
+    "name": "墨库",
+    "race": "goblin",
+    "role": "洞口护卫",
+    "areaId": "goblin.a08",
+    "homeAreaId": "goblin.a08",
+    "appearance": "矮小结实，深绿皮肤，稀疏灰鬓贴着耳根；圆盾缀着交错的浅色皮补片。",
+    "voice": "话不多，会把新人的退路放在自己的面子前。",
+    "plotRelation": "普通洞口轮值者，不是哥布林首领，不替奇克承担族群结局。",
+    "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+    "areaName": "深窟集地",
+    "portraitId": "npc.goblin.moku",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+  },
+  {
+    "id": "npc.ashen.shayan",
+    "name": "砂砚",
+    "race": "ashen",
+    "role": "矿粉研配者",
+    "areaId": "ashen.a01",
+    "homeAreaId": "ashen.a01",
+    "appearance": "砂岩矿壳带天然层线，方颌没有人类皮肉；宽手托着陶研钵与短杵。",
+    "voice": "分清粉与颗粒再说用途，态度温厚而不机械。",
+    "plotRelation": "普通矿物生命，只调护具用粉，不研磨、替换或医治生命核心。",
+    "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+    "areaName": "醒石边地",
+    "portraitId": "npc.ashen.shayan",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+  },
+  {
+    "id": "npc.ashen.huileng",
+    "name": "灰棱",
+    "race": "ashen",
+    "role": "通风口照管者",
+    "areaId": "ashen.a04",
+    "homeAreaId": "ashen.a04",
+    "appearance": "灰蓝矿壳有整齐的斜面棱线，头侧嵌淡色片晶；胸前挂轻薄风叶片。",
+    "voice": "听见异响先核对风向，不把每种回声解释成古代召唤。",
+    "plotRelation": "只维护普通风口，不解释先祖起源、神庙或核心奥秘。",
+    "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+    "areaName": "琉砂洼地",
+    "portraitId": "npc.ashen.huileng",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+  },
+  {
+    "id": "npc.ashen.pucheng",
+    "name": "璞承",
+    "race": "ashen",
+    "role": "石道护行者",
+    "areaId": "ashen.a07",
+    "homeAreaId": "ashen.a07",
+    "appearance": "黑曜矿壳透出温暗琥珀晶纹，头颅是整块有棱的矿石；陶护肩与短石盾错层相扣。",
+    "voice": "沉稳而有耐心，先让同行者停稳再作判断。",
+    "plotRelation": "只护送普通石道行人，不是族长，不改变主线战争与族长死亡。",
+    "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+    "areaName": "黑曜风口",
+    "portraitId": "npc.ashen.pucheng",
+    "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+  }
+]);
+export const RACIAL_NPC_EVENTS = freeze([
+  {
+    "id": "local.dwarf.lamp_labels",
+    "npcId": "npc.dwarf.dora",
+    "npcName": "朵菈",
+    "race": "dwarf",
+    "areaId": "dwarf.a01",
+    "title": "看得清的标记",
+    "description": "同色灯牌让交班矿工拿错待修灯。把可用、待修两组重新标清。",
+    "dialogue": [
+      "灯不认谁嗓门大。坏罩和好罩得分开。",
+      "这边是裂罩，那边缺扣。你看怎样最不易拿错？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "按形状分牌",
+        "dialogue": "你刻缺口，我画横线。手脏也摸得出来。",
+        "outcome": "灯架改用缺口／横线双标记；后续问候承认玩家选择。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.dwarf.lamp_labels.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "按存放位置分架",
+        "dialogue": "行。好灯靠出口，待修灯往里放。",
+        "outcome": "改为内外两架并加提示。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.dwarf.lamp_labels.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "dwarf.a01",
+      "atArea": "dwarf.a01",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "先放着。答应了再动工具。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本稿采用零额外经济奖励；后续奖励须独立平衡，不是已固定正史。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "areaName": "山麓矿道",
+    "implementationNotes": {
+      "originalDescription": "同色灯牌让交班矿工拿错待修灯。把可用、待修两组重新标清。",
+      "originalChoiceOutcomes": {
+        "option_1": "灯架改用缺口／横线双标记；后续问候承认玩家选择。",
+        "option_2": "改为内外两架并加提示；不新增装备、灯光属性或地图解锁。"
+      }
+    }
+  },
+  {
+    "id": "local.dwarf.strap_repair",
+    "npcId": "npc.dwarf.dora",
+    "npcName": "朵菈",
+    "race": "dwarf",
+    "areaId": "dwarf.a01",
+    "title": "别把灯绑在腕上",
+    "description": "用一份普通铁屑修好灯架松脱的扣环；选择优先补公用架还是交班架。",
+    "dialogue": [
+      "我修的是灯架，不是给你打造新盔甲。",
+      "普通铁屑就够，亮得扎眼的好料留着。"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "materials",
+      "materials": [
+        {
+          "key": "铁屑|0",
+          "materialId": "dwarf.iron_filings",
+          "quantity": 1
+        }
+      ],
+      "inventoryPolicy": "仅扣界面明示的一份普通品质材料；不自动扣高品质，不按曾经拾取判交付。"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "先补公用架",
+        "dialogue": "那就先让赶着出门的人有灯拿。",
+        "outcome": "公用灯架扣环修好，任务记一次完成。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.dwarf.strap_repair.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "先补交班架",
+        "dialogue": "好，先让交班的人别把灯摔在地上。",
+        "outcome": "交班架固定完成，后续对白不同。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.dwarf.strap_repair.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "dwarf.a01",
+      "atArea": "dwarf.a01",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "先放着。答应了再动工具。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本稿采用零额外经济奖励；后续奖励须独立平衡，不是已固定正史。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "materials": [
+      {
+        "key": "铁屑|0",
+        "materialId": "dwarf.iron_filings",
+        "quantity": 1
+      }
+    ],
+    "areaName": "山麓矿道",
+    "implementationNotes": {
+      "originalDescription": "用一份普通铁屑修好灯架松脱的扣环；选择优先补公用架还是交班架。",
+      "originalChoiceOutcomes": {
+        "option_1": "公用灯架扣环修好，任务记一次完成。",
+        "option_2": "交班架固定完成，后续对白不同；不改变矿难人数。"
+      }
+    }
+  },
+  {
+    "id": "local.dwarf.moss_batch",
+    "npcId": "npc.dwarf.hepo",
+    "npcName": "赫珀",
+    "race": "dwarf",
+    "areaId": "dwarf.a05",
+    "title": "这批别混",
+    "description": "本批石胆菌分装缺料；赫珀用库存灰根草交换，补充玩家的基础配料。两份普通石胆菌换一份普通灰根草，不自动投入高品质。",
+    "dialogue": [
+      "石胆菌和寒泉苔别混。我这批还缺石胆菌。",
+      "交两份普通石胆菌，领一份普通灰根草。"
+    ],
+    "completion": [
+      "已记录你的选择；与约定相符的交付和回报已经结清。"
+    ],
+    "objective": {
+      "kind": "materials",
+      "materials": [
+        {
+          "key": "dwarf.stone_gall_fungus|0",
+          "materialId": "dwarf.stone_gall_fungus",
+          "quantity": 2
+        }
+      ],
+      "inventoryPolicy": "明示扣除两份普通品质材料，不自动消耗高品质；与奖励及完成同一原子事务。"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "标成当批补入",
+        "dialogue": "这一格写你补入的，不改旧账。",
+        "outcome": "两份普通石胆菌被消耗；当前批登记完成；领取一份普通灰根草。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.dwarf.moss_batch.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "单独装袋",
+        "dialogue": "单袋也好，谁领走都知道装的是什么。",
+        "outcome": "同样扣两份普通石胆菌；本批改为独立袋签；领取一份普通灰根草。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.dwarf.moss_batch.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "material",
+        "key": "灰根草|0",
+        "materialId": "dwarf.ashroot",
+        "quantity": 1
+      }
+    ],
+    "narrativeOnly": false,
+    "repeatable": true,
+    "conditions": {
+      "areaUnlocked": "dwarf.a05",
+      "atArea": "dwarf.a05",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": false,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "先放着。答应了再动工具。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": true,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本轮授权保守初调；非此前固定正史。实测长期供需后可改配置。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "materials": [
+      {
+        "key": "dwarf.stone_gall_fungus|0",
+        "materialId": "dwarf.stone_gall_fungus",
+        "quantity": 2
+      }
+    ],
+    "cooldownMs": 300000,
+    "recurrence": {
+      "cooldownMs": 300000,
+      "reference": "dist/engine.js：普通副本完整通关 cooldown 为 300000ms；此处复用同量级为本稿节流参数，不是新战争时长。",
+      "startsAt": "成功原子提交本轮完成时",
+      "requiresFreshObjective": true,
+      "cycleKey": "任务 ID + 单调递增 cycleIndex",
+      "requiresManualReaccept": true,
+      "noOfflineAutoAccept": true,
+      "sameCycleClaimIdempotent": true,
+      "refreshDoesNotReset": true
+    },
+    "rewardTuning": {
+      "model": "common-q0-lossy-exchange-2-to-1",
+      "maxExtraMaterialPerCycle": 1,
+      "quality": 0,
+      "rarity": "常见",
+      "cooldownMs": 300000,
+      "source": "现有 WORLD_MATERIALS 常见可刷材料；不接入随机稀有渠道。",
+      "inventorySourceException": "矮人本区常见品种不足，灰根草来自赫珀／纳铎既有库存；仍为本族低阶现有材料，非本区野外新来源。"
+    },
+    "areaName": "冷泉与炉区交界",
+    "implementationNotes": {
+      "originalDescription": "本批石胆菌分装缺料；赫珀用库存灰根草交换，补充玩家的基础配料。两份普通石胆菌换一份普通灰根草，不自动投入高品质。",
+      "originalChoiceOutcomes": {
+        "option_1": "两份普通石胆菌被消耗；当前批登记完成。；领取一份普通灰根草。",
+        "option_2": "同样扣两份普通石胆菌；本批改为独立袋签。；领取一份普通灰根草。"
+      }
+    }
+  },
+  {
+    "id": "local.dwarf.two_baskets",
+    "npcId": "npc.dwarf.hepo",
+    "npcName": "赫珀",
+    "race": "dwarf",
+    "areaId": "dwarf.a05",
+    "title": "两个筐的争执",
+    "description": "一筐干料、一筐湿料被贴错标签。听完两位工人的要求后由赫珀重新分装。",
+    "dialogue": [
+      "他们都说我少给了。其实谁都拿错了筐。",
+      "要先逐人换回，还是摊开重新认领？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "逐人对签换回",
+        "dialogue": "慢一点，但每个人都能看见自己的那份。",
+        "outcome": "赫珀逐袋对签；争执结束，不改玩家物资。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.dwarf.two_baskets.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "摊开重新认领",
+        "dialogue": "都退一步，我把签放在筐前。",
+        "outcome": "公开核对筐签。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.dwarf.two_baskets.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "dwarf.a05",
+      "atArea": "dwarf.a05",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "先放着。答应了再动工具。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本稿采用零额外经济奖励；后续奖励须独立平衡，不是已固定正史。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "areaName": "冷泉与炉区交界",
+    "implementationNotes": {
+      "originalDescription": "一筐干料、一筐湿料被贴错标签。听完两位工人的要求后由赫珀重新分装。",
+      "originalChoiceOutcomes": {
+        "option_1": "赫珀逐袋对签；争执结束，不改玩家物资。",
+        "option_2": "公开核对筐签；不创造材料，也不改变商品价格。"
+      }
+    }
+  },
+  {
+    "id": "local.dwarf.uncertain_branch",
+    "npcId": "npc.dwarf.naduo",
+    "npcName": "纳铎",
+    "race": "dwarf",
+    "areaId": "dwarf.a07",
+    "title": "地图上的问号",
+    "description": "旧图里的一条支路缺少核验日期。决定怎样标记未核验信息。",
+    "dialogue": [
+      "这条线是抄来的，我没走过。",
+      "你要我写“能通”，得拿出亲眼所见。"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "标作未经核验",
+        "dialogue": "问号留着。它比一句瞎保证有用。",
+        "outcome": "任务日志新增“未核验支路”的地方记录。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.dwarf.uncertain_branch.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "暂时遮去支路线",
+        "dialogue": "遮，不是擦。等有人核实再翻出来。",
+        "outcome": "纸图覆盖该线但保留原稿。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.dwarf.uncertain_branch.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "dwarf.a07",
+      "atArea": "dwarf.a07",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "先放着。答应了再动工具。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本稿采用零额外经济奖励；后续奖励须独立平衡，不是已固定正史。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "areaName": "银纹矿廊",
+    "implementationNotes": {
+      "originalDescription": "旧图里的一条支路缺少核验日期。决定怎样标记未核验信息。",
+      "originalChoiceOutcomes": {
+        "option_1": "任务日志新增“未核验支路”的地方记录；没有旅行权限变化。",
+        "option_2": "纸图覆盖该线但保留原稿；不抹游戏探索记录。"
+      }
+    }
+  },
+  {
+    "id": "local.dwarf.survey_after_clear",
+    "npcId": "npc.dwarf.naduo",
+    "npcName": "纳铎",
+    "race": "dwarf",
+    "areaId": "dwarf.a07",
+    "title": "回来再画线",
+    "description": "接受后在银纹矿廊野外取得一次真实胜利，再带回路况记录。",
+    "dialogue": [
+      "在银纹矿廊走一趟，回来只说你见到的。",
+      "我不收“听说已经安全”，也不保证下一次没人拦路。",
+      "本轮回报后领一份普通灰根草，不另发金币。"
+    ],
+    "completion": [
+      "已记录你的选择；与约定相符的交付和回报已经结清。"
+    ],
+    "objective": {
+      "kind": "victory",
+      "nodeIds": [
+        "dwarf.a07.field"
+      ],
+      "count": 1,
+      "tracking": "接受本轮之后该节点的一次真实胜利；已有胜场、其他地区与失败不计。",
+      "offlinePolicy": "仅已接受任务的客观胜利可由挂机／离线累计，选项与完成必须手动。"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "记下遇敌位置",
+        "dialogue": "把位置圈上。下个人至少知道在哪里放慢脚。",
+        "outcome": "本轮巡查记录标成“有活动敌情”；领取一份普通灰根草。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.dwarf.survey_after_clear.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "记下撤回路径",
+        "dialogue": "这条线写“可撤回”，不写“永远安全”。",
+        "outcome": "本轮记录撤回路径；领取一份普通灰根草。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.dwarf.survey_after_clear.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "material",
+        "key": "灰根草|0",
+        "materialId": "dwarf.ashroot",
+        "quantity": 1
+      }
+    ],
+    "narrativeOnly": false,
+    "repeatable": true,
+    "conditions": {
+      "areaUnlocked": "dwarf.a07",
+      "atArea": "dwarf.a07",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": false,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "先放着。答应了再动工具。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": true,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本轮授权保守初调；非此前固定正史。实测长期供需后可改配置。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "cooldownMs": 300000,
+    "recurrence": {
+      "cooldownMs": 300000,
+      "reference": "dist/engine.js：普通副本完整通关 cooldown 为 300000ms；此处复用同量级为本稿节流参数，不是新战争时长。",
+      "startsAt": "成功原子提交本轮完成时",
+      "requiresFreshObjective": true,
+      "cycleKey": "任务 ID + 单调递增 cycleIndex",
+      "requiresManualReaccept": true,
+      "noOfflineAutoAccept": true,
+      "sameCycleClaimIdempotent": true,
+      "refreshDoesNotReset": true
+    },
+    "rewardTuning": {
+      "model": "common-q0-single-unit-fresh-victory",
+      "maxExtraMaterialPerCycle": 1,
+      "quality": 0,
+      "rarity": "常见",
+      "cooldownMs": 300000,
+      "source": "现有 WORLD_MATERIALS 常见可刷材料；不接入随机稀有渠道。",
+      "inventorySourceException": "矮人本区常见品种不足，灰根草来自赫珀／纳铎既有库存；仍为本族低阶现有材料，非本区野外新来源。"
+    },
+    "areaName": "银纹矿廊",
+    "implementationNotes": {
+      "originalDescription": "接受后在银纹矿廊野外取得一次真实胜利，再带回路况记录；不是提前发现祭坛。",
+      "originalChoiceOutcomes": {
+        "option_1": "本轮巡查记录标成“有活动敌情”，不改变怪物刷新。；领取一份普通灰根草。",
+        "option_2": "本轮记录撤回路径；不绕过邻接旅行或战争门禁。；领取一份普通灰根草。"
+      }
+    }
+  },
+  {
+    "id": "local.human.seed_sacks",
+    "npcId": "npc.human.milei",
+    "npcName": "米蕾",
+    "race": "human",
+    "areaId": "human.a01",
+    "title": "留给下季的袋子",
+    "description": "白穗籽袋上的食用／留种签混了。帮助米蕾恢复分类。",
+    "dialogue": [
+      "今天要吃，下季也得有东西下地。",
+      "两种签弄混了。先清点，还是先把空袋挪开？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "先对照旧签清点",
+        "dialogue": "一袋一袋来，别凭颜色猜。",
+        "outcome": "恢复留种／食用签，记录玩家偏重核对。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.human.seed_sacks.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "先腾出干净位置",
+        "dialogue": "把地腾出来，错袋就不会又混回去。",
+        "outcome": "整理仓内分区再核对。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.human.seed_sacks.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "human.a01",
+      "atArea": "human.a01",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "好，方便时再来，我把这事记着。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本稿采用零额外经济奖励；后续奖励须独立平衡，不是已固定正史。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "areaName": "田垄边境",
+    "implementationNotes": {
+      "originalDescription": "白穗籽袋上的食用／留种签混了。帮助米蕾恢复分类。",
+      "originalChoiceOutcomes": {
+        "option_1": "恢复留种／食用签，记录玩家偏重核对。",
+        "option_2": "整理仓内分区再核对；不凭空增加粮食。"
+      }
+    }
+  },
+  {
+    "id": "local.human.one_seed_measure",
+    "npcId": "npc.human.milei",
+    "npcName": "米蕾",
+    "race": "human",
+    "areaId": "human.a01",
+    "title": "一小份留种",
+    "description": "交一份普通白穗籽，由米蕾按玩家选择补入留种袋或当期公用袋。",
+    "dialogue": [
+      "只收普通白穗籽，一份也记清楚。",
+      "你想留给下季，还是补眼前的缺？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "materials",
+      "materials": [
+        {
+          "key": "human.mat.02|0",
+          "materialId": "human.mat.02",
+          "quantity": 1
+        }
+      ],
+      "inventoryPolicy": "仅扣界面明示的一份普通品质材料；不自动扣高品质，不按曾经拾取判交付。"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "补入留种袋",
+        "dialogue": "那我给这袋另写日期，不许先搬走。",
+        "outcome": "消耗一份普通白穗籽，仓储日志记为留种。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.human.one_seed_measure.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "补入公用袋",
+        "dialogue": "眼前的缺先补上。明天的账还得继续算。",
+        "outcome": "消耗同一份材料，日志记为公用补给。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.human.one_seed_measure.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "human.a01",
+      "atArea": "human.a01",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "好，方便时再来，我把这事记着。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本稿采用零额外经济奖励；后续奖励须独立平衡，不是已固定正史。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "materials": [
+      {
+        "key": "human.mat.02|0",
+        "materialId": "human.mat.02",
+        "quantity": 1
+      }
+    ],
+    "areaName": "田垄边境",
+    "implementationNotes": {
+      "originalDescription": "交一份普通白穗籽，由米蕾按玩家选择补入留种袋或当期公用袋。",
+      "originalChoiceOutcomes": {
+        "option_1": "消耗一份普通白穗籽，仓储日志记为留种；不保证战争灾害被阻止。",
+        "option_2": "消耗同一份材料，日志记为公用补给；不改变哥布林既定饥荒设定。"
+      }
+    }
+  },
+  {
+    "id": "local.human.unaddressed_note",
+    "npcId": "npc.human.aoden",
+    "npcName": "奥登",
+    "race": "human",
+    "areaId": "human.a02",
+    "title": "没有门牌的口信",
+    "description": "一张日常口信只写了“旧驿站旁”。决定先核对哪条可验证线索，不拆私人内容。",
+    "dialogue": [
+      "只有“旧驿站旁”，这不能算地址。",
+      "信封不拆。认字迹，还是问送信人的来路？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "先核对投递登记",
+        "dialogue": "登记写着南边来的，我去找当班的人。",
+        "outcome": "口信按既有投递登记继续核对。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.human.unaddressed_note.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "把收件描述贴出来",
+        "dialogue": "只贴信封上有的字，内容不外传。",
+        "outcome": "公开收件提示但不公开私信。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.human.unaddressed_note.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "human.a02",
+      "atArea": "human.a02",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "好，方便时再来，我把这事记着。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本稿采用零额外经济奖励；后续奖励须独立平衡，不是已固定正史。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "areaName": "旧驿道",
+    "implementationNotes": {
+      "originalDescription": "一张日常口信只写了“旧驿站旁”。决定先核对哪条可验证线索，不拆私人内容。",
+      "originalChoiceOutcomes": {
+        "option_1": "口信按既有投递登记继续核对；不读取私人内文。",
+        "option_2": "公开收件提示但不公开私信；无主线情报奖励。"
+      }
+    }
+  },
+  {
+    "id": "local.human.road_report",
+    "npcId": "npc.human.aoden",
+    "npcName": "奥登",
+    "race": "human",
+    "areaId": "human.a02",
+    "title": "今天的驿路",
+    "description": "接受后在旧驿道野外取得一次真实胜利，回来选择记录危险点或休整点。",
+    "dialogue": [
+      "上一张路况过时了。今天有人走过才算数。",
+      "顺路把情况带回来；别为了我的纸去追远处的人。",
+      "本轮回报后领一份普通白穗籽，不另发金币。"
+    ],
+    "completion": [
+      "已记录你的选择；与约定相符的交付和回报已经结清。"
+    ],
+    "objective": {
+      "kind": "victory",
+      "nodeIds": [
+        "human.a02.field"
+      ],
+      "count": 1,
+      "tracking": "接受本轮之后该节点的一次真实胜利；已有胜场、其他地区与失败不计。",
+      "offlinePolicy": "仅已接受任务的客观胜利可由挂机／离线累计，选项与完成必须手动。"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "先记危险点",
+        "dialogue": "我在日期旁加粗。没人能拿它当永久保证。",
+        "outcome": "本轮路况更新，普通战斗掉落只结算原有一份；领取一份普通白穗籽。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.human.road_report.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "先记可休整处",
+        "dialogue": "写清你停过的位置，不替别人担保全路。",
+        "outcome": "记录本轮亲历的停留位置；领取一份普通白穗籽。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.human.road_report.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "material",
+        "key": "human.mat.02|0",
+        "materialId": "human.mat.02",
+        "quantity": 1
+      }
+    ],
+    "narrativeOnly": false,
+    "repeatable": true,
+    "conditions": {
+      "areaUnlocked": "human.a02",
+      "atArea": "human.a02",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": false,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "好，方便时再来，我把这事记着。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": true,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本轮授权保守初调；非此前固定正史。实测长期供需后可改配置。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "cooldownMs": 300000,
+    "recurrence": {
+      "cooldownMs": 300000,
+      "reference": "dist/engine.js：普通副本完整通关 cooldown 为 300000ms；此处复用同量级为本稿节流参数，不是新战争时长。",
+      "startsAt": "成功原子提交本轮完成时",
+      "requiresFreshObjective": true,
+      "cycleKey": "任务 ID + 单调递增 cycleIndex",
+      "requiresManualReaccept": true,
+      "noOfflineAutoAccept": true,
+      "sameCycleClaimIdempotent": true,
+      "refreshDoesNotReset": true
+    },
+    "rewardTuning": {
+      "model": "common-q0-single-unit-fresh-victory",
+      "maxExtraMaterialPerCycle": 1,
+      "quality": 0,
+      "rarity": "常见",
+      "cooldownMs": 300000,
+      "source": "现有 WORLD_MATERIALS 常见可刷材料；不接入随机稀有渠道。",
+      "inventorySourceException": null
+    },
+    "areaName": "旧驿道",
+    "implementationNotes": {
+      "originalDescription": "接受后在旧驿道野外取得一次真实胜利，回来选择记录危险点或休整点。",
+      "originalChoiceOutcomes": {
+        "option_1": "本轮路况更新，普通战斗掉落只结算原有一份。；领取一份普通白穗籽。",
+        "option_2": "记录本轮亲历的停留位置；不新增营地或传送点。；领取一份普通白穗籽。"
+      }
+    }
+  },
+  {
+    "id": "local.human.dry_patch",
+    "npcId": "npc.human.saifu",
+    "npcName": "赛芙",
+    "race": "human",
+    "areaId": "human.a05",
+    "title": "先补漏风处",
+    "description": "交两份普通烛脂树胶，帮赛芙补完本批防雨布边。两份普通烛脂树胶换一份普通盐泉结晶，不自动投入高品质。",
+    "dialogue": [
+      "胶补布边，别倒在整块布上。",
+      "交两份普通烛脂树胶，领一份普通盐泉结晶。"
+    ],
+    "completion": [
+      "已记录你的选择；与约定相符的交付和回报已经结清。"
+    ],
+    "objective": {
+      "kind": "materials",
+      "materials": [
+        {
+          "key": "human.mat.06|0",
+          "materialId": "human.mat.06",
+          "quantity": 2
+        }
+      ],
+      "inventoryPolicy": "明示扣除两份普通品质材料，不自动消耗高品质；与奖励及完成同一原子事务。"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "先补边缝",
+        "dialogue": "边缝贴牢，风就不从这里钻。",
+        "outcome": "消耗两份普通烛脂树胶，本批防雨布完工；领取一份普通盐泉结晶。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.human.dry_patch.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "先补旧洞",
+        "dialogue": "旧洞先补，我再把边缘压一遍。",
+        "outcome": "同样消耗两份材料，本批旧洞补牢；领取一份普通盐泉结晶。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.human.dry_patch.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "material",
+        "key": "human.mat.05|0",
+        "materialId": "human.mat.05",
+        "quantity": 1
+      }
+    ],
+    "narrativeOnly": false,
+    "repeatable": true,
+    "conditions": {
+      "areaUnlocked": "human.a05",
+      "atArea": "human.a05",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": false,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "好，方便时再来，我把这事记着。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": true,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本轮授权保守初调；非此前固定正史。实测长期供需后可改配置。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "materials": [
+      {
+        "key": "human.mat.06|0",
+        "materialId": "human.mat.06",
+        "quantity": 2
+      }
+    ],
+    "cooldownMs": 300000,
+    "recurrence": {
+      "cooldownMs": 300000,
+      "reference": "dist/engine.js：普通副本完整通关 cooldown 为 300000ms；此处复用同量级为本稿节流参数，不是新战争时长。",
+      "startsAt": "成功原子提交本轮完成时",
+      "requiresFreshObjective": true,
+      "cycleKey": "任务 ID + 单调递增 cycleIndex",
+      "requiresManualReaccept": true,
+      "noOfflineAutoAccept": true,
+      "sameCycleClaimIdempotent": true,
+      "refreshDoesNotReset": true
+    },
+    "rewardTuning": {
+      "model": "common-q0-lossy-exchange-2-to-1",
+      "maxExtraMaterialPerCycle": 1,
+      "quality": 0,
+      "rarity": "常见",
+      "cooldownMs": 300000,
+      "source": "现有 WORLD_MATERIALS 常见可刷材料；不接入随机稀有渠道。",
+      "inventorySourceException": null
+    },
+    "areaName": "圣烛林缘",
+    "implementationNotes": {
+      "originalDescription": "交两份普通烛脂树胶，帮赛芙补完本批防雨布边。两份普通烛脂树胶换一份普通盐泉结晶，不自动投入高品质。",
+      "originalChoiceOutcomes": {
+        "option_1": "消耗两份普通烛脂树胶，本批防雨布完工。；领取一份普通盐泉结晶。",
+        "option_2": "同样消耗两份材料，本批旧洞补牢；不提升装备属性。；领取一份普通盐泉结晶。"
+      }
+    }
+  },
+  {
+    "id": "local.human.borrowed_blanket",
+    "npcId": "npc.human.saifu",
+    "npcName": "赛芙",
+    "race": "human",
+    "areaId": "human.a05",
+    "title": "一床借来的毯子",
+    "description": "两名旅人都以为毯子归自己。根据布角借用记号决定核对顺序。",
+    "dialogue": [
+      "一床毯子，两个人都说是自己的。",
+      "先看借用记号，还是先让他们说在哪领的？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "看布角记号",
+        "dialogue": "记号在这里。先把借用登记找齐。",
+        "outcome": "已按实物记号核对借用登记；毯子归属不靠种族判断。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.human.borrowed_blanket.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "各自说清领取地点",
+        "dialogue": "一个一个说，不让声音大的人先占。",
+        "outcome": "分别记录领用地点再核对。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.human.borrowed_blanket.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "human.a05",
+      "atArea": "human.a05",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "好，方便时再来，我把这事记着。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本稿采用零额外经济奖励；后续奖励须独立平衡，不是已固定正史。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "areaName": "圣烛林缘",
+    "implementationNotes": {
+      "originalDescription": "两名旅人都以为毯子归自己。根据布角借用记号决定核对顺序。",
+      "originalChoiceOutcomes": {
+        "option_1": "依实物记号核对借用登记；毯子归属不靠种族判断。",
+        "option_2": "分别记录领用地点再核对；不强迫玩家付金币。"
+      }
+    }
+  },
+  {
+    "id": "local.elf.shade_trays",
+    "npcId": "npc.elf.fulan",
+    "npcName": "芙岚",
+    "race": "elf",
+    "areaId": "elf.a01",
+    "title": "苗盘挪半步",
+    "description": "露冠花苗盘一侧受曝、一侧被遮。帮助安排位置。",
+    "dialogue": [
+      "叶片朝这边卷了，先别再往上浇。",
+      "挪苗盘，还是先给日头最晒的这排遮一下？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "先挪开受曝苗盘",
+        "dialogue": "就挪半步，别踩到浅根。",
+        "outcome": "调整苗盘位置，照管日志记为先移苗。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.elf.shade_trays.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "先立遮片",
+        "dialogue": "遮片别贴着叶子，留点风。",
+        "outcome": "架起轻遮片，记录先遮阴。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.elf.shade_trays.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "elf.a01",
+      "atArea": "elf.a01",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "好，等你愿意时再说。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本稿采用零额外经济奖励；后续奖励须独立平衡，不是已固定正史。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "areaName": "露冠林缘",
+    "implementationNotes": {
+      "originalDescription": "露冠花苗盘一侧受曝、一侧被遮。帮助安排位置，不凭魔法瞬间复苏。",
+      "originalChoiceOutcomes": {
+        "option_1": "调整苗盘位置，照管日志记为先移苗；不产生种植产出。",
+        "option_2": "架起轻遮片，记录先遮阴；不设新的气候机制。"
+      }
+    }
+  },
+  {
+    "id": "local.elf.return_empty_pots",
+    "npcId": "npc.elf.fulan",
+    "npcName": "芙岚",
+    "race": "elf",
+    "areaId": "elf.a01",
+    "title": "谁的空盆",
+    "description": "苗圃空盆与寄放的盆混在一起。按底部旧刻痕整理归还清单。",
+    "dialogue": [
+      "空盆也有人等着用，别全当没人要。",
+      "底下有刻痕。你想先分开，还是先列一张单？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "按刻痕分开",
+        "dialogue": "这几个放一起，缺刻痕的另留。",
+        "outcome": "归还清单有实物对应。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.elf.return_empty_pots.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "先列认领清单",
+        "dialogue": "只抄你看见的，不替模糊的笔画补名字。",
+        "outcome": "形成待认领清单。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.elf.return_empty_pots.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "elf.a01",
+      "atArea": "elf.a01",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "好，等你愿意时再说。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本稿采用零额外经济奖励；后续奖励须独立平衡，不是已固定正史。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "areaName": "露冠林缘",
+    "implementationNotes": {
+      "originalDescription": "苗圃空盆与寄放的盆混在一起。按底部旧刻痕整理归还清单。",
+      "originalChoiceOutcomes": {
+        "option_1": "归还清单有实物对应，不占玩家背包。",
+        "option_2": "形成待认领清单；不新增固定世界人物。"
+      }
+    }
+  },
+  {
+    "id": "local.elf.bridge_lashing",
+    "npcId": "npc.elf.yiluo",
+    "npcName": "伊萝",
+    "race": "elf",
+    "areaId": "elf.a03",
+    "title": "这一节松了",
+    "description": "交两份普通旋叶藤，补完本轮根桥护绳。两份普通旋叶藤换一份普通露冠花，不自动投入高品质。",
+    "dialogue": [
+      "松的是护绳，不是树根。别拿斧头试。",
+      "交两份普通旋叶藤，领一份普通露冠花。"
+    ],
+    "completion": [
+      "已记录你的选择；与约定相符的交付和回报已经结清。"
+    ],
+    "objective": {
+      "kind": "materials",
+      "materials": [
+        {
+          "key": "elf.spiral_vine|0",
+          "materialId": "elf.spiral_vine",
+          "quantity": 2
+        }
+      ],
+      "inventoryPolicy": "明示扣除两份普通品质材料，不自动消耗高品质；与奖励及完成同一原子事务。"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "先补行人侧",
+        "dialogue": "让过去的人能看见手该扶哪。",
+        "outcome": "扣两份普通旋叶藤，本轮行人侧护绳补好；领取一份普通露冠花。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.elf.bridge_lashing.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "先补货篮侧",
+        "dialogue": "货篮别碰到新芽，我把结收紧。",
+        "outcome": "扣相同材料，货篮侧补好；领取一份普通露冠花。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.elf.bridge_lashing.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "material",
+        "key": "elf.dew_crown|0",
+        "materialId": "elf.dew_crown",
+        "quantity": 1
+      }
+    ],
+    "narrativeOnly": false,
+    "repeatable": true,
+    "conditions": {
+      "areaUnlocked": "elf.a03",
+      "atArea": "elf.a03",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": false,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "好，等你愿意时再说。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": true,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本轮授权保守初调；非此前固定正史。实测长期供需后可改配置。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "materials": [
+      {
+        "key": "elf.spiral_vine|0",
+        "materialId": "elf.spiral_vine",
+        "quantity": 2
+      }
+    ],
+    "cooldownMs": 300000,
+    "recurrence": {
+      "cooldownMs": 300000,
+      "reference": "dist/engine.js：普通副本完整通关 cooldown 为 300000ms；此处复用同量级为本稿节流参数，不是新战争时长。",
+      "startsAt": "成功原子提交本轮完成时",
+      "requiresFreshObjective": true,
+      "cycleKey": "任务 ID + 单调递增 cycleIndex",
+      "requiresManualReaccept": true,
+      "noOfflineAutoAccept": true,
+      "sameCycleClaimIdempotent": true,
+      "refreshDoesNotReset": true
+    },
+    "rewardTuning": {
+      "model": "common-q0-lossy-exchange-2-to-1",
+      "maxExtraMaterialPerCycle": 1,
+      "quality": 0,
+      "rarity": "常见",
+      "cooldownMs": 300000,
+      "source": "现有 WORLD_MATERIALS 常见可刷材料；不接入随机稀有渠道。",
+      "inventorySourceException": null
+    },
+    "areaName": "盘藤坡地",
+    "implementationNotes": {
+      "originalDescription": "交两份普通旋叶藤，补完本轮根桥护绳。两份普通旋叶藤换一份普通露冠花，不自动投入高品质。",
+      "originalChoiceOutcomes": {
+        "option_1": "扣两份普通旋叶藤，本轮行人侧护绳补好。；领取一份普通露冠花。",
+        "option_2": "扣相同材料，货篮侧补好；不改变地图边与旅行许可。；领取一份普通露冠花。"
+      }
+    }
+  },
+  {
+    "id": "local.elf.root_or_rope",
+    "npcId": "npc.elf.yiluo",
+    "npcName": "伊萝",
+    "race": "elf",
+    "areaId": "elf.a03",
+    "title": "别锯那条根",
+    "description": "搬运工把支撑根误认成废绳。选择用示范或标识让大家绕开。",
+    "dialogue": [
+      "那条有活皮，是根。锯断不会自己长回来。",
+      "你帮我拦一下，还是把真正的旧绳挑出来？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "先立禁锯标识",
+        "dialogue": "写“活根”，别只画个别人看不懂的圈。",
+        "outcome": "新标识就位。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.elf.root_or_rope.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "找出旧绳作对照",
+        "dialogue": "并排一放就清楚了。今天先别急着下刀。",
+        "outcome": "通过实物对照解决误认。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.elf.root_or_rope.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "elf.a03",
+      "atArea": "elf.a03",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "好，等你愿意时再说。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本稿采用零额外经济奖励；后续奖励须独立平衡，不是已固定正史。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "areaName": "盘藤坡地",
+    "implementationNotes": {
+      "originalDescription": "搬运工把支撑根误认成废绳。选择用示范或标识让大家绕开。",
+      "originalChoiceOutcomes": {
+        "option_1": "新标识就位；没有触发枯泉恢复或古代遗址调查。",
+        "option_2": "通过实物对照解决误认；不改变主线树根裂泉事实。"
+      }
+    }
+  },
+  {
+    "id": "local.elf.faded_marks",
+    "npcId": "npc.elf.sailin",
+    "npcName": "赛林",
+    "race": "elf",
+    "areaId": "elf.a05",
+    "title": "褪掉的是箭头",
+    "description": "花粉遮住普通路标箭头。决定先擦净旧标还是加临时提示。",
+    "dialogue": [
+      "只是箭头被遮了，别把整块牌拆下来。",
+      "先擦净，还是给后面的人挂个临时提示？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "先擦净旧标",
+        "dialogue": "我扶住牌，你沿着箭头擦。",
+        "outcome": "旧箭头恢复可读，记录一次维护。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.elf.faded_marks.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "先挂临时提示",
+        "dialogue": "临时两个字写清楚，擦完旧牌就撤。",
+        "outcome": "临时牌避免当下误认。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.elf.faded_marks.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "elf.a05",
+      "atArea": "elf.a05",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "好，等你愿意时再说。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本稿采用零额外经济奖励；后续奖励须独立平衡，不是已固定正史。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "areaName": "蚀月花径",
+    "implementationNotes": {
+      "originalDescription": "花粉遮住普通路标箭头。决定先擦净旧标还是加临时提示。",
+      "originalChoiceOutcomes": {
+        "option_1": "旧箭头恢复可读，记录一次维护。",
+        "option_2": "临时牌避免当下误认；不成为战争通行依据。"
+      }
+    }
+  },
+  {
+    "id": "local.elf.pollen_path_watch",
+    "npcId": "npc.elf.sailin",
+    "npcName": "赛林",
+    "race": "elf",
+    "areaId": "elf.a05",
+    "title": "花径回报",
+    "description": "接受后在蚀月花径野外取得一次真实胜利，带回一次亲历路况。",
+    "dialogue": [
+      "花径今天又有动静。我缺的是回报，不是战利品。",
+      "走过再记；没看见的别替我补齐。",
+      "本轮回报后领一份普通萤绒苔，不另发金币。"
+    ],
+    "completion": [
+      "已记录你的选择；与约定相符的交付和回报已经结清。"
+    ],
+    "objective": {
+      "kind": "victory",
+      "nodeIds": [
+        "elf.a05.field"
+      ],
+      "count": 1,
+      "tracking": "接受本轮之后该节点的一次真实胜利；已有胜场、其他地区与失败不计。",
+      "offlinePolicy": "仅已接受任务的客观胜利可由挂机／离线累计，选项与完成必须手动。"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "标出遭遇路段",
+        "dialogue": "把日期也记上。下一班还要再看。",
+        "outcome": "本轮标记遭遇路段；领取一份普通萤绒苔。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.elf.pollen_path_watch.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "标出可撤回方向",
+        "dialogue": "这条是你退回来的，对吧？就按这个写。",
+        "outcome": "记录亲历撤回方向；领取一份普通萤绒苔。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.elf.pollen_path_watch.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "material",
+        "key": "elf.glow_moss|0",
+        "materialId": "elf.glow_moss",
+        "quantity": 1
+      }
+    ],
+    "narrativeOnly": false,
+    "repeatable": true,
+    "conditions": {
+      "areaUnlocked": "elf.a05",
+      "atArea": "elf.a05",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": false,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "好，等你愿意时再说。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": true,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本轮授权保守初调；非此前固定正史。实测长期供需后可改配置。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "cooldownMs": 300000,
+    "recurrence": {
+      "cooldownMs": 300000,
+      "reference": "dist/engine.js：普通副本完整通关 cooldown 为 300000ms；此处复用同量级为本稿节流参数，不是新战争时长。",
+      "startsAt": "成功原子提交本轮完成时",
+      "requiresFreshObjective": true,
+      "cycleKey": "任务 ID + 单调递增 cycleIndex",
+      "requiresManualReaccept": true,
+      "noOfflineAutoAccept": true,
+      "sameCycleClaimIdempotent": true,
+      "refreshDoesNotReset": true
+    },
+    "rewardTuning": {
+      "model": "common-q0-single-unit-fresh-victory",
+      "maxExtraMaterialPerCycle": 1,
+      "quality": 0,
+      "rarity": "常见",
+      "cooldownMs": 300000,
+      "source": "现有 WORLD_MATERIALS 常见可刷材料；不接入随机稀有渠道。",
+      "inventorySourceException": null
+    },
+    "areaName": "蚀月花径",
+    "implementationNotes": {
+      "originalDescription": "接受后在蚀月花径野外取得一次真实胜利，带回一次亲历路况。",
+      "originalChoiceOutcomes": {
+        "option_1": "本轮标记遭遇路段，不判断整个种族或森林敌对。；领取一份普通萤绒苔。",
+        "option_2": "记录亲历撤回方向，不新增安全路径豁免。；领取一份普通萤绒苔。"
+      }
+    }
+  },
+  {
+    "id": "local.goblin.mushroom_labels",
+    "npcId": "npc.goblin.gudai",
+    "npcName": "咕黛",
+    "race": "goblin",
+    "areaId": "goblin.a01",
+    "title": "别把旧签当新签",
+    "description": "旧批次与新批次灰帽菌筐的签绑反了。重新核对。",
+    "dialogue": [
+      "停！那根旧绳绑的是昨天那筐。",
+      "帮我认签，别一着急全倒进去。"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "先分开两个批次",
+        "dialogue": "这边旧的，那边新的，谁拿都看得到。",
+        "outcome": "批次分开。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.goblin.mushroom_labels.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "先换绑绳位置",
+        "dialogue": "旧签留在旧筐，别为了好看重写成新货。",
+        "outcome": "修正绑绳，保留真实日期。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.goblin.mushroom_labels.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "goblin.a01",
+      "atArea": "goblin.a01",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "行，东西别动，回头再说。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本稿采用零额外经济奖励；后续奖励须独立平衡，不是已固定正史。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "areaName": "苔口坡地",
+    "implementationNotes": {
+      "originalDescription": "旧批次与新批次灰帽菌筐的签绑反了。重新核对，不宣称彻底解决粮荒。",
+      "originalChoiceOutcomes": {
+        "option_1": "批次分开；没有增加粮食或抹去持续短缺。",
+        "option_2": "修正绑绳，保留真实日期。"
+      }
+    }
+  },
+  {
+    "id": "local.goblin.shared_shelf",
+    "npcId": "npc.goblin.gudai",
+    "npcName": "咕黛",
+    "race": "goblin",
+    "areaId": "goblin.a01",
+    "title": "窄架也有空位",
+    "description": "为两个互相挤占位置的邻筐重排空架。",
+    "dialogue": [
+      "架子就这么宽。再推，谁的筐都要下去。",
+      "你画条分界，还是先把空筐叠走？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "标清各自位置",
+        "dialogue": "线画在板上，别画在人家筐里。",
+        "outcome": "邻筐明确位置，争执停止。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.goblin.shared_shelf.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "先收走空筐",
+        "dialogue": "早这么干就不用吵了。留条取筐的缝。",
+        "outcome": "空筐叠放后留出通道。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.goblin.shared_shelf.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "goblin.a01",
+      "atArea": "goblin.a01",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "行，东西别动，回头再说。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本稿采用零额外经济奖励；后续奖励须独立平衡，不是已固定正史。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "areaName": "苔口坡地",
+    "implementationNotes": {
+      "originalDescription": "为两个互相挤占位置的邻筐重排空架，帮助小范围生活而不立新领袖。",
+      "originalChoiceOutcomes": {
+        "option_1": "邻筐明确位置，争执停止；不新增种族统治制度。",
+        "option_2": "空筐叠放后留出通道；不发放特殊材料。"
+      }
+    }
+  },
+  {
+    "id": "local.goblin.rivet_batch",
+    "npcId": "npc.goblin.banya",
+    "npcName": "扳牙",
+    "race": "goblin",
+    "areaId": "goblin.a02",
+    "title": "铆一下还顶用",
+    "description": "交两份普通旧铆铁，为本批推架修好松动连接。两份普通旧铆铁换一份普通灰帽菌，不自动投入高品质。",
+    "dialogue": [
+      "这东西不是烂了，是钉松了。",
+      "交两份普通旧铆铁，领一份普通灰帽菌。"
+    ],
+    "completion": [
+      "已记录你的选择；与约定相符的交付和回报已经结清。"
+    ],
+    "objective": {
+      "kind": "materials",
+      "materials": [
+        {
+          "key": "goblin.mat.02|0",
+          "materialId": "goblin.mat.02",
+          "quantity": 2
+        }
+      ],
+      "inventoryPolicy": "明示扣除两份普通品质材料，不自动消耗高品质；与奖励及完成同一原子事务。"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "先修把手",
+        "dialogue": "手不晃，推车的人就不用用肩顶。",
+        "outcome": "扣两份普通旧铆铁，本批把手固定；领取一份普通灰帽菌。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.goblin.rivet_batch.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "先修横梁",
+        "dialogue": "横梁稳了，筐才不会一边走一边歪。",
+        "outcome": "扣相同材料，本批横梁固定；领取一份普通灰帽菌。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.goblin.rivet_batch.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "material",
+        "key": "goblin.mat.01|0",
+        "materialId": "goblin.mat.01",
+        "quantity": 1
+      }
+    ],
+    "narrativeOnly": false,
+    "repeatable": true,
+    "conditions": {
+      "areaUnlocked": "goblin.a02",
+      "atArea": "goblin.a02",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": false,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "行，东西别动，回头再说。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": true,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本轮授权保守初调；非此前固定正史。实测长期供需后可改配置。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "materials": [
+      {
+        "key": "goblin.mat.02|0",
+        "materialId": "goblin.mat.02",
+        "quantity": 2
+      }
+    ],
+    "cooldownMs": 300000,
+    "recurrence": {
+      "cooldownMs": 300000,
+      "reference": "dist/engine.js：普通副本完整通关 cooldown 为 300000ms；此处复用同量级为本稿节流参数，不是新战争时长。",
+      "startsAt": "成功原子提交本轮完成时",
+      "requiresFreshObjective": true,
+      "cycleKey": "任务 ID + 单调递增 cycleIndex",
+      "requiresManualReaccept": true,
+      "noOfflineAutoAccept": true,
+      "sameCycleClaimIdempotent": true,
+      "refreshDoesNotReset": true
+    },
+    "rewardTuning": {
+      "model": "common-q0-lossy-exchange-2-to-1",
+      "maxExtraMaterialPerCycle": 1,
+      "quality": 0,
+      "rarity": "常见",
+      "cooldownMs": 300000,
+      "source": "现有 WORLD_MATERIALS 常见可刷材料；不接入随机稀有渠道。",
+      "inventorySourceException": null
+    },
+    "areaName": "碎铁旧道",
+    "implementationNotes": {
+      "originalDescription": "交两份普通旧铆铁，为本批推架修好松动连接。两份普通旧铆铁换一份普通灰帽菌，不自动投入高品质。",
+      "originalChoiceOutcomes": {
+        "option_1": "扣两份普通旧铆铁，本批把手固定。；领取一份普通灰帽菌。",
+        "option_2": "扣相同材料，本批横梁固定；不发新装备。；领取一份普通灰帽菌。"
+      }
+    }
+  },
+  {
+    "id": "local.goblin.keep_the_offcut",
+    "npcId": "npc.goblin.banya",
+    "npcName": "扳牙",
+    "race": "goblin",
+    "areaId": "goblin.a02",
+    "title": "不是每块都能用",
+    "description": "修架剩下的边角有裂口。选择分类存放或做醒目标记，避免误用。",
+    "dialogue": [
+      "这个能留，那个裂到底了。别看都闪着亮。",
+      "分两个盒，还是给废边打孔？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "按可用与废料分盒",
+        "dialogue": "盒口朝不同方向，黑里也不拿错。",
+        "outcome": "废边分开储存，无额外材料产出。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.goblin.keep_the_offcut.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "给废边打明显记号",
+        "dialogue": "这孔只告诉人别用，不拿来冒充好料。",
+        "outcome": "废边加标，避免被混入修架料。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.goblin.keep_the_offcut.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "goblin.a02",
+      "atArea": "goblin.a02",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "行，东西别动，回头再说。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本稿采用零额外经济奖励；后续奖励须独立平衡，不是已固定正史。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "areaName": "碎铁旧道",
+    "implementationNotes": {
+      "originalDescription": "修架剩下的边角有裂口。选择分类存放或做醒目标记，避免误用。",
+      "originalChoiceOutcomes": {
+        "option_1": "废边分开储存，无额外材料产出。",
+        "option_2": "废边加标，避免被混入修架料；不解锁新锻造功能。"
+      }
+    }
+  },
+  {
+    "id": "local.goblin.boat_loading",
+    "npcId": "npc.goblin.disuo",
+    "npcName": "滴索",
+    "race": "goblin",
+    "areaId": "goblin.a06",
+    "title": "人站哪一边",
+    "description": "渡船靠岸时货篮偏重。帮滴索拟好下一次装载次序。",
+    "dialogue": [
+      "船不听谁先到，只认哪边压得重。",
+      "先摆重篮，还是先留人站的位置？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "先留上下船的位置",
+        "dialogue": "对，别让最后上来的人踩着货走。",
+        "outcome": "装载表预留上下船通道。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.goblin.boat_loading.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "先把重篮分两侧",
+        "dialogue": "搬近一点，别在船沿上赌平衡。",
+        "outcome": "货篮均匀摆放。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.goblin.boat_loading.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "goblin.a06",
+      "atArea": "goblin.a06",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "行，东西别动，回头再说。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本稿采用零额外经济奖励；后续奖励须独立平衡，不是已固定正史。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "areaName": "暗河渡口",
+    "implementationNotes": {
+      "originalDescription": "渡船靠岸时货篮偏重。帮滴索拟好下一次装载次序，不直接跨境。",
+      "originalChoiceOutcomes": {
+        "option_1": "装载表预留上下船通道；不执行旅行。",
+        "option_2": "货篮均匀摆放；不修改挂机收益或地图路线。"
+      }
+    }
+  },
+  {
+    "id": "local.goblin.landing_watch",
+    "npcId": "npc.goblin.disuo",
+    "npcName": "滴索",
+    "race": "goblin",
+    "areaId": "goblin.a06",
+    "title": "渡口边的动静",
+    "description": "接受后在暗河渡口野外取得一次真实胜利，再报告靠岸处动静。",
+    "dialogue": [
+      "靠岸处有东西乱撞。我不能拿整船人试。",
+      "你走得回来再报；别追进看不见底的水里。",
+      "本轮回报后领一份普通沉河砂铜，不另发金币。"
+    ],
+    "completion": [
+      "已记录你的选择；与约定相符的交付和回报已经结清。"
+    ],
+    "objective": {
+      "kind": "victory",
+      "nodeIds": [
+        "goblin.a06.field"
+      ],
+      "count": 1,
+      "tracking": "接受本轮之后该节点的一次真实胜利；已有胜场、其他地区与失败不计。",
+      "offlinePolicy": "仅已接受任务的客观胜利可由挂机／离线累计，选项与完成必须手动。"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "标记受扰的一侧",
+        "dialogue": "那边先不堆篮，等下一次再查。",
+        "outcome": "本轮靠岸记录标出受扰侧；领取一份普通沉河砂铜。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.goblin.landing_watch.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "整理撤回顺序",
+        "dialogue": "先人后篮。篮子落水还能再打捞。",
+        "outcome": "记下撤回顺序，普通战斗奖励原样保留；领取一份普通沉河砂铜。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.goblin.landing_watch.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "material",
+        "key": "goblin.mat.07|0",
+        "materialId": "goblin.mat.07",
+        "quantity": 1
+      }
+    ],
+    "narrativeOnly": false,
+    "repeatable": true,
+    "conditions": {
+      "areaUnlocked": "goblin.a06",
+      "atArea": "goblin.a06",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": false,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "行，东西别动，回头再说。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": true,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本轮授权保守初调；非此前固定正史。实测长期供需后可改配置。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "cooldownMs": 300000,
+    "recurrence": {
+      "cooldownMs": 300000,
+      "reference": "dist/engine.js：普通副本完整通关 cooldown 为 300000ms；此处复用同量级为本稿节流参数，不是新战争时长。",
+      "startsAt": "成功原子提交本轮完成时",
+      "requiresFreshObjective": true,
+      "cycleKey": "任务 ID + 单调递增 cycleIndex",
+      "requiresManualReaccept": true,
+      "noOfflineAutoAccept": true,
+      "sameCycleClaimIdempotent": true,
+      "refreshDoesNotReset": true
+    },
+    "rewardTuning": {
+      "model": "common-q0-single-unit-fresh-victory",
+      "maxExtraMaterialPerCycle": 1,
+      "quality": 0,
+      "rarity": "常见",
+      "cooldownMs": 300000,
+      "source": "现有 WORLD_MATERIALS 常见可刷材料；不接入随机稀有渠道。",
+      "inventorySourceException": null
+    },
+    "areaName": "暗河渡口",
+    "implementationNotes": {
+      "originalDescription": "接受后在暗河渡口野外取得一次真实胜利，再报告靠岸处动静。",
+      "originalChoiceOutcomes": {
+        "option_1": "本轮靠岸记录标出受扰侧；不永久清空敌人。；领取一份普通沉河砂铜。",
+        "option_2": "记下撤回顺序，普通战斗奖励原样保留；不授战时通行。；领取一份普通沉河砂铜。"
+      }
+    }
+  },
+  {
+    "id": "local.ashen.dew_queue",
+    "npcId": "npc.ashen.lilu",
+    "npcName": "砾露",
+    "race": "ashen",
+    "areaId": "ashen.a03",
+    "title": "先看空器",
+    "description": "矿露领取处混了空器和已装器。重新分开容器与领取顺序。",
+    "dialogue": [
+      "这个空着，那个已经装过。放一起会漏掉人。",
+      "先分容器，还是先让等着的各自认领？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "先分空器与满器",
+        "dialogue": "空的靠这里，领完就挪开。",
+        "outcome": "分配处减少混淆。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.ashen.dew_queue.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "逐个核对领取情况",
+        "dialogue": "我问清再装，不让谁因为站得后就被忘掉。",
+        "outcome": "逐个核对登记。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.ashen.dew_queue.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "ashen.a03",
+      "atArea": "ashen.a03",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "可以。等你决定。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本稿采用零额外经济奖励；后续奖励须独立平衡，不是已固定正史。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "areaName": "冷烬浅谷",
+    "implementationNotes": {
+      "originalDescription": "矿露领取处混了空器和已装器。重新分开容器与领取顺序。",
+      "originalChoiceOutcomes": {
+        "option_1": "分配处减少混淆，不增加矿露资源或恢复生命数值。",
+        "option_2": "逐个核对登记；不创造种族阶层或繁衍设定。"
+      }
+    }
+  },
+  {
+    "id": "local.ashen.basin_cover",
+    "npcId": "npc.ashen.lilu",
+    "npcName": "砾露",
+    "race": "ashen",
+    "areaId": "ashen.a03",
+    "title": "风吹进了接露盆",
+    "description": "接露盆边盖歪了。决定先挡风还是先移开受灰的空器。",
+    "dialogue": [
+      "灰从盖边进来，不是露水变坏了。",
+      "先挡这股风，还是把空器挪远一点？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "先把盖边压稳",
+        "dialogue": "我扶这边，你压住那边。别碰满器。",
+        "outcome": "盖边恢复，记录合作动作。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.ashen.basin_cover.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "先移开空器",
+        "dialogue": "放到背风面，等盖稳了再搬回。",
+        "outcome": "空器移位避免落灰。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.ashen.basin_cover.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "ashen.a03",
+      "atArea": "ashen.a03",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "可以。等你决定。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本稿采用零额外经济奖励；后续奖励须独立平衡，不是已固定正史。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "areaName": "冷烬浅谷",
+    "implementationNotes": {
+      "originalDescription": "接露盆边盖歪了。决定先挡风还是先移开受灰的空器。",
+      "originalChoiceOutcomes": {
+        "option_1": "盖边恢复，记录合作动作；不发生核心治疗或升级。",
+        "option_2": "空器移位避免落灰；不产生新的炼金材料。"
+      }
+    }
+  },
+  {
+    "id": "local.ashen.clear_signal",
+    "npcId": "npc.ashen.mingji",
+    "npcName": "鸣隙",
+    "race": "ashen",
+    "areaId": "ashen.a06",
+    "title": "别让两声挤一起",
+    "description": "声标支架松动，让两片晶片碰在一起；补修支架。两份普通赤脉矿换一份普通琉砂晶粒，不自动投入高品质。",
+    "dialogue": [
+      "松的是架脚，两片才会碰在一起。不是谁在召唤。",
+      "交两份普通赤脉矿，领一份普通琉砂晶粒。"
+    ],
+    "completion": [
+      "已记录你的选择；与约定相符的交付和回报已经结清。"
+    ],
+    "objective": {
+      "kind": "materials",
+      "materials": [
+        {
+          "key": "ashen.red_vein_ore|0",
+          "materialId": "ashen.red_vein_ore",
+          "quantity": 2
+        }
+      ],
+      "inventoryPolicy": "明示扣除两份普通品质材料，不自动消耗高品质；与奖励及完成同一原子事务。"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "留下清楚短响",
+        "dialogue": "短一点，好和石壁的回声分开。",
+        "outcome": "扣两份普通赤脉矿，完成本轮路标维护；领取一份普通琉砂晶粒。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.ashen.clear_signal.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "把声标间隔拉开",
+        "dialogue": "先响完这一处，再听下一处。",
+        "outcome": "扣相同材料，调整路标间隔；领取一份普通琉砂晶粒。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.ashen.clear_signal.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "material",
+        "key": "ashen.glass_grain|0",
+        "materialId": "ashen.glass_grain",
+        "quantity": 1
+      }
+    ],
+    "narrativeOnly": false,
+    "repeatable": true,
+    "conditions": {
+      "areaUnlocked": "ashen.a06",
+      "atArea": "ashen.a06",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": false,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "可以。等你决定。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": true,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本轮授权保守初调；非此前固定正史。实测长期供需后可改配置。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "materials": [
+      {
+        "key": "ashen.red_vein_ore|0",
+        "materialId": "ashen.red_vein_ore",
+        "quantity": 2
+      }
+    ],
+    "cooldownMs": 300000,
+    "recurrence": {
+      "cooldownMs": 300000,
+      "reference": "dist/engine.js：普通副本完整通关 cooldown 为 300000ms；此处复用同量级为本稿节流参数，不是新战争时长。",
+      "startsAt": "成功原子提交本轮完成时",
+      "requiresFreshObjective": true,
+      "cycleKey": "任务 ID + 单调递增 cycleIndex",
+      "requiresManualReaccept": true,
+      "noOfflineAutoAccept": true,
+      "sameCycleClaimIdempotent": true,
+      "refreshDoesNotReset": true
+    },
+    "rewardTuning": {
+      "model": "common-q0-lossy-exchange-2-to-1",
+      "maxExtraMaterialPerCycle": 1,
+      "quality": 0,
+      "rarity": "常见",
+      "cooldownMs": 300000,
+      "source": "现有 WORLD_MATERIALS 常见可刷材料；不接入随机稀有渠道。",
+      "inventorySourceException": null
+    },
+    "areaName": "鸣晶断层",
+    "implementationNotes": {
+      "originalDescription": "声标支架松动，让两片晶片碰在一起；补修支架，不更换生命核心或创造音魔法。两份普通赤脉矿换一份普通琉砂晶粒，不自动投入高品质。",
+      "originalChoiceOutcomes": {
+        "option_1": "扣两份普通赤脉矿，完成本轮路标维护；不创作音魔法机制。；领取一份普通琉砂晶粒。",
+        "option_2": "扣相同材料，调整路标间隔；不揭古代遗址身份。；领取一份普通琉砂晶粒。"
+      }
+    }
+  },
+  {
+    "id": "local.ashen.listen_after_return",
+    "npcId": "npc.ashen.mingji",
+    "npcName": "鸣隙",
+    "race": "ashen",
+    "areaId": "ashen.a06",
+    "title": "走回来再听",
+    "description": "接受后在鸣晶断层野外取得一次真实胜利，再区分脚步回声与路标声。",
+    "dialogue": [
+      "站在这里听不出路上怎样。走过，回来再说。",
+      "只记你能分清的，别替空白添一个答案。",
+      "本轮回报后领一份普通黑曜玻璃，不另发金币。"
+    ],
+    "completion": [
+      "已记录你的选择；与约定相符的交付和回报已经结清。"
+    ],
+    "objective": {
+      "kind": "victory",
+      "nodeIds": [
+        "ashen.a06.field"
+      ],
+      "count": 1,
+      "tracking": "接受本轮之后该节点的一次真实胜利；已有胜场、其他地区与失败不计。",
+      "offlinePolicy": "仅已接受任务的客观胜利可由挂机／离线累计，选项与完成必须手动。"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "标出听不清的位置",
+        "dialogue": "这处写“混响”。不硬说它能指路。",
+        "outcome": "本轮标出混响处；领取一份普通黑曜玻璃。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.ashen.listen_after_return.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "标出能辨认的声标",
+        "dialogue": "有把握的留下，没把握的先空着。",
+        "outcome": "本轮只录可验证声标；领取一份普通黑曜玻璃。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.ashen.listen_after_return.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "material",
+        "key": "ashen.obsidian_glass|0",
+        "materialId": "ashen.obsidian_glass",
+        "quantity": 1
+      }
+    ],
+    "narrativeOnly": false,
+    "repeatable": true,
+    "conditions": {
+      "areaUnlocked": "ashen.a06",
+      "atArea": "ashen.a06",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": false,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "可以。等你决定。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": true,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本轮授权保守初调；非此前固定正史。实测长期供需后可改配置。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "cooldownMs": 300000,
+    "recurrence": {
+      "cooldownMs": 300000,
+      "reference": "dist/engine.js：普通副本完整通关 cooldown 为 300000ms；此处复用同量级为本稿节流参数，不是新战争时长。",
+      "startsAt": "成功原子提交本轮完成时",
+      "requiresFreshObjective": true,
+      "cycleKey": "任务 ID + 单调递增 cycleIndex",
+      "requiresManualReaccept": true,
+      "noOfflineAutoAccept": true,
+      "sameCycleClaimIdempotent": true,
+      "refreshDoesNotReset": true
+    },
+    "rewardTuning": {
+      "model": "common-q0-single-unit-fresh-victory",
+      "maxExtraMaterialPerCycle": 1,
+      "quality": 0,
+      "rarity": "常见",
+      "cooldownMs": 300000,
+      "source": "现有 WORLD_MATERIALS 常见可刷材料；不接入随机稀有渠道。",
+      "inventorySourceException": null
+    },
+    "areaName": "鸣晶断层",
+    "implementationNotes": {
+      "originalDescription": "接受后在鸣晶断层野外取得一次真实胜利，再区分脚步回声与路标声。",
+      "originalChoiceOutcomes": {
+        "option_1": "本轮标出混响处；不解释大祭司仪式或核心。；领取一份普通黑曜玻璃。",
+        "option_2": "本轮只录可验证声标；不产生封锁豁免。；领取一份普通黑曜玻璃。"
+      }
+    }
+  },
+  {
+    "id": "local.ashen.shelter_seam",
+    "npcId": "npc.ashen.taozhe",
+    "npcName": "陶褶",
+    "race": "ashen",
+    "areaId": "ashen.a08",
+    "title": "先补哪道缝",
+    "description": "遮棚两处接缝松开。选择先给来客留干净停靠处，或先给工具遮挡。",
+    "dialogue": [
+      "棚还站得住，缝得先处理。",
+      "来客那边，还是工具这边？另一处我随后接着补。"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "先补来客侧",
+        "dialogue": "这里站得开，路过的人不用挤到石沿。",
+        "outcome": "来客侧先修，之后工具侧由 NPC 继续修；无属性奖励。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.ashen.shelter_seam.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "先补工具侧",
+        "dialogue": "工具干净了，后面的活也省得返工。",
+        "outcome": "工具侧先修。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.ashen.shelter_seam.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "ashen.a08",
+      "atArea": "ashen.a08",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "可以。等你决定。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本稿采用零额外经济奖励；后续奖励须独立平衡，不是已固定正史。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "areaName": "白盐古盆",
+    "implementationNotes": {
+      "originalDescription": "遮棚两处接缝松开。选择先给来客留干净停靠处，或先给工具遮挡。",
+      "originalChoiceOutcomes": {
+        "option_1": "来客侧先修，之后工具侧由 NPC 继续修；无属性奖励。",
+        "option_2": "工具侧先修；没有隐含放弃来客或造成永久死亡。"
+      }
+    }
+  },
+  {
+    "id": "local.ashen.misplaced_stones",
+    "npcId": "npc.ashen.taozhe",
+    "npcName": "陶褶",
+    "race": "ashen",
+    "areaId": "ashen.a08",
+    "title": "像路标的石头",
+    "description": "临时堆放的陶石看起来像方向标。选择重摆或加醒目标识。",
+    "dialogue": [
+      "我只是把石头搁这儿，有人却跟着走了。",
+      "搬散，还是把“存料”写清楚？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "重新摆成存料堆",
+        "dialogue": "别摆成一串。路上最怕看着像指路。",
+        "outcome": "存料堆不再与道路标志混淆。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.ashen.misplaced_stones.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "标清这是存料",
+        "dialogue": "两边都写，别只给走来的那边看。",
+        "outcome": "加上双面存料牌。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.ashen.misplaced_stones.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "ashen.a08",
+      "atArea": "ashen.a08",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "可以。等你决定。",
+      "effect": "不扣材料，不写完成，不改变主线或战争。"
+    },
+    "failurePolicy": "材料不足／背包变化／保存失败时不完成且不扣料；战败保留本轮已记客观进度；拒绝、离开与封锁不清进度。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "沿用实际地点战斗结算；不另外复制一份。",
+      "tuningStatus": "本稿采用零额外经济奖励；后续奖励须独立平衡，不是已固定正史。"
+    },
+    "provenance": "authored-v1",
+    "availability": "在既有区域解锁且可进入后可接；不注入主线进度，不按角色等级猜剧情阶段。",
+    "areaName": "白盐古盆",
+    "implementationNotes": {
+      "originalDescription": "临时堆放的陶石看起来像方向标。选择重摆或加醒目标识。",
+      "originalChoiceOutcomes": {
+        "option_1": "存料堆不再与道路标志混淆。",
+        "option_2": "加上双面存料牌；不创造古代阵法或新的地图地点。"
+      }
+    }
+  },
+  {
+    "id": "local.dwarf.cart_handle_height",
+    "npcId": "npc.dwarf.taolan",
+    "npcName": "陶兰",
+    "race": "dwarf",
+    "areaId": "dwarf.a02",
+    "title": "把手高一截",
+    "description": "两位推车人的身高不同，陶兰想给公用矿车留两种握位。",
+    "dialogue": [
+      "不是谁推得差，是把手只照着一个人的个头做了。",
+      "你帮我试试：加低握位，还是做能拆换的横杆？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "增设低握位",
+        "dialogue": "好，上面留着，矮个子不用踮脚。",
+        "outcome": "公用矿车保留高低两处握位。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.dwarf.cart_handle_height.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "改成可换横杆",
+        "dialogue": "拆装扣朝外，戴着手套也找得到。",
+        "outcome": "横杆增加拆换记号，交班时按需调整。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.dwarf.cart_handle_height.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "dwarf.a02",
+      "atArea": "dwarf.a02",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "先留着，等你有空。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "areaName": "岩蜥支洞"
+  },
+  {
+    "id": "local.dwarf.wheel_pin_batch",
+    "npcId": "npc.dwarf.taolan",
+    "npcName": "陶兰",
+    "race": "dwarf",
+    "areaId": "dwarf.a02",
+    "title": "轮销别晃",
+    "description": "交两份普通铁屑修一批轮销，换一份普通灰根草。",
+    "dialogue": [
+      "轮缘还好，松的是这里，不必把整只轮子扔掉。",
+      "两份普通铁屑就够。你想先修哪辆？",
+      "办妥后给你一份普通灰根草，我从自己的存料里留。"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "materials",
+      "materials": [
+        {
+          "key": "铁屑|0",
+          "materialId": "dwarf.iron_filings",
+          "quantity": 2
+        }
+      ],
+      "inventoryPolicy": "仅消耗明示的两份普通品质；不会替用高品质。"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "先修载人的空车",
+        "dialogue": "先让走不动的人坐稳，货可以等。",
+        "outcome": "本批空车轮销固定。；领取一份普通灰根草。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.dwarf.wheel_pin_batch.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "先修共用货车",
+        "dialogue": "先卸货再动销，别让谁顶着车干活。",
+        "outcome": "共用货车卸载后修好轮销。；领取一份普通灰根草。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.dwarf.wheel_pin_batch.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "material",
+        "key": "灰根草|0",
+        "materialId": "dwarf.ashroot",
+        "quantity": 1
+      }
+    ],
+    "narrativeOnly": false,
+    "repeatable": true,
+    "conditions": {
+      "areaUnlocked": "dwarf.a02",
+      "atArea": "dwarf.a02",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": false,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "先留着，等你有空。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": true,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "materials": [
+      {
+        "key": "铁屑|0",
+        "materialId": "dwarf.iron_filings",
+        "quantity": 2
+      }
+    ],
+    "cooldownMs": 300000,
+    "recurrence": {
+      "cooldownMs": 300000,
+      "startsAt": "成功原子提交本轮完成时",
+      "requiresFreshObjective": true,
+      "requiresManualReaccept": true,
+      "noOfflineAutoAccept": true,
+      "sameCycleClaimIdempotent": true,
+      "refreshDoesNotReset": true
+    },
+    "rewardTuning": {
+      "model": "common-q0-lossy-exchange-2-to-1",
+      "maxExtraMaterialPerCycle": 1,
+      "quality": 0,
+      "rarity": "常见",
+      "cooldownMs": 300000,
+      "source": "既有普通材料，由NPC存料支付；不增加稀有掉落或新材料身份。"
+    },
+    "areaName": "岩蜥支洞"
+  },
+  {
+    "id": "local.dwarf.shield_rotation",
+    "npcId": "npc.dwarf.kelin",
+    "npcName": "科霖",
+    "race": "dwarf",
+    "areaId": "dwarf.a04",
+    "title": "谁来歇这一班",
+    "description": "一位新盾卫不肯离岗休息，科霖请你一起调整轮班。",
+    "dialogue": [
+      "盾能补，人累得握不住了，补盾也没用。",
+      "先换他下来，还是先把每个人的时段写清？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "先替他安排换班",
+        "dialogue": "我接这一段，让他喝口水再说。",
+        "outcome": "疲惫的盾卫先休息，科霖补上这一班。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.dwarf.shield_rotation.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "把每人的时段写清",
+        "dialogue": "连我的也写，规矩不能只管新人。",
+        "outcome": "轮班表包含所有人，休息不再靠争抢。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.dwarf.shield_rotation.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "dwarf.a04",
+      "atArea": "dwarf.a04",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "先留着，等你有空。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "areaName": "废炉外坡"
+  },
+  {
+    "id": "local.dwarf.slope_guard_round",
+    "npcId": "npc.dwarf.kelin",
+    "npcName": "科霖",
+    "race": "dwarf",
+    "areaId": "dwarf.a04",
+    "title": "坡下这一班",
+    "description": "接取后在废炉外坡野外赢一场战斗，回报本轮守望情况。",
+    "dialogue": [
+      "只巡视坡下这段，不要追到看不见同伴的地方。",
+      "回来时告诉我，哪里该站人。",
+      "办妥后给你一份普通炉灰盐，我从自己的存料里留。"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "victory",
+      "nodeIds": [
+        "dwarf.a04.field"
+      ],
+      "count": 1,
+      "tracking": "接取后在真实节点发生的新胜利结算；历史探索、预览地图、主线演出不计。"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "补在视线受阻处",
+        "dialogue": "两个人互相看得见，别各站各的。",
+        "outcome": "本轮守望安排在视线受阻处加岗。；领取一份普通炉灰盐。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.dwarf.slope_guard_round.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "先留撤回通道",
+        "dialogue": "对，盾墙后面也得留得出脚。",
+        "outcome": "本轮明确撤回通道与让行次序。；领取一份普通炉灰盐。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.dwarf.slope_guard_round.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "material",
+        "key": "dwarf.furnace_ash_salt|0",
+        "materialId": "dwarf.furnace_ash_salt",
+        "quantity": 1
+      }
+    ],
+    "narrativeOnly": false,
+    "repeatable": true,
+    "conditions": {
+      "areaUnlocked": "dwarf.a04",
+      "atArea": "dwarf.a04",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": false,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "先留着，等你有空。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": true,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "actionLabel": "接取后赢得此地野外战斗",
+    "cooldownMs": 300000,
+    "recurrence": {
+      "cooldownMs": 300000,
+      "startsAt": "成功原子提交本轮完成时",
+      "requiresFreshObjective": true,
+      "requiresManualReaccept": true,
+      "noOfflineAutoAccept": true,
+      "sameCycleClaimIdempotent": true,
+      "refreshDoesNotReset": true
+    },
+    "rewardTuning": {
+      "model": "common-q0-single-unit-fresh-victory",
+      "maxExtraMaterialPerCycle": 1,
+      "quality": 0,
+      "rarity": "常见",
+      "cooldownMs": 300000,
+      "source": "既有普通材料，由NPC存料支付；不增加稀有掉落或新材料身份。"
+    },
+    "areaName": "废炉外坡"
+  },
+  {
+    "id": "local.dwarf.quiet_meal_bench",
+    "npcId": "npc.dwarf.shajia",
+    "npcName": "莎嘉",
+    "race": "dwarf",
+    "areaId": "dwarf.a08",
+    "title": "留一张安静桌",
+    "description": "用餐的人挤在炉边说笑，一位头疼的矿工找不到安静位置。",
+    "dialogue": [
+      "热饭要吃，安静也得有地方找。",
+      "挪一张桌，还是把吵闹的那边分开？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "留一张安静桌",
+        "dialogue": "靠墙但别堵门，谁需要都能坐。",
+        "outcome": "食棚留出不必解释原因的安静桌。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.dwarf.quiet_meal_bench.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "把交班讨论移开",
+        "dialogue": "吃饭和争进度分两处，大家都省嗓子。",
+        "outcome": "交班讨论移到食桌之外。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.dwarf.quiet_meal_bench.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "dwarf.a08",
+      "atArea": "dwarf.a08",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "先留着，等你有空。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "areaName": "深脉裂谷"
+  },
+  {
+    "id": "local.dwarf.meal_route",
+    "npcId": "npc.dwarf.shajia",
+    "npcName": "莎嘉",
+    "race": "dwarf",
+    "areaId": "dwarf.a08",
+    "title": "热饭走哪边",
+    "description": "接取后亲自进入深脉裂谷野外，结束远征再报告送饭路面的情况。",
+    "dialogue": [
+      "我不想让挑饭的人一只手扶墙，一只手护锅。",
+      "走过再说哪里难落脚，别替没看见的地方打包票。"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "exploration",
+      "nodeIds": [
+        "dwarf.a08.field"
+      ],
+      "count": 1,
+      "tracking": "接取后在真实节点发生的新探索进入；历史探索、预览地图、主线演出不计。"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "标出需要慢走的窄段",
+        "dialogue": "窄段分两趟，不让人硬挤。",
+        "outcome": "送饭记录标出亲历窄段并安排分批。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.dwarf.meal_route.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "标出可停锅的位置",
+        "dialogue": "有平处就停一停，饭凉一点总比洒了好。",
+        "outcome": "送饭记录留下可临时放锅的平处。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.dwarf.meal_route.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "dwarf.a08",
+      "atArea": "dwarf.a08",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "先留着，等你有空。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "actionLabel": "接取后亲自进入此地野外探索；结束远征后回报",
+    "areaName": "深脉裂谷"
+  },
+  {
+    "id": "local.human.blank_herb_tag",
+    "npcId": "npc.human.wenna",
+    "npcName": "温娜",
+    "race": "human",
+    "areaId": "human.a03",
+    "title": "空着的药签",
+    "description": "一包草叶的标签被雨水冲淡，温娜不愿靠香味猜名字。",
+    "dialogue": [
+      "我认得气味，不代表能替这张空签作证。",
+      "先封存，还是把送来的人请回来核对？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "封存并写明待核对",
+        "dialogue": "写清今天的日期，别让下一班以为能用。",
+        "outcome": "未明草包单独封存并注明待核对。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.human.blank_herb_tag.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "先核对采集记录",
+        "dialogue": "地点和样叶都对上了，才重写标签。",
+        "outcome": "草包在来源核对完成前保持停用。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.human.blank_herb_tag.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "human.a03",
+      "atArea": "human.a03",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "好，我把这事记着。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "areaName": "礼钟丘陵"
+  },
+  {
+    "id": "local.human.hillside_drying",
+    "npcId": "npc.human.wenna",
+    "npcName": "温娜",
+    "race": "human",
+    "areaId": "human.a03",
+    "title": "找一块背风地",
+    "description": "接取后亲自进入礼钟丘陵野外，结束远征后回报晾草处的风与遮挡。",
+    "dialogue": [
+      "我缺的是晾架的位置，不是让你多摘一袋。",
+      "看看哪里背风，哪里又会积湿。"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "exploration",
+      "nodeIds": [
+        "human.a03.field"
+      ],
+      "count": 1,
+      "tracking": "接取后在真实节点发生的新探索进入；历史探索、预览地图、主线演出不计。"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "先留背风的空位",
+        "dialogue": "架子离地一点，叶下才能走风。",
+        "outcome": "晾草记录标出背风处并留出通风间隙。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.human.hillside_drying.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "先避开积湿的低处",
+        "dialogue": "低洼那块划掉，不能只图搬得近。",
+        "outcome": "晾草记录优先排除亲见的积湿处。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.human.hillside_drying.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "human.a03",
+      "atArea": "human.a03",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "好，我把这事记着。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "actionLabel": "接取后亲自进入此地野外探索；结束远征后回报",
+    "areaName": "礼钟丘陵"
+  },
+  {
+    "id": "local.human.low_rail_window",
+    "npcId": "npc.human.luoen",
+    "npcName": "洛恩",
+    "race": "human",
+    "areaId": "human.a07",
+    "title": "看得见水的缺口",
+    "description": "桥栏的观察口太高，矮个旅人只能踩在横木上看下方。",
+    "dialogue": [
+      "栏杆是防人掉下去，不是教人往上爬。",
+      "开个低观察口，还是在旁边留一段低矮挡栏？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "加带护网的低观察口",
+        "dialogue": "边上磨圆，手伸过去也别被刺到。",
+        "outcome": "低观察口加护网，旅人无需踩高。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.human.low_rail_window.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "做一段独立低挡栏",
+        "dialogue": "站位先画清，别挤到过路的人。",
+        "outcome": "侧边留出带低挡栏的观察位。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.human.low_rail_window.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "human.a07",
+      "atArea": "human.a07",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "好，我把这事记着。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "areaName": "失守关隘"
+  },
+  {
+    "id": "local.human.rail_seal_brush",
+    "npcId": "npc.human.luoen",
+    "npcName": "洛恩",
+    "race": "human",
+    "areaId": "human.a07",
+    "title": "封缝的小刷子",
+    "description": "交两份普通夜鸦羽制作封缝刷，换一份普通余烬椒。",
+    "dialogue": [
+      "大刷子进不去的缝，羽梗正好够到。",
+      "两份普通夜鸦羽，先补迎风面还是背水面？",
+      "办妥后给你一份普通余烬椒，我从自己的存料里留。"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "materials",
+      "materials": [
+        {
+          "key": "human.mat.10|0",
+          "materialId": "human.mat.10",
+          "quantity": 2
+        }
+      ],
+      "inventoryPolicy": "仅消耗明示的两份普通品质；不会替用高品质。"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "先封迎风面",
+        "dialogue": "等这一层收住再补下一层，不往缝里硬塞。",
+        "outcome": "本批迎风面细缝刷过封料。；领取一份普通余烬椒。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.human.rail_seal_brush.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "先封背水面",
+        "dialogue": "把旧湿料挑净，免得外面干、里面闷。",
+        "outcome": "本批背水面清理后重新封缝。；领取一份普通余烬椒。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.human.rail_seal_brush.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "material",
+        "key": "human.mat.09|0",
+        "materialId": "human.mat.09",
+        "quantity": 1
+      }
+    ],
+    "narrativeOnly": false,
+    "repeatable": true,
+    "conditions": {
+      "areaUnlocked": "human.a07",
+      "atArea": "human.a07",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": false,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "好，我把这事记着。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": true,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "materials": [
+      {
+        "key": "human.mat.10|0",
+        "materialId": "human.mat.10",
+        "quantity": 2
+      }
+    ],
+    "cooldownMs": 300000,
+    "recurrence": {
+      "cooldownMs": 300000,
+      "startsAt": "成功原子提交本轮完成时",
+      "requiresFreshObjective": true,
+      "requiresManualReaccept": true,
+      "noOfflineAutoAccept": true,
+      "sameCycleClaimIdempotent": true,
+      "refreshDoesNotReset": true
+    },
+    "rewardTuning": {
+      "model": "common-q0-lossy-exchange-2-to-1",
+      "maxExtraMaterialPerCycle": 1,
+      "quality": 0,
+      "rarity": "常见",
+      "cooldownMs": 300000,
+      "source": "既有普通材料，由NPC存料支付；不增加稀有掉落或新材料身份。"
+    },
+    "areaName": "失守关隘"
+  },
+  {
+    "id": "local.human.mist_whistle",
+    "npcId": "npc.human.beila",
+    "npcName": "贝菈",
+    "race": "human",
+    "areaId": "human.a08",
+    "title": "雾里别乱吹哨",
+    "description": "巡守的试哨声被旅人误当警报，贝菈要把练习和告警分开。",
+    "dialogue": [
+      "刚才那声是我试的，吓得人把包都丢下了。",
+      "定个试哨时段，还是先把练习点挪远些？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "固定试哨时段",
+        "dialogue": "把时间写在入口，我自己也照着来。",
+        "outcome": "试哨时段公开，警报与练习不再混用。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.human.mist_whistle.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "把练习点挪开",
+        "dialogue": "先告诉过路人，再换地方。",
+        "outcome": "练习点离开通行处，并补上说明。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.human.mist_whistle.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "human.a08",
+      "atArea": "human.a08",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "好，我把这事记着。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "areaName": "夜鸦高地"
+  },
+  {
+    "id": "local.human.highland_patrol",
+    "npcId": "npc.human.beila",
+    "npcName": "贝菈",
+    "race": "human",
+    "areaId": "human.a08",
+    "title": "沿着旧篱巡一圈",
+    "description": "接取后在夜鸦高地野外赢一场战斗，再回报本轮旧篱巡查。",
+    "dialogue": [
+      "旧篱挡不了什么，可有人会拿它当路边界。",
+      "别追远。你回来，我才好把下一班排下去。",
+      "办妥后给你一份普通夜鸦羽，我从自己的存料里留。"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "victory",
+      "nodeIds": [
+        "human.a08.field"
+      ],
+      "count": 1,
+      "tracking": "接取后在真实节点发生的新胜利结算；历史探索、预览地图、主线演出不计。"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "标明旧篱的断处",
+        "dialogue": "给人留看得见的提醒，不假装篱还完整。",
+        "outcome": "本轮巡查注明断篱位置。；领取一份普通夜鸦羽。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.human.highland_patrol.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "优先照看绕行的人",
+        "dialogue": "这一班守在转弯处，别催人跑。",
+        "outcome": "本轮巡查安排守望绕行处。；领取一份普通夜鸦羽。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.human.highland_patrol.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "material",
+        "key": "human.mat.10|0",
+        "materialId": "human.mat.10",
+        "quantity": 1
+      }
+    ],
+    "narrativeOnly": false,
+    "repeatable": true,
+    "conditions": {
+      "areaUnlocked": "human.a08",
+      "atArea": "human.a08",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": false,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "好，我把这事记着。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": true,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "actionLabel": "接取后赢得此地野外战斗",
+    "cooldownMs": 300000,
+    "recurrence": {
+      "cooldownMs": 300000,
+      "startsAt": "成功原子提交本轮完成时",
+      "requiresFreshObjective": true,
+      "requiresManualReaccept": true,
+      "noOfflineAutoAccept": true,
+      "sameCycleClaimIdempotent": true,
+      "refreshDoesNotReset": true
+    },
+    "rewardTuning": {
+      "model": "common-q0-single-unit-fresh-victory",
+      "maxExtraMaterialPerCycle": 1,
+      "quality": 0,
+      "rarity": "常见",
+      "cooldownMs": 300000,
+      "source": "既有普通材料，由NPC存料支付；不增加稀有掉落或新材料身份。"
+    },
+    "areaName": "夜鸦高地"
+  },
+  {
+    "id": "local.elf.fallen_nest_rest",
+    "npcId": "npc.elf.qiwei",
+    "npcName": "栖苇",
+    "race": "elf",
+    "areaId": "elf.a02",
+    "title": "暂借一根横枝",
+    "description": "掉落的空巢占住休息横枝，栖苇想留空间又不惊扰附近的鸟。",
+    "dialogue": [
+      "空巢也可能还会回来住，别急着拆。",
+      "先支一根新横枝，还是给这段留个绕行标？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "另支休息横枝",
+        "dialogue": "离巢远一点，让路人歇脚也不必凑过去。",
+        "outcome": "另设休息横枝，旧巢保持原状。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.elf.fallen_nest_rest.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "暂留绕行标",
+        "dialogue": "标记别晃得太厉害，会惊到它们。",
+        "outcome": "旧巢附近暂留安静绕行提示。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.elf.fallen_nest_rest.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "elf.a02",
+      "atArea": "elf.a02",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "等你愿意再说。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "areaName": "回声树庭"
+  },
+  {
+    "id": "local.elf.echo_bird_roost",
+    "npcId": "npc.elf.qiwei",
+    "npcName": "栖苇",
+    "race": "elf",
+    "areaId": "elf.a02",
+    "title": "回声里的一处栖枝",
+    "description": "接取后亲自进入回声树庭野外，结束远征后回报沿路栖枝受扰的情况。",
+    "dialogue": [
+      "听见两声，不一定是两只鸟，树庭会把声音送回来。",
+      "只说你确实看见的，不必替我找个漂亮答案。"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "exploration",
+      "nodeIds": [
+        "elf.a02.field"
+      ],
+      "count": 1,
+      "tracking": "接取后在真实节点发生的新探索进入；历史探索、预览地图、主线演出不计。"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "记录真正看见的栖枝",
+        "dialogue": "看不见的先空着，空白比瞎画一只鸟强。",
+        "outcome": "照护记录只标出亲眼见到的栖枝。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.elf.echo_bird_roost.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "记录人经过的扰动",
+        "dialogue": "等人走开再听，别追着声音找。",
+        "outcome": "照护记录注明行人扰动与静候位置。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.elf.echo_bird_roost.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "elf.a02",
+      "atArea": "elf.a02",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "等你愿意再说。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "actionLabel": "接取后亲自进入此地野外探索；结束远征后回报",
+    "areaName": "回声树庭"
+  },
+  {
+    "id": "local.elf.visible_mending",
+    "npcId": "npc.elf.luyin",
+    "npcName": "露茵",
+    "race": "elf",
+    "areaId": "elf.a06",
+    "title": "补丁也能认路",
+    "description": "几块相似的披布被人拿混，露茵想把补丁做成容易认出的样子。",
+    "dialogue": [
+      "人人都补成一个颜色，放下就分不清了。",
+      "留各自的旧色，还是各缝一个不同角？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "保留各自旧色",
+        "dialogue": "旧布不丢，认得它的人也认得回来。",
+        "outcome": "披布保留各自旧色作为认领特征。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.elf.visible_mending.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "缝不同的补丁角",
+        "dialogue": "三角在这件，方角在那件，别偷偷换。",
+        "outcome": "披布以不同补丁角区分。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.elf.visible_mending.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "elf.a06",
+      "atArea": "elf.a06",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "等你愿意再说。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "areaName": "焚林新芽"
+  },
+  {
+    "id": "local.elf.loom_padding",
+    "npcId": "npc.elf.luyin",
+    "npcName": "露茵",
+    "race": "elf",
+    "areaId": "elf.a06",
+    "title": "梭边垫一层",
+    "description": "交两份普通萤绒苔垫护织架，换一份普通旋叶藤。",
+    "dialogue": [
+      "这里磨的是线，不是你力气不够。",
+      "我带了些旧存旋叶藤，换两份普通萤绒苔作软垫。",
+      "办妥后给你一份普通旋叶藤，我从自己的存料里留。"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "materials",
+      "materials": [
+        {
+          "key": "elf.glow_moss|0",
+          "materialId": "elf.glow_moss",
+          "quantity": 2
+        }
+      ],
+      "inventoryPolicy": "仅消耗明示的两份普通品质；不会替用高品质。"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "先垫送线口",
+        "dialogue": "让线走顺，不必把整架拉紧。",
+        "outcome": "本批送线口加了软垫。；领取一份普通旋叶藤。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.elf.loom_padding.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "先垫收梭处",
+        "dialogue": "梭子收住了，边线才不被带偏。",
+        "outcome": "本批收梭处加了软垫。；领取一份普通旋叶藤。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.elf.loom_padding.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "material",
+        "key": "elf.spiral_vine|0",
+        "materialId": "elf.spiral_vine",
+        "quantity": 1
+      }
+    ],
+    "narrativeOnly": false,
+    "repeatable": true,
+    "conditions": {
+      "areaUnlocked": "elf.a06",
+      "atArea": "elf.a06",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": false,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "等你愿意再说。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": true,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "materials": [
+      {
+        "key": "elf.glow_moss|0",
+        "materialId": "elf.glow_moss",
+        "quantity": 2
+      }
+    ],
+    "cooldownMs": 300000,
+    "recurrence": {
+      "cooldownMs": 300000,
+      "startsAt": "成功原子提交本轮完成时",
+      "requiresFreshObjective": true,
+      "requiresManualReaccept": true,
+      "noOfflineAutoAccept": true,
+      "sameCycleClaimIdempotent": true,
+      "refreshDoesNotReset": true
+    },
+    "rewardTuning": {
+      "model": "common-q0-lossy-exchange-2-to-1",
+      "maxExtraMaterialPerCycle": 1,
+      "quality": 0,
+      "rarity": "常见",
+      "cooldownMs": 300000,
+      "source": "既有普通材料，由NPC存料支付；不增加稀有掉落或新材料身份。",
+      "inventorySourceException": "旋叶藤是露茵从既有林缘供给带来的普通存料；不新增焚林新芽野外掉落。"
+    },
+    "areaName": "焚林新芽"
+  },
+  {
+    "id": "local.elf.reed_lane_space",
+    "npcId": "npc.elf.yasen",
+    "npcName": "雅森",
+    "race": "elf",
+    "areaId": "elf.a09",
+    "title": "一条能错身的路",
+    "description": "临时苇垫铺得太窄，挑担和空手的人互相堵住。",
+    "dialogue": [
+      "窄路上谁都急，退让也得有地方退。",
+      "留一处错身位，还是先定哪端等一等？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "加一处错身位",
+        "dialogue": "垫子先试稳，别只看着比原先宽。",
+        "outcome": "苇垫边试稳后留出错身位。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.elf.reed_lane_space.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "标明两端等候位",
+        "dialogue": "让先走的人看得见后面有人等。",
+        "outcome": "两端增设互相可见的等候提示。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.elf.reed_lane_space.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "elf.a09",
+      "atArea": "elf.a09",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "等你愿意再说。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "areaName": "落潮泽地"
+  },
+  {
+    "id": "local.elf.marsh_watch_round",
+    "npcId": "npc.elf.yasen",
+    "npcName": "雅森",
+    "race": "elf",
+    "areaId": "elf.a09",
+    "title": "低苇后的动静",
+    "description": "接取后在落潮泽地野外赢一场战斗，回报本轮沿路动静。",
+    "dialogue": [
+      "低苇挡住视线，别只盯着远处。",
+      "走过回来，我们再决定下一班照看哪段。",
+      "办妥后给你一份普通枯潮鳞，我从自己的存料里留。"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "victory",
+      "nodeIds": [
+        "elf.a09.field"
+      ],
+      "count": 1,
+      "tracking": "接取后在真实节点发生的新胜利结算；历史探索、预览地图、主线演出不计。"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "标出近处的遮挡",
+        "dialogue": "把眼前这段补上，别画一个虚的远圈。",
+        "outcome": "本轮守望记录优先注明近处遮挡。；领取一份普通枯潮鳞。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.elf.marsh_watch_round.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "标出可停步的硬地",
+        "dialogue": "脚下站稳了，才谈看得远。",
+        "outcome": "本轮守望记录标出亲历的硬地。；领取一份普通枯潮鳞。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.elf.marsh_watch_round.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "material",
+        "key": "elf.dry_tide_scale|0",
+        "materialId": "elf.dry_tide_scale",
+        "quantity": 1
+      }
+    ],
+    "narrativeOnly": false,
+    "repeatable": true,
+    "conditions": {
+      "areaUnlocked": "elf.a09",
+      "atArea": "elf.a09",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": false,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "等你愿意再说。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": true,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "actionLabel": "接取后赢得此地野外战斗",
+    "cooldownMs": 300000,
+    "recurrence": {
+      "cooldownMs": 300000,
+      "startsAt": "成功原子提交本轮完成时",
+      "requiresFreshObjective": true,
+      "requiresManualReaccept": true,
+      "noOfflineAutoAccept": true,
+      "sameCycleClaimIdempotent": true,
+      "refreshDoesNotReset": true
+    },
+    "rewardTuning": {
+      "model": "common-q0-single-unit-fresh-victory",
+      "maxExtraMaterialPerCycle": 1,
+      "quality": 0,
+      "rarity": "常见",
+      "cooldownMs": 300000,
+      "source": "既有普通材料，由NPC存料支付；不增加稀有掉落或新材料身份。"
+    },
+    "areaName": "落潮泽地"
+  },
+  {
+    "id": "local.goblin.last_ladle",
+    "npcId": "npc.goblin.kaba",
+    "npcName": "咔巴",
+    "race": "goblin",
+    "areaId": "goblin.a03",
+    "title": "最后一勺给谁留",
+    "description": "锅边的人以为汤已经分完，咔巴还为晚班留着一小份。",
+    "dialogue": [
+      "不是藏起来自己喝，是下面那班还没上来。",
+      "把留份写在锅边，还是单独盛到盖碗里？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "写清晚班留份",
+        "dialogue": "字别太小，谁伸勺都看得见。",
+        "outcome": "锅边明确标出晚班留份。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.goblin.last_ladle.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "先盛进有盖的碗",
+        "dialogue": "盖碗放高点，别又被当成洗锅水。",
+        "outcome": "晚班留份装进有盖的碗。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.goblin.last_ladle.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "goblin.a03",
+      "atArea": "goblin.a03",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "行，回来再商量。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "areaName": "菌灯洞群"
+  },
+  {
+    "id": "local.goblin.soup_straining",
+    "npcId": "npc.goblin.kaba",
+    "npcName": "咔巴",
+    "race": "goblin",
+    "areaId": "goblin.a03",
+    "title": "菌汤要过细筛",
+    "description": "交两份普通灰帽菌补本批锅料，换一份普通韧苔纤维。",
+    "dialogue": [
+      "这批先过筛，别让小碎梗全挤到最后一碗。",
+      "两份普通灰帽菌，我用一份存好的韧苔纤维换。",
+      "办妥后给你一份普通韧苔纤维，我从自己的存料里留。"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "materials",
+      "materials": [
+        {
+          "key": "goblin.mat.01|0",
+          "materialId": "goblin.mat.01",
+          "quantity": 2
+        }
+      ],
+      "inventoryPolicy": "仅消耗明示的两份普通品质；不会替用高品质。"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "先筛本批汤底",
+        "dialogue": "汤勺慢一点，不把底渣又搅上来。",
+        "outcome": "本批汤底细筛后分盛。；领取一份普通韧苔纤维。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.goblin.soup_straining.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "先分开新旧锅料",
+        "dialogue": "旧签留在旧篮，不靠鼻子猜日期。",
+        "outcome": "本批锅料分开后再下锅。；领取一份普通韧苔纤维。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.goblin.soup_straining.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "material",
+        "key": "goblin.mat.03|0",
+        "materialId": "goblin.mat.03",
+        "quantity": 1
+      }
+    ],
+    "narrativeOnly": false,
+    "repeatable": true,
+    "conditions": {
+      "areaUnlocked": "goblin.a03",
+      "atArea": "goblin.a03",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": false,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "行，回来再商量。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": true,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "materials": [
+      {
+        "key": "goblin.mat.01|0",
+        "materialId": "goblin.mat.01",
+        "quantity": 2
+      }
+    ],
+    "cooldownMs": 300000,
+    "recurrence": {
+      "cooldownMs": 300000,
+      "startsAt": "成功原子提交本轮完成时",
+      "requiresFreshObjective": true,
+      "requiresManualReaccept": true,
+      "noOfflineAutoAccept": true,
+      "sameCycleClaimIdempotent": true,
+      "refreshDoesNotReset": true
+    },
+    "rewardTuning": {
+      "model": "common-q0-lossy-exchange-2-to-1",
+      "maxExtraMaterialPerCycle": 1,
+      "quality": 0,
+      "rarity": "常见",
+      "cooldownMs": 300000,
+      "source": "既有普通材料，由NPC存料支付；不增加稀有掉落或新材料身份。"
+    },
+    "areaName": "菌灯洞群"
+  },
+  {
+    "id": "local.goblin.basket_name_knot",
+    "npcId": "npc.goblin.zhiqi",
+    "npcName": "枝契",
+    "race": "goblin",
+    "areaId": "goblin.a04",
+    "title": "记得谁背过",
+    "description": "公用货篓没有清楚的借用记号，背带磨坏后大家互相推托。",
+    "dialogue": [
+      "不是叫谁赔钱，先知道哪根带子用了多久。",
+      "结绳记日期，还是把借还牌分两面？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "用结绳记使用日",
+        "dialogue": "一日一结，拆结得当着借的人。",
+        "outcome": "货篓以结绳记录使用日。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.goblin.basket_name_knot.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "用双面的借还牌",
+        "dialogue": "红面是外借，素面是归还，都挂在同一处。",
+        "outcome": "货篓借还牌使用两面状态。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.goblin.basket_name_knot.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "goblin.a04",
+      "atArea": "goblin.a04",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "行，回来再商量。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "areaName": "地下货道"
+  },
+  {
+    "id": "local.goblin.basket_clearance",
+    "npcId": "npc.goblin.zhiqi",
+    "npcName": "枝契",
+    "race": "goblin",
+    "areaId": "goblin.a04",
+    "title": "背篓过得去吗",
+    "description": "接取后亲自进入地下货道野外，结束远征后回报低矮路段。",
+    "dialogue": [
+      "人低头能过，背上的篓可不会自己弯。",
+      "走一趟再说，别把地图上宽的线当真空地。"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "exploration",
+      "nodeIds": [
+        "goblin.a04.field"
+      ],
+      "count": 1,
+      "tracking": "接取后在真实节点发生的新探索进入；历史探索、预览地图、主线演出不计。"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "标出要卸篓的地方",
+        "dialogue": "到那里先卸，不让背的人自己猜。",
+        "outcome": "货道记录标出需卸篓通过的位置。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.goblin.basket_clearance.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "标出能转身的空处",
+        "dialogue": "掉头也得留地方，别只顾往里塞。",
+        "outcome": "货道记录保留可转身的空处。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.goblin.basket_clearance.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "goblin.a04",
+      "atArea": "goblin.a04",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "行，回来再商量。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "actionLabel": "接取后亲自进入此地野外探索；结束远征后回报",
+    "areaName": "地下货道"
+  },
+  {
+    "id": "local.goblin.shield_not_a_stool",
+    "npcId": "npc.goblin.moku",
+    "npcName": "墨库",
+    "race": "goblin",
+    "areaId": "goblin.a08",
+    "title": "盾不是凳子",
+    "description": "洞口休息的人把圆盾当凳子，墨库发现背带被压歪。",
+    "dialogue": [
+      "坐一下不丢人，把背带坐坏才麻烦。",
+      "做一处坐垫，还是给盾架挪个醒目的位置？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "另铺一处坐垫",
+        "dialogue": "就在背风处，谁累了都能坐。",
+        "outcome": "洞口铺出休息坐垫，盾不再代替凳子。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.goblin.shield_not_a_stool.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "把盾架移到手边",
+        "dialogue": "靠手边，不挡脚，起身就能拿。",
+        "outcome": "盾架重新摆放，背带保持展开。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.goblin.shield_not_a_stool.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "goblin.a08",
+      "atArea": "goblin.a08",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "行，回来再商量。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "areaName": "深窟集地"
+  },
+  {
+    "id": "local.goblin.entrance_watch",
+    "npcId": "npc.goblin.moku",
+    "npcName": "墨库",
+    "race": "goblin",
+    "areaId": "goblin.a08",
+    "title": "洞口外的脚步",
+    "description": "接取后在深窟集地野外赢一场战斗，回报本轮洞口巡看。",
+    "dialogue": [
+      "我守入口，你走外边那一段。",
+      "听着像很多，也可能是回声；回来再讲。",
+      "办妥后给你一份普通赤须兽筋，我从自己的存料里留。"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "victory",
+      "nodeIds": [
+        "goblin.a08.field"
+      ],
+      "count": 1,
+      "tracking": "接取后在真实节点发生的新胜利结算；历史探索、预览地图、主线演出不计。"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "标出脚步靠近的方向",
+        "dialogue": "写方向，不编对方来了多少。",
+        "outcome": "本轮巡看记录亲历的靠近方向。；领取一份普通赤须兽筋。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.goblin.entrance_watch.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "整理回撤的手势",
+        "dialogue": "让新人也能看懂，不只我们两个懂。",
+        "outcome": "本轮把回撤手势向轮值者说明。；领取一份普通赤须兽筋。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.goblin.entrance_watch.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "material",
+        "key": "goblin.mat.11|0",
+        "materialId": "goblin.mat.11",
+        "quantity": 1
+      }
+    ],
+    "narrativeOnly": false,
+    "repeatable": true,
+    "conditions": {
+      "areaUnlocked": "goblin.a08",
+      "atArea": "goblin.a08",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": false,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "行，回来再商量。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": true,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "actionLabel": "接取后赢得此地野外战斗",
+    "cooldownMs": 300000,
+    "recurrence": {
+      "cooldownMs": 300000,
+      "startsAt": "成功原子提交本轮完成时",
+      "requiresFreshObjective": true,
+      "requiresManualReaccept": true,
+      "noOfflineAutoAccept": true,
+      "sameCycleClaimIdempotent": true,
+      "refreshDoesNotReset": true
+    },
+    "rewardTuning": {
+      "model": "common-q0-single-unit-fresh-victory",
+      "maxExtraMaterialPerCycle": 1,
+      "quality": 0,
+      "rarity": "常见",
+      "cooldownMs": 300000,
+      "source": "既有普通材料，由NPC存料支付；不增加稀有掉落或新材料身份。"
+    },
+    "areaName": "深窟集地"
+  },
+  {
+    "id": "local.ashen.powder_lid_shapes",
+    "npcId": "npc.ashen.shayan",
+    "npcName": "砂砚",
+    "race": "ashen",
+    "areaId": "ashen.a01",
+    "title": "摸得到的罐盖",
+    "description": "细粉罐外壁沾灰看不清，砂砚想让取料者凭罐盖也能区分。",
+    "dialogue": [
+      "擦干净很快，下一阵风又会糊上。",
+      "刻不同边角，还是给盖顶留凸点？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "刻不同边角",
+        "dialogue": "圆角留给细粉，缺角留给粗粒。",
+        "outcome": "粉罐盖以不同边角区分。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.ashen.powder_lid_shapes.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "增加可摸的凸点",
+        "dialogue": "凸点别尖，手套碰过去也认得出。",
+        "outcome": "粉罐盖增加安全的触摸凸点。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.ashen.powder_lid_shapes.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "ashen.a01",
+      "atArea": "ashen.a01",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "可以，我继续照管这里。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "areaName": "醒石边地"
+  },
+  {
+    "id": "local.ashen.grinding_batch",
+    "npcId": "npc.ashen.shayan",
+    "npcName": "砂砚",
+    "race": "ashen",
+    "areaId": "ashen.a01",
+    "title": "磨平护具边",
+    "description": "交两份普通冷烬砂研磨护具毛边，换一份普通盐壳碎片。",
+    "dialogue": [
+      "磨的是护具边，不是谁的矿壳。",
+      "两份普通冷烬砂，先处理朝里的边还是外侧扣口？",
+      "办妥后给你一份普通盐壳碎片，我从自己的存料里留。"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "materials",
+      "materials": [
+        {
+          "key": "ashen.cold_ash_sand|0",
+          "materialId": "ashen.cold_ash_sand",
+          "quantity": 2
+        }
+      ],
+      "inventoryPolicy": "仅消耗明示的两份普通品质；不会替用高品质。"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "先磨朝里的毛边",
+        "dialogue": "试过不挂布，再让人穿上。",
+        "outcome": "本批护具朝内毛边磨平并试布。；领取一份普通盐壳碎片。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.ashen.grinding_batch.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "先磨外侧扣口",
+        "dialogue": "扣口顺了，也不必用力扯带子。",
+        "outcome": "本批护具扣口磨平。；领取一份普通盐壳碎片。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.ashen.grinding_batch.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "material",
+        "key": "ashen.salt_shell|0",
+        "materialId": "ashen.salt_shell",
+        "quantity": 1
+      }
+    ],
+    "narrativeOnly": false,
+    "repeatable": true,
+    "conditions": {
+      "areaUnlocked": "ashen.a01",
+      "atArea": "ashen.a01",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": false,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "可以，我继续照管这里。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": true,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "materials": [
+      {
+        "key": "ashen.cold_ash_sand|0",
+        "materialId": "ashen.cold_ash_sand",
+        "quantity": 2
+      }
+    ],
+    "cooldownMs": 300000,
+    "recurrence": {
+      "cooldownMs": 300000,
+      "startsAt": "成功原子提交本轮完成时",
+      "requiresFreshObjective": true,
+      "requiresManualReaccept": true,
+      "noOfflineAutoAccept": true,
+      "sameCycleClaimIdempotent": true,
+      "refreshDoesNotReset": true
+    },
+    "rewardTuning": {
+      "model": "common-q0-lossy-exchange-2-to-1",
+      "maxExtraMaterialPerCycle": 1,
+      "quality": 0,
+      "rarity": "常见",
+      "cooldownMs": 300000,
+      "source": "既有普通材料，由NPC存料支付；不增加稀有掉落或新材料身份。"
+    },
+    "areaName": "醒石边地"
+  },
+  {
+    "id": "local.ashen.wind_vane_spacing",
+    "npcId": "npc.ashen.huileng",
+    "npcName": "灰棱",
+    "race": "ashen",
+    "areaId": "ashen.a04",
+    "title": "别把风口塞满",
+    "description": "避风的货包堵住风口一半，灰棱想兼顾存货和通风。",
+    "dialogue": [
+      "风不能因为箱子先来，就自己换条路。",
+      "给货包划线，还是另搭一个小挡风板？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "留出不可堆货的线",
+        "dialogue": "线画得宽些，最外面的绳头也别伸进来。",
+        "outcome": "风口前划出通风空线。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.ashen.wind_vane_spacing.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "另搭存货挡风板",
+        "dialogue": "挡货那边的风，不挡通风口的风。",
+        "outcome": "货包获得独立挡风板，风口恢复空畅。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.ashen.wind_vane_spacing.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "ashen.a04",
+      "atArea": "ashen.a04",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "可以，我继续照管这里。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "areaName": "琉砂洼地"
+  },
+  {
+    "id": "local.ashen.airflow_walk",
+    "npcId": "npc.ashen.huileng",
+    "npcName": "灰棱",
+    "race": "ashen",
+    "areaId": "ashen.a04",
+    "title": "走出去听风",
+    "description": "接取后亲自进入琉砂洼地野外，结束远征后回报沿路风声与扬砂。",
+    "dialogue": [
+      "站在口里听，哪里都像从前面来。",
+      "走出去看看砂往哪边落，再回来讲。"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "exploration",
+      "nodeIds": [
+        "ashen.a04.field"
+      ],
+      "count": 1,
+      "tracking": "接取后在真实节点发生的新探索进入；历史探索、预览地图、主线演出不计。"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "记录扬砂落向",
+        "dialogue": "写看见的方向，下一阵再另记。",
+        "outcome": "通风记录保留本次亲见的扬砂落向。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.ashen.airflow_walk.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "记录风声被遮的位置",
+        "dialogue": "声小不等于风停，这处先做提醒。",
+        "outcome": "通风记录注明受遮挡的听风位置。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.ashen.airflow_walk.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "ashen.a04",
+      "atArea": "ashen.a04",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "可以，我继续照管这里。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "actionLabel": "接取后亲自进入此地野外探索；结束远征后回报",
+    "areaName": "琉砂洼地"
+  },
+  {
+    "id": "local.ashen.stoneway_pace",
+    "npcId": "npc.ashen.pucheng",
+    "npcName": "璞承",
+    "race": "ashen",
+    "areaId": "ashen.a07",
+    "title": "慢一些也能同行",
+    "description": "护行队步子越走越快，一位负重者被落在后面。",
+    "dialogue": [
+      "最前面没停，最后面的已经看不见手势。",
+      "让领路者回看，还是在中段安排传手势的人？"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "choice"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "领路者定点回看",
+        "dialogue": "走到转角就回看，别等有人喊。",
+        "outcome": "护行队约定转角回看后再动身。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.ashen.stoneway_pace.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "中段补上手势传递",
+        "dialogue": "传到最后一个再起步，我等得住。",
+        "outcome": "护行队增加中段手势传递。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.ashen.stoneway_pace.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [],
+    "narrativeOnly": true,
+    "repeatable": false,
+    "conditions": {
+      "areaUnlocked": "ashen.a07",
+      "atArea": "ashen.a07",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": true,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "可以，我继续照管这里。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": false,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "areaName": "黑曜风口"
+  },
+  {
+    "id": "local.ashen.obsidian_escort_round",
+    "npcId": "npc.ashen.pucheng",
+    "npcName": "璞承",
+    "race": "ashen",
+    "areaId": "ashen.a07",
+    "title": "风口的一次护行",
+    "description": "接取后在黑曜风口野外赢一场战斗，回报本轮护行观察。",
+    "dialogue": [
+      "这次照看风口这一段，不把远处也写成安全。",
+      "回来选一处让下一队留心。",
+      "办妥后给你一份普通黑曜玻璃，我从自己的存料里留。"
+    ],
+    "completion": [
+      "已记录你的选择，这件地方事务已经办妥。"
+    ],
+    "objective": {
+      "kind": "victory",
+      "nodeIds": [
+        "ashen.a07.field"
+      ],
+      "count": 1,
+      "tracking": "接取后在真实节点发生的新胜利结算；历史探索、预览地图、主线演出不计。"
+    },
+    "choices": [
+      {
+        "id": "option_1",
+        "label": "提醒碎石松动处",
+        "dialogue": "松动还在，就写还在，不画一个完成的勾。",
+        "outcome": "本轮护行记录明确松石提醒。；领取一份普通黑曜玻璃。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.ashen.obsidian_escort_round.1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "option_2",
+        "label": "提醒停步避风处",
+        "dialogue": "留给人站稳，不再往那里堆货。",
+        "outcome": "本轮护行记录保留停步避风位。；领取一份普通黑曜玻璃。",
+        "effects": [
+          {
+            "kind": "narrative",
+            "flag": "local.ashen.obsidian_escort_round.2",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "material",
+        "key": "ashen.obsidian_glass|0",
+        "materialId": "ashen.obsidian_glass",
+        "quantity": 1
+      }
+    ],
+    "narrativeOnly": false,
+    "repeatable": true,
+    "conditions": {
+      "areaUnlocked": "ashen.a07",
+      "atArea": "ashen.a07",
+      "accessPolicy": "territoryAccess(save, race).allowed",
+      "notInCombat": true,
+      "notAlreadyCompleted": false,
+      "noRaceRestriction": true,
+      "requiredEventIds": [],
+      "requiredStoryFlags": []
+    },
+    "decline": {
+      "label": "以后再来",
+      "permanent": false,
+      "dialogue": "可以，我继续照管这里。"
+    },
+    "failurePolicy": "材料不足、满包或保存失败不扣料不完成；战败、离开与封锁不清已接进度；回来继续。",
+    "economy": {
+      "extraGold": false,
+      "extraXp": false,
+      "extraItems": true,
+      "ordinaryCombatRewards": "实际战斗奖励只结算一次。"
+    },
+    "provenance": "authored-v2",
+    "availability": "当前区域已开放且可进入；无主线前置，不按等级猜剧情。",
+    "actionLabel": "接取后赢得此地野外战斗",
+    "cooldownMs": 300000,
+    "recurrence": {
+      "cooldownMs": 300000,
+      "startsAt": "成功原子提交本轮完成时",
+      "requiresFreshObjective": true,
+      "requiresManualReaccept": true,
+      "noOfflineAutoAccept": true,
+      "sameCycleClaimIdempotent": true,
+      "refreshDoesNotReset": true
+    },
+    "rewardTuning": {
+      "model": "common-q0-single-unit-fresh-victory",
+      "maxExtraMaterialPerCycle": 1,
+      "quality": 0,
+      "rarity": "常见",
+      "cooldownMs": 300000,
+      "source": "既有普通材料，由NPC存料支付；不增加稀有掉落或新材料身份。"
+    },
+    "areaName": "黑曜风口"
+  }
+]);
+export const RACIAL_NPC_BY_ID = freeze(Object.fromEntries(RACIAL_NPCS.map(n => [n.id, n])));
+export const RACIAL_EVENT_BY_ID = freeze(Object.fromEntries(RACIAL_NPC_EVENTS.map(e => [e.id, e])));

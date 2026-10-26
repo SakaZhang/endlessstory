@@ -6,6 +6,7 @@ import {returnRingMaterialUsage,syncReturnRingRecipe} from './return-ring-state.
 import {renderReturnRingRecipe} from './return-ring-ui.js';
 import {craftReturnRing} from './return-ring-crafting.js';
 import {renderNpcEventBoard} from './npc-event-ui.js';
+import {bindNpcPortraitErrors} from './npc-portraits.js';
 import {beginNpcEvent,declineNpcEvent,chooseNpcEventResponse} from './npc-events.js';
 import {claimTaskReward} from './task-reward-transaction.js';
 import {bindAssetReleaseNotice} from './asset-recovery.js';
@@ -70,6 +71,7 @@ bindEquipmentRasterErrors(document);
 bindMaterialPixelErrors(document);
 bindConsumablePixelErrors(document);
 bindMonsterPortraitErrors(document);
+bindNpcPortraitErrors(document);
 const $=id=>document.getElementById(id),KEY=SAVE_KEY;let enhancementSlot=null,enhancementItem=null,enhancementQuote=null,enhancementResult=null,enhancementError='',enhancementBusy=false;let workshopItem=null,workshopTemplate=null,workshopQuote=null,workshopResult=null,workshopError='',workshopBusy=false;let sandboxSession=null,sandboxReturn=null,battleBindings=[],selectedCodexMonster=null,sourceFocus=null;let runtimeStorageBlocked=false,s=loaded.game;normalizeMonsterLedger(s);normalizeEquipmentLevels(s);normalizeInventoryState(s);normalizeCodexCollection(s);normalizeTalents(s);normalizeMaterials(s);MultiEngine.normalizeRegionNavigation?.(s);normalizePotions(s);normalizeRecipes(s);syncReturnRingRecipe(s);normalizeAreaProgress(s);normalizeExpedition(s);normalizeHealth(s,s.lastSeen);let e=null,view='world',race=s.race,selected=s.equip.weapon,logs=[],selection=[],nextAt=0,lastStep=0,toastTimer,hitUntil=0,forgeBusy=false,forgeInputs=[],lastForgeResult=null,forgeTimer=null,forgeEpoch=0,forgeTab='fusion',recoveryQuality=0,recoveryQuantities={},recoveryError='',potionRecipeId='potion-healing',potionRecipeQuality=0,potionRecipeMain='',potionRecipeAux='',potionRecipeBatch=1,potionRecipeError='',potionSettingsOpen=false,fusionInputTab='materials',fusionFamily='all',fusionPage=0,selectedRecipe=null,modifySlot=null,modifyId=null,modifyDonorId=null,modifyMode='value',modifyIndex=0,modifyReady=true,modifyResult=null,codexTab='sets',selectedCodexSet='anvil',selectedCodexLegend=LEGENDARY_CODEX[0]?.id,bagSort='quality',bagTab='equipment',bagSlot='weapon',batchSaleActive=false,batchSaleSlot='weapon',batchSaleQualities=[],batchSaleQuote=null,batchSaleError='',batchSalePage=0,batchSaleBusy=false,buyQuantities={},buyLockUntil=0,shopQuote=null,talentRefundMode=false,talentRefundDraft={};const away=offline(s);e=normalizeEncounterElements(s.activeEncounter??null);const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));const raceIcon={human:'sword',dwarf:'forge',elf:'soul',goblin:'merchant',ashen:'fire'};const conditions=[['always','可用即施放'],['low','生命低于60%'],['charge','敌人将重击'],['burn','目标已灼烧']];
 let lastCommittedGameRaw=null;try{lastCommittedGameRaw=localStorage.getItem(KEY);}catch{}
 bindSkillPixelErrors(document);

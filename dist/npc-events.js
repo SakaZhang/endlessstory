@@ -2,7 +2,7 @@ import {RACIAL_NPC_EVENTS} from './racial-npc-event-content.js';
 import {worldInventoryKey} from './world-materials.js';
 import {RETURN_RING_EVENTS} from './return-ring-content.js';
 import {AREAS,INSTANCES,instanceCooldownMs} from './location-schema.js';
-import {territoryAccess} from './war-diplomacy.js';
+import {territoryAccess,nodeAccess} from './war-diplomacy.js';
 const freeze=o=>{if(o&&typeof o==='object'){Object.values(o).forEach(freeze);Object.freeze(o);}return o;};
 const canonicalRows=rows=>rows.map(row=>({...row,key:(worldInventoryKey(row.key.split('|')[0])??row.key.split('|')[0])+'|'+row.key.split('|')[1]}));
 const content=[...RETURN_RING_EVENTS,...RACIAL_NPC_EVENTS].map(d=>({...d,materials:canonicalRows(d.materials??(d.objective?.kind==='materials'?d.objective.materials??[]:[])),rewards:(d.rewards??[]).map(row=>row.kind==='material'?{...row,key:(worldInventoryKey(row.key.split('|')[0])??row.key.split('|')[0])+'|'+row.key.split('|')[1]}:row)}));
@@ -33,7 +33,7 @@ export function npcEventAccess(s,id){
 export function npcEventReady(s,id){
  const def=NPC_EVENTS[id],e=s.npcEvents?.entries?.[id];if(!def||e?.status!=='active'||!npcEventAccess(s,id).allowed)return false;
  if(def.choices?.length&&!def.choices.some(c=>c.id===e.choiceId))return false;
- if(def.objective?.kind==='victory'&&e.count<def.objective.count)return false;
+ if(['victory','exploration'].includes(def.objective?.kind)&&e.count<def.objective.count)return false;
  const costs=npcEventCosts(def),totals={};for(const row of costs)totals[row.key]=(totals[row.key]??0)+row.quantity;
  return Object.entries(totals).every(([key,n])=>(s.materialStacks?.[key]??0)>=n);
 }
@@ -53,6 +53,15 @@ export function declineNpcEvent(s,id){
  s.npcEvents??={version:1,entries:{}};s.npcEvents.entries[id]={status:'declined',count:0,cycle:old?.cycle??0,readyAt:0,acceptedAt:old?.acceptedAt??0,lastEncounterId:null,choiceId:null};return true;
 }
 export function chooseNpcEventResponse(s,id,choiceId){const def=NPC_EVENTS[id],row=s.npcEvents?.entries?.[id];if(!npcEventAccess(s,id).allowed||row?.status!=='active'||!def?.choices?.some(c=>c.id===choiceId))return false;row.choiceId=choiceId;return true;}
+// Called once by the genuine node-entry lifecycle inside the same candidate save as travel.
+// A map preview, a historical explored-node ledger, or a story staging move never calls this.
+export function recordNpcEventExploration(s,e,now){
+ if(!time(now)||!validNpcEventState(s)||!s.npcEvents||s.activeEncounter!==e||!s.running||e?.developmentFixture||e?.storyScenario||e?.done||e?.rewarded||!INSTANCES[e?.instanceId]||e.areaId!==INSTANCES[e.instanceId].areaId||!nodeAccess(s,e.instanceId).allowed)return false;
+ let changed=false;for(const [id,entry]of Object.entries(s.npcEvents.entries)){
+  const def=NPC_EVENTS[id];if(entry.status!=='active'||def.objective?.kind!=='exploration'||entry.acceptedAt>now||!def.objective.nodeIds.includes(e.instanceId)||entry.lastEncounterId===e.id||entry.count>=def.objective.count)continue;
+  entry.count++;entry.lastEncounterId=e.id;changed=true;
+ }return changed;
+}
 // Called only by the actual successful settlement after its once-only reward guard.
 // One victory counts once, not once per loot round, summoned unit or follower.
 export function recordNpcEventVictory(s,e){
