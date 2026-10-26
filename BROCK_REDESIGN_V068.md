@@ -86,7 +86,12 @@ No publication is performed by this branch.
 - `art/brock-redesign/source-manifest.json`: generated sources/prompts and hashes;
   round-helmet stages are explicitly rejected provenance, never runtime inputs.
 
-Aggregate `npm test` was started after focused verification and remains running
-through the pre-existing large gameplay statistical suites at this commit. It is
-not reported as passed. Its terminal result will be sent separately; it is not a
-reason to change any game rules or statistical fixture in this art-only patch.
+Aggregate `npm test` reached a terminal failure after the gameplay/statistical
+suites: `equipment-armor-art-tests.mjs:8` expects 28 armour entries, while the
+current catalog has 36 (`36 !== 28`). The same focused failure was reproduced in
+unmodified v066 `goblin-next-integration`; this patch does not change that test,
+armor catalog, or equipment rules. Full aggregate is therefore **not passed**.
+Final build and release-cache were rerun after the portraitCrop metadata change
+and passed: release `965605c677cef950693612ce3ef51c40ca32a0242256a4bd40ff101969f02d4e`,
+2702 hashes / 8210 dependency edges. No runtime source changed after the approved
+implementation commit; this note only closes the test-status record.
