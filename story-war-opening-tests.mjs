@@ -20,8 +20,8 @@ for(const race of ['human','dwarf','elf','goblin','ashen']){
  const malformed=structuredClone(s);delete malformed.diplomacy;assert.equal(validStoryWarState(malformed),false);
  assert(!JSON.stringify(s.story.knowledge).includes('惧死'));assert(!s.story.flags.includes('CHIEFTAIN_KILLED'));assert(!s.story.flags.includes('E_SEALED'));
  if(['elf','ashen'].includes(race)){
-  const d=STORY_SCENES['C07.X01.'+race];s.areaProgress[race]={unlocked:[1,2,3,4,5,6],cleared:[1,2,3,4,5]};readAndChooseStoryScene(s,d);assert.equal(C.finishStoryScene(s,d.id),false);playActiveStoryEncounter(s);assert(C.finishStoryScene(s,d.id));assert.equal(s.diplomacy.revision,1);assert(s.story.flags.includes(race==='elf'?'E_WAR_ATTRITION_SEEN':'A_WAR_ATTRITION_SEEN'));assert.match(renderStoryEventBoard(s),/尚未开放/);
- }else assert.match(renderStoryEventBoard(s),/尚未开放/);
+  const d=STORY_SCENES['C07.X01.'+race];s.areaProgress[race]={unlocked:[1,2,3,4,5,6],cleared:[1,2,3,4,5]};readAndChooseStoryScene(s,d);assert.equal(C.finishStoryScene(s,d.id),false);playActiveStoryEncounter(s);assert(C.finishStoryScene(s,d.id));assert.equal(s.diplomacy.revision,1);assert(s.story.flags.includes(race==='elf'?'E_WAR_ATTRITION_SEEN':'A_WAR_ATTRITION_SEEN'));assert(C.availableStoryScenes(s).some(d=>d.id==='C07.EA02.'+race));assert(renderStoryEventBoard(s).includes('C07.EA02.'+race));
+ }else {assert(C.availableStoryScenes(s).some(d=>d.id==='C07.O02.'+race));assert(renderStoryEventBoard(s).includes('C07.O02.'+race));}
  assert.equal(applyStoryWarTransition(s,'made-up.scene',now),false);
 }
 console.log('PASS five canonical C07 openings: genuine first-front encounters then atomic declaration/war; recipe-before-war; quota rollback, reload/replay, two-sided enemy locks and neutral access, continued E/A attrition, no seal/ritual/ending or secret leakage.');
