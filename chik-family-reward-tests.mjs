@@ -43,6 +43,14 @@ tx=claimTaskReward(st,s,STAGE.id,{now:time(s)});assert(tx.ok);assert.equal(tx.ga
 marked.consumables.reforgeToken=0;st.raw=JSON.stringify(marked);assert.equal(claimTaskReward(st,marked,STAGE.id,{now:time(marked)}).reason,'already-claimed');assert.equal(marked.consumables.reforgeToken,0);
 // Strict source history: no token claim without all real scene outcomes/claim keys.
 const empty=structuredClone(seed);empty.taskRewardClaims=[STAGE.id];assert(!validNpcEventState(empty));assert(!E.validSave(empty));
+for(const d of CHIK_FAMILY_EVENTS){
+ for(const ledger of [undefined,{version:1,entries:{}}]){
+  const bad=structuredClone(seed);bad.taskRewardClaims=[d.id];bad.npcEvents=ledger;assert(!validNpcEventState(bad),'orphan family claim requires resolved source');assert(!E.validSave(bad));
+ }
+ const bad=structuredClone(earned);delete bad.npcEvents.entries[d.id];assert(!validNpcEventState(bad),'claim plus incomplete source ledger must not validate even before milestone claim');assert(!E.validSave(bad));
+}
+const legacyClaim=structuredClone(seed);delete legacyClaim.npcEvents;legacyClaim.taskRewardClaims=['legacy.unknown.claim'];assert(validNpcEventState(legacyClaim),'do not narrow unrelated historical claim compatibility');
+
 for(const mutate of [x=>delete x.npcEvents.entries[CHIK_FAMILY_EVENTS[0].id],x=>x.taskRewardClaims=x.taskRewardClaims.filter(id=>id!==CHIK_FAMILY_EVENTS[0].id),x=>x.npcEvents.entries[CHIK_FAMILY_EVENTS[0].id].choiceId=null,x=>x.npcEvents.entries[CHIK_FAMILY_EVENTS[0].id].status='active',x=>x.story.completedScenes=x.story.completedScenes.filter(id=>id!=='C02.O01.goblin'),x=>x.race='human']){const bad=structuredClone(tx.game);mutate(bad);assert(!validNpcEventState(bad));assert(!E.validSave(bad));}
 for(const mutate of [x=>at(x,'human.a02'),x=>x.running=true,x=>x.restUntil=x.lastHealthClock+10000,x=>x.areaProgress.goblin.unlocked=[]]){const bad=structuredClone(earned);mutate(bad);assert(!familyMilestoneAccess(bad).allowed);}
 // Invasion pauses new house scenes but cannot confiscate an already-earned reward.

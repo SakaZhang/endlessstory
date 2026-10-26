@@ -25,6 +25,9 @@ export const completedFamilyEventCount=s=>CHIK_FAMILY_MILESTONE.requiresEventIds
 export function npcClaimKey(s,id){const def=NPC_EVENTS[id],entry=s.npcEvents?.entries?.[id];return def?.repeatable?id+'.cycle-'+(entry?.cycle??0):id;}
 export function validNpcEventState(s){
  if(!plain(s))return false;
+ // Newly authored family claims always require their matching resolved source.
+ // Leave unrelated historical/unknown claim compatibility unchanged.
+ if(CHIK_FAMILY_MILESTONE.requiresEventIds.some(id=>hasTaskClaim(s,id)&&s.npcEvents?.entries?.[id]?.status!=='resolved'))return false;
  if(hasTaskClaim(s,CHIK_FAMILY_MILESTONE.id)&&completedFamilyEventCount(s)!==CHIK_FAMILY_MILESTONE.requiresEventIds.length)return false;
  if(s.npcEvents===undefined)return true;
  const n=s.npcEvents;if(!plain(n)||Object.keys(n).length!==2||n.version!==1||!plain(n.entries)||Object.keys(n.entries).length>Object.keys(NPC_EVENTS).length)return false;
