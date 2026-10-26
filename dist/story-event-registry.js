@@ -2602,7 +2602,7 @@ export const STORY_SCENES=freeze({
    "大祭司：继续前进。",
    "族长：想进来，就从这里过。"
   ],
-  "objective": "清开去左翼的路，赶到族长所在处；本场不是击杀大祭司。",
+  "objective": "突破阻拦，赶往族长；本场不是击杀大祭司。",
   "flags": [
    "CHIEFTAIN_KILLED",
    "PRIEST_HAS_CHIEFTAIN_CORE"

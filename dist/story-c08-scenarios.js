@@ -33,7 +33,7 @@ export const C08_SCENARIOS={
   "actorName": "战场残留威胁",
   "mode": "clear",
   "result": "front-cleared",
-  "objective": "清开去左翼的路，赶到族长所在处；本场不是击杀大祭司。",
+  "objective": "突破阻拦，赶往族长；本场不是击杀大祭司。",
   "outcome": "赶到转折点时，族长已倒下。大祭司取走族长自身核心，离开了仍被围困的精灵部队。"
  },
  "story.c08-e01-elf": {
