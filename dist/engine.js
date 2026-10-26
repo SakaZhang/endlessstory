@@ -682,6 +682,13 @@ export function startRest(s,now=Date.now(),resume=false){
  if(!normalizeHealth(s,now))return false;
  if(s.restUntil>0)return false;
  resume=!!resume&&nodeAccess(s,s.siteId+'.field',now).allowed;
+ // An explicit camp withdrawal abandons only the current unfulfilled attempt.
+ // Keep prior layers/receipts and protected quest tools; the retry gets a new ID.
+ const pending=s.story?.activeScene,battle=s.activeEncounter,definition=STORY_SCENES[pending?.id];
+ if(battle&&pending?.encounterId===battle.id&&definition?.encounter?.nodeId===battle.instanceId&&!s.story.encounters.some(r=>r.sceneId===pending.id)){
+  pending.encounterId=null;
+  if(battle.storyScenario&&Number.isFinite(battle.storyScenario.initialHeroHp))s.heroHp=battle.storyScenario.initialHeroHp;
+ }
  s.atCamp=true;s.restUntil=s.lastHealthClock+REST_DURATION_MS;s.activeEncounter=null;s.dungeonRun=null;s.restResume=!!resume;s.running=!!resume;s.nextActionAt=s.restUntil;return true;
 }
 export function canStartEncounter(s,now=Date.now(),nodeId=s.siteId+'.field'){
