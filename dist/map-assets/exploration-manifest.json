@@ -1,0 +1,708 @@
+{
+  "version": 1,
+  "purpose": "Exploration-only scene routing. Dwarf legacy layers retained; expansion races use dedicated geography.",
+  "backgrounds": [
+    {
+      "id": "cave",
+      "file": "../battle-assets/backgrounds/cave.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "stage",
+      "file": "../battle-assets/backgrounds/stage.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 1
+    },
+    {
+      "id": "rift-cave",
+      "file": "../battle-assets/backgrounds/rift-cave.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "rift-platform",
+      "file": "../battle-assets/backgrounds/rift-platform.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 1
+    },
+    {
+      "id": "oath-ruins",
+      "file": "../battle-assets/backgrounds/oath-ruins.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "oath-platform",
+      "file": "../battle-assets/backgrounds/oath-platform.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 1
+    },
+    {
+      "id": "ash-furnaces",
+      "file": "../battle-assets/backgrounds/ash-furnaces.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "slag-platform",
+      "file": "../battle-assets/backgrounds/slag-platform.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 1
+    },
+    {
+      "id": "mineral-springs",
+      "file": "../battle-assets/backgrounds/mineral-springs.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "spring-platform",
+      "file": "../battle-assets/backgrounds/spring-platform.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 1
+    },
+    {
+      "id": "sunken-forge",
+      "file": "../battle-assets/backgrounds/sunken-forge.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "forge-platform",
+      "file": "../battle-assets/backgrounds/forge-platform.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 1
+    },
+    {
+      "id": "silver-gallery",
+      "file": "../battle-assets/backgrounds/silver-gallery.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "silver-platform",
+      "file": "../battle-assets/backgrounds/silver-platform.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 1
+    },
+    {
+      "id": "obsidian-rift",
+      "file": "../battle-assets/backgrounds/obsidian-rift.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "a08-rift-platform",
+      "file": "../battle-assets/backgrounds/a08-rift-platform.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 1
+    },
+    {
+      "id": "runebone-archive",
+      "file": "../battle-assets/backgrounds/runebone-archive.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "archive-platform",
+      "file": "../battle-assets/backgrounds/archive-platform.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 1
+    },
+    {
+      "id": "deepcore-forge",
+      "file": "../battle-assets/backgrounds/deepcore-forge.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "deepforge-platform",
+      "file": "../battle-assets/backgrounds/deepforge-platform.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 1
+    },
+    {
+      "id": "exploration-human.a01",
+      "file": "../races/human/assets/maps-01.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-human.a02",
+      "file": "../races/human/assets/maps-02.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-human.a03",
+      "file": "../races/human/assets/maps-03.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-human.a04",
+      "file": "../races/human/assets/maps-04.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-human.a05",
+      "file": "../races/human/assets/maps-05.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-human.a06",
+      "file": "../races/human/assets/maps-06.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-human.a07",
+      "file": "../races/human/assets/maps-07.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-human.a08",
+      "file": "../races/human/assets/maps-08.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-human.a09",
+      "file": "../races/human/assets/maps-09.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-human.a10",
+      "file": "../races/human/assets/maps-10.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-elf.a01",
+      "file": "../races/elf/assets/exploration-01.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-elf.a02",
+      "file": "../races/elf/assets/exploration-02.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-elf.a03",
+      "file": "../races/elf/assets/exploration-03.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-elf.a04",
+      "file": "../races/elf/assets/exploration-04.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-elf.a05",
+      "file": "../races/elf/assets/exploration-05.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-elf.a06",
+      "file": "../races/elf/assets/exploration-06.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-elf.a07",
+      "file": "../races/elf/assets/exploration-07.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-elf.a08",
+      "file": "../races/elf/assets/exploration-08.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-elf.a09",
+      "file": "../races/elf/assets/exploration-09.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-elf.a10",
+      "file": "../races/elf/assets/exploration-10.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-goblin.a01",
+      "file": "../races/goblin/assets/exploration-01.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-goblin.a02",
+      "file": "../races/goblin/assets/exploration-02.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-goblin.a03",
+      "file": "../races/goblin/assets/exploration-03.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-goblin.a04",
+      "file": "../races/goblin/assets/exploration-04.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-goblin.a05",
+      "file": "../races/goblin/assets/exploration-05.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-goblin.a06",
+      "file": "../races/goblin/assets/exploration-06.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-goblin.a07",
+      "file": "../races/goblin/assets/exploration-07.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-goblin.a08",
+      "file": "../races/goblin/assets/exploration-08.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-goblin.a09",
+      "file": "../races/goblin/assets/exploration-09.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-goblin.a10",
+      "file": "../races/goblin/assets/exploration-10.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-ashen.a01",
+      "file": "../races/ashen/assets/exploration-01.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-ashen.a02",
+      "file": "../races/ashen/assets/exploration-02.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-ashen.a03",
+      "file": "../races/ashen/assets/exploration-03.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-ashen.a04",
+      "file": "../races/ashen/assets/exploration-04.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-ashen.a05",
+      "file": "../races/ashen/assets/exploration-05.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-ashen.a06",
+      "file": "../races/ashen/assets/exploration-06.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-ashen.a07",
+      "file": "../races/ashen/assets/exploration-07.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-ashen.a08",
+      "file": "../races/ashen/assets/exploration-08.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-ashen.a09",
+      "file": "../races/ashen/assets/exploration-09.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "exploration-ashen.a10",
+      "file": "../races/ashen/assets/exploration-10.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    }
+  ],
+  "areaBackgrounds": {
+    "dwarf.a01": [
+      "cave",
+      "stage"
+    ],
+    "dwarf.a02": [
+      "rift-cave",
+      "rift-platform"
+    ],
+    "dwarf.a03": [
+      "oath-ruins",
+      "oath-platform"
+    ],
+    "dwarf.a04": [
+      "ash-furnaces",
+      "slag-platform"
+    ],
+    "dwarf.a05": [
+      "mineral-springs",
+      "spring-platform"
+    ],
+    "dwarf.a06": [
+      "sunken-forge",
+      "forge-platform"
+    ],
+    "dwarf.a07": [
+      "silver-gallery",
+      "silver-platform"
+    ],
+    "dwarf.a08": [
+      "obsidian-rift",
+      "a08-rift-platform"
+    ],
+    "dwarf.a09": [
+      "runebone-archive",
+      "archive-platform"
+    ],
+    "dwarf.a10": [
+      "deepcore-forge",
+      "deepforge-platform"
+    ],
+    "human.a01": [
+      "exploration-human.a01"
+    ],
+    "human.a02": [
+      "exploration-human.a02"
+    ],
+    "human.a03": [
+      "exploration-human.a03"
+    ],
+    "human.a04": [
+      "exploration-human.a04"
+    ],
+    "human.a05": [
+      "exploration-human.a05"
+    ],
+    "human.a06": [
+      "exploration-human.a06"
+    ],
+    "human.a07": [
+      "exploration-human.a07"
+    ],
+    "human.a08": [
+      "exploration-human.a08"
+    ],
+    "human.a09": [
+      "exploration-human.a09"
+    ],
+    "human.a10": [
+      "exploration-human.a10"
+    ],
+    "elf.a01": [
+      "exploration-elf.a01"
+    ],
+    "elf.a02": [
+      "exploration-elf.a02"
+    ],
+    "elf.a03": [
+      "exploration-elf.a03"
+    ],
+    "elf.a04": [
+      "exploration-elf.a04"
+    ],
+    "elf.a05": [
+      "exploration-elf.a05"
+    ],
+    "elf.a06": [
+      "exploration-elf.a06"
+    ],
+    "elf.a07": [
+      "exploration-elf.a07"
+    ],
+    "elf.a08": [
+      "exploration-elf.a08"
+    ],
+    "elf.a09": [
+      "exploration-elf.a09"
+    ],
+    "elf.a10": [
+      "exploration-elf.a10"
+    ],
+    "goblin.a01": [
+      "exploration-goblin.a01"
+    ],
+    "goblin.a02": [
+      "exploration-goblin.a02"
+    ],
+    "goblin.a03": [
+      "exploration-goblin.a03"
+    ],
+    "goblin.a04": [
+      "exploration-goblin.a04"
+    ],
+    "goblin.a05": [
+      "exploration-goblin.a05"
+    ],
+    "goblin.a06": [
+      "exploration-goblin.a06"
+    ],
+    "goblin.a07": [
+      "exploration-goblin.a07"
+    ],
+    "goblin.a08": [
+      "exploration-goblin.a08"
+    ],
+    "goblin.a09": [
+      "exploration-goblin.a09"
+    ],
+    "goblin.a10": [
+      "exploration-goblin.a10"
+    ],
+    "ashen.a01": [
+      "exploration-ashen.a01"
+    ],
+    "ashen.a02": [
+      "exploration-ashen.a02"
+    ],
+    "ashen.a03": [
+      "exploration-ashen.a03"
+    ],
+    "ashen.a04": [
+      "exploration-ashen.a04"
+    ],
+    "ashen.a05": [
+      "exploration-ashen.a05"
+    ],
+    "ashen.a06": [
+      "exploration-ashen.a06"
+    ],
+    "ashen.a07": [
+      "exploration-ashen.a07"
+    ],
+    "ashen.a08": [
+      "exploration-ashen.a08"
+    ],
+    "ashen.a09": [
+      "exploration-ashen.a09"
+    ],
+    "ashen.a10": [
+      "exploration-ashen.a10"
+    ]
+  }
+}

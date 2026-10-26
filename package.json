@@ -7,6 +7,7 @@
     "test:races": "node race-expansion-tests.mjs",
     "test:equipment-parity": "node equipment-slot-parity-tests.mjs",
     "audit:equipment": "node equipment-catalog-audit.mjs",
-    "test:goblin-ashen": "node goblin-ashen-catalog-parity-tests.mjs && node goblin-ashen-drop-settlement-tests.mjs"
+    "test:goblin-ashen": "node goblin-ashen-catalog-parity-tests.mjs && node goblin-ashen-drop-settlement-tests.mjs",
+    "test:exploration": "node exploration-map-tests.mjs && node test-pixel-map-scenes.mjs && node adjacent-region-tests.mjs && node region-navigation-state-tests.mjs && node adjacent-region-app-ui-tests.cjs && node pixel-maps-live-app-ui-tests.cjs && node exploration-map-native-proof.mjs"
   }
 }

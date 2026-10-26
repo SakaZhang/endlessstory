@@ -3,7 +3,7 @@
 .worldMapStage .mapCanvas{display:block;width:100%;height:100%;min-height:0;aspect-ratio:16/9;object-fit:fill;image-rendering:pixelated}
 .worldMapStage>.mapOverlay{position:absolute;inset:0}
 /* Never turn the new raster into an input target or change node/edge positions. */
-.adjacentRegion [data-region-canvas]{pointer-events:none;image-rendering:pixelated}
+.adjacentRegion [data-region-canvas]{pointer-events:none;image-rendering:pixelated;object-fit:cover;object-position:center}
 .mapSceneRetry{position:absolute;z-index:3;left:50%;bottom:12px;transform:translateX(-50%);min-height:44px;background:#243b4c;border:2px solid #c3a874;color:#eee1bb}
 .mapSceneRetry:hover{transform:translateX(-50%)}
 .worldMapStage .previewTerritoryPin{pointer-events:none;transform:translate(-50%,-50%);border-color:#ead08f;box-shadow:0 0 0 3px #101e2a,0 0 24px #d8bc7355;z-index:2}

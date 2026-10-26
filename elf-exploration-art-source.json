@@ -1,0 +1,167 @@
+{
+  "schema": 1,
+  "method": "built-in image_gen, one original generation per area",
+  "postprocess": "Nearest-neighbor resize only to 480x270; no programmatic replacement illustration",
+  "rows": [
+    {
+      "area": "elf.a01",
+      "file": "dist/races/elf/assets/exploration-01.png",
+      "source": "/workspace/scratch/81f4d6a709c0/generated_images/exec-a5e757d8-eebf-4491-8b73-b2c536310174.png",
+      "prompt": "Use case: stylized-concept. Production game asset: a single 16:9 Japanese 16-bit pixel-art elevated top-down REGIONAL EXPLORATION MAP, not a battle backdrop. Region elf.a01 Dew-Crown Forest Edge: white dew-covered flowers in lush forest clearings, a shallow turquoise creek crossing exposed green-veined shale beds, short mossy cliffs, readable branching pale dirt paths, a stepping-stone creek crossing and root-framed hollow entrance. Broad traversable geography across the whole image, multiple connected destinations seen from high overhead 3/4 camera, edge-to-edge terrain, no sky or horizon. Crisp clustered pixels with handcrafted JRPG detail and restrained natural green/aqua palette. Intended game raster 480x270 logical pixels, landscape 16:9. Match visual spirit of detailed SNES regional exploration maps. No characters, monsters, labels, UI, letters, numbers, borders, grids, icons, watermark, blur, side-view arena, empty combat floor.",
+      "sourceDimensions": [
+        1672,
+        941
+      ],
+      "dimensions": [
+        480,
+        270
+      ],
+      "sha256": "face5a31e8d59f88ff5a98bd1b7a903ff3383316af26ffb46868c2677d3b7f9c",
+      "bytes": 361124
+    },
+    {
+      "area": "elf.a02",
+      "file": "dist/races/elf/assets/exploration-02.png",
+      "source": "/workspace/scratch/81f4d6a709c0/generated_images/exec-225cc0da-18c7-4cc6-821d-ae71cc600ab9.png",
+      "prompt": "Use case: stylized-concept. Production game asset: single landscape 16:9 Japanese 16-bit pixel-art REGIONAL EXPLORATION MAP. Elevated top-down 3/4 camera, all terrain geography viewed from high above. Echo Tree Court: enormous hollow ancient tree courtyard with three dark root-hollow entrances, thick winding root bridges spanning mossy ravines, clustered woodland terraces, branching walkable paths leading into quiet deep grove. Forest green and warm amber bark. Edge-to-edge terrain with multiple distinct connected destinations and clear paths, no sky or horizon. Detailed handcrafted crisp clustered JRPG pixels, 480x270 logical pixel target. NOT side-view combat backdrop, not empty battle floor. No characters, creatures, text, letters, numbers, UI, icons, grid, border, watermark, blur. Produce only the single map.",
+      "sourceDimensions": [
+        1672,
+        941
+      ],
+      "dimensions": [
+        480,
+        270
+      ],
+      "sha256": "00084e12e408a1e3a35d22dadea3aee69e2232ee0c3ec4ce3eb679b75317fbdd",
+      "bytes": 350961
+    },
+    {
+      "area": "elf.a03",
+      "file": "dist/races/elf/assets/exploration-03.png",
+      "source": "/workspace/scratch/81f4d6a709c0/generated_images/exec-8a8b692e-0fc9-4ff1-8df6-1b8d3a9cd455.png",
+      "prompt": "Use case: stylized-concept. Production game asset: single landscape 16:9 Japanese 16-bit pixel-art REGIONAL EXPLORATION MAP. Elevated top-down 3/4 camera, all terrain geography viewed from high above. Spiral Vine Slopes: steep stepped woodland hillside crossed by curling vines, broken moss-covered stone walls and disconnected ancient staircases, winding accessible switchback paths reconnecting terraces and a vine-framed ruin entrance. Emerald and sandstone colors. Edge-to-edge terrain with multiple distinct connected destinations and clear paths, no sky or horizon. Detailed handcrafted crisp clustered JRPG pixels, 480x270 logical pixel target. NOT side-view combat backdrop, not empty battle floor. No characters, creatures, text, letters, numbers, UI, icons, grid, border, watermark, blur. Produce only the single map.",
+      "sourceDimensions": [
+        1672,
+        941
+      ],
+      "dimensions": [
+        480,
+        270
+      ],
+      "sha256": "c7a44f249ad0406f01faa2bb251b14344da6ffa1e9408c65f6a417687fa7b541",
+      "bytes": 359871
+    },
+    {
+      "area": "elf.a04",
+      "file": "dist/races/elf/assets/exploration-04.png",
+      "source": "/workspace/scratch/81f4d6a709c0/generated_images/exec-da218d94-7e76-4fd2-ab92-b0df119a75e1.png",
+      "prompt": "Use case: stylized-concept. Production game asset: single landscape 16:9 Japanese 16-bit pixel-art REGIONAL EXPLORATION MAP. Elevated top-down 3/4 camera, all terrain geography viewed from high above. Moonwell Creek Valley: blue moonwell salt crystals along creek walls, damp winding stone pathways illuminated by tiny luminous moss clusters, moonwell basin at upper right, little bridges crossing multiple streams between lush forest shelves. Cool cyan and deep green. Edge-to-edge terrain with multiple distinct connected destinations and clear paths, no sky or horizon. Detailed handcrafted crisp clustered JRPG pixels, 480x270 logical pixel target. NOT side-view combat backdrop, not empty battle floor. No characters, creatures, text, letters, numbers, UI, icons, grid, border, watermark, blur. Produce only the single map.",
+      "sourceDimensions": [
+        1672,
+        941
+      ],
+      "dimensions": [
+        480,
+        270
+      ],
+      "sha256": "61f179e5861f836736f709eb422ee11c6cb478deafcc0c7bf8510f02e00749e6",
+      "bytes": 352005
+    },
+    {
+      "area": "elf.a05",
+      "file": "dist/races/elf/assets/exploration-05.png",
+      "source": "/workspace/scratch/81f4d6a709c0/generated_images/exec-aab49adb-c507-423e-86b6-212da3e1d1e7.png",
+      "prompt": "Use case: stylized-concept. Production game asset: single landscape 16:9 Japanese 16-bit pixel-art REGIONAL EXPLORATION MAP. Elevated top-down 3/4 camera, all terrain geography viewed from high above. Eclipsed Moon Flower Path: dark silver flowers and pollen scattered beside branching woodland paths under eclipse-like violet twilight, subtle old warning slash marks on trees without readable writing, overgrown stone portal into deep woods, circular root-ring clearing. Silver lavender and muted teal. Edge-to-edge terrain with multiple distinct connected destinations and clear paths, no sky or horizon. Detailed handcrafted crisp clustered JRPG pixels, 480x270 logical pixel target. NOT side-view combat backdrop, not empty battle floor. No characters, creatures, text, letters, numbers, UI, icons, grid, border, watermark, blur. Produce only the single map.",
+      "sourceDimensions": [
+        1672,
+        941
+      ],
+      "dimensions": [
+        480,
+        270
+      ],
+      "sha256": "2a39dbe7b35c386945e0182681a673a07c5ae7994314710969ee524892d12ff1",
+      "bytes": 359932
+    },
+    {
+      "area": "elf.a06",
+      "file": "dist/races/elf/assets/exploration-06.png",
+      "source": "/workspace/scratch/81f4d6a709c0/generated_images/exec-d6c8ce65-c4ea-47fe-82ab-9a8e6fc6dc72.png",
+      "prompt": "Use case: stylized-concept. Production game asset: single landscape 16:9 Japanese 16-bit pixel-art REGIONAL EXPLORATION MAP. Elevated top-down 3/4 camera, all terrain geography viewed from high above. Burnt Forest New Growth: charred black tree stumps and cinder-red blossoms after forest fire, luminous tiny new green shoots amid ash, sparse surviving trees, branching ash footpaths over terraced scorched earth, small ember cracks and a hollow charred trunk entrance. Charcoal russet bright new green. Edge-to-edge terrain with multiple distinct connected destinations and clear paths, no sky or horizon. Detailed handcrafted crisp clustered JRPG pixels, 480x270 logical pixel target. NOT side-view combat backdrop, not empty battle floor. No characters, creatures, text, letters, numbers, UI, icons, grid, border, watermark, blur. Produce only the single map.",
+      "sourceDimensions": [
+        1672,
+        941
+      ],
+      "dimensions": [
+        480,
+        270
+      ],
+      "sha256": "7308189fb1ecfe8d7aa66da5292bd08b89880f47891e620c00896c110abd011d",
+      "bytes": 355579
+    },
+    {
+      "area": "elf.a07",
+      "file": "dist/races/elf/assets/exploration-07.png",
+      "source": "/workspace/scratch/81f4d6a709c0/generated_images/exec-95117bb3-3cec-43c2-b539-853fcfab1eef.png",
+      "prompt": "Use case: stylized-concept. Production game asset: single landscape 16:9 Japanese 16-bit pixel-art REGIONAL EXPLORATION MAP. Elevated top-down 3/4 camera, all terrain geography viewed from high above. Twilight Root Forest: dense ancient woodland at dusk, huge tangled root systems threaded with silver mineral veins, shadow mushrooms expanding on shaded banks, root tunnels and branching walkable footpaths crossing short root bridges. Deep violet forest green and restrained silver. Edge-to-edge terrain with multiple distinct connected destinations and clear paths, no sky or horizon. Detailed handcrafted crisp clustered JRPG pixels, 480x270 logical pixel target. NOT side-view combat backdrop, not empty battle floor. No characters, creatures, text, letters, numbers, UI, icons, grid, border, watermark, blur. Produce only the single map.",
+      "sourceDimensions": [
+        1672,
+        941
+      ],
+      "dimensions": [
+        480,
+        270
+      ],
+      "sha256": "0719eab05a93775b2bf26e211ff7ef006147cfcfd9f63334e9f142d4c3598fa0",
+      "bytes": 340434
+    },
+    {
+      "area": "elf.a08",
+      "file": "dist/races/elf/assets/exploration-08.png",
+      "source": "/workspace/scratch/81f4d6a709c0/generated_images/exec-72efd64e-25f4-41c3-be2d-9f00703c197d.png",
+      "prompt": "Use case: stylized-concept. Production game asset: single landscape 16:9 Japanese 16-bit pixel-art REGIONAL EXPLORATION MAP. Elevated top-down 3/4 camera, all terrain geography viewed from high above. Deadheart Depths: huge hollow deadwood shell with green living heartwood marrow visible inside, canopy removed to show traversable interior root galleries, ancient decaying tree terraces, paths across mossy log bridges and deep dark hollow entrances. Green glow amber deadwood black forest. Edge-to-edge terrain with multiple distinct connected destinations and clear paths, no sky or horizon. Detailed handcrafted crisp clustered JRPG pixels, 480x270 logical pixel target. NOT side-view combat backdrop, not empty battle floor. No characters, creatures, text, letters, numbers, UI, icons, grid, border, watermark, blur. Produce only the single map.",
+      "sourceDimensions": [
+        1672,
+        941
+      ],
+      "dimensions": [
+        480,
+        270
+      ],
+      "sha256": "c8062b13cd19858b0e13d374818f591ab8bfa16aaef8067b06d3e6564615daa7",
+      "bytes": 341540
+    },
+    {
+      "area": "elf.a09",
+      "file": "dist/races/elf/assets/exploration-09.png",
+      "source": "/workspace/scratch/81f4d6a709c0/generated_images/exec-2b173b14-5b30-4e42-99ee-3c2e86f87cfb.png",
+      "prompt": "Use case: stylized-concept. Production game asset: single landscape 16:9 Japanese 16-bit pixel-art REGIONAL EXPLORATION MAP. Elevated top-down 3/4 camera, all terrain geography viewed from high above. Ebbtide Marsh: receding tidal water reveals old stone causeways, winding wetland paths, star-shaped ferns on muddy islands, pale scale-like fragments beside pools, broken stone bridge and reed-covered ruin entrance. Muted aquamarine ochre green. Edge-to-edge terrain with multiple distinct connected destinations and clear paths, no sky or horizon. Detailed handcrafted crisp clustered JRPG pixels, 480x270 logical pixel target. NOT side-view combat backdrop, not empty battle floor. No characters, creatures, text, letters, numbers, UI, icons, grid, border, watermark, blur. Produce only the single map.",
+      "sourceDimensions": [
+        1672,
+        941
+      ],
+      "dimensions": [
+        480,
+        270
+      ],
+      "sha256": "d37fc61f28e20a4b6f02db6ad41f2198e1985d5e5c0e628ac6c72f1776090da7",
+      "bytes": 350804
+    },
+    {
+      "area": "elf.a10",
+      "file": "dist/races/elf/assets/exploration-10.png",
+      "source": "/workspace/scratch/81f4d6a709c0/generated_images/exec-f9a03290-8ccd-4f78-9e7e-57d95a0f5b12.png",
+      "prompt": "Use case: stylized-concept. Production game asset: single landscape 16:9 Japanese 16-bit pixel-art REGIONAL EXPLORATION MAP. Elevated top-down 3/4 camera, all terrain geography viewed from high above. Mirror Pool Sanctuary: star-reflecting dark pool enclosed by forest and crystalline rock, teardrop crystals growing from rock fissures, interconnected shore paths and stepping-stone crossings, crystal grotto entrance and mossy stone island. Midnight blue luminous turquoise and silver. Edge-to-edge terrain with multiple distinct connected destinations and clear paths, no sky or horizon. Detailed handcrafted crisp clustered JRPG pixels, 480x270 logical pixel target. NOT side-view combat backdrop, not empty battle floor. No characters, creatures, text, letters, numbers, UI, icons, grid, border, watermark, blur. Produce only the single map.",
+      "sourceDimensions": [
+        1672,
+        941
+      ],
+      "dimensions": [
+        480,
+        270
+      ],
+      "sha256": "d7b246fb10eb0627825332b6eaa57181e98956bde79ca78252b3c90cdde38a40",
+      "bytes": 341423
+    }
+  ]
+}

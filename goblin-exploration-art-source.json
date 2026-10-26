@@ -1,0 +1,185 @@
+{
+  "schema": 1,
+  "race": "goblin",
+  "generator": "built-in image_gen",
+  "styleReference": "dist/races/human/assets/maps-01.png (visually inspected)",
+  "method": "One built-in generation per distinct area; nearest-neighbor resampling only",
+  "assets": [
+    {
+      "area": "goblin.a01",
+      "name": "苔口坡地",
+      "prompt": "Use case: stylized-concept. Create ONE full-bleed 16:9 480x270 logical-pixel Japanese 16-bit JRPG regional exploration map for goblin.a01 苔口坡地 (Mossmouth Slopes). High elevated bird's-eye terrain view, not side-view battle backdrop. Crisp small pixel clusters, detailed readable terrain. Mossy stepped green hills surrounding old burrow cave mouths, low gray crags, patches of gray-cap mushrooms, reclaimed rusty iron supports. A winding ochre dirt trail enters from left edge, branches around moss-covered stones, links three distinct explorable places: lower-left mushroom clearing, upper-center cave mouth, lower-right old timber entrance; exits right. Small bridges and terraced steps where logical. Muted moss green/earth brown/gray palette, daylight. Entire image is terrain, no horizon or sky. Dense handcrafted Japanese pixel environment consistent with provided human map in conversation but new geography, not copied. NO text, labels, UI, markers, grid, border, people, creatures, battle arena, montage, blur, painting.",
+      "original": "/workspace/scratch/81f4d6a709c0/generated_images/exec-c5933f5f-2b83-4fac-a21b-1c84dd40cec9.png",
+      "file": "dist/races/goblin/assets/exploration-01.png",
+      "dimensions": [
+        480,
+        270
+      ],
+      "sha256": "6fb089d2078e61508764936419810533b15a2cdcfcdf470b4a710d780cdc859b",
+      "status": "visually-reviewed",
+      "originalDimensions": [
+        1672,
+        941
+      ]
+    },
+    {
+      "area": "goblin.a02",
+      "name": "碎铁旧道",
+      "prompt": "Use case: stylized-concept. ONE full-bleed 16:9 Japanese 16-bit JRPG regional exploration map, 480x270 logical pixel art. High elevated bird's-eye terrain view with distinct traversable geography, no horizon/sky, never side-view battle arena. Crisp small pixel clusters and finely detailed handcrafted SNES RPG terrain. Interconnected winding paths enter left, branch to three readable landmarks, reconnect and exit right. Three spatially separated explorable places around lower left, upper center, lower right. No text, labels, UI, icons, markers, grid, border, creatures, characters, montage, blur, painting. Broken Iron Old Road: an abandoned crumbling paved trade road weaving diagonally through rocky gullies. Rusted riveted iron scaffolds, collapsed old cart chassis, dismantled iron tracks and gray mushrooms. Three landmarks: scrap-strewn roadside clearing, old stone underpass entrance, fortified iron-supported tunnel mouth. Earth ochre, charcoal slate, weathered rust red; scattered moss; daylight.",
+      "file": "dist/races/goblin/assets/exploration-02.png",
+      "status": "visually-reviewed",
+      "original": "/workspace/scratch/81f4d6a709c0/generated_images/exec-d02b5211-9a6e-4b2e-bb0a-4fdb0c44bbb4.png",
+      "originalDimensions": [
+        1672,
+        941
+      ],
+      "dimensions": [
+        480,
+        270
+      ],
+      "sha256": "cf38e8d34520274844a954ba3d7b81397b849e36c1487222146dc166192ff941"
+    },
+    {
+      "area": "goblin.a03",
+      "name": "菌灯洞群",
+      "prompt": "Use case: stylized-concept. ONE full-bleed 16:9 Japanese 16-bit JRPG regional exploration map, 480x270 logical pixel art. High elevated bird's-eye terrain view with distinct traversable geography, no horizon/sky, never side-view battle arena. Crisp small pixel clusters and finely detailed handcrafted SNES RPG terrain. Interconnected winding paths enter left, branch to three readable landmarks, reconnect and exit right. Three spatially separated explorable places around lower left, upper center, lower right. No text, labels, UI, icons, markers, grid, border, creatures, characters, montage, blur, painting. Mushroom-Lamp Cave Cluster: overhead cutaway labyrinth of several connected underground cavern chambers. Massive turquoise bioluminescent mushroom clusters and small gray mushrooms, verdant moss mats, narrow stone arches over dark pools. Three landmarks: luminous mushroom grove, upper central vaulted cave entrance, a larger deep chamber in lower right. Cool teal and green light with violet shadow, readable tan paths and terraced rocky shelves.",
+      "file": "dist/races/goblin/assets/exploration-03.png",
+      "status": "visually-reviewed",
+      "original": "/workspace/scratch/81f4d6a709c0/generated_images/exec-cb0c4728-52a4-4ac3-934e-400917cec027.png",
+      "originalDimensions": [
+        1672,
+        941
+      ],
+      "dimensions": [
+        480,
+        270
+      ],
+      "sha256": "fe78965549c600b49b139a7b0959e76c57995e28687e9bb8428ef5612f67d59e"
+    },
+    {
+      "area": "goblin.a04",
+      "name": "地下货道",
+      "prompt": "Use case: stylized-concept. ONE full-bleed 16:9 Japanese 16-bit JRPG regional exploration map, 480x270 logical pixel art. High elevated bird's-eye terrain view with distinct traversable geography, no horizon/sky, never side-view battle arena. Crisp small pixel clusters and finely detailed handcrafted SNES RPG terrain. Interconnected winding paths enter left, branch to three readable landmarks, reconnect and exit right. Three spatially separated explorable places around lower left, upper center, lower right. No text, labels, UI, icons, markers, grid, border, creatures, characters, montage, blur, painting. Underground Freight Route: overhead cutaway interlinked subterranean cargo passages. Winding weathered wooden haulway and short mine rails across chambers, ore carts and stacked plain crates, old riveted metal supports, coppery stream sediments, rope bridges over pits, sparse bitter mushrooms. Three landmarks: cargo layby clearing, upper-central warehouse tunnel, lower-right iron gate. Warm amber lamps against cool slate cavern walls; readable empty routes.",
+      "file": "dist/races/goblin/assets/exploration-04.png",
+      "status": "visually-reviewed",
+      "original": "/workspace/scratch/81f4d6a709c0/generated_images/exec-745a93bc-74db-4810-ab2a-0d50971f6b20.png",
+      "originalDimensions": [
+        1672,
+        941
+      ],
+      "dimensions": [
+        480,
+        270
+      ],
+      "sha256": "6c5dfd35e5f4b502c9231c07a7c3445af655f0f650ab63f0651ce96a204bc100"
+    },
+    {
+      "area": "goblin.a05",
+      "name": "裂齿兽穴",
+      "prompt": "Use case: stylized-concept. ONE full-bleed 16:9 Japanese 16-bit JRPG regional exploration map, 480x270 logical pixel art. High elevated bird's-eye terrain view with distinct traversable geography, no horizon/sky, never side-view battle arena. Crisp small pixel clusters and finely detailed handcrafted SNES RPG terrain. Interconnected winding paths enter left, branch to three readable landmarks, reconnect and exit right. Three spatially separated explorable places around lower left, upper center, lower right. No text, labels, UI, icons, markers, grid, border, creatures, characters, montage, blur, painting. Splitfang Beast Burrows: elevated cutaway rugged natural burrow network in jagged gray limestone. Toothlike rock formations, curved bone fragments on sand, cold blue luminous spore mushrooms, small rounded river pebbles beside a shallow seep. Branching ochre trails enter left, connect three distinctly sized cave mouths and rocky clearings, exit right. An abandoned natural lair geography WITHOUT living beasts or gore. Slate gray, desaturated purple and muted amber.",
+      "file": "dist/races/goblin/assets/exploration-05.png",
+      "status": "visually-reviewed",
+      "original": "/workspace/scratch/81f4d6a709c0/generated_images/exec-df0e885c-cfad-41b6-bc59-959c94b620da.png",
+      "originalDimensions": [
+        1672,
+        941
+      ],
+      "dimensions": [
+        480,
+        270
+      ],
+      "sha256": "ee68bbc5a0abc3f93f3832c5350ade779b532eafc7e367ea1e027dcace670e66"
+    },
+    {
+      "area": "goblin.a06",
+      "name": "暗河渡口",
+      "prompt": "Use case: stylized-concept. ONE full-bleed 16:9 Japanese 16-bit JRPG regional exploration map, 480x270 logical pixel art. High elevated bird's-eye terrain view with distinct traversable geography, no horizon/sky, never side-view battle arena. Crisp small pixel clusters and finely detailed handcrafted SNES RPG terrain. Interconnected winding paths enter left, branch to three readable landmarks, reconnect and exit right. Three spatially separated explorable places around lower left, upper center, lower right. No text, labels, UI, icons, markers, grid, border, creatures, characters, montage, blur, painting. Dark River Ferry Crossing: elevated underground regional map centered on a winding deep blue subterranean river. Two riverbanks linked by a little wooden ferry and rope-guided pontoon landing, branching paths to three clear landmarks: copper-sand bank, upper central echo-stone cave, lower-right ruined ferry dock. Small cold-glow mushrooms, smooth pebbles, weathered ropes and wood. Teal water, slate rock, copper sands, warm lanterns. Water and paths clearly continuous.",
+      "file": "dist/races/goblin/assets/exploration-06.png",
+      "status": "visually-reviewed",
+      "original": "/workspace/scratch/81f4d6a709c0/generated_images/exec-962498ff-5105-4b58-9815-90488fde90ac.png",
+      "originalDimensions": [
+        1672,
+        941
+      ],
+      "dimensions": [
+        480,
+        270
+      ],
+      "sha256": "964165461bbd7f53bc8ad960e8534a4bbd48f941be1039dfdf76f0b20f7b7f8b"
+    },
+    {
+      "area": "goblin.a07",
+      "name": "废垒围场",
+      "prompt": "Use case: stylized-concept. ONE full-bleed 16:9 Japanese 16-bit JRPG regional exploration map, 480x270 logical pixel art. High elevated bird's-eye terrain view with distinct traversable geography, no horizon/sky, never side-view battle arena. Crisp small pixel clusters and finely detailed handcrafted SNES RPG terrain. Interconnected winding paths enter left, branch to three readable landmarks, reconnect and exit right. Three spatially separated explorable places around lower left, upper center, lower right. No text, labels, UI, icons, markers, grid, border, creatures, characters, montage, blur, painting. Ruined Fort Enclosure: elevated regional map of broken subterranean stone ramparts and an overgrown abandoned enclosure. Discontinuous masonry walls, shattered watchtower, rusty gate, purple shadow mushrooms and small fractured crystals. Branching dusty paths through three readable places: open ruined yard, upper-central stone arch passage, lower-right collapsed inner keep. Copper-toned sediment and patches of moss, charcoal violet and warm earth palette. Not a battle arena.",
+      "file": "dist/races/goblin/assets/exploration-07.png",
+      "status": "visually-reviewed",
+      "original": "/workspace/scratch/81f4d6a709c0/generated_images/exec-b6245b65-022c-4622-a779-4673d8e87322.png",
+      "originalDimensions": [
+        1672,
+        941
+      ],
+      "dimensions": [
+        480,
+        270
+      ],
+      "sha256": "3fdaee9c023470ec0923cf127ab31ff064b973f9f06c3523593230b37e605e82"
+    },
+    {
+      "area": "goblin.a08",
+      "name": "深窟集地",
+      "prompt": "Use case: stylized-concept. ONE full-bleed 16:9 Japanese 16-bit JRPG regional exploration map, 480x270 logical pixel art. High elevated bird's-eye terrain view with distinct traversable geography, no horizon/sky, never side-view battle arena. Crisp small pixel clusters and finely detailed handcrafted SNES RPG terrain. Interconnected winding paths enter left, branch to three readable landmarks, reconnect and exit right. Three spatially separated explorable places around lower left, upper center, lower right. No text, labels, UI, icons, markers, grid, border, creatures, characters, montage, blur, painting. Deep Cavern Gathering Place: high overhead cutaway of broad terraced cavern holding a compact abandoned goblin gathering market, small rough timber shelters and awnings, purple fungal beds and glowing wall crystal grains. Winding paths join three landmarks: small open trading square, upper-central deep cave opening, lower-right ancient giant mushroom-root hollow. Rope footbridges cross fissures. Cool violet and cyan glows, warm small amber lanterns. No inhabitants, no writing.",
+      "file": "dist/races/goblin/assets/exploration-08.png",
+      "status": "visually-reviewed",
+      "original": "/workspace/scratch/81f4d6a709c0/generated_images/exec-ce96ba30-2d85-4a6c-ab01-32936ed49de0.png",
+      "originalDimensions": [
+        1672,
+        941
+      ],
+      "dimensions": [
+        480,
+        270
+      ],
+      "sha256": "1ee821173f5779e56b6b5ed3cc4734638ee419a32fa575b7d05189b8d5f05cca"
+    },
+    {
+      "area": "goblin.a09",
+      "name": "影隙栈道",
+      "prompt": "Use case: stylized-concept. ONE full-bleed 16:9 Japanese 16-bit JRPG regional exploration map, 480x270 logical pixel art. High elevated bird's-eye terrain view with distinct traversable geography, no horizon/sky, never side-view battle arena. Crisp small pixel clusters and finely detailed handcrafted SNES RPG terrain. Interconnected winding paths enter left, branch to three readable landmarks, reconnect and exit right. Three spatially separated explorable places around lower left, upper center, lower right. No text, labels, UI, icons, markers, grid, border, creatures, characters, montage, blur, painting. Shadow Rift Boardwalk: steep elevated bird's-eye map of a deep purple-black ravine crossed by zigzagging wooden cliff boardwalks, narrow hanging bridges and carved stairs. Three clearly connected rocky ledges with distinct cave entrances, purple shadow mushrooms and silent pale crystal clusters. Path enters left and exits right, route legible from above, no horizon. Blue-violet rock, dark chasm, warm weathered timber and small amber lanterns; avoid central battle floor.",
+      "file": "dist/races/goblin/assets/exploration-09.png",
+      "status": "visually-reviewed",
+      "original": "/workspace/scratch/81f4d6a709c0/generated_images/exec-2e1d7a11-321b-473e-b185-ff92e36d4b04.png",
+      "originalDimensions": [
+        1672,
+        941
+      ],
+      "dimensions": [
+        480,
+        270
+      ],
+      "sha256": "c8eb95046a148ed4d1f2f8e1b2562a5acf9ae67ce89176fe2d61d145ef0d0c33"
+    },
+    {
+      "area": "goblin.a10",
+      "name": "群穴腹地",
+      "prompt": "Use case: stylized-concept. ONE full-bleed 16:9 Japanese 16-bit JRPG regional exploration map, 480x270 logical pixel art. High elevated bird's-eye terrain view with distinct traversable geography, no horizon/sky, never side-view battle arena. Crisp small pixel clusters and finely detailed handcrafted SNES RPG terrain. Interconnected winding paths enter left, branch to three readable landmarks, reconnect and exit right. Three spatially separated explorable places around lower left, upper center, lower right. No text, labels, UI, icons, markers, grid, border, creatures, characters, montage, blur, painting. Heart of the Burrow Network: elevated overhead cutaway of an immense deep interconnected cave network, multiple rock galleries around a monumental ancient fungal-root core embedded in stone. Tiny sticky wall crystals, purple stone seams, ochre walkable paths and raised natural bridges thread between nested cavern openings. Three main explorable clearings distinctly separated: left fungal terrace, upper-center tall burrow portal, lower-right root-carved hollow. Deep indigo, muted mauve, warm umber and restrained turquoise bioluminescence. No living figures.",
+      "file": "dist/races/goblin/assets/exploration-10.png",
+      "status": "visually-reviewed",
+      "original": "/workspace/scratch/81f4d6a709c0/generated_images/exec-6eebefb9-e015-4b1a-a132-bbd30b8df9dc.png",
+      "originalDimensions": [
+        1672,
+        941
+      ],
+      "dimensions": [
+        480,
+        270
+      ],
+      "sha256": "699a46085c51050f087da23bc1e02dd327b752b9f9ffcb15ab84d7f32629a2c8"
+    }
+  ],
+  "qa": {
+    "dimensions": "all 10 are 480x270",
+    "uniqueHashes": 10,
+    "review": "Each final PNG inspected: elevated regional geography, connected paths, distinctive actual-area landmarks, no text/UI/characters; no combat/camp originals changed",
+    "contactSheet": "qa/exploration/goblin/contact-sheet.png"
+  }
+}

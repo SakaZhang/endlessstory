@@ -31,6 +31,13 @@ async function probe(output,report){
   const bytes=await readFile(join(output,'releases',report.release,path));assert.equal(digest(bytes),files.get(path).sha256);
   const text=bytes.toString(),ext=path.split('.').pop();
   for(const dep of deps(text,ext).filter(x=>!external(x)))await visit(new URL(dep,url),url.href);
+  if(ext==='js'&&text.includes("fetch(assetRoot+'exploration-manifest.json')")){
+   const assetRoot=text.match(/assetRoot\s*=\s*['"]([^'"]+)['"]/);assert.ok(assetRoot,'unreviewed exploration assetRoot');
+   const manifestUrl=new URL(assetRoot[1]+'exploration-manifest.json',release);await visit(manifestUrl,url.href);
+   const manifest=JSON.parse(await readFile(join(output,'releases',report.release,manifestUrl.pathname.slice(release.pathname.length)),'utf8'));
+   assert.equal(Object.keys(manifest.areaBackgrounds).length,50,'Dwarf legacy10 plus dedicated expansion40');
+   for(const image of manifest.backgrounds)await visit(new URL(image.file,manifestUrl),manifestUrl.href);
+  }
   if(ext==='js'&&text.includes("fetch(assetRoot+'manifest.json')")){
    const assetRoot=text.match(/assetRoot\s*=\s*['"]([^'"]+)['"]/);assert.ok(assetRoot,'unreviewed dynamic assetRoot');
    const manifestUrl=new URL(assetRoot[1]+'manifest.json',release);
@@ -72,7 +79,7 @@ try{
  // Cache populated from actual checked-in legacy root and actual previous graph, not mocked module constants.
  const oldCache=new Map(before.map(([path,sha])=>[new URL(path,root).href,sha]));oldCache.set(new URL(legacyScript,root).href,'legacy entry cache');
  for(const url of graphA.urls)oldCache.set(url,'previous release cached bytes');
- for(const path of ['style.css','engine.js','battle-assets/manifest.json',before.find(([p])=>p.endsWith('.png'))[0]]){
+ for(const path of ['style.css','engine.js','battle-assets/manifest.json','map-assets/exploration-manifest.json','races/elf/assets/exploration-01.png',before.find(([p])=>p.endsWith('.png'))[0]]){
   const original=await readFile(join(source,path));await writeFile(join(source,path),Buffer.concat([original,Buffer.from(path.endsWith('.js')||path.endsWith('.css')?'\n/* cache mutation probe */\n':' ')]));
   const changed=await buildRelease({source,output});assert.notEqual(changed.release,a.release,'file failed to affect namespace '+path);
   // Manifest whitespace valid; PNG trailing whitespace allowed as byte-level cache test only.
@@ -81,6 +88,7 @@ try{
  }
  // Negative references must fail traversal even when build hashes are internally valid.
  for(const [file,mutate] of [
+  ['map-assets/exploration-manifest.json',text=>text.replace('exploration-01.png','missing-exploration.png')],
   ['style.css',text=>text+'\n.broken{background:url(./missing-cache-probe.png)}'],
   ['races/human/art.js',text=>{assert.match(text,/races\/human\/[^"']+\.png/);return text.replace(/races\/human\/[^"']+\.png/,'races/human/missing-registered-art.png');}]
  ]){const original=await readFile(join(source,file),'utf8');await writeFile(join(source,file),mutate(original));const broken=await buildRelease({source,output});await assert.rejects(()=>probe(output,broken),/missing dependency/);await writeFile(join(source,file),original);}
@@ -118,5 +126,5 @@ try{
 
  await writeFile(join(actualOutput,'dependency-probe.json'),JSON.stringify({release:actual.release,legacyEntry:legacyScript,packageCheck,kind:'Actual emitted HTML/ESM/CSS and dynamic manifest/image URL graph; filesystem + URL/cache model, not browser cache inspection',...graph},null,2)+'\n');
  console.log(packageCheck);
- console.log(`PASS release cache: ${actual.files.length} files hash-verified; ${graph.urls.length} resource URLs / ${graph.edges.length} dependency edges; old legacy and prior release cache misses; 4 mutation classes; roots/navigation/origin/save key preserved.`);
+ console.log(`PASS release cache: ${actual.files.length} files hash-verified; ${graph.urls.length} resource URLs / ${graph.edges.length} dependency edges; old legacy and prior release cache misses; 6 mutation targets; roots/navigation/origin/save key preserved.`);
 }finally{await rm(temp,{recursive:true,force:true});}

@@ -1,0 +1,171 @@
+{
+  "schema": 1,
+  "race": "ashen",
+  "method": "Built-in image_gen; one independent generation per regional map",
+  "referenceInspected": "dist/races/human/assets/maps-01.png",
+  "contentSource": "dist/races/ashen/world.js areas",
+  "processing": "Nearest-neighbor resize only to 480x270; original generated files retained",
+  "visualQA": "Elevated exploration geography, branching paths and landmarks; no text/UI/characters; all 10 distinct and inspected",
+  "assets": [
+    {
+      "id": "ashen.a01",
+      "file": "dist/races/ashen/assets/exploration-01.png",
+      "prompt": "Use case: stylized-concept. Create a single production exploration map asset for a Japanese 16-bit pixel-art fantasy RPG, area Ashen a01 醒石边地 (do not render text). Wide 16:9 composition, elevated three-quarter top-down view looking down on a complete small region, no sky or horizon. Dense crisp hand-placed-looking pixel clusters and limited earthy palette, genuinely pixel art not painted realism. Wind has swept ancient gray ash off ochre stone ridges; white salt crust surrounds small drinkable turquoise mineral-dew pools. Clear interconnected pale trails wind between ridges and pools, linking an open field at lower-left, a dark rocky cavern entrance around center-right, and neighboring exits at left/right edges. Layered rock terraces and tiny salt crystals provide rich geography. No people, no monsters, no castle or unrelated buildings, no labels, text, icons, border or UI. Distinct region with multiple paths, NOT a side-scrolling battle arena or empty central fighting floor. Opaque full-bleed image intended to be downscaled to 480x270.",
+      "source": "/workspace/scratch/81f4d6a709c0/generated_images/exec-b951714b-ad91-4130-ae8c-36e1f011bd59.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "sourceSha256": "7caae5e5cd0ffa5c65ebbf3394e9bb572ccf513132074afb7a08a8372f6d46eb",
+      "size": [
+        480,
+        270
+      ],
+      "sha256": "79ed0020e58404bde11ae581374e4270913e77d148ac37758a9247bf5462a65d"
+    },
+    {
+      "id": "ashen.a02",
+      "file": "dist/races/ashen/assets/exploration-02.png",
+      "prompt": "Use case: stylized-concept. Single production exploration map for Japanese 16-bit pixel-art fantasy RPG. Wide 16:9 full-bleed opaque composition, elevated three-quarter top-down view looking DOWN on entire small region, NO sky or horizon. Crisp small pixel clusters, detailed readable geography, not photorealism or watercolor. Interconnected traversable paths and multiple distinct landmarks, routes towards neighboring exits at left and right edges. No text, labels, icons, border, UI, people or monsters. Not a side-scrolling battle background, no empty central fighting floor. Intended final size 480x270. Area 盐风台地 (do NOT render name). White salt plateaus suspended above deep wind-cut ravines, thin glittering mica sheets along cliffs. Pale switchback trails cross narrow natural stone bridges connecting three irregular chalk mesas; dark cavern mouth in a cliff. Dry cool white salt, pale lilac mica, charcoal rock. No water lake.",
+      "source": "/workspace/scratch/81f4d6a709c0/generated_images/exec-0a4b5441-db56-47ef-b934-c390bd37f723.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "sourceSha256": "f61693c9ab3f43b5f608f093b4818bbb82dc166794c4e3ba4fa2ecd52c89d912",
+      "size": [
+        480,
+        270
+      ],
+      "sha256": "7f6d032abf2e858dc64eaf2e73038525532ad6263fe8ea5724a696ff5ec57be1"
+    },
+    {
+      "id": "ashen.a03",
+      "file": "dist/races/ashen/assets/exploration-03.png",
+      "prompt": "Use case: stylized-concept. Single production exploration map for Japanese 16-bit pixel-art fantasy RPG. Wide 16:9 full-bleed opaque composition, elevated three-quarter top-down view looking DOWN on entire small region, NO sky or horizon. Crisp small pixel clusters, detailed readable geography, not photorealism or watercolor. Interconnected traversable paths and multiple distinct landmarks, routes towards neighboring exits at left and right edges. No text, labels, icons, border, UI, people or monsters. Not a side-scrolling battle background, no empty central fighting floor. Intended final size 480x270. Area 冷烬浅谷 (do NOT render name). A shallow valley filled with cold blue-gray ash, a small branching condensation creek trickles through it, turquoise crystal shoots growing in shaded gullies. Interconnected winding footpaths cross stepping stones and low ash ridges, leading to a shadowy cave. Soft cool slate and pale cyan colors, no lava.",
+      "source": "/workspace/scratch/81f4d6a709c0/generated_images/exec-c2dfc09b-a545-449e-a1f6-9da696a984ac.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "sourceSha256": "1477eca492fb5230468e3f120b88cd688978f13c338af2b8dea962932ad143d8",
+      "size": [
+        480,
+        270
+      ],
+      "sha256": "1f3ca4accc03a0f48bc0fb62cc79b5ccf07debdd3eceff5f2612d31275096b3b"
+    },
+    {
+      "id": "ashen.a04",
+      "file": "dist/races/ashen/assets/exploration-04.png",
+      "prompt": "Use case: stylized-concept. Single production exploration map for Japanese 16-bit pixel-art fantasy RPG. Wide 16:9 full-bleed opaque composition, elevated three-quarter top-down view looking DOWN on entire small region, NO sky or horizon. Crisp small pixel clusters, detailed readable geography, not photorealism or watercolor. Interconnected traversable paths and multiple distinct landmarks, routes towards neighboring exits at left and right edges. No text, labels, icons, border, UI, people or monsters. Not a side-scrolling battle background, no empty central fighting floor. Intended final size 480x270. Area 琉砂洼地 (do NOT render name). An irregular low basin of glassy teal sand with ripples frozen like a receded tide, vivid red mineral seams crossing the depression. Paths curl around glazed dunes and red crystal outcrops, connecting to a crevice cave and a rugged lower-right rocky boss landmark. Dusty turquoise, copper-red and charcoal palette. Not a water lake.",
+      "source": "/workspace/scratch/81f4d6a709c0/generated_images/exec-bb38be85-5de1-4359-8c8d-c551f97f32e7.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "sourceSha256": "39014d52ce946a6d13eb08b535868aa496ccf079d355eeffd1cdf1f1d7a017fe",
+      "size": [
+        480,
+        270
+      ],
+      "sha256": "2c0fb803ac5c71ce2a1b5ec6df60bf961f1c8e4b1d2c2817ede496843903856c"
+    },
+    {
+      "id": "ashen.a05",
+      "file": "dist/races/ashen/assets/exploration-05.png",
+      "prompt": "Use case: stylized-concept. Single production exploration map for Japanese 16-bit pixel-art fantasy RPG. Wide 16:9 full-bleed opaque composition, elevated three-quarter top-down view looking DOWN on entire small region, NO sky or horizon. Crisp small pixel clusters, detailed readable geography, not photorealism or watercolor. Interconnected traversable paths and multiple distinct landmarks, routes towards neighboring exits at left and right edges. No text, labels, icons, border, UI, people or monsters. Not a side-scrolling battle background, no empty central fighting floor. Intended final size 480x270. Area 热脉裂原 (do NOT render name). A broad fractured gray-brown plain cut by branching glowing warm orange mineral veins and narrow fissures, small pale steam plumes rising from them. Animal migration trails (no animals visible) weave around fissures and cross natural rock spans to a dark cleft. Detailed basalt ground with warm amber accents; not an ocean of lava.",
+      "source": "/workspace/scratch/81f4d6a709c0/generated_images/exec-e83c16ef-3668-4fe7-af33-82ff8f5ffe9d.png",
+      "sourceSize": [
+        1672,
+        940
+      ],
+      "sourceSha256": "209e8efe485612c5986a7d026ae09605bd1b3382cececf2bd781c9cef0f1e13b",
+      "size": [
+        480,
+        270
+      ],
+      "sha256": "b547f324cc5e67c186d5265e69afb828ce8f79c6c50bee6ee14d16e0cb0859cc"
+    },
+    {
+      "id": "ashen.a06",
+      "file": "dist/races/ashen/assets/exploration-06.png",
+      "prompt": "Use case: stylized-concept. Single production exploration map for Japanese 16-bit pixel-art fantasy RPG. Wide 16:9 full-bleed opaque composition, elevated three-quarter top-down view looking DOWN on entire small region, NO sky or horizon. Crisp small pixel clusters, detailed readable geography, not photorealism or watercolor. Interconnected traversable paths and multiple distinct landmarks, routes towards neighboring exits at left and right edges. No text, labels, icons, border, UI, people or monsters. Not a side-scrolling battle background, no empty central fighting floor. Intended final size 480x270. Area 鸣晶断层 (do NOT render name). An exposed fault with stepped crystalline walls and tall pale emerald and violet quartz columns; narrow zigzag stair-paths weave between several offset terraces, a crystal cavern entrance at center-right. Deep vertical rifts and resonant clustered crystal walls, cool mineral glow. Interconnected paths, not a single big central crystal.",
+      "source": "/workspace/scratch/81f4d6a709c0/generated_images/exec-056a61e0-01b2-4f61-a82a-9e37c7c3309d.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "sourceSha256": "39893288e50eac64f2b1a0c0b7c5698cfd9c3d73cff149ddb0fcbd544916a857",
+      "size": [
+        480,
+        270
+      ],
+      "sha256": "7053ce48e9e64f2babd977c5aee37492f02c2896cd3b792f6569d9a22a8f74b7"
+    },
+    {
+      "id": "ashen.a07",
+      "file": "dist/races/ashen/assets/exploration-07.png",
+      "prompt": "Use case: stylized-concept. Single production exploration map for Japanese 16-bit pixel-art fantasy RPG. Wide 16:9 full-bleed opaque composition, elevated three-quarter top-down view looking DOWN on entire small region, NO sky or horizon. Crisp small pixel clusters, detailed readable geography, not photorealism or watercolor. Interconnected traversable paths and multiple distinct landmarks, routes towards neighboring exits at left and right edges. No text, labels, icons, border, UI, people or monsters. Not a side-scrolling battle background, no empty central fighting floor. Intended final size 480x270. Area 黑曜风口 (do NOT render name). A wind pass between jagged black glass obsidian cliffs, white salt drifts piled on sheltered leeward ledges. Silver trails snake through narrow black ravines, around serrated formations, into a cliff cavern; distinctive rugged lower-right obsidian spire landmark. Strong black glass, off-white salt and muted violet palette, little or no lava.",
+      "source": "/workspace/scratch/81f4d6a709c0/generated_images/exec-44f45943-2a0a-4646-afe6-18326705545a.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "sourceSha256": "181dd5596216a988285fd9b7afb783407ac646c0f92e4e2f6889e0a860dad102",
+      "size": [
+        480,
+        270
+      ],
+      "sha256": "11a19979773f4f951c5948553ccdb2c6d3587be728be38de5b975c2ba90e42b9"
+    },
+    {
+      "id": "ashen.a08",
+      "file": "dist/races/ashen/assets/exploration-08.png",
+      "prompt": "Use case: stylized-concept. Single production exploration map for Japanese 16-bit pixel-art fantasy RPG. Wide 16:9 full-bleed opaque composition, elevated three-quarter top-down view looking DOWN on entire small region, NO sky or horizon. Crisp small pixel clusters, detailed readable geography, not photorealism or watercolor. Interconnected traversable paths and multiple distinct landmarks, routes towards neighboring exits at left and right edges. No text, labels, icons, border, UI, people or monsters. Not a side-scrolling battle background, no empty central fighting floor. Intended final size 480x270. Area 白盐古盆 (do NOT render name). A broad ancient shallow basin covered with soft ivory salt, irregular rings of weathered terracotta pottery-like stone formations serving as silent trail markers. Winding ochre tracks weave between the standing ceramic stones, outlying low rock shelves and a small salt-encrusted cave. A luminous chalk-white basin with warm clay accents, no snow, no giant crystal pillars, no temple buildings.",
+      "source": "/workspace/scratch/81f4d6a709c0/generated_images/exec-1962d19f-8519-4efe-a3f4-14565db165a1.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "sourceSha256": "e44f3fc127c80ffd0cdee593612c2382859b5e710c612052d5aa72eee587d041",
+      "size": [
+        480,
+        270
+      ],
+      "sha256": "660e7bda4ecb8097c3bda0587d6b2c93ffe6629bc123d3ebc98caecc586a84b2"
+    },
+    {
+      "id": "ashen.a09",
+      "file": "dist/races/ashen/assets/exploration-09.png",
+      "prompt": "Use case: stylized-concept. Single production exploration map for Japanese 16-bit pixel-art fantasy RPG. Wide 16:9 full-bleed opaque composition, elevated three-quarter top-down view looking DOWN on entire small region, NO sky or horizon. Crisp small pixel clusters, detailed readable geography, not photorealism or watercolor. Interconnected traversable paths and multiple distinct landmarks, routes towards neighboring exits at left and right edges. No text, labels, icons, border, UI, people or monsters. Not a side-scrolling battle background, no empty central fighting floor. Intended final size 480x270. Area 沉辉石海 (do NOT render name). A vast-looking local field of faintly glowing indigo and silver crystalline sand, sweeping wave-shaped rock formations and dark buried coal ember fragments. Traversable narrow silver tracks meander between successive stone waves and cross low natural arches to a recessed cave. Cool dusk mineral colors with tiny subdued amber coal accents. Dry geological stone sea, NOT water.",
+      "source": "/workspace/scratch/81f4d6a709c0/generated_images/exec-07791966-0eed-49e8-9810-1ebc9ce17189.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "sourceSha256": "62ec2b66081cdbbe8004f214b1dc935b03dea3137f56ada0d90e6ebf6aa620a2",
+      "size": [
+        480,
+        270
+      ],
+      "sha256": "a4d187ca495df04d2c0b49cfe59af1d3dd0aa7d4488b8ada7204af0568ac631f"
+    },
+    {
+      "id": "ashen.a10",
+      "file": "dist/races/ashen/assets/exploration-10.png",
+      "prompt": "Use case: stylized-concept. Single production exploration map for Japanese 16-bit pixel-art fantasy RPG. Wide 16:9 full-bleed opaque composition, elevated three-quarter top-down view looking DOWN on entire small region, NO sky or horizon. Crisp small pixel clusters, detailed readable geography, not photorealism or watercolor. Interconnected traversable paths and multiple distinct landmarks, routes towards neighboring exits at left and right edges. No text, labels, icons, border, UI, people or monsters. Not a side-scrolling battle background, no empty central fighting floor. Intended final size 480x270. Area 初火深层 (do NOT render name). The deepest mineral caverns: warm amber mineral streams wind around towering dark quartz columns, branching ledge paths and natural stone bridges connecting several layered rock islands. A larger ancient glowing crystal formation at lower-right serves as boss-location landmark, a deeper cavern opening around upper-right. Underground ochre and ruby light, mineral black columns, bright warm flow with readable safe paths. NO sky, no throne, no castle, no written symbols.",
+      "source": "/workspace/scratch/81f4d6a709c0/generated_images/exec-0a174faf-b0fb-470c-b54e-d27c954ecd31.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "sourceSha256": "377207e3bba37bf5f254013a0649c3022eafe15ca40ffb22e5a773f25e7ff10b",
+      "size": [
+        480,
+        270
+      ],
+      "sha256": "56b729ae222aa07944c9c599e874267b66ee3425728022c67dc08b6edfaf4d73"
+    }
+  ]
+}

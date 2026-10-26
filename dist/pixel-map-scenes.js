@@ -1,4 +1,3 @@
-import {extendBattleManifest} from './race-art.js';
 // Read-only map pixels. No combat, travel, save writes, clocks or RNG.
 const supported=id=>id==='world'||/^(?:dwarf|human|elf|goblin|ashen)\.a(?:0[1-9]|10)$/.test(id);
 function layersFor(manifest,scene){
@@ -14,12 +13,12 @@ export function drawPixelMapScene(canvas,scene,{manifest,images}={}){
  if(canvas.width!==960)canvas.width=960;if(canvas.height!==540)canvas.height=540;
  c.save();try{c.setTransform(1,0,0,1,0,0);c.imageSmoothingEnabled=false;c.clearRect(0,0,960,540);for(const b of layers)c.drawImage(images.get(b.file),0,0,960,540);}finally{c.restore();}return true;
 }
-export function createPixelMapScenes({assetRoot='./map-assets/',battleAssetRoot='./battle-assets/',onStatus,manifest:worldManifest=null,battleManifest=null,images:providedImages=null}={}){
- let disposed=false;const manifests={world:worldManifest,battle:battleManifest},manifestPending={},images=providedImages??new Map(),states=new Map(),pending=new Map();
- const family=scene=>scene==='world'?'world':'battle';const root=scene=>scene==='world'?assetRoot:battleAssetRoot;
+export function createPixelMapScenes({assetRoot='./map-assets/',onStatus,manifest:worldManifest=null,explorationManifest=null,images:providedImages=null}={}){
+ let disposed=false;const manifests={world:worldManifest,exploration:explorationManifest},manifestPending={},images=providedImages??new Map(),states=new Map(),pending=new Map();
+ const family=scene=>scene==='world'?'world':'exploration';const root=()=>assetRoot;
  function status(scene){if(disposed)return {mode:'disposed',label:'地图已释放'};if(!supported(scene))return {mode:'unavailable',label:'地图暂不可用'};const state=states.get(scene);if(state)return state;return {mode:'idle',label:'地图素材准备中'};}
  function publish(scene,value){states.set(scene,value);try{onStatus?.(scene,status(scene));}catch{}}
- async function getManifest(scene){const key=family(scene);if(manifests[key])return manifests[key];if(!manifestPending[key])manifestPending[key]=(async()=>{let response;if(scene==='world')response=await fetch(assetRoot+'manifest.json');else response=await fetch(battleAssetRoot+'manifest.json');if(!response.ok)throw Error('Manifest HTTP '+response.status);const raw=await response.json();return manifests[key]=key==='battle'?extendBattleManifest(raw):raw;})().finally(()=>{delete manifestPending[key]});return manifestPending[key];}
+ async function getManifest(scene){const key=family(scene);if(manifests[key])return manifests[key];if(!manifestPending[key])manifestPending[key]=(async()=>{let response;if(scene==='world')response=await fetch(assetRoot+'manifest.json');else response=await fetch(assetRoot+'exploration-manifest.json');if(!response.ok)throw Error('Manifest HTTP '+response.status);const raw=await response.json();return manifests[key]=raw;})().finally(()=>{delete manifestPending[key]});return manifestPending[key];}
  async function load(scene,{retry=false}={}){
   if(disposed||!supported(scene))return false;if(pending.has(scene))return pending.get(scene);if(status(scene).mode==='ready')return true;if(status(scene).mode==='failed'&&!retry)return false;
   publish(scene,{mode:'loading',label:'地图素材加载中'});
