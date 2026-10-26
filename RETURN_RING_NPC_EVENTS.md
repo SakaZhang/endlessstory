@@ -41,10 +41,20 @@ This change does **not** fake mainline progress or turn exploration into chapter
 |`return-ring.ashen.scene-open`|C06 A01 outpost support|
 |`return-ring.recipe-revealed`|C06.RR01.<POV> mandatory old-object joining scene, before C07|
 
-Each POV receives world opportunity flags at the genuine chapter outcome, not knowledge of secret events. `syncReturnRingRecipe(candidate)` runs within the story completion transaction. It checks the real recipe flag and requires neither material possession nor optional completion. Shared local NPC host is real/playable without story flags; Ring story availability still requires the actual mainline integration.
+Each POV receives world opportunity flags at the genuine chapter outcome, not knowledge of secret events. `syncReturnRingRecipe(candidate)` runs within the story completion transaction. It checks the real recipe flag and requires neither material possession nor optional completion. Shared local NPC host is real/playable without story flags. The App follow-on supplies Ring opportunities through the genuine C01–C06 controller and learns the recipe within its C06 completion transaction.
 
 ## Verification
 
 New commands: `npm run test:npc-events` covers model and real App handler flow. Extra regression runs: task service/boundary, dwarf materials, goblin/ashen drop settlements, legendary drop/production, adjacent-region actual App.
 
 The full `npm test` reaches a **pre-existing** `equipment-armor-art-tests.mjs` mismatch (`36 !== 28`) also reproduced in untouched integration baseline. Do not describe this as an all-green aggregate. No browser pixel screenshot audit claimed by the fake-DOM App tests; source-aware rendered/browser QA remains separate.
+
+## Shared App/mainline follow-on
+
+The App follow-on integrates the real `story-event-controller`/scenario modules in the same regional event panel. C01–C06 all-five-POV fixtures now traverse actual controller actions and real combat; Ring tests no longer inject bare story flags. Every dialogue frame, choice, real encounter start and scene completion uses the sealed story transaction. Mandatory C06 completion and permanent recipe learning are one save; a failed write preserves both before-states.
+
+The old three legacy boss “found a clue” journal cards are removed: only source-tagged actual story knowledge is shown. Story combat has its own nonlethal/no-loot result notice, never the ordinary death/rest message, and a return-to-dialogue control. The chapter header shows actual active/available chapter or “first six chapters completed”, not an endgame claim. Later `enter`/`retreat` controller actions update region presentation from the committed actual site without introducing UI-side travel permission.
+
+Observed external-save conflicts are rejected before the event flush, and the App pauses further automatic saves until reload. This prevents the preflight itself from overwriting a known newer snapshot; it is not cross-tab compare-and-swap or multiwriter serialization.
+
+`npm run test:story-host` passes controller/scenario plus actual-App fake-DOM cursor/stale/quota, scenario/result navigation and same-save C06 recipe tests. Native Chromium could not launch in this execution environment; no screenshot/pixel proof is claimed. No further launcher permission retries are part of this work.

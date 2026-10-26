@@ -14,6 +14,7 @@
     "test:npc-events": "node npc-event-host-tests.mjs && node return-ring-events-tests.mjs && node return-ring-drop-tests.mjs && node npc-event-app-ui-tests.cjs",
     "sync:infinity-gems": "node tools/sync-infinity-gem-probabilities.mjs",
     "test:infinity-gems": "node tools/sync-infinity-gem-probabilities.mjs --check && node infinity-gem-base-tests.mjs && node infinity-gem-settlement-tests.mjs",
-    "prebuild": "node tools/sync-infinity-gem-probabilities.mjs --check"
+    "prebuild": "node tools/sync-infinity-gem-probabilities.mjs --check",
+    "test:story-host": "node story-event-controller-tests.mjs && node story-scenario-combat-tests.mjs && node story-event-app-ui-tests.cjs"
   }
 }

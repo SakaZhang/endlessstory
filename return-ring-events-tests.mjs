@@ -1,3 +1,4 @@
+import {completeStory} from './story-event-test-fixture.mjs';
 import assert from 'node:assert/strict';
 import * as E from './dist/engine.js';
 import {SAVE_KEY,loadProgress} from './dist/storage.js';
@@ -7,12 +8,13 @@ import {claimTaskReward} from './dist/task-reward-transaction.js';
 import {renderNpcEventBoard} from './dist/npc-event-ui.js';
 import {syncReturnRingRecipe,returnRingMaterialUsage,returnRingRecipeKnown,returnRingRareBonus} from './dist/return-ring-state.js';
 import {craftReturnRing,createReturnRingCraftService} from './dist/return-ring-crafting.js';
-const clone=structuredClone,now=Date.now();
+const clone=structuredClone,now=Date.now(),storyFixtures=new Map();
+function storyFixture(race){if(!storyFixtures.has(race))storyFixtures.set(race,completeStory(race));return clone(storyFixtures.get(race));}
 function storage(game){let raw=JSON.stringify(game);return {fail:false,writes:0,get length(){return 1},key:()=>SAVE_KEY,getItem:k=>k===SAVE_KEY?raw:null,setItem(k,v){if(this.fail)throw Error('quota');assert.equal(k,SAVE_KEY);this.writes++;raw=v},removeItem(){}};}
-function at(def){const s=E.fresh(def.race);E.normalizeHealth(s,now);E.normalizeAreaProgress(s);E.normalizeExpedition(s);s.areaProgress[def.race]={unlocked:[1,2,3,4,5,6],cleared:[1,2,3,4,5]};s.siteId=def.areaId;s.location=E.AREAS[def.areaId].number-1;s.expedition.fieldId=def.areaId+'.field';s.story={flags:[def.requiresStoryFlag]};assert(E.validSave(s));return s;}
+function at(def){const s=storyFixture(def.race);E.normalizeHealth(s,now);E.normalizeAreaProgress(s);E.normalizeExpedition(s);s.areaProgress[def.race]={unlocked:[1,2,3,4,5,6],cleared:[1,2,3,4,5]};s.siteId=def.areaId;s.location=E.AREAS[def.areaId].number-1;s.expedition.fieldId=def.areaId+'.field';assert(E.validSave(s));return s;}
 function victory(s,def){const e=E.startInstanceEncounter(s,def.areaId+'.field',Math.max(now,s.lastHealthClock??now)+2000);assert(e);for(const u of e.enemies){u.hp=1;u.control.stunUntil=s.lastHealthClock+1e8;}for(let n=0;n<50&&!e.done;n++)E.step(s,e);assert(e.win);E.reward(s,e,Math.max(now,s.lastHealthClock??now)+2100);s.running=false;assert(E.validSave(s));return e;}
 for(const def of RETURN_RING_EVENTS){
- let s=at(def),store=storage(s);const hidden=clone(s);hidden.story.flags=[];assert(!beginNpcEvent(hidden,def.id,now));assert(!renderNpcEventBoard(hidden,{race:def.race,areaId:def.areaId}).includes(def.id));
+ let s=at(def),store=storage(s);const hidden=clone(s);delete hidden.story;assert(!beginNpcEvent(hidden,def.id,now));assert(!renderNpcEventBoard(hidden,{race:def.race,areaId:def.areaId}).includes(def.id));
  assert(beginNpcEvent(s,def.id,now));assert(!npcEventReady(s,def.id));store=storage(s);assert.equal(claimTaskReward(store,s,def.id).reason,'not-ready');
  // Only actual post-acceptance settlement counts, not repeats/summons/old history.
  const e=victory(s,def);assert.equal(s.npcEvents.entries[def.id].count,1);assert(!recordNpcEventVictory(s,e));assert(npcEventReady(s,def.id));
@@ -29,7 +31,7 @@ const keys=Object.keys(E.MATERIALS).filter(k=>!E.MATERIALS[k].storyOnly).flatMap
 // Remote, live combat and war gates cannot be bypassed by button/action calls.
 s=at(def);s.siteId='dwarf.a01';s.location=0;assert(!beginNpcEvent(s,def.id,now));s=at(def);s.running=true;assert(!beginNpcEvent(s,def.id,now));
 // Guaranteed recipe depends only on the real mandatory flag, not token ownership.
-s=E.fresh();assert(!syncReturnRingRecipe(s));s.story={flags:['return-ring.recipe-revealed']};assert(syncReturnRingRecipe(s));assert(returnRingRecipeKnown(s));assert(!syncReturnRingRecipe(s));assert.equal(returnRingMaterialUsage(s,RETURN_RING_MATERIALS[0].material),'归途之环配方材料');
+s=E.fresh();assert(!syncReturnRingRecipe(s));s=storyFixture('dwarf');assert(syncReturnRingRecipe(s));assert(returnRingRecipeKnown(s));assert(!syncReturnRingRecipe(s));assert.equal(returnRingMaterialUsage(s,RETURN_RING_MATERIALS[0].material),'归途之环配方材料');
 for(const m of RETURN_RING_MATERIALS)s.materialStacks[m.material+'|3']=1;s.gold=1000;store=storage(s);before=clone(s);assert.equal(createReturnRingCraftService({approved:false,bonusPP:.03,pools:[]})(store,s).reason,'balance-unconfirmed');assert.deepEqual(s,before);
 // Trusted approved-policy fixture verifies the real manufacturing transaction; no
 // production policy is assigned by this test. Exactly five inputs, once ledger.
