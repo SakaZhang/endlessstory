@@ -15,7 +15,8 @@ const failure=(game,reason)=>({ok:false,game,value:null,reason});
 /** Internal content registration seam. Only trusted, approved definitions belong here.
  * A definition has isEligible(save), materials:[{key,quantity}], rewards:[loot].
  * Rewards are fixed records, not factories; no rerolls on capacity/storage retry.
- * Production registry stays empty until story specifications are approved.
+ * The production registry contains only the authorized authored NPC definitions.
+ * A rewardless definition must explicitly declare narrativeOnly and an outcome.
  */
 export function createTaskRewardService(registry=TASK_REWARD_REGISTRY){
  const definitions=Object.freeze(Object.fromEntries(Object.entries(registry).map(([id,def])=>[id,{
