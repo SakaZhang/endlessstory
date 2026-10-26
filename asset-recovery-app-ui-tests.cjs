@@ -1,14 +1,14 @@
 // Actual production App, current schema6 save, synthetic DOM/events. Not a browser/layout test.
 const assert=require('node:assert/strict'),fs=require('node:fs');
-const elements=new Map(),events={},windowEvents={},store=new Map(),timers=new Map(),notices=[];
-let SAVE_KEY,failWrite=false,confirmAnswer=false,confirmCalls=0,reloads=0,serial=0;
+const elements=new Map(),events={},windowEvents={},store=new Map(),timers=new Map(),notices=[],intervals=[];
+let SAVE_KEY,failWrite=false,failRead=false,confirmAnswer=false,confirmCalls=0,reloads=0,serial=0,onConfirm=()=>{};
 const ctx=new Proxy({measureText:()=>({width:100})},{get:(o,k)=>k in o?o[k]:()=>{},set:(o,k,v)=>(o[k]=v,true)});
 function el(id){if(elements.has(id))return elements.get(id);const listeners={},o={id,style:{},dataset:{},width:960,height:540,listeners,classList:{add(){},remove(){}},open:false,setAttribute(){},showModal(){this.open=true;},close(){this.open=false;},addEventListener(k,f){(listeners[k]??=[]).push(f);},removeEventListener(k,f){listeners[k]=(listeners[k]??[]).filter(x=>x!==f);},contains:n=>n?.owner===id,getContext:()=>ctx,querySelector:()=>null,querySelectorAll:()=>[],getBoundingClientRect:()=>({left:0,top:0,width:960,height:540})};let html='';Object.defineProperty(o,'innerHTML',{get:()=>html,set:v=>{html=String(v);for(const m of html.matchAll(/id="([^"]+)"/g))el(m[1]);}});elements.set(id,o);return o;}
 global.document={baseURI:'https://game.example/releases/'+('a'.repeat(64))+'/',hidden:false,getElementById:el,querySelector:selector=>selector==='.heroIdentity'?{querySelector:tag=>el('identity-'+tag)}:null,querySelectorAll:()=>[],addEventListener:(k,f)=>(events[k]??=[]).push(f),body:{prepend:n=>notices.unshift(n)},createElement(tag){return {tag,hidden:false,listeners:{},children:[],setAttribute(){},addEventListener(k,f){this.listeners[k]=f;},append(...xs){this.children.push(...xs);},remove(){const i=notices.indexOf(this);if(i>=0)notices.splice(i,1);},click(){}};}};
 global.window={addEventListener:(k,f)=>(windowEvents[k]??=[]).push(f),matchMedia:()=>({matches:true})};
-global.localStorage={getItem:k=>store.get(k)??null,setItem(k,v){if(failWrite&&k===SAVE_KEY)throw Error('quota');store.set(k,String(v));},removeItem:k=>store.delete(k),get length(){return store.size},key:i=>[...store.keys()][i]};
-global.requestAnimationFrame=()=>{};global.setInterval=()=>0;global.setTimeout=(fn,ms)=>{timers.set(++serial,{fn,ms});return serial;};global.clearTimeout=id=>timers.delete(id);
-global.confirm=()=>{confirmCalls++;return confirmAnswer;};global.location={href:'https://game.example/',reload(){reloads++;}};
+global.localStorage={getItem:k=>{if(failRead&&k===SAVE_KEY)throw Error('read blocked');return store.get(k)??null},setItem(k,v){if(failWrite&&k===SAVE_KEY)throw Error('quota');store.set(k,String(v));},removeItem:k=>store.delete(k),get length(){return store.size},key:i=>[...store.keys()][i]};
+global.requestAnimationFrame=()=>{};global.setInterval=(fn,ms)=>{intervals.push({fn,ms});return intervals.length};global.setTimeout=(fn,ms)=>{timers.set(++serial,{fn,ms});return serial;};global.clearTimeout=id=>timers.delete(id);
+global.confirm=()=>{confirmCalls++;onConfirm();return confirmAnswer;};global.location={href:'https://game.example/',reload(){reloads++;}};
 global.Image=class{naturalWidth=960;naturalHeight=540;async decode(){}};
 global.fetch=async(url,options)=>String(url).includes('release-integrity.json')?(assert.equal(options.cache,'no-store'),{ok:true,json:async()=>({release:'b'.repeat(64)})}):{ok:true,json:async()=>JSON.parse(fs.readFileSync('dist/'+url,'utf8'))};
 const click=(dataset,id='')=>{const b={dataset,id};for(const f of events.click??[])f({target:{id,closest:()=>b}});};
@@ -21,5 +21,16 @@ confirmAnswer=true;failWrite=true;notices[0].parts.reload.listeners.click();asse
 failWrite=false;notices[0].parts.reload.listeners.click();assert.equal(reloads,1);assert.deepEqual(saved().skillTree.presets[0].unlocked,[],'reload does not silently commit draft');assert.equal(saved().gold,4321);assert.equal(store.get('unrelated-app'),'keep');assert(E.validSave(saved()));
 // In-flight forge presentation is guarded; refresh cannot interrupt its queued reveal.
 global.window.matchMedia=()=>({matches:false});click({view:'forge'});click({material:'铁屑|0'});click({},'forgeBtn');assert.match(el('view').innerHTML,/is-forging/);const forged=saved(),confirmBefore=confirmCalls;notices[0].parts.reload.listeners.click();assert.equal(reloads,1);assert.equal(confirmCalls,confirmBefore,'active operation blocks before confirmation');assert.match(el('toast').textContent,/处理中/);assert.deepEqual(saved(),forged);const reveal=[...timers.values()].find(t=>t.ms===1100);assert(reveal);reveal.fn();assert(!el('view').innerHTML.includes('is-forging'));assert.deepEqual(saved(),forged,'reveal never recharges/rerolls');
-console.log('PASS actual App/current-save recovery: explicit confirmation, declined reload preserves skill draft/save, failed save blocks reload, active forge queue protected, approved reload only, no implicit allocation/spend or unrelated-storage change. DOM event fixture, NOT browser QA.');
+// A save arriving DURING the confirmation is observed after the modal, even
+// on Cancel. Pagehide and periodic autosave stay paused rather than undoing it.
+const newer=saved();newer.gold+=777;const newerRaw=JSON.stringify(newer),reloadBefore=reloads;
+confirmAnswer=false;onConfirm=()=>store.set(SAVE_KEY,newerRaw);notices[0].parts.reload.listeners.click();onConfirm=()=>{};
+assert.equal(reloads,reloadBefore);assert.equal(store.get(SAVE_KEY),newerRaw);for(const f of windowEvents.pagehide??[])f();for(const t of intervals.filter(t=>t.ms===10000))t.fn();assert.equal(store.get(SAVE_KEY),newerRaw,'cancel does not allow a later stale save');
+confirmAnswer=true;notices[0].parts.reload.listeners.click();assert.equal(reloads,reloadBefore+1,'explicit refresh loads newer stored state without a write');assert.equal(store.get(SAVE_KEY),newerRaw);for(const f of windowEvents.pagehide??[])f();assert.equal(store.get(SAVE_KEY),newerRaw);
+// A failed post-confirmation read neither writes nor reloads the unknown state.
+failRead=true;notices[0].parts.reload.listeners.click();assert.equal(reloads,reloadBefore+1);assert.equal(store.get(SAVE_KEY),newerRaw);failRead=false;
+// Fresh App instance: an unobserved external save is caught by pagehide itself,
+// not just by the event or refresh guards. Explicit load adopts the current raw.
+await import('./dist/app.js?asset-recovery-autosave-snapshot');const latest=saved();latest.gold+=13;const latestRaw=JSON.stringify(latest);store.set(SAVE_KEY,latestRaw);for(const f of windowEvents.pagehide??[])f();for(const t of intervals.filter(t=>t.ms===10000))t.fn();assert.equal(store.get(SAVE_KEY),latestRaw,'every ordinary save rechecks current raw');assert.equal(store.get('unrelated-app'),'keep');
+console.log('PASS actual App/current-save recovery: explicit confirmation, declined reload preserves skill draft/save, failed save blocks reload, active forge queue protected, approved reload only, post-confirmation newer-save/read-failure protection, paused pagehide/autosave, no implicit allocation/spend or unrelated-storage change. DOM event fixture, NOT browser QA.');
 })().catch(e=>{console.error(e);process.exitCode=1});
