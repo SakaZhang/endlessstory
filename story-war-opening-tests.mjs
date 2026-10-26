@@ -7,7 +7,7 @@ import {territoryAccess,validDiplomacy} from './dist/war-diplomacy.js';
 import {reachStoryScene,playActiveStoryEncounter,readAndChooseStoryScene} from './story-event-test-fixture.mjs';
 import {SAVE_KEY} from './dist/storage.js';
 import {renderStoryEventBoard} from './dist/story-event-ui.js';
-assert.deepEqual(STORY_WAR_ENDINGS,[]);
+assert.deepEqual(STORY_WAR_ENDINGS,['human','dwarf','elf','goblin','ashen'].map(race=>'C08.X04.'+race));
 for(const race of ['human','dwarf','elf','goblin','ashen']){
  const id=race==='elf'?'C07.E01.elf':race==='ashen'?'C07.A01.ashen':'C07.O01.'+race;
  let s=reachStoryScene(race,id);assert(s.story.flags.includes('return-ring.recipe-revealed'));assert(!s.story.flags.includes('WAR_DECLARED'));assert.equal(s.diplomacy?.wars?.length??0,0);assert.equal(C.finishStoryScene(s,id),false,'no click-to-declare before actual route protection');
