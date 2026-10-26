@@ -64,16 +64,16 @@ let restored=loadProgress(memory(s));assert(!restored.blocked);s=restored.game;a
 // Field, intermediate dungeon stage and boss wins heal exactly once, and a
 // subsequent loadout swap/refresh/replayed reward never grants another heal.
 for(const node of ['dwarf.a01.field','dwarf.a01.dungeon','dwarf.a03.boss']){
- const trial=clone(s);trial.heroHp=E.stats(trial).hp-7;const e=enter(trial,node);fight(trial,e);
- assert.equal(trial.heroHp,E.stats(trial).hp,node);assert.equal(e.heroHp,E.stats(trial).hp,node);
- if(node.endsWith('.dungeon')){const next=E.startInstanceEncounter(trial,node,trial.nextBattleAt+2000);assert(next&&next.dungeonStage>e.dungeonStage);assert.equal(next.heroHp,E.stats(trial).hp);}
+ const trial=clone(s);trial.heroHp=E.stats(trial).hp*.5;const e=enter(trial,node);let turns=0;while(!e.done&&turns++<3000)E.step(trial,e,trial.nextActionAt);assert(e.win);const hpBefore=trial.heroHp;E.reward(trial,e,trial.lastHealthClock);trial.running=false;trial.lastSeen=trial.lastHealthClock;const healedHp=Math.min(E.stats(trial).hp,hpBefore+E.stats(trial).hp*.15);
+ assert.equal(trial.heroHp,healedHp,node);assert.equal(e.heroHp,healedHp,node);
+ if(node.endsWith('.dungeon')){const next=E.startInstanceEncounter(trial,node,trial.nextBattleAt+2000);assert(next&&next.dungeonStage>e.dungeonStage);assert.equal(next.heroHp,healedHp);}
  else {trial.heroHp=5;E.reward(trial,e,trial.lastSeen+2000);assert.equal(trial.heroHp,5,'replay cannot heal');assert(E.applyLoadout(trial,0));assert(E.applyLoadout(trial,1));assert.equal(trial.heroHp,5,'loadout cannot heal');assert.equal(loadProgress(memory(trial)).game.heroHp,5,'reload cannot heal');}
 }
 
 // The same admitted battle settles identically online/offline with the Ring.
-const initial=clone(s);initial.heroHp=E.stats(initial).hp-11;enter(initial,'dwarf.a01.field');initial.stopAfterBattle=true;
+const initial=clone(s);initial.heroHp=E.stats(initial).hp*.5;enter(initial,'dwarf.a01.field');initial.stopAfterBattle=true;
 const online=clone(initial),off=clone(initial);fight(online);const report=E.offline(off,initial.lastSeen+60000);
 assert.equal(report.kills,1);for(const key of ['gold','xp','level','kills','heroHp'])assert.equal(off[key],online[key],key);
-assert.deepEqual(off.materialStacks,online.materialStacks);assert.deepEqual(off.returnRing,online.returnRing);assert.deepEqual(off.story,online.story);assert.deepEqual(off.npcEvents,online.npcEvents);assert.deepEqual(off.loadouts,online.loadouts);assert.equal(off.heroHp,E.stats(off).hp);assert(E.validSave(off));
+assert.deepEqual(off.materialStacks,online.materialStacks);assert.deepEqual(off.returnRing,online.returnRing);assert.deepEqual(off.story,online.story);assert.deepEqual(off.npcEvents,online.npcEvents);assert.deepEqual(off.loadouts,online.loadouts);assert(off.heroHp<E.stats(off).hp,'15% recovery is not a full heal');assert(E.validSave(off));
 
 console.log('PASS integrated five-POV C06 recipe + one-character five real optional claims, actual area6 unlocks, storage rollback/reload, exact five-input once craft, loadout-gated bonus, field/stage/boss one-time heal, and online/offline settlement parity.');

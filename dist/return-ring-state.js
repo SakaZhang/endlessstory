@@ -19,7 +19,11 @@ export function equippedReturnRing(s){
 }
 export function applyReturnRingVictory(s,e,maxHp){
  if(!equippedReturnRing(s)||s.activeEncounter!==e||!e?.done||!e.win||!e.rewarded||e.developmentFixture||!Number.isFinite(maxHp)||maxHp<=0)return false;
- s.heroHp=maxHp;e.heroHp=maxHp;e.rewardNotes??=[];e.rewardNotes.push('归途之环 · 生命已回满');return true;
+ // Fixed post-victory recovery uses final (post-XP) max HP, not skill/potion
+ // healing multipliers. Keep fractional HP; no minimum-one rounding or revival.
+ if(!Number.isFinite(s.heroHp)||s.heroHp<=0||s.heroHp>=maxHp)return false;
+ const healedHp=Math.min(maxHp,s.heroHp+maxHp*.15);
+ s.heroHp=healedHp;e.heroHp=healedHp;e.rewardNotes??=[];e.rewardNotes.push('归途之环 · 恢复15%最大生命（不超过生命上限）');return true;
 }
 export function validReturnRingDropPolicy(policy){return !!policy&&policy.approved===true&&Number.isFinite(policy.bonusPP)&&policy.bonusPP>=0&&policy.bonusPP<=1&&Array.isArray(policy.pools)&&policy.pools.length>0&&new Set(policy.pools).size===policy.pools.length&&policy.pools.every(p=>['boss-legendary','material-special','material-gem'].includes(p));}
 export function returnRingRareBonus(s,pool,policy=RETURN_RING_DROP_POLICY){return equippedReturnRing(s)&&validReturnRingDropPolicy(policy)&&policy.pools.includes(pool)?policy.bonusPP:0;}
