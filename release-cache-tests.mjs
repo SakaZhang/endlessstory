@@ -24,6 +24,8 @@ async function probe(output,report){
  const emittedRoot=join(output,'releases',report.release);
  const {EXPANSION_PACKS}=await import(pathToFileURL(join(emittedRoot,'race-packs.js')));
  const {extendBattleManifest}=await import(pathToFileURL(join(emittedRoot,'race-art.js')));
+ const {STORY_ACTOR_ART}=await import(pathToFileURL(join(emittedRoot,'story-actor-art.js')));
+ const storyProvenance=new Set(['story-assets/alpha-verification.json','story-assets/generation-log.json',...Object.values(STORY_ACTOR_ART).flatMap(a=>[a.file.replace(/\.png$/,'.json'),a.file.replace('story-assets/','story-assets/source/')])]);
  async function visit(url,from){
   assert.equal(url.origin,new URL(root).origin);assert.ok(url.href.startsWith(release.href),'resource escaped namespace: '+url.href);
   edges.push({from,to:url.href});if(urls.has(url.href))return;urls.add(url.href);
@@ -31,6 +33,11 @@ async function probe(output,report){
   const bytes=await readFile(join(output,'releases',report.release,path));assert.equal(digest(bytes),files.get(path).sha256);
   const text=bytes.toString(),ext=path.split('.').pop();
   for(const dep of deps(text,ext).filter(x=>!external(x)))await visit(new URL(dep,url),url.href);
+  if(path==='npc-portrait-registry.js'){
+   const {NPC_PORTRAIT_REGISTRY}=await import(pathToFileURL(join(emittedRoot,path)));
+   assert.equal(Object.keys(NPC_PORTRAIT_REGISTRY).length,30);
+   for(const descriptor of Object.values(NPC_PORTRAIT_REGISTRY))await visit(new URL(descriptor.file,release),url.href);
+  }
   if(ext==='js'&&text.includes("fetch(assetRoot+'exploration-manifest.json')")){
    const assetRoot=text.match(/assetRoot\s*=\s*['"]([^'"]+)['"]/);assert.ok(assetRoot,'unreviewed exploration assetRoot');
    const manifestUrl=new URL(assetRoot[1]+'exploration-manifest.json',release);await visit(manifestUrl,url.href);
@@ -59,9 +66,11 @@ async function probe(output,report){
  await artEdges(DWARF_EXPANDED_SKILLS,new URL('dwarf-skill-expansion.js',release).href);
  // Package intentionally retains provenance JSON and unused source art. Keep those
  // as explicit inventory roots, separate from the verified runtime dependency graph.
+ for(const actor of Object.values(STORY_ACTOR_ART))assert(urls.has(new URL(actor.file,release).href),'story actor must be reached through actual production battle manifest: '+actor.file);
+ for(const module of ['npc-portraits.js','npc-portrait-registry.js','random-world-events.js','story-c08-scenarios.js','story-scenario-registry.js','story-actor-art.js'])assert(urls.has(new URL(module,release).href),'new runtime module must be imported from an entry: '+module);
  const runtimeUrls=new Set(urls);
  const auxiliary=report.files.filter(f=>!f.path.endsWith('.html')&&!urls.has(new URL(f.path,release).href));
- for(const f of auxiliary){assert.match(f.path,/^(?:races\/(?:human|elf|goblin|ashen)\/.*\.(?:png|json|md))$/,'unclassified unreachable emitted asset '+f.path);await visit(new URL(f.path,release),'packaged auxiliary inventory');}
+ for(const f of auxiliary){assert.ok(/^(?:races\/(?:human|elf|goblin|ashen)\/.*\.(?:png|json|md))$/.test(f.path)||storyProvenance.has(f.path),'unclassified unreachable emitted asset '+f.path);await visit(new URL(f.path,release),'packaged auxiliary inventory');}
  assert.equal([...urls].filter(u=>new URL(u).pathname.endsWith('/engine.js')).length,1,'single engine URL in both entry graphs');
  assert.deepEqual([...new Set([...urls].map(u=>new URL(u).pathname.slice(release.pathname.length)))].sort(),report.files.filter(f=>!f.path.endsWith('.html')).map(f=>f.path).sort(),'complete actual non-HTML file graph');
  assert.ok([...urls].some(u=>u.endsWith('/engine.js')));assert.ok([...urls].some(u=>u.endsWith('/style.css')));assert.ok([...urls].some(u=>u.endsWith('/manifest.json')));assert.ok([...urls].some(u=>/\.png$/.test(u)));
@@ -90,6 +99,8 @@ try{
  for(const [file,mutate] of [
   ['map-assets/exploration-manifest.json',text=>text.replace('exploration-01.png','missing-exploration.png')],
   ['style.css',text=>text+'\n.broken{background:url(./missing-cache-probe.png)}'],
+  ['npc-portrait-registry.js',text=>text.replace(/npc-portraits\/[^"']+\.png/,'npc-portraits/missing-registered-portrait.png')],
+  ['story-actor-art.js',text=>text.replace('story-assets/high-priest.png','story-assets/missing-story-actor.png')],
   ['races/human/art.js',text=>{assert.match(text,/races\/human\/[^"']+\.png/);return text.replace(/races\/human\/[^"']+\.png/,'races/human/missing-registered-art.png');}]
  ]){const original=await readFile(join(source,file),'utf8');await writeFile(join(source,file),mutate(original));const broken=await buildRelease({source,output});await assert.rejects(()=>probe(output,broken),/missing dependency/);await writeFile(join(source,file),original);}
  const anchorSource='<html><head></head><body><a href="battle-preview.html?scenario=poison#x">preview</a><a href="#help">help</a><a href="https://other.example/">outside</a></body></html>';
@@ -126,5 +137,5 @@ try{
 
  await writeFile(join(actualOutput,'dependency-probe.json'),JSON.stringify({release:actual.release,legacyEntry:legacyScript,packageCheck,kind:'Actual emitted HTML/ESM/CSS and dynamic manifest/image URL graph; filesystem + URL/cache model, not browser cache inspection',...graph},null,2)+'\n');
  console.log(packageCheck);
- console.log(`PASS release cache: ${actual.files.length} files hash-verified; ${graph.urls.length} resource URLs / ${graph.edges.length} dependency edges; old legacy and prior release cache misses; 6 mutation targets; roots/navigation/origin/save key preserved.`);
+ console.log(`PASS release cache: ${actual.files.length} files hash-verified; ${graph.urls.length} resource URLs / ${graph.edges.length} dependency edges; old legacy and prior release cache misses; 6 byte mutations + 5 negative reference mutations; roots/navigation/origin/save key preserved.`);
 }finally{await rm(temp,{recursive:true,force:true});}
