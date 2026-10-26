@@ -28,3 +28,11 @@ Also passed task transaction/engine boundary, current save generation, Ashen cor
 ## Remaining
 
 C07–C10 reviewed script is not yet hosted by this milestone. No war start, seal, ritual, ending, random-war schedule or endgame unlock is silently simulated. C07 declaration is the next separate integration patch. Ring material awards, recipe fabrication and approved probability rules remain owned by the Ring worker.
+
+## C07 opening extension
+
+The next patch hosts five POV-specific first-front scenes: `C07.E01.elf`, `C07.A01.ashen`, `C07.O01.human/dwarf/goblin`. Every route requires C06 recipe completion, authored dialogue/choice and a real current local field victory. Completing the scene atomically emits the validated `WAR_DECLARED` flag and invokes the closed `story.c07.elf-ashen` war transition through `applyStoryWarTransition`. Failed storage rolls back both story and diplomacy. Two additional E/A `C07.X01` scenes require a separate actual A06 attrition encounter. No user-facing flag/stage/war toggle exists.
+
+Dependencies: war foundation `450552b`, `260eb1a`, `7269933`; closed bridge `1487462` (cherry-picked here as `c581506`); war worker owns engine access/save hooks and narrow story-entry admission. The story controller only uses the registered `storyTerritoryAccess` policy for its current-location gate. First-front C07 scenes are in own territory, so no blanket war bypass is needed. This checkout borrowed the pure `war-diplomacy.js` for tests; that file is **not** part of the story commit and must come from the war foundation.
+
+`story-war-opening-tests.mjs` passes real all-five route completion, recipe-before-war, atomic quota rollback, save/reload/replay, active enemy-pair versus neutral access, second E/A attrition, and explicit pending seal/ritual/ending. The combined war engine/App tests remain the final integrator's responsibility. No random war chance/duration or automatic ceasefire was added.

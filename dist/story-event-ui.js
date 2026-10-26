@@ -22,7 +22,7 @@ export function renderStoryEventBoard(s){
    if(a.grant==='ashen-primal-core')content+='<p><small>核心装备背包需有空位。领取、装备与剧情完成一次保存；空间不足不会前进或丢弃原核心。</small></p>';
   }
  }else if(v.available.length){content=v.available.map(d=>`<article class="storySceneOffer"><h4>${esc(d.title)}${d.optional?' · 可选':''}</h4><p>${esc(d.npc)} · ${esc(AREAS[d.siteId]?.name)} · 第${d.chapter}章</p><p>${esc(d.objective)}</p>${button('begin',d.id,'与'+d.npc+'交谈',!d.available)}${!d.atLocation?'<p><small>前往上述地点后交谈；不自动移动。</small></p>':''}</article>`).join('');}
- else content=v.complete?'<p>前六章与归途之环图样已完成。后续章节尚未开放，不会以按钮跳过战争或结局。</p>':'<p>当前没有可开始的主线场景。</p>';
+ else content=v.warOpeningComplete?'<p>战争已开始，开战后的护送与救援结果已保存。族长遇害、封印营救、仪式与结局尚未开放，不会跳过或伪装完成。</p>':v.complete?'<p>前六章与归途之环图样已完成。后续章节尚未开放，不会以按钮跳过战争或结局。</p>':'<p>当前没有可开始的主线场景。</p>';
  return `<section class="panel storyEventBoard" aria-label="主线人物与事件"><h3>主线人物与事件</h3>${content}</section>`;
 }
 export function storyActionFromDataset(data){

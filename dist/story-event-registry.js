@@ -2186,6 +2186,315 @@ export const STORY_SCENES=freeze({
    "E_DRYSPRING_DEFERRED"
   ],
   "optional": false
+ },
+ "C07.E01.elf": {
+  "id": "C07.E01.elf",
+  "sourceScene": "C07.E01",
+  "chapter": 7,
+  "pov": "elf",
+  "siteId": "elf.a05",
+  "title": "出发的命令",
+  "npc": "大祭司与救护队",
+  "lines": [
+   "大祭司：遗物被夺，追索者遭到攻击。烬裔必须付出代价。",
+   "莱姆斯：我们还没有查清最先袭击商队的人。",
+   "大祭司：核心在他们手里。你自己带回的消息。",
+   "莱姆斯：是一个人拿走的。",
+   "大祭司：队伍已经出发。去你该去的位置。"
+  ],
+  "objective": "跟随部队通过首段险路，护住救护队；质疑命令不会取消已发起的战争。",
+  "flags": [
+   "WAR_DECLARED",
+   "E_MARCH_JOINED",
+   "C07_OPENING_COMPLETE"
+  ],
+  "knowledge": [
+   {
+    "id": "C07.E01.elf.k0",
+    "text": "大祭司以遗物被夺为由出兵烬裔；最初袭车者仍未查清。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "protect",
+    "label": "护住救护队，通过首段险路",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C06.RR01.elf"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "victory",
+   "nodeId": "elf.a05.field",
+   "count": 1
+  }
+ },
+ "C07.A01.ashen": {
+  "id": "C07.A01.ashen",
+  "sourceScene": "C07.A01",
+  "chapter": 7,
+  "pov": "ashen",
+  "siteId": "ashen.a05",
+  "title": "哨口的第一夜",
+  "npc": "族长与哨卫",
+  "lines": [
+   "哨卫：他们没有停。前面的路已经封了。",
+   "族长：让守不住的人退回来。别散在外面。",
+   "砾恩：他们是来找我。",
+   "族长：现在冲着我们的路来。你一个人出去，他们就会停？",
+   "砾恩：我去接最后一班。"
+  ],
+  "objective": "守住撤退通道，接回哨卫；不能靠交出核心取消战争。",
+  "flags": [
+   "WAR_DECLARED",
+   "A_FIRST_DEFENSE_DONE",
+   "C07_OPENING_COMPLETE"
+  ],
+  "knowledge": [
+   {
+    "id": "C07.A01.ashen.k0",
+    "text": "精灵部队进攻，前路封锁；族长仍持自己的核心，砾恩的王室遗物未转移。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "protect",
+    "label": "接回最后一班哨卫",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C06.RR01.ashen"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "victory",
+   "nodeId": "ashen.a05.field",
+   "count": 1
+  }
+ },
+ "C07.O01.dwarf": {
+  "id": "C07.O01.dwarf",
+  "sourceScene": "C07.O01",
+  "chapter": 7,
+  "pov": "dwarf",
+  "siteId": "dwarf.a05",
+  "title": "远处的战争",
+  "npc": "矿班长与商路信使",
+  "lines": [
+   "信使：精灵和烬裔打起来了。两边都在收路。",
+   "布洛克：矿里救出来的人先别往外送。",
+   "矿班长：这里也不安全。",
+   "布洛克：我去清后面的道。人挪到能撤的地方，证词带两份。"
+  ],
+  "objective": "保护矿工证人转移，保住炸矿与运输留底。",
+  "flags": [
+   "WAR_DECLARED",
+   "D_WAR_EVACUATION_DONE",
+   "C07_OPENING_COMPLETE"
+  ],
+  "knowledge": [
+   {
+    "id": "C07.O01.dwarf.k0",
+    "text": "信使报告精灵与烬裔开战；货检棚口信链传来莱姆斯救护营的联络地点。",
+    "mode": "heard"
+   }
+  ],
+  "choices": [
+   {
+    "id": "protect",
+    "label": "保护证人，携两份证词转移",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C06.RR01.dwarf"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "victory",
+   "nodeId": "dwarf.a05.field",
+   "count": 1
+  }
+ },
+ "C07.O01.human": {
+  "id": "C07.O01.human",
+  "sourceScene": "C07.O01",
+  "chapter": 7,
+  "pov": "human",
+  "siteId": "human.a05",
+  "title": "远处的战争",
+  "npc": "边境斥候与车夫",
+  "lines": [
+   "边境斥候：军队把商路封了。车夫要硬闯。",
+   "罗什福尔：把他们拦在路口外，不要拦在箭底下。",
+   "车夫：货再拖下去就坏了。",
+   "罗什福尔：我找绕路。你把不能再等的列出来，别把人押在货上。"
+  ],
+  "objective": "救助被战线切断的商旅，分流到当前可进入的安全路。",
+  "flags": [
+   "WAR_DECLARED",
+   "H_WAR_CORRIDOR_DONE",
+   "C07_OPENING_COMPLETE"
+  ],
+  "knowledge": [
+   {
+    "id": "C07.O01.human.k0",
+    "text": "商路被军队封锁；莱姆斯救护队来信说明前线伤员困境，没有提及大祭司隐秘动机。",
+    "mode": "heard"
+   }
+  ],
+  "choices": [
+   {
+    "id": "protect",
+    "label": "分流商旅，先护住路口外的人",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C06.RR01.human"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "victory",
+   "nodeId": "human.a05.field",
+   "count": 1
+  }
+ },
+ "C07.O01.goblin": {
+  "id": "C07.O01.goblin",
+  "sourceScene": "C07.O01",
+  "chapter": 7,
+  "pov": "goblin",
+  "siteId": "goblin.a05",
+  "title": "远处的战争",
+  "npc": "换粮者与家人",
+  "lines": [
+   "换粮者：今天要走，明天这摊就不在了。",
+   "奇克：换去哪？",
+   "换粮者：能活着停车的地方。",
+   "奇克：谁让你来的？",
+   "快长大的那个：你一个人背不完。",
+   "奇克：背不完还能回来。你跑进战线，我上哪儿找？"
+  ],
+  "objective": "护送家人返安全处，再完成这次换粮；奇克不是族群代表。",
+  "flags": [
+   "WAR_DECLARED",
+   "G_WAR_FOOD_RUN_DONE",
+   "C07_OPENING_COMPLETE"
+  ],
+  "knowledge": [
+   {
+    "id": "C07.O01.goblin.k0",
+    "text": "换粮点受战线威胁；已与罗什福尔的人约好交换安全路情报。",
+    "mode": "heard"
+   }
+  ],
+  "choices": [
+   {
+    "id": "protect",
+    "label": "先送家人回去，再走换粮路",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C06.RR01.goblin"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "victory",
+   "nodeId": "goblin.a05.field",
+   "count": 1
+  }
+ },
+ "C07.X01.elf": {
+  "id": "C07.X01.elf",
+  "sourceScene": "C07.X01",
+  "chapter": 7,
+  "pov": "elf",
+  "siteId": "elf.a06",
+  "title": "第二次争夺",
+  "npc": "士兵与传令者",
+  "lines": [
+   "士兵：又是这里？昨天的人还没抬完。",
+   "莱姆斯：先把能动的带到坡后。",
+   "传令者：大祭司要通路。立刻向前。",
+   "莱姆斯：路上躺着自己人。",
+   "传令者：命令没有改。"
+  ],
+  "objective": "再次开辟掩护路线，送走伤员后抵达部队集合点；不跳过持续战事。",
+  "flags": [
+   "E_WAR_ATTRITION_SEEN"
+  ],
+  "knowledge": [
+   {
+    "id": "C07.X01.elf.k0",
+    "text": "同一段通道再次被争夺；大祭司的前进命令未因伤员而改变。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "protect",
+    "label": "先把伤员送到坡后，再抵达集合点",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C07.E01.elf"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "victory",
+   "nodeId": "elf.a06.field",
+   "count": 1
+  }
+ },
+ "C07.X01.ashen": {
+  "id": "C07.X01.ashen",
+  "sourceScene": "C07.X01",
+  "chapter": 7,
+  "pov": "ashen",
+  "siteId": "ashen.a06",
+  "title": "第二次争夺",
+  "npc": "修护者与哨卫",
+  "lines": [
+   "修护者：这里补不住了。",
+   "砾恩：人走，东西别搬。",
+   "哨卫：再退，里面就是族地。",
+   "砾恩：留在这儿，谁也守不了。"
+  ],
+  "objective": "哨墙再度坍塌；清开掩护路线后撤到内线。",
+  "flags": [
+   "A_WAR_ATTRITION_SEEN"
+  ],
+  "knowledge": [
+   {
+    "id": "C07.X01.ashen.k0",
+    "text": "补过的哨墙再度坍塌，守军被迫向族地内线撤退。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "protect",
+    "label": "掩护伤者，撤到内线",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C07.A01.ashen"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "victory",
+   "nodeId": "ashen.a06.field",
+   "count": 1
+  }
  }
 });
 export const STORY_POVS=Object.freeze(["human","dwarf","elf","goblin","ashen"]);
