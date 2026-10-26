@@ -8,6 +8,8 @@ import {craftReturnRing} from './return-ring-crafting.js';
 import {renderNpcEventBoard} from './npc-event-ui.js';
 import {beginNpcEvent,declineNpcEvent,chooseNpcEventResponse} from './npc-events.js';
 import {claimTaskReward} from './task-reward-transaction.js';
+import {bindAssetReleaseNotice} from './asset-recovery.js';
+import {bindSkillPixelErrors} from './skill-pixel-icons.js';
 import {renderHeroChoices} from './hero-selection.js';
 import {SCHEMA_VERSION} from './save-generation.js';
 import {getRacePack,heroName,getSkillTreeDefinition,getSkillMetadata,PLAYABLE_RACES} from './race-registry.js';
@@ -27,7 +29,7 @@ import {POTION_BUFF_KEYS} from './potion-catalog.js';
 import {mountSkillTree} from './skill-tree-ui.js';
 import {draftSkillTreePresetPayload,quoteSkillTreeDraft,prepareSkillTreeDraft} from './skill-tree-state.js';
 import {mountRegion,buildRegionSnapshot} from './adjacent-region.js';
-import {drawAdjacentRegion} from './adjacent-region-map.js';
+import {drawAdjacentRegion,retryAdjacentRegion} from './adjacent-region-map.js';
 import {equipmentBudgetNotice} from './equipment-budget-adapter.js';
 import {quoteEnhancement,enhancementLevel} from './equipment-enhancement.js';
 import {renderFormalEnhancement} from './equipment-enhancement-ui.js';
@@ -70,6 +72,12 @@ bindConsumablePixelErrors(document);
 bindMonsterPortraitErrors(document);
 const $=id=>document.getElementById(id),KEY=SAVE_KEY;let enhancementSlot=null,enhancementItem=null,enhancementQuote=null,enhancementResult=null,enhancementError='',enhancementBusy=false;let workshopItem=null,workshopTemplate=null,workshopQuote=null,workshopResult=null,workshopError='',workshopBusy=false;let sandboxSession=null,sandboxReturn=null,battleBindings=[],selectedCodexMonster=null,sourceFocus=null;let runtimeStorageBlocked=false,s=loaded.game;normalizeMonsterLedger(s);normalizeEquipmentLevels(s);normalizeInventoryState(s);normalizeCodexCollection(s);normalizeTalents(s);normalizeMaterials(s);MultiEngine.normalizeRegionNavigation?.(s);normalizePotions(s);normalizeRecipes(s);syncReturnRingRecipe(s);normalizeAreaProgress(s);normalizeExpedition(s);normalizeHealth(s,s.lastSeen);let e=null,view='world',race=s.race,selected=s.equip.weapon,logs=[],selection=[],nextAt=0,lastStep=0,toastTimer,hitUntil=0,forgeBusy=false,forgeInputs=[],lastForgeResult=null,forgeTimer=null,forgeEpoch=0,forgeTab='fusion',recoveryQuality=0,recoveryQuantities={},recoveryError='',potionRecipeId='potion-healing',potionRecipeQuality=0,potionRecipeMain='',potionRecipeAux='',potionRecipeBatch=1,potionRecipeError='',potionSettingsOpen=false,fusionInputTab='materials',fusionFamily='all',fusionPage=0,selectedRecipe=null,modifySlot=null,modifyId=null,modifyDonorId=null,modifyMode='value',modifyIndex=0,modifyReady=true,modifyResult=null,codexTab='sets',selectedCodexSet='anvil',selectedCodexLegend=LEGENDARY_CODEX[0]?.id,bagSort='quality',bagTab='equipment',bagSlot='weapon',batchSaleActive=false,batchSaleSlot='weapon',batchSaleQualities=[],batchSaleQuote=null,batchSaleError='',batchSalePage=0,batchSaleBusy=false,buyQuantities={},buyLockUntil=0,shopQuote=null,talentRefundMode=false,talentRefundDraft={};const away=offline(s);e=normalizeEncounterElements(s.activeEncounter??null);const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));const raceIcon={human:'sword',dwarf:'forge',elf:'soul',goblin:'merchant',ashen:'fire'};const conditions=[['always','可用即施放'],['low','生命低于60%'],['charge','敌人将重击'],['burn','目标已灼烧']];
 let lastCommittedGameRaw=null;try{lastCommittedGameRaw=localStorage.getItem(KEY);}catch{}
+bindSkillPixelErrors(document);
+bindAssetReleaseNotice(document,{beforeReload:()=>{
+ if(forgeBusy||enhancementBusy||workshopBusy||batchSaleBusy){toast('操作仍在处理中，请完成后再刷新。');return false;}
+ if(!confirm('将刷新到新版本。未确认的技能草稿、锻造选择与当前弹窗会丢失；已保存的游戏进度保留。确定刷新吗？'))return false;
+ save();if($('saveStatus')?.textContent==='请导出备份'){toast('当前保存失败，请先导出备份再刷新。');return false;}return true;
+},onRetry:()=>{livePixel.load({retry:true}).then(()=>{refreshPixelPortraits();syncLiveBattle();});if(view==='world')mapScenes.load('world',{retry:true}).then(()=>{drawVisibleMap();updateMapSceneStatus('world',mapScenes.status('world'));});if(view==='region'&&regionMount)retryAdjacentRegion($('adjacentRegionHost'),{id:regionMount.getUI().viewAreaId});const scene=view==='merchant'?'merchant':view==='forge'&&forgeTab==='fusion'?'forge':null;if(scene)serviceScenes.load(scene,{retry:true}).then(()=>updateServiceSceneStatus(scene,serviceScenes.status(scene)));}});
 const livePixel=createLiveBattlePresentation(),liveEvents=createLiveCombatEvents();
 const serviceScenes=createPixelServiceScenes({onStatus:updateServiceSceneStatus});
 const mapScenes=createPixelMapScenes({onStatus:updateMapSceneStatus});

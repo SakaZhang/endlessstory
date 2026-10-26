@@ -1,3 +1,4 @@
+import {bindRecoverableImages} from './asset-recovery.js';
 import {raceArt} from './race-art.js';
 // Read-only portraits from exact current battle idle assets, never procedural monster fallback.
 import {MONSTER_PIXEL_REGISTRY as registry} from './monster-pixel-registry.js';
@@ -17,13 +18,7 @@ export function renderMonsterPixelPortrait(id,{known=true,follower=false}={}){
  const g=monsterPortraitGeometry(d),name=esc(follower?'随从':MONSTER_CATALOG[id]?.name??'怪物');
  return `<span class="monsterPortrait monsterPixelPortrait" data-monster-pixel="true" data-monster-id="${d.id}" data-monster-sprite="${d.spriteKey}" data-monster-follower="${d.follower}" role="img" aria-label="${name}"><img class="monsterPixelImage" data-monster-pixel-image="true" src="${d.file}" alt="${name}" draggable="false" style="left:${g.left}%;top:${g.top}%;width:${g.width}%;height:${g.height}%"><span class="monsterPixelError" hidden>图像失败</span></span>`;
 }
-export function bindMonsterPortraitErrors(host){
- const identify=img=>img?.dataset?.monsterPixelImage==='true'?img.closest?.('[data-monster-pixel="true"]'):null;
- const update=(event,failed)=>{const img=event.target,wrapper=identify(img);if(!wrapper)return;const message=wrapper.querySelector?.('.monsterPixelError');wrapper.classList.toggle('isImageError',failed);img.hidden=failed;if(message)message.hidden=!failed;if(failed){wrapper.setAttribute('tabindex','0');wrapper.setAttribute('role','button');wrapper.setAttribute('aria-label',(img.alt||'怪物画像')+'：图像载入失败，点击重试');wrapper.setAttribute('title','图像载入失败，点击重试；不执行怪物画像操作');}else{wrapper.removeAttribute('tabindex');wrapper.setAttribute('role','img');wrapper.setAttribute('aria-label',img.alt||'怪物画像');wrapper.removeAttribute('title');}};
- const retry=event=>{if(event.type==='keydown'&&!['Enter',' '].includes(event.key))return;const wrapper=event.target?.closest?.('[data-monster-pixel="true"]');if(!wrapper?.classList?.contains('isImageError'))return;const img=wrapper.querySelector?.('.monsterPixelImage');if(!img)return;event.preventDefault?.();event.stopPropagation?.();const original=img.dataset.monsterOriginalSrc??img.getAttribute('src');img.dataset.monsterOriginalSrc=original;const count=Number(img.dataset.monsterRetry||0)+1;img.dataset.monsterRetry=String(count);img.src=original+(original.includes('?')?'&':'?')+'asset_retry='+count;};
- const error=e=>update(e,true),load=e=>update(e,false);host.addEventListener('error',error,true);host.addEventListener('load',load,true);host.addEventListener('click',retry,true);host.addEventListener('keydown',retry,true);
- return()=>{host.removeEventListener('error',error,true);host.removeEventListener('load',load,true);host.removeEventListener('click',retry,true);host.removeEventListener('keydown',retry,true);};
-}
+export function bindMonsterPortraitErrors(host){return bindRecoverableImages(host,{imageSelector:'.monsterPixelImage',datasetKey:'monsterPixelImage',wrapperSelector:'[data-monster-pixel="true"]',errorSelector:'.monsterPixelError',label:'怪物画像'});}
 
 
 

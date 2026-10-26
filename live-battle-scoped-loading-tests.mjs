@@ -6,7 +6,7 @@ import * as E from './dist/engine.js';
 const base=JSON.parse(fs.readFileSync('dist/battle-assets/manifest.json')),manifest=extendBattleManifest(base);
 const previous={fetch:globalThis.fetch,Image:globalThis.Image};let requested=[],active=0,peak=0,fail=null,waiters=[],hold=false;
 globalThis.fetch=async()=>({ok:true,json:async()=>base});
-globalThis.Image=class {async decode(){requested.push(this.src);active++;peak=Math.max(peak,active);try{if(hold)await new Promise(resolve=>waiters.push(resolve));else await Promise.resolve();if(this.src===fail)throw Error('test missing');}finally{active--;}}};
+globalThis.Image=class {async decode(){requested.push(this.src);active++;peak=Math.max(peak,active);try{if(hold)await new Promise(resolve=>waiters.push(resolve));else await Promise.resolve();if(this.src.split('?')[0]===fail)throw Error('test missing');}finally{active--;}}};
 const expected=(s,e)=>{
  const hero=manifest.raceHeroWeaponSprites[s.race]?.[liveHeroWeaponType(s)]??manifest.raceHeroSprites[s.race]??({axe:'dwarf',hammer:'dwarf-hammer'})[liveHeroWeaponType(s)]??'hero-neutral';
  const spriteIds=[hero,...(e?.enemies??[]).map(u=>liveActorSprite(u,manifest))];
