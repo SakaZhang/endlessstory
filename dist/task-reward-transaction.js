@@ -25,6 +25,7 @@ export function createTaskRewardService(registry=TASK_REWARD_REGISTRY){
  }])));
  return function claimTaskReward(storage,game,id,{now=Date.now()}={}){
   if(!idValid(id)||!Object.hasOwn(definitions,id))return failure(game,'not-available');
+  if(!Number.isFinite(now)||now<0||now>1e15)return failure(game,'invalid-clock');
   if(!validTaskRewardState(game)||!validSave(game)||game.developmentEquipmentSandbox===true)return failure(game,'invalid-state');
   if(game.taskRewardClaims?.includes(id))return failure(game,'already-claimed');
   // Reject an already stale snapshot at submission. This synchronous localStorage

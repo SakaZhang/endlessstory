@@ -41,6 +41,9 @@ s=E.fresh();f=fixture(s,{eligible:state=>{state.gold=0;return state.level>=2;}})
 for(const ledger of [null,{},['x','x'],[''],[1]]){s=E.fresh();s.taskRewardClaims=ledger;assert(!validTaskRewardState(s));f=fixture(s);assert.equal(f.claim(f.storage,s,'test.claim').reason,'invalid-state');assert.equal(f.storage.writes,0);}
 for(const options of [{costs:[{key:'unknown|0',quantity:1}]},{rewards:[{kind:'material',key:'铁屑|0',quantity:-1}]},{rewards:[{kind:'equipment',item:{id:'bad'}}]}]){s=E.fresh();f=fixture(s,options);before=clone(s);raw=f.storage.getItem(SAVE_KEY);assert(!f.claim(f.storage,s,'test.claim').ok);unchanged(s,f.storage,before,raw);}
 const gem=Object.keys(E.MATERIALS).find(k=>E.MATERIALS[k].uniqueHeld);assert(gem);s=E.fresh();f=fixture(s,{rewards:[{kind:'material',key:E.materialKey(gem,3)},{kind:'material',key:E.materialKey(gem,3)}]});assert.equal(f.claim(f.storage,s,'test.claim').reason,'unique-held');assert.equal(f.storage.writes,0);
+// The storage helper stamps lastSeen after operation validation; bound it here.
+for(const now of [NaN,Infinity,-1,1e16]){s=E.fresh();f=fixture(s);before=clone(s);raw=f.storage.getItem(SAVE_KEY);assert.equal(f.claim(f.storage,s,'test.claim',{now}).reason,'invalid-clock');unchanged(s,f.storage,before,raw);assert.equal(f.storage.writes,0);}
+s=E.fresh();f=fixture(s);result=f.claim(f.storage,s,'test.claim',{now:1e15});assert(result.ok);assert(E.validSave(result.game));
 // Present current states remain valid without any migration or added ledger.
 assert(validTaskRewardState(E.fresh()));assert(E.validSave(E.fresh()));
 console.log('PASS task reward service: empty production registry, real current save/reload, full-bag retry, aggregate costs, atomic batch rewards/completion, forge independence, filters, fixed outputs, save rollback, idempotency, current-stock and gem checks. No quest content or UI enabled.');
