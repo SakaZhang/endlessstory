@@ -19,10 +19,10 @@ export function advanceRandomWorldEvents(s,now=Date.now()){
  if(!clock(now)||now>1e15-RANDOM_WAR_RULES.checkIntervalMs||!validWorldEventState(s)||!validDiplomacy(s)||s.developmentEquipmentSandbox)return null;
  const prior=s.worldEvents,reference=Math.max(prior?.lastProcessedAt??0,s.lastSeen??0,s.lastHealthClock??0);
  if(now<reference){s.worldEvents??=initialState(s,reference);const result=settleRandomWars(s,now,{clockRollback:true});return {ok:true,changed:!prior||result.changed,declared:[],ended:result.ended,checks:0,clockRollback:true};}
- s.worldEvents??=initialState(s,now);const w=s.worldEvents,r=RANDOM_WAR_RULES,from=Math.max(w.lastProcessedAt,s.lastSeen??0,s.lastHealthClock??0),horizon=Math.min(now,from+r.maxOfflineMs),declared=[],ended=[];let checks=0;
- // Skip unobserved time before the actual retained save/reward window in O(1).
- if(w.nextWarCheckAt<from)w.nextWarCheckAt+=Math.ceil((from-w.nextWarCheckAt)/r.checkIntervalMs)*r.checkIntervalMs;
- while(w.nextWarCheckAt<=horizon&&checks<r.maxOfflineChecks){
+ s.worldEvents??=initialState(s,now);const w=s.worldEvents,r=RANDOM_WAR_RULES,from=w.lastProcessedAt,declared=[],ended=[];let checks=0;
+ // Only the scheduler's persisted checkpoint owns world time. An autosave or
+ // health tick just after a deadline must not erase an unprocessed event.
+ while(w.nextWarCheckAt<=now&&checks<r.maxOfflineChecks){
   const at=w.nextWarCheckAt;w.nextWarCheckAt+=r.checkIntervalMs;checks++;ended.push(...settleRandomWars(s,at).ended);
   const wars=s.diplomacy?.wars??[],activeRandom=wars.some(x=>warKind(x)==='random'&&warActiveAt(x,at)),justEnded=wars.some(x=>warKind(x)==='random'&&x.status==='ended'&&x.endedAt===at);
   if(activeRandom||justEnded)continue;
@@ -32,6 +32,7 @@ export function advanceRandomWorldEvents(s,now=Date.now()){
   const out=applyWarStart(s,{id,races:pair,kind:'random',durationMs},at);if(out?.changed)declared.push({id,races:pair,startedAt:at,expiresAt:at+durationMs});
  }
  ended.push(...settleRandomWars(s,now).ended);w.lastProcessedAt=now;
+ const skippedMs=w.nextWarCheckAt<=now?Math.max(0,now-(w.nextWarCheckAt-r.checkIntervalMs)):0;
  if(w.nextWarCheckAt<=now)w.nextWarCheckAt=now+r.checkIntervalMs;
- return {ok:true,changed:true,declared,ended:[...new Set(ended)],checks,clockRollback:false,skippedMs:Math.max(0,now-horizon)};
+ return {ok:true,changed:true,declared,ended:[...new Set(ended)],checks,clockRollback:false,skippedMs};
 }

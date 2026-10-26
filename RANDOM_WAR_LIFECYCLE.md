@@ -18,7 +18,7 @@ An admitted battle, including a paused one, is preserved. If its territory remai
 
 ## Online/offline timeline
 
-Resume processes the same independent schedule within the existing first-four-hour offline reward window, at most 24 checks. It does not draw for months or years of absence. Expired incidents from that window are summarized rather than appearing as new login-time locks. The scheduler skips unprocessed time beyond the cap and schedules the next eligible check ten minutes after return.
+Resume processes the same independent schedule from its own oldest pending checkpoint, at most 24 ten-minute checks (four hours of checks). Autosave/pagehide/health timestamps cannot erase a pending checkpoint just because their timestamp passed its deadline. It does not draw for months or years of absence. Expired incidents from that window are summarized rather than appearing as new login-time locks. The scheduler skips unprocessed time beyond the cap and schedules the next eligible check ten minutes after return.
 
 Timestamped random intervals remain available while the real combat router replays that window; only afterwards are ended random records older than four hours pruned. `prunedTransitions` preserves the ledger revision invariant without retaining every historical event. Story records are retained. This preserves both bounded save size and the evidence needed to deny farming during an earlier part of the replay, even if the war is over when the player returns.
 
@@ -33,3 +33,5 @@ The story worker owns actual later C07/C08 scene/encounter content; this bridge 
 - `random-war-world-tests.mjs`: strict duration/import validation; five-player identity matrix; kind separation and story supersession; independent RNG; online/offline world-history equality; <=24 checks after years away; expiry on exact entry boundary; paused battle preservation; zero-grace rollback; exact-end gap; storage retry; real combat online/offline parity.
 - `random-war-app-ui-tests.cjs`: actual App declaration tick, deterministic quota retry, same-instant replay, ordinary entry rejection, visibility resume expiry and summary, newer-save protection. This is a DOM event fixture, not full browser visual QA.
 - Existing NPC App and asset-recovery App suites also passed after scheduler wiring. Final combined C08 and aggregate results are reported separately; no publication is performed by this worker.
+
+The actual-App regression also forces autosave at checkpoint +1ms before the 250ms world tick, then verifies quota retry still declares at the original checkpoint. A corresponding hidden-resume engine test preserves both due checks across newer save/health timestamps.

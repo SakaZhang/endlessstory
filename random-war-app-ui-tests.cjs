@@ -6,7 +6,7 @@ const click=(dataset={},id='')=>{const b={dataset,id};for(const fn of events.cli
 (async()=>{
  ({SAVE_KEY}=await import('./dist/save-generation.js'));const E=await import('./dist/engine.js'),originalNow=Date.now;Date.now=()=>now;
  const start=1_800_000_000_000;now=start;let game=E.fresh('human');game.lastSeen=start;E.normalizeHealth(game,start);E.normalizeExpedition(game);game.worldEvents={version:1,lastProcessedAt:start,nextWarCheckAt:start+600000,rngState:1,serial:0};store.set(SAVE_KEY,JSON.stringify(game));await refresh('random-world-start');
- const before=store.get(SAVE_KEY);now=start+600000;failWrite=true;for(const t of intervals.filter(x=>x.ms===250))t.fn();failWrite=false;assert.equal(store.get(SAVE_KEY),before,'quota failure keeps complete seed/schedule/save');
+ now=start+600001;periodic();assert.equal(saved().lastSeen,start+600001,'autosave may run before world tick');const before=store.get(SAVE_KEY);failWrite=true;for(const t of intervals.filter(x=>x.ms===250))t.fn();failWrite=false;assert.equal(store.get(SAVE_KEY),before,'quota failure keeps complete seed/schedule/save');
  for(const t of intervals.filter(x=>x.ms===250))t.fn();let war=saved().diplomacy.wars.find(w=>w.kind==='random');assert(war);assert.equal(war.startedAt,start+600000);assert.deepEqual(war.races,['dwarf','human']);assert(el('toast').textContent.includes('最多持续1小时'));assert(E.validSave(saved()));
  const exact=JSON.stringify(war);for(const t of intervals.filter(x=>x.ms===250))t.fn();assert.equal(JSON.stringify(saved().diplomacy.wars.find(w=>w.kind==='random')),exact,'same instant never re-rolls');
  click({race:'dwarf'});assert.equal(E.startInstanceEncounter(saved(),'dwarf.a01.field',now+1),null);
