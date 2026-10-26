@@ -33,7 +33,7 @@ for size in (96,192):
  manifest['characters']['dwarf.brock']['assets'][str(size)]={'file':'hero-portraits/'+filename if size==96 else 'art/brock-redesign/horned-bust-192.png','size':[size,size],'contentPadding':padding,'sourceScale':content/745,'sha256':hashlib.sha256(blob).hexdigest(),**bounds}
 outputs['art/brock-redesign/portrait-manifest.json']=(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n').encode()
 runtime={'version':1,'characters':{'dwarf.brock':{'name':'布洛克','race':'dwarf','facing':'right','usage':'dialogue/head portrait only; retain existing full-body selection/HUD/equipment assets','assets':{'96':manifest['characters']['dwarf.brock']['assets']['96']}}}}
-outputs['dist/hero-portraits/manifest.json']=(json.dumps(runtime,ensure_ascii=False,indent=2)+'\n').encode()
+outputs['dist/hero-portraits/manifest.js']=('// Generated approved bust metadata; consumed by story-cast-registry.js.\nexport const HERO_PORTRAIT_ASSETS=Object.freeze('+json.dumps(runtime,ensure_ascii=False,indent=2)+');\n').encode()
 if '--check' in sys.argv:
  for name,blob in outputs.items():assert (root/name).read_bytes()==blob, name+' is stale'
  print('PASS exact mechanical bust crop/NN export, original alpha retained, 96/192 edge margins, provenance and hashes.')

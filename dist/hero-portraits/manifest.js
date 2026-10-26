@@ -1,4 +1,5 @@
-{
+// Generated approved bust metadata; consumed by story-cast-registry.js.
+export const HERO_PORTRAIT_ASSETS=Object.freeze({
   "version": 1,
   "characters": {
     "dwarf.brock": {
@@ -32,4 +33,4 @@
       }
     }
   }
-}
+});

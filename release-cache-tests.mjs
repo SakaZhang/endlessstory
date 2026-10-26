@@ -38,6 +38,10 @@ async function probe(output,report){
    assert.equal(Object.keys(CHIK_FAMILY_CHARACTERS).length,3);
    for(const descriptor of Object.values(CHIK_FAMILY_CHARACTERS))await visit(new URL(descriptor.file,release),url.href);
   }
+  if(path==='hero-portraits/manifest.js'){
+   const {HERO_PORTRAIT_ASSETS}=await import(pathToFileURL(join(emittedRoot,path)));
+   for(const actor of Object.values(HERO_PORTRAIT_ASSETS.characters))for(const descriptor of Object.values(actor.assets))await visit(new URL(descriptor.file,release),url.href);
+  }
   if(path==='story-cast-registry.js'){
    const {STORY_CAST_CHARACTERS}=await import(pathToFileURL(join(emittedRoot,path)));
    for(const descriptor of Object.values(STORY_CAST_CHARACTERS)){
@@ -79,7 +83,7 @@ async function probe(output,report){
  // Package intentionally retains provenance JSON and unused source art. Keep those
  // as explicit inventory roots, separate from the verified runtime dependency graph.
  for(const actor of Object.values(STORY_ACTOR_ART))assert(urls.has(new URL(actor.file,release).href),'story actor must be reached through actual production battle manifest: '+actor.file);
- for(const module of ['chik-family-registry.js','chik-family-ui.js','story-cast-registry.js','story-cast-ui.js','story-portrait-crops.js','npc-portraits.js','npc-portrait-registry.js','random-world-events.js','story-c08-scenarios.js','story-scenario-registry.js','story-actor-art.js'])assert(urls.has(new URL(module,release).href),'new runtime module must be imported from an entry: '+module);
+ for(const module of ['hero-portraits/manifest.js','chik-family-registry.js','chik-family-ui.js','story-cast-registry.js','story-cast-ui.js','story-portrait-crops.js','npc-portraits.js','npc-portrait-registry.js','random-world-events.js','story-c08-scenarios.js','story-scenario-registry.js','story-actor-art.js'])assert(urls.has(new URL(module,release).href),'new runtime module must be imported from an entry: '+module);
  const runtimeUrls=new Set(urls);
  const auxiliary=report.files.filter(f=>!f.path.endsWith('.html')&&!urls.has(new URL(f.path,release).href));
  for(const f of auxiliary){assert.ok(/^(?:races\/(?:human|elf|goblin|ashen)\/.*\.(?:png|json|md))$/.test(f.path)||storyProvenance.has(f.path),'unclassified unreachable emitted asset '+f.path);await visit(new URL(f.path,release),'packaged auxiliary inventory');}
@@ -113,6 +117,7 @@ try{
   ['style.css',text=>text+'\n.broken{background:url(./missing-cache-probe.png)}'],
   ['npc-portrait-registry.js',text=>text.replace(/npc-portraits\/[^"']+\.png/,'npc-portraits/missing-registered-portrait.png')],
   ['chik-family-registry.js',text=>text.replace('story-family-portraits/family.goblin.kalo.png','story-family-portraits/missing-family-portrait.png')],
+  ['hero-portraits/manifest.js',text=>text.replace('hero-portraits/brock-96.png','hero-portraits/missing-brock-portrait.png')],
   ['story-cast-registry.js',text=>text.replace('story-portraits/ashen-chief.png','story-portraits/missing-story-cast.png')],
   ['story-actor-art.js',text=>text.replace('story-assets/high-priest.png','story-assets/missing-story-actor.png')],
   ['races/human/art.js',text=>{assert.match(text,/races\/human\/[^"']+\.png/);return text.replace(/races\/human\/[^"']+\.png/,'races/human/missing-registered-art.png');}]

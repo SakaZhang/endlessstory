@@ -4,7 +4,7 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {createRequire} from 'node:module';
 import {STORY_SCENES} from './dist/story-event-registry.js';
-import {STORY_CAST_CHARACTERS,storyCastSpeaker,storyCastDisplayLine,storyCastDisplayLabel,knownStoryEvidenceCast} from './dist/story-cast-registry.js';
+import {STORY_CAST_CHARACTERS,storyHeroDescriptor,storyCastSpeaker,storyCastDisplayLine,storyCastDisplayLabel,knownStoryEvidenceCast} from './dist/story-cast-registry.js';
 import {renderStoryDialogue,renderKnownStoryEvidence,renderStoryCastPortrait} from './dist/story-cast-ui.js';
 import {renderStoryKnowledge} from './dist/story-event-ui.js';
 import {NPC_PORTRAIT_REGISTRY} from './dist/npc-portrait-registry.js';
@@ -16,6 +16,7 @@ execFileSync(process.execPath,['tools/sync-story-portrait-crops.mjs','--check'])
 const manifest=JSON.parse(fs.readFileSync('main-cast-source-manifest.json'));assert.equal(manifest.entries.length,6);
 for(const entry of manifest.entries){assert.equal(typeof entry.prompt,'string');for(const key of ['source','source192',entry.designOnly?'designPreview':'runtime']){const item=entry[key],bytes=fs.readFileSync(item.path);assert.equal(sha(bytes),item.sha256);const im=await loadImage(item.path);assert.deepEqual([im.width,im.height],item.size);if(key==='source192')assert.deepEqual(item.size,[192,192]);if(key==='runtime'||key==='designPreview')assert.deepEqual(item.size,[96,96]);}}
 for(const c of Object.values(STORY_CAST_CHARACTERS)){if(c.designOnly){assert.equal(c.file,null);assert(!fs.existsSync('dist/story-portraits/current-dwarf-king.png'));}else assert(fs.existsSync('dist/'+c.file));if(c.regionalNpcId)assert.equal(c.file,NPC_PORTRAIT_REGISTRY[c.regionalNpcId].file);}
+assert.equal(storyHeroDescriptor('goblin').role,'盗贼');assert.equal(storyHeroDescriptor('ashen').role,'矿石行者');assert.equal(storyHeroDescriptor('dwarf').file,'hero-portraits/brock-96.png');assert.equal(storyHeroDescriptor('dwarf').portraitCrop,undefined);
 const counts={};let lines=0,narration=0;
 for(const scene of Object.values(STORY_SCENES))for(const line of scene.lines){
  lines++;const actor=storyCastSpeaker(scene,line),html=renderStoryDialogue(scene,line);assert(!html.includes('current-dwarf-king'));assert(!html.includes('dwarf-minister'));if(line.startsWith('[')){narration++;assert.equal(actor,null);assert(!html.includes('data-story-speaker'));}

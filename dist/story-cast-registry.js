@@ -1,3 +1,4 @@
+import {HERO_PORTRAIT_ASSETS} from './hero-portraits/manifest.js';
 // Presentation identities only. Do not serialize this catalogue into story state.
 // Canon scene/speaker labels, flags, choices and rewards stay in their existing registry.
 import {STORY_SCENES} from './story-event-registry.js';
@@ -21,9 +22,10 @@ export const STORY_CAST_CHARACTERS=freeze({
  'royal-guard':portrait('royal-guard','科霖','轮值盾卫 · 王室守军','dwarf','npc-portraits/npc.dwarf.kelin.png',{regionalNpcId:'npc.dwarf.kelin'}),
  'ashen-sentry':portrait('ashen-sentry','璞承','石道护行者 · 哨卫','ashen','npc-portraits/npc.ashen.pucheng.png',{regionalNpcId:'npc.ashen.pucheng'})
 });
-const HEROES=freeze({human:{name:'罗什福尔',role:'人族骑士'},dwarf:{name:'布洛克',role:'矮人战士'},elf:{name:'莱姆斯',role:'年轻祭司'},goblin:{name:'奇克',role:'哥布林旅人'},ashen:{name:'砾恩',role:'烬裔旅人'}});
+const HEROES=freeze(Object.fromEntries(['human','dwarf','elf','goblin','ashen'].map(race=>{const pack=getRacePack(race);return [race,{name:pack.heroName,role:pack.heroTitle}];})));
 export function storyHeroDescriptor(race){
  const h=HEROES[race];if(!h)return null;
+ if(race==='dwarf')return portrait('hero.dwarf',h.name,h.role,race,HERO_PORTRAIT_ASSETS.characters['dwarf.brock'].assets['96'].file,{nativeBodyFrame:DWARF_STORY_PORTRAIT_FRAME.file});
  const pack=getRacePack(race),weapon=pack.weapons[0],sprite=(pack.art?.heroWeapons??pack.art?.hero)?.[weapon],idle=sprite?.animations?.idle?.[0],frame=sprite?.frames?.find((f,i)=>f.id===idle||i===idle);
  const box=race==='dwarf'?DWARF_STORY_PORTRAIT_FRAME.bodyBounds:frame.solidBBox??frame.alphaBBox;
  const body=HERO_BODY_REFERENCE_BOUNDS[race]?.[weapon]??[box[1],box[3]],size=Math.round(Math.max(42,Math.min(96,(body[1]-body[0]+1)*.7))),center=race==='dwarf'?DWARF_STORY_PORTRAIT_FRAME.centerX:sprite.anchor[0];

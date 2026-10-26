@@ -4,7 +4,7 @@ import {createHash} from 'node:crypto';
 import {createRequire} from 'node:module';
 import {execFileSync} from 'node:child_process';
 const {createCanvas,loadImage}=createRequire(import.meta.url)('@napi-rs/canvas');
-const manifest=JSON.parse(fs.readFileSync('dist/hero-portraits/manifest.json'));
+const {HERO_PORTRAIT_ASSETS:manifest}=await import('./dist/hero-portraits/manifest.js');
 const provenance=JSON.parse(fs.readFileSync('art/brock-redesign/portrait-manifest.json'));
 const row=provenance.characters['dwarf.brock'],hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 assert.deepEqual(Object.keys(manifest.characters['dwarf.brock'].assets),['96'],'only the consumed 96px asset is in runtime');assert.deepEqual(manifest.characters['dwarf.brock'].assets['96'],row.assets['96']);
