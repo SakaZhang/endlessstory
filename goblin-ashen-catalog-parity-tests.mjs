@@ -4,6 +4,9 @@ import {createHash} from 'node:crypto';
 import {createRequire} from 'node:module';
 import * as goblin from './dist/races/goblin/equipment.js';
 import * as ashen from './dist/races/ashen/equipment.js';
+import {ASHEN_STORY_CORE_ID,ASHEN_STORY_CORE_QUESTS,grantAshenStoryCore} from './dist/races/ashen/story-core.js';
+import {reachStoryScene} from './story-event-test-fixture.mjs';
+import {finishStoryScene} from './dist/story-event-controller.js';
 import {listEquipmentTemplates,selectEquipmentTemplate,validateEquipmentTemplates} from './dist/equipment-templates.js';
 import {fusionOriginTemplates} from './dist/fusion-origin.js';
 import {equipmentRasterSource} from './dist/equipment-raster-art.js';
@@ -15,7 +18,16 @@ const baseline=JSON.parse(fs.readFileSync(new URL('./fixtures/goblin-ashen-equip
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 const slots=['weapon','helm','armor','gloves','boots','ring','amulet'];
 assert(validateEquipmentTemplates());
-for(const [path,digest] of Object.entries(baseline.preservedFiles))assert.equal(hash(fs.readFileSync(path)),digest,`untouched ${path}`);
+// This equipment-only milestone predates the authorized C05 story grant.
+// Reconcile exactly that behavioral seam; every other preserved-file hash and
+// all legacy equipment/legendary identity assertions below remain unchanged.
+for(const [path,digest] of Object.entries(baseline.preservedFiles))if(path!=='dist/races/ashen/story-core.js')assert.equal(hash(fs.readFileSync(path)),digest,`untouched ${path}`);
+assert(Object.hasOwn(baseline.preservedFiles,'dist/races/ashen/story-core.js'));
+assert.equal(ASHEN_STORY_CORE_ID,'ashen-primal-core');assert(Object.isFrozen(ASHEN_STORY_CORE_QUESTS));assert.deepEqual(ASHEN_STORY_CORE_QUESTS,['C05.EA02.ashen']);
+for(const race of ['human','dwarf','elf','goblin','ashen']){const s=fresh(race),before=JSON.stringify(s);assert.equal(grantAshenStoryCore(s,{questId:'C05.EA02.ashen'}).ok,false);assert.equal(grantAshenStoryCore(s,{questId:'invented'}).ok,false);assert.equal(JSON.stringify(s),before);}
+const storyCoreSave=reachStoryScene('ashen','C05.EA02.ashen'),storyBefore=JSON.stringify(storyCoreSave),coreReceipt=grantAshenStoryCore(storyCoreSave,{questId:'C05.EA02.ashen'});
+assert(coreReceipt.ok);assert.equal(coreReceipt.legendaryId,'ashen-primal-core');assert.equal(coreReceipt.level,storyCoreSave.story.acceptedLevels['C05.EA01.ashen']);assert.equal(JSON.stringify(storyCoreSave),storyBefore,'guarded receipt is not a free inventory grant');
+assert(finishStoryScene(storyCoreSave,'C05.EA02.ashen'));const storyCores=storyCoreSave.inventory.filter(i=>i.legendaryId==='ashen-primal-core');assert.equal(storyCores.length,1);assert.equal(storyCoreSave.equip.core,storyCores[0].id);assert.equal(storyCores[0].affixes.length,0);assert.equal(storyCores[0].exclusive.id,ashen.legendaries.find(i=>i.id==='ashen-primal-core').exclusiveId);assert(storyCoreSave.taskRewardClaims.includes('story.ashen-primal-core'));assert.equal(finishStoryScene(storyCoreSave,'C05.EA02.ashen'),false);assert.equal(grantAshenStoryCore(storyCoreSave,{questId:'C05.EA02.ashen'}).reason,'already-granted');
 const added=[];
 for(const [race,pack] of Object.entries({goblin,ashen})){
  const old=baseline.races[race];
