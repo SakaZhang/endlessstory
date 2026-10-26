@@ -18,251 +18,259 @@
         176
       ],
       "facing": "right",
-      "uniformSourceScale": 0.24,
+      "uniformSourceScale": 0.1724137931034483,
       "frames": [
         {
           "id": "idle-0",
           "file": "sprites/dwarf-idle-0.png",
           "sourceCrop": [
-            0,
-            0,
-            548,
-            460
+            22,
+            37,
+            437,
+            406
           ],
           "sourceAnchor": [
-            212,
-            445
+            172,
+            403
           ],
           "alphaBBox": [
-            52,
-            75,
-            177,
-            178
+            70,
+            113,
+            141,
+            176
           ],
           "durationMs": 120,
           "solidBBox": [
             70,
-            116,
-            162,
+            113,
+            140,
             175
-          ]
+          ],
+          "sourceScale": 0.1724137931034483
         },
         {
           "id": "idle-1",
           "file": "sprites/dwarf-idle-1.png",
           "sourceCrop": [
-            548,
-            0,
-            935,
-            460
+            436,
+            44,
+            845,
+            407
           ],
           "sourceAnchor": [
-            666,
-            445
+            583,
+            404
           ],
           "alphaBBox": [
-            68,
-            74,
-            161,
-            177
+            71,
+            114,
+            140,
+            176
           ],
           "durationMs": 120,
           "solidBBox": [
-            70,
-            115,
-            158,
+            71,
+            114,
+            140,
             175
-          ]
+          ],
+          "sourceScale": 0.1724137931034483
         },
         {
           "id": "anticipation",
           "file": "sprites/dwarf-anticipation.png",
           "sourceCrop": [
-            935,
-            0,
-            1335,
-            460
+            844,
+            31,
+            1172,
+            407
           ],
           "sourceAnchor": [
-            1120,
-            445
+            1011,
+            404
           ],
           "alphaBBox": [
-            52,
-            81,
-            147,
-            179
+            67,
+            112,
+            123,
+            176
           ],
           "durationMs": 120,
           "solidBBox": [
-            53,
-            114,
-            123,
+            68,
+            112,
+            122,
             175
-          ]
+          ],
+          "sourceScale": 0.1724137931034483
         },
         {
           "id": "windup",
           "file": "sprites/dwarf-windup.png",
           "sourceCrop": [
-            1335,
-            0,
-            1774,
-            460
+            26,
+            407,
+            345,
+            831
           ],
           "sourceAnchor": [
-            1560,
-            445
+            185,
+            829
           ],
           "alphaBBox": [
-            42,
-            74,
-            146,
-            177
+            69,
+            103,
+            123,
+            175
           ],
           "durationMs": 120,
           "solidBBox": [
-            65,
-            91,
-            123,
+            69,
+            104,
+            122,
             175
-          ]
+          ],
+          "sourceScale": 0.1724137931034483
         },
         {
           "id": "strike",
           "file": "sprites/dwarf-strike.png",
           "sourceCrop": [
-            0,
-            460,
-            548,
-            887
+            393,
+            500,
+            891,
+            831
           ],
           "sourceAnchor": [
-            212,
-            833
+            560,
+            829
           ],
           "alphaBBox": [
-            45,
-            86,
-            177,
-            184
+            67,
+            119,
+            152,
+            175
           ],
           "durationMs": 90,
           "solidBBox": [
-            65,
-            117,
-            177,
+            68,
+            120,
+            152,
             175
-          ]
+          ],
+          "sourceScale": 0.1724137931034483
         },
         {
           "id": "followthrough",
           "file": "sprites/dwarf-followthrough.png",
           "sourceCrop": [
-            548,
-            460,
-            945,
-            887
+            818,
+            539,
+            1254,
+            842
           ],
           "sourceAnchor": [
-            666,
+            966,
             833
           ],
           "alphaBBox": [
-            68,
-            91,
-            163,
-            180
+            70,
+            125,
+            145,
+            177
           ],
           "durationMs": 120,
           "solidBBox": [
-            68,
-            118,
-            162,
-            177
-          ]
+            71,
+            126,
+            144,
+            176
+          ],
+          "sourceScale": 0.1724137931034483
         },
         {
           "id": "recovery",
           "file": "sprites/dwarf-recovery.png",
           "sourceCrop": [
-            945,
-            460,
-            1380,
-            887
+            17,
+            849,
+            436,
+            1226
           ],
           "sourceAnchor": [
-            1088,
-            833
+            171,
+            1224
           ],
           "alphaBBox": [
-            62,
-            86,
-            166,
-            183
+            69,
+            111,
+            141,
+            175
           ],
           "durationMs": 120,
           "solidBBox": [
             70,
-            117,
-            155,
+            112,
+            140,
             175
-          ]
+          ],
+          "sourceScale": 0.1724137931034483
         },
         {
           "id": "hurt",
           "file": "sprites/dwarf-hurt.png",
           "sourceCrop": [
-            1380,
-            460,
-            1774,
-            887
+            443,
+            860,
+            835,
+            1225
           ],
           "sourceAnchor": [
-            1550,
-            833
+            596,
+            1222
           ],
           "alphaBBox": [
-            55,
-            92,
-            150,
-            184
+            70,
+            114,
+            136,
+            176
           ],
           "durationMs": 120,
           "solidBBox": [
-            59,
-            113,
-            140,
+            70,
+            114,
+            136,
             175
-          ]
+          ],
+          "sourceScale": 0.1724137931034483
         },
         {
           "id": "death",
           "file": "sprites/dwarf-death.png",
           "sourceCrop": [
-            450,
-            300,
-            1400,
-            710
+            798,
+            1031,
+            1252,
+            1245
           ],
           "sourceAnchor": [
-            900,
-            640
+            983,
+            1209
           ],
-          "uniformSourceScale": 0.12,
           "durationMs": 650,
           "alphaBBox": [
-            49,
+            64,
+            145,
             141,
-            148,
-            179
+            181
           ],
           "solidBBox": [
-            49,
+            65,
+            146,
             141,
-            148,
-            179
-          ]
+            181
+          ],
+          "sourceScale": 0.1724137931034483
         }
       ],
       "animations": {
@@ -285,12 +293,24 @@
           "death"
         ]
       },
-      "headY": 116,
+      "headY": 113,
       "healthBarAnchor": [
         96,
-        107
+        104
       ],
-      "weaponFamily": "axe"
+      "weaponFamily": "axe",
+      "sourceAtlas": "brock-redesign-horned-axe-atlas",
+      "bodyReferenceBounds": [
+        116,
+        175
+      ],
+      "portraitCrop": [
+        68,
+        110,
+        126,
+        158
+      ],
+      "portraitCropFormat": "left,top,right,bottom exclusive"
     },
     "lizard": {
       "frameSize": [
@@ -1212,223 +1232,231 @@
         176
       ],
       "facing": "right",
-      "uniformSourceScale": 0.24,
+      "uniformSourceScale": 0.17307692307692307,
       "frames": [
         {
           "id": "idle",
           "file": "sprites/dwarf-hammer-idle.png",
           "sourceCrop": [
-            0,
-            0,
-            520,
-            510
+            19,
+            23,
+            428,
+            407
           ],
           "sourceAnchor": [
-            210,
-            452
+            171,
+            405
           ],
           "durationMs": 160,
           "alphaBBox": [
-            56,
-            81,
-            171,
-            190
+            70,
+            110,
+            139,
+            175
           ],
           "solidBBox": [
-            69,
-            114,
-            161,
-            176
-          ]
+            70,
+            110,
+            139,
+            175
+          ],
+          "sourceScale": 0.17307692307692307
         },
         {
           "id": "anticipation",
           "file": "sprites/dwarf-hammer-anticipation.png",
           "sourceCrop": [
-            520,
-            0,
-            950,
-            510
+            851,
+            32,
+            1175,
+            409
           ],
           "sourceAnchor": [
-            740,
-            452
+            1013,
+            407
           ],
           "durationMs": 160,
           "alphaBBox": [
-            43,
-            73,
-            146,
-            187
+            68,
+            111,
+            123,
+            175
           ],
           "solidBBox": [
-            54,
-            115,
-            126,
-            176
-          ]
+            68,
+            111,
+            123,
+            175
+          ],
+          "sourceScale": 0.17307692307692307
         },
         {
           "id": "windup",
           "file": "sprites/dwarf-hammer-windup.png",
           "sourceCrop": [
-            950,
-            0,
-            1300,
-            510
+            27,
+            406,
+            344,
+            834
           ],
           "sourceAnchor": [
-            1120,
-            452
+            185,
+            832
           ],
           "durationMs": 160,
           "alphaBBox": [
-            55,
-            83,
-            139,
-            190
+            69,
+            102,
+            123,
+            175
           ],
           "solidBBox": [
-            66,
-            84,
-            125,
-            176
-          ]
+            69,
+            103,
+            122,
+            175
+          ],
+          "sourceScale": 0.17307692307692307
         },
         {
           "id": "strike",
           "file": "sprites/dwarf-hammer-strike.png",
           "sourceCrop": [
-            1300,
-            0,
-            1774,
-            510
+            390,
+            513,
+            833,
+            848
           ],
           "sourceAnchor": [
-            1500,
-            452
+            558,
+            832
           ],
           "durationMs": 160,
           "alphaBBox": [
-            57,
-            92,
-            160,
-            189
+            67,
+            121,
+            143,
+            178
           ],
           "solidBBox": [
-            61,
-            124,
-            158,
-            185
-          ]
+            67,
+            121,
+            142,
+            177
+          ],
+          "sourceScale": 0.17307692307692307
         },
         {
           "id": "followthrough",
           "file": "sprites/dwarf-hammer-followthrough.png",
           "sourceCrop": [
-            0,
-            510,
-            520,
-            887
+            834,
+            519,
+            1251,
+            851
           ],
           "sourceAnchor": [
-            200,
-            824
+            985,
+            836
           ],
           "durationMs": 160,
           "alphaBBox": [
-            54,
-            101,
-            168,
-            182
+            70,
+            121,
+            141,
+            178
           ],
           "solidBBox": [
-            63,
-            121,
-            166,
-            180
-          ]
+            70,
+            122,
+            141,
+            177
+          ],
+          "sourceScale": 0.17307692307692307
         },
         {
           "id": "recovery",
           "file": "sprites/dwarf-hammer-recovery.png",
           "sourceCrop": [
-            520,
-            510,
-            950,
-            887
+            19,
+            851,
+            431,
+            1229
           ],
           "sourceAnchor": [
-            670,
-            824
+            172,
+            1227
           ],
           "durationMs": 160,
           "alphaBBox": [
-            67,
-            116,
-            163,
-            186
+            70,
+            111,
+            140,
+            175
           ],
           "solidBBox": [
-            68,
-            117,
-            158,
-            176
-          ]
+            70,
+            111,
+            139,
+            175
+          ],
+          "sourceScale": 0.17307692307692307
         },
         {
           "id": "hurt",
           "file": "sprites/dwarf-hammer-hurt.png",
           "sourceCrop": [
-            950,
-            510,
-            1300,
-            887
+            442,
+            860,
+            823,
+            1225
           ],
           "sourceAnchor": [
-            1120,
-            826
+            596,
+            1223
           ],
           "durationMs": 160,
           "alphaBBox": [
-            55,
-            100,
-            139,
-            184
+            69,
+            114,
+            134,
+            175
           ],
           "solidBBox": [
-            55,
-            110,
-            137,
+            70,
+            114,
+            134,
             175
-          ]
+          ],
+          "sourceScale": 0.17307692307692307
         },
         {
           "id": "death",
           "file": "sprites/dwarf-hammer-death.png",
           "sourceCrop": [
-            1300,
-            510,
-            1774,
-            887
+            804,
+            1042,
+            1243,
+            1232
           ],
           "sourceAnchor": [
-            1525,
-            828
+            984,
+            1211
           ],
           "durationMs": 650,
           "alphaBBox": [
-            42,
-            102,
-            151,
+            65,
+            147,
+            140,
             179
           ],
           "solidBBox": [
-            42,
-            146,
-            150,
+            65,
+            147,
+            139,
             178
-          ]
+          ],
+          "sourceScale": 0.17307692307692307
         }
       ],
       "animations": {
@@ -1451,10 +1479,15 @@
         ]
       },
       "weaponFamily": "hammer",
-      "headY": 114,
+      "headY": 110,
       "healthBarAnchor": [
         96,
-        105
+        101
+      ],
+      "sourceAtlas": "brock-redesign-horned-hammer-atlas",
+      "bodyReferenceBounds": [
+        113,
+        175
       ]
     },
     "brown-rock-lizard": {
@@ -10441,16 +10474,16 @@
       ],
       "facing": "right",
       "weaponFamily": null,
-      "headY": 117,
+      "headY": 114,
       "healthBarAnchor": [
         96,
-        108
+        105
       ],
       "portraitCrop": [
-        69,
-        115,
-        125,
-        161
+        70,
+        113,
+        122,
+        177
       ],
       "portraitCropFormat": "left,top,right,bottom exclusive",
       "frames": [
@@ -10458,36 +10491,253 @@
           "id": "idle",
           "file": "hero-neutral-idle.png",
           "alphaBBox": [
-            70,
-            117,
-            122,
-            177
+            71,
+            113,
+            120,
+            175
           ],
           "solidBBox": [
             71,
-            117,
-            122,
-            176
+            114,
+            120,
+            175
           ],
           "durationMs": 1000,
           "sourceCrop": [
-            300,
-            365,
-            910,
-            1065
+            37,
+            40,
+            334,
+            409
           ],
           "sourceAnchor": [
-            603,
-            1046
+            186,
+            407
           ],
-          "sourceScale": 0.09
+          "sourceScale": 0.17045454545454544
+        },
+        {
+          "id": "anticipation",
+          "file": "sprites/hero-neutral-anticipation.png",
+          "sourceCrop": [
+            860,
+            78,
+            1240,
+            409
+          ],
+          "sourceAnchor": [
+            1018,
+            407
+          ],
+          "sourceScale": 0.17045454545454544,
+          "alphaBBox": [
+            69,
+            120,
+            133,
+            175
+          ],
+          "solidBBox": [
+            69,
+            120,
+            132,
+            175
+          ],
+          "durationMs": 120
+        },
+        {
+          "id": "windup",
+          "file": "sprites/hero-neutral-windup.png",
+          "sourceCrop": [
+            25,
+            465,
+            385,
+            825
+          ],
+          "sourceAnchor": [
+            183,
+            823
+          ],
+          "sourceScale": 0.17045454545454544,
+          "alphaBBox": [
+            69,
+            115,
+            129,
+            175
+          ],
+          "solidBBox": [
+            69,
+            115,
+            129,
+            175
+          ],
+          "durationMs": 120
+        },
+        {
+          "id": "strike",
+          "file": "sprites/hero-neutral-strike.png",
+          "sourceCrop": [
+            423,
+            476,
+            846,
+            825
+          ],
+          "sourceAnchor": [
+            590,
+            823
+          ],
+          "sourceScale": 0.17045454545454544,
+          "alphaBBox": [
+            68,
+            117,
+            139,
+            175
+          ],
+          "solidBBox": [
+            68,
+            117,
+            138,
+            175
+          ],
+          "durationMs": 120
+        },
+        {
+          "id": "followthrough",
+          "file": "sprites/hero-neutral-followthrough.png",
+          "sourceCrop": [
+            860,
+            496,
+            1193,
+            825
+          ],
+          "sourceAnchor": [
+            1017,
+            823
+          ],
+          "sourceScale": 0.17045454545454544,
+          "alphaBBox": [
+            69,
+            120,
+            125,
+            175
+          ],
+          "solidBBox": [
+            70,
+            121,
+            124,
+            175
+          ],
+          "durationMs": 120
+        },
+        {
+          "id": "recovery",
+          "file": "sprites/hero-neutral-recovery.png",
+          "sourceCrop": [
+            36,
+            848,
+            335,
+            1219
+          ],
+          "sourceAnchor": [
+            185,
+            1217
+          ],
+          "sourceScale": 0.17045454545454544,
+          "alphaBBox": [
+            71,
+            113,
+            121,
+            175
+          ],
+          "solidBBox": [
+            71,
+            114,
+            120,
+            175
+          ],
+          "durationMs": 120
+        },
+        {
+          "id": "hurt",
+          "file": "sprites/hero-neutral-hurt.png",
+          "sourceCrop": [
+            453,
+            852,
+            808,
+            1219
+          ],
+          "sourceAnchor": [
+            615,
+            1217
+          ],
+          "sourceScale": 0.17045454545454544,
+          "alphaBBox": [
+            68,
+            114,
+            128,
+            175
+          ],
+          "solidBBox": [
+            69,
+            114,
+            127,
+            175
+          ],
+          "durationMs": 120
+        },
+        {
+          "id": "death",
+          "file": "sprites/hero-neutral-death.png",
+          "sourceCrop": [
+            807,
+            1049,
+            1231,
+            1216
+          ],
+          "sourceAnchor": [
+            1007,
+            1214
+          ],
+          "sourceScale": 0.17045454545454544,
+          "alphaBBox": [
+            62,
+            148,
+            133,
+            175
+          ],
+          "solidBBox": [
+            62,
+            148,
+            133,
+            175
+          ],
+          "durationMs": 650
         }
       ],
       "animations": {
         "idle": [
           "idle"
+        ],
+        "attack": [
+          "anticipation",
+          "windup",
+          "strike",
+          "followthrough",
+          "recovery"
+        ],
+        "hurt": [
+          "hurt",
+          "idle"
+        ],
+        "death": [
+          "death"
         ]
-      }
+      },
+      "uniformSourceScale": 0.17045454545454544,
+      "sourceAtlas": "brock-redesign-horned-neutral-atlas",
+      "appearance": "neutral",
+      "bodyReferenceBounds": [
+        116,
+        175
+      ]
     }
   },
   "backgrounds": [
@@ -10920,5 +11170,19 @@
       "file": "backgrounds/camp-ashen.png",
       "baseline": 195
     }
+  },
+  "brockVisualRedesign": {
+    "version": 1,
+    "source": "Built-in image generation; approved master design; original sources and prompts retained in art/brock-redesign",
+    "scope": "Dwarf visual assets and native/neutral animation frames only; no game rules or save changes",
+    "frameSize": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "facing": "right"
   }
 }

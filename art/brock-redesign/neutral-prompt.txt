@@ -1,0 +1,15 @@
+Use case: precise-object-edit / identity-preserve.
+Asset type: ONE square transparent production pixel RPG sprite atlas, three columns by three rows, nine poses of the SAME dwarf.
+Input image 1 is the exact approved Brock animation atlas edit target; image 2 is his face portrait identity. Create the EMPTY-HANDED neutral lifecycle variant. Keep exactly the same identity, face, copper-red hair/moustache/beard with silver braid rings, open iron/copper helmet, slate-blue tunic, crossed leather straps, one iron shoulder guard, bracers, leather waist skirt, short brown boots, proportions, camera distance, shading and palette. Same dwarf body size and same per-row ground baselines. Do not shrink or enlarge individual poses.
+REMOVE EVERY AXE, HAMMER, SHAFT AND ALL WEAPONS, including the weapon lying in the death cell. Empty hands must be visibly empty, with natural fingers or closed fists, no gripping invisible handles. No spells, tools, staffs, shields or ghost weapon fragments. This neutral appearance is intentionally not claiming a currently equipped weapon.
+Exact row-major poses:
+1 idle: alert right-facing stance, both hands empty and relaxed near belt.
+2 secondary breathing idle: same pose with subtle lowered shoulders; empty hands.
+3 anticipation: lower center of gravity, arms draw back slightly, open empty off-hand forward as guard, rear hand forms fist.
+4 windup: winding up a short practical empty-handed strike, rear arm pulls back at shoulder level, forward forearm guards; NO overhead gripping of invisible weapon.
+5 strike: short rightward forward punch with one fist extended, off-hand guards chest; keep short sturdy legs grounded.
+6 followthrough: extended fist lowers slightly after punch, body still forward; NO objects.
+7 recovery: returns to relaxed ready empty-handed stance.
+8 hurt: same visible backward recoil and grimace, both empty hands spread reflexively.
+9 death: same dwarf collapsed on side, head to right, bent short legs to left, empty hand resting on ground, NO axe or hammer or weapon anywhere.
+All face RIGHT in three-quarter side view. Crisp premium handcrafted pixel RPG art, identical detailed character style, not chibi, not painting or 3D. Every cell contains only one fully visible independent sprite, with transparent separation; no crossing into neighboring cells, no crops. Transparent background ONLY, no ground, shadows, grids, labels, text, effects, colored haze or stray pixels.

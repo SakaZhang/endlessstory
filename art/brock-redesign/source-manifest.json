@@ -1,0 +1,130 @@
+{
+  "generation": "built-in image_gen tool; no CLI or algorithmically authored character drawing",
+  "userApproval": "Horned master: 用户回复“没问题”; round helmet explicitly rejected as miner-like.",
+  "libraryPreview": {
+    "library_file_id": "libfile_5f39c1891c0c819181bf3dea58204d67",
+    "file_id": "file_000000000a5c81f5bc6952bb368ea584",
+    "version": 1,
+    "filename": "布洛克新版形象草案.png"
+  },
+  "runtimeInputs": [
+    "horned-axe-atlas.png",
+    "horned-hammer-atlas.png",
+    "horned-neutral-atlas.png"
+  ],
+  "packager": "tools/package-brock-art.py",
+  "generationRepairs": [
+    "Hammer anticipation: removed erroneous third horn from hammer using imagegen.",
+    "Axe low followthrough: completed rightmost blade edge using imagegen."
+  ],
+  "files": [
+    {
+      "file": "axe-atlas.png",
+      "sha256": "840dff7b81294f69d59c6056f16f29cab05accc578ceca5b4774ef2a79631710",
+      "bytes": 1700110,
+      "status": "rejected-round-helmet-stage-not-runtime"
+    },
+    {
+      "file": "axe-prompt.txt",
+      "sha256": "b58d3d1f55d5149f049746cfd593ab53fdd5b1d71fe1bc5ab51d23187c4ad83c",
+      "bytes": 3367,
+      "status": "rejected-round-helmet-stage-not-runtime"
+    },
+    {
+      "file": "hammer-atlas.png",
+      "sha256": "32d4adbc98de7857752e5447780495cf120ecf3600d41a0c73a15cda45722927",
+      "bytes": 1586059,
+      "status": "rejected-round-helmet-stage-not-runtime"
+    },
+    {
+      "file": "hammer-prompt.txt",
+      "sha256": "ce69be35c43e3a6dde3462311f5738bad6834414cb4eafc30b1310b5ad7733ef",
+      "bytes": 2131,
+      "status": "rejected-round-helmet-stage-not-runtime"
+    },
+    {
+      "file": "horned-axe-atlas.png",
+      "sha256": "3d84af0d5ea80e261ae52bf05e42be5ff1114dcdb2309410aba4747bde661de2",
+      "bytes": 1783049,
+      "status": "approved-final-source"
+    },
+    {
+      "file": "horned-axe-edge-repair-prompt.txt",
+      "sha256": "68bbb9bd5daf7f2e9235c4f92c716d853dbbac56b076e6aa2633b1309f2a499b",
+      "bytes": 976,
+      "status": "approved-final-source"
+    },
+    {
+      "file": "horned-axe-prompt.txt",
+      "sha256": "bb292ba85be52800472d79e995f8db63fd6728a195d7ce0702444d9ae9043787",
+      "bytes": 2164,
+      "status": "approved-final-source"
+    },
+    {
+      "file": "horned-hammer-atlas.png",
+      "sha256": "b471453728c6909a2d0cf543fa159e0cd0399d11745892da31c65645c3aad4c7",
+      "bytes": 1696392,
+      "status": "approved-final-source"
+    },
+    {
+      "file": "horned-hammer-prompt.txt",
+      "sha256": "94702bf7ab41b5d87dd781339befd64305570704157b05d46b7f48b72189c7d8",
+      "bytes": 2183,
+      "status": "approved-final-source"
+    },
+    {
+      "file": "horned-hammer-repair-prompt.txt",
+      "sha256": "a32c3bb7b4c73ebc1062b9329cec7bd28885e48294ef77f29751fe9c204ac5e9",
+      "bytes": 1153,
+      "status": "approved-final-source"
+    },
+    {
+      "file": "horned-master-prompt.txt",
+      "sha256": "ec7dab80a9dcbbab608cdf0b7fbadd509a5f0758c39d68181bc9e69e08acee42",
+      "bytes": 2365,
+      "status": "approved-final-source"
+    },
+    {
+      "file": "horned-master-sheet.png",
+      "sha256": "511a634c1e75a413ba6fa1130477a7d37fdcf655d269ad4f33f7b09455041a6c",
+      "bytes": 1516370,
+      "status": "approved-final-source"
+    },
+    {
+      "file": "horned-neutral-atlas.png",
+      "sha256": "2b387cd228c481cb1c2b838d3f602f3bc03dd5e69125e54eac33d71898682291",
+      "bytes": 1625195,
+      "status": "approved-final-source"
+    },
+    {
+      "file": "horned-neutral-prompt.txt",
+      "sha256": "ab504f96b2e13a693b2bfdf1b9453f0f72aa2c269e218b3a37ee783892a46e90",
+      "bytes": 2257,
+      "status": "approved-final-source"
+    },
+    {
+      "file": "master-prompt.txt",
+      "sha256": "6cc1cf4a85b45f707b3338fcfc75935ae38e9307856a6610c087607331255608",
+      "bytes": 3464,
+      "status": "rejected-round-helmet-stage-not-runtime"
+    },
+    {
+      "file": "master-sheet.png",
+      "sha256": "f85cf2907a69aa3700d200c138cbc5226ca2f4965c5745d21e57ebaaed3eeac9",
+      "bytes": 1492248,
+      "status": "rejected-round-helmet-stage-not-runtime"
+    },
+    {
+      "file": "neutral-atlas.png",
+      "sha256": "5b379f86097b5bc9652799c4f128505b394fe947ca07259434c5dad0eb1e285a",
+      "bytes": 1545085,
+      "status": "rejected-round-helmet-stage-not-runtime"
+    },
+    {
+      "file": "neutral-prompt.txt",
+      "sha256": "b13452e0d8e13021e0429e9411275c4bb918e150f696022e54e5f5ea4122a235",
+      "bytes": 2442,
+      "status": "rejected-round-helmet-stage-not-runtime"
+    }
+  ]
+}

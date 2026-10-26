@@ -1,0 +1,1125 @@
+{
+  "operation": "Mechanical alpha-component slicing and fixed uniform nearest-neighbor placement only; original RGB and alpha preserved inside each cutout. No artwork drawing or body-part compositing.",
+  "sources": {
+    "axe": {
+      "path": "art/brock-redesign/horned-axe-atlas.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "uniformScale": 0.1724137931034483,
+      "bodyIdleTarget": 60,
+      "sourceCrownYExcludingHorns": 55,
+      "components": [
+        [
+          2,
+          [
+            24,
+            39,
+            435,
+            404
+          ]
+        ],
+        [
+          3,
+          [
+            438,
+            46,
+            843,
+            405
+          ]
+        ],
+        [
+          1,
+          [
+            846,
+            33,
+            1170,
+            405
+          ]
+        ],
+        [
+          4,
+          [
+            28,
+            409,
+            343,
+            829
+          ]
+        ],
+        [
+          5,
+          [
+            395,
+            502,
+            889,
+            829
+          ]
+        ],
+        [
+          6,
+          [
+            820,
+            541,
+            1252,
+            840
+          ]
+        ],
+        [
+          7,
+          [
+            19,
+            851,
+            434,
+            1224
+          ]
+        ],
+        [
+          8,
+          [
+            445,
+            862,
+            833,
+            1223
+          ]
+        ],
+        [
+          9,
+          [
+            800,
+            1033,
+            1250,
+            1243
+          ]
+        ]
+      ],
+      "sourceAnchors": [
+        [
+          172,
+          403
+        ],
+        [
+          583,
+          404
+        ],
+        [
+          1011,
+          404
+        ],
+        [
+          185,
+          829
+        ],
+        [
+          560,
+          829
+        ],
+        [
+          966,
+          833
+        ],
+        [
+          171,
+          1224
+        ],
+        [
+          596,
+          1222
+        ],
+        [
+          983,
+          1209
+        ]
+      ]
+    },
+    "hammer": {
+      "path": "art/brock-redesign/horned-hammer-atlas.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "uniformScale": 0.17307692307692307,
+      "bodyIdleTarget": 63,
+      "sourceCrownYExcludingHorns": 41,
+      "components": [
+        [
+          1,
+          [
+            21,
+            25,
+            426,
+            405
+          ]
+        ],
+        [
+          3,
+          [
+            440,
+            35,
+            816,
+            407
+          ]
+        ],
+        [
+          2,
+          [
+            853,
+            34,
+            1173,
+            407
+          ]
+        ],
+        [
+          4,
+          [
+            29,
+            408,
+            342,
+            832
+          ]
+        ],
+        [
+          5,
+          [
+            392,
+            515,
+            831,
+            846
+          ]
+        ],
+        [
+          6,
+          [
+            836,
+            521,
+            1249,
+            849
+          ]
+        ],
+        [
+          7,
+          [
+            21,
+            853,
+            429,
+            1227
+          ]
+        ],
+        [
+          8,
+          [
+            444,
+            862,
+            821,
+            1223
+          ]
+        ],
+        [
+          9,
+          [
+            806,
+            1044,
+            1241,
+            1230
+          ]
+        ]
+      ],
+      "sourceAnchors": [
+        [
+          171,
+          405
+        ],
+        [
+          584,
+          407
+        ],
+        [
+          1013,
+          407
+        ],
+        [
+          185,
+          832
+        ],
+        [
+          558,
+          832
+        ],
+        [
+          985,
+          836
+        ],
+        [
+          172,
+          1227
+        ],
+        [
+          596,
+          1223
+        ],
+        [
+          984,
+          1211
+        ]
+      ]
+    },
+    "neutral": {
+      "path": "art/brock-redesign/horned-neutral-atlas.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "uniformScale": 0.17045454545454544,
+      "bodyIdleTarget": 60,
+      "sourceCrownYExcludingHorns": 55,
+      "components": [
+        [
+          1,
+          [
+            39,
+            42,
+            332,
+            407
+          ]
+        ],
+        [
+          2,
+          [
+            456,
+            53,
+            744,
+            407
+          ]
+        ],
+        [
+          3,
+          [
+            862,
+            80,
+            1238,
+            407
+          ]
+        ],
+        [
+          4,
+          [
+            27,
+            467,
+            383,
+            823
+          ]
+        ],
+        [
+          5,
+          [
+            425,
+            478,
+            844,
+            823
+          ]
+        ],
+        [
+          6,
+          [
+            862,
+            498,
+            1191,
+            823
+          ]
+        ],
+        [
+          7,
+          [
+            38,
+            850,
+            333,
+            1217
+          ]
+        ],
+        [
+          8,
+          [
+            455,
+            854,
+            806,
+            1217
+          ]
+        ],
+        [
+          9,
+          [
+            809,
+            1051,
+            1229,
+            1214
+          ]
+        ]
+      ],
+      "sourceAnchors": [
+        [
+          186,
+          407
+        ],
+        [
+          600,
+          407
+        ],
+        [
+          1018,
+          407
+        ],
+        [
+          183,
+          823
+        ],
+        [
+          590,
+          823
+        ],
+        [
+          1017,
+          823
+        ],
+        [
+          185,
+          1217
+        ],
+        [
+          615,
+          1217
+        ],
+        [
+          1007,
+          1214
+        ]
+      ]
+    }
+  },
+  "frames": [
+    {
+      "family": "axe",
+      "id": "idle-0",
+      "file": "sprites/dwarf-idle-0.png",
+      "sourceCrop": [
+        22,
+        37,
+        437,
+        406
+      ],
+      "sourceAnchor": [
+        172,
+        403
+      ],
+      "alphaBBox": [
+        70,
+        113,
+        141,
+        176
+      ],
+      "durationMs": 120,
+      "solidBBox": [
+        70,
+        113,
+        140,
+        175
+      ],
+      "sourceScale": 0.1724137931034483
+    },
+    {
+      "family": "axe",
+      "id": "idle-1",
+      "file": "sprites/dwarf-idle-1.png",
+      "sourceCrop": [
+        436,
+        44,
+        845,
+        407
+      ],
+      "sourceAnchor": [
+        583,
+        404
+      ],
+      "alphaBBox": [
+        71,
+        114,
+        140,
+        176
+      ],
+      "durationMs": 120,
+      "solidBBox": [
+        71,
+        114,
+        140,
+        175
+      ],
+      "sourceScale": 0.1724137931034483
+    },
+    {
+      "family": "axe",
+      "id": "anticipation",
+      "file": "sprites/dwarf-anticipation.png",
+      "sourceCrop": [
+        844,
+        31,
+        1172,
+        407
+      ],
+      "sourceAnchor": [
+        1011,
+        404
+      ],
+      "alphaBBox": [
+        67,
+        112,
+        123,
+        176
+      ],
+      "durationMs": 120,
+      "solidBBox": [
+        68,
+        112,
+        122,
+        175
+      ],
+      "sourceScale": 0.1724137931034483
+    },
+    {
+      "family": "axe",
+      "id": "windup",
+      "file": "sprites/dwarf-windup.png",
+      "sourceCrop": [
+        26,
+        407,
+        345,
+        831
+      ],
+      "sourceAnchor": [
+        185,
+        829
+      ],
+      "alphaBBox": [
+        69,
+        103,
+        123,
+        175
+      ],
+      "durationMs": 120,
+      "solidBBox": [
+        69,
+        104,
+        122,
+        175
+      ],
+      "sourceScale": 0.1724137931034483
+    },
+    {
+      "family": "axe",
+      "id": "strike",
+      "file": "sprites/dwarf-strike.png",
+      "sourceCrop": [
+        393,
+        500,
+        891,
+        831
+      ],
+      "sourceAnchor": [
+        560,
+        829
+      ],
+      "alphaBBox": [
+        67,
+        119,
+        152,
+        175
+      ],
+      "durationMs": 90,
+      "solidBBox": [
+        68,
+        120,
+        152,
+        175
+      ],
+      "sourceScale": 0.1724137931034483
+    },
+    {
+      "family": "axe",
+      "id": "followthrough",
+      "file": "sprites/dwarf-followthrough.png",
+      "sourceCrop": [
+        818,
+        539,
+        1254,
+        842
+      ],
+      "sourceAnchor": [
+        966,
+        833
+      ],
+      "alphaBBox": [
+        70,
+        125,
+        145,
+        177
+      ],
+      "durationMs": 120,
+      "solidBBox": [
+        71,
+        126,
+        144,
+        176
+      ],
+      "sourceScale": 0.1724137931034483
+    },
+    {
+      "family": "axe",
+      "id": "recovery",
+      "file": "sprites/dwarf-recovery.png",
+      "sourceCrop": [
+        17,
+        849,
+        436,
+        1226
+      ],
+      "sourceAnchor": [
+        171,
+        1224
+      ],
+      "alphaBBox": [
+        69,
+        111,
+        141,
+        175
+      ],
+      "durationMs": 120,
+      "solidBBox": [
+        70,
+        112,
+        140,
+        175
+      ],
+      "sourceScale": 0.1724137931034483
+    },
+    {
+      "family": "axe",
+      "id": "hurt",
+      "file": "sprites/dwarf-hurt.png",
+      "sourceCrop": [
+        443,
+        860,
+        835,
+        1225
+      ],
+      "sourceAnchor": [
+        596,
+        1222
+      ],
+      "alphaBBox": [
+        70,
+        114,
+        136,
+        176
+      ],
+      "durationMs": 120,
+      "solidBBox": [
+        70,
+        114,
+        136,
+        175
+      ],
+      "sourceScale": 0.1724137931034483
+    },
+    {
+      "family": "axe",
+      "id": "death",
+      "file": "sprites/dwarf-death.png",
+      "sourceCrop": [
+        798,
+        1031,
+        1252,
+        1245
+      ],
+      "sourceAnchor": [
+        983,
+        1209
+      ],
+      "durationMs": 650,
+      "alphaBBox": [
+        64,
+        145,
+        141,
+        181
+      ],
+      "solidBBox": [
+        65,
+        146,
+        141,
+        181
+      ],
+      "sourceScale": 0.1724137931034483
+    },
+    {
+      "family": "hammer",
+      "id": "idle",
+      "file": "sprites/dwarf-hammer-idle.png",
+      "sourceCrop": [
+        19,
+        23,
+        428,
+        407
+      ],
+      "sourceAnchor": [
+        171,
+        405
+      ],
+      "durationMs": 160,
+      "alphaBBox": [
+        70,
+        110,
+        139,
+        175
+      ],
+      "solidBBox": [
+        70,
+        110,
+        139,
+        175
+      ],
+      "sourceScale": 0.17307692307692307
+    },
+    {
+      "family": "hammer",
+      "id": "anticipation",
+      "file": "sprites/dwarf-hammer-anticipation.png",
+      "sourceCrop": [
+        851,
+        32,
+        1175,
+        409
+      ],
+      "sourceAnchor": [
+        1013,
+        407
+      ],
+      "durationMs": 160,
+      "alphaBBox": [
+        68,
+        111,
+        123,
+        175
+      ],
+      "solidBBox": [
+        68,
+        111,
+        123,
+        175
+      ],
+      "sourceScale": 0.17307692307692307
+    },
+    {
+      "family": "hammer",
+      "id": "windup",
+      "file": "sprites/dwarf-hammer-windup.png",
+      "sourceCrop": [
+        27,
+        406,
+        344,
+        834
+      ],
+      "sourceAnchor": [
+        185,
+        832
+      ],
+      "durationMs": 160,
+      "alphaBBox": [
+        69,
+        102,
+        123,
+        175
+      ],
+      "solidBBox": [
+        69,
+        103,
+        122,
+        175
+      ],
+      "sourceScale": 0.17307692307692307
+    },
+    {
+      "family": "hammer",
+      "id": "strike",
+      "file": "sprites/dwarf-hammer-strike.png",
+      "sourceCrop": [
+        390,
+        513,
+        833,
+        848
+      ],
+      "sourceAnchor": [
+        558,
+        832
+      ],
+      "durationMs": 160,
+      "alphaBBox": [
+        67,
+        121,
+        143,
+        178
+      ],
+      "solidBBox": [
+        67,
+        121,
+        142,
+        177
+      ],
+      "sourceScale": 0.17307692307692307
+    },
+    {
+      "family": "hammer",
+      "id": "followthrough",
+      "file": "sprites/dwarf-hammer-followthrough.png",
+      "sourceCrop": [
+        834,
+        519,
+        1251,
+        851
+      ],
+      "sourceAnchor": [
+        985,
+        836
+      ],
+      "durationMs": 160,
+      "alphaBBox": [
+        70,
+        121,
+        141,
+        178
+      ],
+      "solidBBox": [
+        70,
+        122,
+        141,
+        177
+      ],
+      "sourceScale": 0.17307692307692307
+    },
+    {
+      "family": "hammer",
+      "id": "recovery",
+      "file": "sprites/dwarf-hammer-recovery.png",
+      "sourceCrop": [
+        19,
+        851,
+        431,
+        1229
+      ],
+      "sourceAnchor": [
+        172,
+        1227
+      ],
+      "durationMs": 160,
+      "alphaBBox": [
+        70,
+        111,
+        140,
+        175
+      ],
+      "solidBBox": [
+        70,
+        111,
+        139,
+        175
+      ],
+      "sourceScale": 0.17307692307692307
+    },
+    {
+      "family": "hammer",
+      "id": "hurt",
+      "file": "sprites/dwarf-hammer-hurt.png",
+      "sourceCrop": [
+        442,
+        860,
+        823,
+        1225
+      ],
+      "sourceAnchor": [
+        596,
+        1223
+      ],
+      "durationMs": 160,
+      "alphaBBox": [
+        69,
+        114,
+        134,
+        175
+      ],
+      "solidBBox": [
+        70,
+        114,
+        134,
+        175
+      ],
+      "sourceScale": 0.17307692307692307
+    },
+    {
+      "family": "hammer",
+      "id": "death",
+      "file": "sprites/dwarf-hammer-death.png",
+      "sourceCrop": [
+        804,
+        1042,
+        1243,
+        1232
+      ],
+      "sourceAnchor": [
+        984,
+        1211
+      ],
+      "durationMs": 650,
+      "alphaBBox": [
+        65,
+        147,
+        140,
+        179
+      ],
+      "solidBBox": [
+        65,
+        147,
+        139,
+        178
+      ],
+      "sourceScale": 0.17307692307692307
+    },
+    {
+      "family": "neutral",
+      "id": "idle",
+      "file": "hero-neutral-idle.png",
+      "alphaBBox": [
+        71,
+        113,
+        120,
+        175
+      ],
+      "solidBBox": [
+        71,
+        114,
+        120,
+        175
+      ],
+      "durationMs": 1000,
+      "sourceCrop": [
+        37,
+        40,
+        334,
+        409
+      ],
+      "sourceAnchor": [
+        186,
+        407
+      ],
+      "sourceScale": 0.17045454545454544
+    },
+    {
+      "family": "neutral",
+      "id": "anticipation",
+      "file": "sprites/hero-neutral-anticipation.png",
+      "sourceCrop": [
+        860,
+        78,
+        1240,
+        409
+      ],
+      "sourceAnchor": [
+        1018,
+        407
+      ],
+      "sourceScale": 0.17045454545454544,
+      "alphaBBox": [
+        69,
+        120,
+        133,
+        175
+      ],
+      "solidBBox": [
+        69,
+        120,
+        132,
+        175
+      ],
+      "durationMs": 120
+    },
+    {
+      "family": "neutral",
+      "id": "windup",
+      "file": "sprites/hero-neutral-windup.png",
+      "sourceCrop": [
+        25,
+        465,
+        385,
+        825
+      ],
+      "sourceAnchor": [
+        183,
+        823
+      ],
+      "sourceScale": 0.17045454545454544,
+      "alphaBBox": [
+        69,
+        115,
+        129,
+        175
+      ],
+      "solidBBox": [
+        69,
+        115,
+        129,
+        175
+      ],
+      "durationMs": 120
+    },
+    {
+      "family": "neutral",
+      "id": "strike",
+      "file": "sprites/hero-neutral-strike.png",
+      "sourceCrop": [
+        423,
+        476,
+        846,
+        825
+      ],
+      "sourceAnchor": [
+        590,
+        823
+      ],
+      "sourceScale": 0.17045454545454544,
+      "alphaBBox": [
+        68,
+        117,
+        139,
+        175
+      ],
+      "solidBBox": [
+        68,
+        117,
+        138,
+        175
+      ],
+      "durationMs": 120
+    },
+    {
+      "family": "neutral",
+      "id": "followthrough",
+      "file": "sprites/hero-neutral-followthrough.png",
+      "sourceCrop": [
+        860,
+        496,
+        1193,
+        825
+      ],
+      "sourceAnchor": [
+        1017,
+        823
+      ],
+      "sourceScale": 0.17045454545454544,
+      "alphaBBox": [
+        69,
+        120,
+        125,
+        175
+      ],
+      "solidBBox": [
+        70,
+        121,
+        124,
+        175
+      ],
+      "durationMs": 120
+    },
+    {
+      "family": "neutral",
+      "id": "recovery",
+      "file": "sprites/hero-neutral-recovery.png",
+      "sourceCrop": [
+        36,
+        848,
+        335,
+        1219
+      ],
+      "sourceAnchor": [
+        185,
+        1217
+      ],
+      "sourceScale": 0.17045454545454544,
+      "alphaBBox": [
+        71,
+        113,
+        121,
+        175
+      ],
+      "solidBBox": [
+        71,
+        114,
+        120,
+        175
+      ],
+      "durationMs": 120
+    },
+    {
+      "family": "neutral",
+      "id": "hurt",
+      "file": "sprites/hero-neutral-hurt.png",
+      "sourceCrop": [
+        453,
+        852,
+        808,
+        1219
+      ],
+      "sourceAnchor": [
+        615,
+        1217
+      ],
+      "sourceScale": 0.17045454545454544,
+      "alphaBBox": [
+        68,
+        114,
+        128,
+        175
+      ],
+      "solidBBox": [
+        69,
+        114,
+        127,
+        175
+      ],
+      "durationMs": 120
+    },
+    {
+      "family": "neutral",
+      "id": "death",
+      "file": "sprites/hero-neutral-death.png",
+      "sourceCrop": [
+        807,
+        1049,
+        1231,
+        1216
+      ],
+      "sourceAnchor": [
+        1007,
+        1214
+      ],
+      "sourceScale": 0.17045454545454544,
+      "alphaBBox": [
+        62,
+        148,
+        133,
+        175
+      ],
+      "solidBBox": [
+        62,
+        148,
+        133,
+        175
+      ],
+      "durationMs": 650
+    }
+  ]
+}
