@@ -45,4 +45,4 @@ Passed focused checks: 863 content assertions; all60 model lifecycle/choices/cos
 
 Actual 64/96 contact sheets were visually inspected, all30 Chinese-name contact reviewed by root. `source-art/npc-portraits/all-30-named-contact.png` is the user review image, not a screenshot. No browser screenshot / browser layout QA is claimed. The local `npc-event-app-ui-tests.cjs` is a fake-DOM actual-App handler test. Final release graph inclusion of dynamic portrait registry paths is owned by integration.
 
-Full aggregate `npm test` is tracked separately in the final handoff; focused checks are not an assertion that all unrelated legacy tests pass.
+Full aggregate `npm test` reached the existing `equipment-armor-art-tests.mjs` failure (`actual 36`, `expected 28`), matching the previously documented untouched baseline. It is not all green. `npm run build` passed; its candidate bundle had 2727 files, release hash `96c5a70a9f083e16b8c3ccd8fd22f241919566afbcb2abc908f614db4a1de347`. This is not the final combined release.
