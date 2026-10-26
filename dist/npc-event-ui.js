@@ -1,17 +1,19 @@
 import {RACIAL_NPC_BY_ID} from './racial-npc-event-content.js';
 import {renderNpcPortrait} from './npc-portraits.js';
+import {renderChikFamilyEventBoard} from './chik-family-event-ui.js';
 import {NPC_EVENTS,npcEventAccess,npcEventReady,npcClaimKey,hasStoryFlag,npcEventCosts} from './npc-events.js';
 import {MATERIALS,RARITY} from './engine.js';
 import {AREAS} from './location-schema.js';
 const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const materialsText=rows=>rows.map(row=>{const [key,q]=row.key.split('|');return RARITY[Number(q)]+' '+(MATERIALS[key]?.name??key)+' ×'+row.quantity;}).join('、');
 export function renderNpcEventBoard(s,{race,areaId,now=Date.now()}={}){
- const defs=Object.values(NPC_EVENTS).filter(d=>d.race===race&&d.areaId===areaId&&(!d.requiresStoryFlag||hasStoryFlag(s,d.requiresStoryFlag)));
- if(!defs.length)return '';
+ const family=renderChikFamilyEventBoard(s,{race,areaId});
+ const defs=Object.values(NPC_EVENTS).filter(d=>d.category!=='chik-family'&&d.race===race&&d.areaId===areaId&&(!d.requiresStoryFlag||hasStoryFlag(s,d.requiresStoryFlag)));
+ if(!defs.length)return family;
  return `<section class="npcEventBoard" aria-label="当地人物与委托"><h2>${esc(AREAS[areaId]?.name??'当地')} · 旅途中遇到的人</h2><div class="npcEventCards">${defs.map(def=>{
   const row=s.npcEvents?.entries?.[def.id],claimed=s.taskRewardClaims?.includes(npcClaimKey(s,def.id)),access=npcEventAccess(s,def.id),done=row?.status==='resolved'||claimed,declined=row?.status==='declined',cooldown=done&&def.repeatable?Math.max(0,Math.ceil((row.readyAt-now)/1000)):0,ready=npcEventReady(s,def.id),costs=npcEventCosts(def);
   const npc=RACIAL_NPC_BY_ID[def.npcId];
   const active=row?.status==='active',choice=def.choices?.find(c=>c.id===row?.choiceId),dialogue=done&&choice?[choice.dialogue,choice.outcome]:done?def.completion:def.dialogue;
   return `<article class="npcEventCard" data-npc-event-card="${esc(def.id)}"><header class="npcEventIdentity">${renderNpcPortrait(def.npcId)}<div><strong>${esc(def.npcName??def.npcId)}</strong>${npc?`<small>${esc(npc.role)}</small>`:''}<h3>${esc(def.title)}</h3></div></header><p>${esc(def.description)}</p>${(dialogue??[]).map(t=>`<p class="npcDialogue">${esc(t)}</p>`).join('')}${active&&def.choices?.length?`<div class="npcEventChoices">${def.choices.map(c=>`<button data-npc-action="choose" data-npc-event="${esc(def.id)}" data-npc-choice="${esc(c.id)}" aria-pressed="${row.choiceId===c.id}" ${access.allowed?'':'disabled'}>${esc(c.label)}</button>`).join('')}</div>${choice?`<p>${esc(choice.dialogue)}</p>`:''}`:''}${active&&['victory','exploration'].includes(def.objective.kind)?`<p class="npcObjective">${esc(def.actionLabel??'完成委托地点的战斗')} · ${row.count} / ${def.objective.count}</p>`:''}${costs.length?`<p class="subtleText">交付：${esc(materialsText(costs))}；不会自动扣除更高品质。</p>`:''}${done?`<p role="status">已办妥${cooldown?' · 还需 '+cooldown+' 秒':''}</p>`:declined?'<p>你选择了继续赶路。</p>':''}<div class="npcEventActions">${!declined&&(!done||def.repeatable&&!cooldown)?active?`<button data-npc-action="claim" data-npc-event="${esc(def.id)}" ${ready?'':'disabled'}>回到${esc(def.npcName??'对方')}身边</button><button data-npc-action="decline" data-npc-event="${esc(def.id)}" ${access.allowed?'':'disabled'}>${esc(def.decline?.label??'继续赶路')}</button>`:`<button data-npc-action="accept" data-npc-event="${esc(def.id)}" ${access.allowed?'':'disabled'}>${done?'再问问近况':'停下来帮忙'}</button><button data-npc-action="decline" data-npc-event="${esc(def.id)}" ${access.allowed?'':'disabled'}>${esc(def.decline?.label??'继续赶路')}</button>`:''}</div>${!access.allowed&&!done&&!declined?`<p class="subtleText">${esc(access.reason)}</p>`:''}</article>`;
- }).join('')}</div></section>`;
+ }).join('')}</div></section>`+family;
 }

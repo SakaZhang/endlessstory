@@ -83,7 +83,7 @@ async function probe(output,report){
  // Package intentionally retains provenance JSON and unused source art. Keep those
  // as explicit inventory roots, separate from the verified runtime dependency graph.
  for(const actor of Object.values(STORY_ACTOR_ART))assert(urls.has(new URL(actor.file,release).href),'story actor must be reached through actual production battle manifest: '+actor.file);
- for(const module of ['hero-portraits/manifest.js','chik-family-registry.js','chik-family-ui.js','story-cast-registry.js','story-cast-ui.js','story-portrait-crops.js','npc-portraits.js','npc-portrait-registry.js','random-world-events.js','story-c08-scenarios.js','story-scenario-registry.js','story-actor-art.js'])assert(urls.has(new URL(module,release).href),'new runtime module must be imported from an entry: '+module);
+ for(const module of ['chik-family-events.js','chik-family-event-rewards.js','chik-family-event-ui.js','hero-portraits/manifest.js','chik-family-registry.js','chik-family-ui.js','story-cast-registry.js','story-cast-ui.js','story-portrait-crops.js','npc-portraits.js','npc-portrait-registry.js','random-world-events.js','story-c08-scenarios.js','story-scenario-registry.js','story-actor-art.js'])assert(urls.has(new URL(module,release).href),'new runtime module must be imported from an entry: '+module);
  const runtimeUrls=new Set(urls);
  const auxiliary=report.files.filter(f=>!f.path.endsWith('.html')&&!urls.has(new URL(f.path,release).href));
  for(const f of auxiliary){assert.ok(/^(?:races\/(?:human|elf|goblin|ashen)\/.*\.(?:png|json|md))$/.test(f.path)||storyProvenance.has(f.path),'unclassified unreachable emitted asset '+f.path);await visit(new URL(f.path,release),'packaged auxiliary inventory');}
@@ -156,5 +156,5 @@ try{
 
  await writeFile(join(actualOutput,'dependency-probe.json'),JSON.stringify({release:actual.release,legacyEntry:legacyScript,packageCheck,kind:'Actual emitted HTML/ESM/CSS and dynamic manifest/image URL graph; filesystem + URL/cache model, not browser cache inspection',...graph},null,2)+'\n');
  console.log(packageCheck);
- console.log(`PASS release cache: ${actual.files.length} files hash-verified; ${graph.urls.length} resource URLs / ${graph.edges.length} dependency edges; old legacy and prior release cache misses; 6 byte mutations + 5 negative reference mutations; roots/navigation/origin/save key preserved.`);
+ console.log(`PASS release cache: ${actual.files.length} files hash-verified; ${graph.urls.length} resource URLs / ${graph.edges.length} dependency edges; old legacy and prior release cache misses; 6 byte mutations + 8 negative reference mutations; roots/navigation/origin/save key preserved.`);
 }finally{await rm(temp,{recursive:true,force:true});}

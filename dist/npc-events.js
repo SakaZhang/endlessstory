@@ -1,33 +1,44 @@
 import {RACIAL_NPC_EVENTS} from './racial-npc-event-content.js';
 import {worldInventoryKey} from './world-materials.js';
 import {RETURN_RING_EVENTS} from './return-ring-content.js';
+import {CHIK_FAMILY_EVENTS} from './chik-family-events.js';
 import {AREAS,INSTANCES,instanceCooldownMs} from './location-schema.js';
 import {territoryAccess,nodeAccess} from './war-diplomacy.js';
 const freeze=o=>{if(o&&typeof o==='object'){Object.values(o).forEach(freeze);Object.freeze(o);}return o;};
 const canonicalRows=rows=>rows.map(row=>({...row,key:(worldInventoryKey(row.key.split('|')[0])??row.key.split('|')[0])+'|'+row.key.split('|')[1]}));
-const content=[...RETURN_RING_EVENTS,...RACIAL_NPC_EVENTS].map(d=>({...d,materials:canonicalRows(d.materials??(d.objective?.kind==='materials'?d.objective.materials??[]:[])),rewards:(d.rewards??[]).map(row=>row.kind==='material'?{...row,key:(worldInventoryKey(row.key.split('|')[0])??row.key.split('|')[0])+'|'+row.key.split('|')[1]}:row)}));
+const content=[...RETURN_RING_EVENTS,...RACIAL_NPC_EVENTS,...CHIK_FAMILY_EVENTS].map(d=>({...d,materials:canonicalRows(d.materials??(d.objective?.kind==='materials'?d.objective.materials??[]:[])),rewards:(d.rewards??[]).map(row=>row.kind==='material'?{...row,key:(worldInventoryKey(row.key.split('|')[0])??row.key.split('|')[0])+'|'+row.key.split('|')[1]}:row)}));
 export const NPC_EVENTS=freeze(Object.fromEntries(content.map(d=>[d.id,d])));
 export const npcEventCosts=def=>def.materials??[];
 const plain=o=>!!o&&typeof o==='object'&&!Array.isArray(o);
 const time=n=>Number.isSafeInteger(n)&&n>=0&&n<=1e15;
 const known=id=>typeof id==='string'&&Object.hasOwn(NPC_EVENTS,id);
 export function hasStoryFlag(s,flag){return Array.isArray(s?.story?.flags)&&s.story.flags.includes(flag);}
+// Definition-only gates. No new save field or quest-state version is needed.
+const scenePrerequisites=(s,def)=>(def.conditions?.requiredStorySceneIds??[]).every(id=>s.story?.completedScenes?.includes(id));
+const personalHistoryValid=(s,id,e)=>{
+ const def=NPC_EVENTS[id];if(!def?.playerRace)return true;
+ return s.race===def.playerRace&&scenePrerequisites(s,def)&&hasStoryFlag(s,def.requiresStoryFlag)&&(e.status!=='resolved'||def.choices.some(c=>c.id===e.choiceId));
+};
 export function npcClaimKey(s,id){const def=NPC_EVENTS[id],entry=s.npcEvents?.entries?.[id];return def?.repeatable?id+'.cycle-'+(entry?.cycle??0):id;}
 export function validNpcEventState(s){
  if(!plain(s))return false;if(s.npcEvents===undefined)return true;
  const n=s.npcEvents;if(!plain(n)||Object.keys(n).length!==2||n.version!==1||!plain(n.entries)||Object.keys(n.entries).length>Object.keys(NPC_EVENTS).length)return false;
- return Object.entries(n.entries).every(([id,e])=>known(id)&&plain(e)&&Object.keys(e).length===7&&['active','resolved','declined'].includes(e.status)&&Number.isSafeInteger(e.count)&&e.count>=0&&e.count<= (NPC_EVENTS[id].objective?.count??0)&&Number.isSafeInteger(e.cycle)&&e.cycle>=0&&e.cycle<=9999&&time(e.readyAt)&&time(e.acceptedAt)&&(e.lastEncounterId===null||typeof e.lastEncounterId==='string'&&e.lastEncounterId.length<=160)&&(!NPC_EVENTS[id].repeatable?e.cycle===0:true)&&(e.choiceId===null||NPC_EVENTS[id].choices?.some(c=>c.id===e.choiceId))&&(e.status==='resolved')===(s.taskRewardClaims?.includes(npcClaimKey(s,id))===true));
+ return Object.entries(n.entries).every(([id,e])=>known(id)&&plain(e)&&Object.keys(e).length===7&&['active','resolved','declined'].includes(e.status)&&Number.isSafeInteger(e.count)&&e.count>=0&&e.count<= (NPC_EVENTS[id].objective?.count??0)&&Number.isSafeInteger(e.cycle)&&e.cycle>=0&&e.cycle<=9999&&time(e.readyAt)&&time(e.acceptedAt)&&(e.lastEncounterId===null||typeof e.lastEncounterId==='string'&&e.lastEncounterId.length<=160)&&(!NPC_EVENTS[id].repeatable?e.cycle===0:true)&&(e.choiceId===null||NPC_EVENTS[id].choices?.some(c=>c.id===e.choiceId))&&(e.status==='resolved')===(s.taskRewardClaims?.includes(npcClaimKey(s,id))===true)&&personalHistoryValid(s,id,e));
 }
 export function npcEventAccess(s,id){
  if(!known(id)||!validNpcEventState(s))return {allowed:false,reason:'事件不可用'};
  const def=NPC_EVENTS[id],access=territoryAccess(s,def.race);if(!access.allowed)return access;
+ if(def.playerRace&&s.race!==def.playerRace)return {allowed:false,reason:'这是奇克与家人的私事'};
  if(def.requiresStoryFlag&&!hasStoryFlag(s,def.requiresStoryFlag))return {allowed:false,reason:'尚未到这段行程'};
+ if(!scenePrerequisites(s,def))return {allowed:false,reason:'先完成这次回家的主线交谈'};
+ if((def.conditions?.forbiddenStoryFlags??[]).some(flag=>hasStoryFlag(s,flag)))return {allowed:false,reason:'旧住处的家人小事暂缓；已有选择和记录仍保留'};
  if(!(s.areaProgress?.[def.race]?.unlocked??[1]).includes(AREAS[def.areaId]?.number))return {allowed:false,reason:'此地尚未开放'};
  if((def.conditions?.requiredEventIds??[]).some(key=>s.npcEvents?.entries?.[key]?.status!=='resolved')||(def.conditions?.requiredStoryFlags??[]).some(flag=>!hasStoryFlag(s,flag)))return {allowed:false,reason:'前事尚未完成'};
  if(s.siteId!==def.areaId)return {allowed:false,reason:'先前往'+(AREAS[def.areaId]?.name??def.areaId)};
  if(s.activeEncounter&&!s.activeEncounter.done||s.running)return {allowed:false,reason:'先结束当前远征'};
  if((s.restUntil??0)>(s.lastHealthClock??0))return {allowed:false,reason:'休息结束后再来交谈'};
  if(s.developmentEquipmentSandbox===true)return {allowed:false,reason:'测试角色不能领取任务'};
+ if(def.rewardPolicyId&&def.rewardPolicyApproved!==true)return {allowed:false,reason:'家人事件的奖励方案待确认，暂不开放接取与结算'};
  return {allowed:true,reason:''};
 }
 export function npcEventReady(s,id){
