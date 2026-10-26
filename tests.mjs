@@ -1,3 +1,6 @@
+import './return-ring-drop-tests.mjs';
+import './npc-event-host-tests.mjs';
+import './return-ring-events-tests.mjs';
 import './task-reward-engine-integration-tests.mjs';
 import './task-reward-transaction-tests.mjs';
 // Current schema regression entrypoint. Prior schema tests are superseded.

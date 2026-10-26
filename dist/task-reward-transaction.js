@@ -1,9 +1,9 @@
+import {NPC_TASK_REWARD_REGISTRY} from './npc-events.js';
 import {validSave,effectiveLuck,normalizeMaterials,parseMaterialKey,materialCount,MATERIALS,receiveBattleLoot} from './engine.js';
 import {commitGameTransaction,SAVE_KEY} from './storage.js';
 
-// Deliberately empty: story content must explicitly register approved definitions.
-// This service does not grant eligibility, create quests, or roll reward values.
-export const TASK_REWARD_REGISTRY=Object.freeze({});
+// Sealed authored content only; callers cannot inject a reward or eligibility.
+export const TASK_REWARD_REGISTRY=NPC_TASK_REWARD_REGISTRY;
 const idValid=id=>typeof id==='string'&&/^[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}$/.test(id);
 export function validTaskRewardState(s){
  if(!s||typeof s!=='object'||Array.isArray(s))return false;
@@ -21,25 +21,28 @@ export function createTaskRewardService(registry=TASK_REWARD_REGISTRY){
  const definitions=Object.freeze(Object.fromEntries(Object.entries(registry).map(([id,def])=>[id,{
   isEligible:def.isEligible,
   materials:structuredClone(def.materials??[]),
-  rewards:structuredClone(def.rewards??[])
+  rewards:structuredClone(def.rewards??[]),
+  narrativeOnly:def.narrativeOnly===true,claimKey:def.claimKey,onClaim:def.onClaim
  }])));
  return function claimTaskReward(storage,game,id,{now=Date.now()}={}){
   if(!idValid(id)||!Object.hasOwn(definitions,id))return failure(game,'not-available');
   if(!Number.isFinite(now)||now<0||now>1e15)return failure(game,'invalid-clock');
   if(!validTaskRewardState(game)||!validSave(game)||game.developmentEquipmentSandbox===true)return failure(game,'invalid-state');
-  if(game.taskRewardClaims?.includes(id))return failure(game,'already-claimed');
+  const def=definitions[id],claimId=typeof def.claimKey==='function'?def.claimKey(structuredClone(game)):id;
+  if(!idValid(claimId))return failure(game,'invalid-definition');
+  if(game.taskRewardClaims?.includes(claimId))return failure(game,'already-claimed');
   // Reject an already stale snapshot at submission. This synchronous localStorage
   // check is not cross-tab compare-and-swap or multi-writer serialization.
   // Callers must persist unsaved gameplay changes before submitting a task claim.
   try{
    const saved=JSON.parse(storage.getItem(SAVE_KEY));
    if(!validTaskRewardState(saved)||!validSave(saved))return failure(game,'invalid-saved-state');
-   if(saved.taskRewardClaims?.includes(id))return failure(game,'already-claimed');
+   if(saved.taskRewardClaims?.includes(claimId))return failure(game,'already-claimed');
    if(JSON.stringify(saved)!==JSON.stringify(game))return failure(game,'stale-state');
   }catch{return failure(game,'storage-read');}
-  const def=definitions[id];let rejected='invalid-definition';
+  let rejected='invalid-definition';
   const tx=commitGameTransaction(storage,game,next=>{
-   if(typeof def.isEligible!=='function'||!Array.isArray(def.materials)||!Array.isArray(def.rewards)||!def.rewards.length)return false;
+   if(typeof def.isEligible!=='function'||!Array.isArray(def.materials)||!Array.isArray(def.rewards)||(!def.rewards.length&&!(def.narrativeOnly&&typeof def.onClaim==='function')))return false;
    // Eligibility cannot mutate the candidate, and is re-evaluated at submission.
    if(def.isEligible(structuredClone(next))!==true){rejected='not-ready';return false;}
    if(!normalizeMaterials(next)){rejected='invalid-state';return false;}
@@ -63,11 +66,12 @@ export function createTaskRewardService(registry=TASK_REWARD_REGISTRY){
     if(!receiveBattleLoot(next,loot)){rejected='reward-unavailable';return false;}
    }
    if(filters===undefined)delete next.lootFilters;else next.lootFilters=filters;
-   next.taskRewardClaims=[...(next.taskRewardClaims??[]),id];
+   if(typeof def.onClaim==='function'&&def.onClaim(next,{now})!==true)return false;
+   next.taskRewardClaims=[...(next.taskRewardClaims??[]),claimId];
    // Validate the exact metadata values the storage transaction will persist.
    next.lastSeen=now;next.offlineLuck=effectiveLuck(next);
    if(!validTaskRewardState(next)||!validSave(next)){rejected='invalid-state';return false;}
-   return {taskId:id};
+   return {taskId:id,claimId};
   },{now});
   return !tx.ok&&tx.reason==='rejected'?{...tx,reason:rejected}:tx;
  };

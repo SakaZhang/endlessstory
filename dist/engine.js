@@ -1,5 +1,7 @@
 import {freshDiplomacy,validDiplomacy,normalizeDiplomacy,territoryAccess,nodeAccess,applyWarStart,applyWarEnd} from './war-diplomacy.js';
 export {validDiplomacy,normalizeDiplomacy,territoryAccess,nodeAccess} from './war-diplomacy.js';
+import {validReturnRingState,applyReturnRingVictory,returnRingRareBonus} from './return-ring-state.js';
+import {validNpcEventState,recordNpcEventVictory} from './npc-events.js';
 import {validTaskRewardState} from './task-reward-transaction.js';
 // Sealed production claim only; trusted registry factory is not an engine API.
 export {claimTaskReward} from './task-reward-transaction.js';
@@ -745,13 +747,14 @@ function rewardDwarf(s,e,now){
  normalizeCodexCollection(s);
  return withMultiRng(e,()=>{
   e.rewarded=true;e.lootSummary=emptyLootSummary();e.materialLoot=[];e.rewardNotes=[];
+  recordNpcEventVictory(s,e);
   const st=stats(s),multiple=e.fieldGroup?2:1,baseXp=e.rewardXp*multiple,knowledge=st.specials.knowledge&&Math.random()<.05,clearRewards=clear?e.clearRewards:null;
   s.kills++;s.gold+=e.rewardGold*multiple+(clearRewards?.gold??0);e.acceptedXp=gainXp(s,baseXp*(knowledge?2:1)+(clearRewards?.xp??0)).acceptedXp;
   const initial=e.enemies.filter(u=>u.origin==='initial'&&!u.follower),sources=[];
   for(let i=0;i<multiple;i++)sources.push(e.fieldGroup?initial[rand(0,initial.length-1)]:initial[0]);
   e.rewardRoundSources=e.fieldGroup?sources.map(u=>u.id):undefined;
   const materialRound=u=>{
-   const result=rollMonsterMaterials(s,e,u,{random:Math.random,luck:e.luck??0,rollQuality:(weights,luck)=>luckyRoll(()=>rollQuality(weights),luck),owned:(save,id)=>[0,1,2,3].some(q=>materialCount(save,toDwarfInventoryKey(id),q)>0),receive:(save,row)=>{
+   const result=rollMonsterMaterials(s,e,u,{random:Math.random,luck:e.luck??0,rareBonuses:{special:returnRingRareBonus(s,'material-special'),gem:returnRingRareBonus(s,'material-gem')},rollQuality:(weights,luck)=>luckyRoll(()=>rollQuality(weights),luck),owned:(save,id)=>[0,1,2,3].some(q=>materialCount(save,toDwarfInventoryKey(id),q)>0),receive:(save,row)=>{
     const key=materialKey(row.material,row.quality),received=receiveBattleLoot(save,{kind:'material',key,quantity:row.quantity},e.lootSummary);
     if(received)e.materialLoot.push({key,material:row.material,quality:row.quality,count:row.quantity,channel:row.channel,monsterId:row.monsterId,nodeId:row.nodeId});
     if(received&&rollGoblinExtraMaterial(save.race,row,MATERIALS[row.material],Math.random)&&receiveBattleLoot(save,{kind:'material',key,quantity:1},e.lootSummary)){e.materialLoot.push({key,material:row.material,quality:row.quality,count:1,channel:'racial-scavenging',monsterId:row.monsterId,nodeId:row.nodeId});e.rewardNotes.push('拾荒直觉：额外材料 +1');}return received;
@@ -766,9 +769,10 @@ function rewardDwarf(s,e,now){
   }
   if(clearRewards)for(let i=0;i<(clearRewards.materialRounds??0);i++)materialRound(initial[0]);
   let first=null;for(const u of sources){const drop=rollDrop(s,e.boss,e.luck??0,e.instanceId,clear,e.lootSummary,clearRewards?.gearChance);if(drop){first??=drop;e.rewardNotes.push(drop.name);}}
-  if(e.boss){const area=AREAS[e.areaId],receipt=prepareLegendaryDrop({settlementId:e.id,nodeId:e.instanceId,regionRace:area?.race,kind:e.kind,won:true},{probability:legendaryPoolProbability(e.luck??0),random:Math.random,generateItem:({legendaryId})=>{const lv=rollDropEquipmentLevel(areaGearLevel(e.instanceId),area.levelRange);return legendaryItem(legendaryId,lv.level,{...lv,luck:e.luck??0});},validateItem:it=>validEquipment(it)});if(receipt){e.legendaryDropReceipt=receipt;if(receipt.item){const accepted=receiveBattleLoot(s,{kind:'equipment',item:structuredClone(receipt.item)},e.lootSummary);e.rewardNotes.push(accepted?'传说 · '+receipt.item.name:'传说未收取 · '+receipt.item.name);}}}
+  if(e.boss){const area=AREAS[e.areaId],receipt=prepareLegendaryDrop({settlementId:e.id,nodeId:e.instanceId,regionRace:area?.race,kind:e.kind,won:true},{probability:legendaryPoolProbability(e.luck??0,returnRingRareBonus(s,'boss-legendary')),random:Math.random,generateItem:({legendaryId})=>{const lv=rollDropEquipmentLevel(areaGearLevel(e.instanceId),area.levelRange);return legendaryItem(legendaryId,lv.level,{...lv,luck:e.luck??0});},validateItem:it=>validEquipment(it)});if(receipt){e.legendaryDropReceipt=receipt;if(receipt.item){const accepted=receiveBattleLoot(s,{kind:'equipment',item:structuredClone(receipt.item)},e.lootSummary);e.rewardNotes.push(accepted?'传说 · '+receipt.item.name:'传说未收取 · '+receipt.item.name);}}}
   const markChance=e.boss?.08:clear?(clearRewards?.markChance??.02):0;
   if(markChance>0&&Math.random()<lootOccurrenceProbability(markChance,e.luck??0)&&receiveBattleLoot(s,{kind:'consumable',key:'reforgeToken',quantity:1},e.lootSummary))e.rewardNotes.push('重铸印记 ×1');
+  applyReturnRingVictory(s,e,stats(s).hp);
   if(e.boss){s.instanceCooldowns[e.instanceId]=Math.max(now,s.lastHealthClock??0)+1800000;s.running=!!s.expedition.autoBoss;}
   else if(e.kind==='dungeon'){
    if(clear){recordDungeonAreaClear(s,e);s.instanceCooldowns[e.instanceId]=Math.max(now,s.lastHealthClock??0)+300000;s.dungeonRun=null;e.rewardNotes.push('普通副本通关 · 冷却5分钟');if(!s.expedition.loop&&!s.expedition.autoDungeon&&!s.expedition.autoBoss)s.running=false;}
@@ -1061,7 +1065,7 @@ export function applyForgeFavor(it){
  bonus.affixes=it.affixes.map(a=>({stat:a.stat,value:a.value/10}));
  it.divine={id:'forge-favor',name:'神赐·炉火眷顾',model:'raw-v1',bonus};return true;
 }
-export const LEGENDARY_CODEX=[...EXPANSION_PACKS.flatMap(p=>p.legendaries.map(d=>({...d,implemented:true,lore:d.lore??d.description??'',affix:d.exclusiveName??d.exclusiveId,effect:d.exclusiveDescription??d.exclusive?.description??d.effect??d.description??'',acquisition:d.questOnly?'主线剧情（尚未开放，唯一）':p.name+'地区首领额外掉落，可重复获得',attributes:d.ordinaryAffixCount===0?'仅基础属性与固定专属，无随机普通词条':'4条随机普通词条与固定专属',icon:d.icon??d.slot}))),{id:'first-forge-oathhammer',name:'王统·初炉誓锤',slot:'weapon',icon:'firstforge',implemented:true,lore:'每一代矮人王继承此锤时，都会重新锻造它，并刻下自己的名字。旧王的誓言留在锤身，新王的名字融入炉火。',affix:'祖王回响',effect:'普攻或主动伤害技能每5次出手，向当前目标追加140%攻击的单体重击，穿透30%护甲。',acquisition:'矮人地区首领额外掉落，可重复获得。',attributes:'4条随机普通词条与固定专属；基础和普通词条区间高于同等级至臻。',tuning:'首轮调优数值；回响可暴击、实际生命伤害可吸血，不触发死神、多重或累计。'},{id:'everburning-reactor',name:'不熄之炉',slot:'amulet',icon:'fire',implemented:true,lore:'矮人机械产物：一座可佩戴的微型反应炉，以战斗中的余热驱动火焰脉冲与防护层。',affix:'余热循环',effect:'每12秒实际战斗时间自动向全体释放75%攻击火焰脉冲，并获得8%最大生命加通用护盾增幅的护盾，持续3秒战斗时间；同源护盾刷新不叠加。',acquisition:'矮人地区首领额外掉落，可重复获得。',attributes:'4条随机普通词条与固定专属；基础和普通词条区间高于同等级至臻。',tuning:'首轮调优数值；实际卸下清空充能并移除自身护盾。'}];
+export const LEGENDARY_CODEX=[{id:'return-ring',name:'归途之环',slot:'ring',icon:'ring',implemented:true,lore:'旅途里留下的五件旧物，被接成了完整的环。',affix:'归途',effect:'每次战斗胜利恢复满生命，包含普通副本阶段胜利。首领传说、稀有材料与无限宝石的有效掉落率增加3个百分点；不改变来源和持有上限。',acquisition:'剧情学习配方后，以五族旧物制作；每档仅一次。',attributes:'4条可洗练普通词条与固定专属'},...EXPANSION_PACKS.flatMap(p=>p.legendaries.map(d=>({...d,implemented:true,lore:d.lore??d.description??'',affix:d.exclusiveName??d.exclusiveId,effect:d.exclusiveDescription??d.exclusive?.description??d.effect??d.description??'',acquisition:d.questOnly?'主线剧情（尚未开放，唯一）':p.name+'地区首领额外掉落，可重复获得',attributes:d.ordinaryAffixCount===0?'仅基础属性与固定专属，无随机普通词条':'4条随机普通词条与固定专属',icon:d.icon??d.slot}))),{id:'first-forge-oathhammer',name:'王统·初炉誓锤',slot:'weapon',icon:'firstforge',implemented:true,lore:'每一代矮人王继承此锤时，都会重新锻造它，并刻下自己的名字。旧王的誓言留在锤身，新王的名字融入炉火。',affix:'祖王回响',effect:'普攻或主动伤害技能每5次出手，向当前目标追加140%攻击的单体重击，穿透30%护甲。',acquisition:'矮人地区首领额外掉落，可重复获得。',attributes:'4条随机普通词条与固定专属；基础和普通词条区间高于同等级至臻。',tuning:'首轮调优数值；回响可暴击、实际生命伤害可吸血，不触发死神、多重或累计。'},{id:'everburning-reactor',name:'不熄之炉',slot:'amulet',icon:'fire',implemented:true,lore:'矮人机械产物：一座可佩戴的微型反应炉，以战斗中的余热驱动火焰脉冲与防护层。',affix:'余热循环',effect:'每12秒实际战斗时间自动向全体释放75%攻击火焰脉冲，并获得8%最大生命加通用护盾增幅的护盾，持续3秒战斗时间；同源护盾刷新不叠加。',acquisition:'矮人地区首领额外掉落，可重复获得。',attributes:'4条随机普通词条与固定专属；基础和普通词条区间高于同等级至臻。',tuning:'首轮调优数值；实际卸下清空充能并移除自身护盾。'}];
 export const SET_CODEX=BUILD.map(b=>({id:b.id,name:b.name,icon:b.id,parts:[...SET_SLOTS],bonus:b.bonus}));
 function validCodexCollection(s){return validCollectionLedger(s,SET_CODEX,LEGENDARY_CODEX);}
 export function normalizeCodexCollection(s){return normalizeCollectionLedger(s,SET_CODEX,LEGENDARY_CODEX,validEquipment);}
@@ -1082,7 +1086,7 @@ export function codexState(s,id){
 }
 export function validSave(s){
  try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;
- if(!validTaskRewardState(s)||!validDiplomacy(s))return false;
+ if(!validTaskRewardState(s)||!validDiplomacy(s)||!validNpcEventState(s)||!validReturnRingState(s))return false;
  if(!validSkillTree(s,getSkillTreeDefinition(s))||s.skillTree?.mode!=='active')return false;
  if(s.activeEncounter?.skillResolver!==undefined&&(s.activeEncounter.skillResolver!=='tree-v1'||s.skillTree?.mode!=='active'||s.activeEncounter.multiVersion!==1))return false;
  if(s.supportGrantEligible!==undefined||s.testGrants!==undefined||s.bonusTalentPoints!==undefined||s.skillRulesVersion!==undefined||s.skillAccess!==undefined)return false;

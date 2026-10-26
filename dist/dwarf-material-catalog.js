@@ -1,3 +1,4 @@
+import {rareMaterialOccurrenceProbability} from './rare-material-policy.js';
 import {lootOccurrenceProbability} from './luck-policy.js';
 const freeze=x=>{for(const v of Object.values(x))if(v&&typeof v==='object')freeze(v);return Object.freeze(x)};
 export const LEGACY_MATERIAL_IDS=freeze({"铁屑": "dwarf.iron_filings", "炉火晶": "dwarf.furnace_crystal", "灰根草": "dwarf.ashroot", "誓约残片": "dwarf.oath_fragment"});
@@ -16,13 +17,14 @@ export function validDwarfMaterialPool(pool){
 }
 // Caller supplies quality/luck policy and synchronous inventory acceptance. No global pools,
 // invented fallback materials, direct state writes or independent follower rewards.
-export function rollMonsterMaterials(s,e,unit,{random,rollQuality,owned,receive,luck=0}={}){
+export function rollMonsterMaterials(s,e,unit,{random,rollQuality,owned,receive,luck=0,rareBonuses={}}={}){
  const monsterId=unit?.definitionId??unit?.monsterId,nodeId=unit?.sourceInstanceId??e?.instanceId,pool=getDwarfMaterialPool(monsterId,nodeId);
  if(e?.contentVersion!=='dwarf-m2-v1'||unit?.origin==='summoned'||unit?.independentRewards===false||!validDwarfMaterialPool(pool)||typeof random!=='function'||typeof rollQuality!=='function'||typeof owned!=='function'||typeof receive!=='function'||!Number.isFinite(luck)||luck<0||luck>1000)return {ok:false,reason:'source',drops:[]};
  const drops=[];
  for(const c of pool.channels){
-  if(!c.entries.length||random()>=lootOccurrenceProbability(c.hitProbability,luck))continue;
-  let pick=random(),chosen=c.entries.at(-1);for(const row of c.entries){pick-=row.weight;if(pick<0){chosen=row;break;}}
+  const entries=c.entries.filter(row=>!DWARF_MATERIALS[row.materialId].uniqueHeld||!owned(s,DWARF_MATERIALS[row.materialId].id));
+  if(!entries.length||random()>=rareMaterialOccurrenceProbability(c.channel,c.hitProbability,luck,rareBonuses))continue;
+  let pick=random()*entries.reduce((n,row)=>n+row.weight,0),chosen=entries.at(-1);for(const row of entries){pick-=row.weight;if(pick<0){chosen=row;break;}}
   const m=DWARF_MATERIALS[chosen.materialId];
   for(let i=0;i<c.quantity;i++){
    if(m.uniqueHeld&&owned(s,m.id))break;

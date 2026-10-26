@@ -9,7 +9,7 @@ function fixture(s,{costs=[],rewards=[{kind:'material',key:'铁屑|0',quantity:2
  return {storage:store(s),claim:createTaskRewardService(definitions),definitions};
 }
 function unchanged(s,storage,before,raw){assert.deepEqual(s,before);assert.equal(storage.getItem(SAVE_KEY),raw);}
-assert.deepEqual(TASK_REWARD_REGISTRY,{});
+assert(Object.keys(TASK_REWARD_REGISTRY).length>=5,'authored NPC definitions are sealed in production');
 let s=E.fresh(),f=fixture(s),before=clone(s),raw=f.storage.getItem(SAVE_KEY);
 assert.equal(claimTaskReward(f.storage,s,'test.claim').reason,'not-available');unchanged(s,f.storage,before,raw);assert.equal(f.storage.writes,0);
 // Actual inventory submission, successful save, immutable caller and idempotent reload.
@@ -46,4 +46,4 @@ for(const now of [NaN,Infinity,-1,1e16]){s=E.fresh();f=fixture(s);before=clone(s
 s=E.fresh();f=fixture(s);result=f.claim(f.storage,s,'test.claim',{now:1e15});assert(result.ok);assert(E.validSave(result.game));
 // Present current states remain valid without any migration or added ledger.
 assert(validTaskRewardState(E.fresh()));assert(E.validSave(E.fresh()));
-console.log('PASS task reward service: empty production registry, real current save/reload, full-bag retry, aggregate costs, atomic batch rewards/completion, forge independence, filters, fixed outputs, save rollback, idempotency, current-stock and gem checks. No quest content or UI enabled.');
+console.log('PASS task reward service: sealed authored registry, real current save/reload, full-bag retry, aggregate costs, atomic batch rewards/completion, forge independence, filters, fixed outputs, save rollback, idempotency, current-stock and gem checks. Authored NPC quest tests are separate.');
