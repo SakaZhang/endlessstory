@@ -2,15 +2,8 @@ import {WORLD_MONSTERS,monsterParameters} from './world-content.js';
 import {makeMultiUnit,syncMultiTarget} from './multi-combat.js';
 import {initializeDwarfActor} from './dwarf-effects.js';
 
-const freeze=value=>{for(const child of Object.values(value))if(child&&typeof child==='object')freeze(child);return Object.freeze(value)};
-// Named, nonlethal authored scenes. The source monster ID is a numerical budget,
-// never the character's identity, a codex discovery, or a loot source.
-export const STORY_SCENARIOS=freeze({
- 'story.c01.human-chase':{sceneId:'C01.H01.human',race:'human',siteId:'goblin.a01',budgetId:'goblin.a01.normal.1',actorRace:'goblin',actorWeapon:'dagger',actorName:'奇克',rounds:4,result:'chase-transition',objective:'截住奇克，交手四轮后追入石道；本场不杀死对方。',outcome:'奇克钻入旧石道。罗什福尔追了进去。'},
- 'story.c01.goblin-escape':{sceneId:'C01.G01.goblin',race:'goblin',siteId:'goblin.a01',budgetId:'goblin.a01.normal.1',actorRace:'human',actorWeapon:'sword_shield',actorName:'罗什福尔',rounds:4,result:'chase-transition',objective:'撑过四轮拦截，找到撤离口；本场不杀死对方。',outcome:'窄口的旧阶断开。奇克钻入石道，罗什福尔紧随其后。'},
- 'story.c05.elf-duel':{sceneId:'C05.EA01.elf',race:'elf',siteId:'ashen.a04',budgetId:'ashen.a04.normal.1',actorRace:'ashen',actorWeapon:'armguard',actorName:'砾恩',rounds:4,result:'elf-defeated',objective:'交手四轮，确认核心变化；升级后莱姆斯将败退，不以杀死砾恩为目标。',outcome:'核心的光稳定下来。莱姆斯被逼退，武器落在石面；砾恩没有追击。'},
- 'story.c05.ashen-duel':{sceneId:'C05.EA01.ashen',race:'ashen',siteId:'ashen.a04',budgetId:'ashen.a04.normal.1',actorRace:'elf',actorWeapon:'staff',actorName:'莱姆斯',rounds:4,result:'ashen-victory',objective:'交手四轮，稳住核心并突破拦截；击退对方也会转场，不杀死莱姆斯。',outcome:'核心的光稳定下来。砾恩击退莱姆斯，留下了离开的路。'}
-});
+import {STORY_SCENARIOS,storyScenarioMode,storyScenarioNonlethal} from './story-scenario-registry.js';
+export {STORY_SCENARIOS,storyScenarioMode,storyScenarioNonlethal} from './story-scenario-registry.js';
 const plain=x=>!!x&&typeof x==='object'&&!Array.isArray(x);
 const finite=(x,max=1e12)=>Number.isFinite(x)&&x>=0&&x<=max;
 export function storyScenarioForStart(s,id){
@@ -23,35 +16,35 @@ export function attachStoryScenario(s,e,id,{initialHeroHp,returnAtCamp}={}){
  const d=STORY_SCENARIOS[id],a=s.story?.activeScene,def=d&&WORLD_MONSTERS[d.budgetId],p=def&&monsterParameters(def.id);
  if(!d||!def||!p||s.activeEncounter!==e||s.race!==d.race||s.siteId!==d.siteId||a?.id!==d.sceneId||a.encounterId!==null||e.instanceId!==d.siteId+'.field'||e.done||!finite(initialHeroHp)||initialHeroHp<=0||typeof returnAtCamp!=='boolean')return false;
  const u=makeMultiUnit(e.id+'-story-actor',e.location,e.instanceId,{enemy:d.actorName,hp:p.hp,atk:p.atk,armor:p.armor},s.lastHealthClock,{});
- initializeDwarfActor(u,def,p,s.lastHealthClock);u.main=true;u.name=d.actorName;u.storyActorRace=d.actorRace;u.storyActorWeapon=d.actorWeapon;
+ initializeDwarfActor(u,def,p,s.lastHealthClock);u.main=true;u.name=d.actorName;u.storyActorRace=d.actorRace;u.storyActorWeapon=d.actorWeapon;if(d.actorId)u.storyActorId=d.actorId;
  // No creature traits or spells impersonate the named hero. Only the existing
  // region's normal-actor HP/attack/armor/basic cadence are reused.
  u.shield=0;u.shieldUntil=0;u.control.cooldowns={};u.skillOverrides={};
  e.enemies=[u];e.fieldGroup=false;e.rewardDefinitionId=def.id;e.rewardGold=0;e.rewardXp=0;e.targetId=u.id;e.typedDots=[];
  e.storyScenario={version:1,id,sceneId:d.sceneId,pov:s.race,initialHeroHp,returnAtCamp,result:null,resolvedRound:null};
- a.encounterId=e.id;syncMultiTarget(e);return e;
+ a.encounterId=e.id;if(d.mode==='tool')s.running=false;syncMultiTarget(e);return e;
 }
 export function validStoryScenarioState(s){
  const e=s?.activeEncounter;if(!e)return true;
- if(e.storyScenario===undefined)return !(e.enemies??[]).some(u=>u.storyActorRace!==undefined||u.storyActorWeapon!==undefined);
+ if(e.storyScenario===undefined)return !(e.enemies??[]).some(u=>u.storyActorRace!==undefined||u.storyActorWeapon!==undefined||u.storyActorId!==undefined);
  const x=e.storyScenario,d=plain(x)&&Object.hasOwn(STORY_SCENARIOS,x.id)?STORY_SCENARIOS[x.id]:null,a=s.story?.activeScene;
  if(!d||Object.keys(x).length!==8||x.version!==1||x.sceneId!==d.sceneId||x.pov!==d.race||s.race!==d.race||s.siteId!==d.siteId||a?.id!==d.sceneId||a.encounterId!==e.id||e.instanceId!==d.siteId+'.field'||e.kind!=='field'||e.boss||e.developmentFixture||e.fieldGroup||e.rewardGold!==0||e.rewardXp!==0||e.rewardDefinitionId!==d.budgetId||!finite(x.initialHeroHp)||x.initialHeroHp<=0||typeof x.returnAtCamp!=='boolean'||!Array.isArray(e.enemies)||e.enemies.length!==1)return false;
- const u=e.enemies[0];if(u.definitionId!==d.budgetId||u.name!==d.actorName||u.storyActorRace!==d.actorRace||u.storyActorWeapon!==d.actorWeapon||u.follower||!u.main||u.origin!=='initial')return false;
- if(x.result===null)return x.resolvedRound===null&&!e.done&&!e.rewarded&&e.round<d.rounds;
- return [d.result,'retry'].includes(x.result)&&Number.isSafeInteger(x.resolvedRound)&&x.resolvedRound>0&&x.resolvedRound===e.round&&e.done===true&&e.win===false&&e.rewarded===true;
+ const u=e.enemies[0];if(u.definitionId!==d.budgetId||u.name!==d.actorName||u.storyActorRace!==d.actorRace||u.storyActorWeapon!==d.actorWeapon||u.storyActorId!==d.actorId||u.follower||!u.main||u.origin!=='initial')return false;
+ if(x.result===null)return x.resolvedRound===null&&!e.done&&!e.rewarded&&(d.mode==='clear'||d.mode==='tool'||e.round<d.rounds);
+ return [d.result,'retry'].includes(x.result)&&Number.isSafeInteger(x.resolvedRound)&&x.resolvedRound>=(d.mode==='tool'?0:1)&&x.resolvedRound===e.round&&e.done===true&&e.win===false&&e.rewarded===true;
 }
 // Must run after a real engine step and before ordinary death/rest settlement.
 // No UI action accepts a result or a round count.
 export function advanceStoryScenario(s,e){
- if(s.activeEncounter!==e||!e?.storyScenario||e.storyScenario.result!==null)return null;
+ if(s.activeEncounter!==e||!e?.storyScenario||e.storyScenario.result!==null||storyScenarioMode(e)==='tool')return null;
  const x=e.storyScenario,d=STORY_SCENARIOS[x.id];
  if(!d||s.story?.activeScene?.encounterId!==e.id||s.story.activeScene.id!==d.sceneId||!Number.isSafeInteger(e.round)||e.round<1||e.lastCombatEventAt!==s.lastHealthClock)return null;
- const failed=e.heroHp<=0,decisive=e.done&&e.win===true;
- if(!failed&&!decisive&&e.round<d.rounds)return null;
+ const heroDown=e.heroHp<=0,failed=heroDown&&!d.defeatIsOutcome,decisive=e.done&&e.win===true;
+ if(!heroDown&&!decisive&&(d.mode==='clear'||e.round<d.rounds))return null;
  x.result=failed?'retry':d.result;x.resolvedRound=e.round;e.done=true;e.win=false;e.rewarded=true;e.targetId=null;e.killSource=null;
  // The real hit has already been processed. At the authored nonlethal cut,
  // keep named actors visibly alive; this never changes ordinary combat damage.
- for(const actor of e.enemies)actor.hp=Math.max(1,actor.hp);
+ if(d.mode==='nonlethal')for(const actor of e.enemies)actor.hp=Math.max(1,actor.hp);
  e.rewardNotes=[failed?'未能通过这一段。返回本场安全点，可重新交手。':d.outcome,'剧情交手不结算金币、经验、掉落或副本冷却。'];
  syncMultiTarget(e);return {completed:!failed,result:x.result};
 }
@@ -64,7 +57,11 @@ export function finalizeStoryScenario(s,e){
  if(x.result==='retry'&&s.story?.activeScene?.encounterId===e.id)s.story.activeScene.encounterId=null;
  return true;
 }
-export function storyScenarioObjective(e){const d=STORY_SCENARIOS[e?.storyScenario?.id];return d?{id:e.storyScenario.id,objective:d.objective,rounds:Math.min(d.rounds,e.round),requiredRounds:d.rounds,result:e.storyScenario.result,outcome:e.storyScenario.result==='retry'?'返回安全点，可重试。':e.storyScenario.result?d.outcome:null}:null;}
+export function storyScenarioObjective(e){const d=STORY_SCENARIOS[e?.storyScenario?.id];return d?{id:e.storyScenario.id,objective:d.objective,mode:d.mode,rounds:d.rounds?Math.min(d.rounds,e.round):e.round,requiredRounds:d.rounds??null,result:e.storyScenario.result,outcome:e.storyScenario.result==='retry'?'返回安全点，可重试。':e.storyScenario.result?d.outcome:null}:null;}
 
 const esc=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-export function renderStoryScenarioNotice(e){const row=storyScenarioObjective(e);if(!row)return '';return `<section class="storyScenarioNotice" aria-label="剧情交手目标"><b>剧情交手 · 非致死 · 无战利品</b><p>${esc(row.objective)}</p><p>即死效果不处决剧情人物；普通战斗规则不变。</p><small>交手 ${row.rounds}/${row.requiredRounds} 轮</small>${row.outcome?'<p>'+esc(row.outcome)+'</p>':''}</section>`;}
+export function resolveStoryToolEncounter(s,e){
+ if(s.activeEncounter!==e||storyScenarioMode(e)!=='tool'||e.storyScenario.result!==null||e.done||e.rewarded)return false;
+ const d=STORY_SCENARIOS[e.storyScenario.id];for(const u of e.enemies)u.hp=0;e.hp=0;e.done=true;e.win=false;e.rewarded=true;e.killSource=null;e.targetId=null;e.storyScenario.result=d.result;e.storyScenario.resolvedRound=e.round;e.rewardNotes=[d.outcome,'任务道具仅在本次解封保存成功后消耗。'];syncMultiTarget(e);return true;
+}
+export function renderStoryScenarioNotice(e){const row=storyScenarioObjective(e);if(!row)return '';const tool=row.mode==='tool',nonlethal=row.mode==='nonlethal';return `<section class="storyScenarioNotice" aria-label="剧情遭遇目标"><b>${tool?'封印核心 · 任务道具解除':nonlethal?'剧情交手 · 非致死':'剧情遭遇'} · 无战利品</b><p>${esc(row.objective)}</p>${nonlethal?'<p>即死效果不处决剧情人物；普通战斗规则不变。</p>':tool?'<p>核心封闭，普通攻击无法解除。旧制楔钉受到任务保护，使用成功后消耗一次。</p>':'<p>按现场目标完成遭遇；失败返回本层安全点，已有层次不重打。</p>'}${row.requiredRounds?`<small>交手 ${row.rounds}/${row.requiredRounds} 轮</small>`:''}${tool&&!row.result?`<button type="button" data-story-action="use-tool" data-story-scene="${esc(e.storyScenario.sceneId)}" data-story-encounter="${esc(e.id)}" data-story-target="${esc(e.enemies[0].id)}">使用旧制楔钉击破核心（消耗1件）</button>`:''}${row.outcome?'<p>'+esc(row.outcome)+'</p>':''}</section>`;}

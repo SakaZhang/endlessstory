@@ -1,0 +1,78 @@
+{
+  "passed": true,
+  "checks": "actual 192px RGBA/transparent background/nonempty alpha and solid bounds/exact metadata/hash/anchor",
+  "assets": [
+    {
+      "id": "high-priest",
+      "size": [
+        192,
+        192
+      ],
+      "alphaBBox": [
+        22,
+        20,
+        173,
+        175
+      ],
+      "solidBBox": [
+        51,
+        21,
+        147,
+        175
+      ],
+      "transparentPixels": 28211,
+      "solidPixels": 8013,
+      "above240": 7902,
+      "facing": "right",
+      "sha256": "d716fea66ac4b5f178dbf7d91bdb8ad947e2d7fd21e4fa374d02fa274fce86f6"
+    },
+    {
+      "id": "seal-core",
+      "size": [
+        192,
+        192
+      ],
+      "alphaBBox": [
+        46,
+        19,
+        148,
+        173
+      ],
+      "solidBBox": [
+        47,
+        20,
+        148,
+        172
+      ],
+      "transparentPixels": 26703,
+      "solidPixels": 9824,
+      "above240": 9760,
+      "facing": "not-applicable-inanimate",
+      "sha256": "60bf1cf90ef374afecb727466360df158ca42e5185e8d88c2c21f292484a3063"
+    },
+    {
+      "id": "outsider-vanguard",
+      "size": [
+        192,
+        192
+      ],
+      "alphaBBox": [
+        8,
+        23,
+        184,
+        176
+      ],
+      "solidBBox": [
+        8,
+        23,
+        184,
+        176
+      ],
+      "transparentPixels": 25271,
+      "solidPixels": 9738,
+      "above240": 9355,
+      "facing": "right",
+      "sha256": "a1ae410b10692d448db3d4cf59d747db54f4d08109702926c172ecd3e15d3359"
+    }
+  ]
+}

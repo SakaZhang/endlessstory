@@ -1,3 +1,5 @@
+import {STORY_SCENARIOS} from './story-scenario-registry.js';
+import {resolveStoryToolEncounter,finalizeStoryScenario} from './story-scenario-combat.js';
 import {territoryAccess} from './war-diplomacy.js';
 import {applyStoryWarTransition,storyTerritoryAccess} from './story-war-bridge.js';
 import {STORY_SCENES,STORY_POVS} from './story-event-registry.js';
@@ -25,7 +27,7 @@ function derived(st){
  for(const id of st.completedScenes){const d=scene(id),c=choice(d,st.choices[id]);for(const f of [...d.flags,...(c?.flags??[])])if(!flags.includes(f))flags.push(f);for(const k of [...d.knowledge,...(c?.knowledge??[])])knowledge.push({...k,sourceScene:id});}
  return {flags,knowledge};
 }
-const expectedResult=d=>({'story.c01.human-chase':'chase-transition','story.c01.goblin-escape':'chase-transition','story.c05.elf-duel':'elf-defeated','story.c05.ashen-duel':'ashen-victory'})[d.encounter?.scenarioId];
+const expectedResult=d=>STORY_SCENARIOS[d.encounter?.scenarioId]?.result;
 function receiptFor(st,d){return st.encounters.find(r=>r.sceneId===d.id);}
 export function validStoryEventState(s){
  try{
@@ -108,7 +110,7 @@ export function bindStoryScenario(s,e){
 export function recordStoryScenarioResult(s,e){
  if(!validStoryEventState(s)||s.activeEncounter!==e||!e?.storyScenario||!e.done||!e.rewarded)return false;
  const st=s.story,a=st?.activeScene,d=scene(a?.id),m=e.storyScenario;
- if(!a||!d||d.encounter?.kind!=='scenario'||a.encounterId!==e.id||receiptFor(st,d)||a.cursor!==d.lines.length||!a.choiceId||!storySceneLocationAvailable(s,d)||e.instanceId!==d.encounter.nodeId||m.id!==d.encounter.scenarioId||m.sceneId!==d.id||m.pov!==s.race||m.result!==expectedResult(d)||!Number.isInteger(m.resolvedRound)||m.resolvedRound<1)return false;
+ if(!a||!d||d.encounter?.kind!=='scenario'||a.encounterId!==e.id||receiptFor(st,d)||a.cursor!==d.lines.length||!a.choiceId||!storySceneLocationAvailable(s,d)||e.instanceId!==d.encounter.nodeId||m.id!==d.encounter.scenarioId||m.sceneId!==d.id||m.pov!==s.race||m.result!==expectedResult(d)||!Number.isInteger(m.resolvedRound)||m.resolvedRound<(STORY_SCENARIOS[m.id]?.mode==='tool'?0:1))return false;
  st.encounters.push({sceneId:d.id,encounterId:e.id,nodeId:e.instanceId,scenarioId:m.id,result:m.result});return true;
 }
 export function recordStoryEncounterVictory(s,e){
@@ -135,6 +137,7 @@ export function finishStoryScene(s,id,now=s.lastHealthClock??s.lastSeen??Date.no
 }
 export function applyStoryEvent(s,action,{now=Date.now()}={}){
  if(!object(action))return false;
+ if(action.type==='use-tool')return useStoryQuestTool(s,action,now);
  if(action.type==='enter')return enterWarStoryScene(s,action.sceneId);
  if(action.type==='retreat'&&warWithdrawalAvailable(s))return retreatWarTerritory(s,action.returnSiteId);
  if(action.type==='begin')return beginStoryScene(s,action.sceneId);
@@ -155,13 +158,22 @@ export function transactStoryEvent(storage,game,action,{now=Date.now(),afterComm
 export function storyEventView(s){
  if(!validStoryEventState(s))return {valid:false,active:null,available:[],knowledge:[],complete:false};
  const st=state(s),a=st.activeScene,d=scene(a?.id);
- return {valid:true,active:d?{...structuredClone(d),...structuredClone(a),line:d.lines[a.cursor]??null,receipt:structuredClone(receiptFor(st,d)??null),ready:storySceneReady(s,d.id),safe:storySafeToInteract(s),atLocation:storySceneLocationAvailable(s,d),entryAvailable:canEnterWarStoryScene(s,d.id)}:null,available:availableStoryScenes(s),knowledge:structuredClone(st.knowledge),complete:st.flags.includes('C06_COMPLETE'),warDeclared:st.flags.includes('WAR_DECLARED'),warOpeningComplete:st.flags.includes('C07_OPENING_COMPLETE'),completedCount:st.completedScenes.length};
+ return {valid:true,active:d?{...structuredClone(d),...structuredClone(a),line:d.lines[a.cursor]??null,receipt:structuredClone(receiptFor(st,d)??null),ready:storySceneReady(s,d.id),safe:storySafeToInteract(s),atLocation:storySceneLocationAvailable(s,d),entryAvailable:canEnterWarStoryScene(s,d.id)}:null,available:availableStoryScenes(s),knowledge:structuredClone(st.knowledge),complete:st.flags.includes('C06_COMPLETE'),warDeclared:st.flags.includes('WAR_DECLARED'),warOpeningComplete:st.flags.includes('C07_OPENING_COMPLETE'),invasionBegan:st.flags.includes('INVASION_BEGAN'),chapter8Complete:st.flags.includes('C08_COMPLETE'),completedCount:st.completedScenes.length};
 }
 export function canStartStoryScenario(s,scenarioId){
  if(!validStoryEventState(s)||!storySafeToInteract(s))return false;
- const a=s.story?.activeScene,d=scene(a?.id);return !!d&&d.encounter?.kind==='scenario'&&d.encounter.scenarioId===scenarioId&&a.cursor===d.lines.length&&!!choice(d,a.choiceId)&&!receiptFor(s.story,d)&&a.encounterId===null&&storySceneLocationAvailable(s,d);
+ const a=s.story?.activeScene,d=scene(a?.id);return !!d&&d.encounter?.kind==='scenario'&&d.encounter.scenarioId===scenarioId&&a.cursor===d.lines.length&&!!choice(d,a.choiceId)&&!receiptFor(s.story,d)&&a.encounterId===null&&(!d.questTool||storyQuestToolAvailable(s,d.questTool))&&storySceneLocationAvailable(s,d);
 }
 export function canStartStoryFieldEncounter(s,nodeId){
  if(!validStoryEventState(s)||!storySafeToInteract(s))return false;
  const a=s.story?.activeScene,d=scene(a?.id);return !!d&&d.encounter?.kind==='victory'&&d.encounter.nodeId===nodeId&&a.cursor===d.lines.length&&!!choice(d,a.choiceId)&&!receiptFor(s.story,d)&&storySceneLocationAvailable(s,d);
+}
+
+export function storyQuestToolAvailable(s,id){return id==='old-wedge'&&validStoryEventState(s)&&s.story?.flags.includes('E_WEDGE_LEARNED')&&s.story.flags.includes('E_WEDGE_AVAILABLE')&&!s.story.flags.includes('E_WEDGE_USED');}
+export function useStoryQuestTool(s,action,now){
+ if(!validSave(s)||!storyQuestToolAvailable(s,'old-wedge')||s.race!=='elf'||action.sceneId!=='C08.E03.elf'||s.story?.activeScene?.id!==action.sceneId)return false;
+ const e=s.activeEncounter;if(!e||e.id!==action.encounterId||e.enemies[0]?.id!==action.targetId||e.storyScenario?.id!==STORY_SCENES[action.sceneId].encounter.scenarioId||e.done||e.rewarded)return false;
+ const next=structuredClone(s),battle=next.activeEncounter;
+ if(!resolveStoryToolEncounter(next,battle)||!recordStoryScenarioResult(next,battle)||!finalizeStoryScenario(next,battle)||!finishStoryScene(next,action.sceneId,now)||!validSave(next))return false;
+ Object.assign(s,next);return {sceneId:action.sceneId,encounterId:e.id,toolUsed:'old-wedge',completed:true};
 }

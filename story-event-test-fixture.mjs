@@ -5,23 +5,24 @@ import * as E from './dist/engine.js';
 import * as C from './dist/story-event-controller.js';
 export function preparedStoryGame(race,{level=60,now=1800000000000}={}){
  const s=E.fresh(race);s.level=level;s.lastSeen=now;E.normalizeHealth(s,now);E.normalizeAreaProgress(s);E.normalizeExpedition(s);
- for(const r of ['human','dwarf','elf','goblin','ashen'])s.areaProgress[r]={unlocked:[1,2,3,4,5],cleared:[1,2,3,4]};
+ for(const r of ['human','dwarf','elf','goblin','ashen'])s.areaProgress[r]={unlocked:[1,2,3,4,5,6,7],cleared:[1,2,3,4,5,6]};
  assert(E.validSave(s));return s;
 }
 export function visitSceneSite(s,d){
  const now=Math.max(s.lastSeen,s.lastHealthClock??0,s.nextBattleAt??0)+2000;s.running=false;
- if(s.siteId!==d.siteId){assert(E.chooseAdventureNode(s,d.siteId+'.field',{start:true},now),'navigate '+d.id);const e=s.activeEncounter;s.stopAfterBattle=true;let rounds=0;while(!e.done&&rounds++<3000)E.step(s,e,s.nextActionAt);assert(e.done&&e.win,'travel clear '+d.id);E.reward(s,e,s.lastHealthClock);s.running=false;}
+ if(s.siteId!==d.siteId&&C.canEnterWarStoryScene(s,d.id)){assert(C.enterWarStoryScene(s,d.id));}
+ else if(s.siteId!==d.siteId){assert(E.chooseAdventureNode(s,d.siteId+'.field',{start:true},now),'navigate '+d.id);const e=s.activeEncounter;s.stopAfterBattle=true;let rounds=0;while(!e.done&&rounds++<3000)E.step(s,e,s.nextActionAt);assert(e.done&&e.win,'travel clear '+d.id);E.reward(s,e,s.lastHealthClock);s.running=false;}
  s.lastSeen=Math.max(now,s.lastHealthClock??0);return s.lastSeen;
 }
 export function readAndChooseStoryScene(s,d,selected){
- visitSceneSite(s,d);assert(C.beginStoryScene(s,d.id),'begin '+d.id);
+ visitSceneSite(s,d);if(s.story?.activeScene?.id!==d.id)assert(C.beginStoryScene(s,d.id),'begin '+d.id);
  for(let i=0;i<d.lines.length;i++)assert(C.advanceStoryDialogue(s,d.id),'dialogue '+d.id);
  const id=selected??d.choices[0].id;assert(C.chooseStoryResponse(s,d.id,id),'choice '+d.id);assert(E.validSave(s));return id;
 }
 export function playActiveStoryEncounter(s,{reload=true}={}){
  let d=C.storyEventView(s).active;assert(d?.encounter);const type=d.encounter.kind==='scenario'?'scenario':'encounter';
  assert(C.applyStoryEvent(s,{type,sceneId:d.id,scenarioId:d.encounter.scenarioId,nodeId:d.encounter.nodeId},{now:Math.max(s.lastHealthClock??0,s.nextBattleAt??0)+2000}),'start '+d.id);
- let e=s.activeEncounter;assert(e);let rounds=0;
+ let e=s.activeEncounter;assert(e);if(d.questTool){assert(C.applyStoryEvent(s,{type:'use-tool',sceneId:d.id,encounterId:e.id,targetId:e.enemies[0].id},{now:s.lastHealthClock}));return e;}let rounds=0;
  while(!e.done&&rounds++<3000){E.step(s,e,s.nextActionAt);assert(E.validSave(s),'valid actual combat '+d.id);if(!e.done&&reload&&rounds===1){const restored=JSON.parse(JSON.stringify(s));Object.assign(s,restored);e=s.activeEncounter;}}
  assert(e.done,'combat finite '+d.id);if(!e.storyScenario){assert(e.win,'ordinary clear '+d.id);E.reward(s,e,s.lastHealthClock);}else assert.notEqual(e.storyScenario.result,'retry','story clear '+d.id);
  s.running=false;s.lastSeen=s.lastHealthClock;assert(E.validSave(s),'valid settlement '+d.id);assert(C.storyEventView(s).active.receipt,'recorded '+d.id);return e;
@@ -34,7 +35,7 @@ export function reachStoryScene(race,target,{spring='full',level=60,finishTarget
   readAndChooseStoryScene(s,d,choose);
   if(d.id===target&&!finishTarget)return s;
   if(d.encounter)playActiveStoryEncounter(s);
-  assert(C.finishStoryScene(s,d.id),'finish '+d.id);assert(E.validSave(s));
+  if(!s.story.completedScenes.includes(d.id))assert(C.finishStoryScene(s,d.id),'finish '+d.id);assert(E.validSave(s));
   if(d.id===target)return s;
  }
  throw Error('route did not reach '+target);

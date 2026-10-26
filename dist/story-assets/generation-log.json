@@ -1,0 +1,92 @@
+[
+  {
+    "id": "high-priest",
+    "prompt": "Use case: stylized-concept. Asset type: ONE transparent full-body static battle sprite for a Japanese 16-bit pixel-art fantasy RPG, designed to become a crisp 192 by 192 PNG game asset. Subject: the High Priest, an elderly slim male ELF with long straight white hair, long tapered ears, lined dignified tired face, dark forest-green ceremonial robes with restrained silver trim, one plain carved wooden staff with a small silver leaf fitting. He is an ordinary solemn elder under strain, NOT an evil demon, not a monster, no demonic traits, no crown. Pose: full body idle standing, THREE QUARTER SIDE VIEW facing to the RIGHT side of image, nose, gaze and toes point RIGHT, staff slightly forward on his right-facing side. Show every foot and all of staff, hair, robe hem without cropping. Composition: centered single full-body figure, plain genuinely TRANSPARENT background with alpha channel, no ground plane, no shadow outside feet, no scenic background, no checkerboard baked into pixels. Compact readable silhouette with narrow shoulders, clear head, staff and robe. Hand-placed hard square pixels and chunky color clusters, dark selective outline, muted greens and silver, warm limited highlight, no smooth gradients, not photorealistic, no 3D. No text, letters, numbers, frames, logos, other people, duplicate poses or sprite sheet.",
+    "sourcePath": "/workspace/scratch/81f4d6a709c0/generated_images/exec-c81c86d6-fee0-49dd-a7c4-14f61ef4a0cc.png",
+    "method": "builtin image_gen",
+    "file": "/workspace/shared/npc-portraits-30/story/high-priest.png",
+    "sourceSize": [
+      1246,
+      1263
+    ],
+    "sourceAlphaBBox": [
+      0,
+      0,
+      1234,
+      1237
+    ],
+    "frameSize": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "alphaBBox": [
+      22,
+      20,
+      173,
+      175
+    ],
+    "facing": "right",
+    "sha256": "d716fea66ac4b5f178dbf7d91bdb8ad947e2d7fd21e4fa374d02fa274fce86f6",
+    "processing": "Actual alpha preserved; alpha-bounds crop then nearest-neighbor scaled to 160px max dimension, bottom aligned y176, centered x96. No semantic edits.",
+    "solidBBox": [
+      51,
+      21,
+      147,
+      175
+    ],
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "transparentPixels": 28211
+  },
+  {
+    "id": "seal-core",
+    "prompt": "Use case: stylized-concept. Asset type: ONE transparent static encounter object sprite for a Japanese 16-bit pixel-art fantasy RPG, designed to become a crisp 192 by 192 PNG game asset. Subject: an ancient SEAL CORE apparatus, a squat standing mineral-stone device composed of one faceted charcoal mineral centerpiece held within a time-worn grey stone hexagonal cradle and low sturdy stone base; abstract shallow geometric carved grooves, a few restrained AMBER hairline cracks glowing dimly within the center. This is an inanimate ancient sealing apparatus, NOT a person, not a creature, no face, eyes, limbs, skull, body silhouette or sentience. Single compact readable artifact in three-quarter side view, full object visible, base rests level. Plain genuinely TRANSPARENT background with alpha channel, no ground, no scenery, no external shadow or radiant aura, no checkerboard baked in. Crisp hand-placed hard square pixels and chunky color clusters, muted stone grey and dark blue-green with restrained amber fissures, selective dark outlines, classic 16-bit Japanese RPG pixel sprite, no smooth painting, not 3D, not photoreal. No readable symbols, letters, words, numbers, text, frame, logo, collage, variants or other objects.",
+    "sourcePath": "/workspace/scratch/81f4d6a709c0/generated_images/exec-e774c298-4f19-45d2-8945-94ee201f0226.png",
+    "method": "builtin image_gen",
+    "file": "/workspace/shared/npc-portraits-30/story/seal-core.png",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "sourceAlphaBBox": [
+      0,
+      47,
+      1232,
+      1254
+    ],
+    "frameSize": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "alphaBBox": [
+      46,
+      19,
+      148,
+      173
+    ],
+    "facing": "not-applicable-inanimate",
+    "sha256": "60bf1cf90ef374afecb727466360df158ca42e5185e8d88c2c21f292484a3063",
+    "processing": "Actual alpha preserved; alpha-bounds crop then nearest-neighbor scaled to 160px max dimension, bottom aligned y176, centered x96. No semantic edits.",
+    "solidBBox": [
+      47,
+      20,
+      148,
+      172
+    ],
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "transparentPixels": 26703
+  }
+]

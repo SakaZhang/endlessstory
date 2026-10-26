@@ -1,3 +1,4 @@
+import {storyActorPresentationScale} from './story-actor-art.js';
 import {loadImageAsset} from './asset-loader.js';
 import {reportAssetFailure} from './asset-recovery.js';
 import {heroPresentationScale,heroPortraitFlipX,HERO_REFERENCE_HEIGHTS} from './hero-proportions.js';
@@ -48,6 +49,7 @@ export function liveCampRace(state){if(state?.atCamp!==true&&!(state?.restUntil>
 export function liveSceneBackgrounds(snapshot,manifest){if(snapshot?.campRace){const row=manifest?.campBackgrounds?.[snapshot.campRace];return row?[row]:[];}return liveAreaBackgrounds(snapshot?.areaId,manifest);}
 const areaKey=id=>String(id).match(/^(?:dwarf|human|elf|goblin|ashen)\.a(?:0[1-9]|10)(?=\.|$)/)?.[0]??null;
 export function liveActorSprite(unit,manifest){
+ if(unit?.storyActorId)return manifest?.storyActorSprites?.[unit.storyActorId]??null;
  if(unit?.storyActorRace)return manifest?.raceHeroWeaponSprites?.[unit.storyActorRace]?.[unit.storyActorWeapon]??null;
  const variant=[...(manifest?.actorVariants??[])].sort((a,b)=>(b.priority??0)-(a.priority??0)).find(row=>row.match&&Object.entries(row.match).every(([key,value])=>(key==='definitionId'?(unit.definitionId??unit.monsterId):unit[key])===value));
  if(variant)return variant.spriteKey;
@@ -111,7 +113,7 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
    // Idle height sets visual hierarchy; the full lifecycle bounds constrain clipping.
    const width=Math.max(1,...boxes.map(b=>b[2]-b[0]+1)),height=Math.max(1,...boxes.map(b=>b[3]-b[1]+1));
    const idle=sprite?.frames.find(f=>f.id===sprite.animations.idle[0]),box=idle?.solidBBox??idle?.alphaBBox,idleHeight=box?box[3]-box[1]+1:height;
-   const scale=u.storyActorRace?heroPresentationScale(sprite,u.storyActorRace):dense?Math.min((n===0?(String(identity(u)).endsWith('.boss')?112:96):slots.size<=5?52:42)/idleHeight,(n===0?164:slots.size<=5?66:48)/width,128/height):u.follower===true?.72:1;
+   const scale=u.storyActorId?storyActorPresentationScale(sprite,u.storyActorId):u.storyActorRace?heroPresentationScale(sprite,u.storyActorRace):dense?Math.min((n===0?(String(identity(u)).endsWith('.boss')?112:96):slots.size<=5?52:42)/idleHeight,(n===0?164:slots.size<=5?66:48)/width,128/height):u.follower===true?.72:1;
    positions[u.id]={x:cell?.[0]??layout[n%3]??425,y:baseline+(cell?.[1]??0),scale,sprite:key};
   }
   for(const id of Object.keys(positions))if(id!=='hero'&&!units.some(u=>u.id===id))delete positions[id];

@@ -1,4 +1,4 @@
-// Canon source: rpg-script-v1/chapters-01-06.md. No world-secret knowledge is inferred for absent POVs.
+// Canon source: rpg-script-v1/screenplay-v1.md (C01–C08). No world-secret knowledge is inferred for absent POVs.
 const freeze=o=>{if(o&&typeof o==='object'){Object.values(o).forEach(freeze);Object.freeze(o);}return o;};
 export const STORY_SCENES=freeze({
  "C01.H01.human": {
@@ -2495,6 +2495,1934 @@ export const STORY_SCENES=freeze({
    "nodeId": "ashen.a06.field",
    "count": 1
   }
+ },
+ "C07.EA02.elf": {
+  "id": "C07.EA02.elf",
+  "sourceScene": "C07.EA02",
+  "chapter": 7,
+  "pov": "elf",
+  "siteId": "ashen.a06",
+  "title": "直取族长",
+  "npc": "前线混战",
+  "lines": [
+   "[精灵部队被困在侧翼。大祭司越过伤者，直向族长所在处前进。]",
+   "莱姆斯：左翼还没有撤出来！",
+   "大祭司：继续前进。",
+   "族长：想进来，就从这里过。"
+  ],
+  "objective": "清开去左翼的路，赶到族长所在处；本场不是击杀大祭司。",
+  "flags": [
+   "CHIEFTAIN_KILLED",
+   "PRIEST_HAS_CHIEFTAIN_CORE"
+  ],
+  "knowledge": [
+   {
+    "id": "C07.EA02.elf.k0",
+    "text": "大祭司杀死族长、取走族长自身核心后离开战阵；砾恩的升级王室遗物核心没有转移。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C07.X01.elf"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "scenario",
+   "scenarioId": "story.c07-ea02-elf",
+   "nodeId": "ashen.a06.field",
+   "count": 1
+  }
+ },
+ "C07.EA03.elf": {
+  "id": "C07.EA03.elf",
+  "sourceScene": "C07.EA03",
+  "chapter": 7,
+  "pov": "elf",
+  "siteId": "ashen.a06",
+  "title": "留在后面的人",
+  "npc": "大祭司与砾恩",
+  "lines": [
+   "[大祭司带着族长核心离开战阵，仍被包围的精灵兵没有接应。]",
+   "莱姆斯：您往哪里去？部队还在里面！",
+   "大祭司：他们会退出来。",
+   "莱姆斯：没有人接应，他们怎么退？",
+   "大祭司：让开。",
+   "莱姆斯：把人带回去。现在。",
+   "大祭司：你在命令我？",
+   "莱姆斯：是您把他们带来的。"
+  ],
+  "objective": "挡住大祭司，为伤员争取撤离；对方力量远胜，抵抗后莱姆斯将被封印。",
+  "flags": [
+   "E_SEALED",
+   "A_WITNESSED_E_REBELLION"
+  ],
+  "knowledge": [
+   {
+    "id": "C07.EA03.elf.k0",
+    "text": "莱姆斯为被抛下的兵阻挡大祭司，败北被封；砾恩亲眼见到，仍不知道惧死动机。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "resist",
+    "label": "挡住大祭司，给伤员争取撤离",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C07.EA02.elf"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "scenario",
+   "scenarioId": "story.c07-ea03-elf",
+   "nodeId": "ashen.a06.field",
+   "count": 1
+  }
+ },
+ "C07.EA02.ashen": {
+  "id": "C07.EA02.ashen",
+  "sourceScene": "C07.EA02",
+  "chapter": 7,
+  "pov": "ashen",
+  "siteId": "ashen.a06",
+  "title": "直取族长",
+  "npc": "前线混战",
+  "lines": [
+   "[精灵部队被困在侧翼。大祭司越过伤者，直向族长所在处前进。]",
+   "莱姆斯：左翼还没有撤出来！",
+   "大祭司：继续前进。",
+   "族长：想进来，就从这里过。"
+  ],
+  "objective": "清开去左翼的路，赶到族长所在处；本场不是击杀大祭司。",
+  "flags": [
+   "CHIEFTAIN_KILLED",
+   "PRIEST_HAS_CHIEFTAIN_CORE"
+  ],
+  "knowledge": [
+   {
+    "id": "C07.EA02.ashen.k0",
+    "text": "大祭司杀死族长、取走族长自身核心后离开战阵；砾恩的升级王室遗物核心没有转移。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C07.X01.ashen"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "scenario",
+   "scenarioId": "story.c07-ea02-ashen",
+   "nodeId": "ashen.a06.field",
+   "count": 1
+  }
+ },
+ "C07.EA03.ashen": {
+  "id": "C07.EA03.ashen",
+  "sourceScene": "C07.EA03",
+  "chapter": 7,
+  "pov": "ashen",
+  "siteId": "ashen.a06",
+  "title": "留在后面的人",
+  "npc": "大祭司与砾恩",
+  "lines": [
+   "[大祭司带着族长核心离开战阵，仍被包围的精灵兵没有接应。]",
+   "莱姆斯：您往哪里去？部队还在里面！",
+   "大祭司：他们会退出来。",
+   "莱姆斯：没有人接应，他们怎么退？",
+   "大祭司：让开。",
+   "莱姆斯：把人带回去。现在。",
+   "大祭司：你在命令我？",
+   "莱姆斯：是您把他们带来的。",
+   "[莱姆斯举起武器阻挡大祭司，随后败退。砾恩在断墙后亲眼看着。]",
+   "大祭司：你就在这里，想清自己的位置。",
+   "[封印合拢。砾恩靠近，却被外涌的力量逼退。]",
+   "砾恩：莱姆斯。",
+   "[近处追赶路线已被危险断路截住，必须回到封印边寻求援手。]"
+  ],
+  "objective": "目击莱姆斯因保护弃军反抗而被封；确定从外侧营救的起点。",
+  "flags": [
+   "E_SEALED",
+   "A_WITNESSED_E_REBELLION"
+  ],
+  "knowledge": [
+   {
+    "id": "C07.EA03.ashen.k0",
+    "text": "莱姆斯为被抛下的兵阻挡大祭司，败北被封；砾恩亲眼见到，仍不知道惧死动机。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "seal",
+    "label": "先查看封印",
+    "flags": []
+   },
+   {
+    "id": "pursue",
+    "label": "先追到断路，再回封印求援",
+    "flags": [
+     "A_PURSUIT_BLOCKED"
+    ]
+   }
+  ],
+  "requires": [
+   "C07.EA02.ashen"
+  ],
+  "optional": false
+ },
+ "C07.O02.dwarf": {
+  "id": "C07.O02.dwarf",
+  "sourceScene": "C07.O02",
+  "chapter": 7,
+  "pov": "dwarf",
+  "siteId": "dwarf.a05",
+  "title": "从战场送出的口信",
+  "npc": "幸存救护者",
+  "lines": [
+   "信使：莱姆斯拦住了大祭司。他没跟着走。他被封在前线了。",
+   "布洛克：谁在那儿？",
+   "信使：一个叫砾恩的烬裔。他没走，说需要能开路的人。",
+   "布洛克：把伤员的退路画给我。别让我走进你们进军的路。"
+  ],
+  "objective": "接下有来源的撤离路线，沿路线前往前线救护点；不假装亲见异地交手。",
+  "flags": [
+   "SELECTED_HERO_SEAL_ROUTE_KNOWN",
+   "E_SEALED"
+  ],
+  "knowledge": [
+   {
+    "id": "C07.O02.dwarf.k0",
+    "text": "幸存救护者报告莱姆斯阻止大祭司弃军，被封在前线；砾恩留在封印外求援。",
+    "mode": "heard"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C07.O01.dwarf"
+  ],
+  "optional": false
+ },
+ "C07.O02.human": {
+  "id": "C07.O02.human",
+  "sourceScene": "C07.O02",
+  "chapter": 7,
+  "pov": "human",
+  "siteId": "human.a05",
+  "title": "从战场送出的口信",
+  "npc": "幸存救护者",
+  "lines": [
+   "信使：莱姆斯拦住了大祭司。他被封在前线了。",
+   "罗什福尔：这消息是谁交给你的？",
+   "信使：救护队。我从那边撤出来的。布洛克留过你的名字。",
+   "罗什福尔：带我到安全接应点。你不必再进战场。"
+  ],
+  "objective": "接下有来源的撤离路线，沿路线前往前线救护点；不假装亲见异地交手。",
+  "flags": [
+   "SELECTED_HERO_SEAL_ROUTE_KNOWN",
+   "E_SEALED"
+  ],
+  "knowledge": [
+   {
+    "id": "C07.O02.human.k0",
+    "text": "幸存救护者报告莱姆斯阻止大祭司弃军，被封在前线；砾恩留在封印外求援。",
+    "mode": "heard"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C07.O01.human"
+  ],
+  "optional": false
+ },
+ "C07.O02.goblin": {
+  "id": "C07.O02.goblin",
+  "sourceScene": "C07.O02",
+  "chapter": 7,
+  "pov": "goblin",
+  "siteId": "goblin.a05",
+  "title": "从战场送出的口信",
+  "npc": "幸存救护者",
+  "lines": [
+   "信使：莱姆斯拦住了大祭司。他被封在前线了。",
+   "信使：罗什福尔说，你能找不走大路的办法。",
+   "奇克：他说得倒轻巧。那边可都是兵。",
+   "信使：有伤员，还有个被封住的人。路图在这。",
+   "奇克：路开了，你们把沿路的人一起带出来。别让我只赚一条死路。"
+  ],
+  "objective": "接下有来源的撤离路线，沿路线前往前线救护点；不假装亲见异地交手。",
+  "flags": [
+   "SELECTED_HERO_SEAL_ROUTE_KNOWN",
+   "E_SEALED"
+  ],
+  "knowledge": [
+   {
+    "id": "C07.O02.goblin.k0",
+    "text": "幸存救护者报告莱姆斯阻止大祭司弃军，被封在前线；砾恩留在封印外求援。",
+    "mode": "heard"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C07.O01.goblin"
+  ],
+  "optional": false
+ },
+ "C08.E01.elf": {
+  "id": "C08.E01.elf",
+  "sourceScene": "C08.E01",
+  "chapter": 8,
+  "pov": "elf",
+  "siteId": "ashen.a06",
+  "title": "封印里面 · 第一层",
+  "npc": "封印内侧",
+  "lines": [
+   "莱姆斯：能听见吗？外面还有人吗？",
+   "[远处传来一次闷响，随后停下。]",
+   "莱姆斯：不是全封死的。"
+  ],
+  "objective": "击退第一层显现的阻拦，抵达下一层；这是可胜的真实战斗。",
+  "flags": [
+   "E_SEAL_FIRST_CLEARED"
+  ],
+  "knowledge": [],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C07.EA03.elf"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "scenario",
+   "scenarioId": "story.c08-e01-elf",
+   "nodeId": "ashen.a06.field",
+   "count": 1
+  }
+ },
+ "C08.E02.elf": {
+  "id": "C08.E02.elf",
+  "sourceScene": "C08.E02",
+  "chapter": 8,
+  "pov": "elf",
+  "siteId": "ashen.a06",
+  "title": "封印里面 · 第二层",
+  "npc": "封印内侧",
+  "lines": [
+   "莱姆斯：它在把我往回推。那就别顺着它走。"
+  ],
+  "objective": "解除通向中心的第二层阻拦；已完成的第一层不重打。",
+  "flags": [
+   "E_SEAL_SECOND_CLEARED"
+  ],
+  "knowledge": [],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.E01.elf"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "scenario",
+   "scenarioId": "story.c08-e02-elf",
+   "nodeId": "ashen.a06.field",
+   "count": 1
+  }
+ },
+ "C08.E03.elf": {
+  "id": "C08.E03.elf",
+  "sourceScene": "C08.E03",
+  "chapter": 8,
+  "pov": "elf",
+  "siteId": "ashen.a06",
+  "title": "封印核心",
+  "npc": "回弹闭合的核心",
+  "lines": [
+   "[第三层封印核心显露；普通攻击无法解除它。]",
+   "莱姆斯：卡住回弹……就是这里。击破它！",
+   "砾恩在外：往左。那里松了。",
+   "莱姆斯：你是谁？",
+   "砾恩：先出来。"
+  ],
+  "objective": "进入封印核心战，使用先前取得的旧制楔钉一击解除；道具会消耗一次。",
+  "flags": [
+   "E_WEDGE_USED",
+   "E_SEAL_CORE_OPENED",
+   "E_UNSEALED"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.E03.elf.k0",
+    "text": "旧制楔钉在解除封印核心时耗尽；砾恩从外侧帮助打开通道。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "use",
+    "label": "锁定封印核心，准备使用旧制楔钉",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.E02.elf"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "scenario",
+   "scenarioId": "story.c08-e03-elf",
+   "nodeId": "ashen.a06.field",
+   "count": 1
+  },
+  "questTool": "old-wedge",
+  "requiresFlags": [
+   "E_WEDGE_AVAILABLE",
+   "E_WEDGE_LEARNED"
+  ]
+ },
+ "C08.O01.dwarf": {
+  "id": "C08.O01.dwarf",
+  "sourceScene": "C08.O01",
+  "chapter": 8,
+  "pov": "dwarf",
+  "siteId": "ashen.a06",
+  "title": "封印外面",
+  "npc": "砾恩与救护者",
+  "lines": [
+   "砾恩：他挡过那个人。就在这儿。",
+   "布洛克：你看见他被封进去？",
+   "砾恩：看见了。",
+   "布洛克：那就先找不受力的边。别冲着最硬的打。"
+  ],
+  "objective": "清除外围威胁，循内部敲击打开外侧约束；莱姆斯自行处理内部层次。",
+  "flags": [
+   "E_SEAL_OUTER_OPENED",
+   "E_UNSEALED"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.O01.dwarf.k0",
+    "text": "内部传来两次战斗声，最后传来任务道具解除核心的声响；莱姆斯从内部打开通道。",
+    "mode": "heard"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C07.O02.dwarf"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "scenario",
+   "scenarioId": "story.c08-o01-dwarf",
+   "nodeId": "ashen.a06.field",
+   "count": 1
+  }
+ },
+ "C08.O01.human": {
+  "id": "C08.O01.human",
+  "sourceScene": "C08.O01",
+  "chapter": 8,
+  "pov": "human",
+  "siteId": "ashen.a06",
+  "title": "封印外面",
+  "npc": "砾恩与救护者",
+  "lines": [
+   "砾恩：他挡过那个人。就在这儿。",
+   "罗什福尔：他为什么拦大祭司？",
+   "砾恩：为了被丢下的兵。",
+   "罗什福尔：我清开外围。你认得刚才封起来的位置，带路。"
+  ],
+  "objective": "清除外围威胁，循内部敲击打开外侧约束；莱姆斯自行处理内部层次。",
+  "flags": [
+   "E_SEAL_OUTER_OPENED",
+   "E_UNSEALED"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.O01.human.k0",
+    "text": "内部传来两次战斗声，最后传来任务道具解除核心的声响；莱姆斯从内部打开通道。",
+    "mode": "heard"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C07.O02.human"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "scenario",
+   "scenarioId": "story.c08-o01-human",
+   "nodeId": "ashen.a06.field",
+   "count": 1
+  }
+ },
+ "C08.O01.goblin": {
+  "id": "C08.O01.goblin",
+  "sourceScene": "C08.O01",
+  "chapter": 8,
+  "pov": "goblin",
+  "siteId": "ashen.a06",
+  "title": "封印外面",
+  "npc": "砾恩与救护者",
+  "lines": [
+   "砾恩：他挡过那个人。就在这儿。",
+   "奇克：这东西会把人弹回来？",
+   "砾恩：会。",
+   "奇克：那别催我。我要找能伸手进去的缝。"
+  ],
+  "objective": "清除外围威胁，循内部敲击打开外侧约束；莱姆斯自行处理内部层次。",
+  "flags": [
+   "E_SEAL_OUTER_OPENED",
+   "E_UNSEALED"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.O01.goblin.k0",
+    "text": "内部传来两次战斗声，最后传来任务道具解除核心的声响；莱姆斯从内部打开通道。",
+    "mode": "heard"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C07.O02.goblin"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "scenario",
+   "scenarioId": "story.c08-o01-goblin",
+   "nodeId": "ashen.a06.field",
+   "count": 1
+  }
+ },
+ "C08.O01.ashen": {
+  "id": "C08.O01.ashen",
+  "sourceScene": "C08.O01",
+  "chapter": 8,
+  "pov": "ashen",
+  "siteId": "ashen.a06",
+  "title": "封印外面",
+  "npc": "砾恩与救护者",
+  "lines": [
+   "砾恩：他挡过那个人。就在这儿。",
+   "救护者：你还会帮我们？",
+   "砾恩：我帮里面那个。其他的，以后说。"
+  ],
+  "objective": "清除外围威胁，循内部敲击打开外侧约束；莱姆斯自行处理内部层次。",
+  "flags": [
+   "E_SEAL_OUTER_OPENED",
+   "E_UNSEALED"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.O01.ashen.k0",
+    "text": "内部传来两次战斗声，最后传来任务道具解除核心的声响；莱姆斯从内部打开通道。",
+    "mode": "heard"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C07.EA03.ashen"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "scenario",
+   "scenarioId": "story.c08-o01-ashen",
+   "nodeId": "ashen.a06.field",
+   "count": 1
+  }
+ },
+ "C08.X01.human": {
+  "id": "C08.X01.human",
+  "sourceScene": "C08.X01",
+  "chapter": 8,
+  "pov": "human",
+  "siteId": "ashen.a06",
+  "title": "出来之后",
+  "npc": "莱姆斯与砾恩",
+  "lines": [
+   "莱姆斯：是你。",
+   "砾恩：你看见他拿走了什么。",
+   "莱姆斯：族长的核心。我看见了。",
+   "砾恩：我要找到他。",
+   "莱姆斯：我也是。",
+   "砾恩：别挡我的路。",
+   "莱姆斯：你也别挡我救人。",
+   "罗什福尔：伤员有人接应。先把追踪方向说清。"
+  ],
+  "objective": "带着保留共同追踪；不是五人提前结盟。",
+  "flags": [
+   "E_UNSEALED"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X01.human.k0",
+    "text": "莱姆斯已经解封，与砾恩带着戒心同行；大祭司夺走的是族长自身核心。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.O01.human"
+  ],
+  "optional": false
+ },
+ "C08.X02.human": {
+  "id": "C08.X02.human",
+  "sourceScene": "C08.X02",
+  "chapter": 8,
+  "pov": "human",
+  "siteId": "ashen.a07",
+  "title": "留下的痕迹",
+  "npc": "莱姆斯与砾恩",
+  "lines": [
+   "[石屑被同一方向的光照亮，前方的门刚被强行打开。]",
+   "莱姆斯：他没再带人。",
+   "砾恩：拿到核心就走。军队只替他开了路。",
+   "莱姆斯：我当时没有看出来。",
+   "砾恩：现在看路。"
+  ],
+  "objective": "追查痕迹，清开守路威胁，找到中央主祭坛入口。",
+  "flags": [
+   "MAIN_ALTAR_ROUTE_FOUND"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X02.human.k0",
+    "text": "大祭司取得族长核心后独自赶往主祭坛；仍不知道他的惧死动机。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.X01.human"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "scenario",
+   "scenarioId": "story.c08-x02-human",
+   "nodeId": "ashen.a07.field",
+   "count": 1
+  }
+ },
+ "C08.X03.human": {
+  "id": "C08.X03.human",
+  "sourceScene": "C08.X03",
+  "chapter": 8,
+  "pov": "human",
+  "siteId": "ashen.a07",
+  "title": "主祭坛",
+  "npc": "大祭司",
+  "lines": [
+   "[族长核心置入中央结构，已亮起。砾恩胸前仍是升级后的王室遗物核心。]",
+   "莱姆斯：停下。你把他们留在战场，就是为了这个？",
+   "大祭司：我等不到下一次了。",
+   "莱姆斯：等什么？",
+   "大祭司：等这具身体慢慢死掉。你还年轻，当然觉得时间很多。",
+   "砾恩：把他的核心拿出来。",
+   "大祭司：原本该用的是你拿走的那一枚。如今，只能用这枚强行开坛。",
+   "莱姆斯：这会打开什么？",
+   "大祭司：我知道门外有什么。我曾把它们挡在外面。",
+   "砾恩：你凭什么知道？",
+   "大祭司：当年的矮人王、人族国王，还有我。是我们造出了烬裔。",
+   "大祭司：你们就是为挡住外来的东西而生的。",
+   "砾恩：那也不是你拿走他的理由。",
+   "莱姆斯：如果你知道，就更该停下！"
+  ],
+  "objective": "记录大祭司当场宣称的古代身份和惧死动机；尚未得到独立遗迹印证。",
+  "flags": [
+   "PRIEST_MORTALITY_MOTIVE_HEARD",
+   "ASHEN_ORIGIN_CLAIM_HEARD"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X03.human.k0",
+    "text": "大祭司在主祭坛承认自己惧死，宣称曾与古代两位国王创造烬裔；古代身份与起源仍待独立记录印证。",
+    "mode": "heard"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.X02.human"
+  ],
+  "optional": false
+ },
+ "C08.X04A.human": {
+  "id": "C08.X04A.human",
+  "sourceScene": "C08.X04A",
+  "chapter": 8,
+  "pov": "human",
+  "siteId": "ashen.a07",
+  "title": "打断施法",
+  "npc": "仪式外围",
+  "lines": [
+   "[目标：突破仪式外围，切断持续施法，尝试救出核心。]",
+   "[尚不知道核心能否在停手后继续运转；先找到接近中央结构的路。]"
+  ],
+  "objective": "突破仪式外围，尝试切断施法、救出核心；这不是保证关闭门户。",
+  "flags": [
+   "RITUAL_CAST_INTERRUPTED"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X04A.human.k0",
+    "text": "持续施法已被打断，核心仍自行运转；仅让大祭司停手已经无用。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.X03.human"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "scenario",
+   "scenarioId": "story.c08-x04a-human",
+   "nodeId": "ashen.a07.field",
+   "count": 1
+  }
+ },
+ "C08.X04.human": {
+  "id": "C08.X04.human",
+  "sourceScene": "C08.X04",
+  "chapter": 8,
+  "pov": "human",
+  "siteId": "ashen.a07",
+  "title": "没能关上的门",
+  "npc": "涌出的界外力量",
+  "lines": [
+   "莱姆斯：他已经停手了。",
+   "砾恩：下面还在动。",
+   "[目标变更：避开涌出的力量，撤出中心。]",
+   "[核心已激活，门户打开，恶魔涌入。]",
+   "大祭司：不……不该这样。",
+   "[反噬蔓延，大祭司退不出去，倒在中央结构旁。]",
+   "大祭司：我还不能……",
+   "莱姆斯：后退！门已经开了！",
+   "砾恩：我看见了。",
+   "罗什福尔：靠着退路，别被冲散！"
+  ],
+  "objective": "抵挡首波冲击并撤出中心；成功撤离不等于阻止仪式或关闭门户。",
+  "flags": [
+   "RITUAL_SUCCEEDED",
+   "PRIEST_DIED_BACKLASH",
+   "INVASION_BEGAN"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X04.human.k0",
+    "text": "仪式成功，恶魔入侵，大祭司死于反噬；门户仍运转。精灵与烬裔转向抵抗入侵，全境敌对封锁解除，并不代表和解。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.X04A.human"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "scenario",
+   "scenarioId": "story.c08-x04-human",
+   "nodeId": "ashen.a07.field",
+   "count": 1
+  }
+ },
+ "C08.X05.human": {
+  "id": "C08.X05.human",
+  "sourceScene": "C08.X05",
+  "chapter": 8,
+  "pov": "human",
+  "siteId": "ashen.a07",
+  "title": "只守住这里不够",
+  "npc": "莱姆斯与砾恩",
+  "lines": [
+   "莱姆斯：先把消息送出去。让沿路的人撤开。",
+   "砾恩：它还在往外来。",
+   "莱姆斯：我知道。只守这条路，挡不住。",
+   "砾恩：这几道转折，我见过。",
+   "莱姆斯：在哪里？",
+   "砾恩：那座神庙。我得回去。"
+  ],
+  "objective": "记录激活刻纹，发出撤离消息，准备返回古神庙核实；暂不确认支撑数量。",
+  "flags": [
+   "ACTIVE_MARKS_RECORDED",
+   "TEMPLE_RETURN_PLANNED",
+   "C08_COMPLETE"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X05.human.k0",
+    "text": "砾恩认为激活刻纹与古神庙相似，需要返查；尚不能确认四座支撑祭坛。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.X04.human"
+  ],
+  "optional": false
+ },
+ "C08.X01.dwarf": {
+  "id": "C08.X01.dwarf",
+  "sourceScene": "C08.X01",
+  "chapter": 8,
+  "pov": "dwarf",
+  "siteId": "ashen.a06",
+  "title": "出来之后",
+  "npc": "莱姆斯与砾恩",
+  "lines": [
+   "莱姆斯：是你。",
+   "砾恩：你看见他拿走了什么。",
+   "莱姆斯：族长的核心。我看见了。",
+   "砾恩：我要找到他。",
+   "莱姆斯：我也是。",
+   "砾恩：别挡我的路。",
+   "莱姆斯：你也别挡我救人。",
+   "布洛克：路上再吵。他带着核心走多久了？"
+  ],
+  "objective": "带着保留共同追踪；不是五人提前结盟。",
+  "flags": [
+   "E_UNSEALED"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X01.dwarf.k0",
+    "text": "莱姆斯已经解封，与砾恩带着戒心同行；大祭司夺走的是族长自身核心。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.O01.dwarf"
+  ],
+  "optional": false
+ },
+ "C08.X02.dwarf": {
+  "id": "C08.X02.dwarf",
+  "sourceScene": "C08.X02",
+  "chapter": 8,
+  "pov": "dwarf",
+  "siteId": "ashen.a07",
+  "title": "留下的痕迹",
+  "npc": "莱姆斯与砾恩",
+  "lines": [
+   "[石屑被同一方向的光照亮，前方的门刚被强行打开。]",
+   "莱姆斯：他没再带人。",
+   "砾恩：拿到核心就走。军队只替他开了路。",
+   "莱姆斯：我当时没有看出来。",
+   "砾恩：现在看路。"
+  ],
+  "objective": "追查痕迹，清开守路威胁，找到中央主祭坛入口。",
+  "flags": [
+   "MAIN_ALTAR_ROUTE_FOUND"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X02.dwarf.k0",
+    "text": "大祭司取得族长核心后独自赶往主祭坛；仍不知道他的惧死动机。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.X01.dwarf"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "scenario",
+   "scenarioId": "story.c08-x02-dwarf",
+   "nodeId": "ashen.a07.field",
+   "count": 1
+  }
+ },
+ "C08.X03.dwarf": {
+  "id": "C08.X03.dwarf",
+  "sourceScene": "C08.X03",
+  "chapter": 8,
+  "pov": "dwarf",
+  "siteId": "ashen.a07",
+  "title": "主祭坛",
+  "npc": "大祭司",
+  "lines": [
+   "[族长核心置入中央结构，已亮起。砾恩胸前仍是升级后的王室遗物核心。]",
+   "莱姆斯：停下。你把他们留在战场，就是为了这个？",
+   "大祭司：我等不到下一次了。",
+   "莱姆斯：等什么？",
+   "大祭司：等这具身体慢慢死掉。你还年轻，当然觉得时间很多。",
+   "砾恩：把他的核心拿出来。",
+   "大祭司：原本该用的是你拿走的那一枚。如今，只能用这枚强行开坛。",
+   "莱姆斯：这会打开什么？",
+   "大祭司：我知道门外有什么。我曾把它们挡在外面。",
+   "砾恩：你凭什么知道？",
+   "大祭司：当年的矮人王、人族国王，还有我。是我们造出了烬裔。",
+   "大祭司：你们就是为挡住外来的东西而生的。",
+   "砾恩：那也不是你拿走他的理由。",
+   "莱姆斯：如果你知道，就更该停下！"
+  ],
+  "objective": "记录大祭司当场宣称的古代身份和惧死动机；尚未得到独立遗迹印证。",
+  "flags": [
+   "PRIEST_MORTALITY_MOTIVE_HEARD",
+   "ASHEN_ORIGIN_CLAIM_HEARD"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X03.dwarf.k0",
+    "text": "大祭司在主祭坛承认自己惧死，宣称曾与古代两位国王创造烬裔；古代身份与起源仍待独立记录印证。",
+    "mode": "heard"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.X02.dwarf"
+  ],
+  "optional": false
+ },
+ "C08.X04A.dwarf": {
+  "id": "C08.X04A.dwarf",
+  "sourceScene": "C08.X04A",
+  "chapter": 8,
+  "pov": "dwarf",
+  "siteId": "ashen.a07",
+  "title": "打断施法",
+  "npc": "仪式外围",
+  "lines": [
+   "[目标：突破仪式外围，切断持续施法，尝试救出核心。]",
+   "[尚不知道核心能否在停手后继续运转；先找到接近中央结构的路。]"
+  ],
+  "objective": "突破仪式外围，尝试切断施法、救出核心；这不是保证关闭门户。",
+  "flags": [
+   "RITUAL_CAST_INTERRUPTED"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X04A.dwarf.k0",
+    "text": "持续施法已被打断，核心仍自行运转；仅让大祭司停手已经无用。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.X03.dwarf"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "scenario",
+   "scenarioId": "story.c08-x04a-dwarf",
+   "nodeId": "ashen.a07.field",
+   "count": 1
+  }
+ },
+ "C08.X04.dwarf": {
+  "id": "C08.X04.dwarf",
+  "sourceScene": "C08.X04",
+  "chapter": 8,
+  "pov": "dwarf",
+  "siteId": "ashen.a07",
+  "title": "没能关上的门",
+  "npc": "涌出的界外力量",
+  "lines": [
+   "莱姆斯：他已经停手了。",
+   "砾恩：下面还在动。",
+   "[目标变更：避开涌出的力量，撤出中心。]",
+   "[核心已激活，门户打开，恶魔涌入。]",
+   "大祭司：不……不该这样。",
+   "[反噬蔓延，大祭司退不出去，倒在中央结构旁。]",
+   "大祭司：我还不能……",
+   "莱姆斯：后退！门已经开了！",
+   "砾恩：我看见了。",
+   "布洛克：出口还能走，快！"
+  ],
+  "objective": "抵挡首波冲击并撤出中心；成功撤离不等于阻止仪式或关闭门户。",
+  "flags": [
+   "RITUAL_SUCCEEDED",
+   "PRIEST_DIED_BACKLASH",
+   "INVASION_BEGAN"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X04.dwarf.k0",
+    "text": "仪式成功，恶魔入侵，大祭司死于反噬；门户仍运转。精灵与烬裔转向抵抗入侵，全境敌对封锁解除，并不代表和解。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.X04A.dwarf"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "scenario",
+   "scenarioId": "story.c08-x04-dwarf",
+   "nodeId": "ashen.a07.field",
+   "count": 1
+  }
+ },
+ "C08.X05.dwarf": {
+  "id": "C08.X05.dwarf",
+  "sourceScene": "C08.X05",
+  "chapter": 8,
+  "pov": "dwarf",
+  "siteId": "ashen.a07",
+  "title": "只守住这里不够",
+  "npc": "莱姆斯与砾恩",
+  "lines": [
+   "莱姆斯：先把消息送出去。让沿路的人撤开。",
+   "砾恩：它还在往外来。",
+   "莱姆斯：我知道。只守这条路，挡不住。",
+   "砾恩：这几道转折，我见过。",
+   "莱姆斯：在哪里？",
+   "砾恩：那座神庙。我得回去。"
+  ],
+  "objective": "记录激活刻纹，发出撤离消息，准备返回古神庙核实；暂不确认支撑数量。",
+  "flags": [
+   "ACTIVE_MARKS_RECORDED",
+   "TEMPLE_RETURN_PLANNED",
+   "C08_COMPLETE"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X05.dwarf.k0",
+    "text": "砾恩认为激活刻纹与古神庙相似，需要返查；尚不能确认四座支撑祭坛。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.X04.dwarf"
+  ],
+  "optional": false
+ },
+ "C08.X01.elf": {
+  "id": "C08.X01.elf",
+  "sourceScene": "C08.X01",
+  "chapter": 8,
+  "pov": "elf",
+  "siteId": "ashen.a06",
+  "title": "出来之后",
+  "npc": "莱姆斯与砾恩",
+  "lines": [
+   "莱姆斯：是你。",
+   "砾恩：你看见他拿走了什么。",
+   "莱姆斯：族长的核心。我看见了。",
+   "砾恩：我要找到他。",
+   "莱姆斯：我也是。",
+   "砾恩：别挡我的路。",
+   "莱姆斯：你也别挡我救人。"
+  ],
+  "objective": "带着保留共同追踪；不是五人提前结盟。",
+  "flags": [
+   "E_UNSEALED"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X01.elf.k0",
+    "text": "莱姆斯已经解封，与砾恩带着戒心同行；大祭司夺走的是族长自身核心。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.E03.elf"
+  ],
+  "optional": false
+ },
+ "C08.X02.elf": {
+  "id": "C08.X02.elf",
+  "sourceScene": "C08.X02",
+  "chapter": 8,
+  "pov": "elf",
+  "siteId": "ashen.a07",
+  "title": "留下的痕迹",
+  "npc": "莱姆斯与砾恩",
+  "lines": [
+   "[石屑被同一方向的光照亮，前方的门刚被强行打开。]",
+   "莱姆斯：他没再带人。",
+   "砾恩：拿到核心就走。军队只替他开了路。",
+   "莱姆斯：我当时没有看出来。",
+   "砾恩：现在看路。"
+  ],
+  "objective": "追查痕迹，清开守路威胁，找到中央主祭坛入口。",
+  "flags": [
+   "MAIN_ALTAR_ROUTE_FOUND"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X02.elf.k0",
+    "text": "大祭司取得族长核心后独自赶往主祭坛；仍不知道他的惧死动机。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.X01.elf"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "scenario",
+   "scenarioId": "story.c08-x02-elf",
+   "nodeId": "ashen.a07.field",
+   "count": 1
+  }
+ },
+ "C08.X03.elf": {
+  "id": "C08.X03.elf",
+  "sourceScene": "C08.X03",
+  "chapter": 8,
+  "pov": "elf",
+  "siteId": "ashen.a07",
+  "title": "主祭坛",
+  "npc": "大祭司",
+  "lines": [
+   "[族长核心置入中央结构，已亮起。砾恩胸前仍是升级后的王室遗物核心。]",
+   "莱姆斯：停下。你把他们留在战场，就是为了这个？",
+   "大祭司：我等不到下一次了。",
+   "莱姆斯：等什么？",
+   "大祭司：等这具身体慢慢死掉。你还年轻，当然觉得时间很多。",
+   "砾恩：把他的核心拿出来。",
+   "大祭司：原本该用的是你拿走的那一枚。如今，只能用这枚强行开坛。",
+   "莱姆斯：这会打开什么？",
+   "大祭司：我知道门外有什么。我曾把它们挡在外面。",
+   "砾恩：你凭什么知道？",
+   "大祭司：当年的矮人王、人族国王，还有我。是我们造出了烬裔。",
+   "大祭司：你们就是为挡住外来的东西而生的。",
+   "砾恩：那也不是你拿走他的理由。",
+   "莱姆斯：如果你知道，就更该停下！"
+  ],
+  "objective": "记录大祭司当场宣称的古代身份和惧死动机；尚未得到独立遗迹印证。",
+  "flags": [
+   "PRIEST_MORTALITY_MOTIVE_HEARD",
+   "ASHEN_ORIGIN_CLAIM_HEARD"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X03.elf.k0",
+    "text": "大祭司在主祭坛承认自己惧死，宣称曾与古代两位国王创造烬裔；古代身份与起源仍待独立记录印证。",
+    "mode": "heard"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.X02.elf"
+  ],
+  "optional": false
+ },
+ "C08.X04A.elf": {
+  "id": "C08.X04A.elf",
+  "sourceScene": "C08.X04A",
+  "chapter": 8,
+  "pov": "elf",
+  "siteId": "ashen.a07",
+  "title": "打断施法",
+  "npc": "仪式外围",
+  "lines": [
+   "[目标：突破仪式外围，切断持续施法，尝试救出核心。]",
+   "[尚不知道核心能否在停手后继续运转；先找到接近中央结构的路。]"
+  ],
+  "objective": "突破仪式外围，尝试切断施法、救出核心；这不是保证关闭门户。",
+  "flags": [
+   "RITUAL_CAST_INTERRUPTED"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X04A.elf.k0",
+    "text": "持续施法已被打断，核心仍自行运转；仅让大祭司停手已经无用。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.X03.elf"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "scenario",
+   "scenarioId": "story.c08-x04a-elf",
+   "nodeId": "ashen.a07.field",
+   "count": 1
+  }
+ },
+ "C08.X04.elf": {
+  "id": "C08.X04.elf",
+  "sourceScene": "C08.X04",
+  "chapter": 8,
+  "pov": "elf",
+  "siteId": "ashen.a07",
+  "title": "没能关上的门",
+  "npc": "涌出的界外力量",
+  "lines": [
+   "莱姆斯：他已经停手了。",
+   "砾恩：下面还在动。",
+   "[目标变更：避开涌出的力量，撤出中心。]",
+   "[核心已激活，门户打开，恶魔涌入。]",
+   "大祭司：不……不该这样。",
+   "[反噬蔓延，大祭司退不出去，倒在中央结构旁。]",
+   "大祭司：我还不能……",
+   "莱姆斯：后退！门已经开了！",
+   "砾恩：我看见了。"
+  ],
+  "objective": "抵挡首波冲击并撤出中心；成功撤离不等于阻止仪式或关闭门户。",
+  "flags": [
+   "RITUAL_SUCCEEDED",
+   "PRIEST_DIED_BACKLASH",
+   "INVASION_BEGAN"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X04.elf.k0",
+    "text": "仪式成功，恶魔入侵，大祭司死于反噬；门户仍运转。精灵与烬裔转向抵抗入侵，全境敌对封锁解除，并不代表和解。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.X04A.elf"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "scenario",
+   "scenarioId": "story.c08-x04-elf",
+   "nodeId": "ashen.a07.field",
+   "count": 1
+  }
+ },
+ "C08.X05.elf": {
+  "id": "C08.X05.elf",
+  "sourceScene": "C08.X05",
+  "chapter": 8,
+  "pov": "elf",
+  "siteId": "ashen.a07",
+  "title": "只守住这里不够",
+  "npc": "莱姆斯与砾恩",
+  "lines": [
+   "莱姆斯：先把消息送出去。让沿路的人撤开。",
+   "砾恩：它还在往外来。",
+   "莱姆斯：我知道。只守这条路，挡不住。",
+   "砾恩：这几道转折，我见过。",
+   "莱姆斯：在哪里？",
+   "砾恩：那座神庙。我得回去。"
+  ],
+  "objective": "记录激活刻纹，发出撤离消息，准备返回古神庙核实；暂不确认支撑数量。",
+  "flags": [
+   "ACTIVE_MARKS_RECORDED",
+   "TEMPLE_RETURN_PLANNED",
+   "C08_COMPLETE"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X05.elf.k0",
+    "text": "砾恩认为激活刻纹与古神庙相似，需要返查；尚不能确认四座支撑祭坛。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.X04.elf"
+  ],
+  "optional": false
+ },
+ "C08.X01.goblin": {
+  "id": "C08.X01.goblin",
+  "sourceScene": "C08.X01",
+  "chapter": 8,
+  "pov": "goblin",
+  "siteId": "ashen.a06",
+  "title": "出来之后",
+  "npc": "莱姆斯与砾恩",
+  "lines": [
+   "莱姆斯：是你。",
+   "砾恩：你看见他拿走了什么。",
+   "莱姆斯：族长的核心。我看见了。",
+   "砾恩：我要找到他。",
+   "莱姆斯：我也是。",
+   "砾恩：别挡我的路。",
+   "莱姆斯：你也别挡我救人。",
+   "奇克：我只问一件事。跟过去，还有回来的路吗？",
+   "莱姆斯：不知道。我会先看退路。"
+  ],
+  "objective": "带着保留共同追踪；不是五人提前结盟。",
+  "flags": [
+   "E_UNSEALED"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X01.goblin.k0",
+    "text": "莱姆斯已经解封，与砾恩带着戒心同行；大祭司夺走的是族长自身核心。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.O01.goblin"
+  ],
+  "optional": false
+ },
+ "C08.X02.goblin": {
+  "id": "C08.X02.goblin",
+  "sourceScene": "C08.X02",
+  "chapter": 8,
+  "pov": "goblin",
+  "siteId": "ashen.a07",
+  "title": "留下的痕迹",
+  "npc": "莱姆斯与砾恩",
+  "lines": [
+   "[石屑被同一方向的光照亮，前方的门刚被强行打开。]",
+   "莱姆斯：他没再带人。",
+   "砾恩：拿到核心就走。军队只替他开了路。",
+   "莱姆斯：我当时没有看出来。",
+   "砾恩：现在看路。"
+  ],
+  "objective": "追查痕迹，清开守路威胁，找到中央主祭坛入口。",
+  "flags": [
+   "MAIN_ALTAR_ROUTE_FOUND"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X02.goblin.k0",
+    "text": "大祭司取得族长核心后独自赶往主祭坛；仍不知道他的惧死动机。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.X01.goblin"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "scenario",
+   "scenarioId": "story.c08-x02-goblin",
+   "nodeId": "ashen.a07.field",
+   "count": 1
+  }
+ },
+ "C08.X03.goblin": {
+  "id": "C08.X03.goblin",
+  "sourceScene": "C08.X03",
+  "chapter": 8,
+  "pov": "goblin",
+  "siteId": "ashen.a07",
+  "title": "主祭坛",
+  "npc": "大祭司",
+  "lines": [
+   "[族长核心置入中央结构，已亮起。砾恩胸前仍是升级后的王室遗物核心。]",
+   "莱姆斯：停下。你把他们留在战场，就是为了这个？",
+   "大祭司：我等不到下一次了。",
+   "莱姆斯：等什么？",
+   "大祭司：等这具身体慢慢死掉。你还年轻，当然觉得时间很多。",
+   "砾恩：把他的核心拿出来。",
+   "大祭司：原本该用的是你拿走的那一枚。如今，只能用这枚强行开坛。",
+   "莱姆斯：这会打开什么？",
+   "大祭司：我知道门外有什么。我曾把它们挡在外面。",
+   "砾恩：你凭什么知道？",
+   "大祭司：当年的矮人王、人族国王，还有我。是我们造出了烬裔。",
+   "大祭司：你们就是为挡住外来的东西而生的。",
+   "砾恩：那也不是你拿走他的理由。",
+   "莱姆斯：如果你知道，就更该停下！"
+  ],
+  "objective": "记录大祭司当场宣称的古代身份和惧死动机；尚未得到独立遗迹印证。",
+  "flags": [
+   "PRIEST_MORTALITY_MOTIVE_HEARD",
+   "ASHEN_ORIGIN_CLAIM_HEARD"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X03.goblin.k0",
+    "text": "大祭司在主祭坛承认自己惧死，宣称曾与古代两位国王创造烬裔；古代身份与起源仍待独立记录印证。",
+    "mode": "heard"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.X02.goblin"
+  ],
+  "optional": false
+ },
+ "C08.X04A.goblin": {
+  "id": "C08.X04A.goblin",
+  "sourceScene": "C08.X04A",
+  "chapter": 8,
+  "pov": "goblin",
+  "siteId": "ashen.a07",
+  "title": "打断施法",
+  "npc": "仪式外围",
+  "lines": [
+   "[目标：突破仪式外围，切断持续施法，尝试救出核心。]",
+   "[尚不知道核心能否在停手后继续运转；先找到接近中央结构的路。]"
+  ],
+  "objective": "突破仪式外围，尝试切断施法、救出核心；这不是保证关闭门户。",
+  "flags": [
+   "RITUAL_CAST_INTERRUPTED"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X04A.goblin.k0",
+    "text": "持续施法已被打断，核心仍自行运转；仅让大祭司停手已经无用。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.X03.goblin"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "scenario",
+   "scenarioId": "story.c08-x04a-goblin",
+   "nodeId": "ashen.a07.field",
+   "count": 1
+  }
+ },
+ "C08.X04.goblin": {
+  "id": "C08.X04.goblin",
+  "sourceScene": "C08.X04",
+  "chapter": 8,
+  "pov": "goblin",
+  "siteId": "ashen.a07",
+  "title": "没能关上的门",
+  "npc": "涌出的界外力量",
+  "lines": [
+   "莱姆斯：他已经停手了。",
+   "砾恩：下面还在动。",
+   "[目标变更：避开涌出的力量，撤出中心。]",
+   "[核心已激活，门户打开，恶魔涌入。]",
+   "大祭司：不……不该这样。",
+   "[反噬蔓延，大祭司退不出去，倒在中央结构旁。]",
+   "大祭司：我还不能……",
+   "莱姆斯：后退！门已经开了！",
+   "砾恩：我看见了。",
+   "奇克：这边！刚才的缝还在！"
+  ],
+  "objective": "抵挡首波冲击并撤出中心；成功撤离不等于阻止仪式或关闭门户。",
+  "flags": [
+   "RITUAL_SUCCEEDED",
+   "PRIEST_DIED_BACKLASH",
+   "INVASION_BEGAN"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X04.goblin.k0",
+    "text": "仪式成功，恶魔入侵，大祭司死于反噬；门户仍运转。精灵与烬裔转向抵抗入侵，全境敌对封锁解除，并不代表和解。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.X04A.goblin"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "scenario",
+   "scenarioId": "story.c08-x04-goblin",
+   "nodeId": "ashen.a07.field",
+   "count": 1
+  }
+ },
+ "C08.X05.goblin": {
+  "id": "C08.X05.goblin",
+  "sourceScene": "C08.X05",
+  "chapter": 8,
+  "pov": "goblin",
+  "siteId": "ashen.a07",
+  "title": "只守住这里不够",
+  "npc": "莱姆斯与砾恩",
+  "lines": [
+   "莱姆斯：先把消息送出去。让沿路的人撤开。",
+   "砾恩：它还在往外来。",
+   "莱姆斯：我知道。只守这条路，挡不住。",
+   "砾恩：这几道转折，我见过。",
+   "莱姆斯：在哪里？",
+   "砾恩：那座神庙。我得回去。"
+  ],
+  "objective": "记录激活刻纹，发出撤离消息，准备返回古神庙核实；暂不确认支撑数量。",
+  "flags": [
+   "ACTIVE_MARKS_RECORDED",
+   "TEMPLE_RETURN_PLANNED",
+   "C08_COMPLETE"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X05.goblin.k0",
+    "text": "砾恩认为激活刻纹与古神庙相似，需要返查；尚不能确认四座支撑祭坛。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.X04.goblin"
+  ],
+  "optional": false
+ },
+ "C08.X01.ashen": {
+  "id": "C08.X01.ashen",
+  "sourceScene": "C08.X01",
+  "chapter": 8,
+  "pov": "ashen",
+  "siteId": "ashen.a06",
+  "title": "出来之后",
+  "npc": "莱姆斯与砾恩",
+  "lines": [
+   "莱姆斯：是你。",
+   "砾恩：你看见他拿走了什么。",
+   "莱姆斯：族长的核心。我看见了。",
+   "砾恩：我要找到他。",
+   "莱姆斯：我也是。",
+   "砾恩：别挡我的路。",
+   "莱姆斯：你也别挡我救人。"
+  ],
+  "objective": "带着保留共同追踪；不是五人提前结盟。",
+  "flags": [
+   "E_UNSEALED"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X01.ashen.k0",
+    "text": "莱姆斯已经解封，与砾恩带着戒心同行；大祭司夺走的是族长自身核心。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.O01.ashen"
+  ],
+  "optional": false
+ },
+ "C08.X02.ashen": {
+  "id": "C08.X02.ashen",
+  "sourceScene": "C08.X02",
+  "chapter": 8,
+  "pov": "ashen",
+  "siteId": "ashen.a07",
+  "title": "留下的痕迹",
+  "npc": "莱姆斯与砾恩",
+  "lines": [
+   "[石屑被同一方向的光照亮，前方的门刚被强行打开。]",
+   "莱姆斯：他没再带人。",
+   "砾恩：拿到核心就走。军队只替他开了路。",
+   "莱姆斯：我当时没有看出来。",
+   "砾恩：现在看路。"
+  ],
+  "objective": "追查痕迹，清开守路威胁，找到中央主祭坛入口。",
+  "flags": [
+   "MAIN_ALTAR_ROUTE_FOUND"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X02.ashen.k0",
+    "text": "大祭司取得族长核心后独自赶往主祭坛；仍不知道他的惧死动机。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.X01.ashen"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "scenario",
+   "scenarioId": "story.c08-x02-ashen",
+   "nodeId": "ashen.a07.field",
+   "count": 1
+  }
+ },
+ "C08.X03.ashen": {
+  "id": "C08.X03.ashen",
+  "sourceScene": "C08.X03",
+  "chapter": 8,
+  "pov": "ashen",
+  "siteId": "ashen.a07",
+  "title": "主祭坛",
+  "npc": "大祭司",
+  "lines": [
+   "[族长核心置入中央结构，已亮起。砾恩胸前仍是升级后的王室遗物核心。]",
+   "莱姆斯：停下。你把他们留在战场，就是为了这个？",
+   "大祭司：我等不到下一次了。",
+   "莱姆斯：等什么？",
+   "大祭司：等这具身体慢慢死掉。你还年轻，当然觉得时间很多。",
+   "砾恩：把他的核心拿出来。",
+   "大祭司：原本该用的是你拿走的那一枚。如今，只能用这枚强行开坛。",
+   "莱姆斯：这会打开什么？",
+   "大祭司：我知道门外有什么。我曾把它们挡在外面。",
+   "砾恩：你凭什么知道？",
+   "大祭司：当年的矮人王、人族国王，还有我。是我们造出了烬裔。",
+   "大祭司：你们就是为挡住外来的东西而生的。",
+   "砾恩：那也不是你拿走他的理由。",
+   "莱姆斯：如果你知道，就更该停下！"
+  ],
+  "objective": "记录大祭司当场宣称的古代身份和惧死动机；尚未得到独立遗迹印证。",
+  "flags": [
+   "PRIEST_MORTALITY_MOTIVE_HEARD",
+   "ASHEN_ORIGIN_CLAIM_HEARD"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X03.ashen.k0",
+    "text": "大祭司在主祭坛承认自己惧死，宣称曾与古代两位国王创造烬裔；古代身份与起源仍待独立记录印证。",
+    "mode": "heard"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.X02.ashen"
+  ],
+  "optional": false
+ },
+ "C08.X04A.ashen": {
+  "id": "C08.X04A.ashen",
+  "sourceScene": "C08.X04A",
+  "chapter": 8,
+  "pov": "ashen",
+  "siteId": "ashen.a07",
+  "title": "打断施法",
+  "npc": "仪式外围",
+  "lines": [
+   "[目标：突破仪式外围，切断持续施法，尝试救出核心。]",
+   "[尚不知道核心能否在停手后继续运转；先找到接近中央结构的路。]"
+  ],
+  "objective": "突破仪式外围，尝试切断施法、救出核心；这不是保证关闭门户。",
+  "flags": [
+   "RITUAL_CAST_INTERRUPTED"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X04A.ashen.k0",
+    "text": "持续施法已被打断，核心仍自行运转；仅让大祭司停手已经无用。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.X03.ashen"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "scenario",
+   "scenarioId": "story.c08-x04a-ashen",
+   "nodeId": "ashen.a07.field",
+   "count": 1
+  }
+ },
+ "C08.X04.ashen": {
+  "id": "C08.X04.ashen",
+  "sourceScene": "C08.X04",
+  "chapter": 8,
+  "pov": "ashen",
+  "siteId": "ashen.a07",
+  "title": "没能关上的门",
+  "npc": "涌出的界外力量",
+  "lines": [
+   "莱姆斯：他已经停手了。",
+   "砾恩：下面还在动。",
+   "[目标变更：避开涌出的力量，撤出中心。]",
+   "[核心已激活，门户打开，恶魔涌入。]",
+   "大祭司：不……不该这样。",
+   "[反噬蔓延，大祭司退不出去，倒在中央结构旁。]",
+   "大祭司：我还不能……",
+   "莱姆斯：后退！门已经开了！",
+   "砾恩：我看见了。"
+  ],
+  "objective": "抵挡首波冲击并撤出中心；成功撤离不等于阻止仪式或关闭门户。",
+  "flags": [
+   "RITUAL_SUCCEEDED",
+   "PRIEST_DIED_BACKLASH",
+   "INVASION_BEGAN"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X04.ashen.k0",
+    "text": "仪式成功，恶魔入侵，大祭司死于反噬；门户仍运转。精灵与烬裔转向抵抗入侵，全境敌对封锁解除，并不代表和解。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.X04A.ashen"
+  ],
+  "optional": false,
+  "encounter": {
+   "kind": "scenario",
+   "scenarioId": "story.c08-x04-ashen",
+   "nodeId": "ashen.a07.field",
+   "count": 1
+  }
+ },
+ "C08.X05.ashen": {
+  "id": "C08.X05.ashen",
+  "sourceScene": "C08.X05",
+  "chapter": 8,
+  "pov": "ashen",
+  "siteId": "ashen.a07",
+  "title": "只守住这里不够",
+  "npc": "莱姆斯与砾恩",
+  "lines": [
+   "莱姆斯：先把消息送出去。让沿路的人撤开。",
+   "砾恩：它还在往外来。",
+   "莱姆斯：我知道。只守这条路，挡不住。",
+   "砾恩：这几道转折，我见过。",
+   "莱姆斯：在哪里？",
+   "砾恩：那座神庙。我得回去。"
+  ],
+  "objective": "记录激活刻纹，发出撤离消息，准备返回古神庙核实；暂不确认支撑数量。",
+  "flags": [
+   "ACTIVE_MARKS_RECORDED",
+   "TEMPLE_RETURN_PLANNED",
+   "C08_COMPLETE"
+  ],
+  "knowledge": [
+   {
+    "id": "C08.X05.ashen.k0",
+    "text": "砾恩认为激活刻纹与古神庙相似，需要返查；尚不能确认四座支撑祭坛。",
+    "mode": "seen"
+   }
+  ],
+  "choices": [
+   {
+    "id": "proceed",
+    "label": "照现场情况行动",
+    "flags": []
+   }
+  ],
+  "requires": [
+   "C08.X04.ashen"
+  ],
+  "optional": false
  }
 });
 export const STORY_POVS=Object.freeze(["human","dwarf","elf","goblin","ashen"]);

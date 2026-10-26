@@ -1,0 +1,47 @@
+{
+  "id": "outsider-vanguard",
+  "name": "界外恶魔先锋",
+  "mode": "builtin image_gen",
+  "sourceFile": "outsider-vanguard-source.png",
+  "file": "outsider-vanguard.png",
+  "frameSize": [
+    192,
+    192
+  ],
+  "anchor": [
+    96,
+    176
+  ],
+  "facing": "right",
+  "alphaBBox": [
+    8,
+    23,
+    184,
+    176
+  ],
+  "solidBBox": [
+    8,
+    23,
+    184,
+    176
+  ],
+  "sourceSize": [
+    1254,
+    1254
+  ],
+  "sourceAlphaBBox": [
+    0,
+    0,
+    1240,
+    1254
+  ],
+  "sourceSolidCropBBox": [
+    20,
+    94,
+    1228,
+    1145
+  ],
+  "processing": "Mechanical visible-alpha bounds crop (threshold128 only to select rectangle), nearest-neighbor resize, centered at ground anchor96/176; generated alpha within crop preserved. No semantic drawing.",
+  "sha256": "a1ae410b10692d448db3d4cf59d747db54f4d08109702926c172ecd3e15d3359",
+  "bytes": 37143
+}

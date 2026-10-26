@@ -140,7 +140,7 @@ function handleStoryEventAction(b){
  const action=storyActionFromDataset(b.dataset);if(!action)return true;
  if(!flushEventSnapshot())return true;
  const result=transactStoryEvent(activeGameStorage(),s,action,{afterCommitCandidate:next=>{syncReturnRingRecipe(next);return true;}});
- if(result.ok){s=result.game;lastCommittedGameRaw=JSON.stringify(s);e=normalizeEncounterElements(s.activeEncounter??null);if(action.type==='scenario'||action.type==='encounter'){view='battle';lastStep=Date.now();logs.unshift('继续当前剧情目标');}else if(action.type==='enter'||action.type==='retreat'){race=AREAS[s.siteId]?.race??s.race;selectedPlannedArea=AREAS[s.siteId]?.number??1;view='region';}else if(action.type==='finish')toast('已记录这段经历');}
+ if(result.ok){s=result.game;lastCommittedGameRaw=JSON.stringify(s);e=normalizeEncounterElements(s.activeEncounter??null);if(action.type==='scenario'||action.type==='encounter'){view='battle';lastStep=Date.now();logs.unshift('继续当前剧情目标');}else if(action.type==='enter'||action.type==='retreat'){race=AREAS[s.siteId]?.race??s.race;selectedPlannedArea=AREAS[s.siteId]?.number??1;view='region';}else if(action.type==='use-tool'){race=AREAS[s.siteId]?.race??s.race;selectedPlannedArea=AREAS[s.siteId]?.number??1;view='region';toast('封印核心已解除，旧制楔钉已消耗；进度已保存。');}else if(action.type==='finish')toast('已记录这段经历');}
  else toast(result.reason==='storage'?'保存失败，这段对话尚未提交，可以重试。':'场景、地点或进度已经变化；尚未推进剧情。');
  render();return true;
 }
