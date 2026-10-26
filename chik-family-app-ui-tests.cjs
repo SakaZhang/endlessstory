@@ -1,0 +1,33 @@
+const assert=require('assert/strict');const {createCanvas}=require('@napi-rs/canvas');
+let SAVE_KEY;let elements=new Map(),events={},windowEvents={},intervals=[],store=new Map(),failWrite=false,now=Date.now(),serial=0;
+function el(id){if(elements.has(id))return elements.get(id);const canvas=createCanvas(960,540),listeners={};const obj={id,width:960,height:540,style:{},listeners,classList:{add(){},remove(){}},open:false,showModal(){this.open=true},close(){this.open=false},addEventListener(k,f){(listeners[k]??=[]).push(f);},removeEventListener(k,f){listeners[k]=(listeners[k]??[]).filter(x=>x!==f);},contains:n=>n?.owner===id,click(){this.onclick?.()},getContext:(...a)=>canvas.getContext(...a),getBoundingClientRect:()=>({left:0,top:0,width:960,height:420}),querySelector(selector){return selector.includes('canvas')?el('adjacentCanvas'):null;},querySelectorAll(selector){if(selector!=='.skillSlot')return [];return this.slots??[];}};let html='';Object.defineProperty(obj,'innerHTML',{get:()=>html,set:v=>{html=String(v);for(const m of html.matchAll(/id="([^"]+)"/g))el(m[1]);if(id==='view')obj.slots=Array.from({length:(html.match(/class="skillSlot /g)||[]).length},(_,i)=>({owner:id,dataset:{},index:i}));}});elements.set(id,obj);return obj;}
+function install(){global.document={hidden:false,getElementById:el,querySelector:selector=>selector==='.heroIdentity'?{querySelector:tag=>el('heroIdentity-'+tag)}:null,addEventListener:(k,f)=>(events[k]??=[]).push(f),createElement:()=>({click(){}})};global.window={addEventListener:(k,f)=>(windowEvents[k]??=[]).push(f),matchMedia:()=>({matches:true})};global.localStorage={getItem:k=>store.get(k)||null,setItem(k,v){if(failWrite)throw Error('quota');store.set(k,String(v));},get length(){return store.size},key:i=>[...store.keys()][i]};global.requestAnimationFrame=()=>{};global.setInterval=(fn,ms)=>{intervals.push({fn,ms});return intervals.length};global.setTimeout=()=>++serial;global.clearTimeout=()=>{};global.confirm=()=>true;}
+const click=(dataset={},id='')=>{const b={dataset,id};for(const fn of events.click??[])fn({target:{id,closest:()=>b}});};const saved=()=>JSON.parse(store.get(SAVE_KEY));const tick=()=>{now+=1100;for(const x of intervals.filter(x=>x.ms===250))x.fn();};const periodic=()=>{for(const x of intervals.filter(x=>x.ms===10000))x.fn();};const refresh=async label=>{elements=new Map();events={};windowEvents={};intervals=[];install();await import('./dist/app.js?multi-app-'+label);};
+(async()=>{
+ ({SAVE_KEY}=await import('./dist/save-generation.js'));
+ const E=await import('./dist/engine.js'),C=await import('./dist/story-event-controller.js'),{STORY_SCENES}=await import('./dist/story-event-registry.js');
+ const {preparedStoryGame,reachStoryScene}=await import('./story-event-test-fixture.mjs');
+ const {CHIK_FAMILY_CHARACTERS:FAMILY}=await import('./dist/chik-family-registry.js');
+ const originalNow=Date.now;Date.now=()=>now;
+ let game=preparedStoryGame('goblin');now=game.lastSeen;store.set(SAVE_KEY,JSON.stringify(game));await refresh('family-start');click({race:'goblin'});
+ const id='C01.G01.goblin',d=STORY_SCENES[id];let html=el('view').innerHTML;
+ for(const c of Object.values(FAMILY)){assert(html.includes(c.name));assert(html.includes(c.file));}
+ assert(!html.includes('三个弟弟妹妹'));assert(html.includes('与咔洛、米芮、豆布交谈'));
+ click({storyAction:'begin',storyScene:id});assert.equal(saved().story.activeScene.cursor,0);assert(el('view').innerHTML.includes('咔洛：今天带我去。我背得动。'));assert(el('view').innerHTML.includes('aria-label="咔洛正在说话"'));
+ const firstLedger=JSON.stringify(saved().story),claimCount=saved().taskRewardClaims?.length??0,gold=saved().gold,xp=saved().xp;
+ // Viewing and leaving a family scene does not resolve it or invent rewards.
+ click({view:'world'});click({race:'goblin'});assert.equal(JSON.stringify(saved().story),firstLedger);
+ const next={storyAction:'next',storyScene:id,storyCursor:'0'};failWrite=true;click(next);failWrite=false;assert.equal(saved().story.activeScene.cursor,0);assert(el('view').innerHTML.includes('咔洛：今天带我去。我背得动。'));
+ click(next);click(next);assert.equal(saved().story.activeScene.cursor,1,'stale repeated click cannot skip a dialogue');click({storyAction:'next',storyScene:id,storyCursor:'1'});assert.equal(saved().story.activeScene.cursor,2);assert(el('view').innerHTML.includes('米芮：你昨晚说还剩一袋。'));assert(el('view').innerHTML.includes('aria-label="米芮正在说话"'));
+ await refresh('family-reload');click({race:'goblin'});assert.equal(saved().story.activeScene.cursor,2);assert(el('view').innerHTML.includes('米芮：你昨晚说还剩一袋。'));
+ for(let cursor=2;cursor<5;cursor++)click({storyAction:'next',storyScene:id,storyCursor:String(cursor)});
+ assert(el('view').innerHTML.includes('豆布：今天也能吃满吗？'));assert(el('view').innerHTML.includes('aria-label="豆布正在说话"'));
+ // Forged ordinary-NPC operations using family IDs are rejected with no reward.
+ const before=JSON.stringify(saved());for(const familyId of Object.keys(FAMILY)){click({npcAction:'accept',npcEvent:familyId});click({npcAction:'claim',npcEvent:familyId});}assert.equal(JSON.stringify(saved()),before);assert.equal(saved().gold,gold);assert.equal(saved().xp,xp);assert.equal(saved().taskRewardClaims?.length??0,claimCount);assert(!saved().npcEvents?.entries?.['family.goblin.kalo']);
+ assert(E.validSave(saved()));
+ // Existing C07 scene contains only Kalo, not siblings who stayed at home.
+ game=reachStoryScene('goblin','C07.O01.goblin');game.story.activeScene.cursor=4;game.story.activeScene.choiceId=null;assert(E.validSave(game));now=Math.max(game.lastSeen,game.lastHealthClock)+1000;store.set(SAVE_KEY,JSON.stringify(game));await refresh('family-c07');click({race:'goblin'});html=el('view').innerHTML;assert(html.includes('咔洛：你一个人背不完。'));assert(html.includes(FAMILY['family.goblin.kalo'].file));assert(!html.includes(FAMILY['family.goblin.mirei'].file));assert(!html.includes(FAMILY['family.goblin.dobu'].file));
+ // No family private scene is made visible to another POV through the cast.
+ for(const race of ['human','dwarf','elf','ashen']){game=preparedStoryGame(race);now=game.lastSeen;store.set(SAVE_KEY,JSON.stringify(game));await refresh('family-other-'+race);click({race});assert(!el('view').innerHTML.includes('story-family-portraits'));assert(!el('view').innerHTML.includes('咔洛'));assert(E.validSave(saved()));}
+ Date.now=originalNow;console.log('PASS actual App family UI: named C01 cast/speaker highlights, failed save rollback, stale repeated cursor, leave/reopen and reload continuity, no family quest/reward path, C07 only-present sibling, four other POVs remain private. Fake DOM; not browser layout QA.');
+})().catch(e=>{console.error(e);process.exitCode=1});

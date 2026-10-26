@@ -21,6 +21,7 @@
     "test:events-release": "npm run test:npc-events && npm run test:npc-expansion && npm run test:story-host && npm run test:story-c08 && npm run test:war && npm run test:random-war && npm run test:authored-slows && node story-ring-integration-tests.mjs && npm run test:infinity-gems && npm run test:asset-recovery && node story-scenario-native-proof.mjs",
     "test:random-war": "node random-war-world-tests.mjs && node random-war-app-ui-tests.cjs && node random-war-story-access-tests.mjs",
     "test:npc-expansion": "node content/racial-npc-events/validate-content.mjs . && node npc-expansion-tests.mjs && node npc-event-host-tests.mjs && node npc-event-app-ui-tests.cjs && node npc-portrait-tests.mjs && node npc-exploration-war-parity-tests.mjs",
-    "test:story-c08": "node story-c08-runtime-tests.mjs && node story-c08-app-ui-tests.cjs && node story-c08-native-proof.mjs && node story-cancellation-app-ui-tests.cjs && node story-portrait-recovery-tests.mjs && node v067-cross-system-tests.mjs"
+    "test:story-c08": "node story-c08-runtime-tests.mjs && node story-c08-app-ui-tests.cjs && node story-c08-native-proof.mjs && node story-cancellation-app-ui-tests.cjs && node story-portrait-recovery-tests.mjs && node v067-cross-system-tests.mjs",
+    "test:chik-family": "node chik-family-tests.mjs && node chik-family-app-ui-tests.cjs"
   }
 }

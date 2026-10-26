@@ -1,0 +1,14 @@
+{
+  "source": "/workspace/shared/rpg-script-v1/screenplay-v1.md",
+  "sourcePage": "page_4102129c95388191b797fcdd8ff8b878",
+  "sourceSha256": "aa963799640d998784cdd33cfde209861e94c67bca9de4652d98fbc8a200eb5b",
+  "proposedSha256": "0b2bb4500e46679299e40fec2b3c306ba712743bca20d921e1308f7c95c0efc0",
+  "changes": "presentation names only; no scenes/flags/objectives/dialogue wording added or removed",
+  "nativePageWritten": false,
+  "authoritativeFileWritten": false,
+  "replacements": {
+    "快长大的那个": 9,
+    "谨慎的那个": 12,
+    "最小的那个": 3
+  }
+}

@@ -38,6 +38,11 @@ async function probe(output,report){
    assert.equal(Object.keys(NPC_PORTRAIT_REGISTRY).length,30);
    for(const descriptor of Object.values(NPC_PORTRAIT_REGISTRY))await visit(new URL(descriptor.file,release),url.href);
   }
+  if(path==='chik-family-registry.js'){
+   const {CHIK_FAMILY_CHARACTERS}=await import(pathToFileURL(join(emittedRoot,path)));
+   assert.equal(Object.keys(CHIK_FAMILY_CHARACTERS).length,3);
+   for(const descriptor of Object.values(CHIK_FAMILY_CHARACTERS))await visit(new URL(descriptor.file,release),url.href);
+  }
   if(ext==='js'&&text.includes("fetch(assetRoot+'exploration-manifest.json')")){
    const assetRoot=text.match(/assetRoot\s*=\s*['"]([^'"]+)['"]/);assert.ok(assetRoot,'unreviewed exploration assetRoot');
    const manifestUrl=new URL(assetRoot[1]+'exploration-manifest.json',release);await visit(manifestUrl,url.href);
@@ -67,7 +72,7 @@ async function probe(output,report){
  // Package intentionally retains provenance JSON and unused source art. Keep those
  // as explicit inventory roots, separate from the verified runtime dependency graph.
  for(const actor of Object.values(STORY_ACTOR_ART))assert(urls.has(new URL(actor.file,release).href),'story actor must be reached through actual production battle manifest: '+actor.file);
- for(const module of ['npc-portraits.js','npc-portrait-registry.js','random-world-events.js','story-c08-scenarios.js','story-scenario-registry.js','story-actor-art.js'])assert(urls.has(new URL(module,release).href),'new runtime module must be imported from an entry: '+module);
+ for(const module of ['npc-portraits.js','npc-portrait-registry.js','chik-family-registry.js','chik-family-ui.js','random-world-events.js','story-c08-scenarios.js','story-scenario-registry.js','story-actor-art.js'])assert(urls.has(new URL(module,release).href),'new runtime module must be imported from an entry: '+module);
  const runtimeUrls=new Set(urls);
  const auxiliary=report.files.filter(f=>!f.path.endsWith('.html')&&!urls.has(new URL(f.path,release).href));
  for(const f of auxiliary){assert.ok(/^(?:races\/(?:human|elf|goblin|ashen)\/.*\.(?:png|json|md))$/.test(f.path)||storyProvenance.has(f.path),'unclassified unreachable emitted asset '+f.path);await visit(new URL(f.path,release),'packaged auxiliary inventory');}
@@ -100,6 +105,7 @@ try{
   ['map-assets/exploration-manifest.json',text=>text.replace('exploration-01.png','missing-exploration.png')],
   ['style.css',text=>text+'\n.broken{background:url(./missing-cache-probe.png)}'],
   ['npc-portrait-registry.js',text=>text.replace(/npc-portraits\/[^"']+\.png/,'npc-portraits/missing-registered-portrait.png')],
+  ['chik-family-registry.js',text=>text.replace('story-family-portraits/family.goblin.kalo.png','story-family-portraits/missing-family-portrait.png')],
   ['story-actor-art.js',text=>text.replace('story-assets/high-priest.png','story-assets/missing-story-actor.png')],
   ['races/human/art.js',text=>{assert.match(text,/races\/human\/[^"']+\.png/);return text.replace(/races\/human\/[^"']+\.png/,'races/human/missing-registered-art.png');}]
  ]){const original=await readFile(join(source,file),'utf8');await writeFile(join(source,file),mutate(original));const broken=await buildRelease({source,output});await assert.rejects(()=>probe(output,broken),/missing dependency/);await writeFile(join(source,file),original);}
@@ -137,5 +143,5 @@ try{
 
  await writeFile(join(actualOutput,'dependency-probe.json'),JSON.stringify({release:actual.release,legacyEntry:legacyScript,packageCheck,kind:'Actual emitted HTML/ESM/CSS and dynamic manifest/image URL graph; filesystem + URL/cache model, not browser cache inspection',...graph},null,2)+'\n');
  console.log(packageCheck);
- console.log(`PASS release cache: ${actual.files.length} files hash-verified; ${graph.urls.length} resource URLs / ${graph.edges.length} dependency edges; old legacy and prior release cache misses; 6 byte mutations + 5 negative reference mutations; roots/navigation/origin/save key preserved.`);
+ console.log(`PASS release cache: ${actual.files.length} files hash-verified; ${graph.urls.length} resource URLs / ${graph.edges.length} dependency edges; old legacy and prior release cache misses; 6 byte mutations + 6 negative reference mutations; roots/navigation/origin/save key preserved.`);
 }finally{await rm(temp,{recursive:true,force:true});}

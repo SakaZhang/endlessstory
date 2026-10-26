@@ -203,3 +203,6 @@ for(const file of ['story-event-controller-tests.mjs','story-scenario-combat-tes
 
 // Random world clock and the actual App tick/resume/storage boundary.
 for(const file of ['random-war-world-tests.mjs','random-war-story-access-tests.mjs','random-war-app-ui-tests.cjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+// Presentation-only family identities preserve all canonical story records.
+for(const file of ['chik-family-tests.mjs','chik-family-app-ui-tests.cjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});

@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "method": "builtin image_gen",
+  "familyOf": "奇克",
+  "ordinaryNpcCount": 30,
+  "familyCount": 3,
+  "entries": [
+    {
+      "id": "family.goblin.kalo",
+      "name": "咔洛",
+      "role": "快长大的弟弟",
+      "race": "goblin",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: ONE finished square NPC dialogue portrait for a Chinese pixel-art fantasy RPG, readable at 64 and 96 pixels. Input image 1: style reference ONLY, the existing 30-person portrait sheet; match its detailed crisp pixel-bust quality, colors, proportions, plain dark desaturated blue-green background. Input image 2: family/race reference ONLY, the canonical goblin older brother Chik (奇克). Create a DIFFERENT younger sibling, never copy his hood, dagger, armor, pose or adult face. Family resemblance: green skin, extremely large long pointed goblin ears extending sideways, amber-brown eyes, compact slender shoulders, blunt short goblin nose, subtle small protruding lower canine teeth, visibly nonhuman goblin not a green-painted human or elf. Style: richly detailed yet crisp chunky pixel clusters, hard stepped edges, restrained muted natural colors, selective dark outlines, classic 16-bit JRPG character portrait, warm left-front light. Composition: ONE chest-up three-quarter-view character facing slightly toward viewer's RIGHT, head about 55 percent of square height, ears and hair entirely in frame with small breathing room, shoulders visible. Flat opaque dark desaturated blue-green background #172c31, no scene. Constraints: appropriately fully clothed fantasy minor, no romance, no sensuality, no scars or tragic backstory, no heroic weapon, no other people, no text, no letters, no border/frame/watermark/collage, no photorealism/smooth painting/3D.\nSubject: Kalo (咔洛), a male adolescent goblin, the oldest of Chik's three younger siblings, nearly adult but noticeably younger and slighter than Chik. Olive-green skin, narrow lively face, angular upright ears, unruly dark-brown short hair, tiny visible lower canines, energetic cocky half-smile with earnest eyes. Wears a worn russet/rust red short scarf over a fully covering earthy brown patched tunic. A comically overlong simple pack strap hangs over one shoulder, which one hand grips as if proudly saying he can carry the load. Not muscular. No cap or hood. The desire to join his older brother's adventures should be legible through posture and expression.",
+      "source": {
+        "path": "source-art/chik-family/original/family.goblin.kalo.png",
+        "sha256": "a248a84d91273f33c4fb309e4ead416046558f5366d2a12094e5aa9391ace59a",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "preview": {
+        "path": "source-art/chik-family/192/family.goblin.kalo.png",
+        "sha256": "d2c33cf2d9ac4f12d0e9c2bcc3022d0c65b587f4fcdbcad5a5a6d42e5e86fe16",
+        "size": [
+          192,
+          192
+        ]
+      },
+      "runtime": {
+        "path": "dist/story-family-portraits/family.goblin.kalo.png",
+        "sha256": "c59a93841a6b1f0a046a690b44a8c04361b61dc3c1e3b88e0c3e79f3a8e999a8",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 20383
+      },
+      "facing": "right",
+      "bounds": {
+        "earsAndHairUnclipped": true,
+        "bodyCrop": "chest-up"
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false,
+        "rootContactReview": "approved"
+      }
+    },
+    {
+      "id": "family.goblin.mirei",
+      "name": "米芮",
+      "role": "帮忙分粮的妹妹",
+      "race": "goblin",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: ONE finished square NPC dialogue portrait for a Chinese pixel-art fantasy RPG, readable at 64 and 96 pixels. Input image 1: style reference ONLY, the existing 30-person portrait sheet; match its detailed crisp pixel-bust quality, colors, proportions, plain dark desaturated blue-green background. Input image 2: family/race reference ONLY, the canonical goblin older brother Chik (奇克). Create a DIFFERENT younger sibling, never copy his hood, dagger, armor, pose or adult face. Family resemblance: green skin, extremely large long pointed goblin ears extending sideways, amber-brown eyes, compact slender shoulders, blunt short goblin nose, subtle small protruding lower canine teeth, visibly nonhuman goblin not a green-painted human or elf. Style: richly detailed yet crisp chunky pixel clusters, hard stepped edges, restrained muted natural colors, selective dark outlines, classic 16-bit JRPG character portrait, warm left-front light. Composition: ONE chest-up three-quarter-view character facing slightly toward viewer's RIGHT, head about 55 percent of square height, ears and hair entirely in frame with small breathing room, shoulders visible. Flat opaque dark desaturated blue-green background #172c31, no scene. Constraints: appropriately fully clothed fantasy minor, no romance, no sensuality, no scars or tragic backstory, no heroic weapon, no other people, no text, no letters, no border/frame/watermark/collage, no photorealism/smooth painting/3D.\nSubject: Mirei (米芮), a female child goblin, the middle of Chik's three younger siblings, older than the smallest boy but younger than the adolescent. Sage/jade-green skin, thoughtful blunt goblin face, wide pointed sideways ears with slight downward angle, amber-brown eyes looking carefully ahead. Dark brown hair neatly arranged in two LOW short braids, plain tiny cloth ties, no jewels. Wears a modest fully covering pale grey-beige long sleeve tunic with a faded indigo-blue patched work apron. She carefully holds a small grain-pouch drawstring knotted cord between her hands at the bottom of the bust; a corner of the coarse cloth pouch is visible. Slight knitted eyebrows and matter-of-fact calm, cares by counting and dividing food. Noticeably goblin; NOT a human girl with green paint or elven facial proportions. No adult feminine body proportions, no weapon, no smiley mascot.",
+      "source": {
+        "path": "source-art/chik-family/original/family.goblin.mirei.png",
+        "sha256": "3d934f7671abc0d83ea3725ecef26b1c6f1fcaa66e5a4740fa4fdd9ad7875c82",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "preview": {
+        "path": "source-art/chik-family/192/family.goblin.mirei.png",
+        "sha256": "a3276bf899e44cedfc7b605f5fa12bdabf3db8149cb94d53f762019f0ba52675",
+        "size": [
+          192,
+          192
+        ]
+      },
+      "runtime": {
+        "path": "dist/story-family-portraits/family.goblin.mirei.png",
+        "sha256": "a8047739d455e9941bd5e3f16a4b8ac58f42920a054e318a00144e837b660b6e",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 19953
+      },
+      "facing": "right",
+      "bounds": {
+        "earsAndHairUnclipped": true,
+        "bodyCrop": "chest-up"
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false,
+        "rootContactReview": "approved"
+      }
+    },
+    {
+      "id": "family.goblin.dobu",
+      "name": "豆布",
+      "role": "最小的弟弟",
+      "race": "goblin",
+      "method": "builtin image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: ONE finished square NPC dialogue portrait for a Chinese pixel-art fantasy RPG, readable at 64 and 96 pixels. Input image 1: style reference ONLY, the existing 30-person portrait sheet; match its detailed crisp pixel-bust quality, colors, proportions, plain dark desaturated blue-green background. Input image 2: family/race reference ONLY, the canonical goblin older brother Chik (奇克). Create a DIFFERENT younger sibling, never copy his hood, dagger, armor, pose or adult face. Family resemblance: green skin, extremely large long pointed goblin ears extending sideways, amber-brown eyes, compact slender shoulders, blunt short goblin nose, subtle small protruding lower canine teeth, visibly nonhuman goblin not a green-painted human or elf. Style: richly detailed yet crisp chunky pixel clusters, hard stepped edges, restrained muted natural colors, selective dark outlines, classic 16-bit JRPG character portrait, warm left-front light. Composition: ONE chest-up three-quarter-view character facing slightly toward viewer's RIGHT, head about 55 percent of square height, ears and hair entirely in frame with small breathing room, shoulders visible. Flat opaque dark desaturated blue-green background #172c31, no scene. Constraints: appropriately fully clothed fantasy minor, no romance, no sensuality, no scars or tragic backstory, no heroic weapon, no other people, no text, no letters, no border/frame/watermark/collage, no photorealism/smooth painting/3D.\nSubject: Dobu (豆布), a male young child goblin, the smallest of Chik's three younger siblings, distinctly younger, smaller and rounder than both siblings. Light pea/olive-green skin, round goblin cheeks but a recognizably blunt broad little goblin muzzle/nose, huge long leaf-shaped pointed ears almost as wide as his head, very short dark-brown hair tuft, wide curious amber-brown eyes, a tiny lower goblin canine visible in an innocently open mouth. Wears an oversized mustard-yellow fully covering long-sleeved patched tunic, both small hands holding a worn empty wooden eating bowl at the bottom of the bust. Naively hopeful and curious about food; cheerful but not clownish. IMPORTANT: not a human toddler face painted green, not baby Yoda, not an elf. No hat/hood/weapon. Pixel goblin child anatomy consistent with reference adults, softened for young age.",
+      "source": {
+        "path": "source-art/chik-family/original/family.goblin.dobu.png",
+        "sha256": "d52a309745148c1c2cb632aa6bf3f0ed9defcc8957ffb22f1ef6db9a6681dc77",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "preview": {
+        "path": "source-art/chik-family/192/family.goblin.dobu.png",
+        "sha256": "5665d563c212b153be094bd77c2b9b4cb52631eb975d35267bfe401be3b287ff",
+        "size": [
+          192,
+          192
+        ]
+      },
+      "runtime": {
+        "path": "dist/story-family-portraits/family.goblin.dobu.png",
+        "sha256": "40a8b229adb44a523a4e6d4df013089c886ea8d5bfef2619e2a0212fcd7ba03a",
+        "size": [
+          96,
+          96
+        ],
+        "bytes": 19589
+      },
+      "facing": "right",
+      "bounds": {
+        "earsAndHairUnclipped": true,
+        "bodyCrop": "chest-up"
+      },
+      "pixelQa": {
+        "at64": "visual reviewed",
+        "at96": "visual reviewed",
+        "browserScreenshot": false,
+        "rootContactReview": "approved"
+      }
+    }
+  ],
+  "references": [
+    {
+      "role": "30-NPC portrait style reference",
+      "path": "source-art/npc-portraits/all-30-named-contact.png",
+      "sha256": "d68264c4d2aa56735c1c0049f3f5fa284ef73533e10a168b61fb2f67b1f6feb1"
+    },
+    {
+      "role": "canonical Chik family/race reference",
+      "path": "dist/races/goblin/assets/hero-dagger-0.png",
+      "sha256": "38b3e2efee717f6422d0cd806350a74ef9c54f8a36f7fa966864e3cff43ec92d"
+    }
+  ]
+}
