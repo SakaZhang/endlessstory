@@ -55,8 +55,10 @@ export function declineNpcEvent(s,id){
 export function chooseNpcEventResponse(s,id,choiceId){const def=NPC_EVENTS[id],row=s.npcEvents?.entries?.[id];if(!npcEventAccess(s,id).allowed||row?.status!=='active'||!def?.choices?.some(c=>c.id===choiceId))return false;row.choiceId=choiceId;return true;}
 // Called once by the genuine node-entry lifecycle inside the same candidate save as travel.
 // A map preview, a historical explored-node ledger, or a story staging move never calls this.
+// Only this genuine entry receipt uses the engine event time (including bounded offline replay).
+// Acceptance/readiness/reward claims above retain current-time territory gates.
 export function recordNpcEventExploration(s,e,now){
- if(!time(now)||!validNpcEventState(s)||!s.npcEvents||s.activeEncounter!==e||!s.running||e?.developmentFixture||e?.storyScenario||e?.done||e?.rewarded||!INSTANCES[e?.instanceId]||e.areaId!==INSTANCES[e.instanceId].areaId||!nodeAccess(s,e.instanceId).allowed)return false;
+ if(!time(now)||!validNpcEventState(s)||!s.npcEvents||s.activeEncounter!==e||!s.running||e?.developmentFixture||e?.storyScenario||e?.done||e?.rewarded||!INSTANCES[e?.instanceId]||e.areaId!==INSTANCES[e.instanceId].areaId||!nodeAccess(s,e.instanceId,now).allowed)return false;
  let changed=false;for(const [id,entry]of Object.entries(s.npcEvents.entries)){
   const def=NPC_EVENTS[id];if(entry.status!=='active'||def.objective?.kind!=='exploration'||entry.acceptedAt>now||!def.objective.nodeIds.includes(e.instanceId)||entry.lastEncounterId===e.id||entry.count>=def.objective.count)continue;
   entry.count++;entry.lastEncounterId=e.id;changed=true;
