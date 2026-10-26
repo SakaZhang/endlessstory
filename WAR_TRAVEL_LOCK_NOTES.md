@@ -27,3 +27,10 @@ Base: live v0.64 source `2a77f9eceee8f77a0e39429d6c40513f7c230395`, schema 6, is
 Existing route/automation/model/actual-app suites passed. Race aggregate has a historical engine-file hash assertion in `equipment-slot-parity-tests.mjs:21`: that earlier equipment-only test freezes the whole engine to an old authorized scope. This change necessarily changes the engine; the assertion was not weakened or silently rebaselined. Parent integration must explicitly reconcile that scope and rerun final aggregate tests.
 
 Do not describe this as naturally triggered gameplay until a permitted event/story caller and the safe-return/story-access choices are connected and tested. Parent owns release/publication.
+
+Final aggregate observations (2026-10-26):
+
+- `npm test` terminated at `equipment-armor-art-tests.mjs:8`, 36 actual versus 28 expected armor templates.
+- `node race-expansion-tests.mjs` terminated nonzero for only the historical whole-engine hash assertion; all other listed cases passed.
+- Both exact failures were reproduced by running their individual tests on the untouched live `2a77f9e` checkout, not only this worktree. The base engine hash is already `6e377e55…`, different from that fixture's expected `fe7d58d3…`. Neither assertion was changed in this patch.
+- Focused final checks passed: war gate; task reward engine boundary and transaction; HP/rest; current save generation; adjacent-region actual app. Earlier automation, 29 region-model cases and navigation ledger checks passed too. No browser visual or full-green aggregate claim.
