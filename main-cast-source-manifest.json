@@ -1,0 +1,256 @@
+{
+  "version": 1,
+  "method": "builtin image_gen",
+  "baseCommit": "706c2687a448635d75088977abf61c3000eeccfe",
+  "notes": [
+    "Six independent generated pixel busts. Names are newly authored design drafts, not previously named script roles.",
+    "Original bytes preserved; 192 and 96 derivations use nearest-neighbor only.",
+    "King is current-era concept only; no runtime character scene or ancient-king assignment.",
+    "High priest and five existing regional portraits reused unchanged; no new combat actors."
+  ],
+  "entries": [
+    {
+      "id": "dwarf-minister",
+      "name": "维尔铎",
+      "role": "矮人重臣",
+      "source": {
+        "path": "source-art/main-cast/original/dwarf-minister.png",
+        "sha256": "30530f27fb1b79b894c48026ef33e9cecb9291f4052602a511d641d23fc2ad3c",
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "bytes": 1469150
+      },
+      "prompt": "Use case: stylized-concept. Asset type: one finished square pixel-art dialogue bust for a 16-bit Japanese fantasy RPG, readable at 96 by 96 pixels. Subject: an original adult male dwarf high minister named Weierduo, a broad stocky compact dwarf with a heavy angular face, watchful deep-set eyes, combed-back BLACK hair and a neatly sculpted BLACK square beard split into two blunt forks. He wears a deep burgundy official robe with restrained iron-grey trim, a heavy iron seal chain across his chest, and holds just the corner of a closed ledger at the bottom of frame. His expression is controlled and calculating, not a cartoon villain. No weapon, no armor, no horns, no horned helmet, no red beard, no crown. Composition: one chest-up three-quarter portrait, entire hair and shoulders within the square, head and beard fill about 62 percent of image height, compact silhouette and tiny margin above head. Style: actual hand-placed hard pixel clusters, deliberately limited 16-bit color palette, readable large pixel facial features, stepped outlines, no soft digital painting or antialiasing, no 3D, no photorealism. Warm left-front light, plain solid dark desaturated blue-green background in the #172c31 family. The image should feel native at 96px, not a detailed painting with a pixel filter. No text, names, letters, numerals, border, badge, watermark, montage, extra figure or scenery.",
+      "source192": {
+        "path": "source-art/main-cast/192/dwarf-minister.png",
+        "sha256": "b7f82a6edcc1bcd9e9e0f51f15a104ff183f76a9c1a3116561e8033b597188b8",
+        "size": [
+          192,
+          192
+        ],
+        "mode": "RGB",
+        "bytes": 61358
+      },
+      "runtime": {
+        "path": "dist/story-portraits/dwarf-minister.png",
+        "sha256": "13a533d96e86776ff3c65d2c1a529e9b992e2fbf8760fb15a6994e63a649cb83",
+        "size": [
+          96,
+          96
+        ],
+        "mode": "RGB",
+        "bytes": 18535
+      },
+      "visualQa": {
+        "original": "visually inspected",
+        "at192": "visually inspected",
+        "at96": "visually inspected",
+        "notes": "Reviewed original/192/96: adult compact dwarf; black forked beard, burgundy formal robe, iron seal and ledger readable. No horns, crown or weapon. Distinct from king and red-bearded Brock."
+      },
+      "status": "authored-name-and-visual-design"
+    },
+    {
+      "id": "current-dwarf-king",
+      "name": "索兰姆",
+      "role": "现任矮人王（未出场设定稿）",
+      "source": {
+        "path": "source-art/main-cast/original/current-dwarf-king.png",
+        "sha256": "34cffb44a084bcd38302766cc4756730dae7496cf3257193fa214673b71e233a",
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "bytes": 1491773
+      },
+      "prompt": "Use case: stylized-concept. Asset type: ONE finished square pixel-art NPC dialogue bust for a 16-bit Japanese fantasy RPG, usable at 96 by 96 pixels. Subject: an original current-era elderly male dwarf king, named Suolanmu. Broad compact powerful dwarf face and shoulders, age-lined but steady attentive eyes, white-grey hair and a broad WHITE-GREY fan-shaped beard that flares out across his chest. A LOW geometric forged-iron crown with small angular notches rests on his head, iron with only tiny restrained gold details. An INDIGO royal cloak with simple gold edging over dark formal clothing, understated square brooch. He is not wearing armor. Expression thoughtful, weary but dignified, not angry. No horns, no horned helmet, no red beard, no weapon, no magic, no ancient or immortal symbols. Composition: one chest-up three-quarter portrait, full crown and beard fit in square with small clear top margin, head and beard fill 62 percent of image height, broad shoulders. Hard crisp pixel clusters and stepped dark outlines, restrained limited warm 16-bit palette, native low-resolution pixel portrait design, not photorealistic and not smooth digital illustration. Plain solid dark desaturated blue-green background in the #172c31 family. Warm light from upper left. No frame, border, text, writing, letters, watermark, badges, multiple figures, scenery or montage.",
+      "source192": {
+        "path": "source-art/main-cast/192/current-dwarf-king.png",
+        "sha256": "e4dc6afa80cb4febf44be0868633a94286a669c599b869fcd5fbf180c8832b5b",
+        "size": [
+          192,
+          192
+        ],
+        "mode": "RGB",
+        "bytes": 60166
+      },
+      "runtime": {
+        "path": "dist/story-portraits/current-dwarf-king.png",
+        "sha256": "fcf367d8f1fddaf86cf0c1fb948f425168068db7ebf93c246429546f8a303c0e",
+        "size": [
+          96,
+          96
+        ],
+        "mode": "RGB",
+        "bytes": 18262
+      },
+      "visualQa": {
+        "original": "visually inspected",
+        "at192": "visually inspected",
+        "at96": "visually inspected",
+        "notes": "Reviewed original/192/96: white-grey fan beard, low iron/gold crown, indigo cloak. Current-era design draft only; no runtime scene or identity as ancient creator implied."
+      },
+      "status": "design-draft-not-in-current-story"
+    },
+    {
+      "id": "ashen-chief",
+      "name": "玄珀",
+      "role": "烬裔族长",
+      "source": {
+        "path": "source-art/main-cast/original/ashen-chief.png",
+        "sha256": "74472f80ce4945d3772ca64e1be795023be24167c5f1a3453e7a8752cf31b2b8",
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "bytes": 1602771
+      },
+      "prompt": "Use case: stylized-concept. Asset type: ONE finished square pixel-art NPC dialogue bust for a classic 16-bit Japanese fantasy RPG, readable at 96 by 96 pixels. Subject: Xuanpo, an intelligent nonhuman mineral-bodied Ashen clan chief. He is made ENTIRELY of naturally interlocking layered black-grey basalt plates and angular slate, with broad powerful compact shoulders and a recognizably sapient but clearly INORGANIC head. His head is an asymmetrical cluster of dark basalt slabs, no human skin anywhere. A wide WHITE QUARTZ brow ridge contrasts against the dark stone; two small inset amber crystalline eye points look calmly watchful from under this ridge. Faceted stone cheek ridges, a narrow jagged seam rather than fleshy lips, no nose flesh. The upper chest contains ONE visible inset AMBER mineral core in a natural stone socket, distinct from his eye points; warm mineral glow, not fire. A simple weathered dark woven shoulder wrap marks an experienced leader without a crown. Mood dignified, protective and observant. No human hair, no human beard, no burned human skin, no flames, no lava cracks, no horns, no fire demon, no skull, no crown, no metal robot or mechanical parts. Composition: one chest-up three-quarter bust; entire head fits in square with small top margin, amber chest core visible near bottom center, head fills 50 percent of image height. Style: truly crisp chunky hand-placed pixel clusters, clear hard stepped contours, small limited 16-bit palette, selective dark outlines, natural front-left light. Native low-resolution sprite portrait, not a smooth painting or 3D rendering. Plain solid dark desaturated blue-green background in #172c31 family. No text, names, letters, border, frame, badge, watermark, scenery, extra figures or montage.",
+      "source192": {
+        "path": "source-art/main-cast/192/ashen-chief.png",
+        "sha256": "7323a99ca1a70f35759f3f8e70c402d1261a830fdb45e96545b2f3f941013228",
+        "size": [
+          192,
+          192
+        ],
+        "mode": "RGB",
+        "bytes": 70283
+      },
+      "runtime": {
+        "path": "dist/story-portraits/ashen-chief.png",
+        "sha256": "1752ba0f369951f0d9a689002eba98ac863b388d4f65c7ecc455071385319a55",
+        "size": [
+          96,
+          96
+        ],
+        "mode": "RGB",
+        "bytes": 19994
+      },
+      "visualQa": {
+        "original": "visually inspected",
+        "at192": "visually inspected",
+        "at96": "visually inspected",
+        "notes": "Reviewed original/192/96: completely mineral basalt/quartz head and body, amber own chest core, no flesh/hair/beard/flames; no burned-human substitution. Compact head/shoulder silhouette reads at96."
+      },
+      "status": "authored-name-and-visual-design"
+    },
+    {
+      "id": "carter",
+      "name": "鲁托",
+      "prompt": "Use case: stylized-concept. Asset type: one finished square NPC dialogue portrait for a Japanese pixel-art fantasy RPG, intended for 96 and 192 pixel display. Subject: Ruto, the surviving caravan driver, a middle-aged human man with a broad sun-weathered face, short cropped chestnut hair, small square short chestnut beard, tired but alert kind eyes, slightly broad nose, ochre-yellow scarf, faded blue work vest, pale rough linen shirt, one worn leather driving glove holding a short loop of ordinary rope near bottom. Ordinary reliable working man, not a hero, rogue or soldier. Composition: single chest-up three-quarter bust, whole head fits with small top margin, head 55 percent of canvas height, visible shoulders and scarf. Plain flat dark desaturated blue-green background #172c31 family. Style: actual crisp 16-bit JRPG pixel art, deliberate compact chunky pixel clusters, hard stepped edges, limited muted palette, selective dark outlines, no smooth gradients or painted brushwork, no photorealism or 3D. Natural soft light from upper-left expressed as flat pixel clusters. No text, letters, names, frame, badge, watermark, extra people, weapons or dramatic magic.",
+      "method": "builtin image_gen",
+      "source": {
+        "path": "source-art/main-cast/original/carter.png",
+        "size": [
+          1254,
+          1254
+        ],
+        "sha256": "5874a46e91e2f9e3c6071144785a6648f32ce7180c8a66a96154b66d5e96d1ee",
+        "bytes": 1514628
+      },
+      "source192": {
+        "path": "source-art/main-cast/192/carter.png",
+        "size": [
+          192,
+          192
+        ],
+        "sha256": "4ec715a270f4c92353d51cfe34641a3f9805fa8671fa4e1c320259746ada714a",
+        "bytes": 64197
+      },
+      "runtime": {
+        "path": "dist/story-portraits/carter.png",
+        "size": [
+          96,
+          96
+        ],
+        "sha256": "67621c43ab083601b0c8f5cd8a54b8d9a3b539d32a83cfca7d3dd504d1e3f7cb",
+        "bytes": 18723
+      },
+      "visualQa": {
+        "at192": "visually reviewed",
+        "at96": "included in contact review"
+      },
+      "status": "authored-name-and-visual-design"
+    },
+    {
+      "id": "mine-foreman",
+      "name": "杜铎",
+      "prompt": "Use case: stylized-concept. Asset type: one finished square NPC dialogue portrait for a Japanese pixel-art fantasy RPG, intended for 96 and 192 pixel display. Subject: Dudo, an adult male dwarf mine foreman, a short and very broad sturdy working dwarf, weathered compact broad face, alert brown eyes, thick short squared charcoal-black beard streaked grey (not long, not red), a plain battered low brown leather work cap without a lamp and without horns, slate-grey heavy work vest over a russet shirt, a small brass shift tally tag at his collar, holding the corner of an old open roll-call ledger near the bottom. Serious protective responsible expression, ordinary dirty mine worker not a royal courtier. Composition: single chest-up three-quarter bust, entire cap and beard inside canvas, head about 55 percent of height, broad shoulders visible. Plain flat dark desaturated blue-green background #172c31 family. Style: actual crisp 16-bit JRPG pixel art, deliberate compact chunky pixel clusters, hard stepped edges, limited muted palette, selective dark outlines. No smooth gradients or painted brushwork, no photorealism or 3D. Natural upper-left light in flat pixel clusters. No text, letters, readable ledger marks, names, frame, badge, watermark, extra people, weapons, horns or magical glow.",
+      "method": "builtin image_gen",
+      "source": {
+        "path": "source-art/main-cast/original/mine-foreman.png",
+        "size": [
+          1254,
+          1254
+        ],
+        "sha256": "41bc80fae206b5473d411020f5164e61c44c0677be9b406330453f25112b9cfc",
+        "bytes": 1602617
+      },
+      "source192": {
+        "path": "source-art/main-cast/192/mine-foreman.png",
+        "size": [
+          192,
+          192
+        ],
+        "sha256": "7b41e9fece426b31369044a45b63791e8b10be05ae3798e8c495a4c0ed95dce5",
+        "bytes": 69421
+      },
+      "runtime": {
+        "path": "dist/story-portraits/mine-foreman.png",
+        "size": [
+          96,
+          96
+        ],
+        "sha256": "f19976817ca8f19cc3f45a394f3525574c135e8f120415e3a91f636630298dd0",
+        "bytes": 19787
+      },
+      "visualQa": {
+        "at192": "visually reviewed",
+        "at96": "included in contact review"
+      },
+      "status": "authored-name-and-visual-design"
+    },
+    {
+      "id": "elf-medic",
+      "name": "伊瑟",
+      "prompt": "Use case: stylized-concept. Asset type: one finished square NPC dialogue portrait for a Japanese pixel-art fantasy RPG, intended for 96 and 192 pixel display. Subject: Iser, a young-adult elven field medic woman with narrow elegant face, long pointed ears clearly visible, warm light brown hair pinned in a practical short low bun, focused calm green-brown eyes, slightly weary expression, moss-green plain medic apron over a cream linen tunic, a short pale bandage roll held near the bottom with clean working hands, a practical small linen supply strap. Caring practical field worker, not nobility, not priestess, no magical staff, no armour, no invented religious symbol. Composition: single chest-up three-quarter bust, entire head and ears inside canvas with small margins, head 55 percent of height, visible shoulders and bandage. Plain flat dark desaturated blue-green background #172c31 family. Style: actual crisp 16-bit JRPG pixel art, deliberate compact chunky pixel clusters, hard stepped edges, limited muted palette, selective dark outlines. No smooth gradients or painted brushwork, no photorealism or 3D. Natural upper-left light expressed as flat pixel clusters. No text, letters, names, crosses, frame, badge, watermark, extra characters, gore or magical glow.",
+      "method": "builtin image_gen",
+      "source": {
+        "path": "source-art/main-cast/original/elf-medic.png",
+        "size": [
+          1254,
+          1254
+        ],
+        "sha256": "9b5220911f1b3dc9639dc1776554ad072c0153ccc827224d0ad07eda0815ee3c",
+        "bytes": 1553734
+      },
+      "source192": {
+        "path": "source-art/main-cast/192/elf-medic.png",
+        "size": [
+          192,
+          192
+        ],
+        "sha256": "f9590cf550227cd57432d6d4797a923fd9a7b9b34b30d049a86790af34b24f8d",
+        "bytes": 65548
+      },
+      "runtime": {
+        "path": "dist/story-portraits/elf-medic.png",
+        "size": [
+          96,
+          96
+        ],
+        "sha256": "8e7b3091098fafd70cce5ea7dbc8c09c83528888b3a5ff96c29c997a78e85906",
+        "bytes": 18754
+      },
+      "visualQa": {
+        "at192": "visually reviewed",
+        "at96": "included in contact review"
+      },
+      "status": "authored-name-and-visual-design"
+    }
+  ]
+}
