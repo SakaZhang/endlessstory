@@ -11,7 +11,9 @@ export function materialChannelProbability(channel,area,kind,rank){
  if(channel==='regular')return {field:.35,dungeon:.5,boss:.75}[kind];
  if(channel==='recovery')return {field:.6,dungeon:.75,boss:.9}[kind];
  if(channel==='special')return {field:.005,dungeon:.015,boss:.08}[kind]*(1+.08*(area-1))*(kind!=='boss'&&rank==='elite'?1.5:1);
- if(channel==='gem')return .00005*area*({field:1,dungeon:2.5,boss:10}[kind]);
+ // Infinity gems: per eligible creature judgment, not per battle or per hour.
+ // Callers still own source eligibility, held-one suppression and luck/ring bonuses.
+ if(channel==='gem')return kind==='boss'?.02+.03*(area-1)/9:area*({field:.0002,dungeon:.001}[kind]);
  throw Error('Unknown material channel');
 }
 export function buildMaterialPools({materials,monsters,associations}){

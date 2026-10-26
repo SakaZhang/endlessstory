@@ -2,9 +2,12 @@ import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
 import {DWARF_MATERIAL_SOURCE_POOLS as pools,DWARF_MONSTER_INFO as monsters,DWARF_MATERIALS as materials,validDwarfMaterialPool,rollMonsterMaterials,toDwarfInventoryKey} from './dist/dwarf-material-catalog.js';
 import {recoveryInputPlan} from './dist/recovery-recipe-schema.js';
+import {materialChannelProbability} from './dist/material-loot-profile.js';
 const prior=execFileSync('git',['show','319ca607:dist/dwarf-material-catalog.js'],{encoding:'utf8'});
 const old=JSON.parse(prior.match(/DWARF_MATERIAL_SOURCE_POOLS=freeze\(Object.fromEntries\((\[.*?\])\.map/)[1]);
-for(const row of old)assert.deepEqual(pools[row.monsterId+'|'+row.nodeId],row);
+// Only the subsequently approved Infinity gem rate is rebased; every other
+// historical field remains byte-for-byte JSON-equivalent.
+for(const row of old){const [,area,kind]=row.nodeId.split('.');for(const c of row.channels)if(c.channel==='gem'&&c.entries.length)c.hitProbability=materialChannelProbability('gem',Number(area.slice(1)),kind);assert.deepEqual(pools[row.monsterId+'|'+row.nodeId],row);}
 assert.equal(Object.values(pools).filter(r=>Number(r.nodeId.split('.')[1].slice(1))<=6).length,44);assert.equal(monsters.filter(m=>m.area<=6).length,26);assert.equal(Object.keys(materials).length,18);
 const rows=Object.values(pools).filter(p=>/^dwarf\.a0[456]\./.test(p.monsterId));assert.equal(rows.length,22);
 const registry=Object.fromEntries(Object.values(materials).map(m=>[toDwarfInventoryKey(m.id),m]));
@@ -14,4 +17,4 @@ const options={random:()=>0,rollQuality:()=>0,owned:(s,id)=>s.owned.has(id),rece
 assert(rollMonsterMaterials(s,e,u,options).ok);const gem=receipts.find(x=>materials[x.materialId].uniqueHeld);assert(gem);assert.equal(gem.quality,3);assert(rollMonsterMaterials(s,e,u,options).ok);assert.equal(receipts.filter(x=>x.materialId===gem.materialId).length,1);
 assert.equal(rollMonsterMaterials({}, {...e,instanceId:'dwarf.a01.boss'},u,options).ok,false);
 assert.equal(rollMonsterMaterials(s,e,{...u,origin:'summoned'},options).ok,false);
-console.log('PASS M3 22 source rows/13 monster codex additions, M2 pools unchanged, strict node eligibility, local same-quality recovery substitutes, unique gem second-round ownership recheck');
+console.log('PASS M3 22 source rows/13 monster codex additions, M2 pools unchanged except approved gem rates, strict node eligibility, local same-quality recovery substitutes, unique gem second-round ownership recheck');

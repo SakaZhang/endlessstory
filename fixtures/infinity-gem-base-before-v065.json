@@ -1,0 +1,1967 @@
+{
+  "baselineCommit": "3117c0691986ce14054c8b858ce72eaf57853107",
+  "description": "v0.65 source. Hash JSON pool data after removing ONLY populated gem channel hitProbability. Everything else, including eligible pools, channels, weights, quantities and quality profiles, must match.",
+  "materialsSha256": "8c68da9cf0467d20eff7173435a65b5d01634881930890db0d4b6dd054e29ab2",
+  "races": {
+    "dwarf": {
+      "unchangedPoolDataSha256": "e4d054218003c3263cd4176ae79abb70f4e19bf8853ca22eb97a24144e212d70",
+      "gemChannels": [
+        {
+          "monsterId": "dwarf.a01.normal.1",
+          "nodeId": "dwarf.a01.field",
+          "oldHitProbability": 5e-05
+        },
+        {
+          "monsterId": "dwarf.a01.normal.1",
+          "nodeId": "dwarf.a01.dungeon",
+          "oldHitProbability": 0.000125
+        },
+        {
+          "monsterId": "dwarf.a01.normal.2",
+          "nodeId": "dwarf.a01.field",
+          "oldHitProbability": 5e-05
+        },
+        {
+          "monsterId": "dwarf.a01.normal.2",
+          "nodeId": "dwarf.a01.dungeon",
+          "oldHitProbability": 0.000125
+        },
+        {
+          "monsterId": "dwarf.a01.normal.3",
+          "nodeId": "dwarf.a01.field",
+          "oldHitProbability": 5e-05
+        },
+        {
+          "monsterId": "dwarf.a01.normal.3",
+          "nodeId": "dwarf.a01.dungeon",
+          "oldHitProbability": 0.000125
+        },
+        {
+          "monsterId": "dwarf.a01.elite",
+          "nodeId": "dwarf.a01.dungeon",
+          "oldHitProbability": 0.000125
+        },
+        {
+          "monsterId": "dwarf.a02.normal.1",
+          "nodeId": "dwarf.a02.field",
+          "oldHitProbability": 9.999999999999999e-05
+        },
+        {
+          "monsterId": "dwarf.a02.normal.1",
+          "nodeId": "dwarf.a02.dungeon",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "dwarf.a02.normal.2",
+          "nodeId": "dwarf.a02.field",
+          "oldHitProbability": 9.999999999999999e-05
+        },
+        {
+          "monsterId": "dwarf.a02.normal.2",
+          "nodeId": "dwarf.a02.dungeon",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "dwarf.a02.normal.3",
+          "nodeId": "dwarf.a02.field",
+          "oldHitProbability": 9.999999999999999e-05
+        },
+        {
+          "monsterId": "dwarf.a02.normal.3",
+          "nodeId": "dwarf.a02.dungeon",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "dwarf.a02.elite",
+          "nodeId": "dwarf.a02.dungeon",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "dwarf.a03.normal.1",
+          "nodeId": "dwarf.a03.field",
+          "oldHitProbability": 0.00015
+        },
+        {
+          "monsterId": "dwarf.a03.normal.1",
+          "nodeId": "dwarf.a03.dungeon",
+          "oldHitProbability": 0.00037499999999999995
+        },
+        {
+          "monsterId": "dwarf.a03.normal.2",
+          "nodeId": "dwarf.a03.field",
+          "oldHitProbability": 0.00015
+        },
+        {
+          "monsterId": "dwarf.a03.normal.2",
+          "nodeId": "dwarf.a03.dungeon",
+          "oldHitProbability": 0.00037499999999999995
+        },
+        {
+          "monsterId": "dwarf.a03.normal.3",
+          "nodeId": "dwarf.a03.field",
+          "oldHitProbability": 0.00015
+        },
+        {
+          "monsterId": "dwarf.a03.normal.3",
+          "nodeId": "dwarf.a03.dungeon",
+          "oldHitProbability": 0.00037499999999999995
+        },
+        {
+          "monsterId": "dwarf.a03.elite",
+          "nodeId": "dwarf.a03.dungeon",
+          "oldHitProbability": 0.00037499999999999995
+        },
+        {
+          "monsterId": "dwarf.a03.boss",
+          "nodeId": "dwarf.a03.boss",
+          "oldHitProbability": 0.0014999999999999998
+        },
+        {
+          "monsterId": "dwarf.a04.normal.1",
+          "nodeId": "dwarf.a04.field",
+          "oldHitProbability": 0.0002
+        },
+        {
+          "monsterId": "dwarf.a04.normal.1",
+          "nodeId": "dwarf.a04.dungeon",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "dwarf.a04.normal.2",
+          "nodeId": "dwarf.a04.field",
+          "oldHitProbability": 0.0002
+        },
+        {
+          "monsterId": "dwarf.a04.normal.2",
+          "nodeId": "dwarf.a04.dungeon",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "dwarf.a04.normal.3",
+          "nodeId": "dwarf.a04.field",
+          "oldHitProbability": 0.0002
+        },
+        {
+          "monsterId": "dwarf.a04.normal.3",
+          "nodeId": "dwarf.a04.dungeon",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "dwarf.a04.elite",
+          "nodeId": "dwarf.a04.dungeon",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "dwarf.a05.normal.1",
+          "nodeId": "dwarf.a05.field",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "dwarf.a05.normal.1",
+          "nodeId": "dwarf.a05.dungeon",
+          "oldHitProbability": 0.000625
+        },
+        {
+          "monsterId": "dwarf.a05.normal.2",
+          "nodeId": "dwarf.a05.field",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "dwarf.a05.normal.2",
+          "nodeId": "dwarf.a05.dungeon",
+          "oldHitProbability": 0.000625
+        },
+        {
+          "monsterId": "dwarf.a05.normal.3",
+          "nodeId": "dwarf.a05.field",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "dwarf.a05.normal.3",
+          "nodeId": "dwarf.a05.dungeon",
+          "oldHitProbability": 0.000625
+        },
+        {
+          "monsterId": "dwarf.a05.elite",
+          "nodeId": "dwarf.a05.dungeon",
+          "oldHitProbability": 0.000625
+        },
+        {
+          "monsterId": "dwarf.a06.normal.1",
+          "nodeId": "dwarf.a06.field",
+          "oldHitProbability": 0.00030000000000000003
+        },
+        {
+          "monsterId": "dwarf.a06.normal.1",
+          "nodeId": "dwarf.a06.dungeon",
+          "oldHitProbability": 0.00075
+        },
+        {
+          "monsterId": "dwarf.a06.normal.2",
+          "nodeId": "dwarf.a06.field",
+          "oldHitProbability": 0.00030000000000000003
+        },
+        {
+          "monsterId": "dwarf.a06.normal.2",
+          "nodeId": "dwarf.a06.dungeon",
+          "oldHitProbability": 0.00075
+        },
+        {
+          "monsterId": "dwarf.a06.normal.3",
+          "nodeId": "dwarf.a06.field",
+          "oldHitProbability": 0.00030000000000000003
+        },
+        {
+          "monsterId": "dwarf.a06.normal.3",
+          "nodeId": "dwarf.a06.dungeon",
+          "oldHitProbability": 0.00075
+        },
+        {
+          "monsterId": "dwarf.a06.elite",
+          "nodeId": "dwarf.a06.dungeon",
+          "oldHitProbability": 0.00075
+        },
+        {
+          "monsterId": "dwarf.a06.boss",
+          "nodeId": "dwarf.a06.boss",
+          "oldHitProbability": 0.003
+        },
+        {
+          "monsterId": "dwarf.a07.normal.1",
+          "nodeId": "dwarf.a07.field",
+          "oldHitProbability": 0.00035000000000000005
+        },
+        {
+          "monsterId": "dwarf.a07.normal.1",
+          "nodeId": "dwarf.a07.dungeon",
+          "oldHitProbability": 0.0008750000000000001
+        },
+        {
+          "monsterId": "dwarf.a07.normal.2",
+          "nodeId": "dwarf.a07.field",
+          "oldHitProbability": 0.00035000000000000005
+        },
+        {
+          "monsterId": "dwarf.a07.normal.2",
+          "nodeId": "dwarf.a07.dungeon",
+          "oldHitProbability": 0.0008750000000000001
+        },
+        {
+          "monsterId": "dwarf.a07.normal.3",
+          "nodeId": "dwarf.a07.field",
+          "oldHitProbability": 0.00035000000000000005
+        },
+        {
+          "monsterId": "dwarf.a07.normal.3",
+          "nodeId": "dwarf.a07.dungeon",
+          "oldHitProbability": 0.0008750000000000001
+        },
+        {
+          "monsterId": "dwarf.a07.elite",
+          "nodeId": "dwarf.a07.dungeon",
+          "oldHitProbability": 0.0008750000000000001
+        },
+        {
+          "monsterId": "dwarf.a08.normal.1",
+          "nodeId": "dwarf.a08.field",
+          "oldHitProbability": 0.0004
+        },
+        {
+          "monsterId": "dwarf.a08.normal.1",
+          "nodeId": "dwarf.a08.dungeon",
+          "oldHitProbability": 0.001
+        },
+        {
+          "monsterId": "dwarf.a08.normal.2",
+          "nodeId": "dwarf.a08.field",
+          "oldHitProbability": 0.0004
+        },
+        {
+          "monsterId": "dwarf.a08.normal.2",
+          "nodeId": "dwarf.a08.dungeon",
+          "oldHitProbability": 0.001
+        },
+        {
+          "monsterId": "dwarf.a08.normal.3",
+          "nodeId": "dwarf.a08.field",
+          "oldHitProbability": 0.0004
+        },
+        {
+          "monsterId": "dwarf.a08.normal.3",
+          "nodeId": "dwarf.a08.dungeon",
+          "oldHitProbability": 0.001
+        },
+        {
+          "monsterId": "dwarf.a08.elite",
+          "nodeId": "dwarf.a08.dungeon",
+          "oldHitProbability": 0.001
+        },
+        {
+          "monsterId": "dwarf.a09.normal.1",
+          "nodeId": "dwarf.a09.field",
+          "oldHitProbability": 0.00045
+        },
+        {
+          "monsterId": "dwarf.a09.normal.1",
+          "nodeId": "dwarf.a09.dungeon",
+          "oldHitProbability": 0.001125
+        },
+        {
+          "monsterId": "dwarf.a09.normal.2",
+          "nodeId": "dwarf.a09.field",
+          "oldHitProbability": 0.00045
+        },
+        {
+          "monsterId": "dwarf.a09.normal.2",
+          "nodeId": "dwarf.a09.dungeon",
+          "oldHitProbability": 0.001125
+        },
+        {
+          "monsterId": "dwarf.a09.normal.3",
+          "nodeId": "dwarf.a09.field",
+          "oldHitProbability": 0.00045
+        },
+        {
+          "monsterId": "dwarf.a09.normal.3",
+          "nodeId": "dwarf.a09.dungeon",
+          "oldHitProbability": 0.001125
+        },
+        {
+          "monsterId": "dwarf.a09.elite",
+          "nodeId": "dwarf.a09.dungeon",
+          "oldHitProbability": 0.001125
+        },
+        {
+          "monsterId": "dwarf.a10.normal.1",
+          "nodeId": "dwarf.a10.field",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "dwarf.a10.normal.1",
+          "nodeId": "dwarf.a10.dungeon",
+          "oldHitProbability": 0.00125
+        },
+        {
+          "monsterId": "dwarf.a10.normal.2",
+          "nodeId": "dwarf.a10.field",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "dwarf.a10.normal.2",
+          "nodeId": "dwarf.a10.dungeon",
+          "oldHitProbability": 0.00125
+        },
+        {
+          "monsterId": "dwarf.a10.normal.3",
+          "nodeId": "dwarf.a10.field",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "dwarf.a10.normal.3",
+          "nodeId": "dwarf.a10.dungeon",
+          "oldHitProbability": 0.00125
+        },
+        {
+          "monsterId": "dwarf.a10.elite",
+          "nodeId": "dwarf.a10.dungeon",
+          "oldHitProbability": 0.00125
+        },
+        {
+          "monsterId": "dwarf.a09.boss",
+          "nodeId": "dwarf.a09.boss",
+          "oldHitProbability": 0.0045
+        },
+        {
+          "monsterId": "dwarf.a10.boss",
+          "nodeId": "dwarf.a10.boss",
+          "oldHitProbability": 0.005
+        }
+      ]
+    },
+    "human": {
+      "unchangedPoolDataSha256": "20f86c12d298525e546e7c8e01749bef9369ee0b2882ca3a83a158da8b7311ce",
+      "gemChannels": [
+        {
+          "monsterId": "human.a01.normal.1",
+          "nodeId": "human.a01.field",
+          "oldHitProbability": 5e-05
+        },
+        {
+          "monsterId": "human.a01.normal.1",
+          "nodeId": "human.a01.dungeon",
+          "oldHitProbability": 0.000125
+        },
+        {
+          "monsterId": "human.a01.normal.2",
+          "nodeId": "human.a01.field",
+          "oldHitProbability": 5e-05
+        },
+        {
+          "monsterId": "human.a01.normal.2",
+          "nodeId": "human.a01.dungeon",
+          "oldHitProbability": 0.000125
+        },
+        {
+          "monsterId": "human.a01.normal.3",
+          "nodeId": "human.a01.field",
+          "oldHitProbability": 5e-05
+        },
+        {
+          "monsterId": "human.a01.normal.3",
+          "nodeId": "human.a01.dungeon",
+          "oldHitProbability": 0.000125
+        },
+        {
+          "monsterId": "human.a01.elite",
+          "nodeId": "human.a01.field",
+          "oldHitProbability": 5e-05
+        },
+        {
+          "monsterId": "human.a01.elite",
+          "nodeId": "human.a01.dungeon",
+          "oldHitProbability": 0.000125
+        },
+        {
+          "monsterId": "human.a02.normal.1",
+          "nodeId": "human.a02.field",
+          "oldHitProbability": 0.0001
+        },
+        {
+          "monsterId": "human.a02.normal.1",
+          "nodeId": "human.a02.dungeon",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "human.a02.normal.2",
+          "nodeId": "human.a02.field",
+          "oldHitProbability": 0.0001
+        },
+        {
+          "monsterId": "human.a02.normal.2",
+          "nodeId": "human.a02.dungeon",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "human.a02.normal.3",
+          "nodeId": "human.a02.field",
+          "oldHitProbability": 0.0001
+        },
+        {
+          "monsterId": "human.a02.normal.3",
+          "nodeId": "human.a02.dungeon",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "human.a02.elite",
+          "nodeId": "human.a02.field",
+          "oldHitProbability": 0.0001
+        },
+        {
+          "monsterId": "human.a02.elite",
+          "nodeId": "human.a02.dungeon",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "human.a03.normal.1",
+          "nodeId": "human.a03.field",
+          "oldHitProbability": 0.00015000000000000001
+        },
+        {
+          "monsterId": "human.a03.normal.1",
+          "nodeId": "human.a03.dungeon",
+          "oldHitProbability": 0.000375
+        },
+        {
+          "monsterId": "human.a03.normal.2",
+          "nodeId": "human.a03.field",
+          "oldHitProbability": 0.00015000000000000001
+        },
+        {
+          "monsterId": "human.a03.normal.2",
+          "nodeId": "human.a03.dungeon",
+          "oldHitProbability": 0.000375
+        },
+        {
+          "monsterId": "human.a03.normal.3",
+          "nodeId": "human.a03.field",
+          "oldHitProbability": 0.00015000000000000001
+        },
+        {
+          "monsterId": "human.a03.normal.3",
+          "nodeId": "human.a03.dungeon",
+          "oldHitProbability": 0.000375
+        },
+        {
+          "monsterId": "human.a03.elite",
+          "nodeId": "human.a03.field",
+          "oldHitProbability": 0.00015000000000000001
+        },
+        {
+          "monsterId": "human.a03.elite",
+          "nodeId": "human.a03.dungeon",
+          "oldHitProbability": 0.000375
+        },
+        {
+          "monsterId": "human.a04.normal.1",
+          "nodeId": "human.a04.field",
+          "oldHitProbability": 0.0002
+        },
+        {
+          "monsterId": "human.a04.normal.1",
+          "nodeId": "human.a04.dungeon",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "human.a04.normal.2",
+          "nodeId": "human.a04.field",
+          "oldHitProbability": 0.0002
+        },
+        {
+          "monsterId": "human.a04.normal.2",
+          "nodeId": "human.a04.dungeon",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "human.a04.normal.3",
+          "nodeId": "human.a04.field",
+          "oldHitProbability": 0.0002
+        },
+        {
+          "monsterId": "human.a04.normal.3",
+          "nodeId": "human.a04.dungeon",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "human.a04.elite",
+          "nodeId": "human.a04.field",
+          "oldHitProbability": 0.0002
+        },
+        {
+          "monsterId": "human.a04.elite",
+          "nodeId": "human.a04.dungeon",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "human.a05.normal.1",
+          "nodeId": "human.a05.field",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "human.a05.normal.1",
+          "nodeId": "human.a05.dungeon",
+          "oldHitProbability": 0.000625
+        },
+        {
+          "monsterId": "human.a05.normal.2",
+          "nodeId": "human.a05.field",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "human.a05.normal.2",
+          "nodeId": "human.a05.dungeon",
+          "oldHitProbability": 0.000625
+        },
+        {
+          "monsterId": "human.a05.normal.3",
+          "nodeId": "human.a05.field",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "human.a05.normal.3",
+          "nodeId": "human.a05.dungeon",
+          "oldHitProbability": 0.000625
+        },
+        {
+          "monsterId": "human.a05.elite",
+          "nodeId": "human.a05.field",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "human.a05.elite",
+          "nodeId": "human.a05.dungeon",
+          "oldHitProbability": 0.000625
+        },
+        {
+          "monsterId": "human.a06.normal.1",
+          "nodeId": "human.a06.field",
+          "oldHitProbability": 0.00030000000000000003
+        },
+        {
+          "monsterId": "human.a06.normal.1",
+          "nodeId": "human.a06.dungeon",
+          "oldHitProbability": 0.00075
+        },
+        {
+          "monsterId": "human.a06.normal.2",
+          "nodeId": "human.a06.field",
+          "oldHitProbability": 0.00030000000000000003
+        },
+        {
+          "monsterId": "human.a06.normal.2",
+          "nodeId": "human.a06.dungeon",
+          "oldHitProbability": 0.00075
+        },
+        {
+          "monsterId": "human.a06.normal.3",
+          "nodeId": "human.a06.field",
+          "oldHitProbability": 0.00030000000000000003
+        },
+        {
+          "monsterId": "human.a06.normal.3",
+          "nodeId": "human.a06.dungeon",
+          "oldHitProbability": 0.00075
+        },
+        {
+          "monsterId": "human.a06.elite",
+          "nodeId": "human.a06.field",
+          "oldHitProbability": 0.00030000000000000003
+        },
+        {
+          "monsterId": "human.a06.elite",
+          "nodeId": "human.a06.dungeon",
+          "oldHitProbability": 0.00075
+        },
+        {
+          "monsterId": "human.a07.normal.1",
+          "nodeId": "human.a07.field",
+          "oldHitProbability": 0.00035
+        },
+        {
+          "monsterId": "human.a07.normal.1",
+          "nodeId": "human.a07.dungeon",
+          "oldHitProbability": 0.000875
+        },
+        {
+          "monsterId": "human.a07.normal.2",
+          "nodeId": "human.a07.field",
+          "oldHitProbability": 0.00035
+        },
+        {
+          "monsterId": "human.a07.normal.2",
+          "nodeId": "human.a07.dungeon",
+          "oldHitProbability": 0.000875
+        },
+        {
+          "monsterId": "human.a07.normal.3",
+          "nodeId": "human.a07.field",
+          "oldHitProbability": 0.00035
+        },
+        {
+          "monsterId": "human.a07.normal.3",
+          "nodeId": "human.a07.dungeon",
+          "oldHitProbability": 0.000875
+        },
+        {
+          "monsterId": "human.a07.elite",
+          "nodeId": "human.a07.field",
+          "oldHitProbability": 0.00035
+        },
+        {
+          "monsterId": "human.a07.elite",
+          "nodeId": "human.a07.dungeon",
+          "oldHitProbability": 0.000875
+        },
+        {
+          "monsterId": "human.a08.normal.1",
+          "nodeId": "human.a08.field",
+          "oldHitProbability": 0.0004
+        },
+        {
+          "monsterId": "human.a08.normal.1",
+          "nodeId": "human.a08.dungeon",
+          "oldHitProbability": 0.001
+        },
+        {
+          "monsterId": "human.a08.normal.2",
+          "nodeId": "human.a08.field",
+          "oldHitProbability": 0.0004
+        },
+        {
+          "monsterId": "human.a08.normal.2",
+          "nodeId": "human.a08.dungeon",
+          "oldHitProbability": 0.001
+        },
+        {
+          "monsterId": "human.a08.normal.3",
+          "nodeId": "human.a08.field",
+          "oldHitProbability": 0.0004
+        },
+        {
+          "monsterId": "human.a08.normal.3",
+          "nodeId": "human.a08.dungeon",
+          "oldHitProbability": 0.001
+        },
+        {
+          "monsterId": "human.a08.elite",
+          "nodeId": "human.a08.field",
+          "oldHitProbability": 0.0004
+        },
+        {
+          "monsterId": "human.a08.elite",
+          "nodeId": "human.a08.dungeon",
+          "oldHitProbability": 0.001
+        },
+        {
+          "monsterId": "human.a09.normal.1",
+          "nodeId": "human.a09.field",
+          "oldHitProbability": 0.00045000000000000004
+        },
+        {
+          "monsterId": "human.a09.normal.1",
+          "nodeId": "human.a09.dungeon",
+          "oldHitProbability": 0.0011250000000000001
+        },
+        {
+          "monsterId": "human.a09.normal.2",
+          "nodeId": "human.a09.field",
+          "oldHitProbability": 0.00045000000000000004
+        },
+        {
+          "monsterId": "human.a09.normal.2",
+          "nodeId": "human.a09.dungeon",
+          "oldHitProbability": 0.0011250000000000001
+        },
+        {
+          "monsterId": "human.a09.normal.3",
+          "nodeId": "human.a09.field",
+          "oldHitProbability": 0.00045000000000000004
+        },
+        {
+          "monsterId": "human.a09.normal.3",
+          "nodeId": "human.a09.dungeon",
+          "oldHitProbability": 0.0011250000000000001
+        },
+        {
+          "monsterId": "human.a09.elite",
+          "nodeId": "human.a09.field",
+          "oldHitProbability": 0.00045000000000000004
+        },
+        {
+          "monsterId": "human.a09.elite",
+          "nodeId": "human.a09.dungeon",
+          "oldHitProbability": 0.0011250000000000001
+        },
+        {
+          "monsterId": "human.a10.normal.1",
+          "nodeId": "human.a10.field",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "human.a10.normal.1",
+          "nodeId": "human.a10.dungeon",
+          "oldHitProbability": 0.00125
+        },
+        {
+          "monsterId": "human.a10.normal.2",
+          "nodeId": "human.a10.field",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "human.a10.normal.2",
+          "nodeId": "human.a10.dungeon",
+          "oldHitProbability": 0.00125
+        },
+        {
+          "monsterId": "human.a10.normal.3",
+          "nodeId": "human.a10.field",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "human.a10.normal.3",
+          "nodeId": "human.a10.dungeon",
+          "oldHitProbability": 0.00125
+        },
+        {
+          "monsterId": "human.a10.elite",
+          "nodeId": "human.a10.field",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "human.a10.elite",
+          "nodeId": "human.a10.dungeon",
+          "oldHitProbability": 0.00125
+        },
+        {
+          "monsterId": "human.a03.boss",
+          "nodeId": "human.a03.boss",
+          "oldHitProbability": 0.0015
+        },
+        {
+          "monsterId": "human.a06.boss",
+          "nodeId": "human.a06.boss",
+          "oldHitProbability": 0.003
+        },
+        {
+          "monsterId": "human.a09.boss",
+          "nodeId": "human.a09.boss",
+          "oldHitProbability": 0.0045000000000000005
+        }
+      ]
+    },
+    "elf": {
+      "unchangedPoolDataSha256": "76639be664414c8928e59e39375de6c6de9bc27eeaa52658f55dfae1530187e8",
+      "gemChannels": [
+        {
+          "monsterId": "elf.a01.normal.1",
+          "nodeId": "elf.a01.field",
+          "oldHitProbability": 5e-05
+        },
+        {
+          "monsterId": "elf.a01.normal.1",
+          "nodeId": "elf.a01.dungeon",
+          "oldHitProbability": 0.000125
+        },
+        {
+          "monsterId": "elf.a01.normal.2",
+          "nodeId": "elf.a01.field",
+          "oldHitProbability": 5e-05
+        },
+        {
+          "monsterId": "elf.a01.normal.2",
+          "nodeId": "elf.a01.dungeon",
+          "oldHitProbability": 0.000125
+        },
+        {
+          "monsterId": "elf.a01.normal.3",
+          "nodeId": "elf.a01.field",
+          "oldHitProbability": 5e-05
+        },
+        {
+          "monsterId": "elf.a01.normal.3",
+          "nodeId": "elf.a01.dungeon",
+          "oldHitProbability": 0.000125
+        },
+        {
+          "monsterId": "elf.a01.elite",
+          "nodeId": "elf.a01.field",
+          "oldHitProbability": 5e-05
+        },
+        {
+          "monsterId": "elf.a01.elite",
+          "nodeId": "elf.a01.dungeon",
+          "oldHitProbability": 0.000125
+        },
+        {
+          "monsterId": "elf.a02.normal.1",
+          "nodeId": "elf.a02.field",
+          "oldHitProbability": 0.0001
+        },
+        {
+          "monsterId": "elf.a02.normal.1",
+          "nodeId": "elf.a02.dungeon",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "elf.a02.normal.2",
+          "nodeId": "elf.a02.field",
+          "oldHitProbability": 0.0001
+        },
+        {
+          "monsterId": "elf.a02.normal.2",
+          "nodeId": "elf.a02.dungeon",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "elf.a02.normal.3",
+          "nodeId": "elf.a02.field",
+          "oldHitProbability": 0.0001
+        },
+        {
+          "monsterId": "elf.a02.normal.3",
+          "nodeId": "elf.a02.dungeon",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "elf.a02.elite",
+          "nodeId": "elf.a02.field",
+          "oldHitProbability": 0.0001
+        },
+        {
+          "monsterId": "elf.a02.elite",
+          "nodeId": "elf.a02.dungeon",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "elf.a02.boss",
+          "nodeId": "elf.a02.boss",
+          "oldHitProbability": 0.001
+        },
+        {
+          "monsterId": "elf.a03.normal.1",
+          "nodeId": "elf.a03.field",
+          "oldHitProbability": 0.00015000000000000001
+        },
+        {
+          "monsterId": "elf.a03.normal.1",
+          "nodeId": "elf.a03.dungeon",
+          "oldHitProbability": 0.000375
+        },
+        {
+          "monsterId": "elf.a03.normal.2",
+          "nodeId": "elf.a03.field",
+          "oldHitProbability": 0.00015000000000000001
+        },
+        {
+          "monsterId": "elf.a03.normal.2",
+          "nodeId": "elf.a03.dungeon",
+          "oldHitProbability": 0.000375
+        },
+        {
+          "monsterId": "elf.a03.normal.3",
+          "nodeId": "elf.a03.field",
+          "oldHitProbability": 0.00015000000000000001
+        },
+        {
+          "monsterId": "elf.a03.normal.3",
+          "nodeId": "elf.a03.dungeon",
+          "oldHitProbability": 0.000375
+        },
+        {
+          "monsterId": "elf.a03.elite",
+          "nodeId": "elf.a03.field",
+          "oldHitProbability": 0.00015000000000000001
+        },
+        {
+          "monsterId": "elf.a03.elite",
+          "nodeId": "elf.a03.dungeon",
+          "oldHitProbability": 0.000375
+        },
+        {
+          "monsterId": "elf.a04.normal.1",
+          "nodeId": "elf.a04.field",
+          "oldHitProbability": 0.0002
+        },
+        {
+          "monsterId": "elf.a04.normal.1",
+          "nodeId": "elf.a04.dungeon",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "elf.a04.normal.2",
+          "nodeId": "elf.a04.field",
+          "oldHitProbability": 0.0002
+        },
+        {
+          "monsterId": "elf.a04.normal.2",
+          "nodeId": "elf.a04.dungeon",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "elf.a04.normal.3",
+          "nodeId": "elf.a04.field",
+          "oldHitProbability": 0.0002
+        },
+        {
+          "monsterId": "elf.a04.normal.3",
+          "nodeId": "elf.a04.dungeon",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "elf.a04.elite",
+          "nodeId": "elf.a04.field",
+          "oldHitProbability": 0.0002
+        },
+        {
+          "monsterId": "elf.a04.elite",
+          "nodeId": "elf.a04.dungeon",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "elf.a05.normal.1",
+          "nodeId": "elf.a05.field",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "elf.a05.normal.1",
+          "nodeId": "elf.a05.dungeon",
+          "oldHitProbability": 0.000625
+        },
+        {
+          "monsterId": "elf.a05.normal.2",
+          "nodeId": "elf.a05.field",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "elf.a05.normal.2",
+          "nodeId": "elf.a05.dungeon",
+          "oldHitProbability": 0.000625
+        },
+        {
+          "monsterId": "elf.a05.normal.3",
+          "nodeId": "elf.a05.field",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "elf.a05.normal.3",
+          "nodeId": "elf.a05.dungeon",
+          "oldHitProbability": 0.000625
+        },
+        {
+          "monsterId": "elf.a05.elite",
+          "nodeId": "elf.a05.field",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "elf.a05.elite",
+          "nodeId": "elf.a05.dungeon",
+          "oldHitProbability": 0.000625
+        },
+        {
+          "monsterId": "elf.a05.boss",
+          "nodeId": "elf.a05.boss",
+          "oldHitProbability": 0.0025
+        },
+        {
+          "monsterId": "elf.a06.normal.1",
+          "nodeId": "elf.a06.field",
+          "oldHitProbability": 0.00030000000000000003
+        },
+        {
+          "monsterId": "elf.a06.normal.1",
+          "nodeId": "elf.a06.dungeon",
+          "oldHitProbability": 0.00075
+        },
+        {
+          "monsterId": "elf.a06.normal.2",
+          "nodeId": "elf.a06.field",
+          "oldHitProbability": 0.00030000000000000003
+        },
+        {
+          "monsterId": "elf.a06.normal.2",
+          "nodeId": "elf.a06.dungeon",
+          "oldHitProbability": 0.00075
+        },
+        {
+          "monsterId": "elf.a06.normal.3",
+          "nodeId": "elf.a06.field",
+          "oldHitProbability": 0.00030000000000000003
+        },
+        {
+          "monsterId": "elf.a06.normal.3",
+          "nodeId": "elf.a06.dungeon",
+          "oldHitProbability": 0.00075
+        },
+        {
+          "monsterId": "elf.a06.elite",
+          "nodeId": "elf.a06.field",
+          "oldHitProbability": 0.00030000000000000003
+        },
+        {
+          "monsterId": "elf.a06.elite",
+          "nodeId": "elf.a06.dungeon",
+          "oldHitProbability": 0.00075
+        },
+        {
+          "monsterId": "elf.a07.normal.1",
+          "nodeId": "elf.a07.field",
+          "oldHitProbability": 0.00035
+        },
+        {
+          "monsterId": "elf.a07.normal.1",
+          "nodeId": "elf.a07.dungeon",
+          "oldHitProbability": 0.000875
+        },
+        {
+          "monsterId": "elf.a07.normal.2",
+          "nodeId": "elf.a07.field",
+          "oldHitProbability": 0.00035
+        },
+        {
+          "monsterId": "elf.a07.normal.2",
+          "nodeId": "elf.a07.dungeon",
+          "oldHitProbability": 0.000875
+        },
+        {
+          "monsterId": "elf.a07.normal.3",
+          "nodeId": "elf.a07.field",
+          "oldHitProbability": 0.00035
+        },
+        {
+          "monsterId": "elf.a07.normal.3",
+          "nodeId": "elf.a07.dungeon",
+          "oldHitProbability": 0.000875
+        },
+        {
+          "monsterId": "elf.a07.elite",
+          "nodeId": "elf.a07.field",
+          "oldHitProbability": 0.00035
+        },
+        {
+          "monsterId": "elf.a07.elite",
+          "nodeId": "elf.a07.dungeon",
+          "oldHitProbability": 0.000875
+        },
+        {
+          "monsterId": "elf.a08.normal.1",
+          "nodeId": "elf.a08.field",
+          "oldHitProbability": 0.0004
+        },
+        {
+          "monsterId": "elf.a08.normal.1",
+          "nodeId": "elf.a08.dungeon",
+          "oldHitProbability": 0.001
+        },
+        {
+          "monsterId": "elf.a08.normal.2",
+          "nodeId": "elf.a08.field",
+          "oldHitProbability": 0.0004
+        },
+        {
+          "monsterId": "elf.a08.normal.2",
+          "nodeId": "elf.a08.dungeon",
+          "oldHitProbability": 0.001
+        },
+        {
+          "monsterId": "elf.a08.normal.3",
+          "nodeId": "elf.a08.field",
+          "oldHitProbability": 0.0004
+        },
+        {
+          "monsterId": "elf.a08.normal.3",
+          "nodeId": "elf.a08.dungeon",
+          "oldHitProbability": 0.001
+        },
+        {
+          "monsterId": "elf.a08.elite",
+          "nodeId": "elf.a08.field",
+          "oldHitProbability": 0.0004
+        },
+        {
+          "monsterId": "elf.a08.elite",
+          "nodeId": "elf.a08.dungeon",
+          "oldHitProbability": 0.001
+        },
+        {
+          "monsterId": "elf.a08.boss",
+          "nodeId": "elf.a08.boss",
+          "oldHitProbability": 0.004
+        },
+        {
+          "monsterId": "elf.a09.normal.1",
+          "nodeId": "elf.a09.field",
+          "oldHitProbability": 0.00045000000000000004
+        },
+        {
+          "monsterId": "elf.a09.normal.1",
+          "nodeId": "elf.a09.dungeon",
+          "oldHitProbability": 0.0011250000000000001
+        },
+        {
+          "monsterId": "elf.a09.normal.2",
+          "nodeId": "elf.a09.field",
+          "oldHitProbability": 0.00045000000000000004
+        },
+        {
+          "monsterId": "elf.a09.normal.2",
+          "nodeId": "elf.a09.dungeon",
+          "oldHitProbability": 0.0011250000000000001
+        },
+        {
+          "monsterId": "elf.a09.normal.3",
+          "nodeId": "elf.a09.field",
+          "oldHitProbability": 0.00045000000000000004
+        },
+        {
+          "monsterId": "elf.a09.normal.3",
+          "nodeId": "elf.a09.dungeon",
+          "oldHitProbability": 0.0011250000000000001
+        },
+        {
+          "monsterId": "elf.a09.elite",
+          "nodeId": "elf.a09.field",
+          "oldHitProbability": 0.00045000000000000004
+        },
+        {
+          "monsterId": "elf.a09.elite",
+          "nodeId": "elf.a09.dungeon",
+          "oldHitProbability": 0.0011250000000000001
+        },
+        {
+          "monsterId": "elf.a10.normal.1",
+          "nodeId": "elf.a10.field",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "elf.a10.normal.1",
+          "nodeId": "elf.a10.dungeon",
+          "oldHitProbability": 0.00125
+        },
+        {
+          "monsterId": "elf.a10.normal.2",
+          "nodeId": "elf.a10.field",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "elf.a10.normal.2",
+          "nodeId": "elf.a10.dungeon",
+          "oldHitProbability": 0.00125
+        },
+        {
+          "monsterId": "elf.a10.normal.3",
+          "nodeId": "elf.a10.field",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "elf.a10.normal.3",
+          "nodeId": "elf.a10.dungeon",
+          "oldHitProbability": 0.00125
+        },
+        {
+          "monsterId": "elf.a10.elite",
+          "nodeId": "elf.a10.field",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "elf.a10.elite",
+          "nodeId": "elf.a10.dungeon",
+          "oldHitProbability": 0.00125
+        },
+        {
+          "monsterId": "elf.a10.boss",
+          "nodeId": "elf.a10.boss",
+          "oldHitProbability": 0.005
+        }
+      ]
+    },
+    "goblin": {
+      "unchangedPoolDataSha256": "46dcb06df06a2d89a536bf96451f2ac0cf8cd018004b04f0fe84f0235eafbe9b",
+      "gemChannels": [
+        {
+          "monsterId": "goblin.a01.normal.1",
+          "nodeId": "goblin.a01.field",
+          "oldHitProbability": 5e-05
+        },
+        {
+          "monsterId": "goblin.a01.normal.1",
+          "nodeId": "goblin.a01.dungeon",
+          "oldHitProbability": 0.000125
+        },
+        {
+          "monsterId": "goblin.a01.normal.2",
+          "nodeId": "goblin.a01.field",
+          "oldHitProbability": 5e-05
+        },
+        {
+          "monsterId": "goblin.a01.normal.2",
+          "nodeId": "goblin.a01.dungeon",
+          "oldHitProbability": 0.000125
+        },
+        {
+          "monsterId": "goblin.a01.normal.3",
+          "nodeId": "goblin.a01.field",
+          "oldHitProbability": 5e-05
+        },
+        {
+          "monsterId": "goblin.a01.normal.3",
+          "nodeId": "goblin.a01.dungeon",
+          "oldHitProbability": 0.000125
+        },
+        {
+          "monsterId": "goblin.a01.elite",
+          "nodeId": "goblin.a01.dungeon",
+          "oldHitProbability": 0.000125
+        },
+        {
+          "monsterId": "goblin.a02.normal.1",
+          "nodeId": "goblin.a02.field",
+          "oldHitProbability": 0.0001
+        },
+        {
+          "monsterId": "goblin.a02.normal.1",
+          "nodeId": "goblin.a02.dungeon",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "goblin.a02.normal.2",
+          "nodeId": "goblin.a02.field",
+          "oldHitProbability": 0.0001
+        },
+        {
+          "monsterId": "goblin.a02.normal.2",
+          "nodeId": "goblin.a02.dungeon",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "goblin.a02.normal.3",
+          "nodeId": "goblin.a02.field",
+          "oldHitProbability": 0.0001
+        },
+        {
+          "monsterId": "goblin.a02.normal.3",
+          "nodeId": "goblin.a02.dungeon",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "goblin.a02.elite",
+          "nodeId": "goblin.a02.dungeon",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "goblin.a03.normal.1",
+          "nodeId": "goblin.a03.field",
+          "oldHitProbability": 0.00015000000000000001
+        },
+        {
+          "monsterId": "goblin.a03.normal.1",
+          "nodeId": "goblin.a03.dungeon",
+          "oldHitProbability": 0.000375
+        },
+        {
+          "monsterId": "goblin.a03.normal.2",
+          "nodeId": "goblin.a03.field",
+          "oldHitProbability": 0.00015000000000000001
+        },
+        {
+          "monsterId": "goblin.a03.normal.2",
+          "nodeId": "goblin.a03.dungeon",
+          "oldHitProbability": 0.000375
+        },
+        {
+          "monsterId": "goblin.a03.normal.3",
+          "nodeId": "goblin.a03.field",
+          "oldHitProbability": 0.00015000000000000001
+        },
+        {
+          "monsterId": "goblin.a03.normal.3",
+          "nodeId": "goblin.a03.dungeon",
+          "oldHitProbability": 0.000375
+        },
+        {
+          "monsterId": "goblin.a03.elite",
+          "nodeId": "goblin.a03.dungeon",
+          "oldHitProbability": 0.000375
+        },
+        {
+          "monsterId": "goblin.a03.boss",
+          "nodeId": "goblin.a03.boss",
+          "oldHitProbability": 0.0015
+        },
+        {
+          "monsterId": "goblin.a04.normal.1",
+          "nodeId": "goblin.a04.field",
+          "oldHitProbability": 0.0002
+        },
+        {
+          "monsterId": "goblin.a04.normal.1",
+          "nodeId": "goblin.a04.dungeon",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "goblin.a04.normal.2",
+          "nodeId": "goblin.a04.field",
+          "oldHitProbability": 0.0002
+        },
+        {
+          "monsterId": "goblin.a04.normal.2",
+          "nodeId": "goblin.a04.dungeon",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "goblin.a04.normal.3",
+          "nodeId": "goblin.a04.field",
+          "oldHitProbability": 0.0002
+        },
+        {
+          "monsterId": "goblin.a04.normal.3",
+          "nodeId": "goblin.a04.dungeon",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "goblin.a04.elite",
+          "nodeId": "goblin.a04.dungeon",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "goblin.a05.normal.1",
+          "nodeId": "goblin.a05.field",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "goblin.a05.normal.1",
+          "nodeId": "goblin.a05.dungeon",
+          "oldHitProbability": 0.000625
+        },
+        {
+          "monsterId": "goblin.a05.normal.2",
+          "nodeId": "goblin.a05.field",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "goblin.a05.normal.2",
+          "nodeId": "goblin.a05.dungeon",
+          "oldHitProbability": 0.000625
+        },
+        {
+          "monsterId": "goblin.a05.normal.3",
+          "nodeId": "goblin.a05.field",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "goblin.a05.normal.3",
+          "nodeId": "goblin.a05.dungeon",
+          "oldHitProbability": 0.000625
+        },
+        {
+          "monsterId": "goblin.a05.elite",
+          "nodeId": "goblin.a05.dungeon",
+          "oldHitProbability": 0.000625
+        },
+        {
+          "monsterId": "goblin.a06.normal.1",
+          "nodeId": "goblin.a06.field",
+          "oldHitProbability": 0.00030000000000000003
+        },
+        {
+          "monsterId": "goblin.a06.normal.1",
+          "nodeId": "goblin.a06.dungeon",
+          "oldHitProbability": 0.00075
+        },
+        {
+          "monsterId": "goblin.a06.normal.2",
+          "nodeId": "goblin.a06.field",
+          "oldHitProbability": 0.00030000000000000003
+        },
+        {
+          "monsterId": "goblin.a06.normal.2",
+          "nodeId": "goblin.a06.dungeon",
+          "oldHitProbability": 0.00075
+        },
+        {
+          "monsterId": "goblin.a06.normal.3",
+          "nodeId": "goblin.a06.field",
+          "oldHitProbability": 0.00030000000000000003
+        },
+        {
+          "monsterId": "goblin.a06.normal.3",
+          "nodeId": "goblin.a06.dungeon",
+          "oldHitProbability": 0.00075
+        },
+        {
+          "monsterId": "goblin.a06.elite",
+          "nodeId": "goblin.a06.dungeon",
+          "oldHitProbability": 0.00075
+        },
+        {
+          "monsterId": "goblin.a06.boss",
+          "nodeId": "goblin.a06.boss",
+          "oldHitProbability": 0.003
+        },
+        {
+          "monsterId": "goblin.a07.normal.1",
+          "nodeId": "goblin.a07.field",
+          "oldHitProbability": 0.00035
+        },
+        {
+          "monsterId": "goblin.a07.normal.1",
+          "nodeId": "goblin.a07.dungeon",
+          "oldHitProbability": 0.000875
+        },
+        {
+          "monsterId": "goblin.a07.normal.2",
+          "nodeId": "goblin.a07.field",
+          "oldHitProbability": 0.00035
+        },
+        {
+          "monsterId": "goblin.a07.normal.2",
+          "nodeId": "goblin.a07.dungeon",
+          "oldHitProbability": 0.000875
+        },
+        {
+          "monsterId": "goblin.a07.normal.3",
+          "nodeId": "goblin.a07.field",
+          "oldHitProbability": 0.00035
+        },
+        {
+          "monsterId": "goblin.a07.normal.3",
+          "nodeId": "goblin.a07.dungeon",
+          "oldHitProbability": 0.000875
+        },
+        {
+          "monsterId": "goblin.a07.elite",
+          "nodeId": "goblin.a07.dungeon",
+          "oldHitProbability": 0.000875
+        },
+        {
+          "monsterId": "goblin.a08.normal.1",
+          "nodeId": "goblin.a08.field",
+          "oldHitProbability": 0.0004
+        },
+        {
+          "monsterId": "goblin.a08.normal.1",
+          "nodeId": "goblin.a08.dungeon",
+          "oldHitProbability": 0.001
+        },
+        {
+          "monsterId": "goblin.a08.normal.2",
+          "nodeId": "goblin.a08.field",
+          "oldHitProbability": 0.0004
+        },
+        {
+          "monsterId": "goblin.a08.normal.2",
+          "nodeId": "goblin.a08.dungeon",
+          "oldHitProbability": 0.001
+        },
+        {
+          "monsterId": "goblin.a08.normal.3",
+          "nodeId": "goblin.a08.field",
+          "oldHitProbability": 0.0004
+        },
+        {
+          "monsterId": "goblin.a08.normal.3",
+          "nodeId": "goblin.a08.dungeon",
+          "oldHitProbability": 0.001
+        },
+        {
+          "monsterId": "goblin.a08.elite",
+          "nodeId": "goblin.a08.dungeon",
+          "oldHitProbability": 0.001
+        },
+        {
+          "monsterId": "goblin.a09.normal.1",
+          "nodeId": "goblin.a09.field",
+          "oldHitProbability": 0.00045000000000000004
+        },
+        {
+          "monsterId": "goblin.a09.normal.1",
+          "nodeId": "goblin.a09.dungeon",
+          "oldHitProbability": 0.0011250000000000001
+        },
+        {
+          "monsterId": "goblin.a09.normal.2",
+          "nodeId": "goblin.a09.field",
+          "oldHitProbability": 0.00045000000000000004
+        },
+        {
+          "monsterId": "goblin.a09.normal.2",
+          "nodeId": "goblin.a09.dungeon",
+          "oldHitProbability": 0.0011250000000000001
+        },
+        {
+          "monsterId": "goblin.a09.normal.3",
+          "nodeId": "goblin.a09.field",
+          "oldHitProbability": 0.00045000000000000004
+        },
+        {
+          "monsterId": "goblin.a09.normal.3",
+          "nodeId": "goblin.a09.dungeon",
+          "oldHitProbability": 0.0011250000000000001
+        },
+        {
+          "monsterId": "goblin.a09.elite",
+          "nodeId": "goblin.a09.dungeon",
+          "oldHitProbability": 0.0011250000000000001
+        },
+        {
+          "monsterId": "goblin.a09.boss",
+          "nodeId": "goblin.a09.boss",
+          "oldHitProbability": 0.0045000000000000005
+        },
+        {
+          "monsterId": "goblin.a10.normal.1",
+          "nodeId": "goblin.a10.field",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "goblin.a10.normal.1",
+          "nodeId": "goblin.a10.dungeon",
+          "oldHitProbability": 0.00125
+        },
+        {
+          "monsterId": "goblin.a10.normal.2",
+          "nodeId": "goblin.a10.field",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "goblin.a10.normal.2",
+          "nodeId": "goblin.a10.dungeon",
+          "oldHitProbability": 0.00125
+        },
+        {
+          "monsterId": "goblin.a10.normal.3",
+          "nodeId": "goblin.a10.field",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "goblin.a10.normal.3",
+          "nodeId": "goblin.a10.dungeon",
+          "oldHitProbability": 0.00125
+        },
+        {
+          "monsterId": "goblin.a10.elite",
+          "nodeId": "goblin.a10.dungeon",
+          "oldHitProbability": 0.00125
+        }
+      ]
+    },
+    "ashen": {
+      "unchangedPoolDataSha256": "3a7d8666ee3b619b07dd68d929ebcff051c43e04866367ceac6da33550d510c9",
+      "gemChannels": [
+        {
+          "monsterId": "ashen.a01.normal.1",
+          "nodeId": "ashen.a01.field",
+          "oldHitProbability": 5e-05
+        },
+        {
+          "monsterId": "ashen.a01.normal.1",
+          "nodeId": "ashen.a01.dungeon",
+          "oldHitProbability": 0.000125
+        },
+        {
+          "monsterId": "ashen.a01.normal.2",
+          "nodeId": "ashen.a01.field",
+          "oldHitProbability": 5e-05
+        },
+        {
+          "monsterId": "ashen.a01.normal.2",
+          "nodeId": "ashen.a01.dungeon",
+          "oldHitProbability": 0.000125
+        },
+        {
+          "monsterId": "ashen.a01.normal.3",
+          "nodeId": "ashen.a01.field",
+          "oldHitProbability": 5e-05
+        },
+        {
+          "monsterId": "ashen.a01.normal.3",
+          "nodeId": "ashen.a01.dungeon",
+          "oldHitProbability": 0.000125
+        },
+        {
+          "monsterId": "ashen.a01.elite",
+          "nodeId": "ashen.a01.dungeon",
+          "oldHitProbability": 0.000125
+        },
+        {
+          "monsterId": "ashen.a02.normal.1",
+          "nodeId": "ashen.a02.field",
+          "oldHitProbability": 0.0001
+        },
+        {
+          "monsterId": "ashen.a02.normal.1",
+          "nodeId": "ashen.a02.dungeon",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "ashen.a02.normal.2",
+          "nodeId": "ashen.a02.field",
+          "oldHitProbability": 0.0001
+        },
+        {
+          "monsterId": "ashen.a02.normal.2",
+          "nodeId": "ashen.a02.dungeon",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "ashen.a02.normal.3",
+          "nodeId": "ashen.a02.field",
+          "oldHitProbability": 0.0001
+        },
+        {
+          "monsterId": "ashen.a02.normal.3",
+          "nodeId": "ashen.a02.dungeon",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "ashen.a02.elite",
+          "nodeId": "ashen.a02.dungeon",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "ashen.a03.normal.1",
+          "nodeId": "ashen.a03.field",
+          "oldHitProbability": 0.00015000000000000001
+        },
+        {
+          "monsterId": "ashen.a03.normal.1",
+          "nodeId": "ashen.a03.dungeon",
+          "oldHitProbability": 0.000375
+        },
+        {
+          "monsterId": "ashen.a03.normal.2",
+          "nodeId": "ashen.a03.field",
+          "oldHitProbability": 0.00015000000000000001
+        },
+        {
+          "monsterId": "ashen.a03.normal.2",
+          "nodeId": "ashen.a03.dungeon",
+          "oldHitProbability": 0.000375
+        },
+        {
+          "monsterId": "ashen.a03.normal.3",
+          "nodeId": "ashen.a03.field",
+          "oldHitProbability": 0.00015000000000000001
+        },
+        {
+          "monsterId": "ashen.a03.normal.3",
+          "nodeId": "ashen.a03.dungeon",
+          "oldHitProbability": 0.000375
+        },
+        {
+          "monsterId": "ashen.a03.elite",
+          "nodeId": "ashen.a03.dungeon",
+          "oldHitProbability": 0.000375
+        },
+        {
+          "monsterId": "ashen.a04.normal.1",
+          "nodeId": "ashen.a04.field",
+          "oldHitProbability": 0.0002
+        },
+        {
+          "monsterId": "ashen.a04.normal.1",
+          "nodeId": "ashen.a04.dungeon",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "ashen.a04.normal.2",
+          "nodeId": "ashen.a04.field",
+          "oldHitProbability": 0.0002
+        },
+        {
+          "monsterId": "ashen.a04.normal.2",
+          "nodeId": "ashen.a04.dungeon",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "ashen.a04.normal.3",
+          "nodeId": "ashen.a04.field",
+          "oldHitProbability": 0.0002
+        },
+        {
+          "monsterId": "ashen.a04.normal.3",
+          "nodeId": "ashen.a04.dungeon",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "ashen.a04.elite",
+          "nodeId": "ashen.a04.dungeon",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "ashen.a04.boss",
+          "nodeId": "ashen.a04.boss",
+          "oldHitProbability": 0.002
+        },
+        {
+          "monsterId": "ashen.a05.normal.1",
+          "nodeId": "ashen.a05.field",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "ashen.a05.normal.1",
+          "nodeId": "ashen.a05.dungeon",
+          "oldHitProbability": 0.000625
+        },
+        {
+          "monsterId": "ashen.a05.normal.2",
+          "nodeId": "ashen.a05.field",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "ashen.a05.normal.2",
+          "nodeId": "ashen.a05.dungeon",
+          "oldHitProbability": 0.000625
+        },
+        {
+          "monsterId": "ashen.a05.normal.3",
+          "nodeId": "ashen.a05.field",
+          "oldHitProbability": 0.00025
+        },
+        {
+          "monsterId": "ashen.a05.normal.3",
+          "nodeId": "ashen.a05.dungeon",
+          "oldHitProbability": 0.000625
+        },
+        {
+          "monsterId": "ashen.a05.elite",
+          "nodeId": "ashen.a05.dungeon",
+          "oldHitProbability": 0.000625
+        },
+        {
+          "monsterId": "ashen.a06.normal.1",
+          "nodeId": "ashen.a06.field",
+          "oldHitProbability": 0.00030000000000000003
+        },
+        {
+          "monsterId": "ashen.a06.normal.1",
+          "nodeId": "ashen.a06.dungeon",
+          "oldHitProbability": 0.00075
+        },
+        {
+          "monsterId": "ashen.a06.normal.2",
+          "nodeId": "ashen.a06.field",
+          "oldHitProbability": 0.00030000000000000003
+        },
+        {
+          "monsterId": "ashen.a06.normal.2",
+          "nodeId": "ashen.a06.dungeon",
+          "oldHitProbability": 0.00075
+        },
+        {
+          "monsterId": "ashen.a06.normal.3",
+          "nodeId": "ashen.a06.field",
+          "oldHitProbability": 0.00030000000000000003
+        },
+        {
+          "monsterId": "ashen.a06.normal.3",
+          "nodeId": "ashen.a06.dungeon",
+          "oldHitProbability": 0.00075
+        },
+        {
+          "monsterId": "ashen.a06.elite",
+          "nodeId": "ashen.a06.dungeon",
+          "oldHitProbability": 0.00075
+        },
+        {
+          "monsterId": "ashen.a07.normal.1",
+          "nodeId": "ashen.a07.field",
+          "oldHitProbability": 0.00035
+        },
+        {
+          "monsterId": "ashen.a07.normal.1",
+          "nodeId": "ashen.a07.dungeon",
+          "oldHitProbability": 0.000875
+        },
+        {
+          "monsterId": "ashen.a07.normal.2",
+          "nodeId": "ashen.a07.field",
+          "oldHitProbability": 0.00035
+        },
+        {
+          "monsterId": "ashen.a07.normal.2",
+          "nodeId": "ashen.a07.dungeon",
+          "oldHitProbability": 0.000875
+        },
+        {
+          "monsterId": "ashen.a07.normal.3",
+          "nodeId": "ashen.a07.field",
+          "oldHitProbability": 0.00035
+        },
+        {
+          "monsterId": "ashen.a07.normal.3",
+          "nodeId": "ashen.a07.dungeon",
+          "oldHitProbability": 0.000875
+        },
+        {
+          "monsterId": "ashen.a07.elite",
+          "nodeId": "ashen.a07.dungeon",
+          "oldHitProbability": 0.000875
+        },
+        {
+          "monsterId": "ashen.a07.boss",
+          "nodeId": "ashen.a07.boss",
+          "oldHitProbability": 0.0035
+        },
+        {
+          "monsterId": "ashen.a08.normal.1",
+          "nodeId": "ashen.a08.field",
+          "oldHitProbability": 0.0004
+        },
+        {
+          "monsterId": "ashen.a08.normal.1",
+          "nodeId": "ashen.a08.dungeon",
+          "oldHitProbability": 0.001
+        },
+        {
+          "monsterId": "ashen.a08.normal.2",
+          "nodeId": "ashen.a08.field",
+          "oldHitProbability": 0.0004
+        },
+        {
+          "monsterId": "ashen.a08.normal.2",
+          "nodeId": "ashen.a08.dungeon",
+          "oldHitProbability": 0.001
+        },
+        {
+          "monsterId": "ashen.a08.normal.3",
+          "nodeId": "ashen.a08.field",
+          "oldHitProbability": 0.0004
+        },
+        {
+          "monsterId": "ashen.a08.normal.3",
+          "nodeId": "ashen.a08.dungeon",
+          "oldHitProbability": 0.001
+        },
+        {
+          "monsterId": "ashen.a08.elite",
+          "nodeId": "ashen.a08.dungeon",
+          "oldHitProbability": 0.001
+        },
+        {
+          "monsterId": "ashen.a09.normal.1",
+          "nodeId": "ashen.a09.field",
+          "oldHitProbability": 0.00045000000000000004
+        },
+        {
+          "monsterId": "ashen.a09.normal.1",
+          "nodeId": "ashen.a09.dungeon",
+          "oldHitProbability": 0.0011250000000000001
+        },
+        {
+          "monsterId": "ashen.a09.normal.2",
+          "nodeId": "ashen.a09.field",
+          "oldHitProbability": 0.00045000000000000004
+        },
+        {
+          "monsterId": "ashen.a09.normal.2",
+          "nodeId": "ashen.a09.dungeon",
+          "oldHitProbability": 0.0011250000000000001
+        },
+        {
+          "monsterId": "ashen.a09.normal.3",
+          "nodeId": "ashen.a09.field",
+          "oldHitProbability": 0.00045000000000000004
+        },
+        {
+          "monsterId": "ashen.a09.normal.3",
+          "nodeId": "ashen.a09.dungeon",
+          "oldHitProbability": 0.0011250000000000001
+        },
+        {
+          "monsterId": "ashen.a09.elite",
+          "nodeId": "ashen.a09.dungeon",
+          "oldHitProbability": 0.0011250000000000001
+        },
+        {
+          "monsterId": "ashen.a10.normal.1",
+          "nodeId": "ashen.a10.field",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "ashen.a10.normal.1",
+          "nodeId": "ashen.a10.dungeon",
+          "oldHitProbability": 0.00125
+        },
+        {
+          "monsterId": "ashen.a10.normal.2",
+          "nodeId": "ashen.a10.field",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "ashen.a10.normal.2",
+          "nodeId": "ashen.a10.dungeon",
+          "oldHitProbability": 0.00125
+        },
+        {
+          "monsterId": "ashen.a10.normal.3",
+          "nodeId": "ashen.a10.field",
+          "oldHitProbability": 0.0005
+        },
+        {
+          "monsterId": "ashen.a10.normal.3",
+          "nodeId": "ashen.a10.dungeon",
+          "oldHitProbability": 0.00125
+        },
+        {
+          "monsterId": "ashen.a10.elite",
+          "nodeId": "ashen.a10.dungeon",
+          "oldHitProbability": 0.00125
+        },
+        {
+          "monsterId": "ashen.a10.boss",
+          "nodeId": "ashen.a10.boss",
+          "oldHitProbability": 0.005
+        }
+      ]
+    }
+  }
+}

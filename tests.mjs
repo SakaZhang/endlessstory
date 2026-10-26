@@ -192,3 +192,6 @@ runAffixSourceTest(process.execPath,[new URL('./monster-facing-tests.mjs',import
 runAffixSourceTest(process.execPath,[new URL('./goblin-hero-facing-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
 // Explicit war state and the shared entry/offline access gate.
 runAffixSourceTest(process.execPath,[new URL('./war-travel-lock-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+// Approved Infinity gem base rates: source invariants, real settlement and offline parity.
+for(const file of ['tools/sync-infinity-gem-probabilities.mjs','infinity-gem-base-tests.mjs','infinity-gem-settlement-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname,...(file.startsWith('tools/')?['--check']:[])],{stdio:'inherit'});

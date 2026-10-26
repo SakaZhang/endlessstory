@@ -11,6 +11,9 @@
     "test:exploration": "node exploration-map-tests.mjs && node test-pixel-map-scenes.mjs && node adjacent-region-tests.mjs && node region-navigation-state-tests.mjs && node adjacent-region-app-ui-tests.cjs && node pixel-maps-live-app-ui-tests.cjs && node exploration-map-native-proof.mjs",
     "test:confirmed-rules": "node task-reward-engine-integration-tests.mjs && node task-reward-transaction-tests.mjs && node material-forge-variance-tests.mjs && node forge-level-tests.mjs && node equipment-level-tests.mjs && node fusion-origin-production-tests.mjs && node equipment-fusion-tests.mjs && node talent-tests.mjs",
     "test:war": "node war-travel-lock-tests.mjs",
-    "test:npc-events": "node npc-event-host-tests.mjs && node return-ring-events-tests.mjs && node return-ring-drop-tests.mjs && node npc-event-app-ui-tests.cjs"
+    "test:npc-events": "node npc-event-host-tests.mjs && node return-ring-events-tests.mjs && node return-ring-drop-tests.mjs && node npc-event-app-ui-tests.cjs",
+    "sync:infinity-gems": "node tools/sync-infinity-gem-probabilities.mjs",
+    "test:infinity-gems": "node tools/sync-infinity-gem-probabilities.mjs --check && node infinity-gem-base-tests.mjs && node infinity-gem-settlement-tests.mjs",
+    "prebuild": "node tools/sync-infinity-gem-probabilities.mjs --check"
   }
 }
