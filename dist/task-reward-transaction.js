@@ -1,4 +1,4 @@
-import {validSave,normalizeMaterials,parseMaterialKey,materialCount,MATERIALS,receiveBattleLoot} from './engine.js';
+import {validSave,effectiveLuck,normalizeMaterials,parseMaterialKey,materialCount,MATERIALS,receiveBattleLoot} from './engine.js';
 import {commitGameTransaction,SAVE_KEY} from './storage.js';
 
 // Deliberately empty: story content must explicitly register approved definitions.
@@ -64,6 +64,8 @@ export function createTaskRewardService(registry=TASK_REWARD_REGISTRY){
    }
    if(filters===undefined)delete next.lootFilters;else next.lootFilters=filters;
    next.taskRewardClaims=[...(next.taskRewardClaims??[]),id];
+   // Validate the exact metadata values the storage transaction will persist.
+   next.lastSeen=now;next.offlineLuck=effectiveLuck(next);
    if(!validTaskRewardState(next)||!validSave(next)){rejected='invalid-state';return false;}
    return {taskId:id};
   },{now});
