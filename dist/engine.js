@@ -2,6 +2,7 @@ import {freshDiplomacy,validDiplomacy,normalizeDiplomacy,territoryAccess,nodeAcc
 export {validDiplomacy,normalizeDiplomacy,territoryAccess,nodeAccess} from './war-diplomacy.js';
 import {validReturnRingState,applyReturnRingVictory,returnRingRareBonus} from './return-ring-state.js';
 import {validNpcEventState,recordNpcEventVictory} from './npc-events.js';
+import {validStoryEventState,canStartStoryScenario,recordStoryScenarioResult,recordStoryEncounterVictory} from './story-event-controller.js';
 import {storyScenarioForStart,attachStoryScenario,advanceStoryScenario,finalizeStoryScenario,validStoryScenarioState} from './story-scenario-combat.js';
 import {validTaskRewardState} from './task-reward-transaction.js';
 // Sealed production claim only; trusted registry factory is not an engine API.
@@ -686,7 +687,7 @@ function ensureEncounterAffixes(e){e.affixBattleId??=e.id??('legacy-battle-'+(++
 function reviveEncounter(e,st,logs){const out=tryNirvana(e.affixState,{battleId:e.affixState.battleId,hasNirvana:!!st.specials.nirvana,hp:e.heroHp,maxHp:st.hp});if(!out)return false;e.affixState=out.state;if(out.revived){e.heroHp=out.hp;logs.push('涅槃 · 满血复活（本场已使用）');}return out.revived;}
 // Authored nonlethal scene start. Caller must persist this candidate atomically.
 export function startStoryScenario(s,scenarioId,now=Date.now()){
- if(!validSave(s)||!storyScenarioForStart(s,scenarioId)||!Number.isSafeInteger(now)||now<0||now>1e15)return null;
+ if(!validSave(s)||!canStartStoryScenario(s,scenarioId)||!storyScenarioForStart(s,scenarioId)||!Number.isSafeInteger(now)||now<0||now>1e15)return null;
  const next=structuredClone(s),definition=storyScenarioForStart(next,scenarioId),initialHeroHp=next.heroHp??stats(next).hp,returnAtCamp=next.atCamp===true,priorMonsterLedger=structuredClone(next.monsterLedger);
  const e=startInstanceEncounter(next,definition.siteId+'.field',now);
  if(!e||!attachStoryScenario(next,e,scenarioId,{initialHeroHp,returnAtCamp}))return null;
@@ -758,7 +759,7 @@ function rewardDwarf(s,e,now){
  normalizeCodexCollection(s);
  return withMultiRng(e,()=>{
   e.rewarded=true;e.lootSummary=emptyLootSummary();e.materialLoot=[];e.rewardNotes=[];
-  recordNpcEventVictory(s,e);
+  recordNpcEventVictory(s,e);recordStoryEncounterVictory(s,e);
   const st=stats(s),multiple=e.fieldGroup?2:1,baseXp=e.rewardXp*multiple,knowledge=st.specials.knowledge&&Math.random()<.05,clearRewards=clear?e.clearRewards:null;
   s.kills++;s.gold+=e.rewardGold*multiple+(clearRewards?.gold??0);e.acceptedXp=gainXp(s,baseXp*(knowledge?2:1)+(clearRewards?.xp??0)).acceptedXp;
   const initial=e.enemies.filter(u=>u.origin==='initial'&&!u.follower),sources=[];
@@ -838,7 +839,7 @@ function stepImpl(s,e,now=Date.now(),treeSkills=null){
  if(!e.heroBurn)e.heroBurnPower=0;
  if(!e.barrier)e.barrierShield=0;
  if(e.multiVersion===1){e.lastCombatEventAt=eventAt;if(basicOnly)e.basicMicroElapsed=combatDeltaMs;else {delete e.basicMicroElapsed;e.nextRegularAt=eventAt+1100;}s.nextActionAt=Math.min(e.nextRegularAt??eventAt+1100,e.pendingBasicAt??Infinity);}else s.nextActionAt=eventAt+1100;if(drank)logs.unshift('自动饮用 · '+POTIONS.healing.name);s.heroHp=Math.max(0,Math.min(stats(s).hp,e.heroHp));
- const scenario=advanceStoryScenario(s,e);if(scenario){/* STORY_RESULT_HOOK: recordStoryScenarioResult(s,e) before finalization. */finalizeStoryScenario(s,e);logs.push(...e.rewardNotes);return logs;}
+ const scenario=advanceStoryScenario(s,e);if(scenario){if(scenario.completed&&!recordStoryScenarioResult(s,e)){e.storyScenario.result='retry';e.rewardNotes=['剧情记录校验未通过，返回本场安全点；未推进剧情。'];}finalizeStoryScenario(s,e);logs.push(...e.rewardNotes);return logs;}
  if(s.heroHp<=0){const resume=!e.developmentFixture&&!!s.running&&(!e.boss||!!s.expedition?.autoBoss)&&!s.stopAfterBattle&&!s.stopAfterDungeon&&(e.kind!=='dungeon'||!!s.expedition?.loop||!!s.expedition?.autoDungeon||!!s.expedition?.autoBoss);startRest(s,now,resume);s.stopAfterBattle=false;s.stopAfterDungeon=false;}return logs;
 }
 function selectedTreeRules(s,parameters=getRaceTuning(s.race)){
@@ -1098,7 +1099,7 @@ export function codexState(s,id){
 }
 export function validSave(s){
  try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;
- if(!validTaskRewardState(s)||!validDiplomacy(s)||!validNpcEventState(s)||!validReturnRingState(s)||!validStoryScenarioState(s))return false;
+ if(!validTaskRewardState(s)||!validDiplomacy(s)||!validNpcEventState(s)||!validReturnRingState(s)||!validStoryEventState(s)||!validStoryScenarioState(s))return false;
  if(!validSkillTree(s,getSkillTreeDefinition(s))||s.skillTree?.mode!=='active')return false;
  if(s.activeEncounter?.skillResolver!==undefined&&(s.activeEncounter.skillResolver!=='tree-v1'||s.skillTree?.mode!=='active'||s.activeEncounter.multiVersion!==1))return false;
  if(s.supportGrantEligible!==undefined||s.testGrants!==undefined||s.bonusTalentPoints!==undefined||s.skillRulesVersion!==undefined||s.skillAccess!==undefined)return false;

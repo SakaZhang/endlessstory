@@ -1,12 +1,12 @@
-// Future main-story reward seam. No quest is registered until the actual story is authored.
-// This is not a player claim endpoint, free grant, boss drop, recipe, or merchant offer.
+// Pure guarded receipt seam: importing engine/factory here creates a race-registry cycle.
+// Only the story controller consumes this receipt and atomically receives/equips the item.
 export const ASHEN_STORY_CORE_ID='ashen-primal-core';
-export const ASHEN_STORY_CORE_QUESTS=Object.freeze([]);
+export const ASHEN_STORY_CORE_QUESTS=Object.freeze(['C05.EA02.ashen']);
 export function grantAshenStoryCore(state,{questId}={}){
  if(state?.race!=='ashen')return {ok:false,reason:'wrong-race'};
- if((state.inventory??[]).some(item=>item.legendaryId===ASHEN_STORY_CORE_ID)||(state.storyRewards??[]).includes(ASHEN_STORY_CORE_ID))return {ok:false,reason:'already-granted'};
- if(!ASHEN_STORY_CORE_QUESTS.includes(questId))return {ok:false,reason:'story-unavailable'};
- // A real quest completion validator and atomic unique receipt must be integrated here,
- // before a future quest may be added to the registry. Fail closed in this release.
- return {ok:false,reason:'story-unavailable'};
+ if((state.inventory??[]).some(item=>item.legendaryId===ASHEN_STORY_CORE_ID)||(state.storyRewards??[]).includes(ASHEN_STORY_CORE_ID)||state.taskRewardClaims?.includes('story.ashen-primal-core'))return {ok:false,reason:'already-granted'};
+ const st=state.story,a=st?.activeScene,receipt=st?.encounters?.find(e=>e.sceneId==='C05.EA01.ashen');
+ if(!ASHEN_STORY_CORE_QUESTS.includes(questId)||state.version!==6||st?.version!==1||st.pov!=='ashen'||a?.id!==questId||!a.choiceId||!st.completedScenes?.includes('C05.EA01.ashen')||receipt?.scenarioId!=='story.c05.ashen-duel'||receipt.result!=='ashen-victory'||state.siteId!=='ashen.a04'||state.running||state.activeEncounter&&!state.activeEncounter.rewarded)return {ok:false,reason:'story-unavailable'};
+ const level=st.acceptedLevels?.['C05.EA01.ashen'];if(!Number.isSafeInteger(level)||level<1||level>=100000)return {ok:false,reason:'invalid-state'};
+ return {ok:true,questId,claimId:'story.ashen-primal-core',id:'story-ashen-primal-core',legendaryId:ASHEN_STORY_CORE_ID,level};
 }
