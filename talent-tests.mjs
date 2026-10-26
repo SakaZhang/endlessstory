@@ -21,11 +21,25 @@ try{
  // Snapshot controls drops even if callers alter live talents after encounter start.
  Math.random=rng;const a=fresh();a.level=20;a.talents.luck=10;const e=encounter(a);assert.equal(e.luck,10);a.talents.luck=0;assert.equal(e.luck,10);
  const report=[];
- for(const points of [0,5,10]){seed=17653;Math.random=rng;const q=fresh();q.level=20;q.talents.luck=points;q.gold=1e10;for(const k in q.materialStacks)q.materialStacks[k]=1e7;let quality=0,nonsets=0,sets=0,divine=0;for(let i=0;i<20000;i++){const it=forge(q,['铁屑']);if(it.set)sets++;else{quality+=it.rarity;nonsets++;}if(it.divine)divine++;q.inventory.pop();}report.push({points,meanQuality:quality/nonsets,sets,divine});}
+ // Independent oracle: one ordinary iron input has weights [46,42,10.6,1.4].
+ // The dwarf .08 favorable roll combines with luck {0:0,5:.03,10:.04};
+ // best-of-two CDF is F². Do not use the production probability functions here.
+ const expectedForge=points=>{const chance=1-(1-.08)*(1-({0:0,5:.03,10:.04}[points]));let cdf=0,previous=0;return [.46,.42,.106,.014].map(p=>{cdf+=p;const next=(1-chance)*cdf+chance*cdf*cdf,result=next-previous;previous=next;return result;});};
+ const meanOf=ps=>ps.reduce((sum,p,i)=>sum+p*i,0);
+ const checkForgeSample=(counts,points)=>{const n=counts.reduce((a,b)=>a+b),ps=expectedForge(points),mean=meanOf(ps),variance=ps.reduce((sum,p,i)=>sum+p*(i-mean)**2,0);assert(Math.abs(meanOf(counts)/n-mean)<=4*Math.sqrt(variance/n),'forge mean outside 4 SE');for(let q=0;q<4;q++)assert(Math.abs(counts[q]/n-ps[q])<=4*Math.sqrt(ps[q]*(1-ps[q])/n),'forge quality distribution outside 4 SE');};
+ assert(meanOf(expectedForge(5))>meanOf(expectedForge(0)));assert(meanOf(expectedForge(10))>meanOf(expectedForge(5)));
+ // The extra equipment-level draw changes later seeded samples. One 20k sample
+ // cannot reliably order a ~.01 mean improvement (SE ~.0051 per mean).
+ // Retain the original seed and test five fixed streams against the exact law.
+ for(const points of [0,5,10]){const counts=[0,0,0,0];let sets=0,divine=0;for(const initial of [17653,613,92171,312042,79421]){seed=initial;Math.random=rng;const q=fresh();q.level=20;q.talents.luck=points;q.gold=1e10;q.materialStacks['铁屑|0']=20000;const sample=[0,0,0,0];for(let i=0;i<20000;i++){const it=forge(q,['铁屑']);if(it.set)sets++;else{sample[it.rarity]++;counts[it.rarity]++;}if(it.divine)divine++;q.inventory.pop();}checkForgeSample(sample,points);}checkForgeSample(counts,points);report.push({points,meanQuality:meanOf(counts)/100000,sets,divine,counts});}
  assert(report[1].meanQuality>report[0].meanQuality);assert(report[2].meanQuality>report[0].meanQuality);assert(report[2].meanQuality-report[0].meanQuality<.08);
+ // Negative controls: a luck-ignored forge repeats the observed zero-luck
+ // distribution at luck10; reversed quality weights invert its outcomes.
+ assert.throws(()=>checkForgeSample(report[0].counts,10),assert.AssertionError);
+ assert.throws(()=>checkForgeSample([...report[2].counts].reverse(),10),assert.AssertionError);
  for(const points of [0,5,10]){seed=9351;Math.random=rng;const q=fresh();q.level=20;q.talents.luck=points;q.gold=1e10;q.materialStacks['铁屑|0']=1e7;const it=item('weapon',1,null,0);it.affixes=[currentAffix('atk',3)];q.inventory.push(it);let total=0;for(let i=0;i<20000;i++){assert(reforge(q,it.id,'value',0));assert(resolveReforge(q,true));total+=it.affixes[0].value;}report.find(x=>x.points===points).meanReforge=total/20000;}
  assert(report[1].meanReforge>report[0].meanReforge);assert(report[2].meanReforge>report[0].meanReforge);assert(report[2].meanReforge-report[0].meanReforge<.15);
  for(const points of [0,5,10]){seed=61091;Math.random=rng;const q=fresh();q.level=20;q.talents.luck=points;let quality=0,count=0;for(let i=0;i<20000;i++){q.nextBattleAt=0;const e=encounter(q);markVictory(e);const it=reward(q,e,q.lastHealthClock);if(it){if(!it.set){quality+=it.rarity;count++;}q.inventory.pop();}q.level=20;q.xp=0;}report.find(x=>x.points===points).meanDrop=quality/count;}
  assert(report[1].meanDrop>report[0].meanDrop);assert(report[2].meanDrop>report[0].meanDrop);assert(report[2].meanDrop-report[0].meanDrop<.1);
- console.log(report);console.log('14 talents: current talent caps/fruit atomics, actual combat stats, bounded luck 20k×3 forge/reforge distributions: PASS');
+ console.log(report);console.log('14 talents: current talent caps/fruit atomics, actual combat stats, bounded luck 5 seeds×20k×3 forge and 20k×3 reforge distributions: PASS');
 }finally{Math.random=original;}

@@ -26,6 +26,7 @@ import './reforge-v13-tests.mjs';
 import './transaction-tests.mjs';
 
 import './forge-level-tests.mjs';
+import './material-forge-variance-tests.mjs';
 import './area-progress-tests.mjs';
 import './equipment-level-tests.mjs';
 import './inventory-bags-tests.mjs';

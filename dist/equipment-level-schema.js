@@ -19,6 +19,11 @@ function rollWithin(baseLevel,range,random,levelSource){
 export function rollDropEquipmentLevel(baseLevel,areaRange,random=Math.random){
  return rollWithin(baseLevel,areaRange,random,'drop');
 }
+// Material-only equipment uses the hero baseline and the same ±2 bounds as
+// equipment-input fusion. Potions do not roll equipment levels.
+export function rollMaterialFusionLevel(baseLevel,random=Math.random){
+ return rollWithin(baseLevel,[1,1e12],random,'material');
+}
 // Pure level calculation shared with equipment-input fusion. Consumption and
 // quality choice stay in the engine; offsets never become the next baseline.
 export function rollEquipmentFusionLevel(items,random=Math.random){

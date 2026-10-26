@@ -39,12 +39,15 @@ try{
  // Exact 2,000-result M2 sequences after approved removal of the legacy raw-spread RNG draw; material quality formula remains unchanged.
  // v0.34 explicitly changes nonzero luck RNG (new values/divine benefits).
  // v0.37 zero-luck dwarves now have a racial second-roll/value/special/divine benefit.
+ // Material-only equipment now consumes one independent ±2 level draw after quality.
+ // This shifts subsequent seeded categorical traces (including mixed potion recipes),
+ // not their probability tables. Equipment-input RNG and potion-only branches are unchanged.
  // These are the new 2000-result racial traces; base quality tables/equal-thirds remain tested above.
  const legacySequences=[
- [['铁屑|0'],'54cf084815a1bfb1244dfc9b657bdb518b9f58836b41d4997a1e7f04c2373d78'],
- [Array(5).fill('铁屑|3'),'9480c4d2082a919fd74fb81d30f0fd3611408f4d22fa2342b81ac376d52ee273'],
- [['灰根草|0','铁屑|0'],'1f4edf708f32f26576956870ad651b58f58420deb25516a51103d79b52e392cc'],
- [['灰根草|3','炉火晶|2','灰根草|1'],'8bb9861c3692a2a79d33be291f2d66bdc0f9aad1bfa0c0fe79688ca08021afe9']];
+ [['铁屑|0'],'53c271ab6d661e2d5a4e70a0eb273b2966796c600f81f3a59ae4ac519ba5c4c6'],
+ [Array(5).fill('铁屑|3'),'503805950d4764af0b78a6ba86c6e3f67f99548c0527e69cc1d4037064cff237'],
+ [['灰根草|0','铁屑|0'],'f5969be67161541f3a85a038790abec9bdf3d9660679d4c6a10abc3fa439c09f'],
+ [['灰根草|3','炉火晶|2','灰根草|1'],'2ec4d99e4e32567c26a0aa97fadf22823edef153f8465d8c7134965ade7e16f6']];
  for(const [selection,expected] of legacySequences){seed=91731;Math.random=rng;const p=fresh();p.level=20;p.talents.luck=0;p.gold=1e9;for(const k of selection)p.materialStacks[k]=10000;const rows=[];for(let n=0;n<2000;n++){const out=forge(p,selection);rows.push([out.kind??'equipment',out.rarity??out.quality,out.slot??out.potionType]);if(!out.kind)p.inventory.pop();}assert.equal(createHash('sha256').update(JSON.stringify(rows)).digest('hex'),expected);}
  console.log('Equipment-input fusion:1161 exact dominance cases;5same20k with racial overlay',observed,'divine',gods,'; protected/duplicate no-RNG,1–5 mixed gear, independent blessing, level no-ratchet1000, pending/codex/storage atomics: PASS');
 }finally{Math.random=original;}

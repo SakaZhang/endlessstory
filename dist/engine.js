@@ -53,8 +53,8 @@ const skillUnlocked=(_s,key)=>typeof key==='string'&&Object.hasOwn(SKILLS,key);
 import {BAG_LIMITS,INVENTORY_SAVE_LIMIT,bagCounts,canReceiveEquipment,canReceiveMaterial,canReceiveItem,validLootFilters,normalizeInventoryState,setLootFilter,shouldDiscardLoot,emptyLootSummary,validLootSummary,mergeLootSummary} from './inventory-schema.js';
 export {BAG_LIMITS,bagCounts,canReceiveEquipment,canReceiveMaterial,canReceiveItem,normalizeInventoryState,setLootFilter,shouldDiscardLoot} from './inventory-schema.js';
 import {validDungeonCarry,captureDungeonPlayerState,applyDungeonPlayerState,restoreDungeonSkillShieldLayers} from './dungeon-player-state.js';
-import {validEquipmentLevelMetadata,normalizeEquipmentLevels,rollDropEquipmentLevel,rollEquipmentFusionLevel} from './equipment-level-schema.js';
-export {normalizeEquipmentLevels,rollDropEquipmentLevel,rollEquipmentFusionLevel,EQUIPMENT_LEVEL_SOURCES} from './equipment-level-schema.js';
+import {validEquipmentLevelMetadata,normalizeEquipmentLevels,rollDropEquipmentLevel,rollMaterialFusionLevel,rollEquipmentFusionLevel} from './equipment-level-schema.js';
+export {normalizeEquipmentLevels,rollDropEquipmentLevel,rollMaterialFusionLevel,rollEquipmentFusionLevel,EQUIPMENT_LEVEL_SOURCES} from './equipment-level-schema.js';
 import {AREAS,SITES,INSTANCES,PLANNED_INSTANCES,RACE_KEYS,areaLevelRange,resolveLegacySite,instanceCooldownMs,pickRoute,areaGearLevel} from './location-schema.js';
 export {AREAS,SITES,INSTANCES,RACE_KEYS,areaLevelRange,resolveLegacySite,instanceCooldownMs,pickRoute,areaGearLevel} from './location-schema.js';
 import {ELEMENT_KEYS,ELEMENT_AFFIX_DEFS,resolveElementDamage} from './element-schema.js';
@@ -1019,7 +1019,7 @@ export function forge(s,selection){
  }
  const originRace=chooseFusionOrigin({heroRace:s.race,equipment:gear});if(originRace===null)return null;
  const weights=fusionWeights(materials),slot=weighted(Object.entries(weights.slots).filter(([slot])=>slot!=='core'||originRace==='ashen')),quality=gear.some(it=>it.legendaryId)?3:forgeLuckyRoll(()=>gear.length?rollEquipmentInputQuality(inputs):rollQuality(qualityWeights),effectiveLuck(s),s.race);
- const level=gear.length?rollEquipmentFusionLevel(gear):{level:s.level,baseLevel:s.level,levelSource:'material'};
+ const level=gear.length?rollEquipmentFusionLevel(gear):rollMaterialFusionLevel(s.level);
  const it=item(slot,level.level,null,quality,{...level,originRace,luck:effectiveLuck(s),forgeRace:s.race});if(Math.random()<dwarfDivineChance(divineProbability(fusionDivineChance(inputs),effectiveLuck(s)),s.race,DWARF_FORGE_FAVOR_CONFIG))applyForgeFavor(it);
  // Record actual owned inputs before their one-time consumption.
  if(gear.length)normalizeCodexCollection(s);
