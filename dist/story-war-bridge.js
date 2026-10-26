@@ -34,7 +34,11 @@ export const STORY_WAR_ENTRANCES=Object.freeze({
  'C04.HD01.dwarf':'human.a03','C04.G01.dwarf':'human.a03','C04.G01.goblin':'human.a03','C04.DE01.dwarf':'human.a03','C04.DE01.elf':'human.a03','C04.A01.elf':'ashen.a04',
  'C05.EA01.elf':'ashen.a04','C05.EA02.elf':'ashen.a04',
  'C07.EA02.elf':'ashen.a06','C07.EA03.elf':'ashen.a06','C08.E01.elf':'ashen.a06','C08.E02.elf':'ashen.a06','C08.E03.elf':'ashen.a06','C08.X01.elf':'ashen.a06',
- 'C08.X02.elf':'ashen.a07','C08.X03.elf':'ashen.a07','C08.X04A.elf':'ashen.a07','C08.X04.elf':'ashen.a07','C08.X05.elf':'ashen.a07'
+ 'C08.X02.elf':'ashen.a07','C08.X03.elf':'ashen.a07','C08.X04A.elf':'ashen.a07','C08.X04.elf':'ashen.a07','C08.X05.elf':'ashen.a07',
+ // Neutral POVs also need these exact authored entrances during a random war.
+ 'C08.O01.human':'ashen.a06','C08.X01.human':'ashen.a06','C08.X02.human':'ashen.a07','C08.X03.human':'ashen.a07','C08.X04A.human':'ashen.a07','C08.X04.human':'ashen.a07','C08.X05.human':'ashen.a07',
+ 'C08.O01.dwarf':'ashen.a06','C08.X01.dwarf':'ashen.a06','C08.X02.dwarf':'ashen.a07','C08.X03.dwarf':'ashen.a07','C08.X04A.dwarf':'ashen.a07','C08.X04.dwarf':'ashen.a07','C08.X05.dwarf':'ashen.a07',
+ 'C08.O01.goblin':'ashen.a06','C08.X01.goblin':'ashen.a06','C08.X02.goblin':'ashen.a07','C08.X03.goblin':'ashen.a07','C08.X04A.goblin':'ashen.a07','C08.X04.goblin':'ashen.a07','C08.X05.goblin':'ashen.a07'
 });
 export function storyTerritoryAccess(s,id){
  const d=canonicalScene(id);if(!d||d.pov!==s.race||!AREAS[d.siteId])return {allowed:false,reason:'剧情入口不可用'};

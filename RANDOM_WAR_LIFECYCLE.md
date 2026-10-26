@@ -35,3 +35,7 @@ The story worker owns actual later C07/C08 scene/encounter content; this bridge 
 - Existing NPC App and asset-recovery App suites also passed after scheduler wiring. Final combined C08 and aggregate results are reported separately; no publication is performed by this worker.
 
 The actual-App regression also forces autosave at checkpoint +1ms before the 250ms world tick, then verifies quota retry still declares at the original checkpoint. A corresponding hidden-resume engine test preserves both due checks across newer save/health timestamps.
+
+## Final C08/random overlap check
+
+Combined with actual story host `c3710fb` and assertion update `1e4a68e`, all-five C08 engine and actual-App suites passed. The late human/dwarf/goblin C08 Ashen entrances are explicitly bound too, because those normally neutral POVs can become opponents in a random war. `random-war-story-access-tests.mjs` checks every current canonical cross-border binding and traverses real C07 same-pair supersession plus neutral C08 retreat/re-entry/combat/invasion completion. Ordinary field/dungeon/boss/auto and NPC access remain blocked; invasion ends only the story war, an unrelated active random war keeps its own <=1h expiry. Quota rollback and replay do not mint another outcome or reward.
