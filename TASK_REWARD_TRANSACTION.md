@@ -12,16 +12,16 @@ Approved Roadmap revision 98, block `71636589-b007-4acc-8298-6e28c0d86156`: a fu
 - Task rewards ignore battle auto-discard and never use or clear `pendingForgeClaim`.
 - A persisted-current-snapshot precondition rejects a snapshot already stale at submission. This synchronous localStorage service does not provide cross-tab compare-and-swap or multi-writer serialization. Future UI integration must persist any outstanding gameplay changes first. A claim already recorded in storage remains rejected even if the caller holds an old unclaimed snapshot.
 
-## Minimal root integration proposal (not applied here)
+## Minimal engine integration (applied in v0.64)
 
-In `dist/engine.js` add:
+`dist/engine.js` imports the validator and exposes only the sealed production claim:
 
 ```js
 import {validTaskRewardState} from './task-reward-transaction.js';
 export {claimTaskReward} from './task-reward-transaction.js';
 ```
 
-Near the start of `validSave(s)`, inside its `try`:
+At the start of `validSave(s)`, inside its `try`:
 
 ```js
 if (!validTaskRewardState(s)) return false;
@@ -29,7 +29,7 @@ if (!validTaskRewardState(s)) return false;
 
 The module's engine references are used only inside callable functions, not during module initialization. Its default service captures only an empty registry. Keep the production registry empty until approved story definitions arrive. Only trusted content may use the registration factory; test fixtures are not production content.
 
-Add `node task-reward-transaction-tests.mjs` to the aggregate gate if desired. No App hook is proposed before real quest specifications exist.
+Both transaction and engine boundary tests are in the aggregate gate. No App hook exists before real quest specifications are approved. Sparse ledgers are rejected as malformed, just like explicit undefined IDs.
 
 ## Scope limits
 

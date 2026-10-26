@@ -1,3 +1,6 @@
+import {validTaskRewardState} from './task-reward-transaction.js';
+// Sealed production claim only; trusted registry factory is not an engine API.
+export {claimTaskReward} from './task-reward-transaction.js';
 import {dispatchRacialLegendaryEvent,racialLegendaryStatBonuses} from './racial-legendary-runtime.js';
 import {rollGoblinExtraMaterial} from './race-loot.js';
 import {racialGoldCost} from './race-economy.js';
@@ -1055,6 +1058,7 @@ export function codexState(s,id){
 }
 export function validSave(s){
  try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;
+ if(!validTaskRewardState(s))return false;
  if(!validSkillTree(s,getSkillTreeDefinition(s))||s.skillTree?.mode!=='active')return false;
  if(s.activeEncounter?.skillResolver!==undefined&&(s.activeEncounter.skillResolver!=='tree-v1'||s.skillTree?.mode!=='active'||s.activeEncounter.multiVersion!==1))return false;
  if(s.supportGrantEligible!==undefined||s.testGrants!==undefined||s.bonusTalentPoints!==undefined||s.skillRulesVersion!==undefined||s.skillAccess!==undefined)return false;

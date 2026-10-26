@@ -8,7 +8,7 @@ const idValid=id=>typeof id==='string'&&/^[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}$/.tes
 export function validTaskRewardState(s){
  if(!s||typeof s!=='object'||Array.isArray(s))return false;
  const claims=s.taskRewardClaims;
- return claims===undefined||(Array.isArray(claims)&&claims.length<=10000&&claims.every(idValid)&&new Set(claims).size===claims.length);
+ return claims===undefined||(Array.isArray(claims)&&claims.length<=10000&&Array.from(claims).every(idValid)&&new Set(claims).size===claims.length);
 }
 const failure=(game,reason)=>({ok:false,game,value:null,reason});
 

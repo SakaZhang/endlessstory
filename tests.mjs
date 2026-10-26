@@ -1,3 +1,5 @@
+import './task-reward-engine-integration-tests.mjs';
+import './task-reward-transaction-tests.mjs';
 // Current schema regression entrypoint. Prior schema tests are superseded.
 import './engine-v4-tests.mjs';
 
