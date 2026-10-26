@@ -18,6 +18,9 @@ Baseline: live v0.64, `2a77f9eceee8f77a0e39429d6c40513f7c230395`.
 - `node monster-facing-tests.mjs`: 1,132 native draws, all 44 monster identities and three follower variants; unchanged frame orientation, target side, fixed anchors, RNG/state behavior.
 - `node racial-camp-scenes-tests.mjs`, `node race-neutral-hero-tests.mjs`: actual routing of camp/battle/portrait variants, including foreign/empty weapon fallback.
 
+- `node tests.mjs`: terminal failure at the already-documented `equipment-armor-art-tests.mjs:8` armor count, actual 36 vs expected 28. This historical failure is unrelated to the facing correction; the aggregate gate is **not green**.
+- Release build and cache graph passed. The cache suite’s obsolete Sites 1.1.1 preparation-helper subcheck was not run because that historical helper path is absent; current official packaging belongs to the integrator.
+
 ## Visual evidence
 
 `node goblin-hero-facing-native-proof.mjs` writes reproducible evidence under ignored `qa/goblin-facing/`:
