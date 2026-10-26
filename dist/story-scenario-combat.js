@@ -49,6 +49,9 @@ export function advanceStoryScenario(s,e){
  const failed=e.heroHp<=0,decisive=e.done&&e.win===true;
  if(!failed&&!decisive&&e.round<d.rounds)return null;
  x.result=failed?'retry':d.result;x.resolvedRound=e.round;e.done=true;e.win=false;e.rewarded=true;e.targetId=null;e.killSource=null;
+ // The real hit has already been processed. At the authored nonlethal cut,
+ // keep named actors visibly alive; this never changes ordinary combat damage.
+ for(const actor of e.enemies)actor.hp=Math.max(1,actor.hp);
  e.rewardNotes=[failed?'未能通过这一段。返回本场安全点，可重新交手。':d.outcome,'剧情交手不结算金币、经验、掉落或副本冷却。'];
  syncMultiTarget(e);return {completed:!failed,result:x.result};
 }

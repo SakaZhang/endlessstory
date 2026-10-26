@@ -33,4 +33,12 @@ let s=fixture(first);s.heroHp=1;let e=E.startStoryScenario(s,first,readyAt(s));f
 s=fixture(first);const raw=JSON.stringify(s),storage={getItem:key=>key===SAVE_KEY?raw:null,setItem(){throw Error('quota')}};const tx=commitGameTransaction(storage,s,next=>E.startStoryScenario(next,first,readyAt(next)),{now:s.lastSeen});assert.equal(tx.ok,false);assert.equal(tx.reason,'storage');assert.equal(tx.game,s);assert.equal(JSON.stringify(s),raw);
 // Real offline turns resolve only this named encounter and never farm a next one.
 s=fixture(first);const before=economy(s);E.startStoryScenario(s,first,readyAt(s));const report=E.offline(s,s.lastSeen+3600000);assert.equal(s.activeEncounter,null);assert.equal(s.running,false);assert.equal(s.restUntil,0);assert.equal(economy(s),before);assert.equal(report?.kills??0,0);assert(E.validSave(s));
+// A genuine decisive hit from an overlevelled lawful hero is a nonlethal story cut,
+// not a dead portrait or a loot win. The same hit remains lethal in ordinary combat.
+for(const id of ['story.c01.human-chase','story.c05.elf-duel']){
+ const d=STORY_SCENARIOS[id],game=fixture(id);game.level=99999;assert(E.validSave(game));
+ const before=economy(game),codex=structuredClone(game.monsterLedger),battle=E.startStoryScenario(game,id,readyAt(game));assert(battle);battle.rngState=1;
+ E.step(game,battle,game.nextActionAt);assert(battle.done,'decisive genuine first hit');assert.equal(battle.round,1);assert.equal(battle.storyScenario.result,d.result);assert.equal(battle.enemies[0].hp,1);assert.equal(battle.hp,1);assert.equal(economy(game),before);assert.deepEqual(game.monsterLedger,codex);assert.equal(E.reward(game,battle),null);assert(E.validSave(game));assert(C.finishStoryScene(game,d.sceneId));
+ const ordinary=E.startInstanceEncounter(game,d.siteId+'.field',readyAt(game));assert(ordinary);ordinary.rngState=1;let n=0;while(!ordinary.done&&n++<10)E.step(game,ordinary,game.nextActionAt);assert(ordinary.done&&ordinary.win);assert(ordinary.enemies.every(u=>u.hp===0),'ordinary deaths unchanged');const kills=game.kills;E.reward(game,ordinary,game.lastHealthClock);assert.equal(game.kills,kills+1);
+}
 console.log('PASS four named story scenarios: actual turns, exact hero identity and fixed region budgets, save/pause/reload, premature defeat retry, no rewards/cooldowns/codex farm, quota start rollback, offline stop, strict malformed/wrong-location/POV/replay gates. Combined strict controller launch/once-only receipt/finish passes through canonical actions.');
