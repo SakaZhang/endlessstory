@@ -21,6 +21,7 @@ const plain=x=>!!x&&typeof x==='object'&&!Array.isArray(x);
 const validId=id=>Object.hasOwn(MONSTER_CATALOG,id);
 export function validMonsterLedger(s){const l=s?.monsterLedger;return l===undefined||plain(l)&&l.version===1&&plain(l.encountered)&&Object.entries(l.encountered).every(([id,v])=>validId(id)&&v===true);}
 export function inferEncounterMonsterIds(e){
+ if(e?.storyScenario)return []; // A named story opponent is not its numerical monster budget.
  if(plain(e)&&e.contentVersion==='dwarf-m2-v1'&&!e.developmentFixture&&!e.developmentTest&&!e.testEncounter&&Array.isArray(e.enemies)){
   return [...new Set(e.enemies.filter(u=>plain(u)&&u.origin!=='summoned').map(u=>({id:u.codexDefinitionId??u.leaderDefinitionId??u.definitionId??u.monsterId,source:u.sourceInstanceId??e.instanceId})).filter(({id,source})=>validId(id)&&INSTANCES[source]?.enabled&&MONSTER_CATALOG[id].sources.includes(source)).map(({id})=>id))];
  }

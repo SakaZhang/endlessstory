@@ -33,6 +33,7 @@ export function validDwarfDots(dots){return dots===undefined||(Array.isArray(dot
 // production physical / elemental resolvers in multi-combat, not a second formula.
 export function nextDwarfAction(u,now){
  const original=DWARF_MONSTERS[u.definitionId],d=original?{...original,skills:original.skills.map(skill=>({...skill,...u.skillOverrides?.[skill.id]}))}:null;if(!d||u.hp<=0||!controlAllowsAction(u.control,now))return null;
+ if(u.storyActorRace){if(now<u.nextBasicAt)return null;u.nextBasicAt=Math.max(u.nextBasicAt+u.basicIntervalMs,now+1);return {id:'basic',name:'普通攻击',effects:[{type:'damage',damageType:'physical',powerBasis:'atk',coefficient:1}]};}
  if(u.control.preparing){const result=claimCompletedCast(u.control,now);if(!result)return null;const skill=d.skills.find(s=>s.id===u.control.preparing.skillId);u.control=result.state;u.heavyDelayed=false;if(!skill)return null;u.skillUses[skill.id]=(u.skillUses[skill.id]??0)+1;u.nextBasicAt=now+u.basicIntervalMs;return skill;}
  if(!u.follower){
   const available=skill=>(u.skillUses[skill.id]??0)<(skill.maxCasts??Infinity)&&(skill.trigger==='hp_below_50_once'?u.hp<=u.max*.5:(u.control.cooldowns[skill.id]??0)<=now);

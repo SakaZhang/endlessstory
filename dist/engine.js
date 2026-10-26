@@ -2,6 +2,7 @@ import {freshDiplomacy,validDiplomacy,normalizeDiplomacy,territoryAccess,nodeAcc
 export {validDiplomacy,normalizeDiplomacy,territoryAccess,nodeAccess} from './war-diplomacy.js';
 import {validReturnRingState,applyReturnRingVictory,returnRingRareBonus} from './return-ring-state.js';
 import {validNpcEventState,recordNpcEventVictory} from './npc-events.js';
+import {storyScenarioForStart,attachStoryScenario,advanceStoryScenario,finalizeStoryScenario,validStoryScenarioState} from './story-scenario-combat.js';
 import {validTaskRewardState} from './task-reward-transaction.js';
 // Sealed production claim only; trusted registry factory is not an engine API.
 export {claimTaskReward} from './task-reward-transaction.js';
@@ -683,6 +684,16 @@ export function encounter(s,boss=false,now=Date.now()){
 function initializeEncounterAffixes(e,st){e.affixBattleId=e.id??('battle-'+(++serial));e.affixState=createBattleAffixState(e.affixBattleId);e.shelterUsed=!!st.specials.shelter;e.shield=openingShelterShield({hasShelter:!!st.specials.shelter,maxHp:st.hp,flatBonus:st.shieldBonus});}
 function ensureEncounterAffixes(e){e.affixBattleId??=e.id??('legacy-battle-'+(++serial));e.affixState??=createBattleAffixState(e.affixBattleId);}
 function reviveEncounter(e,st,logs){const out=tryNirvana(e.affixState,{battleId:e.affixState.battleId,hasNirvana:!!st.specials.nirvana,hp:e.heroHp,maxHp:st.hp});if(!out)return false;e.affixState=out.state;if(out.revived){e.heroHp=out.hp;logs.push('涅槃 · 满血复活（本场已使用）');}return out.revived;}
+// Authored nonlethal scene start. Caller must persist this candidate atomically.
+export function startStoryScenario(s,scenarioId,now=Date.now()){
+ if(!validSave(s)||!storyScenarioForStart(s,scenarioId)||!Number.isSafeInteger(now)||now<0||now>1e15)return null;
+ const next=structuredClone(s),definition=storyScenarioForStart(next,scenarioId),initialHeroHp=next.heroHp??stats(next).hp,returnAtCamp=next.atCamp===true,priorMonsterLedger=structuredClone(next.monsterLedger);
+ const e=startInstanceEncounter(next,definition.siteId+'.field',now);
+ if(!e||!attachStoryScenario(next,e,scenarioId,{initialHeroHp,returnAtCamp}))return null;
+ if(priorMonsterLedger===undefined)delete next.monsterLedger;else next.monsterLedger=priorMonsterLedger;
+ if(!validSave(next))return null;
+ for(const key of Object.keys(s))if(!Object.hasOwn(next,key))delete s[key];Object.assign(s,next);return s.activeEncounter;
+}
 export function startInstanceEncounter(s,instanceId,now=Date.now()){
  const instance=PLANNED_INSTANCES[instanceId];if(s.version!==SCHEMA_VERSION||!instance?.enabled||!canStartEncounter(s,now,instanceId)||!normalizeExpedition(s))return null;
  if(s.activeEncounter&&!s.activeEncounter.rewarded)return s.activeEncounter.instanceId===instanceId?s.activeEncounter:null;
@@ -827,6 +838,7 @@ function stepImpl(s,e,now=Date.now(),treeSkills=null){
  if(!e.heroBurn)e.heroBurnPower=0;
  if(!e.barrier)e.barrierShield=0;
  if(e.multiVersion===1){e.lastCombatEventAt=eventAt;if(basicOnly)e.basicMicroElapsed=combatDeltaMs;else {delete e.basicMicroElapsed;e.nextRegularAt=eventAt+1100;}s.nextActionAt=Math.min(e.nextRegularAt??eventAt+1100,e.pendingBasicAt??Infinity);}else s.nextActionAt=eventAt+1100;if(drank)logs.unshift('自动饮用 · '+POTIONS.healing.name);s.heroHp=Math.max(0,Math.min(stats(s).hp,e.heroHp));
+ const scenario=advanceStoryScenario(s,e);if(scenario){/* STORY_RESULT_HOOK: recordStoryScenarioResult(s,e) before finalization. */finalizeStoryScenario(s,e);logs.push(...e.rewardNotes);return logs;}
  if(s.heroHp<=0){const resume=!e.developmentFixture&&!!s.running&&(!e.boss||!!s.expedition?.autoBoss)&&!s.stopAfterBattle&&!s.stopAfterDungeon&&(e.kind!=='dungeon'||!!s.expedition?.loop||!!s.expedition?.autoDungeon||!!s.expedition?.autoBoss);startRest(s,now,resume);s.stopAfterBattle=false;s.stopAfterDungeon=false;}return logs;
 }
 function selectedTreeRules(s,parameters=getRaceTuning(s.race)){
@@ -850,7 +862,7 @@ function rollDrop(s,boss,luck=0,instanceId=resolveLegacySite(s.location).id+'-fi
  return receiveBattleLoot(s,{kind:'equipment',item:it},lootSummary)?it:null;
 }
 export function reward(s,e,now=Date.now()){
- if(s.version!==SCHEMA_VERSION||!e||e.multiVersion!==1)return null;
+ if(s.version!==SCHEMA_VERSION||!e||e.multiVersion!==1||e.storyScenario)return null;
  if(e.contentVersion==='dwarf-m2-v1'&&PLANNED_INSTANCES[e.instanceId]){
   const owned=s.activeEncounter===e,wasRewarded=e.rewarded,result=rewardDwarf(s,e,now);
   if(owned&&!wasRewarded&&e.rewarded&&!nodeAccess(s,e.instanceId).allowed){s.running=false;s.restResume=false;s.dungeonRun=null;s.stopAfterBattle=false;s.stopAfterDungeon=false;}
@@ -1086,7 +1098,7 @@ export function codexState(s,id){
 }
 export function validSave(s){
  try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;
- if(!validTaskRewardState(s)||!validDiplomacy(s)||!validNpcEventState(s)||!validReturnRingState(s))return false;
+ if(!validTaskRewardState(s)||!validDiplomacy(s)||!validNpcEventState(s)||!validReturnRingState(s)||!validStoryScenarioState(s))return false;
  if(!validSkillTree(s,getSkillTreeDefinition(s))||s.skillTree?.mode!=='active')return false;
  if(s.activeEncounter?.skillResolver!==undefined&&(s.activeEncounter.skillResolver!=='tree-v1'||s.skillTree?.mode!=='active'||s.activeEncounter.multiVersion!==1))return false;
  if(s.supportGrantEligible!==undefined||s.testGrants!==undefined||s.bonusTalentPoints!==undefined||s.skillRulesVersion!==undefined||s.skillAccess!==undefined)return false;
