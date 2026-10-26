@@ -18,6 +18,13 @@ import {createControl,validControl,advanceControlClock,controlAllowsAction,begin
 export const PROTOTYPE_MONSTERS=['grayflag-raider','rogue-mine-golem','oathless-soldier'];
 const n=x=>Number.isFinite(x)&&x>=0&&x<=1e12;
 const int=x=>Number.isSafeInteger(x)&&x>=0;
+// Only exact authored next-basic slows are valid save states. This catalog has
+// both 15% (165ms) and 20% (220ms), not a single universal 165ms delay.
+const PLAYER_ACTION_INTERVAL_MS=1100;
+const basicSlowDelayMs=multiplier=>Math.round(PLAYER_ACTION_INTERVAL_MS*(multiplier-1));
+const basicSlowEntries=Object.values(DWARF_MONSTERS).flatMap(d=>(d.skills??[]).flatMap(skill=>(skill.effects??[]).filter(effect=>effect.type==='next_basic_slow').map(effect=>({multiplier:effect.multiplier,delay:basicSlowDelayMs(effect.multiplier)})))).filter(({multiplier,delay})=>Number.isFinite(multiplier)&&multiplier>1&&multiplier<2&&Number.isSafeInteger(delay)&&delay>0&&delay<PLAYER_ACTION_INTERVAL_MS);
+const basicSlowMultipliers=new Set(basicSlowEntries.map(x=>x.multiplier));
+const basicSlowDelays=new Set(basicSlowEntries.map(x=>x.delay));
 let rngOwner=null;
 export function multiItemId(){return rngOwner?`${rngOwner.id}-loot-${++rngOwner.itemSerial}`:null;}
 export function withMultiRng(e,fn){const random=Math.random,old=rngOwner;rngOwner=e;Math.random=()=>{e.rngState=(Math.imul(e.rngState,1664525)+1013904223)>>>0;e.rngDraws++;return e.rngState/2**32;};try{return fn();}finally{Math.random=random;rngOwner=old;}}
@@ -37,9 +44,9 @@ export function validMultiEncounter(e,instances){
   if(e.enemies.some(u=>DWARF_MONSTERS[u.definitionId]?.rank!==rank))return false;
   if(e.clearRewards!==undefined&&e.clearRewards!==null){const c=e.clearRewards;if(!['gold','xp'].every(k=>n(c[k]))||!Number.isInteger(c.materialRounds)||c.materialRounds<0||c.materialRounds>3||!['gearChance','markChance'].every(k=>Number.isFinite(c[k])&&c[k]>=0&&c[k]<=1))return false;}
  }
- for(const key of ['pendingBasicDelayMs','basicMicroElapsed'])if(e[key]!==undefined&&e[key]!==165)return false;
+ for(const key of ['pendingBasicDelayMs','basicMicroElapsed'])if(e[key]!==undefined&&(!Number.isSafeInteger(e[key])||!basicSlowDelays.has(e[key])))return false;
  if((e.pendingBasicAt===undefined)!==(e.pendingBasicDelayMs===undefined))return false;
- if(e.nextBasicSlow!==undefined&&e.nextBasicSlow!==1.15)return false;
+ if(e.nextBasicSlow!==undefined&&!basicSlowMultipliers.has(e.nextBasicSlow))return false;
  for(const key of ['pendingBasicAt','nextRegularAt','lastCombatEventAt'])if(e[key]!==undefined&&(!Number.isSafeInteger(e[key])||e[key]<0||e[key]>1e15))return false;
  if(e.pendingBasicAt!==undefined&&e.nextRegularAt!==undefined&&e.pendingBasicAt>=e.nextRegularAt)return false;
  if(e.treeCombatClock!==undefined&&(!Number.isSafeInteger(e.treeCombatClock)||e.treeCombatClock<0||e.treeCombatClock>1e15))return false;
@@ -197,7 +204,7 @@ export function stepMulti(s,e,turn,ctx){
  }
  return false;};
  const deferBasic=!ctx.basicOnly&&!k&&!fixture&&(e.nextBasicSlow??1)>1;
- if(deferBasic){e.pendingBasicDelayMs=Math.round(1100*(e.nextBasicSlow-1));e.pendingBasicAt=now+e.pendingBasicDelayMs;delete e.nextBasicSlow;}
+ if(deferBasic){e.pendingBasicDelayMs=basicSlowDelayMs(e.nextBasicSlow);e.pendingBasicAt=now+e.pendingBasicDelayMs;delete e.nextBasicSlow;}
  else if(executeCast())return logs;
  if(k&&!fixture&&st.specials.multicast&&tryMulticast({source:'active',triggered:false,hasLivingEnemies:e.enemies.some(u=>u.hp>0)})?.triggered){logs.push('多重施法 · '+SKILLS[k].name);if(executeCast(true))return logs;}
  } // legacy/basic player branch; actual enemy phase is shared with the tree consumer.
