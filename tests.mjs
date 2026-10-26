@@ -197,3 +197,6 @@ runAffixSourceTest(process.execPath,[new URL('./war-travel-lock-tests.mjs',impor
 for(const file of ['tools/sync-infinity-gem-probabilities.mjs','infinity-gem-base-tests.mjs','infinity-gem-settlement-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname,...(file.startsWith('tools/')?['--check']:[])],{stdio:'inherit'});
 // Exact story-only war entrances and real C07 declaration transaction.
 for(const file of ['war-story-access-tests.mjs','story-war-opening-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+// Real canonical story/UI, cross-system Ring and image-recovery boundaries.
+for(const file of ['story-event-controller-tests.mjs','story-scenario-combat-tests.mjs','story-ring-integration-tests.mjs','story-event-app-ui-tests.cjs','npc-event-app-ui-tests.cjs','asset-recovery-tests.mjs','asset-recovery-app-ui-tests.cjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
