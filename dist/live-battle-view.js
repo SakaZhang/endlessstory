@@ -1,4 +1,4 @@
-import {heroPresentationScale,HERO_REFERENCE_HEIGHTS} from './hero-proportions.js';
+import {heroPresentationScale,heroPortraitFlipX,HERO_REFERENCE_HEIGHTS} from './hero-proportions.js';
 import {cooldownDisplaySeconds} from './cooldown-label.js';
 import {extendBattleManifest} from './race-art.js';
 import {getSkillMetadata} from './race-registry.js';
@@ -35,7 +35,8 @@ export function drawLiveHeroPortrait(canvas,state,{manifest,images,time=0}={}){
  const ids=sprite.animations.idle,frame=sprite.frames.find(f=>f.id===ids[Math.floor(time/500)%ids.length]),img=images?.get(frame?.file);
  if(!img)return drawPixelNotice(canvas,'角色素材待加载 · 可重试',{width,height});
  const c=canvas.getContext('2d');c.imageSmoothingEnabled=false;c.clearRect(0,0,width,height);const box=frame.solidBBox??[0,0,192,192],w=box[2]-box[0]+1,h=box[3]-box[1]+1,fitScale=Math.max(.5,Math.min((width-12)/w,(height-10)/h)),scale=HERO_REFERENCE_HEIGHTS[state.race]?Math.min(fitScale,(height-10)/112*heroPresentationScale(sprite,state.race)):fitScale;
- c.drawImage(img,Math.round((width-w*scale)/2-box[0]*scale),Math.round(height-5-(box[3]+1)*scale),Math.round(192*scale),Math.round(192*scale));return true;
+ c.save();if(heroPortraitFlipX(sprite,frame)){c.translate(width,0);c.scale(-1,1);}
+ c.drawImage(img,Math.round((width-w*scale)/2-box[0]*scale),Math.round(height-5-(box[3]+1)*scale),Math.round(192*scale),Math.round(192*scale));c.restore();return true;
 }
 export const LIVE_MONSTER_SPRITES=Object.freeze({'dwarf.a01.normal.1':'raider','dwarf.a01.normal.2':'pit-rat','dwarf.a01.normal.3':'golem','dwarf.a01.elite':'shield-captain'});
 const identity=u=>u.monsterId??u.definitionId??null;

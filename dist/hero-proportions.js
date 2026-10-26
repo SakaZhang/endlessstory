@@ -3,6 +3,9 @@
 // normalize individual attack/death bounds (that causes animation size popping).
 // Source PNGs, anchors, collision/combat data and other races remain unchanged.
 export const HERO_REFERENCE_HEIGHTS=Object.freeze({goblin:62,elf:98});
+// Portraits and selection cards face right like the default camp/battle hero.
+// Read authored facing (including per-frame overrides); never rewrite the PNG.
+export const heroPortraitFlipX=(sprite,frame)=>(frame?.facing??sprite?.facing)==='left';
 // Inclusive head/hood-to-foot Y bounds, visually inspected in the idle PNG.
 // Staff tip is NOT anatomy: elf staff alpha starts92 but hair starts101.
 export const HERO_BODY_REFERENCE_BOUNDS=Object.freeze({

@@ -184,3 +184,6 @@ runAffixSourceTest(process.execPath,[new URL('./reforge-same-slot-tests.mjs',imp
 runAffixSourceTest(process.execPath,[new URL('./stat-label-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
 // v0.58 native frame-facing and renderer lifecycle regression.
 runAffixSourceTest(process.execPath,[new URL('./monster-facing-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+// Goblin selection and portrait facing, plus unchanged battle/camp orientation.
+runAffixSourceTest(process.execPath,[new URL('./goblin-hero-facing-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
