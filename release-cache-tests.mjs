@@ -41,7 +41,7 @@ async function probe(output,report){
   if(path==='story-cast-registry.js'){
    const {STORY_CAST_CHARACTERS}=await import(pathToFileURL(join(emittedRoot,path)));
    for(const descriptor of Object.values(STORY_CAST_CHARACTERS)){
-    if(descriptor.designOnly){assert.equal(descriptor.id,'current-dwarf-king');storyProvenance.add(descriptor.file);}
+    if(descriptor.designOnly){assert.equal(descriptor.id,'current-dwarf-king');assert.equal(descriptor.file,null);assert(!files.has('story-portraits/current-dwarf-king.png'),'unimplemented draft portrait must not be packaged');}
     else await visit(new URL(descriptor.file,release),url.href);
    }
   }

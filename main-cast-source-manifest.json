@@ -77,8 +77,15 @@
         "mode": "RGB",
         "bytes": 60166
       },
-      "runtime": {
-        "path": "dist/story-portraits/current-dwarf-king.png",
+      "visualQa": {
+        "original": "visually inspected",
+        "at192": "visually inspected",
+        "at96": "visually inspected",
+        "notes": "Reviewed original/192/96: white-grey fan beard, low iron/gold crown, indigo cloak. Current-era design draft only; no runtime scene or identity as ancient creator implied."
+      },
+      "status": "design-draft-not-in-current-story",
+      "designPreview": {
+        "path": "source-art/main-cast/96/current-dwarf-king.png",
         "sha256": "fcf367d8f1fddaf86cf0c1fb948f425168068db7ebf93c246429546f8a303c0e",
         "size": [
           96,
@@ -87,13 +94,7 @@
         "mode": "RGB",
         "bytes": 18262
       },
-      "visualQa": {
-        "original": "visually inspected",
-        "at192": "visually inspected",
-        "at96": "visually inspected",
-        "notes": "Reviewed original/192/96: white-grey fan beard, low iron/gold crown, indigo cloak. Current-era design draft only; no runtime scene or identity as ancient creator implied."
-      },
-      "status": "design-draft-not-in-current-story"
+      "designOnly": true
     },
     {
       "id": "ashen-chief",

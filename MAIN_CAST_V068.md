@@ -54,7 +54,7 @@ node tools/sync-story-portrait-crops.mjs --check
 - `node main-cast-app-ui-tests.cjs`：实际`app.js`/委托点击/存储，遍历103场、751个对白状态（包含精灵完整/简略修泉两分支）、15发言者；保存失败/旧cursor重复/纪事往返不丢状态。
 - `node main-cast-native-proof.mjs`：实际资源96像素展示与裁切联系图；`qa/main-cast/native-portraits.png`。这是原生像素验证，**不是浏览器截图**。
 - 既有`story-event-app-ui-tests.cjs`、`story-c08-app-ui-tests.cjs`、`npc-portrait-tests.mjs`通过。
-- 构建/缓存图纳入新主线registry动态资源边，国王设计图明确归为辅助库存而非运行依赖；新增破损主线图URL负例。
+- 构建/缓存图纳入新主线registry动态资源边，国王96px设计图仅保留于source-art，运行registry无图片URL，发布目录和运行依赖均不包含此未出场草稿；新增破损主线图URL负例。
 - Chromium启动在本沙箱不可用；没有声称浏览器布局QA。没有发布或改线上状态。
 
 中文审阅图：`/workspace/shared/maincast-v068/six-maincast-chinese-contact.png`。Library：`libfile_89087ca03d1881918b3bb23b7d24cf8f`（主线人物形象补充.png，v0）。

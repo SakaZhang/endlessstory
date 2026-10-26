@@ -10,7 +10,7 @@ const portrait=(id,name,role,race,file,extra={})=>({id,name,role,race,file,width
 export const STORY_CAST_CHARACTERS=freeze({
  'high-priest':portrait('high-priest','大祭司','精灵大祭司','elf','story-assets/high-priest.png',{existingFullActor:true,portraitCrop:{x:63.5,y:19,size:65}}),
  'dwarf-minister':portrait('dwarf-minister','维尔铎','矮人重臣','dwarf','story-portraits/dwarf-minister.png',{evidenceOnly:true}),
- 'current-dwarf-king':portrait('current-dwarf-king','索兰姆','现任矮人王','dwarf','story-portraits/current-dwarf-king.png',{designOnly:true}),
+ 'current-dwarf-king':portrait('current-dwarf-king','索兰姆','现任矮人王','dwarf',null,{designOnly:true}),
  'ashen-chief':portrait('ashen-chief','玄珀','烬裔族长','ashen','story-portraits/ashen-chief.png'),
  'carter':portrait('carter','鲁托','商队幸存车夫','human','story-portraits/carter.png'),
  'mine-foreman':portrait('mine-foreman','杜铎','矿班长','dwarf','story-portraits/mine-foreman.png'),
