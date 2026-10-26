@@ -6,12 +6,13 @@ import {SAVE_KEY,loadProgress} from './dist/storage.js';
 const clone=structuredClone;
 const near=(a,b)=>assert(Math.abs(a-b)<1e-8,`${a} != ${b}`);
 function fixture(seedValue=68){
- const original=Math.random;let seed=seedValue;Math.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};
+ // Item template selection hashes generated IDs, so pin the clock as well as RNG.
+ const original=Math.random,originalNow=Date.now;Date.now=()=>1800000000006;let seed=seedValue;Math.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};
  try{
   const s=preparedStoryGame('human');for(const [socket,id] of Object.entries(s.equip)){const old=s.inventory.find(it=>it.id===id),gear=E.item(old.slot,s.level,null,2,{originRace:s.race});s.inventory.push(gear);assert(E.equipItem(s,gear.id,socket));}
   const ring=E.legendaryItem('return-ring',1);s.inventory.push(ring);s.returnRing={version:1,recipeLearned:true,crafted:true,craftedItemId:ring.id};assert(E.equipItem(s,ring.id,'ring1'));s.heroHp=E.stats(s).hp*.6;E.normalizePotions(s);
   assert(E.startInstanceEncounter(s,'human.a03.boss',s.lastHealthClock+2000));s.lastSeen=s.lastHealthClock;s.stopAfterBattle=true;return s;
- }finally{Math.random=original;}
+ }finally{Math.random=original;Date.now=originalNow;}
 }
 function stored(s){const raw=JSON.stringify(s);return {get length(){return 1},key:()=>SAVE_KEY,getItem:k=>k===SAVE_KEY?raw:null};}
 const authored=[...new Set(Object.values(WORLD_MONSTERS).flatMap(d=>(d.skills??[]).flatMap(sk=>(sk.effects??[]).filter(f=>f.type==='next_basic_slow').map(f=>f.multiplier))))].sort();assert.deepEqual(authored,[1.15,1.2]);
@@ -30,7 +31,7 @@ assert(slow&&pending&&micro&&reloaded,'real authored 20% boss slow traverses eac
 // Pause/reload shifts deadlines, never the authored 220ms duration.
 {const s=clone(pending),e=s.activeEncounter,at=s.lastHealthClock,due=e.pendingBasicAt,regular=e.nextRegularAt;assert(E.setMultiPaused(s,true,at));assert(E.setMultiPaused(s,false,at+30000));assert.equal(e.pendingBasicAt,due+30000);assert.equal(e.nextRegularAt,regular+30000);assert.equal(e.pendingBasicDelayMs,220);assert(E.validSave(s));const restored=loadProgress(stored(s));assert(!restored.blocked);E.step(restored.game,restored.game.activeEncounter,restored.game.nextActionAt);assert.equal(restored.game.activeEncounter.basicMicroElapsed,220);assert(E.validSave(restored.game));}
 
-const win=online.activeEncounter;assert(win.done&&win.win);const beforeHp=online.heroHp,beforeGold=online.gold;E.reward(online,win,online.lastHealthClock);assert(win.rewarded);assert(online.gold>beforeGold);assert.equal(online.kills,1);near(online.heroHp,Math.min(E.stats(online).hp,beforeHp+.15*E.stats(online).hp));assert(E.validSave(online));
+const win=online.activeEncounter;assert(win.done&&win.win);assert.equal(win.basicMicroElapsed,220,'fixed seed68/time reproduces an actual terminal delayed-basic win');const beforeHp=online.heroHp,beforeGold=online.gold;E.reward(online,win,online.lastHealthClock);assert(win.rewarded);assert(online.gold>beforeGold);assert.equal(online.kills,1);near(online.heroHp,Math.min(E.stats(online).hp,beforeHp+.15*E.stats(online).hp));assert(E.validSave(online));
 const settled=clone(online);E.reward(online,win,online.lastHealthClock+2000);assert.deepEqual(online,settled,'settlement remains exactly once');
 const report=E.offline(batch,initial.lastSeen+180000);assert.equal(report.kills,1);assert.equal(report.rests,0);assert(E.validSave(batch));
 for(const key of ['gold','xp','level','kills','heroHp','materialStacks','inventory','potionStacks','potionReadyAt','instanceCooldowns','returnRing'])assert.deepEqual(batch[key],online[key],'online/offline '+key);
