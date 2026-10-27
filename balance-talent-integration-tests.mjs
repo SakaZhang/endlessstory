@@ -28,5 +28,14 @@ for(const points of [0,1,5,10])for(const passive of [false,true]){
  host.applyEffect('self',{type:'heal',amount:100,durationMs:0,sourceId:'regression-heal'});near(e.heroHp,st.hp,'overheal clamps');
  host.applyEffect('self',{type:'shield',amount:100,durationMs:4000,sourceId:'regression-shield'});near(e.playerShieldLayers.layers.find(x=>x.source==='skill:regression-shield').capacity,100,'talent excludes shield');
 }
+// Default periodic interval must be resolved BEFORE duration reduction: 2.2s
+// incoming status at 20% talent × 20% passive still retains its one 2s tick.
+{
+ const s=state('dwarf'),e=E.startRoutedEncounter(s,10000),st=E.stats(s);s.talents.resolve=10;let ticks=0;
+ const host=H.createTreeEffectHost(s,e,{stats:()=>st,combatClock:0,tickIntervalMs:()=>2000,resolveDot:()=>ticks++,negativeDuration:(ms,effect)=>P.talentNegativeDuration(ms,s.talents.resolve,{minimumMs:effect?.type==='dot'?(effect.tickIntervalMs??1000):1,durationMultiplier:.8})});assert(host);
+ assert(host.applyEffect('self',{type:'dot',status:'burn',damageType:'fire',amount:1,durationMs:2200,sourceId:'short-incoming-dot'}));
+ near(e.treeEffects.hero.sources.find(x=>x.sourceId==='short-incoming-dot').endAt,2000,'minimum uses default tick interval');assert(host.advance(2200));assert.equal(ticks,1,'short incoming DOT retains exactly one tick');
+ assert(host.applyEffect('self',{type:'attackUp',amount:1,durationMs:2200,sourceId:'positive-buff'}));near(e.treeEffects.hero.sources.find(x=>x.sourceId==='positive-buff').endAt,4400,'positive duration unchanged');
+}
 const human=await load('races/human/skills.js');assert(human.HUMAN_CORE_BUILDS.crit.active.includes('human.expose'));assert(!human.HUMAN_CORE_BUILDS.crit.active.includes('human.opening'));
 console.log(`PASS v0.71 talent host contracts: 5 races × 6 healing allocations, exact HOT exclusion, passive single multiplication, 8 typed DOT timing cases, clamp/shield exclusion, crit recommended armor break. Engine root ${root}`);
