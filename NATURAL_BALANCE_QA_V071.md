@@ -69,3 +69,6 @@ No technical pass certifies all builds, human playtime, or a fixed potion band.
 For earned-save parity, set `PARITY_SAVE_PATTERN=/path/save-{race}-1917.json`.
 The save's own clock and world state are preserved, and both modes start from
 identical serialized input. No levels, equipment or unlocks are added.
+
+`--jobs=1..5` runs cases concurrently in isolated processes (default1).
+Use `--jobs=5` for the five long endpoint cases; output ordering remains stable.

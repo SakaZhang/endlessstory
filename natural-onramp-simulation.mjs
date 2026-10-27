@@ -5,7 +5,7 @@ import path from 'node:path';
 import os from 'node:os';
 import {createHash} from 'node:crypto';
 import {pathToFileURL} from 'node:url';
-import {execFileSync} from 'node:child_process';
+import {execFileSync,spawn} from 'node:child_process';
 const args=Object.fromEntries(process.argv.slice(2).map(a=>a.replace(/^--/,'').split('=')));
 const root=path.resolve(args['engine-root']??new URL('.',import.meta.url).pathname);
 const races=(args.races??'human,dwarf,elf,goblin,ashen').split(',');
@@ -13,8 +13,10 @@ const seeds=(args.seeds??'1917,8675309,739').split(',').map(Number);
 const hours=Number(args.hours??.5),shopping=args.shopping!=='0',develop=args.develop!=='0';
 assert(hours>0&&hours<=168);
 if(!args.single){
- const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'natural-onramp-')),rows=[];
- for(const race of races)for(const seed of seeds){const out=path.join(tmp,`${race}-${seed}.json`);const child={...args,'engine-root':root,races:race,seeds:seed,single:1,out};if(args.save)child.save=`${args.save}-${race}-${seed}.json`;execFileSync(process.execPath,[new URL(import.meta.url).pathname,...Object.entries(child).map(([k,v])=>`--${k}=${v}`)],{stdio:'inherit'});rows.push(JSON.parse(fs.readFileSync(out)));if(args.out)fs.writeFileSync(args.out,JSON.stringify({policy:'Separate process per race/seed; each result carries policy and exact source revision.',rows},null,2));}
+ const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'natural-onramp-')),rows=[],cases=races.flatMap(race=>seeds.map(seed=>({race,seed}))),jobs=Number(args.jobs??1);assert(Number.isInteger(jobs)&&jobs>=1&&jobs<=5);let cursor=0;
+ const save=()=>{rows.sort((a,b)=>races.indexOf(a.race)-races.indexOf(b.race)||seeds.indexOf(a.seed)-seeds.indexOf(b.seed));if(args.out)fs.writeFileSync(args.out,JSON.stringify({policy:'Separate process per race/seed; each result carries policy and exact source revision.',rows},null,2));};
+ await Promise.all(Array.from({length:Math.min(jobs,cases.length)},async()=>{while(cursor<cases.length){const {race,seed}=cases[cursor++],out=path.join(tmp,`${race}-${seed}.json`),child={...args,'engine-root':root,races:race,seeds:seed,single:1,out};if(args.save)child.save=`${args.save}-${race}-${seed}.json`;
+ await new Promise((resolve,reject)=>{const p=spawn(process.execPath,[new URL(import.meta.url).pathname,...Object.entries(child).map(([k,v])=>`--${k}=${v}`)],{stdio:'inherit'});p.on('error',reject);p.on('exit',(code,signal)=>code===0?resolve():reject(Error(`${race}/${seed} failed ${code??signal}`)));});rows.push(JSON.parse(fs.readFileSync(out)));save();}}));
  if(!args.out)console.log(JSON.stringify({rows},null,2));process.exit(0);
 }
 assert.equal(races.length,1);assert.equal(seeds.length,1);
