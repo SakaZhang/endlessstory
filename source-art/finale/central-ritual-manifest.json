@@ -1,0 +1,48 @@
+[
+  {
+    "state": "open",
+    "source": "source-art/finale/central-ritual-open-master.png",
+    "runtime": "dist/story-assets/central-ritual-open.png",
+    "sourceSize": [
+      1774,
+      887
+    ],
+    "sourceSha256": "a99f5fa1efd38d074e3e650877f665c021fffc8e70800f8a39cb3d0e365f87f8",
+    "runtimeSha256": "bfff2c7f8295a789fe9347e3ede38be0282643ba6a687d9b63eea4a50686945e",
+    "crop": [
+      120,
+      80,
+      1534,
+      767
+    ],
+    "output": [
+      480,
+      270
+    ],
+    "resize": "nearest neighbor; logical battle canvas",
+    "baseline": 203
+  },
+  {
+    "state": "closed",
+    "source": "source-art/finale/central-ritual-closed-master.png",
+    "runtime": "dist/story-assets/central-ritual-closed.png",
+    "sourceSize": [
+      1774,
+      887
+    ],
+    "sourceSha256": "61da6957d32f3d6180536320a94191be251fe0b1e8decf8d844ebb0cd0172def",
+    "runtimeSha256": "06302a30b5d3af60001ac520f07e08a3d23d0e1814230ffe6869b6ce998f249a",
+    "crop": [
+      120,
+      80,
+      1534,
+      767
+    ],
+    "output": [
+      480,
+      270
+    ],
+    "resize": "nearest neighbor; logical battle canvas",
+    "baseline": 203
+  }
+]

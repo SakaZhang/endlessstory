@@ -50,7 +50,7 @@ const identity=u=>u.monsterId??u.definitionId??null;
 const areaOf=(s,e)=>e?.areaId??e?.instanceId??s?.siteId??'';
 export const RACIAL_CAMPS=Object.freeze({dwarf:'黑炉营地',human:'边境营地',elf:'林间营地',goblin:'拾荒者营地',ashen:'余烬营地'});
 export function liveCampRace(state){if(state?.atCamp!==true&&!(state?.restUntil>0))return null;const territory=String(state.siteId??'').split('.')[0];return Object.hasOwn(RACIAL_CAMPS,territory)?territory:Object.hasOwn(RACIAL_CAMPS,state.race)?state.race:'dwarf';}
-export function liveSceneBackgrounds(snapshot,manifest){if(snapshot?.campRace){const row=manifest?.campBackgrounds?.[snapshot.campRace];return row?[row]:[];}return liveAreaBackgrounds(snapshot?.areaId,manifest);}
+export function liveSceneBackgrounds(snapshot,manifest){if(snapshot?.campRace){const row=manifest?.campBackgrounds?.[snapshot.campRace];return row?[row]:[];}const story=manifest?.storyScenarioBackgrounds?.[snapshot?.encounter?.storyScenario?.id];if(story)return [story];return liveAreaBackgrounds(snapshot?.areaId,manifest);}
 const areaKey=id=>String(id).match(/^(?:dwarf|human|elf|goblin|ashen)\.a(?:0[1-9]|10)(?=\.|$)/)?.[0]??null;
 export function liveActorSprite(unit,manifest){
  if(unit?.storyActorId)return manifest?.storyActorSprites?.[unit.storyActorId]??null;

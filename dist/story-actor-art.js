@@ -1,3 +1,4 @@
+import {extendStoryBattleBackgrounds} from './story-battle-backgrounds.js';
 // Dedicated authored identities; never substitute playable heroes or local fauna.
 export const STORY_ACTOR_ART=Object.freeze({
  'invasion-leader':Object.freeze({name:'入侵首领',kind:'界外入侵',file:'story-assets/invasion-leader.png',height:130,facing:'left',anchor:[96,182],alphaBBox:[17,11,181,182],solidBBox:[17,12,181,181]}),
@@ -11,6 +12,6 @@ export function extendStoryActorManifest(manifest){
   const key='story-actor-'+id;manifest.storyActorSprites[id]=key;
   manifest.sprites[key]={frameSize:[192,192],anchor:a.anchor??[96,176],facing:a.facing??'right',frames:[{id:key,file:'../'+a.file,durationMs:150,solidBBox:a.solidBBox}],animations:{idle:[key],attack:[key],hurt:[key]},healthBarAnchor:[96,8]};
  }
- return manifest;
+ return extendStoryBattleBackgrounds(manifest);
 }
 export function storyActorPresentationScale(sprite,id){const a=STORY_ACTOR_ART[id],box=sprite?.frames?.[0]?.solidBBox;return a&&box?a.height/(box[3]-box[1]+1):1;}
