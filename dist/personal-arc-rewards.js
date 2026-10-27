@@ -116,6 +116,7 @@ const eventService=createTaskRewardService(Object.fromEntries(Object.values(PERS
 export function claimPersonalEventReward(storage,game,eventId,{now=Date.now()}={}){
  if(!Object.hasOwn(PERSONAL_EVENT_REWARDS,eventId))return fail(game,'not-available');
  if(!clockValid(game,now))return fail(game,'invalid-clock');
+ if(!validSave(game)||game.developmentEquipmentSandbox)return fail(game,'invalid-state');
  if(game.running||game.dungeonRun||(game.activeEncounter&&!game.activeEncounter.rewarded)||game.story?.activeScene||(game.restUntil??0)>now)return fail(game,'busy');
  return eventService(storage,game,eventId,{now});
 }
