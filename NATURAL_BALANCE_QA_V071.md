@@ -59,7 +59,7 @@ online/offline state (excluding descriptive chronicle) and the8h absence cap.
 
 ## Acceptance reporting
 
-Report first fight time/actual HP loss, first naturally received and first
+Report first fight time/net HP loss, observer-recorded gross HP damage/effective healing, first naturally received and first
 useful equipped gear (including purchases), first three drops, complete first
 clear, unsuccessful attempts, actual rest fraction, recipe availability,
 owned/crafted/consumed potions, and reconciled gold. Report missed milestones

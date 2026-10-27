@@ -20,6 +20,7 @@ if(!args.single){
 assert.equal(races.length,1);assert.equal(seeds.length,1);
 const runtimeHash=createHash('sha256');for(const file of fs.readdirSync(path.join(root,'dist')).filter(x=>x.endsWith('.js')).sort()){runtimeHash.update(file);runtimeHash.update(fs.readFileSync(path.join(root,'dist',file)));}const runtimeSha256=runtimeHash.digest('hex');
 const E=await import(pathToFileURL(path.join(root,'dist/engine.js')));
+const {setCombatDisplayObserver}=await import(pathToFileURL(path.join(root,'dist/combat-display-bridge.js')));
 const T=await import(pathToFileURL(path.join(root,'dist/skill-tree-state.js')));
 const R=await import(pathToFileURL(path.join(root,'dist/race-registry.js')));
 // xorshift32 deliberately differs from encounter's internal LCG; serials reset by child process.
@@ -75,20 +76,20 @@ function review(){
  checkpoints.push(record({gold:s.gold,hp:s.heroHp,maxHp:E.stats(s).hp,atk:E.stats(s).atk,armor:E.stats(s).armor,gearCount:Object.values(s.equip).filter(Boolean).length,potions:potions(),recipe:E.recipeKnown(s,'potion-healing'),route:s.expedition.mode,activeSkills:[...s.skillTree.presets[s.skillTree.selectedPreset].active]}));
  nextReview=now+(now-START<1800000?120000:900000);s.running=true;assert(E.validSave(s));
 }
-review();let encounterStart=null,seenRun=new Set(),runStarts=new Map();
+review();let encounterStart=null,seenRun=new Set(),runStarts=new Map(),detachDisplay=()=>{};
 while(now<END){
  if(E.worldEventsDue(s,now))E.advanceWorldEvents(s,now);
  if(s.restUntil>0){const next=Math.min(END,s.restUntil);restMs+=Math.max(0,next-now);now=next;E.settleRest(s,now);if(now>=END)break;s.running=true;}
  if(!s.activeEncounter&&!s.dungeonRun&&now>=nextReview)review();
  now=Math.min(END,Math.max(now,s.nextBattleAt??0));if(now>=END)break;
  let e=s.activeEncounter;
- if(!e){e=E.startRoutedEncounter(s,now);if(!e){if(s.restUntil>0)continue;throw Error('Route blocked without a battle/rest: '+JSON.stringify({level:s.level,expedition:s.expedition,now}));}encounterStart={at:now,hp:e.heroHp,kind:e.kind,stage:e.dungeonStage,runId:e.runId,inventory:new Set(s.inventory.map(i=>i.id))};if(e.runId&&!seenRun.has(e.runId)){seenRun.add(e.runId);runStarts.set(e.runId,{at:now,hp:e.heroHp,level:s.level,stages:[]});counts.dungeonAttempts++;}}
+ if(!e){e=E.startRoutedEncounter(s,now);if(!e){if(s.restUntil>0)continue;throw Error('Route blocked without a battle/rest: '+JSON.stringify({level:s.level,expedition:s.expedition,now}));}encounterStart={at:now,hp:e.heroHp,kind:e.kind,stage:e.dungeonStage,runId:e.runId,inventory:new Set(s.inventory.map(i=>i.id)),hpDamage:0,effectiveHealing:0,shieldAbsorbed:0,oneDamageEvents:0};detachDisplay=setCombatDisplayObserver(e,event=>{if(event.targetId!=='hero')return;encounterStart.hpDamage+=Math.max(0,-event.hpDelta);encounterStart.effectiveHealing+=Math.max(0,event.hpDelta);encounterStart.shieldAbsorbed+=Math.max(0,-event.shieldDelta);if(event.hpDelta===-1)encounterStart.oneDamageEvents++;});if(e.runId&&!seenRun.has(e.runId)){seenRun.add(e.runId);runStarts.set(e.runId,{at:now,hp:e.heroHp,level:s.level,stages:[]});counts.dungeonAttempts++;}}
  const next=Math.max(now,s.nextActionAt??now+1100);if(next>END){now=END;break;}now=next;
  if(E.worldEventsDue(s,now))E.advanceWorldEvents(s,now);
  const pBefore=potions(),hadRest=s.restUntil>0;E.step(s,e,now);ledger.consumedPotions+=pBefore-potions();counts.steps++;
  if(!hadRest&&s.restUntil>0)counts.rests++;
  if(!e.done)continue;
- const battle=record({win:e.win,kind:e.kind,stage:e.dungeonStage,runId:e.runId,durationSeconds:(now-encounterStart.at)/1000,hpBefore:encounterStart.hp,hpAfter:e.heroHp,enemies:e.enemies.map(u=>u.definitionId)});firstBattle??=battle;if(e.runId)runStarts.get(e.runId)?.stages.push(battle);
+ const battle=record({win:e.win,kind:e.kind,stage:e.dungeonStage,runId:e.runId,durationSeconds:(now-encounterStart.at)/1000,hpBefore:encounterStart.hp,hpAfter:e.heroHp,hpDamage:encounterStart.hpDamage,effectiveHealing:encounterStart.effectiveHealing,shieldAbsorbed:encounterStart.shieldAbsorbed,oneDamageEvents:encounterStart.oneDamageEvents,enemies:e.enemies.map(u=>u.definitionId)});detachDisplay();firstBattle??=battle;if(e.runId)runStarts.get(e.runId)?.stages.push(battle);
  if(e.win){counts.wins++;const gold=s.gold;E.reward(s,e,now);assert(e.rewarded);ledger.rewardGold+=s.gold-gold;
   for(const it of s.inventory.filter(i=>!encounterStart.inventory.has(i.id))){const loot=record({kind:'drop',slot:it.slot,item:it.id,itemLevel:it.level,quality:it.rarity});firstGear??=loot;events.push(loot);}
   if(e.kind==='dungeon'&&e.dungeonStage===3){counts.dungeonClears++;const run=runStarts.get(e.runId),full={...battle,entryLevel:run.level,entryHp:run.hp,fullDurationSeconds:(now-run.at)/1000,stages:run.stages};firstDungeonClear??=full;dungeons.push(full);}
