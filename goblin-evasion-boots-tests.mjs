@@ -1,3 +1,4 @@
+import {levelAffixRange} from './dist/affix-level-budget.js';
 import assert from 'node:assert/strict';
 import * as E from './dist/engine.js';
 import {getRacePack} from './dist/race-registry.js';
@@ -12,7 +13,7 @@ assert.equal(def.slot,'boots');assert.match(def.description,/盗贼/);assert.doe
 for(const race of ['dwarf','human','elf','goblin','ashen']){
  const s=E.fresh(race),before=E.stats(s),prior=s.equip.boots,boots=E.legendaryItem(id,100);s.inventory.push(boots);
  assert.equal(E.stats(s).dodgeRating,before.dodgeRating,'inventory grants nothing');assert.equal(boots.affixes.length,4);assert.equal(new Set(boots.affixes.map(a=>a.stat)).size,4);
- for(const a of boots.affixes){assert.equal(a.sourceRange.quality,4);assert(a.sourceRange.max>affixRange(E.AFFIX_DEFS[a.stat],3).max);}
+ for(const a of boots.affixes){assert.equal(a.sourceRange.quality,4);assert(a.sourceRange.max>=levelAffixRange(E.AFFIX_DEFS[a.stat],a.stat,boots.level,3).max);}
  assert(E.equipItem(s,boots.id));assert.equal(E.stats(s).dodgeRating-before.dodgeRating,100);assert.equal(E.stats(s).dodge,.25);assert(E.validSave(s));assert(E.validSave(JSON.parse(JSON.stringify(s))));
  const duplicate=structuredClone(boots);duplicate.id+='duplicate';s.inventory.push(duplicate);assert.equal(racialLegendaryStatBonuses(s).dodgeRating,100);assert.equal(racialLegendaryStatBonuses({...s,equip:{...s.equip,extra:duplicate.id}}).dodgeRating,100,'same legend does not stack even in synthetic duplicate equipment input');
  boots.fixedEffect={type:'statBonus',stats:{dodgeRating:999999}};assert.equal(E.stats(s).dodgeRating,100,'never trusts mutable item payload');delete boots.fixedEffect;

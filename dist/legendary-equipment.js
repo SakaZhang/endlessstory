@@ -4,7 +4,7 @@ import {EXPANSION_PACKS} from './race-packs.js';
 // Registered legendary factory. Reward-source eligibility remains in the engine.
 // Fixed identity and budget are separate from transferable ordinary affixes.
 import {CONFIG,deriveEquipmentBase,affixRange} from './equipment-budget.js';
-import {validAffixSource} from './affix-range.js';
+import {validAffixSource,makeAffixSourceRange} from './affix-range.js';
 export const LEGENDARY_EQUIPMENT_DEFINITIONS=Object.freeze({
  'infinity-gauntlet':INFINITY_GAUNTLET_DEFINITION,'return-ring':RETURN_RING_DEFINITION,...Object.fromEntries(EXPANSION_PACKS.flatMap(p=>p.legendaries.map(d=>[d.id,d]))),
  'first-forge-oathhammer':Object.freeze({id:'first-forge-oathhammer',ready:true,name:'王统·初炉誓锤',slot:'weapon',baseVariant:'hammer_balanced',weaponType:'hammer',originRace:'dwarf',exclusiveId:'ancestor-echo'}),
@@ -21,10 +21,10 @@ export function createLegendaryEquipment({id,legendaryId,level,baseLevel=level,l
   const raw=deriveEquipmentBase({slot:definition.slot,baseVariant:definition.baseVariant,level:Math.min(level,100),quality:4,enhancement:0});
   const affixes=[];const pool=[...keys];
   for(let i=0;i<count;i++){
-   const stat=pool.splice(Math.floor(draw(random)*pool.length),1)[0],range=affixRange(affixDefs[stat],4);
+   const stat=pool.splice(Math.floor(draw(random)*pool.length),1)[0],sourceRange=makeAffixSourceRange(affixDefs[stat],4,{stat,sourceLevel:level}),range=sourceRange;
    const value=rollValue?rollValue({...range},random):range.min+Math.floor(draw(random)*(range.max-range.min+1));
    if(!Number.isSafeInteger(value)||value<range.min||value>range.max)return null;
-   affixes.push({stat,value,sourceRange:{model:'quality-v1',quality:4,...range}});
+   affixes.push({stat,value,sourceRange});
   }
   return {id,legendaryId,name:definition.name,slot:definition.slot,rarity:3,budgetQuality:4,baseVariant:definition.baseVariant,level,baseLevel,levelSource,...raw,affixes,special:null,set:null,exclusive:{id:definition.exclusiveId},locked:false,bless:0,legendaryBudget:{model:CONFIG.id,quality:4,budgetLevel:Math.min(level,100),sourceLevel:level},...(definition.weaponType?{weaponType:definition.weaponType}:{}),originRace:definition.originRace??null};
  }catch{return null;}

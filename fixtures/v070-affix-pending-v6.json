@@ -1,0 +1,1770 @@
+[
+  {
+    "mode": "value",
+    "state": {
+      "version": 6,
+      "diplomacy": {
+        "version": 1,
+        "revision": 0,
+        "wars": []
+      },
+      "race": "dwarf",
+      "hero": "布洛克",
+      "atCamp": true,
+      "level": 1,
+      "xp": 0,
+      "gold": 9985,
+      "location": 0,
+      "siteId": "dwarf.a01",
+      "expedition": {
+        "mode": "field",
+        "fieldId": "dwarf.a01.field",
+        "targetInstanceId": null,
+        "loop": false
+      },
+      "build": "custom",
+      "inventory": [
+        {
+          "id": "loyw3v28-1-j96xp",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 0,
+          "level": 1,
+          "baseLevel": 1,
+          "levelSource": "starter",
+          "name": "六棱铜锤",
+          "atk": 19,
+          "armor": 4,
+          "hp": 13,
+          "affixes": [],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_sixface_hammer",
+          "baseVariant": "hammer_balanced",
+          "weaponType": "hammer",
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_sixface_hammer",
+          "visualVariant": "dwarf_scatter_sixface_hammer",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 1,
+          "budgetSourceLevel": 1
+        },
+        {
+          "id": "loyw3v28-2-q9krj",
+          "slot": "helm",
+          "set": null,
+          "rarity": 0,
+          "level": 1,
+          "baseLevel": 1,
+          "levelSource": "starter",
+          "name": "烟灰软帽",
+          "atk": 1,
+          "armor": 6,
+          "hp": 49,
+          "affixes": [],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_sootcloth_hood",
+          "baseVariant": "helm_vitality",
+          "weaponType": null,
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_sootcloth_hood",
+          "visualVariant": "dwarf_scatter_sootcloth_hood",
+          "iconKey": "helm",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 1,
+          "budgetSourceLevel": 1
+        },
+        {
+          "id": "loyw3v28-3-89ig6",
+          "slot": "armor",
+          "set": null,
+          "rarity": 0,
+          "level": 1,
+          "baseLevel": 1,
+          "levelSource": "starter",
+          "name": "矿行皮袄",
+          "atk": 0,
+          "armor": 12,
+          "hp": 86,
+          "affixes": [],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_minehide_coat",
+          "baseVariant": "armor_vitality",
+          "weaponType": null,
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_minehide_coat",
+          "visualVariant": "dwarf_scatter_minehide_coat",
+          "iconKey": "armor",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 1,
+          "budgetSourceLevel": 1
+        },
+        {
+          "id": "loyw3v28-4-o8kg6",
+          "slot": "gloves",
+          "set": null,
+          "rarity": 0,
+          "level": 1,
+          "baseLevel": 1,
+          "levelSource": "starter",
+          "name": "铜节铁手",
+          "atk": 3,
+          "armor": 8,
+          "hp": 24,
+          "affixes": [],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_copperknuckle_gloves",
+          "baseVariant": "gloves_armor",
+          "weaponType": null,
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_copperknuckle_gloves",
+          "visualVariant": "dwarf_scatter_copperknuckle_gloves",
+          "iconKey": "gloves",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 1,
+          "budgetSourceLevel": 1
+        },
+        {
+          "id": "loyw3v28-5-maheu",
+          "slot": "boots",
+          "set": null,
+          "rarity": 0,
+          "level": 1,
+          "baseLevel": 1,
+          "levelSource": "starter",
+          "name": "铁底战靴",
+          "atk": 1,
+          "armor": 10,
+          "hp": 28,
+          "affixes": [],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_ironsole_boots",
+          "baseVariant": "boots_armor",
+          "weaponType": null,
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_ironsole_boots",
+          "visualVariant": "dwarf_scatter_ironsole_boots",
+          "iconKey": "boots",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 1,
+          "budgetSourceLevel": 1
+        },
+        {
+          "id": "loyw3v28-6-1of26",
+          "slot": "ring",
+          "set": null,
+          "rarity": 0,
+          "level": 1,
+          "baseLevel": 1,
+          "levelSource": "starter",
+          "name": "铜篆戒",
+          "atk": 9,
+          "armor": 2,
+          "hp": 45,
+          "affixes": [],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_copperglyph_ring",
+          "baseVariant": "ring_element",
+          "weaponType": null,
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_copperglyph_ring",
+          "visualVariant": "dwarf_scatter_copperglyph_ring",
+          "iconKey": "ring",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 1,
+          "budgetSourceLevel": 1
+        },
+        {
+          "id": "loyw3v28-7-lbt6q",
+          "slot": "ring",
+          "set": null,
+          "rarity": 0,
+          "level": 1,
+          "baseLevel": 1,
+          "levelSource": "starter",
+          "name": "锤痕戒",
+          "atk": 13,
+          "armor": 0,
+          "hp": 35,
+          "affixes": [],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_hammermark_ring",
+          "baseVariant": "ring_attack",
+          "weaponType": null,
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_hammermark_ring",
+          "visualVariant": "dwarf_scatter_hammermark_ring",
+          "iconKey": "ring",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 1,
+          "budgetSourceLevel": 1
+        },
+        {
+          "id": "loyw3v28-8-cpdu5",
+          "slot": "amulet",
+          "set": null,
+          "rarity": 0,
+          "level": 1,
+          "baseLevel": 1,
+          "levelSource": "starter",
+          "name": "沉石符",
+          "atk": 3,
+          "armor": 7,
+          "hp": 53,
+          "affixes": [],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_deepstone_charm",
+          "baseVariant": "amulet_survival",
+          "weaponType": null,
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_deepstone_charm",
+          "visualVariant": "dwarf_scatter_deepstone_charm",
+          "iconKey": "amulet",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 1,
+          "budgetSourceLevel": 1
+        },
+        {
+          "id": "loyw3v28-9-5e18o",
+          "slot": "gloves",
+          "set": null,
+          "rarity": 1,
+          "level": 100,
+          "baseLevel": 100,
+          "levelSource": "generated",
+          "name": "锻工铁手",
+          "atk": 40,
+          "armor": 101,
+          "hp": 303,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 9,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 3,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "armor",
+              "value": 6,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 0,
+                "min": 2,
+                "max": 6
+              }
+            }
+          ],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_forge_ironhands",
+          "baseVariant": "gloves_armor",
+          "weaponType": null,
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_forge_ironhands",
+          "visualVariant": "dwarf_scatter_forge_ironhands",
+          "iconKey": "gloves",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 100,
+          "budgetSourceLevel": 100,
+          "divine": {
+            "id": "forge-favor",
+            "name": "神赐·炉火眷顾",
+            "model": "raw-v1",
+            "bonus": {
+              "atk": 4,
+              "armor": 10.1,
+              "hp": 30.3,
+              "affixes": [
+                {
+                  "stat": "atk",
+                  "value": 0.9
+                },
+                {
+                  "stat": "armor",
+                  "value": 0.6
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "loyw3v28-a-0z902",
+          "slot": "gloves",
+          "set": null,
+          "rarity": 0,
+          "level": 1,
+          "baseLevel": 1,
+          "levelSource": "generated",
+          "name": "赤袖铆铁手",
+          "atk": 3,
+          "armor": 8,
+          "hp": 24,
+          "affixes": [
+            {
+              "stat": "hp",
+              "value": 50,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 4,
+                "min": 18,
+                "max": 50
+              }
+            }
+          ],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_redcuff_gloves",
+          "baseVariant": "gloves_armor",
+          "weaponType": null,
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_redcuff_gloves",
+          "visualVariant": "dwarf_scatter_redcuff_gloves",
+          "iconKey": "gloves",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 1,
+          "budgetSourceLevel": 1
+        }
+      ],
+      "equip": {
+        "weapon": "loyw3v28-1-j96xp",
+        "helm": "loyw3v28-2-q9krj",
+        "armor": "loyw3v28-3-89ig6",
+        "gloves": "loyw3v28-4-o8kg6",
+        "boots": "loyw3v28-5-maheu",
+        "ring1": "loyw3v28-6-1of26",
+        "ring2": "loyw3v28-7-lbt6q",
+        "amulet": "loyw3v28-8-cpdu5"
+      },
+      "skills": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "conditions": [
+        "always",
+        "always",
+        "always",
+        "always"
+      ],
+      "materialStacks": {
+        "铁屑|0": 99,
+        "炉火晶|0": 2,
+        "誓约残片|0": 1
+      },
+      "offlineLuck": 0,
+      "talents": {
+        "power": 0,
+        "heart": 0,
+        "steel": 0,
+        "precision": 0,
+        "crit": 0,
+        "critDamage": 0,
+        "penetration": 0,
+        "element": 0,
+        "elementResist": 0,
+        "block": 0,
+        "shield": 0,
+        "healing": 0,
+        "resolve": 0,
+        "luck": 0
+      },
+      "consumables": {
+        "memoryFruit": 0,
+        "refundCredits": 0,
+        "reforgeToken": 10
+      },
+      "potionSlot": {
+        "key": null,
+        "auto": false,
+        "priority": "low",
+        "priorityVersion": 1
+      },
+      "kills": 0,
+      "normalWins": [
+        0,
+        0,
+        0
+      ],
+      "bossWins": [
+        0,
+        0,
+        0
+      ],
+      "bossReady": [
+        0,
+        0,
+        0
+      ],
+      "stock": 3,
+      "loadouts": [
+        null,
+        null,
+        null
+      ],
+      "chapters": [],
+      "chronicle": [
+        "灰冠历317年：你带着旧炉装备，离开黑炉堡寻找失踪商队。"
+      ],
+      "momentum": 0,
+      "lastSeen": 1700000000000,
+      "running": false,
+      "skillTree": {
+        "version": 1,
+        "mode": "active",
+        "configId": "dwarf-skill-tree-99-expanded-v2",
+        "revision": 0,
+        "selectedPreset": 0,
+        "presets": [
+          {
+            "name": "方案1",
+            "unlocked": [],
+            "active": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "passive": [
+              null,
+              null
+            ],
+            "conditions": [
+              "always",
+              "always",
+              "always",
+              "always"
+            ]
+          },
+          {
+            "name": "方案2",
+            "unlocked": [],
+            "active": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "passive": [
+              null,
+              null
+            ],
+            "conditions": [
+              "always",
+              "always",
+              "always",
+              "always"
+            ]
+          },
+          {
+            "name": "方案3",
+            "unlocked": [],
+            "active": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "passive": [
+              null,
+              null
+            ],
+            "conditions": [
+              "always",
+              "always",
+              "always",
+              "always"
+            ]
+          }
+        ]
+      },
+      "pendingReforge": {
+        "ruleVersion": 6,
+        "operationId": "reforge-loyw3v28-b",
+        "itemId": "loyw3v28-9-5e18o",
+        "mode": "value",
+        "index": 0,
+        "oldAffixes": [
+          {
+            "stat": "atk",
+            "value": 9,
+            "sourceRange": {
+              "model": "quality-v1",
+              "quality": 3,
+              "min": 3,
+              "max": 9
+            }
+          },
+          {
+            "stat": "armor",
+            "value": 6,
+            "sourceRange": {
+              "model": "quality-v1",
+              "quality": 0,
+              "min": 2,
+              "max": 6
+            }
+          }
+        ],
+        "newAffixes": [
+          {
+            "stat": "atk",
+            "value": 7,
+            "sourceRange": {
+              "model": "quality-v1",
+              "quality": 3,
+              "min": 3,
+              "max": 9
+            }
+          },
+          {
+            "stat": "armor",
+            "value": 6,
+            "sourceRange": {
+              "model": "quality-v1",
+              "quality": 0,
+              "min": 2,
+              "max": 6
+            }
+          }
+        ],
+        "oldSpecial": null,
+        "newSpecial": null,
+        "cost": {
+          "gold": 15,
+          "materials": {
+            "铁屑": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "mode": "replace",
+    "state": {
+      "version": 6,
+      "diplomacy": {
+        "version": 1,
+        "revision": 0,
+        "wars": []
+      },
+      "race": "dwarf",
+      "hero": "布洛克",
+      "atCamp": true,
+      "level": 1,
+      "xp": 0,
+      "gold": 10000,
+      "location": 0,
+      "siteId": "dwarf.a01",
+      "expedition": {
+        "mode": "field",
+        "fieldId": "dwarf.a01.field",
+        "targetInstanceId": null,
+        "loop": false
+      },
+      "build": "custom",
+      "inventory": [
+        {
+          "id": "loyw3v28-c-wlfqz",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 0,
+          "level": 1,
+          "baseLevel": 1,
+          "levelSource": "starter",
+          "name": "沉桩铁锤",
+          "atk": 16,
+          "armor": 6,
+          "hp": 13,
+          "affixes": [],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_pileiron_hammer",
+          "baseVariant": "hammer_defensive",
+          "weaponType": "hammer",
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_pileiron_hammer",
+          "visualVariant": "dwarf_scatter_pileiron_hammer",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 1,
+          "budgetSourceLevel": 1
+        },
+        {
+          "id": "loyw3v28-d-2bzwv",
+          "slot": "helm",
+          "set": null,
+          "rarity": 0,
+          "level": 1,
+          "baseLevel": 1,
+          "levelSource": "starter",
+          "name": "烟灰软帽",
+          "atk": 1,
+          "armor": 6,
+          "hp": 49,
+          "affixes": [],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_sootcloth_hood",
+          "baseVariant": "helm_vitality",
+          "weaponType": null,
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_sootcloth_hood",
+          "visualVariant": "dwarf_scatter_sootcloth_hood",
+          "iconKey": "helm",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 1,
+          "budgetSourceLevel": 1
+        },
+        {
+          "id": "loyw3v28-e-xob7y",
+          "slot": "armor",
+          "set": null,
+          "rarity": 0,
+          "level": 1,
+          "baseLevel": 1,
+          "levelSource": "starter",
+          "name": "矿行皮袄",
+          "atk": 0,
+          "armor": 12,
+          "hp": 86,
+          "affixes": [],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_minehide_coat",
+          "baseVariant": "armor_vitality",
+          "weaponType": null,
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_minehide_coat",
+          "visualVariant": "dwarf_scatter_minehide_coat",
+          "iconKey": "armor",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 1,
+          "budgetSourceLevel": 1
+        },
+        {
+          "id": "loyw3v28-f-zlgym",
+          "slot": "gloves",
+          "set": null,
+          "rarity": 0,
+          "level": 1,
+          "baseLevel": 1,
+          "levelSource": "starter",
+          "name": "麻缠护手",
+          "atk": 3,
+          "armor": 4,
+          "hp": 45,
+          "affixes": [],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_hempbound_grips",
+          "baseVariant": "gloves_vitality",
+          "weaponType": null,
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_hempbound_grips",
+          "visualVariant": "dwarf_scatter_hempbound_grips",
+          "iconKey": "gloves",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 1,
+          "budgetSourceLevel": 1
+        },
+        {
+          "id": "loyw3v28-g-xhk4c",
+          "slot": "boots",
+          "set": null,
+          "rarity": 0,
+          "level": 1,
+          "baseLevel": 1,
+          "levelSource": "starter",
+          "name": "铁底战靴",
+          "atk": 1,
+          "armor": 10,
+          "hp": 28,
+          "affixes": [],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_ironsole_boots",
+          "baseVariant": "boots_armor",
+          "weaponType": null,
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_ironsole_boots",
+          "visualVariant": "dwarf_scatter_ironsole_boots",
+          "iconKey": "boots",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 1,
+          "budgetSourceLevel": 1
+        },
+        {
+          "id": "loyw3v28-h-h13is",
+          "slot": "ring",
+          "set": null,
+          "rarity": 0,
+          "level": 1,
+          "baseLevel": 1,
+          "levelSource": "starter",
+          "name": "刻铭戒",
+          "atk": 9,
+          "armor": 2,
+          "hp": 45,
+          "affixes": [],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_engraved_ring",
+          "baseVariant": "ring_element",
+          "weaponType": null,
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_engraved_ring",
+          "visualVariant": "dwarf_scatter_engraved_ring",
+          "iconKey": "ring",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 1,
+          "budgetSourceLevel": 1
+        },
+        {
+          "id": "loyw3v28-i-32jco",
+          "slot": "ring",
+          "set": null,
+          "rarity": 0,
+          "level": 1,
+          "baseLevel": 1,
+          "levelSource": "starter",
+          "name": "砧印戒",
+          "atk": 13,
+          "armor": 0,
+          "hp": 35,
+          "affixes": [],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_anvil_seal_ring",
+          "baseVariant": "ring_attack",
+          "weaponType": null,
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_anvil_seal_ring",
+          "visualVariant": "dwarf_scatter_anvil_seal_ring",
+          "iconKey": "ring",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 1,
+          "budgetSourceLevel": 1
+        },
+        {
+          "id": "loyw3v28-j-lvvvp",
+          "slot": "amulet",
+          "set": null,
+          "rarity": 0,
+          "level": 1,
+          "baseLevel": 1,
+          "levelSource": "starter",
+          "name": "旧誓符",
+          "atk": 9,
+          "armor": 3,
+          "hp": 48,
+          "affixes": [],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_old_oath_charm",
+          "baseVariant": "amulet_element",
+          "weaponType": null,
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_old_oath_charm",
+          "visualVariant": "dwarf_scatter_old_oath_charm",
+          "iconKey": "amulet",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 1,
+          "budgetSourceLevel": 1
+        },
+        {
+          "id": "loyw3v28-k-waumc",
+          "slot": "gloves",
+          "set": null,
+          "rarity": 1,
+          "level": 100,
+          "baseLevel": 100,
+          "levelSource": "generated",
+          "name": "锻工铁手",
+          "atk": 40,
+          "armor": 101,
+          "hp": 303,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 9,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 3,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "armor",
+              "value": 6,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 0,
+                "min": 2,
+                "max": 6
+              }
+            }
+          ],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_forge_ironhands",
+          "baseVariant": "gloves_armor",
+          "weaponType": null,
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_forge_ironhands",
+          "visualVariant": "dwarf_scatter_forge_ironhands",
+          "iconKey": "gloves",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 100,
+          "budgetSourceLevel": 100,
+          "divine": {
+            "id": "forge-favor",
+            "name": "神赐·炉火眷顾",
+            "model": "raw-v1",
+            "bonus": {
+              "atk": 4,
+              "armor": 10.1,
+              "hp": 30.3,
+              "affixes": [
+                {
+                  "stat": "atk",
+                  "value": 0.9
+                },
+                {
+                  "stat": "armor",
+                  "value": 0.6
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "equip": {
+        "weapon": "loyw3v28-c-wlfqz",
+        "helm": "loyw3v28-d-2bzwv",
+        "armor": "loyw3v28-e-xob7y",
+        "gloves": "loyw3v28-f-zlgym",
+        "boots": "loyw3v28-g-xhk4c",
+        "ring1": "loyw3v28-h-h13is",
+        "ring2": "loyw3v28-i-32jco",
+        "amulet": "loyw3v28-j-lvvvp"
+      },
+      "skills": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "conditions": [
+        "always",
+        "always",
+        "always",
+        "always"
+      ],
+      "materialStacks": {
+        "铁屑|0": 100,
+        "炉火晶|0": 2,
+        "誓约残片|0": 1
+      },
+      "offlineLuck": 0,
+      "talents": {
+        "power": 0,
+        "heart": 0,
+        "steel": 0,
+        "precision": 0,
+        "crit": 0,
+        "critDamage": 0,
+        "penetration": 0,
+        "element": 0,
+        "elementResist": 0,
+        "block": 0,
+        "shield": 0,
+        "healing": 0,
+        "resolve": 0,
+        "luck": 0
+      },
+      "consumables": {
+        "memoryFruit": 0,
+        "refundCredits": 0,
+        "reforgeToken": 10
+      },
+      "potionSlot": {
+        "key": null,
+        "auto": false,
+        "priority": "low",
+        "priorityVersion": 1
+      },
+      "kills": 0,
+      "normalWins": [
+        0,
+        0,
+        0
+      ],
+      "bossWins": [
+        0,
+        0,
+        0
+      ],
+      "bossReady": [
+        0,
+        0,
+        0
+      ],
+      "stock": 3,
+      "loadouts": [
+        null,
+        null,
+        null
+      ],
+      "chapters": [],
+      "chronicle": [
+        "灰冠历317年：你带着旧炉装备，离开黑炉堡寻找失踪商队。"
+      ],
+      "momentum": 0,
+      "lastSeen": 1700000000000,
+      "running": false,
+      "skillTree": {
+        "version": 1,
+        "mode": "active",
+        "configId": "dwarf-skill-tree-99-expanded-v2",
+        "revision": 0,
+        "selectedPreset": 0,
+        "presets": [
+          {
+            "name": "方案1",
+            "unlocked": [],
+            "active": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "passive": [
+              null,
+              null
+            ],
+            "conditions": [
+              "always",
+              "always",
+              "always",
+              "always"
+            ]
+          },
+          {
+            "name": "方案2",
+            "unlocked": [],
+            "active": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "passive": [
+              null,
+              null
+            ],
+            "conditions": [
+              "always",
+              "always",
+              "always",
+              "always"
+            ]
+          },
+          {
+            "name": "方案3",
+            "unlocked": [],
+            "active": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "passive": [
+              null,
+              null
+            ],
+            "conditions": [
+              "always",
+              "always",
+              "always",
+              "always"
+            ]
+          }
+        ]
+      },
+      "codexCollection": {
+        "version": 1,
+        "sets": {
+          "human_blood_oath": [],
+          "human_royal_edge": [],
+          "human_last_bastion": [],
+          "elf_arrow": [],
+          "elf_prism": [],
+          "elf_root": [],
+          "goblin_spore": [],
+          "goblin_ambush": [],
+          "goblin_snare": [],
+          "ashen.caldera": [],
+          "ashen.strata": [],
+          "ashen.prism": [],
+          "anvil": [],
+          "rune": [],
+          "guard": []
+        },
+        "legendaries": []
+      },
+      "pendingReforge": {
+        "ruleVersion": 6,
+        "operationId": "reforge-loyw3v28-m",
+        "itemId": "loyw3v28-k-waumc",
+        "mode": "replace",
+        "index": 0,
+        "oldAffixes": [
+          {
+            "stat": "atk",
+            "value": 9,
+            "sourceRange": {
+              "model": "quality-v1",
+              "quality": 3,
+              "min": 3,
+              "max": 9
+            }
+          },
+          {
+            "stat": "armor",
+            "value": 6,
+            "sourceRange": {
+              "model": "quality-v1",
+              "quality": 0,
+              "min": 2,
+              "max": 6
+            }
+          }
+        ],
+        "newAffixes": [
+          {
+            "stat": "hp",
+            "value": 50,
+            "sourceRange": {
+              "model": "quality-v1",
+              "quality": 4,
+              "min": 18,
+              "max": 50
+            }
+          },
+          {
+            "stat": "armor",
+            "value": 6,
+            "sourceRange": {
+              "model": "quality-v1",
+              "quality": 0,
+              "min": 2,
+              "max": 6
+            }
+          }
+        ],
+        "oldSpecial": null,
+        "newSpecial": null,
+        "cost": {
+          "gold": 0,
+          "materials": {},
+          "equipment": 1
+        },
+        "donor": {
+          "id": "loyw3v28-l-qkiqj",
+          "name": "铜节铁手",
+          "slot": "gloves",
+          "eligibleStats": [
+            "hp"
+          ],
+          "eligibleAffixes": [
+            {
+              "stat": "hp",
+              "value": 50,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 4,
+                "min": 18,
+                "max": 50
+              }
+            }
+          ],
+          "selectedAffix": {
+            "stat": "hp",
+            "value": 50,
+            "sourceRange": {
+              "model": "quality-v1",
+              "quality": 4,
+              "min": 18,
+              "max": 50
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "mode": "all",
+    "state": {
+      "version": 6,
+      "diplomacy": {
+        "version": 1,
+        "revision": 0,
+        "wars": []
+      },
+      "race": "dwarf",
+      "hero": "布洛克",
+      "atCamp": true,
+      "level": 1,
+      "xp": 0,
+      "gold": 10000,
+      "location": 0,
+      "siteId": "dwarf.a01",
+      "expedition": {
+        "mode": "field",
+        "fieldId": "dwarf.a01.field",
+        "targetInstanceId": null,
+        "loop": false
+      },
+      "build": "custom",
+      "inventory": [
+        {
+          "id": "loyw3v28-n-bjup2",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 0,
+          "level": 1,
+          "baseLevel": 1,
+          "levelSource": "starter",
+          "name": "采岩楔斧",
+          "atk": 20,
+          "armor": 0,
+          "hp": 25,
+          "affixes": [],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_quarrywedge_axe",
+          "baseVariant": "axe_balanced",
+          "weaponType": "axe",
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_quarrywedge_axe",
+          "visualVariant": "dwarf_scatter_quarrywedge_axe",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 1,
+          "budgetSourceLevel": 1
+        },
+        {
+          "id": "loyw3v28-o-9iznj",
+          "slot": "helm",
+          "set": null,
+          "rarity": 0,
+          "level": 1,
+          "baseLevel": 1,
+          "levelSource": "starter",
+          "name": "铆脊盔",
+          "atk": 1,
+          "armor": 11,
+          "hp": 24,
+          "affixes": [],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_riveted_helm",
+          "baseVariant": "helm_armor",
+          "weaponType": null,
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_riveted_helm",
+          "visualVariant": "dwarf_scatter_riveted_helm",
+          "iconKey": "helm",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 1,
+          "budgetSourceLevel": 1
+        },
+        {
+          "id": "loyw3v28-p-npczj",
+          "slot": "armor",
+          "set": null,
+          "rarity": 0,
+          "level": 1,
+          "baseLevel": 1,
+          "levelSource": "starter",
+          "name": "黑炉板甲",
+          "atk": 0,
+          "armor": 20,
+          "hp": 43,
+          "affixes": [],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_blackforge_plate",
+          "baseVariant": "armor_armor",
+          "weaponType": null,
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_blackforge_plate",
+          "visualVariant": "dwarf_scatter_blackforge_plate",
+          "iconKey": "armor",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 1,
+          "budgetSourceLevel": 1
+        },
+        {
+          "id": "loyw3v28-q-al32o",
+          "slot": "gloves",
+          "set": null,
+          "rarity": 0,
+          "level": 1,
+          "baseLevel": 1,
+          "levelSource": "starter",
+          "name": "麻缠护手",
+          "atk": 3,
+          "armor": 4,
+          "hp": 45,
+          "affixes": [],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_hempbound_grips",
+          "baseVariant": "gloves_vitality",
+          "weaponType": null,
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_hempbound_grips",
+          "visualVariant": "dwarf_scatter_hempbound_grips",
+          "iconKey": "gloves",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 1,
+          "budgetSourceLevel": 1
+        },
+        {
+          "id": "loyw3v28-r-ejz5i",
+          "slot": "boots",
+          "set": null,
+          "rarity": 0,
+          "level": 1,
+          "baseLevel": 1,
+          "levelSource": "starter",
+          "name": "铆跟铁靴",
+          "atk": 1,
+          "armor": 10,
+          "hp": 28,
+          "affixes": [],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_rivetheel_boots",
+          "baseVariant": "boots_armor",
+          "weaponType": null,
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_rivetheel_boots",
+          "visualVariant": "dwarf_scatter_rivetheel_boots",
+          "iconKey": "boots",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 1,
+          "budgetSourceLevel": 1
+        },
+        {
+          "id": "loyw3v28-s-ckboa",
+          "slot": "ring",
+          "set": null,
+          "rarity": 0,
+          "level": 1,
+          "baseLevel": 1,
+          "levelSource": "starter",
+          "name": "锤痕戒",
+          "atk": 13,
+          "armor": 0,
+          "hp": 35,
+          "affixes": [],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_hammermark_ring",
+          "baseVariant": "ring_attack",
+          "weaponType": null,
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_hammermark_ring",
+          "visualVariant": "dwarf_scatter_hammermark_ring",
+          "iconKey": "ring",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 1,
+          "budgetSourceLevel": 1
+        },
+        {
+          "id": "loyw3v28-t-kl1mn",
+          "slot": "ring",
+          "set": null,
+          "rarity": 0,
+          "level": 1,
+          "baseLevel": 1,
+          "levelSource": "starter",
+          "name": "砧印戒",
+          "atk": 13,
+          "armor": 0,
+          "hp": 35,
+          "affixes": [],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_anvil_seal_ring",
+          "baseVariant": "ring_attack",
+          "weaponType": null,
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_anvil_seal_ring",
+          "visualVariant": "dwarf_scatter_anvil_seal_ring",
+          "iconKey": "ring",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 1,
+          "budgetSourceLevel": 1
+        },
+        {
+          "id": "loyw3v28-u-urian",
+          "slot": "amulet",
+          "set": null,
+          "rarity": 0,
+          "level": 1,
+          "baseLevel": 1,
+          "levelSource": "starter",
+          "name": "旧誓符",
+          "atk": 9,
+          "armor": 3,
+          "hp": 48,
+          "affixes": [],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_old_oath_charm",
+          "baseVariant": "amulet_element",
+          "weaponType": null,
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_old_oath_charm",
+          "visualVariant": "dwarf_scatter_old_oath_charm",
+          "iconKey": "amulet",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 1,
+          "budgetSourceLevel": 1
+        },
+        {
+          "id": "loyw3v28-v-sk0ot",
+          "slot": "gloves",
+          "set": null,
+          "rarity": 1,
+          "level": 100,
+          "baseLevel": 100,
+          "levelSource": "generated",
+          "name": "麻缠护手",
+          "atk": 40,
+          "armor": 50,
+          "hp": 555,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 9,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 3,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "armor",
+              "value": 6,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 0,
+                "min": 2,
+                "max": 6
+              }
+            }
+          ],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_hempbound_grips",
+          "baseVariant": "gloves_vitality",
+          "weaponType": null,
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_hempbound_grips",
+          "visualVariant": "dwarf_scatter_hempbound_grips",
+          "iconKey": "gloves",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 100,
+          "budgetSourceLevel": 100,
+          "divine": {
+            "id": "forge-favor",
+            "name": "神赐·炉火眷顾",
+            "model": "raw-v1",
+            "bonus": {
+              "atk": 4,
+              "armor": 5,
+              "hp": 55.5,
+              "affixes": [
+                {
+                  "stat": "atk",
+                  "value": 0.9
+                },
+                {
+                  "stat": "armor",
+                  "value": 0.6
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "loyw3v28-w-uxppq",
+          "slot": "gloves",
+          "set": null,
+          "rarity": 0,
+          "level": 1,
+          "baseLevel": 1,
+          "levelSource": "generated",
+          "name": "铜节铁手",
+          "atk": 3,
+          "armor": 8,
+          "hp": 24,
+          "affixes": [
+            {
+              "stat": "hp",
+              "value": 50,
+              "sourceRange": {
+                "model": "quality-v1",
+                "quality": 4,
+                "min": 18,
+                "max": 50
+              }
+            }
+          ],
+          "special": null,
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_copperknuckle_gloves",
+          "baseVariant": "gloves_armor",
+          "weaponType": null,
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_copperknuckle_gloves",
+          "visualVariant": "dwarf_scatter_copperknuckle_gloves",
+          "iconKey": "gloves",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 1,
+          "budgetSourceLevel": 1
+        }
+      ],
+      "equip": {
+        "weapon": "loyw3v28-n-bjup2",
+        "helm": "loyw3v28-o-9iznj",
+        "armor": "loyw3v28-p-npczj",
+        "gloves": "loyw3v28-q-al32o",
+        "boots": "loyw3v28-r-ejz5i",
+        "ring1": "loyw3v28-s-ckboa",
+        "ring2": "loyw3v28-t-kl1mn",
+        "amulet": "loyw3v28-u-urian"
+      },
+      "skills": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "conditions": [
+        "always",
+        "always",
+        "always",
+        "always"
+      ],
+      "materialStacks": {
+        "铁屑|0": 100,
+        "炉火晶|0": 2,
+        "誓约残片|0": 1
+      },
+      "offlineLuck": 0,
+      "talents": {
+        "power": 0,
+        "heart": 0,
+        "steel": 0,
+        "precision": 0,
+        "crit": 0,
+        "critDamage": 0,
+        "penetration": 0,
+        "element": 0,
+        "elementResist": 0,
+        "block": 0,
+        "shield": 0,
+        "healing": 0,
+        "resolve": 0,
+        "luck": 0
+      },
+      "consumables": {
+        "memoryFruit": 0,
+        "refundCredits": 0,
+        "reforgeToken": 9
+      },
+      "potionSlot": {
+        "key": null,
+        "auto": false,
+        "priority": "low",
+        "priorityVersion": 1
+      },
+      "kills": 0,
+      "normalWins": [
+        0,
+        0,
+        0
+      ],
+      "bossWins": [
+        0,
+        0,
+        0
+      ],
+      "bossReady": [
+        0,
+        0,
+        0
+      ],
+      "stock": 3,
+      "loadouts": [
+        null,
+        null,
+        null
+      ],
+      "chapters": [],
+      "chronicle": [
+        "灰冠历317年：你带着旧炉装备，离开黑炉堡寻找失踪商队。"
+      ],
+      "momentum": 0,
+      "lastSeen": 1700000000000,
+      "running": false,
+      "skillTree": {
+        "version": 1,
+        "mode": "active",
+        "configId": "dwarf-skill-tree-99-expanded-v2",
+        "revision": 0,
+        "selectedPreset": 0,
+        "presets": [
+          {
+            "name": "方案1",
+            "unlocked": [],
+            "active": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "passive": [
+              null,
+              null
+            ],
+            "conditions": [
+              "always",
+              "always",
+              "always",
+              "always"
+            ]
+          },
+          {
+            "name": "方案2",
+            "unlocked": [],
+            "active": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "passive": [
+              null,
+              null
+            ],
+            "conditions": [
+              "always",
+              "always",
+              "always",
+              "always"
+            ]
+          },
+          {
+            "name": "方案3",
+            "unlocked": [],
+            "active": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "passive": [
+              null,
+              null
+            ],
+            "conditions": [
+              "always",
+              "always",
+              "always",
+              "always"
+            ]
+          }
+        ]
+      },
+      "pendingReforge": {
+        "ruleVersion": 6,
+        "operationId": "reforge-loyw3v28-x",
+        "itemId": "loyw3v28-v-sk0ot",
+        "mode": "all",
+        "index": null,
+        "oldAffixes": [
+          {
+            "stat": "atk",
+            "value": 9,
+            "sourceRange": {
+              "model": "quality-v1",
+              "quality": 3,
+              "min": 3,
+              "max": 9
+            }
+          },
+          {
+            "stat": "armor",
+            "value": 6,
+            "sourceRange": {
+              "model": "quality-v1",
+              "quality": 0,
+              "min": 2,
+              "max": 6
+            }
+          }
+        ],
+        "newAffixes": [
+          {
+            "stat": "hp",
+            "value": 15,
+            "sourceRange": {
+              "model": "quality-v1",
+              "quality": 1,
+              "min": 15,
+              "max": 42
+            }
+          },
+          {
+            "stat": "lifesteal",
+            "value": 4,
+            "sourceRange": {
+              "model": "quality-v1",
+              "quality": 1,
+              "min": 3,
+              "max": 9
+            }
+          }
+        ],
+        "oldSpecial": null,
+        "newSpecial": null,
+        "cost": {
+          "gold": 0,
+          "materials": {},
+          "consumables": {
+            "reforgeToken": 1
+          }
+        },
+        "oldDivine": {
+          "id": "forge-favor",
+          "name": "神赐·炉火眷顾",
+          "model": "raw-v1",
+          "bonus": {
+            "atk": 4,
+            "armor": 5,
+            "hp": 55.5,
+            "affixes": [
+              {
+                "stat": "atk",
+                "value": 0.9
+              },
+              {
+                "stat": "armor",
+                "value": 0.6
+              }
+            ]
+          }
+        },
+        "newDivine": {
+          "id": "forge-favor",
+          "name": "神赐·炉火眷顾",
+          "model": "raw-v1",
+          "bonus": {
+            "atk": 4,
+            "armor": 5,
+            "hp": 55.5,
+            "affixes": [
+              {
+                "stat": "hp",
+                "value": 1.5
+              },
+              {
+                "stat": "lifesteal",
+                "value": 0.4
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+]

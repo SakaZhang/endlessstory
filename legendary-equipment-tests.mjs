@@ -1,3 +1,4 @@
+import {levelAffixRange} from './dist/affix-level-budget.js';
 import assert from 'node:assert/strict';
 import {createLegendaryEquipment as create,legendaryIdentitySnapshot} from './dist/legendary-equipment.js';
 import {deriveEquipmentBase,affixRange} from './dist/equipment-budget.js';
@@ -6,7 +7,7 @@ const affixDefs={hp:{min:15,max:40},atk:{min:2,max:7},armor:{min:3,max:8},luck:{
 const args={id:'owned-1',legendaryId:'fixture-hammer',level:137,definition,affixDefs,random:()=>.99};
 const it=create(args);assert(it);assert.equal(it.rarity,3);assert.equal(it.budgetQuality,4);assert.equal(it.affixes.length,4);assert.equal(new Set(it.affixes.map(a=>a.stat)).size,4);assert.equal(it.special,null);assert.equal(it.set,null);assert.equal(it.divine,undefined);assert.equal(it.enhancement,undefined);
 const raw=deriveEquipmentBase({slot:'weapon',baseVariant:'hammer_balanced',level:100,quality:4});for(const k of ['atk','armor','hp'])assert.equal(it[k],raw[k]);
-for(const a of it.affixes){assert.equal(a.sourceRange.quality,4);assert.deepEqual({min:a.sourceRange.min,max:a.sourceRange.max},affixRange(affixDefs[a.stat],4));assert.equal(a.value,a.sourceRange.max);}
+for(const a of it.affixes){assert.equal(a.sourceRange.quality,4);assert.deepEqual({min:a.sourceRange.min,max:a.sourceRange.max},levelAffixRange(affixDefs[a.stat],a.stat,137,4));assert.equal(a.value,a.sourceRange.max);}
 const snap=legendaryIdentitySnapshot(it);snap.exclusive.id='mutated';assert.equal(it.exclusive.id,'fixture-echo');
 let calls=0;const invalid={...args,random:()=>{calls++;return 0;}};
 for(const patch of [{definition:{...definition,ready:false}},{level:NaN},{affixDefs:{only:{min:1,max:2}}},{definition:{...definition,baseVariant:'invalid'}},{legendaryId:'unregistered'}])assert.equal(create({...invalid,...patch}),null);assert.equal(calls,0);

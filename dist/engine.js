@@ -40,7 +40,7 @@ import {combinedFavorableRollChance,dwarfDivineChance,dwarfForgeOccurrenceChance
 import {DWARF_FORGE_FAVOR_CONFIG} from './dwarf-forge-favor-config.js';
 import {validEquipmentRuntime,normalizeEquipmentRuntime,applyEquipmentRuntimeChange} from './equipment-runtime.js';
 export {validEquipmentRuntime,normalizeEquipmentRuntime,applyEquipmentRuntimeChange} from './equipment-runtime.js';
-import {makeAffixSourceRange,affixOwnRange,validAffixSource} from './affix-range.js';
+import {makeAffixSourceRange,affixOwnRange,validAffixSource,affixSourceLabel} from './affix-range.js';
 import {deriveNewItemBudget,validItemBudgetMetadata} from './equipment-budget-adapter.js';
 import {applyExperience} from './character-progression.js';
 import {dwarfBudgetReady} from './dwarf-content.js';
@@ -155,7 +155,7 @@ export function affixRollInfo(a){
  const def=affixOwnRange(a,AFFIX_DEFS);if(!def)return null;
  const ratio=Math.max(0,Math.min(1,(a.value-def.min)/(def.max-def.min||1)));
  const tier=Math.min(3,Math.floor(ratio*4));
- return {min:def.min,max:def.max,raw:a.value,tier,color:['#e4e5e7','#69b9f0','#bc8cf2','#f07878'][tier]};
+ return {min:def.min,max:def.max,raw:a.value,tier,sourceLabel:affixSourceLabel(a),color:['#e4e5e7','#69b9f0','#bc8cf2','#f07878'][tier]};
 }
 export function divineMultiplier(it){return it.divine?.id==='forge-favor'&&it.divine.model==='raw-v1'?1.1:1;}
 export const SPECIALS={
@@ -173,7 +173,7 @@ const bases={weapon:{atk:12,armor:1,hp:5},helm:{atk:1,armor:4,hp:18},armor:{atk:
 function weighted(entries){let roll=Math.random()*entries.reduce((n,[,w])=>n+w,0);for(const [key,w] of entries){roll-=w;if(roll<0)return key;}return entries.at(-1)[0];}
 export const ACTIVE_SPECIAL_KEYS=Object.freeze(Object.keys(SPECIALS).filter(k=>SPECIALS[k].enabled!==false));
 const activeSpecialKeys=()=>ACTIVE_SPECIAL_KEYS;
-function rollAffixes(quality,luck=0,forgeRace=null){const pool=[...ACTIVE_AFFIX_KEYS];const count=quality===0?rand(0,1):quality+1,affixes=[];for(let i=0;i<count;i++){const key=pool.splice(rand(0,pool.length-1),1)[0],sourceRange=makeAffixSourceRange(AFFIX_DEFS[key],quality);affixes.push({stat:key,value:forgeRace===null?luckyRoll(()=>rand(sourceRange.min,sourceRange.max),luck):forgeLuckyRoll(()=>rand(sourceRange.min,sourceRange.max),luck,forgeRace),sourceRange});}return affixes;}
+function rollAffixes(quality,sourceLevel,luck=0,forgeRace=null){const pool=[...ACTIVE_AFFIX_KEYS];const count=quality===0?rand(0,1):quality+1,affixes=[];for(let i=0;i<count;i++){const key=pool.splice(rand(0,pool.length-1),1)[0],sourceRange=makeAffixSourceRange(AFFIX_DEFS[key],quality,{stat:key,sourceLevel});affixes.push({stat:key,value:forgeRace===null?luckyRoll(()=>rand(sourceRange.min,sourceRange.max),luck):forgeLuckyRoll(()=>rand(sourceRange.min,sourceRange.max),luck,forgeRace),sourceRange});}return affixes;}
 export function item(slot,level=1,set=null,rarity=0,levelMetadata={}){
  if(!SLOTS.includes(slot))throw new Error('Unsupported item family');
  rarity=clamp(Math.floor(rarity),0,3);level=Math.max(1,Math.floor(level));
@@ -183,7 +183,7 @@ export function item(slot,level=1,set=null,rarity=0,levelMetadata={}){
  const name=(set?BUILD.find(x=>x.id===set).name+'·':'旅铸·')+names[slot];
  const baseLevel=levelMetadata.baseLevel??level,levelSource=levelMetadata.levelSource??'generated';
  if(!validEquipmentLevelMetadata({baseLevel,levelSource}))throw new RangeError('Invalid equipment level provenance');
- const out={id:uid(),slot,set,rarity,level,baseLevel,levelSource,name,atk:0,armor:0,hp:0,affixes:rollAffixes(rarity,levelMetadata.luck??0,levelMetadata.forgeRace??null),special:null,legendaryId:null,locked:false,bless:0};
+ const out={id:uid(),slot,set,rarity,level,baseLevel,levelSource,name,atk:0,armor:0,hp:0,affixes:rollAffixes(rarity,level,levelMetadata.luck??0,levelMetadata.forgeRace??null),special:null,legendaryId:null,locked:false,bless:0};
  const specialChance=lootOccurrenceProbability(rarity===2?.1:.2,levelMetadata.luck??0);
  if(!set&&rarity>=2&&Math.random()<(levelMetadata.forgeRace?dwarfForgeOccurrenceChance(specialChance,levelMetadata.forgeRace,DWARF_FORGE_FAVOR_CONFIG):specialChance)){out.special={id:activeSpecialKeys()[rand(0,activeSpecialKeys().length-1)]};}
  let hash=2166136261;for(const ch of out.id){hash^=ch.charCodeAt(0);hash=Math.imul(hash,16777619)>>>0;}
@@ -239,7 +239,7 @@ export function reforge(s,itemId,mode,index=0,donorId){
  if(!validCodexCollection(s))return null;
  if(mode==='all'&&it.divine!==undefined&&!sameReforgeData(it.divine,canonicalReforgeDivine(it)))return null;
  const before=structuredClone(it.affixes),after=structuredClone(before);
- const roll=(stat,original)=>{const sourceRange=original?original.sourceRange:makeAffixSourceRange(AFFIX_DEFS[stat],it.legendaryId?4:it.rarity),range=original?affixOwnRange(original,AFFIX_DEFS):sourceRange;return {stat,value:forgeLuckyRoll(()=>rand(range.min,range.max),effectiveLuck(s),s.race),...(sourceRange?{sourceRange:structuredClone(sourceRange)}:{})};};
+ const roll=(stat,original)=>{const sourceRange=original?original.sourceRange:makeAffixSourceRange(AFFIX_DEFS[stat],it.legendaryId?4:it.rarity,{stat,sourceLevel:it.level}),range=original?affixOwnRange(original,AFFIX_DEFS):sourceRange;return {stat,value:forgeLuckyRoll(()=>rand(range.min,range.max),effectiveLuck(s),s.race),...(sourceRange?{sourceRange:structuredClone(sourceRange)}:{})};};
  if(mode==='value')after[index]=roll(after[index].stat,after[index]);
  else if(mode==='replace'){
   const chosen=donor.affixes[weightedDonorIndex(donor.affixes,AFFIX_DEFS,s.race,DWARF_FORGE_FAVOR_CONFIG,Math.random())];
@@ -262,13 +262,13 @@ export function reforge(s,itemId,mode,index=0,donorId){
  if(donor)normalizeCodexCollection(s);
  if(donor)s.inventory.splice(s.inventory.findIndex(x=>x.id===donor.item.id),1);
  const operationId='reforge-'+Date.now().toString(36)+'-'+(++serial).toString(36);
- s.pendingReforge={ruleVersion:6,operationId,itemId:it.id,mode,index:mode==='all'?null:index,oldAffixes:before,newAffixes:after,oldSpecial,newSpecial,cost,...divineSnapshot,...(donor?{donor:{id:donor.item.id,name:donor.item.name,slot:donor.item.slot,eligibleStats:donor.affixes.map(a=>a.stat),eligibleAffixes:structuredClone(donor.affixes),selectedAffix:structuredClone(after[index])}}:{})};
+ s.pendingReforge={ruleVersion:7,operationId,itemId:it.id,mode,index:mode==='all'?null:index,oldAffixes:before,newAffixes:after,oldSpecial,newSpecial,cost,...divineSnapshot,...(donor?{donor:{id:donor.item.id,name:donor.item.name,slot:donor.item.slot,eligibleStats:donor.affixes.map(a=>a.stat),eligibleAffixes:structuredClone(donor.affixes),selectedAffix:structuredClone(after[index])}}:{})};
  return {item:it,operationId,mode,index:mode==='all'?null:index,cost,before:structuredClone(before),after:structuredClone(after),oldSpecial,newSpecial,pending:true};
 }
 export function validPendingReforge(s){
  const p=s.pendingReforge;if(p===undefined||p===null)return true;
  if(!p||typeof p!=='object'||Array.isArray(p)||typeof p.operationId!=='string'||p.operationId.length<1||p.operationId.length>160)return false;
- if(p.ruleVersion!==6)return false;
+ if(![6,7].includes(p.ruleVersion))return false;
  const it=s.inventory?.find(i=>i.id===p.itemId),cost=getReforgeCost(it,p.mode,s);
  if(!it||!cost||!p.cost||p.cost.gold!==cost.gold||!p.cost.materials||Object.keys(p.cost.materials).length!==Object.keys(cost.materials).length||!Object.entries(cost.materials).every(([k,v])=>p.cost.materials[k]===v))return false;
  if((p.cost.equipment??0)!==(cost.equipment??0))return false;
@@ -299,7 +299,7 @@ export function validPendingReforge(s){
   if(p.newDivine!==null&&!sameReforgeData(p.newDivine,canonicalReforgeDivine(expected)))return false;
   if(p.oldDivine!==null&&p.newDivine===null)return false;
  }else if(p.oldDivine!==undefined||p.newDivine!==undefined)return false;
- if(p.mode==='all')return p.index===null&&p.newAffixes.every(a=>ACTIVE_AFFIX_KEYS.includes(a.stat)&&sameReforgeData(a.sourceRange,makeAffixSourceRange(AFFIX_DEFS[a.stat],it.legendaryId?4:it.rarity)));
+ if(p.mode==='all')return p.index===null&&p.newAffixes.every(a=>ACTIVE_AFFIX_KEYS.includes(a.stat)&&sameReforgeData(a.sourceRange,makeAffixSourceRange(AFFIX_DEFS[a.stat],it.legendaryId?4:it.rarity,p.ruleVersion===7?{stat:a.stat,sourceLevel:it.level}:null)));
  if(!Number.isInteger(p.index)||p.index<0||p.index>=it.affixes.length||!p.newAffixes.every((a,i)=>i===p.index||equal(a,p.oldAffixes[i])))return false;
  return p.mode==='value'?p.newAffixes[p.index].stat===p.oldAffixes[p.index].stat&&sameReforgeData(p.newAffixes[p.index].sourceRange,p.oldAffixes[p.index].sourceRange):p.donor.eligibleStats.includes(p.newAffixes[p.index].stat);
 }
