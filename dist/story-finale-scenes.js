@@ -178,7 +178,7 @@ export const FINALE_SCENES={
   "pov": "human",
   "siteId": "human.a02",
   "title": "城门外的车",
-  "npc": "罗什福尔",
+  "npc": "守门兵与车夫",
   "lines": [
    "守门兵：车堵住了门。再放，就关不上了。",
    "罗什福尔：先卸挡路的货，让车往侧面靠。人不能留在门缝里。",
@@ -627,7 +627,7 @@ export const FINALE_SCENES={
   "pov": "human",
   "siteId": "human.a01",
   "title": "罗什福尔 · 回去还有事",
-  "npc": "罗什福尔",
+  "npc": "斥候与车夫",
   "lines": [
    "[货检棚重新放平一张破桌。罗什福尔把旧货单压在桌上。]",
    "车夫：最大的事都完了，还查这些？",
@@ -836,7 +836,7 @@ export const FINALE_SCENES={
   "pov": "dwarf",
   "siteId": "dwarf.a02",
   "title": "让矿口再开一次",
-  "npc": "布洛克",
+  "npc": "矿班长与记录者",
   "lines": [
    "矿班长：这回从地里出来的，不是我们的人。",
    "布洛克：人往上走。矿车横过来，堵住窄口。",
@@ -1289,7 +1289,7 @@ export const FINALE_SCENES={
   "pov": "dwarf",
   "siteId": "dwarf.a01",
   "title": "布洛克 · 回去还有事",
-  "npc": "布洛克",
+  "npc": "矿班长与记录者",
   "lines": [
    "[矿口重新点名。布洛克把保全的账证交给记录者，自己走到新支架旁。]",
    "矿班长：今天还下去？",
@@ -1498,7 +1498,7 @@ export const FINALE_SCENES={
   "pov": "elf",
   "siteId": "elf.a02",
   "title": "泉边的撤离",
-  "npc": "莱姆斯",
+  "npc": "村民与守林者",
   "lines": [
    "村民：水没停。可下面的声音越来越大。",
    "莱姆斯：别下去。先让孩子和走不快的人过桥。",
@@ -1948,7 +1948,7 @@ export const FINALE_SCENES={
   "pov": "elf",
   "siteId": "elf.a01",
   "title": "莱姆斯 · 回去还有事",
-  "npc": "莱姆斯",
+  "npc": "村民与守林者",
   "lines": [
    "[泉边。村民提起水桶，守林者给旧裂口添上新支撑。]",
    "村民：你以后还回来吗？",
@@ -2158,7 +2158,7 @@ export const FINALE_SCENES={
   "pov": "goblin",
   "siteId": "goblin.a02",
   "title": "粮路没有了",
-  "npc": "奇克",
+  "npc": "家人",
   "lines": [
    "[曾在 C05／C06 走通的路塌毁，换粮车被弃在路边。奇克找到空粮袋，没有找到能继续交易的人。]",
    "奇克：这条也断了。",
@@ -2613,7 +2613,7 @@ export const FINALE_SCENES={
   "pov": "goblin",
   "siteId": "goblin.a01",
   "title": "奇克 · 回去还有事",
-  "npc": "奇克",
+  "npc": "家人",
   "lines": [
    "[安全营地分给一家人的临时住处。奇克推门，三个弟弟妹妹抬起头。米芮先看他的手有没有受伤。]",
    "豆布：今天能吃满吗？",
@@ -2825,7 +2825,7 @@ export const FINALE_SCENES={
   "pov": "ashen",
   "siteId": "ashen.a02",
   "title": "没有族长的哨口",
-  "npc": "砾恩",
+  "npc": "哨卫与修护者",
   "lines": [
    "哨卫：族长没回来。谁下命令？",
    "砾恩：先让伤的人过来。",
@@ -3278,7 +3278,7 @@ export const FINALE_SCENES={
   "pov": "ashen",
   "siteId": "ashen.a01",
   "title": "砾恩 · 回去还有事",
-  "npc": "砾恩",
+  "npc": "哨卫与修护者",
   "lines": [
    "[烬裔幸存者围着带回的记录。族长留下的位置仍空着。砾恩把拓记摊平。]",
    "修护者：这是我们的来历？",
@@ -3317,7 +3317,7 @@ export const FINALE_SCENES={
   "pov": "goblin",
   "siteId": "goblin.a02",
   "title": "安全营地的口信",
-  "npc": "奇克",
+  "npc": "家人",
   "lines": [
    "[米芮、咔洛、豆布三人已经到达安全营地。会合口信送来。]",
    "米芮：你又要出去？",

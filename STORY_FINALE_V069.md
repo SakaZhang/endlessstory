@@ -27,3 +27,7 @@ No main-story item/amount was specified in the approved script, so no arbitrary 
 - `node story-finale-native-proof.mjs`: real production renderer across all five final encounters; dedicated left-facing boss, correct selected hero, no fauna codex identity, saved altar flags. `qa/story-finale/five-povs.png` inspected visually. This is native renderer evidence, **not** a browser screenshot.
 
 Prior C01–C08 controller/scenario/war/random-war/current-generation/family/cast suites remain required. Historical tests that asserted C09/ending did not exist now assert the correct new boundary while retaining byte-identical old scene checks. Final integrator must re-run combined personal-arc/reward changes and release/cache/build checks. No browser claim or blanket final-balance acceptance.
+
+## Natural-save first-through proof
+
+`node story-finale-natural-save-tests.mjs /tmp/natural48-{human,dwarf,elf,goblin,ashen}-1917.json` consumes independent production-economy simulation saves, not a story fixture. It encounters the first actual foreign-map story lock and asserts clear prerequisite-dungeon guidance. It then earns all missing foreign A01–A06 dungeon clears through real entry/combat/reward (24 dungeons per POV) before completing every remaining mainline scene and own ending. No levels, gold, materials, equipment, area unlocks or story flags are injected; camp rest remains real. Inputs are synthetic QA saves, never user saves. Evidence is `qa/story-finale/natural-save-proof.json`; the producer is `progression-economy-simulation.mjs` in the economy worktree.

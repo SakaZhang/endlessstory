@@ -10,13 +10,18 @@ const button=(action,id,text,disabled=false,extra='')=>`<button type="button" da
 // Release scope, not story canon or a promise of an implemented ceasefire.
 export const STORY_WAR_RELEASE_NOTICE='开战后敌对地区普通活动封锁；必需主线可通过登记入口继续。推进至界外入侵后，双方转向抵抗恶魔，全境封锁解除，但并不因此和解。';
 const warNotice=id=>STORY_WAR_DECLARATIONS.includes(id)?`<aside class="storyWarBoundary" role="note"><p>${STORY_WAR_RELEASE_NOTICE}</p><p>只有继续完成并确认本段剧情才会记录宣战；可暂缓推进。</p><button type="button" data-view="world">暂不推进，继续探索</button></aside>`:'';
+function storyTravelHint(s,d){
+ const area=AREAS[d.siteId],unlocked=s.areaProgress?.[area?.race]?.unlocked??[1];
+ if(area&&!unlocked.includes(area.number)){const frontier=Math.max(...unlocked.filter(n=>n<area.number),1),site=area.race+'.a'+String(frontier).padStart(2,'0');return '<p><small>此剧情地点尚未解锁。请先通关'+esc(AREAS[site]?.name??site)+'的普通副本，再逐区前进至'+esc(area.name)+'。可继续普通探索与整备，不会丢失主线记录。</small></p>';}
+ return '<p><small>请通过地图前往上述地点；不自动传送。可继续探索与整备，不会丢失主线记录。</small></p>';
+}
 export function renderStoryEventBoard(s){
  const v=storyEventView(s);if(!v.valid)return '<section class="panel storyEventBoard"><h3>主线记录不可用</h3><p>剧情状态未通过验证；不会推进或发放奖励。</p></section>';
  let content='';const a=v.active;
  if(a){
   const blocked=!a.safe||!a.atLocation;
   content=`<h4>${esc(a.title)}</h4><p>${esc(storyCastDisplayLabel(a,chikFamilyDisplayText(a,a.npc)))} · ${esc(AREAS[a.siteId]?.name)} · 第${a.chapter}章</p><p>${esc(a.objective)}</p>`+warNotice(a.id)+renderChikFamilyCast(a,a.line);
-  if(!a.atLocation)content+=a.entryAvailable?button('enter',a.id,'通过本场剧情入口前往')+'<p>仅本场剧情通行；普通刷怪入口仍封锁。</p>':'<p>请通过地图前往上述地点；此处不会自动传送。</p>';
+  if(!a.atLocation)content+=a.entryAvailable?button('enter',a.id,'通过本场剧情入口前往')+'<p>仅本场剧情通行；普通刷怪入口仍封锁。</p>':storyTravelHint(s,a);
   if(!a.safe)content+='<p>请先结束当前战斗、停止远征并完成休息，再继续对话。</p>';
   if(a.line!==null){content+=renderStoryDialogue(a,a.line,chikFamilyDisplayText(a,a.line))+button('next',a.id,'继续对话',blocked,`data-story-cursor="${a.cursor}"`);}
   else if(a.choiceId===null){content+='<div class="storyChoices">'+a.choices.map(c=>button('choice',a.id,(STORY_WAR_DECLARATIONS.includes(a.id)?'继续战争剧情 · ':'')+c.label,blocked,`data-story-choice="${esc(c.id)}"`)).join('')+'</div>';}
@@ -29,7 +34,7 @@ export function renderStoryEventBoard(s){
    content+=button('finish',a.id,STORY_WAR_DECLARATIONS.includes(a.id)?'确认推进战争剧情':a.grant==='ashen-primal-core'?'收好升级核心并离开':a.id.startsWith('C06.RR01.')?'确认学习归途之环图样':selected?.label??'继续处理现场',!a.ready);
    if(a.grant==='ashen-primal-core')content+='<p><small>核心装备背包需有空位。领取、装备与剧情完成一次保存；空间不足不会前进或丢弃原核心。</small></p>';
   }
- }else if(v.available.length){content=v.available.map(d=>`<article class="storySceneOffer"><h4>${esc(d.title)}${d.optional?' · 可选':''}</h4><p>${esc(storyCastDisplayLabel(d,chikFamilyDisplayText(d,d.npc)))} · ${esc(AREAS[d.siteId]?.name)} · 第${d.chapter}章</p><p>${esc(d.objective)}</p>${warNotice(d.id)}${renderChikFamilyCast(d)}${button('begin',d.id,'与'+storyCastDisplayLabel(d,chikFamilyDisplayText(d,d.npc))+'交谈',!d.available)}${d.entryAvailable?button('enter',d.id,'通过本场剧情入口前往')+'<p><small>仅本场剧情通行；普通刷怪入口仍封锁。</small></p>':!d.atLocation?'<p><small>前往上述地点后交谈；不自动移动。</small></p>':''}</article>`).join('');}
+ }else if(v.available.length){content=v.available.map(d=>`<article class="storySceneOffer"><h4>${esc(d.title)}${d.optional?' · 可选':''}</h4><p>${esc(storyCastDisplayLabel(d,chikFamilyDisplayText(d,d.npc)))} · ${esc(AREAS[d.siteId]?.name)} · 第${d.chapter}章</p><p>${esc(d.objective)}</p>${warNotice(d.id)}${renderChikFamilyCast(d)}${button('begin',d.id,'与'+storyCastDisplayLabel(d,chikFamilyDisplayText(d,d.npc))+'交谈',!d.available)}${d.entryAvailable?button('enter',d.id,'通过本场剧情入口前往')+'<p><small>仅本场剧情通行；普通刷怪入口仍封锁。</small></p>':!d.atLocation?storyTravelHint(s,d):''}</article>`).join('');}
  else content=s.story?.flags.includes('EPILOGUE_COMPLETE')?'<p>主线与尾声已完成。门户已关闭，残留敌人与已开放支线仍可继续。五人保留联络，各族并未因此和解。</p>':v.chapter8Complete?'<p>界外入侵已经开始，双方转向抵抗恶魔。全境战争封锁已解除，但门户仍在运转。请继续返回神庙核实四处支撑，再与同伴会合。</p>':v.warOpeningComplete?'<p>前线任务已记录，请继续可用的救援与追踪场景。</p>':v.complete?'<p>前六章与归途之环图样已完成。后续章节尚未开放，不会以按钮跳过战争或结局。</p>':'<p>当前没有可开始的主线场景。</p>';
  if(s.story?.flags.includes('EPILOGUE_COMPLETE')&&v.available.length)content='<p role="status">主线与尾声已完成。可继续同一存档探索或再访其他四位主角；当前地图与随机战争门禁仍生效。</p>'+content;
  if(s.diplomacy?.wars?.some(w=>w.id===STORY_WAR_ID&&w.status==='active'))content+='<p role="status">精灵与烬裔的战事仍在持续。参战主角的敌境普通入口已封锁；本族、非敌对地区与已登记的剧情入口不受此封锁。继续主线至界外入侵后解除本次全境封锁；这不代表彼此和解。</p>';
