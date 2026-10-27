@@ -289,3 +289,29 @@ story and no granted foreign-area access. Run
 Story QA can read these source fixtures instead of depending on `/tmp` paths.
 The nondeterministically produced just-in-time war-block snapshot is deliberately
 not bundled into this deterministic producer fixture set.
+
+## Final runtime receipt — 254ca2b
+
+Exact source `254ca2b3a810fd5707dc046eb08674631f485e3f`, including the private
+registered story-corridor/JIT-war repair, passed:
+
+- All five actual 4h online/offline full-state comparisons, including world
+  events, diplomacy, inventory, resources and active encounter state.
+- All five 8h-absence probes: exactly the same earned resources as 4h, with
+  `lastSeen` correctly advanced to 8h. Expiry/rest clocks are not incorrectly
+  required to equal the 4h return clock.
+- All five bundled earned-save SHA-256/current-schema compatibility checks.
+- 500 expected bought-material forge/resale cases and 3,920 base-budget cases.
+- The eight focused racial-economy, production-luck, recipe-batch, task-reward,
+  actual-gem-settlement, Return-Ring-drop, material-forge-variance and random-war
+  regression suites.
+
+Reproduction on that checkout:
+`node progression-parity-tests.mjs`, `node natural-progression-fixture-tests.mjs`,
+`node economy-boundary-audit.mjs`, and the eight named focused scripts above.
+QA logs are `/tmp/economy-254ca2b-{human,dwarf,elf,goblin,ashen}.log`,
+`/tmp/economy-254ca2b-contracts.log` and
+`/tmp/economy-254ca2b-boundary.log`.
+No balance coefficients, ordinary access gates, prices or rewards were changed
+by this verification branch. The measured-policy and human-playtime limitations
+in this report remain; a technical pass does not turn them into balance claims.
