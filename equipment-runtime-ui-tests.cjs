@@ -1,3 +1,5 @@
+// Explicit previously acquired gear; production fresh() remains empty.
+const {equipTestLoadout}=require('./equipped-test-fixture.mjs');
 // Use the current production save key; retired-generation behavior has dedicated tests.
 const {SAVE_KEY}=require('./dist/save-generation.js');
 const assert=require('assert/strict');const {createCanvas}=require('@napi-rs/canvas');
@@ -6,7 +8,7 @@ function el(id){if(elements.has(id))return elements.get(id);const canvas=createC
 function install(){global.document={hidden:false,getElementById:el,querySelector:selector=>selector==='.heroIdentity'?{querySelector:tag=>el('heroIdentity-'+tag)}:null,addEventListener:(k,f)=>(events[k]??=[]).push(f),createElement:()=>({click(){}})};global.window={addEventListener:(k,f)=>(windowEvents[k]??=[]).push(f),matchMedia:()=>({matches:true})};global.localStorage={getItem:k=>store.get(k)||null,setItem(k,v){if(failWrite)throw Error('quota');store.set(k,String(v));},get length(){return store.size},key:i=>[...store.keys()][i]};global.requestAnimationFrame=()=>{};global.setInterval=(fn,ms)=>{intervals.push({fn,ms});return intervals.length};global.setTimeout=()=>++serial;global.clearTimeout=()=>{};global.confirm=()=>true;}
 const click=(dataset={},id='')=>{const b={dataset,id};for(const fn of events.click??[])fn({target:{id,closest:()=>b}});};const saved=()=>JSON.parse(store.get(SAVE_KEY));const tick=()=>{now+=1100;for(const x of intervals.filter(x=>x.ms===250))x.fn();};const periodic=()=>{for(const x of intervals.filter(x=>x.ms===10000))x.fn();};const refresh=async label=>{elements=new Map();events={};windowEvents={};intervals=[];install();await import('./dist/app.js?multi-app-'+label);};
 (async()=>{
- const E=await import('./dist/engine.js');const oldNow=Date.now;Date.now=()=>now;install();const base=E.fresh(),extra=E.item('weapon',4,null,1);base.inventory.push(extra);assert(E.normalizeEquipmentRuntime(base));
+ const E=await import('./dist/engine.js');const oldNow=Date.now;Date.now=()=>now;install();const base=E.fresh();equipTestLoadout(base);const extra=E.item('weapon',4,null,1);base.inventory.push(extra);assert(E.normalizeEquipmentRuntime(base));
  for(const [i,record] of Object.values(base.equipmentRuntime.byId).entries())Object.assign(record,{combatMs:12345+i,attackCount:7+i,castCount:3+i});
  const initialEquip=structuredClone(base.equip),initialRuntime=structuredClone(base.equipmentRuntime),oldWeapon=base.equip.weapon;
  const makeLoadout=(name,equip,skills=base.skills)=>({name,equip:{...equip},skills:[...skills],conditions:[...base.conditions]});
