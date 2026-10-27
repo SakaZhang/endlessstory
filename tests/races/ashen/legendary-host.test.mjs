@@ -4,7 +4,7 @@ import {RACE_PACK as P} from '../../../dist/races/ashen/index.js';
 import {captureCombatDisplay} from '../../../dist/combat-display-bridge.js';
 import {createPlayerShieldLayers,grantPlayerShieldLayer} from '../../../dist/player-shield-layers.js';
 import {skillVisualForEvent,createBattleSlicePresentation} from '../../../dist/battle-slice.js';
-const originalRandom=Math.random;let seed=73021;Math.random=()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0)/2**32);
+const originalRandom=Math.random;let seed=Number(process.env.ASHEN_LEGEND_FIXTURE_SEED??73021);assert(Number.isInteger(seed)&&seed>=0&&seed<=0xffffffff);Math.random=()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0)/2**32);
 export function fixture(id,skill=null){const s=E.fresh('ashen');s.level=100;s.skillTree.presets[0].unlocked=P.tree.nodes.map(x=>x.id);s.skillTree.presets[0].active=[skill,null,null,null];s.skillTree.presets[0].passive=[null,null];const it=E.legendaryItem(id,100);s.inventory.push(it);assert(E.equipItem(s,it.id));s.lastSeen=s.lastHealthClock=1000;E.normalizeHealth(s,1000);s.heroHp=E.stats(s).hp;s.restUntil=0;s.nextBattleAt=0;const e=E.startInstanceEncounter(s,'ashen.a01.field',1000);for(const u of e.enemies){u.hp=u.max=1e8;u.atk=u.elementalPower=0;u.armor=1e8;u.elementResistance.light=1e8;}return{s,e,it};}
 export const tick=(s,e)=>{const random=Math.random;Math.random=()=>.5;try{return captureCombatDisplay(e,()=>E.step(s,e,s.nextActionAt)).events;}finally{Math.random=random;}};
 try{
@@ -13,7 +13,6 @@ const c=fixture('ashen-crystal-core');let events=[];for(let i=0;i<27;i++)events.
 const saved=JSON.parse(JSON.stringify(c.s));assert(E.validSave(saved));assert.deepEqual(tick(c.s,c.e).map(({eventId,...x})=>x),tick(saved,saved.activeEncounter).map(({eventId,...x})=>x));
 const r=fixture('ashen-stone-core');r.e.heroHp=E.stats(r.s).hp/2;r.e.playerShieldLayers=createPlayerShieldLayers();r.e.playerShieldLayers=grantPlayerShieldLayer(r.e.playerShieldLayers,{source:'test-shield',capacity:1,durationMs:60000,clock:0,hp:r.e.heroHp}).state;for(const u of r.e.enemies){u.atk=u.elementalPower=100;}let healed=[];for(let i=0;i<8&&!healed.length;i++)healed=tick(r.s,r.e).filter(x=>x.kind==='heal'&&x.skillId==='ashen-stone-core');assert(healed.length);assert.equal(healed[0].hpDelta,E.stats(r.s).hp*.04);assert.equal(r.e.raceRuntime.state.shards,2);assert(E.validSave(r.s));
 console.log('PASS real engine molten spend buff, crystal extra active 30s + bypass + distinct beam + basic retained, JSON parity, rock real shield-break heal/resources.');
-}finally{Math.random=originalRandom;}
 // Equipment beam is a true active, not an uncounted passive proc.
 {
  const x=fixture('ashen-crystal-core'),staff=E.legendaryItem('elf-sixfold-heartwood',100);x.s.inventory.push(staff);assert(E.equipItem(x.s,staff.id));
@@ -27,10 +26,13 @@ console.log('PASS real engine molten spend buff, crystal extra active 30s + bypa
  console.log('PASS beam consumes ready Elf staff as active, crits, multicasts once, +2 active casts, original-only cooldown, recharges light once.');
 }
 {
- const x=fixture('ashen-crystal-core');let ring;for(let n=0;n<200;n++){ring=E.item('ring',100,null,3,{originRace:'ashen'});if(ring.affixes.some(a=>a.stat==='lifesteal'))break;}assert(ring.affixes.some(a=>a.stat==='lifesteal'));x.s.inventory.push(ring);assert(E.equipItem(x.s,ring.id));
+ const x=fixture('ashen-crystal-core');let ring;for(let n=0;n<200;n++){ring=E.item('ring',100,null,3,{originRace:'ashen'});if(!ring.special&&ring.affixes.some(a=>a.stat==='lifesteal'))break;}assert(ring.affixes.some(a=>a.stat==='lifesteal'));
+ // Isolate lifesteal/cooldown from an unrelated random Reaper that can end the 30-second observation.
+ // Standard Reaper eligibility is exercised explicitly in the next block.
+ assert.equal(ring.special,null,'generated lifesteal ring has no unrelated special');x.s.inventory.push(ring);assert(E.equipItem(x.s,ring.id));
  for(let n=0;n<27;n++)tick(x.s,x.e);x.e.heroHp=E.stats(x.s).hp/2;x.s.heroHp=x.e.heroHp;
  const snapshot=structuredClone(x.s);let found=false;for(let seed=1;seed<100;seed++){const candidate=structuredClone(snapshot);candidate.activeEncounter.rngState=seed;const events=captureCombatDisplay(candidate.activeEncounter,()=>E.step(candidate,candidate.activeEncounter,candidate.nextActionAt)).events;const beam=events.find(v=>v.skillId==='ashen-prism-beam'&&v.kind==='hit'&&v.hpDelta<0);if(!beam)continue;const firstBeamIndex=events.indexOf(beam),nextCastIndex=events.findIndex((v,i)=>i>firstBeamIndex&&v.kind==='cast');assert(events.slice(firstBeamIndex,nextCastIndex<0?events.length:nextCastIndex).some(v=>v.kind==='heal'&&v.skillId==='lifesteal'&&v.hpDelta>0),'beam actual HP damage heals via standard lifesteal');found=true;break;}assert(found);
- const replacement=E.item('core',100,null,0,{originRace:'ashen'});x.s.inventory.push(replacement);assert(E.equipItem(x.s,replacement.id));assert(!x.s.legendaryRuntime.byId[x.it.id]);assert(E.equipItem(x.s,x.it.id));for(let n=0;n<27;n++)assert(!tick(x.s,x.e).some(v=>v.skillId==='ashen-prism-beam'));assert.equal(x.s.legendaryRuntime.byId[x.it.id].clock,29700);
+ const replacement=E.item('core',100,null,0,{originRace:'ashen'});x.s.inventory.push(replacement);assert(E.equipItem(x.s,replacement.id));assert(!x.s.legendaryRuntime.byId[x.it.id]);assert(E.equipItem(x.s,x.it.id));for(let n=0;n<27;n++)assert(!tick(x.s,x.e).some(v=>v.skillId==='ashen-prism-beam'));assert.equal(x.e.done,false,'cooldown measurement requires a still-running real encounter');assert.equal(x.s.legendaryRuntime.byId[x.it.id].clock,29700);
  console.log('PASS beam standard lifesteal from actual HP damage and full30second unequip/re-equip reset.');
 }
 {
@@ -41,3 +43,5 @@ console.log('PASS real engine molten spend buff, crystal extra active 30s + bypa
  const snapshot=structuredClone(x.s);let found=false;for(let seed=1;seed<200;seed++){const candidate=structuredClone(snapshot),enc=candidate.activeEncounter;enc.rngState=seed;const events=captureCombatDisplay(enc,()=>withMultiRng(enc,()=>executeTreePlayerAction(candidate,enc,context))).events;if(events.some(v=>v.skillId==='reaper')){found=true;break;}}assert(found,'real equipment beam eligible for standard Reaper');
  console.log('PASS failed beam with no living targets preserves cooldown; actual equipment active supports standard Reaper.');
 }
+
+}finally{Math.random=originalRandom;}
