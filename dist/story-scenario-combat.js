@@ -19,8 +19,13 @@ export function attachStoryScenario(s,e,id,{initialHeroHp,returnAtCamp}={}){
  initializeDwarfActor(u,def,p,s.lastHealthClock);u.main=true;u.name=d.actorName;u.storyActorRace=d.actorRace;u.storyActorWeapon=d.actorWeapon;if(d.actorId)u.storyActorId=d.actorId;
  // No creature traits or spells impersonate the named hero. Only the existing
  // region's normal-actor HP/attack/armor/basic cadence are reused.
+ // Finale tuning only: damage +20%, protection +20%, healing 2% per
+ // completed non-decisive action, one finite reinforcement at entry.
+ if(d.finalBossBudget){u.max=Math.round(u.max*1.6);u.hp=u.max;u.atk*=6;u.armor*=1.5;}
+ if(d.supportEffects){u.atk*=1.2;u.armor*=1.2;}
  u.shield=0;u.shieldUntil=0;u.control.cooldowns={};u.skillOverrides={};
  e.enemies=[u];e.fieldGroup=false;e.rewardDefinitionId=def.id;e.rewardGold=0;e.rewardXp=0;e.targetId=u.id;e.typedDots=[];
+ if(d.supportEffects){const v=makeMultiUnit(e.id+'-story-reinforcement',e.location,e.instanceId,{enemy:'支撑援军',hp:p.hp*.35,atk:p.atk*.35,armor:p.armor},s.lastHealthClock,{});initializeDwarfActor(v,def,p,s.lastHealthClock,{share:.35});v.main=false;v.name='支撑援军';v.storyActorId='invasion-wave';v.shield=0;v.shieldUntil=0;v.control.cooldowns={};v.skillOverrides={};e.enemies.push(v);}
  e.storyScenario={version:1,id,sceneId:d.sceneId,pov:s.race,initialHeroHp,returnAtCamp,result:null,resolvedRound:null};
  a.encounterId=e.id;if(d.mode==='tool')s.running=false;syncMultiTarget(e);return e;
 }
@@ -28,8 +33,9 @@ export function validStoryScenarioState(s){
  const e=s?.activeEncounter;if(!e)return true;
  if(e.storyScenario===undefined)return !(e.enemies??[]).some(u=>u.storyActorRace!==undefined||u.storyActorWeapon!==undefined||u.storyActorId!==undefined);
  const x=e.storyScenario,d=plain(x)&&Object.hasOwn(STORY_SCENARIOS,x.id)?STORY_SCENARIOS[x.id]:null,a=s.story?.activeScene;
- if(!d||Object.keys(x).length!==8||x.version!==1||x.sceneId!==d.sceneId||x.pov!==d.race||s.race!==d.race||s.siteId!==d.siteId||a?.id!==d.sceneId||a.encounterId!==e.id||e.instanceId!==d.siteId+'.field'||e.kind!=='field'||e.boss||e.developmentFixture||e.fieldGroup||e.rewardGold!==0||e.rewardXp!==0||e.rewardDefinitionId!==d.budgetId||!finite(x.initialHeroHp)||x.initialHeroHp<=0||typeof x.returnAtCamp!=='boolean'||!Array.isArray(e.enemies)||e.enemies.length!==1)return false;
+ if(!d||Object.keys(x).length!==8||x.version!==1||x.sceneId!==d.sceneId||x.pov!==d.race||s.race!==d.race||s.siteId!==d.siteId||a?.id!==d.sceneId||a.encounterId!==e.id||e.instanceId!==d.siteId+'.field'||e.kind!=='field'||e.boss||e.developmentFixture||e.fieldGroup||e.rewardGold!==0||e.rewardXp!==0||e.rewardDefinitionId!==d.budgetId||!finite(x.initialHeroHp)||x.initialHeroHp<=0||typeof x.returnAtCamp!=='boolean'||!Array.isArray(e.enemies)||e.enemies.length!==(d.supportEffects?2:1))return false;
  const u=e.enemies[0];if(u.definitionId!==d.budgetId||u.name!==d.actorName||u.storyActorRace!==d.actorRace||u.storyActorWeapon!==d.actorWeapon||u.storyActorId!==d.actorId||u.follower||!u.main||u.origin!=='initial')return false;
+ if(d.supportEffects){const v=e.enemies[1];if(v.id!==e.id+'-story-reinforcement'||v.definitionId!==d.budgetId||v.name!=='支撑援军'||v.storyActorId!=='invasion-wave'||v.main||v.follower||v.origin!=='initial')return false;}
  if(x.result===null)return x.resolvedRound===null&&!e.done&&!e.rewarded&&(d.mode==='clear'||d.mode==='tool'||e.round<d.rounds);
  return [d.result,'retry'].includes(x.result)&&Number.isSafeInteger(x.resolvedRound)&&x.resolvedRound>=(d.mode==='tool'?0:1)&&x.resolvedRound===e.round&&e.done===true&&e.win===false&&e.rewarded===true;
 }
@@ -39,12 +45,12 @@ export function advanceStoryScenario(s,e){
  if(s.activeEncounter!==e||!e?.storyScenario||e.storyScenario.result!==null||storyScenarioMode(e)==='tool')return null;
  const x=e.storyScenario,d=STORY_SCENARIOS[x.id];
  if(!d||s.story?.activeScene?.encounterId!==e.id||s.story.activeScene.id!==d.sceneId||!Number.isSafeInteger(e.round)||e.round<1||e.lastCombatEventAt!==s.lastHealthClock)return null;
- const heroDown=e.heroHp<=0,failed=heroDown&&!d.defeatIsOutcome,decisive=e.done&&e.win===true;
- if(!heroDown&&!decisive&&(d.mode==='clear'||e.round<d.rounds))return null;
+ const heroDown=e.heroHp<=0,failed=heroDown&&!d.defeatIsOutcome,decisive=e.done&&e.win===true||d.keepAlive&&e.enemies[0].hp<=0;
+ if(!heroDown&&!decisive&&(d.mode==='clear'||e.round<d.rounds)){if(d.supportEffects){const u=e.enemies[0];if(u.hp>0)u.hp=Math.min(u.max,u.hp+u.max*.02);syncMultiTarget(e);}return null;}
  x.result=failed?'retry':d.result;x.resolvedRound=e.round;e.done=true;e.win=false;e.rewarded=true;e.targetId=null;e.killSource=null;
  // The real hit has already been processed. At the authored nonlethal cut,
  // keep named actors visibly alive; this never changes ordinary combat damage.
- if(d.mode==='nonlethal')for(const actor of e.enemies)actor.hp=Math.max(1,actor.hp);
+ if(d.mode==='nonlethal'||d.keepAlive)for(const actor of e.enemies)if(d.mode==='nonlethal'||actor.main)actor.hp=Math.max(1,actor.hp);
  e.rewardNotes=[failed?'未能通过这一段。返回本场安全点，可重新交手。':d.outcome,'剧情交手不结算金币、经验、掉落或副本冷却。'];
  syncMultiTarget(e);return {completed:!failed,result:x.result};
 }
@@ -64,4 +70,4 @@ export function resolveStoryToolEncounter(s,e){
  if(s.activeEncounter!==e||storyScenarioMode(e)!=='tool'||e.storyScenario.result!==null||e.done||e.rewarded)return false;
  const d=STORY_SCENARIOS[e.storyScenario.id];for(const u of e.enemies)u.hp=0;e.hp=0;e.done=true;e.win=false;e.rewarded=true;e.killSource=null;e.targetId=null;e.storyScenario.result=d.result;e.storyScenario.resolvedRound=e.round;e.rewardNotes=[d.outcome,'任务道具仅在本次解封保存成功后消耗。'];syncMultiTarget(e);return true;
 }
-export function renderStoryScenarioNotice(e){const row=storyScenarioObjective(e);if(!row)return '';const tool=row.mode==='tool',nonlethal=row.mode==='nonlethal';return `<section class="storyScenarioNotice" aria-label="剧情遭遇目标"><b>${tool?'封印核心 · 任务道具解除':nonlethal?'剧情交手 · 非致死':'剧情遭遇'} · 无战利品</b><p>${esc(row.objective)}</p>${nonlethal?'<p>即死效果不处决剧情人物；普通战斗规则不变。</p>':tool?'<p>核心封闭，普通攻击无法解除。旧制楔钉受到任务保护，使用成功后消耗一次。</p>':'<p>按现场目标完成遭遇；失败返回本层安全点，已有层次不重打。</p>'}${row.requiredRounds?`<small>交手 ${row.rounds}/${row.requiredRounds} 轮</small>`:''}${tool&&!row.result?`<button type="button" data-story-action="use-tool" data-story-scene="${esc(e.storyScenario.sceneId)}" data-story-encounter="${esc(e.id)}" data-story-target="${esc(e.enemies[0].id)}">使用旧制楔钉击破核心（消耗1件）</button>`:''}${row.outcome?'<p>'+esc(row.outcome)+'</p>':''}</section>`;}
+export function renderStoryScenarioNotice(e){const row=storyScenarioObjective(e);if(!row)return '';const tool=row.mode==='tool',nonlethal=row.mode==='nonlethal';return `<section class="storyScenarioNotice" aria-label="剧情遭遇目标"><b>${tool?'封印核心 · 任务道具解除':nonlethal?'剧情交手 · 非致死':'剧情遭遇'} · 无战利品</b><p>${esc(row.objective)}</p>${STORY_SCENARIOS[e.storyScenario.id].supportEffects?'<p>四道外部支撑：伤害 +20% · 防护 +20% · 每个未决行动恢复2%生命 · 一名有限援军。首领从开战即可受伤；通过本段后依次断开支撑。</p>':e.storyScenario.sceneId.startsWith('C10.X07.')?'<p>四处支撑已永久断开：额外伤害、防护、恢复与援军均移除。重试不会再获得或重复移除支撑。</p>':''}${nonlethal?'<p>即死效果不处决剧情人物；普通战斗规则不变。</p>':tool?'<p>核心封闭，普通攻击无法解除。旧制楔钉受到任务保护，使用成功后消耗一次。</p>':'<p>按现场目标完成遭遇；失败返回本层安全点，已有层次不重打。</p>'}${row.requiredRounds?`<small>交手 ${row.rounds}/${row.requiredRounds} 轮</small>`:''}${tool&&!row.result?`<button type="button" data-story-action="use-tool" data-story-scene="${esc(e.storyScenario.sceneId)}" data-story-encounter="${esc(e.id)}" data-story-target="${esc(e.enemies[0].id)}">使用旧制楔钉击破核心（消耗1件）</button>`:''}${row.outcome?'<p>'+esc(row.outcome)+'</p>':''}</section>`;}

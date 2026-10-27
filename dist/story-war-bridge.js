@@ -1,3 +1,4 @@
+import {FINALE_SCENES} from './story-finale-scenes.js';
 import {STORY_SCENES} from './story-event-registry.js';
 import {validStoryEventState} from './story-event-controller.js';
 import {AREAS} from './location-schema.js';
@@ -29,6 +30,7 @@ export function applyStoryWarTransition(s,id,now){
 // UI-provided pass. Unlocks, prerequisites, current action and receipts are
 // separately enforced by the controller. Optional NPCs use territoryAccess.
 export const STORY_WAR_ENTRANCES=Object.freeze({
+ ...Object.fromEntries(Object.values(FINALE_SCENES).map(d=>[d.id,d.siteId])),
  'C01.H01.human':'goblin.a01','C01.X01.human':'goblin.a01',
  'C03.G01.goblin':'human.a02','C03.A01.ashen':'human.a02','C03.X01.dwarf':'human.a02','C03.X01.elf':'human.a02',
  'C04.HD01.dwarf':'human.a03','C04.G01.dwarf':'human.a03','C04.G01.goblin':'human.a03','C04.DE01.dwarf':'human.a03','C04.DE01.elf':'human.a03','C04.A01.elf':'ashen.a04',

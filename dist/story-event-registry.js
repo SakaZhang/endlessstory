@@ -1,6 +1,8 @@
 // Canon source: rpg-script-v1/screenplay-v1.md (C01–C08). No world-secret knowledge is inferred for absent POVs.
+import {FINALE_SCENES} from './story-finale-scenes.js';
 const freeze=o=>{if(o&&typeof o==='object'){Object.values(o).forEach(freeze);Object.freeze(o);}return o;};
 export const STORY_SCENES=freeze({
+ ...FINALE_SCENES,
  "C01.H01.human": {
   "id": "C01.H01.human",
   "sourceScene": "C01.H01",

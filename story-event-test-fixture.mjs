@@ -20,7 +20,7 @@ export function readAndChooseStoryScene(s,d,selected){
  const id=selected??d.choices[0].id;assert(C.chooseStoryResponse(s,d.id,id),'choice '+d.id);assert(E.validSave(s));return id;
 }
 export function playActiveStoryEncounter(s,{reload=true}={}){
- let d=C.storyEventView(s).active;assert(d?.encounter);const type=d.encounter.kind==='scenario'?'scenario':'encounter';
+ let d=C.storyEventView(s).active;assert(d?.encounter);if(d.chapter>=9){assert(E.startRest(s,Math.max(s.lastSeen,s.lastHealthClock??0)+2000));const wake=s.restUntil+1;assert(E.settleRest(s,wake));s.lastSeen=wake;}const type=d.encounter.kind==='scenario'?'scenario':'encounter';
  assert(C.applyStoryEvent(s,{type,sceneId:d.id,scenarioId:d.encounter.scenarioId,nodeId:d.encounter.nodeId},{now:Math.max(s.lastHealthClock??0,s.nextBattleAt??0)+2000}),'start '+d.id);
  let e=s.activeEncounter;assert(e);if(d.questTool){assert(C.applyStoryEvent(s,{type:'use-tool',sceneId:d.id,encounterId:e.id,targetId:e.enemies[0].id},{now:s.lastHealthClock}));return e;}let rounds=0;
  while(!e.done&&rounds++<3000){E.step(s,e,s.nextActionAt);assert(E.validSave(s),'valid actual combat '+d.id);if(!e.done&&reload&&rounds===1){const restored=JSON.parse(JSON.stringify(s));Object.assign(s,restored);e=s.activeEncounter;}}

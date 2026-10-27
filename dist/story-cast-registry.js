@@ -50,6 +50,12 @@ bind('C06.E01','elf','救护者','elf-medic');bind('C08.O01','ashen','救护者'
 bind('C07.O02','dwarf human goblin','信使|幸存救护者','elf-medic');
 bind('C06.D01','dwarf','王室守军','royal-guard');
 for(const source of ['C07.A01','C07.X01'])bind(source,'ashen','哨卫','ashen-sentry');
+// Exact final-chapter returning characters. Unassigned recorders, villagers and
+// couriers retain honest role-only text instead of borrowing another identity.
+for(const source of ['C10.D01','END.D01'])bind(source,'dwarf','矿班长','mine-foreman');
+for(const source of ['C10.E01','END.E01'])bind(source,'elf','守林者','forest-keeper');
+for(const source of ['C10.A01','END.A01']){bind(source,'ashen','修护者','ashen-repairer');bind(source,'ashen','哨卫','ashen-sentry');}
+for(const source of ['C10.H01','END.H01']){bind(source,'human','车夫','carter');bind(source,'human','斥候','border-scout');}
 export const STORY_CAST_BINDINGS=freeze(bindings);
 function registeredScene(scene){const d=STORY_SCENES[scene?.id];return d&&d.sourceScene===scene.sourceScene&&d.pov===scene.pov?d:null;}
 export function storyCastAlias(scene,alias){
@@ -71,6 +77,7 @@ export function storyCastDisplayLabel(scene,label){if(typeof label!=='string')re
 // Existing knowledge ID + flag + completed scene are checked together to avoid spoilers.
 export function knownStoryEvidenceCast(game){
  const st=game?.story;
+ if(st?.flags?.includes('D_RELIC_SALE_COUP_PROVEN')||st?.flags?.includes('FIVE_HEROES_BRIEFED'))return [{...STORY_CAST_CHARACTERS['dwarf-minister'],summary:'布洛克与王室记录者保存的出库、运输、支出账及证词已对应：维尔铎盗卖王室遗物资助夺权。案情仍待继续追查，不表示已处刑。'}];
  if(game?.race!=='dwarf'||!st?.completedScenes?.includes('C06.D03.dwarf')||!st.flags?.includes('D_COUP_LINK_PARTIAL')||!st.knowledge?.some(k=>k.id==='C06.D03.dwarf.k0'))return [];
  return [{...STORY_CAST_CHARACTERS['dwarf-minister'],summary:'已保存的调拨证词指向维尔铎一方。遗物盗卖与夺权军资的完整资金链，仍待查清。'}];
 }

@@ -11,7 +11,7 @@ import {NPC_PORTRAIT_REGISTRY} from './dist/npc-portrait-registry.js';
 import {bindNpcPortraitErrors} from './dist/npc-portraits.js';
 import {reachStoryScene} from './story-event-test-fixture.mjs';
 const {loadImage}=createRequire(import.meta.url)('@napi-rs/canvas'),sha=b=>createHash('sha256').update(b).digest('hex');
-assert.equal(sha(fs.readFileSync('dist/story-event-registry.js')),'9d236c8bfa71c213248c696caec315de2b5a500dc44f9b9a4bd8a8a5426d7dc7','all 103 scenes remain byte-identical');
+assert.equal(sha(fs.readFileSync('dist/story-event-registry.js','utf8').replace("import {FINALE_SCENES} from './story-finale-scenes.js';\n",'').replace(' ...FINALE_SCENES,\n','')),'9d236c8bfa71c213248c696caec315de2b5a500dc44f9b9a4bd8a8a5426d7dc7','all 103 scenes remain byte-identical');
 execFileSync(process.execPath,['tools/sync-story-portrait-crops.mjs','--check']);
 const manifest=JSON.parse(fs.readFileSync('main-cast-source-manifest.json'));assert.equal(manifest.entries.length,6);
 for(const entry of manifest.entries){assert.equal(typeof entry.prompt,'string');for(const key of ['source','source192',entry.designOnly?'designPreview':'runtime']){const item=entry[key],bytes=fs.readFileSync(item.path);assert.equal(sha(bytes),item.sha256);const im=await loadImage(item.path);assert.deepEqual([im.width,im.height],item.size);if(key==='source192')assert.deepEqual(item.size,[192,192]);if(key==='runtime'||key==='designPreview')assert.deepEqual(item.size,[96,96]);}}
@@ -20,7 +20,7 @@ assert.equal(storyHeroDescriptor('goblin').role,'盗贼');assert.equal(storyHero
 const counts={};let lines=0,narration=0;
 for(const scene of Object.values(STORY_SCENES))for(const line of scene.lines){
  lines++;const actor=storyCastSpeaker(scene,line),html=renderStoryDialogue(scene,line);assert(!html.includes('current-dwarf-king'));assert(!html.includes('dwarf-minister'));if(line.startsWith('[')){narration++;assert.equal(actor,null);assert(!html.includes('data-story-speaker'));}
- if(actor){counts[actor.id]=(counts[actor.id]??0)+1;assert(html.includes(`data-story-speaker="${actor.id}"`));assert(html.includes('loading="lazy"'));assert(html.includes(actor.file));assert(html.includes(actor.name));assert(!actor.designOnly&&!actor.evidenceOnly);assert.equal((html.match(/data-npc-portrait-image=/g)||[]).length,1);}
+ if(actor){if(scene.chapter<9)counts[actor.id]=(counts[actor.id]??0)+1;assert(html.includes(`data-story-speaker="${actor.id}"`));assert(html.includes('loading="lazy"'));assert(html.includes(actor.file));assert(html.includes(actor.name));assert(!actor.designOnly&&!actor.evidenceOnly);assert.equal((html.match(/data-npc-portrait-image=/g)||[]).length,1);}
  else assert(!html.includes('data-npc-portrait-image'));
 }
 assert.deepEqual(counts,{'border-scout':4,'hero.human':40,'hero.goblin':39,'mine-foreman':7,'hero.dwarf':45,'forest-keeper':9,'hero.elf':144,'ashen-repairer':6,'hero.ashen':111,'high-priest':59,carter:9,'royal-guard':1,'elf-medic':9,'ashen-chief':8,'ashen-sentry':2});

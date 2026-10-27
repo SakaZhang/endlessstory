@@ -1,3 +1,4 @@
+import {FINALE_SCENARIOS} from './story-finale-scenarios.js';
 import {C08_SCENARIOS} from './story-c08-scenarios.js';
 const freeze=value=>{for(const child of Object.values(value))if(child&&typeof child==='object')freeze(child);return Object.freeze(value)};
 
@@ -10,6 +11,6 @@ const LEGACY_SCENARIOS={
  'story.c05.ashen-duel':{sceneId:'C05.EA01.ashen',race:'ashen',siteId:'ashen.a04',budgetId:'ashen.a04.normal.1',actorRace:'elf',actorWeapon:'staff',actorName:'莱姆斯',rounds:4,result:'ashen-victory',objective:'交手四轮，稳住核心并突破拦截；击退对方也会转场，不杀死莱姆斯。',outcome:'核心的光稳定下来。砾恩击退莱姆斯，留下了离开的路。'}
 };
 
-export const STORY_SCENARIOS=freeze({...Object.fromEntries(Object.entries(LEGACY_SCENARIOS).map(([id,d])=>[id,{...d,mode:'nonlethal'}])),...C08_SCENARIOS});
+export const STORY_SCENARIOS=freeze({...Object.fromEntries(Object.entries(LEGACY_SCENARIOS).map(([id,d])=>[id,{...d,mode:'nonlethal'}])),...C08_SCENARIOS,...FINALE_SCENARIOS});
 export const storyScenarioMode=e=>STORY_SCENARIOS[e?.storyScenario?.id]?.mode??null;
 export const storyScenarioNonlethal=e=>storyScenarioMode(e)==='nonlethal';

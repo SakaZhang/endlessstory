@@ -38,7 +38,7 @@ const click=(dataset={},id='')=>{const b={dataset,id};for(const fn of events.cli
    }
    assert.equal(saved().race,race);assert.equal(saved().hero,hero);assert(E.validSave(saved()));
   }
-  assert(saved().story.flags.includes('C08_COMPLETE'));assert.equal(saved().diplomacy.wars.find(w=>w.id==='story.c07.elf-ashen').status,'ended');assert(!saved().story.flags.includes('R4_TEMPLE_CONFIRMED'));click({race:saved().siteId.split('.')[0]});assert(el('view').innerHTML.includes('最终战仍待后续开放'));
+  assert(saved().story.flags.includes('C08_COMPLETE'));assert.equal(saved().diplomacy.wars.find(w=>w.id==='story.c07.elf-ashen').status,'ended');assert(!saved().story.flags.includes('R4_TEMPLE_CONFIRMED'));click({race:saved().siteId.split('.')[0]});assert(el('view').innerHTML.includes('变了的旧座'));
   const state=JSON.stringify(saved().story);await refresh('c08-complete-reload-'+race);assert.equal(JSON.stringify(saved().story),state);if(race==='ashen')assert.equal(saved().inventory.filter(i=>i.legendaryId==='ashen-primal-core').length,1);
  }
  Date.now=originalNow;console.log('PASS actual App five POVs C07 remainder–C08: registered war entrances/actual travel, genuine scenario loops, own hero, no rewards/rest, three seal encounters, protected one-use tool target/quota/reload/duplicate, atomic invasion+war end, truthful post-C08 boundary.');
