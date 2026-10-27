@@ -11,9 +11,12 @@ import {STORY_CAST_CHARACTERS,storyCastSpeaker} from './dist/story-cast-registry
 import {CHIK_FAMILY_CHARACTERS,chikFamilySpeaker} from './dist/chik-family-registry.js';
 import {renderStoryDialogue,renderStoryCastPortrait} from './dist/story-cast-ui.js';
 const base='706c2687a448635d75088977abf61c3000eeccfe';
+// Approved v0.71 scheduler fix preserves a pending starting deadline under the four-hour cap.
+// Keep a strict source snapshot for that explicit exception; all other boundaries retain v0.68.
+const boundaryBase=file=>file==='random-world-events.js'?'470bb29':base;
 // v0.69 evolves the engine/host additively. Preserve the historical scene data
 // and the unaffected regional/art/save boundaries, not obsolete whole-app hashes.
-for(const file of ['hero-selection.js','hero-proportions.js','storage.js','save-generation.js','races/ashen/story-core.js','story-c08-scenarios.js','racial-npc-event-content.js','return-ring-state.js','return-ring-content.js','random-world-events.js','war-diplomacy.js','asset-recovery.js'])assert.equal(fs.readFileSync('dist/'+file,'utf8'),execFileSync('git',['show',base+':dist/'+file],{encoding:'utf8'}),'unchanged boundary '+file);
+for(const file of ['hero-selection.js','hero-proportions.js','storage.js','save-generation.js','races/ashen/story-core.js','story-c08-scenarios.js','racial-npc-event-content.js','return-ring-state.js','return-ring-content.js','random-world-events.js','war-diplomacy.js','asset-recovery.js'])assert.equal(fs.readFileSync('dist/'+file,'utf8'),execFileSync('git',['show',boundaryBase(file)+':dist/'+file],{encoding:'utf8'}),'unchanged boundary '+file);
 const oldScenes=JSON.parse(fs.readFileSync('fixtures/chik-family/v067-scene-hashes.json')).sceneHashes;
 const {createHash}=await import('node:crypto');
 assert.equal(Object.keys(oldScenes).length,103);
