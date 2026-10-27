@@ -9,6 +9,8 @@ import {validReturnRingState,applyReturnRingVictory,returnRingRareBonus} from '.
 import {validNpcEventState,recordNpcEventVictory,recordNpcEventExploration} from './npc-events.js';
 import {validStoryEventState,canStartStoryScenario,canStartStoryFieldEncounter,recordStoryScenarioResult,recordStoryEncounterVictory} from './story-event-controller.js';
 import {storyScenarioForStart,attachStoryScenario,advanceStoryScenario,finalizeStoryScenario,validStoryScenarioState,storyScenarioMode} from './story-scenario-combat.js';
+import {validPersonalArcRewardState} from './personal-arc-rewards.js';
+export {claimPersonalArcReward,claimPersonalEventReward,personalArcRewardSlots,personalArcRewardStatus,PERSONAL_ARC_REWARDS,PERSONAL_EVENT_REWARDS} from './personal-arc-rewards.js';
 import {validTaskRewardState} from './task-reward-transaction.js';
 // Sealed production claim only; trusted registry factory is not an engine API.
 export {claimTaskReward} from './task-reward-transaction.js';
@@ -1140,7 +1142,7 @@ export function codexState(s,id){
 }
 export function validSave(s){
  try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;
- if(!validTaskRewardState(s)||!validDiplomacy(s)||!validWorldEventState(s)||!validStoryWarState(s)||!validNpcEventState(s)||!validReturnRingState(s)||!validStoryEventState(s)||!validStoryScenarioState(s))return false;
+ if(!validPersonalArcRewardState(s)||!validTaskRewardState(s)||!validDiplomacy(s)||!validWorldEventState(s)||!validStoryWarState(s)||!validNpcEventState(s)||!validReturnRingState(s)||!validStoryEventState(s)||!validStoryScenarioState(s))return false;
  if(!validSkillTree(s,getSkillTreeDefinition(s))||s.skillTree?.mode!=='active')return false;
  if(s.activeEncounter?.skillResolver!==undefined&&(s.activeEncounter.skillResolver!=='tree-v1'||s.skillTree?.mode!=='active'||s.activeEncounter.multiVersion!==1))return false;
  if(s.supportGrantEligible!==undefined||s.testGrants!==undefined||s.bonusTalentPoints!==undefined||s.skillRulesVersion!==undefined||s.skillAccess!==undefined)return false;
