@@ -96,3 +96,35 @@ Full integrated natural acquisition/check-ins/shopping/long-run progress and
 online/offline parity are run on a frozen integrated runtime by the natural
 progression reviewer. Intermediate single-module curves or mixed runtime hashes
 must not be represented as final release acceptance.
+
+## Integrated corrected-runtime outcome (6e62da6)
+
+`tools/monster-tier-probe.mjs` executed 976 real-host encounter/run attempts on
+an immutable integrated snapshot `6e62da6537546133655c3c274f8d76aa17dabc27`
+(includes new equipment affixes, talents and corrected cadence). Every attempt
+completed with victory. This is an appropriate-level Q1 reference/point-build
+check, not a claim that undergeared or arbitrary builds cannot lose.
+
+| Build / content | Group-median time range | Group-median gross HP damage range | Maximum single HP-loss event |
+| --- | --- | --- | --- |
+| basic / field | 9.9–17.8s | 1.5%–2.9% | 0.8% |
+| basic / dungeon | 38.8–63.0s | 11.7%–23.4% | 3.6% |
+| basic / boss | 33.0–47.3s | 20.8%–41.3% | 4.9% |
+| balanced / field | 8.8–16.5s | 0.3%–2.0% | 0.7% |
+| balanced / dungeon | 33.3–52.0s | 3.5%–14.9% | 3.5% |
+| balanced / boss | 23.1–30.8s | 3.1%–22.2% | 4.5% |
+
+Dungeon time/damage covers all three stages. Gross damage excludes healing
+refunds and shield absorption; the two are separately recorded, so this table
+must not be called net resource consumption. Bosses include every race's first
+and last authored boss (plus sampled intermediate available bosses), not
+nonexistent A10 human/goblin bosses. Some strong defenses offset nearly all
+gross damage, as intended for low-consumption build payoff. No potion stock is
+granted or consumed in these probes. Independent reviewer also checks combined
+1100ms burst windows rather than only individual HP-loss events.
+
+`tests/economy/v071-monster-tier-measurements.json` keeps the full grouped
+summary and policy; raw per-attempt data is reproducible with the tool and
+stored in the task shared evidence. Grouped 1-point rates separate DOT from
+direct hits, but group attacks and reflection may still contain legitimate
+small direct segments; no all-events no-1 promise is made.
