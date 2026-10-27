@@ -1,3 +1,4 @@
+import {addTestEquipment,equipTestLoadout} from './equipped-test-fixture.mjs';
 import {SCHEMA_VERSION} from './dist/save-generation.js';
 import {currentAffix} from './current-equipment-test-fixture.mjs';
 import {fresh} from './dist/engine.js';
@@ -5,12 +6,12 @@ import assert from 'node:assert/strict';
 import {item,stats,preset,encounter,step,reward,offline,forge,applyForgeFavor,validSave,SOCKETS,SOCKET_TYPE,SLOTS,SET_SLOTS,RARITY,BUILD,AFFIX_DEFS,equipItem,LEGENDARY_CODEX,codexState,affixRollInfo,divineMultiplier,itemTotals} from './dist/engine.js';
 const originalRandom=Math.random;let seed=93812;const rng=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};Math.random=rng;
 try{
- const s=fresh();assert(validSave(s));assert.equal(s.version,SCHEMA_VERSION);assert.equal(SOCKETS.length,8);assert.equal(s.inventory.length,8);assert.deepEqual(RARITY,['普通','稀有','优良','至臻']);assert(s.inventory.every(i=>!i.set&&i.rarity===0&&!i.special&&i.affixes.length===0));assert.equal(new Set(Object.values(s.equip)).size,8);
+ const s=fresh();assert(validSave(s));assert.equal(s.version,SCHEMA_VERSION);assert.equal(SOCKETS.length,8);assert.equal(s.inventory.length,0);assert(Object.values(s.equip).every(x=>x===null));equipTestLoadout(s);assert.equal(s.inventory.length,8);assert.deepEqual(RARITY,['普通','稀有','优良','至臻']);assert(s.inventory.every(i=>!i.set&&i.rarity===0&&!i.special&&i.affixes.length===0));assert.equal(new Set(Object.values(s.equip)).size,8);
  const ring1=s.equip.ring1,ring2=s.equip.ring2;assert(equipItem(s,ring1,'ring2'));assert.equal(s.equip.ring1,ring2);assert.equal(s.equip.ring2,ring1);assert(validSave(s));let bad=structuredClone(s);bad.equip.ring1=bad.equip.ring2;assert(!validSave(bad));bad=structuredClone(s);bad.version=1;assert(!validSave(bad));assert(!equipItem(s,ring1,'weapon'));
  for(let quality=0;quality<4;quality++)for(let j=0;j<300;j++){const it=item(SLOTS[j%SLOTS.length],5,null,quality);assert(quality===0?it.affixes.length<=1:it.affixes.length===quality+1);assert.equal(new Set(it.affixes.map(a=>a.stat)).size,it.affixes.length);assert(it.affixes.every(a=>AFFIX_DEFS[a.stat]));if(quality<2)assert(!it.special);}
  for(const slot of SLOTS)for(const b of BUILD){const it=item(slot,4,b.id,0);if(SET_SLOTS.includes(slot)){assert.equal(it.rarity,3);assert.equal(it.set,b.id);assert.equal(it.affixes.length,4);assert(!it.special);}else assert.equal(it.set,null);}
  // Affixes really modify stats, with explicit caps.
- let p=fresh(),base=stats(p);p.inventory[0].affixes=[{stat:'atk',value:10}];assert(stats(p).atk>base.atk);p.inventory[0].affixes=[{stat:'hp',value:10}];assert(stats(p).hp>base.hp);p.inventory[0].affixes=[{stat:'armor',value:10}];assert(stats(p).armor>base.armor);
+ let p=fresh();addTestEquipment(p);let base=stats(p);p.inventory[0].affixes=[{stat:'atk',value:10}];assert(stats(p).atk>base.atk);p.inventory[0].affixes=[{stat:'hp',value:10}];assert(stats(p).hp>base.hp);p.inventory[0].affixes=[{stat:'armor',value:10}];assert(stats(p).armor>base.armor);
  for(const [stat,out,max] of [['hit','hit',1],['crit','crit',.6],['critDamage','critDamage',2.5],['element','element',1000]]){p.inventory[0].affixes=[{stat,value:1000}];assert(stats(p)[out]>base[out]);assert(stats(p)[out]<= max);}
  p=fresh();let unmodified=stats(p);p.inventory.push({...item('ring',3,null,2),id:'extra-ring',affixes:[currentAffix('crit',5),currentAffix('atk',5),currentAffix('hp',15)]});equipItem(p,'extra-ring','ring2');assert(stats(p).crit>unmodified.crit);assert(validSave(p));
  // Set counts are exactly three pieces, no phantom fourth threshold.
@@ -37,7 +38,7 @@ try{
  const stored=JSON.stringify(p);assert(validSave(JSON.parse(stored)));assert.deepEqual(stats(JSON.parse(stored)),post);assert(!applyForgeFavor(divineItem));assert.equal(JSON.stringify(p),stored);
  for(const a of divineItem.affixes)assert.deepEqual(affixRollInfo(a),affixRollInfo(raw.affixes.find(x=>x.stat===a.stat)));
  // Tiny gains accumulate before rounding instead of every tiny roll rounding up.
- p=fresh();for(const gear of p.inventory){gear.atk=1;gear.armor=1;gear.hp=1;gear.affixes=[{stat:'atk',value:3}];applyForgeFavor(gear);}
+ p=fresh();equipTestLoadout(p);for(const gear of p.inventory){gear.atk=1;gear.armor=1;gear.hp=1;gear.affixes=[{stat:'atk',value:3}];applyForgeFavor(gear);}
  assert.equal(stats(p).atk,Math.round(17+8*4.4));
  console.log('Current equipment/quality/affix/raw stats/fusion/divine/schema tests passed; retired old combat matrix lives outside the current generation.');
 }finally{Math.random=originalRandom;}

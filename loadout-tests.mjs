@@ -1,9 +1,10 @@
+import {equipTestLoadout} from './equipped-test-fixture.mjs';
 import {fresh} from './dist/engine.js';
 import assert from 'node:assert/strict';
 import {item,saveLoadout,deleteLoadout,applyLoadout,wardrobeIds,bagItems,bagCounts,claimForgeResult,isProtected,validSave,equipItem,forge,reforge,resolveReforge,SOCKETS,SOCKET_TYPE,encounter,reward,preset,receiveBattleLoot} from './dist/engine.js';
 const original=Math.random;let seed=382;Math.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};
 try{
- const s=fresh();assert.deepEqual(s.loadouts,[null,null,null]);assert(validSave(s));const old=structuredClone(s);delete old.loadouts;assert(validSave(old));assert(saveLoadout(old,0,'旧存档方案'));assert(validSave(old));
+ const s=fresh();assert.equal(s.inventory.length,0);equipTestLoadout(s);assert.deepEqual(s.loadouts,[null,null,null]);assert(validSave(s));const old=structuredClone(s);delete old.loadouts;assert(validSave(old));assert(saveLoadout(old,0,'旧存档方案'));assert(validSave(old));
  assert(saveLoadout(s,0,'碎砧'));assert.equal(wardrobeIds(s).size,8);assert.equal(bagItems(s).length,0);const originalIds=[...wardrobeIds(s)];assert(originalIds.every(id=>isProtected(s,id)));
  assert(saveLoadout(s,1,'共用装备'));assert.equal(wardrobeIds(s).size,8);assert.equal(s.inventory.length,8);
  let gear=s.inventory.find(i=>i.id===s.equip.weapon);Object.assign(gear,item('weapon',1,null,1),{id:gear.id});s.gold=1000;s.materialStacks['铁屑|0']=100;assert(reforge(s,gear.id,'value',0));assert(resolveReforge(s,true));assert.equal(s.loadouts[0].equip.weapon,s.loadouts[1].equip.weapon);assert.equal(s.inventory.filter(i=>i.id===gear.id).length,1);

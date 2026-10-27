@@ -1,3 +1,4 @@
+import {addTestEquipment} from './equipped-test-fixture.mjs';
 import {levelAffixRange} from './dist/affix-level-budget.js';
 import assert from 'node:assert/strict';
 import * as E from './dist/engine.js';
@@ -11,7 +12,7 @@ import {affixRange} from './dist/equipment-budget.js';
 const id='goblin-silent-steps',def=getRacePack('goblin').legendaries.find(d=>d.id===id);
 assert.equal(def.slot,'boots');assert.match(def.description,/盗贼/);assert.doesNotMatch(def.description,/信使/);assert.match(def.exclusiveDescription,/闪避\+100/);assert.equal(E.legendaryItem('goblin-returning-spring',100),null);
 for(const race of ['dwarf','human','elf','goblin','ashen']){
- const s=E.fresh(race),before=E.stats(s),prior=s.equip.boots,boots=E.legendaryItem(id,100);s.inventory.push(boots);
+ const s=E.fresh(race);addTestEquipment(s,{socket:'boots'});const before=E.stats(s),prior=s.equip.boots,boots=E.legendaryItem(id,100);s.inventory.push(boots);
  assert.equal(E.stats(s).dodgeRating,before.dodgeRating,'inventory grants nothing');assert.equal(boots.affixes.length,4);assert.equal(new Set(boots.affixes.map(a=>a.stat)).size,4);
  for(const a of boots.affixes){assert.equal(a.sourceRange.quality,4);assert(a.sourceRange.max>=levelAffixRange(E.AFFIX_DEFS[a.stat],a.stat,boots.level,3).max);}
  assert(E.equipItem(s,boots.id));assert.equal(E.stats(s).dodgeRating-before.dodgeRating,100);assert.equal(E.stats(s).dodge,.25);assert(E.validSave(s));assert(E.validSave(JSON.parse(JSON.stringify(s))));

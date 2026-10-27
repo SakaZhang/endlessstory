@@ -1,3 +1,4 @@
+import {addTestEquipment} from './equipped-test-fixture.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createRequire} from 'node:module';
@@ -34,7 +35,7 @@ let portraits=0,frames=0,draws=0;
 for(const race of PLAYABLE_RACES){
  const variants={...(race==='dwarf'?manifest.heroWeaponSprites:manifest.raceHeroWeaponSprites[race]),neutral:race==='dwarf'?'hero-neutral':manifest.raceHeroNeutralSprites[race]};
  for(const [weapon,key]of Object.entries(variants)){
-  const state=E.fresh(race);if(weapon==='neutral')state.equip.weapon=null;else state.inventory.find(i=>i.id===state.equip.weapon).weaponType=weapon;
+  const state=E.fresh(race);if(weapon==='neutral')state.equip.weapon=null;else addTestEquipment(state,{weaponType:weapon});
   assert.equal(liveHeroSpriteFor(weapon==='neutral'?null:weapon,manifest,race),key);
   const sprite=manifest.sprites[key];
   for(const [i,id]of sprite.animations.idle.entries())for(const [width,height]of [[160,150],[240,280]]){

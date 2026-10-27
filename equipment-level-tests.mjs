@@ -1,11 +1,12 @@
+import {addTestEquipment} from './equipped-test-fixture.mjs';
 import {fresh} from './dist/engine.js';
 import assert from 'node:assert/strict';
 import {item,stats,validSave,normalizeEquipmentLevels,rollDropEquipmentLevel,rollEquipmentFusionLevel,ensureMerchant,purchaseEquipment,forge,reforge,resolveReforge,equipItem,saveLoadout} from './dist/engine.js';
 const original=Math.random;let seed=613;Math.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};
 try{
- const old=fresh();old.level=137;ensureMerchant(old,1000);const once=JSON.stringify(old);assert(normalizeEquipmentLevels(old));assert.equal(JSON.stringify(old),once);assert(validSave(old));
+ const old=fresh();addTestEquipment(old);old.level=137;ensureMerchant(old,1000);const once=JSON.stringify(old);assert(normalizeEquipmentLevels(old));assert.equal(JSON.stringify(old),once);assert(validSave(old));
  for(const change of [it=>delete it.baseLevel,it=>delete it.levelSource,it=>it.baseLevel=-1,it=>it.baseLevel=Infinity,it=>it.levelSource='legacy']){const bad=JSON.parse(once);change(bad.inventory[0]);assert(!validSave(bad));const raw=JSON.stringify(bad);assert(!normalizeEquipmentLevels(bad));assert.equal(JSON.stringify(bad),raw);}
- assert(fresh().inventory.every(it=>it.baseLevel===1&&it.levelSource==='starter'));
+ assert.deepEqual(fresh().inventory,[],'new heroes have no implicit equipment provenance');
  for(const base of [1,3,6,9,10]){const levels=new Set();for(let i=0;i<1000;i++){const r=rollDropEquipmentLevel(base,[1,10]);assert.equal(r.baseLevel,base);assert.equal(r.levelSource,'drop');assert(r.level>=Math.max(1,base-2)&&r.level<=Math.min(10,base+2));levels.add(r.level);}assert.equal(levels.size,Math.min(10,base+2)-Math.max(1,base-2)+1);}
  let fused={baseLevel:10,level:12,levelSource:'equipment'};for(let i=0;i<1000;i++){fused=rollEquipmentFusionLevel([fused],()=>.999);assert.equal(fused.baseLevel,10);assert.equal(fused.level,12);}
  assert.deepEqual(rollEquipmentFusionLevel([{level:137,baseLevel:137,levelSource:'generated'}],()=>.999),{baseLevel:137,level:139,levelSource:'equipment'});assert.equal(rollEquipmentFusionLevel([]),null);assert.equal(rollEquipmentFusionLevel(Array(6).fill({level:2})),null);

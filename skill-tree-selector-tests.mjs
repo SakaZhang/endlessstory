@@ -6,7 +6,7 @@ let s=E.fresh();s.level=30;for(const id of ['fracture_strike','anvil_cry','ember
 s.heroHp=E.stats(s).hp;s.lastHealthClock=s.lastSeen=10000;s.restUntil=0;s.nextBattleAt=0;const e=E.startRoutedEncounter(s,10000);assert(e);for(const u of e.enemies)u.hp=u.max=1e6;
 
 let logs=E.step(s,e,11100);assert(logs);assert.equal(e.lastCast.skillId,'anvil_cry');assert(e.treeEffects.hero.sources.some(x=>x.type==='attackUp'));assert(E.validSave(s));
-logs=E.step(s,e,12200);assert(logs);assert.equal(e.lastCast.skillId,'cinder_barrage');assert.equal(e.lastCast.hits.length,s.inventory.find(it=>it.id===s.equip.weapon).weaponType==='axe'?3:2);assert(E.validSave(s));
+logs=E.step(s,e,12200);assert(logs);assert.equal(e.lastCast.skillId,'cinder_barrage');assert.equal(e.lastCast.hits.length,s.inventory.find(it=>it.id===s.equip.weapon)?.weaponType==='axe'?3:2);assert(E.validSave(s));
 // Saved encounter resumes the same selector/production enemies with identical persisted RNG.
 const resumed=JSON.parse(JSON.stringify(s));for(let i=3;i<=8;i++){const at=10000+i*1100;assert.deepEqual(E.step(s,e,at),E.step(resumed,resumed.activeEncounter,at));}assert.deepEqual(s,resumed);assert(E.validSave(s));
 // Default current entry never silently equips new skills.

@@ -9,7 +9,7 @@ function fixture(seedValue=68){
  // Item template selection hashes generated IDs, so pin the clock as well as RNG.
  const original=Math.random,originalNow=Date.now;Date.now=()=>1800000000006;let seed=seedValue;Math.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};
  try{
-  const s=preparedStoryGame('human');for(const [socket,id] of Object.entries(s.equip)){const old=s.inventory.find(it=>it.id===id),gear=E.item(old.slot,s.level,null,2,{originRace:s.race});s.inventory.push(gear);assert(E.equipItem(s,gear.id,socket));}
+  const s=preparedStoryGame('human');for(const [socket,id] of Object.entries(s.equip)){const gear=E.item(E.SOCKET_TYPE[socket]??socket,s.level,null,2,{originRace:s.race});s.inventory.push(gear);assert(E.equipItem(s,gear.id,socket));}
   const ring=E.legendaryItem('return-ring',1);s.inventory.push(ring);s.returnRing={version:1,recipeLearned:true,crafted:true,craftedItemId:ring.id};assert(E.equipItem(s,ring.id,'ring1'));s.heroHp=E.stats(s).hp*.6;E.normalizePotions(s);
   assert(E.startInstanceEncounter(s,'human.a03.boss',s.lastHealthClock+2000));s.lastSeen=s.lastHealthClock;s.stopAfterBattle=true;return s;
  }finally{Math.random=original;Date.now=originalNow;}

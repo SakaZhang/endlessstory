@@ -1,3 +1,4 @@
+import {equipTestLoadout} from './equipped-test-fixture.mjs';
 import {currentEncounter,markVictory,rewardSeeded} from './current-combat-test-fixture.mjs';
 import {enableM2TestBudget,prepareM2TestRoute} from './m2-test-budget-fixture.mjs';
 import {fresh} from './dist/engine.js';
@@ -7,7 +8,7 @@ import {emptyLootSummary} from './dist/inventory-schema.js';
 const original=Math.random;let seed=751;Math.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};
 const fill=(s,slot,n=50)=>{while(bagCounts(s).equipment[slot]<n)s.inventory.push(item(slot,1,null,0));};
 try{
- const s=fresh(),originalGear=JSON.stringify(s.inventory);assert(normalizeInventoryState(s));assert.deepEqual(s.lootFilters,{equipment:[],materials:[],items:[]});assert.equal(JSON.stringify(s.inventory),originalGear);const initialized=JSON.stringify(s);assert(normalizeInventoryState(s));assert.equal(JSON.stringify(s),initialized);
+ const s=fresh();assert.equal(s.inventory.length,0);equipTestLoadout(s);const originalGear=JSON.stringify(s.inventory);assert(normalizeInventoryState(s));assert.deepEqual(s.lootFilters,{equipment:[],materials:[],items:[]});assert.equal(JSON.stringify(s.inventory),originalGear);const initialized=JSON.stringify(s);assert(normalizeInventoryState(s));assert.equal(JSON.stringify(s),initialized);
  assert.equal(bagCounts(s).equipment.ring,2);for(const slot of SLOTS){fill(s,slot);assert(!canReceiveEquipment(s,slot));}assert.equal(s.inventory.length,SLOTS.length*50);assert(validSave(s));
  fill(s,'ring',75);const over=s.inventory.length;assert(validSave(s));assert(saveLoadout(s,0,'柜'));assert(saveLoadout(s,1,'共用柜'));assert.equal(bagCounts(s).equipment.ring,73);assert(deleteLoadout(s,0));assert(deleteLoadout(s,1));assert.equal(s.inventory.length,over);assert.equal(bagCounts(s).equipment.ring,75);assert(validSave(s));
  // Pure generic-stack fixtures exercise future capacity without inventing registered content.
@@ -19,7 +20,7 @@ try{
  // Full gear bag does not suppress other categories/gold/XP; filters and overflow count separately.
  Math.random=()=>0;const battle=fresh();for(const slot of SLOTS)fill(battle,slot);setLootFilter(battle,'materials',[0,1,2,3]);battle.consumables.reforgeToken=1e9;markVictory(currentEncounter(battle,true));const found=rewardSeeded(battle,(_s,e)=>e.lootSummary.overflow.equipment>=1&&e.lootSummary.overflow.items===1&&e.lootSummary.discarded.materials>=1);assert(found);assert(found.game.gold>battle.gold);assert(found.game.xp>0||found.game.level>1);assert(found.e.rewardNotes.some(x=>x.includes('品质过滤')));assert(found.e.rewardNotes.some(x=>x.includes('背包已满')));assert(validSave(found.game));
 
- const afk=fresh();normalizeHealth(afk,0);afk.lastSeen=0;afk.running=true;for(const category of ['equipment','materials','items'])setLootFilter(afk,category,[0,1,2,3]);enableM2TestBudget();prepareM2TestRoute(afk,0);let offlineSeed=132;Math.random=()=>((offlineSeed=(Math.imul(offlineSeed,1664525)+1013904223)>>>0)/2**32);const report=offline(afk,600000);assert(report.gold>0);assert(report.lootSummary.discarded.equipment>0);assert(report.lootSummary.discarded.materials>0);assert(afk.chronicle.some(x=>x.includes('品质过滤')));
+ const afk=fresh();equipTestLoadout(afk);normalizeHealth(afk,0);afk.lastSeen=0;afk.running=true;for(const category of ['equipment','materials','items'])setLootFilter(afk,category,[0,1,2,3]);enableM2TestBudget();prepareM2TestRoute(afk,0);let offlineSeed=132;Math.random=()=>((offlineSeed=(Math.imul(offlineSeed,1664525)+1013904223)>>>0)/2**32);const report=offline(afk,600000);assert(report.gold>0);assert(report.lootSummary.discarded.equipment>0);assert(report.lootSummary.discarded.materials>0);assert(afk.chronicle.some(x=>x.includes('品质过滤')));
  // Purchase capacities are based on actual target bag; rejected purchase costs nothing.
  Math.random=()=>0;const buyer=fresh();buyer.gold=10000;const m=ensureMerchant(buyer,1000),offer=m.offers.find(o=>o.type==='equipment');fill(buyer,offer.item.slot);let before=JSON.stringify(buyer);assert(!purchaseEquipment(buyer,offer.offerId,0,1001));assert.equal(JSON.stringify(buyer),before);
  const material=m.offers.find(o=>o.type==='material'),mk=materialKey(material.material,material.quality);buyer.materialStacks[mk]=1e12;before=JSON.stringify(buyer);assert(!buyMaterial(buyer,mk,1,0,1001));assert.equal(JSON.stringify(buyer),before);

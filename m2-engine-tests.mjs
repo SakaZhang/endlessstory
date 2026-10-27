@@ -14,7 +14,7 @@ console.log('PASS M2 actual 7-node spawn/step/save/settlement with explicit test
 // Real typed actor execution: no Chinese parsing, independent elemental power,
 // non-damaging shields, one-shot boss shield, source-snapshotted DOT.
 import {initializeDwarfActor} from './dist/dwarf-effects.js';
-function actorFixture(defId){const s=setup();s.skills=[null,null,null,null];const e=E.startInstanceEncounter(s,DWARF_MONSTERS[defId].nodes.at(-1),s.lastSeen);const u=e.enemies[0],d=DWARF_MONSTERS[defId],p={...FIXTURE_BUDGET.monsters[defId],hp:100000,atk:1,armor:100000,elementalPower:100,parameterSetId:'typed-test'};initializeDwarfActor(u,d,p,s.lastSeen);e.enemies=[u];e.targetId=u.id;e.rewardDefinitionId=defId;e.fieldGroup=false;return {s,e,u};}
+function actorFixture(defId){const s=setup();s.level=30;E.normalizeHealth(s,s.lastSeen);s.heroHp=E.stats(s).hp;s.skills=[null,null,null,null];const e=E.startInstanceEncounter(s,DWARF_MONSTERS[defId].nodes.at(-1),s.lastSeen);const u=e.enemies[0],d=DWARF_MONSTERS[defId],p={...FIXTURE_BUDGET.monsters[defId],hp:100000,atk:1,armor:100000,elementalPower:100,parameterSetId:'typed-test'};initializeDwarfActor(u,d,p,s.lastSeen);e.enemies=[u];e.targetId=u.id;e.rewardDefinitionId=defId;e.fieldGroup=false;return {s,e,u};}
 {
  const {s,e,u}=actorFixture('dwarf.a03.normal.3');const t=s.lastSeen;u.control.cooldowns[DWARF_MONSTERS[u.definitionId].skills[0].id]=t;u.nextBasicAt=t+60000;const hp=e.heroHp;E.step(s,e,t+1100);assert.equal(e.heroHp,hp,'shield skill must not deal damage');assert(u.shield>0);assert.equal(u.shieldUntil,t+7100);
 }

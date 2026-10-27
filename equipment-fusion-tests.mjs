@@ -1,3 +1,4 @@
+import {addTestEquipment} from './equipped-test-fixture.mjs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {fresh,item,forge,eligibleFusionEquipment,equipmentFusionQualityDistribution,rollEquipmentInputQuality,fusionDivineChance,validSave,applyForgeFavor,saveLoadout,equipItem,reforge,codexSetState,claimForgeResult,bagCounts,SLOTS} from './dist/engine.js';
@@ -12,12 +13,12 @@ try{
  assert.equal(fusionDivineChance(Array(5).fill({kind:'equipment',quality:3})),.06);assert(Math.abs(fusionDivineChance(Array(5).fill({kind:'material',quality:3}))-.055)<1e-12);
  // Invalid/protected/duplicate selections consume neither RNG nor state.
  for(const setup of [
- s=>[input(s.inventory[0])],
+ s=>[input(addTestEquipment(s))],
  s=>{const it=gear(s);it.locked=true;return[input(it)];},
  s=>{const it=gear(s);return[input(it),input(it)];},
  s=>[{kind:'equipment',id:'missing'}],
  s=>{const it=gear(s);return[input(it),'未知材料'];},
- s=>{const it=gear(s);equipItem(s,it.id,'ring1');saveLoadout(s,0,'柜');equipItem(s,s.inventory.find(x=>x.slot==='ring'&&x.id!==it.id).id,'ring1');return[input(it)];},
+ s=>{const it=gear(s);equipItem(s,it.id,'ring1');saveLoadout(s,0,'柜');addTestEquipment(s,{socket:'ring1'});return[input(it)];},
  s=>{const it=gear(s);reforge(s,it.id,'value',0);return[input(it)];},
  s=>Array(6).fill('铁屑|0')
  ]){const s=fresh();s.gold=1000;const selection=setup(s),before=JSON.stringify(s);let draws=0;Math.random=()=>{draws++;return .5;};assert.equal(forge(s,selection),null);assert.equal(draws,0);assert.equal(JSON.stringify(s),before);Math.random=rng;}
@@ -43,11 +44,13 @@ try{
  // This shifts subsequent seeded categorical traces (including mixed potion recipes),
  // not their probability tables. Equipment-input RNG and potion-only branches are unchanged.
  // These are the new 2000-result racial traces; base quality tables/equal-thirds remain tested above.
- const legacySequences=[
- [['铁屑|0'],'53c271ab6d661e2d5a4e70a0eb273b2966796c600f81f3a59ae4ac519ba5c4c6'],
- [Array(5).fill('铁屑|3'),'503805950d4764af0b78a6ba86c6e3f67f99548c0527e69cc1d4037064cff237'],
- [['灰根草|0','铁屑|0'],'f5969be67161541f3a85a038790abec9bdf3d9660679d4c6a10abc3fa439c09f'],
- [['灰根草|3','炉火晶|2','灰根草|1'],'2ec4d99e4e32567c26a0aa97fadf22823edef153f8465d8c7134965ade7e16f6']];
- for(const [selection,expected] of legacySequences){seed=91731;Math.random=rng;const p=fresh();p.level=20;p.talents.luck=0;p.gold=1e9;for(const k of selection)p.materialStacks[k]=10000;const rows=[];for(let n=0;n<2000;n++){const out=forge(p,selection);rows.push([out.kind??'equipment',out.rarity??out.quality,out.slot??out.potionType]);if(!out.kind)p.inventory.pop();}assert.equal(createHash('sha256').update(JSON.stringify(rows)).digest('hex'),expected);}
+ // v0.71 empty fresh consumes no starter-item RNG. Pin this new boundary
+ // explicitly, while retaining every probability/quality/divine assertion above.
+ const currentSequences=[
+ [['铁屑|0'],'94391b2c4d7880b241db01575ee83c2fa895bd329b8a276f5e2604dee44e9510'],
+ [Array(5).fill('铁屑|3'),'f948cf12ecfac8609bfa75344d7fe26ef63fc2f38d3cf024e994cbe00619ad15'],
+ [['灰根草|0','铁屑|0'],'34240b503ec21d90b1652e7618563644556ebad9c6811be6de9379852c37fa53'],
+ [['灰根草|3','炉火晶|2','灰根草|1'],'69a73e00dfa27e5c58d8ccd0017300805f0185cc23b64e7cb24eb1ca7c3a8b8a']];
+ for(const [selection,expected] of currentSequences){seed=91731;Math.random=rng;const p=fresh();assert.equal(seed,91731,'empty fresh must not consume equipment RNG');assert.equal(p.inventory.length,0);p.level=20;p.talents.luck=0;p.gold=1e9;for(const k of selection)p.materialStacks[k]=10000;const rows=[];for(let n=0;n<2000;n++){const out=forge(p,selection);rows.push([out.kind??'equipment',out.rarity??out.quality,out.slot??out.potionType]);if(!out.kind)p.inventory.pop();}assert.equal(createHash('sha256').update(JSON.stringify(rows)).digest('hex'),expected);}
  console.log('Equipment-input fusion:1161 exact dominance cases;5same20k with racial overlay',observed,'divine',gods,'; protected/duplicate no-RNG,1–5 mixed gear, independent blessing, level no-ratchet1000, pending/codex/storage atomics: PASS');
 }finally{Math.random=original;}

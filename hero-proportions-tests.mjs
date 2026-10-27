@@ -1,3 +1,4 @@
+import {addTestEquipment} from './equipped-test-fixture.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import * as E from './dist/engine.js';
@@ -15,7 +16,7 @@ for(const race of ['dwarf','human','elf','goblin','ashen']){
  for(const [weapon,key] of Object.entries(variants)){
   const sprite=manifest.sprites[key],idle=sprite.frames.find(f=>f.id===sprite.animations.idle[0]),box=idle.solidBBox??idle.alphaBBox,height=sprite.bodyReferenceBounds?sprite.bodyReferenceBounds[1]-sprite.bodyReferenceBounds[0]+1:box[3]-box[1]+1,scale=heroPresentationScale(sprite,race);
   assert.equal(height*scale,HERO_REFERENCE_HEIGHTS[race]??Math.min(94,height));
-  const state=E.fresh(race);if(weapon==='neutral')state.equip.weapon=null;else state.inventory.find(it=>it.id===state.equip.weapon).weaponType=weapon;
+  const state=E.fresh(race);if(weapon==='neutral')state.equip.weapon=null;else addTestEquipment(state,{weaponType:weapon});
   const view=createLiveBattlePresentation({manifest,images});
   for(const camp of [true,false]){state.atCamp=camp;state.siteId=race+'.a01';view.sync(state,null,{visible:true});assert.equal(view.status.mode,'ready');assert.equal(view.positions.hero.scale,scale);assert.equal(view.positions.hero.y,camp?manifest.campBackgrounds[race].baseline:203);assert(view.draw(canvas,0));}
   // Every native/neutral lifecycle frame uses the SAME transform and foot anchor.

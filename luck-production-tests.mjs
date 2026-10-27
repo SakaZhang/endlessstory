@@ -1,3 +1,4 @@
+import {addTestEquipment} from './equipped-test-fixture.mjs';
 import assert from 'node:assert/strict';
 import * as E from './dist/engine.js';
 import {createBattleAffixState,tryReaperHit,tryMulticast} from './dist/affix-expansion.js';
@@ -6,7 +7,7 @@ import {lootOccurrenceProbability,divineProbability,ordinarySecondRollProbabilit
 import {rollMonsterMaterials,getDwarfMaterialPool} from './dist/dwarf-material-catalog.js';
 const clone=x=>structuredClone(x),realRandom=Math.random;
 function forced(fn,random=()=>.5){const previous=Math.random;Math.random=random;try{return fn();}finally{Math.random=previous;}}
-function state(luck=0){const s=forced(()=>E.fresh());s.gold=100000;s.bonusTalentPoints=30;s.talents.luck=luck;s.materialStacks['铁屑|0']=100;s.consumables.reforgeToken=20;return s;}
+function state(luck=0){const s=forced(()=>E.fresh());s.gold=100000;s.level=31;s.talents.luck=luck;s.materialStacks['铁屑|0']=100;s.consumables.reforgeToken=20;return s;}
 // 1. Production material adapter: boundary occurrence changes, original source pool stays authoritative.
 const pool=getDwarfMaterialPool('dwarf.a01.normal.1','dwarf.a01.field');
 function materialRun(luck){let calls=0;return rollMonsterMaterials({}, {contentVersion:'dwarf-m2-v1',instanceId:'dwarf.a01.field'}, {definitionId:'dwarf.a01.normal.1',sourceInstanceId:'dwarf.a01.field',origin:'initial'}, {luck,random:()=>++calls===1?.36:.5,rollQuality:()=>0,owned:()=>false,receive:()=>true});}
@@ -30,7 +31,7 @@ for(const luck of [0,10]){const s=state(luck);s.learnedRecipes=['potion-healing'
 const stocks=[];for(const luck of [0,10]){const s=state(luck);forced(()=>E.ensureMerchant(s,100000));stocks.push(s.merchant.offers.map(o=>{const x=clone(o);delete x.offerId;if(x.item)x.item={slot:x.item.slot,level:x.item.level,rarity:x.item.rarity,affixes:x.item.affixes,special:x.item.special,divine:x.item.divine};return x;}));}assert.deepEqual(stocks[0],stocks[1]);
 // Real combat resolution is unchanged by lucky loot ratings.
 const combat=state();const active=forced(()=>E.encounter(combat),()=>.1);const combatNow=Date.now()+5000,outcomes=[];for(const luck of [0,10]){const s=clone(combat);s.talents.luck=luck;s.activeEncounter.luck=luck;E.step(s,s.activeEncounter,combatNow);const x=clone(s.activeEncounter);delete x.luck;outcomes.push(x);}assert.deepEqual(outcomes[0],outcomes[1]);
-const enhancements=[];for(const luck of [0,10]){const s=state(luck),id=s.equip.weapon;for(let i=0;i<3;i++){const q=E.quoteEnhancement(s,id);assert(q.ok);assert(E.enhanceEquipment(s,q,()=>0).success);}const q=E.quoteEnhancement(s,id),r=E.enhanceEquipment(s,q,()=>.999);enhancements.push({success:r.success,level:s.inventory.find(it=>it.id===id).enhancement.level});}assert.deepEqual(enhancements[0],enhancements[1]);
+const enhancements=[];for(const luck of [0,10]){const s=state(luck);s.level=31;const id=addTestEquipment(s).id;for(let i=0;i<3;i++){const q=E.quoteEnhancement(s,id);assert(q.ok);assert(E.enhanceEquipment(s,q,()=>0).success);}const q=E.quoteEnhancement(s,id),r=E.enhanceEquipment(s,q,()=>.999);enhancements.push({success:r.success,level:s.inventory.find(it=>it.id===id).enhancement.level});}assert.deepEqual(enhancements[0],enhancements[1]);
 for(const luck of [0,10]){assert.equal(tryReaperHit(createBattleAffixState('battle'),{battleId:'battle',castId:'cast',hitIndex:0,targetId:'enemy',hit:true,targetHp:100,hasReaper:true,luck},()=>.021).triggered,false);assert.equal(tryMulticast({source:'active',triggered:false,hasLivingEnemies:true,luck},{},()=>.151).triggered,false);}
 assert.equal(E.luckChance(10),ordinarySecondRollProbability(10),'quality second-roll policy applied once');assert(Math.abs(divineProbability(.03,10)-.034)<1e-12);assert(lootOccurrenceProbability(.08,10)>.08);
 console.log('Luck production PASS: material source adapter, gated sets, real completed field reward, fusion/full-reforge divine, raw donor single-copy, fixed recovery no RNG, merchant/combat/enhancement exclusions, mark source/rate, reaper/multicast exclusion, single quality-policy mapping.');

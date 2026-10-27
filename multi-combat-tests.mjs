@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {fresh,startDeveloperGroup,setCombatTarget,queueDeveloperAction,step,reward,validSave,offline,stats,LOCS} from './dist/engine.js';
+import {fresh,startDeveloperGroup,setCombatTarget,queueDeveloperAction,step,reward,validSave,offline,stats,LOCS,settleRest} from './dist/engine.js';
 const clone=x=>JSON.parse(JSON.stringify(x));
 function game(seed=9,count=3){let s=fresh();s.heroHp=stats(s).hp;s.restUntil=0;s.lastSeen=s.lastHealthClock=10000;s.nextActionAt=0;s.nextBattleAt=0;startDeveloperGroup(s,{count,seed},10000);assert(validSave(s));return s;}
 {
@@ -10,7 +10,8 @@ function game(seed=9,count=3){let s=fresh();s.heroHp=stats(s).hp;s.restUntil=0;s
 }
 {
  const a=game(24,2),b=clone(a);while(a.running){const e=a.activeEncounter;step(a,e,a.nextActionAt);if(e.done&&e.win)reward(a,e,a.lastHealthClock);}
- offline(b,10000+3600000);for(const k of ['inventory','materialStacks','gold','xp','kills','heroHp'])assert.deepEqual(b[k],a[k],k+' offline parity');
+ // Match the host wall-clock/rest settlement even when the unarmed hero loses.
+ settleRest(a,10000+3600000);offline(b,10000+3600000);for(const k of ['inventory','materialStacks','gold','xp','kills','heroHp'])assert.deepEqual(b[k],a[k],k+' offline parity');
 }
 {
  const s=game(),e=s.activeEncounter;s.skills=[null,null,null,null];e.heroBurn=2;e.heroBurnPower=10;e.shield=1000;e.barrier=5;e.barrierShield=1000;const hp=e.heroHp;step(s,e,11100);assert(e.heroHp<hp,'self burn bypasses shields');assert(e.shield>0);

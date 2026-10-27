@@ -1,3 +1,4 @@
+import {addTestEquipment} from './equipped-test-fixture.mjs';
 import assert from 'node:assert/strict';
 import * as E from './dist/engine.js';
 import {commitGameTransaction} from './dist/storage.js';
@@ -13,7 +14,7 @@ for(const [legendaryId,ledger] of identities){
   let tx=commitGameTransaction(storage,s,next=>E.disposeEquipment(next,it.id,action));assert.equal(tx.reason,'storage');assert.deepEqual(s,before);assert.deepEqual(JSON.parse(raw),before);fail=false;
   tx=commitGameTransaction(storage,s,next=>E.disposeEquipment(next,it.id,action));assert(tx.ok);assert(!tx.game.inventory.some(x=>x.id===it.id));assert.deepEqual(tx.game[ledger],before[ledger]);assert.equal(tx.game.gold,gold+(action==='sell'?E.sellValue(it):0));assert(E.validSave(JSON.parse(raw)));assert.equal((legendaryId==='return-ring'?craftReturnRing:craftInfinityGauntlet)(storage,tx.game).reason,'already-crafted');assert.equal(E.disposeEquipment(tx.game,it.id,action),null);
  }
- for(const mutate of [s=>s.inventory.find(x=>x.id===it.id).locked=true,s=>E.equipItem(s,it.id),s=>{E.equipItem(s,it.id);E.saveLoadout(s,0,'保护');E.equipItem(s,s.inventory.find(x=>x.slot===it.slot&&x.id!==it.id).id)}]){
+ for(const mutate of [s=>s.inventory.find(x=>x.id===it.id).locked=true,s=>E.equipItem(s,it.id),s=>{E.equipItem(s,it.id);E.saveLoadout(s,0,'保护');addTestEquipment(s,{socket:it.slot})}]){
   const s=clone(base);mutate(s);for(const action of ['sell','discard']){const before=clone(s);assert.equal(E.disposeEquipment(s,it.id,action),null);assert.deepEqual(s,before);}
  }
  const pending=clone(base),cost=E.getReforgeCost(it,'value',pending);for(const [key,n] of Object.entries(cost.materials??{}))pending.materialStacks[E.materialKey(key,0)]=(pending.materialStacks[E.materialKey(key,0)]??0)+n;assert(E.reforge(pending,it.id,'value',0));assert(pending.pendingReforge);for(const action of ['sell','discard']){const before=clone(pending);assert.equal(E.disposeEquipment(pending,it.id,action),null);assert.deepEqual(pending,before);}

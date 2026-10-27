@@ -1,3 +1,4 @@
+import {equipTestLoadout} from './equipped-test-fixture.mjs';
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
 import {mkdirSync,writeFileSync} from 'node:fs';
@@ -35,16 +36,16 @@ try{
 snap('monster-production-contact-sheet',sheet);
 // Normal production provider and original fresh hero. Only access records are seeded.
 const provider=dwarfParameterSet();assert.deepEqual(provider,PRODUCTION_DWARF_PARAMETERS);assert.equal(provider.reviewed,true);assert.notEqual(provider.testOnly,true);
-const s=E.fresh(),originalInventory=structuredClone(s.inventory),originalSkills=structuredClone(s.skills);
+const s=E.fresh();equipTestLoadout(s);const originalInventory=structuredClone(s.inventory),originalSkills=structuredClone(s.skills);
 E.normalizeHealth(s,100000);E.normalizeExpedition(s);
 s.areaProgress.dwarf={unlocked:[1,2,3],cleared:[1,2]};
 const initialStats=E.stats(s),initialHp=s.heroHp;
 const e=E.startInstanceEncounter(s,'dwarf.a03.boss',100000);assert(e);const boss=e.enemies.find(u=>u.definitionId==='dwarf.a03.boss');assert(boss);
-let now=100000;for(let i=0;i<30&&!boss.control.preparing&&!e.done;i++){now=s.nextActionAt;E.step(s,e,now);}assert(boss.control.preparing,'Normal fresh hero reaches the production boss preparing state');assert.equal(boss.control.preparing.duration,2200);
+let now=100000;for(let i=0;i<30&&!boss.control.preparing&&!e.done;i++){now=s.nextActionAt;E.step(s,e,now);}assert(boss.control.preparing,'Explicit owned Lv1 loadout reaches the production boss preparing state');assert.equal(boss.control.preparing.duration,2200);
 assert.deepEqual(s.inventory,originalInventory);assert.deepEqual(s.skills,originalSkills);
 const units=normalizeBattleEnemies(e,now);assert(units.some(u=>u.preparing));assert.equal(units[0].preparing.name,'断誓重槌');
 const bossScene={location:2,areaId:'dwarf.a03',time:1200,enemies:units,targetId:e.targetId,boss:true};snap('area-a03-real-engine-boss',render(bossScene));
 const html=renderEnemyRoster(e,{now});assert(html.includes('enemyUnitCast'));assert(html.includes('断誓重槌'));writeFileSync(new URL('boss-roster.html',out),html);
 writeFileSync(new URL('evidence.json',out),JSON.stringify({renderer:'dist/art.js drawScene (production)',capture:'Native @napi-rs/canvas export, NOT browser screenshot',boss:{definitionId:boss.definitionId,source:'Default reviewed production provider; E.fresh + E.startInstanceEncounter + actual E.step until preparing',parameterSetId:provider.id,reviewed:provider.reviewed,testOnly:provider.testOnly===true,provenance:DWARF_PARAMETER_PROVENANCE,accessFixture:'Only legal A03 unlock/clear records seeded: unlocked [1,2,3], cleared [1,2]. No level, hero HP, raw items, monster parameters, cooldowns or skills changed.',hero:{level:s.level,initialHp,initialStats,inventoryCount:originalInventory.length,skills:originalSkills,currentHp:s.heroHp},runtimeSkillOverrides:boss.skillOverrides,preparing:boss.control.preparing,normalizedPreparing:units[0].preparing,simulationClock:now,limitation:'Real casting state verified in engine and production HTML roster. HTML bar is outside canvas and intentionally not fabricated into PNG. boss-roster.html is production HTML, not a browser screenshot.'},hashes},null,2));
-console.log('PASS 26 historical A01–06 sprites distinct/non-fallback, 3 distinct areas, 2/3 formations, deterministic/nonmutating/no RNG, anonymous unknown SVG, legacy pixel hashes; default reviewed provider + unmodified fresh hero reaches named 2200ms boss preparing; production HTML exported (not browser evidence).');
+console.log('PASS 26 historical A01–06 sprites distinct/non-fallback, 3 distinct areas, 2/3 formations, deterministic/nonmutating/no RNG, anonymous unknown SVG, legacy pixel hashes; default reviewed provider + explicitly equipped Lv1 hero reaches named 2200ms boss preparing; production HTML exported (not browser evidence).');
 }

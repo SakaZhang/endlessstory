@@ -3,6 +3,7 @@
 import assert from 'node:assert/strict';
 import * as E from './dist/engine.js';
 export function addTestEquipment(s,{socket='weapon',level=1,quality=0,clean=true,equip=true,weaponType=null}={}){
+ if(socket==='ring')socket='ring1';
  const slot=E.SOCKET_TYPE[socket]??socket;
  let it;for(let attempt=0;attempt<512;attempt++){it=E.item(slot,level,null,quality,{originRace:s.race,levelSource:'generated'});if(!weaponType||it.weaponType===weaponType)break;}
  if(weaponType)assert.equal(it.weaponType,weaponType,'requested weapon family must be naturally generated');

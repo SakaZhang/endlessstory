@@ -1,3 +1,4 @@
+import {addTestEquipment} from './equipped-test-fixture.mjs';
 import {currentAffix} from './current-equipment-test-fixture.mjs';
 import {fresh} from './dist/engine.js';
 import assert from 'node:assert/strict';
@@ -24,7 +25,7 @@ try{
  const s=fresh(),it=target(s);it.affixes=[currentAffix('atk',3),currentAffix('hp',15),currentAffix('crit',5)];const donor=item(it.slot,1,null,1);donor.affixes=[currentAffix('armor',6),currentAffix('atk',8)];s.inventory.push(donor);const oldGold=s.gold;
  assert.deepEqual(eligibleReforgeDonors(s,it.id,0).find(x=>x.item.id===donor.id).affixes,[currentAffix('armor',6),currentAffix('atk',8)]);
  for(const flag of ['locked','legendaryId']){donor[flag]=flag==='locked'?true:'fake';assert(!eligibleReforgeDonors(s,it.id,0).some(x=>x.item.id===donor.id));donor[flag]=flag==='locked'?false:null;}
- equipItem(s,donor.id,it.slot);assert(!eligibleReforgeDonors(s,it.id,0).some(x=>x.item.id===donor.id));saveLoadout(s,0,'protected');equipItem(s,s.inventory.find(x=>x.slot===it.slot&&x.id!==it.id&&x.id!==donor.id).id,it.slot);assert(!eligibleReforgeDonors(s,it.id,0).some(x=>x.item.id===donor.id));s.loadouts[0]=null;
+ equipItem(s,donor.id,it.slot);assert(!eligibleReforgeDonors(s,it.id,0).some(x=>x.item.id===donor.id));saveLoadout(s,0,'protected');addTestEquipment(s,{socket:it.slot});assert(!eligibleReforgeDonors(s,it.id,0).some(x=>x.item.id===donor.id));s.loadouts[0]=null;
  Math.random=()=>0;const r=reforge(s,it.id,'replace',0,donor.id);assert(r);assert.equal(r.after[0].stat,'armor');assert.equal(r.after[0].value,6);assert(!s.inventory.some(x=>x.id===donor.id));assert.equal(s.gold,oldGold);assert.deepEqual(r.newSpecial,it.special??null);assert(resolveReforge(s,false));assert(!s.inventory.some(x=>x.id===donor.id));
  // A donor matching another retained slot is invalid and consumes nothing.
  const d=item(it.slot,1,null,0);d.affixes=[currentAffix('hp',20)];s.inventory.push(d);let calls=0;Math.random=()=>{calls++;return 0;};let before=JSON.stringify(s);assert.equal(reforge(s,it.id,'replace',0,d.id),null);assert.equal(reforge(s,it.id,'replace',0,it.id),null);assert.equal(calls,0);assert.equal(JSON.stringify(s),before);

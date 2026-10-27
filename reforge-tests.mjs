@@ -1,14 +1,15 @@
+import {addTestEquipment} from './equipped-test-fixture.mjs';
 import {currentAffix} from './current-equipment-test-fixture.mjs';
 import {fresh} from './dist/engine.js';
 import assert from 'node:assert/strict';
 import {item,getReforgeCost,reforge,resolveReforge,applyForgeFavor,affixRollInfo,AFFIX_DEFS,stats,equipItem,validSave} from './dist/engine.js';
 const original=Math.random;let seed=51481,calls=0;Math.random=()=>{calls++;seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};
 try{
- const s=fresh();s.consumables.reforgeToken=10000;s.gold=1e7;s.materialStacks['铁屑|0']=1e6;s.materialStacks['炉火晶|0']=1e6;
+ const s=fresh();const blank=addTestEquipment(s);s.consumables.reforgeToken=10000;s.gold=1e7;s.materialStacks['铁屑|0']=1e6;s.materialStacks['炉火晶|0']=1e6;
  const it=item('gloves',5,null,3);it.locked=true;it.bless=0;it.special={id:'knowledge'};applyForgeFavor(it);s.inventory.push(it);equipItem(s,it.id);
  let c=calls;for(let i=0;i<100;i++)for(const mode of ['value','replace','all'])assert(getReforgeCost(it,mode));assert.equal(calls,c);
  assert.deepEqual(getReforgeCost(it,'value'),{gold:25,materials:{'铁屑':1}});assert.deepEqual(getReforgeCost(it,'replace'),{gold:0,materials:{},equipment:1});assert.deepEqual(getReforgeCost(it,'all'),{gold:0,materials:{},consumables:{reforgeToken:1}});
- for(const [id,mode,index] of [['missing','value',0],[it.id,'bad',0],[it.id,'value',-1],[it.id,'replace',4],[it.id,'value',.5],[s.inventory[0].id,'all',0]]){const before=JSON.stringify(s),n=calls;assert.equal(reforge(s,id,mode,index),null);assert.equal(JSON.stringify(s),before);assert.equal(calls,n);}
+ for(const [id,mode,index] of [['missing','value',0],[it.id,'bad',0],[it.id,'value',-1],[it.id,'replace',4],[it.id,'value',.5],[blank.id,'all',0]]){const before=JSON.stringify(s),n=calls;assert.equal(reforge(s,id,mode,index),null);assert.equal(JSON.stringify(s),before);assert.equal(calls,n);}
  const fixed=({affixes,divine,special,...rest})=>({...rest,divine:{...divine,bonus:{...divine.bonus,affixes:undefined}}});const identity=fixed(structuredClone(it));
  for(let i=0;i<3000;i++){
   const mode=['value','replace','all'][i%3],index=i%4,before=structuredClone(it.affixes),gold=s.gold,iron=s.materialStacks['铁屑|0'],crystal=s.materialStacks['炉火晶|0'],cost=getReforgeCost(it,mode);
