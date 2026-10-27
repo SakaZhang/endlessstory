@@ -1,0 +1,138 @@
+{
+  "passed": true,
+  "errors": [],
+  "matrix": {
+    "dwarf": {
+      "slots": {
+        "weapon": 16,
+        "helm": 6,
+        "armor": 6,
+        "gloves": 6,
+        "boots": 6,
+        "ring": 6,
+        "amulet": 6
+      },
+      "nativeWeaponFamilies": {
+        "axe": 8,
+        "hammer": 8
+      },
+      "common": 52,
+      "extraCores": 0,
+      "setParts": 12,
+      "setIds": [
+        "anvil",
+        "rune",
+        "guard"
+      ],
+      "legends": 2
+    },
+    "human": {
+      "slots": {
+        "weapon": 16,
+        "helm": 6,
+        "armor": 6,
+        "gloves": 6,
+        "boots": 6,
+        "ring": 6,
+        "amulet": 6
+      },
+      "nativeWeaponFamilies": {
+        "sword_shield": 8,
+        "greatsword": 8
+      },
+      "common": 52,
+      "extraCores": 0,
+      "setParts": 12,
+      "setIds": [
+        "human_blood_oath",
+        "human_royal_edge",
+        "human_last_bastion"
+      ],
+      "legends": 2
+    },
+    "elf": {
+      "slots": {
+        "weapon": 16,
+        "helm": 6,
+        "armor": 6,
+        "gloves": 6,
+        "boots": 6,
+        "ring": 6,
+        "amulet": 6
+      },
+      "nativeWeaponFamilies": {
+        "bow": 8,
+        "staff": 8
+      },
+      "common": 52,
+      "extraCores": 0,
+      "setParts": 12,
+      "setIds": [
+        "elf_arrow",
+        "elf_prism",
+        "elf_root"
+      ],
+      "legends": 2
+    },
+    "goblin": {
+      "slots": {
+        "weapon": 16,
+        "helm": 6,
+        "armor": 6,
+        "gloves": 6,
+        "boots": 6,
+        "ring": 6,
+        "amulet": 6
+      },
+      "nativeWeaponFamilies": {
+        "dagger": 8,
+        "sword": 8
+      },
+      "common": 52,
+      "extraCores": 0,
+      "setParts": 12,
+      "setIds": [
+        "goblin_spore",
+        "goblin_ambush",
+        "goblin_snare"
+      ],
+      "legends": 2
+    },
+    "ashen": {
+      "slots": {
+        "weapon": 16,
+        "helm": 6,
+        "armor": 6,
+        "gloves": 6,
+        "boots": 6,
+        "ring": 6,
+        "amulet": 6
+      },
+      "nativeWeaponFamilies": {
+        "armguard": 8,
+        "hammer": 8
+      },
+      "common": 52,
+      "extraCores": 3,
+      "setParts": 12,
+      "setIds": [
+        "ashen.caldera",
+        "ashen.strata",
+        "ashen.prism"
+      ],
+      "legends": 4
+    }
+  },
+  "totals": {
+    "common": 260,
+    "ordinary": 263,
+    "sets": 60,
+    "legends": 14,
+    "definitions": 337
+  },
+  "reservedNonDrop": [
+    "infinity-gauntlet",
+    "return-ring",
+    "ashen-primal-core"
+  ]
+}
