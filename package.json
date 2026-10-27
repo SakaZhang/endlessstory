@@ -26,6 +26,7 @@
     "test:main-cast": "node main-cast-tests.mjs && node main-cast-app-ui-tests.cjs && node main-cast-native-proof.mjs",
     "test:art-cast-release": "node v068-art-cast-integration-tests.mjs && npm run test:chik-family && npm run test:family-events && node v068-mixed-dialogue-native-proof.mjs && npm run test:main-cast && node brock-redesign-tests.mjs && node brock-portrait-tests.mjs && node hero-proportions-tests.mjs && node live-battle-lifecycle-tests.mjs && node race-neutral-hero-tests.mjs && node race-art-routing-tests.mjs && node goblin-hero-facing-tests.mjs && node live-battle-scoped-loading-tests.mjs && node named-hero-selection-app-ui-tests.cjs && node story-event-app-ui-tests.cjs && node story-c08-app-ui-tests.cjs && node asset-recovery-app-ui-tests.cjs && node npc-portrait-tests.mjs",
     "test:family-events": "node chik-family-event-tests.mjs && node chik-family-event-app-ui-tests.cjs && node chik-family-reward-tests.mjs && node chik-family-reward-app-ui-tests.cjs",
-    "test:personal-arcs": "node personal-arc-runtime-tests.mjs && node personal-arc-app-ui-tests.cjs && node personal-arc-reward-tests.mjs"
+    "test:personal-arcs": "node personal-arc-runtime-tests.mjs && node personal-arc-app-ui-tests.cjs && node personal-arc-reward-tests.mjs",
+    "test:story-finale": "node story-finale-runtime-tests.mjs && node story-finale-balance-tests.mjs && node story-finale-background-tests.mjs && node story-finale-app-ui-tests.cjs && node story-finale-cancellation-app-ui-tests.cjs && node story-finale-native-proof.mjs"
   }
 }

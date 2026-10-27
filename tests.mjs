@@ -212,3 +212,6 @@ for(const file of ['chik-family-event-tests.mjs','chik-family-event-app-ui-tests
 
 // Five optional long arcs, actual site actions, resumed routes and durable rewards.
 for(const file of ['personal-arc-runtime-tests.mjs','personal-arc-app-ui-tests.cjs','personal-arc-reward-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+// Completed mainline: real five-POV gates, combat checkpoints, interruption and exact arena routing.
+for(const file of ['story-finale-runtime-tests.mjs','story-finale-balance-tests.mjs','story-finale-background-tests.mjs','story-finale-app-ui-tests.cjs','story-finale-cancellation-app-ui-tests.cjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
