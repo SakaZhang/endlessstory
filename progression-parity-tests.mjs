@@ -1,9 +1,10 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';import os from 'node:os';import path from 'node:path';import {execFileSync} from 'node:child_process';
-import * as E from './dist/engine.js';
+import {pathToFileURL} from 'node:url';
+const E=await import(pathToFileURL(path.resolve(process.env.PARITY_ENGINE_ROOT??new URL('.',import.meta.url).pathname,'dist/engine.js')));
 const [mode,race,dest]=process.argv.slice(2),START=1700000000000,HOURS=Number(process.env.PARITY_HOURS??4);
 if(mode){
- Date.now=()=>START;let z=1917;Math.random=()=>((z=(Math.imul(z,1664525)+1013904223)>>>0)/2**32);
+ Date.now=()=>START;let z=(Number(process.env.PARITY_SEED??1917)^0x9e3779b9)>>>0||1;Math.random=()=>{z^=z<<13;z^=z>>>17;z^=z<<5;return (z>>>0)/2**32;};
  const s=E.fresh(race);s.lastSeen=START;E.normalizeHealth(s,START);E.normalizeExpedition(s);E.normalizeMaterials(s);E.normalizePotions(s);s.worldEvents={version:1,lastProcessedAt:START,nextWarCheckAt:START+600000,rngState:1,serial:0};s.running=true;const end=START+HOURS*3600000;
  let report=null;if(mode==='offline'||mode==='capped')report=E.offline(s,end+(mode==='capped'?4*3600000:0));else{
  let time=START;while(time<end&&s.running){if(E.worldEventsDue(s,time))assert(E.advanceWorldEvents(s,time));if(s.restUntil>0){if(s.restUntil>end)break;time=Math.max(time,s.restUntil);E.settleRest(s,time);if(!s.running)break;continue;}if(s.nextBattleAt>time){time=Math.min(end,s.nextBattleAt);if(time>=end)break;}let e=s.activeEncounter;if(e?.done){if(e.win&&!e.rewarded)E.reward(s,e,time);else s.activeEncounter=null;continue;}if(!e){e=E.startRoutedEncounter(s,time);if(!e){if(s.restUntil>0)continue;break;}}const next=Math.max(time,s.nextActionAt??time+1100);if(next>end)break;time=next;if(E.worldEventsDue(s,time))assert(E.advanceWorldEvents(s,time));E.step(s,e,time);if(e.done&&e.win){E.reward(s,e,time);const before=JSON.stringify(s);E.reward(s,e,time);assert.equal(JSON.stringify(s),before,'no rewarded replay');}}
