@@ -1,3 +1,4 @@
+import {equipTestLoadout} from './equipped-test-fixture.mjs';
 import assert from 'node:assert/strict';
 import * as E from './dist/engine.js';
 import {RANDOM_WAR_MAX_MS,warKind,withWarReplay,validDiplomacy} from './dist/war-diplomacy.js';
@@ -44,7 +45,7 @@ for(const field of ['lastSeen','lastHealthClock']){const delayed=game(),online=g
 // farming a foreign field. Finish the admitted fight only, never farm the lock.
 const provider=dwarfParameterSet(),priorRandom=Math.random;try{
  const test={id:'war-world-parity',testOnly:true,reviewed:false,areas:[1,2,3],fieldGroupChance:0,clearRewards:Object.fromEntries([1,2,3].map(i=>[i,{gold:1,xp:1,materialRounds:0,gearChance:0,markChance:0}])),monsters:Object.fromEntries(Object.keys(DWARF_MONSTERS).filter(id=>Number(id.split('.')[1].slice(1))<=3).map(id=>[id,{hp:1,atk:1,armor:0,elementalPower:1,basicIntervalMs:2200,rewardGold:1,rewardXp:1}]))};assert(E.configureDwarfParameters(test));
- const initial=game('human');initial.siteId='dwarf.a01';initial.expedition.fieldId='dwarf.a01.field';initial.running=true;const online=structuredClone(initial),off=structuredClone(initial),end=start+4*3600000;
+ const initial=game('human');initial.level=100;equipTestLoadout(initial,{level:100});initial.heroHp=E.stats(initial).hp;initial.siteId='dwarf.a01';initial.expedition.fieldId='dwarf.a01.field';initial.running=true;const online=structuredClone(initial),off=structuredClone(initial),end=start+4*3600000;
  const seeded=()=>{let z=123456;Math.random=()=>((z=(Math.imul(z,1664525)+1013904223)>>>0)/4294967296)};seeded();const report=E.offline(off,end);seeded();let t=start,rounds=0;while(t<end&&online.running){if(online.nextBattleAt>t)t=online.nextBattleAt;if(t>=end)break;if(E.worldEventsDue(online,t))E.advanceWorldEvents(online,t);if(!online.running)break;let e=online.activeEncounter??E.startRoutedEncounter(online,t);if(!e)break;t=Math.max(t,online.nextActionAt??t+1100);if(E.worldEventsDue(online,t))E.advanceWorldEvents(online,t);E.step(online,e,t);rounds++;if(e.done&&e.win)E.reward(online,e,t);}E.advanceWorldEvents(online,end);assert.equal(report.kills,online.kills);assert.equal(off.gold,online.gold);assert.deepEqual(off.materialStacks,online.materialStacks);assert.deepEqual(off.diplomacy,online.diplomacy);assert.deepEqual(off.worldEvents,online.worldEvents);assert.equal(off.running,false);assert.equal(online.running,false);assert(off.kills>0);assert(E.validSave(off));
 }finally{E.configureDwarfParameters(provider);Math.random=priorRandom;}
 console.log('PASS random world lifecycle: explicit 1h hard cap, kinds, five-race gates, independent seeded schedule, 24-check offline parity, no return burst, bounded history, rollback expiry, story coexistence, exact-boundary gap, storage retry and real combat parity.');

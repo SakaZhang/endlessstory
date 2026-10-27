@@ -1,3 +1,4 @@
+import {MONSTER_BALANCE_ID} from './dist/monster-balance.js';
 import assert from 'node:assert/strict';
 import {historicalDwarfProvider} from './historical-dwarf-provider-fixture.mjs';
 import {execFileSync} from 'node:child_process';
@@ -19,7 +20,7 @@ function setup(){
 // Only encounter HP/shield/defense are reduced to isolate routing/settlement from balance.
 // The imported default provider and its parameter table are never injected or modified.
 function win(s,e){
- assert(e);assert(e.enemies.every(u=>u.parameterSetId===P.id));
+ assert(e);assert(e.enemies.every(u=>u.parameterSetId===MONSTER_BALANCE_ID));
  for(const u of e.enemies){u.hp=1;u.shield=0;u.shieldUntil=0;u.armor=0;u.atk=0;u.elementalPower=0;}
  for(let n=0;n<80&&!e.done;n++)E.step(s,e,s.nextActionAt);
  assert(e.done&&e.win);assert(E.validSave(s));return e;

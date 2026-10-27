@@ -1,3 +1,5 @@
+import {monsterParameters} from './dist/world-content.js';
+import {MONSTER_BALANCE_ID} from './dist/monster-balance.js';
 import assert from 'node:assert/strict';
 import * as E from './dist/engine.js';
 import {DWARF_MONSTERS,configureDwarfParameters,dwarfParameterSet,dwarfParameters,dwarfBudgetReady,dwarfEligibleMonsters} from './dist/dwarf-content.js';
@@ -47,8 +49,10 @@ try{
   const others=Object.values(DWARF_MONSTERS).filter(x=>x.id!==d.id&&x.nodes.includes(d.nodes.at(-1))&&x.rank===d.rank),nodes=others.map(x=>x.nodes);
   let e;try{others.forEach(x=>x.nodes=[]);e=E.startInstanceEncounter(s,d.nodes.at(-1),s.lastSeen);}finally{others.forEach((x,i)=>x.nodes=nodes[i]);}
   assert(e,'factory '+d.id);assert.equal(e.rewardDefinitionId,d.id);assert(e.enemies.every(x=>validDwarfActor(x)));assert(E.validSave(s),'factory save '+d.id);
-  if(d.id==='dwarf.a06.elite'){assert.equal(e.enemies.length,3);assert.deepEqual(e.enemies.map(x=>x.hp),[60000,20000,20000]);assert.deepEqual(e.enemies.map(x=>x.atk),[.6,.2,.2]);}
-  s.skills=[null,null,null,null];const leader=e.enemies[0];leader.control.cooldowns[d.skills[0].id]=s.lastSeen;leader.nextBasicAt=s.lastSeen+60000;
+  if(d.id==='dwarf.a06.elite'){assert.equal(e.enemies.length,3);assert(e.enemies.every(x=>x.parameterSetId===MONSTER_BALANCE_ID));for(const [i,share] of [.6,.2,.2].entries()){assert.equal(e.enemies[i].hp,monsterParameters(d.id).hp*share);assert.equal(e.enemies[i].atk,monsterParameters(d.id).atk*share);}}
+  // Mechanism-only fixture: production budget checked above; isolate typed actions from lethal damage.
+   for(const x of e.enemies){x.hp=x.max=100000;x.atk=1;x.armor=100000;x.elementalPower=10;}
+   s.skills=[null,null,null,null];const leader=e.enemies[0];leader.control.cooldowns[d.skills[0].id]=s.lastSeen;leader.nextBasicAt=s.lastSeen+60000;
   E.step(s,e,s.nextActionAt);assert.equal(leader.skillUses[d.skills[0].id],1,'production typed action '+d.id);if(d.id==='dwarf.a05.normal.1')assert.equal(e.nextBasicSlow,1.15,'actual typed slow host');assert(E.validSave(JSON.parse(JSON.stringify(s))),'post-action save '+d.id);
  }
  // Source boss windup suppresses basics; bounded shield is not an HP trigger or priority cast.

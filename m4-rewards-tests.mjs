@@ -1,3 +1,4 @@
+import {MONSTER_BALANCE_ID} from './dist/monster-balance.js';
 import assert from 'node:assert/strict';
 import * as E from './dist/engine.js';
 import {PRODUCTION_DWARF_PARAMETERS as P} from './dist/dwarf-parameters.js';
@@ -10,7 +11,7 @@ function setup(){
  s.areaProgress.dwarf={unlocked:[1,2,3,4,5,6,7,8,9,10],cleared:[1,2,3,4,5,6,7,8,9]};return s;
 }
 function victory(s,id,at=s.lastHealthClock){
- const e=E.startInstanceEncounter(s,id,at);assert(e,id);assert(e.enemies.every(u=>u.parameterSetId===P.id));
+ const e=E.startInstanceEncounter(s,id,at);assert(e,id);assert(e.enemies.every(u=>u.parameterSetId===MONSTER_BALANCE_ID));
  // Explicit encounter-only test reduction, not a balance or provider override.
  for(const u of e.enemies){u.hp=1;u.shield=0;u.shieldUntil=0;u.armor=0;u.atk=0;u.elementalPower=0;}
  for(let n=0;n<80&&!e.done;n++)E.step(s,e,s.nextActionAt);

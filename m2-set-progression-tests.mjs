@@ -1,3 +1,4 @@
+import {equipTestLoadout} from './equipped-test-fixture.mjs';
 import assert from 'node:assert/strict';
 import * as E from './dist/engine.js';
 import {enableM2TestBudget} from './m2-test-budget-fixture.mjs';
@@ -8,8 +9,8 @@ import {configureDwarfParameters} from './dist/dwarf-content.js';
 const originalRandom=Math.random,originalNow=Date.now;
 const fixtureSeed=Number(process.env.M2_SET_FIXTURE_SEED??1);assert(Number.isInteger(fixtureSeed)&&fixtureSeed>=0&&fixtureSeed<=0xffffffff);
 let fixtureRng=fixtureSeed;Math.random=()=>((fixtureRng=(Math.imul(fixtureRng,1664525)+1013904223)>>>0)/2**32);Date.now=()=>1770000000000;
-enableM2TestBudget();let s=E.fresh();s.lastSeen=0;E.normalizeHealth(s,0);E.normalizeExpedition(s);s.level=100;const testWeapon=E.item('weapon',100,null,3);testWeapon.special=null;s.inventory.push(testWeapon);assert(E.equipItem(s,testWeapon.id));s.heroHp=E.stats(s).hp;assert(E.validSave(s));
-const start=(state,id)=>{state.running=false;state.nextBattleAt=0;const now=Math.max(state.lastHealthClock??0,state.instanceCooldowns?.[id]??0);const e=E.startInstanceEncounter(state,id,now);assert(e,id);for(let i=0;i<10&&!e.done;i++)E.step(state,e,state.nextActionAt);assert(e.win,id+' actual combat win');return e;};
+enableM2TestBudget();let s=E.fresh();s.lastSeen=0;E.normalizeHealth(s,0);E.normalizeExpedition(s);s.level=100;equipTestLoadout(s,{level:100});const testWeapon=E.item('weapon',100,null,3);testWeapon.special=null;s.inventory.push(testWeapon);assert(E.equipItem(s,testWeapon.id));s.heroHp=E.stats(s).hp;assert(E.validSave(s));
+const start=(state,id)=>{state.running=false;state.nextBattleAt=0;const now=Math.max(state.lastHealthClock??0,state.instanceCooldowns?.[id]??0);const e=E.startInstanceEncounter(state,id,now);assert(e,id);for(let i=0;i<3000&&!e.done;i++)E.step(state,e,state.nextActionAt);assert(e.win,id+' actual combat win');return e;};
 for(const area of [1,2]){const id=`dwarf.a0${area}.dungeon`;for(let stage=1;stage<=3;stage++){const e=start(s,id);assert.equal(e.dungeonStage,stage);for(let seed=0;seed<128;seed++){const c=structuredClone(s);c.activeEncounter.rngState=seed;assert(!E.reward(c,c.activeEncounter,c.lastHealthClock)?.set,'A01/A02 actual source never sets');}const reward=E.reward(s,e,s.lastHealthClock);assert(!reward?.set);}assert(E.getAreaProgress(s).unlocked.includes(area+1));}
 assert.deepEqual(E.getAreaProgress(s).unlocked,[1,2,3]);
 // Actual A03 normal rewards, not source-policy-only synthetic calls. Replay the

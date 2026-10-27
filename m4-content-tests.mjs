@@ -1,3 +1,5 @@
+import {monsterParameters} from './dist/world-content.js';
+import {MONSTER_BALANCE_ID} from './dist/monster-balance.js';
 import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
 import * as E from './dist/engine.js';
@@ -62,9 +64,11 @@ try{
    }
    assert.equal(e.rewardDefinitionId,d.id,'sampled factory '+d.id);assert(E.validSave(s),'factory save '+d.id);
    if(d.id==='dwarf.a08.elite'){
-    assert.equal(e.enemies.length,3);assert.deepEqual(e.enemies.map(x=>x.hp),[60000,20000,20000]);assert.deepEqual(e.enemies.map(x=>x.atk),[.6,.2,.2]);
+    assert.equal(e.enemies.length,3);assert(e.enemies.every(x=>x.parameterSetId===MONSTER_BALANCE_ID));for(const [i,share] of [.6,.2,.2].entries()){assert.equal(e.enemies[i].hp,monsterParameters(d.id).hp*share);assert.equal(e.enemies[i].atk,monsterParameters(d.id).atk*share);}
     for(const f of e.enemies.slice(1)){assert(f.follower);assert.equal(nextDwarfAction(f,s.lastSeen+3000).id,'basic');}
    }
+   // Mechanism-only fixture: production budget checked above; isolate typed actions from lethal damage.
+   for(const x of e.enemies){x.hp=x.max=100000;x.atk=1;x.armor=100000;x.elementalPower=10;}
    s.skills=[null,null,null,null];const leader=e.enemies[0];leader.control.cooldowns[s0.id]=s.lastSeen;leader.nextBasicAt=s.lastSeen+60000;
    E.step(s,e,s.nextActionAt);if(s0.castMs)for(let n=0;n<3&&!leader.skillUses[s0.id];n++)E.step(s,e,s.nextActionAt);
    assert.equal(leader.skillUses[s0.id],1,'production action '+d.id);assert(E.validSave(JSON.parse(JSON.stringify(s))),'post action save '+d.id);
@@ -72,7 +76,7 @@ try{
     for(const x of e.enemies)x.hp=1;
     for(let i=0;i<50&&!e.done;i++)E.step(s,e,s.nextActionAt);
     assert(e.done&&e.win,'real shared-budget encounter victory');assert.equal(e.targetId,null);assert(E.validSave(s),'actual terminal encounter save');
-    const gold=s.gold,kills=s.kills;E.reward(s,e,s.lastHealthClock);assert(e.rewarded);assert.equal(s.gold-gold,24);assert.equal(s.kills-kills,1);
+    const gold=s.gold,kills=s.kills;E.reward(s,e,s.lastHealthClock);assert(e.rewarded);assert.equal(s.gold-gold,20+monsterParameters(d.id).rewardGold);assert.equal(s.kills-kills,1);
     const saved=JSON.stringify(s);E.reward(s,e,s.lastHealthClock);assert.equal(JSON.stringify(s),saved,'one reward per follower encounter');
    }
   }

@@ -16,7 +16,7 @@ try {
  }
  E.settleRest(online,end);online.lastSeen=end;Math.random=seed(331);const report=E.offline(offline,end);
  for(const key of ['heroHp','kills','level','xp','gold','potionStacks','nextActionAt','materialStacks'])assert.deepEqual(offline[key],online[key],key);
- const canonicalEncounter=e=>JSON.parse(JSON.stringify(e).replaceAll(e.id,'ENCOUNTER'));assert.deepEqual(canonicalEncounter(offline.activeEncounter),canonicalEncounter(online.activeEncounter));
+ const canonicalEncounter=e=>e===null?null:JSON.parse(JSON.stringify(e).replaceAll(e.id,'ENCOUNTER'));assert.deepEqual(canonicalEncounter(offline.activeEncounter),canonicalEncounter(online.activeEncounter));
  assert.equal(report.rounds,rounds);assert(E.validSave(online));assert(E.validSave(offline));
  console.log('PASS Goblin sword capped weakening actual online/offline parity',JSON.stringify({minutes:10,rounds,kills:online.kills,potions:5000-online.potionStacks['healing|0'],hp:online.heroHp}));
 }finally{Math.random=old;Date.now=oldNow;}

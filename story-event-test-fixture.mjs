@@ -15,7 +15,7 @@ export function preparedStoryGame(race,{level=60,now=1800000000000}={}){
 export function visitSceneSite(s,d){
  const now=Math.max(s.lastSeen,s.lastHealthClock??0,s.nextBattleAt??0)+2000;s.running=false;
  if(s.siteId!==d.siteId&&C.canEnterWarStoryScene(s,d.id)){assert(C.enterWarStoryScene(s,d.id));}
- else if(s.siteId!==d.siteId){assert(E.chooseAdventureNode(s,d.siteId+'.field',{start:true},now),'navigate '+d.id);const e=s.activeEncounter;s.stopAfterBattle=true;let rounds=0;while(!e.done&&rounds++<3000)E.step(s,e,s.nextActionAt);assert(e.done&&e.win,'travel clear '+d.id);E.reward(s,e,s.lastHealthClock);s.running=false;}
+ else if(s.siteId!==d.siteId){assert(E.chooseAdventureNode(s,d.siteId+'.field',{start:true},now),'navigate '+d.id+' '+JSON.stringify({now,valid:E.validSave(s),running:s.running,restUntil:s.restUntil,hp:s.heroHp,encounter:s.activeEncounter&&{done:s.activeEncounter.done,rewarded:s.activeEncounter.rewarded,scenario:s.activeEncounter.storyScenario},dungeon:s.dungeonRun,node:E.plannedNodes(s,now).find(n=>n.id===d.siteId+'.field')}));const e=s.activeEncounter;s.stopAfterBattle=true;let rounds=0;while(!e.done&&rounds++<3000)E.step(s,e,s.nextActionAt);assert(e.done&&e.win,'travel clear '+d.id);E.reward(s,e,s.lastHealthClock);s.running=false;}
  s.lastSeen=Math.max(now,s.lastHealthClock??0);return s.lastSeen;
 }
 export function readAndChooseStoryScene(s,d,selected){
