@@ -9,8 +9,8 @@ const click=(dataset={},id='')=>{const b={dataset,id};for(const fn of events.cli
  const seen=new Set(),identities=new Set(),rows=[];let lineCount=0;
  for(const [race,spring]of [['human','full'],['dwarf','full'],['elf','full'],['goblin','full'],['ashen','full'],['elf','skip']]){
   let game=F.preparedStoryGame(race);let n=0;
-  while(C.availableStoryScenes(game).length){
-   assert(n++<100);const offers=C.availableStoryScenes(game),d=offers.find(x=>spring==='skip'?!x.optional:true)??offers[0];F.visitSceneSite(game,d);if(game.story?.activeScene?.id!==d.id)assert(C.beginStoryScene(game,d.id));
+  while(C.availableStoryScenes(game).some(d=>!d.personal)){
+   assert(n++<100);const offers=C.availableStoryScenes(game).filter(d=>!d.personal),d=offers.find(x=>spring==='skip'?!x.optional:true)??offers[0];if(d.chapter>=9){game.running=false;const at=Math.max(game.lastSeen,game.lastHealthClock??0,game.nextBattleAt??0)+2000;assert(E.startRest(game,at));assert(E.settleRest(game,game.restUntil+1));game.lastSeen=game.lastHealthClock;}F.visitSceneSite(game,d);if(game.story?.activeScene?.id!==d.id)assert(C.beginStoryScene(game,d.id));
    now=game.lastSeen;store.set(SAVE_KEY,JSON.stringify(game));await refresh('main-cast-'+race+'-'+spring+'-'+n);click({race});seen.add(d.id);
    for(let i=0;i<d.lines.length;i++){
     const state=saved();assert.equal(state.story.activeScene.id,d.id);assert.equal(state.story.activeScene.cursor,i);const html=el('view').innerHTML,actor=storyCastSpeaker(d,d.lines[i]);assert(html.includes(renderStoryDialogue(d,d.lines[i],family?.chikFamilyDisplayText(d,d.lines[i]))),'actual App dialogue '+d.id+' @'+i);assert(!html.includes('current-dwarf-king'));if(actor){identities.add(actor.id);assert(html.includes(actor.role),'current canonical speaker role');if(actor.id==='hero.goblin')assert.equal(actor.role,'盗贼');if(actor.id==='hero.ashen')assert.equal(actor.role,'矿石行者');}lineCount++;
@@ -25,6 +25,6 @@ const click=(dataset={},id='')=>{const b={dataset,id};for(const fn of events.cli
    }
   }
  }
- assert.equal(seen.size,Object.keys(STORY_SCENES).length,'every one of 103 live scene IDs rendered');assert.equal(identities.size,15);fs.mkdirSync('qa/main-cast',{recursive:true});fs.writeFileSync('qa/main-cast/actual-app-coverage.json',JSON.stringify({kind:'actual app.js import, delegated clicks and storage; no browser screenshot',sceneIds:[...seen],identities:[...identities],lineCount,rows},null,2));Date.now=originalNow;
+ assert.equal(seen.size,Object.values(STORY_SCENES).filter(d=>!d.personal).length,'every live mainline scene ID rendered; personal early/late actions have their own actual-App suite');assert.equal(identities.size,15);fs.mkdirSync('qa/main-cast',{recursive:true});fs.writeFileSync('qa/main-cast/actual-app-coverage.json',JSON.stringify({kind:'actual app.js import, delegated clicks and storage; no browser screenshot',sceneIds:[...seen],identities:[...identities],lineCount,rows},null,2));Date.now=originalNow;
  console.log('PASS actual App main cast: all '+seen.size+' scene IDs, '+lineCount+' displayed dialogue states, '+identities.size+' speaking identities; full/skip spring branches; save-failure, repeated cursor, journal reload and knowledge-gated minister; king never inserted.');
 })().catch(e=>{console.error(e);process.exitCode=1});
