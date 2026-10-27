@@ -1,4 +1,5 @@
 import {personalActions,personalSceneIsLate,personalSceneSite,personalSceneRuntimeAvailable} from './personal-story-registry.js';
+import {storyCorridorExitAvailable} from './war-travel-boundary.js';
 import {STORY_SCENARIOS} from './story-scenario-registry.js';
 import {resolveStoryToolEncounter,finalizeStoryScenario} from './story-scenario-combat.js';
 import {territoryAccess} from './war-diplomacy.js';
@@ -73,13 +74,13 @@ export function validStoryEventState(s){
 export function storySafeToInteract(s){return s?.version===6&&s.developmentEquipmentSandbox!==true&&!s.running&&!s.dungeonRun&&(!s.activeEncounter||s.activeEncounter.rewarded===true)&&!(s.restUntil>Math.max(s.lastHealthClock??0,s.lastSeen??0));}
 export function storySceneLocationAvailable(s,d){
  const siteId=personalSceneSite(s,d);if(!d||!personalSceneRuntimeAvailable(s,d)||s.siteId!==siteId||!AREAS[siteId]||!storyTerritoryAccess(s,d.id).allowed)return false;
- const area=AREAS[siteId],progress=s.areaProgress?.[area.race];return progress?progress.unlocked?.includes(area.number):area.number===1;
+ const area=AREAS[siteId],progress=s.areaProgress?.[area.race];return (progress?progress.unlocked?.includes(area.number):area.number===1)||(!d.optional&&storyTerritoryAccess(s,d.id).storyOnly===true);
 }
 function sceneAreaUnlocked(s,d){const area=AREAS[personalSceneSite(s,d)],progress=area&&s.areaProgress?.[area.race];return !!area&&(progress?progress.unlocked?.includes(area.number):area.number===1);}
 export function canEnterWarStoryScene(s,id){
  if(!validStoryEventState(s)||!storySafeToInteract(s))return false;
  const d=scene(id),st=state(s),access=storyTerritoryAccess(s,id);
- return !!d&&d.pov===s.race&&!st.completedScenes.includes(id)&&(!st.activeScene||st.activeScene.id===id)&&prerequisites(st,d)&&sceneAreaUnlocked(s,d)&&access.allowed&&access.storyOnly===true&&s.siteId!==d.siteId;
+ return !!d&&d.pov===s.race&&!st.completedScenes.includes(id)&&(!st.activeScene||st.activeScene.id===id)&&prerequisites(st,d)&&(sceneAreaUnlocked(s,d)||!d.optional&&access.storyOnly===true)&&access.allowed&&access.storyOnly===true&&s.siteId!==d.siteId;
 }
 export function enterWarStoryScene(s,id){
  if(!canEnterWarStoryScene(s,id))return false;const next=structuredClone(s),d=scene(id),area=AREAS[d.siteId];
@@ -88,7 +89,7 @@ export function enterWarStoryScene(s,id){
  if(!next.story?.activeScene&&!beginStoryScene(next,id))return false;
  if(!validSave(next))return false;Object.assign(s,next);return {sceneId:id,entered:true,storyOnly:true};
 }
-export function warWithdrawalAvailable(s){return validSave(s)&&territoryAccess(s,AREAS[s.siteId]?.race).code==='war'&&(!s.activeEncounter||s.activeEncounter.rewarded===true);}
+export function warWithdrawalAvailable(s){return validSave(s)&&(territoryAccess(s,AREAS[s.siteId]?.race).code==='war'||storyCorridorExitAvailable(s))&&(!s.activeEncounter||s.activeEncounter.rewarded===true);}
 export function availableStoryScenes(s){
  if(!validStoryEventState(s))return [];
  const st=state(s);if(st.activeScene)return [];

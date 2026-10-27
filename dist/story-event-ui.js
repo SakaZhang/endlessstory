@@ -44,7 +44,7 @@ export function renderStoryEventBoard(s){
  else content=s.story?.flags.includes('EPILOGUE_COMPLETE')?'<p>主线与尾声已完成。门户已关闭，残留敌人与已开放支线仍可继续。五人保留联络，各族并未因此和解。</p>':v.chapter8Complete?'<p>界外入侵已经开始，双方转向抵抗恶魔。全境战争封锁已解除，但门户仍在运转。请继续返回神庙核实四处支撑，再与同伴会合。</p>':v.warOpeningComplete?'<p>前线任务已记录，请继续可用的救援与追踪场景。</p>':v.complete?'<p>前六章与归途之环图样已完成。后续章节尚未开放，不会以按钮跳过战争或结局。</p>':'<p>当前没有可开始的主线场景。</p>';
  if(s.story?.flags.includes('EPILOGUE_COMPLETE')&&v.available.length)content='<p role="status">主线与尾声已完成。可继续同一存档探索或再访其他四位主角；当前地图与随机战争门禁仍生效。</p>'+content;
  if(s.diplomacy?.wars?.some(w=>w.id===STORY_WAR_ID&&w.status==='active'))content+='<p role="status">精灵与烬裔的战事仍在持续。参战主角的敌境普通入口已封锁；本族、非敌对地区与已登记的剧情入口不受此封锁。继续主线至界外入侵后解除本次全境封锁；这不代表彼此和解。</p>';
- if(warWithdrawalAvailable(s))content+=button('retreat','','撤回本族起始营地',false,`data-story-return-site="${esc(s.race+'.a01')}"`)+'<p><small>只撤离当前战区；不额外休息、不恢复生命、不丢失战利品，当前剧情记录保留。</small></p>';
+ if(warWithdrawalAvailable(s))content+=button('retreat','','撤回本族起始营地',false,`data-story-return-site="${esc(s.race+'.a01')}"`)+'<p><small>撤回已解锁的本族营地；不额外休息、不恢复生命、不丢失战利品，当前剧情记录保留。</small></p>';
  return `<section class="panel storyEventBoard" aria-label="主线人物与事件"><h3>主线与个人长线</h3>${content}${renderPersonalRewards(s)}</section>`;
 }
 export function storyActionFromDataset(data){

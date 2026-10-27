@@ -745,7 +745,11 @@ export function startInstanceEncounter(s,instanceId,now=Date.now()){
 
 function startDwarfEncounter(s,instance,now,recordLocalExploration=true){
  const treeCarry=s.dungeonRun?.carry;
- const area=AREAS[instance.areaId];if(!areaBudgetReady(area.number,area.race)||!getAreaProgress(s,area.race)?.unlocked.includes(area.number))return null;
+ const area=AREAS[instance.areaId],story=STORY_SCENES[s.story?.activeScene?.id];
+ // Only the private registered-scene launcher passes recordLocalExploration=false.
+ // A story corridor never grants ordinary exploration access or area progress.
+ const storyCorridor=recordLocalExploration===false&&story?.optional===false&&story.pov===s.race&&story.siteId===instance.siteId&&story.encounter?.nodeId===instance.id&&storyTerritoryAccess(s,story.id).storyOnly===true;
+ if(!areaBudgetReady(area.number,area.race)||!getAreaProgress(s,area.race)?.unlocked.includes(area.number)&&!storyCorridor)return null;
  const stage=s.dungeonRun?.stage??1,rank=instance.kind==='boss'?'boss':instance.kind==='dungeon'&&stage===3?'elite':'normal',pool=eligibleMonsters(instance.id,rank);
  if(!pool.length)return null;
  const st=stats(s),id='m2-'+Math.floor(now)+'-'+(++serial),seed=rand(0,0xffffffff),e={contentVersion:'dwarf-m2-v1',location:area.number-1,siteId:instance.siteId,areaId:instance.areaId,instanceId:instance.id,kind:instance.kind,luck:st.luck,boss:instance.kind==='boss',heroHp:s.heroHp,round:0,warcry:0,ironcoat:0,barrier:0,barrierShield:0,heroBurn:0,heroBurnPower:0,weakness:0,guard:0,cd:{},shelterUsed:false,shield:0,done:false,rewarded:false,killSource:null,multiVersion:1,id,rngState:seed,rngDraws:0,itemSerial:0,summonSerial:0,activeCastCount:0,enemies:[],typedDots:[]};
