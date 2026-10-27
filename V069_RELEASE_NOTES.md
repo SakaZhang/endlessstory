@@ -15,7 +15,11 @@ Base: verified v0.68 a5a77d4b888b998d7fb54349d258fb639d2ef11f. This is a release
 
 The historical regression suite has been repaired against approved current rules: current save keys, authentic historical provider fixtures, current equipment/tree counts, correct image retry mock URLs and scoped old-source boundaries. Meaningful assertions remain; no production compatibility layer was added for retired saves.
 
-Final integrated command receipts and the release dependency graph must be recorded after the last runtime change. Earlier baseline results (229 MJS and 87 CJS plus aggregate npm success) are not by themselves the final candidate's acceptance.
+Final integrated `npm test` terminated with exit 0. The full non-browser inventory covers 329 suites: 327 passed the first inventory; two obsolete test assumptions were corrected, then both passed in an explicit rerun. All 329 now pass, comprising 238 MJS and 91 CJS suites. One browser-only suite was not run for the verified environment/access limits below. Main-cast coverage now includes all 204 mainline definitions, 1,370 displayed dialogue states and 15 exact speaking identities. See `tests/v069-final-verification.json`.
+
+Build/cache verification: 2,777 files, 2,775 resource URLs and 8,380 dependency edges; 8 byte-mutation and 9 broken-reference negative probes passed. Bundle hash: `4b9634d3fc71db9139672822015174ba18142e4e54b6bc88ddc5c55bfaf3909b`. The independent review covered final runtime `254ca2b`; subsequent changes only expanded/reconciled tests and documentation.
+
+An additional release-blocking just-in-time Elf war route was found and fixed: exact mandatory story corridors remain accessible without granting ordinary region unlocks. Cancel/retry and an explicit safe exit after the war ends preserve all progress without healing, rewards or forced travel. All five naturally earned saves now follow actual prerequisite dungeon progression through the full mainline.
 
 Natural resource-constrained simulations and actual earned-save routes demonstrate viable five-race progression, foreign dungeon unlocks and mainline completion. See PROGRESSION_ECONOMY_V069.md. Simulated engine hours are not measured human playtime. Potion use varies greatly with healing and lifesteal; the old 40–80 / four-hour target is not a universal result and no artificial minimum or healer nerf was added.
 

@@ -1,0 +1,34 @@
+{
+  "runtime_review_commit": "254ca2b3a810fd5707dc046eb08674631f485e3f",
+  "source_before_receipt": "19b54698196dbb4067c3f70bf7c24d81c4c30a0c",
+  "npm_test": {
+    "exit_code": 0,
+    "log": "/tmp/v069-final-npm-rerun.log"
+  },
+  "nonbrowser_inventory": {
+    "discovered": 330,
+    "covered": 329,
+    "passed": 329,
+    "first_run_passed": 327,
+    "corrected_test_rerun_passed": 2,
+    "notes": "Two old test assumptions corrected without runtime change: mainline cast traversal now covers all 204 mainline definitions while personal actions are separately tested; optional revisits wait through real random-war expiry. Mandatory war-entry test asserts isolated story admission without ordinary area unlock.",
+    "first_report": "/tmp/rpg-regressions-6pFj7Z/results.json",
+    "rerun_report": "/tmp/rpg-regressions-UAOiJZ/results.json"
+  },
+  "not_run": [
+    {
+      "file": "exploration-maps-browser-tests.cjs",
+      "reason": "Managed preview startup timeout; read-only owner-private live navigation reached login gate. No bypass."
+    }
+  ],
+  "build": {
+    "hash": "4b9634d3fc71db9139672822015174ba18142e4e54b6bc88ddc5c55bfaf3909b",
+    "files": 2777,
+    "urls": 2775,
+    "dependency_edges": 8380,
+    "byte_mutations": 8,
+    "negative_reference_mutations": 9
+  },
+  "native_not_browser": true,
+  "gauntlet_included": false
+}
