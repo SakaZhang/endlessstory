@@ -1,3 +1,4 @@
+import {renderPersonalArcRecords,renderPersonalRewards,personalSceneCallback} from './personal-story-ui.js';
 import {renderStoryDialogue,renderKnownStoryEvidence} from './story-cast-ui.js';
 import {storyCastDisplayLabel} from './story-cast-registry.js';
 import {chikFamilyDisplayText} from './chik-family-registry.js';
@@ -23,23 +24,27 @@ export function renderStoryEventBoard(s){
   content=`<h4>${esc(a.title)}</h4><p>${esc(storyCastDisplayLabel(a,chikFamilyDisplayText(a,a.npc)))} · ${esc(AREAS[a.siteId]?.name)} · 第${a.chapter}章</p><p>${esc(a.objective)}</p>`+warNotice(a.id)+renderChikFamilyCast(a,a.line);
   if(!a.atLocation)content+=a.entryAvailable?button('enter',a.id,'通过本场剧情入口前往')+'<p>仅本场剧情通行；普通刷怪入口仍封锁。</p>':storyTravelHint(s,a);
   if(!a.safe)content+='<p>请先结束当前战斗、停止远征并完成休息，再继续对话。</p>';
-  if(a.line!==null){content+=renderStoryDialogue(a,a.line,chikFamilyDisplayText(a,a.line))+button('next',a.id,'继续对话',blocked,`data-story-cursor="${a.cursor}"`);}
+  if(a.personal)content+='<p><strong>个人长线 · 可暂缓，不阻塞主线</strong></p>'+button('personal-pause',a.id,'保存这段进度，暂缓个人线',!a.safe||!!s.activeEncounter?.storyScenario)+renderPersonalArcRecords(s,a.arcId)+(personalSceneCallback(s,a)?'<p>'+esc(personalSceneCallback(s,a))+'</p>':'');
+  if(a.line!==null){const line=a.personalLate?(a.cursor===0?a.lateIntro:'只办理当前的修护与交接，既有经历不改写。'):a.line;content+=renderStoryDialogue(a,line,chikFamilyDisplayText(a,line))+button('next',a.id,'继续对话',blocked,`data-story-cursor="${a.cursor}"`);}
   else if(a.choiceId===null){content+='<div class="storyChoices">'+a.choices.map(c=>button('choice',a.id,(STORY_WAR_DECLARATIONS.includes(a.id)?'继续战争剧情 · ':'')+c.label,blocked,`data-story-choice="${esc(c.id)}"`)).join('')+'</div>';}
-  else if(a.encounter&&!a.receipt){
+  else if(a.personal&&a.personalStep<a.personalActions.length){
+   const step=a.personalActions[a.personalStep];content+='<section class="personalActionObjective" aria-label="个人线行动目标"><h4>行动 '+(a.personalStep+1)+' / '+a.personalActions.length+'</h4><p>'+esc(step.prompt)+'</p>'+step.options.map(o=>button('personal-step',a.id,o.label,blocked,`data-story-step="${a.personalStep}" data-story-option="${esc(o.id)}"`)).join('')+'</section>';
+   for(const done of a.personalActions.slice(0,a.personalStep))content+='<p>✓ '+esc(done.result)+'</p>';
+  }else if(a.encounter&&a.needsEncounter!==false&&!a.receipt){
    const scenario=a.encounter.kind==='scenario';content+='<p>尚未完成：'+esc(a.objective)+'</p>';
-   content+=scenario?button('scenario',a.id,a.questTool?'进入封印核心战':'进入剧情遭遇',!canStartStoryScenario(s,a.encounter.scenarioId),`data-story-scenario="${esc(a.encounter.scenarioId)}"`):button('encounter',a.id,'进入当地野外，清除阻碍',!canStartStoryFieldEncounter(s,a.encounter.nodeId),`data-story-node="${esc(a.encounter.nodeId)}"`);
+   content+=scenario?button('scenario',a.id,a.questTool?'进入封印核心战':'进入剧情遭遇',!canStartStoryScenario(s,a.encounter.scenarioId),`data-story-scenario="${esc(a.encounter.scenarioId)}"`):button('encounter',a.id,a.personal?'实地清除当前路线的野外威胁':'进入当地野外，清除阻碍',!canStartStoryFieldEncounter(s,a.encounter.nodeId),`data-story-node="${esc(a.encounter.nodeId)}"`);
    if(scenario)content+='<p><small>剧情遭遇无金币、经验或掉落。按现场目标战斗；失败可从本层安全点重试，已经完成的层次不会重打。</small></p>';
   }else{
    const selected=a.choices.find(c=>c.id===a.choiceId);if(a.receipt)content+='<p>遭遇结果已保存；继续处理现场。</p>';
-   content+=button('finish',a.id,STORY_WAR_DECLARATIONS.includes(a.id)?'确认推进战争剧情':a.grant==='ashen-primal-core'?'收好升级核心并离开':a.id.startsWith('C06.RR01.')?'确认学习归途之环图样':selected?.label??'继续处理现场',!a.ready);
+   content+=button('finish',a.id,STORY_WAR_DECLARATIONS.includes(a.id)?'确认推进战争剧情':a.grant==='ashen-primal-core'?'收好升级核心并离开':a.id.startsWith('C06.RR01.')?'确认学习归途之环图样':a.personal?'确认完成当前交接':selected?.label??'继续处理现场',!a.ready);
    if(a.grant==='ashen-primal-core')content+='<p><small>核心装备背包需有空位。领取、装备与剧情完成一次保存；空间不足不会前进或丢弃原核心。</small></p>';
   }
- }else if(v.available.length){content=v.available.map(d=>`<article class="storySceneOffer"><h4>${esc(d.title)}${d.optional?' · 可选':''}</h4><p>${esc(storyCastDisplayLabel(d,chikFamilyDisplayText(d,d.npc)))} · ${esc(AREAS[d.siteId]?.name)} · 第${d.chapter}章</p><p>${esc(d.objective)}</p>${warNotice(d.id)}${renderChikFamilyCast(d)}${button('begin',d.id,'与'+storyCastDisplayLabel(d,chikFamilyDisplayText(d,d.npc))+'交谈',!d.available)}${d.entryAvailable?button('enter',d.id,'通过本场剧情入口前往')+'<p><small>仅本场剧情通行；普通刷怪入口仍封锁。</small></p>':!d.atLocation?storyTravelHint(s,d):''}</article>`).join('');}
+ }else if(v.available.length){content=v.available.map(d=>`<article class="storySceneOffer"><h4>${esc(d.title)}${d.personal?' · 个人长线':d.optional?' · 可选':''}</h4><p>${esc(storyCastDisplayLabel(d,chikFamilyDisplayText(d,d.npc)))} · ${esc(AREAS[d.siteId]?.name)} · 第${d.chapter}章</p><p>${esc(d.objective)}</p>${warNotice(d.id)}${renderChikFamilyCast(d)}${button('begin',d.id,d.personal?(s.personalStoryProgress?.paused?.[d.id]?'继续已保存的个人线':'开始个人线 · '+d.title):'与'+storyCastDisplayLabel(d,chikFamilyDisplayText(d,d.npc))+'交谈',!d.available)}${d.entryAvailable?button('enter',d.id,'通过本场剧情入口前往')+'<p><small>仅本场剧情通行；普通刷怪入口仍封锁。</small></p>':!d.atLocation?storyTravelHint(s,d):''}</article>`).join('');}
  else content=s.story?.flags.includes('EPILOGUE_COMPLETE')?'<p>主线与尾声已完成。门户已关闭，残留敌人与已开放支线仍可继续。五人保留联络，各族并未因此和解。</p>':v.chapter8Complete?'<p>界外入侵已经开始，双方转向抵抗恶魔。全境战争封锁已解除，但门户仍在运转。请继续返回神庙核实四处支撑，再与同伴会合。</p>':v.warOpeningComplete?'<p>前线任务已记录，请继续可用的救援与追踪场景。</p>':v.complete?'<p>前六章与归途之环图样已完成。后续章节尚未开放，不会以按钮跳过战争或结局。</p>':'<p>当前没有可开始的主线场景。</p>';
  if(s.story?.flags.includes('EPILOGUE_COMPLETE')&&v.available.length)content='<p role="status">主线与尾声已完成。可继续同一存档探索或再访其他四位主角；当前地图与随机战争门禁仍生效。</p>'+content;
  if(s.diplomacy?.wars?.some(w=>w.id===STORY_WAR_ID&&w.status==='active'))content+='<p role="status">精灵与烬裔的战事仍在持续。参战主角的敌境普通入口已封锁；本族、非敌对地区与已登记的剧情入口不受此封锁。继续主线至界外入侵后解除本次全境封锁；这不代表彼此和解。</p>';
  if(warWithdrawalAvailable(s))content+=button('retreat','','撤回本族起始营地',false,`data-story-return-site="${esc(s.race+'.a01')}"`)+'<p><small>只撤离当前战区；不额外休息、不恢复生命、不丢失战利品，当前剧情记录保留。</small></p>';
- return `<section class="panel storyEventBoard" aria-label="主线人物与事件"><h3>主线人物与事件</h3>${content}</section>`;
+ return `<section class="panel storyEventBoard" aria-label="主线人物与事件"><h3>主线与个人长线</h3>${content}${renderPersonalRewards(s)}</section>`;
 }
 export function storyActionFromDataset(data){
  if(!data||typeof data.storyAction!=='string')return null;
@@ -47,7 +52,8 @@ export function storyActionFromDataset(data){
  if(typeof data.storyScene!=='string')return null;
  if(data.storyAction==='use-tool'&&typeof data.storyEncounter==='string'&&typeof data.storyTarget==='string')return {type:'use-tool',sceneId:data.storyScene,encounterId:data.storyEncounter,targetId:data.storyTarget};
  if(data.storyAction==='next'&&/^\d+$/.test(data.storyCursor??''))return {type:'next',sceneId:data.storyScene,cursor:Number(data.storyCursor)};
- if(['begin','finish','enter'].includes(data.storyAction))return {type:data.storyAction,sceneId:data.storyScene};
+ if(data.storyAction==='personal-step'&&/^\d+$/.test(data.storyStep??'')&&typeof data.storyOption==='string')return {type:'personal-step',sceneId:data.storyScene,step:Number(data.storyStep),optionId:data.storyOption};
+ if(['begin','finish','enter','personal-pause'].includes(data.storyAction))return {type:data.storyAction,sceneId:data.storyScene};
  if(data.storyAction==='choice'&&typeof data.storyChoice==='string')return {type:'choice',sceneId:data.storyScene,choiceId:data.storyChoice};
  if(data.storyAction==='scenario'&&typeof data.storyScenario==='string')return {type:'scenario',sceneId:data.storyScene,scenarioId:data.storyScenario};
  if(data.storyAction==='encounter'&&typeof data.storyNode==='string')return {type:'encounter',sceneId:data.storyScene,nodeId:data.storyNode};
