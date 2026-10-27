@@ -1,3 +1,4 @@
+import {applyEquipmentRuntimeChange} from './dist/equipment-runtime.js';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import * as E from './dist/engine.js';
@@ -10,7 +11,9 @@ import {renderEnemyRoster} from './dist/multi-battle-ui.js';
 import {commitGameTransaction,SAVE_KEY} from './dist/storage.js';
 import {reachStoryScene} from './story-event-test-fixture.mjs';
 import * as C from './dist/story-event-controller.js';
-function fixture(id){const d=STORY_SCENARIOS[id],s=reachStoryScene(d.race,d.sceneId,{level:d.sceneId.startsWith('C01')?1:60});assert(E.validSave(s));return s;}
+// Traverse chapters with explicit owned gear, then remove it through the runtime API:
+// these four-round pause/retry cases must not be the separately tested decisive-hit build.
+function fixture(id){const d=STORY_SCENARIOS[id],s=reachStoryScene(d.race,d.sceneId,{level:d.sceneId.startsWith('C01')?1:60});const empty=Object.fromEntries(Object.keys(s.equip).map(k=>[k,null]));assert(applyEquipmentRuntimeChange(s,s.equip,empty));s.equip=empty;E.normalizeHealth(s,s.lastHealthClock);s.heroHp=Math.min(s.heroHp,E.stats(s).hp);assert(E.validSave(s));return s;}
 const readyAt=s=>Math.max(s.lastHealthClock??0,s.nextBattleAt??0)+2000;
 const economy=s=>JSON.stringify({gold:s.gold,xp:s.xp,kills:s.kills,inventory:s.inventory,materials:s.materialStacks,consumables:s.consumables,cooldowns:s.instanceCooldowns,areaProgress:s.areaProgress});
 const manifest=extendBattleManifest(JSON.parse(fs.readFileSync('./dist/battle-assets/manifest.json')));
