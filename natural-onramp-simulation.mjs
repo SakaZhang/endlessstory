@@ -80,7 +80,7 @@ while(now<END){
  if(E.worldEventsDue(s,now))E.advanceWorldEvents(s,now);
  if(s.restUntil>0){const next=Math.min(END,s.restUntil);restMs+=Math.max(0,next-now);now=next;E.settleRest(s,now);if(now>=END)break;s.running=true;}
  if(!s.activeEncounter&&!s.dungeonRun&&now>=nextReview)review();
- now=Math.max(now,s.nextBattleAt??0);if(now>=END)break;
+ now=Math.min(END,Math.max(now,s.nextBattleAt??0));if(now>=END)break;
  let e=s.activeEncounter;
  if(!e){e=E.startRoutedEncounter(s,now);if(!e){if(s.restUntil>0)continue;throw Error('Route blocked without a battle/rest: '+JSON.stringify({level:s.level,expedition:s.expedition,now}));}encounterStart={at:now,hp:e.heroHp,kind:e.kind,stage:e.dungeonStage,runId:e.runId,inventory:new Set(s.inventory.map(i=>i.id))};if(e.runId&&!seenRun.has(e.runId)){seenRun.add(e.runId);runStarts.set(e.runId,{at:now,hp:e.heroHp,level:s.level,stages:[]});counts.dungeonAttempts++;}}
  const next=Math.max(now,s.nextActionAt??now+1100);if(next>END){now=END;break;}now=next;
