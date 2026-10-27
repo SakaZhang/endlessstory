@@ -1,3 +1,7 @@
+import './infinity-gauntlet-tests.mjs';
+import './infinity-gauntlet-combat-tests.mjs';
+import './infinity-gauntlet-recipe-tests.mjs';
+import './unique-crafted-disposal-tests.mjs';
 import './return-ring-drop-tests.mjs';
 import './npc-event-host-tests.mjs';
 import './return-ring-events-tests.mjs';

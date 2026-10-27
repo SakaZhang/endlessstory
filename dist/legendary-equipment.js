@@ -1,3 +1,4 @@
+import {INFINITY_GAUNTLET_DEFINITION} from './infinity-gauntlet-content.js';
 import {RETURN_RING_DEFINITION} from './return-ring-content.js';
 import {EXPANSION_PACKS} from './race-packs.js';
 // Registered legendary factory. Reward-source eligibility remains in the engine.
@@ -5,7 +6,7 @@ import {EXPANSION_PACKS} from './race-packs.js';
 import {CONFIG,deriveEquipmentBase,affixRange} from './equipment-budget.js';
 import {validAffixSource} from './affix-range.js';
 export const LEGENDARY_EQUIPMENT_DEFINITIONS=Object.freeze({
- 'return-ring':RETURN_RING_DEFINITION,...Object.fromEntries(EXPANSION_PACKS.flatMap(p=>p.legendaries.map(d=>[d.id,d]))),
+ 'infinity-gauntlet':INFINITY_GAUNTLET_DEFINITION,'return-ring':RETURN_RING_DEFINITION,...Object.fromEntries(EXPANSION_PACKS.flatMap(p=>p.legendaries.map(d=>[d.id,d]))),
  'first-forge-oathhammer':Object.freeze({id:'first-forge-oathhammer',ready:true,name:'王统·初炉誓锤',slot:'weapon',baseVariant:'hammer_balanced',weaponType:'hammer',originRace:'dwarf',exclusiveId:'ancestor-echo'}),
  'everburning-reactor':Object.freeze({id:'everburning-reactor',ready:true,name:'不熄之炉',slot:'amulet',baseVariant:'amulet_survival',originRace:'dwarf',exclusiveId:'residual-heat-cycle'})
 });

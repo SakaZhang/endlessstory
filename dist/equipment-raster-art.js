@@ -5,7 +5,7 @@ import {raceIconAsset} from './race-art.js';
 import {EQUIPMENT_TEMPLATE_BY_ID} from './equipment-templates.js';
 import {equipmentPresentation} from './equipment-presentation.js';
 import {EQUIPMENT_RASTER_ASSETS} from './equipment-raster-registry.js';
-export const LEGENDARY_RASTER_IDENTITIES=Object.freeze({...Object.fromEntries(EXPANSION_PACKS.flatMap(p=>p.legendaries.map(d=>[d.id,{id:d.id,name:d.name}]))),'first-forge-oathhammer':{id:'first-forge-oathhammer',name:'王统·初炉誓锤'},'everburning-reactor':{id:'everburning-reactor',name:'不熄之炉'}});
+export const LEGENDARY_RASTER_IDENTITIES=Object.freeze({'infinity-gauntlet':{id:'infinity-gauntlet',name:'无限手套'},...Object.fromEntries(EXPANSION_PACKS.flatMap(p=>p.legendaries.map(d=>[d.id,{id:d.id,name:d.name}]))),'first-forge-oathhammer':{id:'first-forge-oathhammer',name:'王统·初炉誓锤'},'everburning-reactor':{id:'everburning-reactor',name:'不熄之炉'}});
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function equipmentRasterSize(size=48){return size===32?32:size===64?64:48;}
 export function equipmentRasterSource(template,size=48){const id=template?.id;const racial=raceIconAsset('equipment',id,equipmentRasterSize(size));if(racial)return racial;return typeof id==='string'&&(Object.hasOwn(EQUIPMENT_TEMPLATE_BY_ID,id)||Object.hasOwn(LEGENDARY_RASTER_IDENTITIES,id))&&Object.hasOwn(EQUIPMENT_RASTER_ASSETS,id)?EQUIPMENT_RASTER_ASSETS[id][equipmentRasterSize(size)]:null;}

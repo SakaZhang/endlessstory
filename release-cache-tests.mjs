@@ -33,6 +33,10 @@ async function probe(output,report){
   const bytes=await readFile(join(output,'releases',report.release,path));assert.equal(digest(bytes),files.get(path).sha256);
   const text=bytes.toString(),ext=path.split('.').pop();
   for(const dep of deps(text,ext).filter(x=>!external(x)))await visit(new URL(dep,url),url.href);
+  if(path==='equipment-raster-registry.js'){
+   const {EQUIPMENT_RASTER_ASSETS}=await import(pathToFileURL(join(emittedRoot,path)));
+   for(const sizes of Object.values(EQUIPMENT_RASTER_ASSETS))for(const file of Object.values(sizes))await visit(new URL(file,release),url.href);
+  }
   if(path==='chik-family-registry.js'){
    const {CHIK_FAMILY_CHARACTERS}=await import(pathToFileURL(join(emittedRoot,path)));
    assert.equal(Object.keys(CHIK_FAMILY_CHARACTERS).length,3);
@@ -113,6 +117,7 @@ try{
  }
  // Negative references must fail traversal even when build hashes are internally valid.
  for(const [file,mutate] of [
+  ['equipment-raster-registry.js',text=>text.replace('equipment-assets/32/infinity-gauntlet.png','equipment-assets/32/missing-infinity.png')],
   ['map-assets/exploration-manifest.json',text=>text.replace('exploration-01.png','missing-exploration.png')],
   ['style.css',text=>text+'\n.broken{background:url(./missing-cache-probe.png)}'],
   ['npc-portrait-registry.js',text=>text.replace(/npc-portraits\/[^"']+\.png/,'npc-portraits/missing-registered-portrait.png')],
