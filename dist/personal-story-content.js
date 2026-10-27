@@ -2742,7 +2742,7 @@ export const PERSONAL_ARC_CONTENT = [
   "title": "越来越窄的粮路",
   "chapter": 6,
   "gate": "C06.G01.goblin",
-  "siteId": "goblin.a05",
+  "siteId": "goblin.a04",
   "intro": [
    "奇克：不能再只算我一个人能不能钻过去。",
    "咔洛想帮忙，米芮拿出分粮记号，豆布把碗护在怀里。"
@@ -2866,7 +2866,7 @@ export const PERSONAL_ARC_CONTENT = [
   "title": "一家人的路",
   "chapter": 10,
   "gate": "flag:G_FAMILY_SAFE",
-  "siteId": "goblin.a05",
+  "siteId": "goblin.a02",
   "intro": [
    "主线已确认咔洛、米芮与豆布真实抵达安全点。奇克再把名字逐个叫一遍。",
    "奇克：现在说谁还缺什么，不用只说没事。"
@@ -3016,7 +3016,7 @@ export const PERSONAL_ARC_CONTENT = [
   "title": "明天一起分",
   "chapter": 11,
   "gate": "flag:MAIN_STORY_CLEAR",
-  "siteId": "goblin.a05",
+  "siteId": "goblin.a02",
   "intro": [
    "奇克放下袋子，没有立刻替每个人分好。",
    "米芮：今天也把你算进去。",

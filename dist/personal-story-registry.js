@@ -14,3 +14,6 @@ export function personalActions(d,choiceId,late=false){
  return late?(c.lateActions??c.actions):c.actions;
 }
 export function personalSceneIsLate(s,d){return !!d?.personal&&d.chapter<9&&(s.story?.completedScenes??[]).some(id=>/^C\d\d\./.test(id)&&Number(id.slice(1,3))>d.chapter);}
+
+export function personalSceneSite(s,d){return d?.id==='personal.goblin.family.01'&&s.story?.flags.includes('G_FAMILY_SAFE')?'goblin.a02':d?.siteId;}
+export function personalSceneRuntimeAvailable(s,d){return !(d?.id==='personal.goblin.family.01'&&s.story?.flags.includes('INVASION_BEGAN')&&!s.story.flags.includes('G_FAMILY_SAFE'));}

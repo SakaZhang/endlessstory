@@ -1,7 +1,7 @@
 import {PERSONAL_STORY_SCENES} from './personal-story-registry.js';
 import {PERSONAL_ARC_REWARDS,PERSONAL_EVENT_REWARDS,personalArcRewardSlots,personalArcRewardStatus} from './personal-arc-rewards.js';
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const slotNames={weapon:'武器',helm:'头盔',armor:'护甲',boots:'靴子',ring:'戒指',amulet:'护符',offhand:'副手',core:'核心'};
+const slotNames={weapon:'武器',gloves:'手套',helm:'头盔',armor:'护甲',boots:'靴子',ring:'戒指',amulet:'护符',offhand:'副手',core:'核心'};
 export function renderPersonalArcRecords(s,arcId){
  const completed=(s.story?.completedScenes??[]).map(id=>PERSONAL_STORY_SCENES[id]).filter(d=>d&&(!arcId||d.arcId===arcId));
  if(!completed.length)return '';

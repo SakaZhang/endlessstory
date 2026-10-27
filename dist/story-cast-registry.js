@@ -56,6 +56,8 @@ for(const source of ['C10.D01','END.D01'])bind(source,'dwarf','矿班长','mine-
 for(const source of ['C10.E01','END.E01'])bind(source,'elf','守林者','forest-keeper');
 for(const source of ['C10.A01','END.A01']){bind(source,'ashen','修护者','ashen-repairer');bind(source,'ashen','哨卫','ashen-sentry');}
 for(const source of ['C10.H01','END.H01']){bind(source,'human','车夫','carter');bind(source,'human','斥候','border-scout');}
+for(let n=1;n<=8;n++)bind('personal.dwarf.coup.'+String(n).padStart(2,'0'),'dwarf','杜铎','mine-foreman');
+for(let n=1;n<=6;n++){bind('personal.elf.heir.'+String(n).padStart(2,'0'),'elf','伊瑟','elf-medic');bind('personal.human.duty.'+String(n).padStart(2,'0'),'human','鲁托','carter');}
 export const STORY_CAST_BINDINGS=freeze(bindings);
 function registeredScene(scene){const d=STORY_SCENES[scene?.id];return d&&d.sourceScene===scene.sourceScene&&d.pov===scene.pov?d:null;}
 export function storyCastAlias(scene,alias){
@@ -66,7 +68,7 @@ export function storyCastAlias(scene,alias){
 export function storyCastSpeaker(scene,line){
  const d=registeredScene(scene);if(!d||typeof line!=='string'||!d.lines.includes(line))return null;
  const match=line.match(/^([^：\[\]]+)：/);if(!match)return null;
- const alias=match[1];for(const [race,h]of Object.entries(HEROES))if(alias===h.name)return storyHeroDescriptor(race);
+ const alias=match[1];if(d.id==='personal.dwarf.coup.07'&&alias==='维尔铎')return {...STORY_CAST_CHARACTERS['dwarf-minister'],evidenceOnly:false};for(const [race,h]of Object.entries(HEROES))if(alias===h.name)return storyHeroDescriptor(race);
  if(alias==='主角'&&d.sourceScene==='C06.RR01')return storyHeroDescriptor(d.pov);
  if(alias==='砾恩在外'&&d.sourceScene==='C08.E03'&&d.pov==='elf')return {...storyHeroDescriptor('ashen'),delivery:'封印外传来'};
  return storyCastAlias(d,alias);

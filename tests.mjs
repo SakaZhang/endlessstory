@@ -209,3 +209,6 @@ for(const file of ['chik-family-tests.mjs','chik-family-app-ui-tests.cjs'])runAf
 
 // Six approved personal family scenes: fixed supplies and one earned stage claim.
 for(const file of ['chik-family-event-tests.mjs','chik-family-event-app-ui-tests.cjs','chik-family-reward-tests.mjs','chik-family-reward-app-ui-tests.cjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+// Five optional long arcs, actual site actions, resumed routes and durable rewards.
+for(const file of ['personal-arc-runtime-tests.mjs','personal-arc-app-ui-tests.cjs','personal-arc-reward-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});

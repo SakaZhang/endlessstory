@@ -9,6 +9,7 @@ export const CHIK_FAMILY_CHARACTERS=freeze({
 // Script source IDs, not new playable scene definitions. C10/END presentation is
 // ready for its future host; this table does not unlock or simulate those scenes.
 export const CHIK_FAMILY_SCENE_CAST=freeze({
+ ...Object.fromEntries([1,2,4].map(n=>['personal.goblin.family.'+String(n).padStart(2,'0'),['family.goblin.kalo','family.goblin.mirei','family.goblin.dobu']])),
  'C01.G01':['family.goblin.kalo','family.goblin.mirei','family.goblin.dobu'],
  'C02.O01':['family.goblin.kalo','family.goblin.mirei'],
  'C05.O01':['family.goblin.kalo','family.goblin.mirei'],
