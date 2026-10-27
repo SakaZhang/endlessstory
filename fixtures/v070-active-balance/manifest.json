@@ -1,0 +1,258 @@
+{
+  "sourceCommit": "9f56c77996038f929d390a35ac48167250f1475d",
+  "provenance": "Captured by exact v0.70 production engine; synthetic legal Lv100 generated Q3 equipment, diagnostic XP/access grants; actual encounters and preceding dungeon victories/rewards, paused before first action; not user saves or claimed natural acquisition",
+  "rows": [
+    {
+      "name": "human-field-1.json",
+      "race": "human",
+      "kind": "field",
+      "stage": 1,
+      "id": "human.a03.field",
+      "parameterSetIds": [
+        "human-initial-calibration-v1"
+      ]
+    },
+    {
+      "name": "human-dungeon-1.json",
+      "race": "human",
+      "kind": "dungeon",
+      "stage": 1,
+      "id": "human.a03.dungeon",
+      "parameterSetIds": [
+        "human-initial-calibration-v1"
+      ]
+    },
+    {
+      "name": "human-dungeon-2.json",
+      "race": "human",
+      "kind": "dungeon",
+      "stage": 2,
+      "id": "human.a03.dungeon",
+      "parameterSetIds": [
+        "human-initial-calibration-v1"
+      ]
+    },
+    {
+      "name": "human-dungeon-3.json",
+      "race": "human",
+      "kind": "dungeon",
+      "stage": 3,
+      "id": "human.a03.dungeon",
+      "parameterSetIds": [
+        "human-initial-calibration-v1"
+      ]
+    },
+    {
+      "name": "human-boss-1.json",
+      "race": "human",
+      "kind": "boss",
+      "stage": 1,
+      "id": "human.a03.boss",
+      "parameterSetIds": [
+        "human-initial-calibration-v1"
+      ]
+    },
+    {
+      "name": "dwarf-field-1.json",
+      "race": "dwarf",
+      "kind": "field",
+      "stage": 1,
+      "id": "dwarf.a03.field",
+      "parameterSetIds": [
+        "dwarf-a07-a10-v040-field-pressure-candidate"
+      ]
+    },
+    {
+      "name": "dwarf-dungeon-1.json",
+      "race": "dwarf",
+      "kind": "dungeon",
+      "stage": 1,
+      "id": "dwarf.a03.dungeon",
+      "parameterSetIds": [
+        "dwarf-a07-a10-v040-field-pressure-candidate"
+      ]
+    },
+    {
+      "name": "dwarf-dungeon-2.json",
+      "race": "dwarf",
+      "kind": "dungeon",
+      "stage": 2,
+      "id": "dwarf.a03.dungeon",
+      "parameterSetIds": [
+        "dwarf-a07-a10-v040-field-pressure-candidate"
+      ]
+    },
+    {
+      "name": "dwarf-dungeon-3.json",
+      "race": "dwarf",
+      "kind": "dungeon",
+      "stage": 3,
+      "id": "dwarf.a03.dungeon",
+      "parameterSetIds": [
+        "dwarf-a07-a10-v040-field-pressure-candidate"
+      ]
+    },
+    {
+      "name": "dwarf-boss-1.json",
+      "race": "dwarf",
+      "kind": "boss",
+      "stage": 1,
+      "id": "dwarf.a03.boss",
+      "parameterSetIds": [
+        "dwarf-a07-a10-v040-field-pressure-candidate"
+      ]
+    },
+    {
+      "name": "elf-field-1.json",
+      "race": "elf",
+      "kind": "field",
+      "stage": 1,
+      "id": "elf.a03.field",
+      "parameterSetIds": [
+        "elf-balance-candidate-v3-area-curve"
+      ]
+    },
+    {
+      "name": "elf-dungeon-1.json",
+      "race": "elf",
+      "kind": "dungeon",
+      "stage": 1,
+      "id": "elf.a03.dungeon",
+      "parameterSetIds": [
+        "elf-balance-candidate-v3-area-curve"
+      ]
+    },
+    {
+      "name": "elf-dungeon-2.json",
+      "race": "elf",
+      "kind": "dungeon",
+      "stage": 2,
+      "id": "elf.a03.dungeon",
+      "parameterSetIds": [
+        "elf-balance-candidate-v3-area-curve"
+      ]
+    },
+    {
+      "name": "elf-dungeon-3.json",
+      "race": "elf",
+      "kind": "dungeon",
+      "stage": 3,
+      "id": "elf.a03.dungeon",
+      "parameterSetIds": [
+        "elf-balance-candidate-v3-area-curve"
+      ]
+    },
+    {
+      "name": "elf-boss-1.json",
+      "race": "elf",
+      "kind": "boss",
+      "stage": 1,
+      "id": "elf.a02.boss",
+      "parameterSetIds": [
+        "elf-balance-candidate-v3-area-curve"
+      ]
+    },
+    {
+      "name": "goblin-field-1.json",
+      "race": "goblin",
+      "kind": "field",
+      "stage": 1,
+      "id": "goblin.a03.field",
+      "parameterSetIds": [
+        "goblin-initial-candidate-v1"
+      ]
+    },
+    {
+      "name": "goblin-dungeon-1.json",
+      "race": "goblin",
+      "kind": "dungeon",
+      "stage": 1,
+      "id": "goblin.a03.dungeon",
+      "parameterSetIds": [
+        "goblin-initial-candidate-v1"
+      ]
+    },
+    {
+      "name": "goblin-dungeon-2.json",
+      "race": "goblin",
+      "kind": "dungeon",
+      "stage": 2,
+      "id": "goblin.a03.dungeon",
+      "parameterSetIds": [
+        "goblin-initial-candidate-v1"
+      ]
+    },
+    {
+      "name": "goblin-dungeon-3.json",
+      "race": "goblin",
+      "kind": "dungeon",
+      "stage": 3,
+      "id": "goblin.a03.dungeon",
+      "parameterSetIds": [
+        "goblin-initial-candidate-v1"
+      ]
+    },
+    {
+      "name": "goblin-boss-1.json",
+      "race": "goblin",
+      "kind": "boss",
+      "stage": 1,
+      "id": "goblin.a03.boss",
+      "parameterSetIds": [
+        "goblin-initial-candidate-v1"
+      ]
+    },
+    {
+      "name": "ashen-field-1.json",
+      "race": "ashen",
+      "kind": "field",
+      "stage": 1,
+      "id": "ashen.a03.field",
+      "parameterSetIds": [
+        "ashen-a01-a10-candidate-v1",
+        "ashen-a01-a10-candidate-v1",
+        "ashen-a01-a10-candidate-v1"
+      ]
+    },
+    {
+      "name": "ashen-dungeon-1.json",
+      "race": "ashen",
+      "kind": "dungeon",
+      "stage": 1,
+      "id": "ashen.a03.dungeon",
+      "parameterSetIds": [
+        "ashen-a01-a10-candidate-v1"
+      ]
+    },
+    {
+      "name": "ashen-dungeon-2.json",
+      "race": "ashen",
+      "kind": "dungeon",
+      "stage": 2,
+      "id": "ashen.a03.dungeon",
+      "parameterSetIds": [
+        "ashen-a01-a10-candidate-v1"
+      ]
+    },
+    {
+      "name": "ashen-dungeon-3.json",
+      "race": "ashen",
+      "kind": "dungeon",
+      "stage": 3,
+      "id": "ashen.a03.dungeon",
+      "parameterSetIds": [
+        "ashen-a01-a10-candidate-v1"
+      ]
+    },
+    {
+      "name": "ashen-boss-1.json",
+      "race": "ashen",
+      "kind": "boss",
+      "stage": 1,
+      "id": "ashen.a04.boss",
+      "parameterSetIds": [
+        "ashen-a01-a10-candidate-v1"
+      ]
+    }
+  ]
+}
