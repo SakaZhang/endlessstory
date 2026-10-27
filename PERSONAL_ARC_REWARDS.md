@@ -7,7 +7,7 @@ Generation 6 is unchanged. `dist/personal-arc-rewards.js` is the sealed producti
 - Every non-final personal scene awards two existing Q0 healing potions, except the stage scenes below.
 - Dwarf scene `.04`, human/elf/ashen `.03` award one existing reforge token instead. Goblin's six household moments retain their existing separate early-stage token; new continuation `.01`–`.03` award two Q0 healing potions each.
 - A complete personal line awards exactly one ordinary Q3 non-set item, not legendary equipment. Available item-family choices are weapon, helm, armor, gloves, boots, ring and amulet, plus core for Ashen. Choices share the ordinary slot budgets, quality, four randomized affixes and normal special probability; no narrative branch has a stronger reward.
-- The item level is the character's current level ±2, minimum 1, when its first claim reservation commits. Story acceptance/completion level does not determine it. Random ordinary templates determine base stat allocation using the existing equipment-budget model.
+- The item level is the character's current level ±2, minimum 1, when its first claim reservation commits. Story acceptance/completion level does not determine it. The engine still accepts integer character levels 1–99999; reservations follow that current schema rather than inventing a migration/rejection at 100. Existing ordinary generation caps numeric budgets at level 100 while retaining displayed level/provenance. A reservation cannot exceed the current character level or have a timestamp later than the persisted save clock. Random ordinary templates determine base stat allocation using the existing equipment-budget model.
 
 ## UI contract
 
