@@ -215,3 +215,6 @@ for(const file of ['personal-arc-runtime-tests.mjs','personal-arc-app-ui-tests.c
 
 // Completed mainline: real five-POV gates, combat checkpoints, interruption and exact arena routing.
 for(const file of ['story-finale-runtime-tests.mjs','story-finale-balance-tests.mjs','story-finale-background-tests.mjs','story-finale-app-ui-tests.cjs','story-finale-cancellation-app-ui-tests.cjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+// Mandatory story corridors must not softlock just-in-time exploration.
+for(const file of ['story-war-locked-progression-tests.mjs','story-war-locked-progression-app-ui-tests.cjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
