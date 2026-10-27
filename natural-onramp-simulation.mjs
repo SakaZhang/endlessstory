@@ -14,7 +14,7 @@ const hours=Number(args.hours??.5),shopping=args.shopping!=='0',develop=args.dev
 assert(hours>0&&hours<=168);
 if(!args.single){
  const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'natural-onramp-')),rows=[];
- for(const race of races)for(const seed of seeds){const out=path.join(tmp,`${race}-${seed}.json`);const child={...args,'engine-root':root,races:race,seeds:seed,single:1,out};execFileSync(process.execPath,[new URL(import.meta.url).pathname,...Object.entries(child).map(([k,v])=>`--${k}=${v}`)],{stdio:'inherit'});rows.push(JSON.parse(fs.readFileSync(out)));if(args.out)fs.writeFileSync(args.out,JSON.stringify({policy:'Separate process per race/seed; each result carries policy and exact source revision.',rows},null,2));}
+ for(const race of races)for(const seed of seeds){const out=path.join(tmp,`${race}-${seed}.json`);const child={...args,'engine-root':root,races:race,seeds:seed,single:1,out};if(args.save)child.save=`${args.save}-${race}-${seed}.json`;execFileSync(process.execPath,[new URL(import.meta.url).pathname,...Object.entries(child).map(([k,v])=>`--${k}=${v}`)],{stdio:'inherit'});rows.push(JSON.parse(fs.readFileSync(out)));if(args.out)fs.writeFileSync(args.out,JSON.stringify({policy:'Separate process per race/seed; each result carries policy and exact source revision.',rows},null,2));}
  if(!args.out)console.log(JSON.stringify({rows},null,2));process.exit(0);
 }
 assert.equal(races.length,1);assert.equal(seeds.length,1);
