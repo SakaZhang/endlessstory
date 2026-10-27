@@ -65,3 +65,7 @@ clear, unsuccessful attempts, actual rest fraction, recipe availability,
 owned/crafted/consumed potions, and reconciled gold. Report missed milestones
 as censored, not zero. A low potion count without a recipe is supply-censored.
 No technical pass certifies all builds, human playtime, or a fixed potion band.
+
+For earned-save parity, set `PARITY_SAVE_PATTERN=/path/save-{race}-1917.json`.
+The save's own clock and world state are preserved, and both modes start from
+identical serialized input. No levels, equipment or unlocks are added.
