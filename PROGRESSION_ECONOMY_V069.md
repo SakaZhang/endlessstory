@@ -276,3 +276,16 @@ contracts passed there too; it accepts all five genuine earned baseline saves.
 This is explicitly an intermediate receipt, not approval of a newer release
 head. Stable integration `27c65a3` and later story-entry repairs require the
 separate final receipt requested by the release owner.
+
+### Reusable synthetic endpoint fixtures
+
+The five baseline earned saves are now bundled outside runtime assets at
+`fixtures/natural-progression-v068/{human,dwarf,elf,goblin,ashen}.json`.
+`provenance.json` records their SHA-256 hashes, byte sizes, exact baseline and
+producer commits, Node version, seed, clock origin, ordered shared-serial
+contract and regeneration command. They contain **no user data**, no completed
+story and no granted foreign-area access. Run
+`node natural-progression-fixture-tests.mjs` to verify hashes and compatibility.
+Story QA can read these source fixtures instead of depending on `/tmp` paths.
+The nondeterministically produced just-in-time war-block snapshot is deliberately
+not bundled into this deterministic producer fixture set.

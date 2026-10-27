@@ -1,0 +1,204 @@
+{
+  "version": 1,
+  "kind": "synthetic-production-engine-natural-progression",
+  "containsUserSave": false,
+  "baseCommit": "a5a77d4b888b998d7fb54349d258fb639d2ef11f",
+  "reproducibleProducerCommit": "dde43e129e32a0c5928dc9377c6f853719719272",
+  "engineGeneration": 6,
+  "nodeVersion": "v24.22.1",
+  "seed": 1917,
+  "initialDateNow": 1700000000000,
+  "orderedRaces": [
+    "human",
+    "dwarf",
+    "elf",
+    "goblin",
+    "ashen"
+  ],
+  "sharedModuleSerial": true,
+  "command": "node progression-economy-simulation.mjs --single=1 --hours=48 --seeds=1917 --save=/tmp/natural48 --out=/tmp/natural48-report.json",
+  "policy": "48 simulated expedition hours with 4-hour check-ins and 12 additional 5-minute camp rests; dungeon-first, real cooldown field fallback; earned talents 2power/1heart/1steel; first authored skill branch/root healing; score-based owned/shop gear; real sales; healing recipe only when offered and up to200 potions crafted from owned recovery materials. No XP/gear/material/unlock grants, no story rewards, no paid refreshes, no forging. Exact policy and caveats in PROGRESSION_ECONOMY_V069.md.",
+  "purpose": "Legitimate earned resource budgets for integrated story/foreign-access QA. Own regions cleared only; story and foreign areas are NOT pre-unlocked. These are synthetic test saves, not user saves or expected human playtime.",
+  "files": [
+    {
+      "file": "human.json",
+      "race": "human",
+      "bytes": 175505,
+      "sha256": "2dd8a19cea7b39c93cf0bed90f2b5829ebf13eb0584ed8a85b3f5c8303277517",
+      "level": 100,
+      "gold": 123068,
+      "kills": 13800,
+      "ownAreas": {
+        "unlocked": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "cleared": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "lastSeen": 1700176400000
+    },
+    {
+      "file": "dwarf.json",
+      "race": "dwarf",
+      "bytes": 208692,
+      "sha256": "e34604cbdd38c110516ca593d8552314a5ae2fdddc01f793dbe8d2303cb280e8",
+      "level": 100,
+      "gold": 148236,
+      "kills": 17977,
+      "ownAreas": {
+        "unlocked": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "cleared": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "lastSeen": 1700176400000
+    },
+    {
+      "file": "elf.json",
+      "race": "elf",
+      "bytes": 158022,
+      "sha256": "752034c232b050dcd405350009887adf31ec4c6eb2fd8fcc2229381bb4d54192",
+      "level": 100,
+      "gold": 209409,
+      "kills": 14497,
+      "ownAreas": {
+        "unlocked": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "cleared": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "lastSeen": 1700176400000
+    },
+    {
+      "file": "goblin.json",
+      "race": "goblin",
+      "bytes": 181706,
+      "sha256": "46c688e1042800a641a9b6c181ad50eca4c43975137bfe98a7804635f3ee79e6",
+      "level": 100,
+      "gold": 115955,
+      "kills": 11192,
+      "ownAreas": {
+        "unlocked": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "cleared": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "lastSeen": 1700176400000
+    },
+    {
+      "file": "ashen.json",
+      "race": "ashen",
+      "bytes": 166107,
+      "sha256": "620bc39895d17ba48c612f276930f88a9e35c25e58b06e64242f7f6770c797b7",
+      "level": 100,
+      "gold": 128029,
+      "kills": 13634,
+      "ownAreas": {
+        "unlocked": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "cleared": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "lastSeen": 1700176400000
+    }
+  ]
+}
