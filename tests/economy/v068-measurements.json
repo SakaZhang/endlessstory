@@ -1,0 +1,2220 @@
+{
+  "base": "a5a77d4b888b998d7fb54349d258fb639d2ef11f",
+  "seeds": [
+    1917,
+    8675309
+  ],
+  "baselineOrder": [
+    "human",
+    "dwarf",
+    "elf",
+    "goblin",
+    "ashen"
+  ],
+  "baselineSharedSerial": true,
+  "baseline": [
+    {
+      "race": "human",
+      "seed": 1917,
+      "level100ByHours": 40,
+      "final": {
+        "level": 100,
+        "gold": 123068,
+        "progress": {
+          "unlocked": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "cleared": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "materials": 14619,
+        "healingRecipe": false,
+        "potions": 0
+      },
+      "crafted": 0,
+      "craftGold": 0,
+      "sessions": [
+        {
+          "level": 1,
+          "area": 1,
+          "endLevel": 20,
+          "kills": 908,
+          "rests": 11,
+          "usedPotions": 0,
+          "unlocked": 2
+        },
+        {
+          "level": 20,
+          "area": 2,
+          "endLevel": 35,
+          "kills": 1454,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 3
+        },
+        {
+          "level": 35,
+          "area": 3,
+          "endLevel": 47,
+          "kills": 1398,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 4
+        },
+        {
+          "level": 47,
+          "area": 4,
+          "endLevel": 56,
+          "kills": 1150,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 5
+        },
+        {
+          "level": 56,
+          "area": 5,
+          "endLevel": 65,
+          "kills": 1201,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 6
+        },
+        {
+          "level": 65,
+          "area": 6,
+          "endLevel": 73,
+          "kills": 1208,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 7
+        },
+        {
+          "level": 73,
+          "area": 7,
+          "endLevel": 82,
+          "kills": 1126,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 8
+        },
+        {
+          "level": 82,
+          "area": 8,
+          "endLevel": 89,
+          "kills": 973,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 9
+        },
+        {
+          "level": 89,
+          "area": 9,
+          "endLevel": 96,
+          "kills": 994,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 10
+        },
+        {
+          "level": 96,
+          "area": 10,
+          "endLevel": 100,
+          "kills": 948,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 10
+        },
+        {
+          "level": 100,
+          "area": 10,
+          "endLevel": 100,
+          "kills": 1203,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 10
+        },
+        {
+          "level": 100,
+          "area": 10,
+          "endLevel": 100,
+          "kills": 1237,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 10
+        }
+      ]
+    },
+    {
+      "race": "dwarf",
+      "seed": 1917,
+      "level100ByHours": 36,
+      "final": {
+        "level": 100,
+        "gold": 148236,
+        "progress": {
+          "unlocked": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "cleared": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "materials": 15844,
+        "healingRecipe": true,
+        "potions": 200
+      },
+      "crafted": 355,
+      "craftGold": 840,
+      "sessions": [
+        {
+          "level": 1,
+          "area": 1,
+          "endLevel": 6,
+          "kills": 88,
+          "rests": 40,
+          "usedPotions": 0,
+          "unlocked": 2
+        },
+        {
+          "level": 6,
+          "area": 1,
+          "endLevel": 29,
+          "kills": 1812,
+          "rests": 2,
+          "usedPotions": 52,
+          "unlocked": 2
+        },
+        {
+          "level": 29,
+          "area": 2,
+          "endLevel": 46,
+          "kills": 2227,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 3
+        },
+        {
+          "level": 46,
+          "area": 3,
+          "endLevel": 58,
+          "kills": 1817,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 4
+        },
+        {
+          "level": 58,
+          "area": 4,
+          "endLevel": 69,
+          "kills": 1742,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 5
+        },
+        {
+          "level": 69,
+          "area": 5,
+          "endLevel": 79,
+          "kills": 1643,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 6
+        },
+        {
+          "level": 79,
+          "area": 6,
+          "endLevel": 89,
+          "kills": 1689,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 7
+        },
+        {
+          "level": 89,
+          "area": 7,
+          "endLevel": 99,
+          "kills": 1564,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 8
+        },
+        {
+          "level": 99,
+          "area": 8,
+          "endLevel": 100,
+          "kills": 1539,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 9
+        },
+        {
+          "level": 100,
+          "area": 9,
+          "endLevel": 100,
+          "kills": 1307,
+          "rests": 0,
+          "usedPotions": 102,
+          "unlocked": 10
+        },
+        {
+          "level": 100,
+          "area": 10,
+          "endLevel": 100,
+          "kills": 1150,
+          "rests": 0,
+          "usedPotions": 1,
+          "unlocked": 10
+        },
+        {
+          "level": 100,
+          "area": 10,
+          "endLevel": 100,
+          "kills": 1399,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 10
+        }
+      ]
+    },
+    {
+      "race": "elf",
+      "seed": 1917,
+      "level100ByHours": 32,
+      "final": {
+        "level": 100,
+        "gold": 209409,
+        "progress": {
+          "unlocked": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "cleared": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "materials": 14873,
+        "healingRecipe": true,
+        "potions": 200
+      },
+      "crafted": 200,
+      "craftGold": 800,
+      "sessions": [
+        {
+          "level": 1,
+          "area": 1,
+          "endLevel": 28,
+          "kills": 1184,
+          "rests": 10,
+          "usedPotions": 0,
+          "unlocked": 2
+        },
+        {
+          "level": 28,
+          "area": 2,
+          "endLevel": 43,
+          "kills": 1396,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 3
+        },
+        {
+          "level": 43,
+          "area": 3,
+          "endLevel": 56,
+          "kills": 1555,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 4
+        },
+        {
+          "level": 56,
+          "area": 4,
+          "endLevel": 66,
+          "kills": 1101,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 5
+        },
+        {
+          "level": 66,
+          "area": 5,
+          "endLevel": 74,
+          "kills": 1052,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 6
+        },
+        {
+          "level": 74,
+          "area": 6,
+          "endLevel": 83,
+          "kills": 1145,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 7
+        },
+        {
+          "level": 83,
+          "area": 7,
+          "endLevel": 92,
+          "kills": 1215,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 8
+        },
+        {
+          "level": 92,
+          "area": 8,
+          "endLevel": 100,
+          "kills": 1149,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 9
+        },
+        {
+          "level": 100,
+          "area": 9,
+          "endLevel": 100,
+          "kills": 1265,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 10
+        },
+        {
+          "level": 100,
+          "area": 10,
+          "endLevel": 100,
+          "kills": 1121,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 10
+        },
+        {
+          "level": 100,
+          "area": 10,
+          "endLevel": 100,
+          "kills": 1108,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 10
+        },
+        {
+          "level": 100,
+          "area": 10,
+          "endLevel": 100,
+          "kills": 1206,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 10
+        }
+      ]
+    },
+    {
+      "race": "goblin",
+      "seed": 1917,
+      "level100ByHours": 44,
+      "final": {
+        "level": 100,
+        "gold": 115955,
+        "progress": {
+          "unlocked": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "cleared": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "materials": 11885,
+        "healingRecipe": true,
+        "potions": 200
+      },
+      "crafted": 251,
+      "craftGold": 986,
+      "sessions": [
+        {
+          "level": 1,
+          "area": 1,
+          "endLevel": 12,
+          "kills": 284,
+          "rests": 33,
+          "usedPotions": 0,
+          "unlocked": 2
+        },
+        {
+          "level": 12,
+          "area": 2,
+          "endLevel": 23,
+          "kills": 642,
+          "rests": 21,
+          "usedPotions": 0,
+          "unlocked": 3
+        },
+        {
+          "level": 23,
+          "area": 3,
+          "endLevel": 33,
+          "kills": 780,
+          "rests": 12,
+          "usedPotions": 0,
+          "unlocked": 4
+        },
+        {
+          "level": 33,
+          "area": 4,
+          "endLevel": 44,
+          "kills": 1004,
+          "rests": 5,
+          "usedPotions": 0,
+          "unlocked": 5
+        },
+        {
+          "level": 44,
+          "area": 5,
+          "endLevel": 54,
+          "kills": 1005,
+          "rests": 6,
+          "usedPotions": 0,
+          "unlocked": 6
+        },
+        {
+          "level": 54,
+          "area": 6,
+          "endLevel": 63,
+          "kills": 1049,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 7
+        },
+        {
+          "level": 63,
+          "area": 7,
+          "endLevel": 72,
+          "kills": 1035,
+          "rests": 1,
+          "usedPotions": 0,
+          "unlocked": 8
+        },
+        {
+          "level": 72,
+          "area": 8,
+          "endLevel": 81,
+          "kills": 1041,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 9
+        },
+        {
+          "level": 81,
+          "area": 9,
+          "endLevel": 91,
+          "kills": 1110,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 10
+        },
+        {
+          "level": 91,
+          "area": 10,
+          "endLevel": 99,
+          "kills": 1051,
+          "rests": 0,
+          "usedPotions": 36,
+          "unlocked": 10
+        },
+        {
+          "level": 99,
+          "area": 10,
+          "endLevel": 100,
+          "kills": 1094,
+          "rests": 0,
+          "usedPotions": 15,
+          "unlocked": 10
+        },
+        {
+          "level": 100,
+          "area": 10,
+          "endLevel": 100,
+          "kills": 1097,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 10
+        }
+      ]
+    },
+    {
+      "race": "ashen",
+      "seed": 1917,
+      "level100ByHours": 40,
+      "final": {
+        "level": 100,
+        "gold": 128029,
+        "progress": {
+          "unlocked": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "cleared": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "materials": 13862,
+        "healingRecipe": true,
+        "potions": 200
+      },
+      "crafted": 268,
+      "craftGold": 743,
+      "sessions": [
+        {
+          "level": 1,
+          "area": 1,
+          "endLevel": 19,
+          "kills": 740,
+          "rests": 21,
+          "usedPotions": 0,
+          "unlocked": 2
+        },
+        {
+          "level": 19,
+          "area": 2,
+          "endLevel": 33,
+          "kills": 1233,
+          "rests": 8,
+          "usedPotions": 0,
+          "unlocked": 3
+        },
+        {
+          "level": 33,
+          "area": 3,
+          "endLevel": 44,
+          "kills": 1241,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 4
+        },
+        {
+          "level": 44,
+          "area": 4,
+          "endLevel": 55,
+          "kills": 1258,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 5
+        },
+        {
+          "level": 55,
+          "area": 5,
+          "endLevel": 64,
+          "kills": 1163,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 6
+        },
+        {
+          "level": 64,
+          "area": 6,
+          "endLevel": 73,
+          "kills": 1133,
+          "rests": 0,
+          "usedPotions": 34,
+          "unlocked": 7
+        },
+        {
+          "level": 73,
+          "area": 7,
+          "endLevel": 81,
+          "kills": 1063,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 8
+        },
+        {
+          "level": 81,
+          "area": 8,
+          "endLevel": 89,
+          "kills": 1009,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 9
+        },
+        {
+          "level": 89,
+          "area": 9,
+          "endLevel": 97,
+          "kills": 1063,
+          "rests": 0,
+          "usedPotions": 34,
+          "unlocked": 10
+        },
+        {
+          "level": 97,
+          "area": 10,
+          "endLevel": 100,
+          "kills": 1166,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 10
+        },
+        {
+          "level": 100,
+          "area": 10,
+          "endLevel": 100,
+          "kills": 1226,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 10
+        },
+        {
+          "level": 100,
+          "area": 10,
+          "endLevel": 100,
+          "kills": 1339,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 10
+        }
+      ]
+    },
+    {
+      "race": "human",
+      "seed": 8675309,
+      "level100ByHours": 40,
+      "final": {
+        "level": 100,
+        "gold": 129882,
+        "progress": {
+          "unlocked": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "cleared": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "materials": 15159,
+        "healingRecipe": true,
+        "potions": 200
+      },
+      "crafted": 200,
+      "craftGold": 720,
+      "sessions": [
+        {
+          "level": 1,
+          "area": 1,
+          "endLevel": 22,
+          "kills": 1107,
+          "rests": 11,
+          "usedPotions": 0,
+          "unlocked": 2
+        },
+        {
+          "level": 22,
+          "area": 2,
+          "endLevel": 37,
+          "kills": 1575,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 3
+        },
+        {
+          "level": 37,
+          "area": 3,
+          "endLevel": 48,
+          "kills": 1361,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 4
+        },
+        {
+          "level": 48,
+          "area": 4,
+          "endLevel": 58,
+          "kills": 1306,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 5
+        },
+        {
+          "level": 58,
+          "area": 5,
+          "endLevel": 67,
+          "kills": 1273,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 6
+        },
+        {
+          "level": 67,
+          "area": 6,
+          "endLevel": 75,
+          "kills": 1171,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 7
+        },
+        {
+          "level": 75,
+          "area": 7,
+          "endLevel": 82,
+          "kills": 979,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 8
+        },
+        {
+          "level": 82,
+          "area": 8,
+          "endLevel": 91,
+          "kills": 1226,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 9
+        },
+        {
+          "level": 91,
+          "area": 9,
+          "endLevel": 99,
+          "kills": 1134,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 10
+        },
+        {
+          "level": 99,
+          "area": 10,
+          "endLevel": 100,
+          "kills": 1023,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 10
+        },
+        {
+          "level": 100,
+          "area": 10,
+          "endLevel": 100,
+          "kills": 1083,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 10
+        },
+        {
+          "level": 100,
+          "area": 10,
+          "endLevel": 100,
+          "kills": 1198,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 10
+        }
+      ]
+    },
+    {
+      "race": "dwarf",
+      "seed": 8675309,
+      "level100ByHours": 36,
+      "final": {
+        "level": 100,
+        "gold": 146168,
+        "progress": {
+          "unlocked": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "cleared": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "materials": 15887,
+        "healingRecipe": true,
+        "potions": 157
+      },
+      "crafted": 349,
+      "craftGold": 1324,
+      "sessions": [
+        {
+          "level": 1,
+          "area": 1,
+          "endLevel": 6,
+          "kills": 82,
+          "rests": 41,
+          "usedPotions": 0,
+          "unlocked": 1
+        },
+        {
+          "level": 6,
+          "area": 1,
+          "endLevel": 26,
+          "kills": 1426,
+          "rests": 12,
+          "usedPotions": 0,
+          "unlocked": 2
+        },
+        {
+          "level": 26,
+          "area": 2,
+          "endLevel": 44,
+          "kills": 2216,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 3
+        },
+        {
+          "level": 44,
+          "area": 3,
+          "endLevel": 57,
+          "kills": 1860,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 4
+        },
+        {
+          "level": 57,
+          "area": 4,
+          "endLevel": 68,
+          "kills": 1730,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 5
+        },
+        {
+          "level": 68,
+          "area": 5,
+          "endLevel": 79,
+          "kills": 1834,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 6
+        },
+        {
+          "level": 79,
+          "area": 6,
+          "endLevel": 89,
+          "kills": 1647,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 7
+        },
+        {
+          "level": 89,
+          "area": 7,
+          "endLevel": 99,
+          "kills": 1534,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 8
+        },
+        {
+          "level": 99,
+          "area": 8,
+          "endLevel": 100,
+          "kills": 1391,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 9
+        },
+        {
+          "level": 100,
+          "area": 9,
+          "endLevel": 100,
+          "kills": 1254,
+          "rests": 0,
+          "usedPotions": 6,
+          "unlocked": 10
+        },
+        {
+          "level": 100,
+          "area": 10,
+          "endLevel": 100,
+          "kills": 1247,
+          "rests": 0,
+          "usedPotions": 143,
+          "unlocked": 10
+        },
+        {
+          "level": 100,
+          "area": 10,
+          "endLevel": 100,
+          "kills": 1424,
+          "rests": 0,
+          "usedPotions": 43,
+          "unlocked": 10
+        }
+      ]
+    },
+    {
+      "race": "elf",
+      "seed": 8675309,
+      "level100ByHours": 32,
+      "final": {
+        "level": 100,
+        "gold": 221484,
+        "progress": {
+          "unlocked": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "cleared": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "materials": 15814,
+        "healingRecipe": true,
+        "potions": 200
+      },
+      "crafted": 200,
+      "craftGold": 655,
+      "sessions": [
+        {
+          "level": 1,
+          "area": 1,
+          "endLevel": 29,
+          "kills": 1276,
+          "rests": 9,
+          "usedPotions": 0,
+          "unlocked": 2
+        },
+        {
+          "level": 29,
+          "area": 2,
+          "endLevel": 44,
+          "kills": 1378,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 3
+        },
+        {
+          "level": 44,
+          "area": 3,
+          "endLevel": 56,
+          "kills": 1467,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 4
+        },
+        {
+          "level": 56,
+          "area": 4,
+          "endLevel": 67,
+          "kills": 1347,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 5
+        },
+        {
+          "level": 67,
+          "area": 5,
+          "endLevel": 78,
+          "kills": 1373,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 6
+        },
+        {
+          "level": 78,
+          "area": 6,
+          "endLevel": 87,
+          "kills": 1330,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 7
+        },
+        {
+          "level": 87,
+          "area": 7,
+          "endLevel": 96,
+          "kills": 1148,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 8
+        },
+        {
+          "level": 96,
+          "area": 8,
+          "endLevel": 100,
+          "kills": 1263,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 9
+        },
+        {
+          "level": 100,
+          "area": 9,
+          "endLevel": 100,
+          "kills": 1155,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 10
+        },
+        {
+          "level": 100,
+          "area": 10,
+          "endLevel": 100,
+          "kills": 993,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 10
+        },
+        {
+          "level": 100,
+          "area": 10,
+          "endLevel": 100,
+          "kills": 1265,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 10
+        },
+        {
+          "level": 100,
+          "area": 10,
+          "endLevel": 100,
+          "kills": 1263,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 10
+        }
+      ]
+    },
+    {
+      "race": "goblin",
+      "seed": 8675309,
+      "level100ByHours": 44,
+      "final": {
+        "level": 100,
+        "gold": 115516,
+        "progress": {
+          "unlocked": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "cleared": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "materials": 13408,
+        "healingRecipe": true,
+        "potions": 142
+      },
+      "crafted": 332,
+      "craftGold": 1179,
+      "sessions": [
+        {
+          "level": 1,
+          "area": 1,
+          "endLevel": 8,
+          "kills": 131,
+          "rests": 38,
+          "usedPotions": 0,
+          "unlocked": 2
+        },
+        {
+          "level": 8,
+          "area": 1,
+          "endLevel": 25,
+          "kills": 1242,
+          "rests": 12,
+          "usedPotions": 0,
+          "unlocked": 2
+        },
+        {
+          "level": 25,
+          "area": 2,
+          "endLevel": 37,
+          "kills": 1285,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 3
+        },
+        {
+          "level": 37,
+          "area": 3,
+          "endLevel": 48,
+          "kills": 1341,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 4
+        },
+        {
+          "level": 48,
+          "area": 4,
+          "endLevel": 57,
+          "kills": 1135,
+          "rests": 4,
+          "usedPotions": 0,
+          "unlocked": 5
+        },
+        {
+          "level": 57,
+          "area": 5,
+          "endLevel": 64,
+          "kills": 801,
+          "rests": 14,
+          "usedPotions": 0,
+          "unlocked": 6
+        },
+        {
+          "level": 64,
+          "area": 6,
+          "endLevel": 73,
+          "kills": 1189,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 7
+        },
+        {
+          "level": 73,
+          "area": 7,
+          "endLevel": 81,
+          "kills": 1052,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 8
+        },
+        {
+          "level": 81,
+          "area": 8,
+          "endLevel": 90,
+          "kills": 1159,
+          "rests": 0,
+          "usedPotions": 68,
+          "unlocked": 9
+        },
+        {
+          "level": 90,
+          "area": 9,
+          "endLevel": 99,
+          "kills": 1165,
+          "rests": 0,
+          "usedPotions": 34,
+          "unlocked": 10
+        },
+        {
+          "level": 99,
+          "area": 10,
+          "endLevel": 100,
+          "kills": 1098,
+          "rests": 0,
+          "usedPotions": 30,
+          "unlocked": 10
+        },
+        {
+          "level": 100,
+          "area": 10,
+          "endLevel": 100,
+          "kills": 1115,
+          "rests": 0,
+          "usedPotions": 58,
+          "unlocked": 10
+        }
+      ]
+    },
+    {
+      "race": "ashen",
+      "seed": 8675309,
+      "level100ByHours": 36,
+      "final": {
+        "level": 100,
+        "gold": 134722,
+        "progress": {
+          "unlocked": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "cleared": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "materials": 14795,
+        "healingRecipe": true,
+        "potions": 175
+      },
+      "crafted": 413,
+      "craftGold": 1345,
+      "sessions": [
+        {
+          "level": 1,
+          "area": 1,
+          "endLevel": 20,
+          "kills": 845,
+          "rests": 20,
+          "usedPotions": 0,
+          "unlocked": 2
+        },
+        {
+          "level": 20,
+          "area": 2,
+          "endLevel": 36,
+          "kills": 1476,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 3
+        },
+        {
+          "level": 36,
+          "area": 3,
+          "endLevel": 48,
+          "kills": 1441,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 4
+        },
+        {
+          "level": 48,
+          "area": 4,
+          "endLevel": 59,
+          "kills": 1429,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 5
+        },
+        {
+          "level": 59,
+          "area": 5,
+          "endLevel": 68,
+          "kills": 1240,
+          "rests": 0,
+          "usedPotions": 51,
+          "unlocked": 6
+        },
+        {
+          "level": 68,
+          "area": 6,
+          "endLevel": 77,
+          "kills": 1276,
+          "rests": 0,
+          "usedPotions": 30,
+          "unlocked": 7
+        },
+        {
+          "level": 77,
+          "area": 7,
+          "endLevel": 85,
+          "kills": 1119,
+          "rests": 0,
+          "usedPotions": 52,
+          "unlocked": 8
+        },
+        {
+          "level": 85,
+          "area": 8,
+          "endLevel": 93,
+          "kills": 1068,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 9
+        },
+        {
+          "level": 93,
+          "area": 9,
+          "endLevel": 100,
+          "kills": 1089,
+          "rests": 0,
+          "usedPotions": 0,
+          "unlocked": 10
+        },
+        {
+          "level": 100,
+          "area": 10,
+          "endLevel": 100,
+          "kills": 1014,
+          "rests": 0,
+          "usedPotions": 50,
+          "unlocked": 10
+        },
+        {
+          "level": 100,
+          "area": 10,
+          "endLevel": 100,
+          "kills": 1103,
+          "rests": 0,
+          "usedPotions": 30,
+          "unlocked": 10
+        },
+        {
+          "level": 100,
+          "area": 10,
+          "endLevel": 100,
+          "kills": 1142,
+          "rests": 0,
+          "usedPotions": 25,
+          "unlocked": 10
+        }
+      ]
+    }
+  ],
+  "frequentIsolated": [
+    {
+      "race": "human",
+      "seed": 1917,
+      "level": 25,
+      "unlocked": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "crafted": 0,
+      "used": 0
+    },
+    {
+      "race": "human",
+      "seed": 8675309,
+      "level": 26,
+      "unlocked": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "crafted": 0,
+      "used": 0
+    },
+    {
+      "race": "dwarf",
+      "seed": 1917,
+      "level": 23,
+      "unlocked": [
+        1,
+        2,
+        3
+      ],
+      "crafted": 0,
+      "used": 0
+    },
+    {
+      "race": "dwarf",
+      "seed": 8675309,
+      "level": 23,
+      "unlocked": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "crafted": 0,
+      "used": 0
+    },
+    {
+      "race": "elf",
+      "seed": 1917,
+      "level": 30,
+      "unlocked": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "crafted": 0,
+      "used": 0
+    },
+    {
+      "race": "elf",
+      "seed": 8675309,
+      "level": 29,
+      "unlocked": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "crafted": 0,
+      "used": 0
+    },
+    {
+      "race": "goblin",
+      "seed": 1917,
+      "level": 17,
+      "unlocked": [
+        1,
+        2,
+        3
+      ],
+      "crafted": 0,
+      "used": 0
+    },
+    {
+      "race": "goblin",
+      "seed": 8675309,
+      "level": 20,
+      "unlocked": [
+        1,
+        2,
+        3
+      ],
+      "crafted": 293,
+      "used": 121
+    },
+    {
+      "race": "ashen",
+      "seed": 1917,
+      "level": 23,
+      "unlocked": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "crafted": 200,
+      "used": 0
+    },
+    {
+      "race": "ashen",
+      "seed": 8675309,
+      "level": 22,
+      "unlocked": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "crafted": 0,
+      "used": 0
+    }
+  ],
+  "fieldProbes": [
+    {
+      "race": "human",
+      "start": {
+        "level": 100,
+        "field": "human.a10.field",
+        "stats": {
+          "atk": 1275,
+          "hp": 5205,
+          "armor": 751.4499999999999,
+          "lifestealRate": 0.03
+        },
+        "skills": [
+          "human.field_dressing",
+          "human.cut",
+          "human.red_sweep",
+          "human.open_wound"
+        ],
+        "gear": [
+          {
+            "socket": "weapon",
+            "level": 95,
+            "quality": 3
+          },
+          {
+            "socket": "helm",
+            "level": 94,
+            "quality": 3
+          },
+          {
+            "socket": "armor",
+            "level": 95,
+            "quality": 2
+          },
+          {
+            "socket": "gloves",
+            "level": 95,
+            "quality": 2
+          },
+          {
+            "socket": "boots",
+            "level": 96,
+            "quality": 2
+          },
+          {
+            "socket": "ring1",
+            "level": 93,
+            "quality": 2
+          },
+          {
+            "socket": "ring2",
+            "level": 93,
+            "quality": 2
+          },
+          {
+            "socket": "amulet",
+            "level": 94,
+            "quality": 2
+          }
+        ],
+        "potions": 300,
+        "crafted": 300,
+        "refreshes": 8,
+        "recipe": true,
+        "supplyGold": 1517
+      },
+      "usedPotions": 0,
+      "report": {
+        "kills": 1287,
+        "rests": 0,
+        "rounds": 11428,
+        "gold": 9436
+      }
+    },
+    {
+      "race": "dwarf",
+      "start": {
+        "level": 100,
+        "field": "dwarf.a10.field",
+        "stats": {
+          "atk": 1233,
+          "hp": 5526.080000000001,
+          "armor": 689.4,
+          "lifestealRate": 0.019
+        },
+        "skills": [
+          "fracture_strike",
+          "fault_sweep",
+          "breaking_intercept",
+          "breach_followup"
+        ],
+        "gear": [
+          {
+            "socket": "weapon",
+            "level": 97,
+            "quality": 1
+          },
+          {
+            "socket": "helm",
+            "level": 97,
+            "quality": 1
+          },
+          {
+            "socket": "armor",
+            "level": 86,
+            "quality": 3
+          },
+          {
+            "socket": "gloves",
+            "level": 95,
+            "quality": 3
+          },
+          {
+            "socket": "boots",
+            "level": 95,
+            "quality": 2
+          },
+          {
+            "socket": "ring1",
+            "level": 96,
+            "quality": 1
+          },
+          {
+            "socket": "ring2",
+            "level": 97,
+            "quality": 0
+          },
+          {
+            "socket": "amulet",
+            "level": 97,
+            "quality": 1
+          }
+        ],
+        "potions": 300,
+        "crafted": 100,
+        "refreshes": 0,
+        "recipe": true,
+        "supplyGold": 400
+      },
+      "usedPotions": 0,
+      "report": {
+        "kills": 1525,
+        "rests": 0,
+        "rounds": 10595,
+        "gold": 11193
+      }
+    },
+    {
+      "race": "elf",
+      "start": {
+        "level": 100,
+        "field": "elf.a10.field",
+        "stats": {
+          "atk": 1220,
+          "hp": 6127.000000000001,
+          "armor": 945,
+          "lifestealRate": 0.013
+        },
+        "skills": [
+          "elf.dew_mending",
+          "elf.twin_arrow",
+          "elf.thread_volley",
+          "elf.hunter_mark"
+        ],
+        "gear": [
+          {
+            "socket": "weapon",
+            "level": 95,
+            "quality": 3
+          },
+          {
+            "socket": "helm",
+            "level": 95,
+            "quality": 3
+          },
+          {
+            "socket": "armor",
+            "level": 96,
+            "quality": 2
+          },
+          {
+            "socket": "gloves",
+            "level": 97,
+            "quality": 3
+          },
+          {
+            "socket": "boots",
+            "level": 94,
+            "quality": 3
+          },
+          {
+            "socket": "ring1",
+            "level": 96,
+            "quality": 2
+          },
+          {
+            "socket": "ring2",
+            "level": 97,
+            "quality": 3
+          },
+          {
+            "socket": "amulet",
+            "level": 93,
+            "quality": 2
+          }
+        ],
+        "potions": 300,
+        "crafted": 100,
+        "refreshes": 0,
+        "recipe": true,
+        "supplyGold": 400
+      },
+      "usedPotions": 0,
+      "report": {
+        "kills": 1242,
+        "rests": 0,
+        "rounds": 11058,
+        "gold": 18186
+      }
+    },
+    {
+      "race": "goblin",
+      "start": {
+        "level": 100,
+        "field": "goblin.a10.field",
+        "stats": {
+          "atk": 1184,
+          "hp": 4954,
+          "armor": 823,
+          "lifestealRate": 0.017
+        },
+        "skills": [
+          "goblin.venom_cut",
+          "goblin.spore_fan",
+          "goblin.bitter_wound",
+          "goblin.spore_transfer"
+        ],
+        "gear": [
+          {
+            "socket": "weapon",
+            "level": 97,
+            "quality": 1
+          },
+          {
+            "socket": "helm",
+            "level": 93,
+            "quality": 3
+          },
+          {
+            "socket": "armor",
+            "level": 97,
+            "quality": 2
+          },
+          {
+            "socket": "gloves",
+            "level": 97,
+            "quality": 1
+          },
+          {
+            "socket": "boots",
+            "level": 97,
+            "quality": 1
+          },
+          {
+            "socket": "ring1",
+            "level": 96,
+            "quality": 1
+          },
+          {
+            "socket": "ring2",
+            "level": 97,
+            "quality": 0
+          },
+          {
+            "socket": "amulet",
+            "level": 97,
+            "quality": 1
+          }
+        ],
+        "potions": 300,
+        "crafted": 100,
+        "refreshes": 0,
+        "recipe": true,
+        "supplyGold": 400
+      },
+      "usedPotions": 0,
+      "report": {
+        "kills": 1153,
+        "rests": 0,
+        "rounds": 11617,
+        "gold": 8484
+      }
+    },
+    {
+      "race": "ashen",
+      "start": {
+        "level": 100,
+        "field": "ashen.a10.field",
+        "stats": {
+          "atk": 1476.5800000000002,
+          "hp": 5615.88,
+          "armor": 988,
+          "lifestealRate": 0.006
+        },
+        "skills": [
+          "ashen.kindle",
+          "ashen.vent",
+          "ashen.anneal",
+          "ashen.surge"
+        ],
+        "gear": [
+          {
+            "socket": "weapon",
+            "level": 94,
+            "quality": 2
+          },
+          {
+            "socket": "helm",
+            "level": 94,
+            "quality": 3
+          },
+          {
+            "socket": "armor",
+            "level": 94,
+            "quality": 2
+          },
+          {
+            "socket": "gloves",
+            "level": 96,
+            "quality": 3
+          },
+          {
+            "socket": "boots",
+            "level": 94,
+            "quality": 3
+          },
+          {
+            "socket": "ring1",
+            "level": 94,
+            "quality": 3
+          },
+          {
+            "socket": "ring2",
+            "level": 97,
+            "quality": 2
+          },
+          {
+            "socket": "amulet",
+            "level": 96,
+            "quality": 2
+          },
+          {
+            "socket": "core",
+            "level": 96,
+            "quality": 2
+          }
+        ],
+        "potions": 300,
+        "crafted": 100,
+        "refreshes": 0,
+        "recipe": true,
+        "supplyGold": 400
+      },
+      "usedPotions": 0,
+      "report": {
+        "kills": 1420,
+        "rests": 0,
+        "rounds": 10767,
+        "gold": 10437
+      }
+    }
+  ],
+  "cautiousIsolated": [
+    {
+      "race": "human",
+      "seed": 1917,
+      "level100ByHours": 40,
+      "final": {
+        "level": 100,
+        "gold": 116862,
+        "progress": {
+          "unlocked": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "cleared": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "materials": 16017,
+        "healingRecipe": true,
+        "potions": 200
+      },
+      "maxPotionsPerSession": 0,
+      "usedPotions": 0
+    },
+    {
+      "race": "dwarf",
+      "seed": 1917,
+      "level100ByHours": 32,
+      "final": {
+        "level": 100,
+        "gold": 161268,
+        "progress": {
+          "unlocked": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "cleared": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "materials": 18506,
+        "healingRecipe": true,
+        "potions": 200
+      },
+      "maxPotionsPerSession": 59,
+      "usedPotions": 203
+    },
+    {
+      "race": "elf",
+      "seed": 1917,
+      "level100ByHours": 32,
+      "final": {
+        "level": 100,
+        "gold": 218555,
+        "progress": {
+          "unlocked": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "cleared": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "materials": 17872,
+        "healingRecipe": true,
+        "potions": 200
+      },
+      "maxPotionsPerSession": 0,
+      "usedPotions": 0
+    },
+    {
+      "race": "goblin",
+      "seed": 1917,
+      "level100ByHours": 40,
+      "final": {
+        "level": 100,
+        "gold": 125688,
+        "progress": {
+          "unlocked": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "cleared": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "materials": 16117,
+        "healingRecipe": true,
+        "potions": 131
+      },
+      "maxPotionsPerSession": 81,
+      "usedPotions": 354
+    },
+    {
+      "race": "ashen",
+      "seed": 1917,
+      "level100ByHours": 36,
+      "final": {
+        "level": 100,
+        "gold": 129140,
+        "progress": {
+          "unlocked": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "cleared": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "materials": 17520,
+        "healingRecipe": false,
+        "potions": 0
+      },
+      "maxPotionsPerSession": 0,
+      "usedPotions": 0
+    }
+  ]
+}
