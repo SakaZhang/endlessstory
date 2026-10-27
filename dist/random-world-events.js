@@ -19,10 +19,14 @@ export function advanceRandomWorldEvents(s,now=Date.now()){
  if(!clock(now)||now>1e15-RANDOM_WAR_RULES.checkIntervalMs||!validWorldEventState(s)||!validDiplomacy(s)||s.developmentEquipmentSandbox)return null;
  const prior=s.worldEvents,reference=Math.max(prior?.lastProcessedAt??0,s.lastSeen??0,s.lastHealthClock??0);
  if(now<reference){s.worldEvents??=initialState(s,reference);const result=settleRandomWars(s,now,{clockRollback:true});return {ok:true,changed:!prior||result.changed,declared:[],ended:result.ended,checks:0,clockRollback:true};}
- s.worldEvents??=initialState(s,now);const w=s.worldEvents,r=RANDOM_WAR_RULES,from=w.lastProcessedAt,declared=[],ended=[];let checks=0;
+ s.worldEvents??=initialState(s,now);const w=s.worldEvents,r=RANDOM_WAR_RULES,declared=[],ended=[];let checks=0;
  // Only the scheduler's persisted checkpoint owns world time. An autosave or
  // health tick just after a deadline must not erase an unprocessed event.
- while(w.nextWarCheckAt<=now&&checks<r.maxOfflineChecks){
+ // One recent pending deadline belongs to the saved starting instant, not
+ // the following four hours. Include it without replaying an arbitrary backlog.
+ const pendingStart=w.nextWarCheckAt<=reference&&w.nextWarCheckAt>reference-r.checkIntervalMs?1:0;
+ const checkEnd=Math.min(now,reference+r.maxOfflineMs),checkLimit=r.maxOfflineChecks+pendingStart;
+ while(w.nextWarCheckAt<=checkEnd&&checks<checkLimit){
   const at=w.nextWarCheckAt;w.nextWarCheckAt+=r.checkIntervalMs;checks++;ended.push(...settleRandomWars(s,at).ended);
   const wars=s.diplomacy?.wars??[],activeRandom=wars.some(x=>warKind(x)==='random'&&warActiveAt(x,at)),justEnded=wars.some(x=>warKind(x)==='random'&&x.status==='ended'&&x.endedAt===at);
   if(activeRandom||justEnded)continue;
