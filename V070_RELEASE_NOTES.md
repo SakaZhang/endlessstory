@@ -1,6 +1,6 @@
-# v0.70 candidate — Infinity Gauntlet and unique crafted-product disposal
+# v0.70 — Infinity Gauntlet and unique crafted-product disposal
 
-Candidate only; publication and final integrated gates are owned by the parent.
+Release gates verified; publication receipt is recorded by the owning conversation.
 Based on verified v0.69 source `5f5e1c268550a2bc13f354ace2a460af9097fb76`.
 Save generation remains 6; no clearing or migration.
 
@@ -56,7 +56,19 @@ unique disposal engine + six actual-App action/identity combinations, existing g
 387-pool/3M-judgment/15 real source suite, Return Ring events, equipment raster
 adapter, skill-tree active integration, strict337-definition parity audit.
 The App tests use simulated DOM + native canvas, not browser/mobile screenshots.
-Build/cache passed at the first candidate:2785 files/2783URLs/8634 edges; final
-parent build will regenerate the fingerprint after version/metadata changes.
-Full npm was intentionally interrupted to avoid duplicating the parent's full
-integrated run; no claim of final aggregate completion is made here.
+Final integrated verification: npm test exited 0. All 336 non-browser root
+suites passed (242 MJS / 94 CJS) out of 337 discovered. Initial inventory was
+334/335; the codex fixture omitted the new item's required manufacture ledger.
+The fixture was corrected without weakening validSave, rerun successfully, and
+an additional second-storage-write failure test passed in normal/full-bag paths.
+Independent adversarial audit passed, including automatic-core exclusion.
+Final build/cache: 2785 files, 2783 URLs, 8634 dependency edges,
+8 byte-mutation and 9 broken-reference probes. Build fingerprint:
+`f96c65b1885e8f3f91c4b2574191a2b69bbf8aab3e4e18269738c5847941bd1a`.
+See tests/v070-final-verification.json for the evidence inventory.
+
+Actual browser/mobile visual acceptance remains unverified. The official managed
+preview was retried in the restored environment and timed out, then stopped.
+The existing live-page authentication handoff remains pending. Fake-DOM/native
+canvas tests are not substituted for browser acceptance. Owner-only audience and
+schema6/save preservation are retained.

@@ -1,0 +1,46 @@
+{
+  "release": "v0.70",
+  "status": "verified-awaiting-publication",
+  "baseCommit": "5f5e1c268550a2bc13f354ace2a460af9097fb76",
+  "runtimeReviewedCommit": "75863e4705e8c108621fbeaba27295e8546850dc",
+  "followupReviewedCommit": "4bbe046d4f6394c3d3548bec22d3dbc05b9b48dc",
+  "npmTest": {
+    "exitCode": 0,
+    "log": "/tmp/v070-final-npm.log"
+  },
+  "inventory": {
+    "discovered": 337,
+    "nonBrowserPassed": 336,
+    "mjs": 242,
+    "cjs": 94,
+    "initialPassed": 334,
+    "initialFailed": 1,
+    "initialSelected": 335,
+    "resolvedFailure": "codex-collection-ui-tests.cjs fixture now supplies required permanent manufacture ledger; rejection guard retained",
+    "rerunAndAdditionalPassed": 2,
+    "notRun": [
+      "exploration-maps-browser-tests.cjs"
+    ],
+    "reports": [
+      "/tmp/rpg-regressions-AZIMCS/results.json",
+      "/tmp/rpg-regressions-lnWX2r/results.json"
+    ]
+  },
+  "independentAudit": "independent-gauntlet-audit.mjs passed including real auto core exclusion; second-write App failure test passed normal and full bags",
+  "build": {
+    "hash": "f96c65b1885e8f3f91c4b2574191a2b69bbf8aab3e4e18269738c5847941bd1a",
+    "files": 2785,
+    "urls": 2783,
+    "dependencyEdges": 8634,
+    "byteMutationProbes": 8,
+    "missingReferenceProbes": 9
+  },
+  "equipmentDefinitions": 337,
+  "schema": 6,
+  "saveReset": false,
+  "browserQA": {
+    "status": "not verified",
+    "preview": "official managed preview startup timeout; stopped",
+    "live": "existing user login handoff pending"
+  }
+}
