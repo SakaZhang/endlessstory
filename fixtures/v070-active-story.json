@@ -1,0 +1,6105 @@
+{
+  "sourceCommit": "9f56c77996038f929d390a35ac48167250f1475d",
+  "cases": [
+    {
+      "id": "story.c01.human-chase",
+      "moment": "start",
+      "state": {
+        "version": 6,
+        "diplomacy": {
+          "version": 1,
+          "revision": 0,
+          "wars": []
+        },
+        "race": "human",
+        "hero": "罗什福尔",
+        "atCamp": false,
+        "level": 1,
+        "xp": 16,
+        "gold": 102,
+        "location": 0,
+        "siteId": "goblin.a01",
+        "expedition": {
+          "mode": "field",
+          "targetInstanceId": null,
+          "fieldId": "goblin.a01.field",
+          "loop": false
+        },
+        "build": "custom",
+        "inventory": [
+          {
+            "id": "mvqjinv9-1-ip3o5",
+            "slot": "weapon",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "碧纹大剑",
+            "atk": 23,
+            "armor": 0,
+            "hp": 13,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "human_scatter_sword_5",
+            "baseVariant": "axe_attack",
+            "weaponType": "greatsword",
+            "originRace": "human",
+            "visualKey": "human_scatter_sword_5",
+            "visualVariant": "human_scatter_sword_5",
+            "iconKey": "weapon",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinva-2-kjwgl",
+            "slot": "helm",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "蓝缨巡城盔",
+            "atk": 1,
+            "armor": 11,
+            "hp": 24,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "human_scatter_bluecrest_helm",
+            "baseVariant": "helm_armor",
+            "weaponType": null,
+            "originRace": "human",
+            "visualKey": "human_scatter_bluecrest_helm",
+            "visualVariant": "human_scatter_bluecrest_helm",
+            "iconKey": "helm",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinva-3-fjlwc",
+            "slot": "armor",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "驿路甲",
+            "atk": 0,
+            "armor": 12,
+            "hp": 86,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "human_scatter_armor_1",
+            "baseVariant": "armor_vitality",
+            "weaponType": null,
+            "originRace": "human",
+            "visualKey": "human_scatter_armor_1",
+            "visualVariant": "human_scatter_armor_1",
+            "iconKey": "armor",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinva-4-dml6w",
+            "slot": "gloves",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "驿路手套",
+            "atk": 3,
+            "armor": 4,
+            "hp": 45,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "human_scatter_gloves_1",
+            "baseVariant": "gloves_vitality",
+            "weaponType": null,
+            "originRace": "human",
+            "visualKey": "human_scatter_gloves_1",
+            "visualVariant": "human_scatter_gloves_1",
+            "iconKey": "gloves",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinvb-5-p6ewz",
+            "slot": "boots",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "盐泉靴",
+            "atk": 1,
+            "armor": 10,
+            "hp": 28,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "human_scatter_boots_2",
+            "baseVariant": "boots_armor",
+            "weaponType": null,
+            "originRace": "human",
+            "visualKey": "human_scatter_boots_2",
+            "visualVariant": "human_scatter_boots_2",
+            "iconKey": "boots",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinvb-6-nvuhh",
+            "slot": "ring",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "守更铁环",
+            "atk": 4,
+            "armor": 7,
+            "hp": 45,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "human_scatter_ring_watch",
+            "baseVariant": "ring_survival",
+            "weaponType": null,
+            "originRace": "human",
+            "visualKey": "human_scatter_ring_watch",
+            "visualVariant": "human_scatter_ring_watch",
+            "iconKey": "ring",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinvb-7-nd7dv",
+            "slot": "ring",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "守更铁环",
+            "atk": 4,
+            "armor": 7,
+            "hp": 45,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "human_scatter_ring_watch",
+            "baseVariant": "ring_survival",
+            "weaponType": null,
+            "originRace": "human",
+            "visualKey": "human_scatter_ring_watch",
+            "visualVariant": "human_scatter_ring_watch",
+            "iconKey": "ring",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinvb-8-c966k",
+            "slot": "amulet",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "归军吊坠",
+            "atk": 3,
+            "armor": 7,
+            "hp": 53,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "human_scatter_jewel_3",
+            "baseVariant": "amulet_survival",
+            "weaponType": null,
+            "originRace": "human",
+            "visualKey": "human_scatter_jewel_3",
+            "visualVariant": "human_scatter_jewel_3",
+            "iconKey": "amulet",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          }
+        ],
+        "equip": {
+          "weapon": "mvqjinv9-1-ip3o5",
+          "helm": "mvqjinva-2-kjwgl",
+          "armor": "mvqjinva-3-fjlwc",
+          "gloves": "mvqjinva-4-dml6w",
+          "boots": "mvqjinvb-5-p6ewz",
+          "ring1": "mvqjinvb-6-nvuhh",
+          "ring2": "mvqjinvb-7-nd7dv",
+          "amulet": "mvqjinvb-8-c966k"
+        },
+        "skills": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "conditions": [
+          "always",
+          "always",
+          "always",
+          "always"
+        ],
+        "materialStacks": {
+          "goblin.mat.01|0": 1
+        },
+        "offlineLuck": 0,
+        "talents": {
+          "power": 0,
+          "heart": 0,
+          "steel": 0,
+          "precision": 0,
+          "crit": 0,
+          "critDamage": 0,
+          "penetration": 0,
+          "element": 0,
+          "elementResist": 0,
+          "block": 0,
+          "shield": 0,
+          "healing": 0,
+          "resolve": 0,
+          "luck": 0
+        },
+        "consumables": {
+          "memoryFruit": 0,
+          "refundCredits": 0,
+          "reforgeToken": 0
+        },
+        "potionSlot": {
+          "key": null,
+          "auto": false,
+          "priority": "low",
+          "priorityVersion": 1
+        },
+        "kills": 1,
+        "normalWins": [
+          0,
+          0,
+          0
+        ],
+        "bossWins": [
+          0,
+          0,
+          0
+        ],
+        "bossReady": [
+          0,
+          0,
+          0
+        ],
+        "stock": 3,
+        "loadouts": [
+          null,
+          null,
+          null
+        ],
+        "chapters": [],
+        "chronicle": [
+          "你从人族的营地开始旅程。"
+        ],
+        "momentum": 0,
+        "lastSeen": 1800000011900,
+        "running": true,
+        "skillTree": {
+          "version": 1,
+          "mode": "active",
+          "configId": "human-tree-99-v1",
+          "revision": 0,
+          "selectedPreset": 0,
+          "presets": [
+            {
+              "name": "方案1",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案2",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案3",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            }
+          ]
+        },
+        "heroHp": 466.7,
+        "restUntil": 0,
+        "lastHealthClock": 1800000015700,
+        "areaProgress": {
+          "human": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "dwarf": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "elf": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "goblin": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "ashen": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          }
+        },
+        "instanceCooldowns": {},
+        "activeEncounter": {
+          "contentVersion": "dwarf-m2-v1",
+          "location": 0,
+          "siteId": "goblin.a01",
+          "areaId": "goblin.a01",
+          "instanceId": "goblin.a01.field",
+          "kind": "field",
+          "luck": 0,
+          "boss": false,
+          "heroHp": 466.7,
+          "round": 0,
+          "warcry": 0,
+          "ironcoat": 0,
+          "barrier": 0,
+          "barrierShield": 0,
+          "heroBurn": 0,
+          "heroBurnPower": 0,
+          "weakness": 0,
+          "guard": 0,
+          "cd": {},
+          "shelterUsed": false,
+          "shield": 0,
+          "done": false,
+          "rewarded": false,
+          "killSource": null,
+          "multiVersion": 1,
+          "id": "m2-1800000015700-10",
+          "rngState": 1669925409,
+          "rngDraws": 2,
+          "itemSerial": 0,
+          "summonSerial": 0,
+          "activeCastCount": 0,
+          "enemies": [
+            {
+              "id": "m2-1800000015700-10-story-actor",
+              "monsterId": "goblin.a01.normal.1",
+              "definitionId": "goblin.a01.normal.1",
+              "sourceInstanceId": "goblin.a01.field",
+              "origin": "initial",
+              "main": true,
+              "location": 0,
+              "name": "奇克",
+              "hp": 600,
+              "max": 600,
+              "atk": 3,
+              "armor": 12,
+              "shield": 0,
+              "burn": 0,
+              "broken": 0,
+              "blunt": 0,
+              "scorch": 0,
+              "stun": 0,
+              "round": 0,
+              "nextHeavy": 4,
+              "heavyDelayed": false,
+              "cd": {},
+              "control": {
+                "version": 1,
+                "unitId": "m2-1800000015700-10-story-actor",
+                "clock": 1800000015700,
+                "stunUntil": 0,
+                "interruptUntil": 0,
+                "stunChain": 0,
+                "lastStunEnd": null,
+                "cooldowns": {},
+                "preparing": null
+              },
+              "profile": {
+                "controlReduction": 0,
+                "interruptStop": 1100
+              },
+              "elementalPower": 2,
+              "elementTags": [
+                "dark"
+              ],
+              "elementResistance": {
+                "earth": 3,
+                "water": 3,
+                "fire": 3,
+                "wind": 3,
+                "light": 3,
+                "dark": 3
+              },
+              "parameterSetId": "goblin-initial-candidate-v1",
+              "basicIntervalMs": 2200,
+              "nextBasicAt": 1800000017900,
+              "skillUses": {},
+              "follower": false,
+              "typedProfile": true,
+              "shieldUntil": 0,
+              "reflectReadyAt": 0,
+              "skillOverrides": {},
+              "storyActorRace": "goblin",
+              "storyActorWeapon": "dagger"
+            }
+          ],
+          "typedDots": [],
+          "fieldGroup": false,
+          "rewardGold": 0,
+          "rewardXp": 0,
+          "rewardDefinitionId": "goblin.a01.normal.1",
+          "skillResolver": "tree-v1",
+          "affixBattleId": "m2-1800000015700-10",
+          "affixState": {
+            "version": 1,
+            "battleId": "m2-1800000015700-10",
+            "nirvanaUsed": false,
+            "lastReaperCastId": null,
+            "reaperHits": []
+          },
+          "targetId": "m2-1800000015700-10-story-actor",
+          "name": "奇克",
+          "max": 600,
+          "atk": 3,
+          "armor": 12,
+          "burn": 0,
+          "broken": 0,
+          "blunt": 0,
+          "scorch": 0,
+          "stun": 0,
+          "nextHeavy": 4,
+          "heavyDelayed": false,
+          "elementTags": [
+            "dark"
+          ],
+          "elementResistance": {
+            "earth": 3,
+            "water": 3,
+            "fire": 3,
+            "wind": 3,
+            "light": 3,
+            "dark": 3
+          },
+          "hp": 600,
+          "storyScenario": {
+            "version": 1,
+            "id": "story.c01.human-chase",
+            "sceneId": "C01.H01.human",
+            "pov": "human",
+            "initialHeroHp": 466.7,
+            "returnAtCamp": false,
+            "result": null,
+            "resolvedRound": null
+          }
+        },
+        "nextActionAt": 1800000016800,
+        "monsterLedger": {
+          "version": 1,
+          "encountered": {
+            "goblin.a01.normal.2": true
+          }
+        },
+        "regionNavigation": {
+          "version": 1,
+          "exploredNodeIds": [
+            "goblin.a01.field"
+          ],
+          "favoriteNodeIds": [],
+          "discoveredMaterialIds": [
+            "goblin.mat.01"
+          ]
+        },
+        "stopAfterBattle": false,
+        "codexCollection": {
+          "version": 1,
+          "sets": {
+            "human_blood_oath": [],
+            "human_royal_edge": [],
+            "human_last_bastion": [],
+            "elf_arrow": [],
+            "elf_prism": [],
+            "elf_root": [],
+            "goblin_spore": [],
+            "goblin_ambush": [],
+            "goblin_snare": [],
+            "ashen.caldera": [],
+            "ashen.strata": [],
+            "ashen.prism": [],
+            "anvil": [],
+            "rune": [],
+            "guard": []
+          },
+          "legendaries": []
+        },
+        "nextBattleAt": 1800000013700,
+        "stopAfterDungeon": false,
+        "story": {
+          "version": 1,
+          "pov": "human",
+          "completedScenes": [],
+          "flags": [],
+          "knowledge": [],
+          "choices": {},
+          "acceptedLevels": {
+            "C01.H01.human": 1
+          },
+          "activeScene": {
+            "id": "C01.H01.human",
+            "cursor": 9,
+            "choiceId": "pursue",
+            "encounterId": "m2-1800000015700-10"
+          },
+          "encounters": []
+        }
+      }
+    },
+    {
+      "id": "story.c01.human-chase",
+      "moment": "after-one-step",
+      "state": {
+        "version": 6,
+        "diplomacy": {
+          "version": 1,
+          "revision": 0,
+          "wars": []
+        },
+        "race": "human",
+        "hero": "罗什福尔",
+        "atCamp": false,
+        "level": 1,
+        "xp": 16,
+        "gold": 102,
+        "location": 0,
+        "siteId": "goblin.a01",
+        "expedition": {
+          "mode": "field",
+          "targetInstanceId": null,
+          "fieldId": "goblin.a01.field",
+          "loop": false
+        },
+        "build": "custom",
+        "inventory": [
+          {
+            "id": "mvqjinv9-1-ip3o5",
+            "slot": "weapon",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "碧纹大剑",
+            "atk": 23,
+            "armor": 0,
+            "hp": 13,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "human_scatter_sword_5",
+            "baseVariant": "axe_attack",
+            "weaponType": "greatsword",
+            "originRace": "human",
+            "visualKey": "human_scatter_sword_5",
+            "visualVariant": "human_scatter_sword_5",
+            "iconKey": "weapon",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinva-2-kjwgl",
+            "slot": "helm",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "蓝缨巡城盔",
+            "atk": 1,
+            "armor": 11,
+            "hp": 24,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "human_scatter_bluecrest_helm",
+            "baseVariant": "helm_armor",
+            "weaponType": null,
+            "originRace": "human",
+            "visualKey": "human_scatter_bluecrest_helm",
+            "visualVariant": "human_scatter_bluecrest_helm",
+            "iconKey": "helm",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinva-3-fjlwc",
+            "slot": "armor",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "驿路甲",
+            "atk": 0,
+            "armor": 12,
+            "hp": 86,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "human_scatter_armor_1",
+            "baseVariant": "armor_vitality",
+            "weaponType": null,
+            "originRace": "human",
+            "visualKey": "human_scatter_armor_1",
+            "visualVariant": "human_scatter_armor_1",
+            "iconKey": "armor",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinva-4-dml6w",
+            "slot": "gloves",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "驿路手套",
+            "atk": 3,
+            "armor": 4,
+            "hp": 45,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "human_scatter_gloves_1",
+            "baseVariant": "gloves_vitality",
+            "weaponType": null,
+            "originRace": "human",
+            "visualKey": "human_scatter_gloves_1",
+            "visualVariant": "human_scatter_gloves_1",
+            "iconKey": "gloves",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinvb-5-p6ewz",
+            "slot": "boots",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "盐泉靴",
+            "atk": 1,
+            "armor": 10,
+            "hp": 28,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "human_scatter_boots_2",
+            "baseVariant": "boots_armor",
+            "weaponType": null,
+            "originRace": "human",
+            "visualKey": "human_scatter_boots_2",
+            "visualVariant": "human_scatter_boots_2",
+            "iconKey": "boots",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinvb-6-nvuhh",
+            "slot": "ring",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "守更铁环",
+            "atk": 4,
+            "armor": 7,
+            "hp": 45,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "human_scatter_ring_watch",
+            "baseVariant": "ring_survival",
+            "weaponType": null,
+            "originRace": "human",
+            "visualKey": "human_scatter_ring_watch",
+            "visualVariant": "human_scatter_ring_watch",
+            "iconKey": "ring",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinvb-7-nd7dv",
+            "slot": "ring",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "守更铁环",
+            "atk": 4,
+            "armor": 7,
+            "hp": 45,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "human_scatter_ring_watch",
+            "baseVariant": "ring_survival",
+            "weaponType": null,
+            "originRace": "human",
+            "visualKey": "human_scatter_ring_watch",
+            "visualVariant": "human_scatter_ring_watch",
+            "iconKey": "ring",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinvb-8-c966k",
+            "slot": "amulet",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "归军吊坠",
+            "atk": 3,
+            "armor": 7,
+            "hp": 53,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "human_scatter_jewel_3",
+            "baseVariant": "amulet_survival",
+            "weaponType": null,
+            "originRace": "human",
+            "visualKey": "human_scatter_jewel_3",
+            "visualVariant": "human_scatter_jewel_3",
+            "iconKey": "amulet",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          }
+        ],
+        "equip": {
+          "weapon": "mvqjinv9-1-ip3o5",
+          "helm": "mvqjinva-2-kjwgl",
+          "armor": "mvqjinva-3-fjlwc",
+          "gloves": "mvqjinva-4-dml6w",
+          "boots": "mvqjinvb-5-p6ewz",
+          "ring1": "mvqjinvb-6-nvuhh",
+          "ring2": "mvqjinvb-7-nd7dv",
+          "amulet": "mvqjinvb-8-c966k"
+        },
+        "skills": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "conditions": [
+          "always",
+          "always",
+          "always",
+          "always"
+        ],
+        "materialStacks": {
+          "goblin.mat.01|0": 1
+        },
+        "offlineLuck": 0,
+        "talents": {
+          "power": 0,
+          "heart": 0,
+          "steel": 0,
+          "precision": 0,
+          "crit": 0,
+          "critDamage": 0,
+          "penetration": 0,
+          "element": 0,
+          "elementResist": 0,
+          "block": 0,
+          "shield": 0,
+          "healing": 0,
+          "resolve": 0,
+          "luck": 0
+        },
+        "consumables": {
+          "memoryFruit": 0,
+          "refundCredits": 0,
+          "reforgeToken": 0
+        },
+        "potionSlot": {
+          "key": null,
+          "auto": false,
+          "priority": "low",
+          "priorityVersion": 1
+        },
+        "kills": 1,
+        "normalWins": [
+          0,
+          0,
+          0
+        ],
+        "bossWins": [
+          0,
+          0,
+          0
+        ],
+        "bossReady": [
+          0,
+          0,
+          0
+        ],
+        "stock": 3,
+        "loadouts": [
+          null,
+          null,
+          null
+        ],
+        "chapters": [],
+        "chronicle": [
+          "你从人族的营地开始旅程。"
+        ],
+        "momentum": 0,
+        "lastSeen": 1800000011900,
+        "running": true,
+        "skillTree": {
+          "version": 1,
+          "mode": "active",
+          "configId": "human-tree-99-v1",
+          "revision": 0,
+          "selectedPreset": 0,
+          "presets": [
+            {
+              "name": "方案1",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案2",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案3",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            }
+          ]
+        },
+        "heroHp": 466.7,
+        "restUntil": 0,
+        "lastHealthClock": 1800000016800,
+        "areaProgress": {
+          "human": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "dwarf": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "elf": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "goblin": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "ashen": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          }
+        },
+        "instanceCooldowns": {},
+        "activeEncounter": {
+          "contentVersion": "dwarf-m2-v1",
+          "location": 0,
+          "siteId": "goblin.a01",
+          "areaId": "goblin.a01",
+          "instanceId": "goblin.a01.field",
+          "kind": "field",
+          "luck": 0,
+          "boss": false,
+          "heroHp": 466.7,
+          "round": 1,
+          "warcry": 0,
+          "ironcoat": 0,
+          "barrier": 0,
+          "barrierShield": 0,
+          "heroBurn": 0,
+          "heroBurnPower": 0,
+          "weakness": 0,
+          "guard": 0,
+          "cd": {},
+          "shelterUsed": false,
+          "shield": 0,
+          "done": false,
+          "rewarded": false,
+          "killSource": null,
+          "multiVersion": 1,
+          "id": "m2-1800000015700-10",
+          "rngState": 1789113595,
+          "rngDraws": 4,
+          "itemSerial": 0,
+          "summonSerial": 0,
+          "activeCastCount": 0,
+          "enemies": [
+            {
+              "id": "m2-1800000015700-10-story-actor",
+              "monsterId": "goblin.a01.normal.1",
+              "definitionId": "goblin.a01.normal.1",
+              "sourceInstanceId": "goblin.a01.field",
+              "origin": "initial",
+              "main": true,
+              "location": 0,
+              "name": "奇克",
+              "hp": 550,
+              "max": 600,
+              "atk": 3,
+              "armor": 12,
+              "shield": 0,
+              "burn": 0,
+              "broken": 0,
+              "blunt": 0,
+              "scorch": 0,
+              "stun": 0,
+              "round": 1,
+              "nextHeavy": 4,
+              "heavyDelayed": false,
+              "cd": {},
+              "control": {
+                "version": 1,
+                "unitId": "m2-1800000015700-10-story-actor",
+                "clock": 1800000016800,
+                "stunUntil": 0,
+                "interruptUntil": 0,
+                "stunChain": 0,
+                "lastStunEnd": null,
+                "cooldowns": {},
+                "preparing": null
+              },
+              "profile": {
+                "controlReduction": 0,
+                "interruptStop": 1100
+              },
+              "elementalPower": 2,
+              "elementTags": [
+                "dark"
+              ],
+              "elementResistance": {
+                "earth": 3,
+                "water": 3,
+                "fire": 3,
+                "wind": 3,
+                "light": 3,
+                "dark": 3
+              },
+              "parameterSetId": "goblin-initial-candidate-v1",
+              "basicIntervalMs": 2200,
+              "nextBasicAt": 1800000017900,
+              "skillUses": {},
+              "follower": false,
+              "typedProfile": true,
+              "shieldUntil": 0,
+              "reflectReadyAt": 0,
+              "skillOverrides": {},
+              "storyActorRace": "goblin",
+              "storyActorWeapon": "dagger"
+            }
+          ],
+          "typedDots": [],
+          "fieldGroup": false,
+          "rewardGold": 0,
+          "rewardXp": 0,
+          "rewardDefinitionId": "goblin.a01.normal.1",
+          "skillResolver": "tree-v1",
+          "affixBattleId": "m2-1800000015700-10",
+          "affixState": {
+            "version": 1,
+            "battleId": "m2-1800000015700-10",
+            "nirvanaUsed": false,
+            "lastReaperCastId": "m2-1800000015700-10:1",
+            "reaperHits": [
+              "[0,\"m2-1800000015700-10-story-actor\"]"
+            ]
+          },
+          "targetId": "m2-1800000015700-10-story-actor",
+          "name": "奇克",
+          "max": 600,
+          "atk": 3,
+          "armor": 12,
+          "burn": 0,
+          "broken": 0,
+          "blunt": 0,
+          "scorch": 0,
+          "stun": 0,
+          "nextHeavy": 4,
+          "heavyDelayed": false,
+          "elementTags": [
+            "dark"
+          ],
+          "elementResistance": {
+            "earth": 3,
+            "water": 3,
+            "fire": 3,
+            "wind": 3,
+            "light": 3,
+            "dark": 3
+          },
+          "hp": 550,
+          "storyScenario": {
+            "version": 1,
+            "id": "story.c01.human-chase",
+            "sceneId": "C01.H01.human",
+            "pov": "human",
+            "initialHeroHp": 466.7,
+            "returnAtCamp": false,
+            "result": null,
+            "resolvedRound": null
+          },
+          "treeEffects": {
+            "version": 1,
+            "clock": 1100,
+            "hero": {
+              "sources": []
+            },
+            "enemies": {
+              "m2-1800000015700-10-story-actor": {
+                "sources": []
+              }
+            }
+          },
+          "treeCombatClock": 1100,
+          "fixtureAction": null,
+          "lastCast": {
+            "id": "m2-1800000015700-10:1",
+            "skillId": "basic",
+            "scope": "single",
+            "hits": [
+              {
+                "id": "m2-1800000015700-10:1:0:m2-1800000015700-10-story-actor",
+                "hitIndex": 0,
+                "targetId": "m2-1800000015700-10-story-actor",
+                "hit": true,
+                "hpBefore": 600,
+                "hpAfter": 550,
+                "actualHpLost": 50,
+                "killProcHpLost": 0
+              }
+            ]
+          },
+          "lastCombatEventAt": 1800000016800,
+          "nextRegularAt": 1800000017900
+        },
+        "nextActionAt": 1800000017900,
+        "monsterLedger": {
+          "version": 1,
+          "encountered": {
+            "goblin.a01.normal.2": true
+          }
+        },
+        "regionNavigation": {
+          "version": 1,
+          "exploredNodeIds": [
+            "goblin.a01.field"
+          ],
+          "favoriteNodeIds": [],
+          "discoveredMaterialIds": [
+            "goblin.mat.01"
+          ]
+        },
+        "stopAfterBattle": false,
+        "codexCollection": {
+          "version": 1,
+          "sets": {
+            "human_blood_oath": [],
+            "human_royal_edge": [],
+            "human_last_bastion": [],
+            "elf_arrow": [],
+            "elf_prism": [],
+            "elf_root": [],
+            "goblin_spore": [],
+            "goblin_ambush": [],
+            "goblin_snare": [],
+            "ashen.caldera": [],
+            "ashen.strata": [],
+            "ashen.prism": [],
+            "anvil": [],
+            "rune": [],
+            "guard": []
+          },
+          "legendaries": []
+        },
+        "nextBattleAt": 1800000013700,
+        "stopAfterDungeon": false,
+        "story": {
+          "version": 1,
+          "pov": "human",
+          "completedScenes": [],
+          "flags": [],
+          "knowledge": [],
+          "choices": {},
+          "acceptedLevels": {
+            "C01.H01.human": 1
+          },
+          "activeScene": {
+            "id": "C01.H01.human",
+            "cursor": 9,
+            "choiceId": "pursue",
+            "encounterId": "m2-1800000015700-10"
+          },
+          "encounters": []
+        }
+      }
+    },
+    {
+      "id": "story.c01.goblin-escape",
+      "moment": "start",
+      "state": {
+        "version": 6,
+        "diplomacy": {
+          "version": 1,
+          "revision": 0,
+          "wars": []
+        },
+        "race": "goblin",
+        "hero": "奇克",
+        "atCamp": false,
+        "level": 1,
+        "xp": 0,
+        "gold": 100,
+        "location": 0,
+        "siteId": "goblin.a01",
+        "expedition": {
+          "mode": "field",
+          "fieldId": "goblin.a01.field",
+          "targetInstanceId": null,
+          "loop": false
+        },
+        "build": "custom",
+        "inventory": [
+          {
+            "id": "mvqjinwm-b-gejbj",
+            "slot": "weapon",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "锁舌窄匕",
+            "atk": 21,
+            "armor": 0,
+            "hp": 19,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "goblin_scatter_weapon_7",
+            "baseVariant": "dagger_balanced",
+            "weaponType": "dagger",
+            "originRace": "goblin",
+            "visualKey": "goblin_scatter_weapon_7",
+            "visualVariant": "goblin_scatter_weapon_7",
+            "iconKey": "weapon",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwm-c-vqcv4",
+            "slot": "helm",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "渡河铜冠",
+            "atk": 1,
+            "armor": 6,
+            "hp": 49,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "goblin_scatter_helm_5",
+            "baseVariant": "helm_vitality",
+            "weaponType": null,
+            "originRace": "goblin",
+            "visualKey": "goblin_scatter_helm_5",
+            "visualVariant": "goblin_scatter_helm_5",
+            "iconKey": "helm",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwm-d-jvo9x",
+            "slot": "armor",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "苦鳃围甲",
+            "atk": 0,
+            "armor": 20,
+            "hp": 43,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "goblin_scatter_armor_4",
+            "baseVariant": "armor_armor",
+            "weaponType": null,
+            "originRace": "goblin",
+            "visualKey": "goblin_scatter_armor_4",
+            "visualVariant": "goblin_scatter_armor_4",
+            "iconKey": "armor",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwm-e-rjm7h",
+            "slot": "gloves",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "赤筋扣手",
+            "atk": 3,
+            "armor": 8,
+            "hp": 24,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "goblin_scatter_gloves_4",
+            "baseVariant": "gloves_armor",
+            "weaponType": null,
+            "originRace": "goblin",
+            "visualKey": "goblin_scatter_gloves_4",
+            "visualVariant": "goblin_scatter_gloves_4",
+            "iconKey": "gloves",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwm-f-qolny",
+            "slot": "boots",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "翻墙绳履",
+            "atk": 1,
+            "armor": 5,
+            "hp": 53,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "goblin_scatter_boots_6",
+            "baseVariant": "boots_vitality",
+            "weaponType": null,
+            "originRace": "goblin",
+            "visualKey": "goblin_scatter_boots_6",
+            "visualVariant": "goblin_scatter_boots_6",
+            "iconKey": "boots",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwm-g-ngmgh",
+            "slot": "ring",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "赤须结环",
+            "atk": 13,
+            "armor": 0,
+            "hp": 35,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "goblin_scatter_ring_4",
+            "baseVariant": "ring_attack",
+            "weaponType": null,
+            "originRace": "goblin",
+            "visualKey": "goblin_scatter_ring_4",
+            "visualVariant": "goblin_scatter_ring_4",
+            "iconKey": "ring",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwm-h-alln1",
+            "slot": "ring",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "钩骨指环",
+            "atk": 13,
+            "armor": 0,
+            "hp": 35,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "goblin_scatter_ring_1",
+            "baseVariant": "ring_attack",
+            "weaponType": null,
+            "originRace": "goblin",
+            "visualKey": "goblin_scatter_ring_1",
+            "visualVariant": "goblin_scatter_ring_1",
+            "iconKey": "ring",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwm-i-q2uio",
+            "slot": "amulet",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "蜕影结牌",
+            "atk": 3,
+            "armor": 7,
+            "hp": 53,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "goblin_scatter_amulet_5",
+            "baseVariant": "amulet_survival",
+            "weaponType": null,
+            "originRace": "goblin",
+            "visualKey": "goblin_scatter_amulet_5",
+            "visualVariant": "goblin_scatter_amulet_5",
+            "iconKey": "amulet",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          }
+        ],
+        "equip": {
+          "weapon": "mvqjinwm-b-gejbj",
+          "helm": "mvqjinwm-c-vqcv4",
+          "armor": "mvqjinwm-d-jvo9x",
+          "gloves": "mvqjinwm-e-rjm7h",
+          "boots": "mvqjinwm-f-qolny",
+          "ring1": "mvqjinwm-g-ngmgh",
+          "ring2": "mvqjinwm-h-alln1",
+          "amulet": "mvqjinwm-i-q2uio"
+        },
+        "skills": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "conditions": [
+          "always",
+          "always",
+          "always",
+          "always"
+        ],
+        "materialStacks": {},
+        "offlineLuck": 0,
+        "talents": {
+          "power": 0,
+          "heart": 0,
+          "steel": 0,
+          "precision": 0,
+          "crit": 0,
+          "critDamage": 0,
+          "penetration": 0,
+          "element": 0,
+          "elementResist": 0,
+          "block": 0,
+          "shield": 0,
+          "healing": 0,
+          "resolve": 0,
+          "luck": 0
+        },
+        "consumables": {
+          "memoryFruit": 0,
+          "refundCredits": 0,
+          "reforgeToken": 0
+        },
+        "potionSlot": {
+          "key": null,
+          "auto": false,
+          "priority": "low",
+          "priorityVersion": 1
+        },
+        "kills": 0,
+        "normalWins": [
+          0,
+          0,
+          0
+        ],
+        "bossWins": [
+          0,
+          0,
+          0
+        ],
+        "bossReady": [
+          0,
+          0,
+          0
+        ],
+        "stock": 3,
+        "loadouts": [
+          null,
+          null,
+          null
+        ],
+        "chapters": [],
+        "chronicle": [
+          "你从裂穴诸部的营地开始旅程。"
+        ],
+        "momentum": 0,
+        "lastSeen": 1800000002000,
+        "running": true,
+        "skillTree": {
+          "version": 1,
+          "mode": "active",
+          "configId": "goblin-tree-v1",
+          "revision": 0,
+          "selectedPreset": 0,
+          "presets": [
+            {
+              "name": "方案1",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案2",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案3",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            }
+          ]
+        },
+        "heroHp": 445,
+        "restUntil": 0,
+        "lastHealthClock": 1800000002000,
+        "areaProgress": {
+          "human": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "dwarf": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "elf": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "goblin": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "ashen": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          }
+        },
+        "instanceCooldowns": {},
+        "story": {
+          "version": 1,
+          "pov": "goblin",
+          "completedScenes": [],
+          "flags": [],
+          "knowledge": [],
+          "choices": {},
+          "acceptedLevels": {
+            "C01.G01.goblin": 1
+          },
+          "activeScene": {
+            "id": "C01.G01.goblin",
+            "cursor": 9,
+            "choiceId": "escape",
+            "encounterId": "m2-1800000002000-19"
+          },
+          "encounters": []
+        },
+        "activeEncounter": {
+          "contentVersion": "dwarf-m2-v1",
+          "location": 0,
+          "siteId": "goblin.a01",
+          "areaId": "goblin.a01",
+          "instanceId": "goblin.a01.field",
+          "kind": "field",
+          "luck": 0,
+          "boss": false,
+          "heroHp": 445,
+          "round": 0,
+          "warcry": 0,
+          "ironcoat": 0,
+          "barrier": 0,
+          "barrierShield": 0,
+          "heroBurn": 0,
+          "heroBurnPower": 0,
+          "weakness": 0,
+          "guard": 0,
+          "cd": {},
+          "shelterUsed": false,
+          "shield": 0,
+          "done": false,
+          "rewarded": false,
+          "killSource": null,
+          "multiVersion": 1,
+          "id": "m2-1800000002000-19",
+          "rngState": 4118116182,
+          "rngDraws": 2,
+          "itemSerial": 0,
+          "summonSerial": 0,
+          "activeCastCount": 0,
+          "enemies": [
+            {
+              "id": "m2-1800000002000-19-story-actor",
+              "monsterId": "goblin.a01.normal.1",
+              "definitionId": "goblin.a01.normal.1",
+              "sourceInstanceId": "goblin.a01.field",
+              "origin": "initial",
+              "main": true,
+              "location": 0,
+              "name": "罗什福尔",
+              "hp": 600,
+              "max": 600,
+              "atk": 3,
+              "armor": 12,
+              "shield": 0,
+              "burn": 0,
+              "broken": 0,
+              "blunt": 0,
+              "scorch": 0,
+              "stun": 0,
+              "round": 0,
+              "nextHeavy": 4,
+              "heavyDelayed": false,
+              "cd": {},
+              "control": {
+                "version": 1,
+                "unitId": "m2-1800000002000-19-story-actor",
+                "clock": 1800000002000,
+                "stunUntil": 0,
+                "interruptUntil": 0,
+                "stunChain": 0,
+                "lastStunEnd": null,
+                "cooldowns": {},
+                "preparing": null
+              },
+              "profile": {
+                "controlReduction": 0,
+                "interruptStop": 1100
+              },
+              "elementalPower": 2,
+              "elementTags": [
+                "dark"
+              ],
+              "elementResistance": {
+                "earth": 3,
+                "water": 3,
+                "fire": 3,
+                "wind": 3,
+                "light": 3,
+                "dark": 3
+              },
+              "parameterSetId": "goblin-initial-candidate-v1",
+              "basicIntervalMs": 2200,
+              "nextBasicAt": 1800000004200,
+              "skillUses": {},
+              "follower": false,
+              "typedProfile": true,
+              "shieldUntil": 0,
+              "reflectReadyAt": 0,
+              "skillOverrides": {},
+              "storyActorRace": "human",
+              "storyActorWeapon": "sword_shield"
+            }
+          ],
+          "typedDots": [],
+          "fieldGroup": false,
+          "rewardGold": 0,
+          "rewardXp": 0,
+          "rewardDefinitionId": "goblin.a01.normal.1",
+          "skillResolver": "tree-v1",
+          "affixBattleId": "m2-1800000002000-19",
+          "affixState": {
+            "version": 1,
+            "battleId": "m2-1800000002000-19",
+            "nirvanaUsed": false,
+            "lastReaperCastId": null,
+            "reaperHits": []
+          },
+          "targetId": "m2-1800000002000-19-story-actor",
+          "name": "罗什福尔",
+          "max": 600,
+          "atk": 3,
+          "armor": 12,
+          "burn": 0,
+          "broken": 0,
+          "blunt": 0,
+          "scorch": 0,
+          "stun": 0,
+          "nextHeavy": 4,
+          "heavyDelayed": false,
+          "elementTags": [
+            "dark"
+          ],
+          "elementResistance": {
+            "earth": 3,
+            "water": 3,
+            "fire": 3,
+            "wind": 3,
+            "light": 3,
+            "dark": 3
+          },
+          "hp": 600,
+          "storyScenario": {
+            "version": 1,
+            "id": "story.c01.goblin-escape",
+            "sceneId": "C01.G01.goblin",
+            "pov": "goblin",
+            "initialHeroHp": 445,
+            "returnAtCamp": true,
+            "result": null,
+            "resolvedRound": null
+          }
+        },
+        "nextActionAt": 1800000003100,
+        "regionNavigation": {
+          "version": 1,
+          "exploredNodeIds": [
+            "goblin.a01.field"
+          ],
+          "favoriteNodeIds": [],
+          "discoveredMaterialIds": []
+        }
+      }
+    },
+    {
+      "id": "story.c01.goblin-escape",
+      "moment": "after-one-step",
+      "state": {
+        "version": 6,
+        "diplomacy": {
+          "version": 1,
+          "revision": 0,
+          "wars": []
+        },
+        "race": "goblin",
+        "hero": "奇克",
+        "atCamp": false,
+        "level": 1,
+        "xp": 0,
+        "gold": 100,
+        "location": 0,
+        "siteId": "goblin.a01",
+        "expedition": {
+          "mode": "field",
+          "fieldId": "goblin.a01.field",
+          "targetInstanceId": null,
+          "loop": false
+        },
+        "build": "custom",
+        "inventory": [
+          {
+            "id": "mvqjinwm-b-gejbj",
+            "slot": "weapon",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "锁舌窄匕",
+            "atk": 21,
+            "armor": 0,
+            "hp": 19,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "goblin_scatter_weapon_7",
+            "baseVariant": "dagger_balanced",
+            "weaponType": "dagger",
+            "originRace": "goblin",
+            "visualKey": "goblin_scatter_weapon_7",
+            "visualVariant": "goblin_scatter_weapon_7",
+            "iconKey": "weapon",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwm-c-vqcv4",
+            "slot": "helm",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "渡河铜冠",
+            "atk": 1,
+            "armor": 6,
+            "hp": 49,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "goblin_scatter_helm_5",
+            "baseVariant": "helm_vitality",
+            "weaponType": null,
+            "originRace": "goblin",
+            "visualKey": "goblin_scatter_helm_5",
+            "visualVariant": "goblin_scatter_helm_5",
+            "iconKey": "helm",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwm-d-jvo9x",
+            "slot": "armor",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "苦鳃围甲",
+            "atk": 0,
+            "armor": 20,
+            "hp": 43,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "goblin_scatter_armor_4",
+            "baseVariant": "armor_armor",
+            "weaponType": null,
+            "originRace": "goblin",
+            "visualKey": "goblin_scatter_armor_4",
+            "visualVariant": "goblin_scatter_armor_4",
+            "iconKey": "armor",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwm-e-rjm7h",
+            "slot": "gloves",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "赤筋扣手",
+            "atk": 3,
+            "armor": 8,
+            "hp": 24,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "goblin_scatter_gloves_4",
+            "baseVariant": "gloves_armor",
+            "weaponType": null,
+            "originRace": "goblin",
+            "visualKey": "goblin_scatter_gloves_4",
+            "visualVariant": "goblin_scatter_gloves_4",
+            "iconKey": "gloves",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwm-f-qolny",
+            "slot": "boots",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "翻墙绳履",
+            "atk": 1,
+            "armor": 5,
+            "hp": 53,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "goblin_scatter_boots_6",
+            "baseVariant": "boots_vitality",
+            "weaponType": null,
+            "originRace": "goblin",
+            "visualKey": "goblin_scatter_boots_6",
+            "visualVariant": "goblin_scatter_boots_6",
+            "iconKey": "boots",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwm-g-ngmgh",
+            "slot": "ring",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "赤须结环",
+            "atk": 13,
+            "armor": 0,
+            "hp": 35,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "goblin_scatter_ring_4",
+            "baseVariant": "ring_attack",
+            "weaponType": null,
+            "originRace": "goblin",
+            "visualKey": "goblin_scatter_ring_4",
+            "visualVariant": "goblin_scatter_ring_4",
+            "iconKey": "ring",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwm-h-alln1",
+            "slot": "ring",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "钩骨指环",
+            "atk": 13,
+            "armor": 0,
+            "hp": 35,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "goblin_scatter_ring_1",
+            "baseVariant": "ring_attack",
+            "weaponType": null,
+            "originRace": "goblin",
+            "visualKey": "goblin_scatter_ring_1",
+            "visualVariant": "goblin_scatter_ring_1",
+            "iconKey": "ring",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwm-i-q2uio",
+            "slot": "amulet",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "蜕影结牌",
+            "atk": 3,
+            "armor": 7,
+            "hp": 53,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "goblin_scatter_amulet_5",
+            "baseVariant": "amulet_survival",
+            "weaponType": null,
+            "originRace": "goblin",
+            "visualKey": "goblin_scatter_amulet_5",
+            "visualVariant": "goblin_scatter_amulet_5",
+            "iconKey": "amulet",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          }
+        ],
+        "equip": {
+          "weapon": "mvqjinwm-b-gejbj",
+          "helm": "mvqjinwm-c-vqcv4",
+          "armor": "mvqjinwm-d-jvo9x",
+          "gloves": "mvqjinwm-e-rjm7h",
+          "boots": "mvqjinwm-f-qolny",
+          "ring1": "mvqjinwm-g-ngmgh",
+          "ring2": "mvqjinwm-h-alln1",
+          "amulet": "mvqjinwm-i-q2uio"
+        },
+        "skills": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "conditions": [
+          "always",
+          "always",
+          "always",
+          "always"
+        ],
+        "materialStacks": {},
+        "offlineLuck": 0,
+        "talents": {
+          "power": 0,
+          "heart": 0,
+          "steel": 0,
+          "precision": 0,
+          "crit": 0,
+          "critDamage": 0,
+          "penetration": 0,
+          "element": 0,
+          "elementResist": 0,
+          "block": 0,
+          "shield": 0,
+          "healing": 0,
+          "resolve": 0,
+          "luck": 0
+        },
+        "consumables": {
+          "memoryFruit": 0,
+          "refundCredits": 0,
+          "reforgeToken": 0
+        },
+        "potionSlot": {
+          "key": null,
+          "auto": false,
+          "priority": "low",
+          "priorityVersion": 1
+        },
+        "kills": 0,
+        "normalWins": [
+          0,
+          0,
+          0
+        ],
+        "bossWins": [
+          0,
+          0,
+          0
+        ],
+        "bossReady": [
+          0,
+          0,
+          0
+        ],
+        "stock": 3,
+        "loadouts": [
+          null,
+          null,
+          null
+        ],
+        "chapters": [],
+        "chronicle": [
+          "你从裂穴诸部的营地开始旅程。"
+        ],
+        "momentum": 0,
+        "lastSeen": 1800000002000,
+        "running": true,
+        "skillTree": {
+          "version": 1,
+          "mode": "active",
+          "configId": "goblin-tree-v1",
+          "revision": 0,
+          "selectedPreset": 0,
+          "presets": [
+            {
+              "name": "方案1",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案2",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案3",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            }
+          ]
+        },
+        "heroHp": 445,
+        "restUntil": 0,
+        "lastHealthClock": 1800000003100,
+        "areaProgress": {
+          "human": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "dwarf": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "elf": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "goblin": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "ashen": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          }
+        },
+        "instanceCooldowns": {},
+        "story": {
+          "version": 1,
+          "pov": "goblin",
+          "completedScenes": [],
+          "flags": [],
+          "knowledge": [],
+          "choices": {},
+          "acceptedLevels": {
+            "C01.G01.goblin": 1
+          },
+          "activeScene": {
+            "id": "C01.G01.goblin",
+            "cursor": 9,
+            "choiceId": "escape",
+            "encounterId": "m2-1800000002000-19"
+          },
+          "encounters": []
+        },
+        "activeEncounter": {
+          "contentVersion": "dwarf-m2-v1",
+          "location": 0,
+          "siteId": "goblin.a01",
+          "areaId": "goblin.a01",
+          "instanceId": "goblin.a01.field",
+          "kind": "field",
+          "luck": 0,
+          "boss": false,
+          "heroHp": 445,
+          "round": 1,
+          "warcry": 0,
+          "ironcoat": 0,
+          "barrier": 0,
+          "barrierShield": 0,
+          "heroBurn": 0,
+          "heroBurnPower": 0,
+          "weakness": 0,
+          "guard": 0,
+          "cd": {},
+          "shelterUsed": false,
+          "shield": 0,
+          "done": false,
+          "rewarded": false,
+          "killSource": null,
+          "multiVersion": 1,
+          "id": "m2-1800000002000-19",
+          "rngState": 1569642744,
+          "rngDraws": 4,
+          "itemSerial": 0,
+          "summonSerial": 0,
+          "activeCastCount": 0,
+          "enemies": [
+            {
+              "id": "m2-1800000002000-19-story-actor",
+              "monsterId": "goblin.a01.normal.1",
+              "definitionId": "goblin.a01.normal.1",
+              "sourceInstanceId": "goblin.a01.field",
+              "origin": "initial",
+              "main": true,
+              "location": 0,
+              "name": "罗什福尔",
+              "hp": 536,
+              "max": 600,
+              "atk": 3,
+              "armor": 12,
+              "shield": 0,
+              "burn": 0,
+              "broken": 0,
+              "blunt": 0,
+              "scorch": 0,
+              "stun": 0,
+              "round": 1,
+              "nextHeavy": 4,
+              "heavyDelayed": false,
+              "cd": {},
+              "control": {
+                "version": 1,
+                "unitId": "m2-1800000002000-19-story-actor",
+                "clock": 1800000003100,
+                "stunUntil": 0,
+                "interruptUntil": 0,
+                "stunChain": 0,
+                "lastStunEnd": null,
+                "cooldowns": {},
+                "preparing": null
+              },
+              "profile": {
+                "controlReduction": 0,
+                "interruptStop": 1100
+              },
+              "elementalPower": 2,
+              "elementTags": [
+                "dark"
+              ],
+              "elementResistance": {
+                "earth": 3,
+                "water": 3,
+                "fire": 3,
+                "wind": 3,
+                "light": 3,
+                "dark": 3
+              },
+              "parameterSetId": "goblin-initial-candidate-v1",
+              "basicIntervalMs": 2200,
+              "nextBasicAt": 1800000004200,
+              "skillUses": {},
+              "follower": false,
+              "typedProfile": true,
+              "shieldUntil": 0,
+              "reflectReadyAt": 0,
+              "skillOverrides": {},
+              "storyActorRace": "human",
+              "storyActorWeapon": "sword_shield"
+            }
+          ],
+          "typedDots": [],
+          "fieldGroup": false,
+          "rewardGold": 0,
+          "rewardXp": 0,
+          "rewardDefinitionId": "goblin.a01.normal.1",
+          "skillResolver": "tree-v1",
+          "affixBattleId": "m2-1800000002000-19",
+          "affixState": {
+            "version": 1,
+            "battleId": "m2-1800000002000-19",
+            "nirvanaUsed": false,
+            "lastReaperCastId": "m2-1800000002000-19:1",
+            "reaperHits": [
+              "[0,\"m2-1800000002000-19-story-actor\"]"
+            ]
+          },
+          "targetId": "m2-1800000002000-19-story-actor",
+          "name": "罗什福尔",
+          "max": 600,
+          "atk": 3,
+          "armor": 12,
+          "burn": 0,
+          "broken": 0,
+          "blunt": 0,
+          "scorch": 0,
+          "stun": 0,
+          "nextHeavy": 4,
+          "heavyDelayed": false,
+          "elementTags": [
+            "dark"
+          ],
+          "elementResistance": {
+            "earth": 3,
+            "water": 3,
+            "fire": 3,
+            "wind": 3,
+            "light": 3,
+            "dark": 3
+          },
+          "hp": 536,
+          "storyScenario": {
+            "version": 1,
+            "id": "story.c01.goblin-escape",
+            "sceneId": "C01.G01.goblin",
+            "pov": "goblin",
+            "initialHeroHp": 445,
+            "returnAtCamp": true,
+            "result": null,
+            "resolvedRound": null
+          },
+          "treeEffects": {
+            "version": 1,
+            "clock": 1100,
+            "hero": {
+              "sources": []
+            },
+            "enemies": {
+              "m2-1800000002000-19-story-actor": {
+                "sources": []
+              }
+            }
+          },
+          "treeCombatClock": 1100,
+          "fixtureAction": null,
+          "lastCast": {
+            "id": "m2-1800000002000-19:1",
+            "skillId": "basic",
+            "scope": "single",
+            "hits": [
+              {
+                "id": "m2-1800000002000-19:1:0:m2-1800000002000-19-story-actor",
+                "hitIndex": 0,
+                "targetId": "m2-1800000002000-19-story-actor",
+                "hit": true,
+                "hpBefore": 600,
+                "hpAfter": 536,
+                "actualHpLost": 64,
+                "killProcHpLost": 0
+              }
+            ]
+          },
+          "lastCombatEventAt": 1800000003100,
+          "nextRegularAt": 1800000004200
+        },
+        "nextActionAt": 1800000004200,
+        "regionNavigation": {
+          "version": 1,
+          "exploredNodeIds": [
+            "goblin.a01.field"
+          ],
+          "favoriteNodeIds": [],
+          "discoveredMaterialIds": []
+        }
+      }
+    },
+    {
+      "id": "story.c05.elf-duel",
+      "moment": "start",
+      "state": {
+        "version": 6,
+        "diplomacy": {
+          "version": 1,
+          "revision": 0,
+          "wars": []
+        },
+        "race": "elf",
+        "hero": "莱姆斯",
+        "atCamp": false,
+        "level": 60,
+        "xp": 172,
+        "gold": 130,
+        "location": 3,
+        "siteId": "ashen.a04",
+        "expedition": {
+          "mode": "field",
+          "targetInstanceId": null,
+          "fieldId": "ashen.a04.field",
+          "loop": false
+        },
+        "build": "custom",
+        "inventory": [
+          {
+            "id": "mvqjinws-k-5u3p7",
+            "slot": "weapon",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "炭蕊灵杖",
+            "atk": 19,
+            "armor": 1,
+            "hp": 25,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "elf_scatter_weapon_7",
+            "baseVariant": "staff_balanced",
+            "weaponType": "staff",
+            "originRace": "elf",
+            "visualKey": "elf_scatter_weapon_7",
+            "visualVariant": "elf_scatter_weapon_7",
+            "iconKey": "weapon",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwt-l-3a8dm",
+            "slot": "helm",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "暮根兜帽",
+            "atk": 1,
+            "armor": 11,
+            "hp": 24,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "elf_scatter_helm_5",
+            "baseVariant": "helm_armor",
+            "originRace": "elf",
+            "visualKey": "elf_scatter_helm_5",
+            "visualVariant": "elf_scatter_helm_5",
+            "iconKey": "helm",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwt-m-95r4c",
+            "slot": "armor",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "镜叶轻铠",
+            "atk": 0,
+            "armor": 12,
+            "hp": 86,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "elf_scatter_armor_4",
+            "baseVariant": "armor_vitality",
+            "originRace": "elf",
+            "visualKey": "elf_scatter_armor_4",
+            "visualVariant": "elf_scatter_armor_4",
+            "iconKey": "armor",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwt-n-gd4zd",
+            "slot": "gloves",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "银藤指套",
+            "atk": 3,
+            "armor": 4,
+            "hp": 45,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "elf_scatter_gloves_2",
+            "baseVariant": "gloves_vitality",
+            "originRace": "elf",
+            "visualKey": "elf_scatter_gloves_2",
+            "visualVariant": "elf_scatter_gloves_2",
+            "iconKey": "gloves",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwt-o-fpnp3",
+            "slot": "boots",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "露花行靴",
+            "atk": 1,
+            "armor": 10,
+            "hp": 28,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "elf_scatter_boots_1",
+            "baseVariant": "boots_armor",
+            "originRace": "elf",
+            "visualKey": "elf_scatter_boots_1",
+            "visualVariant": "elf_scatter_boots_1",
+            "iconKey": "boots",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwt-p-e3t1o",
+            "slot": "ring",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "花誓指环",
+            "atk": 4,
+            "armor": 7,
+            "hp": 45,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "elf_scatter_ring_3",
+            "baseVariant": "ring_survival",
+            "originRace": "elf",
+            "visualKey": "elf_scatter_ring_3",
+            "visualVariant": "elf_scatter_ring_3",
+            "iconKey": "ring",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwt-q-qb13a",
+            "slot": "ring",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "翠芽戒",
+            "atk": 13,
+            "armor": 0,
+            "hp": 35,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "elf_scatter_ring_1",
+            "baseVariant": "ring_attack",
+            "originRace": "elf",
+            "visualKey": "elf_scatter_ring_1",
+            "visualVariant": "elf_scatter_ring_1",
+            "iconKey": "ring",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwt-r-g783p",
+            "slot": "amulet",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "琥花月坠",
+            "atk": 3,
+            "armor": 7,
+            "hp": 53,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "elf_scatter_amulet_6",
+            "baseVariant": "amulet_survival",
+            "originRace": "elf",
+            "visualKey": "elf_scatter_amulet_6",
+            "visualVariant": "elf_scatter_amulet_6",
+            "iconKey": "amulet",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          }
+        ],
+        "equip": {
+          "weapon": "mvqjinws-k-5u3p7",
+          "helm": "mvqjinwt-l-3a8dm",
+          "armor": "mvqjinwt-m-95r4c",
+          "gloves": "mvqjinwt-n-gd4zd",
+          "boots": "mvqjinwt-o-fpnp3",
+          "ring1": "mvqjinwt-p-e3t1o",
+          "ring2": "mvqjinwt-q-qb13a",
+          "amulet": "mvqjinwt-r-g783p"
+        },
+        "skills": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "conditions": [
+          "always",
+          "always",
+          "always",
+          "always"
+        ],
+        "materialStacks": {
+          "elf.dew_crown|1": 1,
+          "human.mat.02|0": 1,
+          "ashen.weathered_mica|1": 1
+        },
+        "offlineLuck": 0,
+        "talents": {
+          "power": 0,
+          "heart": 0,
+          "steel": 0,
+          "precision": 0,
+          "crit": 0,
+          "critDamage": 0,
+          "penetration": 0,
+          "element": 0,
+          "elementResist": 0,
+          "block": 0,
+          "shield": 0,
+          "healing": 0,
+          "resolve": 0,
+          "luck": 0
+        },
+        "consumables": {
+          "memoryFruit": 0,
+          "refundCredits": 0,
+          "reforgeToken": 0
+        },
+        "potionSlot": {
+          "key": null,
+          "auto": false,
+          "priority": "low",
+          "priorityVersion": 1
+        },
+        "kills": 7,
+        "normalWins": [
+          0,
+          0,
+          0
+        ],
+        "bossWins": [
+          0,
+          0,
+          0
+        ],
+        "bossReady": [
+          0,
+          0,
+          0
+        ],
+        "stock": 3,
+        "loadouts": [
+          null,
+          null,
+          null
+        ],
+        "chapters": [],
+        "chronicle": [
+          "你从精灵的营地开始旅程。"
+        ],
+        "momentum": 0,
+        "lastSeen": 1800000106300,
+        "running": true,
+        "skillTree": {
+          "version": 1,
+          "mode": "active",
+          "configId": "elf-tree-v1",
+          "revision": 0,
+          "selectedPreset": 0,
+          "presets": [
+            {
+              "name": "方案1",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案2",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案3",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            }
+          ]
+        },
+        "heroHp": 1246.002857142857,
+        "restUntil": 0,
+        "lastHealthClock": 1800000106300,
+        "areaProgress": {
+          "human": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "dwarf": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "elf": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "goblin": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "ashen": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          }
+        },
+        "instanceCooldowns": {},
+        "story": {
+          "version": 1,
+          "pov": "elf",
+          "completedScenes": [
+            "C01.E01.elf",
+            "C02.E01.elf",
+            "C02.E02.elf",
+            "C02.E03.elf",
+            "C03.E01.elf",
+            "C03.X01.elf",
+            "C04.DE01.elf",
+            "C04.A01.elf"
+          ],
+          "flags": [
+            "E_WEDGE_LEARNED",
+            "E_WEDGE_AVAILABLE",
+            "E_DRYSPRING_ACCEPTED",
+            "E_DRYSPRING_REPAIRED",
+            "R2_SURVEYED_E",
+            "return-ring.elf.scene-open",
+            "E_RELIC_PURSUIT",
+            "E_CARAVAN_IDENTIFIED",
+            "CARAVAN_ROUTES_RECORDED",
+            "CONTACT_D_E",
+            "return-ring.human.scene-open"
+          ],
+          "knowledge": [
+            {
+              "id": "C01.E01.elf.k0",
+              "text": "已学习旧制楔钉的用法；此任务工具不能出售或消耗。",
+              "mode": "seen",
+              "sourceScene": "C01.E01.elf"
+            },
+            {
+              "id": "C02.E02.elf.k0",
+              "text": "树根撑裂旧结构，泉水漏入地下；疏通旧渠后恢复引流。",
+              "mode": "seen",
+              "sourceScene": "C02.E02.elf"
+            },
+            {
+              "id": "C03.E01.elf.k0",
+              "text": "大祭司要求追回尚未送达的指定遗物。",
+              "mode": "heard",
+              "sourceScene": "C03.E01.elf"
+            },
+            {
+              "id": "C03.X01.elf.k0",
+              "text": "车夫目击一个烬裔独自带走核心；最初袭击者身份仍未知。",
+              "mode": "heard",
+              "sourceScene": "C03.X01.elf"
+            },
+            {
+              "id": "C04.DE01.elf.k0",
+              "text": "大祭司是指定收货方，但尚无其明知盗卖或政变资金的完整证据。",
+              "mode": "confirmed",
+              "sourceScene": "C04.DE01.elf"
+            },
+            {
+              "id": "C04.A01.elf.k0",
+              "text": "遗物对古神庙旧结构有反应，尚未确认用途。",
+              "mode": "seen",
+              "sourceScene": "C04.A01.elf"
+            }
+          ],
+          "choices": {
+            "C01.E01.elf": "wedge",
+            "C02.E01.elf": "help",
+            "C02.E02.elf": "survey",
+            "C02.E03.elf": "continue",
+            "C03.E01.elf": "continue",
+            "C03.X01.elf": "register",
+            "C04.DE01.elf": "verify",
+            "C04.A01.elf": "enter"
+          },
+          "acceptedLevels": {
+            "C01.E01.elf": 60,
+            "C02.E01.elf": 60,
+            "C02.E02.elf": 60,
+            "C02.E03.elf": 60,
+            "C03.E01.elf": 60,
+            "C03.X01.elf": 60,
+            "C04.DE01.elf": 60,
+            "C04.A01.elf": 60,
+            "C05.EA01.elf": 60
+          },
+          "activeScene": {
+            "id": "C05.EA01.elf",
+            "cursor": 6,
+            "choiceId": "duel",
+            "encounterId": "m2-1800000106300-35"
+          },
+          "encounters": [
+            {
+              "sceneId": "C02.E02.elf",
+              "encounterId": "m2-1800000018800-29",
+              "nodeId": "elf.a02.field",
+              "scenarioId": null,
+              "result": "victory"
+            },
+            {
+              "sceneId": "C03.X01.elf",
+              "encounterId": "m2-1800000053100-32",
+              "nodeId": "human.a02.field",
+              "scenarioId": null,
+              "result": "victory"
+            }
+          ]
+        },
+        "activeEncounter": {
+          "contentVersion": "dwarf-m2-v1",
+          "location": 3,
+          "siteId": "ashen.a04",
+          "areaId": "ashen.a04",
+          "instanceId": "ashen.a04.field",
+          "kind": "field",
+          "luck": 0,
+          "boss": false,
+          "heroHp": 1246.002857142857,
+          "round": 0,
+          "warcry": 0,
+          "ironcoat": 0,
+          "barrier": 0,
+          "barrierShield": 0,
+          "heroBurn": 0,
+          "heroBurnPower": 0,
+          "weakness": 0,
+          "guard": 0,
+          "cd": {},
+          "shelterUsed": false,
+          "shield": 0,
+          "done": false,
+          "rewarded": false,
+          "killSource": null,
+          "multiVersion": 1,
+          "id": "m2-1800000106300-35",
+          "rngState": 2538492312,
+          "rngDraws": 2,
+          "itemSerial": 0,
+          "summonSerial": 0,
+          "activeCastCount": 0,
+          "enemies": [
+            {
+              "id": "m2-1800000106300-35-story-actor",
+              "monsterId": "ashen.a04.normal.1",
+              "definitionId": "ashen.a04.normal.1",
+              "sourceInstanceId": "ashen.a04.field",
+              "origin": "initial",
+              "main": true,
+              "location": 3,
+              "name": "砾恩",
+              "hp": 2380,
+              "max": 2380,
+              "atk": 4,
+              "armor": 28,
+              "shield": 0,
+              "burn": 0,
+              "broken": 0,
+              "blunt": 0,
+              "scorch": 0,
+              "stun": 0,
+              "round": 0,
+              "nextHeavy": 4,
+              "heavyDelayed": false,
+              "cd": {},
+              "control": {
+                "version": 1,
+                "unitId": "m2-1800000106300-35-story-actor",
+                "clock": 1800000106300,
+                "stunUntil": 0,
+                "interruptUntil": 0,
+                "stunChain": 0,
+                "lastStunEnd": null,
+                "cooldowns": {},
+                "preparing": null
+              },
+              "profile": {
+                "controlReduction": 0,
+                "interruptStop": 1100
+              },
+              "elementalPower": 2,
+              "elementTags": [
+                "light"
+              ],
+              "elementResistance": {
+                "earth": 6,
+                "water": 6,
+                "fire": 20,
+                "wind": 6,
+                "light": 6,
+                "dark": 6
+              },
+              "parameterSetId": "ashen-a01-a10-candidate-v1",
+              "basicIntervalMs": 2200,
+              "nextBasicAt": 1800000108500,
+              "skillUses": {},
+              "follower": false,
+              "typedProfile": true,
+              "shieldUntil": 0,
+              "reflectReadyAt": 0,
+              "skillOverrides": {},
+              "storyActorRace": "ashen",
+              "storyActorWeapon": "armguard"
+            }
+          ],
+          "typedDots": [],
+          "fieldGroup": false,
+          "rewardGold": 0,
+          "rewardXp": 0,
+          "rewardDefinitionId": "ashen.a04.normal.1",
+          "skillResolver": "tree-v1",
+          "affixBattleId": "m2-1800000106300-35",
+          "affixState": {
+            "version": 1,
+            "battleId": "m2-1800000106300-35",
+            "nirvanaUsed": false,
+            "lastReaperCastId": null,
+            "reaperHits": []
+          },
+          "targetId": "m2-1800000106300-35-story-actor",
+          "name": "砾恩",
+          "max": 2380,
+          "atk": 4,
+          "armor": 28,
+          "burn": 0,
+          "broken": 0,
+          "blunt": 0,
+          "scorch": 0,
+          "stun": 0,
+          "nextHeavy": 4,
+          "heavyDelayed": false,
+          "elementTags": [
+            "light"
+          ],
+          "elementResistance": {
+            "earth": 6,
+            "water": 6,
+            "fire": 20,
+            "wind": 6,
+            "light": 6,
+            "dark": 6
+          },
+          "hp": 2380,
+          "storyScenario": {
+            "version": 1,
+            "id": "story.c05.elf-duel",
+            "sceneId": "C05.EA01.elf",
+            "pov": "elf",
+            "initialHeroHp": 1246.002857142857,
+            "returnAtCamp": false,
+            "result": null,
+            "resolvedRound": null
+          }
+        },
+        "nextActionAt": 1800000107400,
+        "monsterLedger": {
+          "version": 1,
+          "encountered": {
+            "elf.a02.normal.1": true,
+            "elf.a02.normal.3": true,
+            "elf.a01.normal.2": true,
+            "human.a02.normal.1": true,
+            "human.a03.normal.2": true,
+            "ashen.a04.normal.3": true
+          }
+        },
+        "regionNavigation": {
+          "version": 1,
+          "exploredNodeIds": [
+            "elf.a02.field",
+            "elf.a01.field",
+            "human.a02.field",
+            "human.a03.field",
+            "ashen.a04.field"
+          ],
+          "favoriteNodeIds": [],
+          "discoveredMaterialIds": [
+            "elf.dew_crown",
+            "human.mat.02",
+            "ashen.weathered_mica"
+          ]
+        },
+        "stopAfterBattle": false,
+        "codexCollection": {
+          "version": 1,
+          "sets": {
+            "human_blood_oath": [],
+            "human_royal_edge": [],
+            "human_last_bastion": [],
+            "elf_arrow": [],
+            "elf_prism": [],
+            "elf_root": [],
+            "goblin_spore": [],
+            "goblin_ambush": [],
+            "goblin_snare": [],
+            "ashen.caldera": [],
+            "ashen.strata": [],
+            "ashen.prism": [],
+            "anvil": [],
+            "rune": [],
+            "guard": []
+          },
+          "legendaries": []
+        },
+        "nextBattleAt": 1800000104300,
+        "stopAfterDungeon": false
+      }
+    },
+    {
+      "id": "story.c05.elf-duel",
+      "moment": "after-one-step",
+      "state": {
+        "version": 6,
+        "diplomacy": {
+          "version": 1,
+          "revision": 0,
+          "wars": []
+        },
+        "race": "elf",
+        "hero": "莱姆斯",
+        "atCamp": false,
+        "level": 60,
+        "xp": 172,
+        "gold": 130,
+        "location": 3,
+        "siteId": "ashen.a04",
+        "expedition": {
+          "mode": "field",
+          "targetInstanceId": null,
+          "fieldId": "ashen.a04.field",
+          "loop": false
+        },
+        "build": "custom",
+        "inventory": [
+          {
+            "id": "mvqjinws-k-5u3p7",
+            "slot": "weapon",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "炭蕊灵杖",
+            "atk": 19,
+            "armor": 1,
+            "hp": 25,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "elf_scatter_weapon_7",
+            "baseVariant": "staff_balanced",
+            "weaponType": "staff",
+            "originRace": "elf",
+            "visualKey": "elf_scatter_weapon_7",
+            "visualVariant": "elf_scatter_weapon_7",
+            "iconKey": "weapon",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwt-l-3a8dm",
+            "slot": "helm",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "暮根兜帽",
+            "atk": 1,
+            "armor": 11,
+            "hp": 24,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "elf_scatter_helm_5",
+            "baseVariant": "helm_armor",
+            "originRace": "elf",
+            "visualKey": "elf_scatter_helm_5",
+            "visualVariant": "elf_scatter_helm_5",
+            "iconKey": "helm",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwt-m-95r4c",
+            "slot": "armor",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "镜叶轻铠",
+            "atk": 0,
+            "armor": 12,
+            "hp": 86,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "elf_scatter_armor_4",
+            "baseVariant": "armor_vitality",
+            "originRace": "elf",
+            "visualKey": "elf_scatter_armor_4",
+            "visualVariant": "elf_scatter_armor_4",
+            "iconKey": "armor",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwt-n-gd4zd",
+            "slot": "gloves",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "银藤指套",
+            "atk": 3,
+            "armor": 4,
+            "hp": 45,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "elf_scatter_gloves_2",
+            "baseVariant": "gloves_vitality",
+            "originRace": "elf",
+            "visualKey": "elf_scatter_gloves_2",
+            "visualVariant": "elf_scatter_gloves_2",
+            "iconKey": "gloves",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwt-o-fpnp3",
+            "slot": "boots",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "露花行靴",
+            "atk": 1,
+            "armor": 10,
+            "hp": 28,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "elf_scatter_boots_1",
+            "baseVariant": "boots_armor",
+            "originRace": "elf",
+            "visualKey": "elf_scatter_boots_1",
+            "visualVariant": "elf_scatter_boots_1",
+            "iconKey": "boots",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwt-p-e3t1o",
+            "slot": "ring",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "花誓指环",
+            "atk": 4,
+            "armor": 7,
+            "hp": 45,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "elf_scatter_ring_3",
+            "baseVariant": "ring_survival",
+            "originRace": "elf",
+            "visualKey": "elf_scatter_ring_3",
+            "visualVariant": "elf_scatter_ring_3",
+            "iconKey": "ring",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwt-q-qb13a",
+            "slot": "ring",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "翠芽戒",
+            "atk": 13,
+            "armor": 0,
+            "hp": 35,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "elf_scatter_ring_1",
+            "baseVariant": "ring_attack",
+            "originRace": "elf",
+            "visualKey": "elf_scatter_ring_1",
+            "visualVariant": "elf_scatter_ring_1",
+            "iconKey": "ring",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinwt-r-g783p",
+            "slot": "amulet",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "琥花月坠",
+            "atk": 3,
+            "armor": 7,
+            "hp": 53,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "elf_scatter_amulet_6",
+            "baseVariant": "amulet_survival",
+            "originRace": "elf",
+            "visualKey": "elf_scatter_amulet_6",
+            "visualVariant": "elf_scatter_amulet_6",
+            "iconKey": "amulet",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          }
+        ],
+        "equip": {
+          "weapon": "mvqjinws-k-5u3p7",
+          "helm": "mvqjinwt-l-3a8dm",
+          "armor": "mvqjinwt-m-95r4c",
+          "gloves": "mvqjinwt-n-gd4zd",
+          "boots": "mvqjinwt-o-fpnp3",
+          "ring1": "mvqjinwt-p-e3t1o",
+          "ring2": "mvqjinwt-q-qb13a",
+          "amulet": "mvqjinwt-r-g783p"
+        },
+        "skills": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "conditions": [
+          "always",
+          "always",
+          "always",
+          "always"
+        ],
+        "materialStacks": {
+          "elf.dew_crown|1": 1,
+          "human.mat.02|0": 1,
+          "ashen.weathered_mica|1": 1
+        },
+        "offlineLuck": 0,
+        "talents": {
+          "power": 0,
+          "heart": 0,
+          "steel": 0,
+          "precision": 0,
+          "crit": 0,
+          "critDamage": 0,
+          "penetration": 0,
+          "element": 0,
+          "elementResist": 0,
+          "block": 0,
+          "shield": 0,
+          "healing": 0,
+          "resolve": 0,
+          "luck": 0
+        },
+        "consumables": {
+          "memoryFruit": 0,
+          "refundCredits": 0,
+          "reforgeToken": 0
+        },
+        "potionSlot": {
+          "key": null,
+          "auto": false,
+          "priority": "low",
+          "priorityVersion": 1
+        },
+        "kills": 7,
+        "normalWins": [
+          0,
+          0,
+          0
+        ],
+        "bossWins": [
+          0,
+          0,
+          0
+        ],
+        "bossReady": [
+          0,
+          0,
+          0
+        ],
+        "stock": 3,
+        "loadouts": [
+          null,
+          null,
+          null
+        ],
+        "chapters": [],
+        "chronicle": [
+          "你从精灵的营地开始旅程。"
+        ],
+        "momentum": 0,
+        "lastSeen": 1800000106300,
+        "running": true,
+        "skillTree": {
+          "version": 1,
+          "mode": "active",
+          "configId": "elf-tree-v1",
+          "revision": 0,
+          "selectedPreset": 0,
+          "presets": [
+            {
+              "name": "方案1",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案2",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案3",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            }
+          ]
+        },
+        "heroHp": 1246.002857142857,
+        "restUntil": 0,
+        "lastHealthClock": 1800000107400,
+        "areaProgress": {
+          "human": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "dwarf": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "elf": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "goblin": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "ashen": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          }
+        },
+        "instanceCooldowns": {},
+        "story": {
+          "version": 1,
+          "pov": "elf",
+          "completedScenes": [
+            "C01.E01.elf",
+            "C02.E01.elf",
+            "C02.E02.elf",
+            "C02.E03.elf",
+            "C03.E01.elf",
+            "C03.X01.elf",
+            "C04.DE01.elf",
+            "C04.A01.elf"
+          ],
+          "flags": [
+            "E_WEDGE_LEARNED",
+            "E_WEDGE_AVAILABLE",
+            "E_DRYSPRING_ACCEPTED",
+            "E_DRYSPRING_REPAIRED",
+            "R2_SURVEYED_E",
+            "return-ring.elf.scene-open",
+            "E_RELIC_PURSUIT",
+            "E_CARAVAN_IDENTIFIED",
+            "CARAVAN_ROUTES_RECORDED",
+            "CONTACT_D_E",
+            "return-ring.human.scene-open"
+          ],
+          "knowledge": [
+            {
+              "id": "C01.E01.elf.k0",
+              "text": "已学习旧制楔钉的用法；此任务工具不能出售或消耗。",
+              "mode": "seen",
+              "sourceScene": "C01.E01.elf"
+            },
+            {
+              "id": "C02.E02.elf.k0",
+              "text": "树根撑裂旧结构，泉水漏入地下；疏通旧渠后恢复引流。",
+              "mode": "seen",
+              "sourceScene": "C02.E02.elf"
+            },
+            {
+              "id": "C03.E01.elf.k0",
+              "text": "大祭司要求追回尚未送达的指定遗物。",
+              "mode": "heard",
+              "sourceScene": "C03.E01.elf"
+            },
+            {
+              "id": "C03.X01.elf.k0",
+              "text": "车夫目击一个烬裔独自带走核心；最初袭击者身份仍未知。",
+              "mode": "heard",
+              "sourceScene": "C03.X01.elf"
+            },
+            {
+              "id": "C04.DE01.elf.k0",
+              "text": "大祭司是指定收货方，但尚无其明知盗卖或政变资金的完整证据。",
+              "mode": "confirmed",
+              "sourceScene": "C04.DE01.elf"
+            },
+            {
+              "id": "C04.A01.elf.k0",
+              "text": "遗物对古神庙旧结构有反应，尚未确认用途。",
+              "mode": "seen",
+              "sourceScene": "C04.A01.elf"
+            }
+          ],
+          "choices": {
+            "C01.E01.elf": "wedge",
+            "C02.E01.elf": "help",
+            "C02.E02.elf": "survey",
+            "C02.E03.elf": "continue",
+            "C03.E01.elf": "continue",
+            "C03.X01.elf": "register",
+            "C04.DE01.elf": "verify",
+            "C04.A01.elf": "enter"
+          },
+          "acceptedLevels": {
+            "C01.E01.elf": 60,
+            "C02.E01.elf": 60,
+            "C02.E02.elf": 60,
+            "C02.E03.elf": 60,
+            "C03.E01.elf": 60,
+            "C03.X01.elf": 60,
+            "C04.DE01.elf": 60,
+            "C04.A01.elf": 60,
+            "C05.EA01.elf": 60
+          },
+          "activeScene": {
+            "id": "C05.EA01.elf",
+            "cursor": 6,
+            "choiceId": "duel",
+            "encounterId": "m2-1800000106300-35"
+          },
+          "encounters": [
+            {
+              "sceneId": "C02.E02.elf",
+              "encounterId": "m2-1800000018800-29",
+              "nodeId": "elf.a02.field",
+              "scenarioId": null,
+              "result": "victory"
+            },
+            {
+              "sceneId": "C03.X01.elf",
+              "encounterId": "m2-1800000053100-32",
+              "nodeId": "human.a02.field",
+              "scenarioId": null,
+              "result": "victory"
+            }
+          ]
+        },
+        "activeEncounter": {
+          "contentVersion": "dwarf-m2-v1",
+          "location": 3,
+          "siteId": "ashen.a04",
+          "areaId": "ashen.a04",
+          "instanceId": "ashen.a04.field",
+          "kind": "field",
+          "luck": 0,
+          "boss": false,
+          "heroHp": 1246.002857142857,
+          "round": 1,
+          "warcry": 0,
+          "ironcoat": 0,
+          "barrier": 0,
+          "barrierShield": 0,
+          "heroBurn": 0,
+          "heroBurnPower": 0,
+          "weakness": 0,
+          "guard": 0,
+          "cd": {},
+          "shelterUsed": false,
+          "shield": 0,
+          "done": false,
+          "rewarded": false,
+          "killSource": null,
+          "multiVersion": 1,
+          "id": "m2-1800000106300-35",
+          "rngState": 3499533962,
+          "rngDraws": 4,
+          "itemSerial": 0,
+          "summonSerial": 0,
+          "activeCastCount": 0,
+          "enemies": [
+            {
+              "id": "m2-1800000106300-35-story-actor",
+              "monsterId": "ashen.a04.normal.1",
+              "definitionId": "ashen.a04.normal.1",
+              "sourceInstanceId": "ashen.a04.field",
+              "origin": "initial",
+              "main": true,
+              "location": 3,
+              "name": "砾恩",
+              "hp": 2194,
+              "max": 2380,
+              "atk": 4,
+              "armor": 28,
+              "shield": 0,
+              "burn": 0,
+              "broken": 0,
+              "blunt": 0,
+              "scorch": 0,
+              "stun": 0,
+              "round": 1,
+              "nextHeavy": 4,
+              "heavyDelayed": false,
+              "cd": {},
+              "control": {
+                "version": 1,
+                "unitId": "m2-1800000106300-35-story-actor",
+                "clock": 1800000107400,
+                "stunUntil": 0,
+                "interruptUntil": 0,
+                "stunChain": 0,
+                "lastStunEnd": null,
+                "cooldowns": {},
+                "preparing": null
+              },
+              "profile": {
+                "controlReduction": 0,
+                "interruptStop": 1100
+              },
+              "elementalPower": 2,
+              "elementTags": [
+                "light"
+              ],
+              "elementResistance": {
+                "earth": 6,
+                "water": 6,
+                "fire": 20,
+                "wind": 6,
+                "light": 6,
+                "dark": 6
+              },
+              "parameterSetId": "ashen-a01-a10-candidate-v1",
+              "basicIntervalMs": 2200,
+              "nextBasicAt": 1800000108500,
+              "skillUses": {},
+              "follower": false,
+              "typedProfile": true,
+              "shieldUntil": 0,
+              "reflectReadyAt": 0,
+              "skillOverrides": {},
+              "storyActorRace": "ashen",
+              "storyActorWeapon": "armguard"
+            }
+          ],
+          "typedDots": [],
+          "fieldGroup": false,
+          "rewardGold": 0,
+          "rewardXp": 0,
+          "rewardDefinitionId": "ashen.a04.normal.1",
+          "skillResolver": "tree-v1",
+          "affixBattleId": "m2-1800000106300-35",
+          "affixState": {
+            "version": 1,
+            "battleId": "m2-1800000106300-35",
+            "nirvanaUsed": false,
+            "lastReaperCastId": "m2-1800000106300-35:1",
+            "reaperHits": [
+              "[0,\"m2-1800000106300-35-story-actor\"]"
+            ]
+          },
+          "targetId": "m2-1800000106300-35-story-actor",
+          "name": "砾恩",
+          "max": 2380,
+          "atk": 4,
+          "armor": 28,
+          "burn": 0,
+          "broken": 0,
+          "blunt": 0,
+          "scorch": 0,
+          "stun": 0,
+          "nextHeavy": 4,
+          "heavyDelayed": false,
+          "elementTags": [
+            "light"
+          ],
+          "elementResistance": {
+            "earth": 6,
+            "water": 6,
+            "fire": 20,
+            "wind": 6,
+            "light": 6,
+            "dark": 6
+          },
+          "hp": 2194,
+          "storyScenario": {
+            "version": 1,
+            "id": "story.c05.elf-duel",
+            "sceneId": "C05.EA01.elf",
+            "pov": "elf",
+            "initialHeroHp": 1246.002857142857,
+            "returnAtCamp": false,
+            "result": null,
+            "resolvedRound": null
+          },
+          "treeEffects": {
+            "version": 1,
+            "clock": 1100,
+            "hero": {
+              "sources": []
+            },
+            "enemies": {
+              "m2-1800000106300-35-story-actor": {
+                "sources": []
+              }
+            }
+          },
+          "treeCombatClock": 1100,
+          "fixtureAction": null,
+          "lastCast": {
+            "id": "m2-1800000106300-35:1",
+            "skillId": "basic",
+            "scope": "single",
+            "hits": [
+              {
+                "id": "m2-1800000106300-35:1:0:m2-1800000106300-35-story-actor",
+                "hitIndex": 0,
+                "targetId": "m2-1800000106300-35-story-actor",
+                "hit": true,
+                "hpBefore": 2380,
+                "hpAfter": 2194,
+                "actualHpLost": 186,
+                "killProcHpLost": 0
+              }
+            ]
+          },
+          "lastCombatEventAt": 1800000107400,
+          "nextRegularAt": 1800000108500
+        },
+        "nextActionAt": 1800000108500,
+        "monsterLedger": {
+          "version": 1,
+          "encountered": {
+            "elf.a02.normal.1": true,
+            "elf.a02.normal.3": true,
+            "elf.a01.normal.2": true,
+            "human.a02.normal.1": true,
+            "human.a03.normal.2": true,
+            "ashen.a04.normal.3": true
+          }
+        },
+        "regionNavigation": {
+          "version": 1,
+          "exploredNodeIds": [
+            "elf.a02.field",
+            "elf.a01.field",
+            "human.a02.field",
+            "human.a03.field",
+            "ashen.a04.field"
+          ],
+          "favoriteNodeIds": [],
+          "discoveredMaterialIds": [
+            "elf.dew_crown",
+            "human.mat.02",
+            "ashen.weathered_mica"
+          ]
+        },
+        "stopAfterBattle": false,
+        "codexCollection": {
+          "version": 1,
+          "sets": {
+            "human_blood_oath": [],
+            "human_royal_edge": [],
+            "human_last_bastion": [],
+            "elf_arrow": [],
+            "elf_prism": [],
+            "elf_root": [],
+            "goblin_spore": [],
+            "goblin_ambush": [],
+            "goblin_snare": [],
+            "ashen.caldera": [],
+            "ashen.strata": [],
+            "ashen.prism": [],
+            "anvil": [],
+            "rune": [],
+            "guard": []
+          },
+          "legendaries": []
+        },
+        "nextBattleAt": 1800000104300,
+        "stopAfterDungeon": false
+      }
+    },
+    {
+      "id": "story.c05.ashen-duel",
+      "moment": "start",
+      "state": {
+        "version": 6,
+        "diplomacy": {
+          "version": 1,
+          "revision": 0,
+          "wars": []
+        },
+        "race": "ashen",
+        "hero": "砾恩",
+        "atCamp": false,
+        "level": 60,
+        "xp": 84,
+        "gold": 112,
+        "location": 3,
+        "siteId": "ashen.a04",
+        "expedition": {
+          "mode": "field",
+          "targetInstanceId": null,
+          "fieldId": "ashen.a04.field",
+          "loop": false
+        },
+        "build": "custom",
+        "inventory": [
+          {
+            "id": "mvqjinzw-10-pm5c4",
+            "slot": "weapon",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "琉心短锤",
+            "atk": 19,
+            "armor": 4,
+            "hp": 13,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "ashen.scatter.06",
+            "baseVariant": "hammer_balanced",
+            "weaponType": "hammer",
+            "originRace": "ashen",
+            "visualKey": "ashen.scatter.06",
+            "visualVariant": "ashen.scatter.06",
+            "iconKey": "weapon",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinzw-11-47g47",
+            "slot": "helm",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "褶岩颅冠",
+            "atk": 1,
+            "armor": 11,
+            "hp": 24,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "ashen.scatter.48",
+            "baseVariant": "helm_armor",
+            "weaponType": null,
+            "originRace": "ashen",
+            "visualKey": "ashen.scatter.48",
+            "visualVariant": "ashen.scatter.48",
+            "iconKey": "helm",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinzw-12-ywaza",
+            "slot": "armor",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "盐层软甲",
+            "atk": 0,
+            "armor": 12,
+            "hp": 86,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "ashen.scatter.12",
+            "baseVariant": "armor_vitality",
+            "weaponType": null,
+            "originRace": "ashen",
+            "visualKey": "ashen.scatter.12",
+            "visualVariant": "ashen.scatter.12",
+            "iconKey": "armor",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinzx-13-vmxhm",
+            "slot": "gloves",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "活脉护手",
+            "atk": 3,
+            "armor": 4,
+            "hp": 45,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "ashen.scatter.18",
+            "baseVariant": "gloves_vitality",
+            "weaponType": null,
+            "originRace": "ashen",
+            "visualKey": "ashen.scatter.18",
+            "visualVariant": "ashen.scatter.18",
+            "iconKey": "gloves",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinzx-14-e1qak",
+            "slot": "boots",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "云母短靴",
+            "atk": 1,
+            "armor": 5,
+            "hp": 53,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "ashen.scatter.19",
+            "baseVariant": "boots_vitality",
+            "weaponType": null,
+            "originRace": "ashen",
+            "visualKey": "ashen.scatter.19",
+            "visualVariant": "ashen.scatter.19",
+            "iconKey": "boots",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinzx-15-0jvz5",
+            "slot": "ring",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "白盐骨环",
+            "atk": 4,
+            "armor": 7,
+            "hp": 45,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "ashen.scatter.25",
+            "baseVariant": "ring_survival",
+            "weaponType": null,
+            "originRace": "ashen",
+            "visualKey": "ashen.scatter.25",
+            "visualVariant": "ashen.scatter.25",
+            "iconKey": "ring",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinzx-16-dr2yq",
+            "slot": "ring",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "折辉指轮",
+            "atk": 9,
+            "armor": 2,
+            "hp": 45,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "ashen.scatter.26",
+            "baseVariant": "ring_element",
+            "weaponType": null,
+            "originRace": "ashen",
+            "visualKey": "ashen.scatter.26",
+            "visualVariant": "ashen.scatter.26",
+            "iconKey": "ring",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinzx-17-magog",
+            "slot": "amulet",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "沉辉晶坠",
+            "atk": 9,
+            "armor": 3,
+            "hp": 48,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "ashen.scatter.29",
+            "baseVariant": "amulet_element",
+            "weaponType": null,
+            "originRace": "ashen",
+            "visualKey": "ashen.scatter.29",
+            "visualVariant": "ashen.scatter.29",
+            "iconKey": "amulet",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinzx-18-ukfm9",
+            "slot": "core",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "岩核",
+            "atk": 0,
+            "armor": 10,
+            "hp": 50,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "ashen.scatter.35",
+            "baseVariant": "core_stone",
+            "weaponType": null,
+            "originRace": "ashen",
+            "visualKey": "ashen.scatter.35",
+            "visualVariant": "ashen.scatter.35",
+            "iconKey": "core",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          }
+        ],
+        "equip": {
+          "weapon": "mvqjinzw-10-pm5c4",
+          "helm": "mvqjinzw-11-47g47",
+          "armor": "mvqjinzw-12-ywaza",
+          "gloves": "mvqjinzx-13-vmxhm",
+          "boots": "mvqjinzx-14-e1qak",
+          "ring1": "mvqjinzx-15-0jvz5",
+          "ring2": "mvqjinzx-16-dr2yq",
+          "amulet": "mvqjinzx-17-magog",
+          "core": "mvqjinzx-18-ukfm9"
+        },
+        "skills": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "conditions": [
+          "always",
+          "always",
+          "always",
+          "always"
+        ],
+        "materialStacks": {
+          "human.mat.02|0": 2,
+          "ashen.red_vein_ore|1": 1
+        },
+        "offlineLuck": 0,
+        "talents": {
+          "power": 0,
+          "heart": 0,
+          "steel": 0,
+          "precision": 0,
+          "crit": 0,
+          "critDamage": 0,
+          "penetration": 0,
+          "element": 0,
+          "elementResist": 0,
+          "block": 0,
+          "shield": 0,
+          "healing": 0,
+          "resolve": 0,
+          "luck": 0
+        },
+        "consumables": {
+          "memoryFruit": 0,
+          "refundCredits": 0,
+          "reforgeToken": 0
+        },
+        "potionSlot": {
+          "key": null,
+          "auto": false,
+          "priority": "low",
+          "priorityVersion": 1
+        },
+        "kills": 4,
+        "normalWins": [
+          0,
+          0,
+          0
+        ],
+        "bossWins": [
+          0,
+          0,
+          0
+        ],
+        "bossReady": [
+          0,
+          0,
+          0
+        ],
+        "stock": 3,
+        "loadouts": [
+          null,
+          null,
+          null
+        ],
+        "chapters": [],
+        "chronicle": [
+          "你从烬裔的营地开始旅程。"
+        ],
+        "momentum": 0,
+        "lastSeen": 1800000059900,
+        "running": true,
+        "skillTree": {
+          "version": 1,
+          "mode": "active",
+          "configId": "ashen-tree-v1",
+          "revision": 0,
+          "selectedPreset": 0,
+          "presets": [
+            {
+              "name": "方案1",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案2",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案3",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            }
+          ]
+        },
+        "heroHp": 1340,
+        "restUntil": 0,
+        "lastHealthClock": 1800000059900,
+        "areaProgress": {
+          "human": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "dwarf": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "elf": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "goblin": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "ashen": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          }
+        },
+        "instanceCooldowns": {},
+        "story": {
+          "version": 1,
+          "pov": "ashen",
+          "completedScenes": [
+            "C01.A01.ashen",
+            "C02.O01.ashen",
+            "C03.A01.ashen",
+            "C04.A01.ashen"
+          ],
+          "flags": [
+            "A_HOME_ROUTE_KNOWN",
+            "return-ring.elf.scene-open",
+            "A_HAS_ROYAL_RELIC",
+            "return-ring.human.scene-open"
+          ],
+          "knowledge": [
+            {
+              "id": "C03.A01.ashen.k0",
+              "text": "独自在商队遇袭后取走王室遗物核心，尚不知道其来历。",
+              "mode": "seen",
+              "sourceScene": "C03.A01.ashen"
+            },
+            {
+              "id": "C04.A01.ashen.k0",
+              "text": "遗物对古神庙旧结构有反应，尚未确认用途。",
+              "mode": "seen",
+              "sourceScene": "C04.A01.ashen"
+            }
+          ],
+          "choices": {
+            "C01.A01.ashen": "escort",
+            "C02.O01.ashen": "continue",
+            "C03.A01.ashen": "take",
+            "C04.A01.ashen": "enter"
+          },
+          "acceptedLevels": {
+            "C01.A01.ashen": 60,
+            "C02.O01.ashen": 60,
+            "C03.A01.ashen": 60,
+            "C04.A01.ashen": 60,
+            "C05.EA01.ashen": 60
+          },
+          "activeScene": {
+            "id": "C05.EA01.ashen",
+            "cursor": 6,
+            "choiceId": "duel",
+            "encounterId": "m2-1800000059900-49"
+          },
+          "encounters": [
+            {
+              "sceneId": "C01.A01.ashen",
+              "encounterId": "m2-1800000002000-45",
+              "nodeId": "ashen.a01.field",
+              "scenarioId": null,
+              "result": "victory"
+            },
+            {
+              "sceneId": "C03.A01.ashen",
+              "encounterId": "m2-1800000025900-47",
+              "nodeId": "human.a02.field",
+              "scenarioId": null,
+              "result": "victory"
+            }
+          ]
+        },
+        "activeEncounter": {
+          "contentVersion": "dwarf-m2-v1",
+          "location": 3,
+          "siteId": "ashen.a04",
+          "areaId": "ashen.a04",
+          "instanceId": "ashen.a04.field",
+          "kind": "field",
+          "luck": 0,
+          "boss": false,
+          "heroHp": 1340,
+          "round": 0,
+          "warcry": 0,
+          "ironcoat": 0,
+          "barrier": 0,
+          "barrierShield": 0,
+          "heroBurn": 0,
+          "heroBurnPower": 0,
+          "weakness": 0,
+          "guard": 0,
+          "cd": {},
+          "shelterUsed": false,
+          "shield": 0,
+          "done": false,
+          "rewarded": false,
+          "killSource": null,
+          "multiVersion": 1,
+          "id": "m2-1800000059900-49",
+          "rngState": 1316518981,
+          "rngDraws": 2,
+          "itemSerial": 0,
+          "summonSerial": 0,
+          "activeCastCount": 0,
+          "enemies": [
+            {
+              "id": "m2-1800000059900-49-story-actor",
+              "monsterId": "ashen.a04.normal.1",
+              "definitionId": "ashen.a04.normal.1",
+              "sourceInstanceId": "ashen.a04.field",
+              "origin": "initial",
+              "main": true,
+              "location": 3,
+              "name": "莱姆斯",
+              "hp": 2380,
+              "max": 2380,
+              "atk": 4,
+              "armor": 28,
+              "shield": 0,
+              "burn": 0,
+              "broken": 0,
+              "blunt": 0,
+              "scorch": 0,
+              "stun": 0,
+              "round": 0,
+              "nextHeavy": 4,
+              "heavyDelayed": false,
+              "cd": {},
+              "control": {
+                "version": 1,
+                "unitId": "m2-1800000059900-49-story-actor",
+                "clock": 1800000059900,
+                "stunUntil": 0,
+                "interruptUntil": 0,
+                "stunChain": 0,
+                "lastStunEnd": null,
+                "cooldowns": {},
+                "preparing": null
+              },
+              "profile": {
+                "controlReduction": 0,
+                "interruptStop": 1100
+              },
+              "elementalPower": 2,
+              "elementTags": [
+                "light"
+              ],
+              "elementResistance": {
+                "earth": 6,
+                "water": 6,
+                "fire": 20,
+                "wind": 6,
+                "light": 6,
+                "dark": 6
+              },
+              "parameterSetId": "ashen-a01-a10-candidate-v1",
+              "basicIntervalMs": 2200,
+              "nextBasicAt": 1800000062100,
+              "skillUses": {},
+              "follower": false,
+              "typedProfile": true,
+              "shieldUntil": 0,
+              "reflectReadyAt": 0,
+              "skillOverrides": {},
+              "storyActorRace": "elf",
+              "storyActorWeapon": "staff"
+            }
+          ],
+          "typedDots": [],
+          "fieldGroup": false,
+          "rewardGold": 0,
+          "rewardXp": 0,
+          "rewardDefinitionId": "ashen.a04.normal.1",
+          "skillResolver": "tree-v1",
+          "affixBattleId": "m2-1800000059900-49",
+          "affixState": {
+            "version": 1,
+            "battleId": "m2-1800000059900-49",
+            "nirvanaUsed": false,
+            "lastReaperCastId": null,
+            "reaperHits": []
+          },
+          "targetId": "m2-1800000059900-49-story-actor",
+          "name": "莱姆斯",
+          "max": 2380,
+          "atk": 4,
+          "armor": 28,
+          "burn": 0,
+          "broken": 0,
+          "blunt": 0,
+          "scorch": 0,
+          "stun": 0,
+          "nextHeavy": 4,
+          "heavyDelayed": false,
+          "elementTags": [
+            "light"
+          ],
+          "elementResistance": {
+            "earth": 6,
+            "water": 6,
+            "fire": 20,
+            "wind": 6,
+            "light": 6,
+            "dark": 6
+          },
+          "hp": 2380,
+          "storyScenario": {
+            "version": 1,
+            "id": "story.c05.ashen-duel",
+            "sceneId": "C05.EA01.ashen",
+            "pov": "ashen",
+            "initialHeroHp": 1340,
+            "returnAtCamp": false,
+            "result": null,
+            "resolvedRound": null
+          }
+        },
+        "nextActionAt": 1800000061000,
+        "monsterLedger": {
+          "version": 1,
+          "encountered": {
+            "ashen.a01.normal.1": true,
+            "human.a02.normal.3": true,
+            "ashen.a04.normal.1": true
+          }
+        },
+        "regionNavigation": {
+          "version": 1,
+          "exploredNodeIds": [
+            "ashen.a01.field",
+            "human.a02.field",
+            "ashen.a04.field"
+          ],
+          "favoriteNodeIds": [],
+          "discoveredMaterialIds": [
+            "human.mat.02",
+            "ashen.red_vein_ore"
+          ]
+        },
+        "stopAfterBattle": false,
+        "codexCollection": {
+          "version": 1,
+          "sets": {
+            "human_blood_oath": [],
+            "human_royal_edge": [],
+            "human_last_bastion": [],
+            "elf_arrow": [],
+            "elf_prism": [],
+            "elf_root": [],
+            "goblin_spore": [],
+            "goblin_ambush": [],
+            "goblin_snare": [],
+            "ashen.caldera": [],
+            "ashen.strata": [],
+            "ashen.prism": [],
+            "anvil": [],
+            "rune": [],
+            "guard": []
+          },
+          "legendaries": []
+        },
+        "nextBattleAt": 1800000057900,
+        "stopAfterDungeon": false
+      }
+    },
+    {
+      "id": "story.c05.ashen-duel",
+      "moment": "after-one-step",
+      "state": {
+        "version": 6,
+        "diplomacy": {
+          "version": 1,
+          "revision": 0,
+          "wars": []
+        },
+        "race": "ashen",
+        "hero": "砾恩",
+        "atCamp": false,
+        "level": 60,
+        "xp": 84,
+        "gold": 112,
+        "location": 3,
+        "siteId": "ashen.a04",
+        "expedition": {
+          "mode": "field",
+          "targetInstanceId": null,
+          "fieldId": "ashen.a04.field",
+          "loop": false
+        },
+        "build": "custom",
+        "inventory": [
+          {
+            "id": "mvqjinzw-10-pm5c4",
+            "slot": "weapon",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "琉心短锤",
+            "atk": 19,
+            "armor": 4,
+            "hp": 13,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "ashen.scatter.06",
+            "baseVariant": "hammer_balanced",
+            "weaponType": "hammer",
+            "originRace": "ashen",
+            "visualKey": "ashen.scatter.06",
+            "visualVariant": "ashen.scatter.06",
+            "iconKey": "weapon",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinzw-11-47g47",
+            "slot": "helm",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "褶岩颅冠",
+            "atk": 1,
+            "armor": 11,
+            "hp": 24,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "ashen.scatter.48",
+            "baseVariant": "helm_armor",
+            "weaponType": null,
+            "originRace": "ashen",
+            "visualKey": "ashen.scatter.48",
+            "visualVariant": "ashen.scatter.48",
+            "iconKey": "helm",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinzw-12-ywaza",
+            "slot": "armor",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "盐层软甲",
+            "atk": 0,
+            "armor": 12,
+            "hp": 86,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "ashen.scatter.12",
+            "baseVariant": "armor_vitality",
+            "weaponType": null,
+            "originRace": "ashen",
+            "visualKey": "ashen.scatter.12",
+            "visualVariant": "ashen.scatter.12",
+            "iconKey": "armor",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinzx-13-vmxhm",
+            "slot": "gloves",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "活脉护手",
+            "atk": 3,
+            "armor": 4,
+            "hp": 45,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "ashen.scatter.18",
+            "baseVariant": "gloves_vitality",
+            "weaponType": null,
+            "originRace": "ashen",
+            "visualKey": "ashen.scatter.18",
+            "visualVariant": "ashen.scatter.18",
+            "iconKey": "gloves",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinzx-14-e1qak",
+            "slot": "boots",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "云母短靴",
+            "atk": 1,
+            "armor": 5,
+            "hp": 53,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "ashen.scatter.19",
+            "baseVariant": "boots_vitality",
+            "weaponType": null,
+            "originRace": "ashen",
+            "visualKey": "ashen.scatter.19",
+            "visualVariant": "ashen.scatter.19",
+            "iconKey": "boots",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinzx-15-0jvz5",
+            "slot": "ring",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "白盐骨环",
+            "atk": 4,
+            "armor": 7,
+            "hp": 45,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "ashen.scatter.25",
+            "baseVariant": "ring_survival",
+            "weaponType": null,
+            "originRace": "ashen",
+            "visualKey": "ashen.scatter.25",
+            "visualVariant": "ashen.scatter.25",
+            "iconKey": "ring",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinzx-16-dr2yq",
+            "slot": "ring",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "折辉指轮",
+            "atk": 9,
+            "armor": 2,
+            "hp": 45,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "ashen.scatter.26",
+            "baseVariant": "ring_element",
+            "weaponType": null,
+            "originRace": "ashen",
+            "visualKey": "ashen.scatter.26",
+            "visualVariant": "ashen.scatter.26",
+            "iconKey": "ring",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinzx-17-magog",
+            "slot": "amulet",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "沉辉晶坠",
+            "atk": 9,
+            "armor": 3,
+            "hp": 48,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "ashen.scatter.29",
+            "baseVariant": "amulet_element",
+            "weaponType": null,
+            "originRace": "ashen",
+            "visualKey": "ashen.scatter.29",
+            "visualVariant": "ashen.scatter.29",
+            "iconKey": "amulet",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          },
+          {
+            "id": "mvqjinzx-18-ukfm9",
+            "slot": "core",
+            "set": null,
+            "rarity": 0,
+            "level": 1,
+            "baseLevel": 1,
+            "levelSource": "starter",
+            "name": "岩核",
+            "atk": 0,
+            "armor": 10,
+            "hp": 50,
+            "affixes": [],
+            "special": null,
+            "legendaryId": null,
+            "locked": false,
+            "bless": 0,
+            "templateId": "ashen.scatter.35",
+            "baseVariant": "core_stone",
+            "weaponType": null,
+            "originRace": "ashen",
+            "visualKey": "ashen.scatter.35",
+            "visualVariant": "ashen.scatter.35",
+            "iconKey": "core",
+            "baseBudgetModel": "equipment-budget-m2-v1",
+            "budgetLevel": 1,
+            "budgetSourceLevel": 1
+          }
+        ],
+        "equip": {
+          "weapon": "mvqjinzw-10-pm5c4",
+          "helm": "mvqjinzw-11-47g47",
+          "armor": "mvqjinzw-12-ywaza",
+          "gloves": "mvqjinzx-13-vmxhm",
+          "boots": "mvqjinzx-14-e1qak",
+          "ring1": "mvqjinzx-15-0jvz5",
+          "ring2": "mvqjinzx-16-dr2yq",
+          "amulet": "mvqjinzx-17-magog",
+          "core": "mvqjinzx-18-ukfm9"
+        },
+        "skills": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "conditions": [
+          "always",
+          "always",
+          "always",
+          "always"
+        ],
+        "materialStacks": {
+          "human.mat.02|0": 2,
+          "ashen.red_vein_ore|1": 1
+        },
+        "offlineLuck": 0,
+        "talents": {
+          "power": 0,
+          "heart": 0,
+          "steel": 0,
+          "precision": 0,
+          "crit": 0,
+          "critDamage": 0,
+          "penetration": 0,
+          "element": 0,
+          "elementResist": 0,
+          "block": 0,
+          "shield": 0,
+          "healing": 0,
+          "resolve": 0,
+          "luck": 0
+        },
+        "consumables": {
+          "memoryFruit": 0,
+          "refundCredits": 0,
+          "reforgeToken": 0
+        },
+        "potionSlot": {
+          "key": null,
+          "auto": false,
+          "priority": "low",
+          "priorityVersion": 1
+        },
+        "kills": 4,
+        "normalWins": [
+          0,
+          0,
+          0
+        ],
+        "bossWins": [
+          0,
+          0,
+          0
+        ],
+        "bossReady": [
+          0,
+          0,
+          0
+        ],
+        "stock": 3,
+        "loadouts": [
+          null,
+          null,
+          null
+        ],
+        "chapters": [],
+        "chronicle": [
+          "你从烬裔的营地开始旅程。"
+        ],
+        "momentum": 0,
+        "lastSeen": 1800000059900,
+        "running": true,
+        "skillTree": {
+          "version": 1,
+          "mode": "active",
+          "configId": "ashen-tree-v1",
+          "revision": 0,
+          "selectedPreset": 0,
+          "presets": [
+            {
+              "name": "方案1",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案2",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案3",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            }
+          ]
+        },
+        "heroHp": 1340,
+        "restUntil": 0,
+        "lastHealthClock": 1800000061000,
+        "areaProgress": {
+          "human": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "dwarf": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "elf": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "goblin": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "ashen": {
+            "unlocked": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "cleared": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          }
+        },
+        "instanceCooldowns": {},
+        "story": {
+          "version": 1,
+          "pov": "ashen",
+          "completedScenes": [
+            "C01.A01.ashen",
+            "C02.O01.ashen",
+            "C03.A01.ashen",
+            "C04.A01.ashen"
+          ],
+          "flags": [
+            "A_HOME_ROUTE_KNOWN",
+            "return-ring.elf.scene-open",
+            "A_HAS_ROYAL_RELIC",
+            "return-ring.human.scene-open"
+          ],
+          "knowledge": [
+            {
+              "id": "C03.A01.ashen.k0",
+              "text": "独自在商队遇袭后取走王室遗物核心，尚不知道其来历。",
+              "mode": "seen",
+              "sourceScene": "C03.A01.ashen"
+            },
+            {
+              "id": "C04.A01.ashen.k0",
+              "text": "遗物对古神庙旧结构有反应，尚未确认用途。",
+              "mode": "seen",
+              "sourceScene": "C04.A01.ashen"
+            }
+          ],
+          "choices": {
+            "C01.A01.ashen": "escort",
+            "C02.O01.ashen": "continue",
+            "C03.A01.ashen": "take",
+            "C04.A01.ashen": "enter"
+          },
+          "acceptedLevels": {
+            "C01.A01.ashen": 60,
+            "C02.O01.ashen": 60,
+            "C03.A01.ashen": 60,
+            "C04.A01.ashen": 60,
+            "C05.EA01.ashen": 60
+          },
+          "activeScene": {
+            "id": "C05.EA01.ashen",
+            "cursor": 6,
+            "choiceId": "duel",
+            "encounterId": "m2-1800000059900-49"
+          },
+          "encounters": [
+            {
+              "sceneId": "C01.A01.ashen",
+              "encounterId": "m2-1800000002000-45",
+              "nodeId": "ashen.a01.field",
+              "scenarioId": null,
+              "result": "victory"
+            },
+            {
+              "sceneId": "C03.A01.ashen",
+              "encounterId": "m2-1800000025900-47",
+              "nodeId": "human.a02.field",
+              "scenarioId": null,
+              "result": "victory"
+            }
+          ]
+        },
+        "activeEncounter": {
+          "contentVersion": "dwarf-m2-v1",
+          "location": 3,
+          "siteId": "ashen.a04",
+          "areaId": "ashen.a04",
+          "instanceId": "ashen.a04.field",
+          "kind": "field",
+          "luck": 0,
+          "boss": false,
+          "heroHp": 1340,
+          "round": 1,
+          "warcry": 0,
+          "ironcoat": 0,
+          "barrier": 0,
+          "barrierShield": 0,
+          "heroBurn": 0,
+          "heroBurnPower": 0,
+          "weakness": 0,
+          "guard": 0,
+          "cd": {},
+          "shelterUsed": false,
+          "shield": 0,
+          "done": false,
+          "rewarded": false,
+          "killSource": null,
+          "multiVersion": 1,
+          "id": "m2-1800000059900-49",
+          "rngState": 3281714879,
+          "rngDraws": 4,
+          "itemSerial": 0,
+          "summonSerial": 0,
+          "activeCastCount": 0,
+          "enemies": [
+            {
+              "id": "m2-1800000059900-49-story-actor",
+              "monsterId": "ashen.a04.normal.1",
+              "definitionId": "ashen.a04.normal.1",
+              "sourceInstanceId": "ashen.a04.field",
+              "origin": "initial",
+              "main": true,
+              "location": 3,
+              "name": "莱姆斯",
+              "hp": 2174,
+              "max": 2380,
+              "atk": 4,
+              "armor": 28,
+              "shield": 0,
+              "burn": 0,
+              "broken": 0,
+              "blunt": 0,
+              "scorch": 0,
+              "stun": 0,
+              "round": 1,
+              "nextHeavy": 4,
+              "heavyDelayed": false,
+              "cd": {},
+              "control": {
+                "version": 1,
+                "unitId": "m2-1800000059900-49-story-actor",
+                "clock": 1800000061000,
+                "stunUntil": 0,
+                "interruptUntil": 0,
+                "stunChain": 0,
+                "lastStunEnd": null,
+                "cooldowns": {},
+                "preparing": null
+              },
+              "profile": {
+                "controlReduction": 0,
+                "interruptStop": 1100
+              },
+              "elementalPower": 2,
+              "elementTags": [
+                "light"
+              ],
+              "elementResistance": {
+                "earth": 6,
+                "water": 6,
+                "fire": 20,
+                "wind": 6,
+                "light": 6,
+                "dark": 6
+              },
+              "parameterSetId": "ashen-a01-a10-candidate-v1",
+              "basicIntervalMs": 2200,
+              "nextBasicAt": 1800000062100,
+              "skillUses": {},
+              "follower": false,
+              "typedProfile": true,
+              "shieldUntil": 0,
+              "reflectReadyAt": 0,
+              "skillOverrides": {},
+              "storyActorRace": "elf",
+              "storyActorWeapon": "staff"
+            }
+          ],
+          "typedDots": [],
+          "fieldGroup": false,
+          "rewardGold": 0,
+          "rewardXp": 0,
+          "rewardDefinitionId": "ashen.a04.normal.1",
+          "skillResolver": "tree-v1",
+          "affixBattleId": "m2-1800000059900-49",
+          "affixState": {
+            "version": 1,
+            "battleId": "m2-1800000059900-49",
+            "nirvanaUsed": false,
+            "lastReaperCastId": "m2-1800000059900-49:1",
+            "reaperHits": [
+              "[0,\"m2-1800000059900-49-story-actor\"]"
+            ]
+          },
+          "targetId": "m2-1800000059900-49-story-actor",
+          "name": "莱姆斯",
+          "max": 2380,
+          "atk": 4,
+          "armor": 28,
+          "burn": 0,
+          "broken": 0,
+          "blunt": 0,
+          "scorch": 0,
+          "stun": 0,
+          "nextHeavy": 4,
+          "heavyDelayed": false,
+          "elementTags": [
+            "light"
+          ],
+          "elementResistance": {
+            "earth": 6,
+            "water": 6,
+            "fire": 20,
+            "wind": 6,
+            "light": 6,
+            "dark": 6
+          },
+          "hp": 2174,
+          "storyScenario": {
+            "version": 1,
+            "id": "story.c05.ashen-duel",
+            "sceneId": "C05.EA01.ashen",
+            "pov": "ashen",
+            "initialHeroHp": 1340,
+            "returnAtCamp": false,
+            "result": null,
+            "resolvedRound": null
+          },
+          "treeEffects": {
+            "version": 1,
+            "clock": 1100,
+            "hero": {
+              "sources": []
+            },
+            "enemies": {
+              "m2-1800000059900-49-story-actor": {
+                "sources": []
+              }
+            }
+          },
+          "treeCombatClock": 1100,
+          "fixtureAction": null,
+          "lastCast": {
+            "id": "m2-1800000059900-49:1",
+            "skillId": "basic",
+            "scope": "single",
+            "hits": [
+              {
+                "id": "m2-1800000059900-49:1:0:m2-1800000059900-49-story-actor",
+                "hitIndex": 0,
+                "targetId": "m2-1800000059900-49-story-actor",
+                "hit": true,
+                "hpBefore": 2380,
+                "hpAfter": 2174,
+                "actualHpLost": 206,
+                "killProcHpLost": 0
+              }
+            ]
+          },
+          "lastCombatEventAt": 1800000061000,
+          "nextRegularAt": 1800000062100
+        },
+        "nextActionAt": 1800000062100,
+        "monsterLedger": {
+          "version": 1,
+          "encountered": {
+            "ashen.a01.normal.1": true,
+            "human.a02.normal.3": true,
+            "ashen.a04.normal.1": true
+          }
+        },
+        "regionNavigation": {
+          "version": 1,
+          "exploredNodeIds": [
+            "ashen.a01.field",
+            "human.a02.field",
+            "ashen.a04.field"
+          ],
+          "favoriteNodeIds": [],
+          "discoveredMaterialIds": [
+            "human.mat.02",
+            "ashen.red_vein_ore"
+          ]
+        },
+        "stopAfterBattle": false,
+        "codexCollection": {
+          "version": 1,
+          "sets": {
+            "human_blood_oath": [],
+            "human_royal_edge": [],
+            "human_last_bastion": [],
+            "elf_arrow": [],
+            "elf_prism": [],
+            "elf_root": [],
+            "goblin_spore": [],
+            "goblin_ambush": [],
+            "goblin_snare": [],
+            "ashen.caldera": [],
+            "ashen.strata": [],
+            "ashen.prism": [],
+            "anvil": [],
+            "rune": [],
+            "guard": []
+          },
+          "legendaries": []
+        },
+        "nextBattleAt": 1800000057900,
+        "stopAfterDungeon": false
+      }
+    }
+  ]
+}
