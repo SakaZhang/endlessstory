@@ -1,0 +1,106 @@
+{
+  "sourceCommit": "2bb69fa010a264c1add8ff336f4e1480af9e2924",
+  "runtimeSha256": "9369cd3bfae4d75e5d6828f38f2c83eb3801079c977e994ccb7856651b0f4ca5",
+  "seed": 1917,
+  "hours": 48,
+  "rng": "xorshift32(seed XOR 0x9e3779b9), isolated process per race",
+  "policy": "No starter gear; preserve100 initial gold; real shopping/equipment/skills/talents and rewards; no grants or free healing. Balanced cautious policy. Full details in NATURAL_BALANCE_QA_V071.md.",
+  "boundary": "Original simulation endpoint preserved: a world deadline may equal lastSeen. This is a valid production save. Do not silently flush it away; use as scheduler/parity regression input.",
+  "fixtures": [
+    {
+      "race": "human",
+      "file": "human.json",
+      "sha256": "091a214e645166307a8f3aa0f7d9966d67ede76dd8778d5f9af5271fbc176f5a",
+      "bytes": 27655,
+      "level100Hours": 33.65047916666666,
+      "clearedAreas": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "race": "dwarf",
+      "file": "dwarf.json",
+      "sha256": "4d3c9c822158b28c1a12dc2243b25c159772581b581d0fb510c1dce600453de6",
+      "bytes": 30588,
+      "level100Hours": 29.394554166666666,
+      "clearedAreas": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "race": "elf",
+      "file": "elf.json",
+      "sha256": "a803f1e6a94a557a40d25e28639d26f942ab3c113204020a49cc54e4b802a5fc",
+      "bytes": 30390,
+      "level100Hours": 27.563222222222223,
+      "clearedAreas": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "race": "goblin",
+      "file": "goblin.json",
+      "sha256": "4e07ac974f0cd94efbaef85798658154077c3d9893fa1fd3d2a273faa75bcd95",
+      "bytes": 29306,
+      "level100Hours": 30.773990277777777,
+      "clearedAreas": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "race": "ashen",
+      "file": "ashen.json",
+      "sha256": "2c6ff340081fe593aff3eca3cb59f0ab105db9b7c601df986273209244473a09",
+      "bytes": 28531,
+      "level100Hours": 32.983666666666664,
+      "clearedAreas": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    }
+  ]
+}
