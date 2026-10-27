@@ -23,4 +23,4 @@ export function validAffixSource(a,defs,{legacyWide=false}={}){
  if(Object.hasOwn(a,'sourceRange'))return Object.keys(a).length===3&&a.value>=range.min&&a.value<=range.max;
  return legacyWide?a.value>=0&&a.value<=50:a.value>=range.min&&a.value<=range.max;
 }
-export function affixSourceLabel(a){const r=a?.sourceRange;return r?.model===LEVEL_AFFIX_MODEL?`来源装备 Lv.${r.sourceLevel} · ${r.quality===4?'传说':`品质${r.quality}`} · 数值固定`:'旧版来源 · 保留原始区间';}
+export function affixSourceLabel(a){const r=a?.sourceRange;return r?.model===LEVEL_AFFIX_MODEL?`来源装备 Lv.${r.sourceLevel} · ${['普通','稀有','优良','至臻','传说'][r.quality]} · 数值固定`:'旧版来源 · 保留原始区间';}
