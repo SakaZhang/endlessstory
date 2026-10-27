@@ -1,0 +1,76 @@
+{
+  "release": "v0.71",
+  "sourceBaseCommit": "9f56c77996038f929d390a35ac48167250f1475d",
+  "balanceRuntimeCommit": "6e62da6537546133655c3c274f8d76aa17dabc27",
+  "finalWorldBoundaryCommit": "470bb2959d406bdfb5388b9db0c5a01b24b07c03",
+  "finalValidationSnapshot": "d8fbc0f621f5db07264247ae850f582047231ed5",
+  "saveSchema": 6,
+  "saveReset": false,
+  "npmTest": {
+    "exitCode": 0,
+    "log": "/tmp/v071-final-boundary-npm.log"
+  },
+  "regressions": {
+    "discovered": 353,
+    "nonBrowserPassed": 352,
+    "mjsPassed": 256,
+    "cjsPassed": 96,
+    "notRun": [
+      "exploration-maps-browser-tests.cjs"
+    ],
+    "mjsBatch": {
+      "selected": 256,
+      "passed": 255,
+      "failed": 1,
+      "report": "/tmp/rpg-regressions-0Gpfvu/results.json"
+    },
+    "resolvedFailure": {
+      "suite": "race-expansion-tests.mjs",
+      "cause": "Isolated beam-clock fixture accidentally allowed unrelated random Reaper and its damage probe could miss. Real generated no-special lifesteal equipment and explicit persisted hit roll now isolate the intended contracts; strict clock/damage/Reaper tests retained.",
+      "full64SuiteRerunExit": 0,
+      "full64SuiteRerunLog": "/tmp/v071-final-race-rerun.log",
+      "finalChildRerunExit": 0,
+      "finalChildLog": "/tmp/v071-ashen-final-default.log",
+      "tenSeedStressExit": 0,
+      "tenSeedStressLog": "/tmp/v071-ashen-final-seeds.log"
+    },
+    "cjsReport": "/tmp/rpg-regressions-khrEMf/results.json"
+  },
+  "build": {
+    "hash": "7eac746b3835a3e8046a783d88c2ddf47fcde9cb91cc03b9dc37a399eb86311f",
+    "files": 2788,
+    "resourceUrls": 2786,
+    "dependencyEdges": 8640,
+    "byteMutationProbes": 8,
+    "negativeReferenceProbes": 9
+  },
+  "naturalAcceptance": "tests/economy/v071-natural-acceptance.json",
+  "naturalScope": {
+    "unarmedOnrampCases": 150,
+    "onrampZeroDeaths": 147,
+    "otherOnrampCases": "3 cases with one death each",
+    "fourHourCases": 15,
+    "fourHourDeaths": 0,
+    "fourHourForcedRests": 0,
+    "level100SimulatedHoursRange": [
+      27.56,
+      33.65
+    ],
+    "naturallyEarnedArea10Clears": 5,
+    "completeMainlinePOVsPassed": 5,
+    "initialMeasurementsCommit": "2bb69fa010a264c1add8ff336f4e1480af9e2924",
+    "finalBoundaryVerification": "Five fresh and five original earned checkpoints: full 4h online/offline state and 8h cap passed. Five old/new online 4h full saves equal plus scheduler call-bound invariant; original 48h/150-case data not relabelled as rerun."
+  },
+  "compatibility": {
+    "frozenV070FieldDungeonBossSnapshots": 25,
+    "frozenV070EarlyStorySnapshots": 8,
+    "frozenV070FinaleSnapshots": 30,
+    "paidReforgeLegacyModes": 3
+  },
+  "browserQA": {
+    "status": "not verified",
+    "managedPreview": "startup timeout; stopped, no usable URL",
+    "liveAuthentication": "previous handoff remains pending; no user save cleared or imported"
+  },
+  "audience": "preserve owner-private"
+}
