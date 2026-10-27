@@ -23,7 +23,7 @@ export function skillConfigs(st){
  iron_vigil:{cooldownMs:13200,shield:.18*H,hammerMultiplier:1.35,durationMs:6600},
  bastion_blow:{cooldownMs:6600,coefficient:1.10,defenseCoefficient:.60,defenseContributionCap:.60*A,shieldBonus:.50,defenseUp:.20*D,durationMs:4400},
  repelling_wave:{cooldownMs:14300,coefficient:.50,durationMs:1100,hammerDurationBonus:550,dodgeUp:8},
- forge_breath:{cooldownMs:16500,heal:.14*H+(st.healingBonus??0),healingPower:.02*H,durationMs:6000,lifestealUp:8},
+ forge_breath:{cooldownMs:16500,heal:.14*H,healingPower:.02*H,durationMs:6000,lifestealUp:8},
  purifying_bulwark:{cooldownMs:13200,shield:.10*H,durationMs:4400,attackUp:.12*A}
  };
 }

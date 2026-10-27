@@ -1,3 +1,4 @@
+import {activeHealingMultiplier} from './talent-policy.js';
 // Adapter only: the caller owns combat formulas, activation gating and transaction clones.
 import {createSkillEffectState,validSkillEffectState,applySkillEffect,advanceSkillEffectState,skillEffectValue} from './skill-tree-effects.js';
 import {createPlayerShieldLayers,validPlayerShieldLayers,grantPlayerShieldLayer,expirePlayerShieldLayers} from './player-shield-layers.js';
@@ -30,7 +31,7 @@ export function createTreeEffectHost(s,e,{stats,combatClock=0,resolveDot,applySt
    removed++;
   }return removed;
  };
- const callbacks={heal:(_id,ef)=>heal(ef.amount,ef),cleanse:(_id,ef)=>cleanse(ef.eligibleIds,ef.count),stun:(id,ef)=>typeof applyStun==='function'?applyStun(id,ef):false,interrupt:(id,ef)=>typeof interrupt==='function'?interrupt(id,ef):false,
+ const callbacks={heal:(_id,ef)=>heal(ef.amount*(ef.source?.kind==='equipment'?1:activeHealingMultiplier(s.talents?.healing)),ef),cleanse:(_id,ef)=>cleanse(ef.eligibleIds,ef.count),stun:(id,ef)=>typeof applyStun==='function'?applyStun(id,ef):false,interrupt:(id,ef)=>typeof interrupt==='function'?interrupt(id,ef):false,
  shield:(id,source)=>{
   if(id!=='self'||source.source.kind!=='skill')return false;
   const layers=e.playerShieldLayers??createPlayerShieldLayers(e.treeEffects.clock);
@@ -39,8 +40,9 @@ export function createTreeEffectHost(s,e,{stats,combatClock=0,resolveDot,applySt
  }};
  const applyEffect=(id,effect)=>{
   if(!alive(id))return false;
-  let ef=effect;if(id==='self'&&negative.has(ef.type)&&typeof negativeDuration==='function'&&Number.isFinite(ef.durationMs))ef={...ef,durationMs:negativeDuration(ef.durationMs)};
+  let ef=effect;
   if(['dot','healOverTime'].includes(ef.type)&&ef.tickIntervalMs===undefined)ef={...ef,tickIntervalMs:typeof tickIntervalMs==='function'?tickIntervalMs(ef):tickIntervalMs};
+  if(id==='self'&&negative.has(ef.type)&&typeof negativeDuration==='function'&&Number.isFinite(ef.durationMs))ef={...ef,durationMs:negativeDuration(ef.durationMs,ef)};
   // cleanse mutates the same ledger; bypass generic clone adoption which would overwrite it.
   if(ef.type==='cleanse')return cleanse(ef.eligibleIds,ef.count);
   const result=applySkillEffect(e.treeEffects,id,ef,{callbacks});if(!result)return false;e.treeEffects=result.state;return true;

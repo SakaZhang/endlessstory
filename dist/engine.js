@@ -1,3 +1,4 @@
+import {activeHealingMultiplier,talentRefundCost,TALENT_BALANCE_VERSION} from './talent-policy.js';
 import {validInfinityGauntletState,settleInfinityRecipe} from './infinity-gauntlet-state.js';
 import {validWorldEventState,worldEventsDue,advanceRandomWorldEvents} from './random-world-events.js';
 export {worldEventsDue,RANDOM_WAR_RULES} from './random-world-events.js';
@@ -111,12 +112,12 @@ export const TALENTS={
  power:{name:'力量',desc:'每点攻击 +3。',icon:'heavy',cap:null},heart:{name:'体魄',desc:'每点生命 +20。',icon:'mend',cap:null},steel:{name:'坚韧',desc:'每点护甲 +3。',icon:'ironcoat',cap:null},
  precision:{name:'精准',desc:'每点命中 +5。',icon:'mark',cap:10},crit:{name:'锐意',desc:'每点暴击 +5。',icon:'interrupt',cap:10},critDamage:{name:'重创',desc:'每点暴伤 +8。',icon:'heavy',cap:null},
  penetration:{name:'破壁',desc:'每点物理穿甲 +2。',icon:'break',cap:null},element:{name:'元素亲和',desc:'每点元素技能增幅 +2；只增强元素伤害，不为物理攻击追加附伤。',icon:'fire',cap:null},elementResist:{name:'元素抗性',desc:'每点六系元素抗性各 +5；按对应元素降低伤害。',icon:'cleanse',cap:null},
- block:{name:'格挡训练',desc:'每点格挡 +4，概率减轻30%直接攻击伤害。',icon:'barrier',cap:10},shield:{name:'护盾塑形',desc:'已有技能或词条生成护盾时，每点额外 +4；不自动生成。',icon:'shield',cap:null},healing:{name:'复苏',desc:'每点回炉息在基础恢复后额外 +3，总恢复上限为最大生命35%。',icon:'mend',cap:null},
- resolve:{name:'抗扰',desc:'每5点缩短新受到的灼烧、虚弱1回合，最低1回合。',icon:'ironcoat',cap:10},luck:{name:'幸运',desc:'小幅提高非套装掉落、融合品质及改造普通词条数值；并小幅提高合格战利品、套装、特殊词条与神赐机会；不改变战斗触发及强化成功率。',icon:'ring',cap:10}
+ block:{name:'格挡训练',desc:'每点格挡 +4，概率减轻30%直接攻击伤害。',icon:'barrier',cap:10},shield:{name:'护盾塑形',desc:'已有技能或词条生成护盾时，每点额外 +4；不自动生成。',icon:'shield',cap:null},healing:{name:'复苏',desc:'所有种族主动技能的直接治疗：前10点每点 +4%，超过10点后额外加成=40%×超出点数÷(20+超出点数)，总加成低于80%。不增强持续治疗、药剂、吸血或护盾。',icon:'mend',cap:null},
+ resolve:{name:'抗扰',desc:'每点缩短新受到的持续负面状态2%，最多20%；与被动乘算。持续伤害至少保留1跳；不改变下一次普攻减速。',icon:'ironcoat',cap:10},luck:{name:'幸运',desc:'小幅提高非套装掉落、融合品质及改造普通词条数值；并小幅提高合格战利品、套装、特殊词条与神赐机会；不改变战斗触发及强化成功率。',icon:'ring',cap:10}
 };
 export function talentPointBudget(s){return s.level-1;}
 function validTalents(s){
- if(s.bonusTalentPoints!==undefined||s.testGrants!==undefined)return false;
+ if(s.bonusTalentPoints!==undefined||s.testGrants!==undefined||s.talentBalanceVersion!==undefined&&s.talentBalanceVersion!==TALENT_BALANCE_VERSION)return false;
  if(!s.talents||typeof s.talents!=='object'||Array.isArray(s.talents))return false;
  if(!['power','heart','steel'].every(k=>Number.isInteger(s.talents[k])&&s.talents[k]>=0))return false;
  return Object.entries(s.talents).every(([key,n])=>Object.hasOwn(TALENTS,key)&&Number.isSafeInteger(n)&&n>=0&&n<=(TALENTS[key].cap??talentPointBudget(s)))&&Object.values(s.talents).reduce((a,b)=>a+b,0)<=talentPointBudget(s);
@@ -130,19 +131,18 @@ export function normalizeTalents(s){
 }
 export function availableTalentPoints(s){return talentPointBudget(s)-Object.values(s.talents).reduce((a,b)=>a+b,0);}
 export function spendTalent(s,key,battleActive=false){
- if(s.running||battleActive||!Object.hasOwn(TALENTS,key)||!validTalents(s)||!validConsumables(s)||availableTalentPoints(s)<=0||(TALENTS[key].cap!==null&&(s.talents[key]??0)>=TALENTS[key].cap))return false;
+ if(s.running||battleActive||s.activeEncounter&&!s.activeEncounter.done||!Object.hasOwn(TALENTS,key)||!validTalents(s)||!validConsumables(s)||availableTalentPoints(s)<=0||(TALENTS[key].cap!==null&&(s.talents[key]??0)>=TALENTS[key].cap))return false;
  normalizeTalents(s);s.talents[key]++;capHealth(s);return true;
 }
 export function getTalentRefundQuote(s,draft){
  if(!validTalents(s)||!validConsumables(s)||!draft||typeof draft!=='object'||Array.isArray(draft))return null;
  const rows=Object.entries(draft);if(!rows.length||!rows.every(([key,n])=>Object.hasOwn(TALENTS,key)&&Number.isSafeInteger(n)&&n>0&&n<=(s.talents[key]??0)))return null;
- const points=rows.reduce((n,[,v])=>n+v,0),creditsBefore=s.consumables?.refundCredits??0,fruitCost=Math.ceil(Math.max(0,points-creditsBefore)/10);
- return {points,fruitCost,creditsBefore,creditsAfter:creditsBefore+fruitCost*10-points};
+ return talentRefundCost(s,rows.reduce((n,[,v])=>n+v,0));
 }
 export function commitTalentRefund(s,draft,battleActive=false){
- if(s.running||battleActive)return false;const quote=getTalentRefundQuote(s,draft);
- if(!quote||(s.consumables?.memoryFruit??0)<quote.fruitCost)return false;
- normalizeTalents(s);s.consumables.memoryFruit-=quote.fruitCost;s.consumables.refundCredits=quote.creditsAfter;
+ if(s.running||battleActive||s.activeEncounter&&!s.activeEncounter.done)return false;const quote=getTalentRefundQuote(s,draft);
+ if(!quote||(s.consumables?.memoryFruit??0)<quote.fruitCost||!Number.isFinite(s.gold)||s.gold<quote.goldCost)return false;
+ normalizeTalents(s);s.consumables.memoryFruit-=quote.fruitCost;s.consumables.refundCredits=quote.creditsAfter;s.gold-=quote.goldCost;s.talentBalanceVersion=TALENT_BALANCE_VERSION;
  for(const [key,n] of Object.entries(draft))s.talents[key]-=n;capHealth(s);return true;
 }
 export const AFFIX_DEFS={
@@ -363,7 +363,7 @@ export function fresh(race='dwarf'){
  const pack=getRacePack(race);if(!pack)throw new RangeError('Unknown playable race');const sockets=raceSockets(race);
  // New characters begin unarmed. Owned equipment in existing saves is never migrated.
  const inventory=[];
- const s={version:SCHEMA_VERSION,diplomacy:freshDiplomacy(),race,hero:pack.heroName,atCamp:true,level:1,xp:0,gold:100,location:0,siteId:race+'.a01',expedition:{mode:'field',fieldId:race+'.a01.field',targetInstanceId:null,loop:false},build:'custom',inventory,equip:Object.fromEntries(sockets.map(socket=>[socket,null])),skills:[null,null,null,null],conditions:['always','always','always','always'],materialStacks:{'铁屑|0':5,'炉火晶|0':2,'誓约残片|0':1},offlineLuck:0,talents:Object.fromEntries(Object.keys(TALENTS).map(k=>[k,0])),consumables:{memoryFruit:0,refundCredits:0,reforgeToken:0},potionSlot:{key:null,auto:false,priority:'low',priorityVersion:1},kills:0,normalWins:[0,0,0],bossWins:[0,0,0],bossReady:[0,0,0],stock:3,loadouts:[null,null,null],chapters:[],chronicle:[race==='dwarf'?'灰冠历317年：你离开黑炉堡，从徒手战斗开始寻找失踪商队。':'灰冠历317年：你在'+pack.heroName+'的旅途中踏出了第一步。'],momentum:0,lastSeen:Date.now(),running:false};
+ const s={version:SCHEMA_VERSION,talentBalanceVersion:TALENT_BALANCE_VERSION,diplomacy:freshDiplomacy(),race,hero:pack.heroName,atCamp:true,level:1,xp:0,gold:100,location:0,siteId:race+'.a01',expedition:{mode:'field',fieldId:race+'.a01.field',targetInstanceId:null,loop:false},build:'custom',inventory,equip:Object.fromEntries(sockets.map(socket=>[socket,null])),skills:[null,null,null,null],conditions:['always','always','always','always'],materialStacks:{'铁屑|0':5,'炉火晶|0':2,'誓约残片|0':1},offlineLuck:0,talents:Object.fromEntries(Object.keys(TALENTS).map(k=>[k,0])),consumables:{memoryFruit:0,refundCredits:0,reforgeToken:0},potionSlot:{key:null,auto:false,priority:'low',priorityVersion:1},kills:0,normalWins:[0,0,0],bossWins:[0,0,0],bossReady:[0,0,0],stock:3,loadouts:[null,null,null],chapters:[],chronicle:[race==='dwarf'?'灰冠历317年：你离开黑炉堡，从徒手战斗开始寻找失踪商队。':'灰冠历317年：你在'+pack.heroName+'的旅途中踏出了第一步。'],momentum:0,lastSeen:Date.now(),running:false};
  if(race!=='dwarf'){s.materialStacks={};s.chronicle=['你从'+pack.name+'的营地开始旅程。'];}
  normalizeSkillTree(s,getSkillTreeDefinition(s));s.skillTree.mode='active';
  return s;
@@ -386,7 +386,7 @@ export function baseStats(s){
  const ratingFactor=r=>Math.max(0,r)/(100+Math.max(0,r));
  const elementAttack=Object.fromEntries(ELEMENT_KEYS.map(k=>[k,bonus.element+(bonus[k+'Atk']??0)+potionBuffStrength(s,k+'Atk')+(getRacePack(s.race)?.innate?.elementAttack?.[k]??0)]));
  const elementResistance=Object.fromEntries(ELEMENT_KEYS.map(k=>[k,(s.talents.elementResist??0)*5+(bonus[k+'Resist']??0)+potionBuffStrength(s,k+'Resist')+(getRacePack(s.race)?.innate?.elementResistance?.[k]??0)]));
- return {atk,armor,hp,dodgeRating,dodge:(getRaceTuning(s.race)?.attributeConfig?.dodgeCap??0)*ratingFactor(dodgeRating),penetration:(s.talents.penetration??0)*2,elementAttack,elementResistance,elementResist:.5*ratingFactor(elementResistance.fire),block:.35*ratingFactor((s.talents.block??0)*4),shieldBonus:(s.talents.shield??0)*4,healingBonus:(s.talents.healing??0)*3,resolveReduction:Math.floor((s.talents.resolve??0)/5),luck:Math.min(1000,Math.max(0,(s.talents.luck??0)+bonus.luck+potionBuffStrength(s,'luck'))),lifesteal:bonus.lifesteal,lifestealRating:bonus.lifesteal,lifestealRate:lifestealRate(bonus.lifesteal),hit:clamp(.9+.1*ratingFactor(bonus.hit),.5,.995),crit:clamp(.05+.55*ratingFactor(bonus.crit),0,.6),critDamage:clamp(1.5+ratingFactor(bonus.critDamage),1.5,2.5),element:bonus.element,hitRating:bonus.hit,critRating:bonus.crit,critDamageRating:bonus.critDamage,count,specials,legend:false,bonus};
+ return {atk,armor,hp,dodgeRating,dodge:(getRaceTuning(s.race)?.attributeConfig?.dodgeCap??0)*ratingFactor(dodgeRating),penetration:(s.talents.penetration??0)*2,elementAttack,elementResistance,elementResist:.5*ratingFactor(elementResistance.fire),block:.35*ratingFactor((s.talents.block??0)*4),shieldBonus:(s.talents.shield??0)*4,healingBonus:100*(activeHealingMultiplier(s.talents.healing)-1),resolveReduction:(s.talents.resolve??0)*.02,luck:Math.min(1000,Math.max(0,(s.talents.luck??0)+bonus.luck+potionBuffStrength(s,'luck'))),lifesteal:bonus.lifesteal,lifestealRating:bonus.lifesteal,lifestealRate:lifestealRate(bonus.lifesteal),hit:clamp(.9+.1*ratingFactor(bonus.hit),.5,.995),crit:clamp(.05+.55*ratingFactor(bonus.crit),0,.6),critDamage:clamp(1.5+ratingFactor(bonus.critDamage),1.5,2.5),element:bonus.element,hitRating:bonus.hit,critRating:bonus.crit,critDamageRating:bonus.critDamage,count,specials,legend:false,bonus};
 }
 function treePolicy(s){return s.skillTree?.mode==='active'?getRaceTuning(s.race):null;}
 export function treePassiveContext(s,policy=treePolicy(s)){
