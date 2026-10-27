@@ -1,7 +1,8 @@
+import {addTestEquipment} from './equipped-test-fixture.mjs';
 import assert from 'node:assert/strict';
 import * as E from './dist/engine.js';
 import {quoteEnhancement,prepareEnhancement,attemptEnhancement,FORMAL_ENHANCEMENT_CONFIG,quoteDeveloperEnhancement} from './dist/equipment-enhancement.js';
-const make=()=>{const s=E.fresh();s.gold=100000;return s;};
+const make=()=>{const s=E.fresh();addTestEquipment(s);s.gold=100000;return s;};
 for(let level=0;level<5;level++){
  const dwarf=make(),it=dwarf.inventory[0];it.enhancement={version:2,model:FORMAL_ENHANCEMENT_CONFIG.id,level};const human=structuredClone(dwarf);human.race='human';
  const dq=quoteEnhancement(dwarf,it.id),hq=quoteEnhancement(human,it.id);assert(dq.ok&&hq.ok);assert.equal(dq.baseSuccessRate,FORMAL_ENHANCEMENT_CONFIG.successRates[level]);assert.equal(dq.finalSuccessRate,dq.baseSuccessRate+.02);assert.equal(dq.successRate,dq.finalSuccessRate);assert.equal(hq.successRate,hq.baseSuccessRate);assert.equal(hq.cost.gold,Math.max(1,Math.ceil(dq.cost.gold*.9)));assert.deepEqual(dq.cost.materials,hq.cost.materials);assert.deepEqual(dq.bases,hq.bases);

@@ -1,3 +1,4 @@
+import {addTestEquipment} from './equipped-test-fixture.mjs';
 import assert from 'node:assert/strict';
 import * as E from './dist/engine.js';
 import {normalizeSkillTree} from './dist/skill-tree-state.js';
@@ -22,7 +23,7 @@ for(const node of ['dwarf.a01.field','dwarf.a03.boss']){
 // Active multi-hit does not add counts; a blocked/automatic/passive cast doesn't.
 {const f=setup('cinder_barrage');cast(f);assert.equal(f.s.equipmentRuntime.byId[f.id].castCount,1);assert.equal(countInfinityCast(f.s,f.e,{extra:true,castId:'passive'},{activeSkill:true}),null);assert.equal(countInfinityCast(f.s,f.e,{extra:false,castId:'auto'},{activeSkill:false}),null);assert.equal(f.s.equipmentRuntime.byId[f.id].castCount,1);}
 // Real equipment swap removes the count, restoring the item begins at zero.
-{const f=setup();for(let i=0;i<3;i++)cast(f);f.e.done=true;f.e.win=false;f.s.activeEncounter=null;f.s.running=false;const other=f.s.inventory.find(i=>i.slot==='gloves'&&i.id!==f.id);assert(E.equipItem(f.s,other.id));assert(!f.s.equipmentRuntime.byId[f.id]);assert(E.equipItem(f.s,f.id));assert.equal(f.s.equipmentRuntime.byId[f.id].castCount,0);}
+{const f=setup();for(let i=0;i<3;i++)cast(f);f.e.done=true;f.e.win=false;f.s.activeEncounter=null;f.s.running=false;const other=addTestEquipment(f.s,{socket:'gloves',equip:false});assert(E.equipItem(f.s,other.id));assert(!f.s.equipmentRuntime.byId[f.id]);assert(E.equipItem(f.s,f.id));assert.equal(f.s.equipmentRuntime.byId[f.id].castCount,0);}
 // Same equipped item carries partial counts across real dungeon stage transition.
 {const f=setup('bellows_ward','dwarf.a01.dungeon');cast(f);assert.equal(f.s.equipmentRuntime.byId[f.id].castCount,1);for(const u of f.e.enemies)u.hp=1;f.s.skillTree.presets[0].active=['fracture_strike',null,null,null];f.e.rngState=1;cast(f);assert(f.e.done);E.reward(f.s,f.e,f.s.lastHealthClock);const count=f.s.equipmentRuntime.byId[f.id].castCount,e2=E.startInstanceEncounter(f.s,'dwarf.a01.dungeon',f.s.nextBattleAt);assert(e2);assert.equal(f.s.equipmentRuntime.byId[f.id].castCount,count);assert(E.validSave(f.s));}
 // Online and offline use the exact same saved RNG and count trajectory.

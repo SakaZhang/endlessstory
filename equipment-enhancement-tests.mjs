@@ -1,12 +1,13 @@
+import {addTestEquipment} from './equipped-test-fixture.mjs';
 import assert from 'node:assert/strict';
 import {fresh,item,stats,itemTotals,validSave,applyForgeFavor,quoteDeveloperEnhancement,prepareDeveloperEnhancement,attemptDeveloperEnhancement,enhancedItemBase,DEVELOPMENT_ENHANCEMENT_CONFIG} from './dist/engine.js';
 import {commitGameTransaction} from './dist/storage.js';
 const clone=x=>structuredClone(x);
 // Synthetic raw-base edge cases model pre-M2 owned gear, not altered formal budgets.
 const legacyBudget=it=>{for(const key of ['baseBudgetModel','budgetLevel','budgetSourceLevel','budgetCompatibility'])delete it[key];return it;};
-function setup(){const s=fresh();s.developmentEquipmentSandbox=true;s.gold=10000;return s;}
+function setup(){const s=fresh();addTestEquipment(s);s.developmentEquipmentSandbox=true;s.gold=10000;return s;}
 {
- const s=fresh(),it=s.inventory[0];it.bless=0;const before=clone(it),tot=itemTotals(it);assert.equal(quoteDeveloperEnhancement(s,it.id).ok,false);assert.deepEqual(itemTotals(it),tot);assert.deepEqual(it,before);assert(validSave(s));
+ const s=fresh(),it=addTestEquipment(s);it.bless=0;const before=clone(it),tot=itemTotals(it);assert.equal(quoteDeveloperEnhancement(s,it.id).ok,false);assert.deepEqual(itemTotals(it),tot);assert.deepEqual(it,before);assert(validSave(s));
 }
 {
  const s=setup(),it=s.inventory[0];it.bless=0;it.locked=true;applyForgeFavor(it);const raw=clone(it),formal=itemTotals(it),affix=clone(it.affixes);let previous=stats(s).atk;
@@ -28,7 +29,7 @@ console.log('Developer enhancement: formal current raw untouched,5 probabilities
 }
 console.log('Enhancement quote survives unrelated clocks/HP/loot and cached retry rebases without rollback');
 {
- const s=fresh();for(const it of s.inventory){legacyBudget(it);for(const key of ['templateId','baseVariant','weaponType','originRace','visualKey','visualVariant','iconKey'])delete it[key];}const before=clone(s);assert(!validSave(s));assert.deepEqual(s,before);
- const bad=fresh();bad.inventory[0].enhancement={version:1,model:'development-budget-v1',level:6};assert(!validSave(bad));
+ const s=fresh();addTestEquipment(s);for(const it of s.inventory){legacyBudget(it);for(const key of ['templateId','baseVariant','weaponType','originRace','visualKey','visualVariant','iconKey'])delete it[key];}const before=clone(s);assert(!validSave(s));assert.deepEqual(s,before);
+ const bad=fresh();addTestEquipment(bad);bad.inventory[0].enhancement={version:1,model:'development-budget-v1',level:6};assert(!validSave(bad));
 }
 console.log('Retired equipment metadata rejected without mutation; current candidate metadata remains bounded');

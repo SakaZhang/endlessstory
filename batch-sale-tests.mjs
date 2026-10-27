@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
+import {addTestEquipment} from './equipped-test-fixture.mjs';
 import {fresh,item,quoteBatchSale,executeBatchSale,validSave,equipItem,saveLoadout,reforge,claimForgeResult,codexSetState,sellValue} from './dist/engine.js';
 import {commitGameTransaction} from './dist/storage.js';
 const original=Math.random;Math.random=()=>.5;
@@ -12,7 +13,7 @@ try{
  // A set is not blanket-excluded; history is captured before the old piece disappears.
  const sets=fresh(),piece=add(sets,'gloves',3,'rune');const setQuote=quoteBatchSale(sets,'gloves',[3]);assert.equal(setQuote.count,1);assert.equal(sets.codexCollection,undefined);assert(executeBatchSale(sets,setQuote));assert(!sets.inventory.some(it=>it.id===piece.id));assert.deepEqual(codexSetState(sets,'rune').parts,['gloves']);assert(validSave(sets));
  // Equipped, loadout and pending-reforge references are all protected.
- const protectedState=fresh(),equipped=add(protectedState,'helm'),cabinet=add(protectedState,'boots'),pending=add(protectedState,'weapon',1);assert(equipItem(protectedState,equipped.id));assert(equipItem(protectedState,cabinet.id));assert(saveLoadout(protectedState,0,'柜'));assert(equipItem(protectedState,protectedState.inventory.find(i=>i.slot==='boots'&&i.id!==cabinet.id).id));assert(reforge(protectedState,pending.id,'value',0));assert(!quoteBatchSale(protectedState,'helm',[0]).entries.some(e=>e.id===equipped.id));assert(!quoteBatchSale(protectedState,'boots',[0]).entries.some(e=>e.id===cabinet.id));assert(!quoteBatchSale(protectedState,'weapon',[1]).entries.some(e=>e.id===pending.id));
+ const protectedState=fresh(),equipped=add(protectedState,'helm'),cabinet=add(protectedState,'boots'),pending=add(protectedState,'weapon',1);assert(equipItem(protectedState,equipped.id));assert(equipItem(protectedState,cabinet.id));assert(saveLoadout(protectedState,0,'柜'));addTestEquipment(protectedState,{socket:'boots'}); // owned replacement leaves saved-loadout boots protectedassert(reforge(protectedState,pending.id,'value',0));assert(!quoteBatchSale(protectedState,'helm',[0]).entries.some(e=>e.id===equipped.id));assert(!quoteBatchSale(protectedState,'boots',[0]).entries.some(e=>e.id===cabinet.id));assert(!quoteBatchSale(protectedState,'weapon',[1]).entries.some(e=>e.id===pending.id));
  // Any one stale item invalidates the whole quote, not a hidden subset.
  for(const mutate of [
   (p,it)=>it.atk++,(p,it)=>it.name+='改',(p,it)=>it.affixes.push({stat:'hp',value:15}),(p,it)=>it.locked=true,
