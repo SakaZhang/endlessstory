@@ -1,0 +1,17 @@
+{
+  "sourceCommit": "4e1a6a5e762dd62b501d82e9fdfd85178b093f58",
+  "sourcePath": "dist/dwarf-parameters.js",
+  "sourceBlob": "7875eb52c087747d0ff397e8b5d252f665240919",
+  "sourceSha256": "e2188816c65034ca21b5140bfb82b5c34c900e582524095e59d269ef7572fdd0",
+  "fixtureSha256": "efda5aa4fe1e60f7c564378b2cd6fe95898b95eeea057f438139a0c2b3a3096a",
+  "approval": {
+    "sourceId": "dwarf-a04-a06-v039-field-pressure-candidate",
+    "providerSha256": "8889b7f4f9087825d3e99e168e95b43bcb7c9120eb097c173a8acf6f4195644d",
+    "recoveryPatchSha256": "a437b5f647a760c70192bec686a7a3a9c7e106689866257a78423ce96022d419",
+    "authorization": "Root approved final A04–A06 initial parameters after actual host matrix and four-hour parity",
+    "authorizedOn": "2026-10-23",
+    "unpatchedMaterialRowsSha256": "ece5872085b772008728fa8500c02e5250f8bd24184e074e4503c71fd130f058",
+    "previousProviderSha256": "cd05ed7ad2204862f8978c55489305904b6b3f32c230d4585f474a5dfae126bc",
+    "manifestSha256": "d0dbe2dc7539942b5ddbbf50fbc810fa8aa63c5cd81592762983c8b1ab76cf0b"
+  }
+}

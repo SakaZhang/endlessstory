@@ -1,0 +1,15 @@
+{
+  "sourceCommit": "603f82970b5270a41f0a6b18f5ddd4677e5cc57e",
+  "sourcePath": "dist/dwarf-parameters.js",
+  "sourceBlob": "f21f0198bb5dacf4a901d9ddeffe21bc7845a835",
+  "sourceSha256": "1ff3b58fd61633f829ce01a286ea3b0827fd11d66a431b5d01ccaab9fab24da5",
+  "fixtureSha256": "6307ee6043a223f79c282274422c8fb227060af37503cf3eb1de2c346b6dbcae",
+  "approval": {
+    "sourceId": "dwarf-a07-a10-v040-field-pressure-candidate",
+    "providerSha256": "9975fd7379d2b3d6212edc5c7f9ab7980276d989a6a5b295edbb2da97a4cb9ff",
+    "manifestSha256": "79f3a7db4a62943a427b068807f97b567247bca6096f8749678ea47aa40266b5",
+    "authorization": "Root approved final A07–A10 initial parameters after actual host 48 trajectories and level100 four-hour parity",
+    "authorizedOn": "2026-10-23",
+    "scope": "Old26 and prior clear rewards unchanged; only24 new ordinary attack/elementalPower fields tuned; existing material pools preserved"
+  }
+}

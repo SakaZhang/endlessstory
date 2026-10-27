@@ -1,0 +1,522 @@
+{
+  "id": "dwarf-a04-a06-v039-field-pressure-candidate",
+  "reviewed": true,
+  "status": "root-approved-production-2026-10-23",
+  "fieldGroupChance": 0.04,
+  "clearRewards": {
+    "1": {
+      "gold": 6,
+      "xp": 32,
+      "materialRounds": 0,
+      "gearChance": 0.35,
+      "markChance": 0.02
+    },
+    "2": {
+      "gold": 8,
+      "xp": 40,
+      "materialRounds": 0,
+      "gearChance": 0.35,
+      "markChance": 0.02
+    },
+    "3": {
+      "gold": 8,
+      "xp": 48,
+      "materialRounds": 0,
+      "gearChance": 0.35,
+      "markChance": 0.02
+    },
+    "4": {
+      "gold": 8,
+      "xp": 56,
+      "materialRounds": 0,
+      "gearChance": 0.35,
+      "markChance": 0.02
+    },
+    "5": {
+      "gold": 8,
+      "xp": 64,
+      "materialRounds": 0,
+      "gearChance": 0.35,
+      "markChance": 0.02
+    },
+    "6": {
+      "gold": 10,
+      "xp": 72,
+      "materialRounds": 0,
+      "gearChance": 0.35,
+      "markChance": 0.02
+    }
+  },
+  "monsters": {
+    "dwarf.a01.normal.1": {
+      "hp": 600,
+      "atk": 3,
+      "armor": 12,
+      "elementalPower": 2,
+      "basicIntervalMs": 2200,
+      "rewardGold": 2,
+      "rewardXp": 16,
+      "elementResistance": {
+        "earth": 3,
+        "water": 3,
+        "fire": 3,
+        "wind": 3,
+        "light": 3,
+        "dark": 3
+      }
+    },
+    "dwarf.a01.normal.2": {
+      "hp": 450,
+      "atk": 2,
+      "armor": 8,
+      "elementalPower": 2,
+      "basicIntervalMs": 1800,
+      "rewardGold": 2,
+      "rewardXp": 16,
+      "elementResistance": {
+        "earth": 12,
+        "water": 3,
+        "fire": 3,
+        "wind": 3,
+        "light": 3,
+        "dark": 3
+      }
+    },
+    "dwarf.a01.normal.3": {
+      "hp": 780,
+      "atk": 4,
+      "armor": 16,
+      "elementalPower": 2,
+      "basicIntervalMs": 2800,
+      "rewardGold": 2,
+      "rewardXp": 16,
+      "elementResistance": {
+        "earth": 12,
+        "water": 3,
+        "fire": 3,
+        "wind": 3,
+        "light": 3,
+        "dark": 3
+      }
+    },
+    "dwarf.a01.elite": {
+      "hp": 2000,
+      "atk": 48,
+      "armor": 22,
+      "elementalPower": 14,
+      "basicIntervalMs": 2200,
+      "rewardGold": 10,
+      "rewardXp": 55,
+      "elementResistance": {
+        "earth": 13,
+        "water": 3,
+        "fire": 3,
+        "wind": 3,
+        "light": 3,
+        "dark": 3
+      }
+    },
+    "dwarf.a02.normal.1": {
+      "hp": 1100,
+      "atk": 3,
+      "armor": 19,
+      "elementalPower": 2,
+      "basicIntervalMs": 2200,
+      "rewardGold": 3,
+      "rewardXp": 20,
+      "elementResistance": {
+        "earth": 15,
+        "water": 4,
+        "fire": 4,
+        "wind": 4,
+        "light": 4,
+        "dark": 4
+      }
+    },
+    "dwarf.a02.normal.2": {
+      "hp": 850,
+      "atk": 2,
+      "armor": 13,
+      "elementalPower": 2,
+      "basicIntervalMs": 1800,
+      "rewardGold": 3,
+      "rewardXp": 20,
+      "elementResistance": {
+        "earth": 4,
+        "water": 4,
+        "fire": 4,
+        "wind": 15,
+        "light": 4,
+        "dark": 4
+      }
+    },
+    "dwarf.a02.normal.3": {
+      "hp": 1430,
+      "atk": 4,
+      "armor": 26,
+      "elementalPower": 2,
+      "basicIntervalMs": 2800,
+      "rewardGold": 3,
+      "rewardXp": 20,
+      "elementResistance": {
+        "earth": 15,
+        "water": 4,
+        "fire": 4,
+        "wind": 4,
+        "light": 4,
+        "dark": 4
+      }
+    },
+    "dwarf.a02.elite": {
+      "hp": 4200,
+      "atk": 80,
+      "armor": 32,
+      "elementalPower": 22,
+      "basicIntervalMs": 2200,
+      "rewardGold": 12,
+      "rewardXp": 66,
+      "elementResistance": {
+        "earth": 16,
+        "water": 4,
+        "fire": 4,
+        "wind": 4,
+        "light": 4,
+        "dark": 4
+      }
+    },
+    "dwarf.a03.normal.1": {
+      "hp": 1800,
+      "atk": 5,
+      "armor": 26,
+      "elementalPower": 3,
+      "basicIntervalMs": 2200,
+      "rewardGold": 3,
+      "rewardXp": 24,
+      "elementResistance": {
+        "earth": 5,
+        "water": 5,
+        "fire": 5,
+        "wind": 5,
+        "light": 5,
+        "dark": 18
+      }
+    },
+    "dwarf.a03.normal.2": {
+      "hp": 1440,
+      "atk": 4,
+      "armor": 18,
+      "elementalPower": 3,
+      "basicIntervalMs": 1800,
+      "rewardGold": 3,
+      "rewardXp": 24,
+      "elementResistance": {
+        "earth": 18,
+        "water": 5,
+        "fire": 5,
+        "wind": 5,
+        "light": 5,
+        "dark": 5
+      }
+    },
+    "dwarf.a03.normal.3": {
+      "hp": 2340,
+      "atk": 6,
+      "armor": 36,
+      "elementalPower": 3,
+      "basicIntervalMs": 2800,
+      "rewardGold": 3,
+      "rewardXp": 24,
+      "elementResistance": {
+        "earth": 18,
+        "water": 5,
+        "fire": 5,
+        "wind": 5,
+        "light": 18,
+        "dark": 5
+      }
+    },
+    "dwarf.a03.elite": {
+      "hp": 7200,
+      "atk": 110,
+      "armor": 42,
+      "elementalPower": 32,
+      "basicIntervalMs": 2200,
+      "rewardGold": 14,
+      "rewardXp": 79,
+      "elementResistance": {
+        "earth": 19,
+        "water": 6,
+        "fire": 6,
+        "wind": 6,
+        "light": 6,
+        "dark": 19
+      }
+    },
+    "dwarf.a03.boss": {
+      "hp": 15000,
+      "atk": 110,
+      "armor": 48,
+      "elementalPower": 45,
+      "basicIntervalMs": 2200,
+      "rewardGold": 45,
+      "rewardXp": 312,
+      "elementResistance": {
+        "earth": 19,
+        "water": 6,
+        "fire": 6,
+        "wind": 6,
+        "light": 6,
+        "dark": 19
+      }
+    },
+    "dwarf.a04.normal.1": {
+      "hp": 2380,
+      "atk": 4,
+      "armor": 28,
+      "elementalPower": 2,
+      "basicIntervalMs": 2200,
+      "rewardGold": 4,
+      "rewardXp": 28,
+      "elementResistance": {
+        "earth": 6,
+        "water": 6,
+        "fire": 20,
+        "wind": 6,
+        "light": 6,
+        "dark": 6
+      }
+    },
+    "dwarf.a04.normal.2": {
+      "hp": 1918,
+      "atk": 4,
+      "armor": 19,
+      "elementalPower": 2,
+      "basicIntervalMs": 1800,
+      "rewardGold": 4,
+      "rewardXp": 28,
+      "elementResistance": {
+        "earth": 6,
+        "water": 6,
+        "fire": 20,
+        "wind": 20,
+        "light": 6,
+        "dark": 6
+      }
+    },
+    "dwarf.a04.normal.3": {
+      "hp": 3076,
+      "atk": 5,
+      "armor": 39,
+      "elementalPower": 2,
+      "basicIntervalMs": 2800,
+      "rewardGold": 4,
+      "rewardXp": 28,
+      "elementResistance": {
+        "earth": 20,
+        "water": 6,
+        "fire": 20,
+        "wind": 6,
+        "light": 6,
+        "dark": 6
+      }
+    },
+    "dwarf.a04.elite": {
+      "hp": 9146,
+      "atk": 161,
+      "armor": 45,
+      "elementalPower": 40,
+      "basicIntervalMs": 2200,
+      "rewardGold": 18,
+      "rewardXp": 92,
+      "elementResistance": {
+        "earth": 7,
+        "water": 7,
+        "fire": 20,
+        "wind": 20,
+        "light": 7,
+        "dark": 7
+      }
+    },
+    "dwarf.a05.normal.1": {
+      "hp": 2989,
+      "atk": 7,
+      "armor": 30,
+      "elementalPower": 3,
+      "basicIntervalMs": 2200,
+      "rewardGold": 4,
+      "rewardXp": 32,
+      "elementResistance": {
+        "earth": 21,
+        "water": 21,
+        "fire": 7,
+        "wind": 7,
+        "light": 7,
+        "dark": 7
+      }
+    },
+    "dwarf.a05.normal.2": {
+      "hp": 2406,
+      "atk": 5,
+      "armor": 21,
+      "elementalPower": 3,
+      "basicIntervalMs": 1800,
+      "rewardGold": 4,
+      "rewardXp": 32,
+      "elementResistance": {
+        "earth": 7,
+        "water": 21,
+        "fire": 7,
+        "wind": 21,
+        "light": 7,
+        "dark": 7
+      }
+    },
+    "dwarf.a05.normal.3": {
+      "hp": 3839,
+      "atk": 8,
+      "armor": 42,
+      "elementalPower": 3,
+      "basicIntervalMs": 2800,
+      "rewardGold": 4,
+      "rewardXp": 32,
+      "elementResistance": {
+        "earth": 21,
+        "water": 7,
+        "fire": 7,
+        "wind": 7,
+        "light": 7,
+        "dark": 7
+      }
+    },
+    "dwarf.a05.elite": {
+      "hp": 11190,
+      "atk": 230,
+      "armor": 49,
+      "elementalPower": 50,
+      "basicIntervalMs": 2200,
+      "rewardGold": 18,
+      "rewardXp": 106,
+      "elementResistance": {
+        "earth": 8,
+        "water": 22,
+        "fire": 8,
+        "wind": 8,
+        "light": 8,
+        "dark": 8
+      }
+    },
+    "dwarf.a06.normal.1": {
+      "hp": 3740,
+      "atk": 9,
+      "armor": 32,
+      "elementalPower": 4,
+      "basicIntervalMs": 2200,
+      "rewardGold": 5,
+      "rewardXp": 36,
+      "elementResistance": {
+        "earth": 22,
+        "water": 8,
+        "fire": 22,
+        "wind": 8,
+        "light": 8,
+        "dark": 8
+      }
+    },
+    "dwarf.a06.normal.2": {
+      "hp": 3031,
+      "atk": 7,
+      "armor": 22,
+      "elementalPower": 4,
+      "basicIntervalMs": 1800,
+      "rewardGold": 5,
+      "rewardXp": 36,
+      "elementResistance": {
+        "earth": 8,
+        "water": 22,
+        "fire": 8,
+        "wind": 22,
+        "light": 8,
+        "dark": 8
+      }
+    },
+    "dwarf.a06.normal.3": {
+      "hp": 4777,
+      "atk": 11,
+      "armor": 45,
+      "elementalPower": 4,
+      "basicIntervalMs": 2800,
+      "rewardGold": 5,
+      "rewardXp": 36,
+      "elementResistance": {
+        "earth": 22,
+        "water": 8,
+        "fire": 22,
+        "wind": 8,
+        "light": 8,
+        "dark": 8
+      }
+    },
+    "dwarf.a06.elite": {
+      "hp": 13854,
+      "atk": 327,
+      "armor": 52,
+      "elementalPower": 61,
+      "basicIntervalMs": 2200,
+      "rewardGold": 23,
+      "rewardXp": 119,
+      "elementResistance": {
+        "earth": 23,
+        "water": 8,
+        "fire": 23,
+        "wind": 8,
+        "light": 8,
+        "dark": 8
+      }
+    },
+    "dwarf.a06.boss": {
+      "hp": 29774,
+      "atk": 327,
+      "armor": 60,
+      "elementalPower": 85,
+      "basicIntervalMs": 2200,
+      "rewardGold": 75,
+      "rewardXp": 468,
+      "elementResistance": {
+        "earth": 23,
+        "water": 8,
+        "fire": 23,
+        "wind": 8,
+        "light": 8,
+        "dark": 8
+      }
+    }
+  },
+  "skillOverrides": {
+    "dwarf.a02.elite:0": {
+      "castMs": 1100
+    },
+    "dwarf.a03.elite:0": {
+      "castMs": 1600
+    },
+    "dwarf.a03.boss:0": {
+      "castMs": 2200
+    },
+    "dwarf.a03.boss:1": {
+      "castMs": 1600
+    }
+  },
+  "controlReduction": {
+    "normal": 0,
+    "elite": 0.2,
+    "boss": 0.4
+  },
+  "interruptStopMs": 1100,
+  "areas": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ]
+}

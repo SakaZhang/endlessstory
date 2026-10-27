@@ -1,13 +1,14 @@
 import assert from 'node:assert/strict';
-import fs from 'node:fs';import {createHash} from 'node:crypto';import {execFileSync} from 'node:child_process';
+import {execFileSync} from 'node:child_process';
+import {historicalDwarfProvider} from './historical-dwarf-provider-fixture.mjs';
 import * as E from './dist/engine.js';
 import {PRODUCTION_DWARF_PARAMETERS as CURRENT} from './dist/dwarf-parameters.js';
 const historicalSource=execFileSync('git',['show','4e1a6a5:dist/dwarf-parameters.js'],{encoding:'utf8'});const P=JSON.parse(historicalSource.split('PRODUCTION_DWARF_PARAMETERS=freeze(')[1].split(');')[0]);const META=JSON.parse(historicalSource.split('DWARF_PARAMETER_PROVENANCE=freeze(')[1].split(');')[0]);
 for(const [id,v]of Object.entries(P.monsters))assert.deepEqual(CURRENT.monsters[id],v,'published A01–06 immutable '+id);for(const [id,v]of Object.entries(P.clearRewards))assert.deepEqual(CURRENT.clearRewards[id],v);assert(E.configureDwarfParameters(P));
-const path='/workspace/shared/dwarf-m3-a04-a06/final-provider.json',bytes=fs.readFileSync(path),approved=JSON.parse(bytes);assert.equal(createHash('sha256').update(bytes).digest('hex'),META.providerSha256);
+const {provider:approved,provenance}=historicalDwarfProvider('m3');assert.deepEqual(META,provenance.approval);assert.deepEqual(P,approved,'exact historical released provider including approval metadata');
 const numerical=x=>{const y=structuredClone(x);for(const k of ['reviewed','status','testOnly'])delete y[k];return y;};assert.deepEqual(numerical(P),numerical(approved));assert.equal(P.reviewed,true);assert(!('testOnly'in P));assert.deepEqual(P.areas,[1,2,3,4,5,6]);assert.equal(Object.keys(P.monsters).length,26);
 const oldSource=execFileSync('git',['show','319ca607:dist/dwarf-parameters.js'],{encoding:'utf8'});const old=JSON.parse(oldSource.split('PRODUCTION_DWARF_PARAMETERS=freeze(')[1].split(');')[0]);for(const [id,v]of Object.entries(old.monsters))assert.deepEqual(P.monsters[id],v,id);for(const [id,v]of Object.entries(old.clearRewards))assert.deepEqual(P.clearRewards[id],v);
-const s=E.fresh();E.normalizeHealth(s,s.lastSeen);E.normalizeExpedition(s);assert.equal(s.gold,100);assert.equal(s.supportGrantEligible,undefined);assert.equal(E.plannedNodes(s).filter(n=>n.budgetReady).length,14);assert(E.plannedNodes(s).filter(n=>n.areaNumber<=6).every(n=>n.budgetReady));assert(!E.startInstanceEncounter(s,'dwarf.a04.field',s.lastSeen),'locked');
+const s=E.fresh();E.normalizeHealth(s,s.lastSeen);E.normalizeExpedition(s);assert.equal(s.gold,100);assert.equal(s.supportGrantEligible,undefined);assert.equal(E.plannedNodes(s).filter(n=>n.id.startsWith('dwarf.')&&n.budgetReady).length,14);assert(E.plannedNodes(s).filter(n=>n.id.startsWith('dwarf.')&&n.areaNumber<=6).every(n=>n.budgetReady));assert(!E.startInstanceEncounter(s,'dwarf.a04.field',s.lastSeen),'locked');
 s.level=60;s.areaProgress.dwarf={unlocked:[1,2,3,4,5,6],cleared:[1,2,3,4,5]};E.normalizeHealth(s,s.lastSeen);s.heroHp=E.stats(s).hp;
 for(const area of [1,2,3,4,5,6]){const x=structuredClone(s),id=`dwarf.a0${area}.field`,e=E.startInstanceEncounter(x,id,x.lastSeen);assert(e,id);assert.equal(x.location,area-1);assert(E.validSave(x));const restored=JSON.parse(JSON.stringify(x));assert(E.validSave(restored));E.step(restored,restored.activeEncounter,restored.nextActionAt);assert(E.validSave(restored));}
 assert.equal(E.startInstanceEncounter(structuredClone(s),'dwarf.a07.field',s.lastSeen),null);

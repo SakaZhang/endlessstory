@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';import {createHash} from 'node:crypto';
+import {historicalDwarfProvider} from './historical-dwarf-provider-fixture.mjs';
 import {execFileSync} from 'node:child_process';
 import * as E from './dist/engine.js';
 import {PRODUCTION_DWARF_PARAMETERS as P,DWARF_PARAMETER_PROVENANCE as META} from './dist/dwarf-parameters.js';
@@ -7,7 +7,7 @@ import {dwarfParameterSet} from './dist/dwarf-content.js';
 // Deliberately no configureDwarfParameters call: this is a release gate, not candidate evidence.
 assert.deepEqual(P.areas,[1,2,3,4,5,6,7,8,9,10],'WAITING: reviewed default 44-monster provider must be activated');
 assert.equal(P.reviewed,true);assert(!('testOnly' in P));assert.equal(Object.keys(P.monsters).length,44);assert.deepEqual(dwarfParameterSet(),P);
-const approvedBytes=readFileSync('/workspace/shared/dwarf-m3-a07-a10/final-provider.json');assert.equal(createHash('sha256').update(approvedBytes).digest('hex'),META.providerSha256);const approved=JSON.parse(approvedBytes);const numerical=x=>{const y=structuredClone(x);for(const key of ['reviewed','status','testOnly'])delete y[key];return y;};assert.deepEqual(numerical(P),numerical(approved),'exact approved numerical provider');
+const {provider:approved,provenance}=historicalDwarfProvider('m4');assert.deepEqual(META,provenance.approval);assert.deepEqual(P,approved,'exact released provider including approval metadata');const numerical=x=>{const y=structuredClone(x);for(const key of ['reviewed','status','testOnly'])delete y[key];return y;};assert.deepEqual(numerical(P),numerical(approved),'exact approved numerical provider');
 const oldSource=execFileSync('git',['show','4e1a6a5:dist/dwarf-parameters.js'],{cwd:new URL('.',import.meta.url),encoding:'utf8'});
 const old=JSON.parse(oldSource.split('PRODUCTION_DWARF_PARAMETERS=freeze(')[1].split(');')[0]);assert.equal(Object.keys(old.monsters).length,26);
 for(const [id,p] of Object.entries(old.monsters))assert.deepEqual(P.monsters[id],p,'unchanged prior26 '+id);
@@ -26,7 +26,7 @@ function win(s,e){
 }
 const fresh=E.fresh();E.normalizeHealth(fresh,fresh.lastSeen);E.normalizeExpedition(fresh);
 assert.equal(fresh.gold,100);assert.equal(fresh.supportGrantEligible,undefined);
-const nodes=E.plannedNodes(fresh);assert.equal(nodes.length,24);assert.equal(new Set(nodes.map(n=>n.areaNumber)).size,10);assert(nodes.every(n=>n.budgetReady));
+const nodes=E.plannedNodes(fresh).filter(n=>n.id.startsWith('dwarf.'));assert.equal(nodes.length,24);assert.equal(new Set(nodes.map(n=>n.areaNumber)).size,10);assert(nodes.every(n=>n.budgetReady));
 assert.deepEqual(nodes.filter(n=>n.kind==='boss').map(n=>n.areaNumber),[3,6,9,10]);
 assert.equal(E.startInstanceEncounter(fresh,'dwarf.a07.field',fresh.lastSeen),null,'fresh save cannot skip unlock');
 const s=setup();
