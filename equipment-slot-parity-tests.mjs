@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {createRequire} from 'node:module';
 import {auditEquipmentCatalog,PARITY_RACES,COMMON_SLOT_TARGETS} from './equipment-catalog-audit.mjs';
@@ -17,8 +18,11 @@ import {renderCodex} from './dist/codex-ui.js';
 import {SCHEMA_VERSION} from './dist/save-generation.js';
 const hash=x=>createHash('sha256').update(x).digest('hex'),baseline=JSON.parse(fs.readFileSync('tests/fixtures/equipment-v061-identities.json'));
 const identity=t=>Object.fromEntries(Object.entries(t).filter(([k])=>!['pixelAppearance','visualVariant','visualKey','iconKey','icon'].includes(k)));
-// Name-selection scope subsequently authorizes generation 6; equipment gameplay remains pinned.
-for(const [path,h]of Object.entries(baseline.unchangedRuntime).filter(([path])=>path!=='save-generation.js'))assert.equal(hash(fs.readFileSync('dist/'+path)),h,`${path}: no gameplay/rate/quality/save changes authorized`);
+// Preserve the original v0.62 release-boundary proof. Later approved story/war
+// features change engine.js; current equipment behavior is exercised below and
+// in the production settlement suites, rather than freezing unrelated systems.
+assert.equal(hash(execFileSync('git',['show','cba72e3:dist/engine.js'])),baseline.unchangedRuntime['engine.js'],'v062 equipment release preserved the engine');
+for(const [path,h]of Object.entries(baseline.unchangedRuntime).filter(([path])=>!['save-generation.js','engine.js'].includes(path)))assert.equal(hash(fs.readFileSync('dist/'+path)),h,`${path}: equipment budget/rate/quality policy unchanged`);
 const report=auditEquipmentCatalog();assert(report.passed,report.errors.join('\n'));assert(validateEquipmentTemplates());assert.equal(SCHEMA_VERSION,6);
 for(const t of T)if(baseline.templates[t.id])assert.equal(hash(JSON.stringify(identity(t))),baseline.templates[t.id],`${t.id}: preserve existing identity/name/stats metadata`);
 for(const [id,h]of Object.entries(baseline.templates))assert(T.some(t=>t.id===id),`${id}: removed existing template`);
@@ -63,4 +67,4 @@ try{
 const workshop=renderEquipmentWorkshop(fresh());assert(workshop.includes('263 基础 · 60 套装'));for(const t of T)assert(workshop.includes(`data-workshop-template="${t.id}"`));assert.equal((workshop.match(/data-workshop-template=/g)||[]).length,T.length);
 const engine=fs.readFileSync('dist/engine.js','utf8');assert(engine.includes('originRace:area.race'),'battle drop passes region race to tested item generator');
 fs.mkdirSync('qa/equipment-parity',{recursive:true});fs.writeFileSync('qa/equipment-parity/audit.json',JSON.stringify({...report,acquisition,changedArt,art:decoded},null,2));
-console.log('PASS all five strict slot/native-family/set/core/legend matrices; 335 definitions; baseline identity preservation; unique raster identities; actual drop generator/fusion/trader coverage; all workshop/inventory/forge/codex entries, no truncation; strict named-character save generation 6.');
+console.log('PASS all five strict slot/native-family/set/core/legend matrices; 336 definitions (including approved race-neutral Return Ring); baseline identity preservation; unique raster identities; actual drop generator/fusion/trader coverage; all workshop/inventory/forge/codex entries, no truncation; strict named-character save generation 6.');

@@ -4,8 +4,11 @@ import {createRequire} from 'node:module';
 import {mkdirSync,writeFileSync,readFileSync,rmSync} from 'node:fs';
 import {fresh,normalizeAreaProgress} from './dist/engine.js';
 import {buildRegionSnapshot,buildRegionModel,renderRegion} from './dist/adjacent-region.js';
-import {drawAdjacentRegion} from './dist/adjacent-region-map.js';
-const {createCanvas,GlobalFonts}=createRequire(import.meta.url)('@napi-rs/canvas');
+import {createPixelMapScenes} from './dist/pixel-map-scenes.js';
+const {createCanvas,GlobalFonts,loadImage}=createRequire(import.meta.url)('@napi-rs/canvas');
+const explorationManifest=JSON.parse(readFileSync(new URL('./dist/map-assets/exploration-manifest.json',import.meta.url)));
+const images=new Map();for(const layer of explorationManifest.backgrounds)images.set(layer.file,await loadImage(new URL('./dist/map-assets/'+layer.file,import.meta.url).pathname));
+const maps=createPixelMapScenes({explorationManifest,images});
 const out=new URL('./qa/adjacent-region/',import.meta.url);mkdirSync(out,{recursive:true});
 for(const file of ['fixture.html','a01-desktop.html','a02-desktop.html','a03-desktop.html','a03-mobile.html'])rmSync(new URL(file,out),{force:true});
 const css=readFileSync(new URL('./dist/adjacent-region.css',import.meta.url),'utf8');
@@ -59,7 +62,7 @@ function estimate(markup,viewport){
 for(const area of ['dwarf.a01','dwarf.a02','dwarf.a03']){
  const s=fresh();normalizeAreaProgress(s);s.areaProgress.dwarf={unlocked:[1,2,3],cleared:[1,2]};
  const snap=buildRegionSnapshot(s,1000,null,{exploredAreaIds:[]});const model=buildRegionModel(snap,{viewAreaId:area,previewNodeId:null,travelPanelOpen:false});
- const canvas=createCanvas(960,540);assert.equal(drawAdjacentRegion({querySelector:()=>canvas},model.area),true);
+ const canvas=createCanvas(960,540);assert.equal(await maps.load(model.area.id),true);assert.equal(maps.draw(canvas,model.area.id),true);
  writeFileSync(new URL(area+'-scene.png',out),canvas.toBuffer('image/png'));
  const markup=renderRegion(model);assert.equal((markup.match(/class="localNode /g)||[]).length,area==='dwarf.a03'?3:2);assert.ok(!markup.includes('futureAreaTrack'));
  writeFileSync(new URL(area+'-renderer.html',out),'<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="../../dist/style.css"><link rel="stylesheet" href="../../dist/adjacent-region.css"><body>'+markup+'</body></html>');

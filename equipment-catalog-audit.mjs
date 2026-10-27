@@ -21,9 +21,10 @@ export function auditEquipmentCatalog(templates=EQUIPMENT_TEMPLATES,legends=Obje
   const relics=legends.filter(t=>t.originRace===race);check(relics.length===(race==='ashen'?4:2),`${race}: legend count changed`);
   matrix[race]={slots,nativeWeaponFamilies:families,common:common.length,extraCores:cores.length,setParts:sets.length,setIds,legends:relics.length};
  }
- const reserved=legends.filter(t=>t.questOnly);check(reserved.length===1&&reserved[0].id==='ashen-primal-core','reserved story legend changed');
+ const reserved=legends.filter(t=>t.questOnly);check(reserved.length===2&&['ashen-primal-core','return-ring'].every(id=>reserved.some(t=>t.id===id)),'reserved story legends changed');
+ const neutral=legends.filter(t=>t.originRace===null);check(neutral.length===1&&neutral[0].id==='return-ring'&&neutral[0].slot==='ring'&&neutral[0].questOnly,'only the approved Return Ring is race-neutral');
  const totals={common:templates.filter(t=>t.kind==='scatter'&&t.slot!=='core').length,ordinary:templates.filter(t=>t.kind==='scatter').length,sets:templates.filter(t=>t.kind==='set').length,legends:legends.length,definitions:templates.length+legends.length};
- check(totals.common===260&&totals.ordinary===263&&totals.sets===60&&totals.legends===12&&totals.definitions===335,'catalog totals differ from approved contract');
+ check(totals.common===260&&totals.ordinary===263&&totals.sets===60&&totals.legends===13&&totals.definitions===336,'catalog totals differ from approved contract');
  return {passed:!errors.length,errors,matrix,totals,reservedStory:reserved.map(t=>t.id)};
 }
 if(process.argv[1]&&new URL(import.meta.url).pathname===process.argv[1]){

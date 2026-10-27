@@ -1,8 +1,12 @@
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import {renderArmorPixels} from './dist/equipment-armor-art.js';
 import {EQUIPMENT_TEMPLATES as ALL_EQUIPMENT_TEMPLATES} from './dist/equipment-templates.js';
 // This historical renderer fixture covers the original dwarf pixel/raster collection.
-const EQUIPMENT_TEMPLATES=ALL_EQUIPMENT_TEMPLATES.filter(t=>t.originRace==='dwarf');
+const originalIds=JSON.parse(readFileSync(new URL('./tests/fixtures/equipment-v061-identities.json',import.meta.url))).templates;
+const EQUIPMENT_TEMPLATES=ALL_EQUIPMENT_TEMPLATES.filter(t=>t.originRace==='dwarf'&&Object.hasOwn(originalIds,t.id));
+// v0.62 additions use the production raster renderer, not this retired SVG registry.
+for(const t of ALL_EQUIPMENT_TEMPLATES.filter(t=>t.originRace==='dwarf'&&!Object.hasOwn(originalIds,t.id)))assert.equal(renderArmorPixels(t),null);
 const slots=new Set(['helm','armor','gloves','boots']);
 const expected=EQUIPMENT_TEMPLATES.filter(t=>slots.has(t.slot));
 assert.equal(expected.length,28);
