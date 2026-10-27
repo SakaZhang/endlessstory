@@ -1,0 +1,2955 @@
+{
+  "runtimeCommit": "2bb69fa010a264c1add8ff336f4e1480af9e2924",
+  "runtimeSha256": "9369cd3bfae4d75e5d6828f38f2c83eb3801079c977e994ccb7856651b0f4ca5",
+  "scope": "Synthetic production-transaction QA; no user saves, grants, runtime tuning, or publication.",
+  "onramp": {
+    "caveats": [
+      "Null milestone means censored/not achieved, not zero time. Quantiles use nearest rank.",
+      "Shopping, development, cadence and battle policy are agent heuristics, not all player builds.",
+      "Mixed runtime hashes cannot certify one integrated candidate.",
+      "Zero potion use without recipe/supply is not proven zero demand."
+    ],
+    "summary": [
+      {
+        "race": "human",
+        "policy": {
+          "shopping": false,
+          "develop": false,
+          "build": "balanced",
+          "route": "field",
+          "dungeonLevel": 5,
+          "reviews": "2 minutes first30m then15m, safe field/dungeon boundaries; beneficial drops equipped after each completed field/run",
+          "initialGold": 100,
+          "initialEquipment": 0,
+          "rng": "xorshift32(seed XOR 0x9e3779b9), independent process/serial",
+          "noGrants": true
+        },
+        "hours": 0.5,
+        "n": 30,
+        "runtimeHashes": [
+          "9369cd3bfae4d75e5d6828f38f2c83eb3801079c977e994ccb7856651b0f4ca5"
+        ],
+        "firstGearSeconds": {
+          "n": 30,
+          "min": 4.4,
+          "p50": 26.3,
+          "p90": 85.1,
+          "p95": 90.695,
+          "max": 93.8
+        },
+        "firstUsefulGearSeconds": {
+          "n": 30,
+          "min": 4.4,
+          "p50": 26.3,
+          "p90": 85.1,
+          "p95": 90.695,
+          "max": 93.8
+        },
+        "firstWeaponSeconds": {
+          "n": 30,
+          "min": 11.7,
+          "p50": 150.7,
+          "p90": 508.095,
+          "p95": 553.73,
+          "max": 712.865
+        },
+        "firstDungeonSeconds": null,
+        "firstDungeonEntryLevel": null,
+        "uncleared": 30,
+        "firstThreeDropSeconds": [
+          {
+            "n": 30,
+            "min": 4.4,
+            "p50": 26.3,
+            "p90": 85.1,
+            "p95": 90.695,
+            "max": 93.8
+          },
+          {
+            "n": 30,
+            "min": 11.7,
+            "p50": 56.93,
+            "p90": 116.4,
+            "p95": 141.465,
+            "max": 166.03
+          },
+          {
+            "n": 30,
+            "min": 16.8,
+            "p50": 103.63,
+            "p90": 129.765,
+            "p95": 179.365,
+            "max": 201.03
+          }
+        ],
+        "firstFightSeconds": {
+          "n": 30,
+          "min": 4.4,
+          "p50": 5.5,
+          "p90": 6.765,
+          "p95": 6.765,
+          "max": 7.7
+        },
+        "firstFightNetHpLost": {
+          "n": 30,
+          "min": 2,
+          "p50": 4,
+          "p90": 5,
+          "p95": 5,
+          "max": 5
+        },
+        "firstFightHpDamage": {
+          "n": 30,
+          "min": 2,
+          "p50": 4,
+          "p90": 5,
+          "p95": 5,
+          "max": 5
+        },
+        "firstFightEffectiveHealing": {
+          "n": 30,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "finalLevel": {
+          "n": 30,
+          "min": 7,
+          "p50": 8,
+          "p90": 8,
+          "p95": 8,
+          "max": 8
+        },
+        "wins": {
+          "n": 30,
+          "min": 509,
+          "p50": 545,
+          "p90": 561,
+          "p95": 565,
+          "max": 567
+        },
+        "deaths": {
+          "n": 30,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "restFraction": {
+          "n": 30,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "potionUse": {
+          "n": 30,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "recipeKnown": 0,
+        "potionsCrafted": {
+          "n": 30,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "gold": {
+          "n": 30,
+          "min": 962,
+          "p50": 1045,
+          "p90": 1117,
+          "p95": 1148,
+          "max": 1151
+        },
+        "level100Hours": null
+      },
+      {
+        "race": "dwarf",
+        "policy": {
+          "shopping": false,
+          "develop": false,
+          "build": "balanced",
+          "route": "field",
+          "dungeonLevel": 5,
+          "reviews": "2 minutes first30m then15m, safe field/dungeon boundaries; beneficial drops equipped after each completed field/run",
+          "initialGold": 100,
+          "initialEquipment": 0,
+          "rng": "xorshift32(seed XOR 0x9e3779b9), independent process/serial",
+          "noGrants": true
+        },
+        "hours": 0.5,
+        "n": 30,
+        "runtimeHashes": [
+          "9369cd3bfae4d75e5d6828f38f2c83eb3801079c977e994ccb7856651b0f4ca5"
+        ],
+        "firstGearSeconds": {
+          "n": 30,
+          "min": 4.4,
+          "p50": 26.3,
+          "p90": 90.2,
+          "p95": 112.8,
+          "max": 144.6
+        },
+        "firstUsefulGearSeconds": {
+          "n": 30,
+          "min": 4.4,
+          "p50": 26.3,
+          "p90": 90.2,
+          "p95": 112.8,
+          "max": 144.6
+        },
+        "firstWeaponSeconds": {
+          "n": 30,
+          "min": 11.7,
+          "p50": 172.2,
+          "p90": 424.2,
+          "p95": 495.4,
+          "max": 779.7
+        },
+        "firstDungeonSeconds": null,
+        "firstDungeonEntryLevel": null,
+        "uncleared": 30,
+        "firstThreeDropSeconds": [
+          {
+            "n": 30,
+            "min": 4.4,
+            "p50": 26.3,
+            "p90": 90.2,
+            "p95": 112.8,
+            "max": 144.6
+          },
+          {
+            "n": 30,
+            "min": 10.6,
+            "p50": 49.3,
+            "p90": 126.3,
+            "p95": 149.7,
+            "max": 165.7
+          },
+          {
+            "n": 30,
+            "min": 16.8,
+            "p50": 90.9,
+            "p90": 145.6,
+            "p95": 179.9,
+            "max": 218.2
+          }
+        ],
+        "firstFightSeconds": {
+          "n": 30,
+          "min": 4.4,
+          "p50": 5.5,
+          "p90": 6.6,
+          "p95": 6.6,
+          "max": 7.7
+        },
+        "firstFightNetHpLost": {
+          "n": 30,
+          "min": 3,
+          "p50": 3.470850000000013,
+          "p90": 4,
+          "p95": 6,
+          "max": 6
+        },
+        "firstFightHpDamage": {
+          "n": 30,
+          "min": 3,
+          "p50": 3.470850000000013,
+          "p90": 4,
+          "p95": 6,
+          "max": 6
+        },
+        "firstFightEffectiveHealing": {
+          "n": 30,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "finalLevel": {
+          "n": 30,
+          "min": 7,
+          "p50": 8,
+          "p90": 8,
+          "p95": 8,
+          "max": 8
+        },
+        "wins": {
+          "n": 30,
+          "min": 416,
+          "p50": 548,
+          "p90": 565,
+          "p95": 574,
+          "max": 574
+        },
+        "deaths": {
+          "n": 30,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 1,
+          "max": 1
+        },
+        "restFraction": {
+          "n": 30,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0.16666666666666666,
+          "max": 0.16666666666666666
+        },
+        "potionUse": {
+          "n": 30,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "recipeKnown": 0,
+        "potionsCrafted": {
+          "n": 30,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "gold": {
+          "n": 30,
+          "min": 773,
+          "p50": 1051,
+          "p90": 1154,
+          "p95": 1174,
+          "max": 1175
+        },
+        "level100Hours": null
+      },
+      {
+        "race": "elf",
+        "policy": {
+          "shopping": false,
+          "develop": false,
+          "build": "balanced",
+          "route": "field",
+          "dungeonLevel": 5,
+          "reviews": "2 minutes first30m then15m, safe field/dungeon boundaries; beneficial drops equipped after each completed field/run",
+          "initialGold": 100,
+          "initialEquipment": 0,
+          "rng": "xorshift32(seed XOR 0x9e3779b9), independent process/serial",
+          "noGrants": true
+        },
+        "hours": 0.5,
+        "n": 30,
+        "runtimeHashes": [
+          "9369cd3bfae4d75e5d6828f38f2c83eb3801079c977e994ccb7856651b0f4ca5"
+        ],
+        "firstGearSeconds": {
+          "n": 30,
+          "min": 4.4,
+          "p50": 20.1,
+          "p90": 72.3,
+          "p95": 101.9,
+          "max": 139.8
+        },
+        "firstUsefulGearSeconds": {
+          "n": 30,
+          "min": 4.4,
+          "p50": 20.1,
+          "p90": 72.3,
+          "p95": 101.9,
+          "max": 139.8
+        },
+        "firstWeaponSeconds": {
+          "n": 30,
+          "min": 12.8,
+          "p50": 209.8,
+          "p90": 527.3,
+          "p95": 596.6,
+          "max": 603
+        },
+        "firstDungeonSeconds": null,
+        "firstDungeonEntryLevel": null,
+        "uncleared": 30,
+        "firstThreeDropSeconds": [
+          {
+            "n": 30,
+            "min": 4.4,
+            "p50": 20.1,
+            "p90": 72.3,
+            "p95": 101.9,
+            "max": 139.8
+          },
+          {
+            "n": 30,
+            "min": 11.7,
+            "p50": 54,
+            "p90": 123.4,
+            "p95": 175.5,
+            "max": 220.3
+          },
+          {
+            "n": 30,
+            "min": 17.9,
+            "p50": 81,
+            "p90": 179.5,
+            "p95": 214.8,
+            "max": 274.9
+          }
+        ],
+        "firstFightSeconds": {
+          "n": 30,
+          "min": 4.4,
+          "p50": 5.5,
+          "p90": 6.6,
+          "p95": 6.6,
+          "max": 7.7
+        },
+        "firstFightNetHpLost": {
+          "n": 30,
+          "min": 2.074855357142866,
+          "p50": 3,
+          "p90": 4,
+          "p95": 6,
+          "max": 6
+        },
+        "firstFightHpDamage": {
+          "n": 30,
+          "min": 2.074855357142866,
+          "p50": 3,
+          "p90": 4,
+          "p95": 6,
+          "max": 6
+        },
+        "firstFightEffectiveHealing": {
+          "n": 30,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "finalLevel": {
+          "n": 30,
+          "min": 7,
+          "p50": 8,
+          "p90": 8,
+          "p95": 8,
+          "max": 8
+        },
+        "wins": {
+          "n": 30,
+          "min": 506,
+          "p50": 543,
+          "p90": 562,
+          "p95": 568,
+          "max": 573
+        },
+        "deaths": {
+          "n": 30,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "restFraction": {
+          "n": 30,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "potionUse": {
+          "n": 30,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "recipeKnown": 0,
+        "potionsCrafted": {
+          "n": 30,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "gold": {
+          "n": 30,
+          "min": 884,
+          "p50": 1024,
+          "p90": 1110,
+          "p95": 1135,
+          "max": 1141
+        },
+        "level100Hours": null
+      },
+      {
+        "race": "goblin",
+        "policy": {
+          "shopping": false,
+          "develop": false,
+          "build": "balanced",
+          "route": "field",
+          "dungeonLevel": 5,
+          "reviews": "2 minutes first30m then15m, safe field/dungeon boundaries; beneficial drops equipped after each completed field/run",
+          "initialGold": 100,
+          "initialEquipment": 0,
+          "rng": "xorshift32(seed XOR 0x9e3779b9), independent process/serial",
+          "noGrants": true
+        },
+        "hours": 0.5,
+        "n": 30,
+        "runtimeHashes": [
+          "9369cd3bfae4d75e5d6828f38f2c83eb3801079c977e994ccb7856651b0f4ca5"
+        ],
+        "firstGearSeconds": {
+          "n": 30,
+          "min": 4.4,
+          "p50": 27.565,
+          "p90": 87.395,
+          "p95": 114.56,
+          "max": 140.09
+        },
+        "firstUsefulGearSeconds": {
+          "n": 30,
+          "min": 4.4,
+          "p50": 27.565,
+          "p90": 87.395,
+          "p95": 114.56,
+          "max": 140.09
+        },
+        "firstWeaponSeconds": {
+          "n": 30,
+          "min": 24.265,
+          "p50": 142.93,
+          "p90": 432.56,
+          "p95": 583.895,
+          "max": 1446.06
+        },
+        "firstDungeonSeconds": null,
+        "firstDungeonEntryLevel": null,
+        "uncleared": 30,
+        "firstThreeDropSeconds": [
+          {
+            "n": 30,
+            "min": 4.4,
+            "p50": 27.565,
+            "p90": 87.395,
+            "p95": 114.56,
+            "max": 140.09
+          },
+          {
+            "n": 30,
+            "min": 18.065,
+            "p50": 56.93,
+            "p90": 126.96,
+            "p95": 177.36,
+            "max": 182.555
+          },
+          {
+            "n": 30,
+            "min": 31.73,
+            "p50": 92.59,
+            "p90": 174.665,
+            "p95": 183.56,
+            "max": 245.02
+          }
+        ],
+        "firstFightSeconds": {
+          "n": 30,
+          "min": 4.4,
+          "p50": 5.5,
+          "p90": 6.6,
+          "p95": 6.6,
+          "max": 7.7
+        },
+        "firstFightNetHpLost": {
+          "n": 30,
+          "min": 0,
+          "p50": 3.8640000000000043,
+          "p90": 5,
+          "p95": 8,
+          "max": 8
+        },
+        "firstFightHpDamage": {
+          "n": 30,
+          "min": 0,
+          "p50": 3.8640000000000043,
+          "p90": 5,
+          "p95": 8,
+          "max": 8
+        },
+        "firstFightEffectiveHealing": {
+          "n": 30,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "finalLevel": {
+          "n": 30,
+          "min": 7,
+          "p50": 8,
+          "p90": 8,
+          "p95": 8,
+          "max": 8
+        },
+        "wins": {
+          "n": 30,
+          "min": 499,
+          "p50": 542,
+          "p90": 566,
+          "p95": 568,
+          "max": 571
+        },
+        "deaths": {
+          "n": 30,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "restFraction": {
+          "n": 30,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "potionUse": {
+          "n": 30,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "recipeKnown": 0,
+        "potionsCrafted": {
+          "n": 30,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "gold": {
+          "n": 30,
+          "min": 898,
+          "p50": 1043,
+          "p90": 1114,
+          "p95": 1127,
+          "max": 1176
+        },
+        "level100Hours": null
+      },
+      {
+        "race": "ashen",
+        "policy": {
+          "shopping": false,
+          "develop": false,
+          "build": "balanced",
+          "route": "field",
+          "dungeonLevel": 5,
+          "reviews": "2 minutes first30m then15m, safe field/dungeon boundaries; beneficial drops equipped after each completed field/run",
+          "initialGold": 100,
+          "initialEquipment": 0,
+          "rng": "xorshift32(seed XOR 0x9e3779b9), independent process/serial",
+          "noGrants": true
+        },
+        "hours": 0.5,
+        "n": 30,
+        "runtimeHashes": [
+          "9369cd3bfae4d75e5d6828f38f2c83eb3801079c977e994ccb7856651b0f4ca5"
+        ],
+        "firstGearSeconds": {
+          "n": 30,
+          "min": 4.4,
+          "p50": 26.3,
+          "p90": 85.1,
+          "p95": 90.2,
+          "max": 93.8
+        },
+        "firstUsefulGearSeconds": {
+          "n": 30,
+          "min": 4.4,
+          "p50": 26.3,
+          "p90": 85.1,
+          "p95": 90.2,
+          "max": 93.8
+        },
+        "firstWeaponSeconds": {
+          "n": 30,
+          "min": 11.7,
+          "p50": 148.5,
+          "p90": 326.8,
+          "p95": 593.3,
+          "max": 873.6
+        },
+        "firstDungeonSeconds": null,
+        "firstDungeonEntryLevel": null,
+        "uncleared": 30,
+        "firstThreeDropSeconds": [
+          {
+            "n": 30,
+            "min": 4.4,
+            "p50": 26.3,
+            "p90": 85.1,
+            "p95": 90.2,
+            "max": 93.8
+          },
+          {
+            "n": 30,
+            "min": 11.7,
+            "p50": 56.6,
+            "p90": 112.8,
+            "p95": 128.1,
+            "max": 142.3
+          },
+          {
+            "n": 30,
+            "min": 16.8,
+            "p50": 83.2,
+            "p90": 145.9,
+            "p95": 159.2,
+            "max": 181.1
+          }
+        ],
+        "firstFightSeconds": {
+          "n": 30,
+          "min": 4.4,
+          "p50": 5.5,
+          "p90": 6.6,
+          "p95": 6.6,
+          "max": 7.7
+        },
+        "firstFightNetHpLost": {
+          "n": 30,
+          "min": 2,
+          "p50": 4,
+          "p90": 5.277559999999994,
+          "p95": 6,
+          "max": 6
+        },
+        "firstFightHpDamage": {
+          "n": 30,
+          "min": 2,
+          "p50": 4,
+          "p90": 5.277559999999994,
+          "p95": 6,
+          "max": 6
+        },
+        "firstFightEffectiveHealing": {
+          "n": 30,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "finalLevel": {
+          "n": 30,
+          "min": 7,
+          "p50": 8,
+          "p90": 8,
+          "p95": 8,
+          "max": 8
+        },
+        "wins": {
+          "n": 30,
+          "min": 406,
+          "p50": 553,
+          "p90": 568,
+          "p95": 572,
+          "max": 577
+        },
+        "deaths": {
+          "n": 30,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 1
+        },
+        "restFraction": {
+          "n": 30,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0.16666666666666666
+        },
+        "potionUse": {
+          "n": 30,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "recipeKnown": 0,
+        "potionsCrafted": {
+          "n": 30,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "gold": {
+          "n": 30,
+          "min": 758,
+          "p50": 1068,
+          "p90": 1113,
+          "p95": 1134,
+          "max": 1163
+        },
+        "level100Hours": null
+      }
+    ]
+  },
+  "natural4h": {
+    "caveats": [
+      "Null milestone means censored/not achieved, not zero time. Quantiles use nearest rank.",
+      "Shopping, development, cadence and battle policy are agent heuristics, not all player builds.",
+      "Mixed runtime hashes cannot certify one integrated candidate.",
+      "Zero potion use without recipe/supply is not proven zero demand."
+    ],
+    "summary": [
+      {
+        "race": "human",
+        "policy": {
+          "shopping": true,
+          "develop": true,
+          "build": "balanced",
+          "route": "cautious",
+          "dungeonLevel": 5,
+          "reviews": "2 minutes first30m then15m, safe field/dungeon boundaries; beneficial drops equipped after each completed field/run",
+          "initialGold": 100,
+          "initialEquipment": 0,
+          "rng": "xorshift32(seed XOR 0x9e3779b9), independent process/serial",
+          "noGrants": true
+        },
+        "hours": 4,
+        "n": 3,
+        "runtimeHashes": [
+          "9369cd3bfae4d75e5d6828f38f2c83eb3801079c977e994ccb7856651b0f4ca5"
+        ],
+        "firstGearSeconds": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "firstUsefulGearSeconds": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "firstWeaponSeconds": {
+          "n": 3,
+          "min": 134.765,
+          "p50": 156.995,
+          "p90": 436.03,
+          "p95": 436.03,
+          "max": 436.03
+        },
+        "firstDungeonSeconds": {
+          "n": 3,
+          "min": 864.495,
+          "p50": 868.165,
+          "p90": 870.43,
+          "p95": 870.43,
+          "max": 870.43
+        },
+        "firstDungeonEntryLevel": {
+          "n": 3,
+          "min": 5,
+          "p50": 5,
+          "p90": 5,
+          "p95": 5,
+          "max": 5
+        },
+        "uncleared": 0,
+        "firstThreeDropSeconds": [
+          {
+            "n": 3,
+            "min": 49.065,
+            "p50": 62.565,
+            "p90": 126.63,
+            "p95": 126.63,
+            "max": 126.63
+          },
+          {
+            "n": 3,
+            "min": 72.065,
+            "p50": 141.93,
+            "p90": 156.995,
+            "p95": 156.995,
+            "max": 156.995
+          },
+          {
+            "n": 3,
+            "min": 103.065,
+            "p50": 152.13,
+            "p90": 160.995,
+            "p95": 160.995,
+            "max": 160.995
+          }
+        ],
+        "firstFightSeconds": {
+          "n": 3,
+          "min": 4.4,
+          "p50": 5.5,
+          "p90": 8.8,
+          "p95": 8.8,
+          "max": 8.8
+        },
+        "firstFightNetHpLost": {
+          "n": 3,
+          "min": 0.6399999999999864,
+          "p50": 1.3600000000000136,
+          "p90": 5,
+          "p95": 5,
+          "max": 5
+        },
+        "firstFightHpDamage": {
+          "n": 3,
+          "min": 2,
+          "p50": 2,
+          "p90": 5,
+          "p95": 5,
+          "max": 5
+        },
+        "firstFightEffectiveHealing": {
+          "n": 3,
+          "min": 0,
+          "p50": 0.64,
+          "p90": 1.36,
+          "p95": 1.36,
+          "max": 1.36
+        },
+        "finalLevel": {
+          "n": 3,
+          "min": 25,
+          "p50": 25,
+          "p90": 26,
+          "p95": 26,
+          "max": 26
+        },
+        "wins": {
+          "n": 3,
+          "min": 1916,
+          "p50": 1936,
+          "p90": 1974,
+          "p95": 1974,
+          "max": 1974
+        },
+        "deaths": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "restFraction": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "potionUse": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 5,
+          "p95": 5,
+          "max": 5
+        },
+        "recipeKnown": 1,
+        "potionsCrafted": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 105,
+          "p95": 105,
+          "max": 105
+        },
+        "gold": {
+          "n": 3,
+          "min": 5628,
+          "p50": 6011,
+          "p90": 6014,
+          "p95": 6014,
+          "max": 6014
+        },
+        "level100Hours": null
+      },
+      {
+        "race": "dwarf",
+        "policy": {
+          "shopping": true,
+          "develop": true,
+          "build": "balanced",
+          "route": "cautious",
+          "dungeonLevel": 5,
+          "reviews": "2 minutes first30m then15m, safe field/dungeon boundaries; beneficial drops equipped after each completed field/run",
+          "initialGold": 100,
+          "initialEquipment": 0,
+          "rng": "xorshift32(seed XOR 0x9e3779b9), independent process/serial",
+          "noGrants": true
+        },
+        "hours": 4,
+        "n": 3,
+        "runtimeHashes": [
+          "9369cd3bfae4d75e5d6828f38f2c83eb3801079c977e994ccb7856651b0f4ca5"
+        ],
+        "firstGearSeconds": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "firstUsefulGearSeconds": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "firstWeaponSeconds": {
+          "n": 3,
+          "min": 130.8,
+          "p50": 440,
+          "p90": 460.4,
+          "p95": 460.4,
+          "max": 460.4
+        },
+        "firstDungeonSeconds": {
+          "n": 3,
+          "min": 743.1,
+          "p50": 870,
+          "p90": 872.2,
+          "p95": 872.2,
+          "max": 872.2
+        },
+        "firstDungeonEntryLevel": {
+          "n": 3,
+          "min": 5,
+          "p50": 5,
+          "p90": 5,
+          "p95": 5,
+          "max": 5
+        },
+        "uncleared": 0,
+        "firstThreeDropSeconds": [
+          {
+            "n": 3,
+            "min": 5.5,
+            "p50": 56.2,
+            "p90": 155.1,
+            "p95": 155.1,
+            "max": 155.1
+          },
+          {
+            "n": 3,
+            "min": 60.2,
+            "p50": 82.1,
+            "p90": 254.3,
+            "p95": 254.3,
+            "max": 254.3
+          },
+          {
+            "n": 3,
+            "min": 83.5,
+            "p50": 233,
+            "p90": 288.2,
+            "p95": 288.2,
+            "max": 288.2
+          }
+        ],
+        "firstFightSeconds": {
+          "n": 3,
+          "min": 4.4,
+          "p50": 5.5,
+          "p90": 8.8,
+          "p95": 8.8,
+          "max": 8.8
+        },
+        "firstFightNetHpLost": {
+          "n": 3,
+          "min": 2.1108499999999992,
+          "p50": 2.8308500000000265,
+          "p90": 5.470850000000013,
+          "p95": 5.470850000000013,
+          "max": 5.470850000000013
+        },
+        "firstFightHpDamage": {
+          "n": 3,
+          "min": 3.470850000000013,
+          "p50": 3.470850000000013,
+          "p90": 5.470850000000013,
+          "p95": 5.470850000000013,
+          "max": 5.470850000000013
+        },
+        "firstFightEffectiveHealing": {
+          "n": 3,
+          "min": 0,
+          "p50": 0.64,
+          "p90": 1.36,
+          "p95": 1.36,
+          "max": 1.36
+        },
+        "finalLevel": {
+          "n": 3,
+          "min": 26,
+          "p50": 27,
+          "p90": 28,
+          "p95": 28,
+          "max": 28
+        },
+        "wins": {
+          "n": 3,
+          "min": 2027,
+          "p50": 2118,
+          "p90": 2155,
+          "p95": 2155,
+          "max": 2155
+        },
+        "deaths": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "restFraction": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "potionUse": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 9,
+          "p95": 9,
+          "max": 9
+        },
+        "recipeKnown": 1,
+        "potionsCrafted": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 109,
+          "p95": 109,
+          "max": 109
+        },
+        "gold": {
+          "n": 3,
+          "min": 5798,
+          "p50": 6918,
+          "p90": 7163,
+          "p95": 7163,
+          "max": 7163
+        },
+        "level100Hours": null
+      },
+      {
+        "race": "elf",
+        "policy": {
+          "shopping": true,
+          "develop": true,
+          "build": "balanced",
+          "route": "cautious",
+          "dungeonLevel": 5,
+          "reviews": "2 minutes first30m then15m, safe field/dungeon boundaries; beneficial drops equipped after each completed field/run",
+          "initialGold": 100,
+          "initialEquipment": 0,
+          "rng": "xorshift32(seed XOR 0x9e3779b9), independent process/serial",
+          "noGrants": true
+        },
+        "hours": 4,
+        "n": 3,
+        "runtimeHashes": [
+          "9369cd3bfae4d75e5d6828f38f2c83eb3801079c977e994ccb7856651b0f4ca5"
+        ],
+        "firstGearSeconds": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "firstUsefulGearSeconds": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "firstWeaponSeconds": {
+          "n": 3,
+          "min": 432.1,
+          "p50": 604.9,
+          "p90": 656.1,
+          "p95": 656.1,
+          "max": 656.1
+        },
+        "firstDungeonSeconds": {
+          "n": 3,
+          "min": 741.7,
+          "p50": 746.2,
+          "p90": 871.3,
+          "p95": 871.3,
+          "max": 871.3
+        },
+        "firstDungeonEntryLevel": {
+          "n": 3,
+          "min": 5,
+          "p50": 5,
+          "p90": 5,
+          "p95": 5,
+          "max": 5
+        },
+        "uncleared": 0,
+        "firstThreeDropSeconds": [
+          {
+            "n": 3,
+            "min": 10.6,
+            "p50": 23.4,
+            "p90": 24.1,
+            "p95": 24.1,
+            "max": 24.1
+          },
+          {
+            "n": 3,
+            "min": 42.7,
+            "p50": 64.6,
+            "p90": 71.9,
+            "p95": 71.9,
+            "max": 71.9
+          },
+          {
+            "n": 3,
+            "min": 82.1,
+            "p50": 83.2,
+            "p90": 126.6,
+            "p95": 126.6,
+            "max": 126.6
+          }
+        ],
+        "firstFightSeconds": {
+          "n": 3,
+          "min": 4.4,
+          "p50": 5.5,
+          "p90": 8.8,
+          "p95": 8.8,
+          "max": 8.8
+        },
+        "firstFightNetHpLost": {
+          "n": 3,
+          "min": 0.6399999999999864,
+          "p50": 1.3600000000000136,
+          "p90": 4,
+          "p95": 4,
+          "max": 4
+        },
+        "firstFightHpDamage": {
+          "n": 3,
+          "min": 2,
+          "p50": 2,
+          "p90": 4,
+          "p95": 4,
+          "max": 4
+        },
+        "firstFightEffectiveHealing": {
+          "n": 3,
+          "min": 0,
+          "p50": 0.64,
+          "p90": 1.36,
+          "p95": 1.36,
+          "max": 1.36
+        },
+        "finalLevel": {
+          "n": 3,
+          "min": 27,
+          "p50": 28,
+          "p90": 28,
+          "p95": 28,
+          "max": 28
+        },
+        "wins": {
+          "n": 3,
+          "min": 2146,
+          "p50": 2154,
+          "p90": 2190,
+          "p95": 2190,
+          "max": 2190
+        },
+        "deaths": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "restFraction": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "potionUse": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 5,
+          "p95": 5,
+          "max": 5
+        },
+        "recipeKnown": 3,
+        "potionsCrafted": {
+          "n": 3,
+          "min": 100,
+          "p50": 100,
+          "p90": 105,
+          "p95": 105,
+          "max": 105
+        },
+        "gold": {
+          "n": 3,
+          "min": 6787,
+          "p50": 6861,
+          "p90": 6874,
+          "p95": 6874,
+          "max": 6874
+        },
+        "level100Hours": null
+      },
+      {
+        "race": "goblin",
+        "policy": {
+          "shopping": true,
+          "develop": true,
+          "build": "balanced",
+          "route": "cautious",
+          "dungeonLevel": 5,
+          "reviews": "2 minutes first30m then15m, safe field/dungeon boundaries; beneficial drops equipped after each completed field/run",
+          "initialGold": 100,
+          "initialEquipment": 0,
+          "rng": "xorshift32(seed XOR 0x9e3779b9), independent process/serial",
+          "noGrants": true
+        },
+        "hours": 4,
+        "n": 3,
+        "runtimeHashes": [
+          "9369cd3bfae4d75e5d6828f38f2c83eb3801079c977e994ccb7856651b0f4ca5"
+        ],
+        "firstGearSeconds": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "firstUsefulGearSeconds": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "firstWeaponSeconds": {
+          "n": 3,
+          "min": 129.265,
+          "p50": 362.465,
+          "p90": 383.065,
+          "p95": 383.065,
+          "max": 383.065
+        },
+        "firstDungeonSeconds": {
+          "n": 3,
+          "min": 746.265,
+          "p50": 861.095,
+          "p90": 877.33,
+          "p95": 877.33,
+          "max": 877.33
+        },
+        "firstDungeonEntryLevel": {
+          "n": 3,
+          "min": 5,
+          "p50": 5,
+          "p90": 5,
+          "p95": 5,
+          "max": 5
+        },
+        "uncleared": 0,
+        "firstThreeDropSeconds": [
+          {
+            "n": 3,
+            "min": 25.365,
+            "p50": 42.7,
+            "p90": 91.065,
+            "p95": 91.065,
+            "max": 91.065
+          },
+          {
+            "n": 3,
+            "min": 48.9,
+            "p50": 62.565,
+            "p90": 99.465,
+            "p95": 99.465,
+            "max": 99.465
+          },
+          {
+            "n": 3,
+            "min": 83.365,
+            "p50": 127.865,
+            "p90": 156.5,
+            "p95": 156.5,
+            "max": 156.5
+          }
+        ],
+        "firstFightSeconds": {
+          "n": 3,
+          "min": 4.4,
+          "p50": 5.5,
+          "p90": 8.8,
+          "p95": 8.8,
+          "max": 8.8
+        },
+        "firstFightNetHpLost": {
+          "n": 3,
+          "min": -1.3600000000000136,
+          "p50": -0.6399999999999864,
+          "p90": 3.8640000000000043,
+          "p95": 3.8640000000000043,
+          "max": 3.8640000000000043
+        },
+        "firstFightHpDamage": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 3.8640000000000043,
+          "p95": 3.8640000000000043,
+          "max": 3.8640000000000043
+        },
+        "firstFightEffectiveHealing": {
+          "n": 3,
+          "min": 0,
+          "p50": 0.64,
+          "p90": 1.36,
+          "p95": 1.36,
+          "max": 1.36
+        },
+        "finalLevel": {
+          "n": 3,
+          "min": 25,
+          "p50": 27,
+          "p90": 27,
+          "p95": 27,
+          "max": 27
+        },
+        "wins": {
+          "n": 3,
+          "min": 1950,
+          "p50": 2072,
+          "p90": 2090,
+          "p95": 2090,
+          "max": 2090
+        },
+        "deaths": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "restFraction": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "potionUse": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 15,
+          "p95": 15,
+          "max": 15
+        },
+        "recipeKnown": 2,
+        "potionsCrafted": {
+          "n": 3,
+          "min": 0,
+          "p50": 100,
+          "p90": 113,
+          "p95": 113,
+          "max": 113
+        },
+        "gold": {
+          "n": 3,
+          "min": 5834,
+          "p50": 6534,
+          "p90": 6599,
+          "p95": 6599,
+          "max": 6599
+        },
+        "level100Hours": null
+      },
+      {
+        "race": "ashen",
+        "policy": {
+          "shopping": true,
+          "develop": true,
+          "build": "balanced",
+          "route": "cautious",
+          "dungeonLevel": 5,
+          "reviews": "2 minutes first30m then15m, safe field/dungeon boundaries; beneficial drops equipped after each completed field/run",
+          "initialGold": 100,
+          "initialEquipment": 0,
+          "rng": "xorshift32(seed XOR 0x9e3779b9), independent process/serial",
+          "noGrants": true
+        },
+        "hours": 4,
+        "n": 3,
+        "runtimeHashes": [
+          "9369cd3bfae4d75e5d6828f38f2c83eb3801079c977e994ccb7856651b0f4ca5"
+        ],
+        "firstGearSeconds": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "firstUsefulGearSeconds": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "firstWeaponSeconds": {
+          "n": 3,
+          "min": 131.3,
+          "p50": 229.9,
+          "p90": 422.8,
+          "p95": 422.8,
+          "max": 422.8
+        },
+        "firstDungeonSeconds": {
+          "n": 3,
+          "min": 740.6,
+          "p50": 744.7,
+          "p90": 869.4,
+          "p95": 869.4,
+          "max": 869.4
+        },
+        "firstDungeonEntryLevel": {
+          "n": 3,
+          "min": 5,
+          "p50": 5,
+          "p90": 5,
+          "p95": 5,
+          "max": 5
+        },
+        "uncleared": 0,
+        "firstThreeDropSeconds": [
+          {
+            "n": 3,
+            "min": 48.9,
+            "p50": 62.4,
+            "p90": 126.3,
+            "p95": 126.3,
+            "max": 126.3
+          },
+          {
+            "n": 3,
+            "min": 71.9,
+            "p50": 138.3,
+            "p90": 156.5,
+            "p95": 156.5,
+            "max": 156.5
+          },
+          {
+            "n": 3,
+            "min": 102.9,
+            "p50": 145.2,
+            "p90": 381.7,
+            "p95": 381.7,
+            "max": 381.7
+          }
+        ],
+        "firstFightSeconds": {
+          "n": 3,
+          "min": 4.4,
+          "p50": 5.5,
+          "p90": 8.8,
+          "p95": 8.8,
+          "max": 8.8
+        },
+        "firstFightNetHpLost": {
+          "n": 3,
+          "min": 0.6399999999999864,
+          "p50": 4.637560000000008,
+          "p90": 7.277559999999994,
+          "p95": 7.277559999999994,
+          "max": 7.277559999999994
+        },
+        "firstFightHpDamage": {
+          "n": 3,
+          "min": 2,
+          "p50": 5.277559999999994,
+          "p90": 7.277559999999994,
+          "p95": 7.277559999999994,
+          "max": 7.277559999999994
+        },
+        "firstFightEffectiveHealing": {
+          "n": 3,
+          "min": 0,
+          "p50": 0.64,
+          "p90": 1.36,
+          "p95": 1.36,
+          "max": 1.36
+        },
+        "finalLevel": {
+          "n": 3,
+          "min": 25,
+          "p50": 25,
+          "p90": 26,
+          "p95": 26,
+          "max": 26
+        },
+        "wins": {
+          "n": 3,
+          "min": 1872,
+          "p50": 1897,
+          "p90": 1907,
+          "p95": 1907,
+          "max": 1907
+        },
+        "deaths": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "restFraction": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "potionUse": {
+          "n": 3,
+          "min": 0,
+          "p50": 0,
+          "p90": 4,
+          "p95": 4,
+          "max": 4
+        },
+        "recipeKnown": 3,
+        "potionsCrafted": {
+          "n": 3,
+          "min": 100,
+          "p50": 100,
+          "p90": 104,
+          "p95": 104,
+          "max": 104
+        },
+        "gold": {
+          "n": 3,
+          "min": 5449,
+          "p50": 5605,
+          "p90": 5961,
+          "p95": 5961,
+          "max": 5961
+        },
+        "level100Hours": null
+      }
+    ]
+  },
+  "natural48h": {
+    "caveats": [
+      "Null milestone means censored/not achieved, not zero time. Quantiles use nearest rank.",
+      "Shopping, development, cadence and battle policy are agent heuristics, not all player builds.",
+      "Mixed runtime hashes cannot certify one integrated candidate.",
+      "Zero potion use without recipe/supply is not proven zero demand."
+    ],
+    "summary": [
+      {
+        "race": "human",
+        "policy": {
+          "shopping": true,
+          "develop": true,
+          "build": "balanced",
+          "route": "cautious",
+          "dungeonLevel": 5,
+          "reviews": "2 minutes first30m then15m, safe field/dungeon boundaries; beneficial drops equipped after each completed field/run",
+          "initialGold": 100,
+          "initialEquipment": 0,
+          "rng": "xorshift32(seed XOR 0x9e3779b9), independent process/serial",
+          "noGrants": true
+        },
+        "hours": 48,
+        "n": 1,
+        "runtimeHashes": [
+          "9369cd3bfae4d75e5d6828f38f2c83eb3801079c977e994ccb7856651b0f4ca5"
+        ],
+        "firstGearSeconds": {
+          "n": 1,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "firstUsefulGearSeconds": {
+          "n": 1,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "firstWeaponSeconds": {
+          "n": 1,
+          "min": 436.03,
+          "p50": 436.03,
+          "p90": 436.03,
+          "p95": 436.03,
+          "max": 436.03
+        },
+        "firstDungeonSeconds": {
+          "n": 1,
+          "min": 870.43,
+          "p50": 870.43,
+          "p90": 870.43,
+          "p95": 870.43,
+          "max": 870.43
+        },
+        "firstDungeonEntryLevel": {
+          "n": 1,
+          "min": 5,
+          "p50": 5,
+          "p90": 5,
+          "p95": 5,
+          "max": 5
+        },
+        "uncleared": 0,
+        "firstThreeDropSeconds": [
+          {
+            "n": 1,
+            "min": 126.63,
+            "p50": 126.63,
+            "p90": 126.63,
+            "p95": 126.63,
+            "max": 126.63
+          },
+          {
+            "n": 1,
+            "min": 141.93,
+            "p50": 141.93,
+            "p90": 141.93,
+            "p95": 141.93,
+            "max": 141.93
+          },
+          {
+            "n": 1,
+            "min": 152.13,
+            "p50": 152.13,
+            "p90": 152.13,
+            "p95": 152.13,
+            "max": 152.13
+          }
+        ],
+        "firstFightSeconds": {
+          "n": 1,
+          "min": 8.8,
+          "p50": 8.8,
+          "p90": 8.8,
+          "p95": 8.8,
+          "max": 8.8
+        },
+        "firstFightNetHpLost": {
+          "n": 1,
+          "min": 5,
+          "p50": 5,
+          "p90": 5,
+          "p95": 5,
+          "max": 5
+        },
+        "firstFightHpDamage": {
+          "n": 1,
+          "min": 5,
+          "p50": 5,
+          "p90": 5,
+          "p95": 5,
+          "max": 5
+        },
+        "firstFightEffectiveHealing": {
+          "n": 1,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "finalLevel": {
+          "n": 1,
+          "min": 100,
+          "p50": 100,
+          "p90": 100,
+          "p95": 100,
+          "max": 100
+        },
+        "wins": {
+          "n": 1,
+          "min": 14720,
+          "p50": 14720,
+          "p90": 14720,
+          "p95": 14720,
+          "max": 14720
+        },
+        "deaths": {
+          "n": 1,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "restFraction": {
+          "n": 1,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "potionUse": {
+          "n": 1,
+          "min": 5,
+          "p50": 5,
+          "p90": 5,
+          "p95": 5,
+          "max": 5
+        },
+        "recipeKnown": 1,
+        "potionsCrafted": {
+          "n": 1,
+          "min": 105,
+          "p50": 105,
+          "p90": 105,
+          "p95": 105,
+          "max": 105
+        },
+        "gold": {
+          "n": 1,
+          "min": 156147,
+          "p50": 156147,
+          "p90": 156147,
+          "p95": 156147,
+          "max": 156147
+        },
+        "level100Hours": {
+          "n": 1,
+          "min": 33.65047916666666,
+          "p50": 33.65047916666666,
+          "p90": 33.65047916666666,
+          "p95": 33.65047916666666,
+          "max": 33.65047916666666
+        }
+      },
+      {
+        "race": "dwarf",
+        "policy": {
+          "shopping": true,
+          "develop": true,
+          "build": "balanced",
+          "route": "cautious",
+          "dungeonLevel": 5,
+          "reviews": "2 minutes first30m then15m, safe field/dungeon boundaries; beneficial drops equipped after each completed field/run",
+          "initialGold": 100,
+          "initialEquipment": 0,
+          "rng": "xorshift32(seed XOR 0x9e3779b9), independent process/serial",
+          "noGrants": true
+        },
+        "hours": 48,
+        "n": 1,
+        "runtimeHashes": [
+          "9369cd3bfae4d75e5d6828f38f2c83eb3801079c977e994ccb7856651b0f4ca5"
+        ],
+        "firstGearSeconds": {
+          "n": 1,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "firstUsefulGearSeconds": {
+          "n": 1,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "firstWeaponSeconds": {
+          "n": 1,
+          "min": 460.4,
+          "p50": 460.4,
+          "p90": 460.4,
+          "p95": 460.4,
+          "max": 460.4
+        },
+        "firstDungeonSeconds": {
+          "n": 1,
+          "min": 870,
+          "p50": 870,
+          "p90": 870,
+          "p95": 870,
+          "max": 870
+        },
+        "firstDungeonEntryLevel": {
+          "n": 1,
+          "min": 5,
+          "p50": 5,
+          "p90": 5,
+          "p95": 5,
+          "max": 5
+        },
+        "uncleared": 0,
+        "firstThreeDropSeconds": [
+          {
+            "n": 1,
+            "min": 155.1,
+            "p50": 155.1,
+            "p90": 155.1,
+            "p95": 155.1,
+            "max": 155.1
+          },
+          {
+            "n": 1,
+            "min": 254.3,
+            "p50": 254.3,
+            "p90": 254.3,
+            "p95": 254.3,
+            "max": 254.3
+          },
+          {
+            "n": 1,
+            "min": 288.2,
+            "p50": 288.2,
+            "p90": 288.2,
+            "p95": 288.2,
+            "max": 288.2
+          }
+        ],
+        "firstFightSeconds": {
+          "n": 1,
+          "min": 8.8,
+          "p50": 8.8,
+          "p90": 8.8,
+          "p95": 8.8,
+          "max": 8.8
+        },
+        "firstFightNetHpLost": {
+          "n": 1,
+          "min": 5.470850000000013,
+          "p50": 5.470850000000013,
+          "p90": 5.470850000000013,
+          "p95": 5.470850000000013,
+          "max": 5.470850000000013
+        },
+        "firstFightHpDamage": {
+          "n": 1,
+          "min": 5.470850000000013,
+          "p50": 5.470850000000013,
+          "p90": 5.470850000000013,
+          "p95": 5.470850000000013,
+          "max": 5.470850000000013
+        },
+        "firstFightEffectiveHealing": {
+          "n": 1,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "finalLevel": {
+          "n": 1,
+          "min": 100,
+          "p50": 100,
+          "p90": 100,
+          "p95": 100,
+          "max": 100
+        },
+        "wins": {
+          "n": 1,
+          "min": 17487,
+          "p50": 17487,
+          "p90": 17487,
+          "p95": 17487,
+          "max": 17487
+        },
+        "deaths": {
+          "n": 1,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "restFraction": {
+          "n": 1,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "potionUse": {
+          "n": 1,
+          "min": 9,
+          "p50": 9,
+          "p90": 9,
+          "p95": 9,
+          "max": 9
+        },
+        "recipeKnown": 1,
+        "potionsCrafted": {
+          "n": 1,
+          "min": 109,
+          "p50": 109,
+          "p90": 109,
+          "p95": 109,
+          "max": 109
+        },
+        "gold": {
+          "n": 1,
+          "min": 198382,
+          "p50": 198382,
+          "p90": 198382,
+          "p95": 198382,
+          "max": 198382
+        },
+        "level100Hours": {
+          "n": 1,
+          "min": 29.394554166666666,
+          "p50": 29.394554166666666,
+          "p90": 29.394554166666666,
+          "p95": 29.394554166666666,
+          "max": 29.394554166666666
+        }
+      },
+      {
+        "race": "elf",
+        "policy": {
+          "shopping": true,
+          "develop": true,
+          "build": "balanced",
+          "route": "cautious",
+          "dungeonLevel": 5,
+          "reviews": "2 minutes first30m then15m, safe field/dungeon boundaries; beneficial drops equipped after each completed field/run",
+          "initialGold": 100,
+          "initialEquipment": 0,
+          "rng": "xorshift32(seed XOR 0x9e3779b9), independent process/serial",
+          "noGrants": true
+        },
+        "hours": 48,
+        "n": 1,
+        "runtimeHashes": [
+          "9369cd3bfae4d75e5d6828f38f2c83eb3801079c977e994ccb7856651b0f4ca5"
+        ],
+        "firstGearSeconds": {
+          "n": 1,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "firstUsefulGearSeconds": {
+          "n": 1,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "firstWeaponSeconds": {
+          "n": 1,
+          "min": 656.1,
+          "p50": 656.1,
+          "p90": 656.1,
+          "p95": 656.1,
+          "max": 656.1
+        },
+        "firstDungeonSeconds": {
+          "n": 1,
+          "min": 871.3,
+          "p50": 871.3,
+          "p90": 871.3,
+          "p95": 871.3,
+          "max": 871.3
+        },
+        "firstDungeonEntryLevel": {
+          "n": 1,
+          "min": 5,
+          "p50": 5,
+          "p90": 5,
+          "p95": 5,
+          "max": 5
+        },
+        "uncleared": 0,
+        "firstThreeDropSeconds": [
+          {
+            "n": 1,
+            "min": 23.4,
+            "p50": 23.4,
+            "p90": 23.4,
+            "p95": 23.4,
+            "max": 23.4
+          },
+          {
+            "n": 1,
+            "min": 64.6,
+            "p50": 64.6,
+            "p90": 64.6,
+            "p95": 64.6,
+            "max": 64.6
+          },
+          {
+            "n": 1,
+            "min": 126.6,
+            "p50": 126.6,
+            "p90": 126.6,
+            "p95": 126.6,
+            "max": 126.6
+          }
+        ],
+        "firstFightSeconds": {
+          "n": 1,
+          "min": 8.8,
+          "p50": 8.8,
+          "p90": 8.8,
+          "p95": 8.8,
+          "max": 8.8
+        },
+        "firstFightNetHpLost": {
+          "n": 1,
+          "min": 4,
+          "p50": 4,
+          "p90": 4,
+          "p95": 4,
+          "max": 4
+        },
+        "firstFightHpDamage": {
+          "n": 1,
+          "min": 4,
+          "p50": 4,
+          "p90": 4,
+          "p95": 4,
+          "max": 4
+        },
+        "firstFightEffectiveHealing": {
+          "n": 1,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "finalLevel": {
+          "n": 1,
+          "min": 100,
+          "p50": 100,
+          "p90": 100,
+          "p95": 100,
+          "max": 100
+        },
+        "wins": {
+          "n": 1,
+          "min": 18867,
+          "p50": 18867,
+          "p90": 18867,
+          "p95": 18867,
+          "max": 18867
+        },
+        "deaths": {
+          "n": 1,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "restFraction": {
+          "n": 1,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "potionUse": {
+          "n": 1,
+          "min": 5,
+          "p50": 5,
+          "p90": 5,
+          "p95": 5,
+          "max": 5
+        },
+        "recipeKnown": 1,
+        "potionsCrafted": {
+          "n": 1,
+          "min": 105,
+          "p50": 105,
+          "p90": 105,
+          "p95": 105,
+          "max": 105
+        },
+        "gold": {
+          "n": 1,
+          "min": 214072,
+          "p50": 214072,
+          "p90": 214072,
+          "p95": 214072,
+          "max": 214072
+        },
+        "level100Hours": {
+          "n": 1,
+          "min": 27.563222222222223,
+          "p50": 27.563222222222223,
+          "p90": 27.563222222222223,
+          "p95": 27.563222222222223,
+          "max": 27.563222222222223
+        }
+      },
+      {
+        "race": "goblin",
+        "policy": {
+          "shopping": true,
+          "develop": true,
+          "build": "balanced",
+          "route": "cautious",
+          "dungeonLevel": 5,
+          "reviews": "2 minutes first30m then15m, safe field/dungeon boundaries; beneficial drops equipped after each completed field/run",
+          "initialGold": 100,
+          "initialEquipment": 0,
+          "rng": "xorshift32(seed XOR 0x9e3779b9), independent process/serial",
+          "noGrants": true
+        },
+        "hours": 48,
+        "n": 1,
+        "runtimeHashes": [
+          "9369cd3bfae4d75e5d6828f38f2c83eb3801079c977e994ccb7856651b0f4ca5"
+        ],
+        "firstGearSeconds": {
+          "n": 1,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "firstUsefulGearSeconds": {
+          "n": 1,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "firstWeaponSeconds": {
+          "n": 1,
+          "min": 383.065,
+          "p50": 383.065,
+          "p90": 383.065,
+          "p95": 383.065,
+          "max": 383.065
+        },
+        "firstDungeonSeconds": {
+          "n": 1,
+          "min": 877.33,
+          "p50": 877.33,
+          "p90": 877.33,
+          "p95": 877.33,
+          "max": 877.33
+        },
+        "firstDungeonEntryLevel": {
+          "n": 1,
+          "min": 5,
+          "p50": 5,
+          "p90": 5,
+          "p95": 5,
+          "max": 5
+        },
+        "uncleared": 0,
+        "firstThreeDropSeconds": [
+          {
+            "n": 1,
+            "min": 91.065,
+            "p50": 91.065,
+            "p90": 91.065,
+            "p95": 91.065,
+            "max": 91.065
+          },
+          {
+            "n": 1,
+            "min": 99.465,
+            "p50": 99.465,
+            "p90": 99.465,
+            "p95": 99.465,
+            "max": 99.465
+          },
+          {
+            "n": 1,
+            "min": 127.865,
+            "p50": 127.865,
+            "p90": 127.865,
+            "p95": 127.865,
+            "max": 127.865
+          }
+        ],
+        "firstFightSeconds": {
+          "n": 1,
+          "min": 8.8,
+          "p50": 8.8,
+          "p90": 8.8,
+          "p95": 8.8,
+          "max": 8.8
+        },
+        "firstFightNetHpLost": {
+          "n": 1,
+          "min": 3.8640000000000043,
+          "p50": 3.8640000000000043,
+          "p90": 3.8640000000000043,
+          "p95": 3.8640000000000043,
+          "max": 3.8640000000000043
+        },
+        "firstFightHpDamage": {
+          "n": 1,
+          "min": 3.8640000000000043,
+          "p50": 3.8640000000000043,
+          "p90": 3.8640000000000043,
+          "p95": 3.8640000000000043,
+          "max": 3.8640000000000043
+        },
+        "firstFightEffectiveHealing": {
+          "n": 1,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "finalLevel": {
+          "n": 1,
+          "min": 100,
+          "p50": 100,
+          "p90": 100,
+          "p95": 100,
+          "max": 100
+        },
+        "wins": {
+          "n": 1,
+          "min": 15579,
+          "p50": 15579,
+          "p90": 15579,
+          "p95": 15579,
+          "max": 15579
+        },
+        "deaths": {
+          "n": 1,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "restFraction": {
+          "n": 1,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "potionUse": {
+          "n": 1,
+          "min": 54,
+          "p50": 54,
+          "p90": 54,
+          "p95": 54,
+          "max": 54
+        },
+        "recipeKnown": 1,
+        "potionsCrafted": {
+          "n": 1,
+          "min": 154,
+          "p50": 154,
+          "p90": 154,
+          "p95": 154,
+          "max": 154
+        },
+        "gold": {
+          "n": 1,
+          "min": 172135,
+          "p50": 172135,
+          "p90": 172135,
+          "p95": 172135,
+          "max": 172135
+        },
+        "level100Hours": {
+          "n": 1,
+          "min": 30.773990277777777,
+          "p50": 30.773990277777777,
+          "p90": 30.773990277777777,
+          "p95": 30.773990277777777,
+          "max": 30.773990277777777
+        }
+      },
+      {
+        "race": "ashen",
+        "policy": {
+          "shopping": true,
+          "develop": true,
+          "build": "balanced",
+          "route": "cautious",
+          "dungeonLevel": 5,
+          "reviews": "2 minutes first30m then15m, safe field/dungeon boundaries; beneficial drops equipped after each completed field/run",
+          "initialGold": 100,
+          "initialEquipment": 0,
+          "rng": "xorshift32(seed XOR 0x9e3779b9), independent process/serial",
+          "noGrants": true
+        },
+        "hours": 48,
+        "n": 1,
+        "runtimeHashes": [
+          "9369cd3bfae4d75e5d6828f38f2c83eb3801079c977e994ccb7856651b0f4ca5"
+        ],
+        "firstGearSeconds": {
+          "n": 1,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "firstUsefulGearSeconds": {
+          "n": 1,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "firstWeaponSeconds": {
+          "n": 1,
+          "min": 229.9,
+          "p50": 229.9,
+          "p90": 229.9,
+          "p95": 229.9,
+          "max": 229.9
+        },
+        "firstDungeonSeconds": {
+          "n": 1,
+          "min": 740.6,
+          "p50": 740.6,
+          "p90": 740.6,
+          "p95": 740.6,
+          "max": 740.6
+        },
+        "firstDungeonEntryLevel": {
+          "n": 1,
+          "min": 5,
+          "p50": 5,
+          "p90": 5,
+          "p95": 5,
+          "max": 5
+        },
+        "uncleared": 0,
+        "firstThreeDropSeconds": [
+          {
+            "n": 1,
+            "min": 126.3,
+            "p50": 126.3,
+            "p90": 126.3,
+            "p95": 126.3,
+            "max": 126.3
+          },
+          {
+            "n": 1,
+            "min": 138.3,
+            "p50": 138.3,
+            "p90": 138.3,
+            "p95": 138.3,
+            "max": 138.3
+          },
+          {
+            "n": 1,
+            "min": 145.2,
+            "p50": 145.2,
+            "p90": 145.2,
+            "p95": 145.2,
+            "max": 145.2
+          }
+        ],
+        "firstFightSeconds": {
+          "n": 1,
+          "min": 8.8,
+          "p50": 8.8,
+          "p90": 8.8,
+          "p95": 8.8,
+          "max": 8.8
+        },
+        "firstFightNetHpLost": {
+          "n": 1,
+          "min": 7.277559999999994,
+          "p50": 7.277559999999994,
+          "p90": 7.277559999999994,
+          "p95": 7.277559999999994,
+          "max": 7.277559999999994
+        },
+        "firstFightHpDamage": {
+          "n": 1,
+          "min": 7.277559999999994,
+          "p50": 7.277559999999994,
+          "p90": 7.277559999999994,
+          "p95": 7.277559999999994,
+          "max": 7.277559999999994
+        },
+        "firstFightEffectiveHealing": {
+          "n": 1,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "finalLevel": {
+          "n": 1,
+          "min": 100,
+          "p50": 100,
+          "p90": 100,
+          "p95": 100,
+          "max": 100
+        },
+        "wins": {
+          "n": 1,
+          "min": 14660,
+          "p50": 14660,
+          "p90": 14660,
+          "p95": 14660,
+          "max": 14660
+        },
+        "deaths": {
+          "n": 1,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "restFraction": {
+          "n": 1,
+          "min": 0,
+          "p50": 0,
+          "p90": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "potionUse": {
+          "n": 1,
+          "min": 4,
+          "p50": 4,
+          "p90": 4,
+          "p95": 4,
+          "max": 4
+        },
+        "recipeKnown": 1,
+        "potionsCrafted": {
+          "n": 1,
+          "min": 104,
+          "p50": 104,
+          "p90": 104,
+          "p95": 104,
+          "max": 104
+        },
+        "gold": {
+          "n": 1,
+          "min": 156443,
+          "p50": 156443,
+          "p90": 156443,
+          "p95": 156443,
+          "max": 156443
+        },
+        "level100Hours": {
+          "n": 1,
+          "min": 32.983666666666664,
+          "p50": 32.983666666666664,
+          "p90": 32.983666666666664,
+          "p95": 32.983666666666664,
+          "max": 32.983666666666664
+        }
+      }
+    ]
+  },
+  "storyProofs": [
+    {
+      "race": "dwarf",
+      "source": "/workspace/shared/balance-final-2bb69fa/earned48h-dwarf-1917.json",
+      "initial": {
+        "level": 100,
+        "gold": 198382,
+        "inventory": 19
+      },
+      "final": {
+        "level": 100,
+        "gold": 198682,
+        "inventory": 27
+      },
+      "dungeonVictories": 8,
+      "lockedGuidance": 4,
+      "corridorEntries": 0,
+      "peacefulExits": 0,
+      "scenes": 37,
+      "status": "genuine natural gear/resources, just-in-time foreign dungeons, exact essential war corridor, postwar safe exit, full mainline ending"
+    },
+    {
+      "race": "elf",
+      "source": "/workspace/shared/balance-final-2bb69fa/earned48h-elf-1917.json",
+      "initial": {
+        "level": 100,
+        "gold": 214072,
+        "inventory": 25
+      },
+      "final": {
+        "level": 100,
+        "gold": 214376,
+        "inventory": 37
+      },
+      "dungeonVictories": 8,
+      "lockedGuidance": 4,
+      "corridorEntries": 10,
+      "peacefulExits": 1,
+      "scenes": 41,
+      "status": "genuine natural gear/resources, just-in-time foreign dungeons, exact essential war corridor, postwar safe exit, full mainline ending"
+    },
+    {
+      "race": "human",
+      "source": "/workspace/shared/balance-final-2bb69fa/earned48h-human-1917.json",
+      "initial": {
+        "level": 100,
+        "gold": 156147,
+        "inventory": 15
+      },
+      "final": {
+        "level": 100,
+        "gold": 156408,
+        "inventory": 21
+      },
+      "dungeonVictories": 6,
+      "lockedGuidance": 2,
+      "corridorEntries": 0,
+      "peacefulExits": 0,
+      "scenes": 35,
+      "status": "genuine natural gear/resources, just-in-time foreign dungeons, exact essential war corridor, postwar safe exit, full mainline ending"
+    },
+    {
+      "race": "goblin",
+      "source": "/workspace/shared/balance-final-2bb69fa/earned48h-goblin-1917.json",
+      "initial": {
+        "level": 100,
+        "gold": 172135,
+        "inventory": 17
+      },
+      "final": {
+        "level": 100,
+        "gold": 172432,
+        "inventory": 27
+      },
+      "dungeonVictories": 8,
+      "lockedGuidance": 4,
+      "corridorEntries": 0,
+      "peacefulExits": 0,
+      "scenes": 34,
+      "status": "genuine natural gear/resources, just-in-time foreign dungeons, exact essential war corridor, postwar safe exit, full mainline ending"
+    },
+    {
+      "race": "ashen",
+      "source": "/workspace/shared/balance-final-2bb69fa/earned48h-ashen-1917.json",
+      "initial": {
+        "level": 100,
+        "gold": 156443,
+        "inventory": 16
+      },
+      "final": {
+        "level": 100,
+        "gold": 156558,
+        "inventory": 23
+      },
+      "dungeonVictories": 2,
+      "lockedGuidance": 2,
+      "corridorEntries": 0,
+      "peacefulExits": 0,
+      "scenes": 35,
+      "status": "genuine natural gear/resources, just-in-time foreign dungeons, exact essential war corridor, postwar safe exit, full mainline ending"
+    }
+  ],
+  "freshParity": "All five4h complete-state comparisons and8h reward caps pass.",
+  "observerContract": "Independent on/off cases have identical complete saved game state, external RNG state and ledger.",
+  "earnedParity": {
+    "status": "Historical valid-deadline failure on2bb69fa; independently repaired and verified below",
+    "fixture": "fixtures/natural-progression-v071/human.json",
+    "diff": [
+      {
+        "path": "state.worldEvents.rngState",
+        "online": 1605216752,
+        "offline": 449670227
+      }
+    ]
+  },
+  "limits": [
+    "One natural endpoint seed per race; not every build or player strategy.",
+    "No forging/enhancement optimization; gold accumulation is not a complete sink audit.",
+    "Zero potion use without supplied/known recipe is supply-censored.",
+    "Actual human calendar time and UI decision time are not simulated."
+  ],
+  "postRepairVerification": {
+    "runtimeCommit": "d8fbc0f621f5db07264247ae850f582047231ed5",
+    "runtimeSha256": "ab17355731070e4d6e0b9945c239a63eff85f902de4ad4343739ae8b013b57f8",
+    "freshParity": "All five4h complete-state comparisons and8h reward caps pass on repaired runtime.",
+    "earnedParity": "All five ORIGINAL unflushed48h checkpoints pass4h complete-state comparisons and8h reward caps on repaired runtime. No world fields excluded.",
+    "onlineEquivalence": {
+      "oldRuntimeCommit": "2bb69fa010a264c1add8ff336f4e1480af9e2924",
+      "newRuntimeCommit": "d8fbc0f621f5db07264247ae850f582047231ed5",
+      "changedRuntimeModules": [
+        "random-world-events.js"
+      ],
+      "rows": [
+        {
+          "race": "human",
+          "oldSaveSha256": "fc9f10d3a4d9efa32efad69c2ef02f8378ae0ec7e4c4e5a3f684e3a4b38d9b75",
+          "newSaveSha256": "fc9f10d3a4d9efa32efad69c2ef02f8378ae0ec7e4c4e5a3f684e3a4b38d9b75",
+          "worldCallAudit": {
+            "calls": 24,
+            "maxForwardGapMs": 1100,
+            "maxDueChecks": 1,
+            "rollbackCalls": 0
+          },
+          "completeStateEqual": true
+        },
+        {
+          "race": "dwarf",
+          "oldSaveSha256": "aea5f5b187475f2499d3c367033b135be1ae7910c0b410673fb3b2cb2bbc8792",
+          "newSaveSha256": "aea5f5b187475f2499d3c367033b135be1ae7910c0b410673fb3b2cb2bbc8792",
+          "worldCallAudit": {
+            "calls": 25,
+            "maxForwardGapMs": 1100,
+            "maxDueChecks": 1,
+            "rollbackCalls": 0
+          },
+          "completeStateEqual": true
+        },
+        {
+          "race": "elf",
+          "oldSaveSha256": "afe64616cf74d5a54593b517c53749c7b23eb2a066eb08eb5e8ee239d7b78987",
+          "newSaveSha256": "afe64616cf74d5a54593b517c53749c7b23eb2a066eb08eb5e8ee239d7b78987",
+          "worldCallAudit": {
+            "calls": 24,
+            "maxForwardGapMs": 1100,
+            "maxDueChecks": 1,
+            "rollbackCalls": 0
+          },
+          "completeStateEqual": true
+        },
+        {
+          "race": "goblin",
+          "oldSaveSha256": "848413cc9b45462aae994bf3e65bc708a8826042d46fa699a1010b9ae7c7ad61",
+          "newSaveSha256": "848413cc9b45462aae994bf3e65bc708a8826042d46fa699a1010b9ae7c7ad61",
+          "worldCallAudit": {
+            "calls": 25,
+            "maxForwardGapMs": 1100,
+            "maxDueChecks": 1,
+            "rollbackCalls": 0
+          },
+          "completeStateEqual": true
+        },
+        {
+          "race": "ashen",
+          "oldSaveSha256": "36540f9146aab08c6b805dc9f1bf76e8eaec8fb4dc17041ee86382477f7573ac",
+          "newSaveSha256": "36540f9146aab08c6b805dc9f1bf76e8eaec8fb4dc17041ee86382477f7573ac",
+          "worldCallAudit": {
+            "calls": 24,
+            "maxForwardGapMs": 1100,
+            "maxDueChecks": 1,
+            "rollbackCalls": 0
+          },
+          "completeStateEqual": true
+        }
+      ],
+      "interpretation": "These five4h runs are measured again, not relabeled. The48h/150-onramp/15-four-hour source data remain attributed to the old commit. Transfer of online-only balance observations additionally uses the unchanged natural event-loop invariant: world events checked before each <=1100ms combat step, between-fight delay1800ms, actual rest300000ms <600000ms world interval; no offline() calls. Therefore each forward world call processes at most one due deadline and has now-reference far below4h. The changed24/25-check limit and4h cutoff cannot alter those online trajectories. Earned offline parity must be tested separately on the repaired runtime."
+    },
+    "storyProofs": [
+      {
+        "race": "human",
+        "source": "/workspace/shared/balance-final-2bb69fa/earned48h-human-1917.json",
+        "initial": {
+          "level": 100,
+          "gold": 156147,
+          "inventory": 15
+        },
+        "final": {
+          "level": 100,
+          "gold": 156401,
+          "inventory": 24
+        },
+        "dungeonVictories": 6,
+        "lockedGuidance": 2,
+        "corridorEntries": 0,
+        "peacefulExits": 0,
+        "scenes": 35,
+        "status": "genuine natural gear/resources, just-in-time foreign dungeons, exact essential war corridor, postwar safe exit, full mainline ending"
+      },
+      {
+        "race": "dwarf",
+        "source": "/workspace/shared/balance-final-2bb69fa/earned48h-dwarf-1917.json",
+        "initial": {
+          "level": 100,
+          "gold": 198382,
+          "inventory": 19
+        },
+        "final": {
+          "level": 100,
+          "gold": 198682,
+          "inventory": 28
+        },
+        "dungeonVictories": 8,
+        "lockedGuidance": 4,
+        "corridorEntries": 0,
+        "peacefulExits": 0,
+        "scenes": 37,
+        "status": "genuine natural gear/resources, just-in-time foreign dungeons, exact essential war corridor, postwar safe exit, full mainline ending"
+      },
+      {
+        "race": "elf",
+        "source": "/workspace/shared/balance-final-2bb69fa/earned48h-elf-1917.json",
+        "initial": {
+          "level": 100,
+          "gold": 214072,
+          "inventory": 25
+        },
+        "final": {
+          "level": 100,
+          "gold": 214379,
+          "inventory": 34
+        },
+        "dungeonVictories": 8,
+        "lockedGuidance": 4,
+        "corridorEntries": 10,
+        "peacefulExits": 1,
+        "scenes": 41,
+        "status": "genuine natural gear/resources, just-in-time foreign dungeons, exact essential war corridor, postwar safe exit, full mainline ending"
+      },
+      {
+        "race": "goblin",
+        "source": "/workspace/shared/balance-final-2bb69fa/earned48h-goblin-1917.json",
+        "initial": {
+          "level": 100,
+          "gold": 172135,
+          "inventory": 17
+        },
+        "final": {
+          "level": 100,
+          "gold": 172435,
+          "inventory": 27
+        },
+        "dungeonVictories": 8,
+        "lockedGuidance": 4,
+        "corridorEntries": 0,
+        "peacefulExits": 0,
+        "scenes": 34,
+        "status": "genuine natural gear/resources, just-in-time foreign dungeons, exact essential war corridor, postwar safe exit, full mainline ending"
+      },
+      {
+        "race": "ashen",
+        "source": "/workspace/shared/balance-final-2bb69fa/earned48h-ashen-1917.json",
+        "initial": {
+          "level": 100,
+          "gold": 156443,
+          "inventory": 16
+        },
+        "final": {
+          "level": 100,
+          "gold": 156553,
+          "inventory": 19
+        },
+        "dungeonVictories": 2,
+        "lockedGuidance": 2,
+        "corridorEntries": 0,
+        "peacefulExits": 0,
+        "scenes": 35,
+        "status": "genuine natural gear/resources, just-in-time foreign dungeons, exact essential war corridor, postwar safe exit, full mainline ending"
+      }
+    ],
+    "provenanceBoundary": "The150 onramp,15 four-hour and5 forty-eight-hour balance measurements retain2bb69fa provenance. Five four-hour natural runs were genuinely rerun on d8fbc0f and all complete saved states match. Unchanged online call bounds prove the isolated offline-world quota/cutoff repair cannot change those online trajectories; this is not a claim that the48h runs were repeated on d8fbc0f."
+  }
+}
