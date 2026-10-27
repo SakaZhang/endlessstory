@@ -1,10 +1,14 @@
 // Test-only fixture. No production flag setters. Every scene is traversed through
 // the real controller and every encounter through the actual combat engine.
 import assert from 'node:assert/strict';
+import {equipTestLoadout} from './equipped-test-fixture.mjs';
 import * as E from './dist/engine.js';
 import * as C from './dist/story-event-controller.js';
 export function preparedStoryGame(race,{level=60,now=1800000000000}={}){
- const s=E.fresh(race);s.level=level;s.lastSeen=now;E.normalizeHealth(s,now);E.normalizeAreaProgress(s);E.normalizeExpedition(s);
+ const s=E.fresh(race);assert.equal(s.inventory.length,0,'production new game remains unarmed');s.level=level;
+ // This is an advanced story-controller fixture, not a new-player balance simulation.
+ // Acquire legal, level-matched ordinary gear explicitly before traversing chapters.
+ equipTestLoadout(s,{level});s.lastSeen=now;E.normalizeHealth(s,now);E.normalizeAreaProgress(s);E.normalizeExpedition(s);
  for(const r of ['human','dwarf','elf','goblin','ashen'])s.areaProgress[r]={unlocked:[1,2,3,4,5,6,7],cleared:[1,2,3,4,5,6]};
  assert(E.validSave(s));return s;
 }
