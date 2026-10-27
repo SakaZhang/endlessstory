@@ -28,9 +28,12 @@ function fullBag(){const s=clone(seed);while(E.bagCounts(s).equipment.weapon<50)
 let s=fullBag(),st=store(s),tx=E.claimPersonalArcReward(st,s,d.id,'weapon',{now:now(s)});
 assert.equal(tx.reason,'reward-unavailable');assert.equal(st.writes,2);assert(E.validSave(tx.game));let pending=clone(tx.game.personalArcRewards[d.id]);assert(pending.item);assert.equal(s.personalArcRewards,undefined);
 const fixed=JSON.stringify(pending.item);s=JSON.parse(st.raw);s.level=100;persist(st,s);
+const globalRandom=Math.random;Math.random=()=>{throw Error('retry must not draw fresh randomness');};try{assert.equal(E.claimPersonalArcReward(st,s,d.id,undefined,{now:now(s)}).reason,'reward-unavailable');}finally{Math.random=globalRandom;}
 assert.equal(E.claimPersonalArcReward(st,s,d.id,'ring',{now:now(s)}).reason,'slot-locked');
 assert.equal(E.claimPersonalArcReward(st,s,d.id,undefined,{now:now(s)}).reason,'reward-unavailable');assert.equal(JSON.stringify(JSON.parse(st.raw).personalArcRewards[d.id].item),fixed);
 s.inventory.splice(s.inventory.findIndex(it=>it.slot==='weapon'&&!Object.values(s.equip).includes(it.id)),1);persist(st,s);tx=E.claimPersonalArcReward(st,s,d.id,undefined,{now:now(s)});assert(tx.ok,tx.reason);assert.equal(JSON.stringify(tx.game.inventory.find(it=>it.id===pending.item.id)),fixed);
+// The task reward never touches a forge result and bypasses only its own filter.
+{const independent=clone(seed);independent.pendingForgeClaim={kind:'equipment',item:E.item('helm',12,null,2,{originRace:'goblin'})};independent.lootFilters={equipment:[3],materials:[],items:[]};const local=store(independent),result=E.claimPersonalArcReward(local,independent,d.id,'ring',{now:now(independent)});assert(result.ok,result.reason);assert.deepEqual(result.game.pendingForgeClaim,independent.pendingForgeClaim);assert.deepEqual(result.game.lootFilters,independent.lootFilters);}
 // Losing/selling a claimed item never makes it claimable again.
 s=clone(tx.game);s.inventory=s.inventory.filter(it=>it.id!==pending.item.id);persist(st,s);assert.equal(E.claimPersonalArcReward(st,s,d.id,'weapon',{now:now(s)}).reason,'already-claimed');
 // Failure at EACH durable boundary, followed by actual reload recovery.
@@ -55,7 +58,8 @@ for(const mutate of [p=>p.seed=-1,p=>p.seed=2**32,p=>p.baseLevel=0,p=>p.slot='co
 for(const mutate of [x=>x.personalArcRewards=null,x=>x.personalArcRewards=[],x=>x.taskRewardClaims=[...(x.taskRewardClaims??[]),d.claimId],x=>x.inventory.push(clone(x.personalArcRewards[d.id].item)),x=>x.story.completedScenes=x.story.completedScenes.filter(id=>id!==d.finalSceneId)]){const bad=clone(reserved);mutate(bad);assert(!E.validSave(bad));}
 // Fixed small/stage budgets: all 25 source scenes, both tiers, atomic failed save.
 for(const event of Object.values(E.PERSONAL_EVENT_REWARDS)){
- s=clone(seeds.get(event.race));st=store(s);st.failAt=1;assert.equal(E.claimPersonalEventReward(st,s,event.id,{now:now(s)}).reason,'storage');assert.equal(st.raw,JSON.stringify(s));st.failAt=0;
+ s=clone(seeds.get(event.race));const capped=clone(s);if(event.tier==='stage')capped.consumables.reforgeToken=1e9;else{E.normalizePotions(capped);capped.potionStacks['healing|0']=1e9;}const capStore=store(capped);assert.equal(E.claimPersonalEventReward(capStore,capped,event.id,{now:now(capped)}).reason,'reward-unavailable');assert.equal(capStore.writes,0);assert.equal(capStore.raw,JSON.stringify(capped));
+ st=store(s);st.failAt=1;assert.equal(E.claimPersonalEventReward(st,s,event.id,{now:now(s)}).reason,'storage');assert.equal(st.raw,JSON.stringify(s));st.failAt=0;
  tx=E.claimPersonalEventReward(st,s,event.id,{now:now(s)});assert(tx.ok,tx.reason);assert(E.validSave(tx.game));assert.equal(tx.game.taskRewardClaims.filter(id=>id===event.claimId).length,1);assert.equal(E.claimPersonalEventReward(st,tx.game,event.id,{now:now(tx.game)}).reason,'already-claimed');
  if(event.tier==='stage')assert.equal(tx.game.consumables.reforgeToken,(s.consumables.reforgeToken??0)+1);else assert.equal(tx.game.potionStacks['healing|0'],(s.potionStacks?.['healing|0']??0)+2);
  const forged=E.fresh(event.race);forged.taskRewardClaims=[event.claimId];assert(!E.validSave(forged));
