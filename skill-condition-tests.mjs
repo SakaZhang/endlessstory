@@ -27,11 +27,11 @@ function ready(condition,multi=false){let s=E.fresh();s.level=30;for(const chang
 for(const condition of ['burn','bleed','poison','armorDown','attackDown','hitDown','fireResistDown','elementResistDown','self_attackUp','self_critUp','self_penetrationUp','self_defenseUp','self_dodgeUp','self_lifestealUp','self_healOverTime'])for(const present of [false,true]){
  const {s,e}=ready(condition),target=e.enemies.find(u=>u.id===e.targetId)??e.enemies[0];
  if(present){if(condition==='poison'){const config={tickIntervalMs:2000,layerDurationMs:8000,maxLayers:5,refreshPolicy:'earliest-expiry',schedule:'per-layer',expiryTick:'inclusive'};e.treePoison={[target.id]:applySkillPoison(createSkillPoison(target.id,config,0),{enemyId:target.id,sourceId:'test',combatClock:0})};}else if(['burn','bleed'].includes(condition))add(e,target.id,'dot',{status:condition,damageType:'physical',tickIntervalMs:2000});else {const type=condition.replace('self_','');add(e,condition.startsWith('self_')?'self':target.id,type,{...(type==='elementResistDown'?{damageType:'water'}:{}),...(type==='healOverTime'?{tickIntervalMs:2000}:{})});}}
- assert(E.validSave(s),condition+' before');const resumed=JSON.parse(JSON.stringify(s));assert.deepEqual(E.step(s,e,11100),E.step(resumed,resumed.activeEncounter,11100));assert.equal(e.lastCast?.skillId==='fracture_strike',present,condition);assert.deepEqual(s,resumed);assert(E.validSave(s),condition+' after');
+ assert(E.validSave(s),condition+' before');const resumed=JSON.parse(JSON.stringify(s));assert.deepEqual(E.step(s,e,11100),E.step(resumed,resumed.activeEncounter,11100));assert.equal(e.lastCast?.skillId==='fracture_strike',true,'unsupported old '+condition+' falls back without stalling');assert.deepEqual(s,resumed);assert(E.validSave(s),condition+' after');
 }
-{const {s,e}=ready('bleed');const target=e.enemies.find(u=>u.id===e.targetId)??e.enemies[0];add(e,target.id,'dot',{status:'bleed',damageType:'physical',tickIntervalMs:1000,durationMs:1100});E.step(s,e,11100);assert.notEqual(e.lastCast?.skillId,'fracture_strike');}
-{const {s,e}=ready('bleed',true);add(e,e.enemies[1].id,'dot',{status:'bleed',damageType:'physical',tickIntervalMs:2000});assert(E.validSave(s));E.step(s,e,11100);assert.notEqual(e.lastCast?.skillId,'fracture_strike','other target bleeding must not trigger');assert(E.setCombatTarget(s,e.enemies[1].id));const resumed=JSON.parse(JSON.stringify(s));assert.deepEqual(E.step(s,e,12200),E.step(resumed,resumed.activeEncounter,12200));assert.equal(e.lastCast?.skillId,'fracture_strike','selected bleeding target triggers');assert.deepEqual(s,resumed);assert(E.validSave(s));}
-console.log('PASS shared skill conditions: 28 visible choices, five-race saves/loadouts, selected target/self isolation, effect dependencies, expiry, real selector and JSON replay');
+{const {s,e}=ready('bleed');const target=e.enemies.find(u=>u.id===e.targetId)??e.enemies[0];add(e,target.id,'dot',{status:'bleed',damageType:'physical',tickIntervalMs:1000,durationMs:1100});E.step(s,e,11100);assert.equal(e.lastCast?.skillId,'fracture_strike');}
+{const {s,e}=ready('bleed',true);add(e,e.enemies[1].id,'dot',{status:'bleed',damageType:'physical',tickIntervalMs:2000});assert(E.validSave(s));E.step(s,e,11100);assert.equal(e.lastCast?.skillId,'fracture_strike','unsupported legacy gate falls back');assert(E.setCombatTarget(s,e.enemies[1].id));const resumed=JSON.parse(JSON.stringify(s));assert.deepEqual(E.step(s,e,12200),E.step(resumed,resumed.activeEncounter,12200));assert.notEqual(e.lastCast?.skillId,'fracture_strike','fallback already cast and is on cooldown');assert.deepEqual(s,resumed);assert(E.validSave(s));}
+console.log('PASS shared skill conditions: legacy registry compatibility plus contextual fallback, five-race saves/loadouts, selected target/self isolation, effect dependencies, expiry, real selector and JSON replay');
 
 // A single visible option; old persisted IDs remain a safe, non-resetting alias.
 assert(ids.includes('elementResistDown'));
@@ -57,7 +57,7 @@ for(const condition of ['elementResistDown','fireResistDown'])for(const type of 
  add(e,target.id,type,{...(type==='elementResistDown'?{damageType:'dark'}:{}),durationMs:expired?1100:5000});
  const resumed=JSON.parse(JSON.stringify(s));assert(E.validSave(resumed));
  assert.deepEqual(E.step(s,e,11100),E.step(resumed,resumed.activeEncounter,11100));
- assert.equal(e.lastCast?.skillId==='fracture_strike',!expired);assert.deepEqual(s,resumed);
+ assert.equal(e.lastCast?.skillId==='fracture_strike',true);assert.deepEqual(s,resumed);
 }
 const {mountSkillTree}=await import('./dist/skill-tree-ui.js');
 const {getSkillTreeDefinition}=await import('./dist/race-registry.js');
@@ -67,7 +67,7 @@ for(const race of ['dwarf','human','elf','goblin','ashen']){
  assert(E.saveLoadout(s,0,'旧方案'));assert(E.validSave(JSON.parse(JSON.stringify(s))));assert(E.applyLoadout(s,0));
  const before=structuredClone(s),listeners={},host={innerHTML:'',contains:t=>t.owner===host,addEventListener(k,f){listeners[k]=f;},removeEventListener(k){delete listeners[k];}};
  const ui=mountSkillTree(host,{getState:()=>s,getDefinition:getSkillTreeDefinition,commit:async()=>({ok:false})});
- assert(host.innerHTML.includes('<option value="elementResistDown" selected>目标元素抗性削弱</option>'));
+ assert(host.innerHTML.includes('<option value="always" selected>可用即施放</option>'));assert(host.innerHTML.includes('暂按可用即施放'));assert(!host.innerHTML.includes('value="elementResistDown"'));
  assert(!host.innerHTML.includes('value="fireResistDown"'));assert(!host.innerHTML.includes('目标火抗削弱'));
  const html=renderLoadouts(s,{wardrobeIds:E.wardrobeIds,bagItems:E.bagItems});assert(html.includes('目标元素抗性削弱'));assert(!html.includes('目标火抗削弱'));
  await listeners.click({target:{closest:()=>({owner:host,dataset:{treeAction:'cancel'}})}});

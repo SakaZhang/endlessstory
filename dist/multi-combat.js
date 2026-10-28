@@ -412,7 +412,7 @@ function runTreePlayerPhase(s,e,ctx,logs){
  }
  const selected=rules.active.find((id,index)=>{
   if(!id||!rules.unlocked.includes(id)||!TREE_ACTIVE_SKILL_IDS.includes(id)||(e.treeSkillCooldowns?.[id]??0)>0||!rules.configs[id])return false;
-  const condition=rules.conditions[index];if(!skillConditionMatches(condition,{encounter:e,target,maxHp:view.hp,now:ctx.now}))return false;
+  const condition=rules.conditions[index];if(!skillConditionMatches(condition,{encounter:e,target,maxHp:view.hp,now:ctx.now,skillId:id,weaponType:rules.weaponType,eligibleDebuffIds:host.eligibleDebuffIds(),setCounts:base.count}))return false;
   if(id==='anvil_cry'&&host.activeBuffIds().includes(id))return false;if(id==='iron_vigil'&&e.playerShieldLayers?.layers.some(l=>l.source==='skill:iron_vigil'&&l.remaining>0&&(l.expiresAt===null||l.expiresAt>e.playerShieldLayers.clock)))return false;
   return !!planTreeSkill({stats:view,snapshotStats:base,context:{...raceRuntimeContext(e,s.race),...equipmentSkillContext(s)},skillId:id,castId:e.id+':tree:'+e.round,weaponType:rules.weaponType,config:rules.configs[id],selectedTargetId:target.id,targets:e.enemies.map(u=>({id:u.id,alive:u.hp>0,hp:u.hp,maxHp:u.max,baseAtk:u.atk,baseArmor:u.armor,atk:u.atk,preparing:!!u.control.preparing,poisonLayers:e.treePoison?.[u.id]?.layers.length??0,burning:u.burn>0||host.has(u.id,'burn'),bleeding:host.has(u.id,'bleed'),armorBroken:u.broken>0||host.get(u.id,'armorDown')>0})),hero:{hp:e.heroHp,maxHp:view.hp,defense:view.armor,shield:e.playerShieldLayers?.layers.reduce((sum,l)=>sum+l.remaining,0)??0,activeBuffIds:host.activeBuffIds(),eligibleDebuffIds:host.eligibleDebuffIds()}});
  });
