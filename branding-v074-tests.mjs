@@ -1,0 +1,26 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
+import {SAVE_KEY,SCHEMA_VERSION} from './dist/save-generation.js';
+const baseline='a8919a17cbf057713f4305229f008b99f3e79aa9';
+const read=path=>readFileSync(path,'utf8');
+const before=path=>execFileSync('git',['show',`${baseline}:${path}`],{encoding:'utf8',maxBuffer:16*1024*1024});
+const html=read('dist/index.html'),app=read('dist/app.js'),preview=read('dist/battle-preview.html');
+assert.match(html,/<title>长路未尽<\/title>/);
+assert.match(html,/aria-label="长路未尽 · 打开世界地图"/);
+const logo=html.match(/<button class="logo"[\s\S]*?<\/button>/)[0];
+assert.match(logo,/<span>长路未尽<\/span>/);
+assert(!logo.includes('<small>'),'no subtitle');
+assert.match(html,/<div class="chapterTitle">冒险旅程 <span>正在读取旅程…<\/span><\/div>/);
+assert.match(html,/<small>长路未尽 · v\d+\.\d+(?:\.\d+)?<\/small>/);
+assert.match(preview,/<title>长路未尽 · 战斗画面试作<\/title>/);
+for(const source of [html,app,preview])assert(!/灰冠诸境|黑炉余烬/.test(source),'no stale product branding');
+assert.match(app,/downloadSave\(JSON\.stringify\(s\),'长路未尽-v'\+SCHEMA_VERSION\+'-'\+heroName\(s\)\+'\.json'\)/);
+// Export changes its human-readable filename only, never serialized content or import logic.
+const hooks=s=>[...s.matchAll(/\b(?:id|href|src)="[^"]*"/g)].map(m=>m[0]);
+assert.deepEqual(hooks(html),hooks(before('dist/index.html')),'DOM IDs and URLs unchanged');
+assert.match(html,/黑炉氏族 · 矮人/,'lore is not global-replaced');
+assert.equal(SAVE_KEY,'ashencrown-v6');assert.equal(SCHEMA_VERSION,6);
+const storage=read('dist/storage.js');
+for(const declaration of ["export const LEGACY_KEY='ashencrown-v1';","export const RETIRED_SAVE_KEYS=Object.freeze(['ashencrown-v1','ashencrown-v2','ashencrown-v3','ashencrown-v4','ashencrown-v5']);"])assert(storage.includes(declaration),'persisted key contracts unchanged');
+console.log('PASS v0.74 branding: title, accessible logo, no subtitle, neutral chapter fallback, footer, preview, export filename; save-key/schema/export compatibility and DOM IDs/URLs preserved.');

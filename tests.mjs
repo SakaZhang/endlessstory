@@ -241,3 +241,6 @@ for(const file of ['selected-area-travel-tests.mjs','selected-area-travel-app-ui
 runAffixSourceTest(process.execPath,[new URL('./affix-slot-pools-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
 
 runAffixSourceTest(process.execPath,[new URL('./affix-slot-story-compat-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+// Rename-only v0.74: public branding without persisted identifier or mechanics changes.
+runAffixSourceTest(process.execPath,[new URL('./branding-v074-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
