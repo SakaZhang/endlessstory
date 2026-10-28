@@ -1,0 +1,26 @@
+{
+  "version": "v0.75",
+  "baseline_release_commit": "003aac609fc5ef69de9a8d86c91ebee26b0ce6dd",
+  "npm_test_exit": 0,
+  "focused_suites": 14,
+  "build_exit": 0,
+  "release_cache_exit": 0,
+  "build_hash": "b09b7665bba9ce1d925ddb6140d33379ea5a371ff147f52171864b52bec39de8",
+  "files": 2790,
+  "resource_urls": 2788,
+  "dependency_edges": 8651,
+  "coverage": {
+    "catalog_active_skills": 105,
+    "weapon_contexts": 10,
+    "historical_ids": 29,
+    "races": 5,
+    "actual_selector": "supported/absent/live/expired/mismatched target and elements plus JSON replay"
+  },
+  "browser": {
+    "upgrade": "normal UI v0.74 old scorch to v0.75 explicit fallback; unchanged preview hero; correction apply/reload passed",
+    "learned_skill_menus": "automated App coverage only",
+    "mobile": "not verified",
+    "imports": false,
+    "production_access": false
+  }
+}
