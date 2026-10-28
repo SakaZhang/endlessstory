@@ -25,8 +25,8 @@ export function skillTreeGeometry(definition,group){
  for(const item of nodes){const n=definition.nodes.find(n=>n.id===item.id);for(const from of n.requires){const a=positions.get(from);if(a){const edge={from,to:n.id,x1:a.x+70,y1:a.y+108,x2:item.x+70,y2:item.y};const lane=a.x<170?a.x+150:a.x-10;edge.path=item.y-a.y>146?`M ${edge.x1} ${edge.y1} V ${edge.y1+17} H ${lane} V ${edge.y2-17} H ${edge.x2} V ${edge.y2}`:`M ${edge.x1} ${edge.y1} V ${(edge.y1+edge.y2)/2} H ${edge.x2} V ${edge.y2}`;edges.push(edge);}}}
  return {nodes,edges,width:Math.max(480,...nodes.map(n=>n.x+150)),height:Math.max(184,...nodes.map(n=>n.y+132))};
 }
-const conditionGear=(s,index)=>index!==s.skillTree.selectedPreset&&s.loadouts?.[index]?.equip?{...s,equip:s.loadouts[index].equip}:s;
 const treeFingerprint=s=>JSON.stringify({skillTree:s.skillTree,skills:s.skills,conditions:s.conditions,loadouts:s.loadouts});
+const conditionGear=(s,index)=>index!==s.skillTree.selectedPreset&&s.loadouts?.[index]?.equip?{...s,equip:s.loadouts[index].equip}:s;
 export function renderSkillTree(m){
  const D=m.definition??DEFAULT_DEFINITION,groups=skillTreeGroups(D),names=ids=>nodeNames(ids,D);
  const gear=conditionGear(m.draft,m.index),weaponType=skillConditionWeapon(gear),setCounts=skillConditionSetCounts(gear);
