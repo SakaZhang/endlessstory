@@ -244,3 +244,5 @@ runAffixSourceTest(process.execPath,[new URL('./affix-slot-story-compat-tests.mj
 
 // Rename-only v0.74: public branding without persisted identifier or mechanics changes.
 runAffixSourceTest(process.execPath,[new URL('./branding-v074-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+// Contextual skill/weapon/set release rules and nondestructive historical-save fallback.
+for(const file of ['contextual-skill-condition-tests.mjs','contextual-condition-compat-tests.mjs','contextual-condition-selector-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
