@@ -1,10 +1,11 @@
+import {SKILL_CONDITION_LABELS as conditionName} from './skill-conditions.js';
 import {renderSkillPixelIcon} from './skill-pixel-icons.js';
 import {getSkillTreeDefinition,raceSockets} from './race-registry.js';
 import {equipmentIcon} from './equipment-art.js';
 import {SOCKETS,SLOTNAME,SOCKET_TYPE,SKILLS} from './engine.js';
 import {icon} from './icons.js';
 const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const conditionName={always:'可用即施放',low:'生命低于60%',charge:'敌人将重击',burn:'目标已灼烧'};
+
 export function renderLoadouts(s,{wardrobeIds,bagItems}){
  const ids=wardrobeIds(s),gear=s.inventory.filter(it=>ids.has(it.id)),plans=Array.from({length:3},(_,i)=>s.loadouts?.[i]||null);
  const treeActive=s.skillTree?.mode==='active',treeNodes=Object.fromEntries(getSkillTreeDefinition(s).nodes.map(n=>[n.id,n]));

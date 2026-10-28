@@ -226,3 +226,13 @@ for(const file of ['story-war-locked-progression-tests.mjs','story-war-locked-pr
 // Integrated v0.71 contracts: no starter grants, immutable affix origins, talent effects,
 // fixed regional budgets, existing active saves and bounded offline world deadlines.
 for(const file of ["affix-level-growth-tests.mjs", "empty-starter-engine-tests.mjs", "empty-starter-app-ui-tests.cjs", "talent-balance-v071-tests.mjs", "talent-balance-ui-tests.cjs", "balance-cross-system-host-tests.mjs", "balance-talent-integration-tests.mjs", "monster-balance-tests.mjs", "monster-cadence-budget-tests.mjs", "old-active-balance-compat-tests.mjs", "balance-old-story-save-tests.mjs", "balance-old-finale-save-tests.mjs", "natural-balance-fixture-tests.mjs", "random-war-boundary-tests.mjs"])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+runAffixSourceTest(process.execPath,[new URL('./skill-tree-decrement-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+runAffixSourceTest(process.execPath,[new URL('./skill-condition-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+runAffixSourceTest(process.execPath,[new URL('./merchant-quality-pricing-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+runAffixSourceTest(process.execPath,[new URL('./merchant-quality-pricing-ui-tests.cjs',import.meta.url).pathname],{stdio:'inherit'});
+
+// Explicit selected-area travel is a persisted noncombat action.
+for(const file of ['selected-area-travel-tests.mjs','selected-area-travel-app-ui-tests.cjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});

@@ -1,8 +1,9 @@
+import {validSkillCondition} from './skill-conditions.js';
 import {SAVE_KEY} from './save-generation.js';
 // Current-generation skill-tree allocation and atomic draft transactions.
 const clone=x=>structuredClone(x),plain=x=>!!x&&typeof x==='object'&&!Array.isArray(x);
 const id=x=>typeof x==='string'&&/^[a-zA-Z0-9_.-]{1,100}$/.test(x)&&!['__proto__','constructor','prototype'].includes(x);
-const conditions=['always','low','charge','burn'];
+
 
 export function skillPointBudget(s){return Number.isSafeInteger(s?.level)&&s.level>=1?Math.min(99,s.level-1):null;}
 export function validSkillTreeConfig(config){
@@ -18,7 +19,7 @@ function validPreset(p,config,budget){
  const nodes=new Map(config.nodes.map(n=>[n.id,n]));
  if(!Array.from(p.unlocked).every(k=>nodes.has(k)&&nodes.get(k).requires.every(r=>p.unlocked.includes(r)))||skillPresetCost(p,config)>budget)return false;
  for(const [key,kind,count] of [['active','active',4],['passive','passive',2]])if(!Array.isArray(p[key])||p[key].length!==count||new Set(p[key].filter(x=>x!==null)).size!==p[key].filter(x=>x!==null).length||!Array.from(p[key]).every(k=>k===null||(typeof k==='string'&&p.unlocked.includes(k)&&nodes.get(k)?.kind===kind)))return false;
- return Array.isArray(p.conditions)&&p.conditions.length===4&&Array.from(p.conditions).every(c=>conditions.includes(c));
+ return Array.isArray(p.conditions)&&p.conditions.length===4&&Array.from(p.conditions).every(c=>validSkillCondition(c));
 }
 export function validSkillTree(s,config){
  if(s?.skillTree===undefined)return true;

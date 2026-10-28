@@ -1,0 +1,28 @@
+{
+  "version": "v0.72",
+  "baseline_commit": "4f31461c74f0fb1efb1623c82bba1a90542364a1",
+  "npm_test_exit": 0,
+  "build_exit": 0,
+  "release_cache_exit": 0,
+  "build_hash": "55df55bca27cca0db0dde1830ac62dfb8a38487f7a37eae8a032a6b269cff9f4",
+  "files": 2789,
+  "resource_urls": 2787,
+  "dependency_edges": 8647,
+  "focused_suites": {
+    "skill": 25,
+    "merchant": 10,
+    "release_tail": 46,
+    "travel": 2
+  },
+  "counts_overlap": true,
+  "browser": {
+    "desktop_preview": "29 condition options and merchant rules verified",
+    "further_interaction": "pending test-fixture upload authorization",
+    "mobile": "not verified"
+  },
+  "test_corrections": [
+    "current merchant fixture prices",
+    "preserve CSS and geometry invariants while allowing requested control changes",
+    "new suites execute in isolated subprocesses"
+  ]
+}

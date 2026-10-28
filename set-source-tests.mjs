@@ -1,3 +1,4 @@
+import {merchantEquipmentPrice} from './dist/engine.js';
 import {fresh} from './dist/engine.js';
 import {LEGACY_INSTANCES} from './dist/location-schema.js';
 import assert from 'node:assert/strict';
@@ -20,7 +21,7 @@ try{
  // Retired prototype nodes cannot be started in the current generation.
  for(const instance of Object.values(LEGACY_INSTANCES)){const p=fresh(),before=JSON.stringify(p);assert.equal(startInstanceEncounter(p,instance.id,0),null);assert.equal(JSON.stringify(p),before);}
  // Old pre-generated set stock remains unchanged, but cannot be purchased.
- const merchant=fresh();merchant.gold=10000;const m=ensureMerchant(merchant,1000),offer=m.offers.find(o=>o.type==='equipment');offer.item=item('helm',offer.item.level,'anvil',3,{levelSource:'merchant'});offer.price=15+sellValue(offer.item)*4+offer.item.level*3;const snapshot=JSON.stringify(merchant);assert(validSave(merchant));assert(!isMerchantEquipmentSellable(offer));assert(!purchaseEquipment(merchant,offer.offerId,m.revision,1001));assert.equal(JSON.stringify(merchant),snapshot);
+ const merchant=fresh();merchant.gold=10000;const m=ensureMerchant(merchant,1000),offer=m.offers.find(o=>o.type==='equipment');offer.item=item('helm',offer.item.level,'anvil',3,{levelSource:'merchant'});offer.price=merchantEquipmentPrice(offer.item);const snapshot=JSON.stringify(merchant);assert(validSave(merchant));assert(!isMerchantEquipmentSellable(offer));assert(!purchaseEquipment(merchant,offer.offerId,m.revision,1001));assert.equal(JSON.stringify(merchant),snapshot);
  // Previously paid, pending set output remains claimable with the same ID/divine data.
  const old=fresh(),legacySet=item('helm',1,'rune',3,{levelSource:'material'});applyForgeFavor(legacySet);old.pendingForgeClaim={kind:'equipment',item:legacySet};const identity=JSON.stringify(legacySet);assert(validSave(old));const paid=JSON.parse(JSON.stringify(old));assert.equal(JSON.stringify(claimForgeResult(paid)),identity);assert(validSave(paid));assert.equal(claimForgeResult(paid),null);
  assert(equipItem(paid,legacySet.id));assert(saveLoadout(paid,0,'保留旧套装'));const target=paid.inventory.find(i=>i.id===legacySet.id),base=JSON.stringify(target),beforeStats=JSON.stringify(stats(paid));paid.gold=1000;assert(reforge(paid,target.id,'value',0));assert.equal(JSON.stringify(target),base);assert.equal(JSON.stringify(stats(paid)),beforeStats);assert(resolveReforge(paid,false));assert.equal(JSON.stringify(target),base);assert.equal(paid.loadouts[0].equip.helm,target.id);assert(validSave(paid));

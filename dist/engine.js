@@ -1,3 +1,4 @@
+import {validSkillCondition} from './skill-conditions.js';
 import {activeHealingMultiplier,talentRefundCost,TALENT_BALANCE_VERSION} from './talent-policy.js';
 import {validInfinityGauntletState,settleInfinityRecipe} from './infinity-gauntlet-state.js';
 import {validWorldEventState,worldEventsDue,advanceRandomWorldEvents} from './random-world-events.js';
@@ -325,7 +326,7 @@ export function isProtected(s,id){return wardrobeIds(s).has(id)||s.pendingReforg
 function validSkillSlots(skills,conditions){
  if(!Array.isArray(skills)||![3,4].includes(skills.length)||!Array.isArray(conditions)||conditions.length!==skills.length)return false;
  const active=skills.filter(k=>k!==null);
- return new Set(active).size===active.length&&skills.every(k=>(skills.length===4&&k===null)||Object.hasOwn(SKILLS,k))&&conditions.every(k=>['always','low','charge','burn'].includes(k));
+ return new Set(active).size===active.length&&skills.every(k=>(skills.length===4&&k===null)||Object.hasOwn(SKILLS,k))&&conditions.every(validSkillCondition);
 }
 export function normalizeSkillSlots(s){
  const targets=[s,...(Array.isArray(s.loadouts)?s.loadouts.filter(Boolean):[])];
@@ -615,6 +616,21 @@ export function chooseAdventureNode(s,nodeId,{start=true,loop=false,fieldId=null
  let encounter=null;if(start){encounter=startInstanceEncounter(next,node.id,now);if(!encounter)return null;}
  if(!validSave(next))return null;
  for(const key of Object.keys(s))if(!Object.hasOwn(next,key))delete s[key];Object.assign(s,next);return {ok:true,nodeId,started:!!encounter,encounter:s.activeEncounter??null};
+}
+// Noncombat arrival uses the same ordinary territory/progression gates as an expedition.
+// Arrival records a visited field only: no monster/material discovery, rewards, healing or unlock.
+export function travelToArea(s,areaId,now=Date.now()){
+ if(typeof areaId!=='string'||!Object.hasOwn(AREAS,areaId)||s.contentMigration?.legacyDrain)return null;
+ const next=structuredClone(s),fieldId=areaId+'.field';
+ if(!chooseAdventureNode(next,fieldId,{start:false},now))return null;
+ next.siteId=areaId;next.location=AREAS[areaId].number-1;
+ next.activeEncounter=null;next.atCamp=false;next.running=false;next.restResume=false;
+ next.stopAfterBattle=false;next.stopAfterDungeon=false;
+ if(!normalizeRegionNavigation(next))return null;
+ if(!next.regionNavigation.exploredNodeIds.includes(fieldId))next.regionNavigation.exploredNodeIds.push(fieldId);
+ if(!validSave(next))return null;
+ for(const key of Object.keys(s))if(!Object.hasOwn(next,key))delete s[key];Object.assign(s,next);
+ return {ok:true,siteId:areaId,fieldId};
 }
 export function setExpeditionAutomation(s,kind,enabled){
  if(!['dungeon','boss'].includes(kind)||typeof enabled!=='boolean'||(enabled&&!nodeAccess(s,s.expedition?.fieldId).allowed)||!normalizeExpedition(s))return false;
@@ -976,7 +992,15 @@ export function normalizeMaterials(s){
 }
 export function materialCount(s,material,quality=0){const key=materialKey(material,quality);if(!key)return 0;return s.materialStacks!==undefined?(s.materialStacks[key]??0):(quality===0?s.materials?.[material]??0:0);}
 export function materialEntries(s){return Object.keys(MATERIALS).flatMap(material=>[0,1,2,3].map(quality=>({key:materialKey(material,quality),material,quality,count:materialCount(s,material,quality)}))).filter(row=>row.count>0);}
-export function materialPrice(material,quality=0){return materialKey(material,quality)?Math.ceil(MATERIALS[material].price*[1,1.5,2.5,4][quality]):null;}
+export const MERCHANT_QUALITY_MULTIPLIERS=Object.freeze([1,1.5,2.5,4]);
+export const MERCHANT_PRICING_VERSION=2;
+export function materialPrice(material,quality=0){return materialKey(material,quality)?Math.ceil(MATERIALS[material].price*MERCHANT_QUALITY_MULTIPLIERS[quality]):null;}
+// Keep the ordinary-quality price unchanged; quality scales the whole level price.
+export function merchantEquipmentPrice(it){
+ if(!it||!Number.isSafeInteger(it.level)||it.level<1||!Number.isInteger(it.rarity)||it.rarity<0||it.rarity>3)return null;
+ const price=Math.ceil((23+Math.floor(it.level/3)*4+it.level*3)*MERCHANT_QUALITY_MULTIPLIERS[it.rarity]);
+ return Number.isSafeInteger(price)?price:null;
+}
 function addMaterial(s,material,quality,count){const key=materialKey(material,quality),before=s.materialStacks[key]??0,added=Math.max(0,Math.min(count,1e12-before));s.materialStacks[key]=before+added;if(added>0)recordMaterialDiscovered(s,material);return added;}
 export function receiveBattleLoot(s,loot,summary=emptyLootSummary()){
  if(!validMonsterLedger(s)||!validCodexCollection(s)||!loot||!['equipment','material','consumable','potion'].includes(loot.kind))return false;
@@ -1012,14 +1036,14 @@ export function merchantMaterialKeys(){return Object.keys(MATERIALS).filter(k=>M
 export const MERCHANT_CYCLE_MS=30*60*1000;
 function validEquipment(i){try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;return Number.isSafeInteger(i.level)&&i.level>=1&&Number.isSafeInteger(i.baseLevel)&&i.baseLevel>=1&&(i.legendaryId||(typeof i.templateId==='string'&&typeof i.baseBudgetModel==='string'))&&validItemBudgetMetadata(i)&&(!i.legendaryId||validLegendaryEquipmentMetadata(i,AFFIX_DEFS))&&validEquipmentTemplateMetadata(i)&&validEnhancementMetadata(i)&&validEquipmentLevelMetadata(i)&&typeof i.id==='string'&&typeof i.name==='string'&&SLOTS.includes(i.slot)&&Number.isInteger(i.rarity)&&i.rarity>=0&&i.rarity<=3&&(!i.set||(BUILD.some(b=>b.id===i.set)&&SET_SLOTS.includes(i.slot)&&i.rarity===3))&&num(i.atk)&&num(i.hp)&&num(i.armor)&&num(i.level)&&i.bless===0&&Array.isArray(i.affixes)&&(i.rarity===0?i.affixes.length<=1:i.affixes.length===(LEGENDARY_EQUIPMENT_DEFINITIONS[i.legendaryId]?.ordinaryAffixCount??i.rarity+1))&&new Set(i.affixes.map(a=>a.stat)).size===i.affixes.length&&i.affixes.every(a=>(a.sourceRange!==undefined&&validAffixSource(a,AFFIX_DEFS)))&&(!i.special||(!i.set&&i.rarity>=2&&Object.hasOwn(SPECIALS,i.special.id)))&&(i.legendaryId===null||LEGENDARY_CODEX.some(def=>def.id===i.legendaryId&&def.implemented&&def.slot===i.slot&&!i.set))&&(i.divine===undefined||(i.divine?.id==='forge-favor'&&i.divine.name==='神赐·炉火眷顾'&&i.divine.model==='raw-v1'&&['atk','armor','hp'].every(k=>num(i.divine.bonus?.[k]))));}catch{return false;}}
 function validMerchant(merchant,s=null){
- if(!merchant||merchant.version!==1||!Number.isFinite(merchant.generatedAt)||merchant.generatedAt<0||merchant.generatedAt>1e15||!Array.isArray(merchant.offers))return false;
+ if(!merchant||merchant.version!==1||(merchant.pricingVersion!==undefined&&merchant.pricingVersion!==MERCHANT_PRICING_VERSION)||!Number.isFinite(merchant.generatedAt)||merchant.generatedAt<0||merchant.generatedAt>1e15||!Array.isArray(merchant.offers))return false;
  const rows=merchant.offers;
  const materialValid=o=>Object.hasOwn(MATERIALS,o.material)&&Object.hasOwn(MERCHANT_STOCK,o.material)&&Number.isInteger(o.quality??0)&&(o.quality??0)>=0&&(o.quality??0)<=3&&o.price===racialGoldCost(s,materialPrice(o.material,o.quality??0))&&Number.isInteger(o.stock)&&o.stock>=0&&o.stock<=MERCHANT_STOCK[o.material][1];
  {
   if(rows.length!==8||new Set(rows.map(o=>o?.offerId)).size!==8||!rows.every(o=>o&&typeof o.offerId==='string'))return false;
   const mats=rows.filter(o=>o.type==='material'),gear=rows.filter(o=>o.type==='equipment'),consumables=rows.filter(o=>o.type==='consumable'),recipes=rows.filter(o=>o.type==='recipe');
   if(mats.length<2||mats.length>3||mats.length+gear.length+consumables.length+recipes.length!==8||recipes.length>3||new Set(recipes.map(o=>o.recipeId)).size!==recipes.length||!recipes.every(o=>Object.hasOwn(RECIPES,o.recipeId)&&RECIPES[o.recipeId].enabled&&o.price===racialGoldCost(s,RECIPES[o.recipeId].price)&&Number.isSafeInteger(o.price)&&o.price>0&&[0,1].includes(o.stock))||consumables.length>2||new Set(consumables.map(o=>o.consumable)).size!==consumables.length||!consumables.every(o=>Object.hasOwn({memoryFruit:200,reforgeToken:120},o.consumable)&&o.price===racialGoldCost(s,({memoryFruit:200,reforgeToken:120})[o.consumable])&&[0,1].includes(o.stock))||new Set(mats.map(o=>o.material)).size!==mats.length||!mats.every(materialValid))return false;
-  if(!gear.every(o=>validEquipment(o.item)&&!o.item.divine&&o.item.legendaryId===null&&[0,1].includes(o.stock)&&o.price===racialGoldCost(s,15+sellValue(o.item)*4+o.item.level*3))||new Set(gear.map(o=>o.item.id)).size!==gear.length)return false;
+  if(!gear.every(o=>validEquipment(o.item)&&!o.item.divine&&o.item.legendaryId===null&&[0,1].includes(o.stock)&&o.price===racialGoldCost(s,merchant.pricingVersion===MERCHANT_PRICING_VERSION?merchantEquipmentPrice(o.item):15+sellValue(o.item)*4+o.item.level*3))||new Set(gear.map(o=>o.item.id)).size!==gear.length)return false;
  }
  if(['cycleStart','nextRefreshAt','paidRefreshes','revision'].some(k=>merchant[k]===undefined))return false;
  return Number.isFinite(merchant.cycleStart)&&merchant.cycleStart>=0&&merchant.cycleStart<=1e15&&merchant.nextRefreshAt===merchant.cycleStart+MERCHANT_CYCLE_MS&&Number.isSafeInteger(merchant.paidRefreshes)&&merchant.paidRefreshes>=0&&merchant.paidRefreshes<=1e9&&Number.isSafeInteger(merchant.revision)&&merchant.revision>=0;
@@ -1028,7 +1052,7 @@ function rollMerchantOffers(s,revision){
  const [minGearLevel,maxGearLevel]=getMerchantEquipmentLevelRange(s);
  const pool=merchantMaterialKeys(),offers=[],count=rand(2,3);
  for(let i=0;i<count;i++){const material=weighted(pool.map(key=>[key,MATERIALS[key].weight??1]));pool.splice(pool.indexOf(material),1);const [min,max]=MERCHANT_STOCK[material];const quality=rollQuality([75,20,4.5,.5]);offers.push({type:'material',material,quality,price:materialPrice(material,quality),stock:rand(min,max)});}
- while(offers.length<8){const originRace=PLAYABLE_RACES[rand(0,PLAYABLE_RACES.length-1)],available=SLOTS.filter(slot=>slot!=='core'||originRace==='ashen'),slot=available[rand(0,available.length-1)],it=item(slot,rand(minGearLevel,maxGearLevel),null,rollQuality(),{levelSource:'merchant',originRace});offers.push({type:'equipment',item:it,price:15+sellValue(it)*4+it.level*3,stock:1});}
+ while(offers.length<8){const originRace=PLAYABLE_RACES[rand(0,PLAYABLE_RACES.length-1)],available=SLOTS.filter(slot=>slot!=='core'||originRace==='ashen'),slot=available[rand(0,available.length-1)],it=item(slot,rand(minGearLevel,maxGearLevel),null,rollQuality(),{levelSource:'merchant',originRace});offers.push({type:'equipment',item:it,price:merchantEquipmentPrice(it),stock:1});}
  if(Math.random()<.03)offers[7]={type:'consumable',consumable:'memoryFruit',price:200,stock:1};
  if(Math.random()<.10){const index=offers.findLastIndex(o=>o.type==='equipment');offers[index]={type:'consumable',consumable:'reforgeToken',price:120,stock:1};}
  const unknown=Object.keys(RECIPES).filter(id=>RECIPES[id].enabled&&!recipeKnown(s,id));
@@ -1038,9 +1062,17 @@ function rollMerchantOffers(s,revision){
 export function ensureMerchant(s,now=Date.now()){
  if(!validRecipes(s)||!normalizeAreaProgress(s))return null;
  if(!Number.isFinite(now)||now<0||now>1e15)return null;
- if(s.merchant===undefined){normalizeRecipes(s);s.merchant={version:1,offers:rollMerchantOffers(s,0),generatedAt:now,cycleStart:now,nextRefreshAt:now+MERCHANT_CYCLE_MS,paidRefreshes:0,revision:0};return s.merchant;}
+ if(s.merchant===undefined){normalizeRecipes(s);s.merchant={version:1,pricingVersion:MERCHANT_PRICING_VERSION,offers:rollMerchantOffers(s,0),generatedAt:now,cycleStart:now,nextRefreshAt:now+MERCHANT_CYCLE_MS,paidRefreshes:0,revision:0};return s.merchant;}
  if(!validMerchant(s.merchant,s))return null;
- normalizeRecipes(s);const m=s.merchant;for(const offer of m.offers)if(offer.type==='material'||!offer.type)offer.quality??=0;
+ normalizeRecipes(s);const m=s.merchant;
+ // Accept old saves, but never transact an old-price quote. Reprice only: no RNG,
+ // stock resets, item mutations, timer changes, or changes to already-owned gear.
+ if(m.pricingVersion!==MERCHANT_PRICING_VERSION){
+  if(!Number.isSafeInteger(m.revision+1))return null;
+  for(const offer of m.offers)if(offer.type==='equipment')offer.price=racialGoldCost(s,merchantEquipmentPrice(offer.item));
+  m.pricingVersion=MERCHANT_PRICING_VERSION;m.revision++;
+ }
+ for(const offer of m.offers)if(offer.type==='material'||!offer.type)offer.quality??=0;
  if(now>=m.nextRefreshAt){
   const skipped=Math.floor((now-m.cycleStart)/MERCHANT_CYCLE_MS);
   m.cycleStart+=skipped*MERCHANT_CYCLE_MS;m.nextRefreshAt=m.cycleStart+MERCHANT_CYCLE_MS;

@@ -1,3 +1,4 @@
+import {skillConditionMatches} from './skill-conditions.js';
 import {talentNegativeDuration,activeHealingMultiplier} from './talent-policy.js';
 import {countInfinityCast,infinityProcTarget} from './infinity-gauntlet-combat.js';
 import {storyScenarioNonlethal} from './story-scenario-registry.js';
@@ -157,7 +158,7 @@ export function stepMulti(s,e,turn,ctx){
  if(!treePhase?.acted){
  let target=e.enemies.find(u=>u.id===e.targetId);const charging=()=>!!target.control.preparing||(!target.typedProfile&&e.round>=target.nextHeavy);
  const usable=k=>!(k==='warcry'&&e.warcry>0)&&!(k==='ironcoat'&&e.ironcoat>0)&&!(k==='blunt'&&target.blunt>0)&&!(k==='scorch'&&target.scorch>0)&&!(k==='guard'&&e.guard>0)&&!(k==='barrier'&&(e.barrier>0||e.barrierShield>0))&&!(k==='mend'&&e.heroHp>=st.hp)&&!(k==='cleanse'&&!e.heroBurn&&!e.weakness&&!(e.typedDots?.length))&&!(k==='delay'&&(!charging()||target.heavyDelayed));
- const k=(ctx.treeSkills||ctx.basicOnly?null:s.skills.find((key,i)=>key!==null&&SKILLS[key]&&skillUnlocked(s,key)&&!e.cd[key]&&usable(key)&&(s.conditions[i]!=='low'||e.heroHp<st.hp*.6)&&(s.conditions[i]!=='charge'||charging())&&(s.conditions[i]!=='burn'||target.burn>0)))??null,fixture=!ctx.basicOnly&&e.developmentFixture===true?e.fixtureAction:null;if(!ctx.basicOnly)e.fixtureAction=null;
+ const k=(ctx.treeSkills||ctx.basicOnly?null:s.skills.find((key,i)=>key!==null&&SKILLS[key]&&skillUnlocked(s,key)&&!e.cd[key]&&usable(key)&&skillConditionMatches(s.conditions[i],{encounter:e,target,maxHp:st.hp,now,charging:charging(),legacy:true})))??null,fixture=!ctx.basicOnly&&e.developmentFixture===true?e.fixtureAction:null;if(!ctx.basicOnly)e.fixtureAction=null;
  if(k&&!fixture)e.cd[k]=SKILLS[k].cd;
  const executeCast=(extra=false)=>{if(k||fixture)e.activeCastCount++;
  target=e.enemies.find(u=>u.id===e.targetId&&u.hp>0)??e.enemies.find(u=>u.hp>0);if(!target)return true;
@@ -411,7 +412,7 @@ function runTreePlayerPhase(s,e,ctx,logs){
  }
  const selected=rules.active.find((id,index)=>{
   if(!id||!rules.unlocked.includes(id)||!TREE_ACTIVE_SKILL_IDS.includes(id)||(e.treeSkillCooldowns?.[id]??0)>0||!rules.configs[id])return false;
-  const condition=rules.conditions[index];if(!['always','low','charge','burn'].includes(condition)||condition==='low'&&e.heroHp>=view.hp*.6||condition==='charge'&&!target.control.preparing||condition==='burn'&&!(target.burn>0||host.has(target.id,'burn')))return false;
+  const condition=rules.conditions[index];if(!skillConditionMatches(condition,{encounter:e,target,maxHp:view.hp,now:ctx.now}))return false;
   if(id==='anvil_cry'&&host.activeBuffIds().includes(id))return false;if(id==='iron_vigil'&&e.playerShieldLayers?.layers.some(l=>l.source==='skill:iron_vigil'&&l.remaining>0&&(l.expiresAt===null||l.expiresAt>e.playerShieldLayers.clock)))return false;
   return !!planTreeSkill({stats:view,snapshotStats:base,context:{...raceRuntimeContext(e,s.race),...equipmentSkillContext(s)},skillId:id,castId:e.id+':tree:'+e.round,weaponType:rules.weaponType,config:rules.configs[id],selectedTargetId:target.id,targets:e.enemies.map(u=>({id:u.id,alive:u.hp>0,hp:u.hp,maxHp:u.max,baseAtk:u.atk,baseArmor:u.armor,atk:u.atk,preparing:!!u.control.preparing,poisonLayers:e.treePoison?.[u.id]?.layers.length??0,burning:u.burn>0||host.has(u.id,'burn'),bleeding:host.has(u.id,'bleed'),armorBroken:u.broken>0||host.get(u.id,'armorDown')>0})),hero:{hp:e.heroHp,maxHp:view.hp,defense:view.armor,shield:e.playerShieldLayers?.layers.reduce((sum,l)=>sum+l.remaining,0)??0,activeBuffIds:host.activeBuffIds(),eligibleDebuffIds:host.eligibleDebuffIds()}});
  });

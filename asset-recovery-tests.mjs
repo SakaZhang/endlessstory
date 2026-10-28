@@ -40,7 +40,10 @@ try{
  const staleDoc=doc();let releaseVersion;const stale=bindAssetReleaseNotice(staleDoc,{fetcher:()=>new Promise(r=>releaseVersion=r)});reportAssetFailure('./late.png');await flush();stale();releaseVersion({ok:true,json:async()=>({release:newHash})});await flush();assert.equal(staleDoc.children.length,0,'disposed async result never recreates notice');
  // Exact canonical paths, actual decoded pixels for all 150 skill identities.
  const {loadImage}=createRequire(import.meta.url)('@napi-rs/canvas');let skills=0;for(const tree of [DWARF_EXPANDED_DEFINITION,...EXPANSION_PACKS.map(p=>p.skillTree??p.tree).filter(Boolean)])for(const n of tree.nodes){const html=renderSkillPixelIcon(n.id),src=html.match(/src="([^"]+)"/)?.[1];assert(src,n.id);assert(existsSync('dist/'+src),src);const png=await loadImage(readFileSync('dist/'+src));assert(png.width>0&&png.height>0);skills++;}
- // Layout was intentionally untouched after the user identified their own browser issue.
- const {execFileSync}=await import('node:child_process');for(const file of ['dist/skill-tree-ui.js','dist/skill-tree-ui.css','dist/skill-pixel-consumers.css'])assert.equal(readFileSync(file,'utf8'),execFileSync('git',['show','3117c0691986ce14054c8b858ce72eaf57853107:'+file],{encoding:'utf8'}));
+ // Keep the browser-scroll layout invariant; v0.72 explicitly changes refund controls
+ // and condition choices, which have dedicated UI/runtime regressions.
+ const {execFileSync}=await import('node:child_process');for(const file of ['dist/skill-tree-ui.css','dist/skill-pixel-consumers.css'])assert.equal(readFileSync(file,'utf8'),execFileSync('git',['show','3117c0691986ce14054c8b858ce72eaf57853107:'+file],{encoding:'utf8'}));
+ const layoutFunctions=text=>text.slice(text.indexOf('export function skillTreeGroups'),text.indexOf('const treeFingerprint='));
+ assert.equal(layoutFunctions(readFileSync('dist/skill-tree-ui.js','utf8')),layoutFunctions(execFileSync('git',['show','3117c0691986ce14054c8b858ce72eaf57853107:dist/skill-tree-ui.js'],{encoding:'utf8'})));
  console.log(`PASS recovery: bounded backoff/manual retry/abort; cached errors/listeners/removal; offline/stale no-store version checks; explicit confirmed reload only; ${skills} actual skill PNGs; tree layout untouched. DOM mocks + native pixels, NOT browser QA.`);
 }finally{Object.assign(globalThis,old);}
