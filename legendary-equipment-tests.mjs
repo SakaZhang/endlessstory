@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {createLegendaryEquipment as create,legendaryIdentitySnapshot} from './dist/legendary-equipment.js';
 import {deriveEquipmentBase,affixRange} from './dist/equipment-budget.js';
 const definition={id:'fixture-hammer',ready:true,name:'测试锤',slot:'weapon',baseVariant:'hammer_balanced',exclusiveId:'fixture-echo',originRace:'dwarf',weaponType:'hammer'};
-const affixDefs={hp:{min:15,max:40},atk:{min:2,max:7},armor:{min:3,max:8},luck:{min:1,max:3},crit:{min:3,max:9}};
+const affixDefs={waterResist:{min:5,max:12},hit:{min:5,max:12},critDamage:{min:8,max:20},lifesteal:{min:3,max:8},fireAtk:{min:2,max:7},fireResist:{min:5,max:12},hp:{min:15,max:40},atk:{min:2,max:7},armor:{min:3,max:8},luck:{min:1,max:3},crit:{min:3,max:9}};
 const args={id:'owned-1',legendaryId:'fixture-hammer',level:137,definition,affixDefs,random:()=>.99};
 const it=create(args);assert(it);assert.equal(it.rarity,3);assert.equal(it.budgetQuality,4);assert.equal(it.affixes.length,4);assert.equal(new Set(it.affixes.map(a=>a.stat)).size,4);assert.equal(it.special,null);assert.equal(it.set,null);assert.equal(it.divine,undefined);assert.equal(it.enhancement,undefined);
 const raw=deriveEquipmentBase({slot:'weapon',baseVariant:'hammer_balanced',level:100,quality:4});for(const k of ['atk','armor','hp'])assert.equal(it[k],raw[k]);

@@ -31,4 +31,53 @@ for(const condition of ['burn','bleed','poison','armorDown','attackDown','hitDow
 }
 {const {s,e}=ready('bleed');const target=e.enemies.find(u=>u.id===e.targetId)??e.enemies[0];add(e,target.id,'dot',{status:'bleed',damageType:'physical',tickIntervalMs:1000,durationMs:1100});E.step(s,e,11100);assert.notEqual(e.lastCast?.skillId,'fracture_strike');}
 {const {s,e}=ready('bleed',true);add(e,e.enemies[1].id,'dot',{status:'bleed',damageType:'physical',tickIntervalMs:2000});assert(E.validSave(s));E.step(s,e,11100);assert.notEqual(e.lastCast?.skillId,'fracture_strike','other target bleeding must not trigger');assert(E.setCombatTarget(s,e.enemies[1].id));const resumed=JSON.parse(JSON.stringify(s));assert.deepEqual(E.step(s,e,12200),E.step(resumed,resumed.activeEncounter,12200));assert.equal(e.lastCast?.skillId,'fracture_strike','selected bleeding target triggers');assert.deepEqual(s,resumed);assert(E.validSave(s));}
-console.log('PASS shared skill conditions: 29 choices, five-race saves/loadouts, selected target/self isolation, effect dependencies, expiry, real selector and JSON replay');
+console.log('PASS shared skill conditions: 28 visible choices, five-race saves/loadouts, selected target/self isolation, effect dependencies, expiry, real selector and JSON replay');
+
+// A single visible option; old persisted IDs remain a safe, non-resetting alias.
+assert(ids.includes('elementResistDown'));
+assert(!ids.includes('fireResistDown'));
+assert(validSkillCondition('fireResistDown'));
+for(const type of ['fireResistDown','elementResistDown'])for(const element of type==='elementResistDown'?['earth','water','fire','wind','light','dark']:[null]){
+ const e=fixture(),extra=element?{damageType:element}:{};
+ add(e,'b',type,{...extra,requiresStatus:'burn'});
+ for(const condition of ['elementResistDown','fireResistDown']){
+  assert(!check(e,condition,e.enemies[1]),'inactive dependency');
+  add(e,'a','dot',{status:'burn',damageType:'fire',tickIntervalMs:2000});
+  assert(!check(e,condition,e.enemies[1]),'other target burn cannot activate debuff');
+ }
+ add(e,'b','dot',{status:'burn',damageType:'fire',tickIntervalMs:2000,durationMs:1000});
+ for(const condition of ['elementResistDown','fireResistDown']){assert(check(e,condition,e.enemies[1]));assert(!check(e,condition),'other target debuff cannot trigger');}
+ e.treeEffects.clock=2000;
+ assert(!check(e,'elementResistDown',e.enemies[1]),'expired dependency');
+ const z=fixture();add(z,'a',type,{...extra,amount:0});assert(!check(z,'elementResistDown'),'zero reduction is not effective');
+}
+// Production selector recognizes both source schemas through either saved condition ID.
+for(const condition of ['elementResistDown','fireResistDown'])for(const type of ['fireResistDown','elementResistDown'])for(const expired of [false,true]){
+ const {s,e}=ready(condition),target=e.enemies.find(u=>u.id===e.targetId)??e.enemies[0];
+ add(e,target.id,type,{...(type==='elementResistDown'?{damageType:'dark'}:{}),durationMs:expired?1100:5000});
+ const resumed=JSON.parse(JSON.stringify(s));assert(E.validSave(resumed));
+ assert.deepEqual(E.step(s,e,11100),E.step(resumed,resumed.activeEncounter,11100));
+ assert.equal(e.lastCast?.skillId==='fracture_strike',!expired);assert.deepEqual(s,resumed);
+}
+const {mountSkillTree}=await import('./dist/skill-tree-ui.js');
+const {getSkillTreeDefinition}=await import('./dist/race-registry.js');
+for(const race of ['dwarf','human','elf','goblin','ashen']){
+ const s=E.fresh(race);s.conditions[0]='fireResistDown';
+ for(const p of s.skillTree.presets)p.conditions[0]='fireResistDown';
+ assert(E.saveLoadout(s,0,'旧方案'));assert(E.validSave(JSON.parse(JSON.stringify(s))));assert(E.applyLoadout(s,0));
+ const before=structuredClone(s),listeners={},host={innerHTML:'',contains:t=>t.owner===host,addEventListener(k,f){listeners[k]=f;},removeEventListener(k){delete listeners[k];}};
+ const ui=mountSkillTree(host,{getState:()=>s,getDefinition:getSkillTreeDefinition,commit:async()=>({ok:false})});
+ assert(host.innerHTML.includes('<option value="elementResistDown" selected>目标元素抗性削弱</option>'));
+ assert(!host.innerHTML.includes('value="fireResistDown"'));assert(!host.innerHTML.includes('目标火抗削弱'));
+ const html=renderLoadouts(s,{wardrobeIds:E.wardrobeIds,bagItems:E.bagItems});assert(html.includes('目标元素抗性削弱'));assert(!html.includes('目标火抗削弱'));
+ await listeners.click({target:{closest:()=>({owner:host,dataset:{treeAction:'cancel'}})}});
+ assert.deepEqual(s,before,'display and cancel do not rewrite or reset old save');ui.dispose();
+}
+// Use the actual dwarf and elf planners, not merely hand-authored effect schemas.
+const {planTreeSkill}=await import('./dist/skill-tree-consumer.js');
+const {skillConfigs}=await import('./dist/skill-tree-tuning.js');
+const {planSkill:elfPlan}=await import('./dist/races/elf/skills.js');
+const stats={atk:100,hp:100,armor:10},input={castId:'resist-test',weaponType:'hammer',selectedTargetId:'a',targets:[{id:'a',alive:true}],stats};
+const plans=[planTreeSkill({...input,skillId:'furnace_etch',config:skillConfigs(stats).furnace_etch}),...['elf.ember_bloom','elf.root_eclipse'].map(skillId=>elfPlan({...input,skillId}))];
+for(const plan of plans){assert(plan);const e=fixture(),effect=plan.actions.flatMap(a=>a.effects??[]).find(x=>['fireResistDown','elementResistDown'].includes(x.type));assert(effect);add(e,'a',effect.type,effect);assert(check(e,'elementResistDown'),plan.skillId);assert(check(e,'fireResistDown'),plan.skillId);e.treeEffects.clock=1000+effect.durationMs;assert(!check(e,'elementResistDown'),plan.skillId+' expiry');}
+console.log('PASS unified resistance condition: both actual racial sources, all six elements, dependency/expiry/target isolation, selector replay, five-race old saves and canonical editor/loadout display');

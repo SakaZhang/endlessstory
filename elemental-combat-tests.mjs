@@ -27,7 +27,8 @@ try{
  }
  // Current M2 snapshot validation is covered by real multi encounter tests.
  let seed=571;Math.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};
- const all=new Set();for(let i=0;i<20000;i++){const it=item('gloves',3,null,3);assert.equal(it.affixes.length,4);assert.equal(new Set(it.affixes.map(a=>a.stat)).size,4);it.affixes.forEach(a=>all.add(a.stat));}
+ // Offensive weapons and defensive armor together cover the six elemental pairs.
+ const all=new Set();for(let i=0;i<20000;i++){const it=item(i%2?'weapon':'armor',3,null,3);assert.equal(it.affixes.length,4);assert.equal(new Set(it.affixes.map(a=>a.stat)).size,4);it.affixes.forEach(a=>all.add(a.stat));}
  for(const k of ELEMENT_KEYS){assert(all.has(k+'Atk'));assert(all.has(k+'Resist'));}
  assert(!all.has('element'));assert([...all].every(k=>ACTIVE_AFFIX_KEYS.includes(k)));
 }finally{Math.random=oldRandom;}

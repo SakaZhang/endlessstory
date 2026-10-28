@@ -6,7 +6,7 @@ function rolls(values,fn){const old=Math.random;let calls=0;Math.random=()=>{con
 // Dwarf q3 all: 4 types + 4 values + 4 combined-opportunity checks + 1 special, then one independent divine roll.
 for(const accept of [false,true])for(const hit of [false,true]){
  const {s,it}=setup(),before=clone(it);const r=rolls([...Array(13).fill(.4),hit?.02:.033],()=>E.reforge(s,it.id,'all'));
- assert(r.value);assert.equal(r.calls,14);assert.equal(s.pendingReforge.ruleVersion,7);assert.equal(s.pendingReforge.oldDivine,null);assert.equal(!!s.pendingReforge.newDivine,hit);assert.deepEqual(it,before);assert.equal(s.consumables.reforgeToken,4);
+ assert(r.value);assert.equal(r.calls,14);assert.equal(s.pendingReforge.ruleVersion,8);assert.equal(s.pendingReforge.oldDivine,null);assert.equal(!!s.pendingReforge.newDivine,hit);assert.deepEqual(it,before);assert.equal(s.consumables.reforgeToken,4);
  const loaded=JSON.parse(JSON.stringify(s));assert(E.validPendingReforge(loaded));assert(E.validSave(loaded));const preview=E.getPendingReforgeCandidate(loaded);assert.equal(!!preview.divine,hit);assert.notEqual(preview,loaded.inventory.at(-1));
  rolls([],()=>{const old=Math.random;Math.random=()=>{throw Error('decision must not roll');};try{assert(E.resolveReforge(loaded,accept,loaded.pendingReforge.operationId));}finally{Math.random=old;}});
  const result=loaded.inventory.find(x=>x.id===it.id);assert.equal(!!result.divine,accept&&hit);assert.equal(loaded.consumables.reforgeToken,4);assert.equal(E.resolveReforge(loaded,true,'stale'),null);

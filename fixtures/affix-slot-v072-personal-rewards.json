@@ -1,0 +1,3092 @@
+[
+  {
+    "race": "dwarf",
+    "id": "personal.dwarf.coup",
+    "p": {
+      "version": 1,
+      "slot": "weapon",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.dwarf.coup-123456789-loot-1",
+        "slot": "weapon",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "铜沿斧",
+        "atk": 133,
+        "armor": 0,
+        "hp": 74,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "dwarf_scatter_copperedge_axe",
+        "baseVariant": "axe_attack",
+        "weaponType": "axe",
+        "originRace": "dwarf",
+        "visualKey": "dwarf_scatter_copperedge_axe",
+        "visualVariant": "dwarf_scatter_copperedge_axe",
+        "iconKey": "weapon",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "dwarf",
+    "id": "personal.dwarf.coup",
+    "p": {
+      "version": 1,
+      "slot": "helm",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.dwarf.coup-123456789-loot-1",
+        "slot": "helm",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "铆脊盔",
+        "atk": 5,
+        "armor": 63,
+        "hp": 144,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "dwarf_scatter_riveted_helm",
+        "baseVariant": "helm_armor",
+        "weaponType": null,
+        "originRace": "dwarf",
+        "visualKey": "dwarf_scatter_riveted_helm",
+        "visualVariant": "dwarf_scatter_riveted_helm",
+        "iconKey": "helm",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "dwarf",
+    "id": "personal.dwarf.coup",
+    "p": {
+      "version": 1,
+      "slot": "armor",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.dwarf.coup-123456789-loot-1",
+        "slot": "armor",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "铆岩胸甲",
+        "atk": 0,
+        "armor": 119,
+        "hp": 255,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "dwarf_scatter_riveted_cuirass",
+        "baseVariant": "armor_armor",
+        "weaponType": null,
+        "originRace": "dwarf",
+        "visualKey": "dwarf_scatter_riveted_cuirass",
+        "visualVariant": "dwarf_scatter_riveted_cuirass",
+        "iconKey": "armor",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "dwarf",
+    "id": "personal.dwarf.coup",
+    "p": {
+      "version": 1,
+      "slot": "gloves",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.dwarf.coup-123456789-loot-1",
+        "slot": "gloves",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "铜节铁手",
+        "atk": 19,
+        "armor": 48,
+        "hp": 144,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "dwarf_scatter_copperknuckle_gloves",
+        "baseVariant": "gloves_armor",
+        "weaponType": null,
+        "originRace": "dwarf",
+        "visualKey": "dwarf_scatter_copperknuckle_gloves",
+        "visualVariant": "dwarf_scatter_copperknuckle_gloves",
+        "iconKey": "gloves",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "dwarf",
+    "id": "personal.dwarf.coup",
+    "p": {
+      "version": 1,
+      "slot": "boots",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.dwarf.coup-123456789-loot-1",
+        "slot": "boots",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "铆跟铁靴",
+        "atk": 5,
+        "armor": 58,
+        "hp": 168,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "dwarf_scatter_rivetheel_boots",
+        "baseVariant": "boots_armor",
+        "weaponType": null,
+        "originRace": "dwarf",
+        "visualKey": "dwarf_scatter_rivetheel_boots",
+        "visualVariant": "dwarf_scatter_rivetheel_boots",
+        "iconKey": "boots",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "dwarf",
+    "id": "personal.dwarf.coup",
+    "p": {
+      "version": 1,
+      "slot": "ring",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.dwarf.coup-123456789-loot-1",
+        "slot": "ring",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "守誓戒",
+        "atk": 24,
+        "armor": 41,
+        "hp": 267,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "dwarf_scatter_oathkeeper_ring",
+        "baseVariant": "ring_survival",
+        "weaponType": null,
+        "originRace": "dwarf",
+        "visualKey": "dwarf_scatter_oathkeeper_ring",
+        "visualVariant": "dwarf_scatter_oathkeeper_ring",
+        "iconKey": "ring",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "dwarf",
+    "id": "personal.dwarf.coup",
+    "p": {
+      "version": 1,
+      "slot": "amulet",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.dwarf.coup-123456789-loot-1",
+        "slot": "amulet",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "旧誓符",
+        "atk": 50,
+        "armor": 19,
+        "hp": 283,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "dwarf_scatter_old_oath_charm",
+        "baseVariant": "amulet_element",
+        "weaponType": null,
+        "originRace": "dwarf",
+        "visualKey": "dwarf_scatter_old_oath_charm",
+        "visualVariant": "dwarf_scatter_old_oath_charm",
+        "iconKey": "amulet",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "human",
+    "id": "personal.human.duty",
+    "p": {
+      "version": 1,
+      "slot": "weapon",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.human.duty-123456789-loot-1",
+        "slot": "weapon",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "王蓝剑盾",
+        "atk": 111,
+        "armor": 22,
+        "hp": 74,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "human_scatter_shield_6",
+        "baseVariant": "hammer_balanced",
+        "weaponType": "sword_shield",
+        "originRace": "human",
+        "visualKey": "human_scatter_shield_6",
+        "visualVariant": "human_scatter_shield_6",
+        "iconKey": "weapon",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "human",
+    "id": "personal.human.duty",
+    "p": {
+      "version": 1,
+      "slot": "helm",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.human.duty-123456789-loot-1",
+        "slot": "helm",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "盐泉盔",
+        "atk": 5,
+        "armor": 63,
+        "hp": 144,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "human_scatter_helm_2",
+        "baseVariant": "helm_armor",
+        "weaponType": null,
+        "originRace": "human",
+        "visualKey": "human_scatter_helm_2",
+        "visualVariant": "human_scatter_helm_2",
+        "iconKey": "helm",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "human",
+    "id": "personal.human.duty",
+    "p": {
+      "version": 1,
+      "slot": "armor",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.human.duty-123456789-loot-1",
+        "slot": "armor",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "盐泉甲",
+        "atk": 0,
+        "armor": 119,
+        "hp": 255,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "human_scatter_armor_2",
+        "baseVariant": "armor_armor",
+        "weaponType": null,
+        "originRace": "human",
+        "visualKey": "human_scatter_armor_2",
+        "visualVariant": "human_scatter_armor_2",
+        "iconKey": "armor",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "human",
+    "id": "personal.human.duty",
+    "p": {
+      "version": 1,
+      "slot": "gloves",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.human.duty-123456789-loot-1",
+        "slot": "gloves",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "盐泉手套",
+        "atk": 19,
+        "armor": 48,
+        "hp": 144,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "human_scatter_gloves_2",
+        "baseVariant": "gloves_armor",
+        "weaponType": null,
+        "originRace": "human",
+        "visualKey": "human_scatter_gloves_2",
+        "visualVariant": "human_scatter_gloves_2",
+        "iconKey": "gloves",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "human",
+    "id": "personal.human.duty",
+    "p": {
+      "version": 1,
+      "slot": "boots",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.human.duty-123456789-loot-1",
+        "slot": "boots",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "盐泉靴",
+        "atk": 5,
+        "armor": 58,
+        "hp": 168,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "human_scatter_boots_2",
+        "baseVariant": "boots_armor",
+        "weaponType": null,
+        "originRace": "human",
+        "visualKey": "human_scatter_boots_2",
+        "visualVariant": "human_scatter_boots_2",
+        "iconKey": "boots",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "human",
+    "id": "personal.human.duty",
+    "p": {
+      "version": 1,
+      "slot": "ring",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.human.duty-123456789-loot-1",
+        "slot": "ring",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "麦穗印戒",
+        "atk": 77,
+        "armor": 0,
+        "hp": 207,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "human_scatter_ring_wheat",
+        "baseVariant": "ring_attack",
+        "weaponType": null,
+        "originRace": "human",
+        "visualKey": "human_scatter_ring_wheat",
+        "visualVariant": "human_scatter_ring_wheat",
+        "iconKey": "ring",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "human",
+    "id": "personal.human.duty",
+    "p": {
+      "version": 1,
+      "slot": "amulet",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.human.duty-123456789-loot-1",
+        "slot": "amulet",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "归仓麦穗坠",
+        "atk": 19,
+        "armor": 44,
+        "hp": 315,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "human_scatter_wheat_amulet",
+        "baseVariant": "amulet_survival",
+        "weaponType": null,
+        "originRace": "human",
+        "visualKey": "human_scatter_wheat_amulet",
+        "visualVariant": "human_scatter_wheat_amulet",
+        "iconKey": "amulet",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "elf",
+    "id": "personal.elf.heir",
+    "p": {
+      "version": 1,
+      "slot": "weapon",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.elf.heir-123456789-loot-1",
+        "slot": "weapon",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "镜叶复弓",
+        "atk": 133,
+        "armor": 0,
+        "hp": 74,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "elf_scatter_weapon_4",
+        "baseVariant": "bow_attack",
+        "weaponType": "bow",
+        "originRace": "elf",
+        "visualKey": "elf_scatter_weapon_4",
+        "visualVariant": "elf_scatter_weapon_4",
+        "iconKey": "weapon",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "elf",
+    "id": "personal.elf.heir",
+    "p": {
+      "version": 1,
+      "slot": "helm",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.elf.heir-123456789-loot-1",
+        "slot": "helm",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "鹿角林冠",
+        "atk": 5,
+        "armor": 34,
+        "hp": 289,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "elf_scatter_helm_2",
+        "baseVariant": "helm_vitality",
+        "originRace": "elf",
+        "visualKey": "elf_scatter_helm_2",
+        "visualVariant": "elf_scatter_helm_2",
+        "iconKey": "helm",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "elf",
+    "id": "personal.elf.heir",
+    "p": {
+      "version": 1,
+      "slot": "armor",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.elf.heir-123456789-loot-1",
+        "slot": "armor",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "月井银衫",
+        "atk": 0,
+        "armor": 68,
+        "hp": 511,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "elf_scatter_armor_2",
+        "baseVariant": "armor_vitality",
+        "originRace": "elf",
+        "visualKey": "elf_scatter_armor_2",
+        "visualVariant": "elf_scatter_armor_2",
+        "iconKey": "armor",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "elf",
+    "id": "personal.elf.heir",
+    "p": {
+      "version": 1,
+      "slot": "gloves",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.elf.heir-123456789-loot-1",
+        "slot": "gloves",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "银藤指套",
+        "atk": 19,
+        "armor": 24,
+        "hp": 265,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "elf_scatter_gloves_2",
+        "baseVariant": "gloves_vitality",
+        "originRace": "elf",
+        "visualKey": "elf_scatter_gloves_2",
+        "visualVariant": "elf_scatter_gloves_2",
+        "iconKey": "gloves",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "elf",
+    "id": "personal.elf.heir",
+    "p": {
+      "version": 1,
+      "slot": "boots",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.elf.heir-123456789-loot-1",
+        "slot": "boots",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "月银轻靴",
+        "atk": 5,
+        "armor": 29,
+        "hp": 313,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "elf_scatter_boots_2",
+        "baseVariant": "boots_vitality",
+        "originRace": "elf",
+        "visualKey": "elf_scatter_boots_2",
+        "visualVariant": "elf_scatter_boots_2",
+        "iconKey": "boots",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "elf",
+    "id": "personal.elf.heir",
+    "p": {
+      "version": 1,
+      "slot": "ring",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.elf.heir-123456789-loot-1",
+        "slot": "ring",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "月井环",
+        "atk": 53,
+        "armor": 12,
+        "hp": 267,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "elf_scatter_ring_2",
+        "baseVariant": "ring_element",
+        "originRace": "elf",
+        "visualKey": "elf_scatter_ring_2",
+        "visualVariant": "elf_scatter_ring_2",
+        "iconKey": "ring",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "elf",
+    "id": "personal.elf.heir",
+    "p": {
+      "version": 1,
+      "slot": "amulet",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.elf.heir-123456789-loot-1",
+        "slot": "amulet",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "棱晶心坠",
+        "atk": 50,
+        "armor": 19,
+        "hp": 283,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "elf_scatter_amulet_2",
+        "baseVariant": "amulet_element",
+        "originRace": "elf",
+        "visualKey": "elf_scatter_amulet_2",
+        "visualVariant": "elf_scatter_amulet_2",
+        "iconKey": "amulet",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "goblin",
+    "id": "personal.goblin.family",
+    "p": {
+      "version": 1,
+      "slot": "weapon",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.goblin.family-123456789-loot-1",
+        "slot": "weapon",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "车辐细剑",
+        "atk": 118,
+        "armor": 15,
+        "hp": 74,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "goblin_scatter_weapon_14",
+        "baseVariant": "sword_balanced",
+        "weaponType": "sword",
+        "originRace": "goblin",
+        "visualKey": "goblin_scatter_weapon_14",
+        "visualVariant": "goblin_scatter_weapon_14",
+        "iconKey": "weapon",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "goblin",
+    "id": "personal.goblin.family",
+    "p": {
+      "version": 1,
+      "slot": "helm",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.goblin.family-123456789-loot-1",
+        "slot": "helm",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "罐沿潜帽",
+        "atk": 5,
+        "armor": 34,
+        "hp": 289,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "goblin_scatter_helm_6",
+        "baseVariant": "helm_vitality",
+        "weaponType": null,
+        "originRace": "goblin",
+        "visualKey": "goblin_scatter_helm_6",
+        "visualVariant": "goblin_scatter_helm_6",
+        "iconKey": "helm",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "goblin",
+    "id": "personal.goblin.family",
+    "p": {
+      "version": 1,
+      "slot": "armor",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.goblin.family-123456789-loot-1",
+        "slot": "armor",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "暗袋补衣",
+        "atk": 0,
+        "armor": 68,
+        "hp": 511,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "goblin_scatter_armor_6",
+        "baseVariant": "armor_vitality",
+        "weaponType": null,
+        "originRace": "goblin",
+        "visualKey": "goblin_scatter_armor_6",
+        "visualVariant": "goblin_scatter_armor_6",
+        "iconKey": "armor",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "goblin",
+    "id": "personal.goblin.family",
+    "p": {
+      "version": 1,
+      "slot": "gloves",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.goblin.family-123456789-loot-1",
+        "slot": "gloves",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "窃钥指套",
+        "atk": 19,
+        "armor": 24,
+        "hp": 265,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "goblin_scatter_gloves_6",
+        "baseVariant": "gloves_vitality",
+        "weaponType": null,
+        "originRace": "goblin",
+        "visualKey": "goblin_scatter_gloves_6",
+        "visualVariant": "goblin_scatter_gloves_6",
+        "iconKey": "gloves",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "goblin",
+    "id": "personal.goblin.family",
+    "p": {
+      "version": 1,
+      "slot": "boots",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.goblin.family-123456789-loot-1",
+        "slot": "boots",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "翻墙绳履",
+        "atk": 5,
+        "armor": 29,
+        "hp": 313,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "goblin_scatter_boots_6",
+        "baseVariant": "boots_vitality",
+        "weaponType": null,
+        "originRace": "goblin",
+        "visualKey": "goblin_scatter_boots_6",
+        "visualVariant": "goblin_scatter_boots_6",
+        "iconKey": "boots",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "goblin",
+    "id": "personal.goblin.family",
+    "p": {
+      "version": 1,
+      "slot": "ring",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.goblin.family-123456789-loot-1",
+        "slot": "ring",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "铜簧菌戒",
+        "atk": 53,
+        "armor": 12,
+        "hp": 267,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "goblin_scatter_ring_6",
+        "baseVariant": "ring_element",
+        "weaponType": null,
+        "originRace": "goblin",
+        "visualKey": "goblin_scatter_ring_6",
+        "visualVariant": "goblin_scatter_ring_6",
+        "iconKey": "ring",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "goblin",
+    "id": "personal.goblin.family",
+    "p": {
+      "version": 1,
+      "slot": "amulet",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.goblin.family-123456789-loot-1",
+        "slot": "amulet",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "失锁铜牌",
+        "atk": 19,
+        "armor": 44,
+        "hp": 315,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "goblin_scatter_amulet_6",
+        "baseVariant": "amulet_survival",
+        "weaponType": null,
+        "originRace": "goblin",
+        "visualKey": "goblin_scatter_amulet_6",
+        "visualVariant": "goblin_scatter_amulet_6",
+        "iconKey": "amulet",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "ashen",
+    "id": "personal.ashen.agency",
+    "p": {
+      "version": 1,
+      "slot": "weapon",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.ashen.agency-123456789-loot-1",
+        "slot": "weapon",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "泪盐垂锤",
+        "atk": 111,
+        "armor": 22,
+        "hp": 74,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "ashen.scatter.45",
+        "baseVariant": "hammer_balanced",
+        "weaponType": "hammer",
+        "originRace": "ashen",
+        "visualKey": "ashen.scatter.45",
+        "visualVariant": "ashen.scatter.45",
+        "iconKey": "weapon",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "ashen",
+    "id": "personal.ashen.agency",
+    "p": {
+      "version": 1,
+      "slot": "helm",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.ashen.agency-123456789-loot-1",
+        "slot": "helm",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "褶岩颅冠",
+        "atk": 5,
+        "armor": 63,
+        "hp": 144,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "ashen.scatter.48",
+        "baseVariant": "helm_armor",
+        "weaponType": null,
+        "originRace": "ashen",
+        "visualKey": "ashen.scatter.48",
+        "visualVariant": "ashen.scatter.48",
+        "iconKey": "helm",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "ashen",
+    "id": "personal.ashen.agency",
+    "p": {
+      "version": 1,
+      "slot": "armor",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.ashen.agency-123456789-loot-1",
+        "slot": "armor",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "层生胸壳",
+        "atk": 0,
+        "armor": 119,
+        "hp": 255,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "ashen.scatter.50",
+        "baseVariant": "armor_armor",
+        "weaponType": null,
+        "originRace": "ashen",
+        "visualKey": "ashen.scatter.50",
+        "visualVariant": "ashen.scatter.50",
+        "iconKey": "armor",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "ashen",
+    "id": "personal.ashen.agency",
+    "p": {
+      "version": 1,
+      "slot": "gloves",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.ashen.agency-123456789-loot-1",
+        "slot": "gloves",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "盐芽掌甲",
+        "atk": 19,
+        "armor": 48,
+        "hp": 144,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "ashen.scatter.52",
+        "baseVariant": "gloves_armor",
+        "weaponType": null,
+        "originRace": "ashen",
+        "visualKey": "ashen.scatter.52",
+        "visualVariant": "ashen.scatter.52",
+        "iconKey": "gloves",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "ashen",
+    "id": "personal.ashen.agency",
+    "p": {
+      "version": 1,
+      "slot": "boots",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.ashen.agency-123456789-loot-1",
+        "slot": "boots",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "熔脉石履",
+        "atk": 5,
+        "armor": 58,
+        "hp": 168,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "ashen.scatter.54",
+        "baseVariant": "boots_armor",
+        "weaponType": null,
+        "originRace": "ashen",
+        "visualKey": "ashen.scatter.54",
+        "visualVariant": "ashen.scatter.54",
+        "iconKey": "boots",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "ashen",
+    "id": "personal.ashen.agency",
+    "p": {
+      "version": 1,
+      "slot": "ring",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.ashen.agency-123456789-loot-1",
+        "slot": "ring",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "孔纹石戒",
+        "atk": 24,
+        "armor": 41,
+        "hp": 267,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "ashen.scatter.27",
+        "baseVariant": "ring_survival",
+        "weaponType": null,
+        "originRace": "ashen",
+        "visualKey": "ashen.scatter.27",
+        "visualVariant": "ashen.scatter.27",
+        "iconKey": "ring",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "ashen",
+    "id": "personal.ashen.agency",
+    "p": {
+      "version": 1,
+      "slot": "amulet",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.ashen.agency-123456789-loot-1",
+        "slot": "amulet",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "陶石护符",
+        "atk": 19,
+        "armor": 44,
+        "hp": 315,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "ashen.scatter.32",
+        "baseVariant": "amulet_survival",
+        "weaponType": null,
+        "originRace": "ashen",
+        "visualKey": "ashen.scatter.32",
+        "visualVariant": "ashen.scatter.32",
+        "iconKey": "amulet",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  },
+  {
+    "race": "ashen",
+    "id": "personal.ashen.agency",
+    "p": {
+      "version": 1,
+      "slot": "core",
+      "baseLevel": 60,
+      "seed": 123456789,
+      "reservedAt": 1800000000000,
+      "item": {
+        "id": "arc-personal.ashen.agency-123456789-loot-1",
+        "slot": "core",
+        "set": null,
+        "rarity": 3,
+        "level": 59,
+        "baseLevel": 60,
+        "levelSource": "generated",
+        "name": "晶核",
+        "atk": 59,
+        "armor": 0,
+        "hp": 296,
+        "affixes": [
+          {
+            "stat": "darkResist",
+            "value": 10,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "earthAtk",
+            "value": 5,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 2,
+              "max": 8
+            }
+          },
+          {
+            "stat": "earthResist",
+            "value": 7,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          },
+          {
+            "stat": "fireResist",
+            "value": 8,
+            "sourceRange": {
+              "model": "level-quality-v2",
+              "quality": 3,
+              "sourceLevel": 59,
+              "min": 5,
+              "max": 14
+            }
+          }
+        ],
+        "special": {
+          "id": "momentum"
+        },
+        "legendaryId": null,
+        "locked": false,
+        "bless": 0,
+        "templateId": "ashen.scatter.36",
+        "baseVariant": "core_crystal",
+        "weaponType": null,
+        "originRace": "ashen",
+        "visualKey": "ashen.scatter.36",
+        "visualVariant": "ashen.scatter.36",
+        "iconKey": "core",
+        "baseBudgetModel": "equipment-budget-m2-v1",
+        "budgetLevel": 59,
+        "budgetSourceLevel": 59
+      }
+    }
+  }
+]

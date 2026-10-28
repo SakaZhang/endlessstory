@@ -236,3 +236,8 @@ runAffixSourceTest(process.execPath,[new URL('./merchant-quality-pricing-ui-test
 
 // Explicit selected-area travel is a persisted noncombat action.
 for(const file of ['selected-area-travel-tests.mjs','selected-area-travel-app-ui-tests.cjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+// Slot-aware generation and paid legacy compatibility need an isolated production realm.
+runAffixSourceTest(process.execPath,[new URL('./affix-slot-pools-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+runAffixSourceTest(process.execPath,[new URL('./affix-slot-story-compat-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});

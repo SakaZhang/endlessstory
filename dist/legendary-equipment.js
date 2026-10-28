@@ -1,3 +1,4 @@
+import {ordinaryAffixKeys} from './affix-slot-pools.js';
 import {INFINITY_GAUNTLET_DEFINITION} from './infinity-gauntlet-content.js';
 import {RETURN_RING_DEFINITION} from './return-ring-content.js';
 import {EXPANSION_PACKS} from './race-packs.js';
@@ -15,7 +16,7 @@ function draw(random){const r=random();if(!Number.isFinite(r)||r<0||r>=1)throw n
 export function createLegendaryEquipment({id,legendaryId,level,baseLevel=level,levelSource='drop',definition=LEGENDARY_EQUIPMENT_DEFINITIONS[legendaryId],affixDefs,random=Math.random,rollValue=null}={}){
  try{
   if(typeof id!=='string'||!id||typeof legendaryId!=='string'||!legendaryId||!definition||definition.id!==legendaryId||definition.ready!==true||typeof definition.name!=='string'||!definition.name||typeof definition.exclusiveId!=='string'||!definition.exclusiveId||!Number.isSafeInteger(level)||level<1||level>1e12||!Number.isSafeInteger(baseLevel)||baseLevel<1||baseLevel>1e12||!['drop','material','equipment','generated','merchant','legacy','starter'].includes(levelSource))return null;
-  const count=definition.ordinaryAffixCount??4;const keys=Object.keys(affixDefs??{});if(keys.length<count||(rollValue!==null&&typeof rollValue!=='function'))return null;
+  const count=definition.ordinaryAffixCount??4;const keys=ordinaryAffixKeys(definition.slot).filter(key=>Object.hasOwn(affixDefs??{},key));if(keys.length<count||(rollValue!==null&&typeof rollValue!=='function'))return null;
   // Validate the full injected pool before drawing; no partial RNG consumption on bad definitions.
   for(const key of keys)affixRange(affixDefs[key],4);
   const raw=deriveEquipmentBase({slot:definition.slot,baseVariant:definition.baseVariant,level:Math.min(level,100),quality:4,enhancement:0});
