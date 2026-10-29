@@ -254,3 +254,10 @@ runAffixSourceTest(process.execPath,[new URL('./npc-objective-app-ui-tests.cjs',
 runAffixSourceTest(process.execPath,[new URL('./npc-objective-compatibility-audit-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
 runAffixSourceTest(process.execPath,[new URL('./asset-loading-performance-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
 runAffixSourceTest(process.execPath,[new URL('./release-entry-bundle-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.77 safe-boundary automatic idle actions: no lost combat or duplicate rewards.
+for(const file of ['idle-action-controller-tests.mjs','auto-idle-safety-tests.mjs','idle-action-ui-tests.mjs','idle-action-app-ui-tests.cjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+// Visually audited per-frame elf facing; raw art remains byte-identical.
+runAffixSourceTest(process.execPath,[new URL('./elf-monster-facing-regression-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+// Runtime-only safe framing removes adjacent scene strips without touching source PNGs.
+runAffixSourceTest(process.execPath,[new URL('./elf-background-viewport-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});

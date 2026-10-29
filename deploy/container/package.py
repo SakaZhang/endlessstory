@@ -51,7 +51,7 @@ def validate_release(build, expected):
         if pathlib.PurePosixPath(name).suffix in TEXT and PRIVATE_MARKERS.search(tree[p].read_bytes()): raise ValueError('private metadata/credential marker in release asset: '+name)
         allowed.add(p);pairs.append([name,row['sha256']])
     if pairs!=sorted(pairs,key=lambda x:x[0]): raise ValueError('release manifest not canonically sorted')
-    # Match both legacy files-only and v0.76 bundled-entry release identity.
+    # Match both legacy files-only and v0.76+ bundled-entry release identity.
     computed=release_identity(report,lambda name:tree[f'releases/{release}/{name}'].read_bytes())
     if computed!=release: raise ValueError('release identity does not match manifest rows')
     if 'index.html' not in report['entries']: raise ValueError('missing root index entry')
@@ -182,4 +182,4 @@ def package(args):
         print(json.dumps({'bundle':str(bundle),'bytes':bundle.stat().st_size,**metadata},ensure_ascii=False,indent=2))
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--build',required=True);p.add_argument('--release',required=True);p.add_argument('--source-commit',required=True);p.add_argument('--output',required=True);p.add_argument('--version',default='0.76');p.add_argument('--go',default='go');package(p.parse_args())
+    p=argparse.ArgumentParser();p.add_argument('--build',required=True);p.add_argument('--release',required=True);p.add_argument('--source-commit',required=True);p.add_argument('--output',required=True);p.add_argument('--version',default='0.77');p.add_argument('--go',default='go');package(p.parse_args())

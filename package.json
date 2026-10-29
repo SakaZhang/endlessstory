@@ -34,7 +34,9 @@
     "test:balance": "node affix-level-growth-tests.mjs && node empty-starter-engine-tests.mjs && node empty-starter-app-ui-tests.cjs && node talent-balance-v071-tests.mjs && node talent-balance-ui-tests.cjs && node balance-cross-system-host-tests.mjs && node balance-talent-integration-tests.mjs && node monster-balance-tests.mjs && node monster-cadence-budget-tests.mjs && node old-active-balance-compat-tests.mjs && node balance-old-story-save-tests.mjs && node balance-old-finale-save-tests.mjs && node natural-balance-fixture-tests.mjs && node random-war-boundary-tests.mjs",
     "test:npc-objectives": "node content/racial-npc-events/build-actionable-objectives.mjs --check && node npc-objective-runtime-tests.mjs && node npc-objective-ui-tests.mjs && node npc-objective-app-ui-tests.cjs && node npc-objective-compatibility-audit-tests.mjs",
     "test:asset-performance": "node asset-loading-performance-tests.mjs && node release-entry-bundle-tests.mjs && node release-asset-policy-tests.mjs",
-    "audit:asset-loading": "node tools/audit-asset-loading.mjs"
+    "audit:asset-loading": "node tools/audit-asset-loading.mjs",
+    "test:auto-idle": "node idle-action-controller-tests.mjs && node auto-idle-safety-tests.mjs && node idle-action-ui-tests.mjs && node idle-action-app-ui-tests.cjs",
+    "test:elf-visual": "node elf-monster-facing-regression-tests.mjs && node elf-background-viewport-tests.mjs"
   },
   "devDependencies": {
     "esbuild": "0.28.2"

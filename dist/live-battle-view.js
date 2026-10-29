@@ -1,3 +1,4 @@
+import {drawBattleBackground} from './background-viewport.js';
 import {storyActorPresentationScale} from './story-actor-art.js';
 import {loadImageAsset} from './asset-loader.js';
 import {reportAssetFailure} from './asset-recovery.js';
@@ -188,7 +189,7 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
   if(typeof time==='object')time=time.time??displayTime;
   if(disposed||!visible)return false;
   const heroUnavailable=coverage().reason==='hero-weapon-not-covered';
-  if(!snapshot||coverage().mode!=='ready'&&!heroUnavailable){drawPixelNotice(canvas,coverage().label);if(snapshot&&manifest){const bgs=liveSceneBackgrounds(snapshot,manifest);if(bgs.length&&bgs.every(bg=>images.has(bg.file))){const c=canvas.getContext('2d');for(const bg of bgs)c.drawImage(images.get(bg.file),0,0);c.fillStyle='#102030ee';c.fillRect(50,112,380,46);c.fillStyle='#e7cb8d';c.font='12px sans-serif';c.textAlign='center';c.fillText(coverage().label,240,139,350);}}return true;}
+  if(!snapshot||coverage().mode!=='ready'&&!heroUnavailable){drawPixelNotice(canvas,coverage().label);if(snapshot&&manifest){const bgs=liveSceneBackgrounds(snapshot,manifest);if(bgs.length&&bgs.every(bg=>images.has(bg.file))){const c=canvas.getContext('2d');for(const bg of bgs)drawBattleBackground(c,images.get(bg.file),bg);c.fillStyle='#102030ee';c.fillRect(50,112,380,46);c.fillStyle='#e7cb8d';c.font='12px sans-serif';c.textAlign='center';c.fillText(coverage().label,240,139,350);}}return true;}
   try{if(canvas.width!==480)canvas.width=480;if(canvas.height!==270)canvas.height=270;
    displayTime=Number.isFinite(time)?time:displayTime;presentation.advance(displayTime);const animations=liveLivingAnimations(snapshot.encounter,presentation.animations);neutralAnimationGate(animations,positions.hero?.sprite,manifest);
    const drawPositions=heroUnavailable?Object.fromEntries(Object.entries(positions).filter(([id])=>id!=='hero')):positions;

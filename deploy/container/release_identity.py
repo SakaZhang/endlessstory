@@ -1,4 +1,4 @@
-"""Content identity for legacy and esbuild-entry v0.76 release manifests.
+"""Content identity for legacy and esbuild-entry v0.76+ release manifests.
 Matches build-release.mjs/release-entry-bundles.mjs without Node or esbuild.
 Only deterministic HTML reference replacement is reproduced, never game bundling.
 """

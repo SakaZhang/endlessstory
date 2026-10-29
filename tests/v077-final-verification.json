@@ -1,0 +1,51 @@
+{
+  "version": "v0.77",
+  "baseline_commit": "489e6410ec7cc930897ff1b1c249fcaab2bd504c",
+  "release": "bea266d0269d0a9ae6b1b4770aa00a1b67190fa127f445af1c807a3511e2b4fc",
+  "npm_test_exit": 0,
+  "release_files": 2785,
+  "resource_urls": 2783,
+  "dependency_edges": 9174,
+  "idle_safety_tests": 22,
+  "elf_facing": {
+    "identities": 5,
+    "frames_corrected": 8,
+    "native_draw_checks": 135,
+    "raw_monster_pngs_unchanged": 220
+  },
+  "elf_backgrounds": {
+    "areas": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "source_pngs_unchanged": true,
+    "normal_and_notice_native_render_verified": true,
+    "display_baselines": [
+      214,
+      214,
+      223,
+      223,
+      226,
+      226
+    ]
+  },
+  "browser_final_release": {
+    "equipment_then_resume": true,
+    "travel_then_resume": true,
+    "task_turn_in_then_resume": true,
+    "manual_stop_retained": true,
+    "idle_travel_no_autostart": true,
+    "pending_banner_cleared": true,
+    "production_save_touched": false
+  },
+  "container_preflight": {
+    "release_integrity": "passed",
+    "native_amd64_http": "passed",
+    "docker_daemon_run_tested": false,
+    "arm64_execution_tested": false
+  }
+}

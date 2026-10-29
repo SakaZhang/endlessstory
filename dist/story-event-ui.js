@@ -1,3 +1,4 @@
+import {idleActionPreview,idleActionQueueHint} from './idle-action-ui.js';
 import {renderPersonalArcRecords,renderPersonalRewards,personalSceneCallback} from './personal-story-ui.js';
 import {renderStoryDialogue,renderKnownStoryEvidence} from './story-cast-ui.js';
 import {storyCastDisplayLabel} from './story-cast-registry.js';
@@ -16,7 +17,8 @@ function storyTravelHint(s,d){
  if(area&&!unlocked.includes(area.number)){const frontier=Math.max(...unlocked.filter(n=>n<area.number),1),site=area.race+'.a'+String(frontier).padStart(2,'0');return '<p><small>此剧情地点尚未解锁。请先通关'+esc(AREAS[site]?.name??site)+'的普通副本，再逐区前进至'+esc(area.name)+'。可继续普通探索与整备，不会丢失主线记录。</small></p>';}
  return '<p><small>请通过地图前往上述地点；不自动传送。可继续探索与整备，不会丢失主线记录。</small></p>';
 }
-export function renderStoryEventBoard(s){
+export function renderStoryEventBoard(s,{coordinateIdle=false}={}){
+ const queueHint=idleActionQueueHint(s,coordinateIdle);s=idleActionPreview(s,coordinateIdle);
  const v=storyEventView(s);if(!v.valid)return '<section class="panel storyEventBoard"><h3>主线记录不可用</h3><p>剧情状态未通过验证；不会推进或发放奖励。</p></section>';
  let content='';const a=v.active;
  if(a){
@@ -45,7 +47,7 @@ export function renderStoryEventBoard(s){
  if(s.story?.flags.includes('EPILOGUE_COMPLETE')&&v.available.length)content='<p role="status">主线与尾声已完成。可继续同一存档探索或再访其他四位主角；当前地图与随机战争门禁仍生效。</p>'+content;
  if(s.diplomacy?.wars?.some(w=>w.id===STORY_WAR_ID&&w.status==='active'))content+='<p role="status">精灵与烬裔的战事仍在持续。参战主角的敌境普通入口已封锁；本族、非敌对地区与已登记的剧情入口不受此封锁。继续主线至界外入侵后解除本次全境封锁；这不代表彼此和解。</p>';
  if(warWithdrawalAvailable(s))content+=button('retreat','','撤回本族起始营地',false,`data-story-return-site="${esc(s.race+'.a01')}"`)+'<p><small>撤回已解锁的本族营地；不额外休息、不恢复生命、不丢失战利品，当前剧情记录保留。</small></p>';
- return `<section class="panel storyEventBoard" aria-label="主线人物与事件"><h3>主线与个人长线</h3>${content}${renderPersonalRewards(s)}</section>`;
+ return `<section class="panel storyEventBoard" aria-label="主线人物与事件"><h3>主线与个人长线</h3>${queueHint}${content}${renderPersonalRewards(s)}</section>`;
 }
 export function storyActionFromDataset(data){
  if(!data||typeof data.storyAction!=='string')return null;

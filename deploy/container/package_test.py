@@ -16,6 +16,21 @@ class PackageTests(unittest.TestCase):
   (root/'index.html').write_text(f'<head><base href="./releases/{release}/"></head>')
   (root/'release-integrity.json').write_text(json.dumps({'schema':1,'release':release,'base':f'./releases/{release}/','entries':['index.html'],'files':rows}))
   return release
+ def test_v077_defaults_and_registry_guidance(self):
+  source=(HERE/'package.py').read_text()
+  self.assertIn("--version',default='0.77'",source)
+  self.assertIn('ARG GAME_VERSION=0.77',(HERE/'Dockerfile').read_text())
+  readme=(HERE/'README.zh-CN.md').read_text()
+  self.assertIn('# 长路未尽 · v0.77 便携容器',readme)
+  self.assertIn('docker pull saka6/endlessstory:v0.77',readme)
+  self.assertIn('发布状态：待推送及核验',readme)
+  self.assertIn('changlu-weijin:0.77-<release前12位>-amd64',readme)
+  self.assertIn('私有镜像仓库只限制',readme)
+  self.assertIn('不为运行后的游戏提供登录鉴权',readme)
+  self.assertNotIn('本包 v0.76',readme)
+  self.assertIn("tagbase=f'changlu-weijin:{args.version}-{args.release[:12]}'",source)
+  self.assertIn('pull_policy: never',(HERE/'compose.yaml').read_text())
+  self.assertIn('docker load --input changlu-images.tar.gz',(HERE/'start.sh').read_text())
  def test_valid_release_and_frozen_hash(self):
   with tempfile.TemporaryDirectory() as td:
    root=pathlib.Path(td);h=self.fixture(root);report,files=p.validate_release(root,h);self.assertEqual(report['release'],h);self.assertEqual(len(files),4)
