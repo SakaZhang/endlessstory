@@ -21,9 +21,9 @@ const failure=(game,reason)=>({ok:false,game,value:null,reason});
 export function createTaskRewardService(registry=TASK_REWARD_REGISTRY){
  const definitions=Object.freeze(Object.fromEntries(Object.entries(registry).map(([id,def])=>[id,{
   isEligible:def.isEligible,
-  materials:structuredClone(def.materials??[]),
-  rewards:structuredClone(def.rewards??[]),
-  narrativeOnly:def.narrativeOnly===true,claimKey:def.claimKey,onClaim:def.onClaim
+  materials:typeof def.materials==='function'?def.materials:structuredClone(def.materials??[]),
+  rewards:typeof def.rewards==='function'?def.rewards:structuredClone(def.rewards??[]),
+  narrativeOnly:typeof def.narrativeOnly==='function'?def.narrativeOnly:def.narrativeOnly===true,claimKey:def.claimKey,onClaim:def.onClaim
  }])));
  return function claimTaskReward(storage,game,id,{now=Date.now()}={}){
   if(!idValid(id)||!Object.hasOwn(definitions,id))return failure(game,'not-available');
@@ -43,12 +43,14 @@ export function createTaskRewardService(registry=TASK_REWARD_REGISTRY){
   }catch{return failure(game,'storage-read');}
   let rejected='invalid-definition';
   const tx=commitGameTransaction(storage,game,next=>{
-   if(typeof def.isEligible!=='function'||!Array.isArray(def.materials)||!Array.isArray(def.rewards)||(!def.rewards.length&&!(def.narrativeOnly&&typeof def.onClaim==='function')))return false;
+   const materials=typeof def.materials==='function'?def.materials(structuredClone(next)):def.materials,rewards=typeof def.rewards==='function'?def.rewards(structuredClone(next)):def.rewards;
+   const narrativeOnly=typeof def.narrativeOnly==='function'?def.narrativeOnly(structuredClone(next))===true:def.narrativeOnly;
+   if(typeof def.isEligible!=='function'||!Array.isArray(materials)||!Array.isArray(rewards)||(!rewards.length&&!(narrativeOnly&&typeof def.onClaim==='function')))return false;
    // Eligibility cannot mutate the candidate, and is re-evaluated at submission.
    if(def.isEligible(structuredClone(next))!==true){rejected='not-ready';return false;}
    if(!normalizeMaterials(next)){rejected='invalid-state';return false;}
    const costs=new Map();
-   for(const row of def.materials){
+   for(const row of materials){
     if(parseMaterialKey(row?.key)?.key!==row.key||!Number.isSafeInteger(row.quantity)||row.quantity<1)return false;
     const count=(costs.get(row.key)??0)+row.quantity;if(!Number.isSafeInteger(count))return false;costs.set(row.key,count);
    }
@@ -57,7 +59,7 @@ export function createTaskRewardService(registry=TASK_REWARD_REGISTRY){
    // Task rewards ignore battle auto-discard; use the shared item validation,
    // capacity, collection and material-discovery paths on the isolated candidate.
    const filters=next.lootFilters;next.lootFilters={equipment:[],materials:[],items:[]};
-   for(const record of def.rewards){
+   for(const record of rewards){
     const loot=structuredClone(record),qty=loot?.quantity??1;
     if(loot?.kind==='material'){
      const parsed=parseMaterialKey(loot.key);

@@ -1,0 +1,858 @@
+{
+  "version": 1,
+  "contentId": "npc-actionable-objectives-v1",
+  "sourceCommit": "7a32712761ad9aa1e4c684b1e9641331b9fd8628",
+  "scope": {
+    "localEvents": 60,
+    "kill": 20,
+    "collect": 20,
+    "investigate": 20,
+    "uniqueRingEventsProtected": 5,
+    "familyConversationsUnchanged": 6,
+    "modernRewardedEvents": 60
+  },
+  "investigations": {
+    "local.dwarf.lamp_labels": {
+      "brief": "灯牌不能只靠颜色认。替我到两处灯架核对实际刻痕。",
+      "points": [
+        {
+          "id": "local.dwarf.lamp_labels.evidence.1",
+          "areaId": "dwarf.a01",
+          "label": "交班灯架",
+          "actionLabel": "核对待修灯罩与挂签",
+          "text": "你在裂罩边摸到旧缺口，挂签却与可用灯混在一起。"
+        },
+        {
+          "id": "local.dwarf.lamp_labels.evidence.2",
+          "areaId": "dwarf.a01",
+          "label": "回收灯架",
+          "actionLabel": "核对回收灯的旧记号",
+          "text": "回收灯架沿用同一种颜色，只有扣环旁的横线仍可辨认。"
+        }
+      ],
+      "completion": "朵菈将两处记录摊开，为可用灯和待修灯补上能摸出的不同标记。"
+    },
+    "local.dwarf.two_baskets": {
+      "brief": "先别替谁断定少了料。到两处领料点核对筐签。",
+      "points": [
+        {
+          "id": "local.dwarf.two_baskets.evidence.1",
+          "areaId": "dwarf.a05",
+          "label": "冷泉配料筐",
+          "actionLabel": "检查干湿料筐签",
+          "text": "干料筐绑了湿料签；筐底的旧字还在，没有少装的痕迹。"
+        },
+        {
+          "id": "local.dwarf.two_baskets.evidence.2",
+          "areaId": "dwarf.a04",
+          "label": "炉坡领料架",
+          "actionLabel": "核对带回的领料签",
+          "text": "领料架上的另一张签与冷泉那张对调，批次和数量能对上。"
+        }
+      ],
+      "completion": "赫珀按两处筐签逐袋换回，先解决拿错的那份，再把干湿料分开放。"
+    },
+    "local.dwarf.uncertain_branch": {
+      "brief": "图上那条线不能靠听说补齐。请核对两端留下的路记。",
+      "points": [
+        {
+          "id": "local.dwarf.uncertain_branch.evidence.1",
+          "areaId": "dwarf.a07",
+          "label": "银纹支路口",
+          "actionLabel": "描记支路口旧刻线",
+          "text": "旧刻线只标到岔口，后半段没有核验日期。"
+        },
+        {
+          "id": "local.dwarf.uncertain_branch.evidence.2",
+          "areaId": "dwarf.a06",
+          "label": "炉池出口",
+          "actionLabel": "核对出口方向刻记",
+          "text": "出口刻记指向银纹矿廊，却没有承诺那条支路畅通。"
+        }
+      ],
+      "completion": "纳铎给实地核对过的两端写上日期，中间仍留问号，没有把未走过的路画成安全。"
+    },
+    "local.human.unaddressed_note": {
+      "brief": "信封不拆。请核对投递处与来路的公开登记，找出门牌的缺处。",
+      "points": [
+        {
+          "id": "local.human.unaddressed_note.evidence.1",
+          "areaId": "human.a02",
+          "label": "旧驿站投递架",
+          "actionLabel": "检查公开投递登记",
+          "text": "登记只写了驿站旁的转角，没有具体门号。你没有拆开口信。"
+        },
+        {
+          "id": "local.human.unaddressed_note.evidence.2",
+          "areaId": "human.a01",
+          "label": "田垄来路牌",
+          "actionLabel": "核对送信来路记号",
+          "text": "来路牌保留了同一转角的旧称，可以补足收件地点的描述。"
+        }
+      ],
+      "completion": "奥登把两处公开记号合成明确地址，继续投递。口信内容始终没有展开。"
+    },
+    "local.human.borrowed_blanket": {
+      "brief": "先别听谁嗓门大。看清布角记号，再去核对原来的借用登记。",
+      "points": [
+        {
+          "id": "local.human.borrowed_blanket.evidence.1",
+          "areaId": "human.a05",
+          "label": "缝补处借毯架",
+          "actionLabel": "查看毯角借用记号",
+          "text": "毯角缝着一短一长两道旧线，线头没有被后来补丁盖住。"
+        },
+        {
+          "id": "local.human.borrowed_blanket.evidence.2",
+          "areaId": "human.a04",
+          "label": "盐泉歇脚处",
+          "actionLabel": "核对借毯登记",
+          "text": "登记中同样的长短线对应一床公用借毯，不是任何一人的私物。"
+        }
+      ],
+      "completion": "赛芙按记号找回登记，说明这是公用借毯，并把归还位置告诉两位旅人。"
+    },
+    "local.elf.return_empty_pots": {
+      "brief": "盆底的刻痕得和寄放处对上。请两边都看清，别替模糊的字补名字。",
+      "points": [
+        {
+          "id": "local.elf.return_empty_pots.evidence.1",
+          "areaId": "elf.a01",
+          "label": "苗圃空盆堆",
+          "actionLabel": "拓记盆底旧刻痕",
+          "text": "空盆底有两组刻痕，还有几只完全无记号的盆。"
+        },
+        {
+          "id": "local.elf.return_empty_pots.evidence.2",
+          "areaId": "elf.a01",
+          "label": "苗圃寄盆架",
+          "actionLabel": "核对寄放木签",
+          "text": "寄盆架的木签能对上两组刻痕；无记号的盆没有可靠归属。"
+        }
+      ],
+      "completion": "芙岚把能对应的盆列入归还清单，没对上的另存，等主人凭记号认领。"
+    },
+    "local.elf.faded_marks": {
+      "brief": "擦一块牌不等于路就清楚。请沿前后两处路标核对箭头。",
+      "points": [
+        {
+          "id": "local.elf.faded_marks.evidence.1",
+          "areaId": "elf.a05",
+          "label": "花径旧箭牌",
+          "actionLabel": "清理花粉并查看箭头",
+          "text": "花粉擦开后，旧箭头还在；牌身不需要拆除。"
+        },
+        {
+          "id": "local.elf.faded_marks.evidence.2",
+          "areaId": "elf.a04",
+          "label": "溪谷接路牌",
+          "actionLabel": "核对前段路标朝向",
+          "text": "溪谷接路牌与擦出的箭头能接上，两处没有互相矛盾。"
+        }
+      ],
+      "completion": "赛林给核对过的路标补上清晰日期，撤下临时提示，只确认这一段路的指向。"
+    },
+    "local.goblin.boat_loading": {
+      "brief": "船只认哪边重。请看岸边装载线，再去上游交接处核对货篮的摆法。",
+      "points": [
+        {
+          "id": "local.goblin.boat_loading.evidence.1",
+          "areaId": "goblin.a06",
+          "label": "渡口靠岸线",
+          "actionLabel": "查看偏载留下的吃水痕",
+          "text": "一侧吃水痕明显更深，重篮曾集中压在同一边。"
+        },
+        {
+          "id": "local.goblin.boat_loading.evidence.2",
+          "areaId": "goblin.a05",
+          "label": "来路货篮歇放处",
+          "actionLabel": "核对货篮底部重量记号",
+          "text": "重篮有旧刻记，轻篮没有；先前按到达先后排队才混到一边。"
+        }
+      ],
+      "completion": "滴索先按重量分布摆篮，再留下乘客站位，下一趟不再只照到达顺序装载。"
+    },
+    "local.ashen.misplaced_stones": {
+      "brief": "石堆像路标，得把误认从哪儿开始查清。请对照石堆与来路真标记。",
+      "points": [
+        {
+          "id": "local.ashen.misplaced_stones.evidence.1",
+          "areaId": "ashen.a08",
+          "label": "临时陶石堆",
+          "actionLabel": "检查堆形与搬料痕迹",
+          "text": "陶石堆碰巧排成箭头，地上搬料拖痕表明它只是存料。"
+        },
+        {
+          "id": "local.ashen.misplaced_stones.evidence.2",
+          "areaId": "ashen.a07",
+          "label": "风口正式路标",
+          "actionLabel": "核对正式路标样式",
+          "text": "正式路标有连续刻线，临时石堆没有；两者的朝向也不同。"
+        }
+      ],
+      "completion": "陶褶把临时陶石改为平排并标清存料，真路标保留原位，不再让人跟错石堆。"
+    },
+    "local.dwarf.cart_handle_height": {
+      "brief": "握位得照推车人的手来做。请检查两处矿车握痕，别只量我一个人。",
+      "points": [
+        {
+          "id": "local.dwarf.cart_handle_height.evidence.1",
+          "areaId": "dwarf.a02",
+          "label": "支洞公用矿车",
+          "actionLabel": "查看把手握痕与磨损",
+          "text": "高把手只有上沿磨亮，下方另有临时抓握的划痕。"
+        },
+        {
+          "id": "local.dwarf.cart_handle_height.evidence.2",
+          "areaId": "dwarf.a01",
+          "label": "矿道交班车位",
+          "actionLabel": "核对另一辆矿车握位",
+          "text": "交班车的低握位有稳定握痕，推车人不必踮脚也能发力。"
+        }
+      ],
+      "completion": "陶兰对照两处握痕，在公用车上加稳固低握位，保留原有高握位。"
+    },
+    "local.dwarf.shield_rotation": {
+      "brief": "先让人换下来歇着。你替我核对坡上与旧路的轮班记号，找出漏交的那班。",
+      "points": [
+        {
+          "id": "local.dwarf.shield_rotation.evidence.1",
+          "areaId": "dwarf.a04",
+          "label": "废炉坡哨位",
+          "actionLabel": "查看当前轮值记号",
+          "text": "新盾卫的名字连着两段，交班符号漏了一笔。"
+        },
+        {
+          "id": "local.dwarf.shield_rotation.evidence.2",
+          "areaId": "dwarf.a03",
+          "label": "旧矿接班点",
+          "actionLabel": "核对上一班交接牌",
+          "text": "上一班已经交接，接班点的时段没有同步抄到坡哨。"
+        }
+      ],
+      "completion": "科霖把两处轮值补齐，安排接班者就位，让连续守候的新盾卫安心歇下。"
+    },
+    "local.dwarf.meal_route": {
+      "brief": "锅要送到人手里，不是送到地上。请沿送饭两段查清落脚和转弯处。",
+      "points": [
+        {
+          "id": "local.dwarf.meal_route.evidence.1",
+          "areaId": "dwarf.a08",
+          "label": "裂谷送饭窄转角",
+          "actionLabel": "检查转角落脚面",
+          "text": "转角内侧碎石松，外侧有连续平稳的落脚带。"
+        },
+        {
+          "id": "local.dwarf.meal_route.evidence.2",
+          "areaId": "dwarf.a07",
+          "label": "银纹送饭接路处",
+          "actionLabel": "核对交接平台宽度",
+          "text": "接路处可以先落担再换手，平台没有被存料堵满。"
+        }
+      ],
+      "completion": "莎嘉将窄转角和交接平台标进送饭记录，要求先落稳再换手，只确认这两段亲见路况。"
+    },
+    "local.human.hillside_drying": {
+      "brief": "我不缺你多摘一袋。请比较丘陵与驿路两处晾架的风和湿痕。",
+      "points": [
+        {
+          "id": "local.human.hillside_drying.evidence.1",
+          "areaId": "human.a03",
+          "label": "丘陵背风晾架",
+          "actionLabel": "观察架下积湿与风向",
+          "text": "背风面叶片不乱飘，但架脚低洼处留有湿痕。"
+        },
+        {
+          "id": "local.human.hillside_drying.evidence.2",
+          "areaId": "human.a02",
+          "label": "驿路高地晾架",
+          "actionLabel": "检查高处遮挡与通风",
+          "text": "高处没有积湿，侧面遮挡能减小直吹，又没把风完全堵住。"
+        }
+      ],
+      "completion": "温娜按两处实况抬高晾架脚，保留侧面通风，不把背风误当成密不透气。"
+    },
+    "local.human.mist_whistle": {
+      "brief": "试哨不能听起来像遇险。请查旧篱与关隘两边听到的回声。",
+      "points": [
+        {
+          "id": "local.human.mist_whistle.evidence.1",
+          "areaId": "human.a08",
+          "label": "高地试哨处",
+          "actionLabel": "记录哨声回响方向",
+          "text": "旧篱把试哨声反送向来路，近处旅人难分声音距离。"
+        },
+        {
+          "id": "local.human.mist_whistle.evidence.2",
+          "areaId": "human.a07",
+          "label": "关隘来路听哨点",
+          "actionLabel": "核对路牌上的告警记号",
+          "text": "来路牌只写了告警节奏，没有写试哨时间，误会有迹可循。"
+        }
+      ],
+      "completion": "贝菈把试哨时段与告警节奏分别写清，练习点避开对着来路的回声面。"
+    },
+    "local.elf.echo_bird_roost": {
+      "brief": "树庭会把一声送成两声。请亲自比较树庭和林缘的栖枝，不只数叫声。",
+      "points": [
+        {
+          "id": "local.elf.echo_bird_roost.evidence.1",
+          "areaId": "elf.a02",
+          "label": "回声树庭栖枝",
+          "actionLabel": "观察栖枝受扰痕迹",
+          "text": "叫声重叠，栖枝上却只有一处新落羽，不能按回声算鸟数。"
+        },
+        {
+          "id": "local.elf.echo_bird_roost.evidence.2",
+          "areaId": "elf.a01",
+          "label": "林缘接枝处",
+          "actionLabel": "查看接枝处的实际落羽",
+          "text": "接枝处没有同样的扰动，能把树庭回声与实际移动分开记。"
+        }
+      ],
+      "completion": "栖苇只记下两处亲见的栖枝情况，没有把重复回声当成更多受扰鸟群。"
+    },
+    "local.elf.visible_mending": {
+      "brief": "补丁得让主人认得出来。请核对织架留样和领布处旧记号。",
+      "points": [
+        {
+          "id": "local.elf.visible_mending.evidence.1",
+          "areaId": "elf.a06",
+          "label": "织架补丁留样",
+          "actionLabel": "检查旧色与补角位置",
+          "text": "留样保留了原布的不同旧色，同色新补丁才让披布难以区分。"
+        },
+        {
+          "id": "local.elf.visible_mending.evidence.2",
+          "areaId": "elf.a05",
+          "label": "花径领布架",
+          "actionLabel": "核对披布领用记号",
+          "text": "领布架上的记号对应原布旧色和补角，没有需要另猜的名字。"
+        }
+      ],
+      "completion": "露茵依照两处记录保留旧色并区分补角，让披布放下后也能认回各自主人的那一块。"
+    },
+    "local.elf.reed_lane_space": {
+      "brief": "退让也得有地方。请查泽地窄路和前段接路处，找能稳站的错身位。",
+      "points": [
+        {
+          "id": "local.elf.reed_lane_space.evidence.1",
+          "areaId": "elf.a09",
+          "label": "泽地苇垫窄路",
+          "actionLabel": "检查苇垫边缘与担痕",
+          "text": "担痕擦过两侧边缘，硬让人侧身容易踩出苇垫。"
+        },
+        {
+          "id": "local.elf.reed_lane_space.evidence.2",
+          "areaId": "elf.a08",
+          "label": "枯木接路缓台",
+          "actionLabel": "查看缓台承重与宽度",
+          "text": "前段缓台地面结实，可容一人停担等候，不必挤到软边。"
+        }
+      ],
+      "completion": "雅森把缓台标成等候错身位，保留窄路的稳定落脚面，不叫挑担人硬挤。"
+    },
+    "local.goblin.basket_clearance": {
+      "brief": "人能低头，篓不会弯。请查货道低顶和来路转角的真实擦痕。",
+      "points": [
+        {
+          "id": "local.goblin.basket_clearance.evidence.1",
+          "areaId": "goblin.a04",
+          "label": "货道低顶段",
+          "actionLabel": "检查顶棚与货篓擦痕",
+          "text": "顶棚擦痕集中在满篓上缘，空手通过不能证明背篓也能过。"
+        },
+        {
+          "id": "local.goblin.basket_clearance.evidence.2",
+          "areaId": "goblin.a03",
+          "label": "来路转篓角",
+          "actionLabel": "核对转角可停篓的位置",
+          "text": "转角外侧有平稳落篓位，先卸下再转向能避免硬挤低顶。"
+        }
+      ],
+      "completion": "枝契把低顶高度和落篓位写进借篓提醒，不再把地图上的宽线当作实际净空。"
+    },
+    "local.ashen.powder_lid_shapes": {
+      "brief": "灰会再来，罐子也得认得出来。请核对研配台和送粉架上的盖形。",
+      "points": [
+        {
+          "id": "local.ashen.powder_lid_shapes.evidence.1",
+          "areaId": "ashen.a01",
+          "label": "研配台粉罐",
+          "actionLabel": "检查盖沿与粉类旧记号",
+          "text": "粉罐外字被灰遮住，盖沿却仍能摸出旧刻缺。"
+        },
+        {
+          "id": "local.ashen.powder_lid_shapes.evidence.2",
+          "areaId": "ashen.a01",
+          "label": "送粉交接架",
+          "actionLabel": "核对盖形与送达记号",
+          "text": "送粉交接架的记录对应不同缺口，几只平盖才没有可靠区别。"
+        }
+      ],
+      "completion": "砂砚按两处对应记录给罐盖补上不同边角，不再只靠容易积灰的罐身字迹。"
+    },
+    "local.ashen.airflow_walk": {
+      "brief": "站在风口里容易听错。请比较洼地和浅谷两处砂落向哪里。",
+      "points": [
+        {
+          "id": "local.ashen.airflow_walk.evidence.1",
+          "areaId": "ashen.a04",
+          "label": "洼地风口外缘",
+          "actionLabel": "观察风口外的砂纹",
+          "text": "外缘砂纹斜向低处，声音却从石面反弹回来，不能只凭耳朵。"
+        },
+        {
+          "id": "local.ashen.airflow_walk.evidence.2",
+          "areaId": "ashen.a03",
+          "label": "浅谷沉砂带",
+          "actionLabel": "核对沉砂带朝向",
+          "text": "沉砂带接住同一方向的细砂，确认了实际来风的路线。"
+        }
+      ],
+      "completion": "灰棱把两处砂纹方向并列记录，按实际落砂调整通风，不把回声当成风向。"
+    }
+  },
+  "kills": {
+    "local.dwarf.survey_after_clear": {
+      "monsterIds": [
+        "dwarf.a07.normal.1",
+        "dwarf.a07.normal.2"
+      ],
+      "count": 3,
+      "brief": "银纹矿廊的钻虫与晶蛛又挡住了测线。请清开这一段，再回来画线。",
+      "completion": "纳铎记下你实际清理的路段和日期，未亲见的支路仍留问号。"
+    },
+    "local.human.road_report": {
+      "monsterIds": [
+        "human.a02.normal.1",
+        "human.a02.normal.2"
+      ],
+      "count": 3,
+      "brief": "驿道棘兽和断辕刀客拦住了今天的路。清掉眼前威胁，别追离驿道。",
+      "completion": "奥登按本轮实际清理的敌情更新路况，没有把今天的回报当成永久安全。"
+    },
+    "local.elf.pollen_path_watch": {
+      "monsterIds": [
+        "elf.a05.normal.1",
+        "elf.a05.normal.2"
+      ],
+      "count": 3,
+      "brief": "蚀花灵和灰粉蝠正在花径近处活动。请清开巡护路，再带回实况。",
+      "completion": "赛林将本轮清理的路段记下，提醒下一班仍需留意林径变化。"
+    },
+    "local.goblin.landing_watch": {
+      "monsterIds": [
+        "goblin.a06.normal.1",
+        "goblin.a06.normal.2"
+      ],
+      "count": 3,
+      "brief": "砂铜鳌兽和回声渡蛾乱撞靠岸处。替我清开这一段，别追进深水。",
+      "completion": "滴索确认本轮靠岸处已经清理，把船边的观察记进下一班渡运记录。"
+    },
+    "local.ashen.listen_after_return": {
+      "monsterIds": [
+        "ashen.a06.normal.1",
+        "ashen.a06.normal.3"
+      ],
+      "count": 3,
+      "brief": "鸣晶螳螂与共鸣晶蛛挤在声标旁。先清开通路，再回来核对路标声。",
+      "completion": "鸣隙记下本轮清理，重新听清路标的间隔，没有替空白添上一个答案。"
+    },
+    "local.dwarf.slope_guard_round": {
+      "monsterIds": [
+        "dwarf.a04.normal.1",
+        "dwarf.a04.normal.2"
+      ],
+      "count": 3,
+      "brief": "渣火蜥和烟囱灰蝠逼近坡下轮值处。清开近处，不追出同伴视线。",
+      "completion": "科霖按本轮清理后的实际位置布置接班，下一轮仍照常观察。"
+    },
+    "local.human.highland_patrol": {
+      "monsterIds": [
+        "human.a08.normal.1",
+        "human.a08.normal.2"
+      ],
+      "count": 3,
+      "brief": "高地夜鸦和石髓翼卫掠过旧篱。沿篱清理眼前威胁，不必追远。",
+      "completion": "贝菈收到本轮沿篱清理记录，排好下一班，旧篱仍只作路边界。"
+    },
+    "local.elf.marsh_watch_round": {
+      "monsterIds": [
+        "elf.a09.normal.1",
+        "elf.a09.normal.3"
+      ],
+      "count": 3,
+      "brief": "枯潮鳄和潮壳龟占住低苇近路。请清理看得见的这一段，别陷进泥里。",
+      "completion": "雅森根据本轮清理更新低苇近路的守望位置，不把远处也写成安全。"
+    },
+    "local.goblin.entrance_watch": {
+      "monsterIds": [
+        "goblin.a08.normal.1",
+        "goblin.a08.normal.2"
+      ],
+      "count": 3,
+      "brief": "赤须穴兽和黏晶壳虫逼近洞口。你清外边这一段，我留在入口照应。",
+      "completion": "墨库将本轮清理记入洞口巡看，不把回声当成更多敌人的证据。"
+    },
+    "local.ashen.obsidian_escort_round": {
+      "monsterIds": [
+        "ashen.a07.normal.1",
+        "ashen.a07.normal.2"
+      ],
+      "count": 3,
+      "brief": "黑曜刀卫和白盐夜蛾挡在风口近处。请清出护行路，只照看这一段。",
+      "completion": "璞承让同行者在清理过的路段稳步通过，仍保留对松石和强风的提醒。"
+    },
+    "local.human.seed_sacks": {
+      "monsterIds": [
+        "human.a01.normal.1",
+        "human.a01.normal.2"
+      ],
+      "count": 3,
+      "brief": "棘背幼兽和割穗盗兵逼近留种袋的搬运路。请先清开近处，再回来帮我安放留种。",
+      "completion": "米蕾将留种袋搬到清理过的通路旁，重新分开留种与食用签，并交给你一份普通白穗籽。",
+      "rewardMaterialId": "human.mat.02"
+    },
+    "local.goblin.shared_shelf": {
+      "monsterIds": [
+        "goblin.a01.normal.1",
+        "goblin.a01.normal.3"
+      ],
+      "count": 3,
+      "brief": "苔坡盲鼠和旧铆游械又撞到架脚。先清开菌架近处，我才能腾走空筐。",
+      "completion": "咕黛把空筐稳稳叠走，为邻筐各留出位置，交给你一份普通灰帽菌。",
+      "rewardMaterialId": "goblin.mat.01"
+    },
+    "local.goblin.keep_the_offcut": {
+      "monsterIds": [
+        "goblin.a02.normal.1",
+        "goblin.a02.normal.2"
+      ],
+      "count": 3,
+      "brief": "铁屑噬鼠和脱轨运载傀扰乱了旧件存放处。请清开周边，我再把裂件与好料分开。",
+      "completion": "扳牙分开放置能用的旧件和裂到底的废边，给你一份普通灰帽菌作这趟的补给。",
+      "rewardMaterialId": "goblin.mat.01"
+    },
+    "local.ashen.basin_cover": {
+      "monsterIds": [
+        "ashen.a03.normal.1",
+        "ashen.a03.normal.2"
+      ],
+      "count": 3,
+      "brief": "冷烬狐和凝露壳蜗挤到接露盆旁。请清开近处，我才能扶正盆盖、移开空器。",
+      "completion": "砾露将盖边扶正，把空器移离落灰线，并交给你一份普通冷烬砂。",
+      "rewardMaterialId": "ashen.cold_ash_sand"
+    },
+    "local.dwarf.quiet_meal_bench": {
+      "monsterIds": [
+        "dwarf.a08.normal.1",
+        "dwarf.a08.normal.2"
+      ],
+      "count": 3,
+      "brief": "炉边太吵，外侧又有黑曜刃蜥和岩脂伏行兽。先清开歇脚近路，我再安放安静桌。",
+      "completion": "莎嘉在清理过的歇脚处安排安静桌，不挡送饭通路，给你一份普通黑曜薄片。",
+      "rewardMaterialId": "dwarf.obsidian_flake"
+    },
+    "local.human.low_rail_window": {
+      "monsterIds": [
+        "human.a07.normal.1",
+        "human.a07.normal.2"
+      ],
+      "count": 3,
+      "brief": "关隘枪兵和余烬守卒挡在桥栏近路。清开这段，我才能让旅人不用踩高栏也看见下方。",
+      "completion": "洛恩完成低观察口并保留挡边，让旅人平稳站着看下方，交给你一份普通余烬椒。",
+      "rewardMaterialId": "human.mat.09"
+    },
+    "local.elf.fallen_nest_rest": {
+      "monsterIds": [
+        "elf.a02.normal.1",
+        "elf.a02.normal.3"
+      ],
+      "count": 3,
+      "brief": "橡果甲虫和空根野猪挤到落巢横枝附近。先清开近处，旧巢不要拆，也不必追远。",
+      "completion": "栖苇保留旧巢，在清理过的旁侧留出绕行横枝，交给你一份普通露冠花。",
+      "rewardMaterialId": "elf.dew_crown"
+    },
+    "local.goblin.last_ladle": {
+      "monsterIds": [
+        "goblin.a03.normal.1",
+        "goblin.a03.normal.3"
+      ],
+      "count": 3,
+      "brief": "晚班要回来喝汤，灯孢菌兽和盲翼穴鼠却挡在近路。请清开这一段，我替他们留着锅。",
+      "completion": "咔巴把晚班的那份单独盛好写清，并交给你一份普通灰帽菌，没人再误会那是私藏。",
+      "rewardMaterialId": "goblin.mat.01"
+    },
+    "local.ashen.wind_vane_spacing": {
+      "monsterIds": [
+        "ashen.a04.normal.1",
+        "ashen.a04.normal.2"
+      ],
+      "count": 3,
+      "brief": "琉背泽鳄和赤脉针蝎占住通风口外侧。清开近处，我才能把堵风的货包退回线后。",
+      "completion": "灰棱把货包退出通风空线，在旁边保留挡风处，交给你一份普通琉砂晶粒。",
+      "rewardMaterialId": "ashen.glass_grain"
+    },
+    "local.elf.root_or_rope": {
+      "monsterIds": [
+        "elf.a03.normal.1",
+        "elf.a03.normal.2"
+      ],
+      "count": 3,
+      "brief": "盘藤小妖和青岩甲虫挤在根桥支撑旁。先清开近处，我来护住活根；不要拿锯子碰它。",
+      "completion": "伊萝给支撑活根挂上禁锯标识，把真正的旧绳另置，交给你一份普通露冠花。",
+      "rewardMaterialId": "elf.dew_crown"
+    }
+  },
+  "collectionCompletion": {
+    "local.dwarf.strap_repair": "朵菈收下明示的一份普通铁屑，修牢公用灯架扣环，交班时也会检查旧扣。",
+    "local.dwarf.moss_batch": "赫珀把交付的普通石胆菌单独分装，补齐本批，并交给你约定的普通灰根草。",
+    "local.human.one_seed_measure": "米蕾收下这一份普通白穗籽，记清日期，补入留种袋。",
+    "local.human.dry_patch": "赛芙用交付的普通烛脂树胶先压牢边缝，再检查旧洞，本批防雨布补齐。",
+    "local.elf.bridge_lashing": "伊萝用普通旋叶藤收紧本轮护绳，让行人和货篮都避开新芽。",
+    "local.goblin.rivet_batch": "扳牙用交付的普通旧铆铁修牢松动连接，推架继续使用，不换掉整副架子。",
+    "local.ashen.clear_signal": "鸣隙用普通赤脉矿补牢架脚，两片路标晶片不再挤碰。",
+    "local.dwarf.wheel_pin_batch": "陶兰用普通铁屑修稳本批轮销，逐个检查矿车，不再让松轮拖着继续走。",
+    "local.human.rail_seal_brush": "洛恩用普通夜鸦羽做成小刷，清理并封好大刷进不去的栏缝。",
+    "local.elf.loom_padding": "露茵把普通萤绒苔垫在磨线处，保留织架原形，交给你约定的旧存旋叶藤。",
+    "local.goblin.soup_straining": "咔巴收下普通灰帽菌，补齐锅料并仔细过筛，晚班的那一份也留好。",
+    "local.ashen.grinding_batch": "砂砚用普通冷烬砂磨平护具边缘，向里和向外的扣口都检查过。"
+  },
+  "collections": {
+    "local.elf.shade_trays": {
+      "materialId": "elf.green_shale",
+      "quantity": 1,
+      "rewardMaterialId": "elf.dew_crown",
+      "brief": "苗盘先不多浇水。带一份普通青脉页岩来，垫稳遮片，给卷叶的这一排留下半荫。",
+      "completion": "芙岚用青脉页岩稳住遮片，挪开受曝苗盘并留出通风；交给你一份普通露冠花。"
+    },
+    "local.goblin.mushroom_labels": {
+      "materialId": "goblin.mat.01",
+      "quantity": 1,
+      "rewardMaterialId": "goblin.mat.03",
+      "brief": "旧签绑反了。带一份普通灰帽菌补入新批，我按这批实物把旧签、新签重新分开。",
+      "completion": "咕黛把交付的灰帽菌补入新批，核对实物后重新绑签，并交给你一份普通韧苔纤维。"
+    },
+    "local.ashen.dew_queue": {
+      "materialId": "ashen.cold_ash_sand",
+      "quantity": 1,
+      "rewardMaterialId": "ashen.porous_basalt",
+      "brief": "空器和已装器混了。带一份普通冷烬砂来清理空器的旧痕，我再按器底逐个分开。",
+      "completion": "砾露清理空器旧痕，分开放好待装与已装容器，交给你一份普通孔纹玄石。"
+    },
+    "local.ashen.shelter_seam": {
+      "materialId": "ashen.refractory_stone",
+      "quantity": 1,
+      "rewardMaterialId": "ashen.obsidian_glass",
+      "brief": "棚还站得住，两边的缝得补。带一份普通耐焰陶石来，先给来客留干净停靠处。",
+      "completion": "陶褶补牢来客侧，再检查工具侧接缝，交给你一份普通黑曜玻璃。"
+    },
+    "local.human.blank_herb_tag": {
+      "materialId": "human.mat.06",
+      "quantity": 1,
+      "rewardMaterialId": "human.mat.02",
+      "brief": "空药签不能靠猜来填。带一份普通烛脂树胶，先封稳这包待核对的草叶和批次签。",
+      "completion": "温娜封存草叶并稳固残存的批次签，等来源核对后再用；交给你一份普通白穗籽。"
+    },
+    "local.goblin.basket_name_knot": {
+      "materialId": "goblin.mat.03",
+      "quantity": 1,
+      "rewardMaterialId": "goblin.mat.02",
+      "brief": "先记用了多久，不急着叫谁赔。带一份普通韧苔纤维来，我给借还牌补上清楚的日期结。",
+      "completion": "枝契补好日期结，标清背带使用和借还记录，交给你一份普通旧铆铁。"
+    },
+    "local.goblin.shield_not_a_stool": {
+      "materialId": "goblin.mat.11",
+      "quantity": 1,
+      "rewardMaterialId": "goblin.mat.02",
+      "brief": "圆盾被当凳子，背带压坏了。带一份普通赤须兽筋修带，我把盾架挪开，另留歇脚处。",
+      "completion": "墨库修牢盾带，分开盾架与坐靠位置，并把一份修护存料中的普通旧铆铁交给你。"
+    },
+    "local.ashen.stoneway_pace": {
+      "materialId": "ashen.weathered_mica",
+      "quantity": 1,
+      "rewardMaterialId": "ashen.obsidian_glass",
+      "brief": "转角一过，后面就看不见手势。带一份普通风蚀云母，给中段停步位添个容易辨认的提示。",
+      "completion": "璞承补好停步提示，让中段传递手势，等最后一位看见再动身；交给你一份普通黑曜玻璃。"
+    }
+  },
+  "oneTimeRewardSupplements": {
+    "local.dwarf.lamp_labels": {
+      "materialId": "dwarf.iron_filings",
+      "sourceNodeIds": [
+        "dwarf.a01.field",
+        "dwarf.a01.dungeon"
+      ],
+      "completion": "朵菈从修灯存料里交给你一份普通铁屑，谢你把两处记号查清。"
+    },
+    "local.dwarf.strap_repair": {
+      "materialId": "dwarf.ashroot",
+      "sourceNodeIds": [
+        "dwarf.a01.field",
+        "dwarf.a01.dungeon"
+      ],
+      "completion": "朵菈交给你一份备给矿工的普通灰根草，作为修好灯架的报酬。"
+    },
+    "local.dwarf.two_baskets": {
+      "materialId": "dwarf.stone_gall_fungus",
+      "sourceNodeIds": [
+        "dwarf.a05.field",
+        "dwarf.a05.dungeon"
+      ],
+      "completion": "赫珀从配料存货里分出一份普通石胆菌，作为核对两处筐签的报酬。"
+    },
+    "local.dwarf.uncertain_branch": {
+      "materialId": "dwarf.furnace_ash_salt",
+      "sourceNodeIds": [
+        "dwarf.a06.field",
+        "dwarf.a06.dungeon"
+      ],
+      "completion": "纳铎从随行的炉区补给里分出一份普通炉灰盐，谢你把亲见与传闻分开。"
+    },
+    "local.human.one_seed_measure": {
+      "materialId": "human.mat.01",
+      "sourceNodeIds": [
+        "human.a01.field",
+        "human.a01.dungeon"
+      ],
+      "completion": "米蕾从磨坊修护存料里交给你一份普通田垄铁砂，答谢这次补种。"
+    },
+    "local.human.unaddressed_note": {
+      "materialId": "human.mat.02",
+      "sourceNodeIds": [
+        "human.a02.field",
+        "human.a02.dungeon"
+      ],
+      "completion": "奥登从驿道行旅补给里交给你一份普通白穗籽，作为跑两处核对地址的报酬。"
+    },
+    "local.human.borrowed_blanket": {
+      "materialId": "human.mat.05",
+      "sourceNodeIds": [
+        "human.a05.field",
+        "human.a05.dungeon"
+      ],
+      "completion": "赛芙从缝补处的常用存料里交给你一份普通盐泉结晶，谢你查清借毯登记。"
+    },
+    "local.elf.return_empty_pots": {
+      "materialId": "elf.green_shale",
+      "sourceNodeIds": [
+        "elf.a01.field",
+        "elf.a01.dungeon"
+      ],
+      "completion": "芙岚从苗圃垫盆存料里交给你一份普通青脉页岩，谢你找回空盆的对应记号。"
+    },
+    "local.elf.faded_marks": {
+      "materialId": "elf.glow_moss",
+      "sourceNodeIds": [
+        "elf.a05.field",
+        "elf.a05.dungeon"
+      ],
+      "completion": "赛林交给你一份巡护备存的普通萤绒苔，作为这趟实地核对的报酬。"
+    },
+    "local.goblin.boat_loading": {
+      "materialId": "goblin.mat.07",
+      "sourceNodeIds": [
+        "goblin.a06.field",
+        "goblin.a06.dungeon"
+      ],
+      "completion": "滴索从渡口修护存料里交给你一份普通沉河砂铜，谢你把偏载的缘由查清。"
+    },
+    "local.ashen.misplaced_stones": {
+      "materialId": "ashen.refractory_stone",
+      "sourceNodeIds": [
+        "ashen.a08.field",
+        "ashen.a08.dungeon"
+      ],
+      "completion": "陶褶从存料中交给你一份普通耐焰陶石，作为核对真假路标的报酬。"
+    },
+    "local.dwarf.cart_handle_height": {
+      "materialId": "dwarf.iron_filings",
+      "sourceNodeIds": [
+        "dwarf.a02.field",
+        "dwarf.a02.dungeon"
+      ],
+      "completion": "陶兰交给你一份修车余下的普通铁屑，谢你替不同身高的人量清握位。"
+    },
+    "local.dwarf.shield_rotation": {
+      "materialId": "dwarf.furnace_ash_salt",
+      "sourceNodeIds": [
+        "dwarf.a04.field",
+        "dwarf.a04.dungeon"
+      ],
+      "completion": "科霖从轮值补给里交给你一份普通炉灰盐，答谢你核清交班记录。"
+    },
+    "local.dwarf.meal_route": {
+      "materialId": "dwarf.obsidian_flake",
+      "sourceNodeIds": [
+        "dwarf.a08.field",
+        "dwarf.a08.dungeon"
+      ],
+      "completion": "莎嘉从矿队常备料里交给你一份普通黑曜薄片，作为亲自核对送饭路的报酬。"
+    },
+    "local.human.hillside_drying": {
+      "materialId": "human.mat.05",
+      "sourceNodeIds": [
+        "human.a03.field",
+        "human.a03.dungeon"
+      ],
+      "completion": "温娜从常用存料里交给你一份普通盐泉结晶，谢你查清晾架两处的风与湿痕。"
+    },
+    "local.human.mist_whistle": {
+      "materialId": "human.mat.10",
+      "sourceNodeIds": [
+        "human.a08.field",
+        "human.a08.dungeon"
+      ],
+      "completion": "贝菈交给你一份巡守途中留存的普通夜鸦羽，作为沿途核对告警记号的报酬。"
+    },
+    "local.elf.echo_bird_roost": {
+      "materialId": "elf.dew_crown",
+      "sourceNodeIds": [
+        "elf.a02.field",
+        "elf.a02.dungeon"
+      ],
+      "completion": "栖苇从照护处的存料里交给你一份普通露冠花，答谢你带回亲眼观察的记录。"
+    },
+    "local.elf.visible_mending": {
+      "materialId": "elf.glow_moss",
+      "sourceNodeIds": [
+        "elf.a06.field",
+        "elf.a06.dungeon"
+      ],
+      "completion": "露茵从织架垫护存料里交给你一份普通萤绒苔，谢你核清各块披布的记号。"
+    },
+    "local.elf.reed_lane_space": {
+      "materialId": "elf.dry_tide_scale",
+      "sourceNodeIds": [
+        "elf.a09.field",
+        "elf.a09.dungeon"
+      ],
+      "completion": "雅森交给你一份守望时留存的普通枯潮鳞，作为查清错身落脚处的报酬。"
+    },
+    "local.goblin.basket_clearance": {
+      "materialId": "goblin.mat.03",
+      "sourceNodeIds": [
+        "goblin.a04.field",
+        "goblin.a04.dungeon"
+      ],
+      "completion": "枝契从编篓存料里交给你一份普通韧苔纤维，谢你实地核对背篓净空。"
+    },
+    "local.ashen.powder_lid_shapes": {
+      "materialId": "ashen.salt_shell",
+      "sourceNodeIds": [
+        "ashen.a01.field",
+        "ashen.a01.dungeon"
+      ],
+      "completion": "砂砚从研配台存料里交给你一份普通盐壳碎片，作为核对罐盖与送粉记号的报酬。"
+    },
+    "local.ashen.airflow_walk": {
+      "materialId": "ashen.weathered_mica",
+      "sourceNodeIds": [
+        "ashen.a04.field",
+        "ashen.a04.dungeon"
+      ],
+      "completion": "灰棱从风口修护存料里交给你一份普通风蚀云母，谢你查清实际落砂方向。"
+    }
+  }
+}

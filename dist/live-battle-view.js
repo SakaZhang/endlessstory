@@ -124,7 +124,12 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
  }
  function sceneFiles(){
   if(!manifest||!snapshot)return [];
-  const sprites=[heroSpriteFor(metadata.hero?.weaponType,manifest,metadata.hero?.race),...snapshot.encounter.enemies.map(u=>liveActorSprite(u,manifest))];
+  const hero=heroSpriteFor(metadata.hero?.weaponType,manifest,metadata.hero?.race);
+  // The always-visible hero rail needs idle frames, not the hidden battle's
+  // backgrounds, enemies, attacks, hurt or death animations. Full lifecycle
+  // frames are requested when the battle view becomes visible, before drawing.
+  if(!visible){const sprite=manifest.sprites?.[hero],idle=new Set(sprite?.animations?.idle??[]);return [...new Set((sprite?.frames??[]).filter(frame=>idle.has(frame.id)).map(frame=>frame.file))];}
+  const sprites=[hero,...snapshot.encounter.enemies.map(u=>liveActorSprite(u,manifest))];
   return [...new Set([...liveSceneBackgrounds(snapshot,manifest),...sprites.flatMap(key=>manifest.sprites?.[key]?.frames??[])].map(f=>f.file))];
  }
  function updateScope(){

@@ -1,0 +1,15 @@
+长路未尽 — portable deployment notices
+
+The game and its artwork remain subject to their existing ownership and terms.
+No repository-wide public/open-source game license was present in the supplied
+project. Packaging does not grant new redistribution, resale, trademark, or
+artwork rights. Review asset provenance/permissions before public distribution.
+
+The static server is compiled from deploy/container/server using the Go standard
+library. Go and its bundled golang.org/x components are BSD-licensed; the
+corresponding copyright, license and patent notices accompany this package.
+There is no OS base image, shell, package manager or external runtime dependency.
+
+esbuild is a build-time-only tool for the game's JavaScript/CSS; its executable
+is not shipped in this container. No user browser saves, login sessions,
+credentials, repository metadata or assistant identity files are packaged.

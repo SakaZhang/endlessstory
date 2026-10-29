@@ -1,0 +1,8 @@
+*
+!Dockerfile
+!binaries/
+!binaries/**
+!site/
+!site/**
+!licenses/
+!licenses/**

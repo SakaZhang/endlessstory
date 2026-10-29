@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
-import {mkdtemp,cp,readFile,writeFile,rm,mkdir} from 'node:fs/promises';
+import {mkdtemp,cp,readFile,writeFile,rm,mkdir,symlink} from 'node:fs/promises';
 import {existsSync} from 'node:fs';
 import {tmpdir} from 'node:os';
-import {join} from 'node:path';
+import {join,resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {releaseAssetRows} from './release-asset-policy.mjs';
 import {execFileSync} from 'node:child_process';
@@ -78,6 +78,10 @@ async function probe(output,report){
   const html=await readFile(join(output,entry),'utf8');assert.equal((html.match(/<base\b/g)||[]).length,1);
   const base=new URL(html.match(/<base href="([^"]+)"/)[1],new URL(entry,root));assert.equal(base.href,release.href);
   for(const d of deps(html,'html').filter(x=>!external(x)))await visit(new URL(d,base),new URL(entry,root).href);
+  // Bundled public entry is the actual load graph; the retained original
+  // entry separately validates every source module's dynamic art contract.
+  const sourceHtml=await readFile(join(emittedRoot,entry),'utf8');
+  for(const d of deps(sourceHtml,'html').filter(x=>!external(x)))await visit(new URL(d,base),'retained source entry '+entry);
  }
  // Registered icon/camp/sprite paths are dynamic runtime edges, not ESM imports.
  async function artEdges(value,from){if(typeof value==='string'&&/\.(?:png|svg|webp)$/.test(value))await visit(new URL(value.replace(/^\.\.\//,''),release),from);else if(value&&typeof value==='object')for(const child of Object.values(value))await artEdges(child,from);}
@@ -143,10 +147,13 @@ try{
  await cp('dist',join(actualRoot,'dist'),{recursive:true});
  await cp('build-release.mjs',join(actualRoot,'build-release.mjs'));
  await cp('release-asset-policy.mjs',join(actualRoot,'release-asset-policy.mjs'));
+ await cp('release-entry-bundles.mjs',join(actualRoot,'release-entry-bundles.mjs'));
+ await symlink(resolve('node_modules'),join(actualRoot,'node_modules'),'dir');
  await cp('.openai/hosting.json',join(actualRoot,'.openai/hosting.json'));
  execFileSync(process.execPath,['build-release.mjs'],{cwd:actualRoot,encoding:'utf8'});
  const actual=JSON.parse(await readFile(join(actualOutput,'release-integrity.json'),'utf8'));
- assert.deepEqual(actual.files.map(f=>[f.path,f.sha256]),releaseAssetRows(await readTree(source)).map(f=>[f.path,f.sha256]),'isolated CLI source differs from current source snapshot');
+ assert.deepEqual(actual.files.filter(f=>!actual.optimization.generated.includes(f.path)).map(f=>[f.path,f.sha256]),releaseAssetRows(await readTree(source)).map(f=>[f.path,f.sha256]),'isolated CLI source differs from current source snapshot');
+ assert.deepEqual(actual.files,a.files,'isolated CLI generated bundle bytes differ');
  const graph=await probe(actualOutput,actual);
  const helper=process.env.SITES_PREPARE_HELPER??'/home/agent/.codex/plugins/cache/openai-curated-remote/sites/1.1.1/skills/sites/scripts/prepare-site-build.cjs';
  let packageCheck='not run: Sites helper unavailable';
@@ -160,7 +167,7 @@ try{
   packageCheck='actual Sites prepare helper PASS: build copied byte-identically and hosting.static.directory normalized to dist';
  }
 
- await writeFile(join(actualOutput,'dependency-probe.json'),JSON.stringify({release:actual.release,legacyEntry:legacyScript,packageCheck,kind:'Actual emitted HTML/ESM/CSS and dynamic manifest/image URL graph; filesystem + URL/cache model, not browser cache inspection',...graph},null,2)+'\n');
+ await writeFile(join(actualOutput,'dependency-probe.json'),JSON.stringify({release:actual.release,legacyEntry:legacyScript,packageCheck,kind:'Emitted bundled entry dependencies plus retained-source ESM/CSS dynamic manifest/image contract graph; filesystem + URL/cache model, not browser cache inspection',...graph},null,2)+'\n');
  console.log(packageCheck);
  console.log(`PASS release cache: ${actual.files.length} files hash-verified; ${graph.urls.length} resource URLs / ${graph.edges.length} dependency edges; old legacy and prior release cache misses; 8 byte mutations + 9 negative reference mutations; roots/navigation/origin/save key preserved.`);
 }finally{await rm(temp,{recursive:true,force:true});}

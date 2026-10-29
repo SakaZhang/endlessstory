@@ -1,0 +1,112 @@
+{
+  "kind": "static file/ESM graph measurements; gzip is deterministic offline estimate, NOT measured HTTP transfer or user-perceived timing",
+  "baseline": "7a32712",
+  "baselineEntry": {
+    "js": {
+      "requests": 204,
+      "bytes": 3053314,
+      "gzipBytes": 645704
+    },
+    "css": {
+      "requests": 34,
+      "bytes": 240243,
+      "gzipBytes": 54673
+    }
+  },
+  "currentSourceEntry": {
+    "js": {
+      "requests": 205,
+      "bytes": 3171305,
+      "gzipBytes": 668773
+    },
+    "css": {
+      "requests": 34,
+      "bytes": 242779,
+      "gzipBytes": 55287
+    }
+  },
+  "optimizedEntry": {
+    "js": {
+      "requests": 1,
+      "bytes": 2095164,
+      "gzipBytes": 482013
+    },
+    "css": {
+      "requests": 1,
+      "bytes": 234417,
+      "gzipBytes": 39922
+    }
+  },
+  "source": {
+    "files": 2805,
+    "bytes": 89815809
+  },
+  "retainedReleaseSource": {
+    "files": 2778,
+    "bytes": 78694160
+  },
+  "release": "33ce31e03b837b81c53d1e483e844217dd3278cc31210e189d0a62da4cb52514",
+  "buildMatchesCurrentSource": true,
+  "portraits": [
+    {
+      "race": "dwarf",
+      "scope": "saved-game camp while viewing world (world map/UI art excluded)",
+      "before": {
+        "requests": 9,
+        "bytes": 360324
+      },
+      "after": {
+        "requests": 1,
+        "bytes": 8092
+      }
+    },
+    {
+      "race": "human",
+      "scope": "saved-game camp while viewing world (world map/UI art excluded)",
+      "before": {
+        "requests": 5,
+        "bytes": 342663
+      },
+      "after": {
+        "requests": 1,
+        "bytes": 13216
+      }
+    },
+    {
+      "race": "elf",
+      "scope": "saved-game camp while viewing world (world map/UI art excluded)",
+      "before": {
+        "requests": 5,
+        "bytes": 390345
+      },
+      "after": {
+        "requests": 1,
+        "bytes": 11061
+      }
+    },
+    {
+      "race": "goblin",
+      "scope": "saved-game camp while viewing world (world map/UI art excluded)",
+      "before": {
+        "requests": 5,
+        "bytes": 446623
+      },
+      "after": {
+        "requests": 1,
+        "bytes": 30242
+      }
+    },
+    {
+      "race": "ashen",
+      "scope": "saved-game camp while viewing world (world map/UI art excluded)",
+      "before": {
+        "requests": 5,
+        "bytes": 390837
+      },
+      "after": {
+        "requests": 1,
+        "bytes": 24874
+      }
+    }
+  ]
+}

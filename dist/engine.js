@@ -11,7 +11,7 @@ import {STORY_SCENES} from './story-event-registry.js';
 import {freshDiplomacy,validDiplomacy,normalizeDiplomacy,territoryAccess,nodeAccess,applyWarStart,applyWarEnd,pruneRandomWarHistory,withWarReplay} from './war-diplomacy.js';
 export {validDiplomacy,normalizeDiplomacy,territoryAccess,nodeAccess} from './war-diplomacy.js';
 import {validReturnRingState,applyReturnRingVictory,returnRingRareBonus} from './return-ring-state.js';
-import {validNpcEventState,recordNpcEventVictory,recordNpcEventExploration} from './npc-events.js';
+import {NPC_EVENTS,npcEventIsModern,validNpcEventState,recordNpcEventVictory,recordNpcEventExploration} from './npc-events.js';
 import {validStoryEventState,canStartStoryScenario,canStartStoryFieldEncounter,recordStoryScenarioResult,recordStoryEncounterVictory} from './story-event-controller.js';
 import {storyScenarioForStart,attachStoryScenario,advanceStoryScenario,finalizeStoryScenario,validStoryScenarioState,storyScenarioMode} from './story-scenario-combat.js';
 import {validPersonalArcRewardState} from './personal-arc-rewards.js';
@@ -799,7 +799,7 @@ function startDwarfEncounter(s,instance,now,recordLocalExploration=true){
  // Each fresh field encounter starts a new skill clock. Preserve carried shield
  // lifetime, not its previous encounter's absolute clock origin.
  if(e.skillResolver==='tree-v1'&&e.playerShieldLayers){const clock=e.treeEffects?.clock??e.treeCombatClock??0,offset=clock-e.playerShieldLayers.clock;e.playerShieldLayers={...e.playerShieldLayers,clock,layers:e.playerShieldLayers.layers.map(l=>({...l,expiresAt:l.expiresAt===null?null:l.expiresAt+offset}))};}
- e.targetId=e.enemies[0].id;dispatchRacialLegendaryEvent(s,{type:'encounterStart',encounterId:e.id},{maxHp:st.hp,stats:st});syncMultiTarget(e);s.location=e.location;s.siteId=instance.siteId;s.activeEncounter=e;s.atCamp=false;s.running=true;s.nextActionAt=s.lastHealthClock+1100;recordEncounteredMonsters(s,e);recordNodeExplored(s,e);if(recordLocalExploration)recordNpcEventExploration(s,e,now);return e;
+ e.targetId=e.enemies[0].id;dispatchRacialLegendaryEvent(s,{type:'encounterStart',encounterId:e.id},{maxHp:st.hp,stats:st});syncMultiTarget(e);s.location=e.location;s.siteId=instance.siteId;s.activeEncounter=e;s.atCamp=false;s.running=true;s.nextActionAt=s.lastHealthClock+1100;recordEncounteredMonsters(s,e);recordNodeExplored(s,e);if(recordLocalExploration){recordNpcEventExploration(s,e,now);startNpcObjectiveReceipt(s,e,now);}return e;
 }
 // Explicit developer entry: callers isolate the supplied save; no production random trigger.
 export function startDeveloperGroup(s,options={},now=Date.now()){
@@ -816,6 +816,36 @@ export function setMultiPaused(s,paused,now=Date.now()){return pauseMulti(s,paus
 export function setCombatTarget(s,id){return s.activeEncounter?.multiVersion===1?selectMultiTarget(s.activeEncounter,id):false;}
 export function combatTargets(e,now){return e?.multiVersion===1?multiTargetRows(e,now):[];}
 export function queueDeveloperAction(s,action){const e=s.activeEncounter;if(e?.multiVersion!==1||!e.developmentFixture||e.done||e.fixtureAction||!validFixtureAction(action))return false;e.fixtureAction=structuredClone(action);return true;}
+// Objective receipts are minted only in the genuine production encounter path.
+// Unlike legacy victory counters, modern kill objectives count actual matching
+// initial actors killed by an engine step, once per successful stage settlement.
+const npcObjectiveReplayStates=new WeakSet();
+function withNpcObjectiveReplay(s,run){npcObjectiveReplayStates.add(s);try{return run();}finally{npcObjectiveReplayStates.delete(s);}}
+function npcObjectiveNodeAccess(s,nodeId,now){return nodeAccess(s,nodeId,npcObjectiveReplayStates.has(s)?now:undefined);}
+function startNpcObjectiveReceipt(s,e,now){
+ if(!Number.isSafeInteger(now)||now<0||now>1e15||!validNpcEventState(s)||s.developmentEquipmentSandbox||e.developmentFixture||e.storyScenario||!npcObjectiveNodeAccess(s,e.instanceId,now).allowed)return;
+ const tasks={};for(const [id,entry]of Object.entries(s.npcEvents?.entries??{})){
+  const o=NPC_EVENTS[id]?.taskObjective,p=s.npcObjectiveProgress?.entries?.[id];
+  if(entry.status==='active'&&npcEventIsModern(s,id)&&o?.kind==='kill'&&p.count<o.count&&o.nodeIds.includes(e.instanceId)&&entry.acceptedAt<=now)tasks[id]={cycle:entry.cycle,acceptedAt:entry.acceptedAt};
+ }
+ if(Object.keys(tasks).length)e.npcObjectiveReceipt={version:1,startedAt:now,tasks,initialUnitIds:e.enemies.filter(u=>u.origin==='initial'&&!u.follower&&u.sourceInstanceId===e.instanceId).map(u=>u.id),defeatedUnitIds:[]};
+}
+function recordNpcObjectiveDefeats(s,e,living){
+ const r=e.npcObjectiveReceipt;if(!r||e.developmentFixture||e.storyScenario)return;
+ for(const u of e.enemies)if(living.has(u.id)&&u.hp===0&&r.initialUnitIds.includes(u.id)&&!r.defeatedUnitIds.includes(u.id))r.defeatedUnitIds.push(u.id);
+}
+function settleNpcObjectiveKills(s,e,now){
+ const r=e.npcObjectiveReceipt,area=AREAS[e.areaId];
+ if(!r||!validNpcEventState(s)||s.developmentEquipmentSandbox||s.activeEncounter!==e||!e.done||!e.win||!e.rewarded||e.developmentFixture||e.storyScenario||!npcObjectiveNodeAccess(s,e.instanceId,now).allowed||!(s.areaProgress?.[area?.race]?.unlocked??[1]).includes(area?.number)||r.startedAt>now)return false;
+ let changed=false;
+ for(const [id,receipt]of Object.entries(r.tasks)){
+  const entry=s.npcEvents.entries[id],p=s.npcObjectiveProgress.entries[id],o=NPC_EVENTS[id].taskObjective;
+  if(entry.status!=='active'||receipt.cycle!==entry.cycle||receipt.acceptedAt!==entry.acceptedAt||p.count>=o.count||p.receipts.includes(e.id))continue;
+  const killed=e.enemies.filter(u=>r.defeatedUnitIds.includes(u.id)&&u.hp===0&&u.origin==='initial'&&!u.follower&&u.sourceInstanceId===e.instanceId&&o.nodeIds.includes(u.sourceInstanceId)&&o.monsterIds.includes(u.definitionId)&&ALL_MONSTERS[u.definitionId]?.nodes?.includes(e.instanceId));
+  if(!killed.length)continue;p.count=Math.min(o.count,p.count+killed.length);p.receipts.push(e.id);changed=true;
+ }
+ return changed;
+}
 function rewardDwarf(s,e,now){
  if(s.activeEncounter!==e||!e.done||!e.win||e.rewarded||!e.enemies.every(u=>u.hp===0)||!validMultiEncounter(e,INSTANCES))return null;
  const run=s.dungeonRun,clear=e.kind==='dungeon'&&e.dungeonStage===3;
@@ -823,7 +853,7 @@ function rewardDwarf(s,e,now){
  normalizeCodexCollection(s);
  return withMultiRng(e,()=>{
   e.rewarded=true;e.lootSummary=emptyLootSummary();e.materialLoot=[];e.rewardNotes=[];
-  recordNpcEventVictory(s,e);recordStoryEncounterVictory(s,e);
+  settleNpcObjectiveKills(s,e,now);recordNpcEventVictory(s,e);recordStoryEncounterVictory(s,e);
   const st=stats(s),multiple=e.fieldGroup?2:1,baseXp=e.rewardXp*multiple,knowledge=st.specials.knowledge&&Math.random()<.05,clearRewards=clear?e.clearRewards:null;
   s.kills++;s.gold+=e.rewardGold*multiple+(clearRewards?.gold??0);e.acceptedXp=gainXp(s,baseXp*(knowledge?2:1)+(clearRewards?.xp??0)).acceptedXp;
   const initial=e.enemies.filter(u=>u.origin==='initial'&&!u.follower),sources=[];
@@ -912,7 +942,7 @@ function selectedTreeRules(s,parameters=getRaceTuning(s.race)){
  const weapon=s.inventory.find(it=>it.id===s.equip.weapon),configs=typeof parameters.configs==='function'?parameters.configs(stats(s)):parameters.configs;
  return {...parameters,configs,active:[...p.active],conditions:[...p.conditions],unlocked:[...p.unlocked],passive:[...p.passive],weaponType:weapon?.weaponType??'generic'};
 }
-export function step(s,e,now=Date.now()){if(storyScenarioMode(e)==='tool')return [];if(s?.version!==SCHEMA_VERSION||s.skillTree?.mode!=='active'||!e||(!e.developmentFixture&&e.skillResolver!=='tree-v1'))return [];return stepImpl(s,e,now,e?.skillResolver==='tree-v1'&&s.skillTree?.mode==='active'?selectedTreeRules(s):null);}
+export function step(s,e,now=Date.now()){if(storyScenarioMode(e)==='tool')return [];if(s?.version!==SCHEMA_VERSION||s.skillTree?.mode!=='active'||!e||(!e.developmentFixture&&e.skillResolver!=='tree-v1'))return [];const living=new Set(e===s.activeEncounter&&!e.done&&e.npcObjectiveReceipt?e.enemies.filter(u=>u.hp>0).map(u=>u.id):[]);const result=stepImpl(s,e,now,e?.skillResolver==='tree-v1'&&s.skillTree?.mode==='active'?selectedTreeRules(s):null);if(living.size)recordNpcObjectiveDefeats(s,e,living);return result;}
 export function gainXp(s,n){return applyExperience(s,n);}
 export function enhanceEquipment(s,quote,random=Math.random){const result=attemptEnhancement(s,quote,random);if(result)capHealth(s);return result;}
 export function luckChance(points){return ordinarySecondRollProbability(points)??0;}
@@ -945,7 +975,7 @@ export function offline(s,now=Date.now()){
  const worldEvents=advanceRandomWorldEvents(s,now);if(!worldEvents)return null;
  const beforeMaterials=new Map(materialEntries(s).map(x=>[x.key,x.count]));let time=start,kills=0,rests=0,rounds=0;const lootSummary=emptyLootSummary();
  // Real combat turns, bounded to four hours. Camp waits jump to their deadline.
- withWarReplay(s,()=>{while(time<end&&s.running){
+ withWarReplay(s,()=>withNpcObjectiveReplay(s,()=>{while(time<end&&s.running){
   if(s.restUntil>0){if(s.restUntil>end)break;time=Math.max(time,s.restUntil);settleRest(s,time);if(!s.running)break;continue;}
   if(s.nextBattleAt>time){time=Math.min(end,s.nextBattleAt);if(time>=end)break;}
   let e=s.activeEncounter;
@@ -956,7 +986,7 @@ export function offline(s,now=Date.now()){
   if(e.done&&e.win){reward(s,e,time);mergeLootSummary(lootSummary,e.lootSummary);kills++;}
   if(rounds>26200)break; // At most one delayed-basic micro-event per regular 1.1s round within 4h.
  }
- });
+ }));
  pruneRandomWarHistory(s,now);
  // Time beyond the reward cap may finish rest/expire buffs, never grants extra kills.
  settleRest(s,Math.max(now,start));s.lastSeen=Math.max(now,start);

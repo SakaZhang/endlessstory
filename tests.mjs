@@ -246,3 +246,11 @@ runAffixSourceTest(process.execPath,[new URL('./affix-slot-story-compat-tests.mj
 runAffixSourceTest(process.execPath,[new URL('./branding-v074-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
 // Contextual skill/weapon/set release rules and nondestructive historical-save fallback.
 for(const file of ['contextual-skill-condition-tests.mjs','contextual-condition-compat-tests.mjs','contextual-condition-selector-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+// Actionable NPC objectives and verified loading optimizations.
+runAffixSourceTest(process.execPath,[new URL('./npc-objective-runtime-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+runAffixSourceTest(process.execPath,[new URL('./npc-objective-ui-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+runAffixSourceTest(process.execPath,[new URL('./npc-objective-app-ui-tests.cjs',import.meta.url).pathname],{stdio:'inherit'});
+runAffixSourceTest(process.execPath,[new URL('./npc-objective-compatibility-audit-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+runAffixSourceTest(process.execPath,[new URL('./asset-loading-performance-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+runAffixSourceTest(process.execPath,[new URL('./release-entry-bundle-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});

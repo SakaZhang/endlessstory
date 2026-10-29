@@ -9,7 +9,8 @@ try {
  E.normalizeHealth(s,start);E.normalizeExpedition(s);E.normalizeAreaProgress(s);s.lastSeen=start;s.level=1000;s.heroHp=E.stats(s).hp;
  s.areaProgress.dwarf={unlocked:Array.from({length:10},(_,i)=>i+1),cleared:Array.from({length:9},(_,i)=>i+1)};
  s.siteId=d.areaId;s.location=7;s.expedition.fieldId=d.areaId+'.field';s.worldEvents={version:1,lastProcessedAt:start,nextWarCheckAt:start+600000,rngState:1,serial:0};
- assert(beginNpcEvent(s,d.id,start));assert(chooseNpcEventResponse(s,d.id,'option_1'));assert(E.validSave(s));s.running=true;s.stopAfterBattle=true;
+ // Shipped v0.75 active exploration contract must retain its old receipt semantics.
+ s.npcEvents={version:1,entries:{[d.id]:{status:'active',count:0,cycle:0,readyAt:0,acceptedAt:start,lastEncounterId:null,choiceId:null}}};assert(chooseNpcEventResponse(s,d.id,'option_1'));assert(E.validSave(s));s.running=true;s.stopAfterBattle=true;
  const online=structuredClone(s),off=structuredClone(s);seeded();const encounter=E.startRoutedEncounter(online,start);assert(encounter);
  let at=start;while(!encounter.done){at=online.nextActionAt;assert(at<start+600000);now=at;E.step(online,encounter,at);}assert(encounter.win);E.reward(online,encounter,at);
  now=start+1200000;E.advanceWorldEvents(online,now);seeded();const report=E.offline(off,now);

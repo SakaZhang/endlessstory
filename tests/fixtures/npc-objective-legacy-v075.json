@@ -1,0 +1,1577 @@
+{
+  "sourceCommit": "7a32712761ad9aa1e4c684b1e9641331b9fd8628",
+  "events": [
+    {
+      "id": "local.dwarf.lamp_labels",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.dwarf.strap_repair",
+      "objective": {
+        "kind": "materials",
+        "materials": [
+          {
+            "key": "铁屑|0",
+            "materialId": "dwarf.iron_filings",
+            "quantity": 1
+          }
+        ],
+        "inventoryPolicy": "仅扣界面明示的一份普通品质材料；不自动扣高品质，不按曾经拾取判交付。"
+      },
+      "materials": [
+        {
+          "key": "铁屑|0",
+          "materialId": "dwarf.iron_filings",
+          "quantity": 1
+        }
+      ],
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.dwarf.moss_batch",
+      "objective": {
+        "kind": "materials",
+        "materials": [
+          {
+            "key": "dwarf.stone_gall_fungus|0",
+            "materialId": "dwarf.stone_gall_fungus",
+            "quantity": 2
+          }
+        ],
+        "inventoryPolicy": "明示扣除两份普通品质材料，不自动消耗高品质；与奖励及完成同一原子事务。"
+      },
+      "materials": [
+        {
+          "key": "dwarf.stone_gall_fungus|0",
+          "materialId": "dwarf.stone_gall_fungus",
+          "quantity": 2
+        }
+      ],
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": true,
+      "rewards": [
+        {
+          "kind": "material",
+          "key": "灰根草|0",
+          "materialId": "dwarf.ashroot",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "local.dwarf.two_baskets",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.dwarf.uncertain_branch",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.dwarf.survey_after_clear",
+      "objective": {
+        "kind": "victory",
+        "nodeIds": [
+          "dwarf.a07.field"
+        ],
+        "count": 1,
+        "tracking": "接受本轮之后该节点的一次真实胜利；已有胜场、其他地区与失败不计。",
+        "offlinePolicy": "仅已接受任务的客观胜利可由挂机／离线累计，选项与完成必须手动。"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": true,
+      "rewards": [
+        {
+          "kind": "material",
+          "key": "灰根草|0",
+          "materialId": "dwarf.ashroot",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "local.human.seed_sacks",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.human.one_seed_measure",
+      "objective": {
+        "kind": "materials",
+        "materials": [
+          {
+            "key": "human.mat.02|0",
+            "materialId": "human.mat.02",
+            "quantity": 1
+          }
+        ],
+        "inventoryPolicy": "仅扣界面明示的一份普通品质材料；不自动扣高品质，不按曾经拾取判交付。"
+      },
+      "materials": [
+        {
+          "key": "human.mat.02|0",
+          "materialId": "human.mat.02",
+          "quantity": 1
+        }
+      ],
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.human.unaddressed_note",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.human.road_report",
+      "objective": {
+        "kind": "victory",
+        "nodeIds": [
+          "human.a02.field"
+        ],
+        "count": 1,
+        "tracking": "接受本轮之后该节点的一次真实胜利；已有胜场、其他地区与失败不计。",
+        "offlinePolicy": "仅已接受任务的客观胜利可由挂机／离线累计，选项与完成必须手动。"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": true,
+      "rewards": [
+        {
+          "kind": "material",
+          "key": "human.mat.02|0",
+          "materialId": "human.mat.02",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "local.human.dry_patch",
+      "objective": {
+        "kind": "materials",
+        "materials": [
+          {
+            "key": "human.mat.06|0",
+            "materialId": "human.mat.06",
+            "quantity": 2
+          }
+        ],
+        "inventoryPolicy": "明示扣除两份普通品质材料，不自动消耗高品质；与奖励及完成同一原子事务。"
+      },
+      "materials": [
+        {
+          "key": "human.mat.06|0",
+          "materialId": "human.mat.06",
+          "quantity": 2
+        }
+      ],
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": true,
+      "rewards": [
+        {
+          "kind": "material",
+          "key": "human.mat.05|0",
+          "materialId": "human.mat.05",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "local.human.borrowed_blanket",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.elf.shade_trays",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.elf.return_empty_pots",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.elf.bridge_lashing",
+      "objective": {
+        "kind": "materials",
+        "materials": [
+          {
+            "key": "elf.spiral_vine|0",
+            "materialId": "elf.spiral_vine",
+            "quantity": 2
+          }
+        ],
+        "inventoryPolicy": "明示扣除两份普通品质材料，不自动消耗高品质；与奖励及完成同一原子事务。"
+      },
+      "materials": [
+        {
+          "key": "elf.spiral_vine|0",
+          "materialId": "elf.spiral_vine",
+          "quantity": 2
+        }
+      ],
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": true,
+      "rewards": [
+        {
+          "kind": "material",
+          "key": "elf.dew_crown|0",
+          "materialId": "elf.dew_crown",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "local.elf.root_or_rope",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.elf.faded_marks",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.elf.pollen_path_watch",
+      "objective": {
+        "kind": "victory",
+        "nodeIds": [
+          "elf.a05.field"
+        ],
+        "count": 1,
+        "tracking": "接受本轮之后该节点的一次真实胜利；已有胜场、其他地区与失败不计。",
+        "offlinePolicy": "仅已接受任务的客观胜利可由挂机／离线累计，选项与完成必须手动。"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": true,
+      "rewards": [
+        {
+          "kind": "material",
+          "key": "elf.glow_moss|0",
+          "materialId": "elf.glow_moss",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "local.goblin.mushroom_labels",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.goblin.shared_shelf",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.goblin.rivet_batch",
+      "objective": {
+        "kind": "materials",
+        "materials": [
+          {
+            "key": "goblin.mat.02|0",
+            "materialId": "goblin.mat.02",
+            "quantity": 2
+          }
+        ],
+        "inventoryPolicy": "明示扣除两份普通品质材料，不自动消耗高品质；与奖励及完成同一原子事务。"
+      },
+      "materials": [
+        {
+          "key": "goblin.mat.02|0",
+          "materialId": "goblin.mat.02",
+          "quantity": 2
+        }
+      ],
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": true,
+      "rewards": [
+        {
+          "kind": "material",
+          "key": "goblin.mat.01|0",
+          "materialId": "goblin.mat.01",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "local.goblin.keep_the_offcut",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.goblin.boat_loading",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.goblin.landing_watch",
+      "objective": {
+        "kind": "victory",
+        "nodeIds": [
+          "goblin.a06.field"
+        ],
+        "count": 1,
+        "tracking": "接受本轮之后该节点的一次真实胜利；已有胜场、其他地区与失败不计。",
+        "offlinePolicy": "仅已接受任务的客观胜利可由挂机／离线累计，选项与完成必须手动。"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": true,
+      "rewards": [
+        {
+          "kind": "material",
+          "key": "goblin.mat.07|0",
+          "materialId": "goblin.mat.07",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "local.ashen.dew_queue",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.ashen.basin_cover",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.ashen.clear_signal",
+      "objective": {
+        "kind": "materials",
+        "materials": [
+          {
+            "key": "ashen.red_vein_ore|0",
+            "materialId": "ashen.red_vein_ore",
+            "quantity": 2
+          }
+        ],
+        "inventoryPolicy": "明示扣除两份普通品质材料，不自动消耗高品质；与奖励及完成同一原子事务。"
+      },
+      "materials": [
+        {
+          "key": "ashen.red_vein_ore|0",
+          "materialId": "ashen.red_vein_ore",
+          "quantity": 2
+        }
+      ],
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": true,
+      "rewards": [
+        {
+          "kind": "material",
+          "key": "ashen.glass_grain|0",
+          "materialId": "ashen.glass_grain",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "local.ashen.listen_after_return",
+      "objective": {
+        "kind": "victory",
+        "nodeIds": [
+          "ashen.a06.field"
+        ],
+        "count": 1,
+        "tracking": "接受本轮之后该节点的一次真实胜利；已有胜场、其他地区与失败不计。",
+        "offlinePolicy": "仅已接受任务的客观胜利可由挂机／离线累计，选项与完成必须手动。"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": true,
+      "rewards": [
+        {
+          "kind": "material",
+          "key": "ashen.obsidian_glass|0",
+          "materialId": "ashen.obsidian_glass",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "local.ashen.shelter_seam",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.ashen.misplaced_stones",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.dwarf.cart_handle_height",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.dwarf.wheel_pin_batch",
+      "objective": {
+        "kind": "materials",
+        "materials": [
+          {
+            "key": "铁屑|0",
+            "materialId": "dwarf.iron_filings",
+            "quantity": 2
+          }
+        ],
+        "inventoryPolicy": "仅消耗明示的两份普通品质；不会替用高品质。"
+      },
+      "materials": [
+        {
+          "key": "铁屑|0",
+          "materialId": "dwarf.iron_filings",
+          "quantity": 2
+        }
+      ],
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": true,
+      "rewards": [
+        {
+          "kind": "material",
+          "key": "灰根草|0",
+          "materialId": "dwarf.ashroot",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "local.dwarf.shield_rotation",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.dwarf.slope_guard_round",
+      "objective": {
+        "kind": "victory",
+        "nodeIds": [
+          "dwarf.a04.field"
+        ],
+        "count": 1,
+        "tracking": "接取后在真实节点发生的新胜利结算；历史探索、预览地图、主线演出不计。"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": true,
+      "rewards": [
+        {
+          "kind": "material",
+          "key": "dwarf.furnace_ash_salt|0",
+          "materialId": "dwarf.furnace_ash_salt",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "local.dwarf.quiet_meal_bench",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.dwarf.meal_route",
+      "objective": {
+        "kind": "exploration",
+        "nodeIds": [
+          "dwarf.a08.field"
+        ],
+        "count": 1,
+        "tracking": "接取后在真实节点发生的新探索进入；历史探索、预览地图、主线演出不计。"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.human.blank_herb_tag",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.human.hillside_drying",
+      "objective": {
+        "kind": "exploration",
+        "nodeIds": [
+          "human.a03.field"
+        ],
+        "count": 1,
+        "tracking": "接取后在真实节点发生的新探索进入；历史探索、预览地图、主线演出不计。"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.human.low_rail_window",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.human.rail_seal_brush",
+      "objective": {
+        "kind": "materials",
+        "materials": [
+          {
+            "key": "human.mat.10|0",
+            "materialId": "human.mat.10",
+            "quantity": 2
+          }
+        ],
+        "inventoryPolicy": "仅消耗明示的两份普通品质；不会替用高品质。"
+      },
+      "materials": [
+        {
+          "key": "human.mat.10|0",
+          "materialId": "human.mat.10",
+          "quantity": 2
+        }
+      ],
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": true,
+      "rewards": [
+        {
+          "kind": "material",
+          "key": "human.mat.09|0",
+          "materialId": "human.mat.09",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "local.human.mist_whistle",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.human.highland_patrol",
+      "objective": {
+        "kind": "victory",
+        "nodeIds": [
+          "human.a08.field"
+        ],
+        "count": 1,
+        "tracking": "接取后在真实节点发生的新胜利结算；历史探索、预览地图、主线演出不计。"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": true,
+      "rewards": [
+        {
+          "kind": "material",
+          "key": "human.mat.10|0",
+          "materialId": "human.mat.10",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "local.elf.fallen_nest_rest",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.elf.echo_bird_roost",
+      "objective": {
+        "kind": "exploration",
+        "nodeIds": [
+          "elf.a02.field"
+        ],
+        "count": 1,
+        "tracking": "接取后在真实节点发生的新探索进入；历史探索、预览地图、主线演出不计。"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.elf.visible_mending",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.elf.loom_padding",
+      "objective": {
+        "kind": "materials",
+        "materials": [
+          {
+            "key": "elf.glow_moss|0",
+            "materialId": "elf.glow_moss",
+            "quantity": 2
+          }
+        ],
+        "inventoryPolicy": "仅消耗明示的两份普通品质；不会替用高品质。"
+      },
+      "materials": [
+        {
+          "key": "elf.glow_moss|0",
+          "materialId": "elf.glow_moss",
+          "quantity": 2
+        }
+      ],
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": true,
+      "rewards": [
+        {
+          "kind": "material",
+          "key": "elf.spiral_vine|0",
+          "materialId": "elf.spiral_vine",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "local.elf.reed_lane_space",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.elf.marsh_watch_round",
+      "objective": {
+        "kind": "victory",
+        "nodeIds": [
+          "elf.a09.field"
+        ],
+        "count": 1,
+        "tracking": "接取后在真实节点发生的新胜利结算；历史探索、预览地图、主线演出不计。"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": true,
+      "rewards": [
+        {
+          "kind": "material",
+          "key": "elf.dry_tide_scale|0",
+          "materialId": "elf.dry_tide_scale",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "local.goblin.last_ladle",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.goblin.soup_straining",
+      "objective": {
+        "kind": "materials",
+        "materials": [
+          {
+            "key": "goblin.mat.01|0",
+            "materialId": "goblin.mat.01",
+            "quantity": 2
+          }
+        ],
+        "inventoryPolicy": "仅消耗明示的两份普通品质；不会替用高品质。"
+      },
+      "materials": [
+        {
+          "key": "goblin.mat.01|0",
+          "materialId": "goblin.mat.01",
+          "quantity": 2
+        }
+      ],
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": true,
+      "rewards": [
+        {
+          "kind": "material",
+          "key": "goblin.mat.03|0",
+          "materialId": "goblin.mat.03",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "local.goblin.basket_name_knot",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.goblin.basket_clearance",
+      "objective": {
+        "kind": "exploration",
+        "nodeIds": [
+          "goblin.a04.field"
+        ],
+        "count": 1,
+        "tracking": "接取后在真实节点发生的新探索进入；历史探索、预览地图、主线演出不计。"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.goblin.shield_not_a_stool",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.goblin.entrance_watch",
+      "objective": {
+        "kind": "victory",
+        "nodeIds": [
+          "goblin.a08.field"
+        ],
+        "count": 1,
+        "tracking": "接取后在真实节点发生的新胜利结算；历史探索、预览地图、主线演出不计。"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": true,
+      "rewards": [
+        {
+          "kind": "material",
+          "key": "goblin.mat.11|0",
+          "materialId": "goblin.mat.11",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "local.ashen.powder_lid_shapes",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.ashen.grinding_batch",
+      "objective": {
+        "kind": "materials",
+        "materials": [
+          {
+            "key": "ashen.cold_ash_sand|0",
+            "materialId": "ashen.cold_ash_sand",
+            "quantity": 2
+          }
+        ],
+        "inventoryPolicy": "仅消耗明示的两份普通品质；不会替用高品质。"
+      },
+      "materials": [
+        {
+          "key": "ashen.cold_ash_sand|0",
+          "materialId": "ashen.cold_ash_sand",
+          "quantity": 2
+        }
+      ],
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": true,
+      "rewards": [
+        {
+          "kind": "material",
+          "key": "ashen.salt_shell|0",
+          "materialId": "ashen.salt_shell",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "local.ashen.wind_vane_spacing",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.ashen.airflow_walk",
+      "objective": {
+        "kind": "exploration",
+        "nodeIds": [
+          "ashen.a04.field"
+        ],
+        "count": 1,
+        "tracking": "接取后在真实节点发生的新探索进入；历史探索、预览地图、主线演出不计。"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.ashen.stoneway_pace",
+      "objective": {
+        "kind": "choice"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": false,
+      "rewards": []
+    },
+    {
+      "id": "local.ashen.obsidian_escort_round",
+      "objective": {
+        "kind": "victory",
+        "nodeIds": [
+          "ashen.a07.field"
+        ],
+        "count": 1,
+        "tracking": "接取后在真实节点发生的新胜利结算；历史探索、预览地图、主线演出不计。"
+      },
+      "choiceIds": [
+        "option_1",
+        "option_2"
+      ],
+      "repeatable": true,
+      "rewards": [
+        {
+          "kind": "material",
+          "key": "ashen.obsidian_glass|0",
+          "materialId": "ashen.obsidian_glass",
+          "quantity": 1
+        }
+      ]
+    }
+  ],
+  "npcs": [
+    {
+      "id": "npc.dwarf.dora",
+      "name": "朵菈",
+      "race": "dwarf",
+      "role": "矿灯修理工",
+      "areaId": "dwarf.a01",
+      "homeAreaId": "dwarf.a01",
+      "appearance": "烟灰围裙，额灯罩有一道斜裂；短辫末端缠着旧布。",
+      "voice": "先问东西哪里坏了，再说别的；温和但不许逞强。",
+      "plotRelation": "认识来往矿工；布洛克可得到熟人式称呼，但她不是炸矿主线证人，也不知道私卖遗物。",
+      "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+      "areaName": "山麓矿道",
+      "portraitId": "npc.dwarf.dora"
+    },
+    {
+      "id": "npc.dwarf.hepo",
+      "name": "赫珀",
+      "race": "dwarf",
+      "role": "冷泉配料员",
+      "areaId": "dwarf.a05",
+      "homeAreaId": "dwarf.a05",
+      "appearance": "宽布帽裹着耳朵，手套有浅蓝苔痕；腰间挂空量杯。",
+      "voice": "报品名很准，遇到争执就把东西摊开给人看。",
+      "plotRelation": "供应矿工日常配料，不会凭材料认出遗物核心；可复用为归途事件在本区的 NPC。",
+      "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+      "areaName": "冷泉与炉区交界",
+      "portraitId": "npc.dwarf.hepo"
+    },
+    {
+      "id": "npc.dwarf.naduo",
+      "name": "纳铎",
+      "race": "dwarf",
+      "role": "矿图修订员",
+      "areaId": "dwarf.a07",
+      "homeAreaId": "dwarf.a07",
+      "appearance": "右袖磨破，图筒比背包长；指尖常留粉笔白。",
+      "voice": "说得慢，常把“看见”和“听说”纠正一遍。",
+      "plotRelation": "只记录本地现状；第三遗址与炸矿指令由主线自己的证词提供，不能由他提前揭露。",
+      "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+      "areaName": "银纹矿廊",
+      "portraitId": "npc.dwarf.naduo"
+    },
+    {
+      "id": "npc.human.milei",
+      "name": "米蕾",
+      "race": "human",
+      "role": "磨坊管仓员",
+      "areaId": "human.a01",
+      "homeAreaId": "human.a01",
+      "appearance": "卷袖沾麦粉，一只耳后夹着短炭笔；围裙缝了许多方补丁。",
+      "voice": "算账直白，嘴里总分“今天”和“下季”，不训人。",
+      "plotRelation": "承受边境粮食压力，但不是国王密使；知道商队受袭须由主线公开消息而非预知。",
+      "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+      "areaName": "田垄边境",
+      "portraitId": "npc.human.milei"
+    },
+    {
+      "id": "npc.human.aoden",
+      "name": "奥登",
+      "race": "human",
+      "role": "驿道记事员",
+      "areaId": "human.a02",
+      "homeAreaId": "human.a02",
+      "appearance": "褪色短外套，左肩钉着宽纸袋；鼻尖总沾墨。",
+      "voice": "爱把长话压成两行，碰到含混地址就追问。",
+      "plotRelation": "记录普通旅人的消息；不会替罗什福尔判断商队袭击者；归途可临时驻 human.a04。",
+      "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+      "areaName": "旧驿道",
+      "portraitId": "npc.human.aoden"
+    },
+    {
+      "id": "npc.human.saifu",
+      "name": "赛芙",
+      "race": "human",
+      "role": "行旅缝补师",
+      "areaId": "human.a05",
+      "homeAreaId": "human.a05",
+      "appearance": "深色围裙挂着大小针包，发带由两块不同布拼成。",
+      "voice": "习惯先让人坐下再谈事；一句话短，收尾很利落。",
+      "plotRelation": "为路人修布，不是军方情报源；战争中同样遵守地区可达状态，不发通行证。",
+      "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+      "areaName": "圣烛林缘",
+      "portraitId": "npc.human.saifu"
+    },
+    {
+      "id": "npc.elf.fulan",
+      "name": "芙岚",
+      "race": "elf",
+      "role": "苗圃照管者",
+      "areaId": "elf.a01",
+      "homeAreaId": "elf.a01",
+      "appearance": "浅绿围裙有湿泥印，发辫缀着剪掉的干叶柄。",
+      "voice": "细心而不空泛，说植物时用具体动作；不讲全知神谕。",
+      "plotRelation": "照料林缘日常苗木，非枯泉的守林者主角；没有祭坛知识。",
+      "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+      "areaName": "露冠林缘",
+      "portraitId": "npc.elf.fulan"
+    },
+    {
+      "id": "npc.elf.yiluo",
+      "name": "伊萝",
+      "race": "elf",
+      "role": "根桥修护匠",
+      "areaId": "elf.a03",
+      "homeAreaId": "elf.a03",
+      "appearance": "肩上绕着卷好的细藤，袖口整齐地补了浅灰布。",
+      "voice": "先解释为什么不能踩，再让人选办法；耐心不说教。",
+      "plotRelation": "修普通根桥，与枯泉旧结构和解封工具无关；归途可临时驻 elf.a04。",
+      "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+      "areaName": "盘藤坡地",
+      "portraitId": "npc.elf.yiluo"
+    },
+    {
+      "id": "npc.elf.sailin",
+      "name": "赛林",
+      "race": "elf",
+      "role": "林径巡护员",
+      "areaId": "elf.a05",
+      "homeAreaId": "elf.a05",
+      "appearance": "暗绿短披肩，护腕卡着一小片不锋利的木牌。",
+      "voice": "谨慎，常用“我看到的是”；对急躁的人也不摆祭司架子。",
+      "plotRelation": "只知道当前林径状况，不能解释大祭司真意；她不替莱姆斯执行反抗或解封。",
+      "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+      "areaName": "蚀月花径",
+      "portraitId": "npc.elf.sailin"
+    },
+    {
+      "id": "npc.goblin.gudai",
+      "name": "咕黛",
+      "race": "goblin",
+      "role": "菌架看守",
+      "areaId": "goblin.a01",
+      "homeAreaId": "goblin.a01",
+      "appearance": "顶着折边旧帽，背袋外侧缝着细密的防漏网。",
+      "voice": "语速快，先护住眼前那一筐；严肃时不拿饥饿开玩笑。",
+      "plotRelation": "有自己的菌架与邻里，不是奇克的亲属或族群首领；不替奇克解决全家缺粮。",
+      "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+      "areaName": "苔口坡地",
+      "portraitId": "npc.goblin.gudai"
+    },
+    {
+      "id": "npc.goblin.banya",
+      "name": "扳牙",
+      "race": "goblin",
+      "role": "旧铁修补匠",
+      "areaId": "goblin.a02",
+      "homeAreaId": "goblin.a02",
+      "appearance": "一侧护目镜镜片缺了角，腰带上挂着大小不一的钳子。",
+      "voice": "讨价时精明，验修时实在；不把每句话都变成笑话。",
+      "plotRelation": "修普通支架，不参与商队袭击真凶的判定；既不替奇克偷粮，也不认识神秘遗物。",
+      "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+      "areaName": "碎铁旧道",
+      "portraitId": "npc.goblin.banya"
+    },
+    {
+      "id": "npc.goblin.disuo",
+      "name": "滴索",
+      "race": "goblin",
+      "role": "暗河摆渡员",
+      "areaId": "goblin.a06",
+      "homeAreaId": "goblin.a06",
+      "appearance": "披着窄油布，裤脚永远卷得高；肩上绳圈收得很紧。",
+      "voice": "说话短，先算重量和退路；不把所有风险当能赚的钱。",
+      "plotRelation": "运普通人货，不指认商队袭击；不会承诺封锁时仍可摆渡。归途复用本区驻点。",
+      "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+      "areaName": "暗河渡口",
+      "portraitId": "npc.goblin.disuo"
+    },
+    {
+      "id": "npc.ashen.lilu",
+      "name": "砾露",
+      "race": "ashen",
+      "role": "矿露分配员",
+      "areaId": "ashen.a03",
+      "homeAreaId": "ashen.a03",
+      "appearance": "浅灰矿壳，肩缘有水渍般的深纹；携带带缺口的陶制量器。",
+      "voice": "不冷漠，表达具体；先问容器，再问需要，不机械念数字。",
+      "plotRelation": "普通矿物生命，只掌握冷烬浅谷的矿露分配；不知道烬裔起源，也不处理任何人的生命核心。归途可临时驻 ashen.a06。",
+      "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+      "areaName": "冷烬浅谷",
+      "portraitId": "npc.ashen.lilu"
+    },
+    {
+      "id": "npc.ashen.mingji",
+      "name": "鸣隙",
+      "race": "ashen",
+      "role": "晶音路标匠",
+      "areaId": "ashen.a06",
+      "homeAreaId": "ashen.a06",
+      "appearance": "深色石壳夹细银线，背着木框；框上晶片彼此隔开。",
+      "voice": "善听回声但不神秘化；会直说自己也可能听错。",
+      "plotRelation": "校准普通道路声标；不把古神庙提前称为第四祭坛，不解释生命核心与先祖。",
+      "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+      "areaName": "鸣晶断层",
+      "portraitId": "npc.ashen.mingji"
+    },
+    {
+      "id": "npc.ashen.taozhe",
+      "name": "陶褶",
+      "race": "ashen",
+      "role": "陶石棚修护者",
+      "areaId": "ashen.a08",
+      "homeAreaId": "ashen.a08",
+      "appearance": "浅褐矿壳层叠如折痕，前臂缠着防磨布，随身带平木尺。",
+      "voice": "慢声，喜欢先试一小块；对“肯定没事”会追问依据。",
+      "plotRelation": "维护普通遮棚，不是族长、先知或古代创造者证人；不改变族长死亡。",
+      "authorship": "本轮授权创作第一稿；姓名、外观与日常经历不是用户此前逐项固定的正史。",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。",
+      "areaName": "白盐古盆",
+      "portraitId": "npc.ashen.taozhe"
+    },
+    {
+      "id": "npc.dwarf.taolan",
+      "name": "陶兰",
+      "race": "dwarf",
+      "role": "矿车木作匠",
+      "areaId": "dwarf.a02",
+      "homeAreaId": "dwarf.a02",
+      "appearance": "铜色卷发别在耳后，短壮肩膀搭着半只木轮；褐围裙上插木楔。",
+      "voice": "讲尺寸时干脆，愿意先听推车人的手感。",
+      "plotRelation": "只修普通矿车，不掌握炸矿命令或遗物贸易。",
+      "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+      "areaName": "岩蜥支洞",
+      "portraitId": "npc.dwarf.taolan",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+    },
+    {
+      "id": "npc.dwarf.kelin",
+      "name": "科霖",
+      "race": "dwarf",
+      "role": "轮值盾卫",
+      "areaId": "dwarf.a04",
+      "homeAreaId": "dwarf.a04",
+      "appearance": "灰胡子压在旧皮领上，短盾边缘有三块补片；眉毛粗而平。",
+      "voice": "不夸自己打过多少仗，常问同伴有没有退路。",
+      "plotRelation": "看守当地工作队，不是军官，不改变战争结果或矿难生死。",
+      "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+      "areaName": "废炉外坡",
+      "portraitId": "npc.dwarf.kelin",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+    },
+    {
+      "id": "npc.dwarf.shajia",
+      "name": "莎嘉",
+      "race": "dwarf",
+      "role": "矿队炊事员",
+      "areaId": "dwarf.a08",
+      "homeAreaId": "dwarf.a08",
+      "appearance": "红头巾裹着黑色鬓发，壮实手臂挎短柄锅勺；围裙口袋装布包。",
+      "voice": "嗓音爽利，不许拿饥饿和手抖当玩笑。",
+      "plotRelation": "照顾普通矿队用餐，不替主线救援或粮食政策作决定。",
+      "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+      "areaName": "深脉裂谷",
+      "portraitId": "npc.dwarf.shajia",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+    },
+    {
+      "id": "npc.human.wenna",
+      "name": "温娜",
+      "race": "human",
+      "role": "采药师",
+      "areaId": "human.a03",
+      "homeAreaId": "human.a03",
+      "appearance": "银发编成长辫，苔色披巾扣着木别针；肩袋露出整齐的草药包。",
+      "voice": "有分寸地问症状，不把普通草叶说成神药。",
+      "plotRelation": "帮助当地旅人，不治愈主线必然伤亡，不参与王室密信。",
+      "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+      "areaName": "礼钟丘陵",
+      "portraitId": "npc.human.wenna",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+    },
+    {
+      "id": "npc.human.luoen",
+      "name": "洛恩",
+      "race": "human",
+      "role": "桥栏木匠",
+      "areaId": "human.a07",
+      "homeAreaId": "human.a07",
+      "appearance": "深棕卷发蓬在旧工帽下，靛蓝工装缝着木尺袋；左肩挂一把短刨。",
+      "voice": "手上不停但会停下来听人说，讨厌把临时修补说成永久稳固。",
+      "plotRelation": "修桥栏不等于重夺关隘；不发军方通行或改变领土。",
+      "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+      "areaName": "失守关隘",
+      "portraitId": "npc.human.luoen",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+    },
+    {
+      "id": "npc.human.beila",
+      "name": "贝菈",
+      "race": "human",
+      "role": "高地巡守",
+      "areaId": "human.a08",
+      "homeAreaId": "human.a08",
+      "appearance": "雀斑横过鼻梁，蜂蜜色短披巾压在皮肩带下；短矛绑着白布结。",
+      "voice": "语气明亮，发现不确定处会直接承认。",
+      "plotRelation": "普通高地巡守，不是王族、密使或战争胜负关键人物。",
+      "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+      "areaName": "夜鸦高地",
+      "portraitId": "npc.human.beila",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+    },
+    {
+      "id": "npc.elf.qiwei",
+      "name": "栖苇",
+      "race": "elf",
+      "role": "鸟栖照护者",
+      "areaId": "elf.a02",
+      "homeAreaId": "elf.a02",
+      "appearance": "身形纤细，短绿发夹着褐羽；青布肩袋装空巢垫而非捕鸟笼。",
+      "voice": "轻声但不神秘，愿意让不亲人的鸟保持距离。",
+      "plotRelation": "照管普通林鸟，不传神谕，不知道大祭司与遗址秘密。",
+      "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+      "areaName": "回声树庭",
+      "portraitId": "npc.elf.qiwei",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+    },
+    {
+      "id": "npc.elf.luyin",
+      "name": "露茵",
+      "race": "elf",
+      "role": "苇布织工",
+      "areaId": "elf.a06",
+      "homeAreaId": "elf.a06",
+      "appearance": "纤细长臂托着木织梭，紫灰长辫用苇绳扎住；灰绿工作袍磨白了袖口。",
+      "voice": "说话像收线一样有条理，但愿意让补丁保留旧颜色。",
+      "plotRelation": "织普通苇布，不把焚林新芽解释为主线仪式成败。",
+      "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+      "areaName": "焚林新芽",
+      "portraitId": "npc.elf.luyin",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+    },
+    {
+      "id": "npc.elf.yasen",
+      "name": "雅森",
+      "race": "elf",
+      "role": "泽地守望者",
+      "areaId": "elf.a09",
+      "homeAreaId": "elf.a09",
+      "appearance": "瘦高身形裹着苇色短斗篷，青灰长发束得很低；弓弦包在防潮布里。",
+      "voice": "先问脚下稳不稳，再谈箭准不准，不拿年长压人。",
+      "plotRelation": "只巡本地泽路，不拥有祭坛知识，不替莱姆斯完成主线抉择。",
+      "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+      "areaName": "落潮泽地",
+      "portraitId": "npc.elf.yasen",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+    },
+    {
+      "id": "npc.goblin.kaba",
+      "name": "咔巴",
+      "race": "goblin",
+      "role": "菌汤厨手",
+      "areaId": "goblin.a03",
+      "homeAreaId": "goblin.a03",
+      "appearance": "矮小圆脸，浅绿皮肤，白布厨帽歪在长耳间；短勺柄用布缠厚。",
+      "voice": "动作快，盛汤时反而数得慢，给晚来的人留底。",
+      "plotRelation": "不是奇克亲属或首领，经营小锅汤，不根治族群粮荒。",
+      "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+      "areaName": "菌灯洞群",
+      "portraitId": "npc.goblin.kaba",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+    },
+    {
+      "id": "npc.goblin.zhiqi",
+      "name": "枝契",
+      "race": "goblin",
+      "role": "货篓编工",
+      "areaId": "goblin.a04",
+      "homeAreaId": "goblin.a04",
+      "appearance": "小个长耳，橙色背带挎着半编的货篓；深绿短发沾一缕苔纤。",
+      "voice": "善于估轻重，讨厌把身材小等同于可以多塞一篓。",
+      "plotRelation": "编运普通货篓，不判定商队袭击者，不为抢粮补造证词。",
+      "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+      "areaName": "地下货道",
+      "portraitId": "npc.goblin.zhiqi",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+    },
+    {
+      "id": "npc.goblin.moku",
+      "name": "墨库",
+      "race": "goblin",
+      "role": "洞口护卫",
+      "areaId": "goblin.a08",
+      "homeAreaId": "goblin.a08",
+      "appearance": "矮小结实，深绿皮肤，稀疏灰鬓贴着耳根；圆盾缀着交错的浅色皮补片。",
+      "voice": "话不多，会把新人的退路放在自己的面子前。",
+      "plotRelation": "普通洞口轮值者，不是哥布林首领，不替奇克承担族群结局。",
+      "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+      "areaName": "深窟集地",
+      "portraitId": "npc.goblin.moku",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+    },
+    {
+      "id": "npc.ashen.shayan",
+      "name": "砂砚",
+      "race": "ashen",
+      "role": "矿粉研配者",
+      "areaId": "ashen.a01",
+      "homeAreaId": "ashen.a01",
+      "appearance": "砂岩矿壳带天然层线，方颌没有人类皮肉；宽手托着陶研钵与短杵。",
+      "voice": "分清粉与颗粒再说用途，态度温厚而不机械。",
+      "plotRelation": "普通矿物生命，只调护具用粉，不研磨、替换或医治生命核心。",
+      "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+      "areaName": "醒石边地",
+      "portraitId": "npc.ashen.shayan",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+    },
+    {
+      "id": "npc.ashen.huileng",
+      "name": "灰棱",
+      "race": "ashen",
+      "role": "通风口照管者",
+      "areaId": "ashen.a04",
+      "homeAreaId": "ashen.a04",
+      "appearance": "灰蓝矿壳有整齐的斜面棱线，头侧嵌淡色片晶；胸前挂轻薄风叶片。",
+      "voice": "听见异响先核对风向，不把每种回声解释成古代召唤。",
+      "plotRelation": "只维护普通风口，不解释先祖起源、神庙或核心奥秘。",
+      "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+      "areaName": "琉砂洼地",
+      "portraitId": "npc.ashen.huileng",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+    },
+    {
+      "id": "npc.ashen.pucheng",
+      "name": "璞承",
+      "race": "ashen",
+      "role": "石道护行者",
+      "areaId": "ashen.a07",
+      "homeAreaId": "ashen.a07",
+      "appearance": "黑曜矿壳透出温暗琥珀晶纹，头颅是整块有棱的矿石；陶护肩与短石盾错层相扣。",
+      "voice": "沉稳而有耐心，先让同行者停稳再作判断。",
+      "plotRelation": "只护送普通石道行人，不是族长，不改变主线战争与族长死亡。",
+      "authorship": "本轮授权扩充创作；姓名、年龄与外观不冒称此前逐项固定的正史。",
+      "areaName": "黑曜风口",
+      "portraitId": "npc.ashen.pucheng",
+      "portraitStatus": "独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。"
+    }
+  ]
+}

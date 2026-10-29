@@ -2,3 +2,5 @@ qa/
 
 build/
 build.tmp/
+
+node_modules/

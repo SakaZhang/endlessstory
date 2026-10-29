@@ -1,3 +1,4 @@
+import {bundleReleaseEntries} from './release-entry-bundles.mjs';
 import {releaseAssetRows} from './release-asset-policy.mjs';
 import {createHash} from 'node:crypto';
 import {readdir,readFile,mkdir,writeFile,rm,rename} from 'node:fs/promises';
@@ -28,14 +29,16 @@ export function rootHtml(source,entry,hash){
 export async function buildRelease({source='dist',output='build'}={}){
  source=resolve(source);output=resolve(output);
  if(source===output||!relative(source,output).startsWith('..')||!relative(output,source).startsWith('..'))throw Error('Source/output must be separate sibling trees');
- const sourceRows=await readTree(source),rows=releaseAssetRows(sourceRows);
- const hash=sha(Buffer.from(JSON.stringify(rows.map(({path,sha256})=>[path,sha256]))));
+ const sourceRows=await readTree(source),sourceFiles=releaseAssetRows(sourceRows);
+ const bundles=await bundleReleaseEntries(source,sourceFiles);
+ const rows=[...sourceFiles,...bundles.generated.map(row=>({...row,sha256:sha(row.bytes)}))].sort((a,b)=>a.path<b.path?-1:a.path>b.path?1:0);
+ const hash=sha(Buffer.from(JSON.stringify({files:rows.map(({path,sha256})=>[path,sha256]),entries:bundles.entries.map(({path,html})=>[path,sha(Buffer.from(html))])})));
  const stage=output+'.tmp';await rm(stage,{recursive:true,force:true});await mkdir(stage,{recursive:true});
  for(const row of rows){const target=join(stage,'releases',hash,row.path);await mkdir(dirname(target),{recursive:true});await writeFile(target,row.bytes);}
  const entries=rows.filter(r=>!r.path.includes('/')&&r.path.endsWith('.html'));
  if(!entries.some(e=>e.path==='index.html'))throw Error('Missing root index');
- for(const e of entries)await writeFile(join(stage,e.path),rootHtml(e.bytes.toString(),e.path,hash));
- const report={schema:1,release:hash,base:`./releases/${hash}/`,entries:entries.map(e=>e.path),files:rows.map(({path,sha256})=>({path,sha256})),excludedQa:sourceRows.filter(row=>!rows.includes(row)).map(({path,sha256,bytes})=>({path,sha256,bytes:bytes.length}))};
+ for(const e of entries)await writeFile(join(stage,e.path),rootHtml(bundles.entries.find(row=>row.path===e.path).html,e.path,hash));
+ const report={schema:1,release:hash,base:`./releases/${hash}/`,entries:entries.map(e=>e.path),files:rows.map(({path,sha256})=>({path,sha256})),optimization:{kind:'esbuild-esm-css',entries:bundles.entries.map(({html,...entry})=>entry),generated:bundles.generated.map(row=>row.path)},excludedQa:sourceRows.filter(row=>!sourceFiles.includes(row)).map(({path,sha256,bytes})=>({path,sha256,bytes:bytes.length}))};
  await writeFile(join(stage,'release-integrity.json'),JSON.stringify(report,null,2)+'\n');
  // Refuse a mixed snapshot if another worker edited input while this build ran.
  const current=await readTree(source);if(JSON.stringify(current.map(r=>[r.path,r.sha256]))!==JSON.stringify(sourceRows.map(r=>[r.path,r.sha256])))throw Error('dist changed during build; retry after edits finish');

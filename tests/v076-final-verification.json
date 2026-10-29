@@ -1,0 +1,42 @@
+{
+  "version": "v0.76",
+  "baseline_commit": "7a32712761ad9aa1e4c684b1e9641331b9fd8628",
+  "npm_test_exit": 0,
+  "focused_suites": 13,
+  "final_npc_objectives_exit": 0,
+  "final_build_cache_exit": 0,
+  "release": "33ce31e03b837b81c53d1e483e844217dd3278cc31210e189d0a62da4cb52514",
+  "release_files": 2782,
+  "resource_urls": 2780,
+  "dependency_edges": 9167,
+  "final_adjustments": "Legacy null-choice history guard and final authoring-only release exclusions received focused reruns; final build/cache and objective suites passed.",
+  "npc_tasks": {
+    "total": 60,
+    "kill": 20,
+    "collect": 20,
+    "investigate": 20,
+    "npc_count": 30,
+    "modern_reward_each": "one common Q0 material",
+    "legacy_contracts_preserved": 60
+  },
+  "browser": {
+    "sampled_quests": 3,
+    "investigation": "distinct points, reload, remote/map preview rejection, return claim",
+    "collection": "exact Q0 cost consumed and reward received",
+    "kill": "three actual matching targets counted; unrelated victory excluded; return claim",
+    "all_completed_reload": true,
+    "production_data_touched": false,
+    "speed_multiplier_measured": false,
+    "mobile": "not verified"
+  },
+  "container": {
+    "architectures": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "native_http": "passed",
+    "manifest_and_digests": "passed fixtures; final archive built after pushed commit",
+    "docker_daemon_load_run_tested": false,
+    "arm64_runtime_tested": false
+  }
+}

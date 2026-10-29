@@ -1,5 +1,5 @@
 import {EXPANSION_PACKS} from './dist/race-packs.js';
-// Explicit reviewed QA-only assets. Source proofs remain versioned; never use a filename wildcard.
+// Explicit reviewed nonruntime QA/authoring files. Sources remain versioned; never use a filename wildcard.
 // Adding an exclusion requires confirming no live consumer and updating packaging tests.
 export const RELEASE_QA_EXCLUSIONS = Object.freeze([
   "races/goblin/equipment-native-proof.png",
@@ -15,7 +15,23 @@ export const RELEASE_QA_EXCLUSIONS = Object.freeze([
   "races/ashen/art/native-a01-proof.png",
   "races/human/assets/all-monster-lifecycle-proof.png",
   "races/human/assets/lifecycle-native-proof.png",
-  "races/human/assets/native-scene-proof.png"
+  "races/human/assets/native-scene-proof.png",
+  // No runtime references: internal integration/canon notes and art QA metadata.
+  "races/goblin/INTEGRATION.md",
+  "races/goblin/canon.md",
+  "races/goblin/art-qa.json",
+  "races/elf/canonical-source.md",
+  // Unreferenced generation provenance contains prompts and local workspace paths.
+  "story-assets/high-priest.json",
+  "story-assets/seal-core.json",
+  "story-assets/generation-log.json",
+  // Final audited extraction/provenance records, never fetched by the runtime.
+  "races/ashen/art-extraction-audit.json",
+  "story-assets/alpha-verification.json",
+  "races/elf/art-provenance.json",
+  "races/elf/clean-extraction.json",
+  "races/human/assets/lifecycle-source-crops.json",
+  "story-assets/outsider-vanguard.json"
 ]);
 export function releaseAssetRows(sourceRows){
  const exclusions=new Set(RELEASE_QA_EXCLUSIONS);
