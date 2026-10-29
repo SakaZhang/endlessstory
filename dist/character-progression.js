@@ -1,3 +1,4 @@
+import {returnRingExperienceBonus} from './return-ring-state.js';
 // Level cap is independent of story completion and never stops an expedition.
 export const CHARACTER_LEVEL_CAP=100;
 export function planExperience(progress,amount){
@@ -9,4 +10,10 @@ export function planExperience(progress,amount){
  while(nextLevel<CHARACTER_LEVEL_CAP&&nextXp>=nextLevel*80){nextXp-=nextLevel*80;nextLevel++;}
  return {level:nextLevel,xp:nextXp,acceptedXp:amount,ignoredXp:0,levelsGained:nextLevel-level,reachedCap:nextLevel===CHARACTER_LEVEL_CAP,capped:nextLevel>=CHARACTER_LEVEL_CAP};
 }
-export function applyExperience(progress,amount){const result=planExperience(progress,amount);progress.level=result.level;progress.xp=result.xp;return result;}
+export function applyExperience(progress,amount){
+ // Validate the raw award first; round the equipped bonus once per award.
+ // Already-capped saves retain their original ignored-XP and overflow policy.
+ const base=planExperience(progress,amount),bonus=returnRingExperienceBonus(progress);
+ const result=bonus&&base.acceptedXp>0?planExperience(progress,Math.floor(amount*(1+bonus))):base;
+ progress.level=result.level;progress.xp=result.xp;return result;
+}

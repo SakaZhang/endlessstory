@@ -14,13 +14,13 @@ function retiredKeys(storage){
 }
 export function loadProgress(storage){
  let game=null,reason='storage-read',initialized=false;
- const fail=()=>{blockedStores.add(storage);return {game:game??fresh(),notice:'存档切代尚未完成，游戏已暂停。请检查浏览器存储后重试；无效新版存档可在设置中清空重开。',blocked:true,reason};};
+ const fail=()=>{blockedStores.add(storage);return {game:game??fresh(),notice:'无法读取或保存进度，游戏已暂停。请先检查浏览器存储后重试；若存档确已损坏，可在设置中清空重开，这会失去当前进度。',blocked:true,reason};};
  try{
   const raw=storage.getItem(SAVE_KEY),keys=retiredKeys(storage);
   if(raw!==null){reason='invalid-current-save';const parsed=JSON.parse(raw);if(!validCurrent(parsed))return fail();game=parsed;}
   else{game=fresh();game.lastSeen=Date.now();game.offlineLuck=effectiveLuck(game);if(!validCurrent(game)){game=null;reason='invalid-candidate';return fail();}reason='storage-write';storage.setItem(SAVE_KEY,JSON.stringify(game));initialized=true;}
   reason='storage-cleanup';for(const key of keys)if(storage.getItem(key)!==null)storage.removeItem(key);
-  blockedStores.delete(storage);return {game,initialized,notice:initialized?'已启用新版独立存档；旧开发进度及备份已清除。':null,blocked:false,reason:null};
+  blockedStores.delete(storage);return {game,initialized,notice:initialized?'新旅程已开始，进度将保存在此浏览器中。':null,blocked:false,reason:null};
  }catch{return fail();}
 }
 // User-visible resource operations commit storage before adopting their candidate.

@@ -1,0 +1,14 @@
+{
+  "scope": "Existing auxiliary roles only; no effects, fees, input counts, quality rules or acquisition changes",
+  "mappings": [
+    {"material":"human.mat.03","name":"棘背兽皮","recipe":"potion-earthResist","reason":"坚韧兽皮的防护用途，作为地抗药剂辅料；人族早期兽类常规来源"},
+    {"material":"goblin.mat.06","name":"钩牙骨","recipe":"potion-strength","reason":"兽骨作为力量药剂辅料，与既有筋腱类辅料同类"},
+    {"material":"goblin.mat.11","name":"赤须兽筋","recipe":"potion-strength","reason":"兽筋作为力量药剂辅料，与岩蜥腱/赤鬃筋腱的既有用途一致"},
+    {"material":"goblin.mat.02","name":"旧铆铁","recipe":"potion-earthResist","reason":"常规金属防护材料，地抗辅料；早期反复获得"},
+    {"material":"human.mat.08","name":"铸誓钢片","recipe":"potion-earthResist","reason":"锻造钢片归入防护矿料，地抗辅料"},
+    {"material":"dwarf.silverthread_ore","name":"银丝矿","recipe":"potion-earthResist","reason":"矿石类防护辅料；不把其归入宝石或任务物品"},
+    {"material":"elf.root_silver","name":"根银矿","recipe":"potion-earthResist","reason":"金属矿物类防护辅料，与银丝矿用途一致"},
+    {"material":"dwarf.obsidian_flake","name":"黑曜薄片","recipe":"potion-fireResist","reason":"火山玻璃矿料归入火抗辅料，与既有炉灰盐矿料路线一致"},
+    {"material":"ashen.cold_ash_sand","name":"冷烬砂","recipe":"potion-fireResist","reason":"冷却灰烬矿料归入火抗辅料，改善烬裔早期常规材料去向"}
+  ]
+}

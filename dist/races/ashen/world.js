@@ -2728,7 +2728,7 @@ export const materials={
     "uniqueHeld": false,
     "storyOnly": false,
     "usage": "基础锻造填料；融合偏向防御。",
-    "sourceNote": "仅列出的产地可刷"
+    "sourceNote": "可在所列产地反复获取"
   },
   "ashen.salt_shell": {
     "id": "ashen.salt_shell",
@@ -2741,9 +2741,7 @@ export const materials={
     "tags": [
       "盐类"
     ],
-    "functionalTags": [
-      "recoveryBase"
-    ],
+    "functionalTags": ["recoveryBase","luckBase","luckAux"],
     "sources": [
       "ashen.a01.field",
       "ashen.a02.field",
@@ -2762,7 +2760,7 @@ export const materials={
     "uniqueHeld": false,
     "storyOnly": false,
     "usage": "水元素抗性药剂的矿盐基料；生命药剂主原料（通过炼金提纯盐壳内层精华，制成恢复矿液）。",
-    "sourceNote": "仅列出的产地可刷"
+    "sourceNote": "可在所列产地反复获取"
   },
   "ashen.porous_basalt": {
     "id": "ashen.porous_basalt",
@@ -2794,7 +2792,7 @@ export const materials={
     "uniqueHeld": false,
     "storyOnly": false,
     "usage": "护甲与核心外壳锻造；融合偏向生命。",
-    "sourceNote": "仅列出的产地可刷"
+    "sourceNote": "可在所列产地反复获取"
   },
   "ashen.weathered_mica": {
     "id": "ashen.weathered_mica",
@@ -2827,7 +2825,7 @@ export const materials={
     "uniqueHeld": false,
     "storyOnly": false,
     "usage": "风元素抗性药剂；鞋靴轻质衬片。",
-    "sourceNote": "仅列出的产地可刷"
+    "sourceNote": "可在所列产地反复获取"
   },
   "ashen.dew_salt": {
     "id": "ashen.dew_salt",
@@ -2861,7 +2859,7 @@ export const materials={
     "uniqueHeld": false,
     "storyOnly": false,
     "usage": "生命恢复药剂的矿盐路线；生命药剂主原料（提取凝露与盐中精华制成恢复矿液）。",
-    "sourceNote": "仅列出的产地可刷"
+    "sourceNote": "可在所列产地反复获取"
   },
   "ashen.glass_grain": {
     "id": "ashen.glass_grain",
@@ -2893,7 +2891,7 @@ export const materials={
     "uniqueHeld": false,
     "storyOnly": false,
     "usage": "护符与戒指晶托；融合偏向命中。",
-    "sourceNote": "仅列出的产地可刷"
+    "sourceNote": "可在所列产地反复获取"
   },
   "ashen.red_vein_ore": {
     "id": "ashen.red_vein_ore",
@@ -2927,7 +2925,7 @@ export const materials={
     "uniqueHeld": false,
     "storyOnly": false,
     "usage": "火元素增幅药剂的矿基；火元素装备融合；生命药剂主原料（通过炼金分离赤脉内的滋养矿精，制成恢复矿液）。",
-    "sourceNote": "仅列出的产地可刷"
+    "sourceNote": "可在所列产地反复获取"
   },
   "ashen.singing_crystal": {
     "id": "ashen.singing_crystal",
@@ -2959,7 +2957,7 @@ export const materials={
     "uniqueHeld": false,
     "storyOnly": false,
     "usage": "风元素增幅药剂；风元素技能装备融合。",
-    "sourceNote": "仅列出的产地可刷"
+    "sourceNote": "可在所列产地反复获取"
   },
   "ashen.obsidian_glass": {
     "id": "ashen.obsidian_glass",
@@ -2991,7 +2989,7 @@ export const materials={
     "uniqueHeld": false,
     "storyOnly": false,
     "usage": "武器刃部；暗元素抗性药剂的矿基。",
-    "sourceNote": "仅列出的产地可刷"
+    "sourceNote": "可在所列产地反复获取"
   },
   "ashen.white_salt_marrow": {
     "id": "ashen.white_salt_marrow",
@@ -3025,7 +3023,7 @@ export const materials={
     "uniqueHeld": false,
     "storyOnly": false,
     "usage": "光元素抗性药剂；生命类装备数值洗练材料；生命药剂主原料（提纯柔白晶髓制成恢复矿液）。",
-    "sourceNote": "仅列出的产地可刷"
+    "sourceNote": "可在所列产地反复获取"
   },
   "ashen.dim_crystal_sand": {
     "id": "ashen.dim_crystal_sand",
@@ -3059,7 +3057,7 @@ export const materials={
     "uniqueHeld": false,
     "storyOnly": false,
     "usage": "光元素增幅药剂；光元素相关护符融合；生命药剂主原料（通过炼金提取晶砂内的凝辉精华，制成恢复矿液）。",
-    "sourceNote": "仅列出的产地可刷"
+    "sourceNote": "可在所列产地反复获取"
   },
   "ashen.refractory_stone": {
     "id": "ashen.refractory_stone",
@@ -3091,7 +3089,7 @@ export const materials={
     "uniqueHeld": false,
     "storyOnly": false,
     "usage": "手套与核心隔热层；火元素抗性药剂基料。",
-    "sourceNote": "仅列出的产地可刷"
+    "sourceNote": "可在所列产地反复获取"
   },
   "ashen.living_vein_bud": {
     "id": "ashen.living_vein_bud",
@@ -3121,7 +3119,7 @@ export const materials={
     "uniqueHeld": false,
     "storyOnly": false,
     "usage": "烬裔专属核心融合材料；偏向生命与恢复。",
-    "sourceNote": "仅列出的产地可刷"
+    "sourceNote": "可在所列产地反复获取"
   },
   "ashen.upwind_salt": {
     "id": "ashen.upwind_salt",
@@ -3151,7 +3149,7 @@ export const materials={
     "uniqueHeld": false,
     "storyOnly": false,
     "usage": "高品质风元素抗性药剂的特殊基料；速度类装备洗练材料。",
-    "sourceNote": "仅列出的产地可刷"
+    "sourceNote": "可在所列产地反复获取"
   },
   "ashen.refracted_glassheart": {
     "id": "ashen.refracted_glassheart",
@@ -3181,7 +3179,7 @@ export const materials={
     "uniqueHeld": false,
     "storyOnly": false,
     "usage": "幸运药剂的特殊基料；护符及戒指的高品质融合材料。",
-    "sourceNote": "仅列出的产地可刷"
+    "sourceNote": "可在所列产地反复获取"
   },
   "ashen.undying_ember": {
     "id": "ashen.undying_ember",
@@ -3211,7 +3209,7 @@ export const materials={
     "uniqueHeld": false,
     "storyOnly": false,
     "usage": "高品质火元素增幅药剂的特殊基料；火元素词条数值洗练材料。",
-    "sourceNote": "仅列出的产地可刷"
+    "sourceNote": "可在所列产地反复获取"
   },
   "ashen.infinity_gem_ashen": {
     "id": "ashen.infinity_gem_ashen",
@@ -3255,8 +3253,8 @@ export const materials={
     ],
     "uniqueHeld": true,
     "storyOnly": false,
-    "hiddenUsage": "无限手套隐藏配方的烬裔宝石；具体配方后续确定。",
-    "sourceNote": "本族全区；高区概率更高；同区野外＜普通＜首领；同种最多1颗、丢失可重刷；合成后政策待定"
+    "hiddenUsage": "无限手套隐藏配方的烬裔宝石。",
+    "sourceNote": "本族全区；高区概率更高；同区野外＜普通＜首领；同种最多1颗、丢失可重刷"
   },
   "ashen.silent_crystal": {
     "id": "ashen.silent_crystal",
@@ -3276,8 +3274,8 @@ export const materials={
     ],
     "uniqueHeld": true,
     "storyOnly": true,
-    "hiddenUsage": "归途之环隐藏配方材料；获取配方前不展示此用途。",
-    "sourceNote": "中期第5区剧情占位（第4–6区内可调整）；一次性，可永久错过"
+    "hiddenUsage": "归途之环隐藏配方材料。",
+    "sourceNote": "鸣晶断层的砾露事件奖励；仅可领取一次。"
   }
 };
 export const materialAssociations={

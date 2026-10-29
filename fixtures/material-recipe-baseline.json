@@ -1,0 +1,631 @@
+{
+  "potion-healing": {
+    "id": "potion-healing",
+    "functionalTag": "recoveryBase",
+    "name": "治疗药剂配方",
+    "potionType": "healing",
+    "icon": "potionHeal",
+    "price": 45,
+    "craftGoldByQuality": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "roles": [
+      {
+        "role": "main",
+        "functionalTag": "recoveryBase",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "dwarf.ashroot",
+          "dwarf.cold_spring_moss",
+          "dwarf.frostgrain_quartz",
+          "dwarf.deep_seam_oil",
+          "human.mat.02",
+          "human.mat.05",
+          "human.mat.09",
+          "human.mat.12",
+          "elf.mat.01",
+          "elf.mat.06",
+          "elf.mat.09",
+          "elf.mat.12",
+          "goblin.mat.01",
+          "goblin.mat.05",
+          "goblin.mat.08",
+          "goblin.mat.10",
+          "goblin.mat.12",
+          "ashen.mat.02",
+          "ashen.mat.05",
+          "ashen.mat.07",
+          "ashen.mat.10",
+          "ashen.mat.11"
+        ],
+        "tagStatus": "existing_catalog_recoveryBase"
+      }
+    ],
+    "outputPerCraft": 1,
+    "enabled": true,
+    "qualityPolicy": "same-quality",
+    "balanceStatus": "v041-approved-initial-tuning-not-published"
+  },
+  "potion-strength": {
+    "id": "potion-strength",
+    "name": "力量药剂配方",
+    "potionType": "strength",
+    "icon": "potionPower",
+    "price": 65,
+    "craftGoldByQuality": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "roles": [
+      {
+        "role": "main",
+        "functionalTag": "strengthBase",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "dwarf.rock_lizard_sinew",
+          "human.mat.07"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      },
+      {
+        "role": "aux",
+        "functionalTag": "strengthAux",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "human.mat.02",
+          "elf.mat.13"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      }
+    ],
+    "outputPerCraft": 1,
+    "enabled": true,
+    "qualityPolicy": "same-quality",
+    "balanceStatus": "v041-approved-initial-tuning-not-published"
+  },
+  "potion-luck": {
+    "id": "potion-luck",
+    "name": "幸运药剂配方",
+    "potionType": "luck",
+    "icon": "potionPower",
+    "price": 100,
+    "craftGoldByQuality": [
+      6,
+      8,
+      10,
+      12
+    ],
+    "roles": [
+      {
+        "role": "main",
+        "functionalTag": "luckBase",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "human.mat.12",
+          "human.mat.16",
+          "elf.mat.12",
+          "ashen.mat.15",
+          "dwarf.ashroot",
+          "human.mat.02",
+          "elf.dew_crown",
+          "goblin.mat.01",
+          "ashen.salt_shell"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      },
+      {
+        "role": "aux",
+        "functionalTag": "luckAux",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "elf.mat.14",
+          "human.mat.12",
+          "dwarf.ashroot",
+          "human.mat.02",
+          "elf.dew_crown",
+          "goblin.mat.01",
+          "ashen.salt_shell"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      }
+    ],
+    "outputPerCraft": 1,
+    "enabled": true,
+    "qualityPolicy": "same-quality",
+    "balanceStatus": "v041-approved-initial-tuning-not-published"
+  },
+  "potion-earthAtk": {
+    "id": "potion-earthAtk",
+    "name": "地增幅药剂配方",
+    "potionType": "earthAtk",
+    "icon": "potionPower",
+    "price": 65,
+    "craftGoldByQuality": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "roles": [
+      {
+        "role": "main",
+        "functionalTag": "earthAtkBase",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "dwarf.blackvein_ore",
+          "dwarf.deep_seam_oil",
+          "human.mat.11",
+          "elf.mat.02"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      },
+      {
+        "role": "aux",
+        "functionalTag": "earthAtkAux",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "human.mat.01",
+          "dwarf.iron_filings"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      }
+    ],
+    "outputPerCraft": 1,
+    "enabled": true,
+    "qualityPolicy": "same-quality",
+    "balanceStatus": "v041-approved-initial-tuning-not-published"
+  },
+  "potion-waterAtk": {
+    "id": "potion-waterAtk",
+    "name": "水增幅药剂配方",
+    "potionType": "waterAtk",
+    "icon": "potionPower",
+    "price": 65,
+    "craftGoldByQuality": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "roles": [
+      {
+        "role": "main",
+        "functionalTag": "waterAtkBase",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "dwarf.cold_spring_moss",
+          "human.mat.05",
+          "elf.mat.05",
+          "goblin.mat.14"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      },
+      {
+        "role": "aux",
+        "functionalTag": "waterAtkAux",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "elf.mat.01",
+          "dwarf.frostgrain_quartz"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      }
+    ],
+    "outputPerCraft": 1,
+    "enabled": true,
+    "qualityPolicy": "same-quality",
+    "balanceStatus": "v041-approved-initial-tuning-not-published"
+  },
+  "potion-fireAtk": {
+    "id": "potion-fireAtk",
+    "name": "火增幅药剂配方",
+    "potionType": "fireAtk",
+    "icon": "potionPower",
+    "price": 65,
+    "craftGoldByQuality": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "roles": [
+      {
+        "role": "main",
+        "functionalTag": "fireAtkBase",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "dwarf.furnace_crystal",
+          "human.mat.09",
+          "elf.mat.08",
+          "ashen.mat.07"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      },
+      {
+        "role": "aux",
+        "functionalTag": "fireAtkAux",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "human.mat.06",
+          "dwarf.deep_seam_oil"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      }
+    ],
+    "outputPerCraft": 1,
+    "enabled": true,
+    "qualityPolicy": "same-quality",
+    "balanceStatus": "v041-approved-initial-tuning-not-published"
+  },
+  "potion-windAtk": {
+    "id": "potion-windAtk",
+    "name": "风增幅药剂配方",
+    "potionType": "windAtk",
+    "icon": "potionPower",
+    "price": 65,
+    "craftGoldByQuality": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "roles": [
+      {
+        "role": "main",
+        "functionalTag": "windAtkBase",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "human.mat.04",
+          "elf.mat.04",
+          "ashen.mat.08",
+          "goblin.mat.15"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      },
+      {
+        "role": "aux",
+        "functionalTag": "windAtkAux",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "elf.mat.03",
+          "goblin.mat.03"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      }
+    ],
+    "outputPerCraft": 1,
+    "enabled": true,
+    "qualityPolicy": "same-quality",
+    "balanceStatus": "v041-approved-initial-tuning-not-published"
+  },
+  "potion-lightAtk": {
+    "id": "potion-lightAtk",
+    "name": "光增幅药剂配方",
+    "potionType": "lightAtk",
+    "icon": "potionPower",
+    "price": 65,
+    "craftGoldByQuality": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "roles": [
+      {
+        "role": "main",
+        "functionalTag": "lightAtkBase",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "human.mat.06",
+          "elf.mat.06",
+          "goblin.mat.08",
+          "ashen.mat.11"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      },
+      {
+        "role": "aux",
+        "functionalTag": "lightAtkAux",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "human.mat.13",
+          "ashen.mat.06"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      }
+    ],
+    "outputPerCraft": 1,
+    "enabled": true,
+    "qualityPolicy": "same-quality",
+    "balanceStatus": "v041-approved-initial-tuning-not-published"
+  },
+  "potion-darkAtk": {
+    "id": "potion-darkAtk",
+    "name": "暗增幅药剂配方",
+    "potionType": "darkAtk",
+    "icon": "potionPower",
+    "price": 65,
+    "craftGoldByQuality": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "roles": [
+      {
+        "role": "main",
+        "functionalTag": "darkAtkBase",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "human.mat.10",
+          "elf.mat.09",
+          "goblin.mat.10"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      },
+      {
+        "role": "aux",
+        "functionalTag": "darkAtkAux",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "elf.mat.14",
+          "elf.mat.07"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      }
+    ],
+    "outputPerCraft": 1,
+    "enabled": true,
+    "qualityPolicy": "same-quality",
+    "balanceStatus": "v041-approved-initial-tuning-not-published"
+  },
+  "potion-earthResist": {
+    "id": "potion-earthResist",
+    "name": "地抗药剂配方",
+    "potionType": "earthResist",
+    "icon": "potionFireResist",
+    "price": 65,
+    "craftGoldByQuality": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "roles": [
+      {
+        "role": "main",
+        "functionalTag": "earthResistBase",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "dwarf.stone_gall_fungus",
+          "human.mat.11",
+          "elf.mat.02",
+          "goblin.mat.12"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      },
+      {
+        "role": "aux",
+        "functionalTag": "earthResistAux",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "goblin.mat.12",
+          "ashen.mat.03"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      }
+    ],
+    "outputPerCraft": 1,
+    "enabled": true,
+    "qualityPolicy": "same-quality",
+    "balanceStatus": "v041-approved-initial-tuning-not-published"
+  },
+  "potion-waterResist": {
+    "id": "potion-waterResist",
+    "name": "水抗药剂配方",
+    "potionType": "waterResist",
+    "icon": "potionFireResist",
+    "price": 65,
+    "craftGoldByQuality": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "roles": [
+      {
+        "role": "main",
+        "functionalTag": "waterResistBase",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "dwarf.cold_spring_moss",
+          "elf.mat.05",
+          "ashen.mat.02"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      },
+      {
+        "role": "aux",
+        "functionalTag": "waterResistAux",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "dwarf.frostgrain_quartz",
+          "goblin.mat.07"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      }
+    ],
+    "outputPerCraft": 1,
+    "enabled": true,
+    "qualityPolicy": "same-quality",
+    "balanceStatus": "v041-approved-initial-tuning-not-published"
+  },
+  "potion-fireResist": {
+    "id": "potion-fireResist",
+    "name": "火抗药剂配方",
+    "potionType": "fireResist",
+    "icon": "potionFireResist",
+    "price": 65,
+    "craftGoldByQuality": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "roles": [
+      {
+        "role": "main",
+        "functionalTag": "fireResistBase",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "dwarf.furnace_crystal",
+          "human.mat.09",
+          "elf.mat.08",
+          "ashen.mat.12"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      },
+      {
+        "role": "aux",
+        "functionalTag": "fireResistAux",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "dwarf.furnace_ash_salt",
+          "elf.mat.11"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      }
+    ],
+    "outputPerCraft": 1,
+    "enabled": true,
+    "qualityPolicy": "same-quality",
+    "balanceStatus": "v041-approved-initial-tuning-not-published"
+  },
+  "potion-windResist": {
+    "id": "potion-windResist",
+    "name": "风抗药剂配方",
+    "potionType": "windResist",
+    "icon": "potionFireResist",
+    "price": 65,
+    "craftGoldByQuality": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "roles": [
+      {
+        "role": "main",
+        "functionalTag": "windResistBase",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "human.mat.04",
+          "elf.mat.04",
+          "goblin.mat.09",
+          "ashen.mat.04"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      },
+      {
+        "role": "aux",
+        "functionalTag": "windResistAux",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "goblin.mat.04",
+          "elf.mat.11"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      }
+    ],
+    "outputPerCraft": 1,
+    "enabled": true,
+    "qualityPolicy": "same-quality",
+    "balanceStatus": "v041-approved-initial-tuning-not-published"
+  },
+  "potion-lightResist": {
+    "id": "potion-lightResist",
+    "name": "光抗药剂配方",
+    "potionType": "lightResist",
+    "icon": "potionFireResist",
+    "price": 65,
+    "craftGoldByQuality": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "roles": [
+      {
+        "role": "main",
+        "functionalTag": "lightResistBase",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "human.mat.06",
+          "elf.mat.06",
+          "ashen.mat.10"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      },
+      {
+        "role": "aux",
+        "functionalTag": "lightResistAux",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "human.mat.15",
+          "ashen.mat.06"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      }
+    ],
+    "outputPerCraft": 1,
+    "enabled": true,
+    "qualityPolicy": "same-quality",
+    "balanceStatus": "v041-approved-initial-tuning-not-published"
+  },
+  "potion-darkResist": {
+    "id": "potion-darkResist",
+    "name": "暗抗药剂配方",
+    "potionType": "darkResist",
+    "icon": "potionFireResist",
+    "price": 65,
+    "craftGoldByQuality": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "roles": [
+      {
+        "role": "main",
+        "functionalTag": "darkResistBase",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "human.mat.10",
+          "elf.mat.09",
+          "goblin.mat.13",
+          "ashen.mat.09"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      },
+      {
+        "role": "aux",
+        "functionalTag": "darkResistAux",
+        "unitsPerBottle": 1,
+        "materialIds": [
+          "elf.mat.14",
+          "ashen.mat.10"
+        ],
+        "tagStatus": "candidate_whitelist_mapping"
+      }
+    ],
+    "outputPerCraft": 1,
+    "enabled": true,
+    "qualityPolicy": "same-quality",
+    "balanceStatus": "v041-approved-initial-tuning-not-published"
+  }
+}

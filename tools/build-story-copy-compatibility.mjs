@@ -1,0 +1,14 @@
+import fs from 'node:fs';import os from 'node:os';import path from 'node:path';import {execFileSync} from 'node:child_process';import {pathToFileURL,fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'),{STORY_SCENES:current}=await import(pathToFileURL(path.join(root,'dist/story-event-registry.js'))),lengths={},knowledge={};
+for(const revision of ['9f56c77996038f929d390a35ac48167250f1475d','8d08d0b73f6e765749526b51785880d2a46132a6']){
+ const dir=fs.mkdtempSync(path.join(os.tmpdir(),'story-copy-archive-'));fs.writeFileSync(path.join(dir,'package.json'),'{"type":"module"}');
+ for(const file of ['story-event-registry.js','story-finale-scenes.js','personal-story-registry.js','personal-story-content.js'])fs.writeFileSync(path.join(dir,file),execFileSync('git',['show',revision+':dist/'+file],{cwd:root}));
+ const {STORY_SCENES:old}=await import(pathToFileURL(path.join(dir,'story-event-registry.js')));
+ for(const [id,d]of Object.entries(old)){if(!current[id])continue;if(d.lines.length!==current[id].lines.length){lengths[id]??=[];if(!lengths[id].includes(d.lines.length))lengths[id].push(d.lines.length);}
+  for(const k of [...d.knowledge,...d.choices.flatMap(c=>c.knowledge??[])]){const now=[...current[id].knowledge,...current[id].choices.flatMap(c=>c.knowledge??[])].find(n=>n.id===k.id);if(now&&now.text!==k.text){const key=id+'/'+k.id;knowledge[key]??=[];if(!knowledge[key].includes(k.text))knowledge[key].push(k.text);}}
+ }
+ fs.rmSync(dir,{recursive:true});
+}
+const generated=`// Read-only compatibility facts from shipped v0.70 and v0.77 story catalogs.\n// Only exact historical dialogue endpoints and authored knowledge text are accepted.\nconst legacyEnds=${JSON.stringify(lengths,null,1)};\nconst legacyKnowledge=${JSON.stringify(knowledge,null,1)};\nexport function storyDialogueComplete(d,a){return !!d&&!!a&&d.choices.some(c=>c.id===a.choiceId)&&(a.cursor===d.lines.length||legacyEnds[d.id]?.includes(a.cursor)===true);}\nexport function storyKnowledgeMatches(actual,expected){return Array.isArray(actual)&&actual.length===expected.length&&actual.every((row,i)=>{const target=expected[i];if(!row||typeof row!=='object'||Array.isArray(row))return false;const textOK=row.text===target.text||legacyKnowledge[target.sourceScene+'/'+target.id]?.includes(row.text)===true;return textOK&&JSON.stringify({...row,text:target.text})===JSON.stringify(target);});}\n`;
+const target=path.join(root,'dist/story-copy-compatibility.js');if(process.argv.includes('--check')){if(fs.readFileSync(target,'utf8')!==generated)throw Error('story copy compatibility facts are stale');}else fs.writeFileSync(target,generated);
+console.log(Object.keys(lengths).length+' changed scene endpoints; '+Object.keys(knowledge).length+' historical knowledge texts');

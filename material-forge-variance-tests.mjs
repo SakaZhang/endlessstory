@@ -3,7 +3,7 @@ import {readFileSync} from 'node:fs';
 import {fresh,forge,item,validSave,equipItem,rollMaterialFusionLevel,rollEquipmentFusionLevel} from './dist/engine.js';
 import {deriveNewItemBudget} from './dist/equipment-budget-adapter.js';
 const app=readFileSync(new URL('./dist/app.js',import.meta.url),'utf8');
-assert(app.includes('纯材料装备以角色当前等级为基准上下浮动（最低1级）'));
+assert(app.includes('纯材料炼出的装备以角色当前等级为基准上下浮动，最低1级'));
 assert(!app.includes('纯材料锻造仍为角色当前等级'));
 const original=Math.random;
 try{

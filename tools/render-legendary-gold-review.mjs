@@ -1,0 +1,6 @@
+import fs from 'node:fs';import {createRequire} from 'node:module';import * as E from '../dist/engine.js';import {LEGENDARY_EQUIPMENT_DEFINITIONS as defs} from '../dist/legendary-equipment.js';import {drawEquipmentRaster,equipmentRasterSource} from '../dist/equipment-raster-art.js';import {equipmentIcon} from '../dist/equipment-art.js';
+const require=createRequire(import.meta.url);let canvas;try{canvas=require('@napi-rs/canvas');}catch{canvas=require('/opt/codex/runtimes/codex-primary-runtime/dependencies/node/node_modules/@napi-rs/canvas');}const {createCanvas,loadImage}=canvas;const cv=createCanvas(840,320),ctx=cv.getContext('2d');ctx.fillStyle='#17232b';ctx.fillRect(0,0,840,320);let i=0;
+for(const id of Object.keys(defs)){const item=E.legendaryItem(id,20),template={id,name:item.name},src=equipmentRasterSource(template,64);const x=(i%7)*120+28,y=Math.floor(i/7)*140+20;
+ if(src)drawEquipmentRaster(ctx,await loadImage('dist/'+src),item,template,{x,y,size:64});else ctx.drawImage(await loadImage(Buffer.from(equipmentIcon(item,{size:64}))),x,y,64,64);
+ ctx.fillStyle='#e7bc58';ctx.font='11px sans-serif';ctx.fillText(id.split('-').slice(0,2).join('-'),x-16,y+84);i++;
+}fs.writeFileSync('qa/legendary-race-art/legendary-gold-native.png',cv.toBuffer('image/png'));

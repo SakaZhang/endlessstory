@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import * as E from './dist/engine.js';
+import {WORLD_MONSTERS} from './dist/world-content.js';
+import {setup} from './boss-growth-test-fixture.mjs';
+const rows=[];const random=Math.random,now=Date.now;Date.now=()=>1700000000000;
+const cases=E.RACE_KEYS.flatMap(race=>[[20,0,'boss',true],[20,2,'boss',true],[80,0,'boss',true],[80,0,'field',true],[80,0,'boss',false]].map(([level,q,kind,skills])=>({race,level,q,kind,skills,target:'elf.a08'})));
+for(const def of Object.values(WORLD_MONSTERS).filter(d=>d.rank==='boss'))cases.push({race:def.id.split('.')[0],level:def.area*10,q:0,kind:'boss',skills:true,target:def.id.split('.').slice(0,2).join('.')});
+for(const level of [20,80])for(const q of [0,2])cases.push({race:'elf',level,q,kind:'boss',skills:true,target:'elf.a08',variant:'sustain'});
+for(const {race,level,q,kind,skills,target,variant='standard'} of cases){let wins=0,remain=0,rounds=0,minHp=0;const specialWins=[];for(let seed=1;seed<=20;seed++){const s=setup(race,level,q,seed,skills,variant),e=E.startInstanceEncounter(s,`${target}.${kind}`,s.lastSeen);assert(e,JSON.stringify({race,level,kind,access:E.nodeAccess(s,`elf.a08.${kind}`,s.lastSeen),s}));let n=0,low=e.heroHp;while(!e.done&&n++<2000){E.step(s,e,s.nextActionAt);low=Math.min(low,e.heroHp);}minHp+=Math.max(0,low)/E.stats(s).hp;if(e.win&&level===20&&q>0)specialWins.push({seed,specials:s.inventory.map(i=>i.special).filter(Boolean),killSource:e.killSource});assert(e.done);wins+=!!e.win;remain+=Math.max(0,e.heroHp)/E.stats(s).hp;rounds+=e.round;}rows.push({race,target,variant,level,q,kind,skills,specialWins,minHp:Math.round(minHp/20*100),wins,total:20,hp:Math.round(remain/20*100),rounds:Math.round(rounds/20)});}
+Math.random=random;Date.now=now;console.table(rows.map(({specialWins,...r})=>r));if(process.env.CHECK==='1'){for(const r of rows){if(r.level===20&&r.target==='elf.a08'&&r.q===0)assert.equal(r.wins,0,'ordinary Lv20 cannot beat Lv80');if(r.level===20&&r.target==='elf.a08'&&r.q===2)assert(r.specialWins.every(w=>w.specials.some(s=>s.id==='reaper')),'cross-level exception must be an explicit execute special');if(r.level===Number(r.target.slice(-2))*10&&r.skills&&r.q===0)assert(r.wins>=18,'same-level sustain ordinary build remains viable');if(r.kind==='field')assert(r.wins===20&&r.minHp>=90,'low-consumption field unchanged');}}
+fs.writeFileSync(process.env.OUT??'/tmp/boss-audit.json',JSON.stringify(rows,null,2));

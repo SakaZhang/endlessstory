@@ -5,7 +5,7 @@ import {claimTaskReward} from './dist/task-reward-transaction.js';
 import {commitGameTransaction,SAVE_KEY,loadProgress} from './dist/storage.js';
 import {applyWarStart,applyWarEnd} from './dist/war-diplomacy.js';
 const now=Date.now(),clone=structuredClone;
-const defs=Object.values(NPC_EVENTS).filter(d=>d.objectiveVersion===2);
+const defs=Object.values(NPC_EVENTS).filter(d=>d.objectiveVersion===2&&!d.id.startsWith('npc.return-ring.'));
 assert.equal(defs.length,60,'all ordinary tasks have explicit objective contracts');
 function at(s,areaId){const area=E.AREAS[areaId];s.siteId=areaId;s.location=area.number-1;s.expedition.fieldId=areaId+'.field';s.running=false;s.atCamp=true;}
 function fixture(d,race=d.race){const s=E.fresh(race);E.normalizeHealth(s,now);E.normalizeAreaProgress(s);E.normalizeExpedition(s);for(const race of E.RACE_KEYS)s.areaProgress[race]={unlocked:[1,2,3,4,5,6,7,8,9,10],cleared:[1,2,3,4,5,6,7,8,9]};at(s,d.areaId);assert(E.validSave(s));return s;}

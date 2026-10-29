@@ -18,7 +18,9 @@ for(const source of [html,app,preview])assert(!/灰冠诸境|黑炉余烬/.test(
 assert.match(app,/downloadSave\(JSON\.stringify\(s\),'长路未尽-v'\+SCHEMA_VERSION\+'-'\+heroName\(s\)\+'\.json'\)/);
 // Export changes its human-readable filename only, never serialized content or import logic.
 const hooks=s=>[...s.matchAll(/\b(?:id|href|src)="[^"]*"/g)].map(m=>m[0]);
-assert.deepEqual(hooks(html),hooks(before('dist/index.html')),'DOM IDs and URLs unchanged');
+const approvedStyles=['href="character-stats-ui.css"','href="return-ring-ui.css"'];
+for(const style of approvedStyles)assert.equal(hooks(html).filter(h=>h===style).length,1,'one approved v078 stylesheet '+style);
+assert.deepEqual(hooks(html).filter(h=>!approvedStyles.includes(h)),hooks(before('dist/index.html')),'all existing DOM IDs/URLs unchanged; only two approved feature stylesheets added');
 assert.match(html,/黑炉氏族 · 矮人/,'lore is not global-replaced');
 assert.equal(SAVE_KEY,'ashencrown-v6');assert.equal(SCHEMA_VERSION,6);
 const storage=read('dist/storage.js');

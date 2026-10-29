@@ -5,71 +5,29 @@
       "set": "elf_arrow",
       "count": 0,
       "skill": "elf.twin_arrow",
-      "atk": 610,
-      "maxHp": 2025,
+      "atk": 574,
+      "maxHp": 1664,
       "shield": 0,
       "hits": [
         {
           "element": "physical",
-          "damage": 336,
-          "normalized": 0.5508196721311476
+          "damage": 316,
+          "normalized": 0.5505226480836237
         },
         {
           "element": "physical",
-          "damage": 488,
-          "normalized": 0.8
+          "damage": 459,
+          "normalized": 0.7996515679442509
         },
         {
           "element": "physical",
-          "damage": 214,
-          "normalized": 0.35081967213114756
+          "damage": 201,
+          "normalized": 0.3501742160278746
         }
       ],
       "equipped": [
         {
-          "templateId": "elf_scatter_helm_6",
-          "set": null,
-          "rarity": 0,
-          "slot": "helm"
-        },
-        {
-          "templateId": "elf_scatter_armor_6",
-          "set": null,
-          "rarity": 0,
-          "slot": "armor"
-        },
-        {
-          "templateId": "elf_scatter_gloves_6",
-          "set": null,
-          "rarity": 0,
-          "slot": "gloves"
-        },
-        {
-          "templateId": "elf_scatter_boots_4",
-          "set": null,
-          "rarity": 0,
-          "slot": "boots"
-        },
-        {
-          "templateId": "elf_scatter_ring_4",
-          "set": null,
-          "rarity": 0,
-          "slot": "ring"
-        },
-        {
-          "templateId": "elf_scatter_ring_2",
-          "set": null,
-          "rarity": 0,
-          "slot": "ring"
-        },
-        {
-          "templateId": "elf_scatter_amulet_2",
-          "set": null,
-          "rarity": 0,
-          "slot": "amulet"
-        },
-        {
-          "templateId": "elf_scatter_weapon_12",
+          "templateId": "elf_scatter_weapon_10",
           "set": null,
           "rarity": 0,
           "slot": "weapon"
@@ -81,59 +39,29 @@
       "set": "elf_arrow",
       "count": 2,
       "skill": "elf.twin_arrow",
-      "atk": 578,
-      "maxHp": 3149,
+      "atk": 587,
+      "maxHp": 2764,
       "shield": 0,
       "hits": [
         {
           "element": "physical",
-          "damage": 350,
-          "normalized": 0.6055363321799307
+          "damage": 355,
+          "normalized": 0.6047700170357752
         },
         {
           "element": "physical",
-          "damage": 509,
-          "normalized": 0.8806228373702422
+          "damage": 517,
+          "normalized": 0.8807495741056218
         },
         {
           "element": "physical",
-          "damage": 223,
-          "normalized": 0.38581314878892736
+          "damage": 226,
+          "normalized": 0.3850085178875639
         }
       ],
       "equipped": [
         {
-          "templateId": "elf_scatter_gloves_4",
-          "set": null,
-          "rarity": 0,
-          "slot": "gloves"
-        },
-        {
-          "templateId": "elf_scatter_boots_6",
-          "set": null,
-          "rarity": 0,
-          "slot": "boots"
-        },
-        {
-          "templateId": "elf_scatter_ring_6",
-          "set": null,
-          "rarity": 0,
-          "slot": "ring"
-        },
-        {
-          "templateId": "elf_scatter_ring_5",
-          "set": null,
-          "rarity": 0,
-          "slot": "ring"
-        },
-        {
-          "templateId": "elf_scatter_amulet_6",
-          "set": null,
-          "rarity": 0,
-          "slot": "amulet"
-        },
-        {
-          "templateId": "elf_scatter_weapon_9",
+          "templateId": "elf_scatter_weapon_10",
           "set": null,
           "rarity": 0,
           "slot": "weapon"
@@ -159,47 +87,29 @@
       "set": "elf_arrow",
       "count": 4,
       "skill": "elf.twin_arrow",
-      "atk": 679,
-      "maxHp": 3758,
+      "atk": 624,
+      "maxHp": 3769,
       "shield": 0,
       "hits": [
         {
           "element": "physical",
-          "damage": 411,
-          "normalized": 0.605301914580265
+          "damage": 378,
+          "normalized": 0.6057692307692307
         },
         {
           "element": "physical",
-          "damage": 705,
-          "normalized": 1.0382916053019147
+          "damage": 648,
+          "normalized": 1.0384615384615385
         },
         {
           "element": "physical",
-          "damage": 308,
-          "normalized": 0.4536082474226804
+          "damage": 283,
+          "normalized": 0.453525641025641
         }
       ],
       "equipped": [
         {
-          "templateId": "elf_scatter_ring_2",
-          "set": null,
-          "rarity": 0,
-          "slot": "ring"
-        },
-        {
-          "templateId": "elf_scatter_ring_6",
-          "set": null,
-          "rarity": 0,
-          "slot": "ring"
-        },
-        {
-          "templateId": "elf_scatter_amulet_4",
-          "set": null,
-          "rarity": 0,
-          "slot": "amulet"
-        },
-        {
-          "templateId": "elf_scatter_weapon_4",
+          "templateId": "elf_scatter_weapon_9",
           "set": null,
           "rarity": 0,
           "slot": "weapon"
@@ -237,61 +147,19 @@
       "set": "elf_prism",
       "count": 0,
       "skill": "elf.sixfold_shift",
-      "atk": 585,
-      "maxHp": 2069,
+      "atk": 530,
+      "maxHp": 1808,
       "shield": 0,
       "hits": [
         {
           "element": "water",
-          "damage": 983.0611607134342,
-          "normalized": 1.680446428569973
+          "damage": 890.6366071421653,
+          "normalized": 1.6804464285701233
         }
       ],
       "equipped": [
         {
-          "templateId": "elf_scatter_helm_2",
-          "set": null,
-          "rarity": 0,
-          "slot": "helm"
-        },
-        {
-          "templateId": "elf_scatter_armor_3",
-          "set": null,
-          "rarity": 0,
-          "slot": "armor"
-        },
-        {
-          "templateId": "elf_scatter_gloves_4",
-          "set": null,
-          "rarity": 0,
-          "slot": "gloves"
-        },
-        {
-          "templateId": "elf_scatter_boots_4",
-          "set": null,
-          "rarity": 0,
-          "slot": "boots"
-        },
-        {
-          "templateId": "elf_scatter_ring_5",
-          "set": null,
-          "rarity": 0,
-          "slot": "ring"
-        },
-        {
-          "templateId": "elf_scatter_ring_2",
-          "set": null,
-          "rarity": 0,
-          "slot": "ring"
-        },
-        {
-          "templateId": "elf_scatter_amulet_6",
-          "set": null,
-          "rarity": 0,
-          "slot": "amulet"
-        },
-        {
-          "templateId": "elf_scatter_weapon_16",
+          "templateId": "elf_scatter_weapon_5",
           "set": null,
           "rarity": 0,
           "slot": "weapon"
@@ -303,49 +171,19 @@
       "set": "elf_prism",
       "count": 2,
       "skill": "elf.sixfold_shift",
-      "atk": 611,
-      "maxHp": 3036,
+      "atk": 543,
+      "maxHp": 2908,
       "shield": 0,
       "hits": [
         {
           "element": "water",
-          "damage": 1129.428044643253,
-          "normalized": 1.8484910714292195
+          "damage": 1003.7306517865509,
+          "normalized": 1.8484910714301122
         }
       ],
       "equipped": [
         {
-          "templateId": "elf_scatter_gloves_3",
-          "set": null,
-          "rarity": 0,
-          "slot": "gloves"
-        },
-        {
-          "templateId": "elf_scatter_boots_4",
-          "set": null,
-          "rarity": 0,
-          "slot": "boots"
-        },
-        {
-          "templateId": "elf_scatter_ring_4",
-          "set": null,
-          "rarity": 0,
-          "slot": "ring"
-        },
-        {
-          "templateId": "elf_scatter_ring_5",
-          "set": null,
-          "rarity": 0,
-          "slot": "ring"
-        },
-        {
-          "templateId": "elf_scatter_amulet_1",
-          "set": null,
-          "rarity": 0,
-          "slot": "amulet"
-        },
-        {
-          "templateId": "elf_scatter_weapon_14",
+          "templateId": "elf_scatter_weapon_13",
           "set": null,
           "rarity": 0,
           "slot": "weapon"
@@ -371,37 +209,19 @@
       "set": "elf_prism",
       "count": 4,
       "skill": "elf.sixfold_shift",
-      "atk": 630,
-      "maxHp": 3902,
+      "atk": 638,
+      "maxHp": 3697,
       "shield": 0,
       "hits": [
         {
           "element": "water",
-          "damage": 1339.231781249866,
-          "normalized": 2.125764732142644
+          "damage": 1356.2378991078585,
+          "normalized": 2.125764732143979
         }
       ],
       "equipped": [
         {
-          "templateId": "elf_scatter_ring_6",
-          "set": null,
-          "rarity": 0,
-          "slot": "ring"
-        },
-        {
-          "templateId": "elf_scatter_ring_6",
-          "set": null,
-          "rarity": 0,
-          "slot": "ring"
-        },
-        {
-          "templateId": "elf_scatter_amulet_4",
-          "set": null,
-          "rarity": 0,
-          "slot": "amulet"
-        },
-        {
-          "templateId": "elf_scatter_weapon_15",
+          "templateId": "elf_scatter_weapon_16",
           "set": null,
           "rarity": 0,
           "slot": "weapon"
@@ -439,66 +259,24 @@
       "set": "elf_root",
       "count": 0,
       "skill": "elf.root_strike",
-      "atk": 560,
-      "maxHp": 2128,
+      "atk": 530,
+      "maxHp": 1808,
       "shield": 0,
       "hits": [
         {
           "element": "physical",
-          "damage": 554,
-          "normalized": 0.9892857142857143
+          "damage": 525,
+          "normalized": 0.9905660377358491
         },
         {
           "element": "earth",
-          "damage": 389.40000000037253,
-          "normalized": 0.6953571428578081
+          "damage": 368.53928571380675,
+          "normalized": 0.6953571428562392
         }
       ],
       "equipped": [
         {
-          "templateId": "elf_scatter_helm_5",
-          "set": null,
-          "rarity": 0,
-          "slot": "helm"
-        },
-        {
-          "templateId": "elf_scatter_armor_6",
-          "set": null,
-          "rarity": 0,
-          "slot": "armor"
-        },
-        {
-          "templateId": "elf_scatter_gloves_1",
-          "set": null,
-          "rarity": 0,
-          "slot": "gloves"
-        },
-        {
-          "templateId": "elf_scatter_boots_2",
-          "set": null,
-          "rarity": 0,
-          "slot": "boots"
-        },
-        {
-          "templateId": "elf_scatter_ring_2",
-          "set": null,
-          "rarity": 0,
-          "slot": "ring"
-        },
-        {
-          "templateId": "elf_scatter_ring_1",
-          "set": null,
-          "rarity": 0,
-          "slot": "ring"
-        },
-        {
-          "templateId": "elf_scatter_amulet_3",
-          "set": null,
-          "rarity": 0,
-          "slot": "amulet"
-        },
-        {
-          "templateId": "elf_scatter_weapon_15",
+          "templateId": "elf_scatter_weapon_5",
           "set": null,
           "rarity": 0,
           "slot": "weapon"
@@ -510,54 +288,24 @@
       "set": "elf_root",
       "count": 2,
       "skill": "elf.root_strike",
-      "atk": 592,
-      "maxHp": 4157,
+      "atk": 543,
+      "maxHp": 4009,
       "shield": 0,
       "hits": [
         {
           "element": "physical",
-          "damage": 645,
-          "normalized": 1.089527027027027
+          "damage": 591,
+          "normalized": 1.0883977900552486
         },
         {
           "element": "earth",
-          "damage": 452.81657142937183,
-          "normalized": 0.7648928571442092
+          "damage": 415.33682142943144,
+          "normalized": 0.764892857144441
         }
       ],
       "equipped": [
         {
-          "templateId": "elf_scatter_gloves_1",
-          "set": null,
-          "rarity": 0,
-          "slot": "gloves"
-        },
-        {
-          "templateId": "elf_scatter_boots_2",
-          "set": null,
-          "rarity": 0,
-          "slot": "boots"
-        },
-        {
-          "templateId": "elf_scatter_ring_3",
-          "set": null,
-          "rarity": 0,
-          "slot": "ring"
-        },
-        {
-          "templateId": "elf_scatter_ring_2",
-          "set": null,
-          "rarity": 0,
-          "slot": "ring"
-        },
-        {
-          "templateId": "elf_scatter_amulet_6",
-          "set": null,
-          "rarity": 0,
-          "slot": "amulet"
-        },
-        {
-          "templateId": "elf_scatter_weapon_14",
+          "templateId": "elf_scatter_weapon_15",
           "set": null,
           "rarity": 0,
           "slot": "weapon"
@@ -583,42 +331,24 @@
       "set": "elf_root",
       "count": 4,
       "skill": "elf.root_strike",
-      "atk": 668,
-      "maxHp": 5649,
+      "atk": 609,
+      "maxHp": 5598,
       "shield": 0,
       "hits": [
         {
           "element": "physical",
-          "damage": 727,
-          "normalized": 1.0883233532934131
+          "damage": 663,
+          "normalized": 1.0886699507389161
         },
         {
           "element": "earth",
-          "damage": 613.1381142865866,
-          "normalized": 0.9178714285727345
+          "damage": 558.9836999997497,
+          "normalized": 0.9178714285710176
         }
       ],
       "equipped": [
         {
-          "templateId": "elf_scatter_ring_1",
-          "set": null,
-          "rarity": 0,
-          "slot": "ring"
-        },
-        {
-          "templateId": "elf_scatter_ring_6",
-          "set": null,
-          "rarity": 0,
-          "slot": "ring"
-        },
-        {
-          "templateId": "elf_scatter_amulet_1",
-          "set": null,
-          "rarity": 0,
-          "slot": "amulet"
-        },
-        {
-          "templateId": "elf_scatter_weapon_14",
+          "templateId": "elf_scatter_weapon_7",
           "set": null,
           "rarity": 0,
           "slot": "weapon"
@@ -656,43 +386,13 @@
       "set": "elf_root",
       "count": 2,
       "skill": "elf.resonant_guard",
-      "atk": 563,
-      "maxHp": 4204,
-      "shield": 672.64,
+      "atk": 572,
+      "maxHp": 3937,
+      "shield": 629.92,
       "hits": [],
       "equipped": [
         {
-          "templateId": "elf_scatter_gloves_3",
-          "set": null,
-          "rarity": 0,
-          "slot": "gloves"
-        },
-        {
-          "templateId": "elf_scatter_boots_5",
-          "set": null,
-          "rarity": 0,
-          "slot": "boots"
-        },
-        {
-          "templateId": "elf_scatter_ring_6",
-          "set": null,
-          "rarity": 0,
-          "slot": "ring"
-        },
-        {
-          "templateId": "elf_scatter_ring_5",
-          "set": null,
-          "rarity": 0,
-          "slot": "ring"
-        },
-        {
-          "templateId": "elf_scatter_amulet_3",
-          "set": null,
-          "rarity": 0,
-          "slot": "amulet"
-        },
-        {
-          "templateId": "elf_scatter_weapon_15",
+          "templateId": "elf_scatter_weapon_8",
           "set": null,
           "rarity": 0,
           "slot": "weapon"
@@ -718,31 +418,13 @@
       "set": "elf_root",
       "count": 4,
       "skill": "elf.resonant_guard",
-      "atk": 629,
-      "maxHp": 5731,
-      "shield": 1100.352,
+      "atk": 638,
+      "maxHp": 5526,
+      "shield": 1060.992,
       "hits": [],
       "equipped": [
         {
-          "templateId": "elf_scatter_ring_3",
-          "set": null,
-          "rarity": 0,
-          "slot": "ring"
-        },
-        {
-          "templateId": "elf_scatter_ring_1",
-          "set": null,
-          "rarity": 0,
-          "slot": "ring"
-        },
-        {
-          "templateId": "elf_scatter_amulet_3",
-          "set": null,
-          "rarity": 0,
-          "slot": "amulet"
-        },
-        {
-          "templateId": "elf_scatter_weapon_5",
+          "templateId": "elf_scatter_weapon_8",
           "set": null,
           "rarity": 0,
           "slot": "weapon"

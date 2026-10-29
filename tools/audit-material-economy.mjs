@@ -1,0 +1,10 @@
+import {materialFusionSlotBias} from '../dist/material-fusion-policy.js';
+import fs from 'node:fs';
+import {WORLD_MATERIALS,worldInventoryKey} from '../dist/world-materials.js';
+import {MATERIALS,RECIPES,FUSION_TAGS,fusionQualityWeights} from '../dist/engine.js';
+import {potionRecipeAllows} from '../dist/potion-catalog.js';
+import {materialChannelProbability,materialQualityWeights} from '../dist/material-loot-profile.js';
+const rows=Object.values(WORLD_MATERIALS).map(m=>{const key=worldInventoryKey(m.id),recipes=Object.values(RECIPES).filter(r=>potionRecipeAllows(r.id,'main',key)||potionRecipeAllows(r.id,'aux',key)).map(r=>r.id);return {id:m.id,key,name:m.name,kind:m.kind,rarity:m.rarity,protected:!!(m.storyOnly||m.uniqueHeld||m.kind==='宝石'),sources:m.sources,recipes,recovery:!!MATERIALS[key]?.functionalTags?.includes('recoveryBase'),forgeDirection:FUSION_TAGS[key]?.slots??materialFusionSlotBias(MATERIALS[key]),reforge:key==='铁屑'?'Q0: 1份＋10/15/20/25金':null,enhancement:false};});
+const audit={counts:{world:rows.length,protected:rows.filter(r=>r.protected).length,ordinary:rows.filter(r=>!r.protected).length,noPotionRecipe:rows.filter(r=>!r.protected&&!r.recipes.length).length},costs:{fusion:{gold:40,minInputs:1,maxInputs:5},healing:{materials:1,gold:[1,2,3,4]},functional:{materials:2,gold:[3,4,5,6]},luck:{materials:2,gold:[6,8,10,12]},enhancementMaterials:0},baseDrops:['field','dungeon','boss'].map(kind=>({kind,regular:materialChannelProbability('regular',1,kind),recovery:materialChannelProbability('recovery',1,kind),a1Quality:materialQualityWeights(1,kind),a10Quality:materialQualityWeights(10,kind)})),fusion:[0,1,2,3].map(q=>({inputs:5,quality:q,weights:fusionQualityWeights(Array(5).fill('铁屑|'+q))})),materials:rows};
+if(process.argv.includes('--write'))fs.writeFileSync(new URL('../qa/material-economy/coverage.json',import.meta.url),JSON.stringify(audit,null,2)+'\n');
+console.log(JSON.stringify({counts:audit.counts,noPotionRecipe:rows.filter(r=>!r.protected&&!r.recipes.length).map(r=>r.name),baseDrops:audit.baseDrops,fusion:audit.fusion},null,2));

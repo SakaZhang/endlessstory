@@ -1,6 +1,9 @@
 // Fixed regional budgets, not player scaling. Evaluated only for newly created actors.
 // Existing save actors retain their stored hp/atk/armor and parameterSetId.
 export const MONSTER_BALANCE_ID='regional-threat-v071';
+// Boss-only challenge budget: sustain-equipped ordinary builds, not naked auto-attacks.
+// These are fixed area references, never current hero HP or a level-entry restriction.
+export const BOSS_DPS_REFERENCE_FRACTION=.024;
 // Ordinary Q0 equipment at each area's midpoint, no talents/skills/enhancement.
 // A1 is deliberately a naked Lv1 on-ramp; A1 elite uses an early acquired loadout.
 const REFERENCES=Object.freeze([
@@ -11,6 +14,8 @@ const REFERENCES=Object.freeze([
  {hp:4050,armor:480,atk:680},{hp:4900,armor:600,atk:820}
 ].map(Object.freeze));
 export const MONSTER_BALANCE_REFERENCES=REFERENCES;
+// XP-only progression calibration; threat, gold, drops and stored encounters are untouched.
+export const FIELD_EXPERIENCE_BY_AREA=Object.freeze([6,28,38,48,58,68,78,88,98,108]);
 const ELITE_XP=[55,66,79,92,106,119,132,145,158,172];
 const ELITE_GOLD=[10,12,14,18,18,23,23,27,27,32];
 // A transparent static cadence budget. It does not execute combat or consume RNG.
@@ -45,11 +50,12 @@ export function balanceMonsterParameters(def,parameters){
  const opening=def.trait?.type==='openingShield'?def.trait:def.trait?.openingShield;
  if(opening)hp/=1+opening.fraction*.7;
  if(def.trait?.type==='lifesteal')hp/=1+def.trait.encounterCap*.5;
- const dps=rank==='normal'?(area===1?.9:ref.hp*.002):rank==='elite'?ref.hp*.009:ref.hp*.012;
+ const dps=rank==='normal'?(area===1?.9:ref.hp*.002):rank==='elite'?ref.hp*.009:ref.hp*BOSS_DPS_REFERENCE_FRACTION;
  // Physical and elemental raw powers buy the same reference post-mitigation DPS.
  // Authored coefficients, DOT and follower shares consume that common threat budget.
  const unit=dps/monsterCoefficientRate(def,p);
- const rewardXp=rank==='normal'?(area===1?4:12+4*area):rank==='elite'?ELITE_XP[area-1]:156+52*area;
+ const fieldXp=FIELD_EXPERIENCE_BY_AREA[area-1];
+ const rewardXp=rank==='normal'?fieldXp:rank==='elite'?Math.max(ELITE_XP[area-1],fieldXp*4):Math.max(156+52*area,fieldXp*12);
  const rewardGold=rank==='normal'?(area===1?1:Math.ceil(1.5+area*.5)):rank==='elite'?ELITE_GOLD[area-1]:Math.round(15+area*9);
  return {...p,rewardXp,rewardGold,hp:Math.max(1,Math.round(hp)),armor,atk:Number((unit*(1+ref.armor/100)).toFixed(3)),elementalPower:Number(unit.toFixed(3)),parameterSetId:MONSTER_BALANCE_ID};
 }

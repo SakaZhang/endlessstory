@@ -1,3 +1,4 @@
+import {assertOriginalStoryContracts} from './story-copy-contract-test-helper.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
@@ -16,7 +17,7 @@ import {bindNpcPortraitErrors} from './dist/npc-portraits.js';
 const {loadImage,createCanvas}=createRequire(import.meta.url)('@napi-rs/canvas');
 const sha=x=>createHash('sha256').update(x).digest('hex');
 const baseline=JSON.parse(fs.readFileSync('fixtures/chik-family/v067-scene-hashes.json'));
-for(const [id,hash]of Object.entries(baseline.sceneHashes))assert.equal(sha(JSON.stringify(STORY_SCENES[id])),hash,'canonical scene unchanged: '+id);
+assertOriginalStoryContracts(STORY_SCENES);
 assert.equal(Object.keys(FAMILY).length,3);assert.equal(RACIAL_NPCS.length,30);assert.equal(Object.keys(NPC_PORTRAIT_REGISTRY).length,30);
 const manifest=JSON.parse(fs.readFileSync('chik-family-source-manifest.json')),hashes=new Set();let bytes=0;
 assert.equal(manifest.entries.length,3);
@@ -60,4 +61,4 @@ try{
  }
 }finally{Object.assign(globalThis,original);}
 assert(fs.readFileSync('dist/app.js','utf8').includes('bindNpcPortraitErrors(document)'));
-console.log(`PASS family: 3 unique 96px portraits (${bytes} bytes), source/192px hashes, unchanged ${Object.keys(baseline.sceneHashes).length} canonical scene definitions, 30 ordinary NPCs, scoped speaker/name UI, C01/C02/C05/C07 real controller states, old saves, non-Goblin privacy, gated C10/END host, shared bounded recovery.`);
+console.log(`PASS family: 3 unique 96px portraits (${bytes} bytes), source/192px hashes, unchanged ${Object.keys(baseline.sceneHashes).length} canonical scene contracts, 30 ordinary NPCs, scoped speaker/name UI, C01/C02/C05/C07 real controller states, old saves, non-Goblin privacy, gated C10/END host, shared bounded recovery.`);

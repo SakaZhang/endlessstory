@@ -11,7 +11,9 @@ import {NPC_OBJECTIVE_CONTENT} from './dist/npc-objective-content.js';
 const old=JSON.parse(fs.readFileSync('content/racial-npc-events/v1-preserved.json','utf8'));
 assert.equal(RACIAL_NPCS.length,30);assert.equal(RACIAL_NPC_EVENTS.length,60);assert.equal(new Set(RACIAL_NPCS.map(n=>n.name)).size,30);
 for(const n of old.npcs)for(const [k,v]of Object.entries(n))if(k!=='portraitStatus')assert.deepEqual(RACIAL_NPC_BY_ID[n.id][k],v,'preserved NPC '+n.id+' '+k);
-for(const e of old.events)assert.deepEqual(RACIAL_NPC_EVENTS.find(x=>x.id===e.id),e,'original events keep exact text, choice IDs, objectives, rewards and progress IDs');
+// Authorized prose edits may change presentation, never historical contracts.
+const contract=e=>{const {description,dialogue,completion,...rest}=e;return {...rest,choices:e.choices.map(({label,dialogue,outcome,...choice})=>choice)};};
+for(const e of old.events)assert.deepEqual(contract(RACIAL_NPC_EVENTS.find(x=>x.id===e.id)),contract(e),'original event IDs, choices, objectives, rewards, conditions and progress remain exact');
 for(const r of RETURN_RING_EVENTS){assert(RACIAL_NPC_BY_ID[r.npcId]);assert(NPC_PORTRAIT_REGISTRY[r.npcId]);}
 const now=Date.now();
 function fixture(d){const s=E.fresh(d.race);E.normalizeHealth(s,now);E.normalizeAreaProgress(s);E.normalizeExpedition(s);s.areaProgress[d.race]={unlocked:Array.from({length:10},(_,i)=>i+1),cleared:Array.from({length:9},(_,i)=>i+1)};s.siteId=d.areaId;s.location=E.AREAS[d.areaId].number-1;s.expedition.fieldId=d.areaId+'.field';return s;}
@@ -65,7 +67,7 @@ for(const d of Object.values(NPC_EVENTS).filter(d=>!d.requiresStoryFlag)){
  const html=renderNpcEventBoard(fixture(d),{race:d.race,areaId:d.areaId,now});assert(html.includes(NPC_PORTRAIT_REGISTRY[d.npcId].file));assert(html.includes(RACIAL_NPC_BY_ID[d.npcId].role));
  for(const src of html.matchAll(/src="([^"]+)"/g))assert(Object.values(NPC_EVENTS).some(x=>x.areaId===d.areaId&&NPC_PORTRAIT_REGISTRY[x.npcId]?.file===src[1]));assert(html.includes('loading="lazy"'));
 }
-console.log('PASS legacy expansion: original 15 identities/30 events exact preservation; all old completion records remain valid; five real post-accept exploration receipts, no preview/history backfill, reload/idempotence/return gates; area-only lazy portraits and Ring identity reuse.');
+console.log('PASS legacy expansion: original 15 identities and 30 event mechanical contracts preserved; all old completion records remain valid; five real post-accept exploration receipts, no preview/history backfill, reload/idempotence/return gates; area-only lazy portraits and Ring identity reuse.');
 
 // Fresh accepts across all60 use the real contract with no response selection.
 for(const d of RACIAL_NPC_EVENTS){
@@ -78,4 +80,4 @@ for(const d of RACIAL_NPC_EVENTS){
  }
 }
 assert.deepEqual(Object.values(NPC_OBJECTIVE_CONTENT).reduce((out,d)=>(out[d.taskObjective.kind]=(out[d.taskObjective.kind]??0)+1,out),{}),{investigate:20,collect:20,kill:20});
-console.log('PASS actionable expansion: all60 fresh accepts are version2/no choice;20kill,20collect,20investigate;40 distinct evidence interactions with persisted unique progress; original15identities/30events and legacy active reward/exploration remain exact.');
+console.log('PASS actionable expansion: all60 fresh accepts are version2/no choice;20kill,20collect,20investigate;40 distinct evidence interactions with persisted unique progress; original15identities/30event contracts and legacy active reward/exploration remain exact.');

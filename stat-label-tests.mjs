@@ -8,6 +8,6 @@ for(const [key,text] of Object.entries({precision:'每点命中 +5',crit:'每点
 for(const element of ['earth','water','fire','wind','light','dark'])assert.match(potionDescription(element+'Resist',0),/抗性 \+30/);
 const obsolete=/(?:命中|暴击|暴伤|幸运|格挡|吸血|抗性)值|护盾额外值|主动治疗额外值/;
 for(const name of await readdir('dist'))if(/\.(js|html)$/.test(name))assert.doesNotMatch(await readFile('dist/'+name,'utf8'),obsolete,name+' retains an obsolete visible label');
-const app=await readFile('dist/app.js','utf8');
-for(const label of ['命中 / 实际命中率','暴击 / 实际暴击率','暴伤 / 伤害倍率','吸血 / 实际吸血率','有效幸运','护盾加成','主动直疗加成','原始数值','差值'])assert(app.includes(label),label);
+const app=await readFile('dist/app.js','utf8')+await readFile('dist/character-stats-ui.js','utf8');
+for(const label of ['命中判定率','暴击率','暴击伤害倍率','实际吸血率','有效幸运','护盾加成','主动直疗加成','原始数值','差值'])assert(app.includes(label),label);
 console.log('PASS stat labels: affixes, talents, six resistance potions, stats rating/rate distinctions and source-wide obsolete-label guard.');

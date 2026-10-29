@@ -27,3 +27,6 @@ export function applyReturnRingVictory(s,e,maxHp){
 }
 export function validReturnRingDropPolicy(policy){return !!policy&&policy.approved===true&&Number.isFinite(policy.bonusPP)&&policy.bonusPP>=0&&policy.bonusPP<=1&&Array.isArray(policy.pools)&&policy.pools.length>0&&new Set(policy.pools).size===policy.pools.length&&policy.pools.every(p=>['boss-legendary','material-special','material-gem'].includes(p));}
 export function returnRingRareBonus(s,pool,policy=RETURN_RING_DROP_POLICY){return equippedReturnRing(s)&&validReturnRingDropPolicy(policy)&&policy.pools.includes(pool)?policy.bonusPP:0;}
+
+// Identity-based, equipped-only; two sockets never multiply the same effect.
+export function returnRingExperienceBonus(s){return equippedReturnRing(s) ? .2 : 0;}

@@ -1,0 +1,54 @@
+{
+  "version": "0.78",
+  "release": "40d53150c30de9b6abae89b4c86d8e4702f0a859032dfa2ee9e606a857b51dcc",
+  "releaseFiles": 3001,
+  "automated": {
+    "command": "npm test",
+    "exitCode": 0,
+    "build": "npm run build",
+    "buildExitCode": 0,
+    "containerSourceTests": "7/7 passed"
+  },
+  "browser": {
+    "surface": "managed cloud browser / local preview",
+    "passed": [
+      "complete character attributes and potion state",
+      "ring XP equip/unequip",
+      "legendary bow orientation and weapon switching",
+      "human/dwarf full-material probabilities",
+      "early luck ingredients",
+      "ring investigation/full dungeon/recovery/turn-in",
+      "ring craft/pending/consumed history/privacy",
+      "cross-battle dungeon receipts",
+      "automatic boss safe full-dungeon boundary and original route",
+      "human discounted forge price",
+      "map normal loading"
+    ],
+    "notExecuted": [
+      "390px/320px actual viewport",
+      "all nine new auxiliaries individually in browser",
+      "browser network-timeout injection",
+      "browser full failure/retry wait",
+      "browser loot-filter and full-bag branch"
+    ],
+    "note": "These branches have separate automated coverage; browser claims are not substituted with DOM fixture claims."
+  },
+  "oldSaveCompatibility": {
+    "immutableStoryAndFinaleFixtures": 38,
+    "immutableActorFixtures": 25,
+    "schema": 6
+  },
+  "art": {
+    "sharedWeaponIdentities": 5,
+    "raceWeaponCombinations": 25,
+    "bodyFrames": 200,
+    "bowDirectionalReview": "five races, seven living states, both directions; manual five-race large-sheet review"
+  },
+  "boundaries": [
+    "random ordinary dungeon rewards still permit all-empty item clears",
+    "legacy permanent ring declines are not reset",
+    "no nonweapon full-body overlays",
+    "material gold bottleneck unchanged; 11 ordinary materials lack potion recipes",
+    "no Docker daemon / ARM64 execution claim"
+  ]
+}

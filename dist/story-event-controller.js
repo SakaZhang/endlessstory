@@ -1,3 +1,4 @@
+import {storyDialogueComplete,storyKnowledgeMatches} from './story-copy-compatibility.js';
 import {personalActions,personalSceneIsLate,personalSceneSite,personalSceneRuntimeAvailable} from './personal-story-registry.js';
 import {storyCorridorExitAvailable} from './war-travel-boundary.js';
 import {STORY_SCENARIOS} from './story-scenario-registry.js';
@@ -54,7 +55,7 @@ export function validStoryEventState(s){
   if(!same(Object.keys(st.acceptedLevels).sort(),visited.sort())||Object.values(st.acceptedLevels).some(x=>!Number.isSafeInteger(x)||x<1||x>=100000))return false;
   const walked=blank(s.race);
   for(const id of st.completedScenes){const d=scene(id);if(!prerequisites(walked,d))return false;walked.completedScenes.push(id);walked.choices[id]=st.choices[id];Object.assign(walked,derived(walked));}
-  const canonical=derived(st);if(!same(st.flags,canonical.flags)||!same(st.knowledge,canonical.knowledge))return false;
+  const canonical=derived(st);if(!same(st.flags,canonical.flags)||!storyKnowledgeMatches(st.knowledge,canonical.knowledge))return false;
   const receiptIds=new Set(),encounterIds=new Set();
   for(const r of st.encounters){
    const d=scene(r?.sceneId);
@@ -63,7 +64,7 @@ export function validStoryEventState(s){
   }
   for(const id of st.completedScenes)if(needsEncounter(s,scene(id))&&!receiptFor(st,scene(id)))return false;
   for(const a of [...paused,...(st.activeScene?[st.activeScene]:[])]){
-   const d=scene(a?.id);if(!exact(a,['id','cursor','choiceId','encounterId'])||!d||d.pov!==s.race||st.completedScenes.includes(a.id)||!prerequisites(st,d)||!Number.isSafeInteger(a.cursor)||a.cursor<0||a.cursor>d.lines.length||!(a.choiceId===null||choice(d,a.choiceId))||(a.choiceId!==null&&a.cursor!==d.lines.length)||!(a.encounterId===null||(typeof a.encounterId==='string'&&a.encounterId.length>0&&a.encounterId.length<=160)))return false;
+   const d=scene(a?.id);if(!exact(a,['id','cursor','choiceId','encounterId'])||!d||d.pov!==s.race||st.completedScenes.includes(a.id)||!prerequisites(st,d)||!Number.isSafeInteger(a.cursor)||a.cursor<0||(a.cursor>d.lines.length&&!storyDialogueComplete(d,a))||!(a.choiceId===null||choice(d,a.choiceId))||(a.choiceId!==null&&!storyDialogueComplete(d,a))||!(a.encounterId===null||(typeof a.encounterId==='string'&&a.encounterId.length>0&&a.encounterId.length<=160)))return false;
    if(a.encounterId!==null&&!d.encounter)return false;if(receiptFor(st,d)&&a.encounterId!==receiptFor(st,d).encounterId)return false;
   }
   if(st.completedScenes.includes('C05.EA02.ashen')&&!s.taskRewardClaims?.includes('story.ashen-primal-core'))return false;
@@ -112,24 +113,24 @@ export function chooseStoryResponse(s,id,choiceId){
 }
 export function storySceneReady(s,id){
  if(!validStoryEventState(s)||!storySafeToInteract(s))return false;
- const a=s.story?.activeScene,d=scene(id);if(!a||a.id!==id||!storySceneLocationAvailable(s,d)||a.cursor!==d.lines.length||!choice(d,a.choiceId)||needsEncounter(s,d)&&!receiptFor(s.story,d)||!personalActionsDone(s,d))return false;
+ const a=s.story?.activeScene,d=scene(id);if(!a||a.id!==id||!storySceneLocationAvailable(s,d)||!storyDialogueComplete(d,a)||!choice(d,a.choiceId)||needsEncounter(s,d)&&!receiptFor(s.story,d)||!personalActionsDone(s,d))return false;
  return (d.materialConditions??[]).every(row=>materialCount(s,row.material,row.quality)>=row.quantity);
 }
 export function bindStoryScenario(s,e){
  if(!validStoryEventState(s)||s.activeEncounter!==e||!e?.storyScenario||e.done||e.rewarded)return false;
- const a=s.story?.activeScene,d=scene(a?.id);if(!a||!d||d.encounter?.kind!=='scenario'||a.cursor!==d.lines.length||!a.choiceId||a.encounterId!==null||!storySceneLocationAvailable(s,d)||e.instanceId!==d.encounter.nodeId||e.storyScenario.id!==d.encounter.scenarioId||e.storyScenario.sceneId!==d.id||e.storyScenario.pov!==s.race)return false;
+ const a=s.story?.activeScene,d=scene(a?.id);if(!a||!d||d.encounter?.kind!=='scenario'||!storyDialogueComplete(d,a)||!a.choiceId||a.encounterId!==null||!storySceneLocationAvailable(s,d)||e.instanceId!==d.encounter.nodeId||e.storyScenario.id!==d.encounter.scenarioId||e.storyScenario.sceneId!==d.id||e.storyScenario.pov!==s.race)return false;
  a.encounterId=e.id;return true;
 }
 export function recordStoryScenarioResult(s,e){
  if(!validStoryEventState(s)||s.activeEncounter!==e||!e?.storyScenario||!e.done||!e.rewarded)return false;
  const st=s.story,a=st?.activeScene,d=scene(a?.id),m=e.storyScenario;
- if(!a||!d||d.encounter?.kind!=='scenario'||a.encounterId!==e.id||receiptFor(st,d)||a.cursor!==d.lines.length||!a.choiceId||!storySceneLocationAvailable(s,d)||e.instanceId!==d.encounter.nodeId||m.id!==d.encounter.scenarioId||m.sceneId!==d.id||m.pov!==s.race||m.result!==expectedResult(d)||!Number.isInteger(m.resolvedRound)||m.resolvedRound<(STORY_SCENARIOS[m.id]?.mode==='tool'?0:1))return false;
+ if(!a||!d||d.encounter?.kind!=='scenario'||a.encounterId!==e.id||receiptFor(st,d)||!storyDialogueComplete(d,a)||!a.choiceId||!storySceneLocationAvailable(s,d)||e.instanceId!==d.encounter.nodeId||m.id!==d.encounter.scenarioId||m.sceneId!==d.id||m.pov!==s.race||m.result!==expectedResult(d)||!Number.isInteger(m.resolvedRound)||m.resolvedRound<(STORY_SCENARIOS[m.id]?.mode==='tool'?0:1))return false;
  st.encounters.push({sceneId:d.id,encounterId:e.id,nodeId:e.instanceId,scenarioId:m.id,result:m.result});return true;
 }
 export function recordStoryEncounterVictory(s,e){
  if(!validStoryEventState(s)||s.activeEncounter!==e||!e||e.developmentFixture||e.storyScenario||!e.done||!e.win||!e.rewarded||!e.enemies?.length||!e.enemies.every(u=>u.hp===0)||e.multiVersion!==1)return false;
  const st=s.story,a=st?.activeScene,d=scene(a?.id);
- if(!a||!d||d.personal&&a.encounterId===null||d.encounter?.kind!=='victory'||(a.encounterId!==null&&a.encounterId!==e.id)||a.cursor!==d.lines.length||!a.choiceId||receiptFor(st,d)||!storySceneLocationAvailable(s,d)||e.instanceId!==d.encounter.nodeId||e.kind!=='field'||INSTANCES[e.instanceId]?.areaId!==s.siteId)return false;
+ if(!a||!d||d.personal&&a.encounterId===null||d.encounter?.kind!=='victory'||(a.encounterId!==null&&a.encounterId!==e.id)||!storyDialogueComplete(d,a)||!a.choiceId||receiptFor(st,d)||!storySceneLocationAvailable(s,d)||e.instanceId!==d.encounter.nodeId||e.kind!=='field'||INSTANCES[e.instanceId]?.areaId!==s.siteId)return false;
  a.encounterId=e.id;st.encounters.push({sceneId:d.id,encounterId:e.id,nodeId:e.instanceId,scenarioId:null,result:'victory'});return true;
 }
 export function finishStoryScene(s,id,now=s.lastHealthClock??s.lastSeen??Date.now()){
@@ -173,15 +174,15 @@ export function transactStoryEvent(storage,game,action,{now=Date.now(),afterComm
 export function storyEventView(s){
  if(!validStoryEventState(s))return {valid:false,active:null,available:[],knowledge:[],complete:false};
  const st=state(s),a=st.activeScene,d=scene(a?.id);
- return {valid:true,active:d?{...structuredClone(d),...structuredClone(a),siteId:personalSceneSite(s,d),personalDeferred:!personalSceneRuntimeAvailable(s,d),personalStep:personalState(s).steps[d.id]??0,personalLate:personalState(s).lateIds.includes(d.id),personalActions:personalSceneActions(s,d),needsEncounter:!!needsEncounter(s,d),line:d.lines[a.cursor]??null,receipt:structuredClone(receiptFor(st,d)??null),ready:storySceneReady(s,d.id),safe:storySafeToInteract(s),atLocation:storySceneLocationAvailable(s,d),entryAvailable:canEnterWarStoryScene(s,d.id)}:null,available:availableStoryScenes(s),knowledge:structuredClone(st.knowledge),complete:st.flags.includes('C06_COMPLETE'),warDeclared:st.flags.includes('WAR_DECLARED'),warOpeningComplete:st.flags.includes('C07_OPENING_COMPLETE'),invasionBegan:st.flags.includes('INVASION_BEGAN'),chapter8Complete:st.flags.includes('C08_COMPLETE'),completedCount:st.completedScenes.length};
+ return {valid:true,active:d?{...structuredClone(d),...structuredClone(a),siteId:personalSceneSite(s,d),personalDeferred:!personalSceneRuntimeAvailable(s,d),personalStep:personalState(s).steps[d.id]??0,personalLate:personalState(s).lateIds.includes(d.id),personalActions:personalSceneActions(s,d),needsEncounter:!!needsEncounter(s,d),line:storyDialogueComplete(d,a)?null:d.lines[a.cursor]??null,receipt:structuredClone(receiptFor(st,d)??null),ready:storySceneReady(s,d.id),safe:storySafeToInteract(s),atLocation:storySceneLocationAvailable(s,d),entryAvailable:canEnterWarStoryScene(s,d.id)}:null,available:availableStoryScenes(s),knowledge:structuredClone(st.knowledge),complete:st.flags.includes('C06_COMPLETE'),warDeclared:st.flags.includes('WAR_DECLARED'),warOpeningComplete:st.flags.includes('C07_OPENING_COMPLETE'),invasionBegan:st.flags.includes('INVASION_BEGAN'),chapter8Complete:st.flags.includes('C08_COMPLETE'),completedCount:st.completedScenes.length};
 }
 export function canStartStoryScenario(s,scenarioId){
  if(!validStoryEventState(s)||!storySafeToInteract(s))return false;
- const a=s.story?.activeScene,d=scene(a?.id);return !!d&&d.encounter?.kind==='scenario'&&needsEncounter(s,d)&&personalActionsDone(s,d)&&d.encounter.scenarioId===scenarioId&&a.cursor===d.lines.length&&!!choice(d,a.choiceId)&&!receiptFor(s.story,d)&&a.encounterId===null&&(!d.questTool||storyQuestToolAvailable(s,d.questTool))&&storySceneLocationAvailable(s,d);
+ const a=s.story?.activeScene,d=scene(a?.id);return !!d&&d.encounter?.kind==='scenario'&&needsEncounter(s,d)&&personalActionsDone(s,d)&&d.encounter.scenarioId===scenarioId&&storyDialogueComplete(d,a)&&!!choice(d,a.choiceId)&&!receiptFor(s.story,d)&&a.encounterId===null&&(!d.questTool||storyQuestToolAvailable(s,d.questTool))&&storySceneLocationAvailable(s,d);
 }
 export function canStartStoryFieldEncounter(s,nodeId){
  if(!validStoryEventState(s)||!storySafeToInteract(s))return false;
- const a=s.story?.activeScene,d=scene(a?.id);return !!d&&d.encounter?.kind==='victory'&&needsEncounter(s,d)&&personalActionsDone(s,d)&&d.encounter.nodeId===nodeId&&a.cursor===d.lines.length&&!!choice(d,a.choiceId)&&!receiptFor(s.story,d)&&storySceneLocationAvailable(s,d);
+ const a=s.story?.activeScene,d=scene(a?.id);return !!d&&d.encounter?.kind==='victory'&&needsEncounter(s,d)&&personalActionsDone(s,d)&&d.encounter.nodeId===nodeId&&storyDialogueComplete(d,a)&&!!choice(d,a.choiceId)&&!receiptFor(s.story,d)&&storySceneLocationAvailable(s,d);
 }
 
 export function storyQuestToolAvailable(s,id){return id==='old-wedge'&&validStoryEventState(s)&&s.story?.flags.includes('E_WEDGE_LEARNED')&&s.story.flags.includes('E_WEDGE_AVAILABLE')&&!s.story.flags.includes('E_WEDGE_USED');}

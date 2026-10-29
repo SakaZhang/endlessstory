@@ -42,9 +42,13 @@ function validNpcObjectiveProgress(s){
  if(!exactKeys(state,['version','entries'])||state.version!==1||!plain(state.entries)||Object.keys(state.entries).length>Object.keys(NPC_EVENTS).length)return false;
  return Object.entries(state.entries).every(([id,p])=>{
   const d=NPC_EVENTS[id],e=s.npcEvents?.entries?.[id],o=d?.taskObjective;
-  if(!e||d.objectiveVersion!==2||!o||!exactKeys(p,['version','cycle','count','checkpoints','receipts'])||p.version!==2||p.cycle!==e.cycle||!Number.isSafeInteger(p.count)||p.count<0||e.choiceId!==null||e.count!==0||e.lastEncounterId!==MODERN_CONTRACT_MARKER||!uniqueStrings(p.checkpoints,o.checkpoints?.length??0)||!uniqueStrings(p.receipts,o.kind==='kill'?o.count:0))return false;
+  if(!e||d.objectiveVersion!==2||!o||!exactKeys(p,['version','cycle','count','checkpoints','receipts'])||p.version!==2||p.cycle!==e.cycle||!Number.isSafeInteger(p.count)||p.count<0||e.choiceId!==null||e.count!==0||e.lastEncounterId!==MODERN_CONTRACT_MARKER||!uniqueStrings(p.checkpoints,o.checkpoints?.length??0)||!uniqueStrings(p.receipts,o.kind==='kill'?o.count:o.checkpoints?.some(c=>c.challenge==='dungeon-clear')?3:0))return false;
+  if(o.kind==='investigate'&&o.checkpoints.some(c=>c.challenge==='dungeon-clear')){
+   const run=p.receipts[0]?.slice(0,-2);
+   if(p.receipts.some((id,i)=>id!==run+'|'+(i+1))||p.receipts.length&&!p.checkpoints.includes(o.checkpoints[0].id)||o.checkpoints.some(c=>c.challenge==='dungeon-clear'&&p.checkpoints.includes(c.id)&&p.receipts.length!==3))return false;
+  }
   if(o.kind==='kill')return p.count<=o.count&&p.count>=p.receipts.length&&p.count<=p.receipts.length*3&&(!p.count||p.receipts.length>0)&&(e.status!=='resolved'||p.count===o.count);
-  if(o.kind==='investigate')return p.count===p.checkpoints.length&&p.checkpoints.every(id=>o.checkpoints.some(c=>c.id===id))&&(e.status!=='resolved'||p.count===o.checkpoints.length);
+  if(o.kind==='investigate')return p.count===p.checkpoints.length&&p.checkpoints.every(id=>o.checkpoints.some(c=>c.id===id&&(c.requiresCheckpointIds??[]).every(required=>p.checkpoints.includes(required))))&&(e.status!=='resolved'||p.count===o.checkpoints.length);
   return o.kind==='collect'&&p.count===0;
  });
 }
@@ -55,7 +59,7 @@ function validNpcEncounterReceipt(s){
  const e=s.activeEncounter,r=e?.npcObjectiveReceipt;if(r===undefined)return true;
  if(!exactKeys(r,['version','startedAt','tasks','initialUnitIds','defeatedUnitIds'])||r.version!==1||!time(r.startedAt)||!plain(r.tasks)||Object.keys(r.tasks).length>Object.keys(NPC_EVENTS).length||!uniqueStrings(r.initialUnitIds,3)||!uniqueStrings(r.defeatedUnitIds,3)||!Array.isArray(e.enemies)||e.developmentFixture||e.storyScenario||e.contentVersion!=='dwarf-m2-v1')return false;
  if(!r.initialUnitIds.every(id=>e.enemies.some(u=>u.id===id&&u.origin==='initial'&&!u.follower&&u.sourceInstanceId===e.instanceId))||!r.defeatedUnitIds.every(id=>r.initialUnitIds.includes(id)&&e.enemies.some(u=>u.id===id&&u.hp===0)))return false;
- return Object.entries(r.tasks).every(([id,row])=>{const d=NPC_EVENTS[id],p=s.npcObjectiveProgress?.entries?.[id],entry=s.npcEvents?.entries?.[id];return d?.taskObjective?.kind==='kill'&&p&&entry?.status==='active'&&exactKeys(row,['cycle','acceptedAt'])&&row.cycle===p.cycle&&row.acceptedAt===entry.acceptedAt&&row.acceptedAt<=r.startedAt&&d.taskObjective.nodeIds.includes(e.instanceId);});
+ return Object.entries(r.tasks).every(([id,row])=>{const d=NPC_EVENTS[id],p=s.npcObjectiveProgress?.entries?.[id],entry=s.npcEvents?.entries?.[id];return (d?.taskObjective?.kind==='kill'||d?.taskObjective?.checkpoints?.some(c=>c.challenge==='dungeon-clear'&&c.nodeId===e.instanceId))&&p&&entry?.status==='active'&&exactKeys(row,['cycle','acceptedAt'])&&row.cycle===p.cycle&&row.acceptedAt===entry.acceptedAt&&row.acceptedAt<=r.startedAt&&(d.taskObjective.nodeIds??d.taskObjective.checkpoints?.filter(c=>c.challenge).map(c=>c.nodeId)??[]).includes(e.instanceId);});
 }
 export function npcEventObjectiveProgress(s,id){
  const d=NPC_EVENTS[id],entry=s.npcEvents?.entries?.[id],modern=previewModern(s,id),o=npcEventObjective(s,id),p=s.npcObjectiveProgress?.entries?.[id];
@@ -70,6 +74,8 @@ export function npcInvestigationAccess(s,id,checkpointId,now=Date.now()){
  if(!time(now)||!validNpcEventState(s)||!npcEventIsModern(s,id)||s.npcEvents.entries[id]?.status!=='active')return {allowed:false,reason:'先接取这项调查'};
  const d=NPC_EVENTS[id],o=d.taskObjective,p=s.npcObjectiveProgress.entries[id],checkpoint=o.kind==='investigate'&&o.checkpoints.find(c=>c.id===checkpointId);
  if(!checkpoint)return {allowed:false,reason:'调查点不可用'};
+ if(checkpoint.challenge)return {allowed:false,reason:'需实际通关此地普通副本，胜利后自动记录'};
+ if(!(checkpoint.requiresCheckpointIds??[]).every(id=>p.checkpoints.includes(id)))return {allowed:false,reason:'先完成前一步调查或道路挑战'};
  if(p.checkpoints.includes(checkpointId))return {allowed:false,reason:'此处已调查'};
  if(s.npcEvents.entries[id].acceptedAt>now)return {allowed:false,reason:'任务时间尚未到达'};
  const area=AREAS[checkpoint.areaId??INSTANCES[checkpoint.nodeId]?.areaId];

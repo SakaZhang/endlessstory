@@ -127,10 +127,12 @@
     "common": 260,
     "ordinary": 263,
     "sets": 60,
-    "legends": 12,
-    "definitions": 335
+    "legends": 14,
+    "definitions": 337
   },
-  "reservedStory": [
+  "reservedNonDrop": [
+    "infinity-gauntlet",
+    "return-ring",
     "ashen-primal-core"
   ],
   "acquisition": {

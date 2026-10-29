@@ -1,3 +1,4 @@
+import {assertOriginalStoryContracts} from './story-copy-contract-test-helper.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
@@ -11,7 +12,7 @@ import {NPC_PORTRAIT_REGISTRY} from './dist/npc-portrait-registry.js';
 import {bindNpcPortraitErrors} from './dist/npc-portraits.js';
 import {reachStoryScene} from './story-event-test-fixture.mjs';
 const {loadImage}=createRequire(import.meta.url)('@napi-rs/canvas'),sha=b=>createHash('sha256').update(b).digest('hex');
-assert.equal(sha(fs.readFileSync('dist/story-event-registry.js','utf8').replace("import {FINALE_SCENES} from './story-finale-scenes.js';\n",'').replace(' ...FINALE_SCENES,\n','').replace("import {PERSONAL_STORY_SCENES} from './personal-story-registry.js';\n",'').replace(' ...PERSONAL_STORY_SCENES,\n','')),'9d236c8bfa71c213248c696caec315de2b5a500dc44f9b9a4bd8a8a5426d7dc7','all 103 scenes remain byte-identical');
+assertOriginalStoryContracts(STORY_SCENES);
 execFileSync(process.execPath,['tools/sync-story-portrait-crops.mjs','--check']);
 const manifest=JSON.parse(fs.readFileSync('main-cast-source-manifest.json'));assert.equal(manifest.entries.length,6);
 for(const entry of manifest.entries){assert.equal(typeof entry.prompt,'string');for(const key of ['source','source192',entry.designOnly?'designPreview':'runtime']){const item=entry[key],bytes=fs.readFileSync(item.path);assert.equal(sha(bytes),item.sha256);const im=await loadImage(item.path);assert.deepEqual([im.width,im.height],item.size);if(key==='source192')assert.deepEqual(item.size,[192,192]);if(key==='runtime'||key==='designPreview')assert.deepEqual(item.size,[96,96]);}}
@@ -41,4 +42,4 @@ try{const listeners={},attrs={},classes=new Set(),error={hidden:true},img={datas
  listeners.error({target:img});assert(img.hidden&&!error.hidden);assert.equal(scheduled[0].delay,250);scheduled[0].fn();listeners.error({target:img});assert.equal(scheduled[1].delay,1000);scheduled[1].fn();listeners.error({target:img});assert.equal(scheduled.length,2);let blocked=0;listeners.keydown({type:'keydown',key:'Enter',target:{closest:()=>wrapper},preventDefault(){blocked++},stopPropagation(){blocked++}});assert.equal(blocked,2);assert(img.src.endsWith('?asset_retry=3'));listeners.load({target:img});assert(!img.hidden&&error.hidden);dispose();assert.deepEqual(listeners,{});
 }finally{Math.random=oldRandom;globalThis.setTimeout=oldSet;globalThis.clearTimeout=oldClear;}
 fs.mkdirSync('qa/main-cast',{recursive:true});fs.writeFileSync('qa/main-cast/coverage.json',JSON.stringify({kind:'production pure renderers + actual controller evidence gate; not browser screenshot',scenes:Object.keys(STORY_SCENES).length,lines,narration,counts,sourceSceneHash:sha(fs.readFileSync('dist/story-event-registry.js')),browser:'Chromium launch unavailable in sandbox; no browser claim'},null,2));
-console.log('PASS 103 unchanged scenes; exact 15 speaking identities / '+Object.values(counts).reduce((a,b)=>a+b,0)+' mapped lines; anonymous roles not merged; no king/minister false historical speaker; scoped postclear personal minister; six image SHA/size checks; bounded shared recovery; no ledger or RNG mutation.');
+console.log('PASS 103 scenes with unchanged mechanical contracts; exact 15 speaking identities / '+Object.values(counts).reduce((a,b)=>a+b,0)+' mapped lines; anonymous roles not merged; no king/minister false historical speaker; scoped postclear personal minister; six image SHA/size checks; bounded shared recovery; no ledger or RNG mutation.');

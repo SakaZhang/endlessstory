@@ -1,10 +1,11 @@
+import {beforeEquipmentCopy} from './racial-equipment-copy-test-fixture.mjs';
 import assert from 'node:assert/strict';import fs from 'node:fs';import {createHash} from 'node:crypto';import {createRequire} from 'node:module';const {createCanvas,loadImage,GlobalFonts}=createRequire(import.meta.url)('@napi-rs/canvas');
 import {equipment,sets,legendaries,legendaryPolicy} from './dist/races/elf/equipment.js';
 import {EQUIPMENT_TEMPLATES,listEquipmentTemplates,validateEquipmentTemplates} from './dist/equipment-templates.js';
 import {equipmentRasterSource,drawEquipmentRaster} from './dist/equipment-raster-art.js';import {fusionOriginTemplates} from './dist/fusion-origin.js';
 import {fresh,item,forge,ensureMerchant,MERCHANT_CYCLE_MS} from './dist/engine.js';import {deriveNewItemBudget} from './dist/equipment-budget-adapter.js';
 const root='qa/elf-equipment-parity',baseline=JSON.parse(fs.readFileSync(`${root}/baseline.json`));
-for(const old of baseline.equipment)assert.deepEqual(equipment.find(x=>x.id===old.id),old,`preserved ${old.id}`);for(const k of ['sets','legendaries','legendaryPolicy'])assert.deepEqual({sets,legendaries,legendaryPolicy}[k],baseline[k]);assert(validateEquipmentTemplates());
+for(const old of baseline.equipment)assert.deepEqual(beforeEquipmentCopy(equipment.find(x=>x.id===old.id)),old,`preserved ${old.id}`);for(const k of ['sets','legendaries','legendaryPolicy'])assert.deepEqual(beforeEquipmentCopy({sets,legendaries,legendaryPolicy}[k]),baseline[k]);assert(validateEquipmentTemplates());
 const slots=['weapon','helm','armor','gloves','boots','ring','amulet'];const ordinary=equipment.filter(x=>x.kind==='scatter'),setParts=equipment.filter(x=>x.kind==='set');assert.equal(ordinary.length,52);assert.equal(setParts.length,12);assert.equal(legendaries.length,2);
 for(const slot of slots){const rows=listEquipmentTemplates({originRace:'elf',slot});assert.equal(rows.length,slot==='weapon'?16:6);assert.deepEqual(rows,fusionOriginTemplates('elf',{slot}));}for(const w of ['bow','staff'])assert.equal(ordinary.filter(t=>t.weaponType===w).length,8);
 const all=[...ordinary,...setParts,...legendaries],hashes=new Set(),paths=new Set();const pictures=[];

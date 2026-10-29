@@ -1,3 +1,4 @@
+import {beforeEquipmentCopy} from './racial-equipment-copy-test-fixture.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {execFileSync} from 'node:child_process';
@@ -24,9 +25,9 @@ const identity=t=>Object.fromEntries(Object.entries(t).filter(([k])=>!['pixelApp
 assert.equal(hash(execFileSync('git',['show','cba72e3:dist/engine.js'])),baseline.unchangedRuntime['engine.js'],'v062 equipment release preserved the engine');
 for(const [path,h]of Object.entries(baseline.unchangedRuntime).filter(([path])=>!['save-generation.js','engine.js'].includes(path)))assert.equal(hash(fs.readFileSync('dist/'+path)),h,`${path}: equipment budget/rate/quality policy unchanged`);
 const report=auditEquipmentCatalog();assert(report.passed,report.errors.join('\n'));assert(validateEquipmentTemplates());assert.equal(SCHEMA_VERSION,6);
-for(const t of T)if(baseline.templates[t.id])assert.equal(hash(JSON.stringify(identity(t))),baseline.templates[t.id],`${t.id}: preserve existing identity/name/stats metadata`);
+for(const t of T)if(baseline.templates[t.id])assert.equal(hash(JSON.stringify(identity(beforeEquipmentCopy(t)))),baseline.templates[t.id],`${t.id}: preserve existing identity/name/stats metadata`);
 for(const [id,h]of Object.entries(baseline.templates))assert(T.some(t=>t.id===id),`${id}: removed existing template`);
-for(const [id,h]of Object.entries(baseline.legends))assert.equal(hash(JSON.stringify(identity(L[id]))),h,`${id}: preserve legend definition`);
+for(const [id,h]of Object.entries(baseline.legends))assert.equal(hash(JSON.stringify(identity(beforeEquipmentCopy(L[id])))),h,`${id}: preserve legend definition`);
 // Negative controls: a balanced total with incorrect slots/families must fail.
 const corrupt=structuredClone(T),first=corrupt.find(t=>t.kind==='scatter'&&t.slot==='amulet');first.slot='ring';assert(!auditEquipmentCatalog(corrupt).passed);
 const wrongFamily=structuredClone(T),weapon=wrongFamily.find(t=>t.kind==='scatter'&&t.slot==='weapon');weapon.weaponType='staff';assert(!auditEquipmentCatalog(wrongFamily).passed);

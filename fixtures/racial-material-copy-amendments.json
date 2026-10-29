@@ -1,0 +1,242 @@
+[
+  {
+    "id": "elf.dew_crown",
+    "field": "sourcePolicy",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "elf.green_shale",
+    "field": "sourcePolicy",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "elf.moss_deer_sinew",
+    "field": "sourcePolicy",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "elf.spiral_vine",
+    "field": "sourcePolicy",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "elf.moonwell_salt",
+    "field": "sourcePolicy",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "elf.glow_moss",
+    "field": "sourcePolicy",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "elf.twilight_silk",
+    "field": "sourcePolicy",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "elf.ember_flower",
+    "field": "sourcePolicy",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "elf.shadow_fungus",
+    "field": "sourcePolicy",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "elf.root_silver",
+    "field": "sourcePolicy",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "elf.dry_tide_scale",
+    "field": "sourcePolicy",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "elf.star_fern_seed",
+    "field": "sourcePolicy",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "elf.echo_resin",
+    "field": "sourcePolicy",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "elf.eclipse_pollen",
+    "field": "sourcePolicy",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "elf.hollow_marrow",
+    "field": "sourcePolicy",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "elf.mirror_teardrop",
+    "field": "sourcePolicy",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "elf.infinity_gem_elf",
+    "field": "sourcePolicy",
+    "before": "本族全区；高区概率更高；同区野外＜普通＜首领；同种最多1颗、丢失可重刷；合成后政策待定",
+    "after": "本族全区；高区概率更高；同区野外＜普通＜首领；同种最多1颗、丢失可重刷"
+  },
+  {
+    "id": "elf.return_token_elf",
+    "field": "sourcePolicy",
+    "before": "中期第5区剧情占位（第4–6区内可调整）；一次性，可永久错过",
+    "after": "月井溪谷的伊萝事件奖励；仅可领取一次。"
+  },
+  {
+    "id": "ashen.cold_ash_sand",
+    "field": "sourceNote",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "ashen.salt_shell",
+    "field": "sourceNote",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "ashen.porous_basalt",
+    "field": "sourceNote",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "ashen.weathered_mica",
+    "field": "sourceNote",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "ashen.dew_salt",
+    "field": "sourceNote",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "ashen.glass_grain",
+    "field": "sourceNote",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "ashen.red_vein_ore",
+    "field": "sourceNote",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "ashen.singing_crystal",
+    "field": "sourceNote",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "ashen.obsidian_glass",
+    "field": "sourceNote",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "ashen.white_salt_marrow",
+    "field": "sourceNote",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "ashen.dim_crystal_sand",
+    "field": "sourceNote",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "ashen.refractory_stone",
+    "field": "sourceNote",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "ashen.living_vein_bud",
+    "field": "sourceNote",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "ashen.upwind_salt",
+    "field": "sourceNote",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "ashen.refracted_glassheart",
+    "field": "sourceNote",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "ashen.undying_ember",
+    "field": "sourceNote",
+    "before": "仅列出的产地可刷",
+    "after": "可在所列产地反复获取"
+  },
+  {
+    "id": "ashen.infinity_gem_ashen",
+    "field": "hiddenUsage",
+    "before": "无限手套隐藏配方的烬裔宝石；具体配方后续确定。",
+    "after": "无限手套隐藏配方的烬裔宝石。"
+  },
+  {
+    "id": "ashen.infinity_gem_ashen",
+    "field": "sourceNote",
+    "before": "本族全区；高区概率更高；同区野外＜普通＜首领；同种最多1颗、丢失可重刷；合成后政策待定",
+    "after": "本族全区；高区概率更高；同区野外＜普通＜首领；同种最多1颗、丢失可重刷"
+  },
+  {
+    "id": "ashen.silent_crystal",
+    "field": "hiddenUsage",
+    "before": "归途之环隐藏配方材料；获取配方前不展示此用途。",
+    "after": "归途之环隐藏配方材料。"
+  },
+  {
+    "id": "ashen.silent_crystal",
+    "field": "sourceNote",
+    "before": "中期第5区剧情占位（第4–6区内可调整）；一次性，可永久错过",
+    "after": "鸣晶断层的砾露事件奖励；仅可领取一次。"
+  },
+  {
+    "id": "goblin.infinity_gem_goblin",
+    "field": "use",
+    "before": "无限手套隐藏配方的裂穴诸部宝石；具体配方后续确定。",
+    "after": "无限手套隐藏配方的裂穴诸部宝石。"
+  },
+  {
+    "id": "goblin.return_token_goblin",
+    "field": "use",
+    "before": "归途之环隐藏配方材料；获取配方前不展示此用途。",
+    "after": "归途之环隐藏配方材料。"
+  }
+]

@@ -3,12 +3,14 @@ import assert from 'node:assert/strict';
 import * as E from './dist/engine.js';
 import {SAVE_KEY,loadProgress} from './dist/storage.js';
 import {RETURN_RING_EVENTS,RETURN_RING_MATERIALS} from './dist/return-ring-content.js';
-import {beginNpcEvent,declineNpcEvent,npcEventReady,recordNpcEventVictory,validNpcEventState} from './dist/npc-events.js';
+import {beginNpcEvent as beginCurrentNpcEvent,declineNpcEvent,npcEventReady,recordNpcEventVictory,validNpcEventState} from './dist/npc-events.js';
 import {claimTaskReward} from './dist/task-reward-transaction.js';
 import {renderNpcEventBoard} from './dist/npc-event-ui.js';
 import {syncReturnRingRecipe,returnRingMaterialUsage,returnRingRecipeKnown,returnRingRareBonus} from './dist/return-ring-state.js';
 import {craftReturnRing,createReturnRingCraftService} from './dist/return-ring-crafting.js';
 const clone=structuredClone,now=Date.now(),storyFixtures=new Map();
+// Recreate the pre-update accepted ledger to retain historical contract coverage.
+function beginNpcEvent(s,id,now){const ok=beginCurrentNpcEvent(s,id,now);if(ok){delete s.npcObjectiveProgress.entries[id];s.npcEvents.entries[id].lastEncounterId=null;}return ok;}
 function storyFixture(race){if(!storyFixtures.has(race))storyFixtures.set(race,completeStory(race));return clone(storyFixtures.get(race));}
 function storage(game){let raw=JSON.stringify(game);return {fail:false,writes:0,get length(){return 1},key:()=>SAVE_KEY,getItem:k=>k===SAVE_KEY?raw:null,setItem(k,v){if(this.fail)throw Error('quota');assert.equal(k,SAVE_KEY);this.writes++;raw=v},removeItem(){}};}
 function at(def){const s=storyFixture(def.race);E.normalizeHealth(s,now);E.normalizeAreaProgress(s);E.normalizeExpedition(s);s.areaProgress[def.race]={unlocked:[1,2,3,4,5,6],cleared:[1,2,3,4,5]};s.siteId=def.areaId;s.location=E.AREAS[def.areaId].number-1;s.expedition.fieldId=def.areaId+'.field';assert(E.validSave(s));return s;}

@@ -11,9 +11,7 @@ export const materials = {
     "tags": [
       "菌植"
     ],
-    "functionalTags": [
-      "recoveryBase"
-    ],
+    "functionalTags": ["recoveryBase","luckBase","luckAux"],
     "sources": [
       "goblin.a01.field",
       "goblin.a02.field",
@@ -502,7 +500,7 @@ export const materials = {
     "id": "goblin.infinity_gem_goblin",
     "name": "诡影紫石",
     "description": "紫色石心中浮着错位的轮廓，换一个角度看又像空无一物。",
-    "use": "无限手套隐藏配方的裂穴诸部宝石；具体配方后续确定。",
+    "use": "无限手套隐藏配方的裂穴诸部宝石。",
     "rarity": "珍奇",
     "kind": "宝石",
     "category": "特殊",
@@ -546,7 +544,7 @@ export const materials = {
     "id": "goblin.return_token_goblin",
     "name": "打结的铜丝",
     "description": "几段粗细不同的旧铜丝被仔细打结，边缘已磨得圆滑。",
-    "use": "归途之环隐藏配方材料；获取配方前不展示此用途。",
+    "use": "归途之环隐藏配方材料。",
     "rarity": "珍奇",
     "kind": "旧物",
     "category": "特殊",

@@ -1,4 +1,4 @@
-# 长路未尽 · v0.77 便携容器
+# 长路未尽 · v0.78 便携容器
 
 离线便携包包含同一份冻结游戏发布的 **Linux amd64（Intel/AMD）与 arm64（ARM64）** 镜像。不需要 Node.js、不需要构建游戏、不需要拉取基础镜像，也不需要登录镜像仓库；下述私有 Docker Hub 方式则需要仓库拉取权限和登录。包内有可 `docker load` 的镜像、Compose、预编译服务器、完整静态站点和离线 Docker 重建上下文。
 
@@ -6,23 +6,23 @@
 
 ## 1. 推荐：从私有 Docker Hub 拉取
 
-目标镜像：**`saka6/endlessstory:v0.77`**，计划提供 Linux amd64 与 arm64，由 Docker 按服务端架构选择。
+目标镜像：**`saka6/endlessstory:v0.78`**，计划提供 Linux amd64 与 arm64，由 Docker 按服务端架构选择。
 
-**发布状态：待推送及核验，尚不能凭本文件认定 v0.77 已发布。** 以下是正式发布后使用的命令；实际可用状态与精确 registry digest 以最终交付说明为准。不要用旧 `v0.76` 或 `latest` 冒充新版；发布新版不覆盖这两个 tag。
+**发布状态：待推送及核验，尚不能凭本文件认定 v0.78 已发布。** 以下是正式发布后使用的命令；实际可用状态与精确 registry digest 以最终交付说明为准。不要用旧 `v0.76`、`v0.77` 或 `latest` 冒充新版；发布新版不覆盖这些 tag。
 
 目标机器需已有 Docker Engine / Docker Desktop 的 Linux containers，并有该私有仓库的拉取权限。在你自己的终端交互登录，密码/token 不要写入命令、Compose、镜像或发到聊天：
 
 ```sh
 docker login
-docker pull saka6/endlessstory:v0.77
-docker image inspect saka6/endlessstory:v0.77 --format '{{json .RepoDigests}}'
+docker pull saka6/endlessstory:v0.78
+docker image inspect saka6/endlessstory:v0.78 --format '{{json .RepoDigests}}'
 # 保存返回的 registry digest；生产环境可改用最终交付的 saka6/endlessstory@sha256:<digest> 固定内容。
-docker run -d --name changlu-weijin-v077 --restart unless-stopped \
+docker run -d --name changlu-weijin-v078 --restart unless-stopped \
   --pull never --user 65532:65532 --read-only --cap-drop ALL \
   --security-opt no-new-privileges:true --pids-limit 64 --memory 256m \
   --stop-timeout 15 --log-driver json-file --log-opt max-size=10m --log-opt max-file=3 \
-  -p 127.0.0.1:8080:8080 saka6/endlessstory:v0.77
-docker inspect --format '{{.State.Health.Status}}' changlu-weijin-v077
+  -p 127.0.0.1:8080:8080 saka6/endlessstory:v0.78
+docker inspect --format '{{.State.Health.Status}}' changlu-weijin-v078
 curl -fsS http://127.0.0.1:8080/healthz
 ```
 
@@ -30,7 +30,7 @@ healthcheck 启动期间可能显示 `starting`；待其成为 `healthy`，再�
 
 私有镜像仓库只限制**谁能拉取镜像**，不为运行后的游戏提供登录鉴权。域名、HTTPS、访问权限仍需自行配置，见第 2 节。
 
-已有本便携包时，也可在手动 `docker pull` 后，用 `CHANGLU_IMAGE=saka6/endlessstory:v0.77 docker compose up -d --pull never --wait --wait-timeout 90` 复用随附的安全配置；不要再运行会加载离线 tag 的 `start.sh`。本包的离线 `changlu-weijin:0.77-<release前12位>-amd64/arm64` 标签及 Docker/OCI 清单保持独立，不等同于已推送的 Hub digest。
+已有本便携包时，也可在手动 `docker pull` 后，用 `CHANGLU_IMAGE=saka6/endlessstory:v0.78 docker compose up -d --pull never --wait --wait-timeout 90` 复用随附的安全配置；不要再运行会加载离线 tag 的 `start.sh`。本包的离线 `changlu-weijin:0.78-<release前12位>-amd64/arm64` 标签及 Docker/OCI 清单保持独立，不等同于已推送的 Hub digest。
 
 命令依据：[Docker pull](https://docs.docker.com/reference/cli/docker/image/pull/)、[Docker run](https://docs.docker.com/reference/cli/docker/container/run/)、[Compose up](https://docs.docker.com/reference/cli/docker/compose/up/)。
 
@@ -39,7 +39,7 @@ healthcheck 启动期间可能显示 `starting`；待其成为 `healthy`，再�
 目标机器需已有 Docker Engine（或 Docker Desktop 的 Linux containers）和支持 `--wait` 的 Docker Compose v2。先核对外层归档旁的 SHA256，再解压：
 
 ```sh
-tar -xzf changlu-v0.77-*-portable.tar.gz
+tar -xzf changlu-v0.78-*-portable.tar.gz
 cd changlu-portable
 ./start.sh
 ```
@@ -77,7 +77,7 @@ ssh -L 8080:127.0.0.1:8080 your-user@your-server
 **存档保存在浏览器 localStorage，按协议、域名和端口隔离；不在镜像或服务器磁盘里。** 本包没有任何个人存档，也没有自动迁移、同步或清空行为。容器更新/重启本身不会搬走浏览器的存档。
 
 1. 在原站打开“设置”，用存档导出功能保存 JSON，保留原始备份。原站仍是 `https://starlit-grove-saka.blushball13.chatgpt.site`。
-2. 在新站确认运行相同版本（本包 v0.77；最好核对 `release-integrity.json` 的 release），打开“设置”，手动导入备份 JSON。
+2. 在新站确认运行相同版本（本包 v0.78；最好核对 `release-integrity.json` 的 release），打开“设置”，手动导入备份 JSON。
 3. 核对角色、装备、任务和进度后再继续游戏；不要为了迁移而清空旧站存档。
 
 HTTP→HTTPS、换域名、换端口、换浏览器/设备都可能成为另一个存档空间。不要把存档 JSON 放进 `site/`、镜像或公开下载目录。
@@ -89,7 +89,7 @@ sha256sum -c SHA256SUMS
 docker load -i changlu-images.tar.gz
 cat PACKAGE-INFO.json
 # 从其中选择与 Docker 服务端匹配的 amd64 或 arm64 tag：
-export CHANGLU_IMAGE=changlu-weijin:0.77-<release前12位>-amd64
+export CHANGLU_IMAGE=changlu-weijin:0.78-<release前12位>-amd64
 docker compose up -d --pull never --wait --wait-timeout 90
 ```
 
@@ -115,7 +115,7 @@ docker inspect --format '{{.State.Health.Status}}' changlu-weijin
 RELEASE=$(python3 -c 'import json; print(json.load(open("PACKAGE-INFO.json"))["release"])')
 SOURCE_COMMIT=$(python3 -c 'import json; print(json.load(open("PACKAGE-INFO.json"))["source_commit"])')
 docker build --platform linux/amd64 \
-  --build-arg GAME_VERSION=0.77 --build-arg GAME_RELEASE="$RELEASE" \
+  --build-arg GAME_VERSION=0.78 --build-arg GAME_RELEASE="$RELEASE" \
   --build-arg SOURCE_COMMIT="$SOURCE_COMMIT" \
   -t changlu-weijin:local-amd64 .
 # ARM64 改为 --platform linux/arm64 与对应 tag

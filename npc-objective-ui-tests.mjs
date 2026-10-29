@@ -4,14 +4,25 @@ import {NPC_EVENTS,npcEventDefinition,beginNpcEvent,npcEventObjectiveProgress,in
 import {renderNpcEventBoard,renderNpcTaskJournal,renderNpcAreaObjectives} from './dist/npc-event-ui.js';
 import {MONSTER_CATALOG} from './dist/monster-codex-schema.js';
 import {AREAS,INSTANCES} from './dist/location-schema.js';
-const now=Date.now(),defs=Object.values(NPC_EVENTS).filter(d=>d.objectiveVersion===2);
+const now=Date.now(),defs=Object.values(NPC_EVENTS).filter(d=>d.objectiveVersion===2&&!d.id.startsWith('npc.return-ring.'));
 assert.equal(defs.length,60,'all ordinary contracts have actionable offers');
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const occurrences=(html,text)=>html.split(esc(text)).length-1;
+const cardFor=(html,id)=>html.split(`data-npc-event-card="${id}"`)[1]?.split('</article>')[0]??'';
+function assertSingleCopy(html,def){
+ const card=cardFor(html,def.id);assert(card,def.id+' rendered card');
+ assert.equal(occurrences(card,def.taskDescription),1,def.id+' scene appears exactly once');
+ for(const line of def.taskDialogue)assert.equal(occurrences(card,line),1,def.id+' spoken request appears exactly once');
+ assert.equal((card.match(/class="npcTaskObjective"/g)??[]).length,1,def.id+' one structured target block');
+ assert.equal((card.match(/class="npcTaskReturn"/g)??[]).length,1,def.id+' one delivery destination');
+ assert(!def.taskDialogue.some(line=>line.includes(def.taskDescription)),def.id+' dialogue does not repeat narration');
+ if(def.taskObjective.description)assert(!card.includes(esc(def.taskObjective.description)),def.id+' instruction prose is not duplicated beside structured requirements');
+}
 function fixture(def){const s=E.fresh(def.race);E.normalizeHealth(s,now);E.normalizeAreaProgress(s);E.normalizeExpedition(s);for(const race of E.RACE_KEYS)s.areaProgress[race]={unlocked:Array.from({length:10},(_,i)=>i+1),cleared:Array.from({length:9},(_,i)=>i+1)};s.siteId=def.areaId;s.location=AREAS[def.areaId].number-1;s.expedition.fieldId=def.areaId+'.field';return s;}
 for(const original of defs){
  const s=fixture(original),def=npcEventDefinition(s,original.id),o=def.objective;
  const before=JSON.stringify(s),offer=renderNpcEventBoard(s,{race:def.race,areaId:def.areaId,now});
- assert.equal(JSON.stringify(s),before,'preview must not mutate '+def.id);
+ assert.equal(JSON.stringify(s),before,'preview must not mutate '+def.id);assertSingleCopy(offer,def);
  assert(offer.includes('data-task-kind="'+o.kind+'"'));
  assert(!offer.includes('data-npc-action="choose"'),'ordinary fresh offers never need choices');
  assert(offer.includes('完成报酬：')&&offer.includes('交付给 '+def.npcName));
@@ -19,7 +30,7 @@ for(const original of defs){
  if(o.kind==='kill'){for(const id of o.monsterIds)assert(offer.includes(esc(MONSTER_CATALOG[id].name)),def.id+' target name');for(const id of o.nodeIds)assert(offer.includes(esc(INSTANCES[id].name)),def.id+' target location');assert(offer.includes(o.count+' 只'));}
  if(o.kind==='collect'){const p=npcEventObjectiveProgress(s,def.id);for(const r of p.materials){const [id,q]=r.key.split('|');assert(offer.includes(esc(E.MATERIALS[id].name??id)));assert(offer.includes(E.RARITY[Number(q)]));assert(offer.includes(r.quantity+' 份'));for(const node of r.sourceNodeIds??[])assert(offer.includes(esc(INSTANCES[node].name)));}assert(offer.includes('更高品质不会替代'));}
  if(o.kind==='investigate'){assert.equal(new Set(o.checkpoints.map(p=>p.label)).size,o.checkpoints.length);for(const point of o.checkpoints){assert(offer.includes(esc(point.label)));assert(offer.includes(esc(AREAS[point.areaId].name)));}assert(!offer.includes('data-npc-action="investigate"'),'NPC dialogue is not a checkpoint action');}
- assert(beginNpcEvent(s,def.id,now));
+ assert(beginNpcEvent(s,def.id,now));assertSingleCopy(renderNpcEventBoard(s,{race:def.race,areaId:def.areaId,now}),def);
  const journalBefore=JSON.stringify(s),journal=renderNpcTaskJournal(s,{now});assert.equal(JSON.stringify(s),journalBefore);assert(journal.includes(def.title));assert(!journal.includes('data-npc-action="choose"'));
  // Every active task survives changing the viewed/current region in its global ledger.
  const remote=Object.values(AREAS).find(a=>a.race===def.race&&a.id!==def.areaId&&a.id.includes('.a'));
@@ -60,3 +71,15 @@ for(const point of nullChoiceDef.taskObjective.checkpoints)assert(!nullChoiceJou
 assert(nullChoiceJournal.includes('历史委托')&&nullChoiceJournal.includes('无物资报酬'),'legacy identity and original reward retained');
 assert.equal(JSON.stringify(nullChoiceReloaded),nullChoiceRaw,'history rendering never migrates the old contract');
 console.log('PASS 60 objective UI offers: real target/source names, exact-quality requirements, counts/rewards before accept, no fresh choice quiz, global away journal, disabled remote actions, distinct area evidence/once markers, render purity and legacy-next-cycle disclosure and null-choice historical completion.');
+
+// All historical repeatable contracts keep their old result. Their next-cycle
+// preview shares the scene already on the card, rather than narrating it twice.
+for(const def of defs.filter(d=>d.repeatable)){
+ const s=fixture(def);s.npcEvents={version:1,entries:{[def.id]:{status:'resolved',count:def.objective.count??0,cycle:0,readyAt:0,acceptedAt:now-1000,lastEncounterId:null,choiceId:def.choices[0].id}}};s.taskRewardClaims=[def.id+'.cycle-0'];
+ const html=renderNpcEventBoard(s,{race:def.race,areaId:def.areaId,now}),card=cardFor(html,def.id),renewal=card.split('class="npcTaskRenewal"')[1];assert(renewal,def.id+' renewal shown');
+ assert.equal(occurrences(card,def.taskDescription),1,def.id+' historical/renewal scene is not duplicated');
+ for(const line of def.taskDialogue)assert.equal(occurrences(renewal,line),1,def.id+' renewal retains spoken request');
+ assert.equal((renewal.match(/class="npcTaskObjective"/g)??[]).length,1,def.id+' renewal retains full target block');
+ assert(card.includes(esc(def.choices[0].outcome)),def.id+' old outcome retained');
+}
+console.log('PASS copy layout: all60 offered/active tasks show one scene, one spoken request and one complete target block; all20 legacy renewals retain outcomes without repeating the scene.');

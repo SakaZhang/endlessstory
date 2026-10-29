@@ -1,3 +1,4 @@
+import {beforeEquipmentCopy} from './racial-equipment-copy-test-fixture.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
@@ -31,8 +32,8 @@ assert(finishStoryScene(storyCoreSave,'C05.EA02.ashen'));const storyCores=storyC
 const added=[];
 for(const [race,pack] of Object.entries({goblin,ashen})){
  const old=baseline.races[race];
- for(const t of old.equipment)assert.deepEqual(pack.equipment.find(x=>x.id===t.id),t,`stable old identity ${t.id}`);
- for(const key of ['sets','legendaries',...(race==='ashen'?['coreVariants','weaponVariants']:[])])assert.deepEqual(pack[key],old[key],`${race} ${key} unchanged`);
+ for(const t of old.equipment)assert.deepEqual(beforeEquipmentCopy(pack.equipment.find(x=>x.id===t.id)),t,`stable old identity ${t.id}`);
+ for(const key of ['sets','legendaries',...(race==='ashen'?['coreVariants','weaponVariants']:[])])assert.deepEqual(beforeEquipmentCopy(pack[key]),old[key],`${race} ${key} unchanged`);
  const common=pack.equipment.filter(t=>t.kind==='scatter'&&t.slot!=='core');
  assert.equal(common.length,52);assert.equal(new Set(pack.equipment.map(t=>t.name)).size,pack.equipment.length,'unique old and new names');assert.equal(pack.equipment.filter(t=>t.kind==='set').length,12);
  assert.equal(pack.equipment.filter(t=>t.slot==='core').length,race==='ashen'?3:0);

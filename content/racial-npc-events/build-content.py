@@ -84,6 +84,14 @@ for n in NPCS:
     n['portraitId']=n['id']; n['portraitStatus']='独立像素肖像已注册；原始生成图与缩略图见npc-portrait-source-manifest.json；浏览器验收另记。'
 for e in EVENTS: e['areaName']=e.get('areaName') or area_names[e['areaId']]
 META=BASE['metadata'];META.update(contentId='racial-npc-events-v2',sourceCommit='ddfcc1993a38574a2631916519d94e861c674b9f',status='production candidate; not published',authorship='保留15名NPC与30件已上线事件，授权新增15名NPC与30件地方事件；30人均有独立像素肖像。',repeatableContract='20件可重复：10件真实普通材料消耗、10件接取后新胜利；每轮手动接取，成功后冷却300000ms；5件一次性探索须接受后真实节点进入。',ringPostingPolicy='归途临时驻点沿用同一NPC身份与肖像；五件归途事件独立于60件地方事务，不复制人物。',visualStatus='30张独立像素肖像，按当前地区惰性载入；图像失败复用有限自动重试与手动恢复。')
+# Copy changes are separate from the archived v1 contracts; never modify their mechanics.
+POLISH=json.loads((OUT/'narrative-polish.json').read_text())
+for e in EVENTS:
+    prose=POLISH[e['id']]
+    e['description']=prose['scene']+' '+e['description'].replace('补充玩家的基础配料。','补足行路所需。').replace('按玩家选择','按你的安排').replace('一次真实胜利','一次胜利').replace('，不自动投入高品质','')
+    e['completion']=[line.replace('已记录你的选择，这件地方事务已经办妥。','这件事已经办妥。').replace('已记录你的选择；与约定相符的交付和回报已经结清。','约定的交付和报酬已经结清。') for line in e['completion']]
+    for c in e['choices']:
+        c['outcome']=c['outcome'].replace('；后续问候承认玩家选择','，朵菈闭着眼摸了一遍，点头把灯挂回去').replace('；争执结束，不改玩家物资','，拿错料的人各自领回那袋，争执也停了').replace('，记录玩家偏重核对','，米蕾把两种袋子分到木架两侧')
 DATA={'metadata':META,'npcs':NPCS,'events':EVENTS}
 (OUT/'racial-npc-events.json').write_text(json.dumps(DATA,ensure_ascii=False,indent=2)+'\n')
 js='// Authored NPC content v2. Stable v1 identities and progress are preserved.\nconst freeze = x => { if (x && typeof x === "object" && !Object.isFrozen(x)) { for (const v of Object.values(x)) freeze(v); Object.freeze(x); } return x; };\n'

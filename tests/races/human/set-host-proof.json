@@ -6,14 +6,14 @@
       "count": 0,
       "skillId": "human.cut",
       "stats": {
-        "atk": 517,
-        "hp": 2040,
+        "atk": 530,
+        "hp": 1664,
         "shieldBonus": 0
       },
       "effect": {
         "sourceId": "human.cut",
         "type": "dot",
-        "amount": 56.87,
+        "amount": 58.3,
         "endAt": 7100,
         "source": {
           "kind": "skill",
@@ -30,14 +30,14 @@
       "count": 2,
       "skillId": "human.cut",
       "stats": {
-        "atk": 582,
-        "hp": 4062,
+        "atk": 514,
+        "hp": 4051,
         "shieldBonus": 0
       },
       "effect": {
         "sourceId": "human.cut",
         "type": "dot",
-        "amount": 76.824,
+        "amount": 67.848,
         "endAt": 7100,
         "source": {
           "kind": "skill",
@@ -54,14 +54,14 @@
       "count": 4,
       "skillId": "human.cut",
       "stats": {
-        "atk": 609,
-        "hp": 5664,
+        "atk": 641,
+        "hp": 5608,
         "shieldBonus": 0
       },
       "effect": {
         "sourceId": "human.cut",
         "type": "dot",
-        "amount": 80.38799999999999,
+        "amount": 84.61200000000001,
         "endAt": 9100,
         "source": {
           "kind": "skill",
@@ -78,8 +78,8 @@
       "count": 0,
       "skillId": "human.opening",
       "stats": {
-        "atk": 565,
-        "hp": 1995,
+        "atk": 501,
+        "hp": 1664,
         "shieldBonus": 0
       },
       "effect": {
@@ -98,8 +98,8 @@
       "count": 2,
       "skillId": "human.opening",
       "stats": {
-        "atk": 567,
-        "hp": 2974,
+        "atk": 543,
+        "hp": 2764,
         "shieldBonus": 0
       },
       "effect": {
@@ -118,8 +118,8 @@
       "count": 4,
       "skillId": "human.opening",
       "stats": {
-        "atk": 616,
-        "hp": 3795,
+        "atk": 609,
+        "hp": 4154,
         "shieldBonus": 0
       },
       "effect": {
@@ -138,14 +138,14 @@
       "count": 0,
       "skillId": "human.oath_guard",
       "stats": {
-        "atk": 541,
-        "hp": 1931,
+        "atk": 501,
+        "hp": 1664,
         "shieldBonus": 0
       },
       "effect": {
         "sourceId": "human.oath_guard",
         "type": "shield",
-        "amount": 405.51,
+        "amount": 349.44,
         "endAt": 7700,
         "source": {
           "kind": "skill",
@@ -159,14 +159,14 @@
       "count": 2,
       "skillId": "human.oath_guard",
       "stats": {
-        "atk": 548,
-        "hp": 3016,
+        "atk": 543,
+        "hp": 3173,
         "shieldBonus": 0
       },
       "effect": {
         "sourceId": "human.oath_guard",
         "type": "shield",
-        "amount": 760.032,
+        "amount": 799.5959999999999,
         "endAt": 7700,
         "source": {
           "kind": "skill",
@@ -180,14 +180,14 @@
       "count": 4,
       "skillId": "human.oath_guard",
       "stats": {
-        "atk": 639,
-        "hp": 3774,
+        "atk": 609,
+        "hp": 3625,
         "shieldBonus": 0
       },
       "effect": {
         "sourceId": "human.oath_guard",
         "type": "shield",
-        "amount": 951.0479999999999,
+        "amount": 913.5,
         "endAt": 7700,
         "source": {
           "kind": "skill",
@@ -201,14 +201,14 @@
       "count": 0,
       "skillId": "human.field_dressing",
       "stats": {
-        "atk": 537,
-        "hp": 1932,
+        "atk": 530,
+        "hp": 1664,
         "shieldBonus": 0
       },
       "effect": {
         "sourceId": "human.field_dressing",
         "type": "healOverTime",
-        "amount": 23.184,
+        "amount": 19.968,
         "endAt": 7100,
         "source": {
           "kind": "skill",
@@ -223,14 +223,14 @@
       "count": 2,
       "skillId": "human.field_dressing",
       "stats": {
-        "atk": 538,
-        "hp": 3027,
+        "atk": 514,
+        "hp": 2958,
         "shieldBonus": 0
       },
       "effect": {
         "sourceId": "human.field_dressing",
         "type": "healOverTime",
-        "amount": 36.324,
+        "amount": 35.496,
         "endAt": 7100,
         "source": {
           "kind": "skill",
@@ -245,14 +245,14 @@
       "count": 4,
       "skillId": "human.field_dressing",
       "stats": {
-        "atk": 596,
-        "hp": 3877,
+        "atk": 648,
+        "hp": 4114,
         "shieldBonus": 0
       },
       "effect": {
         "sourceId": "human.field_dressing",
         "type": "healOverTime",
-        "amount": 53.502599999999994,
+        "amount": 56.773199999999996,
         "endAt": 7100,
         "source": {
           "kind": "skill",

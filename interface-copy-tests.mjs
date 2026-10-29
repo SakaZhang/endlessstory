@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {idleActionQueueHint} from './dist/idle-action-ui.js';
+const app=readFileSync(new URL('./dist/app.js',import.meta.url),'utf8');
+const fusion=app.split('<details class="fusionRules">')[1].split('</details>')[0];
+assert(!fusion.includes('RAW'));
+assert(!fusion.includes('当前已开放矮人第1–6区域'));
+for(const warning of ['选中的装备和材料会被消耗','品质可能升高、持平或降低','传说本身会消耗','成品强化从 +0 开始','领取前不能再次融合'])assert(fusion.includes(warning),warning);
+const help=app.split("$('helpBtn').onclick=")[1].split("$('settingsBtn').onclick=")[0];
+for(const fact of ['每升一级获得1技能点','投入会被消耗','品质可能升降','本场或本轮副本结束后办理，再继续远征','战败后休息5分钟','最多结算4小时收益','导出备份'])assert(help.includes(fact),fact);
+assert(!app.includes('先结束当前远征再切换方案。'));
+assert(app.includes('费用与祭品均不退还'));
+assert(app.includes('没有自动备份或云同步'));
+assert.match(idleActionQueueHint({running:true},true),/本场结束后自动执行/);
+assert.match(idleActionQueueHint({running:true,dungeonRun:{}},true),/本轮副本结束后自动执行/);
+assert.equal(idleActionQueueHint({running:false},true),'');
+console.log('PASS interface copy: plain-language rules, irreversible costs, quality risk, safe idle boundary and save warnings retained.');

@@ -1,3 +1,4 @@
+import {beforeEarlyLuckTags,beforeMaterialCopy} from './racial-material-copy-test-fixture.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
@@ -16,7 +17,7 @@ const context=p=>[{instanceId:p.nodeId,contentVersion:'dwarf-m2-v1'},{definition
 const gemOf=p=>p.channels.find(c=>c.channel==='gem');
 const options={rollQuality:()=>0,owned:(s,id)=>!!s[id],receive:(s,row)=>{s[row.materialId]=(s[row.materialId]??0)+1;return true;},luck:0};
 let total=0;const summary=[];
-assert.equal(sha(WORLD_MATERIALS),baseline.materialsSha256,'all original material identities, source whitelists, quality ranges and uniqueness unchanged');
+assert.equal(sha(beforeMaterialCopy(beforeEarlyLuckTags(WORLD_MATERIALS))),baseline.materialsSha256,'all original material identities, source whitelists, quality ranges and uniqueness unchanged');
 for(const [race,pools] of races){
  const old=baseline.races[race],rest=structuredClone(pools),counts={race,field:0,dungeon:0,boss:0};
  assert.equal(Object.keys(pools).length,old.gemChannels.length);

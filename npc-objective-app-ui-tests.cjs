@@ -26,6 +26,16 @@ const click=(dataset={},id='')=>{const b={dataset,id};for(const fn of events.cli
  const claim=id=>click({npcAction:'claim',npcEvent:id});
  const checkpoints=d=>objective(d).checkpoints;
 
+ // Regression from browser QA: the two opening Dwarf errands must not render
+ // the scene or spoken request twice beside their structured target section.
+ const opening=defs.find(d=>d.id==='local.dwarf.lamp_labels');await boot(base(opening),'copy-once');
+ for(const id of ['local.dwarf.lamp_labels','local.dwarf.strap_repair']){
+  const d=defs.find(d=>d.id===id),card=html().split(`data-npc-event-card="${id}"`)[1]?.split('</article>')[0];assert(card);
+  assert.equal(card.split(d.taskDescription).length-1,1,id+' actual App scene once');
+  for(const line of d.taskDialogue)assert.equal(card.split(line).length-1,1,id+' actual App request once');
+  assert.equal((card.match(/class="npcTaskObjective"/g)??[]).length,1,id+' actual App target once');
+  assert(card.includes('完成报酬')&&card.includes('交付给'),id+' reward and delivery retained');
+ }
  // Investigation has distinct registered physical evidence points, never a
  // response quiz. Viewing another map is not arrival or evidence collection.
  const research=task('investigate',(d,o)=>o.checkpoints.some(p=>p.areaId!==d.areaId));

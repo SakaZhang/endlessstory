@@ -1,3 +1,4 @@
+import {assertOriginalStoryContracts} from './story-copy-contract-test-helper.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
@@ -16,7 +17,7 @@ import {STORY_SCENES} from './dist/story-event-registry.js';
 import {territoryAccess} from './dist/war-diplomacy.js';
 const sha=x=>createHash('sha256').update(x).digest('hex');
 const baseline=JSON.parse(fs.readFileSync('fixtures/chik-family/v067-scene-hashes.json'));
-for(const [id,hash]of Object.entries(baseline.sceneHashes))assert.equal(sha(JSON.stringify(STORY_SCENES[id])),hash);
+assertOriginalStoryContracts(STORY_SCENES);
 assert.equal(RACIAL_NPCS.length,30);assert.equal(RACIAL_NPC_EVENTS.length,60);assert.equal(CHIK_FAMILY_EVENTS.length,6);assert.equal(Object.keys(CHIK_FAMILY_CHARACTERS).length,3);assert.equal(RETURN_RING_EVENTS.length,5);assert.equal(Object.keys(NPC_EVENTS).length,71);
 const baseSaves=new Map(CHIK_FAMILY_EVENTS.map(d=>[d.areaId,reachStoryScene('goblin',d.conditions.requiredStorySceneIds[0],{finishTarget:true})]));
 const fixture=d=>structuredClone(baseSaves.get(d.areaId));

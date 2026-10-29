@@ -66,7 +66,7 @@ for(const e of events){
  const row=actual[e.id],o=row.taskObjective;
  check(row.objectiveVersion===2,e.id+' versioned new-accept contract');
  for(const key of ['objective','choices','rewards'])check(JSON.stringify(runtime[e.id][key])===JSON.stringify(e[key]),e.id+' untouched legacy '+key);
- check(row.taskDescription&&row.taskDialogue.length>=2&&row.taskCompletion.length>=1,e.id+' full action instructions and authored turn-in');
+ check(row.taskDescription&&row.taskDialogue.length>=1&&row.taskCompletion.length>=1,e.id+' separate scene, spoken request and authored turn-in');
  check(!row.taskDialogue.some(s=>/先选|还是|二选一/.test(s)),e.id+' no disguised choice in new task instructions');
  if(o.kind==='kill'){
   check(o.count===3&&o.monsterIds.length===2,e.id+' actual counted target units');

@@ -10,8 +10,10 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "C01.D01.dwarf",
   "siteId": "dwarf.a01",
   "intro": [
+   "空车才推过半截，轮缘就擦出一声尖响。杜铎用靴尖抵住车轮，把工人招到轨道外侧。",
    "杜铎：撑木换过了，旧轨还在侧移。",
-   "布洛克：先把空车推回线内。停不停，得看它压在哪里。"
+   "布洛克：先把空车推回线内。停不停，得看它压在哪里。",
+   "杜铎：上头只看见车停了。你得让他们看见，不停会怎样。"
   ],
   "choices": [
    {
@@ -41,7 +43,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "布洛克把试载记录交给杜铎。"
      }
     ],
-    "outcome": "矿班遇到争执会先请布洛克说明；停工责任不转嫁给工人。",
+    "outcome": "布洛克把停工缘由讲给接班者听。下次轨道再响，矿工可以先停车，再来找他。",
     "lateActions": [
      {
       "prompt": "旧轨如今仍在使用，重新检查上次修护留下的受力记号。",
@@ -52,10 +54,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "卸下松动枕木，按现有载荷重垫并空车试载。 已完成并记录当前状态。"
+      "result": "松动的枕木换稳了，空车来回走过一趟，轮缘没有再向外挪。"
      },
      {
-      "prompt": "接续所选方案：我来说明停工的原因",
+      "prompt": "接班者看不懂新添的侧移记号，布洛克得当面教他辨认。",
       "options": [
        {
         "id": "handover-current",
@@ -63,7 +65,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "由布洛克向接班者演示如何读侧移记号。 本次交接已记录。"
+      "result": "布洛克指着侧移记号演示了一遍，接班者蹲下来，又自己认了一次。"
      }
     ]
    },
@@ -94,7 +96,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "矿班练习了自己的检查与停工程序。"
      }
     ],
-    "outcome": "愿意发问的矿工今后直接报告异常；不要求所有人出面。",
+    "outcome": "矿工们各自认下了要留意的裂口。谁发现异常，谁就能叫停这一班。",
     "lateActions": [
      {
       "prompt": "旧轨如今仍在使用，重新检查上次修护留下的受力记号。",
@@ -105,10 +107,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "卸下松动枕木，按现有载荷重垫并空车试载。 已完成并记录当前状态。"
+      "result": "松动的枕木换稳了，空车来回走过一趟，轮缘没有再向外挪。"
      },
      {
-      "prompt": "接续所选方案：让这一班说出亲眼见到的问题",
+      "prompt": "新裂口已经找出，矿班还需要试一次叫停和复查。",
       "options": [
        {
         "id": "handover-current",
@@ -116,7 +118,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "请矿班当场标出新裂口，演练自行停工。 本次交接已记录。"
+      "result": "矿班标出了新裂口，试着按约定叫停空车，入口很快传回应声。"
      }
     ]
    }
@@ -134,8 +136,10 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "C05.O01.dwarf",
   "siteId": "dwarf.a04",
   "intro": [
+   "卸料口的尘土上压着一道新辙，旁边却堆着没有拆封的空绑绳。夜班的灯还亮着，车夫已经开始收工具。",
    "运务书记：旧卸料口换了车轮，矿班却说收不到撑木。",
-   "布洛克：先查这趟车，不替不知道的事下结论。"
+   "布洛克：先查这趟车，不替不知道的事下结论。",
+   "运务书记：账上写的是送进矿里。可这条岔道，根本不往矿班去。"
   ],
   "choices": [
    {
@@ -165,7 +169,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "后门位置被记下；交接包的封记可核对。"
      }
     ],
-    "outcome": "保留隐蔽回访入口；包内只有改道标记与清单，没有完整军资链。",
+    "outcome": "检修沟的入口被记了下来。交接包里有改道标记和货单，钱款的去向还得往下查。",
     "lateActions": [
      {
       "prompt": "夜车早已离开，旧卸料口尚有可核对的转运痕迹。",
@@ -176,10 +180,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "比对遗留车轮磨痕与封记，找到现存交接包存放处。 已完成并记录当前状态。"
+      "result": "车轮磨痕对上了旧封记，交接包的存放处也找到了。"
      },
      {
-      "prompt": "接续所选方案：熄信号灯，从检修沟绕入",
+      "prompt": "交接包的位置找到了，记录者需要一条能安全进去查验的路。",
       "options": [
        {
         "id": "handover-current",
@@ -187,7 +191,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "从维护沟复查后门，给记录者留下仅限查验的通路。 本次交接已记录。"
+      "result": "维护沟的后门仍能通行。记录者收下路图，记清了查验时的入口。"
      }
     ]
    },
@@ -218,7 +222,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "车夫只确认亲见的装车与改道。"
      }
     ],
-    "outcome": "后门被封，留下有来源的车夫说明；最初袭击者仍未知。",
+    "outcome": "卸料口的后门封住了，车夫留下装车经过。至于最初是谁动的手，他也没看见。",
     "lateActions": [
      {
       "prompt": "夜车早已离开，旧卸料口尚有可核对的转运痕迹。",
@@ -229,10 +233,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "比对遗留车轮磨痕与封记，找到现存交接包存放处。 已完成并记录当前状态。"
+      "result": "车轮磨痕对上了旧封记，交接包的存放处也找到了。"
      },
      {
-      "prompt": "接续所选方案：落挡车器，在卸料口拦车",
+      "prompt": "旧留底还有几处说不清，找到当班车夫，听他亲口核对。",
       "options": [
        {
         "id": "handover-current",
@@ -240,7 +244,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "找到当班车夫，自愿核对旧留底与本人可公开的目击范围。 本次交接已记录。"
+      "result": "当班车夫对过旧留底，把愿意公开的目击经过说给记录者听。"
      }
     ]
    }
@@ -258,8 +262,10 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "C06.D03.dwarf",
   "siteId": "dwarf.a05",
   "intro": [
+   "半截车架卡在便道上方，绳皮每受一次力就落下细屑。卷绳工靠着岩壁喘气，目光却还追着车底的封签。",
    "杜铎：爆后的便道还悬着一辆车。先看锚点。",
-   "布洛克：人和封签分开算；不能为纸把人留在下面。"
+   "布洛克：人和封签分开算；不能为纸把人留在下面。",
+   "杜铎：别伸手够了。先抓住绳子，剩下的我们来想。"
   ],
   "choices": [
    {
@@ -289,10 +295,10 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "本人同意范围内的路线说明已收好。"
      }
     ],
-    "outcome": "保留证人路线；不因辅助封签缺失而丢掉主线必要证据。",
+    "outcome": "伤者到了安全处，愿意说出自己见过的运输路线。没取回的封签，还能循其他账目追查。",
     "lateActions": [
      {
-      "prompt": "卷绳工已经安全，不让他重新困在悬车上。如今检查爆后便道的遗留危险。",
+      "prompt": "卷绳工已经脱险，爆后的便道却还悬着松脱的车件。先清掉这些隐患。",
       "options": [
        {
         "id": "inspect-current",
@@ -300,10 +306,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "用独立岩柱固定检查绳，卸下悬在便道上的松脱旧车件。 已完成并记录当前状态。"
+      "result": "检查绳牢牢系在岩柱上，悬在便道上方的旧车件逐一卸了下来。"
      },
      {
-      "prompt": "接续所选方案：先保住伤者与可走的路",
+      "prompt": "卷绳工在安全处歇下了。趁他愿意说话，把见过的运输路线问清。",
       "options": [
        {
         "id": "handover-current",
@@ -311,7 +317,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "请安全处的卷绳工在路图标出亲见的运药段，登记其愿意公开的部分。 本次交接已记录。"
+      "result": "卷绳工在路图上画出见过的运药段，并圈出了可以公开的部分。"
      }
     ]
    },
@@ -342,10 +348,10 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "封签作为辅助物证封存，不替代其他证词。"
      }
     ],
-    "outcome": "保留封签核验路线；不凭一张封签提前证明军资链。",
+    "outcome": "封签残片收进了证物袋。它能对上一趟转运，却还解释不了整笔军资的去向。",
     "lateActions": [
      {
-      "prompt": "卷绳工已经安全，不让他重新困在悬车上。如今检查爆后便道的遗留危险。",
+      "prompt": "卷绳工已经脱险，爆后的便道却还悬着松脱的车件。先清掉这些隐患。",
       "options": [
        {
         "id": "inspect-current",
@@ -353,10 +359,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "用独立岩柱固定检查绳，卸下悬在便道上的松脱旧车件。 已完成并记录当前状态。"
+      "result": "检查绳牢牢系在岩柱上，悬在便道上方的旧车件逐一卸了下来。"
      },
      {
-      "prompt": "接续所选方案：与杜铎合作固定车架",
+      "prompt": "封签残片已收好，杜铎拿来了调拨副本，正等着逐项比对。",
       "options": [
        {
         "id": "handover-current",
@@ -364,13 +370,13 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "与杜铎核对存放的封签残片和调拨副本，把缺项留给记录者。 本次交接已记录。"
+      "result": "杜铎把封签残片摆在调拨副本旁，记录者接过尚缺的几项线索。"
      }
     ]
    }
   ],
   "combat": true,
-  "lateIntro": "卷绳工已经安全，不让他重新困在悬车上。如今检查爆后便道的遗留危险。"
+  "lateIntro": "卷绳工已经脱险，爆后的便道却还悬着松脱的车件。先清掉这些隐患。"
  },
  {
   "id": "personal.dwarf.coup.04",
@@ -382,8 +388,10 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "C07.O01.dwarf",
   "siteId": "dwarf.a05",
   "intro": [
-   "杜铎：主线转移的人已经到安全点。现在核实每一段接应，别叫他们再走一遍。",
-   "布洛克：不只数车，让人自己应一声。"
+   "接应表被折得发软，几处只写了“已到”，没留下人名。旁边有人举着空水壶，问下一队该往哪边送。",
+   "杜铎：撤下来的都到了安全点。再对一遍名单，看看哪段接应还缺回信。",
+   "布洛克：不只数车，让人自己应一声。",
+   "杜铎：宽路能抬担架，窄路能避巡灯。两边的值守不能只靠猜。"
   ],
   "choices": [
    {
@@ -399,7 +407,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "抵达者逐一确认，没有用车辆代替人数。"
+      "result": "抵达的人逐一应声，接应表补齐了名字。"
      },
      {
       "prompt": "宽路下一趟怎么接？",
@@ -413,10 +421,10 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "担架接应表交给愿意值守的人。"
      }
     ],
-    "outcome": "宽路的担架接应方法可继续使用；只消费已经完成的C07主线护送，不重打、不重发战利品。",
+    "outcome": "值守者收下担架接应表，在转角处留出位置，等下一批需要照护的人。",
     "lateActions": [
      {
-      "prompt": "撤离者已经抵达，旧护送不再重打一场。核对实际到达的交接记录。",
+      "prompt": "撤离者已经抵达，接应点的记录却还没对齐。有人来问下一趟该在哪里等。",
       "options": [
        {
         "id": "inspect-current",
@@ -424,10 +432,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "逐人核对安全点应答与担架、步行者的到达记录。 已完成并记录当前状态。"
+      "result": "安全点的人逐个应了声，担架与步行者的到达记录终于对齐。"
      },
      {
-      "prompt": "接续所选方案：核实宽路担架接应",
+      "prompt": "名单对齐了，下一班还要抬担架经过转角。把接应位置交代给值守者。",
       "options": [
        {
         "id": "handover-current",
@@ -435,7 +443,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "实地复查担架转角，把当前宽路接应表交给值守者。 本次交接已记录。"
+      "result": "担架转角查过了，值守者接过接应表，认下下一趟该站的位置。"
      }
     ]
    },
@@ -463,13 +471,13 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "受保护身份不进入公开说明。"
+      "result": "公开的路条只留接应位置，姓名另交值守者收好。"
      }
     ],
-    "outcome": "保存隐蔽步行路，重车不能走；已安全的人不重复受险。",
+    "outcome": "窄道的接应点重新对上了信号，入口挂起禁行重车的牌子。",
     "lateActions": [
      {
-      "prompt": "撤离者已经抵达，旧护送不再重打一场。核对实际到达的交接记录。",
+      "prompt": "撤离者已经抵达，接应点的记录却还没对齐。有人来问下一趟该在哪里等。",
       "options": [
        {
         "id": "inspect-current",
@@ -477,10 +485,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "逐人核对安全点应答与担架、步行者的到达记录。 已完成并记录当前状态。"
+      "result": "安全点的人逐个应了声，担架与步行者的到达记录终于对齐。"
      },
      {
-      "prompt": "接续所选方案：核实窄道的隐蔽步行接应",
+      "prompt": "步行队伍还会经过窄道，先确认遮光支架和两处接应点仍能用。",
       "options": [
        {
         "id": "handover-current",
@@ -488,13 +496,13 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "检查遮光支架与两处步行接应点，修正禁止重车的标记。 本次交接已记录。"
+      "result": "遮光支架修稳了，两处接应点重新对上信号，重车禁行牌也挂回入口。"
      }
     ]
    }
   ],
   "combat": false,
-  "lateIntro": "撤离者已经抵达，旧护送不再重打一场。核对实际到达的交接记录。"
+  "lateIntro": "撤离者已经抵达，接应点的记录却还没对齐。有人来问下一趟该在哪里等。"
  },
  {
   "id": "personal.dwarf.coup.05",
@@ -506,8 +514,10 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "C07.O01.dwarf",
   "siteId": "dwarf.a05",
   "intro": [
+   "矿仓门边还有被车轮压碎的木屑。矿工等着补撑木，记录者却说，头车带走的纸匣可能就有这一批货的账。",
    "杜铎：矿仓还缺一份交接。纸匣和撑木，得分清先保哪项。",
-   "布洛克：没留下的也记清，后面继续找。"
+   "布洛克：没留下的也记清，后面继续找。",
+   "杜铎：两边都缺人。先赶哪一边，你给个话，我把另一边稳住。"
   ],
   "choices": [
    {
@@ -537,10 +547,10 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "取得一段局部支出记录，缺页仍待追索。"
      }
     ],
-    "outcome": "纸匣线索优先，矿班先加固最危险处；完整合证仍须C10。",
+    "outcome": "纸匣的去向有了线索。矿班先用手头的撑木顶住险处，等缺失的账页送来核对。",
     "lateActions": [
      {
-      "prompt": "原车队不再停在矿仓。当前仍要整理缺料与可追索的账页，不倒放截车。",
+      "prompt": "车队早已离开矿仓，交接箱还在。缺了多少撑木，账页流向哪里，都得从这里接着查。",
       "options": [
        {
         "id": "inspect-current",
@@ -548,10 +558,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "打开仓房的现存交接箱，按封记将支出副页和撑木缺额分开。 已完成并记录当前状态。"
+      "result": "交接箱打开了，支出副页放在一边，欠缺的撑木另列一张单。"
      },
      {
-      "prompt": "接续所选方案：优先核实头车的纸匣线索",
+      "prompt": "交接箱里留下纸匣的索引，沿着它找找尚存的账页。",
       "options": [
        {
         "id": "handover-current",
@@ -559,7 +569,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "循纸匣索引查到现存账页，带回出处与仍缺原件的名单。 本次交接已记录。"
+      "result": "纸匣索引指向的账页找到了，原件仍缺的几项连同出处一并带回。"
      }
     ]
    },
@@ -590,10 +600,10 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "副页交给记录者，原件继续追索。"
      }
     ],
-    "outcome": "安置处较早补稳支撑，原账由主线后续合证；矿班物资不变玩家战利品。",
+    "outcome": "撑木送到了安置处，摇晃的支点终于稳住。布洛克把账页线索交给记录者，继续追查原账。",
     "lateActions": [
      {
-      "prompt": "原车队不再停在矿仓。当前仍要整理缺料与可追索的账页，不倒放截车。",
+      "prompt": "车队早已离开矿仓，交接箱还在。缺了多少撑木，账页流向哪里，都得从这里接着查。",
       "options": [
        {
         "id": "inspect-current",
@@ -601,10 +611,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "打开仓房的现存交接箱，按封记将支出副页和撑木缺额分开。 已完成并记录当前状态。"
+      "result": "交接箱打开了，支出副页放在一边，欠缺的撑木另列一张单。"
      },
      {
-      "prompt": "接续所选方案：先守物资交接，让矿班取撑木",
+      "prompt": "撑木已经追回一批，矿班在薄弱支点等人搭手搬运。",
       "options": [
        {
         "id": "handover-current",
@@ -612,13 +622,13 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "帮助矿班把已追回撑木运到现存薄弱支点，再交出缺料与副页索引。 本次交接已记录。"
+      "result": "追回的撑木顶住了薄弱支点，剩下的缺料单和账页索引交到记录者手里。"
      }
     ]
    }
   ],
   "combat": true,
-  "lateIntro": "原车队不再停在矿仓。当前仍要整理缺料与可追索的账页，不倒放截车。"
+  "lateIntro": "车队早已离开矿仓，交接箱还在。缺了多少撑木，账页流向哪里，都得从这里接着查。"
  },
  {
   "id": "personal.dwarf.coup.06",
@@ -630,8 +640,10 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "flag:D_RELIC_SALE_COUP_PROVEN",
   "siteId": "dwarf.a05",
   "intro": [
-   "记录者：运输留底与支出账已经接上，完整证明来自这次主线合证。",
-   "杜铎：我想问，知道下面有人，为什么不等？"
+   "记录者把两页纸压在同一盏灯下，沿着日期划出一条线。杜铎盯了很久，手里的旧班牌被握得发热。",
+   "记录者：运输留底和支出账对上了。钱到了谁手里，现在能顺着这几页查清。",
+   "杜铎：我想问，知道下面有人，为什么不等？",
+   "布洛克：你想当面问，我就陪你去。不想去的人，把话留给我也行。"
   ],
   "choices": [
    {
@@ -661,7 +673,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "矿班自愿提出的问题逐项保留。"
      }
     ],
-    "outcome": "对质由杜铎先问，布洛克补充来源；不以出席人数换奖励。"
+    "outcome": "杜铎把问题问了出来，布洛克在一旁递上出处。留下修护的人也会收到这次答复。"
    },
    {
     "id": "brock-reports",
@@ -690,7 +702,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "回报表保留没有答案的位置。"
      }
     ],
-    "outcome": "布洛克带问题出席并负责逐项带回答复；杜铎留守修护。"
+    "outcome": "布洛克带走矿班的问题，约好逐项带回答复。杜铎留在矿里，把未修完的支点接着补好。"
    }
   ],
   "combat": false
@@ -705,9 +717,11 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "flag:MAIN_STORY_CLEAR",
   "siteId": "dwarf.a05",
   "intro": [
+   "物资清单摆上桌时，一角还压着要求撤回证词的附页。门外等着的矿车没有卸货，矿工也没有散。",
    "记录者安排了临时对质，不是宣判。维尔铎仍带着随从。",
    "维尔铎：门关了，矿还得开。下一车补给，你们要不要？",
-   "布洛克：物资是矿班的，不能拿来换他们闭嘴。"
+   "布洛克：物资是矿班的，不能拿来换他们闭嘴。",
+   "杜铎：少了多少，我们记得。还回来多少，也会一件件数。"
   ],
   "choices": [
    {
@@ -737,7 +751,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "矿班看见原话与尚未回答的问题。"
      }
     ],
-    "outcome": "可先修缺料部分，事实核验通路仍在；未宣判、未逮捕、未换王。"
+    "outcome": "归还的物资先送去修护，证词和缺额单仍留在桌上。维尔铎还欠矿班一个交代。"
    },
    {
     "id": "joint-handover",
@@ -766,7 +780,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "矿班可以自行追问未还部分。"
      }
     ],
-    "outcome": "修护等待本次点交完成，范围更可追索；政权与刑罚不在此定案。"
+    "outcome": "双方点清了这一车物资。缺额写在交接单旁，车轮终于朝矿班的方向转动。"
    }
   ],
   "combat": false
@@ -781,9 +795,11 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "flag:MAIN_STORY_CLEAR",
   "siteId": "dwarf.a05",
   "intro": [
+   "入口的碎石扫成一堆，两条路仍各缺一段修护。矿工把常走的位置圈在图上，留出中间的位置给后来的人补记。",
    "杜铎把班牌挂在入口。未归还的物资、没答的问题都还记着。",
    "矿工：先修运车口，还是后面的撤路？",
-   "布洛克：你们每天走，先说哪边。"
+   "布洛克：你们每天走，先说哪边。",
+   "杜铎：先修哪边都得留人照看另一边。班怎么排，咱们今天一起定。"
   ],
   "choices": [
    {
@@ -813,7 +829,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "矿班独立完成一轮检查。"
      }
     ],
-    "outcome": "主作业口更稳，杜铎接续备用撤路；案件尚未结束，矿班已有自己的判断程序。"
+    "outcome": "主作业口能稳稳走车了，杜铎接着查看备用撤路。未结的账还在，矿班也有了自己的停工规矩。"
    },
    {
     "id": "escape-route",
@@ -842,7 +858,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "矿班确认当前限制并自行排班。"
      }
     ],
-    "outcome": "备用撤路先通，主口保持慢运；布洛克不再替矿班包办每一次判断。"
+    "outcome": "备用撤路先通了，主口暂且慢运。矿工自己排好下一班，布洛克听完，只补了一处漏看的裂口。"
    }
   ],
   "combat": false
@@ -857,8 +873,10 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "C02.O01.human",
   "siteId": "human.a01",
   "intro": [
+   "粮袋靠着墙，袋口的旧封记还没拆。另一边，照护伤者的人已经来问过两次，今晚还能分多少。",
    "货主：少的那袋，我还得交账。",
-   "伤者需要粮，货物却不能一句话变成军需。罗什福尔摊开两份登记。"
+   "伤者需要粮，货物却不能一句话变成军需。罗什福尔摊开两份登记。",
+   "罗什福尔：先把是谁的、借多少说清。不能今天吃上了，明天又让两边为这袋粮吵起来。"
   ],
   "choices": [
    {
@@ -888,7 +906,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "另一份救济明确送到伤者手里。"
      }
     ],
-    "outcome": "货主可按原货单追索，伤者获得另有来源的救济。",
+    "outcome": "货主留着原货单，伤者领到了另筹的救济粮。两笔账分别写清，再不用争同一只粮袋。",
     "lateActions": [
      {
       "prompt": "原粮袋已经有去向。如今清理货主与接收者仍未对上的账目。",
@@ -899,10 +917,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "请双方核对当前袋数、已交数量与原始封记。 已完成并记录当前状态。"
+      "result": "粮袋数、已交数量和旧封记逐项对过，未对上的部分留在单旁。"
      },
      {
-      "prompt": "接续所选方案：按所有权封存，另接救济",
+      "prompt": "领粮数已核清，争议粮和另筹的救济该分别交给谁？",
       "options": [
        {
         "id": "handover-current",
@@ -910,7 +928,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "分出仍属货主的争议部分，向自愿救济方交出实际接收表。 本次交接已记录。"
+      "result": "争议粮另放一处，救济方收下了实际领粮的人数表。"
      }
     ]
    },
@@ -941,7 +959,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "双方各留一份借用记录。"
      }
     ],
-    "outcome": "货主以后按借用表催还，不能把伤者当免费奖励。",
+    "outcome": "双方各收好借粮单。伤者先有饭吃，货主也知道该向谁询问归还。",
     "lateActions": [
      {
       "prompt": "原粮袋已经有去向。如今清理货主与接收者仍未对上的账目。",
@@ -952,10 +970,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "请双方核对当前袋数、已交数量与原始封记。 已完成并记录当前状态。"
+      "result": "粮袋数、已交数量和旧封记逐项对过，未对上的部分留在单旁。"
      },
      {
-      "prompt": "接续所选方案：登记双方同意的临时借用",
+      "prompt": "借粮单上的数量对上了，尚未归还的部分还需要有人继续联络。",
       "options": [
        {
         "id": "handover-current",
@@ -963,7 +981,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "核对双方同意的借用数量，将尚未归还的部分交给追索联系人。 本次交接已记录。"
+      "result": "双方对清借用数量，追索联系人收下尚未归还的清单。"
      }
     ]
    }
@@ -981,8 +999,10 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "C04.HD01.human",
   "siteId": "human.a03",
   "intro": [
+   "车夫试了试轴，摇头卸下一只箱子。担架放在车边，药械的领用条还夹在箱盖下，两边都有人等。",
    "鲁托：车只有一趟。伤者和药械，先送哪边？",
-   "罗什福尔：没先走的那一边，也得有人接。"
+   "罗什福尔：没先走的那一边，也得有人接。",
+   "鲁托：你先带走哪边，另一边就给我留个准话。我得知道该到哪个路口等。"
   ],
   "choices": [
    {
@@ -1012,10 +1032,10 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "鲁托接受载重车交接。"
      }
     ],
-    "outcome": "伤者先到，药械有具名接应；未声称所有失货已追回。",
+    "outcome": "伤者先到了照护处，鲁托接下药械清单。还有几件失货没有下落，另留在待查栏里。",
     "lateActions": [
      {
-      "prompt": "原来那趟车已经走过，不让伤者重走险路。现在接续剩余运送。",
+      "prompt": "上一趟车已经送到，交接点却还堆着药械，几副担架也在等下一班接应。",
       "options": [
        {
         "id": "inspect-current",
@@ -1023,10 +1043,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "到交接点清点仍待送达的药械，并核实未完成的担架接应。 已完成并记录当前状态。"
+      "result": "交接点剩下的药械清点过了，还没接上的担架也有了名单。"
      },
      {
-      "prompt": "接续所选方案：先护送伤者，交接药械给鲁托",
+      "prompt": "剩余药械点清了。先试过担架转角，再把下一趟车的清单交给鲁托。",
       "options": [
        {
         "id": "handover-current",
@@ -1034,7 +1054,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "试走现存担架转角，向鲁托交代下一趟药械清单。 本次交接已记录。"
+      "result": "担架能稳稳通过转角，鲁托也接过了下一趟药械的清单。"
      }
     ]
    },
@@ -1065,10 +1085,10 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "担架组接下伤者，留回报节点。"
      }
     ],
-    "outcome": "药械先到，伤者有接应；不存在被选项悄悄牺牲的人。",
+    "outcome": "急用的药械先上了车，担架组留下接应伤者，约好在下一处路口报平安。",
     "lateActions": [
      {
-      "prompt": "原来那趟车已经走过，不让伤者重走险路。现在接续剩余运送。",
+      "prompt": "上一趟车已经送到，交接点却还堆着药械，几副担架也在等下一班接应。",
       "options": [
        {
         "id": "inspect-current",
@@ -1076,10 +1096,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "到交接点清点仍待送达的药械，并核实未完成的担架接应。 已完成并记录当前状态。"
+      "result": "交接点剩下的药械清点过了，还没接上的担架也有了名单。"
      },
      {
-      "prompt": "接续所选方案：先送急需药械，安排担架接应",
+      "prompt": "担架组已经有人接手，载重车的绕路也该再查一遍。",
       "options": [
        {
         "id": "handover-current",
@@ -1087,13 +1107,13 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "检查现存载重绕路，将担架接续名单交给自愿接应组。 本次交接已记录。"
+      "result": "载重绕路查过了，愿意接应的人各自认下需要照护的伤者。"
      }
     ]
    }
   ],
   "combat": true,
-  "lateIntro": "原来那趟车已经走过，不让伤者重走险路。现在接续剩余运送。"
+  "lateIntro": "上一趟车已经送到，交接点却还堆着药械，几副担架也在等下一班接应。"
  },
  {
   "id": "personal.human.duty.03",
@@ -1105,8 +1125,10 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "C06.H01.human",
   "siteId": "human.a05",
   "intro": [
+   "补给单和平民名册摊在同一张矮桌上。守岗的人看看天色，接应队已经开始收起铺盖，谁都怕错过出发的时辰。",
    "巡路补给必须交接，已登记的平民队伍也还在路上。",
-   "罗什福尔：谁接哪个岗，先讲清楚。"
+   "罗什福尔：谁接哪个岗，先讲清楚。",
+   "罗什福尔：不是把名字写上就算有人。接岗的人到了，我们才动。"
   ],
   "choices": [
    {
@@ -1136,10 +1158,10 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "缺席者仍留在待查名单。"
      }
     ],
-    "outcome": "守路后补给与平民两份交接分别留名；不是自动完成所有追回。",
+    "outcome": "补给和平民队伍各有接应者签名。尚未找到的货物，仍记在另一份待查单上。",
     "lateActions": [
      {
-      "prompt": "当年的军需岗不重新撤空。如今核对仍在使用的巡路交接。",
+      "prompt": "巡路交班还沿用那张旧表。路况变了，军需和平民接应的安排也该重新核对。",
       "options": [
        {
         "id": "inspect-current",
@@ -1147,10 +1169,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "走到现存交班点，分开核对军需与平民接应的责任表。 已完成并记录当前状态。"
+      "result": "交班点的两张责任表重新对过，军需和平民接应各有着落。"
      },
      {
-      "prompt": "接续所选方案：分队接应，保留军需交接",
+      "prompt": "两条接应路线已经分开，出发前让负责的人各自认清回报地点。",
       "options": [
        {
         "id": "handover-current",
@@ -1158,7 +1180,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "让两名自愿接应者分别核对各自路线，补齐回报时间。 本次交接已记录。"
+      "result": "两名接应者分别认清路线，约好了各自回报的时辰。"
      }
     ]
    },
@@ -1189,10 +1211,10 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "人货优先级和接应地点明确。"
      }
     ],
-    "outcome": "罗什福尔护送平民，军需仍由实际接岗者承担；不新增军法定罪。",
+    "outcome": "接岗者站稳了原来的哨位，罗什福尔这才转身，带平民队伍走向集合点。",
     "lateActions": [
      {
-      "prompt": "当年的军需岗不重新撤空。如今核对仍在使用的巡路交接。",
+      "prompt": "巡路交班还沿用那张旧表。路况变了，军需和平民接应的安排也该重新核对。",
       "options": [
        {
         "id": "inspect-current",
@@ -1200,10 +1222,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "走到现存交班点，分开核对军需与平民接应的责任表。 已完成并记录当前状态。"
+      "result": "交班点的两张责任表重新对过，军需和平民接应各有着落。"
      },
      {
-      "prompt": "接续所选方案：请求接岗后亲自护送",
+      "prompt": "名单准备好了。等接替者到岗，再送去平民集合点。",
       "options": [
        {
         "id": "handover-current",
@@ -1211,13 +1233,13 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "等待实际接替者到场，再亲自把待交名单送到平民集合点。 本次交接已记录。"
+      "result": "接替者到了岗，罗什福尔把待交名单带到平民集合点。"
      }
     ]
    }
   ],
   "combat": true,
-  "lateIntro": "当年的军需岗不重新撤空。如今核对仍在使用的巡路交接。"
+  "lateIntro": "巡路交班还沿用那张旧表。路况变了，军需和平民接应的安排也该重新核对。"
  },
  {
   "id": "personal.human.duty.04",
@@ -1229,7 +1251,9 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "C07.O01.human",
   "siteId": "human.a05",
   "intro": [
-   "封路后，有一条可步行的短路。信息若没送到，就还不是援路。"
+   "报路人鞋上还沾着湿泥，图上那条近路只画到一座窄桥。伤者队伍问能不能抬担架，货队问车轮能不能过。",
+   "封路后，有一条可步行的短路。信息若没送到，就还不是援路。",
+   "罗什福尔：先把确实走得通的告诉他们。没试过的地方，别为了让人安心就画成通路。"
   ],
   "choices": [
    {
@@ -1259,7 +1283,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "伤者队伍确认收到路线。"
      }
     ],
-    "outcome": "下一次交接按人员通行，货车继续等待载重核验。",
+    "outcome": "伤者队伍收到了步行路线。货车暂时留下，等窄桥的承重查清再走。",
     "lateActions": [
      {
       "prompt": "安全路的旧消息已经过期，重新确认今天能走哪一段。",
@@ -1270,10 +1294,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "沿现存短路检查窄桥与转角，将失效标记撤下。 已完成并记录当前状态。"
+      "result": "窄桥和转角都查过了，指向险处的旧标记被撤下来。"
      },
      {
-      "prompt": "接续所选方案：先把已确认的短路送给伤者队伍",
+      "prompt": "担架能走的路已经确认，伤者队伍还在等这份新消息。",
       "options": [
        {
         "id": "handover-current",
@@ -1281,7 +1305,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "把新核实的担架路线亲自交给伤者队伍的接应者。 本次交接已记录。"
+      "result": "接应者收下新路图，指着窄桥复述了一遍担架该怎样通过。"
      }
     ]
    },
@@ -1312,7 +1336,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "已知与未知分开交给后队。"
      }
     ],
-    "outcome": "后续货队只走已核实载重的路；信息不会一句话结束战争。",
+    "outcome": "斥候带回载重记录，后续货队照着标记绕行。余下的路，还得一段段查。",
     "lateActions": [
      {
       "prompt": "安全路的旧消息已经过期，重新确认今天能走哪一段。",
@@ -1323,10 +1347,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "沿现存短路检查窄桥与转角，将失效标记撤下。 已完成并记录当前状态。"
+      "result": "窄桥和转角都查过了，指向险处的旧标记被撤下来。"
      },
      {
-      "prompt": "接续所选方案：先派可返程的斥候核实载重",
+      "prompt": "货队暂时不能过桥。请斥候查清承重，把回报带回来。",
       "options": [
        {
         "id": "handover-current",
@@ -1334,7 +1358,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "请可返程斥候复核载重段，收到返回报告后交给货队。 本次交接已记录。"
+      "result": "斥候按约定回来，把载重段的情况交给等候的货队。"
      }
     ]
    }
@@ -1352,8 +1376,10 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "flag:H_INVASION_RESISTED",
   "siteId": "human.a05",
   "intro": [
+   "集合点一次次有人报出熟悉的名字，也一次次发现叫的是同名的人。罗什福尔把已经对上的纸条挪开，剩下的仍铺在面前。",
    "城门抵抗之后，入城实数与登记仍对不上。",
-   "罗什福尔：没找到，不等于死了。先找来源。"
+   "罗什福尔：没找到，不等于死了。先找来源。",
+   "值守者：有人只留下行李，人没见着。要再出去找，还是等下一队进来对名册？"
   ],
   "choices": [
    {
@@ -1383,7 +1409,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "失联名单保留来源与不确定性。"
      }
     ],
-    "outcome": "返查路留下可继续追查的线索，不把失联全部算成死亡。"
+    "outcome": "最后目击处有了新的线索。罗什福尔把去向不明的人另列出来，交给下一组接着找。"
    },
    {
     "id": "assembly-ledger",
@@ -1412,7 +1438,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "待核实差异留给下一组返查。"
      }
     ],
-    "outcome": "集合点建立有来源的失联清单；不虚报全员归来。"
+    "outcome": "入城的人数重新对上了，仍未找到的名字留在集合点，等新的消息。"
    }
   ],
   "combat": false
@@ -1427,8 +1453,10 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "flag:MAIN_STORY_CLEAR",
   "siteId": "human.a05",
   "intro": [
+   "桌上两份清单都磨破了边：一份写货物，一份写人名。罗什福尔把它们分开放，叫来愿意继续追查的人。",
    "剩余失货与失联人员是两份不同的责任。",
-   "罗什福尔：我不可能每一条路都亲自走，但不能没人接。"
+   "罗什福尔：我不可能每一条路都亲自走，但不能没人接。",
+   "接应者：你把最后见到的地方交给我。回来以后，我到哪里找你？"
   ],
   "choices": [
    {
@@ -1458,7 +1486,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "寻人职责仍有交接。"
      }
     ],
-    "outcome": "优先追货，寻人继续；交接不许诺全部找回。"
+    "outcome": "追货的人带走货单，寻人者接过最后目击记录。罗什福尔留好两个会合时间，等他们回来。"
    },
    {
     "id": "people-lead",
@@ -1487,7 +1515,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "追货仍有责任人。"
      }
     ],
-    "outcome": "优先寻人，追货继续；罗什福尔学会交接而非独自包办。"
+    "outcome": "寻人者先出发了，追货的事也有人接手。罗什福尔把各人的路线记在同一张图上。"
    }
   ],
   "combat": false
@@ -1502,8 +1530,10 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "flag:E_DRYSPRING_REPAIRED",
   "siteId": "elf.a02",
   "intro": [
+   "水口重新有了细细的水声，村民却仍把水桶留在旧取水处。守林者蹲下摸了摸根边的湿土，指给莱姆斯看一道新缝。",
    "泉水恢复，根系和供水仍需照看。",
-   "莱姆斯：不是修完这一次，就再也没人问。"
+   "莱姆斯：不是修完这一次，就再也没人问。",
+   "村民：这次有人修。下次夜里再渗水，我们该去叫谁？"
   ],
   "choices": [
    {
@@ -1533,7 +1563,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "共同巡查队完成一次故障报信。"
      }
     ],
-    "outcome": "撤离时双方能提供相同入口消息；断水仍是根系破坏旧结构。",
+    "outcome": "村民和守林者认清了同一处入口。根边若再有裂口，两边都知道该把消息送到哪里。",
     "lateActions": [
      {
       "prompt": "泉水仍在流，今天的水位和根边裂口需要重新检查。",
@@ -1544,10 +1574,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "与村民比对现存水位记号，清开报信点前被杂物挡住的路。 已完成并记录当前状态。"
+      "result": "今天的水位记号补在旧痕旁，报信点前的杂物也清开了。"
      },
      {
-      "prompt": "接续所选方案：共同巡查",
+      "prompt": "报信点前的路清开了，带村民和守林者一起走一次巡查路。",
       "options": [
        {
         "id": "handover-current",
@@ -1555,7 +1585,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "带双方完成一次共同巡查与实际报信。 本次交接已记录。"
+      "result": "村民和守林者一起走完巡查路，报信点很快收到了两边的回应。"
      }
     ]
    },
@@ -1586,7 +1616,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "两段确认同一个报信方式。"
      }
     ],
-    "outcome": "村民与守林者各有职责，也保留共同报信点。",
+    "outcome": "村民照看水口，守林者巡查根边，两边在同一处留下报信记号。",
     "lateActions": [
      {
       "prompt": "泉水仍在流，今天的水位和根边裂口需要重新检查。",
@@ -1597,10 +1627,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "与村民比对现存水位记号，清开报信点前被杂物挡住的路。 已完成并记录当前状态。"
+      "result": "今天的水位记号补在旧痕旁，报信点前的杂物也清开了。"
      },
      {
-      "prompt": "接续所选方案：分段照看，共用报信点",
+      "prompt": "两段巡查路在根边交汇，让两边认清彼此的交接位置。",
       "options": [
        {
         "id": "handover-current",
@@ -1608,7 +1638,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "分别走完两段交界，再让两方在共同报信点互认。 本次交接已记录。"
+      "result": "两边各自走到分段交界，在报信点认清了下一次该找的人。"
      }
     ]
    }
@@ -1626,8 +1656,10 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "C04.DE01.elf",
   "siteId": "elf.a01",
   "intro": [
+   "两份凭据放在一起，日期隔了数日，货物一栏却写得相同。经手人的签字只剩半边，谁也不肯先替缺失的部分作答。",
    "凭据有疑点，不代表莱姆斯已经知道动机。",
-   "莱姆斯：先问这笔记录是谁写的，知道多少写多少。"
+   "莱姆斯：先问这笔记录是谁写的，知道多少写多少。",
+   "莱姆斯：我不是要你猜一个人。你记得哪一步，就从哪一步说。"
   ],
   "choices": [
    {
@@ -1643,7 +1675,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "追索回报留下真实问题。"
+      "result": "两份凭据的日期并排写在回报里，差异没有被抹平。"
      },
      {
       "prompt": "缺失的经手人说明怎么办？",
@@ -1657,7 +1689,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "回报区分事实与空缺。"
      }
     ],
-    "outcome": "败北回报时仍有这份提问记录，不提前知道夺核心计划。",
+    "outcome": "日期的差异写进了追索回报。莱姆斯收好副本，等经手者说明其中的缘故。",
     "lateActions": [
      {
       "prompt": "旧追索已有后续，今天仍要核对原问题有没有得到有来源的回答。",
@@ -1668,10 +1700,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "将当初出库疑点、现存凭据和已取得答复逐项对照。 已完成并记录当前状态。"
+      "result": "出库疑点和现有答复一一对上，仍没得到回答的几项圈了出来。"
      },
      {
-      "prompt": "接续所选方案：把疑点写进正式追索",
+      "prompt": "未答的问题已经圈出，把原出处写清，再递一份追索回报。",
       "options": [
        {
         "id": "handover-current",
@@ -1679,7 +1711,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "补写一份注明原出处与未答项的正式追索回报。 本次交接已记录。"
+      "result": "新的追索回报写好了，原出处和未答的问题分列在旁。"
      }
     ]
    },
@@ -1710,7 +1742,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "问题没有被隐瞒，原话可核查。"
      }
     ],
-    "outcome": "保留逐句原答，不让职位代替证据。",
+    "outcome": "经手者的原答逐句留了下来。哪一句亲眼见过，哪一句只是听说，都能重新核对。",
     "lateActions": [
      {
       "prompt": "旧追索已有后续，今天仍要核对原问题有没有得到有来源的回答。",
@@ -1721,10 +1753,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "将当初出库疑点、现存凭据和已取得答复逐项对照。 已完成并记录当前状态。"
+      "result": "出库疑点和现有答复一一对上，仍没得到回答的几项圈了出来。"
      },
      {
-      "prompt": "接续所选方案：先问经手者，逐句留原答",
+      "prompt": "旧答复还在，给经手者看一遍；这次新说的话要另留位置。",
       "options": [
        {
         "id": "handover-current",
@@ -1732,7 +1764,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "邀请愿意核对的经手者确认本人原答，把新补充另行标注。 本次交接已记录。"
+      "result": "经手者确认了自己的原答，新添的话另记一栏，没有盖掉旧记录。"
      }
     ]
    }
@@ -1750,8 +1782,10 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "C06.E01.elf",
   "siteId": "elf.a05",
   "intro": [
+   "药包按去向分好，最远那一份还压着空白签收。伊瑟把系绳拉紧，指向村子后半程的路。",
    "伊瑟：留下的药已经分好了，缺的是后半程送达。",
-   "莱姆斯：写谁负责，就让人找得到谁。"
+   "莱姆斯：写谁负责，就让人找得到谁。",
+   "伊瑟：药能送到门口还不够。有人不会再出来问，你得确认他真的收到了。"
   ],
   "choices": [
    {
@@ -1778,13 +1812,13 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "药份不重复扣取，交接有姓名。"
+      "result": "收药人点清了原先送来的份额，在交接单上留下姓名。"
      }
     ],
-    "outcome": "受助者知道该找谁，莱姆斯负责复核送达。",
+    "outcome": "送药的人留下姓名和下次到访的时间。莱姆斯答应再来一趟，看看药有没有送到。",
     "lateActions": [
      {
-      "prompt": "原来的药份已经送过，不再次扣取。现在接续尚未归档的送达责任。",
+      "prompt": "药已经送了出去，几处签收却还空着。莱姆斯要去问清，是漏了记录，还是有人还在等。",
       "options": [
        {
         "id": "inspect-current",
@@ -1792,10 +1826,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "前往村中接收点，核对已送药份与缺失的签收。 已完成并记录当前状态。"
+      "result": "村里的收药记录查过一遍，缺少签收的几份单独挑了出来。"
      },
      {
-      "prompt": "接续所选方案：安排可承担的送达者",
+      "prompt": "签收空缺已经找出，请实际送药的人补上那一趟的经过。",
       "options": [
        {
         "id": "handover-current",
@@ -1803,7 +1837,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "请实际送达者补足本人经历，并向接收者交出可联系名单。 本次交接已记录。"
+      "result": "送药的人补上亲历经过，收药处也留下了能找到他们的名单。"
      }
     ]
    },
@@ -1820,7 +1854,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "已有份额连贯转交。"
+      "result": "伊瑟把分好的药包逐份点给莱姆斯，系紧了最后一根绳。"
      },
      {
       "prompt": "抵达后怎样结单？",
@@ -1831,13 +1865,13 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "实际送达才完成记录。"
+      "result": "收药人点清药包后签了字，莱姆斯收好回执。"
      }
     ],
-    "outcome": "莱姆斯留下可核查的送达责任，不只是抗议台词。",
+    "outcome": "莱姆斯走完了后半程，带回收药人的签名。下次有人问起，这趟路终于不只是一句承诺。",
     "lateActions": [
      {
-      "prompt": "原来的药份已经送过，不再次扣取。现在接续尚未归档的送达责任。",
+      "prompt": "药已经送了出去，几处签收却还空着。莱姆斯要去问清，是漏了记录，还是有人还在等。",
       "options": [
        {
         "id": "inspect-current",
@@ -1845,10 +1879,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "前往村中接收点，核对已送药份与缺失的签收。 已完成并记录当前状态。"
+      "result": "村里的收药记录查过一遍，缺少签收的几份单独挑了出来。"
      },
      {
-      "prompt": "接续所选方案：亲自护送后半程",
+      "prompt": "签收核对好了，莱姆斯还要沿后半程亲自走一趟，带回照护处。",
       "options": [
        {
         "id": "handover-current",
@@ -1856,13 +1890,13 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "亲自走完今天的安全后半程，将已核对签收送回照护处。 本次交接已记录。"
+      "result": "莱姆斯走完安全的后半程，把核对好的签收带回照护处。"
      }
     ]
    }
   ],
   "combat": true,
-  "lateIntro": "原来的药份已经送过，不再次扣取。现在接续尚未归档的送达责任。"
+  "lateIntro": "药已经送了出去，几处签收却还空着。莱姆斯要去问清，是漏了记录，还是有人还在等。"
  },
  {
   "id": "personal.elf.heir.04",
@@ -1874,8 +1908,10 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "flag:C08_COMPLETE",
   "siteId": "elf.a05",
   "intro": [
+   "几个人坐在安全点的背风处，没有招呼他坐下。莱姆斯停在桌边，把带来的记录放低，等他们先开口。",
    "安全点的幸存者问他，反抗时到底发生了什么。",
-   "莱姆斯：我可以说亲见的事，但不能要求你们因此原谅我。"
+   "莱姆斯：我可以说亲见的事，但不能要求你们因此原谅我。",
+   "一位幸存者：你说你有理由。可我们失去的那些，你知道多少？"
   ],
   "choices": [
    {
@@ -1905,7 +1941,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "回答只到自己的见闻边界。"
      }
     ],
-    "outcome": "部分幸存者愿意下次当面交谈，并非全体宽恕。",
+    "outcome": "有人约他下次再来，有人仍不愿说话。莱姆斯收好记下的损失，没有催他们回答。",
     "lateActions": [
      {
       "prompt": "幸存者对反抗仍有问题；迟来的交谈不预设他们已经原谅。",
@@ -1916,10 +1952,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "把现存亲历记录带到安全处，邀请愿意谈的人选定公开范围。 已完成并记录当前状态。"
+      "result": "亲历记录摊在安全处的桌上，愿意交谈的人各自说清哪些话可以留下。"
      },
      {
-      "prompt": "接续所选方案：先听幸存者的损失",
+      "prompt": "有人愿意开口了。先听他仍没得到回应的损失，不急着解释。",
       "options": [
        {
         "id": "handover-current",
@@ -1927,7 +1963,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "先听今天仍未被回应的损失，逐项记下本人要求保留的原话。 本次交接已记录。"
+      "result": "没得到回应的损失逐条记了下来，讲述者看过原话，才点头让它留下。"
      }
     ]
    },
@@ -1958,7 +1994,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "书面提问也得到接续。"
      }
     ],
-    "outcome": "有人选择书面往来；反抗没有自动换来认可或职位。",
+    "outcome": "几个人留下了书面问题。莱姆斯答应逐条回信，没把沉默当成谅解。",
     "lateActions": [
      {
       "prompt": "幸存者对反抗仍有问题；迟来的交谈不预设他们已经原谅。",
@@ -1969,10 +2005,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "把现存亲历记录带到安全处，邀请愿意谈的人选定公开范围。 已完成并记录当前状态。"
+      "result": "亲历记录摊在安全处的桌上，愿意交谈的人各自说清哪些话可以留下。"
      },
      {
-      "prompt": "接续所选方案：先写亲见经过，再逐项回答",
+      "prompt": "桌上的记录混着亲见与猜测，分清之后，再请提问者核对。",
       "options": [
        {
         "id": "handover-current",
@@ -1980,7 +2016,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "整理亲见与推断分栏的文本，再把未答问题交还提问者核对。 本次交接已记录。"
+      "result": "亲见与推断分开写清，提问者收回了仍待回答的那一页。"
      }
     ]
    }
@@ -1998,8 +2034,10 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "flag:ASHEN_ORIGIN_CORROBORATED",
   "siteId": "elf.a05",
   "intro": [
+   "拓记上有一行被裂痕截断，旁边摆着后来找到的另一份抄本。能相互印证的字不多，围观的人已经开始接着猜下半句。",
    "旧记录已有独立印证，也仍有缺字。",
-   "莱姆斯：不能因为找到了几行，就把空白都替别人填完。"
+   "莱姆斯：不能因为找到了几行，就把空白都替别人填完。",
+   "莱姆斯：这一段先别补。把看见的留下，也让后来的人知道哪里是我们猜的。"
   ],
   "choices": [
    {
@@ -2026,10 +2064,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "公开文本不把历史当服从义务。"
+      "result": "抄本记下了古人的目的，也留下今天的族人各自提出的问题。"
      }
     ],
-    "outcome": "已证实内容可查，空白仍是空白。"
+    "outcome": "抄本摆出来了，缺字处仍留着空格。读到这里的人，也能看见他们尚不知道的部分。"
    },
    {
     "id": "joint-review",
@@ -2055,10 +2093,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "校对公开，不制造全族共识。"
+      "result": "不同读法和各人的意见都留在抄本旁，等其他人来核对。"
      }
     ],
-    "outcome": "记录可继续质疑；莱姆斯不凭空通晓古文。"
+    "outcome": "几份不同的读法并排留着，旁边写明了各自的出处。莱姆斯把仍读不懂的字圈了起来。"
    }
   ],
   "combat": false
@@ -2073,8 +2111,10 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "flag:MAIN_STORY_CLEAR",
   "siteId": "elf.a02",
   "intro": [
+   "照护用的桶和工具靠在墙边，今天的活已经做完，明天的名单却还是空的。有人顺口叫了一声尊称，莱姆斯先伸手去收水桶。",
    "泉边有人问，明天的照护由谁接着做。",
-   "莱姆斯：先说这一天要做什么，不先给我一个头衔。"
+   "莱姆斯：先说这一天要做什么，不先给我一个头衔。",
+   "照护者：名字怎么叫可以以后谈。明天早上，你还来不来？"
   ],
   "choices": [
    {
@@ -2090,7 +2130,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "职责有可执行边界。"
+      "result": "莱姆斯认下了照护的时段和要做的事，旁人也知道该何时来找他。"
      },
      {
       "prompt": "怎样核实照护不是一句话？",
@@ -2104,7 +2144,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "莱姆斯完成首轮日常工作。"
      }
     ],
-    "outcome": "以具体职责接续继承，不自动继任大祭司。"
+    "outcome": "莱姆斯把自己的照护时段写进值班表。第二天，他会按这个时辰再来。"
    },
    {
     "id": "voluntary-rota",
@@ -2130,10 +2170,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "轮值表留下真实待补项。"
+      "result": "空着的时段圈了出来，莱姆斯记下还要去找谁商量。"
      }
     ],
-    "outcome": "有可复查的自愿轮值，不宣告新的宗教制度。"
+    "outcome": "轮值的人各自认下时段，空岗也清楚列着。莱姆斯答应回来复查，而不是把表一挂就走。"
    }
   ],
   "combat": false
@@ -2148,8 +2188,10 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "C01.A01.ashen",
   "siteId": "ashen.a01",
   "intro": [
+   "修护处的门开着，族人望了望门外，又把手从搀扶者的臂弯里抽回来。那条短路上仍横着一块不好迈过的石头。",
    "修护后的族人想自己决定去处。",
-   "砾恩：我带你回来，不是替你把以后都答应下来。"
+   "砾恩：我带你回来，不是替你把以后都答应下来。",
+   "族人：我想试试自己走。有人陪也好，但别替我选终点。"
   ],
   "choices": [
    {
@@ -2176,10 +2218,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "临时照护有明确边界。"
+      "result": "同伴记住了约好的终点，答应到了那里先问他的意思。"
      }
     ],
-    "outcome": "受助者仍决定后续生活，不被救助变成债务。",
+    "outcome": "同伴陪他走到约好的地方便停下。再往哪儿去，由他自己慢慢想。",
     "lateActions": [
      {
       "prompt": "受助者早已有自己的生活。这次只补修他本人仍希望改善的路。",
@@ -2190,10 +2232,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "询问当前需要，清开现存短路的一处落脚障碍。 已完成并记录当前状态。"
+      "result": "族人指出最难走的一段，路上的障碍清掉后，那里已经能落脚。"
      },
      {
-      "prompt": "接续所选方案：请同伴陪走，本人决定终点",
+      "prompt": "路障清掉了，问问他愿意请哪位伙伴陪走这一段。",
       "options": [
        {
         "id": "handover-current",
@@ -2201,7 +2243,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "由本人邀请愿意同行的伙伴，实际试走其同意的一小段。 本次交接已记录。"
+      "result": "族人叫来愿意陪走的伙伴，两人走到他选定的地方，停下来歇脚。"
      }
     ]
    },
@@ -2232,7 +2274,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "族人选择自己的启程时间。"
      }
     ],
-    "outcome": "修护帮助独立，不代替本人意愿；没有起源泄露。",
+    "outcome": "短路上的障碍清开了，休息处也挪到了合适的位置。他试着独自走了一遍，决定何时再出门。",
     "lateActions": [
      {
       "prompt": "受助者早已有自己的生活。这次只补修他本人仍希望改善的路。",
@@ -2243,10 +2285,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "询问当前需要，清开现存短路的一处落脚障碍。 已完成并记录当前状态。"
+      "result": "族人指出最难走的一段，路上的障碍清掉后，那里已经能落脚。"
      },
      {
-      "prompt": "接续所选方案：修通可独行的短路",
+      "prompt": "短路已经能走，请他自己试试，看看休息处放得是否合适。",
       "options": [
        {
         "id": "handover-current",
@@ -2254,7 +2296,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "请本人独立试走修好的短段，按他的反馈再调整休息点。 本次交接已记录。"
+      "result": "他独自试走了修好的短段，又指了一个更顺脚的位置作休息处。"
      }
     ]
    }
@@ -2272,8 +2314,10 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "C05.EA02.ashen",
   "siteId": "ashen.a04",
   "intro": [
+   "旧箱上的封记拓在纸上，放在修护记录旁边。送来口信的人说起“归还”二字，砾恩下意识按住了胸前的核心。",
    "修护者只问身体稳定不稳定，追索口信却还称它为箱里的遗物。",
-   "砾恩：封记可以核对，我的感受也要记。"
+   "砾恩：封记可以核对，我的感受也要记。",
+   "修护者：先说你今天有什么不一样。纸上怎么写，不能替你回答疼不疼。"
   ],
   "choices": [
    {
@@ -2300,10 +2344,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "身体与物品的界限明确。"
+      "result": "砾恩在回信中写明：核心已经与他的身体相连，不能照着货单取走。"
      }
     ],
-    "outcome": "承认争议，不强摘核心，不新编融合工艺。",
+    "outcome": "修护者记下了砾恩的感受，把追索口信放到另一边。核心仍留在他身上，归属的争执没有因此消失。",
     "lateActions": [
      {
       "prompt": "核心的旧变化已有记录，今天仍须区分身体感受与物件追索。",
@@ -2314,10 +2358,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "请修护者取出现存观察表，与本人今日感受分别登记。 已完成并记录当前状态。"
+      "result": "旧观察表翻了出来，修护者在旁边记下砾恩今天的感受。"
      },
      {
-      "prompt": "接续所选方案：先由本人陈述变化",
+      "prompt": "修护记录已经写下，还要请砾恩确认哪些身体变化可以告诉别人。",
       "options": [
        {
         "id": "handover-current",
@@ -2325,7 +2369,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "由本人确认可公开的身体变化，将归属争议另列。 本次交接已记录。"
+      "result": "砾恩确认了愿意公开的身体变化，归属争议另放在一页。"
      }
     ]
    },
@@ -2353,10 +2397,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "来源核验不变成处置族人的授权。"
+      "result": "封记的出处查清了。修护者收好拓记，转身继续听砾恩说明自己的感受。"
      }
     ],
-    "outcome": "修护记录可供以后核对，来历仍待主线印证。",
+    "outcome": "封记与光纹都留了记录，无法解释的地方暂时空着。来历究竟如何，还要找别的线索。",
     "lateActions": [
      {
       "prompt": "核心的旧变化已有记录，今天仍须区分身体感受与物件追索。",
@@ -2367,10 +2411,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "请修护者取出现存观察表，与本人今日感受分别登记。 已完成并记录当前状态。"
+      "result": "旧观察表翻了出来，修护者在旁边记下砾恩今天的感受。"
      },
      {
-      "prompt": "接续所选方案：请修护者记录可观察部分",
+      "prompt": "旧封记和今天的光纹都在眼前，把能核对的部分分开记清。",
       "options": [
        {
         "id": "handover-current",
@@ -2378,7 +2422,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "核对封记来源与今日可见变化，原因不明之处继续留空。 本次交接已记录。"
+      "result": "封记的出处与今天的光纹并排记下，尚无法解释的地方仍留着空。"
      }
     ]
    }
@@ -2396,8 +2440,10 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "C07.EA03.ashen",
   "siteId": "ashen.a05",
   "intro": [
+   "报信牌一块块挂回去，族长常站的位置却空着。几名族人迟迟不肯领新牌，还在等原来的搭档回来。",
    "撤到安全点的人带着残缺的岗位记录。族长已经不在。",
-   "砾恩：先别把谁推上那个位置。看看谁还没接到人。"
+   "砾恩：先别把谁推上那个位置。看看谁还没接到人。",
+   "砾恩：先把最后在哪儿见过、谁还没接到回信说清。别让一个空名字把人催上岗。"
   ],
   "choices": [
    {
@@ -2424,13 +2470,13 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "眼前撤路有人互相确认。"
+      "result": "撤路两端都传回应声，新搭档认清了彼此的报信位置。"
      }
     ],
-    "outcome": "照护失去搭档的人，不自动继任族长。",
+    "outcome": "失去搭档的人有了同行者。砾恩陪他们对完最后一次交班，再去看下一处缺岗。",
     "lateActions": [
      {
-      "prompt": "族长死亡不会再演一遍。现在接续仍缺交班的岗位与失联核问。",
+      "prompt": "族长留下的岗位仍有空缺，报信点也还在等几位同伴的消息。",
       "options": [
        {
         "id": "inspect-current",
@@ -2438,10 +2484,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "到现存报信点整理岗位缺口和仍未确认的同伴名单。 已完成并记录当前状态。"
+      "result": "报信点的名册重新理过，空岗和仍未联系上的同伴分别列明。"
      },
      {
-      "prompt": "接续所选方案：先照顾失去搭档的人",
+      "prompt": "失联名单理好了，先陪那些失去搭档的人核实最后一次交班。",
       "options": [
        {
         "id": "handover-current",
@@ -2449,7 +2495,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "陪失去搭档的人核查最后交接，再为愿意接岗者安排伙伴。 本次交接已记录。"
+      "result": "最后一次交班的经过核对清楚了，愿意接岗的人找到了新的同行伙伴。"
      }
     ]
    },
@@ -2480,10 +2526,10 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "空缺与已接岗位分开记录。"
      }
     ],
-    "outcome": "不让别人失联，战斗只护眼前撤路，不决定战争胜负。",
+    "outcome": "报信点重新有人回应，眼前的撤路通了。砾恩确认接应者到齐，才放下手里的名册。",
     "lateActions": [
      {
-      "prompt": "族长死亡不会再演一遍。现在接续仍缺交班的岗位与失联核问。",
+      "prompt": "族长留下的岗位仍有空缺，报信点也还在等几位同伴的消息。",
       "options": [
        {
         "id": "inspect-current",
@@ -2491,10 +2537,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "到现存报信点整理岗位缺口和仍未确认的同伴名单。 已完成并记录当前状态。"
+      "result": "报信点的名册重新理过，空岗和仍未联系上的同伴分别列明。"
      },
      {
-      "prompt": "接续所选方案：先补上无人交接的报信点",
+      "prompt": "报信点仍有几处没有回应，检查标记，再等下一班亲自到场。",
       "options": [
        {
         "id": "handover-current",
@@ -2502,13 +2548,13 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "修复失效报信标记，实际确认下一班自愿接应者到达。 本次交接已记录。"
+      "result": "失效的报信标记换好了，下一班接应者到达时，远处传回应声。"
      }
     ]
    }
   ],
   "combat": true,
-  "lateIntro": "族长死亡不会再演一遍。现在接续仍缺交班的岗位与失联核问。"
+  "lateIntro": "族长留下的岗位仍有空缺，报信点也还在等几位同伴的消息。"
  },
  {
   "id": "personal.ashen.agency.04",
@@ -2520,7 +2566,9 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "flag:ASHEN_ORIGIN_CORROBORATED",
   "siteId": "ashen.a05",
   "intro": [
-   "起源记录已经有独立印证，但谁先知道，不等于谁能替所有人决定。"
+   "拓记卷好又展开，桌边的人都在问下一份该送去哪儿。有人想先给修护处，有人说，那些因此被安排去处的族人应该先看。",
+   "起源记录已经有独立印证，但谁先知道，不等于谁能替所有人决定。",
+   "砾恩：先送谁，得说清为什么。留下的那份，也别收进只有几个人能开的箱子。"
   ],
   "choices": [
    {
@@ -2550,7 +2598,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "问题与不同意见一起留存。"
      }
     ],
-    "outcome": "先读的人没有替全族作决定，仍有公开讨论机会。"
+    "outcome": "最受影响的族人先读到了记录。他们的问题和意见一同留下，等下一次大家再谈。"
    },
    {
     "id": "repair-archive",
@@ -2579,7 +2627,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "存放点接受后续核问。"
      }
     ],
-    "outcome": "共同核对仍开放，不把记录变成少数人的命令。"
+    "outcome": "修护处收下拓记，把出处和疑点放在一起。想来核对的人，都能找到这份副本。"
    }
   ],
   "combat": false
@@ -2594,8 +2642,10 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "flag:A_INVASION_RESISTED",
   "siteId": "ashen.a05",
   "intro": [
+   "守岗者把旧记录折回原处，行囊已经收好，却迟迟没有背上。替班的人站在旁边，等他自己开口。",
    "有人说，被创造来抵抗，就必须一直守最危险的地方。",
-   "砾恩：那是过去的目的，不是你今天不能走的理由。"
+   "砾恩：那是过去的目的，不是你今天不能走的理由。",
+   "守岗者：若我今天走了，他们会不会说，我连自己为什么被造出来都忘了？"
   ],
   "choices": [
    {
@@ -2622,10 +2672,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "拒绝守岗也保留选择权。"
+      "result": "离岗的人收好行囊，拿到了已经核实的撤离路线。"
      }
     ],
-    "outcome": "岗位有明确同意，古代创造目的不等于永久服从。"
+    "outcome": "愿意接岗的人报了名字，要离开的人也领到了路线。旧记录留在桌上，没有代谁作答。"
    },
    {
     "id": "verify-exit",
@@ -2654,7 +2704,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "自愿者留下，其余人按核实退路离开。"
      }
     ],
-    "outcome": "留下与离开都有选择，不宣布举族一致。"
+    "outcome": "退路查清了。有人留下换岗，有人收拾行李，沿刚确认的路走出去。"
    }
   ],
   "combat": false
@@ -2669,8 +2719,10 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "flag:MAIN_STORY_CLEAR",
   "siteId": "ashen.a05",
   "intro": [
+   "砾恩在古代记录旁铺开一张新纸。有人说这一天没什么值得记，有人却想留下死去搭档的名字，还有一句一直没能问出口的话。",
    "古代记录旁还有空白，那里可以写今天的人。",
-   "砾恩：不要只留一句我们应该是什么。也写我们怎么想。"
+   "砾恩：不要只留一句我们应该是什么。也写我们怎么想。",
+   "砾恩：就从这些开始。说错了可以改，意见不同也可以一起放着。"
   ],
   "choices": [
    {
@@ -2700,7 +2752,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "今日姓名与分歧都被留存。"
      }
     ],
-    "outcome": "口述可继续补充，砾恩自己选择继续巡访，不继任族长。"
+    "outcome": "砾恩收好这次的口述，约好下一处巡访。记录里有争论，也有每个人想怎样生活的打算。"
    },
    {
     "id": "shared-copies",
@@ -2729,7 +2781,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "第一份副本完成实际交接。"
      }
     ],
-    "outcome": "共同记录可以继续质疑，砾恩接下保存责任而非替全族发令。"
+    "outcome": "第一份副本送了出去，存放处留出补写的位置。砾恩接下保管的活，等更多人把自己的话带来。"
    }
   ],
   "combat": false
@@ -2744,8 +2796,10 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "C06.G01.goblin",
   "siteId": "goblin.a04",
   "intro": [
+   "粮袋在地上铺开，袋底的补丁比上一次更多。咔洛伸手想把整袋提起，奇克先按住袋口，让他把背带放松。",
    "奇克：不能再只算我一个人能不能钻过去。",
-   "咔洛想帮忙，米芮拿出分粮记号，豆布把碗护在怀里。"
+   "咔洛想帮忙，米芮拿出分粮记号，豆布把碗护在怀里。",
+   "米芮：你每次只说等你回来。要是比说好的晚，我们到底该等在哪儿？"
   ],
   "choices": [
    {
@@ -2775,7 +2829,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "米芮把自己也列进分配。"
      }
     ],
-    "outcome": "家人参与的是安全准备，不被派去危险路段。",
+    "outcome": "咔洛挑了背得稳的小袋，米芮点好粮份，豆布守着碗。他们在安全处等奇克回来。",
     "lateActions": [
      {
       "prompt": "旧粮路已经改变，家人如今需要核对现有安全处的生活安排。",
@@ -2786,10 +2840,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "和咔洛、米芮、豆布各自确认现有物件与每日需要。 已完成并记录当前状态。"
+      "result": "咔洛、米芮和豆布各自点过手边的东西，缺少的日用品摆到了一起。"
      },
      {
-      "prompt": "接续所选方案：让家人参与安全处的轻装整理",
+      "prompt": "日用品点清了，再试一遍轻袋，把三个人和奇克的粮份一起算进去。",
       "options": [
        {
         "id": "handover-current",
@@ -2797,7 +2851,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "在安全处重新试轻袋，把每个人的粮份都算进来。 本次交接已记录。"
+      "result": "轻袋试过了，每个人的粮份也算进总数。咔洛把自己那只袋口系紧。"
      }
     ]
    },
@@ -2828,7 +2882,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "家人知道晚归不等于追进险地。"
      }
     ],
-    "outcome": "奇克不再把所有安排都藏在自己心里，孩子仍留在安全范围。",
+    "outcome": "奇克把返程和等候的办法说给三人听。咔洛复述了一遍，豆布记住了不能越过的路口。",
     "lateActions": [
      {
       "prompt": "旧粮路已经改变，家人如今需要核对现有安全处的生活安排。",
@@ -2839,10 +2893,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "和咔洛、米芮、豆布各自确认现有物件与每日需要。 已完成并记录当前状态。"
+      "result": "咔洛、米芮和豆布各自点过手边的东西，缺少的日用品摆到了一起。"
      },
      {
-      "prompt": "接续所选方案：一起约定返程与等候信号",
+      "prompt": "东西收拾好了，带三人走到报到点，试一遍晚归时怎么联络。",
       "options": [
        {
         "id": "handover-current",
@@ -2850,7 +2904,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "与三人实际走到能看见的报到点，演练晚归时如何联系。 本次交接已记录。"
+      "result": "三人走到看得见的报到点，各试了一次晚归联络的办法，才一起折返。"
      }
     ]
    }
@@ -2868,8 +2922,10 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "flag:G_FAMILY_SAFE",
   "siteId": "goblin.a02",
   "intro": [
-   "主线已确认咔洛、米芮与豆布真实抵达安全点。奇克再把名字逐个叫一遍。",
-   "奇克：现在说谁还缺什么，不用只说没事。"
+   "安全点的铺位挤得很近，三人的行李却都还抱在怀里。豆布不肯把碗放下，米芮说自己什么也不缺，咔洛一直看着营地出口。",
+   "咔洛、米芮和豆布都到了安全点。奇克还是把名字逐个叫了一遍，听见回答才松开袋口。",
+   "奇克：现在说谁还缺什么，不用只说没事。",
+   "奇克：都先别抢着帮忙。今天先把咱们怎么吃饭、在哪儿等人弄清楚。"
   ],
   "choices": [
    {
@@ -2899,7 +2955,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "当前缺额有接应，不拿旧物当垃圾。"
      }
     ],
-    "outcome": "抵达不是取消需要；团聚由主线唯一发生，这里处理抵达后的生活。"
+    "outcome": "咔洛、米芮和豆布都说出了还缺什么。奇克一项项记下，先去找今晚要用的碗和粮。"
    },
    {
     "id": "safe-routine",
@@ -2928,7 +2984,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "一家人有可实行的营地作息。"
      }
     ],
-    "outcome": "家人能参与营地生活，不由日常小事替代C10真实安置。"
+    "outcome": "营地里的短路走过一遍，哪里能去、哪里要等，都说清了。咔洛终于有了一件能放心帮忙的事。"
    }
   ],
   "combat": false
@@ -2943,8 +2999,10 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "flag:G_FAMILY_SAFE",
   "siteId": "goblin.a05",
   "intro": [
+   "熟悉的岔道堵住了，过去能换粮的摊位也空着。有人来找奇克接一段补给，摊开的路线图旁放着有限的口粮。",
    "偷粮与换粮的路都被入侵截断。奇克需要找愿意合作的人。",
-   "奇克：我也要活。我的那份和该做的事，都先说清。"
+   "奇克：我也要活。我的那份和该做的事，都先说清。",
+   "奇克：我可以跑这段。但送到哪里算完、晚了找谁，都得现在说好。"
   ],
   "choices": [
    {
@@ -2960,7 +3018,7 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "双方知道能交什么，不能交什么。"
+      "result": "补给数量与交付地点写清了，奇克把自己的粮份也核了一遍。"
      },
      {
       "prompt": "家人能承担哪部分？",
@@ -2971,10 +3029,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "合作不靠让孩子冒险兑现。"
+      "result": "家人留在安全处整理轻装，危险路段由奇克去跑。"
      }
     ],
-    "outcome": "奇克因家人与生路参与共同抵抗，不变成政治领袖。"
+    "outcome": "奇克接下补给交接，先把家人和自己的粮份说清。这条路能让他们活下去，他愿意出力守住。"
    },
    {
     "id": "return-contact",
@@ -3000,10 +3058,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "家人了解真实边界。"
+      "result": "家人认清了安全的路口，也知道越过哪处就必须回来。"
      }
     ],
-    "outcome": "合作有明确责任，也保留奇克谨慎的自利，不突然无私领政。"
+    "outcome": "联络的时限和回程都约好了。奇克记住该找谁，也把家里等他的三个人算进安排里。"
    }
   ],
   "combat": true
@@ -3018,9 +3076,11 @@ export const PERSONAL_ARC_CONTENT = [
   "gate": "flag:MAIN_STORY_CLEAR",
   "siteId": "goblin.a02",
   "intro": [
+   "袋里剩下的粮倒进浅盆，分不出满满的四碗。奇克习惯性地伸手拨向旁边，米芮先把他的碗拿了过来。",
    "奇克放下袋子，没有立刻替每个人分好。",
    "米芮：今天也把你算进去。",
-   "豆布把碗放在大家中间，咔洛等着试自己的那份。"
+   "豆布把碗放在大家中间，咔洛等着试自己的那份。",
+   "奇克：行，今天你们也看着分。哪份要留，谁明早先走，咱们一起说。"
   ],
   "choices": [
    {
@@ -3039,7 +3099,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "每个人的份额都被算到。"
      },
      {
-      "prompt": "能分担意味着什么？",
+      "prompt": "咔洛还想多背一点，哪些活适合交给他？",
       "options": [
        {
         "id": "verify",
@@ -3047,10 +3107,10 @@ export const PERSONAL_ARC_CONTENT = [
         "correct": true
        }
       ],
-      "result": "分担有年龄与安全边界。"
+      "result": "咔洛接下轻袋，重物仍由奇克来搬，谁也不用逞强。"
      }
     ],
-    "outcome": "奇克不再独自扛下所有生活，家人不是给他发号施令的附属。"
+    "outcome": "明天的份额由一家人一起定。奇克刚想把自己的那份拨出去，米芮便把碗推了回来。"
    },
    {
     "id": "shared-checkin",
@@ -3079,7 +3139,7 @@ export const PERSONAL_ARC_CONTENT = [
       "result": "家人可以提问，也知道怎样接续。"
      }
     ],
-    "outcome": "一家人有共同生活的计划；余粮仍有限，但不再只有奇克能开口。"
+    "outcome": "晚归的饭有了留处，报到也有了约定。余粮还是不多，但这回每个人都说上了话。"
    }
   ],
   "combat": false

@@ -1,0 +1,11 @@
+{
+  "recipeId": "potion-luck",
+  "policy": "Only extend luckBase/luckAux whitelists. Existing local alchemical extracts can serve both roles; each role consumes its own same-quality unit. Do not change drops, other recipes, prices or effects.",
+  "materials": [
+    {"race":"dwarf","id":"dwarf.ashroot","inventoryKey":"灰根草","name":"灰根草","rationale":"草根汁液可分别提取为幸运药剂的基液与辅助草浆。","files":["dist/dwarf-material-catalog.js"]},
+    {"race":"human","id":"human.mat.02","inventoryKey":"human.mat.02","name":"白穗籽","rationale":"既有通用炼金籽仁基浆可分别用作幸运基液与籽粉辅料。","files":["dist/races/human/materials.js"]},
+    {"race":"elf","id":"elf.dew_crown","inventoryKey":"elf.dew_crown","name":"露冠花","rationale":"现有花露、花汁炼金用途可分别作为幸运基液与辅助花浆。","files":["dist/races/elf/content.js"]},
+    {"race":"goblin","id":"goblin.mat.01","inventoryKey":"goblin.mat.01","name":"灰帽菌","rationale":"湿润菌肉可分别提取为幸运基浆与辅助菌液。","files":["dist/races/goblin/materials.json","dist/races/goblin/materials.js"]},
+    {"race":"ashen","id":"ashen.salt_shell","inventoryKey":"ashen.salt_shell","name":"盐壳碎片","rationale":"已有提纯矿液与矿盐药剂用途可分别作为幸运基液与辅助盐晶。","files":["dist/races/ashen/world.js"]}
+  ]
+}

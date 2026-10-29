@@ -41,13 +41,13 @@ export function pickRoute(expedition,cooldowns,now,registry=INSTANCES){
    const target=Object.values(registry).find(n=>n.enabled&&n.areaId===field.areaId&&n.kind===kind);
    if(target&&now>=(cooldowns?.[target.id]??0))return target;
   }
-  return field;
+  if(expedition.autoDungeon===true)return field;
  }
  if(expedition.mode==='dungeon'){
   const target=registry[expedition.targetInstanceId];
   if(target?.enabled&&target.kind==='dungeon'){
    if(now>=(cooldowns?.[target.id]??0))return target;
-   return expedition.loop?field:null;
+   return expedition.loop||expedition.autoBoss?field:null;
   }
   return null;
  }

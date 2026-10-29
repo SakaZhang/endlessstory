@@ -28,13 +28,13 @@ for(const d of RACIAL_NPC_EVENTS){
   brief=i.brief;completion=i.completion;
  }else if(k){
   assert(k.monsterIds.every(id=>WORLD_MONSTERS[id]?.nodes.includes(d.areaId+'.field')),d.id+' real matching field monsters');
-  taskObjective={kind:'kill',nodeIds:[d.areaId+'.field'],monsterIds:k.monsterIds,count:k.count,description:'在'+AREAS[d.areaId].name+'野外击杀'+k.monsterIds.map(id=>WORLD_MONSTERS[id].name).join('／')+'，合计'+k.count+'名。只记录接取后真实击杀，不计主线演出、召唤单位或旧战果。'};
+  taskObjective={kind:'kill',nodeIds:[d.areaId+'.field'],monsterIds:k.monsterIds,count:k.count,description:'在'+AREAS[d.areaId].name+'野外击杀'+k.monsterIds.map(id=>WORLD_MONSTERS[id].name).join('／')+'，合计'+k.count+'个。接取后开始计数。'};
   brief=k.brief;completion=k.completion;
   if(k.rewardMaterialId)taskRewards=[materialRow(k.rewardMaterialId)];
  }else if(c||d.objective.kind==='materials'){
   const costs=c?[{materialId:c.materialId,quantity:c.quantity}]:d.materials;
   const materials=costs.map(row=>collectedRow(d,row));
-  taskObjective={kind:'collect',materials,sourceNodeIds:[...new Set(materials.flatMap(row=>row.sourceNodeIds))],ownedAllowed:true,description:'收集并交付'+materials.map(row=>`普通（Q0）${WORLD_MATERIALS[row.materialId].name}×${row.quantity}`).join('、')+'。已有库存可交付；只扣明示品质，不替用高品质。'};
+  taskObjective={kind:'collect',materials,sourceNodeIds:[...new Set(materials.flatMap(row=>row.sourceNodeIds))],ownedAllowed:true,description:'收集并交付'+materials.map(row=>`普通品质${WORLD_MATERIALS[row.materialId].name}×${row.quantity}`).join('、')+'。可交付已有的普通品质库存。'};
   brief=c?.brief??d.dialogue[0];completion=c?.completion??source.collectionCompletion[d.id];
   if(c)taskRewards=[materialRow(c.rewardMaterialId)];
  }else throw Error('Unmapped ordinary event: '+d.id);
@@ -45,8 +45,8 @@ for(const d of RACIAL_NPC_EVENTS){
   taskRewards=[materialRow(supplement.materialId)];completion+=' '+supplement.completion;
  }
  assert(completion,d.id+' explicit authored completion');
- const instruction=taskObjective.kind==='investigate'?'分别前往'+taskObjective.checkpoints.map(p=>`${AREAS[p.areaId].name}·${p.label}`).join('、')+'调查并取得两份现场记录。':taskObjective.description;
- modern[d.id]={objectiveVersion:2,taskObjective,taskDescription:brief+' '+instruction+' 完成后返回'+AREAS[d.areaId].name+'，向'+npc.name+'交付。',taskDialogue:[brief,instruction],taskCompletion:[completion],taskRewards:taskRewards.map(row=>({...row,key:worldInventoryKey(row.materialId??row.key.split('|')[0])+'|'+row.key.split('|')[1]}))};
+ const prose=i??k??c??source.collectionScenes[d.id];
+ modern[d.id]={objectiveVersion:2,taskObjective,taskDescription:prose.scene,taskDialogue:[npc.name+'：'+brief],taskCompletion:[completion,prose.closing],taskRewards:taskRewards.map(row=>({...row,key:worldInventoryKey(row.materialId??row.key.split('|')[0])+'|'+row.key.split('|')[1]}))};
 }
 assert.equal(Object.keys(modern).length,60);
 assert.equal(Object.keys(source.oneTimeRewardSupplements).length,22);

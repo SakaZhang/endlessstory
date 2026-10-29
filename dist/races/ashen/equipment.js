@@ -1,3 +1,42 @@
+// Item-specific flavor text; mechanics remain in the catalog fields below.
+const scatterDescriptions=[
+  "护臂外缘磨去尖角，浅白盐纹顺着肘侧延伸。",
+  "赤色矿脉贯穿护臂，关节处的岩片错开，留出活动的间隙。",
+  "细晶嵌在护臂内层，轻叩外壳时能听见清脆的回声。",
+  "玄色岩壳层层包住前臂，最外层留着几处崩口。",
+  "锤头取自沉重的整块岩石，柄端缠着防滑的粗绳。",
+  "半透明锤头包着一团深色矿心，短柄握处已经磨亮。",
+  "护额表面的浅坑仍带着风蚀的痕迹，内缘却已磨平。",
+  "石冠凹处积着细小水珠，清晨才容易看见。",
+  "黑曜薄片遮住面颊，眼前留出两道狭长开口。",
+  "白盐晶簇沿头环向上伸展，衬带隔开了粗糙的内壁。",
+  "多孔岩板以皮绳串联，孔隙间残着深色矿砂。",
+  "薄盐层夹在软衬之间，弯腰时沿着缝线分开。",
+  "赤纹岩板贴合胸腹，边角以小铆扣连在一起。",
+  "细碎晶片缝进暗色衣料，只有转身时才闪出微光。",
+  "陶石护片覆盖掌根，指节处仍用柔韧的织带连接。",
+  "琉砂烧成薄片护住手指，边缘磨得像旧玻璃一样圆滑。",
+  "黑色玻璃护住手背，掌面衬垫留下长年握柄的纹路。",
+  "矿脉沿护手的裂隙伸展，新生的一段颜色稍浅。",
+  "云母薄片压在靴筒外层，弯折处露出细细的银线。",
+  "厚岩护片包住脚背，落地时会带出低沉的磕响。",
+  "足甲向上收拢，挡住贴地刮来的碎盐与砂粒。",
+  "晶砂嵌在柔软鞋底，磨平的边缘又补过一层。",
+  "暗红矿炭嵌入戒圈，晶面中央透出余火般的亮色。",
+  "指环内嵌一圈细晶，碰到石面时会轻轻作响。",
+  "白盐覆住骨环的旧纹，内侧仍能摸到细密的孔隙。",
+  "棱面绕指轮交错排列，一束光会被分成几道细线。",
+  "石戒表面保留天然小孔，孔口都已仔细磨圆。",
+  "赤矿切面朝外，背面磨平，贴着衣襟也不硌人。",
+  "暗色晶坠悬在细绳上，深处的光比表面更清晰。",
+  "盐符中央刻有浅槽，凝出的水珠沿槽聚在尖端。",
+  "羽状盐晶逆向交叠，细绳绕过根部，避免折断晶尖。",
+  "陶石小片刻着简朴的护纹，边角被手指摩挲得发亮。",
+  "两块琉砂晶隔着短结悬垂，走动时只会轻轻相触。",
+  "厚壳包着缓缓涌动的熔流，壳缝透出暗红的光。",
+  "层叠岩片收拢成核，外壳的旧裂隙已被矿质填满。",
+  "透明晶簇向内聚合，深处留着数道交错的光纹。"
+];
 const pieces=['helm','armor','gloves','boots'],labels={helm:'冠',armor:'甲',gloves:'握',boots:'履',ring:'环',amulet:'坠',core:'核'};
 export const sets=[
 {id:'ashen.caldera',name:'赤脉泄压',branch:'heat',description:'四片矿甲沿热脉留出泄压孔。',two:{description:'热量积蓄技能额外获得5热量。'},four:{description:'消耗热量的伤害技能提高15%伤害；退火壳提高20%护盾。'}},
@@ -13,14 +52,14 @@ const scatter=[
 ['ring','余炭戒','ring_attack'],['ring','鸣晶指环','ring_element'],['ring','白盐骨环','ring_survival'],['ring','折辉指轮','ring_element'],['ring','孔纹石戒','ring_survival'],
 ['amulet','赤矿吊坠','amulet_attack'],['amulet','沉辉晶坠','amulet_element'],['amulet','凝露盐符','amulet_survival'],['amulet','逆风盐结坠','amulet_element'],['amulet','陶石护符','amulet_survival'],['amulet','琉砂双晶坠','amulet_attack'],
 ['core','熔核','core_molten'],['core','岩核','core_stone'],['core','晶核','core_crystal']];
-export const equipment=scatter.map(([slot,name,baseVariant,weaponType],i)=>{const id=`ashen.scatter.${String(i+1).padStart(2,'0')}`;return {id,name,slot,baseVariant,weaponType:weaponType??null,originRace:'ashen',kind:'scatter',setId:null,description:`${name}保留了荒原矿层的天然纹路，磨亮的边缘与暗色石面相衬。`,pixelAppearance:`细密矿纹、清晰${slot}轮廓、黑曜与琥珀晶面`,visualVariant:id,visualKey:id,iconKey:slot,...(slot==='core'?{raceRestriction:'ashen'}:{})};});
+export const equipment=scatter.map(([slot,name,baseVariant,weaponType],i)=>{const id=`ashen.scatter.${String(i+1).padStart(2,'0')}`;return {id,name,slot,baseVariant,weaponType:weaponType??null,originRace:'ashen',kind:'scatter',setId:null,description:scatterDescriptions[i],pixelAppearance:`细密矿纹、清晰${slot}轮廓、黑曜与琥珀晶面`,visualVariant:id,visualKey:id,iconKey:slot,...(slot==='core'?{raceRestriction:'ashen'}:{})};});
 for(const set of sets)for(const slot of pieces){const id=set.id+'.'+slot;equipment.push({id,name:set.name+'·'+labels[slot],slot,weaponType:null,baseVariant:slot+'_'+(set.branch==='crystal'?'vitality':'armor'),originRace:'ashen',kind:'set',setId:set.id,description:set.description,visualVariant:id,visualKey:id,iconKey:slot,minimumArea:3,quality:3,special:null});}
 // Boss cores share the single regional legendary pool. Story core is never a pool candidate.
 export const legendaries=[
 {id:'ashen-molten-core',ready:true,name:'余烬·不灭薪',slot:'core',baseVariant:'core_molten',originRace:'ashen',raceRestriction:'ashen',exclusiveId:'ashen-ember-fuel',exclusiveName:'不灭薪',source:'own-race-boss',fixedEffect:{type:'moltenAttackStacks'},description:'黑曜矿壳包裹着不曾冷却的赤色矿心。',exclusive:{description:'累计消耗30热量获得1层攻击增益，每层20%，最多3层（60%）。每次触发延长6秒；满层继续延长时长，未满30的消耗保留。卸下清空。'}},
 {id:'ashen-stone-core',ready:true,name:'负山·长眠垒',slot:'core',baseVariant:'core_stone',originRace:'ashen',raceRestriction:'ashen',exclusiveId:'ashen-mountain-rest',exclusiveName:'长眠垒',source:'own-race-boss',description:'沉重岩层合拢成核，金色脉络隐于层间。',exclusive:{description:'敌方直接攻击击破护盾时，获得2岩片并恢复4%最大生命；8秒战斗冷却。护盾自然到期不触发。'}},
 {id:'ashen-crystal-core',ready:true,name:'折曦·三声遗响',slot:'core',baseVariant:'core_crystal',originRace:'ashen',raceRestriction:'ashen',exclusiveId:'ashen-prism-beam',exclusiveName:'三声遗响',source:'own-race-boss',equipmentSkill:{id:'ashen-prism-beam',cooldownMs:30000,ignoresArmor:true,ignoresElementResistance:true,enabled:true,coefficient:2,scope:'single',automatic:true,usesActiveSlot:false},description:'明暗晶面折射出交织的三束微光。',exclusive:{description:'装备后每30秒战斗时间自动向当前目标释放200%攻击力光线，无视护甲和元素抗性，仍先扣护盾。不占主动技能槽；卸下重置计时。'}},
-{id:'ashen-primal-core',ready:true,name:'原初核心',slot:'core',baseVariant:'core_primal',originRace:'ashen',raceRestriction:'ashen',exclusiveId:'ashen-primal-power',exclusiveName:'原初之力',source:'main-story',questOnly:true,unique:true,ordinaryAffixCount:0,fixedEffect:{type:'unskilledAttackMultiplier',multiplier:2},description:'尚未留下任何刻痕的原初矿心。',exclusive:{description:'不装备任何主动或被动技能时，攻击力翻倍。只提供基础属性，不附带随机普通词条。主线获取尚未开放。'}}
+{id:'ashen-primal-core',ready:true,name:'原初核心',slot:'core',baseVariant:'core_primal',originRace:'ashen',raceRestriction:'ashen',exclusiveId:'ashen-primal-power',exclusiveName:'原初之力',source:'main-story',questOnly:true,unique:true,ordinaryAffixCount:0,fixedEffect:{type:'unskilledAttackMultiplier',multiplier:2},description:'尚未留下任何刻痕的原初矿心。',exclusive:{description:'不装备任何主动或被动技能时，攻击力翻倍。只提供基础属性，不附带随机普通词条。通过主线剧情获取。'}}
 ];
 export const coreVariants={core_primal:{slot:'core',atk:1/3,armor:1/3,hp:1/3},core_molten:{slot:'core',atk:.5,armor:.5,hp:0},core_stone:{slot:'core',atk:0,armor:.5,hp:.5},core_crystal:{slot:'core',atk:.5,armor:0,hp:.5}};
 export const weaponVariants={armguard_balanced:{slot:'weapon',atk:.75,armor:.15,hp:.10},armguard_attack:{slot:'weapon',atk:.85,armor:.10,hp:.05},armguard_defensive:{slot:'weapon',atk:.65,armor:.25,hp:.10}};

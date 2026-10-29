@@ -64,7 +64,7 @@ try{
    }
    assert.equal(e.rewardDefinitionId,d.id,'sampled factory '+d.id);assert(E.validSave(s),'factory save '+d.id);
    if(d.id==='dwarf.a08.elite'){
-    assert.equal(e.enemies.length,3);assert(e.enemies.every(x=>x.parameterSetId===MONSTER_BALANCE_ID));for(const [i,share] of [.6,.2,.2].entries()){assert.equal(e.enemies[i].hp,monsterParameters(d.id).hp*share);assert.equal(e.enemies[i].atk,monsterParameters(d.id).atk*share);}
+    assert.equal(e.enemies.length,3);assert(e.enemies.every(x=>x.parameterSetId===MONSTER_BALANCE_ID));for(const [i,share] of [.6,.2,.2].entries()){assert.equal(e.enemies[i].hp,monsterParameters(d.id).hp*share);assert.equal(e.kind,'dungeon');assert.equal(e.dungeonStage,3);assert.equal(d.rank,'elite');/* Fixed authorized dungeon elite budget, then authored follower share. */assert.equal(e.enemies[i].atk,monsterParameters(d.id).atk*3*share);assert.equal(e.enemies[i].elementalPower,monsterParameters(d.id).elementalPower*3*share);assert.equal(e.enemies[i].armor,monsterParameters(d.id).armor);assert.equal(e.enemies[i].basicIntervalMs,monsterParameters(d.id).basicIntervalMs);}
     for(const f of e.enemies.slice(1)){assert(f.follower);assert.equal(nextDwarfAction(f,s.lastSeen+3000).id,'basic');}
    }
    // Mechanism-only fixture: production budget checked above; isolate typed actions from lethal damage.

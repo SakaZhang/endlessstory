@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';import * as E from './dist/engine.js';import {WORLD_MONSTERS,monsterParameters} from './dist/world-content.js';import {dungeonDamageMultiplier,DUNGEON_DAMAGE_MULTIPLIERS} from './dist/dungeon-threat.js';
+assert.deepEqual(DUNGEON_DAMAGE_MULTIPLIERS,{normal:6,elite:3});
+for(const kind of ['field','boss'])for(const rank of ['normal','elite','boss'])assert.equal(dungeonDamageMultiplier(kind,rank),1);
+let actors=0,followers=0,bosses=0;const random=Math.random;Math.random=()=>.3;
+for(const race of E.RACE_KEYS)for(let area=1;area<=10;area++)for(const kind of ['field','dungeon','boss'])for(const stage of kind==='dungeon'?[1,3]:[1]){
+ const s=E.fresh(race);s.level=100;E.normalizeHealth(s,s.lastSeen);E.normalizeAreaProgress(s);s.areaProgress[race]={unlocked:[1,2,3,4,5,6,7,8,9,10],cleared:[1,2,3,4,5,6,7,8,9]};const site=`${race}.a${String(area).padStart(2,'0')}`,id=site+'.'+kind;s.siteId=site;s.location=area-1;s.expedition.fieldId=site+'.field';s.heroHp=E.stats(s).hp;if(!E.INSTANCES[id]?.enabled)continue;if(kind==='boss')bosses++;
+ if(stage===3)s.dungeonRun={instanceId:id,runId:'synthetic-static-contract',stage:3};
+ const e=E.startInstanceEncounter(s,id,s.lastSeen);assert(e);const count=e.fieldGroup?e.enemies.filter(u=>!u.follower).length:1;
+ for(const u of e.enemies){const def=WORLD_MONSTERS[u.definitionId],p=monsterParameters(u.definitionId),share=def.trait?.type==='followers'?def.trait.shares[u.follower?e.enemies.indexOf(u):0]:1;const threat=kind==='dungeon'?(stage===3?3:6):1;assert.equal(u.max,p.hp*share*(e.fieldGroup?1.5/count:1));assert.equal(u.armor,p.armor);assert.equal(u.basicIntervalMs,p.basicIntervalMs);assert(Math.abs(u.atk-p.atk*share*(e.fieldGroup?1.2/count:1)*threat)<1e-8);assert(Math.abs(u.elementalPower-p.elementalPower*share*(e.fieldGroup?1.2/count:1)*threat)<1e-8);actors++;followers+=u.follower;}
+ const saved=JSON.parse(JSON.stringify(s)),before=JSON.stringify(saved.activeEncounter.enemies);assert(E.normalizeHealth(saved,saved.lastSeen));assert.equal(JSON.stringify(saved.activeEncounter.enemies),before,'load does not multiply saved actors again');assert(E.validSave(saved));
+}
+Math.random=random;assert(followers>0);assert.equal(bosses,17);console.log(`PASS ${actors} actual field/dungeon actors including ${followers} followers and ${bosses} unchanged bosses: dungeon-only power, unchanged HP/armor/cadence, hydration preserves stored power.`);

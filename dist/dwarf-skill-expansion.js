@@ -26,8 +26,8 @@ export const DWARF_EXPANDED_DESCRIPTIONS=freeze({...OLD_DESCRIPTIONS,
  shield_relay:{base:'单体物理攻击，自身有护盾时更强；不消耗护盾。',axe:'斧：命中后降低目标命中。',hammer:'锤：命中后补充一个独立短盾。'},
  prospectors_mark:{base:'标记单体弱点，降低攻击与护甲，不造成直接伤害。',axe:'斧：削弱持续更久。',hammer:'锤：降攻更强。'},
  ember_temper:{base:'仅装槽生效：提高火抗与所受治疗；不增加火伤或护盾。'},
- anvil_balance:{base:'仅装槽生效：持斧提高防御；持锤提高最大生命；其他武器提高少量防御。不会凭空恢复生命。'},
- patient_craft:{base:'仅装槽生效：生命不高于一半时，提高防御与物理穿甲；生命恢复后立即失效。'}
+ anvil_balance:{base:'仅装槽生效：持斧提高防御；持锤提高最大生命；其他武器提高少量防御。提高生命上限时不恢复生命。'},
+ patient_craft:{base:'仅装槽生效：生命不高于一半时，提高防御与物理穿甲；生命高于一半时失效。'}
 });
 export function dwarfExpansionConfigs(st){const A=st.atk,H=st.hp,D=st.armor;return {
  ore_rally:{cooldownMs:12100,durationMs:5500,penetrationUp:.20*A,lifestealUp:10,defenseUp:.18*D},

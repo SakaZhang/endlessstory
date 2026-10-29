@@ -1,3 +1,4 @@
+import {drawLegendaryFrame,legendaryFrameFiles,legendaryFrameBounds} from './legendary-weapon-layer.js';
 import {drawBattleBackground} from './background-viewport.js';
 import {storyActorPresentationScale} from './story-actor-art.js';
 import {loadImageAsset} from './asset-loader.js';
@@ -22,7 +23,9 @@ export function liveHeroWeaponType(state){
  return item?.slot==='weapon'?item.weaponType??null:null;
 }
 // Foreign gear keeps its gameplay stats, but only explicit same-race art may represent it.
-export function liveHeroSpriteFor(weapon,manifest,race='dwarf'){
+export function liveHeroSpriteFor(weapon,manifest,race='dwarf',legendaryId=null){
+ const legendary=manifest?.legendaryHeroSprites?.[race]?.[legendaryId];
+ if(legendary)return legendary;
  const native=manifest?.raceHeroWeaponSprites?.[race]?.[weapon];
  if(native)return native;
  if(race!=='dwarf')return manifest?.raceHeroNeutralSprites?.[race]??null;
@@ -38,13 +41,13 @@ function neutralAnimationGate(animations,key,manifest){if(key!=='hero-neutral')r
 function drawPixelNotice(canvas,label,{width=480,height=270}={}){if(!canvas?.getContext)return false;canvas.width=width;canvas.height=height;const c=canvas.getContext('2d');c.imageSmoothingEnabled=false;c.fillStyle='#132232';c.fillRect(0,0,width,height);c.strokeStyle='#516b80';c.lineWidth=2;c.strokeRect(6,6,width-12,height-12);c.fillStyle='#e7cb8d';c.font='12px sans-serif';c.textAlign='center';c.fillText(label,width/2,height/2,Math.max(24,width-20));return true;}
 export function drawLiveHeroPortrait(canvas,state,{manifest,images,time=0}={}){
  const width=canvas?.width??160,height=canvas?.height??150;
- const key=heroSpriteFor(liveHeroWeaponType(state),manifest,state.race),sprite=manifest?.sprites?.[key];
+ const key=heroSpriteFor(liveHeroWeaponType(state),manifest,state.race,state.inventory?.find(it=>it.id===state.equip?.weapon)?.legendaryId),sprite=manifest?.sprites?.[key];
  if(!sprite)return drawPixelNotice(canvas,manifest?'角色外观暂不可用':'角色外观加载中',{width,height});
  const ids=sprite.animations.idle,frame=sprite.frames.find(f=>f.id===ids[Math.floor(time/500)%ids.length]),img=images?.get(frame?.file);
- if(!img)return drawPixelNotice(canvas,'角色素材待加载 · 可重试',{width,height});
- const c=canvas.getContext('2d');c.imageSmoothingEnabled=false;c.clearRect(0,0,width,height);const box=frame.solidBBox??[0,0,192,192],w=box[2]-box[0]+1,h=box[3]-box[1]+1,fitScale=Math.max(.5,Math.min((width-12)/w,(height-10)/h)),scale=HERO_REFERENCE_HEIGHTS[state.race]?Math.min(fitScale,(height-10)/112*heroPresentationScale(sprite,state.race)):fitScale;
+ if(!img||legendaryFrameFiles(sprite,frame).some(file=>!images?.get(file)))return drawPixelNotice(canvas,'角色素材待加载 · 可重试',{width,height});
+ const c=canvas.getContext('2d');c.imageSmoothingEnabled=false;c.clearRect(0,0,width,height);const box=sprite.legendaryWeapon?legendaryFrameBounds(sprite,frame):frame.solidBBox??[0,0,192,192],w=box[2]-box[0]+1,h=box[3]-box[1]+1,fitScale=Math.max(.5,Math.min((width-12)/w,(height-10)/h)),scale=HERO_REFERENCE_HEIGHTS[state.race]?Math.min(fitScale,(height-10)/112*heroPresentationScale(sprite,state.race)):fitScale;
  c.save();if(heroPortraitFlipX(sprite,frame)){c.translate(width,0);c.scale(-1,1);}
- c.drawImage(img,Math.round((width-w*scale)/2-box[0]*scale),Math.round(height-5-(box[3]+1)*scale),Math.round(192*scale),Math.round(192*scale));c.restore();return true;
+ if(sprite.legendaryWeapon)drawLegendaryFrame(c,sprite,frame,images,{x:Math.round((width-w*scale)/2-box[0]*scale),y:Math.round(height-5-(box[3]+1)*scale),scale});else c.drawImage(img,Math.round((width-w*scale)/2-box[0]*scale),Math.round(height-5-(box[3]+1)*scale),Math.round((sprite.frameSize?.[0]??192)*scale),Math.round((sprite.frameSize?.[1]??192)*scale));c.restore();return true;
 }
 export const LIVE_MONSTER_SPRITES=Object.freeze({'dwarf.a01.normal.1':'raider','dwarf.a01.normal.2':'pit-rat','dwarf.a01.normal.3':'golem','dwarf.a01.elite':'shield-captain'});
 const identity=u=>u.monsterId??u.definitionId??null;
@@ -87,28 +90,28 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
  const reset=(dropHistory=true)=>{presentation.clear();if(dropHistory)seen.clear();deathStarts.clear();positions={};metadata={};slots=new Map();presentation=createBattleSlicePresentation(positions,metadata,{preserveAttack:true});};
  const coverage=()=>{
   const base={mode:'fallback',reason:null,label:'像素画面暂不可用',missingIds:[],coverage:[]};
-  if(disposed)return {...base,reason:'disposed',label:'像素画面已释放'};
+  if(disposed)return {...base,reason:'disposed',label:'战斗画面已关闭'};
   if(!snapshot)return {...base,mode:'idle',reason:'no-encounter',label:'等待战斗'};
-  if(!snapshot.campRace&&!areaKey(snapshot.areaId))return {...base,reason:'area-not-covered',label:'当前区域尚未接入像素背景'};
+  if(!snapshot.campRace&&!areaKey(snapshot.areaId))return {...base,reason:'area-not-covered',label:'此处暂无场景图'};
 
   if(loadError)return {...base,reason:'asset-load-failed',label:'像素素材加载失败 · 请重试',error:loadError};
   if(!manifest)return {...base,reason:'assets-not-loaded',label:'像素外观准备中'};
-  const backgrounds=liveSceneBackgrounds(snapshot,manifest);if(!backgrounds.length)return {...base,reason:'area-not-covered',label:'当前区域尚未接入像素背景'};
+  const backgrounds=liveSceneBackgrounds(snapshot,manifest);if(!backgrounds.length)return {...base,reason:'area-not-covered',label:'此处暂无场景图'};
   const rows=snapshot.encounter.enemies.map(u=>({unitId:u.id,monsterId:identity(u),follower:!!u.follower,sprite:liveActorSprite(u,manifest)}));
   const missing=rows.filter(r=>!r.sprite||!manifest.sprites?.[r.sprite]);
-  if(missing.length)return {...base,reason:'monster-not-covered',label:'当前怪物尚未全部覆盖像素外观',missingIds:missing.map(r=>r.monsterId??r.unitId),coverage:rows};
-  if(rows.length>7)return {...base,reason:'formation-not-covered',label:'当前编队尚未覆盖像素布局',coverage:rows};
-  const heroSprite=heroSpriteFor(metadata.hero?.weaponType,manifest,metadata.hero?.race);if(!heroSprite||!manifest.sprites?.[heroSprite])return {...base,reason:'hero-weapon-not-covered',label:'当前角色外观暂不可用',coverage:rows,heroWeapon:metadata.hero?.weaponType??null};
+  if(missing.length)return {...base,reason:'monster-not-covered',label:'部分怪物外观暂不可用',missingIds:missing.map(r=>r.monsterId??r.unitId),coverage:rows};
+  if(rows.length>7)return {...base,reason:'formation-not-covered',label:'当前编队暂无法显示',coverage:rows};
+  const heroSprite=heroSpriteFor(metadata.hero?.weaponType,manifest,metadata.hero?.race,metadata.hero?.legendaryId);if(!heroSprite||!manifest.sprites?.[heroSprite])return {...base,reason:'hero-weapon-not-covered',label:'当前角色外观暂不可用',coverage:rows,heroWeapon:metadata.hero?.weaponType??null};
   const sprites=[heroSprite,...new Set(rows.map(r=>r.sprite))];
-  const files=[...backgrounds,...sprites.flatMap(key=>manifest.sprites?.[key]?.frames??[])];
-  if(sprites.some(key=>!manifest.sprites?.[key]?.animations?.idle?.length)||files.some(f=>!images.get(f.file)))return {...base,reason:'asset-frames-missing',label:'像素帧尚未完整加载',coverage:rows};
-  return {...base,mode:'ready',reason:null,label:snapshot.campRace?RACIAL_CAMPS[snapshot.campRace]:snapshot.idle?'野外待机':'实时像素战斗',campRace:snapshot.campRace,heroAppearance:neutralHero(heroSprite,manifest)?legacyNeutralIdle(heroSprite,manifest)?'neutral-idle':'neutral-generic':'equipped-weapon',heroAppearanceNote:neutralHero(heroSprite,manifest)?'中立外观 · 当前武器外观未覆盖':'',backgroundIds:backgrounds.map(bg=>bg.id),coverage:rows};
+  const files=[...backgrounds,...sprites.flatMap(key=>(manifest.sprites?.[key]?.frames??[]).flatMap(frame=>legendaryFrameFiles(manifest.sprites[key],frame).map(file=>({file}))))];
+  if(sprites.some(key=>!manifest.sprites?.[key]?.animations?.idle?.length)||files.some(f=>!images.get(f.file)))return {...base,reason:'asset-frames-missing',label:'战斗画面仍在加载',coverage:rows};
+  return {...base,mode:'ready',reason:null,label:snapshot.campRace?RACIAL_CAMPS[snapshot.campRace]:snapshot.idle?'野外待机':'实时像素战斗',campRace:snapshot.campRace,heroAppearance:neutralHero(heroSprite,manifest)?legacyNeutralIdle(heroSprite,manifest)?'neutral-idle':'neutral-generic':'equipped-weapon',heroAppearanceNote:neutralHero(heroSprite,manifest)?'暂用基础外观 · 当前武器外观不可用':'',backgroundIds:backgrounds.map(bg=>bg.id),coverage:rows};
  };
  function rebuildPositions(){
   const units=snapshot.encounter.enemies;for(const u of units)if(!slots.has(u.id))slots.set(u.id,slots.size);
   const layout=units.length<=1?[350]:units.length===2?[305,405]:[275,350,425];
   const baseline=snapshot.campRace?(manifest?.campBackgrounds?.[snapshot.campRace]?.baseline??195):manifest?.areaBaselines?.[areaKey(snapshot.areaId)]??203;
-  positions.hero={x:snapshot.campRace?144:100,y:baseline,sprite:heroSpriteFor(metadata.hero?.weaponType,manifest,metadata.hero?.race),ranged:['bow','staff'].includes(metadata.hero?.weaponType)};
+  positions.hero={x:snapshot.campRace?144:100,y:baseline,sprite:heroSpriteFor(metadata.hero?.weaponType,manifest,metadata.hero?.race,metadata.hero?.legendaryId),ranged:['bow','staff'].includes(metadata.hero?.weaponType)};
   const heroSprite=manifest?.sprites?.[positions.hero.sprite],heroIdle=heroSprite?.frames.find(f=>f.id===heroSprite.animations.idle[0]),heroBox=heroIdle?.solidBBox??heroIdle?.alphaBBox;
   if(heroBox)positions.hero.scale=heroPresentationScale(heroSprite,metadata.hero?.race);
   for(const u of units){
@@ -125,13 +128,13 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
  }
  function sceneFiles(){
   if(!manifest||!snapshot)return [];
-  const hero=heroSpriteFor(metadata.hero?.weaponType,manifest,metadata.hero?.race);
+  const hero=heroSpriteFor(metadata.hero?.weaponType,manifest,metadata.hero?.race,metadata.hero?.legendaryId);
   // The always-visible hero rail needs idle frames, not the hidden battle's
   // backgrounds, enemies, attacks, hurt or death animations. Full lifecycle
   // frames are requested when the battle view becomes visible, before drawing.
-  if(!visible){const sprite=manifest.sprites?.[hero],idle=new Set(sprite?.animations?.idle??[]);return [...new Set((sprite?.frames??[]).filter(frame=>idle.has(frame.id)).map(frame=>frame.file))];}
+  if(!visible){const sprite=manifest.sprites?.[hero],idle=new Set(sprite?.animations?.idle??[]);return [...new Set((sprite?.frames??[]).filter(frame=>idle.has(frame.id)).flatMap(frame=>legendaryFrameFiles(sprite,frame)))];}
   const sprites=[hero,...snapshot.encounter.enemies.map(u=>liveActorSprite(u,manifest))];
-  return [...new Set([...liveSceneBackgrounds(snapshot,manifest),...sprites.flatMap(key=>manifest.sprites?.[key]?.frames??[])].map(f=>f.file))];
+  return [...new Set([...liveSceneBackgrounds(snapshot,manifest),...sprites.flatMap(key=>(manifest.sprites?.[key]?.frames??[]).flatMap(frame=>legendaryFrameFiles(manifest.sprites[key],frame).map(file=>({file}))))].map(f=>f.file))];
  }
  function updateScope(){
   const files=sceneFiles(),key=files.slice().sort().join('\n');desiredFiles=new Set(files);
@@ -177,7 +180,7 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
   const displayEncounter=idle?{heroHp:state.heroHp??heroMaxHp,enemies:[],areaId:areaOf(state,null),targetId:null}:encounter;
   // Detached snapshots guarantee later game mutations cannot race a presentation frame.
   snapshot={idle,campRace,encounter:{...structuredClone(displayEncounter),heroHp:idle||encounter.done?state.heroHp??heroMaxHp:displayEncounter.heroHp},areaId:areaOf(state,displayEncounter),units:idle?[]:normalizeBattleEnemies(encounter,now),gameNow:now};
-  heroMaxHp=stats(structuredClone(state)).hp;Object.assign(metadata,{hero:{weaponType:liveHeroWeaponType(state),race:state.race}});rebuildPositions();if(!providedImages&&updateScope())void load();return coverage();
+  heroMaxHp=stats(structuredClone(state)).hp;Object.assign(metadata,{hero:{weaponType:liveHeroWeaponType(state),race:state.race,legendaryId:state.inventory?.find(it=>it.id===state.equip?.weapon)?.legendaryId??null}});rebuildPositions();if(!providedImages&&updateScope())void load();return coverage();
  }
  function enqueue(events,at){
   if(disposed||!snapshot||!visible||coverage().mode!=='ready')return {accepted:0,reason:'not-presenting'};

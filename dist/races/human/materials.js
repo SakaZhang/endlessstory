@@ -59,9 +59,7 @@ export const HUMAN_MATERIALS={
     "tags": [
       "植物"
     ],
-    "functionalTags": [
-      "recoveryBase"
-    ],
+    "functionalTags": ["recoveryBase","luckBase","luckAux"],
     "qualityRange": [
       0,
       1,

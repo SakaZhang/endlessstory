@@ -58,6 +58,26 @@ async function probe(output,report){
    assert.equal(Object.keys(NPC_PORTRAIT_REGISTRY).length,30);
    for(const descriptor of Object.values(NPC_PORTRAIT_REGISTRY))await visit(new URL(descriptor.file,release),url.href);
   }
+  if(path==='pixel-map-scenes.js'){
+   // Exercise the emitted loader's real URL construction, not a source-text fetch spelling.
+   // The injected transport records requests only: no network or browser/storage access.
+   const {createPixelMapScenes}=await import(pathToFileURL(join(emittedRoot,path)));
+   const requested=[];
+   const scenes=createPixelMapScenes({fetcher:async source=>{requested.push(new URL(source,release));throw Error('dependency probe transport');}});
+   try{await Promise.all([scenes.load('world'),scenes.load('dwarf.a01')]);}finally{scenes.dispose();}
+   assert.equal(requested.length,2,'map loader must request both manifest families');
+   assert.equal(new Set(requested.map(u=>u.href)).size,2,'distinct world/exploration manifest URLs');
+   let worldCount=0,explorationCount=0;
+   for(const manifestUrl of requested){
+    await visit(manifestUrl,url.href);
+    const manifest=JSON.parse(await readFile(join(emittedRoot,manifestUrl.pathname.slice(release.pathname.length)),'utf8'));
+    if(manifest.areaBackgrounds){explorationCount++;assert.equal(Object.keys(manifest.areaBackgrounds).length,50,'all exploration areas');}
+    else{worldCount++;assert.deepEqual(manifest.size,[960,540]);assert.equal(typeof manifest.image,'string');await visit(new URL(manifest.image,manifestUrl),manifestUrl.href);}
+    assert.ok(manifest.backgrounds.length>0,'map manifest image dependencies');
+    for(const image of manifest.backgrounds)await visit(new URL(image.file,manifestUrl),manifestUrl.href);
+   }
+   assert.equal(worldCount,1);assert.equal(explorationCount,1);
+  }
   if(ext==='js'&&text.includes("fetch(assetRoot+'exploration-manifest.json')")){
    const assetRoot=text.match(/assetRoot\s*=\s*['"]([^'"]+)['"]/);assert.ok(assetRoot,'unreviewed exploration assetRoot');
    const manifestUrl=new URL(assetRoot[1]+'exploration-manifest.json',release);await visit(manifestUrl,url.href);

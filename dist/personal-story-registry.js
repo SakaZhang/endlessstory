@@ -2,7 +2,7 @@ import {PERSONAL_ARC_CONTENT} from './personal-story-content.js';
 const names={dwarf:'布洛克 · 矿班',human:'罗什福尔 · 接应队',elf:'莱姆斯 · 照护者',goblin:'奇克 · 家人',ashen:'砾恩 · 族人'};
 export const PERSONAL_STORY_SCENES=Object.fromEntries(PERSONAL_ARC_CONTENT.map(d=>[d.id,{
  id:d.id,sourceScene:d.id,pov:d.race,chapter:d.chapter,siteId:d.siteId,title:d.title,npc:names[d.race],lines:d.intro,lateIntro:d.lateIntro,
- objective:'亲自完成所选方案的两项现场目标；可暂存个人线，继续主线。',flags:[],knowledge:[],optional:true,personal:true,arcId:d.arcId,
+ objective:'按所选方案完成两项行动。也可以先离开，回来后接着办。',flags:[],knowledge:[],optional:true,personal:true,arcId:d.arcId,
  requires:[d.gate,...(d.number>1&&d.id!=='personal.dwarf.coup.03'?[`${d.arcId}.${String(d.number-1).padStart(2,'0')}`]:[])],
  ...(d.id==='personal.dwarf.coup.03'?{requiresAny:[['personal.dwarf.coup.02'],['flag:INVASION_BEGAN']]}:{}),
  choices:d.choices.map(c=>({...c,flags:[],knowledge:[]})),

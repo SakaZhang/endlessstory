@@ -122,7 +122,7 @@ for(const file of ['m3-content-tests.mjs','m3-material-tests.mjs','m3-slow-tests
 for(const file of ['m4-content-tests.mjs','m4-material-tests.mjs','m4-runtime-tests.mjs','m4-production-activation-tests.mjs','m4-rewards-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
 
 // v0.41 fixed recipes and real buff-expiry parity require isolated production realms.
-for(const file of ['potion-catalog-tests.mjs','potion-expansion-tests.mjs','potion-expiry-parity-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+for(const file of ['potion-catalog-tests.mjs','potion-expansion-tests.mjs','potion-expiry-parity-tests.mjs','luck-potion-early-material-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
 
 // v0.42 normal battle presentation observes committed live events only.
 for(const file of ['live-combat-events-tests.mjs','live-battle-view-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
@@ -261,3 +261,29 @@ for(const file of ['idle-action-controller-tests.mjs','auto-idle-safety-tests.mj
 runAffixSourceTest(process.execPath,[new URL('./elf-monster-facing-regression-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
 // Runtime-only safe framing removes adjacent scene strips without touching source PNGs.
 runAffixSourceTest(process.execPath,[new URL('./elf-background-viewport-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+// Editorial refresh preserves gameplay contracts and legendary display identity.
+for(const file of ['interface-copy-tests.mjs','racial-equipment-copy-tests.mjs','copy-mechanics-invariants-tests.mjs','legendary-display-ui-tests.cjs','legendary-race-art-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+runAffixSourceTest(process.execPath,[new URL('./narrative-copy-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+runAffixSourceTest(process.execPath,[new URL('./racial-material-copy-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+// Current-location automatic boss UI, safe boundaries and independent failure retry wait.
+runAffixSourceTest(process.execPath,[new URL('./auto-current-boss-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+// Independently authorized boss damage calibration: no HP inflation or player nerfs.
+for(const file of ['boss-growth-parameter-tests.mjs','boss-special-boundary-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+runAffixSourceTest(process.execPath,[new URL('./dungeon-damage-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+// Complete read-only attributes and redesigned hidden recipe presentation.
+for(const file of ['character-stats-tests.mjs','character-stats-app-ui-tests.cjs','return-ring-ui-tests.mjs','return-ring-app-ui-tests.cjs','story-copy-compatibility-tests.mjs','story-copy-compatibility-app-ui-tests.cjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+runAffixSourceTest(process.execPath,[new URL('./material-fusion-economy-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+runAffixSourceTest(process.execPath,[new URL('./material-recipe-expansion-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+runAffixSourceTest(process.execPath,[new URL('./shared-legendary-weapon-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+runAffixSourceTest(process.execPath,[new URL('./return-ring-contract-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+runAffixSourceTest(process.execPath,[new URL('./return-ring-experience-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+runAffixSourceTest(process.execPath,[new URL('./character-stats-experience-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+runAffixSourceTest(process.execPath,[new URL('./dungeon-loot-receipts-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+runAffixSourceTest(process.execPath,[new URL('./experience-progression-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+runAffixSourceTest(process.execPath,[new URL('./bow-direction-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+runAffixSourceTest(process.execPath,[new URL('./map-manifest-timeout-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});

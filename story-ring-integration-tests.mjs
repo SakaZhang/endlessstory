@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import * as E from './dist/engine.js';
 import {completeStory,visitSceneSite} from './story-event-test-fixture.mjs';
 import {RETURN_RING_EVENTS,RETURN_RING_MATERIALS} from './dist/return-ring-content.js';
-import {beginNpcEvent,npcEventReady} from './dist/npc-events.js';
+import {beginNpcEvent,npcEventReady,investigateNpcEvent} from './dist/npc-events.js';
 import {syncReturnRingRecipe,returnRingRareBonus} from './dist/return-ring-state.js';
 import {createReturnRingCraftService} from './dist/return-ring-crafting.js';
 import {claimTaskReward} from './dist/task-reward-transaction.js';
@@ -34,8 +34,8 @@ for(const race of races){
 
 // One real character visits and claims all five one-time events, with canonical
 // story receipts, real movement, area6 unlocks and post-acceptance combat.
-let s=clone(completed.get('dwarf'));
-// A level-60 test character receives valid level-matched gear through the real
+let s=clone(completed.get('dwarf'));s.level=100;s.xp=0;
+// A level-100 test character receives valid level-matched gear through the real
 // generator/equip APIs; encounter HP, enemies and settlement are never forged.
 for(const [socket,id] of Object.entries(s.equip)){const old=s.inventory.find(i=>i.id===id),gear=E.item(old.slot,s.level,null,2,{originRace:s.race});s.inventory.push(gear);assert(E.equipItem(s,gear.id,socket));}
 assert(E.validSave(s));
@@ -43,7 +43,10 @@ unlockSix(s,'goblin');unlockSix(s,'ashen');
 for(const def of RETURN_RING_EVENTS){
  visitSceneSite(s,{id:def.id,siteId:def.areaId});const beforeKills=s.kills;
  assert(beginNpcEvent(s,def.id,s.lastSeen));assert(!npcEventReady(s,def.id),'old travel kill never counts');
- fight(s,E.startInstanceEncounter(s,def.areaId+'.field',s.nextBattleAt+2000));assert.equal(s.kills,beforeKills+1);assert(npcEventReady(s,def.id));
+ const [trace,clear,recover]=def.taskObjective.checkpoints;
+ assert(investigateNpcEvent(s,def.id,trace.id,s.lastSeen));
+ enter(s,clear.nodeId);do{fight(s);if(s.dungeonRun)assert(E.startInstanceEncounter(s,clear.nodeId,s.nextBattleAt+2000));}while(s.dungeonRun);
+ assert.equal(s.kills,beforeKills+3);assert(!npcEventReady(s,def.id));assert(investigateNpcEvent(s,def.id,recover.id,s.lastSeen));assert(npcEventReady(s,def.id));
  const store=memory(s),before=clone(s),raw=store.getItem(SAVE_KEY);store.fail=true;
  assert.equal(claimTaskReward(store,s,def.id,{now:s.lastSeen}).reason,'storage');assert.deepEqual(s,before);assert.equal(store.getItem(SAVE_KEY),raw);
  store.fail=false;const tx=claimTaskReward(store,s,def.id,{now:s.lastSeen});assert(tx.ok);s=tx.game;

@@ -1,3 +1,6 @@
+import {materialFusionQualityWeights,materialFusionSlotBias,favorableQualityProbabilities} from './material-fusion-policy.js';
+import {dungeonLootSnapshot,recordDungeonLootReceipt,validDungeonLootReceipts} from './dungeon-loot-receipts.js';
+import {dungeonDamageMultiplier} from './dungeon-threat.js';
 import {ordinaryAffixKeys} from './affix-slot-pools.js';
 export {SLOT_AFFIX_POOLS} from './affix-slot-pools.js';
 import {validSkillCondition} from './skill-conditions.js';
@@ -366,7 +369,7 @@ export function fresh(race='dwarf'){
  const pack=getRacePack(race);if(!pack)throw new RangeError('Unknown playable race');const sockets=raceSockets(race);
  // New characters begin unarmed. Owned equipment in existing saves is never migrated.
  const inventory=[];
- const s={version:SCHEMA_VERSION,talentBalanceVersion:TALENT_BALANCE_VERSION,diplomacy:freshDiplomacy(),race,hero:pack.heroName,atCamp:true,level:1,xp:0,gold:100,location:0,siteId:race+'.a01',expedition:{mode:'field',fieldId:race+'.a01.field',targetInstanceId:null,loop:false},build:'custom',inventory,equip:Object.fromEntries(sockets.map(socket=>[socket,null])),skills:[null,null,null,null],conditions:['always','always','always','always'],materialStacks:{'铁屑|0':5,'炉火晶|0':2,'誓约残片|0':1},offlineLuck:0,talents:Object.fromEntries(Object.keys(TALENTS).map(k=>[k,0])),consumables:{memoryFruit:0,refundCredits:0,reforgeToken:0},potionSlot:{key:null,auto:false,priority:'low',priorityVersion:1},kills:0,normalWins:[0,0,0],bossWins:[0,0,0],bossReady:[0,0,0],stock:3,loadouts:[null,null,null],chapters:[],chronicle:[race==='dwarf'?'灰冠历317年：你离开黑炉堡，从徒手战斗开始寻找失踪商队。':'灰冠历317年：你在'+pack.heroName+'的旅途中踏出了第一步。'],momentum:0,lastSeen:Date.now(),running:false};
+ const s={version:SCHEMA_VERSION,talentBalanceVersion:TALENT_BALANCE_VERSION,diplomacy:freshDiplomacy(),race,hero:pack.heroName,atCamp:true,level:1,xp:0,gold:100,location:0,siteId:race+'.a01',expedition:{mode:'field',fieldId:race+'.a01.field',targetInstanceId:null,loop:false},build:'custom',inventory,equip:Object.fromEntries(sockets.map(socket=>[socket,null])),skills:[null,null,null,null],conditions:['always','always','always','always'],materialStacks:{'铁屑|0':5,'炉火晶|0':2,'誓约残片|0':1},offlineLuck:0,talents:Object.fromEntries(Object.keys(TALENTS).map(k=>[k,0])),consumables:{memoryFruit:0,refundCredits:0,reforgeToken:0},potionSlot:{key:null,auto:false,priority:'low',priorityVersion:1},kills:0,normalWins:[0,0,0],bossWins:[0,0,0],bossReady:[0,0,0],stock:3,loadouts:[null,null,null],chapters:[],chronicle:[race==='dwarf'?'灰冠历317年：你离开黑炉堡，踏上寻找失踪商队的路。':'灰冠历317年：你在'+pack.heroName+'的旅途中踏出了第一步。'],momentum:0,lastSeen:Date.now(),running:false};
  if(race!=='dwarf'){s.materialStacks={};s.chronicle=['你从'+pack.name+'的营地开始旅程。'];}
  normalizeSkillTree(s,getSkillTreeDefinition(s));s.skillTree.mode='active';
  return s;
@@ -577,6 +580,7 @@ export function plannedNodes(s,now=Date.now()){
 }
 export function validExpeditionState(s){
  const ex=s.expedition,cd=s.instanceCooldowns;
+ if(s.autoBossRetryAt!==undefined&&(!s.autoBossRetryAt||typeof s.autoBossRetryAt!=='object'||Array.isArray(s.autoBossRetryAt)||!Object.entries(s.autoBossRetryAt).every(([id,t])=>PLANNED_INSTANCES[id]?.kind==='boss'&&Number.isFinite(t)&&t>=0&&t<=1e15+1800000)))return false;
  if(s.stopAfterDungeon!==undefined&&typeof s.stopAfterDungeon!=='boolean')return false;
  if(s.dungeonRun?.carry!==undefined&&(!validDungeonCarry(s.dungeonRun.carry,SKILLS)||s.dungeonRun.stage===1||s.activeEncounter))return false;
  if(cd!==undefined&&(!cd||typeof cd!=='object'||Array.isArray(cd)||!Object.entries(cd).every(([id,t])=>Object.hasOwn(PLANNED_INSTANCES,id)&&INSTANCES[id].kind!=='field'&&Number.isFinite(t)&&t>=0&&t<=1e15+1800000)))return false;
@@ -594,7 +598,12 @@ export function normalizeExpedition(s){
  return true;
 }
 export function nextEncounterRoute(s,now=Date.now()){
- const route=validExpeditionState(s)?pickRoute(s.expedition,s.instanceCooldowns??{},now):null;
+ // Automation follows the actual location, not a browsed map or a newly configured remote route.
+ const ex=s.expedition,local=INSTANCES[ex?.fieldId]?.siteId===s.siteId;
+ const policy={...ex,autoBoss:!!ex?.autoBoss&&local&&!s.story?.activeScene&&!s.stopAfterBattle&&!s.stopAfterDungeon};
+ const cooldowns={...s.instanceCooldowns};
+ for(const [id,at] of Object.entries(s.autoBossRetryAt??{}))cooldowns[id]=Math.max(cooldowns[id]??0,at);
+ const route=validExpeditionState(s)?pickRoute(policy,cooldowns,now):null;
  return route&&nodeAccess(s,route.id,now).allowed&&nodeAccess(s,s.expedition.fieldId,now).allowed?route:null;
 }
 export function configureExpedition(s,config,now=Date.now()){
@@ -653,7 +662,7 @@ export function startRoutedEncounter(s,now=Date.now()){
  if(s.activeEncounter&&!s.activeEncounter.rewarded)return normalizeEncounterElements(s.activeEncounter);
  if(stopBlockedWarActivity(s,now))return null;
  if(s.dungeonRun)return startInstanceEncounter(s,s.dungeonRun.instanceId,now);
- const route=nextEncounterRoute(s,now);if(!route&&!nodeAccess(s,s.expedition?.fieldId,now).allowed){s.running=false;s.restResume=false;}return route?startInstanceEncounter(s,route.id,now):null;
+ const route=nextEncounterRoute(s,now);if(!route&&!nodeAccess(s,s.expedition?.fieldId,now).allowed){s.running=false;s.restResume=false;}const encounter=route?startInstanceEncounter(s,route.id,now):null;if(encounter&&route.kind==='boss'&&s.expedition.autoBoss)encounter.automaticBoss=true;return encounter;
 }
 export function normalizeEncounterElements(e){
  if(!e)return e;
@@ -676,6 +685,7 @@ function validEncounter(e){
  if(e.instanceId===undefined&&['siteId','areaId','kind'].some(k=>e[k]!==undefined))return false;
  if(e.elementTags!==undefined&&(!Array.isArray(e.elementTags)||e.elementTags.length>6||new Set(e.elementTags).size!==e.elementTags.length||!e.elementTags.every(k=>ELEMENT_KEYS.includes(k))))return false;
  if(e.elementResistance!==undefined&&(!e.elementResistance||typeof e.elementResistance!=='object'||Array.isArray(e.elementResistance)||Object.keys(e.elementResistance).length!==6||!ELEMENT_KEYS.every(k=>number(e.elementResistance[k]))))return false;
+ if(e?.automaticBoss!==undefined&&(typeof e.automaticBoss!=='boolean'||!e.boss))return false;
  if(!e||typeof e!=='object'||Array.isArray(e)||!(e.contentVersion==='dwarf-m2-v1'?AREAS[e.areaId]?.number-1===e.location&&INSTANCES[e.instanceId]?.areaId===e.areaId:[0,1,2].includes(e.location))||typeof e.name!=='string'||e.name.length>100||typeof e.boss!=='boolean'||typeof e.done!=='boolean'||typeof e.rewarded!=='boolean')return false;
  if(!['hp','max','atk','armor','heroHp','round','burn','broken','guard','stun','shield'].every(k=>number(e[k])))return false;
  if(!e.cd||typeof e.cd!=='object'||Array.isArray(e.cd)||!Object.entries(e.cd).every(([k,n])=>Object.hasOwn(SKILLS,k)&&number(n,100)))return false;
@@ -780,7 +790,10 @@ function startDwarfEncounter(s,instance,now,recordLocalExploration=true){
    const shares=followers?def.trait.shares:[1];
    for(let j=0;j<shares.length;j++){
     const u=makeMultiUnit(id+'-enemy-'+e.enemies.length,e.location,instance.id,{enemy:def.name,hp:p.hp,atk:p.atk,armor:p.armor},s.lastHealthClock,{});
-    const adjusted={...p,hp:p.hp*(group?1.5/count:1),atk:p.atk*(group?1.2/count:1),elementalPower:p.elementalPower*(group?1.2/count:1)};
+    // Apply only when creating a new dungeon actor; followers inherit their
+    // normal authored shares. Hydrated encounters retain their saved power.
+    const threat=dungeonDamageMultiplier(instance.kind,rank);
+    const adjusted={...p,hp:p.hp*(group?1.5/count:1),atk:p.atk*(group?1.2/count:1)*threat,elementalPower:p.elementalPower*(group?1.2/count:1)*threat};
     initializeDwarfActor(u,def,adjusted,s.lastHealthClock,{share:shares[j],follower:j>0});if(j>0&&def.trait.followerMonsterId){u.followerMonsterId=def.trait.followerMonsterId;u.name=ALL_MONSTERS[u.followerMonsterId]?.name??def.trait.name;u.independentRewards=false;}u.main=e.enemies.length===0;e.enemies.push(u);
    }
    if(i===0){e.rewardGold=p.rewardGold;e.rewardXp=p.rewardXp;e.rewardDefinitionId=def.id;}
@@ -826,7 +839,7 @@ function startNpcObjectiveReceipt(s,e,now){
  if(!Number.isSafeInteger(now)||now<0||now>1e15||!validNpcEventState(s)||s.developmentEquipmentSandbox||e.developmentFixture||e.storyScenario||!npcObjectiveNodeAccess(s,e.instanceId,now).allowed)return;
  const tasks={};for(const [id,entry]of Object.entries(s.npcEvents?.entries??{})){
   const o=NPC_EVENTS[id]?.taskObjective,p=s.npcObjectiveProgress?.entries?.[id];
-  if(entry.status==='active'&&npcEventIsModern(s,id)&&o?.kind==='kill'&&p.count<o.count&&o.nodeIds.includes(e.instanceId)&&entry.acceptedAt<=now)tasks[id]={cycle:entry.cycle,acceptedAt:entry.acceptedAt};
+  if(entry.status==='active'&&npcEventIsModern(s,id)&&((o?.kind==='kill'&&p.count<o.count&&o.nodeIds.includes(e.instanceId))||(o?.kind==='investigate'&&o.checkpoints.some(c=>c.challenge==='dungeon-clear'&&c.nodeId===e.instanceId&&!p.checkpoints.includes(c.id)&&(c.requiresCheckpointIds??[]).every(id=>p.checkpoints.includes(id)))))&&entry.acceptedAt<=now)tasks[id]={cycle:entry.cycle,acceptedAt:entry.acceptedAt};
  }
  if(Object.keys(tasks).length)e.npcObjectiveReceipt={version:1,startedAt:now,tasks,initialUnitIds:e.enemies.filter(u=>u.origin==='initial'&&!u.follower&&u.sourceInstanceId===e.instanceId).map(u=>u.id),defeatedUnitIds:[]};
 }
@@ -841,6 +854,17 @@ function settleNpcObjectiveKills(s,e,now){
  for(const [id,receipt]of Object.entries(r.tasks)){
   const entry=s.npcEvents.entries[id],p=s.npcObjectiveProgress.entries[id],o=NPC_EVENTS[id].taskObjective;
   if(entry.status!=='active'||receipt.cycle!==entry.cycle||receipt.acceptedAt!==entry.acceptedAt||p.count>=o.count||p.receipts.includes(e.id))continue;
+  if(o.kind==='investigate'){
+   if(e.kind!=='dungeon'||!r.initialUnitIds.length||!r.initialUnitIds.every(id=>r.defeatedUnitIds.includes(id)))continue;
+   const stageReceipt=e.runId+'|'+e.dungeonStage;
+   if(p.receipts.includes(stageReceipt))continue;
+   if(e.dungeonStage===1)p.receipts=[stageReceipt];
+   else if(p.receipts.length===e.dungeonStage-1&&p.receipts.every((id,i)=>id===e.runId+'|'+(i+1)))p.receipts.push(stageReceipt);
+   else continue;
+   changed=true;if(e.dungeonStage!==3)continue;
+   for(const point of o.checkpoints)if(point.challenge==='dungeon-clear'&&point.nodeId===e.instanceId&&!p.checkpoints.includes(point.id)&&(point.requiresCheckpointIds??[]).every(id=>p.checkpoints.includes(id))){p.checkpoints.push(point.id);p.count=p.checkpoints.length;changed=true;}
+   continue;
+  }
   const killed=e.enemies.filter(u=>r.defeatedUnitIds.includes(u.id)&&u.hp===0&&u.origin==='initial'&&!u.follower&&u.sourceInstanceId===e.instanceId&&o.nodeIds.includes(u.sourceInstanceId)&&o.monsterIds.includes(u.definitionId)&&ALL_MONSTERS[u.definitionId]?.nodes?.includes(e.instanceId));
   if(!killed.length)continue;p.count=Math.min(o.count,p.count+killed.length);p.receipts.push(e.id);changed=true;
  }
@@ -848,6 +872,7 @@ function settleNpcObjectiveKills(s,e,now){
 }
 function rewardDwarf(s,e,now){
  if(s.activeEncounter!==e||!e.done||!e.win||e.rewarded||!e.enemies.every(u=>u.hp===0)||!validMultiEncounter(e,INSTANCES))return null;
+ const lootBefore=e.kind==='dungeon'?dungeonLootSnapshot(s):null;
  const run=s.dungeonRun,clear=e.kind==='dungeon'&&e.dungeonStage===3;
  if(e.kind==='dungeon'&&(!run||run.instanceId!==e.instanceId||run.runId!==e.runId||run.stage!==e.dungeonStage))return null;
  normalizeCodexCollection(s);
@@ -880,13 +905,14 @@ function rewardDwarf(s,e,now){
   if(markChance>0&&Math.random()<lootOccurrenceProbability(markChance,e.luck??0)&&receiveBattleLoot(s,{kind:'consumable',key:'reforgeToken',quantity:1},e.lootSummary))e.rewardNotes.push('重铸印记 ×1');
   settleInfinityRecipe(s,e,{instances:INSTANCES});
   applyReturnRingVictory(s,e,stats(s).hp);
-  if(e.boss){s.instanceCooldowns[e.instanceId]=Math.max(now,s.lastHealthClock??0)+1800000;s.running=!!s.expedition.autoBoss;}
+  if(e.boss){s.instanceCooldowns[e.instanceId]=Math.max(now,s.lastHealthClock??0)+1800000;s.running=e.automaticBoss?!!s.running:!!s.expedition.autoBoss;}
   else if(e.kind==='dungeon'){
    if(clear){recordDungeonAreaClear(s,e);s.instanceCooldowns[e.instanceId]=Math.max(now,s.lastHealthClock??0)+300000;s.dungeonRun=null;e.rewardNotes.push('普通副本通关 · 冷却5分钟');if(!s.expedition.loop&&!s.expedition.autoDungeon&&!s.expedition.autoBoss)s.running=false;}
    else{run.carry=captureDungeonPlayerState(e);run.stage++;e.rewardNotes.push('副本进度 '+e.dungeonStage+'/3');}
   }
   for(const row of e.materialLoot)e.rewardNotes.push(MATERIAL_QUALITIES[row.quality]+' '+(MATERIALS[row.material]?.name??row.material)+' ×'+row.count);
   for(const action of ['discarded','overflow'])if(Object.values(e.lootSummary[action]).some(Boolean))e.rewardNotes.push((action==='discarded'?'品质过滤丢弃':'背包已满')+'：'+JSON.stringify(e.lootSummary[action]));
+  recordDungeonLootReceipt(s,e,lootBefore,now);
   if(e.playerShieldLayers)s.equipmentShieldCarry={version:1,clock:e.playerShieldLayers.clock,layers:e.playerShieldLayers.layers.filter(layer=>layer.ownerItemId&&(layer.source==='reactor:'+layer.ownerItemId||layer.source==='legendary:'+layer.ownerItemId)).map(layer=>structuredClone(layer))};
   s.nextBattleAt=Math.max(now,s.lastHealthClock??0)+1800;s.nextActionAt=s.nextBattleAt;if(s.stopAfterBattle||(s.stopAfterDungeon&&!s.dungeonRun)){s.running=false;s.stopAfterBattle=false;s.stopAfterDungeon=false;}s.activeEncounter=null;return first;
  });
@@ -935,7 +961,11 @@ function stepImpl(s,e,now=Date.now(),treeSkills=null){
  if(!e.barrier)e.barrierShield=0;
  if(e.multiVersion===1){e.lastCombatEventAt=eventAt;if(basicOnly)e.basicMicroElapsed=combatDeltaMs;else {delete e.basicMicroElapsed;e.nextRegularAt=eventAt+1100;}s.nextActionAt=Math.min(e.nextRegularAt??eventAt+1100,e.pendingBasicAt??Infinity);}else s.nextActionAt=eventAt+1100;if(drank)logs.unshift('自动饮用 · '+POTIONS.healing.name);s.heroHp=Math.max(0,Math.min(stats(s).hp,e.heroHp));
  const scenario=advanceStoryScenario(s,e);if(scenario){if(scenario.completed&&!recordStoryScenarioResult(s,e)){e.storyScenario.result='retry';e.rewardNotes=['剧情记录校验未通过，返回本场安全点；未推进剧情。'];}finalizeStoryScenario(s,e);logs.push(...e.rewardNotes);return logs;}
- if(s.heroHp<=0){const resume=!e.developmentFixture&&!!s.running&&(!e.boss||!!s.expedition?.autoBoss)&&!s.stopAfterBattle&&!s.stopAfterDungeon&&(e.kind!=='dungeon'||!!s.expedition?.loop||!!s.expedition?.autoDungeon||!!s.expedition?.autoBoss);startRest(s,now,resume);s.stopAfterBattle=false;s.stopAfterDungeon=false;}return logs;
+ if(s.heroHp<=0){
+  // A loss is not a reward cooldown. Persist a separate bounded automatic retry
+  // delay so reload/offline never creates a boss-death loop; manual challenges remain available.
+  if(e.boss&&!e.developmentFixture&&(e.automaticBoss||s.expedition?.autoBoss)){s.autoBossRetryAt??={};s.autoBossRetryAt[e.instanceId]=Math.max(now,s.lastHealthClock??0)+1800000;}
+  const resume=!e.developmentFixture&&!!s.running&&(!e.boss||e.automaticBoss||!!s.expedition?.autoBoss)&&!s.stopAfterBattle&&!s.stopAfterDungeon&&(e.kind!=='dungeon'||!!s.expedition?.loop||!!s.expedition?.autoDungeon||!!s.expedition?.autoBoss);startRest(s,now,resume);s.stopAfterBattle=false;s.stopAfterDungeon=false;}return logs;
 }
 function selectedTreeRules(s,parameters=getRaceTuning(s.race)){
  const p=s.skillTree?.presets?.[s.skillTree.selectedPreset];if(!p)return null;
@@ -1146,7 +1176,7 @@ export function purchaseRecipe(s,offerId,expectedRevision,now=Date.now()){
 }
 export function fusionQualityWeights(selection){
  if(!Array.isArray(selection)||selection.length<1||selection.length>5)return null;const parsed=selection.map(parseMaterialKey);if(parsed.some(x=>!x))return null;
- const n=selection.length,a=parsed.reduce((sum,x)=>sum+x.quality,0)/n;return [50-4*n-3*a,40+2*n-a,9+1.6*n+3*a,1+.4*n+a];
+ return materialFusionQualityWeights(parsed.map(x=>x.quality));
 }
 export const FUSION_TAGS={
  '铁屑':{slots:{weapon:2,helm:1,armor:2,gloves:1,boots:1,ring:0,amulet:0}},
@@ -1154,7 +1184,16 @@ export const FUSION_TAGS={
  '灰根草':{slots:{weapon:0,helm:0,armor:0,gloves:0,boots:0,ring:0,amulet:0}},
  '誓约残片':{slots:{weapon:0,helm:1,armor:0,gloves:0,boots:1,ring:2,amulet:2}}
 };
-export function fusionWeights(selection){const slots=Object.fromEntries(SLOTS.map(k=>[k,2]));for(const key of selection){const parsed=parseMaterialKey(key),tag=parsed?FUSION_TAGS[parsed.material]:null;if(!tag)continue;for(const slot of SLOTS)slots[slot]+=tag.slots[slot]??0;}return {slots};}
+export function fusionWeights(selection){const slots=Object.fromEntries(SLOTS.map(k=>[k,2]));for(const key of selection){const parsed=parseMaterialKey(key),tag=parsed?(FUSION_TAGS[parsed.material]??{slots:materialFusionSlotBias(MATERIALS[parsed.material])}):null;if(!tag?.slots)continue;for(const slot of SLOTS)slots[slot]+=tag.slots[slot]??0;}return {slots};}
+// Preview is read-only; share weights and favorable-roll policy with the actual draw.
+export function previewMaterialFusion(s,selection){
+ const weights=fusionQualityWeights(selection);if(!weights)return null;
+ const parsed=selection.map(parseMaterialKey),chance=combinedFavorableRollChance(luckChance(effectiveLuck(s)),s.race,DWARF_FORGE_FAVOR_CONFIG);
+ const qualityProbabilities=favorableQualityProbabilities(weights,chance);if(!qualityProbabilities)return null;
+ const herbs=parsed.filter(p=>p.material==='灰根草').length,potionChance=herbs?.35+.5*herbs/selection.length:0;
+ const slots=fusionWeights(selection).slots,eligible=Object.entries(slots).filter(([slot])=>slot!=='core'||s.race==='ashen'),total=eligible.reduce((sum,[,w])=>sum+w,0);
+ return {qualityProbabilities,baseQualityProbabilities:weights.map(w=>w/100),minimumQuality:weights.findIndex(w=>w>0),potionChance,equipmentChance:1-potionChance,slotProbabilities:Object.fromEntries(eligible.map(([slot,w])=>[slot,w/total])),gold:racialGoldCost(s,40)};
+}
 export function eligibleFusionEquipment(s){
  return s.inventory.filter(it=>validEquipment(it)&&!it.locked&&!Object.values(s.equip).includes(it.id)&&!isProtected(s,it.id));
 }
@@ -1192,7 +1231,7 @@ export function applyForgeFavor(it){
  bonus.affixes=it.affixes.map(a=>({stat:a.stat,value:a.value/10}));
  it.divine={id:'forge-favor',name:'神赐·炉火眷顾',model:'raw-v1',bonus};return true;
 }
-export const LEGENDARY_CODEX=[{id:'infinity-gauntlet',name:'无限手套',slot:'gloves',icon:'gloves',implemented:true,lore:'五颗异色宝石嵌入同一只护手。',affix:'无限',effect:'每成功释放5次主动技能，对当前目标造成其最大生命50%的伤害；普通敌人与首领比例相同。普攻、被动与多段命中不额外计数，卸下清空累计。',acquisition:'普通副本通关时有机会学会隐藏配方，以五族各一颗至臻宝石制作；每档仅一次，失去后无法重造。',attributes:'4条可调整普通词条与固定专属'},{id:'return-ring',name:'归途之环',slot:'ring',icon:'ring',implemented:true,lore:'旅途里留下的五件旧物，被接成了完整的环。',affix:'归途',effect:'每次战斗胜利恢复15%最大生命，最高恢复至生命上限，包含普通副本阶段胜利。首领传说、稀有材料与无限宝石的有效掉落率增加3个百分点；不改变来源和持有上限。',acquisition:'剧情学习配方后，以五族旧物制作；每档仅一次。',attributes:'4条可洗练普通词条与固定专属'},...EXPANSION_PACKS.flatMap(p=>p.legendaries.map(d=>({...d,implemented:true,lore:d.lore??d.description??'',affix:d.exclusiveName??d.exclusiveId,effect:d.exclusiveDescription??d.exclusive?.description??d.effect??d.description??'',acquisition:d.questOnly?'第五章主线剧情（唯一）':p.name+'地区首领额外掉落，可重复获得',attributes:d.ordinaryAffixCount===0?'仅基础属性与固定专属，无随机普通词条':'4条随机普通词条与固定专属',icon:d.icon??d.slot}))),{id:'first-forge-oathhammer',name:'王统·初炉誓锤',slot:'weapon',icon:'firstforge',implemented:true,lore:'每一代矮人王继承此锤时，都会重新锻造它，并刻下自己的名字。旧王的誓言留在锤身，新王的名字融入炉火。',affix:'祖王回响',effect:'普攻或主动伤害技能每5次出手，向当前目标追加140%攻击的单体重击，穿透30%护甲。',acquisition:'矮人地区首领额外掉落，可重复获得。',attributes:'4条随机普通词条与固定专属；基础和普通词条区间高于同等级至臻。',tuning:'首轮调优数值；回响可暴击、实际生命伤害可吸血，不触发死神、多重或累计。'},{id:'everburning-reactor',name:'不熄之炉',slot:'amulet',icon:'fire',implemented:true,lore:'矮人机械产物：一座可佩戴的微型反应炉，以战斗中的余热驱动火焰脉冲与防护层。',affix:'余热循环',effect:'每12秒实际战斗时间自动向全体释放75%攻击火焰脉冲，并获得8%最大生命加通用护盾增幅的护盾，持续3秒战斗时间；同源护盾刷新不叠加。',acquisition:'矮人地区首领额外掉落，可重复获得。',attributes:'4条随机普通词条与固定专属；基础和普通词条区间高于同等级至臻。',tuning:'首轮调优数值；实际卸下清空充能并移除自身护盾。'}];
+export const LEGENDARY_CODEX=[{id:'infinity-gauntlet',name:'无限手套',slot:'gloves',icon:'gloves',implemented:true,lore:'五颗异色宝石被嵌进同一只护手，托座上还留着五种不同的锻造痕迹。握紧手掌时，原本互不相容的微光沿着指节相连，短暂地汇成一道亮线。',affix:'无限',effect:'每成功释放5次主动技能，对当前目标造成其最大生命50%的伤害；普通敌人与首领比例相同。普攻、被动与多段命中不额外计数，卸下清空累计。',acquisition:'普通副本通关时有机会学会隐藏配方，以五族各一颗至臻宝石制作；每档仅一次，失去后无法重造。',attributes:'4条可调整普通词条与固定专属'},{id:'return-ring',name:'归途之环',slot:'ring',icon:'ring',implemented:true,lore:'五件旧物沿着指环内侧相接，接缝没有被磨平。每一道细小的棱角，都让人想起送出它的人，以及那段曾停下脚步的路。',affix:'归途',effect:'装备时经验获取 +20%，双戒指槽不重复叠加，卸下后失效。每次战斗胜利恢复15%最大生命，最高恢复至生命上限，包含普通副本阶段胜利。首领传说、稀有材料与无限宝石的有效掉落率增加3个百分点；不改变来源和持有上限。',acquisition:'剧情学习配方后，以五族旧物制作；每档仅一次。',attributes:'4条可洗练普通词条与固定专属'},...EXPANSION_PACKS.flatMap(p=>p.legendaries.map(d=>({...d,implemented:true,lore:d.lore??d.description??'',affix:d.exclusiveName??d.exclusiveId,effect:d.exclusiveDescription??d.exclusive?.description??d.effect??d.description??'',acquisition:d.questOnly?'第五章主线剧情（唯一）':p.name+'地区首领额外掉落，可重复获得',attributes:d.ordinaryAffixCount===0?'仅基础属性与固定专属，无随机普通词条':'4条随机普通词条与固定专属',icon:d.icon??d.slot}))),{id:'first-forge-oathhammer',name:'王统·初炉誓锤',slot:'weapon',icon:'firstforge',implemented:true,lore:'每一代矮人王继承此锤时，都会重新锻造它，并刻下自己的名字。旧王的誓言留在锤身，新王的名字融入炉火。',affix:'祖王回响',effect:'普攻或主动伤害技能每5次出手，向当前目标追加140%攻击的单体重击，穿透30%护甲。',acquisition:'矮人地区首领额外掉落，可重复获得。',attributes:'4条随机普通词条与固定专属；基础和普通词条区间高于同等级至臻。',tuning:'回响可暴击、实际生命伤害可吸血，不触发死神、多重或累计。'},{id:'everburning-reactor',name:'不熄之炉',slot:'amulet',icon:'fire',implemented:true,lore:'这座微型炉藏在厚实的金属外壳里，贴近耳边时，能听见极轻的鼓风声。炉芯收拢战斗留下的余热，再从狭窄的排口吐出火光；火光散去后，仍有一层温热护在身前。',affix:'余热循环',effect:'每12秒实际战斗时间自动向全体释放75%攻击火焰脉冲，并获得8%最大生命加通用护盾增幅的护盾，持续3秒战斗时间；同源护盾刷新不叠加。',acquisition:'矮人地区首领额外掉落，可重复获得。',attributes:'4条随机普通词条与固定专属；基础和普通词条区间高于同等级至臻。',tuning:'实际卸下清空充能并移除自身护盾。'}];
 export const SET_CODEX=BUILD.map(b=>({id:b.id,name:b.name,icon:b.id,parts:[...SET_SLOTS],bonus:b.bonus}));
 function validCodexCollection(s){return validCollectionLedger(s,SET_CODEX,LEGENDARY_CODEX);}
 export function normalizeCodexCollection(s){return normalizeCollectionLedger(s,SET_CODEX,LEGENDARY_CODEX,validEquipment);}
@@ -1213,7 +1252,7 @@ export function codexState(s,id){
 }
 export function validSave(s){
  try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;
- if(!validPersonalArcRewardState(s)||!validTaskRewardState(s)||!validDiplomacy(s)||!validWorldEventState(s)||!validStoryWarState(s)||!validNpcEventState(s)||!validReturnRingState(s)||!validInfinityGauntletState(s)||!validStoryEventState(s)||!validStoryScenarioState(s))return false;
+ if(!validDungeonLootReceipts(s)||!validPersonalArcRewardState(s)||!validTaskRewardState(s)||!validDiplomacy(s)||!validWorldEventState(s)||!validStoryWarState(s)||!validNpcEventState(s)||!validReturnRingState(s)||!validInfinityGauntletState(s)||!validStoryEventState(s)||!validStoryScenarioState(s))return false;
  if(!validSkillTree(s,getSkillTreeDefinition(s))||s.skillTree?.mode!=='active')return false;
  if(s.activeEncounter?.skillResolver!==undefined&&(s.activeEncounter.skillResolver!=='tree-v1'||s.skillTree?.mode!=='active'||s.activeEncounter.multiVersion!==1))return false;
  if(s.supportGrantEligible!==undefined||s.testGrants!==undefined||s.bonusTalentPoints!==undefined||s.skillRulesVersion!==undefined||s.skillAccess!==undefined)return false;
