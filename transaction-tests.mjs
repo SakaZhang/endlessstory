@@ -9,7 +9,7 @@ try{
  let tx=commitGameTransaction(storage,s,x=>forge(x,['铁屑|0']),{now:100});assert(!tx.ok);assert.equal(tx.reason,'storage');assert.strictEqual(tx.game,s);assert.deepEqual(s,before);assert.equal(raw,null);
  fail=false;tx=commitGameTransaction(storage,s,x=>forge(x,['铁屑|0']),{now:100});assert(tx.ok);assert.equal(tx.game.gold,960);assert.deepEqual(s,before);assert.equal(JSON.parse(raw).inventory.length,1);assert.equal(tx.game.lastSeen,100);assert(validSave(tx.game));
  const n=writes;tx=commitGameTransaction(storage,s,()=>false);assert(!tx.ok);assert.equal(writes,n);tx=commitGameTransaction(storage,s,x=>{x.gold=0;throw new Error('invalid')});assert.equal(tx.reason,'operation');assert.deepEqual(s,before);
- const id='potion-healing';
+ const id='potion-strength';
  Math.random=()=>0;
  s=fresh();s.gold=1000;const shop=ensureMerchant(s,1000),offer=shop.offers.find(x=>x.type==='recipe'&&x.recipeId===id);assert(offer);before=structuredClone(s);fail=true;
  tx=commitGameTransaction(storage,s,x=>purchaseRecipe(x,offer.offerId,shop.revision,1001),{commitOnNoop:true,now:1001});assert(!tx.ok);assert(!recipeKnown(s,id));assert.deepEqual(s,before);

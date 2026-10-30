@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {reachStoryScene} from './story-event-test-fixture.mjs';
+import {renderOtherworldPanel,renderOtherworldPortal} from './dist/otherworld-ui.js';
+import {otherworldFloorStats} from './dist/engine.js';
+import {formatAttribute} from './dist/attribute-format.js';
+const s=reachStoryScene('human','END.H01.human',{spring:'skip',finishTarget:true,level:100});
+s.otherworld.floor=2;s.otherworld.highestCleared=1;
+const before=JSON.stringify(s),html=renderOtherworldPanel(s),portal=renderOtherworldPortal(s),stats=otherworldFloorStats(2);
+assert.match(html,/相对首层 <b>101%<\/b>/);
+for(const [label,key] of [['生命','hp'],['攻击','atk'],['护甲','armor']])assert(html.includes(label+' <b>'+formatAttribute(stats[key])+'</b>'));
+const block=html.match(/<div class="otherworldStats">(.*?)<\/div>/)[1];assert.doesNotMatch(block,/\d\.\d/);
+assert.match(portal,/逐层深入/);assert.doesNotMatch(portal,/无尽/);assert.doesNotMatch(html,/极高/);
+assert.equal(JSON.stringify(s),before,'rendering never writes hidden state or rounds stored combat values');
+assert.equal(stats.armor,60.6,'real floor2 armor remains fractional');
+console.log('PASS otherworld display: integer attributes, exact 101% relative floor2, truthful portal copy, pure read-only rendering.');

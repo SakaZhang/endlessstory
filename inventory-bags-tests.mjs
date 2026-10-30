@@ -35,7 +35,7 @@ try{
  const malformed=fresh();malformed.pendingForgeClaim={kind:'potion',potion:{kind:'potion',quantity:1}};assert(!validSave(malformed));assert.equal(claimForgeResult(malformed),null);
  const duplicateStock=fresh();const dupShop=ensureMerchant(duplicateStock,1000);duplicateStock.pendingForgeClaim={kind:'equipment',item:structuredClone(dupShop.offers.find(o=>o.type==='equipment').item)};assert(!validSave(duplicateStock));
  // Real fixed healing recipe shares pending storage with random forge results.
- const fixed=fresh();fixed.gold=100;fixed.materialStacks['灰根草|0']=2;normalizePotions(fixed);fixed.potionStacks['healing|0']=1e9;assert(learnRecipe(fixed,'potion-healing'));
+ const fixed=fresh();fixed.gold=100;fixed.materialStacks['灰根草|0']=2;normalizePotions(fixed);fixed.potionStacks['healing|0']=1e9;assert(fixed.learnedRecipes.includes('potion-healing'));
  const quote=quoteRecoveryRecipe(fixed,0,[{key:'灰根草|0',quantity:2}]);assert(quote);
  let recipeCalls=0;Math.random=()=>{recipeCalls++;throw Error('fixed recipe RNG');};
  const brewedRecipe=craftRecoveryRecipe(fixed,quote);assert(brewedRecipe);assert.equal(recipeCalls,0);assert.equal(fixed.gold,98);assert.equal(fixed.pendingForgeClaim.potion.key,'healing|0');assert.equal(brewedRecipe.quantity,2);assert(validSave(fixed));

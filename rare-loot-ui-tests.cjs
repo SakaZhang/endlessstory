@@ -18,9 +18,9 @@ global.document={hidden:false,getElementById:el,querySelector:selector=>selector
  assert.equal(JSON.stringify(pure),snap);assert.match(html,/9.2923%/);assert.match(html,/13.9385%/);assert.match(html,/不是掉率增加 21%/);
  store.set(SAVE_KEY,JSON.stringify(base));await import('./dist/app.js');
  const saved=()=>JSON.parse(store.get(SAVE_KEY)),click=(dataset={})=>{const b={dataset,id:''};for(const f of events.click||[])f({target:{id:'',closest:()=>b}})};
- click({view:'inventory'});assert.match(el('view').innerHTML,/珍稀战利品/);assert.match(el('view').innerHTML,/幸运与实际概率/);const inventoryHtml=el('view').innerHTML,strip=inventoryHtml.split('<details>')[0];assert.match(strip,/套装未出/);assert.match(strip,/回忆之果/);assert.match(strip,/待领：/);assert.match(inventoryHtml,/<details><summary>掉落规则与幸运实际概率<\/summary>/);assert(!/<details[^>]*\bopen\b/.test(inventoryHtml));if(mode!=='old')assert.match(strip,/data-rare-loot-claim/);
- el('talentBtn').click();assert.match(el('modalBody').innerHTML,/回忆之果进度/);el('modal').close();
- el('helpBtn').click();assert.match(el('modalBody').innerHTML,/最多结算4小时/);assert.match(el('modalBody').innerHTML,/独立掉落/);el('modal').close();
+ click({view:'inventory'});assert.match(el('view').innerHTML,/珍稀战利品/);assert.match(el('view').innerHTML,/幸运与实际概率/);const inventoryHtml=el('view').innerHTML,strip=inventoryHtml.split('<details>')[0];assert(!/套装未出|果实进度|回忆之果|19\s*\/\s*20|17\s*\/\s*20/.test(inventoryHtml));assert.match(strip,/灵慧之果/);assert.match(strip,/待领：/);assert.match(inventoryHtml,/<details><summary>掉落规则与幸运实际概率<\/summary>/);assert(!/<details[^>]*\bopen\b/.test(inventoryHtml));if(mode!=='old')assert.match(strip,/data-rare-loot-claim/);
+ el('talentBtn').click();assert.match(el('modalBody').innerHTML,/灵慧之果/);assert(!/果实进度|连续.*未获套装|再通关|必得套装/.test(el('modalBody').innerHTML));el('modal').close();
+ el('helpBtn').click();assert.match(el('modalBody').innerHTML,/最多结算4小时/);assert.match(el('modalBody').innerHTML,/独立掉落/);assert(!/果实进度|连续20|每20点/.test(el('modalBody').innerHTML));el('modal').close();
  const before=saved();
  if(mode==='old'){assert.equal(before.rareRewardProgress,undefined);click({rareLootClaim:'1'});assert.equal(saved().rareRewardProgress,undefined);}
  else{
@@ -31,5 +31,5 @@ global.document={hidden:false,getElementById:el,querySelector:selector=>selector
   else{assert.equal(once.rareRewardProgress.pendingSets.length,0);assert.deepEqual(once.inventory.find(x=>x.id===reward.id),reward);}
   click({rareLootClaim:'1'});assert.deepEqual(saved().inventory,once.inventory);assert.deepEqual(saved().consumables,once.consumables);assert.deepEqual(saved().rareRewardProgress,once.rareRewardProgress);assert(E.validSave(saved()));
  }
- console.log('PASS rare loot UI '+mode+': discoverable progress, read-only numbers, protected transactional claim and repeat safety');
+ console.log('PASS rare loot UI '+mode+': hidden counters, visible pending claims, read-only probability, protected transactional claim and repeat safety');
 })().catch(e=>{console.error(e);process.exitCode=1});

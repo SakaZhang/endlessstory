@@ -1,3 +1,4 @@
+import {noncombatRunning} from './noncombat-policy.js';
 import {validSkillCondition} from './skill-conditions.js';
 import {SAVE_KEY} from './save-generation.js';
 // Current-generation skill-tree allocation and atomic draft transactions.
@@ -34,7 +35,7 @@ export function normalizeSkillTree(s,config){
 const treeSnapshot=s=>JSON.stringify({level:s.level,skillTree:s.skillTree??null,skills:s.skills??null,conditions:s.conditions??null,loadouts:s.loadouts??null});
 export function quoteSkillTreeChange(s,config,change){
  try{
- if(!validSkillTreeConfig(config)||!validSkillTree(s,config)||!plain(change)||s.running||(s.activeEncounter&&!s.activeEncounter.done))return null;
+ if(!validSkillTreeConfig(config)||!validSkillTree(s,config)||!plain(change)||noncombatRunning(s)||(s.activeEncounter&&!s.activeEncounter.done))return null;
  const next=clone(s);if(!normalizeSkillTree(next,config))return null;
  const tree=next.skillTree,index=change.index??tree.selectedPreset;if(!Number.isInteger(index)||index<0||index>2)return null;
  const p=tree.presets[index];
@@ -91,7 +92,7 @@ function rebuildDraft(before,changes,config){
  }catch{return null;}
 }
 export function beginSkillTreeDraft(s,config){
- if(!validSkillTreeConfig(config)||!validSkillTree(s,config)||s.running||s.activeEncounter&&!s.activeEncounter.done)return null;
+ if(!validSkillTreeConfig(config)||!validSkillTree(s,config)||noncombatRunning(s)||s.activeEncounter&&!s.activeEncounter.done)return null;
  const before=treeSnapshot(s),built=rebuildDraft(before,[],config);return built?{version:1,configId:config.id,before,changes:[],...built}:null;
 }
 export function editSkillTreeDraft(draft,config,change){
@@ -100,13 +101,13 @@ export function editSkillTreeDraft(draft,config,change){
  const changes=[...clone(draft.changes),clone(change)],built=rebuildDraft(draft.before,changes,config);return built?{version:1,configId:config.id,before:draft.before,changes,...built}:null;
 }
 export function quoteSkillTreeDraft(s,draft,config,{confirm=false}={}){
- if(confirm!==true||!plain(draft)||draft.version!==1||draft.configId!==config?.id||draft.before!==treeSnapshot(s)||s.running||s.activeEncounter&&!s.activeEncounter.done)return null;
+ if(confirm!==true||!plain(draft)||draft.version!==1||draft.configId!==config?.id||draft.before!==treeSnapshot(s)||noncombatRunning(s)||s.activeEncounter&&!s.activeEncounter.done)return null;
  const built=rebuildDraft(draft.before,draft.changes,config);if(!built||JSON.stringify(built.preview)!==JSON.stringify(draft.preview))return null;
  return {version:1,kind:'skill-tree-draft',configId:config.id,before:draft.before,changes:clone(draft.changes),after:clone(built.preview),confirmed:true};
 }
 export function prepareSkillTreeDraft(s,quote,config){
  try{
-  if(!plain(quote)||quote.kind!=='skill-tree-draft'||quote.version!==1||quote.confirmed!==true||quote.configId!==config?.id||quote.before!==treeSnapshot(s)||s.running||s.activeEncounter&&!s.activeEncounter.done)return null;
+  if(!plain(quote)||quote.kind!=='skill-tree-draft'||quote.version!==1||quote.confirmed!==true||quote.configId!==config?.id||quote.before!==treeSnapshot(s)||noncombatRunning(s)||s.activeEncounter&&!s.activeEncounter.done)return null;
   const built=rebuildDraft(quote.before,quote.changes,config);if(!built||JSON.stringify(built.preview)!==JSON.stringify(quote.after))return null;
   const game=clone(s);game.skillTree=clone(built.preview);return {game,result:{preset:game.skillTree.selectedPreset,revision:game.skillTree.revision}};
  }catch{return null;}

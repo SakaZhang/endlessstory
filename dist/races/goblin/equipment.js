@@ -60,7 +60,7 @@ for(const slot of slots)for(const [i,name]of names[slot].entries()){
  equipment.push({id,name,slot,weaponType,baseVariant,originRace:'goblin',kind:'scatter',setId:null,description:scatterDescriptions[slot][i],pixelAppearance:'苔绿、旧铜与暗紫菌光；旧皮绳结和实用修补纹理',visualVariant:id,visualKey:id,iconKey:slot});
 }
 export const sets=[
-{id:'goblin_spore',name:'苦菌行者',branch:'poison',description:'细口菌瓶绑在腰侧，护手内衬能擦去溅出的菌浆。',two:{description:'叠毒技能的削甲/减攻持续时间增加2秒。'},four:{description:'涂菌刺命中额外补一层毒；仍上限5层、每层2%每3秒。'}},
+{id:'goblin_spore',name:'苦菌行者',branch:'poison',description:'细口菌瓶绑在腰侧，护手内衬能擦去溅出的菌浆。',two:{description:'叠毒技能的削甲/减攻持续时间增加2秒。'},four:{description:'涂菌刺命中额外补一层毒；仍上限5层、每层3%每2秒，叠毒刷新全部哥布林毒层至12秒，不推迟下次跳毒。'}},
 {id:'goblin_ambush',name:'余粮斥候',branch:'ambush',description:'轻装先手，留粮续行，抓住敌阵最薄的一瞬。',two:{description:'伏击分支直接伤害提高8%。'},four:{description:'首击与收尾割条件成立时额外提高25%直伤，穿隙步延长2秒。'}},
 {id:'goblin_snare',name:'旧索匠',branch:'contraption',description:'把废弃铜簧和兽筋绳变成活路。',two:{description:'机关的命中/攻击削弱提高15%。'},four:{description:'伏索多一次触发次数；每次反击伤害降低15%，反击不会再次触发机关。'}}
 ];

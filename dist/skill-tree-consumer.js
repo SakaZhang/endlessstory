@@ -1,5 +1,5 @@
 import {getRaceSkillPlanner,getSkillOwner,RACE_PACKS} from './race-registry.js';
-import {validPoisonTiming} from './skill-tree-poison.js';
+import {validPoisonTiming,isGoblinPoisonTiming,isGoblinPoisonSource} from './skill-tree-poison.js';
 // Production adapter plans for the new tree. No live registry activation or numeric defaults.
 // Approved action shapes; host owns combat math and state mutation.
 const clone=x=>structuredClone(x),freeze=x=>{if(x&&typeof x==='object'){Object.values(x).forEach(freeze);Object.freeze(x);}return x;};
@@ -99,7 +99,7 @@ const plain=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
 export function planTreeSkill(input={}){
  if(!plain(input)||(!TREE_ACTIVE_SKILL_IDS.includes(input.skillId)&&input.skillId!=='ashen-prism-beam')||!validId(input.castId)||!plain(input.config)||!Array.isArray(input.targets)||input.targets.length>100000||input.targets.some(t=>!plain(t)||!validId(t.id)||typeof t.alive!=='boolean')||new Set(input.targets.map(t=>t.id)).size!==input.targets.length)return null;
  // Poison is approved as a separate percentage effect, NOT an elemental damage type.
- // Its fixed 2% target maxHP and shield-before-HP policy are approved. Timing must be explicit.
+ // Legacy poison remains2%; goblin v081 explicitly opts into3%/2s. Both remain shield-first.
  if(input.skillId==='scatter_ash'&&input.weaponType==='axe'&&(!validPoisonTiming(input.config.poisonTiming)||input.config.poisonTiming.maxLayers!==5))return null;
  if(!Number.isFinite(input.config.cooldownMs)||input.config.cooldownMs<=0)return null;
  let plan;
@@ -139,7 +139,7 @@ export function planTreeSkill(input={}){
 export function validTreeSkillPlan(p){
  if(!plain(p)||(!TREE_ACTIVE_SKILL_IDS.includes(p.skillId)&&p.skillId!=='ashen-prism-beam')||!validId(p.castId)||!['single','all','self'].includes(p.scope)||!Number.isFinite(p.cooldownMs)||p.cooldownMs<=0||!Array.isArray(p.actions)||p.actions.length>300000||p.activeCastCount!==1||![0,1].includes(p.damageActionCount))return false;
  const ids=new Set(),positions=new Set();let direct=0;const perTarget=new Map();
- const effectValid=e=>plain(e)&&typeof e.type==='string'&&(!('amount'in e)||Number.isFinite(e.amount)&&e.amount>=0)&&(!('durationMs'in e)||Number.isFinite(e.durationMs)&&e.durationMs>=0)&&(!('chance'in e)||Number.isFinite(e.chance)&&e.chance>=0&&e.chance<=1)&&e.mechanicsReady!==false&&(e.type!=='poison'||e.fractionPerLayer===.02&&e.element===null&&e.globalDamageMultiplierApplies===false&&e.shieldPolicy==='absorb-shield-before-hp'&&e.requiresHit===true&&validPoisonTiming(e.timing)&&e.timing.maxLayers===5)&&(!e.onSuccess||Array.isArray(e.onSuccess)&&e.onSuccess.every(effectValid));
+ const effectValid=e=>plain(e)&&typeof e.type==='string'&&(!('amount'in e)||Number.isFinite(e.amount)&&e.amount>=0)&&(!('durationMs'in e)||Number.isFinite(e.durationMs)&&e.durationMs>=0)&&(!('chance'in e)||Number.isFinite(e.chance)&&e.chance>=0&&e.chance<=1)&&e.mechanicsReady!==false&&(e.type!=='poison'||(isGoblinPoisonTiming(e.timing)?isGoblinPoisonSource(p.skillId)&&e.sourceId===p.skillId&&e.fractionPerLayer===.03:e.fractionPerLayer===.02)&&e.element===null&&e.globalDamageMultiplierApplies===false&&e.shieldPolicy==='absorb-shield-before-hp'&&e.requiresHit===true&&validPoisonTiming(e.timing)&&e.timing.maxLayers===5)&&(!e.onSuccess||Array.isArray(e.onSuccess)&&e.onSuccess.every(effectValid));
  for(const a of p.actions){
   if(!plain(a)||!['hit','effects'].includes(a.kind)||a.skillId!==p.skillId||a.source?.kind!=='skill'||a.source?.skillId!==p.skillId||!validId(a.targetId)||!Array.isArray(a.effects)||!a.effects.every(effectValid)||a.afterAttackEffects&&!a.afterAttackEffects.every(effectValid))return false;
   if(a.armorBreak&&(!plain(a.armorBreak)||a.armorBreak.targetId!==a.targetId||!['before-hit','after-hit'].includes(a.armorBreak.timing)||!Number.isFinite(a.armorBreak.amount)||a.armorBreak.amount<0||!Number.isFinite(a.armorBreak.durationMs)||a.armorBreak.durationMs<=0))return false;

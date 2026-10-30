@@ -12,7 +12,7 @@ export function normalizeRegionNavigation(s){
  if(s.regionNavigation!==undefined)return true;
  const found=new Set();
  for(const [key,count] of Object.entries(s.materialStacks??s.materials??{}))if(Number.isFinite(count)&&count>0){const id=resolveDwarfMaterialId(key.split('|')[0]);if(id)found.add(id);}
- const e=s.activeEncounter,explored=e&&!e.developmentFixture&&!e.rewarded&&Object.hasOwn(INSTANCES,e.instanceId)&&e.areaId===INSTANCES[e.instanceId].areaId?[e.instanceId]:[];
+ const e=s.activeEncounter,explored=e&&!e.otherworld&&!e.developmentFixture&&!e.rewarded&&Object.hasOwn(INSTANCES,e.instanceId)&&e.areaId===INSTANCES[e.instanceId].areaId?[e.instanceId]:[];
  s.regionNavigation={version:1,exploredNodeIds:explored,favoriteNodeIds:[],discoveredMaterialIds:[...found].sort()};return true;
 }
 export function getRegionNavigation(s){

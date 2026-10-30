@@ -23,7 +23,7 @@ export function createIdleActionController({read,commit,now=()=>Date.now(),onRes
  function pump(){
   if(!pending||busy)return result(pending?'busy':'idle');
   const state=read(),at=now(),boundary=idleActionBoundary(state,at);
-  if(['sandbox','story-combat','paused-battle','rest'].includes(boundary)){const label=pending.label;cancel();if(boundary==='rest')stopAfterFailure();return notify(result('rejected',{label,reason:boundary}));}
+  if(['sandbox','story-combat','paused-battle','rest'].includes(boundary)){const label=pending.label;cancel();return notify(result('rejected',{label,reason:boundary}));}
   if(boundary!=='ready'||pending.waitForReady&&at<(state.nextBattleAt??0))return result('queued',{label:pending.label});
   const job={...pending,resume:pending.resume&&!state.stopAfterBattle&&!state.stopAfterDungeon},version=serial;busy=true;let tx;
   try{if(job.execute){

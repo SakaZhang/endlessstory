@@ -90,7 +90,7 @@ async function probe(output,report){
    const manifestUrl=new URL(assetRoot[1]+'manifest.json',release);
    await visit(manifestUrl,url.href);
    const manifest=extendBattleManifest(JSON.parse(await readFile(join(output,'releases',report.release,manifestUrl.pathname.slice(release.pathname.length)),'utf8')));
-   const imageRows=[...manifest.backgrounds,...Object.values(manifest.storyScenarioBackgrounds??{}),...Object.values(manifest.campBackgrounds??{}),...Object.values(manifest.sprites).flatMap(s=>s.frames)];assert.ok(imageRows.length>0);
+   const imageRows=[...manifest.backgrounds,...(manifest.otherworldBackground?[manifest.otherworldBackground]:[]),...Object.values(manifest.storyScenarioBackgrounds??{}),...Object.values(manifest.campBackgrounds??{}),...Object.values(manifest.sprites).flatMap(s=>s.frames)];assert.ok(imageRows.length>0);
    for(const image of imageRows)await visit(new URL(assetRoot[1]+image.file,release),manifestUrl.href);
   }
  }
@@ -111,7 +111,9 @@ async function probe(output,report){
  // Package intentionally retains provenance JSON and unused source art. Keep those
  // as explicit inventory roots, separate from the verified runtime dependency graph.
  for(const actor of Object.values(STORY_ACTOR_ART))assert(urls.has(new URL(actor.file,release).href),'story actor must be reached through actual production battle manifest: '+actor.file);
- for(const module of ['chik-family-events.js','chik-family-event-rewards.js','chik-family-event-ui.js','hero-portraits/manifest.js','chik-family-registry.js','chik-family-ui.js','story-cast-registry.js','story-cast-ui.js','story-portrait-crops.js','npc-portraits.js','npc-portrait-registry.js','random-world-events.js','story-c08-scenarios.js','story-finale-scenes.js','story-finale-scenarios.js','story-battle-backgrounds.js','story-scenario-registry.js','story-actor-art.js'])assert(urls.has(new URL(module,release).href),'new runtime module must be imported from an entry: '+module);
+ for(const module of ['chik-family-events.js','chik-family-event-rewards.js','chik-family-event-ui.js','hero-portraits/manifest.js','chik-family-registry.js','chik-family-ui.js','story-cast-registry.js','story-cast-ui.js','story-portrait-crops.js','npc-portraits.js','npc-portrait-registry.js','random-world-events.js','story-c08-scenarios.js','story-finale-scenes.js','story-finale-scenarios.js','otherworld-art.js','story-battle-backgrounds.js','story-scenario-registry.js','story-actor-art.js'])assert(urls.has(new URL(module,release).href),'new runtime module must be imported from an entry: '+module);
+ // Dedicated tower art is reached through the actual extended production battle manifest.
+ for(const asset of ['rift-arena',...['idle','anticipation','attack','recovery','hurt','death'].map(p=>'sentinel-'+p)])assert(urls.has(new URL('otherworld-assets/'+asset+'.png',release).href),'tower asset must be a runtime dependency: '+asset);
  const runtimeUrls=new Set(urls);
  const auxiliary=report.files.filter(f=>!f.path.endsWith('.html')&&!urls.has(new URL(f.path,release).href));
  for(const f of auxiliary){assert.ok(/^(?:races\/(?:human|elf|goblin|ashen)\/.*\.(?:png|json|md))$/.test(f.path)||storyProvenance.has(f.path),'unclassified unreachable emitted asset '+f.path);await visit(new URL(f.path,release),'packaged auxiliary inventory');}
@@ -132,7 +134,7 @@ try{
  // Cache populated from actual checked-in legacy root and actual previous graph, not mocked module constants.
  const oldCache=new Map(before.map(([path,sha])=>[new URL(path,root).href,sha]));oldCache.set(new URL(legacyScript,root).href,'legacy entry cache');
  for(const url of graphA.urls)oldCache.set(url,'previous release cached bytes');
- for(const path of ['style.css','engine.js','battle-assets/manifest.json','map-assets/exploration-manifest.json','races/elf/assets/exploration-01.png','story-assets/central-ritual-open.png','story-assets/central-ritual-closed.png',before.find(([p])=>p.endsWith('.png'))[0]]){
+ for(const path of ['style.css','engine.js','battle-assets/manifest.json','map-assets/exploration-manifest.json','races/elf/assets/exploration-01.png','story-assets/central-ritual-open.png','story-assets/central-ritual-closed.png','otherworld-assets/rift-arena.png','otherworld-assets/sentinel-attack.png',before.find(([p])=>p.endsWith('.png'))[0]]){
   const original=await readFile(join(source,path));await writeFile(join(source,path),Buffer.concat([original,Buffer.from(path.endsWith('.js')||path.endsWith('.css')?'\n/* cache mutation probe */\n':' ')]));
   const changed=await buildRelease({source,output});assert.notEqual(changed.release,a.release,'file failed to affect namespace '+path);
   // Manifest whitespace valid; PNG trailing whitespace allowed as byte-level cache test only.
@@ -148,6 +150,7 @@ try{
   ['chik-family-registry.js',text=>text.replace('story-family-portraits/family.goblin.kalo.png','story-family-portraits/missing-family-portrait.png')],
   ['hero-portraits/manifest.js',text=>text.replace('hero-portraits/brock-96.png','hero-portraits/missing-brock-portrait.png')],
   ['story-cast-registry.js',text=>text.replace('story-portraits/ashen-chief.png','story-portraits/missing-story-cast.png')],
+  ['otherworld-art.js',text=>text.replace('otherworld-assets/rift-arena.png','otherworld-assets/missing-rift-arena.png')],
   ['story-battle-backgrounds.js',text=>text.replace('story-assets/central-ritual-closed.png','story-assets/missing-central-ritual.png')],
   ['story-actor-art.js',text=>text.replace('story-assets/high-priest.png','story-assets/missing-story-actor.png')],
   ['races/human/art.js',text=>{assert.match(text,/races\/human\/[^"']+\.png/);return text.replace(/races\/human\/[^"']+\.png/,'races/human/missing-registered-art.png');}]
@@ -189,5 +192,5 @@ try{
 
  await writeFile(join(actualOutput,'dependency-probe.json'),JSON.stringify({release:actual.release,legacyEntry:legacyScript,packageCheck,kind:'Emitted bundled entry dependencies plus retained-source ESM/CSS dynamic manifest/image contract graph; filesystem + URL/cache model, not browser cache inspection',...graph},null,2)+'\n');
  console.log(packageCheck);
- console.log(`PASS release cache: ${actual.files.length} files hash-verified; ${graph.urls.length} resource URLs / ${graph.edges.length} dependency edges; old legacy and prior release cache misses; 8 byte mutations + 9 negative reference mutations; roots/navigation/origin/save key preserved.`);
+ console.log(`PASS release cache: ${actual.files.length} files hash-verified; ${graph.urls.length} resource URLs / ${graph.edges.length} dependency edges; old legacy and prior release cache misses; 10 byte mutations + 11 negative reference mutations; roots/navigation/origin/save key preserved.`);
 }finally{await rm(temp,{recursive:true,force:true});}

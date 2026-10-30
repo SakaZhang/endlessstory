@@ -88,6 +88,24 @@ assert.deepEqual(JSON.parse(readFileSync(join(root,'content/material-recipe-expa
 const clone=v=>Array.isArray(v)?v.map(clone):v&&typeof v==='object'?Object.fromEntries(Object.entries(v).map(([k,x])=>[k,clone(x)])):v;
 function authorizedBaseline(original,file){
  const out=clone(original);
+ // Approved v081 fruit rename/+3 talent use: exact catalog leaves only.
+ // The retained inventory key, icon, price and every other consumable stay pinned.
+ if(file==='engine.js'){
+  assert.equal(out.CONSUMABLES.memoryFruit.name,'回忆之果');
+  assert.equal(out.CONSUMABLES.memoryFruit.description,'确认洗点时每枚提供10点返还额度。');
+  out.CONSUMABLES.memoryFruit.name='灵慧之果';
+  out.CONSUMABLES.memoryFruit.description='精灵地区特产；使用1枚永久增加3点可分配天赋点，不自动加点。';
+ }
+ // Explicit user-authorized v081 goblin poison: only these numeric deltas.
+ if(file==='races/goblin/skills.js'){
+  for(const [key,before,after]of [['venom_cut',5500,4400],['spore_fan',11000,8800],['spore_transfer',13000,11000],['mire_seal',14000,11000]]){
+   const id='goblin.'+key,node=out.tree.nodes.find(n=>n.id===id);assert.equal(out.skills[id].cooldownMs,before);assert.equal(node.cooldownMs,before);out.skills[id].cooldownMs=node.cooldownMs=after;
+  }
+  assert.deepEqual(out.poisonTiming,{tickIntervalMs:3000,layerDurationMs:9000,maxLayers:5,refreshPolicy:'earliest-expiry',schedule:'per-layer',expiryTick:'inclusive'});
+  out.poisonTiming={tickIntervalMs:2000,layerDurationMs:12000,maxLayers:5,refreshPolicy:'refresh-goblin-layers',schedule:'per-layer',expiryTick:'inclusive',rule:'goblin-poison-v081'};
+  const planner=out.planSkill.toString();assert.equal(planner.split('fractionPerLayer:.02').length,2);out.planSkill='<function:'+planner.replace('fractionPerLayer:.02','fractionPerLayer:.03')+'>';
+ }
+
  // Authorized v080 human A10 addition: exact checked-in content, not a wildcard exclusion.
  const bossId='human.a10.boss',bossKey=bossId+'|'+bossId;
  const addition=JSON.parse(readFileSync(join(root,'fixtures/boss-growth/human-a10-content-v080.json'),'utf8'));
@@ -175,6 +193,7 @@ try{
   const after=await import(pathToFileURL(join(root,'dist',file)));
   const a=project(after,file,''),b=project(authorizedBaseline(before,file),file,''); const differences=[]; function diff(a,b,p=''){if(Object.is(a,b))return;if(a&&b&&typeof a==='object'&&typeof b==='object'){for(const k of new Set([...Object.keys(a),...Object.keys(b)]))diff(a[k],b[k],p+'/'+k);}else differences.push(p+' '+JSON.stringify(b)+' => '+JSON.stringify(a));}diff(a,b);assert.equal(differences.length,0,`Mechanics drift in ${file}:\n${differences.slice(0,15).join('\n')}`);compared++;
   const rejectMutation=(label,mutate)=>{const corrupt=clone(after);mutate(corrupt);assert.throws(()=>assert.deepEqual(project(corrupt,file,''),b),assert.AssertionError,`Unauthorized mutation must fail: ${file}: ${label}`);};
+  if(file==='races/goblin/skills.js'){rejectMutation('unapproved poison cooldown',m=>m.skills['goblin.venom_cut'].cooldownMs--);rejectMutation('unapproved poison cap',m=>m.poisonTiming.maxLayers++);rejectMutation('unapproved tree cost',m=>m.tree.nodes[0].cost--);}
   if(file==='races/human/content.js'){
    rejectMutation('endgame boss damage',m=>m.HUMAN_MONSTERS['human.a10.boss'].skills[0].effects[0].coefficient++);
    rejectMutation('endgame boss gear basis',m=>m.HUMAN_AREAS[9].bossGearLevel=95);
@@ -212,6 +231,19 @@ try{
  // numeric catalogs, and legendary mechanics separately, not function text here.
  const before=await import(pathToFileURL(join(temp,'dist/engine.js'))),after=await import(pathToFileURL(join(root,'dist/engine.js')));
  for(const key of ['LEGENDARY_CODEX','TALENTS','MATERIALS','BUILD','CONSUMABLES'])if(key in before){assert.deepEqual(project(after[key],'engine.js',key),project(authorizedBaseline(before,'engine.js')[key],'engine.js',key),`Engine catalog drift: ${key}`);}
+ // Exact fruit catalog approval cannot hide altered grants, identity, economics,
+ // or unrelated consumable changes. Runtime use is tested by wisdom-fruit suites.
+ const expectedConsumables=project(authorizedBaseline(before,'engine.js').CONSUMABLES,'engine.js','CONSUMABLES');
+ for(const [label,mutate] of [
+  ['retired fruit name',m=>m.memoryFruit.name='回忆之果'],
+  ['unapproved fruit grant description',m=>m.memoryFruit.description=m.memoryFruit.description.replace('3点','4点')],
+  ['fruit price',m=>m.memoryFruit.price++],
+  ['fruit icon',m=>m.memoryFruit.icon='wisdomfruit'],
+  ['fruit inventory key',m=>{m.wisdomFruit=m.memoryFruit;delete m.memoryFruit;}],
+  ['extra fruit mechanics',m=>m.memoryFruit.talentPoints=4],
+  ['unrelated token copy',m=>m.reforgeToken.description+=' changed'],
+  ['unrelated token price',m=>m.reforgeToken.price++]
+ ]){const corrupt=clone(after.CONSUMABLES);mutate(corrupt);assert.throws(()=>assert.deepEqual(project(corrupt,'engine.js','CONSUMABLES'),expectedConsumables),assert.AssertionError,label);}
  // New presentation metadata must not open a hole in the mechanical projection.
  const expectedBuild=project(authorizedBaseline(before,'engine.js').BUILD,'engine.js','BUILD');
  for(const [label,mutate] of [
@@ -224,6 +256,6 @@ try{
  ]){const corrupt=clone(after.BUILD);mutate(corrupt);assert.throws(()=>assert.deepEqual(project(corrupt,'engine.js','BUILD'),expectedBuild),assert.AssertionError,label);}
  // Mutation sentinels prove representative mechanics strings cannot be hidden.
  for(const [f,p]of [['racial-npc-event-content.js','RACIAL_NPC_EVENTS/0/conditions/accessPolicy'],['racial-npc-event-content.js','RACIAL_NPC_EVENTS/0/choices/0/effects/0/flag'],['npc-objective-content.js','NPC_OBJECTIVE_CONTENT/event/taskRewards/0/key'],['races/elf/skills.js','skills/elf.skill/weaponType'],['races/elf/equipment.js','legendaries/0/exclusiveId']])assert.notEqual(project('old',f,p),project('new',f,p),p);
- console.log(`PASS copy + bounded authorized revision invariants: ${compared} modules + engine catalogs vs ${BASELINE.slice(0,12)}; ${changedCopy.length} changed content modules. IDs, gates, objectives, rewards, effects, numeric budgets and legendary functions preserved except exact approved ring objectives / recipe additions / presentation-only set rows (2/4 thresholds pinned) / exact human A10 boss content and sources.`);
+ console.log(`PASS copy + bounded authorized revision invariants: ${compared} modules + engine catalogs vs ${BASELINE.slice(0,12)}; ${changedCopy.length} changed content modules. IDs, gates, objectives, rewards, effects, numeric budgets and legendary functions preserved except exact approved ring objectives / recipe additions / presentation-only set rows (2/4 thresholds pinned) / exact human A10 boss content and sources / exact v081 goblin poison deltas / exact fruit name and description.`);
  console.log('Boundary: does not prove new prose accurately describes mechanics, DOM behavior, non-exported function closures, or visual correctness; use gameplay/UI tests and review alongside this check.');
 }finally{rmSync(temp,{recursive:true,force:true});}

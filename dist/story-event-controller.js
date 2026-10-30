@@ -1,3 +1,4 @@
+import {reconcileOtherworldStone} from './otherworld-entitlement.js';
 import {storyDialogueComplete,storyKnowledgeMatches} from './story-copy-compatibility.js';
 import {personalActions,personalSceneIsLate,personalSceneSite,personalSceneRuntimeAvailable} from './personal-story-registry.js';
 import {storyCorridorExitAvailable} from './war-travel-boundary.js';
@@ -147,6 +148,7 @@ export function finishStoryScene(s,id,now=s.lastHealthClock??s.lastSeen??Date.no
  st.completedScenes.push(id);st.choices[id]=a.choiceId;st.activeScene=null;Object.assign(st,derived(st));
  if(!applyStoryWarTransition(next,id,now)?.ok)return false;
  if(!validStoryEventState(next))return false;
+ reconcileOtherworldStone(next);
  for(const key of Object.keys(s))if(!Object.hasOwn(next,key))delete s[key];Object.assign(s,next);return {sceneId:id,completed:true};
 }
 export function applyStoryEvent(s,action,{now=Date.now()}={}){

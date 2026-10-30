@@ -1,3 +1,4 @@
+import {validOtherworldEncounter} from './otherworld-state.js';
 import {skillConditionMatches} from './skill-conditions.js';
 import {talentNegativeDuration,activeHealingMultiplier} from './talent-policy.js';
 import {countInfinityCast,infinityProcTarget} from './infinity-gauntlet-combat.js';
@@ -11,7 +12,7 @@ import {resolveTreePassives,derivePassiveStats,passiveDamageMultiplier,passiveRe
 import {skillTreeHeroStats,skillTreeEnemyAttributes} from './skill-tree-attributes.js';
 import {createTreeEffectHost} from './skill-tree-effect-host.js';
 import {applySkillEffect,validSkillEffectState} from './skill-tree-effects.js';
-import {validSkillPoison,createSkillPoison,applySkillPoison,advanceSkillPoison} from './skill-tree-poison.js';
+import {validSkillPoison,createSkillPoison,applySkillPoison,advanceSkillPoison,poisonTickFraction} from './skill-tree-poison.js';
 import {executeTreeSkillTurn,planTreeSkill,resolveSetLinkedHit,resolveSetLinkedEffect,TREE_ACTIVE_SKILL_IDS,TREE_MAX_HITS_PER_TARGET} from './skill-tree-consumer.js';
 import {advanceLegendaryCombat} from './legendary-combat.js';
 import {createPlayerShieldLayers,expirePlayerShieldLayers,grantPlayerShieldLayer,absorbPlayerShieldDamage} from './player-shield-layers.js';
@@ -37,6 +38,7 @@ export function makeMultiUnit(id,location,sourceInstanceId,l,now,profile={}){
 }
 export function validMultiProfile(p){if(!p||typeof p!=='object'||Array.isArray(p)||!Object.keys(p).every(k=>['shield','counterRatio','lifestealRatio','lifestealCap','castDuration','castCooldown','castMultiplier','summonCount','controlReduction','interruptStop'].includes(k))||!Object.values(p).every(n))return false;return Number.isSafeInteger(p.interruptStop??1100)&&(p.controlReduction??0)<=1&&(p.counterRatio??0)<=1&&(p.lifestealRatio??0)<=1&&Number.isInteger(p.summonCount??0)&&(p.summonCount??0)<=3&&(!(p.castDuration>0)||(Number.isSafeInteger(p.castDuration)&&Number.isSafeInteger(p.castCooldown)&&p.castCooldown>=0&&p.castMultiplier>0));}
 export function validMultiEncounter(e,instances){
+ if(!validOtherworldEncounter(e))return false;
  if(e.multiVersion===undefined)return e.enemies===undefined&&e.targetId===undefined;
  const planned=e.contentVersion==='dwarf-m2-v1';
  if((e.heroBurnSourceId!==undefined&&(typeof e.heroBurnSourceId!=='string'||!e.heroBurnSourceId||e.heroBurnSourceId.length>200))||e.multiVersion!==1||(!planned&&(e.developmentFixture!==true||e.kind!=='field'||e.boss))||(planned&&(!instances[e.instanceId]?.contentVersion||e.developmentFixture===true||!validDwarfDots(e.typedDots)))||typeof e.id!=='string'||!e.id||e.id.length>100||!int(e.rngState)||e.rngState>0xffffffff||!int(e.rngDraws)||!int(e.itemSerial)||!int(e.summonSerial)||!int(e.activeCastCount)||!Array.isArray(e.enemies)||e.enemies.length<(planned?1:2)||e.enemies.length>100000||new Set(e.enemies.map(u=>u?.id)).size!==e.enemies.length)return false;
@@ -336,7 +338,7 @@ export function executeTreePlayerAction(s,e,ctx){
   onActiveCast:event=>{racialLegendEvent(s,e,{type:'beforeCast'},{st,resolveElementDamage,logs,castId:event.castId,skillId:event.skillId,weaponType:input.weaponType,scope:initialPlan.scope,damageActionCount:initialPlan.actions.filter(a=>a.kind==='hit').length,committed:true});commitRaceRuntime(e,s.race,event.runtimePatch);countEquippedSkillCast(s);infinityProc=countInfinityCast(s,e,event,{activeSkill:skillTreeNode(event.skillId)?.kind==='active'&&event.skillId!=='ashen-prism-beam'});emitCombatDisplay(e,{kind:'cast',castId:event.castId,skillId:event.skillId,targetId:initialPlan.scope==='self'?'hero':e.targetId??'hero',outcome:'none'});counter=null;lifestealHits=[];e.activeCastCount++;if(initialPlan.actions.every(a=>a.kind!=='hit'))logs.push('施放 · '+(skillTreeNode(event.skillId)?.name??event.skillId));e.lastCast={recordVersion:2,id:event.castId,skillId:event.skillId,scope:initialPlan.scope,hits:[]};},
   applyEffect:(target,effect,event)=>effects.apply(target,effect,event),
   resolveEffectHit:action=>{const u=byId(action.targetId),hit=Math.random()<st.hit,record={id:action.hitId,targetId:u.id,hitIndex:action.hitIndex,hit,hpBefore:u.hp,hpAfter:u.hp,actualHpLost:0,killProcHpLost:0};emitCombatDisplay(e,{castId:action.castId??e.lastCast.id,hitId:action.hitId,targetId:u.id,skillId:action.skillId??e.lastCast.skillId,outcome:hit?'hit':'miss',segmentIndex:action.hitIndex??0});if(!hit)logs.push(u.name+' · 未命中');return record;},
-  applyPoison:(target,descriptor)=>{const clock=e.treeCombatClock??e.treeEffects?.clock??0;e.treePoison??={};let ledger=e.treePoison[target]??createSkillPoison(target,descriptor.timing,clock);if(ledger.clock!==clock){const advanced=advanceSkillPoison(ledger,{enemyId:target,combatClock:clock,targetMaxHp:byId(target).max});if(!advanced||advanced.ticks.length)throw Error('Unsettled poison before application');ledger=advanced.state;}const next=applySkillPoison(ledger,{enemyId:target,sourceId:descriptor.sourceId,combatClock:clock});if(!next)throw Error('Invalid poison application');e.treePoison[target]=next;logs.push(byId(target).name+' · 中毒 '+next.layers.length+'层');},
+  applyPoison:(target,descriptor)=>{const clock=e.treeCombatClock??e.treeEffects?.clock??0;e.treePoison??={};let ledger=e.treePoison[target]??createSkillPoison(target,descriptor.timing,clock);if(ledger.clock!==clock){const advanced=advanceSkillPoison(ledger,{enemyId:target,combatClock:clock,targetMaxHp:byId(target).max});if(!advanced||advanced.ticks.length)throw Error('Unsettled poison before application');ledger=advanced.state;}const next=applySkillPoison(ledger,{enemyId:target,sourceId:descriptor.sourceId,combatClock:clock,timing:descriptor.timing});if(!next)throw Error('Invalid poison application');e.treePoison[target]=next;logs.push(byId(target).name+' · 中毒 '+next.layers.length+'层');},
   applyArmorBreak:effect=>effects.applyArmorBreak?.(effect),
   consumeStatus:(target,status,event)=>effects.consume?.(target,status,event),
   interrupt:(target,effect)=>{const u=byId(target),r=interruptPreparing(u.control,{now,briefStop:u.profile.interruptStop??1100});if(!r)return false;u.control=r.state;return r.interrupted===true;},
@@ -382,8 +384,8 @@ export function applyTreePoisonTick(e,tick,{now}={}){
  if(!e||e.done||e.heroHp<=0||!tick||typeof tick.tickId!=='string'||!tick.tickId||tick.tickId.length>1000||!Number.isSafeInteger(tick.at)||tick.at<0||tick.at>1e15||!Number.isFinite(now)||now<0||!Number.isInteger(tick.layers)||tick.layers<1||tick.layers>5||tick.damageKind!=='percent-max-hp'||tick.element!==null||tick.canCrit!==false||tick.reaperEligible!==false||tick.activeCastCount!==0)return null;
  const u=e.enemies.find(u=>u.id===tick.enemyId&&u.hp>0);if(!u)return null;
  const prior=e.treePoisonReceipts?.[u.id];if(prior&&tick.at<=prior.at)return null;
- const damage=u.max*.02*tick.layers;if(!Number.isFinite(damage)||Math.abs(damage-tick.damage)>1e-8*Math.max(1,damage))return null;
- expireDwarfShield(u,now);const beforeHp=u.hp,beforeShield=u.shield;hitEnemy(u,damage,e,{kind:'poison',hitId:tick.tickId,skillId:'scatter_ash',element:null,combatAt:tick.at});
+ const fraction=poisonTickFraction(tick);if(fraction===null)return null;const damage=u.max*fraction;if(!Number.isFinite(damage)||Math.abs(damage-tick.damage)>1e-8*Math.max(1,damage))return null;
+ expireDwarfShield(u,now);const beforeHp=u.hp,beforeShield=u.shield;hitEnemy(u,damage,e,{kind:'poison',hitId:tick.tickId,skillId:tick.layerRules?.[0]?.sourceId??'scatter_ash',element:null,combatAt:tick.at});
  e.treePoisonReceipts??={};e.treePoisonReceipts[u.id]={tickId:tick.tickId,at:tick.at};
  if(!cleared(e,'poison'))syncMultiTarget(e);
  return {enemyId:u.id,damage,shieldLost:beforeShield-u.shield,hpLost:beforeHp-u.hp,killed:u.hp===0};

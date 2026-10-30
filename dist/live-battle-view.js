@@ -54,9 +54,10 @@ const identity=u=>u.monsterId??u.definitionId??null;
 const areaOf=(s,e)=>e?.areaId??e?.instanceId??s?.siteId??'';
 export const RACIAL_CAMPS=Object.freeze({dwarf:'黑炉营地',human:'边境营地',elf:'林间营地',goblin:'拾荒者营地',ashen:'余烬营地'});
 export function liveCampRace(state){if(state?.atCamp!==true&&!(state?.restUntil>0))return null;const territory=String(state.siteId??'').split('.')[0];return Object.hasOwn(RACIAL_CAMPS,territory)?territory:Object.hasOwn(RACIAL_CAMPS,state.race)?state.race:'dwarf';}
-export function liveSceneBackgrounds(snapshot,manifest){if(snapshot?.campRace){const row=manifest?.campBackgrounds?.[snapshot.campRace];return row?[row]:[];}const story=manifest?.storyScenarioBackgrounds?.[snapshot?.encounter?.storyScenario?.id];if(story)return [story];return liveAreaBackgrounds(snapshot?.areaId,manifest);}
+export function liveSceneBackgrounds(snapshot,manifest){if(snapshot?.otherworldActive||snapshot?.encounter?.otherworld){return manifest?.otherworldBackground?[manifest.otherworldBackground]:[];}if(snapshot?.campRace){const row=manifest?.campBackgrounds?.[snapshot.campRace];return row?[row]:[];}const story=manifest?.storyScenarioBackgrounds?.[snapshot?.encounter?.storyScenario?.id];if(story)return [story];return liveAreaBackgrounds(snapshot?.areaId,manifest);}
 const areaKey=id=>String(id).match(/^(?:dwarf|human|elf|goblin|ashen)\.a(?:0[1-9]|10)(?=\.|$)/)?.[0]??null;
 export function liveActorSprite(unit,manifest){
+ if(unit?.otherworldActor===true)return manifest?.otherworldSprite??null;
  if(unit?.storyActorId)return manifest?.storyActorSprites?.[unit.storyActorId]??null;
  if(unit?.storyActorRace)return manifest?.raceHeroWeaponSprites?.[unit.storyActorRace]?.[unit.storyActorWeapon]??null;
  const variant=[...(manifest?.actorVariants??[])].sort((a,b)=>(b.priority??0)-(a.priority??0)).find(row=>row.match&&Object.entries(row.match).every(([key,value])=>(key==='definitionId'?(unit.definitionId??unit.monsterId):unit[key])===value));
@@ -92,7 +93,7 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
   const base={mode:'fallback',reason:null,label:'像素画面暂不可用',missingIds:[],coverage:[]};
   if(disposed)return {...base,reason:'disposed',label:'战斗画面已关闭'};
   if(!snapshot)return {...base,mode:'idle',reason:'no-encounter',label:'等待战斗'};
-  if(!snapshot.campRace&&!areaKey(snapshot.areaId))return {...base,reason:'area-not-covered',label:'此处暂无场景图'};
+  if(!snapshot.otherworldActive&&!snapshot.encounter?.otherworld&&!snapshot.campRace&&!areaKey(snapshot.areaId))return {...base,reason:'area-not-covered',label:'此处暂无场景图'};
 
   if(loadError)return {...base,reason:'asset-load-failed',label:'像素素材加载失败 · 请重试',error:loadError};
   if(!manifest)return {...base,reason:'assets-not-loaded',label:'像素外观准备中'};
@@ -105,12 +106,12 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
   const sprites=[heroSprite,...new Set(rows.map(r=>r.sprite))];
   const files=[...backgrounds,...sprites.flatMap(key=>(manifest.sprites?.[key]?.frames??[]).flatMap(frame=>legendaryFrameFiles(manifest.sprites[key],frame).map(file=>({file}))))];
   if(sprites.some(key=>!manifest.sprites?.[key]?.animations?.idle?.length)||files.some(f=>!images.get(f.file)))return {...base,reason:'asset-frames-missing',label:'战斗画面仍在加载',coverage:rows};
-  return {...base,mode:'ready',reason:null,label:snapshot.campRace?RACIAL_CAMPS[snapshot.campRace]:snapshot.idle?'野外待机':'实时像素战斗',campRace:snapshot.campRace,heroAppearance:neutralHero(heroSprite,manifest)?legacyNeutralIdle(heroSprite,manifest)?'neutral-idle':'neutral-generic':'equipped-weapon',heroAppearanceNote:neutralHero(heroSprite,manifest)?'暂用基础外观 · 当前武器外观不可用':'',backgroundIds:backgrounds.map(bg=>bg.id),coverage:rows};
+  return {...base,mode:'ready',reason:null,label:snapshot.otherworldActive?'异界待机':snapshot.encounter?.otherworld?'异界挑战':snapshot.campRace?RACIAL_CAMPS[snapshot.campRace]:snapshot.idle?'野外待机':'实时像素战斗',campRace:snapshot.campRace,heroAppearance:neutralHero(heroSprite,manifest)?legacyNeutralIdle(heroSprite,manifest)?'neutral-idle':'neutral-generic':'equipped-weapon',heroAppearanceNote:neutralHero(heroSprite,manifest)?'暂用基础外观 · 当前武器外观不可用':'',backgroundIds:backgrounds.map(bg=>bg.id),coverage:rows};
  };
  function rebuildPositions(){
   const units=snapshot.encounter.enemies;for(const u of units)if(!slots.has(u.id))slots.set(u.id,slots.size);
   const layout=units.length<=1?[350]:units.length===2?[305,405]:[275,350,425];
-  const baseline=snapshot.campRace?(manifest?.campBackgrounds?.[snapshot.campRace]?.baseline??195):manifest?.areaBaselines?.[areaKey(snapshot.areaId)]??203;
+  const baseline=(snapshot.otherworldActive||snapshot.encounter?.otherworld)?(manifest?.otherworldBackground?.baseline??203):snapshot.campRace?(manifest?.campBackgrounds?.[snapshot.campRace]?.baseline??195):manifest?.areaBaselines?.[areaKey(snapshot.areaId)]??203;
   positions.hero={x:snapshot.campRace?144:100,y:baseline,sprite:heroSpriteFor(metadata.hero?.weaponType,manifest,metadata.hero?.race,metadata.hero?.legendaryId),ranged:['bow','staff'].includes(metadata.hero?.weaponType)};
   const heroSprite=manifest?.sprites?.[positions.hero.sprite],heroIdle=heroSprite?.frames.find(f=>f.id===heroSprite.animations.idle[0]),heroBox=heroIdle?.solidBBox??heroIdle?.alphaBBox;
   if(heroBox)positions.hero.scale=heroPresentationScale(heroSprite,metadata.hero?.race);
@@ -170,16 +171,17 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
  }
  function sync(state,encounter,options={}){
   if(disposed)return coverage();if(typeof options==='number')options={now:options};
-  const now=Number.isFinite(options.now??options.gameNow)?(options.now??options.gameNow):0,newVisible=options.visible??true,newPaused=!(options.running??state?.running)&&!encounter?.done||Number.isFinite(encounter?.pauseAt),changed=(encounter?.id??null)!==battleId||snapshot?.areaId!==areaOf(state,encounter);
+  const otherworldActive=state?.otherworld?.active===true&&!encounter;
+  const now=Number.isFinite(options.now??options.gameNow)?(options.now??options.gameNow):0,newVisible=options.visible??true,newPaused=!(options.running??state?.running)&&!encounter?.done||Number.isFinite(encounter?.pauseAt),changed=(encounter?.id??null)!==battleId||snapshot?.areaId!==areaOf(state,encounter)||snapshot?.otherworldActive!==otherworldActive;
   if(changed||newPaused!==paused||newVisible!==visible){reset(changed);}
   battleId=encounter?.id??null;paused=newPaused;visible=newVisible;displayTime=Number.isFinite(options.presentationTime)?options.presentationTime:displayTime;
   if(!state){snapshot=null;if(!providedImages)updateScope();return coverage();}
   heroMaxHp=stats(structuredClone(state)).hp;
-  const campRace=liveCampRace(state);
+  const campRace=otherworldActive||encounter?.otherworld?null:liveCampRace(state);
   const idle=!!campRace||!encounter||!Array.isArray(encounter.enemies);
   const displayEncounter=idle?{heroHp:state.heroHp??heroMaxHp,enemies:[],areaId:areaOf(state,null),targetId:null}:encounter;
   // Detached snapshots guarantee later game mutations cannot race a presentation frame.
-  snapshot={idle,campRace,encounter:{...structuredClone(displayEncounter),heroHp:idle||encounter.done?state.heroHp??heroMaxHp:displayEncounter.heroHp},areaId:areaOf(state,displayEncounter),units:idle?[]:normalizeBattleEnemies(encounter,now),gameNow:now};
+  snapshot={idle,campRace,otherworldActive,encounter:{...structuredClone(displayEncounter),heroHp:idle||encounter.done?state.heroHp??heroMaxHp:displayEncounter.heroHp},areaId:areaOf(state,displayEncounter),units:idle?[]:normalizeBattleEnemies(encounter,now),gameNow:now};
   heroMaxHp=stats(structuredClone(state)).hp;Object.assign(metadata,{hero:{weaponType:liveHeroWeaponType(state),race:state.race,legendaryId:state.inventory?.find(it=>it.id===state.equip?.weapon)?.legendaryId??null}});rebuildPositions();if(!providedImages&&updateScope())void load();return coverage();
  }
  function enqueue(events,at){
@@ -219,6 +221,6 @@ export function createLiveBattlePresentation({assetRoot='./battle-assets/',manif
    if(x>=left-3&&x<=right+3&&y>=top-3&&y<=bottom+3)return u.id;
   }return null;
  }
- function detailHtml(){if(!snapshot)return '';return snapshot.units.filter(u=>u.hp>0).map(u=>`<button class="liveBattleDetail" data-monster-detail="${esc(u.definitionId??identity(snapshot.encounter.enemies.find(e=>e.id===u.id)))}" data-unit-detail="${esc(u.id)}" aria-label="查看${esc(u.name)}状态">${esc(u.name)}${u.preparing?` · ${esc(u.preparing.name)} · ${Math.max(0,((snapshot.encounter.enemies.find(e=>e.id===u.id)?.control?.preparing?.duration??0)*(1-u.preparing.progress))/1000).toFixed(1)}秒${u.preparing.paused?'（暂停）':''}`:''}${readEnemyEffectRows(snapshot.encounter,u.id).map(r=>' · '+esc(r.label)+(r.layers?' ×'+r.layers:'')).join('')} ⓘ</button><button class="liveBattleDetail" data-enemy-effects="${esc(u.id)}" aria-label="查看${esc(u.name)}状态来源与剩余">状态详情</button>`).join('');}
+ function detailHtml(){if(!snapshot)return '';return snapshot.units.filter(u=>u.hp>0).map(u=>`<button class="liveBattleDetail" ${u.otherworldActor?`data-enemy-effects="${esc(u.id)}"`:`data-monster-detail="${esc(u.definitionId??identity(snapshot.encounter.enemies.find(e=>e.id===u.id)))}" data-unit-detail="${esc(u.id)}"`} aria-label="查看${esc(u.name)}状态">${esc(u.name)}${u.preparing?` · ${esc(u.preparing.name)} · ${Math.max(0,((snapshot.encounter.enemies.find(e=>e.id===u.id)?.control?.preparing?.duration??0)*(1-u.preparing.progress))/1000).toFixed(1)}秒${u.preparing.paused?'（暂停）':''}`:''}${readEnemyEffectRows(snapshot.encounter,u.id).map(r=>' · '+esc(r.label)+(r.layers?' ×'+r.layers:'')).join('')} ⓘ</button><button class="liveBattleDetail" data-enemy-effects="${esc(u.id)}" aria-label="查看${esc(u.name)}状态来源与剩余">状态详情</button>`).join('');}
  return Object.freeze({load,sync,enqueue,draw,targetAt,drawPortrait(canvas,state,options={}){return drawLiveHeroPortrait(canvas,state,{manifest,images,...options});},get status(){return coverage();},get positions(){return structuredClone(positions);},get detailsHtml(){return detailHtml();},get debug(){return {battleId,paused,visible,floats:presentation.floats.length,deferredHurts:presentation.deferredHurtCount,effects:presentation.effects.length,imageCacheSize:images.size,imageLoads:activeLoads,imageQueueSize:imageQueue.length,seen:seen.size,deathActors:[...deathStarts.keys()]};},dispose(){disposed=true;reset();snapshot=null;desiredFiles.clear();for(const controller of activeImages.values())controller.abort();activeImages.clear();pumpImages();images=new Map();}});
 }

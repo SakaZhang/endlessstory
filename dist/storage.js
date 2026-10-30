@@ -1,4 +1,5 @@
-import {fresh,validSave,effectiveLuck} from './engine.js';
+import {reconcileOtherworldStone} from './otherworld-entitlement.js';
+import {fresh,validSave,effectiveLuck,normalizeRecipes} from './engine.js';
 import {SCHEMA_VERSION,SAVE_KEY} from './save-generation.js';
 export {SAVE_KEY} from './save-generation.js';
 export const LEGACY_KEY='ashencrown-v1';
@@ -19,6 +20,16 @@ export function loadProgress(storage){
   const raw=storage.getItem(SAVE_KEY),keys=retiredKeys(storage);
   if(raw!==null){reason='invalid-current-save';const parsed=JSON.parse(raw);if(!validCurrent(parsed))return fail();game=parsed;}
   else{game=fresh();game.lastSeen=Date.now();game.offlineLuck=effectiveLuck(game);if(!validCurrent(game)){game=null;reason='invalid-candidate';return fail();}reason='storage-write';storage.setItem(SAVE_KEY,JSON.stringify(game));initialized=true;}
+  // Reconcile defaults and story entitlement in one validated candidate/write.
+  // Failed persistence retains the exact original save, with neither grant adopted.
+  const reconciled=structuredClone(game);
+  normalizeRecipes(reconciled);reconcileOtherworldStone(reconciled);
+  if(JSON.stringify(reconciled)!==JSON.stringify(game)){
+   if(!validCurrent(reconciled)){reason='invalid-candidate';return fail();}
+   reason='storage-read';const expected=JSON.stringify(game),current=storage.getItem(SAVE_KEY);
+   if(current===null||JSON.stringify(JSON.parse(current))!==expected){reason='stale-state';return fail();}
+   reason='storage-write';storage.setItem(SAVE_KEY,JSON.stringify(reconciled));game=reconciled;
+  }
   reason='storage-cleanup';for(const key of keys)if(storage.getItem(key)!==null)storage.removeItem(key);
   blockedStores.delete(storage);return {game,initialized,notice:initialized?'新旅程已开始，进度将保存在此浏览器中。':null,blocked:false,reason:null};
  }catch{return fail();}

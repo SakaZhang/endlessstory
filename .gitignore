@@ -11,3 +11,6 @@ deploy/container/binaries/
 # Generated Python caches
 __pycache__/
 *.pyc
+
+# Also ignore a local dependency symlink in isolated worktrees
+node_modules

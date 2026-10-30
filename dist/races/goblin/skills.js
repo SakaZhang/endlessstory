@@ -1,12 +1,13 @@
+import {GOBLIN_POISON_TIMING} from '../../skill-tree-poison.js';
 const sid=x=>'goblin.'+x;
 const branches={poison:'叠毒',ambush:'伏击连杀',contraption:'诡械牵制',common:'穴途生存'};
 const rows=[
-['venom_cut','涂菌刺','poison','single',5500,'命中施加一层毒；匕首补一记轻刺，单手剑削弱攻击。'],
-['spore_fan','散孢扇','poison','all',11000,'对全体施加一层毒并降低命中；不放大毒伤。'],
+['venom_cut','涂菌刺','poison','single',4400,'命中施加一层毒；匕首补一记轻刺，单手剑削弱攻击。'],
+['spore_fan','散孢扇','poison','all',8800,'对全体施加一层毒并降低命中；不放大毒伤。'],
 ['bitter_wound','苦鳃破口','poison','single',8500,'物理刺击；目标中毒时削弱护甲。'],
-['spore_transfer','移孢','poison','all',13000,'当主目标中毒时向其他活目标施加一层毒，主目标获得一次补层。'],
+['spore_transfer','移孢','poison','all',11000,'当主目标中毒时向其他活目标施加一层毒，主目标获得一次补层。'],
 ['toxic_feint','毒刃佯攻','poison','self',15000,'提升闪避与穿透，争取叠层时间。'],
-['mire_seal','苦菌封势','poison','single',14000,'施加毒并削弱攻击；满五层时额外降低命中，不增幅毒伤。'],
+['mire_seal','苦菌封势','poison','single',11000,'施加毒并削弱攻击；满五层时额外降低命中，不增幅毒伤。'],
 ['opening_cut','伏径首击','ambush','single',6000,'目标生命高于75%时增强直伤；匕首两击，单手剑重斩。'],
 ['seam_step','穿隙步','ambush','self',13000,'短时提升闪避与穿透，不提供隐身或无敌。'],
 ['finish_cut','收尾割','ambush','single',9000,'目标生命低于30%时增强直伤，非斩杀即死。'],
@@ -32,7 +33,7 @@ for(const branch of ['poison','ambush','contraption','common']){
  active.forEach((s,i)=>tree.nodes.push({...s,kind:'active',cost:branch==='common'?4:[2,3,3,4,4,4][i],requires:i&&branch!=='common'?[active[0].id]:[],row:Math.floor(i/2),column:i%2}));
  Object.values(passives).filter(s=>s.branch===branch).forEach((s,i)=>tree.nodes.push({...s,kind:'passive',cost:3,requires:[],row:3,column:i}));
 }
-export const poisonTiming={tickIntervalMs:3000,layerDurationMs:9000,maxLayers:5,refreshPolicy:'earliest-expiry',schedule:'per-layer',expiryTick:'inclusive'};
+export const poisonTiming={...GOBLIN_POISON_TIMING};
 export function planSkill({skillId,castId,weaponType,selectedTargetId,targets=[],hero={},stats={}}={}){
  const m=skills[skillId];if(!m||!castId)return null;
  const live=targets.filter(t=>t.alive),chosen=m.scope==='all'?live:m.scope==='single'?live.filter(t=>t.id===selectedTargetId):[];if(m.scope!=='self'&&!chosen.length)return null;
@@ -41,7 +42,7 @@ export function planSkill({skillId,castId,weaponType,selectedTargetId,targets=[]
  const ef=(type,amount,durationMs=6000,extra={})=>({type,amount,durationMs,sourceId:skillId,...extra});
  const effect=(targetId,effects)=>actions.push({kind:'effects',targetId,effects});
  const hit=(t,coefficient,effects=[],index=0)=>actions.push({kind:'hit',castId,hitId:`${castId}:${t.id}:${index}`,targetId:t.id,hitIndex:index,damageType:'physical',coefficient,independentHit:true,independentCrit:true,reaperEligible:true,effects});
- const poison=()=>({type:'poison',status:'poison',sourceId:skillId,damageKind:'percent-max-hp',fractionPerLayer:.02,element:null,mechanicsReady:true,requiresHit:true,timing:{...poisonTiming},shieldPolicy:'absorb-shield-before-hp',globalDamageMultiplierApplies:false,chance:1,reaperEligible:false,activeCastCount:0});
+ const poison=()=>({type:'poison',status:'poison',sourceId:skillId,damageKind:'percent-max-hp',fractionPerLayer:.03,element:null,mechanicsReady:true,requiresHit:true,timing:{...poisonTiming},shieldPolicy:'absorb-shield-before-hp',globalDamageMultiplierApplies:false,chance:1,reaperEligible:false,activeCastCount:0});
  const reactive=(charges,coefficient,hitDown,attackDown,splash=false,durationMs=8000)=>ef('raceReactive',0,durationMs,{charges,coefficient,hitDown,attackDown,splash,trigger:'enemy-direct-action',nonRecursive:true,damageType:'physical'});
  for(const t of chosen){
   const ratio=Number.isFinite(t.hp)&&t.maxHp>0?t.hp/t.maxHp:1,layers=t.poisonLayers??0;
@@ -81,8 +82,9 @@ for(const branch of ['poison','ambush','contraption']){const nodes=tree.nodes.fi
 
 for(const key of ['venom_cut','mire_seal','snare_wire','braced_lure']){skills[sid(key)].description+=' 减攻至多为目标基础攻击的25%，不同减攻来源只取最强。';tree.nodes.find(n=>n.id===sid(key)).description=skills[sid(key)].description;}
 // Tooltips mirror typed plans; descriptions are never parsed by the combat host.
+const standardPoisonText=' 每层毒每2秒扣目标最大生命3%，持续12秒，上限5层；叠毒刷新该目标全部哥布林毒层至12秒，满层补毒也刷新，但不推迟下次跳毒，先扣盾，不暴击、不受增伤。';
 const detail={
-venom_cut:'造成65%攻击的物理伤害并尝试施加1层毒。匕首追加25%攻击轻刺；单手剑降低目标攻击，数值为自身攻击8%、最多目标基础攻击25%，持续6秒。毒每层每3秒扣目标最大生命2%，持续9秒，上限5层，先扣盾且不暴击、不受增伤。',
+venom_cut:'造成65%攻击的物理伤害并尝试施加1层毒。匕首追加25%攻击轻刺；单手剑降低目标攻击，数值为自身攻击8%、最多目标基础攻击25%，持续6秒。毒每层每2秒扣目标最大生命3%，持续12秒，上限5层；叠毒刷新该目标全部哥布林毒层，满层也续时，不推迟下次跳毒；先扣盾且不暴击、不受增伤。',
 spore_fan:'对全体造成25%攻击物理伤害，各尝试施加1层标准毒，并降低12点命中6秒。',
 bitter_wound:'造成105%攻击物理伤害；目标已有毒时，降低相当于自身攻击15%的护甲6秒。',
 spore_transfer:'仅主目标已有毒时可用。对全体造成20%攻击物理伤害，各尝试施加1层标准毒；不转移或放大毒层伤害，上限仍为5层。',
@@ -104,4 +106,4 @@ patch_ration:'恢复最大生命12%；单手剑另获得最大生命4%的护盾6
 dust_escape:'全体敌人降低20点命中6秒；自身获得18点闪避6秒。',
 shed_binding:'清除1个符合规则的自身负面状态，并获得最大生命9%的护盾7秒；没有负面状态时仍可获得护盾。'
 };
-for(const[key,description]of Object.entries(detail)){const skill=skills[sid(key)];skill.description=description+' 冷却'+skill.cooldownMs/1000+'秒。';tree.nodes.find(n=>n.id===skill.id).description=skill.description;}
+for(const[key,description]of Object.entries(detail)){const skill=skills[sid(key)];skill.description=description+(['spore_fan','spore_transfer','mire_seal'].includes(key)?standardPoisonText:'')+' 冷却'+skill.cooldownMs/1000+'秒。';tree.nodes.find(n=>n.id===skill.id).description=skill.description;}

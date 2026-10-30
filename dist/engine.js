@@ -1,3 +1,8 @@
+import {noncombatRunning} from './noncombat-policy.js';
+import {reforgeMaterialForLevel} from './reforge-materials.js';
+import {beginLootReceipt,captureLoot,finishLootReceipt,validLootHistory} from './loot-history.js';
+import {freshOtherworldState,validOtherworldState,normalizeOtherworldState,otherworldUnlocked,otherworldFloorStats,OTHERWORLD_PENDING_LIMIT,OTHERWORLD_MAX_FLOOR,OTHERWORLD_LOOT_POLICY} from './otherworld-state.js';
+export {otherworldUnlocked,otherworldFloorStats,OTHERWORLD_MAX_FLOOR,OTHERWORLD_LOOT_POLICY} from './otherworld-state.js';
 import {withSetEffects} from './set-effects.js';
 import {materialFusionQualityWeights,materialFusionSlotBias,favorableQualityProbabilities} from './material-fusion-policy.js';
 import {dungeonLootSnapshot,recordDungeonLootReceipt,validDungeonLootReceipts} from './dungeon-loot-receipts.js';
@@ -50,7 +55,7 @@ import {validEquipmentRuntime,normalizeEquipmentRuntime,applyEquipmentRuntimeCha
 export {validEquipmentRuntime,normalizeEquipmentRuntime,applyEquipmentRuntimeChange} from './equipment-runtime.js';
 import {makeAffixSourceRange,affixOwnRange,validAffixSource,affixSourceLabel} from './affix-range.js';
 import {deriveNewItemBudget,validItemBudgetMetadata} from './equipment-budget-adapter.js';
-import {applyExperience} from './character-progression.js';
+import {applyExperience,totalEarnedXp} from './character-progression.js';
 import {dwarfBudgetReady} from './dwarf-content.js';
 const DWARF_MONSTERS=ALL_MONSTERS;
 export {configureDwarfParameters,dwarfBudgetReady} from './dwarf-content.js';
@@ -72,7 +77,7 @@ export {equipmentFusionQualityDistribution,rollEquipmentInputQuality,fusionDivin
 import {equipmentFingerprint,validBatchSelection,validBatchQuote} from './batch-sale-schema.js';
 import {validCollectionLedger,addOwnedCollection,normalizeCollectionLedger} from './codex-collection-schema.js';
 import {rollSourceSet,isMerchantEquipmentSellable,eligibleSetSource,setDropProbability} from './set-source-schema.js';
-import {RARE_REWARD_RULES,freshRareRewardProgress,validRareRewardProgress,rareRewardStorageBlocked} from './rare-reward-progress.js';
+import {RARE_REWARD_RULES,freshRareRewardProgress,normalizeRareRewardProgress,validRareRewardProgress,rareRewardStorageBlocked} from './rare-reward-progress.js';
 export {RARE_REWARD_RULES,setDropProbability};
 export {rollSourceSet,isMerchantEquipmentSellable};
 // The retained developer sandbox uses named fixture skills, not the retired level-unlock model.
@@ -124,14 +129,20 @@ export const TALENTS={
  block:{name:'格挡训练',desc:'每点格挡 +4，概率减轻30%直接攻击伤害。',icon:'barrier',cap:10},shield:{name:'护盾塑形',desc:'已有技能或词条生成护盾时，每点额外 +4；不自动生成。',icon:'shield',cap:null},healing:{name:'复苏',desc:'所有种族主动技能的直接治疗：前10点每点 +4%，超过10点后额外加成=40%×超出点数÷(20+超出点数)，总加成低于80%。不增强持续治疗、药剂、吸血或护盾。',icon:'mend',cap:null},
  resolve:{name:'抗扰',desc:'每点缩短新受到的持续负面状态2%，最多20%；与被动乘算。持续伤害至少保留1跳；不改变下一次普攻减速。',icon:'ironcoat',cap:10},luck:{name:'幸运',desc:'小幅提高非套装掉落、融合品质及改造普通词条数值；并小幅提高合格战利品、套装、特殊词条与神赐机会；不改变战斗触发及强化成功率。',icon:'ring',cap:10}
 };
-export function talentPointBudget(s){return s.level-1;}
+export const MAX_FRUIT_TALENT_POINTS=3e9;
+export function talentPointBudget(s){return s.level-1+(s.earnedFruitTalentPoints??0);}
+export function useWisdomFruit(s,expectedQuantity,battleActive=false){
+ if(noncombatRunning(s)||battleActive||s.activeEncounter&&!s.activeEncounter.done||!validTalents(s)||!validConsumables(s)||!Number.isSafeInteger(expectedQuantity)||expectedQuantity<1||s.consumables?.memoryFruit!==expectedQuantity||(s.earnedFruitTalentPoints??0)>MAX_FRUIT_TALENT_POINTS-3)return false;
+ s.consumables.memoryFruit--;s.earnedFruitTalentPoints=(s.earnedFruitTalentPoints??0)+3;return true;
+}
 function validTalents(s){
+ if(s.earnedFruitTalentPoints!==undefined&&(!Number.isSafeInteger(s.earnedFruitTalentPoints)||s.earnedFruitTalentPoints<0||s.earnedFruitTalentPoints>MAX_FRUIT_TALENT_POINTS||s.earnedFruitTalentPoints%3!==0))return false;
  if(s.bonusTalentPoints!==undefined||s.testGrants!==undefined||s.talentBalanceVersion!==undefined&&s.talentBalanceVersion!==TALENT_BALANCE_VERSION)return false;
  if(!s.talents||typeof s.talents!=='object'||Array.isArray(s.talents))return false;
  if(!['power','heart','steel'].every(k=>Number.isInteger(s.talents[k])&&s.talents[k]>=0))return false;
  return Object.entries(s.talents).every(([key,n])=>Object.hasOwn(TALENTS,key)&&Number.isSafeInteger(n)&&n>=0&&n<=(TALENTS[key].cap??talentPointBudget(s)))&&Object.values(s.talents).reduce((a,b)=>a+b,0)<=talentPointBudget(s);
 }
-export const CONSUMABLES={memoryFruit:{name:'回忆之果',icon:'memoryfruit',description:'确认洗点时每枚提供10点返还额度。',price:200},reforgeToken:{name:'重铸印记',icon:'reforgeToken',description:'完整重铸消耗1枚；保留旧结果也不返还。',price:120}};
+export const CONSUMABLES={memoryFruit:{name:'灵慧之果',icon:'memoryfruit',description:'精灵地区特产；使用1枚永久增加3点可分配天赋点，不自动加点。',price:200},reforgeToken:{name:'重铸印记',icon:'reforgeToken',description:'完整重铸消耗1枚；保留旧结果也不返还。',price:120}};
 // Charges are pooled uses: buying one token adds three; activating one banks one attempt.
 export const BOSS_CHALLENGE_PRICE=1000,BOSS_CHALLENGE_USES=3,MAX_BOSS_CHALLENGES=1e9;
 const validBossCount=n=>Number.isSafeInteger(n)&&n>=0&&n<=MAX_BOSS_CHALLENGES;
@@ -162,7 +173,7 @@ export function normalizeTalents(s){
 }
 export function availableTalentPoints(s){return talentPointBudget(s)-Object.values(s.talents).reduce((a,b)=>a+b,0);}
 export function spendTalent(s,key,battleActive=false){
- if(s.running||battleActive||s.activeEncounter&&!s.activeEncounter.done||!Object.hasOwn(TALENTS,key)||!validTalents(s)||!validConsumables(s)||availableTalentPoints(s)<=0||(TALENTS[key].cap!==null&&(s.talents[key]??0)>=TALENTS[key].cap))return false;
+ if(noncombatRunning(s)||battleActive||s.activeEncounter&&!s.activeEncounter.done||!Object.hasOwn(TALENTS,key)||!validTalents(s)||!validConsumables(s)||availableTalentPoints(s)<=0||(TALENTS[key].cap!==null&&(s.talents[key]??0)>=TALENTS[key].cap))return false;
  normalizeTalents(s);s.talents[key]++;capHealth(s);return true;
 }
 export function getTalentRefundQuote(s,draft){
@@ -171,9 +182,9 @@ export function getTalentRefundQuote(s,draft){
  return talentRefundCost(s,rows.reduce((n,[,v])=>n+v,0));
 }
 export function commitTalentRefund(s,draft,battleActive=false){
- if(s.running||battleActive||s.activeEncounter&&!s.activeEncounter.done)return false;const quote=getTalentRefundQuote(s,draft);
+ if(noncombatRunning(s)||battleActive||s.activeEncounter&&!s.activeEncounter.done)return false;const quote=getTalentRefundQuote(s,draft);
  if(!quote||(s.consumables?.memoryFruit??0)<quote.fruitCost||!Number.isFinite(s.gold)||s.gold<quote.goldCost)return false;
- normalizeTalents(s);s.consumables.memoryFruit-=quote.fruitCost;s.consumables.refundCredits=quote.creditsAfter;s.gold-=quote.goldCost;s.talentBalanceVersion=TALENT_BALANCE_VERSION;
+ normalizeTalents(s);s.consumables.refundCredits=quote.creditsAfter;s.gold-=quote.goldCost;s.talentBalanceVersion=TALENT_BALANCE_VERSION;
  for(const [key,n] of Object.entries(draft))s.talents[key]-=n;capHealth(s);return true;
 }
 export const AFFIX_DEFS={
@@ -228,7 +239,18 @@ export function getReforgeCost(it,mode,s=null){
  if(!it||!Number.isInteger(it.rarity)||it.rarity<0||it.rarity>3||!Array.isArray(it.affixes)||!it.affixes.length)return null;
  if(mode==='all')return {gold:0,materials:{},consumables:{reforgeToken:1}};
  if(mode==='replace')return {gold:0,materials:{},equipment:1};
- return mode==='value'?{gold:racialGoldCost(s,10+5*it.rarity),materials:{'铁屑':1}}:null;
+ const material=reforgeMaterialForLevel(it.level);
+ return mode==='value'&&material?{gold:racialGoldCost(s,10+5*it.rarity),materials:{[material.key]:material.quantity}}:null;
+}
+// Read-only quote binds the exact target, donor, level, price and q0 balance.
+export function getReforgeQuote(s,itemId,mode,index=0,donorId){
+ const it=s?.inventory?.find(i=>i.id===itemId),cost=getReforgeCost(it,mode,s);
+ if(!cost)return null;
+ const material=mode==='value'?reforgeMaterialForLevel(it.level):null;
+ return {version:1,itemId,level:it.level,mode,index:mode==='all'?null:index,donorId:donorId??null,
+  target:JSON.stringify(it),donor:mode==='replace'?JSON.stringify(s.inventory.find(i=>i.id===donorId)??null):null,
+  cost,goldOwned:s.gold,materials:material?[{...material,owned:materialCount(s,material.key,0)}]:[],
+  consumables:Object.fromEntries(Object.keys(cost.consumables??{}).map(k=>[k,s.consumables?.[k]??0]))};
 }
 export function eligibleReforgeDonors(s,targetId,index=0){
  const target=s?.inventory?.find(it=>it.id===targetId);
@@ -256,9 +278,10 @@ export function getPendingReforgeCandidate(s){
  return reforgeCandidateItem(s.inventory.find(it=>it.id===s.pendingReforge.itemId),s.pendingReforge);
 }
 function canonicalReforgeDivine(it){const copy=structuredClone(it);delete copy.divine;applyForgeFavor(copy);return copy.divine;}
-export function reforge(s,itemId,mode,index=0,donorId){
+export function reforge(s,itemId,mode,index=0,donorId,expectedQuote){
  if(!s||!Array.isArray(s.inventory)||s.pendingReforge)return null;
  const it=s.inventory.find(i=>i.id===itemId),cost=getReforgeCost(it,mode,s);
+ if(expectedQuote!==undefined&&!sameReforgeData(expectedQuote,getReforgeQuote(s,itemId,mode,index,donorId)))return null;
  if(!cost||!validEquipment(it)||!SLOTS.includes(it.slot)||it.affixes.length>Object.keys(AFFIX_DEFS).length||it.affixes.some(a=>!a||typeof a!=='object'))return null;
  if(divineMultiplier(it)>1&&(!it.divine.bonus||typeof it.divine.bonus!=='object'))return null;
  if(new Set(it.affixes.map(a=>a.stat)).size!==it.affixes.length||!it.affixes.every(a=>validAffixSource(a,AFFIX_DEFS)))return null;
@@ -293,14 +316,17 @@ export function reforge(s,itemId,mode,index=0,donorId){
  if(donor)normalizeCodexCollection(s);
  if(donor)s.inventory.splice(s.inventory.findIndex(x=>x.id===donor.item.id),1);
  const operationId='reforge-'+Date.now().toString(36)+'-'+(++serial).toString(36);
- s.pendingReforge={ruleVersion:8,operationId,itemId:it.id,mode,index:mode==='all'?null:index,oldAffixes:before,newAffixes:after,oldSpecial,newSpecial,cost,...divineSnapshot,...(donor?{donor:{id:donor.item.id,name:donor.item.name,slot:donor.item.slot,eligibleStats:donor.affixes.map(a=>a.stat),eligibleAffixes:structuredClone(donor.affixes),selectedAffix:structuredClone(after[index])}}:{})};
+ s.pendingReforge={ruleVersion:9,targetLevel:it.level,operationId,itemId:it.id,mode,index:mode==='all'?null:index,oldAffixes:before,newAffixes:after,oldSpecial,newSpecial,cost,...divineSnapshot,...(donor?{donor:{id:donor.item.id,name:donor.item.name,slot:donor.item.slot,eligibleStats:donor.affixes.map(a=>a.stat),eligibleAffixes:structuredClone(donor.affixes),selectedAffix:structuredClone(after[index])}}:{})};
  return {item:it,operationId,mode,index:mode==='all'?null:index,cost,before:structuredClone(before),after:structuredClone(after),oldSpecial,newSpecial,pending:true};
 }
 export function validPendingReforge(s){
  const p=s.pendingReforge;if(p===undefined||p===null)return true;
  if(!p||typeof p!=='object'||Array.isArray(p)||typeof p.operationId!=='string'||p.operationId.length<1||p.operationId.length>160)return false;
- if(![6,7,8].includes(p.ruleVersion))return false;
- const it=s.inventory?.find(i=>i.id===p.itemId),cost=getReforgeCost(it,p.mode,s);
+ if(![6,7,8,9].includes(p.ruleVersion))return false;
+ const it=s.inventory?.find(i=>i.id===p.itemId),currentCost=getReforgeCost(it,p.mode,s);
+ // Paid legacy candidates retain their historical iron price; never charge again.
+ const cost=p.ruleVersion<9&&p.mode==='value'&&currentCost?{...currentCost,materials:{'铁屑':1}}:currentCost;
+ if(p.ruleVersion>=9&&p.targetLevel!==it?.level)return false;
  if(!it||!cost||!p.cost||p.cost.gold!==cost.gold||!p.cost.materials||Object.keys(p.cost.materials).length!==Object.keys(cost.materials).length||!Object.entries(cost.materials).every(([k,v])=>p.cost.materials[k]===v))return false;
  if((p.cost.equipment??0)!==(cost.equipment??0))return false;
  const expectedConsumables=cost.consumables??{},actualConsumables=p.cost.consumables??{};
@@ -338,7 +364,7 @@ export function resolveReforge(s,accept,expectedOperationId){
  const p=s?.pendingReforge;
  if(!p||typeof accept!=='boolean'||(expectedOperationId!==undefined&&expectedOperationId!==p.operationId)||!validPendingReforge(s))return null;
  const it=s.inventory.find(i=>i.id===p.itemId);
- if(accept&&Object.values(s.equip).includes(it.id)&&(s.running||(s.activeEncounter&&!s.activeEncounter.done)))return null;
+ if(accept&&Object.values(s.equip).includes(it.id)&&(noncombatRunning(s)||(s.activeEncounter&&!s.activeEncounter.done)))return null;
  if(accept){
   it.affixes=structuredClone(p.newAffixes);
   it.special=p.newSpecial?{...p.newSpecial}:null;
@@ -385,7 +411,7 @@ export function saveLoadout(s,index,name=''){
 }
 export function deleteLoadout(s,index){const slots=projectedLoadouts(s,index,null);if(!slots)return false;s.loadouts=slots;return true;}
 export function applyLoadout(s,index,battleActive=false){
- if(s.running||battleActive||!Number.isInteger(index)||index<0||index>2||!validLoadoutSlots(s))return false;
+ if(noncombatRunning(s)||battleActive||!Number.isInteger(index)||index<0||index>2||!validLoadoutSlots(s))return false;
  const loadout=s.loadouts?.[index];if(!validLoadout(s,loadout))return false;
  const nextEquip={...loadout.equip};if(!applyEquipmentRuntimeChange(s,s.equip,nextEquip))return false;
  s.equip=nextEquip;s.skills=[...loadout.skills];s.conditions=[...loadout.conditions];if(s.skillTree){s.skillTree.selectedPreset=index;s.skillTree.revision++;}normalizeSkillSlots(s);capHealth(s);return true;
@@ -394,7 +420,7 @@ export function fresh(race='dwarf'){
  const pack=getRacePack(race);if(!pack)throw new RangeError('Unknown playable race');const sockets=raceSockets(race);
  // New characters begin unarmed. Owned equipment in existing saves is never migrated.
  const inventory=[];
- const s={version:SCHEMA_VERSION,talentBalanceVersion:TALENT_BALANCE_VERSION,diplomacy:freshDiplomacy(),race,hero:pack.heroName,atCamp:true,level:1,xp:0,gold:100,location:0,siteId:race+'.a01',expedition:{mode:'field',fieldId:race+'.a01.field',targetInstanceId:null,loop:false},build:'custom',inventory,equip:Object.fromEntries(sockets.map(socket=>[socket,null])),skills:[null,null,null,null],conditions:['always','always','always','always'],materialStacks:{'铁屑|0':5,'炉火晶|0':2,'誓约残片|0':1},offlineLuck:0,talents:Object.fromEntries(Object.keys(TALENTS).map(k=>[k,0])),consumables:{memoryFruit:0,refundCredits:0,reforgeToken:0},potionSlot:{key:null,auto:false,priority:'low',priorityVersion:1},kills:0,normalWins:[0,0,0],bossWins:[0,0,0],bossReady:[0,0,0],stock:3,loadouts:[null,null,null],chapters:[],chronicle:[race==='dwarf'?'灰冠历317年：你离开黑炉堡，踏上寻找失踪商队的路。':'灰冠历317年：你在'+pack.heroName+'的旅途中踏出了第一步。'],momentum:0,lastSeen:Date.now(),running:false};
+ const s={version:SCHEMA_VERSION,learnedRecipes:['potion-healing'],talentBalanceVersion:TALENT_BALANCE_VERSION,diplomacy:freshDiplomacy(),race,hero:pack.heroName,atCamp:true,level:1,xp:0,gold:100,location:0,siteId:race+'.a01',expedition:{mode:'field',fieldId:race+'.a01.field',targetInstanceId:null,loop:false},build:'custom',inventory,equip:Object.fromEntries(sockets.map(socket=>[socket,null])),skills:[null,null,null,null],conditions:['always','always','always','always'],materialStacks:{'铁屑|0':5,'炉火晶|0':2,'誓约残片|0':1},offlineLuck:0,talents:Object.fromEntries(Object.keys(TALENTS).map(k=>[k,0])),consumables:{memoryFruit:0,refundCredits:0,reforgeToken:0},potionSlot:{key:null,auto:false,priority:'low',priorityVersion:1},kills:0,normalWins:[0,0,0],bossWins:[0,0,0],bossReady:[0,0,0],stock:3,loadouts:[null,null,null],chapters:[],chronicle:[race==='dwarf'?'灰冠历317年：你离开黑炉堡，踏上寻找失踪商队的路。':'灰冠历317年：你在'+pack.heroName+'的旅途中踏出了第一步。'],momentum:0,lastSeen:Date.now(),running:false};
  if(race!=='dwarf'){s.materialStacks={};s.chronicle=['你从'+pack.name+'的营地开始旅程。'];}
  normalizeSkillTree(s,getSkillTreeDefinition(s));s.skillTree.mode='active';
  return s;
@@ -439,11 +465,12 @@ function validRecipes(s){return s.learnedRecipes===undefined||(Array.isArray(s.l
 export function recipeKnown(s,id){return Object.hasOwn(RECIPES,id)&&Array.isArray(s.learnedRecipes)&&s.learnedRecipes.includes(id);}
 export function normalizeRecipes(s){
  if(!validRecipes(s))return false;s.learnedRecipes??=[];
+ if(!s.learnedRecipes.includes('potion-healing'))s.learnedRecipes.push('potion-healing');
  for(const offer of s.merchant?.offers??[])if(offer.type==='recipe'&&recipeKnown(s,offer.recipeId))offer.stock=0;
  return true;
 }
 export function learnRecipe(s,id){
- if(!Object.hasOwn(RECIPES,id)||!RECIPES[id].enabled||!validRecipes(s)||recipeKnown(s,id))return false;
+ if(!Object.hasOwn(RECIPES,id)||!RECIPES[id].enabled||!validRecipes(s)||id==='potion-healing'||recipeKnown(s,id))return false;
  normalizeRecipes(s);s.learnedRecipes.push(id);for(const offer of s.merchant?.offers??[])if(offer.type==='recipe'&&offer.recipeId===id)offer.stock=0;return true;
 }
 export function eligibleRecoveryMaterials(s,quality){return materialEntries(s).filter(row=>row.quality===quality&&MATERIALS[row.material]?.functionalTags?.includes('recoveryBase'));}
@@ -601,10 +628,12 @@ function changeWar(s,mutate,now){
  s.diplomacy=next.diplomacy;stopBlockedWarActivity(s,now);return result;
 }
 export function retreatWarTerritory(s,returnSiteId){
+ if(s.otherworld?.active)return null;
  if(!validSave(s))return null;const next=structuredClone(s),result=retreatFromWar(next,returnSiteId);
  if(!result?.changed||!validSave(next))return null;Object.assign(s,next);return result;
 }
 function stopBlockedWarActivity(s,now=Date.now()){
+ if(s.otherworld?.active)return false;
  if(s.activeEncounter&&!s.activeEncounter.rewarded)return false;
  if(territoryAccess(s,AREAS[s.siteId]?.race,now).allowed&&nodeAccess(s,s.expedition?.fieldId,now).allowed)return false;
  s.running=false;s.restResume=false;s.dungeonRun=null;s.stopAfterBattle=false;s.stopAfterDungeon=false;return true;
@@ -632,6 +661,7 @@ export function normalizeExpedition(s){
  return true;
 }
 export function nextEncounterRoute(s,now=Date.now()){
+ if(s.otherworld?.active)return validOtherworldState(s,validEquipment)&&otherworldUnlocked(s)&&s.otherworld.pendingEquipment.length<=OTHERWORLD_PENDING_LIMIT-2?{id:"otherworld",kind:"otherworld",floor:s.otherworld.floor}:null;
  // Automation follows the actual location, not a browsed map or a newly configured remote route.
  const ex=s.expedition,local=INSTANCES[ex?.fieldId]?.siteId===s.siteId;
  const policy={...ex,autoBoss:!!ex?.autoBoss&&local&&!s.story?.activeScene&&!s.stopAfterBattle&&!s.stopAfterDungeon};
@@ -643,6 +673,7 @@ export function nextEncounterRoute(s,now=Date.now()){
  return route&&nodeAccess(s,route.id,now).allowed&&nodeAccess(s,s.expedition.fieldId,now).allowed?route:null;
 }
 export function configureExpedition(s,config,now=Date.now()){
+ if(s.otherworld?.active)return false;
  if(s.version!==SCHEMA_VERSION||s.running||(s.activeEncounter&&!s.activeEncounter.rewarded)||s.dungeonRun||!config)return false;
  if(INSTANCES[config.fieldId]?.contentVersion&&!getAreaProgress(s,AREAS[INSTANCES[config.fieldId].areaId].race)?.unlocked.includes(AREAS[INSTANCES[config.fieldId].areaId].number))return false;
  const candidate={mode:config.mode,targetInstanceId:config.targetInstanceId??null,fieldId:config.fieldId,loop:config.loop,...Object.fromEntries(['autoDungeon','autoBoss'].filter(k=>config[k]!==undefined).map(k=>[k,config[k]]))};
@@ -692,7 +723,72 @@ export function setExpeditionLoop(s,enabled){
  if(!enabled&&s.restUntil>0&&s.expedition.mode==='dungeon'){s.restResume=false;s.running=false;}
  return true;
 }
+// Tower operations are persisted by the caller's existing clone-save-adopt boundary.
+const otherworldBoundary=s=>!(s.activeEncounter&&!s.activeEncounter.rewarded)&&!s.dungeonRun&&!s.story?.activeScene;
+export function otherworldStatus(s){const o=s.otherworld??freshOtherworldState();return {...o,pendingEquipment:o.pendingEquipment.length,unlocked:otherworldUnlocked(s),maxFloor:OTHERWORLD_MAX_FLOOR,stats:otherworldFloorStats(o.floor),storageBlocked:o.pendingEquipment.length>OTHERWORLD_PENDING_LIMIT-2};}
+export function enterOtherworld(s,now=Date.now()){
+ if(!validSave(s)||!otherworldUnlocked(s)||!otherworldBoundary(s)||s.running||s.otherworld?.active||!Number.isSafeInteger(now)||now<0||now>1e15||(s.restUntil??0)>now||!normalizeOtherworldState(s))return false;
+ if(s.otherworld.pendingEquipment.length>OTHERWORLD_PENDING_LIMIT-2)return false;
+ normalizeRegionNavigation(s);s.otherworld.active=true;s.activeEncounter=null;s.atCamp=false;s.running=true;s.restResume=false;s.stopAfterBattle=false;s.stopAfterDungeon=false;return {ok:true,floor:s.otherworld.floor};
+}
+export function exitOtherworld(s,now=Date.now()){
+ if(!validSave(s)||!s.otherworld?.active||!otherworldBoundary(s))return false;
+ s.otherworld.active=false;s.activeEncounter=null;s.running=false;s.restResume=false;s.stopAfterBattle=false;s.stopAfterDungeon=false;return {ok:true,siteId:s.siteId};
+}
+export function setOtherworldFloor(s,floor){
+ if(!validSave(s)||!otherworldUnlocked(s)||!otherworldBoundary(s)||!normalizeOtherworldState(s)||!otherworldFloorStats(floor)||floor>Math.min(OTHERWORLD_MAX_FLOOR,s.otherworld.highestCleared+1))return false;
+ s.otherworld.floor=floor;return {ok:true,floor};
+}
+export function setOtherworldAutoAdvance(s,enabled){
+ if(typeof enabled!=='boolean'||!validSave(s)||!otherworldUnlocked(s)||!normalizeOtherworldState(s))return false;s.otherworld.autoAdvance=enabled;return {ok:true,autoAdvance:enabled};
+}
+export function claimPendingOtherworldEquipment(s){
+ if(!validSave(s)||!s.otherworld)return null;const o=s.otherworld,remain=[];let claimed=0;
+ for(const it of o.pendingEquipment){if(canReceiveEquipment(s,it)){s.inventory.push(it);recordCollectedEquipment(s,it);claimed++;}else remain.push(it);}
+ o.pendingEquipment=remain;return {claimed,pending:remain.length};
+}
+function startOtherworldEncounter(s,now){
+ if(!validSave(s)||!s.otherworld?.active||!otherworldUnlocked(s)||!canStartEncounterHealth(s,now))return null;
+ if(s.activeEncounter&&!s.activeEncounter.rewarded)return s.activeEncounter.otherworld?s.activeEncounter:null;
+ if(s.otherworld.pendingEquipment.length>OTHERWORLD_PENDING_LIMIT-2){s.running=false;s.restResume=false;return null;}
+ try{applyExperience({...s},OTHERWORLD_LOOT_POLICY.xp);if(s.kills>=1e12)throw Error('Counter limit');}catch{s.running=false;s.restResume=false;return null;}
+ const floor=s.otherworld.floor,p=otherworldFloorStats(floor),areaId=s.race+'.a01',instanceId=areaId+'.field',def=ALL_MONSTERS[areaId+'.normal.1'],st=stats(s),id='otherworld-'+Math.floor(now)+'-'+(++serial);
+ const e={otherworld:{version:1,floor},contentVersion:'dwarf-m2-v1',location:0,siteId:areaId,areaId,instanceId,kind:'field',luck:st.luck,boss:false,heroHp:s.heroHp,round:0,warcry:0,ironcoat:0,barrier:0,barrierShield:0,heroBurn:0,heroBurnPower:0,weakness:0,guard:0,cd:{},shelterUsed:false,shield:0,done:false,rewarded:false,killSource:null,multiVersion:1,id,rngState:rand(0,0xffffffff),rngDraws:0,itemSerial:0,summonSerial:0,activeCastCount:0,enemies:[],typedDots:[],fieldGroup:false,rewardGold:OTHERWORLD_LOOT_POLICY.gold,rewardXp:OTHERWORLD_LOOT_POLICY.xp,rewardDefinitionId:def.id,skillResolver:'tree-v1'};
+ const u=makeMultiUnit(id+'-enemy-0',0,instanceId,{enemy:'异界守卫',hp:p.hp,atk:p.atk,armor:p.armor},s.lastHealthClock,{});
+ initializeDwarfActor(u,{...def,skills:[],trait:null,elementTags:[]},{...p,parameterSetId:'otherworld-v081',elementResistance:{}},s.lastHealthClock);u.name='异界守卫 · 第'+floor+'层';u.main=true;u.otherworldActor=true;u.control.cooldowns={};e.enemies.push(u);e.targetId=u.id;
+ initializeEncounterAffixes(e,st);if(s.equipmentShieldCarry){e.playerShieldLayers=structuredClone(s.equipmentShieldCarry);delete s.equipmentShieldCarry;}
+ if(e.playerShieldLayers){const offset=-(e.playerShieldLayers.clock??0);e.playerShieldLayers={...e.playerShieldLayers,clock:0,layers:e.playerShieldLayers.layers.map(l=>({...l,expiresAt:l.expiresAt===null?null:l.expiresAt+offset}))};}
+ dispatchRacialLegendaryEvent(s,{type:'encounterStart',encounterId:e.id},{maxHp:st.hp,stats:st});syncMultiTarget(e);s.activeEncounter=e;s.atCamp=false;s.running=true;s.nextActionAt=s.lastHealthClock+1100;return e;
+}
+function rewardOtherworld(s,e,now){
+ if(!validSave(s)||!s.otherworld?.active||s.activeEncounter!==e||!e.otherworld||!e.done||!e.win||e.rewarded||!e.enemies.every(u=>u.hp===0)||!validMultiEncounter(e,INSTANCES)||s.otherworld.pendingEquipment.length>OTHERWORLD_PENDING_LIMIT-2)return null;
+ const o=s.otherworld;let xpPlan;try{xpPlan=applyExperience({...s},OTHERWORLD_LOOT_POLICY.xp);}catch{s.running=false;s.restResume=false;return null;}if(s.kills>=1e12){s.running=false;s.restResume=false;return null;}
+ return withMultiRng(e,()=>{
+  e.rewarded=true;e.lootSummary=emptyLootSummary();e.materialLoot=[];e.rewardNotes=[];
+  // Only this dedicated pool runs: no ordinary material/quest/pity/cooldown hooks.
+  const quality=Number(weighted(OTHERWORLD_LOOT_POLICY.rarities.map((q,i)=>[q,OTHERWORLD_LOOT_POLICY.qualityWeights[i]]))),slots=SLOTS.filter(k=>k!=='core'||s.race==='ashen');
+  const drops=[item(slots[rand(0,slots.length-1)],OTHERWORLD_LOOT_POLICY.equipmentLevel,null,quality,{baseLevel:OTHERWORLD_LOOT_POLICY.equipmentLevel,levelSource:'drop',originRace:s.race,luck:e.luck??0})];
+  if(Math.random()<OTHERWORLD_LOOT_POLICY.setChance){const set=BUILD[rand(0,BUILD.length-1)];drops.push(item(SET_SLOTS[rand(0,SET_SLOTS.length-1)],OTHERWORLD_LOOT_POLICY.equipmentLevel,set.id,3,{baseLevel:OTHERWORLD_LOOT_POLICY.equipmentLevel,levelSource:'drop',originRace:set.originRace??'dwarf',luck:e.luck??0}));}
+  for(const it of drops){
+   // Ordinary equipment obeys the existing quality filter; sets retain v0.79+ protection.
+   if(!it.set&&shouldDiscardLoot(s,'equipment',it.rarity)){e.lootSummary.discarded.equipment++;captureBattleLoot(s,{kind:'equipment',item:it},'filtered');e.rewardNotes.push('品质过滤丢弃 · '+it.name);continue;}
+   if(canReceiveEquipment(s,it)){s.inventory.push(it);recordCollectedEquipment(s,it);captureBattleLoot(s,{kind:'equipment',item:it},'received');e.rewardNotes.push(it.name);}
+   else{o.pendingEquipment.push(it);captureBattleLoot(s,{kind:'equipment',item:it},'pending');e.rewardNotes.push('异界装备待领取 · '+it.name);}
+  }
+  s.level=xpPlan.level;s.xp=xpPlan.xp;e.acceptedXp=xpPlan.acceptedXp;s.kills++;
+  o.highestCleared=Math.max(o.highestCleared,e.otherworld.floor);
+  if(o.autoAdvance&&o.floor<OTHERWORLD_MAX_FLOOR)o.floor++;
+  else if(o.autoAdvance&&o.floor===OTHERWORLD_MAX_FLOOR){s.running=false;e.rewardNotes.push('已到达安全数值边界；可选择已通关层数继续挑战。');}
+  if(o.pendingEquipment.length>OTHERWORLD_PENDING_LIMIT-2){s.running=false;e.rewardNotes.push('异界待领取装备已满，请领取后继续。');}
+  if(e.playerShieldLayers)s.equipmentShieldCarry={version:1,clock:e.playerShieldLayers.clock,layers:e.playerShieldLayers.layers.filter(layer=>layer.ownerItemId&&(layer.source==='reactor:'+layer.ownerItemId||layer.source==='legendary:'+layer.ownerItemId)).map(layer=>structuredClone(layer))};
+  s.nextBattleAt=Math.max(now,s.lastHealthClock??0)+1800;s.nextActionAt=s.nextBattleAt;
+  if(s.stopAfterBattle||s.stopAfterDungeon){s.running=false;s.stopAfterBattle=false;s.stopAfterDungeon=false;}
+  s.activeEncounter=null;return drops[0];
+ });
+}
+
 export function startRoutedEncounter(s,now=Date.now()){
+ if(s.otherworld?.active)return startOtherworldEncounter(s,now);
  if(s.version!==SCHEMA_VERSION||s.skillTree?.mode!=='active'||!normalizeExpedition(s))return null;
  if(s.activeEncounter&&s.activeEncounter.multiVersion!==1)return null;
  if(s.activeEncounter&&!s.activeEncounter.rewarded)return normalizeEncounterElements(s.activeEncounter);
@@ -749,7 +845,7 @@ export function settleRest(s,now=Date.now()){
 export function startRest(s,now=Date.now(),resume=false){
  if(!normalizeHealth(s,now))return false;
  if(s.restUntil>0)return false;
- resume=!!resume&&nodeAccess(s,s.siteId+'.field',now).allowed;
+ resume=!!resume&&(s.otherworld?.active?otherworldUnlocked(s):nodeAccess(s,s.siteId+'.field',now).allowed);
  // An explicit camp withdrawal abandons only the current unfulfilled attempt.
  // Keep prior layers/receipts and protected quest tools; the retry gets a new ID.
  const pending=s.story?.activeScene,battle=s.activeEncounter,definition=STORY_SCENES[pending?.id];
@@ -802,6 +898,7 @@ export function startStoryFieldEncounter(s,sceneId,now=Date.now()){
  if(!validSave(next))return null;Object.assign(s,next);return s.activeEncounter;
 }
 export function startInstanceEncounter(s,instanceId,now=Date.now()){
+ if(s.otherworld?.active)return null;
  if(!validBossChallengeState(s)||!validRareRewardProgress(s,validEquipment)||rareRewardStorageBlocked(s))return null;
  const instance=PLANNED_INSTANCES[instanceId];if(s.version!==SCHEMA_VERSION||!instance?.enabled||!canStartEncounter(s,now,instanceId)||!normalizeExpedition(s))return null;
  if(s.activeEncounter&&!s.activeEncounter.rewarded)return s.activeEncounter.instanceId===instanceId?s.activeEncounter:null;
@@ -920,7 +1017,7 @@ function rewardDwarf(s,e,now){
  normalizeCodexCollection(s);
  return withMultiRng(e,()=>{
   e.rewarded=true;e.lootSummary=emptyLootSummary();e.materialLoot=[];e.rewardNotes=[];
-  if(priorClaims?.sets||priorClaims?.fruit)e.rewardNotes.push('此前待领奖励已入包：套装 '+priorClaims.sets+' / 回忆之果 '+priorClaims.fruit);
+  if(priorClaims?.sets||priorClaims?.fruit)e.rewardNotes.push('此前待领奖励已入包：套装 '+priorClaims.sets+' / 灵慧之果 '+priorClaims.fruit);
   settleNpcObjectiveKills(s,e,now);recordNpcEventVictory(s,e);recordStoryEncounterVictory(s,e);
   const st=stats(s),multiple=e.fieldGroup?2:1,baseXp=e.rewardXp*multiple,knowledge=st.specials.knowledge&&Math.random()<.05,clearRewards=clear?e.clearRewards:null;
   s.kills++;s.gold+=e.rewardGold*multiple+(clearRewards?.gold??0);e.acceptedXp=gainXp(s,baseXp*(knowledge?2:1)+(clearRewards?.xp??0)).acceptedXp;
@@ -942,7 +1039,7 @@ function rewardDwarf(s,e,now){
    }
   }
   if(clearRewards)for(let i=0;i<(clearRewards.materialRounds??0);i++)materialRound(initial[0]);
-  let first=null;for(const u of sources){const drop=rollDrop(s,e.boss,e.luck??0,e.instanceId,clear,e.lootSummary,clearRewards?.gearChance);if(drop){first??=drop;e.rewardNotes.push(drop.name);}}
+  let first=null;for(const u of sources){const drop=rollDrop(s,e.boss,e.luck??0,e.instanceId,clear,e.lootSummary,clearRewards?.gearChance,e);if(drop){first??=drop;e.rewardNotes.push(drop.name);}}
   if(e.boss){const area=AREAS[e.areaId],receipt=prepareLegendaryDrop({settlementId:e.id,nodeId:e.instanceId,regionRace:area?.race,kind:e.kind,won:true},{probability:legendaryPoolProbability(e.luck??0,returnRingRareBonus(s,'boss-legendary')),random:Math.random,generateItem:({legendaryId})=>{const lv=rollDropEquipmentLevel(areaGearLevel(e.instanceId),area.levelRange);return legendaryItem(legendaryId,lv.level,{...lv,luck:e.luck??0});},validateItem:it=>validEquipment(it)});if(receipt){e.legendaryDropReceipt=receipt;if(receipt.item){const accepted=receiveBattleLoot(s,{kind:'equipment',item:structuredClone(receipt.item)},e.lootSummary);e.rewardNotes.push(accepted?'传说 · '+receipt.item.name:'传说未收取 · '+receipt.item.name);}}}
   const markChance=e.boss?.08:clear?(clearRewards?.markChance??.02):0;
   if(markChance>0&&Math.random()<lootOccurrenceProbability(markChance,e.luck??0)&&receiveBattleLoot(s,{kind:'consumable',key:'reforgeToken',quantity:1},e.lootSummary))e.rewardNotes.push('重铸印记 ×1');
@@ -1017,18 +1114,28 @@ function selectedTreeRules(s,parameters=getRaceTuning(s.race)){
  const weapon=s.inventory.find(it=>it.id===s.equip.weapon),configs=typeof parameters.configs==='function'?parameters.configs(stats(s)):parameters.configs;
  return {...parameters,configs,active:[...p.active],conditions:[...p.conditions],unlocked:[...p.unlocked],passive:[...p.passive],weaponType:weapon?.weaponType??'generic'};
 }
-export function step(s,e,now=Date.now()){if(storyScenarioMode(e)==='tool')return [];if(s?.version!==SCHEMA_VERSION||s.skillTree?.mode!=='active'||!e||(!e.developmentFixture&&e.skillResolver!=='tree-v1'))return [];const living=new Set(e===s.activeEncounter&&!e.done&&e.npcObjectiveReceipt?e.enemies.filter(u=>u.hp>0).map(u=>u.id):[]);const result=stepImpl(s,e,now,e?.skillResolver==='tree-v1'&&s.skillTree?.mode==='active'?selectedTreeRules(s):null);if(living.size)recordNpcObjectiveDefeats(s,e,living);return result;}
+export function step(s,e,now=Date.now()){if((s?.otherworld?.active||e?.otherworld||e?.enemies?.some(u=>u.otherworldActor!==undefined||u.parameterSetId==='otherworld-v081'))&&!validSave(s))return [];if(storyScenarioMode(e)==='tool')return [];if(s?.version!==SCHEMA_VERSION||s.skillTree?.mode!=='active'||!e||(!e.developmentFixture&&e.skillResolver!=='tree-v1'))return [];const living=new Set(e===s.activeEncounter&&!e.done&&e.npcObjectiveReceipt?e.enemies.filter(u=>u.hp>0).map(u=>u.id):[]);const result=stepImpl(s,e,now,e?.skillResolver==='tree-v1'&&s.skillTree?.mode==='active'?selectedTreeRules(s):null);if(living.size)recordNpcObjectiveDefeats(s,e,living);return result;}
 export function gainXp(s,n){return applyExperience(s,n);}
 export function enhanceEquipment(s,quote,random=Math.random){const result=attemptEnhancement(s,quote,random);if(result)capHealth(s);return result;}
 export function luckChance(points){return ordinarySecondRollProbability(points)??0;}
 function luckyRoll(draw,points){const first=draw();if(points>0&&Math.random()<luckChance(points))return Math.max(first,draw());return first;}
 function forgeLuckyRoll(draw,points,race){const first=draw(),chance=combinedFavorableRollChance(luckChance(points),race,DWARF_FORGE_FAVOR_CONFIG);if(chance===null)throw new Error('Invalid forge benefit policy');if(chance>0&&Math.random()<chance)return Math.max(first,draw());return first;}
 function rollQuality(weights=[65,28,6.5,.5]){return Number(weighted(weights.map((w,i)=>[i,w])));}
-function rollDrop(s,boss,luck=0,instanceId=resolveLegacySite(s.location).id+'-field',clear=false,lootSummary=emptyLootSummary(),chanceOverride){
+function rollDrop(s,boss,luck=0,instanceId=resolveLegacySite(s.location).id+'-field',clear=false,lootSummary=emptyLootSummary(),chanceOverride,encounter){
  const instance=INSTANCES[instanceId],area=AREAS[instance?.areaId];if(!instance||!area)return null;
  const dungeon=instance.kind==='dungeon';if(Math.random()>=lootOccurrenceProbability(chanceOverride??(boss?.65:clear?.35:.18),luck))return null;
  const dropSlots=SLOTS.filter(k=>k!=='core'||area.race==='ashen'),slot=dropSlots[rand(0,dropSlots.length-1)],set=null,quality=luckyRoll(()=>rollQuality(boss?[50,35,13,2]:dungeon?[55,34,10,1]:[65,28,6.5,.5]),luck);
- const rolled=rollDropEquipmentLevel(areaGearLevel(instanceId),area.levelRange),it=item(slot,rolled.level,set,quality,{...rolled,luck,originRace:area.race});
+ const rolled=rollDropEquipmentLevel(areaGearLevel(instanceId),area.levelRange);let it=item(slot,rolled.level,set,quality,{...rolled,luck,originRace:area.race});
+ // Count generated gear before quality filters/capacity; only actual ordinary dungeon encounters.
+ if(encounter?.kind==='dungeon'&&!encounter.otherworld&&eligibleSetSource({source:'drop',kind:'dungeon',areaNumber:area.number,race:area.race,clear:true})){
+  const p=normalizeRareRewardProgress(s);
+  if(p.dungeonDryStreak===RARE_REWARD_RULES.dungeonPity-1){
+   const selected=rollSourceSet({source:'drop',kind:'dungeon',areaNumber:area.number,race:area.race,clear:true,luck,guaranteed:true});
+   it=item(selected.slot,rolled.level,selected.set,selected.rarity,{...rolled,luck,originRace:area.race});p.dungeonDryStreak=0;p.pendingSets.push(it);
+   claimPendingRareRewards(s);captureBattleLoot(s,{kind:'equipment',item:it},p.pendingSets.some(x=>x.id===it.id)?'pending':'received');encounter.rewardNotes.push((p.pendingSets.some(x=>x.id===it.id)?'套装待领取 · ':'套装 · ')+it.name);return null;
+  }
+  p.dungeonDryStreak++;
+ }
  return receiveBattleLoot(s,{kind:'equipment',item:it},lootSummary)?it:null;
 }
 // Pending rewards retain the exact generated identity; quality filters never destroy them.
@@ -1042,26 +1149,36 @@ export function claimPendingRareRewards(s){
  if(quantity>0&&canReceiveItem(s,'memoryFruit',quantity)){normalizeTalents(s);s.consumables.memoryFruit+=quantity;p.pendingFruit-=quantity;fruit=quantity;}
  return {sets,fruit};
 }
+export const ELF_FRUIT_DROP_RATES=Object.freeze({field:.005,dungeon:.01,boss:.02});
+export function wisdomFruitDropProbability(regionRace,kind,luck=0){return regionRace==='elf'&&Object.hasOwn(ELF_FRUIT_DROP_RATES,kind)?lootOccurrenceProbability(ELF_FRUIT_DROP_RATES[kind],luck):0;}
 function settleRareClearRewards(s,e,clear){
- if(e.kind!=='boss'&&!clear)return;
- const p=s.rareRewardProgress??=freshRareRewardProgress(),area=AREAS[e.areaId];
- const points=p.fruitProgress+(e.kind==='boss'?RARE_REWARD_RULES.bossPoints:RARE_REWARD_RULES.dungeonPoints);
- p.fruitProgress=points%RARE_REWARD_RULES.fruitPoints;
- const fruits=Math.floor(points/RARE_REWARD_RULES.fruitPoints);p.pendingFruit+=fruits;
- const args={source:'drop',kind:e.kind,areaNumber:area.number,race:area.race,clear,luck:e.luck??0};
+ const area=AREAS[e.areaId];if(!area||e.otherworld)return;
+ const p=normalizeRareRewardProgress(s),args={source:'drop',kind:e.kind,areaNumber:area.number,race:area.race,clear,luck:e.luck??0};
  let generated=null;
  if(eligibleSetSource(args)){
-  const guaranteed=clear&&p.dungeonDryStreak===RARE_REWARD_RULES.dungeonPity-1;
-  const rolled=rollSourceSet({...args,guaranteed});
+  const rolled=rollSourceSet(args);
   if(rolled){const lv=rollDropEquipmentLevel(areaGearLevel(e.instanceId),area.levelRange);generated=item(rolled.slot,lv.level,rolled.set,rolled.rarity,{...lv,luck:e.luck??0,originRace:area.race});p.pendingSets.push(generated);if(clear)p.dungeonDryStreak=0;}
-  else if(clear)p.dungeonDryStreak++;
  }
+ // One specialty roll per won real elf-region encounter, not player race or clears.
+ const chance=wisdomFruitDropProbability(area.race,e.kind,e.luck??0);
+ const fruits=chance>0&&Math.random()<chance?1:0;
+ p.pendingFruit+=fruits;
  const claimed=claimPendingRareRewards(s);
+ if(generated)captureBattleLoot(s,{kind:'equipment',item:generated},p.pendingSets.some(it=>it.id===generated.id)?'pending':'received');
+ if(fruits)captureBattleLoot(s,{kind:'consumable',key:'memoryFruit',quantity:fruits},claimed.fruit>=fruits?'received':'pending');
  if(generated)e.rewardNotes.push((p.pendingSets.some(it=>it.id===generated.id)?'套装待领取 · ':'套装 · ')+generated.name);
- if(fruits)e.rewardNotes.push('回忆之果 '+(claimed.fruit>=fruits?'已入包':'待领取')+' ×'+fruits);
- e.rewardNotes.push('回忆之果进度 '+p.fruitProgress+'/'+RARE_REWARD_RULES.fruitPoints);
+ if(fruits)e.rewardNotes.push('灵慧之果 '+(claimed.fruit>=fruits?'已入包':'待领取')+' ×'+fruits);
 }
 export function reward(s,e,now=Date.now()){
+ if(!validLootHistory(s)||!e||e.rewarded)return null;
+ const beforeGold=s.gold,area=AREAS[e.areaId],node=INSTANCES[e.instanceId];
+ beginLootReceipt(s);let completed=false;
+ try{const result=rewardWithoutHistory(s,e,now);completed=true;return result;}finally{
+  finishLootReceipt(s,{id:e.id,at:Math.trunc(now),mode:e.otherworld?'otherworld':e.kind,node:node?.name??e.instanceId??'异界高塔',region:e.otherworld?'异界':area?.name??e.areaId??s.race,floor:e.otherworld?.floor??0,stage:e.dungeonStage??0,gold:Math.max(0,s.gold-beforeGold),xp:e.acceptedXp??0},completed&&e.rewarded===true);
+ }
+}
+function rewardWithoutHistory(s,e,now=Date.now()){
+ if(e?.otherworld)return rewardOtherworld(s,e,now);
  if(s.version!==SCHEMA_VERSION||!e||e.multiVersion!==1||e.storyScenario)return null;
  if(e.contentVersion==='dwarf-m2-v1'&&PLANNED_INSTANCES[e.instanceId]){
   const owned=s.activeEncounter===e,wasRewarded=e.rewarded,result=rewardDwarf(s,e,now);
@@ -1072,24 +1189,25 @@ export function reward(s,e,now=Date.now()){
  return null;
 }
 export function offline(s,now=Date.now()){
- if(s?.version!==SCHEMA_VERSION||!validExpeditionState(s)||!validRareRewardProgress(s,validEquipment))return null;
+ if(s?.version!==SCHEMA_VERSION||!validLootHistory(s)||!validOtherworldState(s,validEquipment)||!validExpeditionState(s)||!validRareRewardProgress(s,validEquipment))return null;
  if(!Number.isFinite(now)||now<0||now>1e15)return null;
- const start=Math.max(s.lastSeen,s.lastHealthClock??s.lastSeen),end=Math.min(now,start+4*3600000),beforeGold=s.gold,beforeXp=s.xp,beforeLevel=s.level;
+ const start=Math.max(s.lastSeen,s.lastHealthClock??s.lastSeen),end=Math.min(now,start+4*3600000),beforeGold=s.gold,beforeXp=totalEarnedXp(s);
  if(!normalizeHealth(s,start)||!normalizeMaterials(s)||!normalizePotions(s))return null;
  const worldEvents=advanceRandomWorldEvents(s,now);if(!worldEvents)return null;
  const beforeMaterials=new Map(materialEntries(s).map(x=>[x.key,x.count]));let time=start,kills=0,rests=0,rounds=0;const lootSummary=emptyLootSummary();
  // Do not spin on an unclaimed saturated reward queue after a reload.
- if(rareRewardStorageBlocked(s)){s.running=false;s.chronicle.unshift('珍稀待领奖励已满：远征暂停，请清理背包并领取后继续。');}
+ if(!s.otherworld?.active&&rareRewardStorageBlocked(s)){s.running=false;s.chronicle.unshift('珍稀待领奖励已满：远征暂停，请清理背包并领取后继续。');}
+ if(s.otherworld?.active&&s.otherworld.pendingEquipment.length>OTHERWORLD_PENDING_LIMIT-2){s.running=false;s.restResume=false;s.chronicle.unshift('异界待领取装备已满：已暂停，请领取后继续。');}
  // Real combat turns, bounded to four hours. Camp waits jump to their deadline.
  withWarReplay(s,()=>withNpcObjectiveReplay(s,()=>{while(time<end&&s.running){
   if(s.restUntil>0){if(s.restUntil>end)break;time=Math.max(time,s.restUntil);settleRest(s,time);if(!s.running)break;continue;}
   if(s.nextBattleAt>time){time=Math.min(end,s.nextBattleAt);if(time>=end)break;}
   let e=s.activeEncounter;
-  if(e?.done){if(e.win&&!e.rewarded){reward(s,e,time);mergeLootSummary(lootSummary,e.lootSummary);kills++;}else s.activeEncounter=null;continue;}
+  if(e?.done){if(e.win&&!e.rewarded){reward(s,e,time);if(!e.rewarded){s.running=false;s.restResume=false;break;}mergeLootSummary(lootSummary,e.lootSummary);kills++;}else s.activeEncounter=null;continue;}
   if(!e){e=startRoutedEncounter(s,time);if(!e){if(s.restUntil>0){rests++;continue;}break;}}
   const turnAt=Math.max(time,s.nextActionAt??(time+1100));if(turnAt>end)break;time=turnAt;
   const wasResting=s.restUntil>0;step(s,e,time);rounds++;if(!wasResting&&s.restUntil>0)rests++;
-  if(e.done&&e.win){reward(s,e,time);mergeLootSummary(lootSummary,e.lootSummary);kills++;}
+  if(e.done&&e.win){reward(s,e,time);if(!e.rewarded){s.running=false;s.restResume=false;break;}mergeLootSummary(lootSummary,e.lootSummary);kills++;}
   if(rounds>26200)break; // At most one delayed-basic micro-event per regular 1.1s round within 4h.
  }
  }));
@@ -1097,7 +1215,7 @@ export function offline(s,now=Date.now()){
  // Time beyond the reward cap may finish rest/expire buffs, never grants extra kills.
  settleRest(s,Math.max(now,start));s.lastSeen=Math.max(now,start);
  const materialLoot=materialEntries(s).map(x=>({...x,count:x.count-(beforeMaterials.get(x.key)??0)})).filter(x=>x.count>0),mat=materialLoot.reduce((n,x)=>n+x.count,0);
- const xp=(s.level-beforeLevel)*(beforeLevel+s.level-1)*40+s.xp-beforeXp,gold=s.gold-beforeGold;
+ const xp=totalEarnedXp(s)-beforeXp,gold=s.gold-beforeGold;
  if(now<=start)return null;
  s.chronicle.unshift('离线实战：完成'+kills+'场胜利，休息'+rests+'次，获得'+gold+'金币与'+mat+'份材料。');for(const action of ['discarded','overflow']){const n=Object.values(lootSummary[action]).reduce((a,b)=>a+b,0);if(n)s.chronicle.unshift((action==='discarded'?'离线品质过滤丢弃':'离线背包已满未收取')+'：装备'+lootSummary[action].equipment+'／材料'+lootSummary[action].materials+'／物品'+lootSummary[action].items);}s.chronicle=s.chronicle.slice(0,20);
  return {minutes:Math.floor(Math.max(0,end-start)/60000),gold,xp,mat,materialLoot,lootSummary,kills,rests,rounds,capped:now-start>4*3600000,worldEvents};
@@ -1140,7 +1258,18 @@ export function merchantEquipmentPrice(it){
  return Number.isSafeInteger(price)?price:null;
 }
 function addMaterial(s,material,quality,count){const key=materialKey(material,quality),before=s.materialStacks[key]??0,added=Math.max(0,Math.min(count,1e12-before));s.materialStacks[key]=before+added;if(added>0)recordMaterialDiscovered(s,material);return added;}
+function captureBattleLoot(s,loot,outcome){
+ const parsed=loot.kind==='material'?parseMaterialKey(loot.key):loot.kind==='potion'?parsePotionKey(loot.key):null;
+ const name=loot.kind==='equipment'?loot.item?.name:loot.kind==='material'?(MATERIALS[parsed?.material]?.name??parsed?.material):loot.kind==='potion'?POTIONS[parsed?.type]?.name:CONSUMABLES[loot.key]?.name;
+ captureLoot(s,{kind:loot.kind,name,quality:loot.kind==='equipment'?(loot.item?.legendaryId?4:loot.item?.rarity):parsed?.quality??0,quantity:loot.quantity??1,level:loot.kind==='equipment'?loot.item?.level:0,outcome});
+}
 export function receiveBattleLoot(s,loot,summary=emptyLootSummary()){
+ const category=loot?.kind==='equipment'?'equipment':loot?.kind==='material'?'materials':'items',discarded=summary.discarded[category],overflow=summary.overflow[category];
+ const result=receiveBattleLootWithoutHistory(s,loot,summary);
+ if(result||summary.discarded[category]>discarded||summary.overflow[category]>overflow)captureBattleLoot(s,loot,result?'received':summary.discarded[category]>discarded?'filtered':'overflow');
+ return result;
+}
+function receiveBattleLootWithoutHistory(s,loot,summary=emptyLootSummary()){
  if(!validMonsterLedger(s)||!validCodexCollection(s)||!loot||!['equipment','material','consumable','potion'].includes(loot.kind))return false;
  const qty=loot.quantity??1;if(!Number.isSafeInteger(qty)||qty<1)return false;
  const category=loot.kind==='equipment'?'equipment':loot.kind==='material'?'materials':'items';
@@ -1191,9 +1320,9 @@ function rollMerchantOffers(s,revision){
  const pool=merchantMaterialKeys(),offers=[],count=rand(2,3);
  for(let i=0;i<count;i++){const material=weighted(pool.map(key=>[key,MATERIALS[key].weight??1]));pool.splice(pool.indexOf(material),1);const [min,max]=MERCHANT_STOCK[material];const quality=rollQuality([75,20,4.5,.5]);offers.push({type:'material',material,quality,price:materialPrice(material,quality),stock:rand(min,max)});}
  while(offers.length<8){const originRace=PLAYABLE_RACES[rand(0,PLAYABLE_RACES.length-1)],available=SLOTS.filter(slot=>slot!=='core'||originRace==='ashen'),slot=available[rand(0,available.length-1)],it=item(slot,rand(minGearLevel,maxGearLevel),null,rollQuality(),{levelSource:'merchant',originRace});offers.push({type:'equipment',item:it,price:merchantEquipmentPrice(it),stock:1});}
- if(Math.random()<.03)offers[7]={type:'consumable',consumable:'memoryFruit',price:200,stock:1};
+ // Permanent-power fruit is a regional battle specialty, no longer merchant stock.
  if(Math.random()<.10){const index=offers.findLastIndex(o=>o.type==='equipment');offers[index]={type:'consumable',consumable:'reforgeToken',price:120,stock:1};}
- const unknown=Object.keys(RECIPES).filter(id=>RECIPES[id].enabled&&!recipeKnown(s,id));
+ const unknown=Object.keys(RECIPES).filter(id=>id!=='potion-healing'&&RECIPES[id].enabled&&!recipeKnown(s,id));
  if(unknown.length){const count=Math.min(unknown.length,rand(1,2));for(let i=0;i<count;i++){const id=unknown.splice(rand(0,unknown.length-1),1)[0],index=offers.findLastIndex(o=>o.type==='equipment');if(index>=0)offers[index]={type:'recipe',recipeId:id,price:RECIPES[id].price,stock:1};}}
  return offers.map((offer,index)=>({...offer,price:racialGoldCost(s,offer.price),offerId:`merchant-${revision}-${index}`}));
 }
@@ -1241,13 +1370,13 @@ export function purchaseEquipment(s,offerId,expectedRevision,now=Date.now()){
 export function purchaseConsumable(s,offerId,expectedRevision,now=Date.now()){
  const m=ensureMerchant(s,now);if(!m||!Number.isSafeInteger(expectedRevision)||m.revision!==expectedRevision)return false;
  const offer=m.offers.find(o=>o.type==='consumable'&&o.offerId===offerId);
- if(!offer||offer.stock!==1||!['memoryFruit','reforgeToken'].includes(offer.consumable)||!validTalents(s)||!validConsumables(s)||!Number.isFinite(s.gold)||s.gold<offer.price||!canReceiveItem(s,offer.consumable,1))return false;
+ if(!offer||offer.stock!==1||offer.consumable!=='reforgeToken'||!validTalents(s)||!validConsumables(s)||!Number.isFinite(s.gold)||s.gold<offer.price||!canReceiveItem(s,offer.consumable,1))return false;
  normalizeTalents(s);s.gold-=offer.price;offer.stock=0;s.consumables[offer.consumable]++;return true;
 }
 export function purchaseRecipe(s,offerId,expectedRevision,now=Date.now()){
  if(!validRecipes(s))return false;const merchant=ensureMerchant(s,now);if(!merchant||!Number.isSafeInteger(expectedRevision)||merchant.revision!==expectedRevision)return false;
  const offer=merchant.offers.find(o=>o.type==='recipe'&&o.offerId===offerId);
- if(!offer||offer.stock!==1||recipeKnown(s,offer.recipeId)||!Number.isFinite(s.gold)||s.gold<offer.price)return false;
+ if(!offer||offer.recipeId==='potion-healing'||offer.stock!==1||recipeKnown(s,offer.recipeId)||!Number.isFinite(s.gold)||s.gold<offer.price)return false;
  if(!learnRecipe(s,offer.recipeId))return false;s.gold-=offer.price;offer.stock=0;return true;
 }
 export function fusionQualityWeights(selection){
@@ -1328,7 +1457,7 @@ export function codexState(s,id){
 }
 export function validSave(s){
  try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;
- if(!validBossChallengeState(s)||!validDungeonLootReceipts(s)||!validPersonalArcRewardState(s)||!validTaskRewardState(s)||!validDiplomacy(s)||!validWorldEventState(s)||!validStoryWarState(s)||!validNpcEventState(s)||!validReturnRingState(s)||!validInfinityGauntletState(s)||!validStoryEventState(s)||!validStoryScenarioState(s))return false;
+ if(!validOtherworldState(s,validEquipment)||!validBossChallengeState(s)||!validDungeonLootReceipts(s)||!validLootHistory(s)||!validPersonalArcRewardState(s)||!validTaskRewardState(s)||!validDiplomacy(s)||!validWorldEventState(s)||!validStoryWarState(s)||!validNpcEventState(s)||!validReturnRingState(s)||!validInfinityGauntletState(s)||!validStoryEventState(s)||!validStoryScenarioState(s))return false;
  if(!validSkillTree(s,getSkillTreeDefinition(s))||s.skillTree?.mode!=='active')return false;
  if(s.activeEncounter?.skillResolver!==undefined&&(s.activeEncounter.skillResolver!=='tree-v1'||s.skillTree?.mode!=='active'||s.activeEncounter.multiVersion!==1))return false;
  if(s.supportGrantEligible!==undefined||s.testGrants!==undefined||s.bonusTalentPoints!==undefined||s.skillRulesVersion!==undefined||s.skillAccess!==undefined)return false;

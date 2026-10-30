@@ -12,7 +12,7 @@ setup();s.running=true;assert.equal(c.request({action:()=>false}).status,'reject
 setup();s.running=true;assert.equal(c.request({action:()=>true,hold:true}).status,'applied');assert.equal(s.running,false);assert(c.held);assert.equal(c.request({action:()=>true,hold:true}).status,'applied');assert(c.held);assert.equal(c.release().resumed,true);assert.equal(s.running,true);
 setup();s.running=true;c.request({action:()=>true,hold:true});c.cancel();assert.equal(c.release().status,'idle');assert.equal(s.running,false);
 setup();E.startInstanceEncounter(s,'human.a01.field',now);E.setMultiPaused(s,true,now);const paused=structuredClone(s);assert.equal(c.request({action:()=>true}).reason,'paused-battle');assert.deepEqual(s,paused);
-setup();E.startInstanceEncounter(s,'human.a01.field',now);c.request({action:()=>true});E.startRest(s,now,true);assert.equal(c.pump().reason,'rest');assert.equal(s.running,false);assert.equal(s.restResume,false);
+setup();E.startInstanceEncounter(s,'human.a01.field',now);c.request({action:()=>true});E.startRest(s,now,true);assert.equal(c.pump().reason,'rest');assert.equal(s.running,true);assert.equal(s.restResume,true);
 setup();s.running=true;s.nextBattleAt=now+1800;assert.equal(c.request({action:()=>true,waitForReady:true}).status,'queued');now+=1800;assert.equal(c.pump().status,'applied');assert.equal(s.running,true);
 setup();s.running=true;let called=0;assert.equal(c.request({execute:()=>{called++;return {ok:true,value:42};}}).status,'applied');assert.equal(called,1);assert.equal(s.running,true);
 setup();s.running=true;assert.equal(c.request({execute:()=>({ok:false,reason:'not-ready'})}).status,'rejected');assert.equal(s.running,false);

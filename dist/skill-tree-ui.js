@@ -1,3 +1,4 @@
+import {noncombatRunning} from './noncombat-policy.js';
 import {renderSkillPixelIcon} from './skill-pixel-icons.js';
 import {DWARF_EXPANDED_DESCRIPTIONS as SKILL_TREE_DESCRIPTIONS} from './dwarf-skill-expansion.js';
 import {DWARF_EXPANDED_DEFINITION as DEFAULT_DEFINITION} from './dwarf-skill-expansion.js';
@@ -40,12 +41,12 @@ export function renderSkillTree(m){
 export function mountSkillTree(host,adapter){let disposed=false,m,D;
  const reset=()=>{const live=adapter.getState(),draft=structuredClone(live);D=adapter.getDefinition?.(live)??DEFAULT_DEFINITION;if(!normalizeSkillTree(draft,D))throw Error('invalid skill tree');m={definition:D,descriptions:adapter.getDescriptions?.(live),branch:'all',inspect:null,baseState:structuredClone(live),draft,index:draft.skillTree.selectedPreset,beforeTree:structuredClone(live.skillTree??null),busy:false,blocked:false,activationAllowed:adapter.canActivate!==false,error:'',refund:null,activationReview:false};};
  let lastLiveKey='';
- const syncLive=()=>{const live=adapter.getState();m.blocked=!!live.running||!!live.dungeonRun||!!live.activeEncounter&&!live.activeEncounter.done;m.conflict=treeFingerprint(live)!==treeFingerprint(m.baseState);m.inDungeon=!!live.dungeonRun;m.stopRequested=!!live.stopAfterBattle||!!live.stopAfterDungeon;m.draft.running=!!live.running;m.draft.equip=structuredClone(live.equip);m.draft.inventory=structuredClone(live.inventory);
+ const syncLive=()=>{const live=adapter.getState();m.blocked=noncombatRunning(live)||!!live.dungeonRun||!!live.activeEncounter&&!live.activeEncounter.done;m.conflict=treeFingerprint(live)!==treeFingerprint(m.baseState);m.inDungeon=!!live.dungeonRun;m.stopRequested=!!live.stopAfterBattle||!!live.stopAfterDungeon;m.draft.running=!!live.running;m.draft.equip=structuredClone(live.equip);m.draft.inventory=structuredClone(live.inventory);
  // Level-ups may occur while drafting. Rebase only the earned-point budget; never adopt changed allocations.
  if(!m.conflict){m.baseState.level=live.level;m.draft.level=live.level;}
  lastLiveKey=JSON.stringify([live.level,m.blocked,!!live.dungeonRun,!!live.stopAfterBattle,!!live.stopAfterDungeon,treeFingerprint(live),skillConditionWeapon(live),skillConditionSetCounts(live)]);};
  const paint=()=>{if(disposed)return;const view=host.querySelector?.('.treeGraphViewport'),scroll=view?{left:view.scrollLeft,top:view.scrollTop}:null;syncLive();host.innerHTML=renderSkillTree(m);const next=host.querySelector?.('.treeGraphViewport');if(scroll&&next){next.scrollLeft=scroll.left;next.scrollTop=scroll.top;}};
- const refresh=()=>{if(disposed)return;const live=adapter.getState(),blocked=!!live.running||!!live.dungeonRun||!!live.activeEncounter&&!live.activeEncounter.done,key=JSON.stringify([live.level,blocked,!!live.dungeonRun,!!live.stopAfterBattle,!!live.stopAfterDungeon,treeFingerprint(live),skillConditionWeapon(live),skillConditionSetCounts(live)]);if(key!==lastLiveKey)paint();};
+ const refresh=()=>{if(disposed)return;const live=adapter.getState(),blocked=noncombatRunning(live)||!!live.dungeonRun||!!live.activeEncounter&&!live.activeEncounter.done,key=JSON.stringify([live.level,blocked,!!live.dungeonRun,!!live.stopAfterBattle,!!live.stopAfterDungeon,treeFingerprint(live),skillConditionWeapon(live),skillConditionSetCounts(live)]);if(key!==lastLiveKey)paint();};
  const changeDraft=fn=>{const next=structuredClone(m.draft);fn(next.skillTree.presets[m.index]);if(!validSkillTree(next,D)){m.error='配置无效：请检查前置、点数与重复技能';return false;}m.draft=next;m.error='';m.activationReview=false;return true;};
  // Refunds affect only this editor draft; the normal Apply transaction owns persistence.
  const applyRefund=()=>{if(!m.refund)return;const ids=m.refund.ids;changeDraft(p=>{p.unlocked=p.unlocked.filter(id=>!ids.includes(id));p.active=p.active.map((id,i)=>{if(ids.includes(id)){p.conditions[i]='always';return null;}return id;});p.passive=p.passive.map(id=>ids.includes(id)?null:id);});m.refund=null;};

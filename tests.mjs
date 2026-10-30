@@ -40,7 +40,6 @@ import './area-progress-tests.mjs';
 import './equipment-level-tests.mjs';
 import './inventory-bags-tests.mjs';
 import './set-source-tests.mjs';
-import './rare-idle-rewards-tests.mjs';
 import './codex-collection-tests.mjs';
 import './batch-sale-tests.mjs';
 import './equipment-fusion-tests.mjs';
@@ -100,6 +99,9 @@ import "./m2-production-activation-tests.mjs";
 // normal affix acquisition in a fresh production realm, not that poisoned fixture.
 import {execFileSync as runAffixSourceTest} from 'node:child_process';
 runAffixSourceTest(process.execPath,[new URL('./affix-source-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+// Rare rewards now exercise all production regions; legacy inventory fixtures
+// install an A01–A03-only dwarf provider, so do not share their test realm.
+runAffixSourceTest(process.execPath,[new URL('./rare-idle-rewards-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
 
 // v0.34 tests require the default production provider, isolated from old boundary fixtures.
 for(const file of ['luck-policy-tests.mjs','luck-production-tests.mjs','legendary-drop-tests.mjs','player-shield-layers-tests.mjs','equipment-runtime-tests.mjs','equipment-runtime-production-tests.mjs','legendary-equipment-tests.mjs','legendary-combat-tests.mjs','legendary-production-tests.mjs','legendary-filter-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
@@ -315,3 +317,10 @@ runAffixSourceTest(process.execPath,[new URL('./boss-challenge-app-ui-tests.cjs'
 runAffixSourceTest(process.execPath,[new URL('./human-level100-boss-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
 
 runAffixSourceTest(process.execPath,[new URL('./human-level100-boss-art-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.81 canonical ending tower: progression, real combat/rewards/offline boundaries,
+// safe routing, actual App transactions and authored art stay isolated from fixtures.
+for(const file of ['otherworld-progression-tests.mjs','otherworld-core-tests.mjs','otherworld-loot-offline-tests.mjs','otherworld-offline-rejection-tests.mjs','otherworld-routing-tests.mjs','otherworld-balance-tests.mjs','otherworld-ui-display-tests.mjs','otherworld-app-ui-tests.cjs','otherworld-art-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.81 authorized reward, poison, workshop and recovery preparation contracts.
+for(const file of ['wisdom-fruit-v081-tests.mjs','wisdom-fruit-ui-tests.cjs','goblin-poison-v081-tests.mjs','reforge-material-tiers-v081-tests.mjs','rest-preparation-v081-tests.mjs','rest-skill-tree-v081-tests.mjs','default-healing-recipe-v081-tests.mjs','loot-history-tests.mjs','loot-history-app-ui-tests.cjs','redeem-codes-tests.mjs','redeem-codes-app-ui-tests.cjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});

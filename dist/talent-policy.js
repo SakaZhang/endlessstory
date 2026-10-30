@@ -15,9 +15,7 @@ export function talentRefundCost(s,points){
  const creditsBefore=s.consumables?.refundCredits??0;
  const correction=(s.talentBalanceVersion??0)<TALENT_BALANCE_VERSION;
  if(s.level<=20||correction)return {points,fruitCost:0,creditsBefore,creditsAfter:creditsBefore,goldCost:0,freeReason:correction?'balance-correction':'early-level'};
- // Existing credits/fruits retain value; missing credits can always be bought at
- // the old fruit unit price (200/10), without a random merchant bottleneck.
- const needed=Math.max(0,points-creditsBefore),fruitCost=Math.min(s.consumables?.memoryFruit??0,Math.ceil(needed/10));
- const goldCost=Math.max(0,needed-fruitCost*10)*20;
- return {points,fruitCost,creditsBefore,creditsAfter:Math.max(0,creditsBefore+fruitCost*10-points),goldCost,freeReason:null};
+ // Legacy refund credits retain their value; fruit is never a refund currency.
+ const needed=Math.max(0,points-creditsBefore);
+ return {points,fruitCost:0,creditsBefore,creditsAfter:Math.max(0,creditsBefore-points),goldCost:needed*20,freeReason:null};
 }
