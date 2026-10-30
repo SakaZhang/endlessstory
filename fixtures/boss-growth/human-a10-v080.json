@@ -1,0 +1,23 @@
+{
+  "human.a10.boss": {
+    "hp": 20359,
+    "atk": 2008.547,
+    "armor": 52,
+    "elementalPower": 286.935,
+    "basicIntervalMs": 2200,
+    "rewardGold": 105,
+    "rewardXp": 1296,
+    "elementResistance": {
+      "earth": 11,
+      "water": 27,
+      "fire": 11,
+      "wind": 11,
+      "light": 27,
+      "dark": 11
+    },
+    "parameterSetId": "regional-threat-v071",
+    "skillOverrides": {},
+    "controlReduction": 0.4,
+    "interruptStopMs": 1100
+  }
+}

@@ -301,3 +301,17 @@ runAffixSourceTest(process.execPath,[new URL('./forge-selection-scroll-app-ui-te
 runAffixSourceTest(process.execPath,[new URL('./attribute-integer-display-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
 
 runAffixSourceTest(process.execPath,[new URL('./potion-independent-cooldown-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+runAffixSourceTest(process.execPath,[new URL('./material-capacity-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+runAffixSourceTest(process.execPath,[new URL('./material-browser-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+runAffixSourceTest(process.execPath,[new URL('./material-browser-app-ui-tests.cjs',import.meta.url).pathname],{stdio:'inherit'});
+
+runAffixSourceTest(process.execPath,[new URL('./extra-boss-challenges-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+runAffixSourceTest(process.execPath,[new URL('./boss-challenge-app-ui-tests.cjs',import.meta.url).pathname],{stdio:'inherit'});
+
+runAffixSourceTest(process.execPath,[new URL('./human-level100-boss-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+runAffixSourceTest(process.execPath,[new URL('./human-level100-boss-art-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});

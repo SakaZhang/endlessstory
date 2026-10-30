@@ -119,8 +119,9 @@ export const HUMAN_AREAS=[
       91,
       100
     ],
-    "boss": false,
-    "description": "空旷宫柱内不再有王座，银籽在荒庭石缝萌生。"
+    "boss": true,
+    "description": "空旷宫柱内不再有王座，银籽在荒庭石缝萌生。",
+    "bossGearLevel": 100
   }
 ];
 export const HUMAN_MATERIAL_ASSOCIATIONS={
@@ -2846,6 +2847,47 @@ export const HUMAN_MATERIAL_ASSOCIATIONS={
         ]
       }
     ]
+  },
+  "human.a10.boss|human.a10.boss": {
+    "monsterId": "human.a10.boss",
+    "nodeId": "human.a10.boss",
+    "channels": [
+      {
+        "channel": "main",
+        "entries": [
+          {
+            "materialId": "human.mat.11",
+            "weight": 0.4
+          },
+          {
+            "materialId": "human.mat.12",
+            "weight": 0.6
+          }
+        ]
+      },
+      {
+        "channel": "special",
+        "entries": [
+          {
+            "materialId": "human.mat.15",
+            "weight": 0.5
+          },
+          {
+            "materialId": "human.mat.16",
+            "weight": 0.5
+          }
+        ]
+      },
+      {
+        "channel": "gem",
+        "entries": [
+          {
+            "materialId": "human.mat.17",
+            "weight": 1
+          }
+        ]
+      }
+    ]
   }
 };
 export const HUMAN_MONSTERS={
@@ -4497,6 +4539,81 @@ export const HUMAN_MONSTERS={
       "name": "王垒石卫",
       "followerMonsterId": "human.a09.normal.1"
     }
+  },
+  "human.a10.boss": {
+    "id": "human.a10.boss",
+    "name": "黎明守誓者 · 奥瑞恩",
+    "area": 10,
+    "rank": "boss",
+    "nodes": [
+      "human.a10.boss"
+    ],
+    "elementTags": [
+      "light"
+    ],
+    "skills": [
+      {
+        "id": "human.a10.boss:0",
+        "name": "荒冠裁决",
+        "effects": [
+          {
+            "type": "damage",
+            "coefficient": 1.9,
+            "damageType": "physical",
+            "powerBasis": "atk"
+          }
+        ],
+        "castMs": 1600,
+        "cooldownMs": 12000,
+        "firstAtMs": 6000,
+        "trigger": null,
+        "maxCasts": null
+      },
+      {
+        "id": "human.a10.boss:1",
+        "name": "黎明盾锋",
+        "effects": [
+          {
+            "type": "damage",
+            "coefficient": 1.15,
+            "damageType": "light",
+            "powerBasis": "elementalPower"
+          },
+          {
+            "type": "reflect",
+            "coefficient": 0.35,
+            "damageType": "light",
+            "powerBasis": "elementalPower",
+            "seconds": 5,
+            "charges": 1,
+            "requiresHpDamage": true,
+            "recursive": false
+          }
+        ],
+        "castMs": 1100,
+        "cooldownMs": 17000,
+        "firstAtMs": 11000,
+        "trigger": null,
+        "maxCasts": null
+      },
+      {
+        "id": "human.a10.boss:2",
+        "name": "末庭不屈",
+        "effects": [
+          {
+            "type": "shield",
+            "fraction": 0.12,
+            "seconds": 8
+          }
+        ],
+        "castMs": 900,
+        "cooldownMs": 22000,
+        "firstAtMs": 16000,
+        "trigger": "hp_below_50_once",
+        "maxCasts": 1
+      }
+    ],
+    "trait": null
   }
 };
 export const HUMAN_MONSTER_SPRITES={
@@ -4542,7 +4659,8 @@ export const HUMAN_MONSTER_SPRITES={
   "human.a10.elite": 11,
   "human.a03.boss": 10,
   "human.a06.boss": 9,
-  "human.a09.boss": 11
+  "human.a09.boss": 11,
+  "human.a10.boss": 11
 };
 export const HUMAN_PARAMETERS={
   "id": "human-initial-calibration-v1",
@@ -5285,6 +5403,23 @@ export const HUMAN_PARAMETERS={
       "basicIntervalMs": 2200,
       "rewardGold": 90,
       "rewardXp": 624,
+      "elementResistance": {
+        "earth": 11,
+        "water": 27,
+        "fire": 11,
+        "wind": 11,
+        "light": 27,
+        "dark": 11
+      }
+    },
+    "human.a10.boss": {
+      "hp": 62000,
+      "atk": 1080,
+      "armor": 78,
+      "elementalPower": 180,
+      "basicIntervalMs": 2200,
+      "rewardGold": 105,
+      "rewardXp": 676,
       "elementResistance": {
         "earth": 11,
         "water": 27,

@@ -794,7 +794,7 @@ export const HUMAN_LEGENDARIES=[
     "bossPool": [
       "human.a03.boss",
       "human.a06.boss",
-      "human.a09.boss"
+      "human.a09.boss", "human.a10.boss"
     ],
     "randomNormalAffixes": 4,
     "exclusiveName": "决斗誓痕",
@@ -810,7 +810,7 @@ export const HUMAN_LEGENDARIES=[
     "exclusiveId": "human-oath-reflection",
     "description": "最后一面军旗没有留在城头。幸存的守卫将它缝进胸甲内衬，让每一次落在身上的重击，都替未归之人讨回回响。",
     "fixedEffect": {"type": "received-damage-reflection", "fraction": 0.5},
-    "bossPool": ["human.a03.boss", "human.a06.boss", "human.a09.boss"],
+    "bossPool": ["human.a03.boss", "human.a06.boss", "human.a09.boss", "human.a10.boss"],
     "randomNormalAffixes": 4,
     "exclusiveName": "誓伤回敬",
     "exclusiveDescription": "每次承受敌方伤害后，将减伤后实际生命损失与护盾吸收之和的50%反弹给伤害来源。普通攻击、技能、持续伤害均逐段结算；全护盾吸收仍反弹，过量伤害不计入。反弹不暴击、不吸血、不触发斩杀或再次反弹，不计作施放；致命受击也结算反弹，但不会复活。"

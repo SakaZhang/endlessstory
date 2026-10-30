@@ -1,0 +1,241 @@
+{
+  "monster": {
+    "id": "human.a10.boss",
+    "name": "黎明守誓者 · 奥瑞恩",
+    "area": 10,
+    "rank": "boss",
+    "nodes": [
+      "human.a10.boss"
+    ],
+    "elementTags": [
+      "light"
+    ],
+    "skills": [
+      {
+        "id": "human.a10.boss:0",
+        "name": "荒冠裁决",
+        "effects": [
+          {
+            "type": "damage",
+            "coefficient": 1.9,
+            "damageType": "physical",
+            "powerBasis": "atk"
+          }
+        ],
+        "castMs": 1600,
+        "cooldownMs": 12000,
+        "firstAtMs": 6000,
+        "trigger": null,
+        "maxCasts": null
+      },
+      {
+        "id": "human.a10.boss:1",
+        "name": "黎明盾锋",
+        "effects": [
+          {
+            "type": "damage",
+            "coefficient": 1.15,
+            "damageType": "light",
+            "powerBasis": "elementalPower"
+          },
+          {
+            "type": "reflect",
+            "coefficient": 0.35,
+            "damageType": "light",
+            "powerBasis": "elementalPower",
+            "seconds": 5,
+            "charges": 1,
+            "requiresHpDamage": true,
+            "recursive": false
+          }
+        ],
+        "castMs": 1100,
+        "cooldownMs": 17000,
+        "firstAtMs": 11000,
+        "trigger": null,
+        "maxCasts": null
+      },
+      {
+        "id": "human.a10.boss:2",
+        "name": "末庭不屈",
+        "effects": [
+          {
+            "type": "shield",
+            "fraction": 0.12,
+            "seconds": 8
+          }
+        ],
+        "castMs": 900,
+        "cooldownMs": 22000,
+        "firstAtMs": 16000,
+        "trigger": "hp_below_50_once",
+        "maxCasts": 1
+      }
+    ],
+    "trait": null
+  },
+  "parameters": {
+    "hp": 62000,
+    "atk": 1080,
+    "armor": 78,
+    "elementalPower": 180,
+    "basicIntervalMs": 2200,
+    "rewardGold": 105,
+    "rewardXp": 676,
+    "elementResistance": {
+      "earth": 11,
+      "water": 27,
+      "fire": 11,
+      "wind": 11,
+      "light": 27,
+      "dark": 11
+    }
+  },
+  "association": {
+    "monsterId": "human.a10.boss",
+    "nodeId": "human.a10.boss",
+    "channels": [
+      {
+        "channel": "main",
+        "entries": [
+          {
+            "materialId": "human.mat.11",
+            "weight": 0.4
+          },
+          {
+            "materialId": "human.mat.12",
+            "weight": 0.6
+          }
+        ]
+      },
+      {
+        "channel": "special",
+        "entries": [
+          {
+            "materialId": "human.mat.15",
+            "weight": 0.5
+          },
+          {
+            "materialId": "human.mat.16",
+            "weight": 0.5
+          }
+        ]
+      },
+      {
+        "channel": "gem",
+        "entries": [
+          {
+            "materialId": "human.mat.17",
+            "weight": 1
+          }
+        ]
+      }
+    ]
+  },
+  "pool": {
+    "monsterId": "human.a10.boss",
+    "nodeId": "human.a10.boss",
+    "channels": [
+      {
+        "channel": "regular",
+        "id": "regular",
+        "hitProbability": 0.75,
+        "quantity": 1,
+        "entries": [
+          {
+            "materialId": "human.mat.11",
+            "weight": 0.4,
+            "qualityWeights": [
+              0.1417004048582996,
+              0.37786774628879893,
+              0.3454790823211876,
+              0.1349527665317139
+            ]
+          },
+          {
+            "materialId": "human.mat.12",
+            "weight": 0.6,
+            "qualityWeights": [
+              0.1417004048582996,
+              0.37786774628879893,
+              0.3454790823211876,
+              0.1349527665317139
+            ]
+          }
+        ]
+      },
+      {
+        "channel": "recovery",
+        "id": "recovery",
+        "hitProbability": 0.9,
+        "quantity": 1,
+        "entries": [
+          {
+            "materialId": "human.mat.12",
+            "weight": 1,
+            "qualityWeights": [
+              0.1417004048582996,
+              0.37786774628879893,
+              0.3454790823211876,
+              0.1349527665317139
+            ]
+          }
+        ]
+      },
+      {
+        "channel": "special",
+        "id": "special",
+        "hitProbability": 0.1376,
+        "quantity": 1,
+        "entries": [
+          {
+            "materialId": "human.mat.15",
+            "weight": 0.5,
+            "qualityWeights": [
+              0.1417004048582996,
+              0.37786774628879893,
+              0.3454790823211876,
+              0.1349527665317139
+            ]
+          },
+          {
+            "materialId": "human.mat.16",
+            "weight": 0.5,
+            "qualityWeights": [
+              0.1417004048582996,
+              0.37786774628879893,
+              0.3454790823211876,
+              0.1349527665317139
+            ]
+          }
+        ]
+      },
+      {
+        "channel": "gem",
+        "id": "gem",
+        "hitProbability": 0.05,
+        "quantity": 1,
+        "entries": [
+          {
+            "materialId": "human.mat.17",
+            "weight": 1,
+            "qualityWeights": [
+              0,
+              0,
+              0,
+              1
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "sprite": 11,
+  "materialIds": [
+    "human.mat.11",
+    "human.mat.12",
+    "human.mat.15",
+    "human.mat.16",
+    "human.mat.17"
+  ]
+}

@@ -27,7 +27,19 @@ for(const [path,h]of Object.entries(baseline.unchangedRuntime).filter(([path])=>
 const report=auditEquipmentCatalog();assert(report.passed,report.errors.join('\n'));assert(validateEquipmentTemplates());assert.equal(SCHEMA_VERSION,6);
 for(const t of T)if(baseline.templates[t.id])assert.equal(hash(JSON.stringify(identity(beforeEquipmentCopy(t)))),baseline.templates[t.id],`${t.id}: preserve existing identity/name/stats metadata`);
 for(const [id,h]of Object.entries(baseline.templates))assert(T.some(t=>t.id===id),`${id}: removed existing template`);
-for(const [id,h]of Object.entries(baseline.legends))assert.equal(hash(JSON.stringify(identity(beforeEquipmentCopy(L[id])))),h,`${id}: preserve legend definition`);
+function beforeHumanBossSource(definition){
+ const old=structuredClone(definition);
+ if(['human-oathblade','human-banner-armor'].includes(old.id)){
+  assert.deepEqual(old.bossPool,['human.a03.boss','human.a06.boss','human.a09.boss','human.a10.boss'],'only the authorized human A10 source append');
+  old.bossPool.pop();
+ }
+ return old;
+}
+for(const [id,h]of Object.entries(baseline.legends))assert.equal(hash(JSON.stringify(identity(beforeEquipmentCopy(beforeHumanBossSource(L[id]))))),h,`${id}: preserve legend definition except exact authorized A10 source`);
+for(const id of ['human-oathblade','human-banner-armor']){
+ const changed=structuredClone(L[id]);changed.bossPool.push('elf.a10.boss');assert.throws(()=>beforeHumanBossSource(changed));
+}
+
 // Negative controls: a balanced total with incorrect slots/families must fail.
 const corrupt=structuredClone(T),first=corrupt.find(t=>t.kind==='scatter'&&t.slot==='amulet');first.slot='ring';assert(!auditEquipmentCatalog(corrupt).passed);
 const wrongFamily=structuredClone(T),weapon=wrongFamily.find(t=>t.kind==='scatter'&&t.slot==='weapon');weapon.weaponType='staff';assert(!auditEquipmentCatalog(wrongFamily).passed);

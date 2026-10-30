@@ -2,11 +2,11 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {WORLD_MATERIALS} from './dist/world-materials.js';
-import {beforeEarlyLuckTags,beforeMaterialCopy,MATERIAL_COPY_AMENDMENTS} from './racial-material-copy-test-fixture.mjs';
+import {beforeHumanEndgameSources,beforeEarlyLuckTags,beforeMaterialCopy,MATERIAL_COPY_AMENDMENTS} from './racial-material-copy-test-fixture.mjs';
 const baseline=JSON.parse(readFileSync(new URL('./fixtures/infinity-gem-base-before-v065.json',import.meta.url)));
 const sha=value=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const original=JSON.stringify(WORLD_MATERIALS);
-assert.equal(sha(beforeMaterialCopy(beforeEarlyLuckTags(WORLD_MATERIALS))),baseline.materialsSha256,'the original complete material hash remains authoritative');
+assert.equal(sha(beforeMaterialCopy(beforeEarlyLuckTags(beforeHumanEndgameSources(WORLD_MATERIALS)))),baseline.materialsSha256,'the original complete material hash remains authoritative');
 assert.equal(JSON.stringify(WORLD_MATERIALS),original,'normalization cannot mutate runtime data');
 assert.equal(MATERIAL_COPY_AMENDMENTS.length,40);
 assert.equal(new Set(MATERIAL_COPY_AMENDMENTS.map(x=>`${x.id}.${x.field}`)).size,40);
@@ -29,7 +29,7 @@ for(const edit of [
  m=>delete m[id].sources,
 ]){
  const changed=structuredClone(WORLD_MATERIALS);edit(changed);
- assert.notEqual(sha(beforeMaterialCopy(beforeEarlyLuckTags(changed))),baseline.materialsSha256,'non-copy mutations must remain visible to the exact hash');
+ assert.notEqual(sha(beforeMaterialCopy(beforeEarlyLuckTags(beforeHumanEndgameSources(changed)))),baseline.materialsSha256,'non-copy mutations must remain visible to the exact hash');
 }
 console.log('PASS material copy compatibility: 40 exact field amendments, unchanged original full hash, runtime immutability, 9 mechanic/identity negative controls.');
 
@@ -38,5 +38,8 @@ for(const tags of [['recoveryBase'],['recoveryBase','luckBase','luckAux','streng
  assert.throws(()=>beforeEarlyLuckTags(changed),/exact approved early-luck tags/);
 }
 const unauthorized=structuredClone(WORLD_MATERIALS);unauthorized['dwarf.iron_filings'].functionalTags.push('luckBase');
-assert.notEqual(sha(beforeMaterialCopy(beforeEarlyLuckTags(unauthorized))),baseline.materialsSha256,'nonapproved materials cannot acquire luck tags');
+assert.notEqual(sha(beforeMaterialCopy(beforeEarlyLuckTags(beforeHumanEndgameSources(unauthorized)))),baseline.materialsSha256,'nonapproved materials cannot acquire luck tags');
 console.log('PASS exact five-material authorized tag projection and four unauthorized-tag negative controls; original v0.65 fixture untouched.');
+
+for(const edit of [m=>m['human.mat.11'].sources.pop(),m=>m['human.mat.11'].sources.push('human.a10.boss'),m=>m['human.mat.02'].sources.push('human.a10.boss')]){const changed=structuredClone(WORLD_MATERIALS);edit(changed);assert.throws(()=>beforeHumanEndgameSources(changed));}
+console.log('PASS exact A10 source append projection rejects missing, duplicate and extra material eligibility.');

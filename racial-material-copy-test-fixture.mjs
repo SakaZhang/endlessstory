@@ -26,3 +26,12 @@ export function beforeEarlyLuckTags(materials){
  }
  return historical;
 }
+
+// v080 authorizes exactly five source appends, not arbitrary source changes.
+export const HUMAN_ENDGAME_MATERIAL_IDS=Object.freeze(['human.mat.11','human.mat.12','human.mat.15','human.mat.16','human.mat.17']);
+export function beforeHumanEndgameSources(materials){
+ const historical=structuredClone(materials),node='human.a10.boss';
+ assert.deepEqual(Object.values(historical).filter(m=>m.sources?.includes(node)).map(m=>m.id).sort(),[...HUMAN_ENDGAME_MATERIAL_IDS].sort());
+ for(const id of HUMAN_ENDGAME_MATERIAL_IDS){assert.equal(historical[id].sources.at(-1),node);assert.equal(historical[id].sources.filter(n=>n===node).length,1);historical[id].sources.pop();}
+ return historical;
+}

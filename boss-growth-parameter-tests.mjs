@@ -4,7 +4,9 @@ import {WORLD_MONSTERS,monsterParameters} from './dist/world-content.js';
 import {BOSS_DPS_REFERENCE_FRACTION} from './dist/monster-balance.js';
 const rows=JSON.parse(fs.readFileSync(new URL('./fixtures/boss-growth/parameter-contract.json',import.meta.url)));
 assert.equal(BOSS_DPS_REFERENCE_FRACTION,.024);
-assert.equal(rows.length,Object.keys(WORLD_MONSTERS).length);
+const added=JSON.parse(fs.readFileSync(new URL('./fixtures/boss-growth/human-a10-v080.json',import.meta.url)));
+assert.deepEqual(Object.keys(WORLD_MONSTERS).sort(),[...rows.map(r=>r.id),...Object.keys(added)].sort());
+for(const [id,parameters] of Object.entries(added))assert.deepEqual(monsterParameters(id),parameters,id+' exact v080 addition');
 for(const r of rows){
  assert.deepEqual(monsterParameters(r.id),r.after,r.id+' fixed exact production contract');
  // XP is the sole authorized exception to the earlier damage-only contract.

@@ -484,7 +484,8 @@ export const HUMAN_MATERIALS={
       "human.a08.dungeon",
       "human.a09.dungeon",
       "human.a10.dungeon",
-      "human.a09.boss"
+      "human.a09.boss",
+      "human.a10.boss"
     ],
     "source": "racial-natural",
     "origin": "王冠领",
@@ -531,7 +532,8 @@ export const HUMAN_MATERIALS={
       "human.a08.dungeon",
       "human.a09.dungeon",
       "human.a10.dungeon",
-      "human.a09.boss"
+      "human.a09.boss",
+      "human.a10.boss"
     ],
     "source": "racial-natural",
     "origin": "王冠领",
@@ -660,7 +662,8 @@ export const HUMAN_MATERIALS={
       "human.a09.field",
       "human.a08.dungeon",
       "human.a09.dungeon",
-      "human.a09.boss"
+      "human.a09.boss",
+      "human.a10.boss"
     ],
     "source": "racial-natural",
     "origin": "王冠领",
@@ -703,7 +706,8 @@ export const HUMAN_MATERIALS={
       "human.a10.field",
       "human.a09.dungeon",
       "human.a10.dungeon",
-      "human.a09.boss"
+      "human.a09.boss",
+      "human.a10.boss"
     ],
     "source": "racial-natural",
     "origin": "王冠领",
@@ -761,7 +765,8 @@ export const HUMAN_MATERIALS={
       "human.a10.dungeon",
       "human.a03.boss",
       "human.a06.boss",
-      "human.a09.boss"
+      "human.a09.boss",
+      "human.a10.boss"
     ],
     "source": "racial-natural",
     "origin": "王冠领",

@@ -6430,3 +6430,147 @@ HUMAN_ART.equipment['human_scatter_ring_lantern']='races/human/assets/human_scat
 HUMAN_ART.equipment['human_scatter_ring_oath']='races/human/assets/human_scatter_ring_oath.png';
 
 Object.assign(HUMAN_ART.equipment,Object.fromEntries(Object.entries(HUMAN_DWARF_EQUIPMENT_ASSETS).filter(([id])=>id.startsWith('human_'))));
+
+
+// Original level-100 Dawn Oathkeeper: six generated poses, fixed ground anchor.
+HUMAN_ART.monsters['human.a10.boss']={
+  "frameSize": [
+    192,
+    192
+  ],
+  "anchor": [
+    96,
+    176
+  ],
+  "facing": "left",
+  "frames": [
+    {
+      "id": "idle",
+      "file": "races/human/assets/human-a10-boss-idle.png",
+      "durationMs": 180,
+      "sourceCrop": [
+        17,
+        63,
+        1244,
+        1170
+      ],
+      "alphaBBox": [
+        26,
+        49,
+        166,
+        175
+      ]
+    },
+    {
+      "id": "anticipation",
+      "file": "races/human/assets/human-a10-boss-anticipation.png",
+      "durationMs": 180,
+      "sourceCrop": [
+        98,
+        59,
+        1239,
+        1176
+      ],
+      "alphaBBox": [
+        31,
+        48,
+        161,
+        175
+      ]
+    },
+    {
+      "id": "attack",
+      "file": "races/human/assets/human-a10-boss-attack.png",
+      "durationMs": 180,
+      "sourceCrop": [
+        5,
+        239,
+        1253,
+        1022
+      ],
+      "alphaBBox": [
+        24,
+        86,
+        167,
+        175
+      ]
+    },
+    {
+      "id": "recovery",
+      "file": "races/human/assets/human-a10-boss-recovery.png",
+      "durationMs": 180,
+      "sourceCrop": [
+        18,
+        123,
+        1245,
+        1155
+      ],
+      "alphaBBox": [
+        26,
+        57,
+        166,
+        175
+      ]
+    },
+    {
+      "id": "hurt",
+      "file": "races/human/assets/human-a10-boss-hurt.png",
+      "durationMs": 180,
+      "sourceCrop": [
+        31,
+        106,
+        1237,
+        1152
+      ],
+      "alphaBBox": [
+        27,
+        56,
+        165,
+        175
+      ]
+    },
+    {
+      "id": "death",
+      "file": "races/human/assets/human-a10-boss-death.png",
+      "durationMs": 180,
+      "sourceCrop": [
+        12,
+        453,
+        1241,
+        869
+      ],
+      "alphaBBox": [
+        26,
+        128,
+        166,
+        175
+      ]
+    }
+  ],
+  "animations": {
+    "idle": [
+      "idle"
+    ],
+    "anticipation": [
+      "anticipation"
+    ],
+    "attack": [
+      "anticipation",
+      "attack",
+      "recovery",
+      "idle"
+    ],
+    "recovery": [
+      "recovery"
+    ],
+    "hurt": [
+      "hurt",
+      "idle"
+    ],
+    "death": [
+      "death"
+    ]
+  },
+  "uniformSourceScale": 0.115,
+  "motionCoverage": "six distinct generated articulated lifecycle poses"
+};

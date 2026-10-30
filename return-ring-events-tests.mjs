@@ -27,9 +27,9 @@ for(const def of RETURN_RING_EVENTS){
  delete s.materialStacks[def.rewards[0].key];store=storage(s);assert.equal(claimTaskReward(store,s,def.id).reason,'already-claimed');assert.equal(returnRingMaterialUsage(s,def.rewards[0].key.split('|')[0]),null);
  const declined=at(def);assert(declineNpcEvent(declined,def.id));assert(!beginNpcEvent(declined,def.id,now));assert(E.validSave(declined));
 }
-// Real full material bag: no completion, cost/reward mutation or lost reward on failure.
+// The former 100-stack boundary no longer blocks a real story material reward.
 const def=RETURN_RING_EVENTS[0];let s=at(def);beginNpcEvent(s,def.id,now);victory(s,def);
-const keys=Object.keys(E.MATERIALS).filter(k=>!E.MATERIALS[k].storyOnly).flatMap(k=>[0,1,2,3].map(q=>E.materialKey(k,q)).filter(Boolean));s.materialStacks=Object.fromEntries(keys.slice(0,100).map(k=>[k,1]));let store=storage(s),before=clone(s);assert.equal(claimTaskReward(store,s,def.id).reason,'reward-unavailable');assert.deepEqual(s,before);delete s.materialStacks[keys[99]];store=storage(s);assert(claimTaskReward(store,s,def.id).ok);
+const keys=Object.keys(E.MATERIALS).filter(k=>!E.MATERIALS[k].storyOnly).flatMap(k=>[0,1,2,3].map(q=>E.materialKey(k,q)).filter(Boolean));s.materialStacks=Object.fromEntries(keys.slice(0,100).map(k=>[k,1]));let store=storage(s),before=clone(s);const expandedClaim=claimTaskReward(store,s,def.id);assert(expandedClaim.ok);assert.equal(E.bagCounts(expandedClaim.game).materials,101);assert.deepEqual(s,before);
 // Remote, live combat and war gates cannot be bypassed by button/action calls.
 s=at(def);s.siteId='dwarf.a01';s.location=0;assert(!beginNpcEvent(s,def.id,now));s=at(def);s.running=true;assert(!beginNpcEvent(s,def.id,now));
 // Guaranteed recipe depends only on the real mandatory flag, not token ownership.
@@ -48,4 +48,4 @@ const identity=clone(ring.exclusive),cost=E.getReforgeCost(ring,'value',s);s.gol
 const consumed=E.forge(s,[{kind:'equipment',id:ring.id}]);assert(consumed);assert(!consumed.legendaryId);assert.equal(consumed.rarity,3);assert(!s.inventory.some(i=>i.id===ring.id));store=storage(s);assert(s.returnRing.crafted);assert.equal(craft(store,s).reason,'already-crafted');assert(E.validSave(s));
 // Imported malformed event and unique ledgers fail save validation.
 for(const value of [null,{},[],{version:1,entries:{'bad.event':{}}}]){const state=E.fresh();state.npcEvents=value;assert(!validNpcEventState(state));assert(!E.validSave(state));}
-console.log('PASS Return Ring: five canonical Q3 scenes; real victory objectives, closed story/recipe flags, full-bag/save retry, filters, decline/loss permanence, idempotency, fixed craft retry, one-craft ledger, field/dungeon 15%-max recovery and explicit unapproved-policy safety gate and approved +3pp runtime.');
+console.log('PASS Return Ring: five canonical Q3 scenes; real victory objectives, closed story/recipe flags, expanded-bag/save retry, filters, decline/loss permanence, idempotency, fixed craft retry, one-craft ledger, field/dungeon 15%-max recovery and explicit unapproved-policy safety gate and approved +3pp runtime.');

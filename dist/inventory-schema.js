@@ -1,5 +1,7 @@
 export const EQUIPMENT_BAG_TYPES=Object.freeze(['weapon','helm','armor','gloves','boots','ring','amulet','core']);
-export const BAG_LIMITS=Object.freeze({equipment:50,materials:100,items:100});
+// Material capacity counts positive name × quality stacks, not individual units.
+// Keep this admission limit separate from save validation: existing stock is never trimmed.
+export const BAG_LIMITS=Object.freeze({equipment:50,materials:1000,items:100});
 export const INVENTORY_SAVE_LIMIT=10000;
 export const LOOT_CATEGORIES=Object.freeze(['equipment','materials','items']);
 const wardrobe=s=>new Set((s.loadouts??[]).filter(Boolean).flatMap(l=>Object.values(l.equip??{})).filter(Boolean));
@@ -8,7 +10,7 @@ const potionStacks=s=>s.potionStacks??Object.fromEntries(Object.entries(s.potion
 export function bagCounts(s){
  const refs=wardrobe(s),equipment=Object.fromEntries(EQUIPMENT_BAG_TYPES.map(k=>[k,0]));
  for(const it of s.inventory??[])if(!refs.has(it.id)&&Object.hasOwn(equipment,it.slot))equipment[it.slot]++;
- return {equipment,materials:Object.values(materialStacks(s)).filter(n=>n>0).length,items:Object.values(potionStacks(s)).filter(n=>n>0).length+['memoryFruit','reforgeToken'].filter(k=>(s.consumables?.[k]??0)>0).length};
+ return {equipment,materials:Object.values(materialStacks(s)).filter(n=>n>0).length,items:Object.values(potionStacks(s)).filter(n=>n>0).length+['memoryFruit','reforgeToken','bossChallengeCharges'].filter(k=>(s.consumables?.[k]??0)>0).length};
 }
 export function canReceiveEquipment(s,itemOrSlot){
  const slot=typeof itemOrSlot==='string'?itemOrSlot:itemOrSlot?.slot;
@@ -19,7 +21,7 @@ export function canReceiveMaterial(s,key,qty=1){
  return Number.isSafeInteger(qty)&&qty>0&&Number.isSafeInteger(current)&&current>=0&&current+qty<=1e12&&(current>0||bagCounts(s).materials<BAG_LIMITS.materials);
 }
 export function canReceiveItem(s,key,qty=1){
- const current=['memoryFruit','reforgeToken'].includes(key)?s.consumables?.[key]??0:potionStacks(s)[key]??0;
+ const current=['memoryFruit','reforgeToken','bossChallengeCharges'].includes(key)?s.consumables?.[key]??0:potionStacks(s)[key]??0;
  return Number.isSafeInteger(qty)&&qty>0&&Number.isSafeInteger(current)&&current>=0&&current+qty<=1e9&&(current>0||bagCounts(s).items<BAG_LIMITS.items);
 }
 export function validLootFilters(s){

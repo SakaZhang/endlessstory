@@ -88,6 +88,19 @@ assert.deepEqual(JSON.parse(readFileSync(join(root,'content/material-recipe-expa
 const clone=v=>Array.isArray(v)?v.map(clone):v&&typeof v==='object'?Object.fromEntries(Object.entries(v).map(([k,x])=>[k,clone(x)])):v;
 function authorizedBaseline(original,file){
  const out=clone(original);
+ // Authorized v080 human A10 addition: exact checked-in content, not a wildcard exclusion.
+ const bossId='human.a10.boss',bossKey=bossId+'|'+bossId;
+ const addition=JSON.parse(readFileSync(join(root,'fixtures/boss-growth/human-a10-content-v080.json'),'utf8'));
+ if(file==='races/human/equipment.js')for(const d of out.HUMAN_LEGENDARIES)d.bossPool.push(bossId);
+ if(file==='engine.js')for(const d of out.LEGENDARY_CODEX??[])if(['human-oathblade','human-banner-armor'].includes(d.id))d.bossPool.push(bossId);
+ if(file==='engine.js')for(const m of Object.values(out.MATERIALS??{}))if(addition.materialIds.includes(m.catalogId))m.sources.push(bossId);
+ if(file==='races/human/materials.js')for(const id of addition.materialIds)out.HUMAN_MATERIALS[id].sources.push(bossId);
+ if(file==='races/human/content.js'){
+  out.HUMAN_AREAS[9].boss=true;out.HUMAN_AREAS[9].bossGearLevel=100;
+  out.HUMAN_MONSTERS[bossId]=addition.monster;out.HUMAN_PARAMETERS.monsters[bossId]=addition.parameters;
+  out.HUMAN_MATERIAL_ASSOCIATIONS[bossKey]=addition.association;out.HUMAN_MATERIAL_POOLS[bossKey]=addition.pool;out.HUMAN_MONSTER_SPRITES[bossId]=addition.sprite;
+ }
+
  // Approved presentation-only 2/4-piece rows. Pin structure and thresholds;
  // descriptions alone are visible copy, never the numerical set tuning.
  if(file==='engine.js'){
@@ -162,6 +175,12 @@ try{
   const after=await import(pathToFileURL(join(root,'dist',file)));
   const a=project(after,file,''),b=project(authorizedBaseline(before,file),file,''); const differences=[]; function diff(a,b,p=''){if(Object.is(a,b))return;if(a&&b&&typeof a==='object'&&typeof b==='object'){for(const k of new Set([...Object.keys(a),...Object.keys(b)]))diff(a[k],b[k],p+'/'+k);}else differences.push(p+' '+JSON.stringify(b)+' => '+JSON.stringify(a));}diff(a,b);assert.equal(differences.length,0,`Mechanics drift in ${file}:\n${differences.slice(0,15).join('\n')}`);compared++;
   const rejectMutation=(label,mutate)=>{const corrupt=clone(after);mutate(corrupt);assert.throws(()=>assert.deepEqual(project(corrupt,file,''),b),assert.AssertionError,`Unauthorized mutation must fail: ${file}: ${label}`);};
+  if(file==='races/human/content.js'){
+   rejectMutation('endgame boss damage',m=>m.HUMAN_MONSTERS['human.a10.boss'].skills[0].effects[0].coefficient++);
+   rejectMutation('endgame boss gear basis',m=>m.HUMAN_AREAS[9].bossGearLevel=95);
+   rejectMutation('earlier human boss budget',m=>m.HUMAN_PARAMETERS.monsters['human.a09.boss'].hp++);
+  }
+  if(file==='races/human/equipment.js')rejectMutation('unapproved legendary source',m=>m.HUMAN_LEGENDARIES[0].bossPool.push('elf.a10.boss'));
   if(file==='return-ring-content.js'){
    rejectMutation('event ID',m=>m.RETURN_RING_EVENTS[0].id+='-changed');
    rejectMutation('reward quantity',m=>m.RETURN_RING_EVENTS[0].rewards[0].quantity=2);
@@ -205,6 +224,6 @@ try{
  ]){const corrupt=clone(after.BUILD);mutate(corrupt);assert.throws(()=>assert.deepEqual(project(corrupt,'engine.js','BUILD'),expectedBuild),assert.AssertionError,label);}
  // Mutation sentinels prove representative mechanics strings cannot be hidden.
  for(const [f,p]of [['racial-npc-event-content.js','RACIAL_NPC_EVENTS/0/conditions/accessPolicy'],['racial-npc-event-content.js','RACIAL_NPC_EVENTS/0/choices/0/effects/0/flag'],['npc-objective-content.js','NPC_OBJECTIVE_CONTENT/event/taskRewards/0/key'],['races/elf/skills.js','skills/elf.skill/weaponType'],['races/elf/equipment.js','legendaries/0/exclusiveId']])assert.notEqual(project('old',f,p),project('new',f,p),p);
- console.log(`PASS copy + bounded authorized revision invariants: ${compared} modules + engine catalogs vs ${BASELINE.slice(0,12)}; ${changedCopy.length} changed content modules. IDs, gates, objectives, rewards, effects, numeric budgets and legendary functions preserved except exact approved ring objectives / recipe additions / presentation-only set rows (2/4 thresholds pinned).`);
+ console.log(`PASS copy + bounded authorized revision invariants: ${compared} modules + engine catalogs vs ${BASELINE.slice(0,12)}; ${changedCopy.length} changed content modules. IDs, gates, objectives, rewards, effects, numeric budgets and legendary functions preserved except exact approved ring objectives / recipe additions / presentation-only set rows (2/4 thresholds pinned) / exact human A10 boss content and sources.`);
  console.log('Boundary: does not prove new prose accurately describes mechanics, DOM behavior, non-exported function closures, or visual correctness; use gameplay/UI tests and review alongside this check.');
 }finally{rmSync(temp,{recursive:true,force:true});}

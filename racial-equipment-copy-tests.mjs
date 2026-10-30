@@ -9,9 +9,11 @@ import {RETURN_RING_EVENTS} from './dist/return-ring-content.js';
 const baseline=JSON.parse(fs.readFileSync(new URL('./fixtures/racial-equipment-mechanics-copy-baseline.json',import.meta.url)));
 function mechanics(o){
  if(Array.isArray(o))return o.map(mechanics);
+ if(o&&typeof o==='object'&&['human-oathblade','human-banner-armor'].includes(o.id)&&o.bossPool){assert.deepEqual(o.bossPool,['human.a03.boss','human.a06.boss','human.a09.boss','human.a10.boss'],'exact authorized human A10 source append');o={...o,bossPool:o.bossPool.slice(0,3)};}
  if(o&&typeof o==='object')return Object.fromEntries(Object.entries(o).filter(([k])=>!['description','exclusiveDescription'].includes(k)).map(([k,v])=>[k,mechanics(v)]));
  return o;
 }
+for(const id of ['human-oathblade','human-banner-armor'])assert.throws(()=>mechanics({id,bossPool:['human.a03.boss','human.a06.boss','human.a09.boss','human.a10.boss','elf.a10.boss']}));
 const forbidden=/不限制其他种族穿戴|剧情占位|政策待定|具体配方后续确定|获取配方前不展示|主线获取尚未开放|王冠领旅人常用的/;
 let inspected=0;
 for(const race of ['human','elf','goblin','ashen']){

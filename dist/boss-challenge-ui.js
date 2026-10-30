@@ -1,0 +1,8 @@
+import {bossChallengeStatus,BOSS_CHALLENGE_PRICE,BOSS_CHALLENGE_USES,MAX_BOSS_CHALLENGES,canReceiveItem} from './engine.js';
+import {icon} from './icons.js';
+// Read-only panels: remaining uses are pooled, never label a partially used item as full.
+export function renderBossChallengeItem(s,{shop=false,locked=false}={}){
+ const {charges,extraChallenges}=bossChallengeStatus(s),fighting=!!s.activeEncounter&&!s.activeEncounter.done;
+ const full=charges>MAX_BOSS_CHALLENGES-BOSS_CHALLENGE_USES,bagFull=!canReceiveItem(s,'bossChallengeCharges',BOSS_CHALLENGE_USES);
+ return `<section class="bossChallengePanel" aria-label="首领挑战令"><div class="bossChallengeTitle">${icon('shield')}<div><h3>首领挑战令</h3><small>${shop?'常驻补给 · 不占随机8个货位':'道具 · 剩余使用次数合并保存'}</small></div></div><p>每件 ${BOSS_CHALLENGE_PRICE} 金币，可用 ${BOSS_CHALLENGE_USES} 次；每次使用增加 1 次额外首领挑战，可累计保留。</p><div class="bossChallengeCounts"><strong>剩余可用 ${charges} 次</strong><strong>额外挑战 ${extraChallenges} 次</strong></div><p class="subtleText">自然冷却结束优先免费挑战；冷却中挑战实际所在地的已解锁首领，才消耗 1 次额外挑战。购买或使用不会立即开战。</p><div class="row">${shop?`<button class="primary" data-buy-boss-challenge="1" ${locked||s.gold<BOSS_CHALLENGE_PRICE||full||bagFull?'disabled':''}>${full?'剩余使用次数已达上限':bagFull?'道具包已满':`购买1件 · ${BOSS_CHALLENGE_PRICE}金币`}</button>`:''}<button data-use-boss-challenge="1" ${locked||fighting||charges<1||extraChallenges>=MAX_BOSS_CHALLENGES?'disabled':''}>使用1次 · 额外挑战＋1</button>${shop?'':'<button data-view="merchant">前往商店购买</button>'}</div>${fighting?'<p class="subtleText">本场战斗结束后可使用挑战令；暂停战斗仍需等待结束。</p>':''}${shop?'<small>固定售价，不参与人族折扣；刷新货单不影响常驻补给。</small>':''}</section>`;
+}

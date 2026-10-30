@@ -1,3 +1,4 @@
+import {assertMonsterCatalogIds} from './monster-catalog-test-fixture.mjs';
 import assert from 'node:assert/strict';
 import {renderMonsterPixelPortrait} from './dist/monster-pixel-portrait.js';
 import {DWARF_MONSTER_INFO} from './dist/dwarf-material-catalog.js';
@@ -12,5 +13,5 @@ for(const m of DWARF_MONSTER_INFO){
  s.monsterLedger.encountered[m.id]=true;assert(renderMonsterDetail(s,m.id).includes(svg));
 }
 assert.equal(graphics.size,44);assert.equal(silhouettes.size,1);
-const empty={monsterLedger:{version:1,encountered:{}}};assert(!renderMonsterCodex(empty).includes('怪物像素画像'));assert(monsterPortrait('grayflag-raider').includes('monsterPixelUnavailable'));assert(monsterPortrait('grayflag-raider',{known:false}).includes('monsterSilhouette'));assert(monsterPortrait('not-registered').includes('monsterPixelUnavailable'));assert.equal(Object.keys(MONSTER_CATALOG).length,224);
+const empty={monsterLedger:{version:1,encountered:{}}};assert(!renderMonsterCodex(empty).includes('怪物像素画像'));assert(monsterPortrait('grayflag-raider').includes('monsterPixelUnavailable'));assert(monsterPortrait('grayflag-raider',{known:false}).includes('monsterSilhouette'));assert(monsterPortrait('not-registered').includes('monsterPixelUnavailable'));assertMonsterCatalogIds(MONSTER_CATALOG);
 console.log('PASS44 exact production PNG portraits in codex/roster, distinct identities/one anonymous unknown, legacy unavailable, controls/status/state unchanged.');

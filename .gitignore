@@ -7,3 +7,7 @@ node_modules/
 
 # Locally compiled container binaries are packaged separately, not source.
 deploy/container/binaries/
+
+# Generated Python caches
+__pycache__/
+*.pyc

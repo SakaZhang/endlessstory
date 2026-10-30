@@ -1,0 +1,57 @@
+{
+  "version": "v0.80",
+  "release": "261f91c1e8eefec3124f2545e8a55b3985ef0d28a5cec30e81fca854a08417f6",
+  "date": "2026-10-30",
+  "aggregate": {
+    "initial_command": "npm test",
+    "initial_exit_code": 1,
+    "initial_log": "/tmp/v080-final-release-tests.log",
+    "initial_stop": "historical human equipment boss-source hash required exact authorized A10 append projection",
+    "test_only_fixes": [
+      "racial-equipment-copy-tests.mjs exact human A10 source append with negative control",
+      "dungeon-damage-tests.mjs exact boss count18 including new human A10"
+    ],
+    "resume": "exact tests.mjs remainder beginning Editorial refresh preserves gameplay contracts",
+    "resume_log": "/tmp/v080-tail-final.log",
+    "resume_exit_code": 0,
+    "runtime_unchanged_during_resume": true,
+    "single_process_rerun_after_test_only_fixes": false
+  },
+  "catalog": {
+    "materials": 99,
+    "quality_stacks": 366,
+    "material_capacity": 1000,
+    "item_capacity": 100,
+    "equipment_family_capacity": 50
+  },
+  "browser": {
+    "report": "qa/v080/REPORT.md",
+    "tested": [
+      "366-stack valid save import",
+      "material search quality and quantity sort",
+      "recipe-authoritative auxiliary filter",
+      "independent forge filters",
+      "hidden selected-input preservation",
+      "1000-gold token purchase",
+      "3 charges and cumulative attempts",
+      "real cooldown-boss launch",
+      "human A10 region98–100 gear preview",
+      "real human A10 boss start and distinct art",
+      "native six-state artwork"
+    ],
+    "not_measured": [
+      "390px and 320px viewport"
+    ]
+  },
+  "notes": [
+    "First aggregate ran while new scope changed runtime; final aggregate above used frozen feature source.",
+    "Old full100-material tests now use valid quantity limits or 1000 synthetic helper boundaries; no forged production catalog entries.",
+    "User server unchanged; Docker publication recorded separately after remote verification."
+  ],
+  "status": "all aggregate checks completed on frozen runtime using verified prefix and exact resumed tail",
+  "supplementary": {
+    "race_expansion_passed": 64,
+    "race_expansion_total": 64,
+    "exit_code": 0
+  }
+}

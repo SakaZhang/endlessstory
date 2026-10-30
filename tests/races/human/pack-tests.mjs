@@ -4,7 +4,7 @@ import {COMMON_SLOT_TARGETS} from '../../../equipment-catalog-audit.mjs';
 import {RACE_PACK as p,planSkill,modifySkillPlan,modifyLegendaryPlan,humanGoldCost} from '../../../dist/races/human/index.js';
 import {HUMAN_CORE_BUILDS} from '../../../dist/races/human/skills.js';
 import {createTreeEffectHost} from '../../../dist/skill-tree-effect-host.js';
-assert.equal(p.areas.length,10);assert.equal(Object.keys(p.monsters).length,43);assert.deepEqual(p.areas.filter(a=>a.boss).map(a=>a.number),[3,6,9]);
+assert.equal(p.areas.length,10);assert.equal(Object.keys(p.monsters).length,44);assert.deepEqual(p.areas.filter(a=>a.boss).map(a=>a.number),[3,6,9,10]);
 assert.equal(p.tree.nodes.length,30);assert.equal(p.tree.nodes.reduce((n,x)=>n+x.cost,0),99);assert.equal(Object.keys(p.skills).length,21);assert.equal(Object.keys(p.passives).length,9);
 for(const g of p.tree.groups){const ns=p.tree.nodes.filter(n=>n.branch===g.id);assert.equal(new Set(ns.map(n=>n.row+':'+n.column)).size,ns.length);}
 const learned=new Set();while(learned.size<p.tree.nodes.length){const n=p.tree.nodes.find(n=>!learned.has(n.id)&&n.requires.every(r=>learned.has(r)));assert.ok(n,'acyclic reachable tree');learned.add(n.id);}
@@ -21,6 +21,6 @@ assert.deepEqual(modifyLegendaryPlan(cut),cut); // Fixed effects moved to valida
 
 for(let cost=1;cost<=100;cost++){assert.ok(humanGoldCost(cost)>=1);assert.equal(humanGoldCost(cost,{operation:'sell'}),cost);assert.equal(humanGoldCost(cost,{race:'elf'}),cost);}assert.equal(humanGoldCost(0),0);assert.equal(humanGoldCost(100),90);
 const paths=[];function visit(v){if(typeof v==='string'&&v.endsWith('.png'))paths.push(v);else if(v&&typeof v==='object')Object.values(v).forEach(visit);}visit(p.art);for(const path of paths)assert.ok(fs.existsSync(new URL('../../../dist/'+path,import.meta.url)),path);
-console.log(JSON.stringify({ok:true,plans,effects,areas:10,monsters:43,materials:18,scatter:p.equipment.filter(e=>e.kind==='scatter').length,setPieces:12,legendary:2,treeCost:99,assetRefs:paths.length}));
+console.log(JSON.stringify({ok:true,plans,effects,areas:10,monsters:44,materials:18,scatter:p.equipment.filter(e=>e.kind==='scatter').length,setPieces:12,legendary:2,treeCost:99,assetRefs:paths.length}));
 for(const id of ['human.cut','human.open_wound','human.blood_mark','human.shield_bash'])for(const weaponType of ['sword_shield','greatsword']){const plan=planSkill({skillId:id,castId:'weakness-cap',weaponType,selectedTargetId:'enemy1',targets:[{id:'enemy1',alive:true,baseAtk:43,bleeding:true}],stats:{atk:1094,hp:5299,armor:903},hero:{shield:1}});for(const a of plan.actions)for(const e of a.effects??[])if(e.type==='attackDown')assert.ok(e.amount<=43*.2+1e-9,'never zero enemy base ATK');}
 console.log('PASS all human attackDown riders capped at20% immutable actual targetbaseATK; no recursive debuff snapshot');

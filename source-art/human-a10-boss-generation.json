@@ -1,0 +1,36 @@
+{
+  "mode": "built-in image_gen",
+  "identity": "黎明守誓者·奥瑞恩",
+  "records": [
+    {
+      "state": "idle",
+      "source": "source-art/human-a10-boss-idle.png",
+      "prompt": "Original Dawn Oathkeeper Aurien idle sprite: ivory/gold sun-halo guardian, red tattered cape, sun kite shield and long sword; left facing; transparent background; detailed pixel art."
+    },
+    {
+      "state": "anticipation",
+      "source": "source-art/human-a10-boss-anticipation.png",
+      "prompt": "Use case: identity-preserve. Asset type: transparent pixel-art battle sprite. Reference image is the exact new character identity to preserve: Dawn Oathkeeper Aurien, ivory plate with antique gold trim, closed left-facing pointed visor, sunburst halo helmet, red tattered cape, ivory sun-emblem kite shield and gold-white long sword. Generate ONE new articulated ANTICIPATION wind-up pose: knees bent, torso coiled back toward right, sword raised above helmet ready to swing to LEFT, shield held in front of torso. Weapon and arms visibly differ from idle. Preserve character costume, body proportions, pixel-art shading and equipment identity. Fixed side-view/slight three-quarter front camera, combat direction LEFT. Full body with all weapon tips fully visible, generous transparent margin on every edge, no cropped objects. Center single character in square image. Transparent background; no scene, platform, floor shadow, text, border or additional characters. Sharp pixel-art details consistent with reference, readable when resized to 192px sprite."
+    },
+    {
+      "state": "attack",
+      "source": "source-art/human-a10-boss-attack.png",
+      "prompt": "Use case: identity-preserve. Asset type: transparent pixel-art battle sprite. Reference image is the exact new character identity to preserve: Dawn Oathkeeper Aurien, ivory plate with antique gold trim, closed left-facing pointed visor, sunburst halo helmet, red tattered cape, ivory sun-emblem kite shield and gold-white long sword. Generate ONE new articulated ATTACK pose: a clear forceful lunge toward LEFT, front knee bent forward, rear leg stretched right, sword thrust fully horizontally far LEFT at chest height, shield held close. No huge effect cloud, only tiny golden edge glint. Preserve character costume, body proportions, pixel-art shading and equipment identity. Fixed side-view/slight three-quarter front camera, combat direction LEFT. Full body with all weapon tips fully visible, generous transparent margin on every edge, no cropped objects. Center single character in square image. Transparent background; no scene, platform, floor shadow, text, border or additional characters. Sharp pixel-art details consistent with reference, readable when resized to 192px sprite."
+    },
+    {
+      "state": "recovery",
+      "source": "source-art/human-a10-boss-recovery.png",
+      "prompt": "Use case: identity-preserve. Asset type: transparent pixel-art battle sprite. Reference image is the exact new character identity to preserve: Dawn Oathkeeper Aurien, ivory plate with antique gold trim, closed left-facing pointed visor, sunburst halo helmet, red tattered cape, ivory sun-emblem kite shield and gold-white long sword. Generate ONE new articulated RECOVERY pose: after leftward sword swing, leaning a little forward with knees slightly bent, sword diagonally down-left closer to body and shield tilted outward. Visibly different articulated limb posture from idle. Preserve character costume, body proportions, pixel-art shading and equipment identity. Fixed side-view/slight three-quarter front camera, combat direction LEFT. Full body with all weapon tips fully visible, generous transparent margin on every edge, no cropped objects. Center single character in square image. Transparent background; no scene, platform, floor shadow, text, border or additional characters. Sharp pixel-art details consistent with reference, readable when resized to 192px sprite."
+    },
+    {
+      "state": "hurt",
+      "source": "source-art/human-a10-boss-hurt.png",
+      "prompt": "Use case: identity-preserve. Asset type: transparent pixel-art battle sprite. Reference image is the exact new character identity to preserve: Dawn Oathkeeper Aurien, ivory plate with antique gold trim, closed left-facing pointed visor, sunburst halo helmet, red tattered cape, ivory sun-emblem kite shield and gold-white long sword. Generate ONE new articulated HURT pose: recoiling backwards to RIGHT from an impact coming from LEFT, knees buckled, torso and helmet leaning right, shield knocked left and lowered slightly, sword arm pulled inward. Still standing and still facing LEFT. No blood. Preserve character costume, body proportions, pixel-art shading and equipment identity. Fixed side-view/slight three-quarter front camera, combat direction LEFT. Full body with all weapon tips fully visible, generous transparent margin on every edge, no cropped objects. Center single character in square image. Transparent background; no scene, platform, floor shadow, text, border or additional characters. Sharp pixel-art details consistent with reference, readable when resized to 192px sprite."
+    },
+    {
+      "state": "death",
+      "source": "source-art/human-a10-boss-death.png",
+      "prompt": "Use case: identity-preserve. Asset type: transparent pixel-art battle sprite. Reference image is the exact new character identity to preserve: Dawn Oathkeeper Aurien, ivory plate with antique gold trim, closed left-facing pointed visor, sunburst halo helmet, red tattered cape, ivory sun-emblem kite shield and gold-white long sword. Generate ONE new articulated DEATH pose: defeated collapsed armored knight lying low horizontally on ground, helmet on LEFT and feet to RIGHT, same sunburst helmet, ivory/gold armor, red cape crumpled beneath torso, sun shield fallen angled beside body, sword lying toward LEFT. Very low silhouette, not kneeling or standing, no blood. Preserve character costume, body proportions, pixel-art shading and equipment identity. Fixed side-view/slight three-quarter front camera, combat direction LEFT. Full body with all weapon tips fully visible, generous transparent margin on every edge, no cropped objects. Center single character in square image. Transparent background; no scene, platform, floor shadow, text, border or additional characters. Sharp pixel-art details consistent with reference, readable when resized to 192px sprite."
+    }
+  ]
+}

@@ -132,6 +132,28 @@ function validTalents(s){
  return Object.entries(s.talents).every(([key,n])=>Object.hasOwn(TALENTS,key)&&Number.isSafeInteger(n)&&n>=0&&n<=(TALENTS[key].cap??talentPointBudget(s)))&&Object.values(s.talents).reduce((a,b)=>a+b,0)<=talentPointBudget(s);
 }
 export const CONSUMABLES={memoryFruit:{name:'回忆之果',icon:'memoryfruit',description:'确认洗点时每枚提供10点返还额度。',price:200},reforgeToken:{name:'重铸印记',icon:'reforgeToken',description:'完整重铸消耗1枚；保留旧结果也不返还。',price:120}};
+// Charges are pooled uses: buying one token adds three; activating one banks one attempt.
+export const BOSS_CHALLENGE_PRICE=1000,BOSS_CHALLENGE_USES=3,MAX_BOSS_CHALLENGES=1e9;
+const validBossCount=n=>Number.isSafeInteger(n)&&n>=0&&n<=MAX_BOSS_CHALLENGES;
+function validBossChallengeState(s){return (s.extraBossChallenges===undefined||validBossCount(s.extraBossChallenges))&&(s.consumables?.bossChallengeCharges===undefined||validBossCount(s.consumables.bossChallengeCharges));}
+export function bossChallengeStatus(s){const charges=s.consumables?.bossChallengeCharges??0;return {charges,extraChallenges:s.extraBossChallenges??0,items:Math.ceil(charges/BOSS_CHALLENGE_USES)};}
+// These mutations must be persisted by the caller's clone-save-adopt transaction.
+export function buyBossChallengeToken(s,quantity=1){
+ if(!Number.isSafeInteger(quantity)||quantity<1||quantity>Math.floor(MAX_BOSS_CHALLENGES/BOSS_CHALLENGE_USES)||!validSave(s))return false;
+ const charges=quantity*BOSS_CHALLENGE_USES,cost=quantity*BOSS_CHALLENGE_PRICE;
+ if(s.gold<cost||!canReceiveItem(s,'bossChallengeCharges',charges))return false;
+ s.consumables??={memoryFruit:0};s.consumables.bossChallengeCharges=(s.consumables.bossChallengeCharges??0)+charges;s.gold-=cost;return true;
+}
+export function useBossChallengeToken(s,quantity=1){
+ if(!Number.isSafeInteger(quantity)||quantity<1||quantity>MAX_BOSS_CHALLENGES||!validSave(s)||(s.activeEncounter&&!s.activeEncounter.done))return false;
+ const {charges,extraChallenges}=bossChallengeStatus(s);
+ if(charges<quantity||extraChallenges+quantity>MAX_BOSS_CHALLENGES)return false;
+ s.consumables.bossChallengeCharges-=quantity;s.extraBossChallenges=extraChallenges+quantity;return true;
+}
+export function canUseExtraBossChallenge(s,instanceId){
+ const instance=PLANNED_INSTANCES[instanceId];
+ return validBossChallengeState(s)&&(s.extraBossChallenges??0)>0&&instance?.enabled&&instance.kind==='boss'&&instance.siteId===s.siteId;
+}
 function validConsumables(s){return s.consumables===undefined||(s.consumables&&Number.isSafeInteger(s.consumables.memoryFruit)&&s.consumables.memoryFruit>=0&&s.consumables.memoryFruit<=1e9&&(s.consumables.reforgeToken===undefined||(Number.isSafeInteger(s.consumables.reforgeToken)&&s.consumables.reforgeToken>=0&&s.consumables.reforgeToken<=1e9))&&(s.consumables.refundCredits===undefined||(Number.isSafeInteger(s.consumables.refundCredits)&&s.consumables.refundCredits>=0&&s.consumables.refundCredits<=1e10)));}
 export function normalizeTalents(s){
  if(!validTalents(s)||!validConsumables(s))return false;
@@ -614,6 +636,8 @@ export function nextEncounterRoute(s,now=Date.now()){
  const ex=s.expedition,local=INSTANCES[ex?.fieldId]?.siteId===s.siteId;
  const policy={...ex,autoBoss:!!ex?.autoBoss&&local&&!s.story?.activeScene&&!s.stopAfterBattle&&!s.stopAfterDungeon};
  const cooldowns={...s.instanceCooldowns};
+ // Extra attempts bypass only success cooldown; defeat auto-retry protection remains.
+ if(policy.autoBoss)for(const id of Object.keys(cooldowns))if(canUseExtraBossChallenge(s,id))cooldowns[id]=0;
  for(const [id,at] of Object.entries(s.autoBossRetryAt??{}))cooldowns[id]=Math.max(cooldowns[id]??0,at);
  const route=validExpeditionState(s)?pickRoute(policy,cooldowns,now):null;
  return route&&nodeAccess(s,route.id,now).allowed&&nodeAccess(s,s.expedition.fieldId,now).allowed?route:null;
@@ -631,7 +655,7 @@ export function chooseAdventureNode(s,nodeId,{start=true,loop=false,fieldId=null
  const next=structuredClone(s);
  if(!normalizeExpedition(next)||next.running||(next.activeEncounter&&!next.activeEncounter.rewarded)||next.dungeonRun)return null;
  const time=Math.max(now,next.lastHealthClock??0),node=plannedNodes(next,time).find(x=>x.id===nodeId);
- if(!node?.enabled||node.warLocked||!node.unlocked||!node.budgetReady||(next.restUntil??0)>time||node.readyAt>time)return null;
+ if(!node?.enabled||node.warLocked||!node.unlocked||!node.budgetReady||(next.restUntil??0)>time||(node.readyAt>time&&!canUseExtraBossChallenge(next,node.id)))return null;
  const fallback=fieldId??node.fieldId,field=plannedNodes(next,time).find(x=>x.id===fallback);
  if(!field?.enabled||field.warLocked||field.kind!=='field'||!field.unlocked||!field.budgetReady)return null;
  const config={mode:node.kind==='dungeon'?'dungeon':'field',targetInstanceId:node.kind==='dungeon'?node.id:null,fieldId:node.kind==='field'?node.id:fallback,loop:node.kind==='dungeon'?loop:false,...Object.fromEntries(['autoDungeon','autoBoss'].filter(k=>next.expedition[k]!==undefined).map(k=>[k,next.expedition[k]]))};
@@ -778,12 +802,16 @@ export function startStoryFieldEncounter(s,sceneId,now=Date.now()){
  if(!validSave(next))return null;Object.assign(s,next);return s.activeEncounter;
 }
 export function startInstanceEncounter(s,instanceId,now=Date.now()){
- if(!validRareRewardProgress(s,validEquipment)||rareRewardStorageBlocked(s))return null;
+ if(!validBossChallengeState(s)||!validRareRewardProgress(s,validEquipment)||rareRewardStorageBlocked(s))return null;
  const instance=PLANNED_INSTANCES[instanceId];if(s.version!==SCHEMA_VERSION||!instance?.enabled||!canStartEncounter(s,now,instanceId)||!normalizeExpedition(s))return null;
  if(s.activeEncounter&&!s.activeEncounter.rewarded)return s.activeEncounter.instanceId===instanceId?s.activeEncounter:null;
  if(s.dungeonRun&&s.dungeonRun.instanceId!==instanceId)return null;
- if(instance.kind!=='field'&&!s.dungeonRun&&s.lastHealthClock<(s.instanceCooldowns[instanceId]??0))return null;
- return startDwarfEncounter(s,instance,now);
+ const cooling=instance.kind!=='field'&&!s.dungeonRun&&s.lastHealthClock<(s.instanceCooldowns[instanceId]??0);
+ if(cooling&&!canUseExtraBossChallenge(s,instanceId))return null;
+ const encounter=startDwarfEncounter(s,instance,now);
+ // Deduct exactly once, only after a genuine new encounter exists. Resumes return above.
+ if(encounter&&cooling)s.extraBossChallenges--;
+ return encounter;
 }
 
 function startDwarfEncounter(s,instance,now,recordLocalExploration=true){
@@ -1300,7 +1328,7 @@ export function codexState(s,id){
 }
 export function validSave(s){
  try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;
- if(!validDungeonLootReceipts(s)||!validPersonalArcRewardState(s)||!validTaskRewardState(s)||!validDiplomacy(s)||!validWorldEventState(s)||!validStoryWarState(s)||!validNpcEventState(s)||!validReturnRingState(s)||!validInfinityGauntletState(s)||!validStoryEventState(s)||!validStoryScenarioState(s))return false;
+ if(!validBossChallengeState(s)||!validDungeonLootReceipts(s)||!validPersonalArcRewardState(s)||!validTaskRewardState(s)||!validDiplomacy(s)||!validWorldEventState(s)||!validStoryWarState(s)||!validNpcEventState(s)||!validReturnRingState(s)||!validInfinityGauntletState(s)||!validStoryEventState(s)||!validStoryScenarioState(s))return false;
  if(!validSkillTree(s,getSkillTreeDefinition(s))||s.skillTree?.mode!=='active')return false;
  if(s.activeEncounter?.skillResolver!==undefined&&(s.activeEncounter.skillResolver!=='tree-v1'||s.skillTree?.mode!=='active'||s.activeEncounter.multiVersion!==1))return false;
  if(s.supportGrantEligible!==undefined||s.testGrants!==undefined||s.bonusTalentPoints!==undefined||s.skillRulesVersion!==undefined||s.skillAccess!==undefined)return false;
