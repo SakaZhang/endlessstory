@@ -68,6 +68,7 @@ import {selectEquipmentTemplate,applyEquipmentTemplate,validEquipmentTemplateMet
 export {EQUIPMENT_TEMPLATES,EQUIPMENT_TEMPLATE_BY_ID,RACE_WEAPON_POOLS,equipmentTemplateDisplay} from './equipment-templates.js';
 import {validEnhancementMetadata,enhancedItemBase,attemptEnhancement} from './equipment-enhancement.js';
 export {quoteEnhancement,FORMAL_ENHANCEMENT_CONFIG,DEVELOPMENT_ENHANCEMENT_CONFIG,enhancementLevel,enhancedItemBase,quoteDeveloperEnhancement,prepareDeveloperEnhancement,attemptDeveloperEnhancement} from './equipment-enhancement.js';
+export {balancedItemBase} from './equipment-base-balance.js';
 import {pauseMulti,makeMultiUnit,validMultiProfile,validMultiEncounter,validFixtureAction,syncMultiTarget,selectMultiTarget,multiTargetRows,stepMulti,withMultiRng,multiItemId} from './multi-combat.js';
 import {validMonsterLedger,recordEncounteredMonsters} from './monster-codex-schema.js';
 import {RECOVERY_RECIPE_CONFIG,recoveryInputPlan,rollRecoverySupply} from './recovery-recipe-schema.js';
@@ -156,9 +157,10 @@ export function buyBossChallengeToken(s,quantity=1){
  s.consumables??={memoryFruit:0};s.consumables.bossChallengeCharges=(s.consumables.bossChallengeCharges??0)+charges;s.gold-=cost;return true;
 }
 export function useBossChallengeToken(s,quantity=1){
- if(!Number.isSafeInteger(quantity)||quantity<1||quantity>MAX_BOSS_CHALLENGES||!validSave(s)||(s.activeEncounter&&!s.activeEncounter.done))return false;
+ if(!Number.isSafeInteger(quantity)||quantity<1||quantity>MAX_BOSS_CHALLENGES||!validSave(s))return false;
  const {charges,extraChallenges}=bossChallengeStatus(s);
  if(charges<quantity||extraChallenges+quantity>MAX_BOSS_CHALLENGES)return false;
+ // Banking an attempt is safe during combat; it must not touch encounter state or clocks.
  s.consumables.bossChallengeCharges-=quantity;s.extraBossChallenges=extraChallenges+quantity;return true;
 }
 export function canUseExtraBossChallenge(s,instanceId){
@@ -711,7 +713,8 @@ export function travelToArea(s,areaId,now=Date.now()){
  return {ok:true,siteId:areaId,fieldId};
 }
 export function setExpeditionAutomation(s,kind,enabled){
- if(!['dungeon','boss'].includes(kind)||typeof enabled!=='boolean'||(enabled&&!nodeAccess(s,s.expedition?.fieldId).allowed)||!normalizeExpedition(s))return false;
+ // Selection changes future routing only; war/unlock/rest gates belong to actual entry.
+ if(!['dungeon','boss'].includes(kind)||typeof enabled!=='boolean'||!normalizeExpedition(s))return false;
  s.expedition[kind==='boss'?'autoBoss':'autoDungeon']=enabled;
  // The new checkbox owns ordinary-repeat behavior once explicitly changed.
  if(kind==='dungeon')s.expedition.loop=enabled;

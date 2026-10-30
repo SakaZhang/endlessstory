@@ -50,3 +50,10 @@ dialog:has(.heroSelection){max-width:920px;max-height:calc(100dvh - 32px);overfl
 
 /* Empty new journey guidance; equipment slots remain usable without owned gear. */
 .emptyEquipmentStart{margin:0 0 16px;padding:14px 16px;border:1px solid #525b5b;background:#202729;color:#d8ded8}.emptyEquipmentStart p{margin:8px 0;line-height:1.6}.emptyEquipmentStart button{margin-right:8px}
+
+/* Read-only war visibility: separate hosts keep region controls stable. */
+.warStatusPanel{margin:0 0 14px;padding:14px 18px;border:1px solid #8d7351;background:#202923;color:#eadcc3;box-shadow:inset 3px 0 #a98b55}
+.warStatusPanel h2{margin:0 0 8px;font-size:16px;line-height:1.6}.warStatusPanel ul{list-style:none;margin:0;padding:0}.warStatusPanel p{margin:6px 0;font-size:13px;line-height:1.65}.warStatusPanel .warPeace{color:#bdd7b5}.warStatusRow+ .warStatusRow{border-top:1px solid #66583d;margin-top:10px;padding-top:10px}.warStatusRow>div{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}.warStatusRow strong{font-size:14px}.warDuration{font-size:12px;color:#f4ce83;font-variant-numeric:tabular-nums}.warStatusHint{color:#b9b9a6}.warStatusBlocked{border-color:#c7755e;box-shadow:inset 3px 0 #df8264}.warStatusBlocked .warRegionNotice{color:#ffd0b8}.warStateBadge,.warNodeBadge{display:inline-block;margin-left:7px;padding:2px 7px;border:1px solid #bb7458;background:#3b2923;color:#ffd0ae;font-size:11px;line-height:1.5;vertical-align:middle}.territoryPin[data-war-state="active"]{border-color:#e7b15d!important;box-shadow:0 0 0 2px #382c1b!important}.territoryPin[data-war-state="blocked"]{border-color:#f0886e!important;box-shadow:0 0 0 2px #542e27!important}.territoryPin[data-war-state="active"] small{color:#ffdc91!important}.territoryPin[data-war-state="blocked"] small{color:#ffb49a!important}
+@media(max-width:600px){.warStatusPanel{padding:11px 12px}.warStatusRow>div{display:block}.warDuration{display:block;margin-top:4px}}
+
+.worldMapStage .territoryPin[data-war-state] small{white-space:pre-line;line-height:1.25;letter-spacing:0}

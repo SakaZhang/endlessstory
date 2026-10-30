@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 import {createRequire} from 'node:module';
+import {execFileSync} from 'node:child_process';
 import * as goblin from './dist/races/goblin/equipment.js';
 import * as ashen from './dist/races/ashen/equipment.js';
 import {ASHEN_STORY_CORE_ID,ASHEN_STORY_CORE_QUESTS,grantAshenStoryCore} from './dist/races/ashen/story-core.js';
@@ -19,10 +20,16 @@ const baseline=JSON.parse(fs.readFileSync(new URL('./fixtures/goblin-ashen-equip
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 const slots=['weapon','helm','armor','gloves','boots','ring','amulet'];
 assert(validateEquipmentTemplates());
-// This equipment-only milestone predates the authorized C05 story grant.
-// Reconcile exactly that behavioral seam; every other preserved-file hash and
-// all legacy equipment/legendary identity assertions below remain unchanged.
-for(const [path,digest] of Object.entries(baseline.preservedFiles))if(path!=='dist/races/ashen/story-core.js')assert.equal(hash(fs.readFileSync(path)),digest,`untouched ${path}`);
+// This equipment-only milestone predates the authorized C05 story grant and
+// v0.81 Goblin poison 3%/2s + cooldown update. HEAD 812e4e35 and the v0.81.2
+// working skill module are byte-identical; pin that approved prior skill file,
+// not a broad refreshed fixture. All other preserved hashes remain unchanged.
+const approvedV081GoblinSkills='7ff45f8fa5771712945340c76166d057f07bafbffa352ca157441d54ec6a07c5';
+assert.equal(baseline.preservedFiles['dist/races/goblin/skills.js'],'86769b18f8950b993b60eff03d1a2a402af665ff3c8d717ffe667f76117be9b2','original equipment milestone skill pin retained');
+for(const [path,digest] of Object.entries(baseline.preservedFiles))if(path!=='dist/races/ashen/story-core.js')assert.equal(hash(fs.readFileSync(path)),path==='dist/races/goblin/skills.js'?approvedV081GoblinSkills:digest,`preserved ${path}`);
+// Reuse the canonical production poison, cadence and offline/JSON contract in
+// its own process: the historical catalog fixture must not weaken those rules.
+execFileSync(process.execPath,[new URL('./goblin-poison-v081-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
 assert(Object.hasOwn(baseline.preservedFiles,'dist/races/ashen/story-core.js'));
 assert.equal(ASHEN_STORY_CORE_ID,'ashen-primal-core');assert(Object.isFrozen(ASHEN_STORY_CORE_QUESTS));assert.deepEqual(ASHEN_STORY_CORE_QUESTS,['C05.EA02.ashen']);
 for(const race of ['human','dwarf','elf','goblin','ashen']){const s=fresh(race),before=JSON.stringify(s);assert.equal(grantAshenStoryCore(s,{questId:'C05.EA02.ashen'}).ok,false);assert.equal(grantAshenStoryCore(s,{questId:'invented'}).ok,false);assert.equal(JSON.stringify(s),before);}

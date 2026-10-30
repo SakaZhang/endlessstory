@@ -324,3 +324,15 @@ for(const file of ['otherworld-progression-tests.mjs','otherworld-core-tests.mjs
 
 // v0.81 authorized reward, poison, workshop and recovery preparation contracts.
 for(const file of ['wisdom-fruit-v081-tests.mjs','wisdom-fruit-ui-tests.cjs','goblin-poison-v081-tests.mjs','reforge-material-tiers-v081-tests.mjs','rest-preparation-v081-tests.mjs','rest-quick-loadouts-v081-tests.mjs','rest-skill-tree-v081-tests.mjs','default-healing-recipe-v081-tests.mjs','default-healing-import-app-ui-tests.cjs','loot-history-tests.mjs','loot-history-app-ui-tests.cjs','redeem-codes-tests.mjs','redeem-codes-app-ui-tests.cjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.81.2 canonical Goblin effective HP/armor base tuning: raw provenance and
+// other origins stay unchanged; enhancement, equipped totals and UI agree.
+runAffixSourceTest(process.execPath,[new URL('./goblin-equipment-v0812-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.81.2 read-only world/region war notices: participant-specific restrictions,
+// accurate random/story timing and scoped refresh without remounting controls.
+for(const file of ['war-status-ui-tests.mjs','war-status-app-ui-tests.cjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.81.2 automation settings remain editable independently of entry gates;
+// real checkbox gestures survive timed refresh, cancellation and save retry.
+runAffixSourceTest(process.execPath,[new URL('./expedition-automation-app-ui-tests.cjs',import.meta.url).pathname],{stdio:'inherit'});

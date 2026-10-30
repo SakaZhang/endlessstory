@@ -26,8 +26,22 @@ const id='dwarf.a03.boss';
 // Synthetic stack-count fixture tests the admission boundary; production currently has only 60 potion stacks.
 {const s=game();s.potionStacks=Object.fromEntries(Array.from({length:100},(_,i)=>['synthetic'+i,1]));assert.equal(E.bagCounts(s).items,100);assert.equal(E.canReceiveItem(s,'bossChallengeCharges',3),false);
  s.consumables.bossChallengeCharges=1;assert(E.canReceiveItem(s,'bossChallengeCharges',3));}
-// Activation is clock/encounter independent, never silently starts combat or clears cooldown.
-{const s=game();bank(s);s.instanceCooldowns[id]=T+1800000;const e=E.startInstanceEncounter(s,'dwarf.a03.field',T),before=structuredClone(e),cd=structuredClone(s.instanceCooldowns),clock=s.lastHealthClock;assert(E.buyBossChallengeToken(s));reject(s,()=>E.useBossChallengeToken(s,2));assert.deepEqual(e,before);assert.deepEqual(s.instanceCooldowns,cd);assert.equal(s.lastHealthClock,clock);assert.equal(s.extraBossChallenges,3);assert.equal(E.startInstanceEncounter(s,id,T),null);assert.equal(s.extraBossChallenges,3);
+// Purchase/activation are balance-only actions during real running and paused fights.
+// Preserve the entire save except the explicit balances: no travel, resume, HP/CD/timer changes.
+for(const instanceId of ['dwarf.a03.field','dwarf.a03.dungeon',id])for(const paused of [false,true]){
+ const s=game();bank(s);s.instanceCooldowns[id]=T+1800000;s.autoBossRetryAt={[id]:T+900000};
+ const e=E.startInstanceEncounter(s,instanceId,T);assert(e&&!e.done);assert.equal(s.running,true);
+ if(paused)assert(E.setMultiPaused(s,true,T));
+ assert(E.validSave(s));const before=structuredClone(s),expected=structuredClone(s);
+ assert(E.buyBossChallengeToken(s));expected.gold-=1000;expected.consumables.bossChallengeCharges+=3;
+ assert.deepEqual(s,expected,'purchase only adds charges and deducts gold during a fight');
+ assert(E.useBossChallengeToken(s,2));expected.consumables.bossChallengeCharges-=2;expected.extraBossChallenges+=2;
+ assert.deepEqual(s,expected,'activation only transfers charges into global attempts');
+ assert.equal(s.activeEncounter,e,'activation does not replace the live encounter');assert(E.validSave(s));
+ reject(s,()=>E.useBossChallengeToken(s,2));reject(s,()=>E.useBossChallengeToken(s,0));
+ assert.equal(E.startInstanceEncounter(s,instanceId,T)?.id,e.id);assert.equal(s.extraBossChallenges,before.extraBossChallenges+2,'resuming the existing fight does not spend the banked attempt');
+ s.extraBossChallenges=E.MAX_BOSS_CHALLENGES;reject(s,()=>E.useBossChallengeToken(s));
+ s.extraBossChallenges=0;s.gold=-1;reject(s,()=>E.useBossChallengeToken(s));
 }
 // Ready challenge is free; cooldown challenge charges once and success still starts 30m CD.
 {let s=game();bank(s);let e=E.startInstanceEncounter(s,id,T);assert(e);assert.equal(s.extraBossChallenges,3);win(s,e);assert.equal(s.instanceCooldowns[id],T+1800000);
@@ -59,6 +73,6 @@ const id='dwarf.a03.boss';
 {const s=E.fresh();s.gold=1000;assert(E.buyBossChallengeToken(s));assert(E.useBossChallengeToken(s));assert.equal(s.extraBossChallenges,1);assert.equal(s.running,false);assert(!s.activeEncounter);assert(E.validSave(s));}
 // Failed persistence via clone-save-adopt leaves live gold, charges and attempts untouched.
 {let s=game();const before=JSON.stringify(s);const draft=structuredClone(s);assert(E.buyBossChallengeToken(draft));assert(E.useBossChallengeToken(draft));const persisted=false;if(persisted)s=draft;assert.equal(JSON.stringify(s),before);}
-console.log('PASS extra boss attempts: additive saves, strict bounds, fixed pricing, inventory, activation, free priority, cooldown debit once, reload/pause, locality/access, auto failure wait, offline and failed persistence');
+console.log('PASS extra boss attempts: additive saves, strict bounds, fixed pricing, inventory, running/paused balance-only activation, free priority, cooldown debit once, reload/pause, locality/access, auto failure wait, offline and failed persistence');
 
 } finally {Date.now=originalNow;Math.random=originalRandom;}

@@ -30,5 +30,6 @@ const context={fmt:formatAttribute,LEGENDARY_CODEX:[],affixRollInfo:()=>({tier:0
 const affix=app.match(/function affixHtml\(it\)\{[^\n]+/)[0];
 const renderAffix=vm.runInNewContext('('+affix+')',context),item={affixes:[{stat:'atk',value:10.5}],divine:true},before=structuredClone(item);
 assert.match(renderAffix(item),/\+11/);assert.match(renderAffix(item),/实际 \+12/);assert.deepEqual(item,before);
-assert.match(app,/fmt\(it\[k\]\)/);assert.match(app,/fmt\(tot\[k\]\)/);
+// Detail formatting uses the canonical effective +0 base, not stored raw budget.
+assert.match(app,/base=MultiEngine\.balancedItemBase\(it\)/);assert.match(app,/fmt\(base\[k\]\)/);assert.match(app,/fmt\(tot\[k\]\)/);
 console.log('PASS integer attributes: screenshot rail, rounding boundaries, percentages/multiplier, all-race full stats, equipment affixes; state and derived combat precision unchanged');
