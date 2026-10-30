@@ -41,5 +41,5 @@ near(A.calculateLifesteal({rating:100,maxHp:1000,currentHp:100,hits:[{hitId:'shi
 assert.equal(A.SPECIAL_AFFIX_EXPANSION.reaper.chance,.02);
 assert.equal(A.SPECIAL_AFFIX_EXPANSION.multicast.chance,.15);
 const poison=R.getRacePack('goblin').planSkill({skillId:'goblin.venom_cut',castId:'poison-invariant',weaponType:'dagger',selectedTargetId:'target',targets:[{id:'target',alive:true,hp:100,maxHp:100,baseAtk:20}],hero:{hp:100,maxHp:1000},stats:{atk:100,hp:1000,armor:100}}).actions.flatMap(x=>x.effects??[]).find(x=>x.type==='poison');
-assert.equal(poison.fractionPerLayer,.02);assert.equal(poison.timing.maxLayers,5);assert.equal(poison.globalDamageMultiplierApplies,false);
+assert.equal(poison.fractionPerLayer,.03);assert.equal(poison.timing.maxLayers,5);assert.equal(poison.globalDamageMultiplierApplies,false);
 console.log(`PASS balance cross-system: ${genericCount} unarmed plans; five earliest-root real casts/valid saves; quota/stale/combat draft protection; five real heal/HOT baselines; poison/reaper/multicast/lifesteal invariants. Engine root ${root}`);

@@ -9,7 +9,7 @@ const state=()=>{const s=E.fresh();s.gold=100000;E.normalizeHealth(s,clock);E.no
 try{
  assert.equal(Object.keys(E.POTIONS).length,15);assert.equal(POTION_BUFF_KEYS.length,14);
  for(const [id,recipe]of Object.entries(E.RECIPES))for(let q=0;q<4;q++){
-  let s=state();assert(E.learnRecipe(s,id));let quote;
+  let s=state();if(id==='potion-healing'){assert(E.recipeKnown(s,id));assert(!E.learnRecipe(s,id));}else assert(E.learnRecipe(s,id));let quote;
   if(id==='potion-healing'){s.materialStacks['灰根草|'+q]=3;quote=E.quoteRecoveryRecipe(s,q,[{key:'灰根草|'+q,quantity:3}]);}
   else {const main=Object.keys(E.MATERIALS).find(k=>potionRecipeAllows(id,'main',k)),aux=Object.keys(E.MATERIALS).find(k=>potionRecipeAllows(id,'aux',k));assert(main&&aux,id);s.materialStacks[main+'|'+q]=6;s.materialStacks[aux+'|'+q]=6;quote=E.quotePotionRecipe(s,id,q,{mainKey:main+'|'+q,auxKey:aux+'|'+q,quantity:3});}
   assert(quote,id);const original=JSON.stringify(s);let saved=null,fail=true;const storage={setItem(k,v){assert.equal(k,SAVE_KEY);if(fail)throw Error('quota');saved=v;}};
@@ -26,9 +26,9 @@ try{
  const full=state();E.learnRecipe(full,'potion-luck');full.materialStacks['human.mat.12|3']=1998;full.potionStacks['luck|3']=1e9;const fq=E.quotePotionRecipe(full,'potion-luck',3,{mainKey:'human.mat.12|3',auxKey:'human.mat.12|3',quantity:999});assert(fq);assert.equal(E.quotePotionRecipe(full,'potion-luck',3,{mainKey:'human.mat.12|3',auxKey:'human.mat.12|3',quantity:1000}),null);const paid=E.craftPotionRecipe(full,fq);assert.equal(paid.quantity,999);assert.equal(full.pendingForgeClaim.potion.quantity,999);assert.equal(full.materialStacks['human.mat.12|3'],0);assert(E.validSave(full));const fullSnapshot=JSON.stringify(full);assert.equal(E.claimForgeResult(full),null);assert.equal(JSON.stringify(full),fullSnapshot);full.potionStacks['luck|3']-=999;assert.equal(E.claimForgeResult(full).quantity,999);assert.equal(full.potionStacks['luck|3'],1e9);assert.equal(E.claimForgeResult(full),null);
  // Real merchant stock -> purchase -> discover -> save. Expanded racial materials retain their canonical natural sources.
  const importIds=new Set(Object.keys(POTION_IMPORT_MATERIALS).map(id=>EXPANSION_PACKS.reduce((value,p)=>p.materialAliases?.[value]??value,id)));let shop=state(),seenBooks=new Set(),seenImports=new Set();
- for(let n=0;n<500&&(seenBooks.size<15||seenImports.size<10);n++){
+ for(let n=0;n<500&&(seenBooks.size<14||seenImports.size<10);n++){
   const m=E.ensureMerchant(shop,clock);assert.equal(m.offers.length,8);for(const o of [...m.offers]){if(o.type==='recipe'){assert(E.purchaseRecipe(shop,o.offerId,m.revision,clock));seenBooks.add(o.recipeId);}if(o.type==='material'&&importIds.has(o.material)){assert(E.buyMaterial(shop,E.materialKey(o.material,o.quality),1,m.revision,clock));seenImports.add(o.material);assert(shop.regionNavigation.discoveredMaterialIds.includes(o.material));assert(materialMonsterSources(shop,o.material).length>0,'expanded racial material retains its real source routes');}}assert(E.validSave(shop));shop=JSON.parse(JSON.stringify(shop));clock=m.nextRefreshAt;
  }
- assert.equal(seenBooks.size,15);assert.equal(seenImports.size,10);assert(!E.ensureMerchant(shop,clock).offers.some(o=>o.type==='recipe'));
+ assert.equal(seenBooks.size,14);assert(!seenBooks.has('potion-healing'));assert.equal(shop.learnedRecipes.length,15);assert.equal(seenImports.size,10);assert(!E.ensureMerchant(shop,clock).offers.some(o=>o.type==='recipe'));
  console.log('PASS potion15: 60 deterministic batch transactions/use/save, quota rollback, raw quantity and same-stack double cost, 14 buffs/CD/expiry, real merchant books/import discovery with canonical source routing');
 }finally{Math.random=realRandom;Date.now=realNow;}
