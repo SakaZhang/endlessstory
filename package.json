@@ -36,7 +36,8 @@
     "test:asset-performance": "node asset-loading-performance-tests.mjs && node release-entry-bundle-tests.mjs && node release-asset-policy-tests.mjs",
     "audit:asset-loading": "node tools/audit-asset-loading.mjs",
     "test:auto-idle": "node idle-action-controller-tests.mjs && node auto-idle-safety-tests.mjs && node idle-action-ui-tests.mjs && node idle-action-app-ui-tests.cjs",
-    "test:elf-visual": "node elf-monster-facing-regression-tests.mjs && node elf-background-viewport-tests.mjs"
+    "test:elf-visual": "node elf-monster-facing-regression-tests.mjs && node elf-background-viewport-tests.mjs",
+    "test:v082": "node special-affix-growth-tests.mjs && node special-affix-overhaul-tests.mjs && node special-affix-reserved-reward-tests.mjs && node lucky-dice-tests.mjs && node casino-tests.mjs && node casino-app-ui-tests.cjs && node v082-independent-integration-tests.mjs && node v082-casino-independent-tests.mjs && node goblin-equipment-v0812-tests.mjs && node racial-ui-copy-tests.mjs && node goblin-racial-growth-v082-tests.mjs && node enhancement-scaling-v082-tests.mjs && node enhancement-scaling-v082-app-tests.cjs"
   },
   "devDependencies": {
     "esbuild": "0.28.2"

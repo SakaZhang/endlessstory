@@ -325,8 +325,8 @@ for(const file of ['otherworld-progression-tests.mjs','otherworld-core-tests.mjs
 // v0.81 authorized reward, poison, workshop and recovery preparation contracts.
 for(const file of ['wisdom-fruit-v081-tests.mjs','wisdom-fruit-ui-tests.cjs','goblin-poison-v081-tests.mjs','reforge-material-tiers-v081-tests.mjs','rest-preparation-v081-tests.mjs','rest-quick-loadouts-v081-tests.mjs','rest-skill-tree-v081-tests.mjs','default-healing-recipe-v081-tests.mjs','default-healing-import-app-ui-tests.cjs','loot-history-tests.mjs','loot-history-app-ui-tests.cjs','redeem-codes-tests.mjs','redeem-codes-app-ui-tests.cjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
 
-// v0.81.2 Goblin actor total HP/armor tuning includes level growth; raw gear
-// and other actors stay unchanged, while equipped totals and UI agree.
+// v0.82 Goblin HP/armor reductions affect level growth only; fixed actor bases,
+// equipment, affixes and talents remain whole, while actual totals and UI agree.
 runAffixSourceTest(process.execPath,[new URL('./goblin-equipment-v0812-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
 
 // v0.81.2 read-only world/region war notices: participant-specific restrictions,
@@ -336,3 +336,7 @@ for(const file of ['war-status-ui-tests.mjs','war-status-app-ui-tests.cjs'])runA
 // v0.81.2 automation settings remain editable independently of entry gates;
 // real checkbox gestures survive timed refresh, cancellation and save retry.
 runAffixSourceTest(process.execPath,[new URL('./expedition-automation-app-ui-tests.cjs',import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.82 independent special-affix, casino and exclusive-dice contracts.
+// Fresh realms prevent old fixture providers or mock DOM state leaking in.
+for(const file of ['special-affix-growth-tests.mjs','special-affix-overhaul-tests.mjs','special-affix-reserved-reward-tests.mjs','lucky-dice-tests.mjs','casino-tests.mjs','casino-app-ui-tests.cjs','v082-independent-integration-tests.mjs','v082-casino-independent-tests.mjs','racial-ui-copy-tests.mjs','goblin-racial-growth-v082-tests.mjs','enhancement-scaling-v082-tests.mjs','enhancement-scaling-v082-app-tests.cjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});

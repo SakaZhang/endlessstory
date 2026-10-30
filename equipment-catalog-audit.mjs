@@ -22,10 +22,11 @@ export function auditEquipmentCatalog(templates=EQUIPMENT_TEMPLATES,legends=Obje
   matrix[race]={slots,nativeWeaponFamilies:families,common:common.length,extraCores:cores.length,setParts:sets.length,setIds,legends:relics.length};
  }
  const reserved=legends.filter(t=>t.questOnly);check(reserved.length===3&&['ashen-primal-core','return-ring','infinity-gauntlet'].every(id=>reserved.some(t=>t.id===id)),'non-random-drop legends changed');
- const neutral=legends.filter(t=>t.originRace===null);check(neutral.length===2&&neutral.every(t=>t.questOnly)&&neutral.some(t=>t.id==='return-ring'&&t.slot==='ring')&&neutral.some(t=>t.id==='infinity-gauntlet'&&t.slot==='gloves'),'only the approved two hidden-recipe legends are race-neutral');
+ const casino=legends.filter(t=>t.casinoOnly);check(casino.length===1&&casino[0].id==='lucky-dice'&&casino[0].slot==='amulet'&&casino[0].ordinaryAffixCount===0,'only Lucky Dice is casino-exclusive');
+ const neutral=legends.filter(t=>t.originRace===null);check(neutral.length===3&&neutral.every(t=>t.questOnly||t.casinoOnly)&&neutral.some(t=>t.id==='return-ring'&&t.slot==='ring')&&neutral.some(t=>t.id==='infinity-gauntlet'&&t.slot==='gloves')&&neutral.some(t=>t.id==='lucky-dice'&&t.slot==='amulet'),'race-neutral legends are the two hidden recipes plus casino-exclusive Lucky Dice');
  const totals={common:templates.filter(t=>t.kind==='scatter'&&t.slot!=='core').length,ordinary:templates.filter(t=>t.kind==='scatter').length,sets:templates.filter(t=>t.kind==='set').length,legends:legends.length,definitions:templates.length+legends.length};
- check(totals.common===260&&totals.ordinary===263&&totals.sets===60&&totals.legends===14&&totals.definitions===337,'catalog totals differ from approved contract');
- return {passed:!errors.length,errors,matrix,totals,reservedNonDrop:reserved.map(t=>t.id)};
+ check(totals.common===260&&totals.ordinary===263&&totals.sets===60&&totals.legends===15&&totals.definitions===338,'catalog totals differ from approved contract');
+ return {passed:!errors.length,errors,matrix,totals,reservedNonDrop:reserved.map(t=>t.id),casinoOnly:casino.map(t=>t.id)};
 }
 if(process.argv[1]&&new URL(import.meta.url).pathname===process.argv[1]){
  const report=auditEquipmentCatalog();console.table(Object.fromEntries(Object.entries(report.matrix).map(([race,row])=>[race,{...row.slots,common:row.common,extraCores:row.extraCores,setParts:row.setParts,legends:row.legends}])));console.log(JSON.stringify(report,null,2));if(!report.passed)process.exitCode=1;

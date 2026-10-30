@@ -3,10 +3,10 @@
 import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';import {pathToFileURL} from 'node:url';
 const root=process.env.BALANCE_ENGINE_ROOT?pathToFileURL(path.resolve(process.env.BALANCE_ENGINE_ROOT,'dist')+'/'):new URL('./dist/',import.meta.url),E=await import(new URL('engine.js',root)),C=await import(new URL('story-scenario-combat.js',root));
 const fixture=JSON.parse(fs.readFileSync(new URL('./fixtures/v070-active-finale.json',import.meta.url)));assert.equal(fixture.sourceCommit,'9f56c77996038f929d390a35ac48167250f1475d');
-// User-directed v0.81.2 total Goblin HP-20%/armor-30% intentionally changes
-// these two exact v0.70 snapshots' survival, not their frozen actors or rewards.
-// No compatibility buff: retain the safe retry contract and every other outcome.
-const authorizedRetryCases=new Set(['story.c10-x07-goblin/start','story.c10-x07-goblin/after-one-step']);
+// Latest v0.82 policy reduces Goblin level growth only, not owned gear/bonuses.
+// The frozen Goblin start still safely retries; its after-one-step snapshot now
+// completes. Pin those exact outcomes without regenerating actors or owned gear.
+const authorizedRetryCases=new Set(['story.c10-x07-goblin/start']);
 assert.equal(fixture.cases.length,30);let retries=0,completed=0;
 const budget=e=>e.enemies.map(u=>({id:u.id,max:u.max,atk:u.atk,armor:u.armor,elementalPower:u.elementalPower,parameterSetId:u.parameterSetId,basicIntervalMs:u.basicIntervalMs,storyActorRace:u.storyActorRace,storyActorId:u.storyActorId}));
 const economy=s=>({gold:s.gold,xp:s.xp,kills:s.kills,inventory:s.inventory,materials:s.materialStacks,consumables:s.consumables,areaProgress:s.areaProgress});
@@ -17,7 +17,7 @@ for(const sample of fixture.cases){let s=structuredClone(sample.state),e=s.activ
  let turns=0;while(!e.done&&turns++<3000){E.step(s,e,s.nextActionAt);assert.deepEqual(budget(e),params,'new table must not replace old actor snapshot');assert(E.validSave(s));}
  const expectsRetry=authorizedRetryCases.has(sample.id+'/'+sample.moment);
  if(expectsRetry){assert.equal(s.race,'goblin');assert.equal(C.STORY_SCENARIOS[sample.id].result,'c10-x07-cleared','original scenario result remains fixed');assert.equal(s.story.activeScene.encounterId,null,'safe retry clears only the active encounter link');assert.deepEqual(s.story.flags,sample.state.story.flags,'retry grants no progression flags');assert.deepEqual(s.story.completedScenes,sample.state.story.completedScenes);assert.deepEqual(s.story.encounters,sample.state.story.encounters);assert.equal(s.atCamp,sample.state.activeEncounter.storyScenario.returnAtCamp);assert.equal(s.restUntil,0);assert.equal(s.restResume,false);retries++;}else completed++;
- assert(e.done);assert.equal(e.storyScenario.result,expectsRetry?'retry':C.STORY_SCENARIOS[sample.id].result);assert.equal(s.heroHp,entryHp);assert.equal(s.activeEncounter,null);assert.equal(s.running,false);assert.deepEqual(economy(s),ledger);assert.equal(E.reward(s,e),null,'no story reward fabrication');
+ assert(e.done);assert.equal(e.storyScenario.result,expectsRetry?'retry':C.STORY_SCENARIOS[sample.id].result,sample.id+'/'+sample.moment);assert.equal(s.heroHp,entryHp);assert.equal(s.activeEncounter,null);assert.equal(s.running,false);assert.deepEqual(economy(s),ledger);assert.equal(E.reward(s,e),null,'no story reward fabrication');
 }
-assert.equal(retries,2);assert.equal(completed,28,'all other frozen cases retain their original authored outcome');
-console.log(`PASS ${fixture.cases.length} frozen v0.70 active finale saves: load unchanged, pause/reload/resume, actor budgets preserved,28 original outcomes +2 exact Goblin safe retries after authorized total-stat nerf, safe-point HP/economy/no reward. Engine root ${root}`);
+assert.equal(retries,1);assert.equal(completed,29,'29 frozen cases retain their original authored outcome under growth-only tuning');
+console.log(`PASS ${fixture.cases.length} frozen v0.70 active finale saves: load unchanged, pause/reload/resume, actor budgets preserved,29 original outcomes +1 exact Goblin safe retry under authorized growth-only tuning, safe-point HP/economy/no reward. Engine root ${root}`);

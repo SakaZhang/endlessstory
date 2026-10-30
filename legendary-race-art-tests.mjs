@@ -64,4 +64,4 @@ if(process.argv.includes('--render')){
  }
 }
 fs.mkdirSync('qa/legendary-race-art',{recursive:true});fs.writeFileSync('qa/legendary-race-art/coverage.json',JSON.stringify({dedicatedCombinations:registered.length,frames:registered.length*8,sharedCombinations:registered.filter(x=>m.sprites[x.key].legendaryWeapon).length,registered},null,2)+'\n');
-console.log(`PASS: 14 legendary gold identities; ${registered.length} dedicated race/legend combinations (${registered.filter(x=>m.sprites[x.key].legendaryWeapon).length} shared-canonical), 8 frames each; equip/unequip, camp/field, scoped loading switch, facing and portrait render.`);
+console.log(`PASS: ${Object.keys(LEGENDARY_EQUIPMENT_DEFINITIONS).length} legendary gold identities; ${registered.length} dedicated race/legend combinations (${registered.filter(x=>m.sprites[x.key].legendaryWeapon).length} shared-canonical), 8 frames each; equip/unequip, camp/field, scoped loading switch, facing and portrait render.`);

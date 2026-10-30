@@ -1,0 +1,7 @@
+import {frameEquipmentSVG} from './equipment-presentation.js';
+// Repo-native 32px vector artwork: a gold necklace, ivory die, ruby three-pip
+// face and teal shadow. No generic amulet fallback or borrowed item identity.
+export function luckyDiceIcon(item,{size=64}={}){
+ const px=Number.isFinite(size)?Math.max(16,Math.min(512,Math.round(size))):64;
+ return frameEquipmentSVG(`<svg xmlns="http://www.w3.org/2000/svg" width="${px}" height="${px}" viewBox="0 0 32 32" shape-rendering="crispEdges" role="img" aria-label="幸运骰子" data-equipment-art="lucky-dice" data-equipment-visual="lucky-dice"><path d="M5 3H8V6H10V9H12V12H14V15H18V12H20V9H22V6H24V3H27V7H25V10H23V13H21V16H19V18H13V16H11V13H9V10H7V7H5Z" fill="#17232b"/><path d="M6 3H8V6H10V9H12V12H14V14H18V12H20V9H22V6H24V3H26V6H24V9H22V12H20V15H18V16H14V15H12V12H10V9H8V6H6Z" fill="#d5a44c"/><path d="M6 3H7V5H6ZM9 6H10V8H9ZM12 9H13V11H12ZM24 3H25V5H24ZM21 6H22V8H21ZM18 9H19V11H18Z" fill="#fff0b5"/><path d="M14 12H18V18H14Z" fill="#17232b"/><path d="M15 13H17V17H15Z" fill="#f3cd79"/><path d="M8 18L19 14L27 19V27L16 31L8 26Z" fill="#17232b"/><path d="M10 19L19 16L24 19L15 22Z" fill="#fff0c6"/><path d="M10 20L15 23V28L10 25Z" fill="#ddc99b"/><path d="M16 23L25 20V26L16 29Z" fill="#69a392"/><path d="M17 23L24 21V25L17 27Z" fill="#8ebfa7"/><path d="M11 20L14 22V26L11 24Z" fill="#f4e6bf"/><path d="M12 21H14V23H12ZM18 23H20V25H18ZM21 24H23V26H21ZM21 21H23V23H21Z" fill="#682f37"/><path d="M17 18H19V20H17Z" fill="#b84c4a"/><path d="M9 18H11V19H9ZM24 18H25V20H24ZM16 28H18V29H16Z" fill="#f4ce77"/></svg>`,item,32);
+}

@@ -1,13 +1,14 @@
 import {ordinaryAffixKeys} from './affix-slot-pools.js';
 import {INFINITY_GAUNTLET_DEFINITION} from './infinity-gauntlet-content.js';
 import {RETURN_RING_DEFINITION} from './return-ring-content.js';
+import {LUCKY_DICE_DEFINITION} from './lucky-dice.js';
 import {EXPANSION_PACKS} from './race-packs.js';
 // Registered legendary factory. Reward-source eligibility remains in the engine.
 // Fixed identity and budget are separate from transferable ordinary affixes.
 import {CONFIG,deriveEquipmentBase,affixRange} from './equipment-budget.js';
 import {validAffixSource,makeAffixSourceRange} from './affix-range.js';
 export const LEGENDARY_EQUIPMENT_DEFINITIONS=Object.freeze({
- 'infinity-gauntlet':INFINITY_GAUNTLET_DEFINITION,'return-ring':RETURN_RING_DEFINITION,...Object.fromEntries(EXPANSION_PACKS.flatMap(p=>p.legendaries.map(d=>[d.id,d]))),
+ 'infinity-gauntlet':INFINITY_GAUNTLET_DEFINITION,'return-ring':RETURN_RING_DEFINITION,'lucky-dice':LUCKY_DICE_DEFINITION,...Object.fromEntries(EXPANSION_PACKS.flatMap(p=>p.legendaries.map(d=>[d.id,d]))),
  'first-forge-oathhammer':Object.freeze({id:'first-forge-oathhammer',ready:true,name:'王统·初炉誓锤',slot:'weapon',baseVariant:'hammer_balanced',weaponType:'hammer',originRace:'dwarf',exclusiveId:'ancestor-echo'}),
  'everburning-reactor':Object.freeze({id:'everburning-reactor',ready:true,name:'不熄之炉',slot:'amulet',baseVariant:'amulet_survival',originRace:'dwarf',exclusiveId:'residual-heat-cycle'})
 });
@@ -19,7 +20,7 @@ export function createLegendaryEquipment({id,legendaryId,level,baseLevel=level,l
   const count=definition.ordinaryAffixCount??4;const keys=ordinaryAffixKeys(definition.slot).filter(key=>Object.hasOwn(affixDefs??{},key));if(keys.length<count||(rollValue!==null&&typeof rollValue!=='function'))return null;
   // Validate the full injected pool before drawing; no partial RNG consumption on bad definitions.
   for(const key of keys)affixRange(affixDefs[key],4);
-  const raw=deriveEquipmentBase({slot:definition.slot,baseVariant:definition.baseVariant,level:Math.min(level,100),quality:4,enhancement:0});
+  const raw=definition.fixedBase??deriveEquipmentBase({slot:definition.slot,baseVariant:definition.baseVariant,level:Math.min(level,100),quality:4,enhancement:0});
   const affixes=[];const pool=[...keys];
   for(let i=0;i<count;i++){
    const stat=pool.splice(Math.floor(draw(random)*pool.length),1)[0],sourceRange=makeAffixSourceRange(affixDefs[stat],4,{stat,sourceLevel:level}),range=sourceRange;
@@ -45,7 +46,7 @@ export function validLegendaryEquipmentMetadata(it,affixDefs=null){
   if(!Number.isSafeInteger(it.level)||it.level<1||it.level>1e12||['baseBudgetModel','budgetLevel','budgetSourceLevel','budgetCompatibility'].some(k=>it[k]!==undefined))return false;
   const b=it.legendaryBudget;
   if(!b||Array.isArray(b)||Object.keys(b).length!==4||b.model!==CONFIG.id||b.quality!==4||b.budgetLevel!==Math.min(100,it.level)||b.sourceLevel!==it.level)return false;
-  const raw=deriveEquipmentBase({slot:d.slot,baseVariant:d.baseVariant,level:b.budgetLevel,quality:4,enhancement:0});
+  const raw=d.fixedBase??deriveEquipmentBase({slot:d.slot,baseVariant:d.baseVariant,level:b.budgetLevel,quality:4,enhancement:0});
   if(!['atk','armor','hp'].every(k=>it[k]===raw[k])||!Array.isArray(it.affixes)||it.affixes.length!==(d.ordinaryAffixCount??4)||new Set(it.affixes.map(a=>a?.stat)).size!==(d.ordinaryAffixCount??4))return false;
   return it.affixes.every(a=>typeof a?.stat==='string'&&Number.isSafeInteger(a.value)&&(affixDefs?validAffixSource(a,affixDefs):a.value>=0));
  }catch{return false;}

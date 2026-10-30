@@ -29,6 +29,6 @@ for(const race of ['human','dwarf','elf','goblin','ashen']){
 const context={fmt:formatAttribute,LEGENDARY_CODEX:[],affixRollInfo:()=>({tier:0,min:0,max:10,sourceLabel:'测试'}),RARITY:['普通'],esc:String,AFFIX_DEFS:{atk:{name:'攻击'}},SPECIALS:{}};
 const affix=app.match(/function affixHtml\(it\)\{[^\n]+/)[0];
 const renderAffix=vm.runInNewContext('('+affix+')',context),item={affixes:[{stat:'atk',value:10.5}],divine:true},before=structuredClone(item);
-assert.match(renderAffix(item),/\+11/);assert.match(renderAffix(item),/实际 \+12/);assert.deepEqual(item,before);
-assert.match(app,/fmt\(it\[k\]\)/);assert.match(app,/fmt\(tot\[k\]\)/);
+assert.match(renderAffix(item),/\+11/);assert.match(renderAffix(item),/神赐 \+1/);assert.doesNotMatch(renderAffix(item),/实际 \+/);assert.deepEqual(item,before);
+assert.match(app,/fmt\(it\[k\]\)/);assert.match(app,/fmt\(enhanced\[k\]\)-fmt\(it\[k\]\)/);assert.match(app,/fmt\(tot\[k\]\)-fmt\(enhanced\[k\]\)/);
 console.log('PASS integer attributes: screenshot rail, rounding boundaries, percentages/multiplier, all-race full stats, equipment affixes; state and derived combat precision unchanged');

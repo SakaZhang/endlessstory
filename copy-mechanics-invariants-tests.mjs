@@ -88,6 +88,18 @@ assert.deepEqual(JSON.parse(readFileSync(join(root,'content/material-recipe-expa
 const clone=v=>Array.isArray(v)?v.map(clone):v&&typeof v==='object'?Object.fromEntries(Object.entries(v).map(([k,x])=>[k,clone(x)])):v;
 function authorizedBaseline(original,file){
  const out=clone(original);
+ // Exact v082 addition, not a catalog-wide exemption: existing legend IDs,
+ // slots, flags, source pools and all non-copy properties stay pinned.
+ if(file==='engine.js')out.LEGENDARY_CODEX.push({id:'lucky-dice',name:'幸运骰子',slot:'amulet',icon:'amulet',implemented:true,affix:'幸运一掷'});
+ // Reservation v3 selects the current special pool. Versions1/2 remain legal;
+ // dedicated frozen-baseline tests pin their complete generated identities.
+ if(file==='personal-arc-rewards.js'){
+  const validator=out.validPersonalArcRewardState.toString(),claim=out.claimPersonalArcReward.toString();
+  assert.equal(validator.split('![1,2].includes(p.version)').length,2);
+  assert.equal(claim.split('{version:2,slot,baseLevel:next.level').length,2);
+  out.validPersonalArcRewardState='<function:'+validator.replace('![1,2].includes(p.version)','![1,2,3].includes(p.version)')+'>';
+  out.claimPersonalArcReward='<function:'+claim.replace('{version:2,slot,baseLevel:next.level','{version:3,slot,baseLevel:next.level')+'>';
+ }
  // Approved v081 fruit rename/+3 talent use: exact catalog leaves only.
  // The retained inventory key, icon, price and every other consumable stay pinned.
  if(file==='engine.js'){
@@ -256,6 +268,6 @@ try{
  ]){const corrupt=clone(after.BUILD);mutate(corrupt);assert.throws(()=>assert.deepEqual(project(corrupt,'engine.js','BUILD'),expectedBuild),assert.AssertionError,label);}
  // Mutation sentinels prove representative mechanics strings cannot be hidden.
  for(const [f,p]of [['racial-npc-event-content.js','RACIAL_NPC_EVENTS/0/conditions/accessPolicy'],['racial-npc-event-content.js','RACIAL_NPC_EVENTS/0/choices/0/effects/0/flag'],['npc-objective-content.js','NPC_OBJECTIVE_CONTENT/event/taskRewards/0/key'],['races/elf/skills.js','skills/elf.skill/weaponType'],['races/elf/equipment.js','legendaries/0/exclusiveId']])assert.notEqual(project('old',f,p),project('new',f,p),p);
- console.log(`PASS copy + bounded authorized revision invariants: ${compared} modules + engine catalogs vs ${BASELINE.slice(0,12)}; ${changedCopy.length} changed content modules. IDs, gates, objectives, rewards, effects, numeric budgets and legendary functions preserved except exact approved ring objectives / recipe additions / presentation-only set rows (2/4 thresholds pinned) / exact human A10 boss content and sources / exact v081 goblin poison deltas / exact fruit name and description.`);
+ console.log(`PASS copy + bounded authorized revision invariants: ${compared} modules + engine catalogs vs ${BASELINE.slice(0,12)}; ${changedCopy.length} changed content modules. IDs, gates, objectives, rewards, effects, numeric budgets and legendary functions preserved except exact approved ring objectives / recipe additions / presentation-only set rows (2/4 thresholds pinned) / exact human A10 boss content and sources / exact v081 goblin poison deltas / exact fruit name and description / exact v082 Lucky Dice codex identity / reserved-reward v3 protocol.`);
  console.log('Boundary: does not prove new prose accurately describes mechanics, DOM behavior, non-exported function closures, or visual correctness; use gameplay/UI tests and review alongside this check.');
 }finally{rmSync(temp,{recursive:true,force:true});}

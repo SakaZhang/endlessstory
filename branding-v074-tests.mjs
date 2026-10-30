@@ -18,10 +18,10 @@ for(const source of [html,app,preview])assert(!/灰冠诸境|黑炉余烬/.test(
 assert.match(app,/downloadSave\(JSON\.stringify\(s\),'长路未尽-v'\+SCHEMA_VERSION\+'-'\+heroName\(s\)\+'\.json'\)/);
 // Export changes its human-readable filename only, never serialized content or import logic.
 const hooks=s=>[...s.matchAll(/\b(?:id|href|src)="[^"]*"/g)].map(m=>m[0]);
-const approvedStyles=['href="character-stats-ui.css"','href="return-ring-ui.css"','href="otherworld-ui.css"'];
+const approvedStyles=['href="character-stats-ui.css"','href="return-ring-ui.css"','href="otherworld-ui.css"','href="casino-ui.css"'];
 for(const style of approvedStyles)assert.equal(hooks(html).filter(h=>h===style).length,1,'one approved feature stylesheet '+style);
-assert.deepEqual(hooks(html).filter(h=>!approvedStyles.includes(h)),hooks(before('dist/index.html')),'all existing DOM IDs/URLs unchanged; only three approved feature stylesheets added');
-assert.match(html,/黑炉氏族 · 矮人/,'lore is not global-replaced');
+assert.deepEqual(hooks(html).filter(h=>!approvedStyles.includes(h)),hooks(before('dist/index.html')),'all existing DOM IDs/URLs unchanged; only four approved feature stylesheets added');
+assert.match(html,/<div class="heroIdentity"><strong>旅人<\/strong><small>冒险者<\/small><\/div>/,'initial identity is race-neutral until save loads');
 assert.equal(SAVE_KEY,'ashencrown-v6');assert.equal(SCHEMA_VERSION,6);
 const storage=read('dist/storage.js');
 for(const declaration of ["export const LEGACY_KEY='ashencrown-v1';","export const RETIRED_SAVE_KEYS=Object.freeze(['ashencrown-v1','ashencrown-v2','ashencrown-v3','ashencrown-v4','ashencrown-v5']);"])assert(storage.includes(declaration),'persisted key contracts unchanged');

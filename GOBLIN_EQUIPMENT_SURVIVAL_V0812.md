@@ -1,3 +1,5 @@
+> Historical v0.81.2 release evidence only. The latest v0.82 instruction supersedes the total multipliers with racial level-growth-only reductions. See `GOBLIN_RACIAL_GROWTH_V082.md`. Original numbers below and `qa/goblin-total-v0812/` are preserved as history.
+
 # Goblin TOTAL survivability — final v0.81.2 policy
 
 ## Latest user instruction supersedes the earlier equipment-only candidate

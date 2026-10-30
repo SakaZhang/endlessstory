@@ -25,9 +25,9 @@ for(const {race,id,p} of goldens){
  // Fail the materialization write, then reload the durable new reservation.
  const s=clone(states.get(race)),st=store(s);st.failAt=2;
  const reserved=E.claimPersonalArcReward(st,s,id,p.slot,{now:now(s)});assert.equal(reserved.reason,'storage');
- const reload=JSON.parse(st.raw);assert.equal(reload.personalArcRewards[id].version,2);assert.equal(reload.personalArcRewards[id].item,undefined);assert(E.validSave(reload));
+ const reload=JSON.parse(st.raw);assert.equal(reload.personalArcRewards[id].version,3);assert.equal(reload.personalArcRewards[id].item,undefined);assert(E.validSave(reload));
  st.failAt=0;const result=E.claimPersonalArcReward(st,reload,id,undefined,{now:now(reload)});assert(result.ok,result.reason);
  const it=result.game.inventory.find(i=>i.id===result.value.itemId);assert.equal(it.slot,p.slot);assert.equal(it.affixes.length,4);assert(it.affixes.every(a=>ordinaryAffixKeys(p.slot).includes(a.stat)));assert(E.validSave(result.game));
 }
 assert(oldOffSlot>0,'goldens must exercise off-slot legacy rolls');
-console.log(`PASS slot story compatibility: ${goldens.length} race/slot goldens, v1 reserved/materialized exact preservation, no fresh RNG/cost, v2 reservation reload slot generation.`);
+console.log(`PASS slot story compatibility: ${goldens.length} race/slot goldens, v1 reserved/materialized exact preservation, no fresh RNG/cost, v3 reservation reload slot generation.`);

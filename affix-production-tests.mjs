@@ -6,11 +6,11 @@ const clone=x=>structuredClone(x);
 function randomWith(values,fn,fallback=0){const old=Math.random;let n=0;Math.random=()=>values[n++]??fallback;try{return{result:fn(),calls:n};}finally{Math.random=old;}}
 function state(){const s=E.fresh();s.heroHp=E.stats(s).hp;s.restUntil=0;s.lastSeen=s.lastHealthClock=10000;s.gold=100000;s.skills=[null,null,null,null];s.conditions=['always','always','always','always'];return s;}
 function gear(s,special,slot='ring',socket){const it=E.item(slot,1,null,3);it.special=special?{id:special}:null;it.affixes=[currentAffix('atk',3),currentAffix('armor',2),currentAffix('hp',15),currentAffix('hit',5)];s.inventory.push(it);assert(E.equipItem(s,it.id,socket));return it;}
-assert.equal(E.ACTIVE_AFFIX_KEYS.length,20);assert.equal(E.ACTIVE_SPECIAL_KEYS.length,7);assert.equal(E.SPECIALS.shelter.name,'护佑');
+assert.equal(E.ACTIVE_AFFIX_KEYS.length,20);assert.equal(E.ACTIVE_SPECIAL_KEYS.length,9);assert.equal(E.SPECIALS.shelter.name,'护佑');
 // Force every acquisition branch, not merely registry presence.
 for(let index=0;index<E.ACTIVE_SPECIAL_KEYS.length;index++){
- const expected=E.ACTIVE_SPECIAL_KEYS[index],values=Array(10).fill(0);values.push((index+.1)/7);const {result:it}=randomWith(values,()=>E.item('weapon',1,null,3));assert.equal(it.special.id,expected,'item generation '+expected);
- const s=state(),target=E.item('gloves',1,null,3);target.special=null;s.inventory.push(target);s.consumables.reforgeToken=1;const rolls=Array(12).fill(.4);rolls.push((index+.1)/7); /* Four type/value/favor gates; .4 does not request a second value roll. */const {result:p}=randomWith(rolls,()=>E.reforge(s,target.id,'all'));assert(p);assert.equal(s.pendingReforge.newSpecial.id,expected,'full reforge '+expected);assert(E.resolveReforge(s,true));assert.equal(target.special.id,expected);
+ const expected=E.ACTIVE_SPECIAL_KEYS[index],values=Array(10).fill(0);values.push((index+.1)/E.ACTIVE_SPECIAL_KEYS.length);const {result:it}=randomWith(values,()=>E.item('weapon',1,null,3));assert.equal(it.special.id,expected,'item generation '+expected);
+ const s=state(),target=E.item('gloves',1,null,3);target.special=null;s.inventory.push(target);s.consumables.reforgeToken=1;const rolls=Array(12).fill(.4);rolls.push((index+.1)/E.ACTIVE_SPECIAL_KEYS.length); /* Four type/value/favor gates; .4 does not request a second value roll. */const {result:p}=randomWith(rolls,()=>E.reforge(s,target.id,'all'));assert(p);assert.equal(s.pendingReforge.newSpecial.id,expected,'full reforge '+expected);assert(E.resolveReforge(s,true));assert.equal(target.special.id,expected);
 }
 for(const [stat,value] of [['luck',3],['lifesteal',8]]){
  const s=state(),target=E.item('gloves',1,null,1),donor=E.item('gloves',1,null,0);target.affixes=[currentAffix('atk',3),currentAffix('hp',15)];donor.affixes=[currentAffix(stat,value)];E.applyForgeFavor(donor);s.inventory.push(target,donor);assert(E.reforge(s,target.id,'replace',0,donor.id));assert.equal(s.pendingReforge.newAffixes[0].value,value);assert.equal(s.pendingReforge.newAffixes[0].stat,stat);assert(E.resolveReforge(s,true));assert.equal(target.affixes[0].value,value);
@@ -32,7 +32,7 @@ console.log('Actual M2 engine3min seeded online/offline parity with all4 combat 
 }
 {
  const template=state();template.level=100;template.talents.luck=10;
- const specials=['knowledge','scavenger','shelter','momentum','nirvana','multicast','reaper',null];
+ const specials=['knowledge','harvester','shelter','momentum','nirvana','multicast','reaper',null];
  E.SOCKETS.forEach((socket,i)=>{const it=gear(template,specials[i],E.SOCKET_TYPE[socket],socket);it.affixes=[currentAffix('lifesteal',8),currentAffix('luck',3),currentAffix('hp',15),currentAffix('hit',5)];E.applyForgeFavor(it);});
  template.level=100;template.skillTree.presets[0].unlocked=E.SKILL_TREE_DEFINITION.nodes.map(n=>n.id);template.skillTree.presets[0].active=['fracture_strike','ember_brand','iron_vigil','breaking_intercept'];template.skillTree.presets[0].conditions=['always','always','always','charge'];template.running=true;template.offlineLuck=E.effectiveLuck(template);template.heroHp=1;assert(Math.abs(template.offlineLuck-36.4)<1e-9);assert(Math.abs(E.stats(template).lifestealRating-70.4)<1e-9);assert(E.validSave(template));
  prepareM2TestRoute(template,10000);E.normalizePotions(template);const online=clone(template),batch=JSON.parse(JSON.stringify(template)),end=10000+4*3600000;const rng=()=>{let seed=77011;return()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};};const old=Math.random;let report,rounds=0,revives=0,time=10000;

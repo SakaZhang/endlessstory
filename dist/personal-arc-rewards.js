@@ -25,7 +25,7 @@ function generate(d,p){
  const rng={id:`arc-${d.id}-${p.seed}`,rngState:p.seed,rngDraws:0,itemSerial:0};
  return withMultiRng(rng,()=>{
   const min=Math.max(1,p.baseLevel-2),level=min+Math.floor(Math.random()*(p.baseLevel+2-min+1));
-  return item(p.slot,level,null,3,{baseLevel:p.baseLevel,levelSource:'generated',originRace:d.race,legacyAffixPool:p.version===1});
+  return item(p.slot,level,null,3,{baseLevel:p.baseLevel,levelSource:'generated',originRace:d.race,legacyAffixPool:p.version===1,legacySpecialPool:p.version<3});
  });
 }
 export function validPersonalArcRewardState(s){
@@ -37,7 +37,7 @@ export function validPersonalArcRewardState(s){
   const ids=new Set();
   for(const [id,p] of Object.entries(rows??{})){
    const d=Object.hasOwn(PERSONAL_ARC_REWARDS,id)?PERSONAL_ARC_REWARDS[id]:null;
-   if(!d||!eligible(s,d)||!p||typeof p!=='object'||Array.isArray(p)||Object.keys(p).some(k=>!['version','slot','baseLevel','seed','reservedAt','item'].includes(k))||![1,2].includes(p.version)||!personalArcRewardSlots(s).includes(p.slot)||!Number.isSafeInteger(p.baseLevel)||p.baseLevel<1||p.baseLevel>=100000||p.baseLevel>s.level||!Number.isSafeInteger(p.seed)||p.seed<0||p.seed>0xffffffff||!Number.isSafeInteger(p.reservedAt)||p.reservedAt<0||p.reservedAt>1e15||p.reservedAt>s.lastSeen||s.taskRewardClaims?.includes(d.claimId))return false;
+   if(!d||!eligible(s,d)||!p||typeof p!=='object'||Array.isArray(p)||Object.keys(p).some(k=>!['version','slot','baseLevel','seed','reservedAt','item'].includes(k))||![1,2,3].includes(p.version)||!personalArcRewardSlots(s).includes(p.slot)||!Number.isSafeInteger(p.baseLevel)||p.baseLevel<1||p.baseLevel>=100000||p.baseLevel>s.level||!Number.isSafeInteger(p.seed)||p.seed<0||p.seed>0xffffffff||!Number.isSafeInteger(p.reservedAt)||p.reservedAt<0||p.reservedAt>1e15||p.reservedAt>s.lastSeen||s.taskRewardClaims?.includes(d.claimId))return false;
    const expected=generate(d,p);
    if(p.item!==undefined&&JSON.stringify(p.item)!==JSON.stringify(expected))return false;
    if(ids.has(expected.id)||s.inventory?.some(it=>it.id===expected.id)||s.pendingForgeClaim?.item?.id===expected.id||s.merchant?.offers?.some(o=>o.stock===1&&o.item?.id===expected.id))return false;
@@ -83,7 +83,7 @@ export function claimPersonalArcReward(storage,game,id,slot,{now=Date.now()}={})
  // slot and CURRENT hero level are durable. A failed reservation reveals no roll.
  if(!p){
   const tx=commitGameTransaction(storage,game,next=>{
-   next.lastSeen=now;next.personalArcRewards??={};next.personalArcRewards[id]={version:2,slot,baseLevel:next.level,seed:Math.floor(Math.random()*2**32),reservedAt:now};
+   next.lastSeen=now;next.personalArcRewards??={};next.personalArcRewards[id]={version:3,slot,baseLevel:next.level,seed:Math.floor(Math.random()*2**32),reservedAt:now};
    return validSave(next)&&{arcId:id,reserved:true};
   },{now});
   if(!tx.ok)return tx;game=tx.game;p=game.personalArcRewards[id];

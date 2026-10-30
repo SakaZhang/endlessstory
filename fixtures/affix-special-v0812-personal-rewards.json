@@ -1,0 +1,3016 @@
+{
+  "baselineCommit": "4d60f7536fe7d28a4cee8429a320a9ce032a3bc1",
+  "baselineFactory": "dist/engine.js:item; unchanged baseline source with imports remapped to local paths and original race-survival-balance.js",
+  "rows": [
+    {
+      "race": "dwarf",
+      "id": "personal.dwarf.coup",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 8,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.dwarf.coup-8-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "铜鼓平口锤",
+          "atk": 111,
+          "armor": 22,
+          "hp": 74,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 11,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 9,
+                "max": 17
+              }
+            },
+            {
+              "stat": "darkAtk",
+              "value": 7,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "waterAtk",
+              "value": 7,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "lightAtk",
+              "value": 6,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            }
+          ],
+          "special": {
+            "id": "momentum"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_brassdrum_hammer",
+          "baseVariant": "hammer_balanced",
+          "weaponType": "hammer",
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_brassdrum_hammer",
+          "visualVariant": "dwarf_scatter_brassdrum_hammer",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "dwarf",
+      "id": "personal.dwarf.coup",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 9,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.dwarf.coup-9-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "采岩楔斧",
+          "atk": 118,
+          "armor": 0,
+          "hp": 148,
+          "affixes": [
+            {
+              "stat": "hit",
+              "value": 14,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 14
+              }
+            },
+            {
+              "stat": "atk",
+              "value": 12,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 9,
+                "max": 17
+              }
+            },
+            {
+              "stat": "earthAtk",
+              "value": 3,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "darkAtk",
+              "value": 2,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            }
+          ],
+          "special": {
+            "id": "multicast"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_quarrywedge_axe",
+          "baseVariant": "axe_balanced",
+          "weaponType": "axe",
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_quarrywedge_axe",
+          "visualVariant": "dwarf_scatter_quarrywedge_axe",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "dwarf",
+      "id": "personal.dwarf.coup",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 25,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.dwarf.coup-25-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "绿绳双缺斧",
+          "atk": 133,
+          "armor": 0,
+          "hp": 74,
+          "affixes": [
+            {
+              "stat": "waterAtk",
+              "value": 8,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "earthAtk",
+              "value": 2,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 6,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 17
+              }
+            },
+            {
+              "stat": "fireAtk",
+              "value": 3,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            }
+          ],
+          "special": {
+            "id": "knowledge"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_greenbind_axe",
+          "baseVariant": "axe_attack",
+          "weaponType": "axe",
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_greenbind_axe",
+          "visualVariant": "dwarf_scatter_greenbind_axe",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "dwarf",
+      "id": "personal.dwarf.coup",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 26,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.dwarf.coup-26-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "渣齿斧",
+          "atk": 118,
+          "armor": 0,
+          "hp": 148,
+          "affixes": [
+            {
+              "stat": "fireAtk",
+              "value": 6,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "waterAtk",
+              "value": 6,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "atk",
+              "value": 13,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 9,
+                "max": 17
+              }
+            },
+            {
+              "stat": "lifesteal",
+              "value": 8,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 3,
+                "max": 9
+              }
+            }
+          ],
+          "special": {
+            "id": "nirvana"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_slagtooth_axe",
+          "baseVariant": "axe_balanced",
+          "weaponType": "axe",
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_slagtooth_axe",
+          "visualVariant": "dwarf_scatter_slagtooth_axe",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "dwarf",
+      "id": "personal.dwarf.coup",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 28,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.dwarf.coup-28-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "岔尾岩钢锤",
+          "atk": 96,
+          "armor": 37,
+          "hp": 74,
+          "affixes": [
+            {
+              "stat": "lightAtk",
+              "value": 8,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "fireAtk",
+              "value": 2,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "earthAtk",
+              "value": 4,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 14,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": {
+            "id": "shelter"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_forkpeen_hammer",
+          "baseVariant": "hammer_defensive",
+          "weaponType": "hammer",
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_forkpeen_hammer",
+          "visualVariant": "dwarf_scatter_forkpeen_hammer",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "dwarf",
+      "id": "personal.dwarf.coup",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 44,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.dwarf.coup-44-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "铆钉锤",
+          "atk": 111,
+          "armor": 22,
+          "hp": 74,
+          "affixes": [
+            {
+              "stat": "crit",
+              "value": 17,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 17
+              }
+            },
+            {
+              "stat": "critDamage",
+              "value": 19,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 8,
+                "max": 23
+              }
+            },
+            {
+              "stat": "waterAtk",
+              "value": 4,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "darkAtk",
+              "value": 8,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            }
+          ],
+          "special": {
+            "id": "reaper"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_rivet_hammer",
+          "baseVariant": "hammer_balanced",
+          "weaponType": "hammer",
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_rivet_hammer",
+          "visualVariant": "dwarf_scatter_rivet_hammer",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "dwarf",
+      "id": "personal.dwarf.coup",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 45,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.dwarf.coup-45-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "绿绳双缺斧",
+          "atk": 133,
+          "armor": 0,
+          "hp": 74,
+          "affixes": [
+            {
+              "stat": "critDamage",
+              "value": 18,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 8,
+                "max": 23
+              }
+            },
+            {
+              "stat": "lifesteal",
+              "value": 5,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 14,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 17
+              }
+            },
+            {
+              "stat": "lightAtk",
+              "value": 4,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            }
+          ],
+          "special": {
+            "id": "scavenger"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "dwarf_scatter_greenbind_axe",
+          "baseVariant": "axe_attack",
+          "weaponType": "axe",
+          "originRace": "dwarf",
+          "visualKey": "dwarf_scatter_greenbind_axe",
+          "visualVariant": "dwarf_scatter_greenbind_axe",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "human",
+      "id": "personal.human.duty",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 8,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.human.duty-8-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "苍誓大剑",
+          "atk": 133,
+          "armor": 0,
+          "hp": 74,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 11,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 9,
+                "max": 17
+              }
+            },
+            {
+              "stat": "darkAtk",
+              "value": 7,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "waterAtk",
+              "value": 7,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "lightAtk",
+              "value": 6,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            }
+          ],
+          "special": {
+            "id": "momentum"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "human_scatter_sword_7",
+          "baseVariant": "axe_attack",
+          "weaponType": "greatsword",
+          "originRace": "human",
+          "visualKey": "human_scatter_sword_7",
+          "visualVariant": "human_scatter_sword_7",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "human",
+      "id": "personal.human.duty",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 9,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.human.duty-9-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "赤革剑盾",
+          "atk": 111,
+          "armor": 22,
+          "hp": 74,
+          "affixes": [
+            {
+              "stat": "hit",
+              "value": 14,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 14
+              }
+            },
+            {
+              "stat": "atk",
+              "value": 12,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 9,
+                "max": 17
+              }
+            },
+            {
+              "stat": "earthAtk",
+              "value": 3,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "darkAtk",
+              "value": 2,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            }
+          ],
+          "special": {
+            "id": "multicast"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "human_scatter_shield_2",
+          "baseVariant": "hammer_balanced",
+          "weaponType": "sword_shield",
+          "originRace": "human",
+          "visualKey": "human_scatter_shield_2",
+          "visualVariant": "human_scatter_shield_2",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "human",
+      "id": "personal.human.duty",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 25,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.human.duty-25-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "黑钢剑盾",
+          "atk": 96,
+          "armor": 37,
+          "hp": 74,
+          "affixes": [
+            {
+              "stat": "waterAtk",
+              "value": 8,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "earthAtk",
+              "value": 2,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 6,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 17
+              }
+            },
+            {
+              "stat": "fireAtk",
+              "value": 3,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            }
+          ],
+          "special": {
+            "id": "knowledge"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "human_scatter_shield_5",
+          "baseVariant": "hammer_defensive",
+          "weaponType": "sword_shield",
+          "originRace": "human",
+          "visualKey": "human_scatter_shield_5",
+          "visualVariant": "human_scatter_shield_5",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "human",
+      "id": "personal.human.duty",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 26,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.human.duty-26-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "旧银剑盾",
+          "atk": 96,
+          "armor": 37,
+          "hp": 74,
+          "affixes": [
+            {
+              "stat": "fireAtk",
+              "value": 6,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "waterAtk",
+              "value": 6,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "atk",
+              "value": 13,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 9,
+                "max": 17
+              }
+            },
+            {
+              "stat": "lifesteal",
+              "value": 8,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 3,
+                "max": 9
+              }
+            }
+          ],
+          "special": {
+            "id": "nirvana"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "human_scatter_shield_7",
+          "baseVariant": "hammer_defensive",
+          "weaponType": "sword_shield",
+          "originRace": "human",
+          "visualKey": "human_scatter_shield_7",
+          "visualVariant": "human_scatter_shield_7",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "human",
+      "id": "personal.human.duty",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 28,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.human.duty-28-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "黑钢剑盾",
+          "atk": 96,
+          "armor": 37,
+          "hp": 74,
+          "affixes": [
+            {
+              "stat": "lightAtk",
+              "value": 8,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "fireAtk",
+              "value": 2,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "earthAtk",
+              "value": 4,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 14,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": {
+            "id": "shelter"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "human_scatter_shield_5",
+          "baseVariant": "hammer_defensive",
+          "weaponType": "sword_shield",
+          "originRace": "human",
+          "visualKey": "human_scatter_shield_5",
+          "visualVariant": "human_scatter_shield_5",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "human",
+      "id": "personal.human.duty",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 44,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.human.duty-44-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "旧银剑盾",
+          "atk": 96,
+          "armor": 37,
+          "hp": 74,
+          "affixes": [
+            {
+              "stat": "crit",
+              "value": 17,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 17
+              }
+            },
+            {
+              "stat": "critDamage",
+              "value": 19,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 8,
+                "max": 23
+              }
+            },
+            {
+              "stat": "waterAtk",
+              "value": 4,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "darkAtk",
+              "value": 8,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            }
+          ],
+          "special": {
+            "id": "reaper"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "human_scatter_shield_7",
+          "baseVariant": "hammer_defensive",
+          "weaponType": "sword_shield",
+          "originRace": "human",
+          "visualKey": "human_scatter_shield_7",
+          "visualVariant": "human_scatter_shield_7",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "human",
+      "id": "personal.human.duty",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 45,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.human.duty-45-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "王蓝剑盾",
+          "atk": 111,
+          "armor": 22,
+          "hp": 74,
+          "affixes": [
+            {
+              "stat": "critDamage",
+              "value": 18,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 8,
+                "max": 23
+              }
+            },
+            {
+              "stat": "lifesteal",
+              "value": 5,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 14,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 17
+              }
+            },
+            {
+              "stat": "lightAtk",
+              "value": 4,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            }
+          ],
+          "special": {
+            "id": "scavenger"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "human_scatter_shield_6",
+          "baseVariant": "hammer_balanced",
+          "weaponType": "sword_shield",
+          "originRace": "human",
+          "visualKey": "human_scatter_shield_6",
+          "visualVariant": "human_scatter_shield_6",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "elf",
+      "id": "personal.elf.heir",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 8,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.elf.heir-8-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "金蕨礼弓",
+          "atk": 133,
+          "armor": 0,
+          "hp": 74,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 11,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 9,
+                "max": 17
+              }
+            },
+            {
+              "stat": "darkAtk",
+              "value": 7,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "waterAtk",
+              "value": 7,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "lightAtk",
+              "value": 6,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            }
+          ],
+          "special": {
+            "id": "momentum"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "elf_scatter_weapon_10",
+          "baseVariant": "bow_attack",
+          "weaponType": "bow",
+          "originRace": "elf",
+          "visualKey": "elf_scatter_weapon_10",
+          "visualVariant": "elf_scatter_weapon_10",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "elf",
+      "id": "personal.elf.heir",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 9,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.elf.heir-9-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "金蕨礼弓",
+          "atk": 133,
+          "armor": 0,
+          "hp": 74,
+          "affixes": [
+            {
+              "stat": "hit",
+              "value": 14,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 14
+              }
+            },
+            {
+              "stat": "atk",
+              "value": 12,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 9,
+                "max": 17
+              }
+            },
+            {
+              "stat": "earthAtk",
+              "value": 3,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "darkAtk",
+              "value": 2,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            }
+          ],
+          "special": {
+            "id": "multicast"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "elf_scatter_weapon_10",
+          "baseVariant": "bow_attack",
+          "weaponType": "bow",
+          "originRace": "elf",
+          "visualKey": "elf_scatter_weapon_10",
+          "visualVariant": "elf_scatter_weapon_10",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "elf",
+      "id": "personal.elf.heir",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 25,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.elf.heir-25-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "盘藤长弓",
+          "atk": 133,
+          "armor": 0,
+          "hp": 74,
+          "affixes": [
+            {
+              "stat": "waterAtk",
+              "value": 8,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "earthAtk",
+              "value": 2,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 6,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 17
+              }
+            },
+            {
+              "stat": "fireAtk",
+              "value": 3,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            }
+          ],
+          "special": {
+            "id": "knowledge"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "elf_scatter_weapon_2",
+          "baseVariant": "bow_attack",
+          "weaponType": "bow",
+          "originRace": "elf",
+          "visualKey": "elf_scatter_weapon_2",
+          "visualVariant": "elf_scatter_weapon_2",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "elf",
+      "id": "personal.elf.heir",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 26,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.elf.heir-26-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "盘藤长弓",
+          "atk": 133,
+          "armor": 0,
+          "hp": 74,
+          "affixes": [
+            {
+              "stat": "fireAtk",
+              "value": 6,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "waterAtk",
+              "value": 6,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "atk",
+              "value": 13,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 9,
+                "max": 17
+              }
+            },
+            {
+              "stat": "lifesteal",
+              "value": 8,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 3,
+                "max": 9
+              }
+            }
+          ],
+          "special": {
+            "id": "nirvana"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "elf_scatter_weapon_2",
+          "baseVariant": "bow_attack",
+          "weaponType": "bow",
+          "originRace": "elf",
+          "visualKey": "elf_scatter_weapon_2",
+          "visualVariant": "elf_scatter_weapon_2",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "elf",
+      "id": "personal.elf.heir",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 28,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.elf.heir-28-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "露柳仪弓",
+          "atk": 118,
+          "armor": 0,
+          "hp": 148,
+          "affixes": [
+            {
+              "stat": "lightAtk",
+              "value": 8,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "fireAtk",
+              "value": 2,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "earthAtk",
+              "value": 4,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 14,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": {
+            "id": "shelter"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "elf_scatter_weapon_9",
+          "baseVariant": "bow_balanced",
+          "weaponType": "bow",
+          "originRace": "elf",
+          "visualKey": "elf_scatter_weapon_9",
+          "visualVariant": "elf_scatter_weapon_9",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "elf",
+      "id": "personal.elf.heir",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 44,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.elf.heir-44-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "紫芽月弓",
+          "atk": 133,
+          "armor": 0,
+          "hp": 74,
+          "affixes": [
+            {
+              "stat": "crit",
+              "value": 17,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 17
+              }
+            },
+            {
+              "stat": "critDamage",
+              "value": 19,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 8,
+                "max": 23
+              }
+            },
+            {
+              "stat": "waterAtk",
+              "value": 4,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "darkAtk",
+              "value": 8,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            }
+          ],
+          "special": {
+            "id": "reaper"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "elf_scatter_weapon_12",
+          "baseVariant": "bow_attack",
+          "weaponType": "bow",
+          "originRace": "elf",
+          "visualKey": "elf_scatter_weapon_12",
+          "visualVariant": "elf_scatter_weapon_12",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "elf",
+      "id": "personal.elf.heir",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 45,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.elf.heir-45-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "回声枝杖",
+          "atk": 126,
+          "armor": 0,
+          "hp": 111,
+          "affixes": [
+            {
+              "stat": "critDamage",
+              "value": 18,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 8,
+                "max": 23
+              }
+            },
+            {
+              "stat": "lifesteal",
+              "value": 5,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 14,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 17
+              }
+            },
+            {
+              "stat": "lightAtk",
+              "value": 4,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            }
+          ],
+          "special": {
+            "id": "scavenger"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "elf_scatter_weapon_8",
+          "baseVariant": "staff_element",
+          "weaponType": "staff",
+          "originRace": "elf",
+          "visualKey": "elf_scatter_weapon_8",
+          "visualVariant": "elf_scatter_weapon_8",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "goblin",
+      "id": "personal.goblin.family",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 8,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.goblin.family-8-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "钱袋挑刃",
+          "atk": 126,
+          "armor": 0,
+          "hp": 111,
+          "affixes": [
+            {
+              "stat": "atk",
+              "value": 11,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 9,
+                "max": 17
+              }
+            },
+            {
+              "stat": "darkAtk",
+              "value": 7,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "waterAtk",
+              "value": 7,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "lightAtk",
+              "value": 6,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            }
+          ],
+          "special": {
+            "id": "momentum"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "goblin_scatter_weapon_15",
+          "baseVariant": "dagger_balanced",
+          "weaponType": "dagger",
+          "originRace": "goblin",
+          "visualKey": "goblin_scatter_weapon_15",
+          "visualVariant": "goblin_scatter_weapon_15",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "goblin",
+      "id": "personal.goblin.family",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 9,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.goblin.family-9-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "锁舌窄匕",
+          "atk": 126,
+          "armor": 0,
+          "hp": 111,
+          "affixes": [
+            {
+              "stat": "hit",
+              "value": 14,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 14
+              }
+            },
+            {
+              "stat": "atk",
+              "value": 12,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 9,
+                "max": 17
+              }
+            },
+            {
+              "stat": "earthAtk",
+              "value": 3,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "darkAtk",
+              "value": 2,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            }
+          ],
+          "special": {
+            "id": "multicast"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "goblin_scatter_weapon_7",
+          "baseVariant": "dagger_balanced",
+          "weaponType": "dagger",
+          "originRace": "goblin",
+          "visualKey": "goblin_scatter_weapon_7",
+          "visualVariant": "goblin_scatter_weapon_7",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "goblin",
+      "id": "personal.goblin.family",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 25,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.goblin.family-25-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "旧铆单剑",
+          "atk": 118,
+          "armor": 15,
+          "hp": 74,
+          "affixes": [
+            {
+              "stat": "waterAtk",
+              "value": 8,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "earthAtk",
+              "value": 2,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 6,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 17
+              }
+            },
+            {
+              "stat": "fireAtk",
+              "value": 3,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            }
+          ],
+          "special": {
+            "id": "knowledge"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "goblin_scatter_weapon_2",
+          "baseVariant": "sword_balanced",
+          "weaponType": "sword",
+          "originRace": "goblin",
+          "visualKey": "goblin_scatter_weapon_2",
+          "visualVariant": "goblin_scatter_weapon_2",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "goblin",
+      "id": "personal.goblin.family",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 26,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.goblin.family-26-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "沉铜刺匕",
+          "atk": 126,
+          "armor": 0,
+          "hp": 111,
+          "affixes": [
+            {
+              "stat": "fireAtk",
+              "value": 6,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "waterAtk",
+              "value": 6,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "atk",
+              "value": 13,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 9,
+                "max": 17
+              }
+            },
+            {
+              "stat": "lifesteal",
+              "value": 8,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 3,
+                "max": 9
+              }
+            }
+          ],
+          "special": {
+            "id": "nirvana"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "goblin_scatter_weapon_3",
+          "baseVariant": "dagger_balanced",
+          "weaponType": "dagger",
+          "originRace": "goblin",
+          "visualKey": "goblin_scatter_weapon_3",
+          "visualVariant": "goblin_scatter_weapon_3",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "goblin",
+      "id": "personal.goblin.family",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 28,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.goblin.family-28-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "锁舌窄匕",
+          "atk": 126,
+          "armor": 0,
+          "hp": 111,
+          "affixes": [
+            {
+              "stat": "lightAtk",
+              "value": 8,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "fireAtk",
+              "value": 2,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "earthAtk",
+              "value": 4,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 14,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 17
+              }
+            }
+          ],
+          "special": {
+            "id": "shelter"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "goblin_scatter_weapon_7",
+          "baseVariant": "dagger_balanced",
+          "weaponType": "dagger",
+          "originRace": "goblin",
+          "visualKey": "goblin_scatter_weapon_7",
+          "visualVariant": "goblin_scatter_weapon_7",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "goblin",
+      "id": "personal.goblin.family",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 44,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.goblin.family-44-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "铜尺藏锋",
+          "atk": 118,
+          "armor": 15,
+          "hp": 74,
+          "affixes": [
+            {
+              "stat": "crit",
+              "value": 17,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 17
+              }
+            },
+            {
+              "stat": "critDamage",
+              "value": 19,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 8,
+                "max": 23
+              }
+            },
+            {
+              "stat": "waterAtk",
+              "value": 4,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "darkAtk",
+              "value": 8,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            }
+          ],
+          "special": {
+            "id": "reaper"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "goblin_scatter_weapon_10",
+          "baseVariant": "sword_balanced",
+          "weaponType": "sword",
+          "originRace": "goblin",
+          "visualKey": "goblin_scatter_weapon_10",
+          "visualVariant": "goblin_scatter_weapon_10",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "goblin",
+      "id": "personal.goblin.family",
+      "p": {
+        "version": 2,
+        "slot": "weapon",
+        "baseLevel": 60,
+        "seed": 45,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.goblin.family-45-loot-1",
+          "slot": "weapon",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "断响细剑",
+          "atk": 118,
+          "armor": 15,
+          "hp": 74,
+          "affixes": [
+            {
+              "stat": "critDamage",
+              "value": 18,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 8,
+                "max": 23
+              }
+            },
+            {
+              "stat": "lifesteal",
+              "value": 5,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 3,
+                "max": 9
+              }
+            },
+            {
+              "stat": "crit",
+              "value": 14,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 17
+              }
+            },
+            {
+              "stat": "lightAtk",
+              "value": 4,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            }
+          ],
+          "special": {
+            "id": "scavenger"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "goblin_scatter_weapon_4",
+          "baseVariant": "sword_balanced",
+          "weaponType": "sword",
+          "originRace": "goblin",
+          "visualKey": "goblin_scatter_weapon_4",
+          "visualVariant": "goblin_scatter_weapon_4",
+          "iconKey": "weapon",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "ashen",
+      "id": "personal.ashen.agency",
+      "p": {
+        "version": 2,
+        "slot": "core",
+        "baseLevel": 60,
+        "seed": 8,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.ashen.agency-8-loot-1",
+          "slot": "core",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "岩核",
+          "atk": 0,
+          "armor": 59,
+          "hp": 296,
+          "affixes": [
+            {
+              "stat": "hp",
+              "value": 72,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 56,
+                "max": 112
+              }
+            },
+            {
+              "stat": "darkResist",
+              "value": 12,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 14
+              }
+            },
+            {
+              "stat": "earthResist",
+              "value": 12,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 14
+              }
+            },
+            {
+              "stat": "lightResist",
+              "value": 10,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 14
+              }
+            }
+          ],
+          "special": {
+            "id": "momentum"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "ashen.scatter.35",
+          "baseVariant": "core_stone",
+          "weaponType": null,
+          "originRace": "ashen",
+          "visualKey": "ashen.scatter.35",
+          "visualVariant": "ashen.scatter.35",
+          "iconKey": "core",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "ashen",
+      "id": "personal.ashen.agency",
+      "p": {
+        "version": 2,
+        "slot": "core",
+        "baseLevel": 60,
+        "seed": 9,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.ashen.agency-9-loot-1",
+          "slot": "core",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "熔核",
+          "atk": 59,
+          "armor": 59,
+          "hp": 0,
+          "affixes": [
+            {
+              "stat": "armor",
+              "value": 12,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 6,
+                "max": 12
+              }
+            },
+            {
+              "stat": "hp",
+              "value": 77,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 56,
+                "max": 112
+              }
+            },
+            {
+              "stat": "lightAtk",
+              "value": 3,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "lightResist",
+              "value": 5,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 14
+              }
+            }
+          ],
+          "special": {
+            "id": "multicast"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "ashen.scatter.34",
+          "baseVariant": "core_molten",
+          "weaponType": null,
+          "originRace": "ashen",
+          "visualKey": "ashen.scatter.34",
+          "visualVariant": "ashen.scatter.34",
+          "iconKey": "core",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "ashen",
+      "id": "personal.ashen.agency",
+      "p": {
+        "version": 2,
+        "slot": "core",
+        "baseLevel": 60,
+        "seed": 25,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.ashen.agency-25-loot-1",
+          "slot": "core",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "晶核",
+          "atk": 59,
+          "armor": 0,
+          "hp": 296,
+          "affixes": [
+            {
+              "stat": "darkAtk",
+              "value": 8,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "earthResist",
+              "value": 5,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 14
+              }
+            },
+            {
+              "stat": "waterAtk",
+              "value": 2,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "lightAtk",
+              "value": 3,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            }
+          ],
+          "special": {
+            "id": "knowledge"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "ashen.scatter.36",
+          "baseVariant": "core_crystal",
+          "weaponType": null,
+          "originRace": "ashen",
+          "visualKey": "ashen.scatter.36",
+          "visualVariant": "ashen.scatter.36",
+          "iconKey": "core",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "ashen",
+      "id": "personal.ashen.agency",
+      "p": {
+        "version": 2,
+        "slot": "core",
+        "baseLevel": 60,
+        "seed": 26,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.ashen.agency-26-loot-1",
+          "slot": "core",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "岩核",
+          "atk": 0,
+          "armor": 59,
+          "hp": 296,
+          "affixes": [
+            {
+              "stat": "earthResist",
+              "value": 11,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 14
+              }
+            },
+            {
+              "stat": "waterResist",
+              "value": 12,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 14
+              }
+            },
+            {
+              "stat": "hp",
+              "value": 87,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 56,
+                "max": 112
+              }
+            },
+            {
+              "stat": "lightAtk",
+              "value": 7,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            }
+          ],
+          "special": {
+            "id": "nirvana"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "ashen.scatter.35",
+          "baseVariant": "core_stone",
+          "weaponType": null,
+          "originRace": "ashen",
+          "visualKey": "ashen.scatter.35",
+          "visualVariant": "ashen.scatter.35",
+          "iconKey": "core",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "ashen",
+      "id": "personal.ashen.agency",
+      "p": {
+        "version": 2,
+        "slot": "core",
+        "baseLevel": 60,
+        "seed": 28,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.ashen.agency-28-loot-1",
+          "slot": "core",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "熔核",
+          "atk": 59,
+          "armor": 59,
+          "hp": 0,
+          "affixes": [
+            {
+              "stat": "windResist",
+              "value": 14,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 14
+              }
+            },
+            {
+              "stat": "waterResist",
+              "value": 5,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 14
+              }
+            },
+            {
+              "stat": "lightAtk",
+              "value": 4,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "waterAtk",
+              "value": 7,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            }
+          ],
+          "special": {
+            "id": "shelter"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "ashen.scatter.34",
+          "baseVariant": "core_molten",
+          "weaponType": null,
+          "originRace": "ashen",
+          "visualKey": "ashen.scatter.34",
+          "visualVariant": "ashen.scatter.34",
+          "iconKey": "core",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "ashen",
+      "id": "personal.ashen.agency",
+      "p": {
+        "version": 2,
+        "slot": "core",
+        "baseLevel": 60,
+        "seed": 44,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.ashen.agency-44-loot-1",
+          "slot": "core",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "熔核",
+          "atk": 59,
+          "armor": 59,
+          "hp": 0,
+          "affixes": [
+            {
+              "stat": "waterAtk",
+              "value": 8,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "fireAtk",
+              "value": 6,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "earthResist",
+              "value": 8,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 14
+              }
+            },
+            {
+              "stat": "darkResist",
+              "value": 13,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 14
+              }
+            }
+          ],
+          "special": {
+            "id": "reaper"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "ashen.scatter.34",
+          "baseVariant": "core_molten",
+          "weaponType": null,
+          "originRace": "ashen",
+          "visualKey": "ashen.scatter.34",
+          "visualVariant": "ashen.scatter.34",
+          "iconKey": "core",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    },
+    {
+      "race": "ashen",
+      "id": "personal.ashen.agency",
+      "p": {
+        "version": 2,
+        "slot": "core",
+        "baseLevel": 60,
+        "seed": 45,
+        "reservedAt": 1800000000000,
+        "item": {
+          "id": "arc-personal.ashen.agency-45-loot-1",
+          "slot": "core",
+          "set": null,
+          "rarity": 3,
+          "level": 59,
+          "baseLevel": 60,
+          "levelSource": "generated",
+          "name": "熔核",
+          "atk": 59,
+          "armor": 59,
+          "hp": 0,
+          "affixes": [
+            {
+              "stat": "windAtk",
+              "value": 6,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "fireAtk",
+              "value": 4,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "waterAtk",
+              "value": 7,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 2,
+                "max": 8
+              }
+            },
+            {
+              "stat": "lightResist",
+              "value": 8,
+              "sourceRange": {
+                "model": "level-quality-v2",
+                "quality": 3,
+                "sourceLevel": 59,
+                "min": 5,
+                "max": 14
+              }
+            }
+          ],
+          "special": {
+            "id": "scavenger"
+          },
+          "legendaryId": null,
+          "locked": false,
+          "bless": 0,
+          "templateId": "ashen.scatter.34",
+          "baseVariant": "core_molten",
+          "weaponType": null,
+          "originRace": "ashen",
+          "visualKey": "ashen.scatter.34",
+          "visualVariant": "ashen.scatter.34",
+          "iconKey": "core",
+          "baseBudgetModel": "equipment-budget-m2-v1",
+          "budgetLevel": 59,
+          "budgetSourceLevel": 59
+        }
+      }
+    }
+  ]
+}

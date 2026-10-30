@@ -8,10 +8,10 @@ export const ORDINARY_AFFIX_CANDIDATES=freeze({
  luck:{name:'幸运',suffix:'',unit:'rating',min:1,max:3,sourceApproved:true,mechanicsReady:true,enabled:true}
 });
 export const SPECIAL_AFFIX_EXPANSION=freeze({
- shelter:{name:'护佑',desc:'开战获得15%最大生命护盾。',sourceApproved:true,mechanicsReady:true,enabled:true,openingShieldFraction:.15},
- nirvana:{name:'涅槃',desc:'每场战斗一次，死亡时满血复活；不重置冷却、护盾或其他计数。',sourceApproved:true,mechanicsReady:true,enabled:true},
- reaper:{name:'死神',desc:'每个命中段、每个仍存活目标独立2%判定；首领同样有效。',chance:.02,sourceApproved:true,mechanicsReady:true,enabled:true},
- multicast:{name:'多重施法',desc:'主动技能后15%概率追加一次，不递归、不额外消耗或重置冷却；算一次真实主动施法，无存活敌人则不追加。',chance:.15,sourceApproved:true,mechanicsReady:true,enabled:true}
+ shelter:{name:'护佑',desc:'开战获得30%最大生命护盾；普通副本整轮只触发一次，剩余护盾可跨阶段保留。',sourceApproved:true,mechanicsReady:true,enabled:true,openingShieldFraction:.30},
+ nirvana:{name:'涅槃',desc:'每场战斗一次（普通副本整轮一次），死亡时满血复活；不重置冷却、护盾或其他计数。',sourceApproved:true,mechanicsReady:true,enabled:true},
+ reaper:{name:'死神',desc:'每个命中段对每个仍存活目标独立进行1%判定，成功时直接处决目标；首领同样有效。',chance:.01,sourceApproved:true,mechanicsReady:true,enabled:true},
+ multicast:{name:'多重施法',desc:'主动技能后15%概率追加一次，不递归、不重复计算技能冷却，资源仍按技能规则消耗；算一次真实主动施法，无存活敌人则不追加。',chance:.15,sourceApproved:true,mechanicsReady:true,enabled:true}
 });
 // Player lifesteal: every 10 rating converts 1% of eligible actual HP damage.
 // Only missing HP limits recovery; no diminishing returns or per-cast HP ceiling.
@@ -33,7 +33,7 @@ export function calculateLifesteal({rating,maxHp,currentHp,hits},config=LIFESTEA
 }
 export function openingShelterShield({hasShelter,maxHp,flatBonus=0,alreadyApplied=false}){
  if(typeof hasShelter!=='boolean'||typeof alreadyApplied!=='boolean'||!nonnegative(maxHp)||!nonnegative(flatBonus))return null;
- return hasShelter&&!alreadyApplied?Math.floor(maxHp*.15)+flatBonus:0;
+ return hasShelter&&!alreadyApplied?Math.floor(maxHp*SPECIAL_AFFIX_EXPANSION.shelter.openingShieldFraction)+flatBonus:0;
 }
 // Caller owns battleId lifetime (individual encounter vs dungeon run remains an integration policy).
 export function createBattleAffixState(battleId){return id(battleId)?{version:1,battleId,nirvanaUsed:false,lastReaperCastId:null,reaperHits:[]}:null;}
@@ -67,9 +67,16 @@ export function lifestealHeal({rating,damage,maxHp,currentHp,alreadyHealed=0}){
  return Math.min(maxHp-currentHp,damage*lifestealRate(rating));
 }
 // Convenience adapters for a caller that already processes each hit exactly once.
-export function rollReaper({hit,targetAlive,equipped},random=Math.random){if(!equipped||hit!==true||targetAlive!==true||typeof random!=='function')return false;let roll;try{roll=random();}catch{return false;}return Number.isFinite(roll)&&roll>=0&&roll<.02;}
+export function rollReaper({hit,targetAlive,equipped},random=Math.random){if(!equipped||hit!==true||targetAlive!==true||typeof random!=='function')return false;let roll;try{roll=random();}catch{return false;}return Number.isFinite(roll)&&roll>=0&&roll<SPECIAL_AFFIX_EXPANSION.reaper.chance;}
 export function applyNirvana(encounter,maxHp,specials,logs=[]){
  if(!encounter||!validBattleAffixState(encounter.affixState))return false;
  const result=tryNirvana(encounter.affixState,{battleId:encounter.affixState.battleId,hasNirvana:!!specials?.nirvana,hp:encounter.heroHp,maxHp});
  if(!result?.revived)return false;encounter.affixState=result.state;encounter.heroHp=result.hp;logs.push('涅槃 · 满血复活（本场已使用）');return true;
 }
+
+// One snapshot per damaging action: every landed segment shares the boost.
+// A multicast extra takes a fresh snapshot: only an unspent/rearmed charge applies.
+export function beginMomentumAction(save,{equipped=false,extra=false,damaging=true}={}){return {boosted:!!equipped&&damaging&&save.momentum===1,landed:false,directKill:false};}
+export function momentumHitMultiplier(action){action.landed=true;return action.boosted?2:1;}
+export function finishMomentumAction(save,action,{equipped=false}={}){if(action.boosted&&action.landed)save.momentum=0;if(equipped&&action.directKill)save.momentum=1;}
+export function validDungeonAffixUsage(usage){return !!usage&&typeof usage==='object'&&!Array.isArray(usage)&&Object.keys(usage).length===2&&typeof usage.shelterUsed==='boolean'&&typeof usage.nirvanaUsed==='boolean';}

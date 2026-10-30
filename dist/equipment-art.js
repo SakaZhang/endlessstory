@@ -4,6 +4,7 @@ import {EQUIPMENT_TEMPLATE_BY_ID} from './equipment-templates.js';
 import {renderArmorPixels} from './equipment-armor-art.js';
 import {icon} from './icons.js';
 import {frameEquipmentSVG} from './equipment-presentation.js';
+import {luckyDiceIcon} from './lucky-dice-art.js';
 const C={ink:'#151b24',steel:'#899ba6',light:'#dce5df',shade:'#425361',copper:'#b57b49',gold:'#e2b574',wood:'#704635',ember:'#c65c35',stone:'#819286'};
 export function renderWeaponAccessoryPixels(template){
  const id=template?.id?.replace('dwarf_scatter_','');let s='';
@@ -39,6 +40,7 @@ export function renderWeaponAccessoryPixels(template){
 export function equipmentArtTemplate(item){for(const id of [item?.visualVariant,item?.templateId,item?.id])if(typeof id==='string'&&Object.hasOwn(EQUIPMENT_TEMPLATE_BY_ID,id))return EQUIPMENT_TEMPLATE_BY_ID[id];return null;}
 export function renderEquipmentPixels(template){return renderWeaponAccessoryPixels(template)||renderArmorPixels(template);}
 function legendaryEquipmentIcon(item,options){
+ if(item?.legendaryId==='lucky-dice')return luckyDiceIcon(item,options);
  const size=Number.isFinite(options.size)?Math.max(16,Math.min(512,Math.round(options.size))):64;
  // Resolve the unique ring by identity, even for codex/old-save stubs without slot.
  if(item?.legendaryId==='return-ring')return frameEquipmentSVG(icon('ring','guard',3).replace(/width="64" height="64"/,`width="${size}" height="${size}"`).replace('aria-hidden="true"','role="img" aria-label="归途之环"').replace('<svg ','<svg data-equipment-art="return-ring" data-equipment-visual="return-ring" '),item,64);

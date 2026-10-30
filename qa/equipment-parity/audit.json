@@ -127,13 +127,16 @@
     "common": 260,
     "ordinary": 263,
     "sets": 60,
-    "legends": 14,
-    "definitions": 337
+    "legends": 15,
+    "definitions": 338
   },
   "reservedNonDrop": [
     "infinity-gauntlet",
     "return-ring",
     "ashen-primal-core"
+  ],
+  "casinoOnly": [
+    "lucky-dice"
   ],
   "acquisition": {
     "dwarf": {
