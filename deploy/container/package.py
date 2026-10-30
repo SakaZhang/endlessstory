@@ -182,4 +182,4 @@ def package(args):
         print(json.dumps({'bundle':str(bundle),'bytes':bundle.stat().st_size,**metadata},ensure_ascii=False,indent=2))
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--build',required=True);p.add_argument('--release',required=True);p.add_argument('--source-commit',required=True);p.add_argument('--output',required=True);p.add_argument('--version',default='0.78');p.add_argument('--go',default='go');package(p.parse_args())
+    p=argparse.ArgumentParser();p.add_argument('--build',required=True);p.add_argument('--release',required=True);p.add_argument('--source-commit',required=True);p.add_argument('--output',required=True);p.add_argument('--version',default='0.79');p.add_argument('--go',default='go');package(p.parse_args())

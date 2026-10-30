@@ -40,6 +40,8 @@ export function equipmentArtTemplate(item){for(const id of [item?.visualVariant,
 export function renderEquipmentPixels(template){return renderWeaponAccessoryPixels(template)||renderArmorPixels(template);}
 function legendaryEquipmentIcon(item,options){
  const size=Number.isFinite(options.size)?Math.max(16,Math.min(512,Math.round(options.size))):64;
+ // Resolve the unique ring by identity, even for codex/old-save stubs without slot.
+ if(item?.legendaryId==='return-ring')return frameEquipmentSVG(icon('ring','guard',3).replace(/width="64" height="64"/,`width="${size}" height="${size}"`).replace('aria-hidden="true"','role="img" aria-label="归途之环"').replace('<svg ','<svg data-equipment-art="return-ring" data-equipment-visual="return-ring" '),item,64);
  if(item?.legendaryId==='first-forge-oathhammer')return frameEquipmentSVG(icon('firstforge','guard',3).replace(/width="64" height="64"/,`width="${size}" height="${size}"`).replace('<svg ','<svg data-equipment-art="first-forge-oathhammer" '),item,64);
  if(item?.legendaryId!=='everburning-reactor')return null;
  let pixels='';const r=(x,y,w,h,c)=>pixels+=`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${c}"/>`;

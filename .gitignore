@@ -4,3 +4,6 @@ build/
 build.tmp/
 
 node_modules/
+
+# Locally compiled container binaries are packaged separately, not source.
+deploy/container/binaries/

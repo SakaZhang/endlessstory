@@ -15,5 +15,5 @@ assert.equal(frames,200);
 const original=createCanvas(64,64),clipped=createCanvas(64,64),a=original.getContext('2d'),b=clipped.getContext('2d'),bow=images.get(C['elf-last-string'].file);a.drawImage(bow,0,0);drawCanonicalWeapon(b,bow,'elf-last-string',{}, {string:false});const aa=a.getImageData(0,0,64,64).data,bb=b.getImageData(0,0,64,64).data;let differences=0;
 for(let y=0;y<64;y++)for(let x=0;x<64;x++){const p=(y*64+x)*4;if(aa.slice(p,p+4).some((v,j)=>v!==bb[p+j])){differences++;assert((x>=36&&x<=47&&y>=11&&y<=50)||(x>=22&&x<=31&&y>=56)||y>=59,'bow limb/leaf/handle unexpectedly changed '+[x,y]);}}
 assert(differences>0);for(let y=58;y<64;y++)for(let x=23;x<31;x++)assert.equal(bb[(y*64+x)*4+3],0,'red debris removed in shared layer');
-assert.equal(fs.readdirSync('dist/legendary-hero-assets',{recursive:true}).filter(f=>String(f).endsWith('.png')).length,0,'rejected baked runtime art removed');
+assert.equal((fs.existsSync('dist/legendary-hero-assets')?fs.readdirSync('dist/legendary-hero-assets',{recursive:true}):[]).filter(f=>String(f).endsWith('.png')).length,0,'rejected baked runtime art removed');
 console.log('PASS immutable canonical PNG/hash + exact shared draw for 200 real production frames; no per-race weapon override/scale; bow limbs pixel-identical outside cord/red-speck clip; no baked runtime assets.');

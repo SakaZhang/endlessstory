@@ -40,6 +40,7 @@ import './area-progress-tests.mjs';
 import './equipment-level-tests.mjs';
 import './inventory-bags-tests.mjs';
 import './set-source-tests.mjs';
+import './rare-idle-rewards-tests.mjs';
 import './codex-collection-tests.mjs';
 import './batch-sale-tests.mjs';
 import './equipment-fusion-tests.mjs';
@@ -287,3 +288,16 @@ runAffixSourceTest(process.execPath,[new URL('./dungeon-loot-receipts-tests.mjs'
 runAffixSourceTest(process.execPath,[new URL('./experience-progression-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
 runAffixSourceTest(process.execPath,[new URL('./bow-direction-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
 runAffixSourceTest(process.execPath,[new URL('./map-manifest-timeout-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+runAffixSourceTest(process.execPath,[new URL('./set-effects-display-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+runAffixSourceTest(process.execPath,[new URL('./set-effects-app-ui-tests.cjs',import.meta.url).pathname],{stdio:'inherit'});
+
+runAffixSourceTest(process.execPath,[new URL('./rare-loot-ui-tests.cjs',import.meta.url).pathname],{stdio:'inherit'});
+
+runAffixSourceTest(process.execPath,[new URL('./return-ring-presentation-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+runAffixSourceTest(process.execPath,[new URL('./forge-selection-scroll-app-ui-tests.cjs',import.meta.url).pathname],{stdio:'inherit'});
+
+runAffixSourceTest(process.execPath,[new URL('./attribute-integer-display-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+runAffixSourceTest(process.execPath,[new URL('./potion-independent-cooldown-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});

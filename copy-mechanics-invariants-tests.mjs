@@ -88,6 +88,12 @@ assert.deepEqual(JSON.parse(readFileSync(join(root,'content/material-recipe-expa
 const clone=v=>Array.isArray(v)?v.map(clone):v&&typeof v==='object'?Object.fromEntries(Object.entries(v).map(([k,x])=>[k,clone(x)])):v;
 function authorizedBaseline(original,file){
  const out=clone(original);
+ // Approved presentation-only 2/4-piece rows. Pin structure and thresholds;
+ // descriptions alone are visible copy, never the numerical set tuning.
+ if(file==='engine.js'){
+  assert.deepEqual(out.BUILD.map(b=>b.id),['human_blood_oath','human_royal_edge','human_last_bastion','elf_arrow','elf_prism','elf_root','goblin_spore','goblin_ambush','goblin_snare','ashen.caldera','ashen.strata','ashen.prism','anvil','rune','guard']);
+  for(const set of out.BUILD){assert(!Object.hasOwn(set,'effects'));set.effects=[{pieces:2,description:''},{pieces:4,description:''}];}
+ }
  if(file==='return-ring-content.js'){
   assert.deepEqual(out.RETURN_RING_EVENTS.map(e=>[e.race,e.areaId]),[['dwarf','dwarf.a05'],['human','human.a04'],['elf','elf.a04'],['goblin','goblin.a06'],['ashen','ashen.a06']]);
   for(const e of out.RETURN_RING_EVENTS){
@@ -126,7 +132,11 @@ function authorizedBaseline(original,file){
  return out;
 }
 const protectedSegments=new Set(['conditions','effects','rewards','taskRewards','modifiers','requires','trigger','parameters','materialAssociations','materialPools']);
-function isCopy(file,path){return !path.split('/').some(x=>protectedSegments.has(x))&&rules.some(r=>r.file.test(file)&&r.pattern.test(path));}
+function isCopy(file,path){
+ // This exact UI leaf is the only exception inside a protected `effects` path.
+ // Array length, pieces, all extra fields and every other effects path stay pinned.
+ if(file==='engine.js'&&/^BUILD\/\d+\/effects\/[01]\/description$/.test(path))return true;
+ return !path.split('/').some(x=>protectedSegments.has(x))&&rules.some(r=>r.file.test(file)&&r.pattern.test(path));}
 function textOnly(v){return typeof v==='string'||Array.isArray(v)&&v.every(textOnly);}
 function project(v,file,path){
  if(isCopy(file,path)&&v!=null){assert(textOnly(v),`Copy exemption cannot hide structured mechanics: ${file}:${path}`);return '<visible-copy>';}
@@ -183,8 +193,18 @@ try{
  // numeric catalogs, and legendary mechanics separately, not function text here.
  const before=await import(pathToFileURL(join(temp,'dist/engine.js'))),after=await import(pathToFileURL(join(root,'dist/engine.js')));
  for(const key of ['LEGENDARY_CODEX','TALENTS','MATERIALS','BUILD','CONSUMABLES'])if(key in before){assert.deepEqual(project(after[key],'engine.js',key),project(authorizedBaseline(before,'engine.js')[key],'engine.js',key),`Engine catalog drift: ${key}`);}
+ // New presentation metadata must not open a hole in the mechanical projection.
+ const expectedBuild=project(authorizedBaseline(before,'engine.js').BUILD,'engine.js','BUILD');
+ for(const [label,mutate] of [
+  ['set activation threshold',m=>m[0].effects[0].pieces=1],
+  ['extra set tier',m=>m[0].effects.push({pieces:6,description:'extra'})],
+  ['missing set tier',m=>m[0].effects.pop()],
+  ['mechanics hidden beside description',m=>m[0].effects[0].multiplier=2],
+  ['structured description',m=>m[0].effects[0].description={multiplier:2}],
+  ['existing set numerical tuning',m=>m.find(x=>x.id==='elf_arrow').two.damageMultiplier=2]
+ ]){const corrupt=clone(after.BUILD);mutate(corrupt);assert.throws(()=>assert.deepEqual(project(corrupt,'engine.js','BUILD'),expectedBuild),assert.AssertionError,label);}
  // Mutation sentinels prove representative mechanics strings cannot be hidden.
  for(const [f,p]of [['racial-npc-event-content.js','RACIAL_NPC_EVENTS/0/conditions/accessPolicy'],['racial-npc-event-content.js','RACIAL_NPC_EVENTS/0/choices/0/effects/0/flag'],['npc-objective-content.js','NPC_OBJECTIVE_CONTENT/event/taskRewards/0/key'],['races/elf/skills.js','skills/elf.skill/weaponType'],['races/elf/equipment.js','legendaries/0/exclusiveId']])assert.notEqual(project('old',f,p),project('new',f,p),p);
- console.log(`PASS copy + bounded authorized revision invariants: ${compared} modules + engine catalogs vs ${BASELINE.slice(0,12)}; ${changedCopy.length} changed content modules. IDs, gates, objectives, rewards, effects, numeric budgets and legendary functions preserved except exact approved ring objectives / recipe additions.`);
+ console.log(`PASS copy + bounded authorized revision invariants: ${compared} modules + engine catalogs vs ${BASELINE.slice(0,12)}; ${changedCopy.length} changed content modules. IDs, gates, objectives, rewards, effects, numeric budgets and legendary functions preserved except exact approved ring objectives / recipe additions / presentation-only set rows (2/4 thresholds pinned).`);
  console.log('Boundary: does not prove new prose accurately describes mechanics, DOM behavior, non-exported function closures, or visual correctness; use gameplay/UI tests and review alongside this check.');
 }finally{rmSync(temp,{recursive:true,force:true});}

@@ -1,0 +1,9 @@
+{
+  "version": "v0.79",
+  "date": "2026-10-30",
+  "release": "aabe8d8f288b8957933c4c30a2cad2264b2bfb73cbeae14dbed844399940ee7c",
+  "aggregate": {"command":"npm test","exit_code":0,"log":"/tmp/v079-final-acceptance.log"},
+  "browser": {"environment":"managed Sites preview, cloud browser","report":"qa/v079/REPORT.md","passed":["set effects and equipped activation","Return Ring icon and dedicated codex","forge bottom-list consecutive selection without top reset","integer attributes and nonzero sub-1% rates","pending reward claim","compact inventory progress","functional and healing potion independent cooldown"],"not_run":["390px/320px physical viewport"]},
+  "container_server": {"compiler":"Go 1.27.3","unit_tests":"passed","race_tests":"passed","vet":"passed","amd64_arm64_static_compilation":"passed","docker_daemon_runtime":"not run","arm64_runtime":"not run"},
+  "notes":["Runtime battle precision unchanged by integer formatting.","No user-server deployment or user-save mutation.","Docker Hub publication must be separately confirmed; this source record is not a registry receipt.","Regression fixtures retain true production combat; fixed random group selection, insufficient historical boss build, full-bag fill count and absent retired empty-art directory assumptions."]
+}

@@ -11,7 +11,7 @@ try{
  // Fifteen unknown books use the existing 1–2-book slots (formerly capped by one enabled book).
  assert.equal(equipment+books+materials+fruit+token,20000*8);assert(books>29000&&books<31000);assert(equipment>70000&&equipment<85000);assert(fruit>450&&fruit<750);assert(token>1750&&token<2250);
  // Source policy is independent of concrete instance availability.
- for(const kind of ['dungeon','boss']){let count=0;const sets=new Set(),slots=new Set();for(let i=0;i<20000;i++){const result=rollSourceSet({source:'drop',kind,areaNumber:3,race:'dwarf'},rng);if(result){count++;sets.add(result.set);slots.add(result.slot);assert.equal(result.rarity,3);assert(SET_SLOTS.includes(result.slot));}}assert.equal(sets.size,3);assert.equal(slots.size,4);assert(count>(kind==='boss'?800:450)&&count<(kind==='boss'?1200:750));}
+ for(const kind of ['dungeon','boss']){let count=0;const sets=new Set(),slots=new Set();for(let i=0;i<20000;i++){const result=rollSourceSet({source:'drop',kind,areaNumber:3,race:'dwarf',clear:true},rng);if(result){count++;sets.add(result.set);slots.add(result.slot);assert.equal(result.rarity,3);assert(SET_SLOTS.includes(result.slot));}}assert.equal(sets.size,3);assert.equal(slots.size,4);assert(count>(kind==='boss'?2100:1350)&&count<(kind==='boss'?2700:1850));}
  let draws=0;const zero=()=>{draws++;return 0;};
  for(const source of ['forge','merchant','drop'])for(const areaNumber of [1,2,3])for(const kind of ['field','dungeon','boss']){
   if(source==='drop'&&areaNumber===3&&kind!=='field')continue;const before=draws;assert.equal(rollSourceSet({source,kind,areaNumber,race:'dwarf'},zero),null);assert.equal(draws,before);

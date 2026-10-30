@@ -5,3 +5,25 @@
 @media(max-width:650px){.returnRingRecipe{padding:14px}.returnRingHeader{flex-wrap:wrap;gap:12px}.returnRingHero{flex-basis:72px;min-height:72px}.returnRingHero svg{width:64px;height:64px}.returnRingRecipe h2{font-size:21px}.returnRingBadge{margin-left:84px}.returnRingMaterials{grid-template-columns:repeat(2,minmax(0,1fr))}.returnRingFinish{grid-template-columns:1fr;gap:12px}}
 @media(max-width:420px){.returnRingMaterials{grid-template-columns:1fr}.returnRingMaterialIdentity{flex-direction:row;text-align:left;padding:12px 0}.returnRingSource>span{font-size:12px}.returnRingRecipe .eyebrow{letter-spacing:1px}.returnRingMaterialTop{font-size:12px}}
 .returnRingSteps{list-style:none;padding:0;margin:0 0 12px;display:grid;gap:8px;font-size:12px}.returnRingSteps li{border-left:2px solid #566c7a;padding-left:7px;color:#bfced5;overflow-wrap:anywhere}.returnRingSteps li>span{display:block;color:#a9bac6;font-size:11px}.returnRingSteps li.isDone{border-color:#d1bb76;color:#e4ddb8}.returnRingSteps li.isDone>span{color:#d1d9a7}.returnRingSteps small{display:block;color:#b4c5ce;font-size:11px}
+/* The ring's codex and equipment detail share its forge palette and effect hierarchy. */
+.returnRingCodex{min-width:0;background:#142737;border-color:#887348}
+.returnRingCodex h2{color:#f0d796;margin:5px 0 10px}
+.returnRingCodex .eyebrow{color:#bba571;font-size:11px;letter-spacing:2px}
+.returnRingStory{font:14px/1.9 Georgia,'Songti SC',serif;color:#c7cdb7;border-left:3px solid #887348;padding:4px 0 4px 16px;margin:22px 0}
+.returnRingSectionTitle{color:#e9d9ad;font-size:14px;margin:20px 0 12px}
+.returnRingPowers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;text-align:left}
+.returnRingPowers>div{min-width:0;background:#1b3042;border:1px solid #4b6070;box-shadow:inset 1px 1px #344b5c;padding:14px}
+.returnRingPowers b{display:block;color:#f0d796;font:700 25px/1.4 monospace;margin-bottom:5px}
+.returnRingPowers b span{font:11px/1.5 sans-serif;margin-left:4px}
+.returnRingPowers strong{color:#e4e5d4;font-size:13px}
+.returnRingPowers p,.legendaryExclusive .returnRingPowers p{color:#c6d4dc;font-size:12px;line-height:1.8;margin:8px 0 0}
+.returnRingRules,.legendaryExclusive .returnRingRules{color:#acbdc8;font-size:12px;line-height:1.8;margin:12px 0}
+.returnRingKeepsakes>div{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.returnRingKeepsake{display:flex;min-width:0;flex-direction:column;align-items:center;gap:10px;padding:12px 6px;background:#10212f;border:1px solid #425765;text-align:center}
+.returnRingKeepsake>span{align-self:flex-start;color:#8fa7b5;font:11px monospace}
+.returnRingKeepsake strong{font-size:12px;line-height:1.6;color:#d6d6b9;overflow-wrap:anywhere}
+.returnRingCodexNotes{border-top:1px dashed #405563;margin-top:20px;padding-top:10px;color:#afc0cc;font-size:12px;line-height:1.8}
+.returnRingCodexNotes strong{color:#e9d9ad;margin-right:8px}
+.legendaryExclusive .returnRingPowers{margin-top:12px}
+@media(max-width:900px){.returnRingPowers{grid-template-columns:1fr}.returnRingPowers>div{padding:12px}.returnRingPowers b{font-size:22px}.returnRingKeepsakes>div{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){.returnRingCodex .returnRingHeader{flex-wrap:nowrap}.returnRingCodex .returnRingHero{flex-basis:64px;min-height:64px}.returnRingCodex .returnRingHero svg{width:56px;height:56px}.returnRingCodex h2{font-size:21px}.returnRingCodex .eyebrow{font-size:10px;letter-spacing:1px}.returnRingKeepsakes>div{grid-template-columns:repeat(2,minmax(0,1fr))}}

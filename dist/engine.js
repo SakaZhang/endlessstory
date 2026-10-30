@@ -1,3 +1,4 @@
+import {withSetEffects} from './set-effects.js';
 import {materialFusionQualityWeights,materialFusionSlotBias,favorableQualityProbabilities} from './material-fusion-policy.js';
 import {dungeonLootSnapshot,recordDungeonLootReceipt,validDungeonLootReceipts} from './dungeon-loot-receipts.js';
 import {dungeonDamageMultiplier} from './dungeon-threat.js';
@@ -70,7 +71,9 @@ import {rollEquipmentInputQuality,fusionDivineChance} from './fusion-input-schem
 export {equipmentFusionQualityDistribution,rollEquipmentInputQuality,fusionDivineChance} from './fusion-input-schema.js';
 import {equipmentFingerprint,validBatchSelection,validBatchQuote} from './batch-sale-schema.js';
 import {validCollectionLedger,addOwnedCollection,normalizeCollectionLedger} from './codex-collection-schema.js';
-import {rollSourceSet,isMerchantEquipmentSellable} from './set-source-schema.js';
+import {rollSourceSet,isMerchantEquipmentSellable,eligibleSetSource,setDropProbability} from './set-source-schema.js';
+import {RARE_REWARD_RULES,freshRareRewardProgress,validRareRewardProgress,rareRewardStorageBlocked} from './rare-reward-progress.js';
+export {RARE_REWARD_RULES,setDropProbability};
 export {rollSourceSet,isMerchantEquipmentSellable};
 // The retained developer sandbox uses named fixture skills, not the retired level-unlock model.
 const skillUnlocked=(_s,key)=>typeof key==='string'&&Object.hasOwn(SKILLS,key);
@@ -97,7 +100,7 @@ export const BUILD = [...EXPANSION_PACKS.flatMap(p=>p.sets.map(s=>({...s,originR
  {id:'anvil',name:'碎砧',sub:'裂甲 · 重击',skills:['break','heavy','interrupt',null],bonus:'2件：对流血或破甲目标的物理技能直伤提高20%。4件：破隙追击持斧时，对流血目标的第二击伤害提高60%；持锤时，对破甲目标的条件追加伤害提高75%；其他武器对流血或破甲目标的基础伤害提高25%。'},
  {id:'rune',name:'炉纹',sub:'铭火 · 引燃',skills:['mark','ignite','interrupt',null],bonus:'2件：灼烧持续伤害提高30%。4件：炉焰迸发持斧时，灼烧施加概率增加25个百分点（最高100%）；持锤时，对灼烧目标的条件追加伤害提高70%；其他武器基础伤害提高30%。'},
  {id:'guard',name:'守冢',sub:'坚守 · 反击',skills:['guard','break','interrupt',null],bonus:'2件：技能产生的护盾量提高25%。4件：守势重击持斧时，防御提升效果提高50%；持锤且自身有护盾时，条件追加伤害提高60%；其他武器基础伤害提高25%。'}
-];
+].map(withSetEffects);
 export const SKILLS={break:{name:'裂甲锤',icon:'⌁',cd:4,desc:'120%攻击伤害，削减目标25%护甲，持续6回合。'},heavy:{name:'重锻击',icon:'✦',cd:5,desc:'220%攻击伤害，破甲目标再提高25%。'},interrupt:{name:'断势',icon:'ϟ',cd:6,desc:'115%攻击伤害，打断本回合蓄力重击。'},mark:{name:'铭火',icon:'♨',cd:4,desc:'90%攻击的火元素伤害，附加5回合火焰灼烧；不受护甲影响。'},ignite:{name:'引燃',icon:'✧',cd:5,desc:'160%攻击的火元素伤害，灼烧目标额外80%攻击；不受护甲影响。'},guard:{name:'坚守',icon:'▣',cd:5,desc:'100%攻击伤害，3回合减伤40%并反击。'}};
 Object.assign(SKILLS,{
  warcry:{name:'砧誓战吼',icon:'⚒',cd:7,desc:'攻击提高25%，持续3回合。碎砧2件延长1回合。'},
@@ -473,10 +476,19 @@ function validPotions(s){
  const count=n=>Number.isSafeInteger(n)&&n>=0&&n<=1e9,time=n=>Number.isFinite(n)&&n>=0&&n<=1e15;
  const stacks=s.potions===undefined&&(s.potionStacks===undefined||(s.potionStacks&&typeof s.potionStacks==='object'&&!Array.isArray(s.potionStacks)&&Object.entries(s.potionStacks).every(([k,n])=>parsePotionKey(k)?.key===k&&count(n))));
  const selected=s.potionSlot?.key??null;
- return stacks&&(s.potionSlot===undefined||(s.potionSlot&&!Array.isArray(s.potionSlot)&&!Object.hasOwn(s.potionSlot,'type')&&(selected===null||parsePotionKey(selected)?.key===selected)&&typeof s.potionSlot.auto==='boolean'&&s.potionSlot.priorityVersion===1&&['low','high'].includes(s.potionSlot.priority)))&&(s.potionReadyAt===undefined||time(s.potionReadyAt))&&(s.potionBuffs===undefined||(s.potionBuffs&&typeof s.potionBuffs==='object'&&!Array.isArray(s.potionBuffs)&&Object.keys(s.potionBuffs).every(type=>POTION_BUFF_KEYS.includes(type))&&POTION_BUFF_KEYS.every(type=>{const b=s.potionBuffs[type];return b===undefined||(b&&typeof b==='object'&&!Array.isArray(b)&&Number.isInteger(b.quality)&&b.quality>=0&&b.quality<=3&&time(b.endAt));})));
+ return stacks&&(s.potionSlot===undefined||(s.potionSlot&&!Array.isArray(s.potionSlot)&&!Object.hasOwn(s.potionSlot,'type')&&(selected===null||parsePotionKey(selected)?.key===selected)&&typeof s.potionSlot.auto==='boolean'&&s.potionSlot.priorityVersion===1&&['low','high'].includes(s.potionSlot.priority)))&&(s.potionReadyAt===undefined||time(s.potionReadyAt))&&(s.potionFunctionCooldowns===undefined||(s.potionFunctionCooldowns&&typeof s.potionFunctionCooldowns==='object'&&!Array.isArray(s.potionFunctionCooldowns)&&Object.keys(s.potionFunctionCooldowns).length===POTION_BUFF_KEYS.length&&POTION_BUFF_KEYS.every(type=>time(s.potionFunctionCooldowns[type]))))&&(s.potionBuffs===undefined||(s.potionBuffs&&typeof s.potionBuffs==='object'&&!Array.isArray(s.potionBuffs)&&Object.keys(s.potionBuffs).every(type=>POTION_BUFF_KEYS.includes(type))&&POTION_BUFF_KEYS.every(type=>{const b=s.potionBuffs[type];return b===undefined||(b&&typeof b==='object'&&!Array.isArray(b)&&Number.isInteger(b.quality)&&b.quality>=0&&b.quality<=3&&time(b.endAt));})));
 }
 export function normalizePotions(s){
- if(!validPotions(s))return false;s.potionStacks??={};s.potionSlot??={key:null,auto:false,priority:'low',priorityVersion:1};s.potionReadyAt??=0;s.potionBuffs??={};for(const type of POTION_BUFF_KEYS)s.potionBuffs[type]??={quality:0,endAt:0};return true;
+ if(!validPotions(s))return false;s.potionStacks??={};s.potionSlot??={key:null,auto:false,priority:'low',priorityVersion:1};s.potionReadyAt??=0;s.potionFunctionCooldowns??=Object.fromEntries(POTION_BUFF_KEYS.map(type=>[type,s.potionReadyAt]));s.potionBuffs??={};for(const type of POTION_BUFF_KEYS)s.potionBuffs[type]??={quality:0,endAt:0};return true;
+}
+// Healing keeps its original save field; old shared timers seed every function once.
+// An unfinished encounter remains combat even while paused or not running.
+export function potionCooldownUntil(s,key,battle=s.activeEncounter??null){
+ const type=parsePotionKey(key)?.type;if(!type)return 0;
+ if(type==='healing')return s.potionReadyAt??0;
+ const cooldowns=s.potionFunctionCooldowns;if(!cooldowns)return s.potionReadyAt??0;
+ const inCombat=(battle&&!battle.done)||(s.activeEncounter&&!s.activeEncounter.done);
+ return inCombat?Math.max(0,...POTION_BUFF_KEYS.map(id=>cooldowns[id]??0)):(cooldowns[type]??0);
 }
 export function potionCount(s,type,quality=0){return s.potionStacks?.[potionKey(type,quality)]??0;}
 
@@ -495,11 +507,11 @@ export function drinkPotion(s,key=undefined,now=Date.now(),battle=s.activeEncoun
  if(key===undefined)key=resolvePotionKey(s,now);
 
  const parsed=parsePotionKey(key);if(!parsed||!POTION_QUALITY_EFFECTS[parsed.quality]||!validPotions(s)||!normalizeHealth(s,now))return false;settleRest(s,now);
- const {type,quality}=parsed,effect=POTION_QUALITY_EFFECTS[quality],clock=s.lastHealthClock;if(s.restUntil>0||s.heroHp<=0||(s.potionReadyAt??0)>clock||potionCount(s,type,quality)<1)return false;
+ const {type,quality}=parsed,effect=POTION_QUALITY_EFFECTS[quality],clock=s.lastHealthClock;if(s.restUntil>0||s.heroHp<=0||potionCooldownUntil(s,parsed.key,battle)>clock||potionCount(s,type,quality)<1)return false;
  const max=stats(s).hp;if(type==='healing'&&s.heroHp>=max)return false;
  const current=potionBuff(s,type),active=current.endAt>clock;if(type!=='healing'&&active&&quality<current.quality)return false;
  const end=type==='healing'?0:(active&&quality===current.quality?current.endAt:clock)+effect.durationMs;if(end>1e15||clock+POTION_COOLDOWN_MS>1e15)return false;
- normalizePotions(s);s.potionStacks[parsed.key]--;s.potionReadyAt=clock+POTION_COOLDOWN_MS;
+ normalizePotions(s);s.potionStacks[parsed.key]--;if(type==='healing')s.potionReadyAt=clock+POTION_COOLDOWN_MS;else s.potionFunctionCooldowns[type]=clock+POTION_COOLDOWN_MS;
  if(type==='healing'){const beforeHp=s.heroHp,context=treePassiveContext(s),amount=context?passiveReceivedHeal(context,{amount:max*effect.heal,currentHp:s.heroHp,maxHp:max}):Math.min(max-s.heroHp,max*effect.heal);s.heroHp=Math.min(max,s.heroHp+amount);if(battle&&!battle.done){battle.heroHp=s.heroHp;if(s.heroHp>beforeHp)emitCombatDisplay(battle,{kind:'heal',sourceId:'potion:'+parsed.key,skillId:null,element:null,hpDelta:s.heroHp-beforeHp});}}
  else s.potionBuffs[type]={quality,endAt:end};
  return true;
@@ -766,6 +778,7 @@ export function startStoryFieldEncounter(s,sceneId,now=Date.now()){
  if(!validSave(next))return null;Object.assign(s,next);return s.activeEncounter;
 }
 export function startInstanceEncounter(s,instanceId,now=Date.now()){
+ if(!validRareRewardProgress(s,validEquipment)||rareRewardStorageBlocked(s))return null;
  const instance=PLANNED_INSTANCES[instanceId];if(s.version!==SCHEMA_VERSION||!instance?.enabled||!canStartEncounter(s,now,instanceId)||!normalizeExpedition(s))return null;
  if(s.activeEncounter&&!s.activeEncounter.rewarded)return s.activeEncounter.instanceId===instanceId?s.activeEncounter:null;
  if(s.dungeonRun&&s.dungeonRun.instanceId!==instanceId)return null;
@@ -871,13 +884,15 @@ function settleNpcObjectiveKills(s,e,now){
  return changed;
 }
 function rewardDwarf(s,e,now){
- if(s.activeEncounter!==e||!e.done||!e.win||e.rewarded||!e.enemies.every(u=>u.hp===0)||!validMultiEncounter(e,INSTANCES))return null;
- const lootBefore=e.kind==='dungeon'?dungeonLootSnapshot(s):null;
+ if(!validRareRewardProgress(s,validEquipment)||rareRewardStorageBlocked(s)||s.activeEncounter!==e||!e.done||!e.win||e.rewarded||!e.enemies.every(u=>u.hp===0)||!validMultiEncounter(e,INSTANCES))return null;
  const run=s.dungeonRun,clear=e.kind==='dungeon'&&e.dungeonStage===3;
  if(e.kind==='dungeon'&&(!run||run.instanceId!==e.instanceId||run.runId!==e.runId||run.stage!==e.dungeonStage))return null;
+ const priorClaims=claimPendingRareRewards(s);
+ const lootBefore=e.kind==='dungeon'?dungeonLootSnapshot(s):null;
  normalizeCodexCollection(s);
  return withMultiRng(e,()=>{
   e.rewarded=true;e.lootSummary=emptyLootSummary();e.materialLoot=[];e.rewardNotes=[];
+  if(priorClaims?.sets||priorClaims?.fruit)e.rewardNotes.push('此前待领奖励已入包：套装 '+priorClaims.sets+' / 回忆之果 '+priorClaims.fruit);
   settleNpcObjectiveKills(s,e,now);recordNpcEventVictory(s,e);recordStoryEncounterVictory(s,e);
   const st=stats(s),multiple=e.fieldGroup?2:1,baseXp=e.rewardXp*multiple,knowledge=st.specials.knowledge&&Math.random()<.05,clearRewards=clear?e.clearRewards:null;
   s.kills++;s.gold+=e.rewardGold*multiple+(clearRewards?.gold??0);e.acceptedXp=gainXp(s,baseXp*(knowledge?2:1)+(clearRewards?.xp??0)).acceptedXp;
@@ -903,6 +918,7 @@ function rewardDwarf(s,e,now){
   if(e.boss){const area=AREAS[e.areaId],receipt=prepareLegendaryDrop({settlementId:e.id,nodeId:e.instanceId,regionRace:area?.race,kind:e.kind,won:true},{probability:legendaryPoolProbability(e.luck??0,returnRingRareBonus(s,'boss-legendary')),random:Math.random,generateItem:({legendaryId})=>{const lv=rollDropEquipmentLevel(areaGearLevel(e.instanceId),area.levelRange);return legendaryItem(legendaryId,lv.level,{...lv,luck:e.luck??0});},validateItem:it=>validEquipment(it)});if(receipt){e.legendaryDropReceipt=receipt;if(receipt.item){const accepted=receiveBattleLoot(s,{kind:'equipment',item:structuredClone(receipt.item)},e.lootSummary);e.rewardNotes.push(accepted?'传说 · '+receipt.item.name:'传说未收取 · '+receipt.item.name);}}}
   const markChance=e.boss?.08:clear?(clearRewards?.markChance??.02):0;
   if(markChance>0&&Math.random()<lootOccurrenceProbability(markChance,e.luck??0)&&receiveBattleLoot(s,{kind:'consumable',key:'reforgeToken',quantity:1},e.lootSummary))e.rewardNotes.push('重铸印记 ×1');
+  settleRareClearRewards(s,e,clear);
   settleInfinityRecipe(s,e,{instances:INSTANCES});
   applyReturnRingVictory(s,e,stats(s).hp);
   if(e.boss){s.instanceCooldowns[e.instanceId]=Math.max(now,s.lastHealthClock??0)+1800000;s.running=e.automaticBoss?!!s.running:!!s.expedition.autoBoss;}
@@ -912,6 +928,7 @@ function rewardDwarf(s,e,now){
   }
   for(const row of e.materialLoot)e.rewardNotes.push(MATERIAL_QUALITIES[row.quality]+' '+(MATERIALS[row.material]?.name??row.material)+' ×'+row.count);
   for(const action of ['discarded','overflow'])if(Object.values(e.lootSummary[action]).some(Boolean))e.rewardNotes.push((action==='discarded'?'品质过滤丢弃':'背包已满')+'：'+JSON.stringify(e.lootSummary[action]));
+  if(rareRewardStorageBlocked(s)){s.running=false;e.rewardNotes.push('珍稀待领奖励已满，请清理背包并领取后继续远征');}
   recordDungeonLootReceipt(s,e,lootBefore,now);
   if(e.playerShieldLayers)s.equipmentShieldCarry={version:1,clock:e.playerShieldLayers.clock,layers:e.playerShieldLayers.layers.filter(layer=>layer.ownerItemId&&(layer.source==='reactor:'+layer.ownerItemId||layer.source==='legendary:'+layer.ownerItemId)).map(layer=>structuredClone(layer))};
   s.nextBattleAt=Math.max(now,s.lastHealthClock??0)+1800;s.nextActionAt=s.nextBattleAt;if(s.stopAfterBattle||(s.stopAfterDungeon&&!s.dungeonRun)){s.running=false;s.stopAfterBattle=false;s.stopAfterDungeon=false;}s.activeEncounter=null;return first;
@@ -982,10 +999,39 @@ function rollQuality(weights=[65,28,6.5,.5]){return Number(weighted(weights.map(
 function rollDrop(s,boss,luck=0,instanceId=resolveLegacySite(s.location).id+'-field',clear=false,lootSummary=emptyLootSummary(),chanceOverride){
  const instance=INSTANCES[instanceId],area=AREAS[instance?.areaId];if(!instance||!area)return null;
  const dungeon=instance.kind==='dungeon';if(Math.random()>=lootOccurrenceProbability(chanceOverride??(boss?.65:clear?.35:.18),luck))return null;
- const setRoll=rollSourceSet({source:'drop',kind:instance.kind,areaNumber:area.number,race:area.race,luck});
- const dropSlots=SLOTS.filter(k=>k!=='core'||area.race==='ashen'),slot=setRoll?.slot??dropSlots[rand(0,dropSlots.length-1)],set=setRoll?.set??null,quality=setRoll?.rarity??luckyRoll(()=>rollQuality(boss?[50,35,13,2]:dungeon?[55,34,10,1]:[65,28,6.5,.5]),luck);
+ const dropSlots=SLOTS.filter(k=>k!=='core'||area.race==='ashen'),slot=dropSlots[rand(0,dropSlots.length-1)],set=null,quality=luckyRoll(()=>rollQuality(boss?[50,35,13,2]:dungeon?[55,34,10,1]:[65,28,6.5,.5]),luck);
  const rolled=rollDropEquipmentLevel(areaGearLevel(instanceId),area.levelRange),it=item(slot,rolled.level,set,quality,{...rolled,luck,originRace:area.race});
  return receiveBattleLoot(s,{kind:'equipment',item:it},lootSummary)?it:null;
+}
+// Pending rewards retain the exact generated identity; quality filters never destroy them.
+export function claimPendingRareRewards(s){
+ if(!validRareRewardProgress(s,validEquipment)||!validCodexCollection(s)||!validConsumables(s))return null;
+ const p=s.rareRewardProgress;if(!p)return {sets:0,fruit:0};
+ let sets=0,fruit=0;const remain=[];
+ for(const it of p.pendingSets){if(canReceiveEquipment(s,it)){s.inventory.push(it);recordCollectedEquipment(s,it);sets++;}else remain.push(it);}
+ p.pendingSets=remain;
+ const quantity=Math.min(p.pendingFruit,1e9-(s.consumables?.memoryFruit??0));
+ if(quantity>0&&canReceiveItem(s,'memoryFruit',quantity)){normalizeTalents(s);s.consumables.memoryFruit+=quantity;p.pendingFruit-=quantity;fruit=quantity;}
+ return {sets,fruit};
+}
+function settleRareClearRewards(s,e,clear){
+ if(e.kind!=='boss'&&!clear)return;
+ const p=s.rareRewardProgress??=freshRareRewardProgress(),area=AREAS[e.areaId];
+ const points=p.fruitProgress+(e.kind==='boss'?RARE_REWARD_RULES.bossPoints:RARE_REWARD_RULES.dungeonPoints);
+ p.fruitProgress=points%RARE_REWARD_RULES.fruitPoints;
+ const fruits=Math.floor(points/RARE_REWARD_RULES.fruitPoints);p.pendingFruit+=fruits;
+ const args={source:'drop',kind:e.kind,areaNumber:area.number,race:area.race,clear,luck:e.luck??0};
+ let generated=null;
+ if(eligibleSetSource(args)){
+  const guaranteed=clear&&p.dungeonDryStreak===RARE_REWARD_RULES.dungeonPity-1;
+  const rolled=rollSourceSet({...args,guaranteed});
+  if(rolled){const lv=rollDropEquipmentLevel(areaGearLevel(e.instanceId),area.levelRange);generated=item(rolled.slot,lv.level,rolled.set,rolled.rarity,{...lv,luck:e.luck??0,originRace:area.race});p.pendingSets.push(generated);if(clear)p.dungeonDryStreak=0;}
+  else if(clear)p.dungeonDryStreak++;
+ }
+ const claimed=claimPendingRareRewards(s);
+ if(generated)e.rewardNotes.push((p.pendingSets.some(it=>it.id===generated.id)?'套装待领取 · ':'套装 · ')+generated.name);
+ if(fruits)e.rewardNotes.push('回忆之果 '+(claimed.fruit>=fruits?'已入包':'待领取')+' ×'+fruits);
+ e.rewardNotes.push('回忆之果进度 '+p.fruitProgress+'/'+RARE_REWARD_RULES.fruitPoints);
 }
 export function reward(s,e,now=Date.now()){
  if(s.version!==SCHEMA_VERSION||!e||e.multiVersion!==1||e.storyScenario)return null;
@@ -998,12 +1044,14 @@ export function reward(s,e,now=Date.now()){
  return null;
 }
 export function offline(s,now=Date.now()){
- if(s?.version!==SCHEMA_VERSION||!validExpeditionState(s))return null;
+ if(s?.version!==SCHEMA_VERSION||!validExpeditionState(s)||!validRareRewardProgress(s,validEquipment))return null;
  if(!Number.isFinite(now)||now<0||now>1e15)return null;
  const start=Math.max(s.lastSeen,s.lastHealthClock??s.lastSeen),end=Math.min(now,start+4*3600000),beforeGold=s.gold,beforeXp=s.xp,beforeLevel=s.level;
  if(!normalizeHealth(s,start)||!normalizeMaterials(s)||!normalizePotions(s))return null;
  const worldEvents=advanceRandomWorldEvents(s,now);if(!worldEvents)return null;
  const beforeMaterials=new Map(materialEntries(s).map(x=>[x.key,x.count]));let time=start,kills=0,rests=0,rounds=0;const lootSummary=emptyLootSummary();
+ // Do not spin on an unclaimed saturated reward queue after a reload.
+ if(rareRewardStorageBlocked(s)){s.running=false;s.chronicle.unshift('珍稀待领奖励已满：远征暂停，请清理背包并领取后继续。');}
  // Real combat turns, bounded to four hours. Camp waits jump to their deadline.
  withWarReplay(s,()=>withNpcObjectiveReplay(s,()=>{while(time<end&&s.running){
   if(s.restUntil>0){if(s.restUntil>end)break;time=Math.max(time,s.restUntil);settleRest(s,time);if(!s.running)break;continue;}
@@ -1232,7 +1280,7 @@ export function applyForgeFavor(it){
  it.divine={id:'forge-favor',name:'神赐·炉火眷顾',model:'raw-v1',bonus};return true;
 }
 export const LEGENDARY_CODEX=[{id:'infinity-gauntlet',name:'无限手套',slot:'gloves',icon:'gloves',implemented:true,lore:'五颗异色宝石被嵌进同一只护手，托座上还留着五种不同的锻造痕迹。握紧手掌时，原本互不相容的微光沿着指节相连，短暂地汇成一道亮线。',affix:'无限',effect:'每成功释放5次主动技能，对当前目标造成其最大生命50%的伤害；普通敌人与首领比例相同。普攻、被动与多段命中不额外计数，卸下清空累计。',acquisition:'普通副本通关时有机会学会隐藏配方，以五族各一颗至臻宝石制作；每档仅一次，失去后无法重造。',attributes:'4条可调整普通词条与固定专属'},{id:'return-ring',name:'归途之环',slot:'ring',icon:'ring',implemented:true,lore:'五件旧物沿着指环内侧相接，接缝没有被磨平。每一道细小的棱角，都让人想起送出它的人，以及那段曾停下脚步的路。',affix:'归途',effect:'装备时经验获取 +20%，双戒指槽不重复叠加，卸下后失效。每次战斗胜利恢复15%最大生命，最高恢复至生命上限，包含普通副本阶段胜利。首领传说、稀有材料与无限宝石的有效掉落率增加3个百分点；不改变来源和持有上限。',acquisition:'剧情学习配方后，以五族旧物制作；每档仅一次。',attributes:'4条可洗练普通词条与固定专属'},...EXPANSION_PACKS.flatMap(p=>p.legendaries.map(d=>({...d,implemented:true,lore:d.lore??d.description??'',affix:d.exclusiveName??d.exclusiveId,effect:d.exclusiveDescription??d.exclusive?.description??d.effect??d.description??'',acquisition:d.questOnly?'第五章主线剧情（唯一）':p.name+'地区首领额外掉落，可重复获得',attributes:d.ordinaryAffixCount===0?'仅基础属性与固定专属，无随机普通词条':'4条随机普通词条与固定专属',icon:d.icon??d.slot}))),{id:'first-forge-oathhammer',name:'王统·初炉誓锤',slot:'weapon',icon:'firstforge',implemented:true,lore:'每一代矮人王继承此锤时，都会重新锻造它，并刻下自己的名字。旧王的誓言留在锤身，新王的名字融入炉火。',affix:'祖王回响',effect:'普攻或主动伤害技能每5次出手，向当前目标追加140%攻击的单体重击，穿透30%护甲。',acquisition:'矮人地区首领额外掉落，可重复获得。',attributes:'4条随机普通词条与固定专属；基础和普通词条区间高于同等级至臻。',tuning:'回响可暴击、实际生命伤害可吸血，不触发死神、多重或累计。'},{id:'everburning-reactor',name:'不熄之炉',slot:'amulet',icon:'fire',implemented:true,lore:'这座微型炉藏在厚实的金属外壳里，贴近耳边时，能听见极轻的鼓风声。炉芯收拢战斗留下的余热，再从狭窄的排口吐出火光；火光散去后，仍有一层温热护在身前。',affix:'余热循环',effect:'每12秒实际战斗时间自动向全体释放75%攻击火焰脉冲，并获得8%最大生命加通用护盾增幅的护盾，持续3秒战斗时间；同源护盾刷新不叠加。',acquisition:'矮人地区首领额外掉落，可重复获得。',attributes:'4条随机普通词条与固定专属；基础和普通词条区间高于同等级至臻。',tuning:'实际卸下清空充能并移除自身护盾。'}];
-export const SET_CODEX=BUILD.map(b=>({id:b.id,name:b.name,icon:b.id,parts:[...SET_SLOTS],bonus:b.bonus}));
+export const SET_CODEX=BUILD.map(b=>({id:b.id,name:b.name,icon:b.id,parts:[...SET_SLOTS],bonus:b.bonus,effects:b.effects}));
 function validCodexCollection(s){return validCollectionLedger(s,SET_CODEX,LEGENDARY_CODEX);}
 export function normalizeCodexCollection(s){return normalizeCollectionLedger(s,SET_CODEX,LEGENDARY_CODEX,validEquipment);}
 export function recordCollectedEquipment(s,it){
@@ -1263,7 +1311,7 @@ export function validSave(s){
  if(s.activeEncounter?.kind==='dungeon'&&(!s.dungeonRun||s.activeEncounter.runId!==s.dungeonRun.runId||s.activeEncounter.dungeonStage!==s.dungeonRun.stage))return false;
  if(s.contentMigration!==undefined)return false;
  if(s.activeEncounter&&(s.activeEncounter.multiVersion!==1||(!s.activeEncounter.developmentFixture&&(s.activeEncounter.contentVersion!=='dwarf-m2-v1'||s.activeEncounter.skillResolver!=='tree-v1'))))return false;
- if(!validRegionNavigation(s)||!validEquipmentRuntime(s)||!validMonsterLedger(s)||!validCodexCollection(s)||!validLootFilters(s)||!validPendingForgeClaim(s)||!validAreaProgress(s)||!validExpeditionState(s)||!Array.isArray(s.inventory)||s.inventory.length>INVENTORY_SAVE_LIMIT||!s.inventory.every(validEquipment)||s.inventory.filter(i=>i.legendaryId==='ashen-primal-core').length>1||!validPendingReforge(s))return false;
+ if(!validRareRewardProgress(s,validEquipment)||!validRegionNavigation(s)||!validEquipmentRuntime(s)||!validMonsterLedger(s)||!validCodexCollection(s)||!validLootFilters(s)||!validPendingForgeClaim(s)||!validAreaProgress(s)||!validExpeditionState(s)||!Array.isArray(s.inventory)||s.inventory.length>INVENTORY_SAVE_LIMIT||!s.inventory.every(validEquipment)||s.inventory.filter(i=>i.legendaryId==='ashen-primal-core').length>1||!validPendingReforge(s))return false;
  if(s.merchant?.offers?.some(o=>o.type==='equipment'&&o.stock===1&&s.inventory.some(it=>it.id===o.item?.id)))return false;
  if((s.nextActionAt!==undefined&&(!Number.isFinite(s.nextActionAt)||s.nextActionAt<0||s.nextActionAt>1e15))||(s.restResume!==undefined&&typeof s.restResume!=='boolean')||(s.nextBattleAt!==undefined&&(!Number.isFinite(s.nextBattleAt)||s.nextBattleAt<0||s.nextBattleAt>1e15))||!validRecipes(s)||!validEncounter(s.activeEncounter)||!validPotions(s)||!validHealth(s)||!validLoadoutSlots(s)||(s.merchant!==undefined&&!validMerchant(s.merchant,s)))return false;
  if(new Set(s.inventory.map(i=>i.id)).size!==s.inventory.length||!s.equip||Object.keys(s.equip).length!==raceSockets(s.race).length||!raceSockets(s.race).every(k=>s.equip[k]===null||s.inventory.some(i=>i.id===s.equip[k]&&i.slot===SOCKET_TYPE[k])))return false;
