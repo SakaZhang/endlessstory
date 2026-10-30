@@ -1,89 +1,56 @@
-# Goblin equipment survivability — v0.81.2
+# Goblin TOTAL survivability — final v0.81.2 policy
 
-## Approved change and implementation
+## Latest user instruction supersedes the earlier equipment-only candidate
 
-Goblin-origin equipment effective **base HP and armor ×0.80**, integer-rounded with existing zero values preserved and positive values at least1. Applies to52 ordinary identities,12 set pieces (all3 sets), and both legends: **66 of337 total catalog identities**. Weapon, head, chest, gloves, boots, ring and amulet families are covered. Catalog `templateId`/`legendaryId`, canonical origin, slot and variant choose the policy; wearer race does not.
+Latest target: same level, loadout and talents versus released **812e4e35**, **Goblin-character total maximum HP ×0.80 and total armor ×0.70**, including level growth. The earlier equipment-base-only20% reduction is discarded, not stacked. Its measurements under `qa/goblin-equipment-v0812/` are superseded and must not be presented as final release evidence.
 
-`dist/equipment-base-balance.js` is the single authored runtime policy, consumed by `enhancedItemBase`, formal enhancement quotes, App equipment detail and developer workshop base preview. There is no separately generated data copy to synchronize. Existing race source/catalog data and its generation paths are unchanged.
+Implementation: `dist/race-survival-balance.js` supplies the two multipliers. `baseStats` in `dist/engine.js` applies them once, after level, equipment, ordinary-affix and talent aggregation. Internal precision is retained; the existing UI rounds displayed attributes. All Goblin/common HP/armor passives are multiplicative, so their final totals retain the same ratios. This is the same shared production chain used by combat and character panels, not a cosmetic panel adjustment.
 
-Order: immutable level/quality-derived raw budget → effective racial +0 base → existing enhancement → existing divine multiplier. Attack, all ordinary affixes, special/legend/set effects, enhancement price/chance, equipment identities and provenance stay unchanged. The raw M2 budget remains strictly validated; no save migration, new compatibility schema, inventory rewrite or forgiving validator is added. Existing owned gear and newly dropped/forged/purchased gear get the same effective base. Existing `normalizeHealth` caps previously full health to the lower maximum without invalidating the save.
+Naked growth changes from `HP=120+14×level` to `HP=96+11.2×level`, and from `armor=5+level` to `armor=3.5+0.7×level`. Attack remains `14+3×level`. Every future level, talent and gear contribution remains inside the survival multiplier, including levels101/150/250/1000: no high-level rebound. The existing item-budget level cap is not altered.
 
-Level growth remains the same1.025-per-level M2 formula and original quality/slot allocations (including the existing100-level budget cap); the20% factor does not flatten it. Same Goblin equipment gives identical contributions to every wearer race. Goblin characters wearing other-origin equipment do **not** receive this penalty.
+All item raw budgets, provenance, catalog identities, affixes, enhancement/divine calculations and equipment displays return to the original812e4e35 behavior. `equipment-base-balance.js` and its hooks are removed. An item has the same numbers on every wearer; only a **Goblin actor's total** is reduced. Other-race characters remain unchanged even when wearing Goblin equipment. Goblins wearing mixed/foreign-origin gear still receive the exact actor total adjustment. Item details correctly show item attributes, while the hero panel shows the racial total.
 
-Poison source files, all poison timings/damage and approved cooldowns remain byte-identical:2s /3% per layer /5 cap /12s all-Goblin-layer refresh. No skill or set-offense changes. Naked first-dungeon baseline is unaffected.
+Attack, poison, skill/set offensive coefficients and cooldowns are unchanged. Goblin poison remains2s /3% per layer /5 cap /12s refresh. Immutable source hashes for gear budgets/factories, Goblin equipment/skills, poison and passive derivation are pinned against812e4e35 in the regression. No raw save mutation, schema expansion, compatibility migration or relaxed validator is introduced. Existing health normalization safely caps current HP to the lower maximum.
 
-## Calibration
+## Exact released-baseline regression
 
-Runner: `goblin-equipment-v0812-audit.mjs`. Local evidence: `qa/goblin-equipment-v0812/{before,candidate-15,after-20,comparison}.json`.
+`fixtures/goblin-total-survival-v0812-baseline.json` contains208 valid states and base/final outputs generated from the exact812e4e35 runtime:
 
-12 lawful loadouts: level20/60/100, eight ordinary Q2 slots or four Q3 pieces of each Goblin set plus four Q2 slots.13-point prerequisite-complete poison/heal skills, no talents/passives/specials/enhancement/divine/potions.10 paired combat seeds against real same-level Human fields, dungeon **first stages**, and bosses. Area2 has no boss, so Lv20 boss is omitted rather than replaced with an invented target.320 actual encounters per candidate;960 across baseline/15%/20%, plus naked Lv1 controls. Every fight starts at full health. Inventory hashes match across candidates.
+-80 Goblin cases: Lv1/20/60/100/101/150/250/1000 × naked, ordinaryQ2, each of3 sets, both Goblin legends, HP/armor talents, mixed-origin gear, survival passives and+5 divine gear.
+-128 other-race controls: all4 other races × those8 levels × naked/Q2/legends/mixed.
+-Additional92 runtime checks cover every one of the9 available Goblin/common passives alone and every two-slot pair at Lv60 and150.
 
-15% base reduction produced14.5–21.5% physical-EHP reduction;20% produced19.2–27.9%.20% was selected because it gives measurable extra incoming damage without breaking these encounters. It is **not20% off total character stats**: full-character HP falls10.7–15.9%; armor14.4–17.1%.
+`goblin-equipment-v0812-tests.mjs` passes all exact ratio checks (floating tolerance1e-8), unchanged other stat objects including ATK, untouched item totals, strict invalid-budget/identity rejection, owned/full-health save acceptance and ordinary HP capping. Paid enhancement success/failure and actual App itemDetail/formal previews preserve the original item values. A real production heal reads the reduced maximum HP; controlled physical basic hits use precisely the armor displayed by the combat character panel.
 
-Physical EHP = `HP × (1 + armor/100)` from the actual physical mitigation formula, before rounding individual hits. It excludes dodge, shields, elemental mitigation and healing.
+The fixture is byte-reproducible with `BASELINE_ENGINE_ROOT=/path/to/extracted-812e4e35 node tools/generate-goblin-total-baseline.mjs /tmp/baseline.json`. The generator refuses any engine other than SHA256 `051cc2c890a303af267c2f94c2cf1b3b3e675d951d5c1d83d7338d9558c00b5d`. The checked fixture SHA256 is `b5e063ab84ab0b4f06dd77d5fad7a15a0e31e3af7743ff7231931c54c4da8f4a`.
 
-| Level | Gear profile | Character HP before → after | Armor before → after | Physical EHP before → after | EHP decrease |
-|---:|---|---:|---:|---:|---:|
-| 20 | Ordinary Q2 | 1132 → 991 | 121 → 102 | 2502 → 2002 | 20.0% |
-| 20 | 苦菌行者4pc | 1245 → 1087 | 100 → 85 | 2490 → 2011 | 19.2% |
-| 20 | 余粮斥候4pc | 1272 → 1108 | 114 → 96 | 2722 → 2172 | 20.2% |
-| 20 | 旧索匠4pc | 979 → 874 | 146 → 122 | 2408 → 1940 | 19.4% |
-| 60 | Ordinary Q2 | 3298 → 2895 | 289 → 245 | 12829 → 9988 | 22.1% |
-| 60 | 苦菌行者4pc | 3245 → 2808 | 292 → 250 | 12720 → 9828 | 22.7% |
-| 60 | 余粮斥候4pc | 3210 → 2780 | 329 → 280 | 13771 → 10564 | 23.3% |
-| 60 | 旧索匠4pc | 2583 → 2277 | 475 → 396 | 14852 → 11294 | 24.0% |
-| 100 | Ordinary Q2 | 6780 → 5771 | 631 → 533 | 49562 → 36530 | 26.3% |
-| 100 | 苦菌行者4pc | 7247 → 6102 | 600 → 510 | 50729 → 37222 | 26.6% |
-| 100 | 余粮斥候4pc | 7384 → 6212 | 696 → 587 | 58777 → 42676 | 27.4% |
-| 100 | 旧索匠4pc | 5563 → 4755 | 1068 → 885 | 64976 → 46837 | 27.9% |
+## Paired real combat measurement
 
-All320/320 encounters win at both baseline and20%; all32 aggregate fight-time and ATK rows are identical. At Lv100, ordinary-Q2 boss mean incoming HP damage rises819.3→1008.3, end-health fraction91.9%→88.2%; poison-set boss incoming966.3→1109.0, end-health90.7%→87.2%. At Lv20 ordinary dungeon first stage, incoming45.0→48.9, end-health97.5%→96.8%.
+Runner: `goblin-equipment-v0812-audit.mjs`; final evidence: `qa/goblin-total-v0812/{before,after,comparison}.json`. Baseline uses the exact812e4e35 extracted runtime; no earlier candidate is used as baseline.
 
-Actual poison HP-loss sums are identical in30/32 rows. The two Lv60 boss/set rows increase by0.66 and0.62 mean damage (<0.011%); captured enemy-healing increases by exactly the same amounts. Lower player armor allows slightly more enemy lifesteal, hence slightly more enemy HP must be removed. Poison formula/timing/offense is unchanged; do not claim every post-mitigation outcome is numerically identical.
+12 lawful loadouts: Lv20/60/100, ordinaryQ2 across8 slots or4 Q3 Goblin set pieces plus4 Q2 slots. Prerequisite-complete13-point poison/heal configuration; no talents/passives/specials/enhancement/divine/potions.10 paired seeds against actual same-level Human field/dungeon-first-stage/boss encounters. Area2 has no boss, so Lv20 omits that encounter.320 encounters before and320 after; all640 win. All32 aggregate ATK and encounter-time rows are identical, and paired inventories hash identically.
 
-The single-seed Lv1 naked Goblin first dungeon has byte-identical stats and identical outcome/rounds/remaining HP across all three candidates. This is an isolation regression, not a general difficulty claim.
+| Level | Gear profile | Total HP before → after | Total armor before → after | Physical EHP before → after |
+|---:|---|---:|---:|---:|
+| 20 | OrdinaryQ2 | 1132 → 905.6 | 121 → 84.7 | 2502 → 1673 |
+| 20 | 苦菌行者4pc | 1245 → 996 | 100 → 70 | 2490 → 1693 |
+| 20 | 余粮斥候4pc | 1272 → 1017.6 | 114 → 79.8 | 2722 → 1830 |
+| 20 | 旧索匠4pc | 979 → 783.2 | 146 → 102.2 | 2408 → 1584 |
+| 60 | OrdinaryQ2 | 3298 → 2638.4 | 289 → 202.3 | 12829 → 7976 |
+| 60 | 苦菌行者4pc | 3245 → 2596 | 292 → 204.4 | 12720 → 7902 |
+| 60 | 余粮斥候4pc | 3210 → 2568 | 329 → 230.3 | 13771 → 8482 |
+| 60 | 旧索匠4pc | 2583 → 2066.4 | 475 → 332.5 | 14852 → 8937 |
+| 100 | OrdinaryQ2 | 6780 → 5424 | 631 → 441.7 | 49562 → 29382 |
+| 100 | 苦菌行者4pc | 7247 → 5797.6 | 600 → 420 | 50729 → 30148 |
+| 100 | 余粮斥候4pc | 7384 → 5907.2 | 696 → 487.2 | 58777 → 34687 |
+| 100 | 旧索匠4pc | 5563 → 4450.4 | 1068 → 747.6 | 64976 → 37722 |
 
-Limitations: this is not a multi-hour sustain test, whole-dungeon completion test, all boss-mechanics audit, cross-race balance ranking or optimized ceiling. The set comparisons retain the same poison/heal skill profile to isolate gear-base survivability; they do not claim optimal ambush/contraption builds.
+Physical EHP is `HP×(1+armor/100)`, before individual-hit rounding, excluding dodge/shields/elemental mitigation/healing. The simultaneous HP and armor changes have a larger combined survival impact than either percentage alone.
 
-## Verification and boundaries
+At Lv100 ordinaryQ2 boss, mean incoming HP damage819.3→1208.5 and finish-health91.9%→84.6%; poison-set boss966.3→1300.4 and90.7%→84.0%. Enemy lifesteal and HP-based healing/shields can change downstream despite unchanged attack/poison formulas; total post-mitigation poison HP loss is not claimed identical.
 
-`goblin-equipment-v0812-tests.mjs` passes337 identities at Lv1/20/60/100, all ordinary qualities, all66 Goblin identities, other-origin numerical controls, cross-race wear, every+0..+5 enhancement and divine once, paid success/failure quotes, reforge, strict raw tamper/identity rejection, old-current/full-health owned saves, and all five earned current-save fixtures. Actual App itemDetail plus formal/developer enhancement renderers show effective base values. The existing integer-display source assertion now requires the effective-base helper rather than the immutable raw field; integer rounding assertions are retained.
+**Naked Lv1 is now intentionally affected.** Its real first-dungeon single-seed control still wins in4 rounds: HP134→107.2, armor6→4.2, remaining HP114.4637→87.6637. Do not retain the discarded candidate's “naked unchanged” claim.
 
-Initial focused result:34 of35 suites passed. `goblin-ashen-catalog-parity-tests.mjs` stopped at an inherited pre-v081 poison-skill hash pin (`86769b18…`), while both released HEAD and current `dist/races/goblin/skills.js` hash to `7ff45f8f…`. No skill file changed here and no fixture bypass was added; integration owns reconciliation of that old milestone assertion. All source-equipment budget/identity validators and `equipment-slot-parity-tests` pass. Full aggregate/build/publication were not run by this worker.
+Actual final-build browser verification used a separate frozen Lv100Q2 fixture from812e4e35: HUD and full attributes show HP6635→5308, armor650→455, ATK1141 unchanged. Exported inventory/equip IDs remained byte-identical. Evidence: `qa/browser-v0812/final-goblin-total-attributes.png` and `final-goblin-after.json`.
 
-Passing focused suites (all suffixes shown):
-
-- `attribute-integer-display-tests.mjs`
-- `balance-talent-integration-tests.mjs`
-- `character-stats-tests.mjs`
-- `current-save-generation-tests.mjs`
-- `equipment-budget-adapter-tests.mjs`
-- `equipment-enhancement-tests.mjs`
-- `equipment-level-tests.mjs`
-- `equipment-runtime-production-tests.mjs`
-- `equipment-runtime-tests.mjs`
-- `equipment-slot-parity-tests.mjs`
-- `equipment-template-tests.mjs`
-- `equipment-workshop-ui-tests.cjs`
-- `formal-enhancement-integration-tests.mjs`
-- `formal-enhancement-tests.mjs`
-- `formal-enhancement-ui-tests.cjs`
-- `goblin-ashen-drop-settlement-tests.mjs`
-- `goblin-equipment-v0812-tests.mjs`
-- `goblin-evasion-boots-tests.mjs`
-- `goblin-legend-offline-parity-tests.mjs`
-- `goblin-legend-production-tests.mjs`
-- `goblin-pack-tests.mjs`
-- `goblin-poison-v081-tests.mjs`
-- `goblin-production-tests.mjs`
-- `integrated-equipment-workshop-ui-tests.cjs`
-- `legendary-equipment-tests.mjs`
-- `m2-generation-tests.mjs`
-- `natural-balance-fixture-tests.mjs`
-- `racial-legendary-ui-tests.mjs`
-- `reforge-divine-tests.mjs`
-- `reforge-inheritance-tests.mjs`
-- `skill-tree-poison-host-tests.mjs`
-- `skill-tree-poison-tests.mjs`
-- `talent-balance-v071-tests.mjs`
-- `talent-tests.mjs`
+Limits: these are fresh-full-health single encounters, not multi-hour sustainability, whole-dungeon completion, optimized endgame or all-boss proof. Set profiles keep the same poison/heal configuration to isolate survival, not to rank optimal builds. Focused logs are in `qa/goblin-total-v0812/tests/`; release-wide regression/build results are owned by the final integration report.

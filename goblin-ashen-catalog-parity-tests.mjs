@@ -36,11 +36,17 @@ for(const race of ['human','dwarf','elf','goblin','ashen']){const s=fresh(race),
 const storyCoreSave=reachStoryScene('ashen','C05.EA02.ashen'),storyBefore=JSON.stringify(storyCoreSave),coreReceipt=grantAshenStoryCore(storyCoreSave,{questId:'C05.EA02.ashen'});
 assert(coreReceipt.ok);assert.equal(coreReceipt.legendaryId,'ashen-primal-core');assert.equal(coreReceipt.level,storyCoreSave.story.acceptedLevels['C05.EA01.ashen']);assert.equal(JSON.stringify(storyCoreSave),storyBefore,'guarded receipt is not a free inventory grant');
 assert(finishStoryScene(storyCoreSave,'C05.EA02.ashen'));const storyCores=storyCoreSave.inventory.filter(i=>i.legendaryId==='ashen-primal-core');assert.equal(storyCores.length,1);assert.equal(storyCoreSave.equip.core,storyCores[0].id);assert.equal(storyCores[0].affixes.length,0);assert.equal(storyCores[0].exclusive.id,ashen.legendaries.find(i=>i.id==='ashen-primal-core').exclusiveId);assert(storyCoreSave.taskRewardClaims.includes('story.ashen-primal-core'));assert.equal(finishStoryScene(storyCoreSave,'C05.EA02.ashen'),false);assert.equal(grantAshenStoryCore(storyCoreSave,{questId:'C05.EA02.ashen'}).reason,'already-granted');
+// The same authorized v0.81 poison contract updated exactly one set tooltip.
+// Keep the historical fixture intact and reconcile only that exact text leaf.
+const approvedGoblinSets=structuredClone(baseline.races.goblin.sets),approvedSpore=approvedGoblinSets.find(set=>set.id==='goblin_spore');
+assert.equal(approvedSpore.four.description,'涂菌刺命中额外补一层毒；仍上限5层、每层2%每3秒。');
+approvedSpore.four.description='涂菌刺命中额外补一层毒；仍上限5层、每层3%每2秒，叠毒刷新全部哥布林毒层至12秒，不推迟下次跳毒。';
+assert.equal(goblin.sets.find(set=>set.id==='goblin_spore').four.description,approvedSpore.four.description);
 const added=[];
 for(const [race,pack] of Object.entries({goblin,ashen})){
  const old=baseline.races[race];
  for(const t of old.equipment)assert.deepEqual(beforeEquipmentCopy(pack.equipment.find(x=>x.id===t.id)),t,`stable old identity ${t.id}`);
- for(const key of ['sets','legendaries',...(race==='ashen'?['coreVariants','weaponVariants']:[])])assert.deepEqual(beforeEquipmentCopy(pack[key]),old[key],`${race} ${key} unchanged`);
+ for(const key of ['sets','legendaries',...(race==='ashen'?['coreVariants','weaponVariants']:[])])assert.deepEqual(beforeEquipmentCopy(pack[key]),race==='goblin'&&key==='sets'?approvedGoblinSets:old[key],`${race} ${key} unchanged except exact approved v081 poison tooltip`);
  const common=pack.equipment.filter(t=>t.kind==='scatter'&&t.slot!=='core');
  assert.equal(common.length,52);assert.equal(new Set(pack.equipment.map(t=>t.name)).size,pack.equipment.length,'unique old and new names');assert.equal(pack.equipment.filter(t=>t.kind==='set').length,12);
  assert.equal(pack.equipment.filter(t=>t.slot==='core').length,race==='ashen'?3:0);

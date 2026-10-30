@@ -3,7 +3,6 @@ import {dwarfEnhancementChance} from './dwarf-forge-favor.js';
 import {DWARF_FORGE_FAVOR_CONFIG} from './dwarf-forge-favor-config.js';
 import {validLegendaryEquipmentMetadata} from './legendary-equipment.js';
 import {CONFIG as FORMAL_BUDGET,enhanceRawBase,enhancementFee} from './equipment-budget.js';
-import {balancedItemBase} from './equipment-base-balance.js';
 // Candidate magnitude/cost are explicit developer configuration, never formal defaults.
 export const DEVELOPMENT_ENHANCEMENT_CONFIG=Object.freeze({id:'development-budget-v1',successRates:Object.freeze([.9,.8,.6,.4,.2]),qualityOffsets:Object.freeze([0,3,7,10]),targetCostWeights:Object.freeze([1,2,3,5,8]),budgetPerLevel:.8,maxLevel:5});
 const copy=x=>structuredClone(x),number=x=>Number.isFinite(x)&&x>=0&&x<=1e12;
@@ -13,10 +12,9 @@ export function validEnhancementMetadata(it){if(!it||typeof it!=='object'||Array
 export function enhancementLevel(it){return validEnhancementMetadata(it)?it.enhancement?.level??0:null;}
 export function enhancedItemBase(it,{development=false,level=enhancementLevel(it)}={}){
  if(!it||!['atk','armor','hp'].every(k=>number(it[k]))||!Number.isInteger(level)||level<0||level>5)return null;
- const effectiveBase=balancedItemBase(it);
- if(it.enhancement?.model===FORMAL_BUDGET.id){try{const base=enhanceRawBase(effectiveBase,level);return Object.values(base).every(number)?base:null;}catch{return null;}}
+ if(it.enhancement?.model===FORMAL_BUDGET.id){try{const base=enhanceRawBase(Object.fromEntries(['atk','armor','hp'].map(k=>[k,it[k]])),level);return Object.values(base).every(number)?base:null;}catch{return null;}}
  let multiplier=1;if(development){if(!number(it.level)||!Number.isInteger(it.rarity)||it.rarity<0||it.rarity>3)return null;multiplier+=.8*level/(it.level+10+DEVELOPMENT_ENHANCEMENT_CONFIG.qualityOffsets[it.rarity]);}
- const base=Object.fromEntries(['atk','armor','hp'].map(k=>[k,effectiveBase[k]*multiplier]));return Object.values(base).every(number)?base:null;
+ const base=Object.fromEntries(['atk','armor','hp'].map(k=>[k,it[k]*multiplier]));return Object.values(base).every(number)?base:null;
 }
 function businessFingerprint(s,id){const it=s?.inventory?.find(i=>i.id===id);return JSON.stringify({item:it,gold:s?.gold,development:s?.developmentEquipmentSandbox===true,running:!!s?.running,active:!!s?.activeEncounter&&!s.activeEncounter.done,pending:s?.pendingReforge?.itemId===id});}
 function allowed(s,it){return s?.developmentEquipmentSandbox===true&&it&&!it.legendaryId&&!s.running&&!(s.activeEncounter&&!s.activeEncounter.done)&&s.pendingReforge?.itemId!==it.id&&validEnhancementMetadata(it);}
@@ -39,7 +37,7 @@ export function attemptDeveloperEnhancement(s,quote,random=Math.random){const re
 export const FORMAL_ENHANCEMENT_CONFIG=FORMAL_BUDGET;
 const formalPrepared=new WeakMap();
 function formalFingerprint(s,id){return JSON.stringify({race:s?.race,item:s?.inventory?.find(i=>i.id===id),gold:s?.gold,equipped:Object.values(s?.equip??{}).includes(id),running:!!s?.running,active:!!s?.activeEncounter&&!s.activeEncounter.done,pending:s?.pendingReforge?.itemId===id});}
-function formalBase(it,level){try{const base=enhanceRawBase(balancedItemBase(it),level);return Object.values(base).every(number)?base:null;}catch{return null;}}
+function formalBase(it,level){try{const base=enhanceRawBase(Object.fromEntries(['atk','armor','hp'].map(k=>[k,it[k]])),level);return Object.values(base).every(number)?base:null;}catch{return null;}}
 export function quoteEnhancement(s,itemId){
  const it=s?.inventory?.find(i=>i.id===itemId),equipped=Object.values(s?.equip??{}).includes(itemId);
  if(!it||(it.legendaryId&&!validLegendaryEquipmentMetadata(it))||!validEnhancementMetadata(it)||it.enhancement?.model===DEVELOPMENT_ENHANCEMENT_CONFIG.id||s?.pendingReforge?.itemId===itemId||equipped&&(s.running||s.activeEncounter&&!s.activeEncounter.done))return bad('unavailable');

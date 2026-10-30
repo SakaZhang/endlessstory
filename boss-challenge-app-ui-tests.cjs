@@ -40,9 +40,48 @@ for(const paused of [false,true]){
  assert.match(renderBossChallengeItem(saved(),{shop:true,locked:true}),/data-use-boss-challenge="1"[^>]*disabled/);
  assert.match(renderBossChallengeItem({...saved(),extraBossChallenges:E.MAX_BOSS_CHALLENGES},{shop:true}),/data-use-boss-challenge="1"[^>]*disabled/);
 }
+// The HUD challenge target and its free/cooling label both use actual location,
+// never the first race sharing its area number, a browsed map or a fallback dropdown.
+const races=['human','dwarf','elf','goblin','ashen'];
+for(const race of races){
+ const prototype=E.fresh(race);E.normalizeExpedition(prototype);
+ const bosses=E.plannedNodes(prototype,now).filter(n=>n.kind==='boss'&&n.enabled&&n.siteId.startsWith(race+'.'));
+ assert(bosses.length>0,'cover boss-bearing areas for every race');if(race==='human')assert(bosses.some(n=>n.siteId==='human.a10'),'cover the reported area-10 HUD bug');
+ for(const boss of bosses)for(const cooling of [false,true]){
+  now+=500;const local=E.fresh(race);E.normalizeExpedition(local);E.normalizeHealth(local,now);
+  for(const r of races)local.areaProgress[r]={unlocked:[1,2,3,4,5,6,7,8,9,10],cleared:[1,2,3,4,5,6,7,8,9]};
+  assert(E.travelToArea(local,boss.siteId,now));local.extraBossChallenges=3;
+  // Foreign cooldowns deliberately disagree with the real site's status.
+  for(const n of E.plannedNodes(local,now).filter(n=>n.kind==='boss'))local.instanceCooldowns[n.id]=n.id===boss.id?(cooling?now+1800000:0):(cooling?0:now+1800000);
+  store.set(SAVE_KEY,JSON.stringify(local));await refresh('boss-hud-'+boss.id+'-'+cooling);
+  const foreignRace=races.find(r=>r!==race),foreignSite=foreignRace+(boss.areaNumber===10?'.a06':'.a10');
+  click({monsterSource:foreignSite+'.field'});assert.equal(saved().siteId,boss.siteId,'foreign map preview does not travel');click({view:'battle'});
+  if(boss.areaNumber===10){
+   for(const handler of events.change??[])handler({target:{id:'fallbackField',value:foreignSite+'.field',dataset:{}}});
+   assert.equal(saved().siteId,boss.siteId,'fallback dropdown changes a route, not actual location');
+   assert.equal(saved().expedition.fieldId,foreignSite+'.field','exercise a genuinely foreign configured route');
+  }
+  assert.equal(el('bossBtn').hidden,false);assert.equal(el('bossBtn').disabled,false);
+  assert.equal(el('bossBtn').textContent,cooling?'挑战首领 · 消耗1次额外挑战':'挑战首领 · 免费');
+  const beforeHud=saved();click({},'bossBtn');const started=saved();
+  assert.equal(started.activeEncounter?.instanceId,boss.id,'HUD starts only the actual current site boss');
+  assert.equal(started.siteId,boss.siteId,'HUD challenge never teleports across races or areas');assert.equal(started.location,beforeHud.location);
+  assert.equal(started.extraBossChallenges,cooling?2:3,'only a new cooling local challenge spends one attempt');assert.deepEqual(started.instanceCooldowns,beforeHud.instanceCooldowns);
+  click({},'bossBtn');assert.equal(saved().activeEncounter.id,started.activeEncounter.id);assert.equal(saved().extraBossChallenges,started.extraBossChallenges,'repeated HUD challenge does not create/debit another fight');
+ }
+}
+for(const [kind,race,site] of [['no-boss','human','human.a01'],['no-boss','goblin','goblin.a10'],['locked','human','human.a10']]){
+ now+=500;const rejected=E.fresh(race);E.normalizeExpedition(rejected);E.normalizeHealth(rejected,now);rejected.restResume=false;rejected.extraBossChallenges=3;
+ rejected.siteId=site;rejected.location=Number(site.slice(-2))-1;rejected.expedition.fieldId=site+'.field';
+ if(race==='goblin')rejected.areaProgress.goblin={unlocked:[1,2,3,4,5,6,7,8,9,10],cleared:[1,2,3,4,5,6,7,8,9]};
+ assert(E.validSave(rejected));store.set(SAVE_KEY,JSON.stringify(rejected));await refresh('boss-hud-'+kind+'-'+site);
+ click({monsterSource:'dwarf.a10.boss'});click({view:'battle'});
+ assert.equal(el('bossBtn').hidden,kind==='no-boss');assert.equal(el('bossBtn').disabled,true);
+ const blocked=saved();click({},'bossBtn');assert.deepEqual(saved(),blocked,'forged '+kind+' HUD click cannot travel, create combat or spend attempts');
+}
 // Local cooling boss is selectable with credit; foreign preview cannot spend it.
 let regionBase=E.fresh();E.normalizeExpedition(regionBase);E.normalizeHealth(regionBase,now);regionBase.areaProgress.dwarf={unlocked:[1,2,3],cleared:[1,2]};assert(E.travelToArea(regionBase,'dwarf.a03',now));regionBase.extraBossChallenges=2;regionBase.consumables.bossChallengeCharges=2;regionBase.instanceCooldowns['dwarf.a03.boss']=now+30000;regionBase.autoBossRetryAt={'dwarf.a03.boss':now+1800000};store.set(SAVE_KEY,JSON.stringify(regionBase));await refresh('boss-item-region');click({race:'dwarf'});
 const region=async(action,id='')=>{const b={owner:'adjacentRegionHost',dataset:{regionAction:action,regionId:id},disabled:false,focus(){}};for(const f of [...el('adjacentRegionHost').listeners.click??[]])await f({target:{closest:()=>b}});};
 await region('node','dwarf.a03.boss');let html=el('adjacentRegionHost').innerHTML;assert.match(html,/挑战首领 · 消耗1次额外挑战/);assert.doesNotMatch(html,/data-region-action="confirm" data-region-id="dwarf.a03.boss" disabled/);assert.match(html,/额外挑战不能跳过这段战败重试等待/);assert.match(html,/本地首领重试等待：30分钟/);const preStart=saved();failWrite=true;await region('confirm','dwarf.a03.boss');failWrite=false;assert.deepEqual(saved(),preStart);await region('confirm','dwarf.a03.boss');assert.equal(saved().extraBossChallenges,1);assert.equal(saved().activeEncounter?.instanceId,'dwarf.a03.boss');
 click({view:'inventory'});click({bagTab:'items'});assertUseEnabled();const inBattle=saved();click({useBossChallenge:'1'});assertBalanceOnly(inBattle,{charges:-1,extra:1});
-const {buildRegionSnapshot,buildRegionModel,renderRegion}=await import('./dist/adjacent-region.js');regionBase.siteId='dwarf.a01';regionBase.expedition.fieldId='dwarf.a01.field';let snapshot=buildRegionSnapshot(regionBase,now),model=buildRegionModel(snapshot,{viewAreaId:'dwarf.a03',previewNodeId:'dwarf.a03.boss'});assert.match(model.preview.blocked,/先旅行至该区域/);regionBase.siteId='dwarf.a03';regionBase.instanceCooldowns['dwarf.a03.boss']=now;model=buildRegionModel(buildRegionSnapshot(regionBase,now),{viewAreaId:'dwarf.a03',previewNodeId:'dwarf.a03.boss'});assert.equal(model.preview.cooldownSeconds,0);assert.match(renderRegion(model),/自然冷却已结束，本次免费，不扣额外挑战/);Date.now=origNow;console.log('Boss item app UI PASS: flat human price, persisted charges/credits, save failures, exact 400ms click guards, reload, no autostart, unchanged 8-slot shop, local/foreign CD gating, real start deduction, running/paused merchant purchase and balance-only activation, quota recovery, auto retry copy.');})();
+const {buildRegionSnapshot,buildRegionModel,renderRegion}=await import('./dist/adjacent-region.js');regionBase.siteId='dwarf.a01';regionBase.expedition.fieldId='dwarf.a01.field';let snapshot=buildRegionSnapshot(regionBase,now),model=buildRegionModel(snapshot,{viewAreaId:'dwarf.a03',previewNodeId:'dwarf.a03.boss'});assert.match(model.preview.blocked,/先旅行至该区域/);regionBase.siteId='dwarf.a03';regionBase.instanceCooldowns['dwarf.a03.boss']=now;model=buildRegionModel(buildRegionSnapshot(regionBase,now),{viewAreaId:'dwarf.a03',previewNodeId:'dwarf.a03.boss'});assert.equal(model.preview.cooldownSeconds,0);assert.match(renderRegion(model),/自然冷却已结束，本次免费，不扣额外挑战/);Date.now=origNow;console.log('Boss item app UI PASS: flat human price, persisted charges/credits, save failures, exact 400ms click guards, reload, no autostart, unchanged 8-slot shop, local/foreign CD gating, real start deduction, running/paused merchant purchase and balance-only activation, quota recovery, five-race local HUD targets/free-cooling debit, foreign previews/dropdowns and locked/no-boss rejection, auto retry copy.');})();

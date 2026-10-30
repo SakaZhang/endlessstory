@@ -68,7 +68,7 @@ import {selectEquipmentTemplate,applyEquipmentTemplate,validEquipmentTemplateMet
 export {EQUIPMENT_TEMPLATES,EQUIPMENT_TEMPLATE_BY_ID,RACE_WEAPON_POOLS,equipmentTemplateDisplay} from './equipment-templates.js';
 import {validEnhancementMetadata,enhancedItemBase,attemptEnhancement} from './equipment-enhancement.js';
 export {quoteEnhancement,FORMAL_ENHANCEMENT_CONFIG,DEVELOPMENT_ENHANCEMENT_CONFIG,enhancementLevel,enhancedItemBase,quoteDeveloperEnhancement,prepareDeveloperEnhancement,attemptDeveloperEnhancement} from './equipment-enhancement.js';
-export {balancedItemBase} from './equipment-base-balance.js';
+import {GOBLIN_SURVIVAL_MULTIPLIERS} from './race-survival-balance.js';
 import {pauseMulti,makeMultiUnit,validMultiProfile,validMultiEncounter,validFixtureAction,syncMultiTarget,selectMultiTarget,multiTargetRows,stepMulti,withMultiRng,multiItemId} from './multi-combat.js';
 import {validMonsterLedger,recordEncounteredMonsters} from './monster-codex-schema.js';
 import {RECOVERY_RECIPE_CONFIG,recoveryInputPlan,rollRecoverySupply} from './recovery-recipe-schema.js';
@@ -441,6 +441,9 @@ export function baseStats(s){
  for(const it of gear){const totals=itemTotals(it,{development:s.developmentEquipmentSandbox===true});atk+=totals.atk;armor+=totals.armor;hp+=totals.hp;if(it.set)count[it.set]=(count[it.set]||0)+1;if(it.special)specials[it.special.id]=true;for(const a of it.affixes)bonus[a.stat]+=a.value*divineMultiplier(it);}
  bonus.hit+=(s.talents.precision??0)*5;bonus.crit+=(s.talents.crit??0)*5;bonus.critDamage+=(s.talents.critDamage??0)*8;bonus.element+=(s.talents.element??0)*2;
  atk=Math.round(atk+bonus.atk);armor=Math.round(armor+bonus.armor);hp=Math.round(hp+bonus.hp);
+ // Scale the whole Goblin actor budget, including every future level and gear/talent gain.
+ // Keep precision; multiplicative passives commute with this one-time policy.
+ if(s.race==='goblin'){hp*=GOBLIN_SURVIVAL_MULTIPLIERS.hp;armor*=GOBLIN_SURVIVAL_MULTIPLIERS.armor;}
  const {dodgeRating,attackMultiplier}=racialLegendaryStatBonuses(s);atk*=attackMultiplier;
  const ratingFactor=r=>Math.max(0,r)/(100+Math.max(0,r));
  const elementAttack=Object.fromEntries(ELEMENT_KEYS.map(k=>[k,bonus.element+(bonus[k+'Atk']??0)+potionBuffStrength(s,k+'Atk')+(getRacePack(s.race)?.innate?.elementAttack?.[k]??0)]));
