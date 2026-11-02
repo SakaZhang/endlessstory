@@ -10,3 +10,7 @@
 - Imported the exported original save through the regular picker and confirmation. Verified Chik level60/chapter9, gold142, XP548/4800, attack449, armor238, HP1799/2077, stopped expedition — identical to initial visible state.
 
 Special-affix numerical effects, failure/double-click atomicity and milestone/offline/old-save cases are covered by the actual App DOM and engine regression tests; this browser pass did not claim those actions were manually simulated.
+
+## Elite display pass
+
+After the elite build, re-imported the same synthetic fixture via Settings, entered otherworld and selected floor50 with the normal number field. The panel displayed 第50层·精英, HP24425, attack782, armor107 and the explicit +25%/+100%/+10% rules. Restored the exported Chik save again and verified the same original level/gold/XP/HP values. No user save was deleted.
