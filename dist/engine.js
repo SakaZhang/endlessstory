@@ -1,3 +1,4 @@
+import {specialDivineMultiplier,specialEffectPower,nirvanaUseCount} from './special-divine.js';
 import {equipmentDisplayName} from './equipment-display-name.js';
 import {INFINITY_GAUNTLET_KEYS,isInfinityGauntletFusion,hasInfinityGauntletMaterial} from './infinity-gauntlet-content.js';
 import {validCasinoState} from './casino-state.js';
@@ -452,7 +453,7 @@ export function baseStats(s){
  const survivalGrowth=racialSurvivalGrowth(s.race);
  let atk=14+s.level*3+s.talents.power*3+potionBuffStrength(s,'strength'),armor=5+s.talents.steel*3,hp=120+s.talents.heart*20;
  const bonus=Object.fromEntries(Object.keys(AFFIX_DEFS).map(k=>[k,0]));
- for(const it of gear){const totals=itemTotals(it,{development:s.developmentEquipmentSandbox===true});atk+=totals.atk;armor+=totals.armor;hp+=totals.hp;if(it.set)count[it.set]=(count[it.set]||0)+1;if(it.special&&SPECIALS[it.special.id]?.enabled!==false)specials[it.special.id]=true;for(const a of it.affixes)bonus[a.stat]+=a.value*divineMultiplier(it);const growth=growthBonuses(it),dice=luckyDiceStatBonuses(it);for(const key of ['atk','luck','lifesteal'])bonus[key]+=growth[key];bonus.luck+=dice.luck;bonus.crit+=dice.crit;}
+ for(const it of gear){const totals=itemTotals(it,{development:s.developmentEquipmentSandbox===true});atk+=totals.atk;armor+=totals.armor;hp+=totals.hp;if(it.set)count[it.set]=(count[it.set]||0)+1;if(it.special&&SPECIALS[it.special.id]?.enabled!==false)specials[it.special.id]=Math.max(specialEffectPower(specials,it.special.id),specialDivineMultiplier(it))===2?2:true;for(const a of it.affixes)bonus[a.stat]+=a.value*divineMultiplier(it);const growth=growthBonuses(it),dice=luckyDiceStatBonuses(it);for(const key of ['atk','luck','lifesteal'])bonus[key]+=growth[key];bonus.luck+=dice.luck;bonus.crit+=dice.crit;}
  bonus.hit+=(s.talents.precision??0)*5;bonus.crit+=(s.talents.crit??0)*5;bonus.critDamage+=(s.talents.critDamage??0)*8;bonus.element+=(s.talents.element??0)*2;
  // Preserve the existing gear/affix rounding, then retain fractional racial growth.
  // Only this per-level contribution differs: no final actor or equipment multiplier.
@@ -674,8 +675,8 @@ function normalizeDungeonAffixUsage(s){
  const e=s.activeEncounter?.kind==='dungeon'?s.activeEncounter:null,priorStage=run.stage>1;
  // A retained pre-ledger run cannot prove an earlier stage's unused proc.
  // Conservatively spent after stage one, without discarding the save or gear.
- run.affixUsage={shelterUsed:priorStage||!!(e?.shelterUsed??run.carry?.shelterUsed),nirvanaUsed:priorStage||!!e?.affixState?.nirvanaUsed};
- if(e){ensureEncounterAffixes(e);e.shelterUsed=run.affixUsage.shelterUsed;e.affixState.nirvanaUsed=run.affixUsage.nirvanaUsed;}
+ run.affixUsage={shelterUsed:priorStage||!!(e?.shelterUsed??run.carry?.shelterUsed),nirvanaUsed:priorStage||!!e?.affixState?.nirvanaUsed,...(e?.affixState?.nirvanaCount!==undefined?{nirvanaCount:Math.max(priorStage?1:0,e.affixState.nirvanaCount)}:{})};
+ if(e){ensureEncounterAffixes(e);e.shelterUsed=run.affixUsage.shelterUsed;e.affixState.nirvanaUsed=run.affixUsage.nirvanaUsed;if(run.affixUsage.nirvanaCount!==undefined)e.affixState.nirvanaCount=run.affixUsage.nirvanaCount;}
  if(run.carry)run.carry.shelterUsed=run.affixUsage.shelterUsed;
 }
 export function normalizeExpedition(s){
@@ -900,13 +901,13 @@ export function encounter(s,boss=false,now=Date.now()){
 }
 function initializeEncounterAffixes(e,st,run=null){
  e.affixBattleId=e.id??('battle-'+(++serial));e.affixState=createBattleAffixState(e.affixBattleId);e.growthKillIds=[];
- const usage=run?.affixUsage;if(usage)e.affixState.nirvanaUsed=usage.nirvanaUsed;
- const alreadyApplied=usage?.shelterUsed??false,grant=openingShelterShield({hasShelter:!!st.specials.shelter,maxHp:st.hp,flatBonus:st.shieldBonus,alreadyApplied});
+ const usage=run?.affixUsage;if(usage){e.affixState.nirvanaUsed=usage.nirvanaUsed;if(usage.nirvanaCount!==undefined)e.affixState.nirvanaCount=usage.nirvanaCount;}
+ const alreadyApplied=usage?.shelterUsed??false,grant=openingShelterShield({hasShelter:!!st.specials.shelter,maxHp:st.hp,flatBonus:st.shieldBonus,alreadyApplied,power:specialEffectPower(st.specials,'shelter')});
  e.shelterUsed=alreadyApplied||!!st.specials.shelter;if(!alreadyApplied)e.shield=grant;
  if(usage)usage.shelterUsed=e.shelterUsed;
 }
 function ensureEncounterAffixes(e){e.affixBattleId??=e.id??('legacy-battle-'+(++serial));e.affixState??=createBattleAffixState(e.affixBattleId);}
-function reviveEncounter(e,st,logs){const out=tryNirvana(e.affixState,{battleId:e.affixState.battleId,hasNirvana:!!st.specials.nirvana,hp:e.heroHp,maxHp:st.hp});if(!out)return false;e.affixState=out.state;if(out.revived){e.heroHp=out.hp;logs.push('涅槃 · 满血复活（本场已使用）');}return out.revived;}
+function reviveEncounter(e,st,logs){const out=tryNirvana(e.affixState,{battleId:e.affixState.battleId,hasNirvana:!!st.specials.nirvana,hp:e.heroHp,maxHp:st.hp,power:specialEffectPower(st.specials,'nirvana')});if(!out)return false;e.affixState=out.state;if(out.revived){e.heroHp=out.hp;logs.push('涅槃 · 满血复活（本场已使用）');}return out.revived;}
 // Authored nonlethal scene start. Caller must persist this candidate atomically.
 export function startStoryScenario(s,scenarioId,now=Date.now()){
  if(!validSave(s)||!canStartStoryScenario(s,scenarioId)||!storyScenarioForStart(s,scenarioId)||!Number.isSafeInteger(now)||now<0||now>1e15)return null;
@@ -1053,7 +1054,7 @@ function rewardDwarf(s,e,now){
   e.rewarded=true;e.lootSummary=emptyLootSummary();e.materialLoot=[];e.rewardNotes=[];
   if(priorClaims?.sets||priorClaims?.fruit)e.rewardNotes.push('此前待领奖励已入包：套装 '+priorClaims.sets+' / 灵慧之果 '+priorClaims.fruit);
   settleNpcObjectiveKills(s,e,now);recordNpcEventVictory(s,e);recordStoryEncounterVictory(s,e);
-  const st=stats(s),multiple=e.fieldGroup?2:1,baseXp=e.rewardXp*multiple,knowledge=st.specials.knowledge&&Math.random()<.5,clearRewards=clear?e.clearRewards:null;
+  const st=stats(s),multiple=e.fieldGroup?2:1,baseXp=e.rewardXp*multiple,knowledge=st.specials.knowledge&&Math.random()<.5*specialEffectPower(st.specials,'knowledge'),clearRewards=clear?e.clearRewards:null;
   s.kills++;s.gold+=e.rewardGold*multiple+(clearRewards?.gold??0);e.acceptedXp=gainXp(s,baseXp*(knowledge?2:1)+(clearRewards?.xp??0)).acceptedXp;if(knowledge&&e.acceptedXp>0)e.rewardNotes.push('求知：额外基础经验 +'+baseXp);
   const initial=e.enemies.filter(u=>u.origin==='initial'&&!u.follower),sources=[];
   for(let i=0;i<multiple;i++)sources.push(e.fieldGroup?initial[rand(0,initial.length-1)]:initial[0]);
@@ -1091,7 +1092,7 @@ function rewardMulti(s,e,now){
  if(s.activeEncounter!==e||!e.done||!e.win||e.rewarded||!e.enemies.every(u=>u.hp===0)||!validMultiEncounter(e,INSTANCES))return null;
  return withMultiRng(e,()=>{
   e.rewarded=true;e.lootSummary=emptyLootSummary();e.materialLoot=[];e.rewardNotes=[];e.rewardRoundSources=[];
-  const l=LOCS[e.location],st=stats(s),baseXp=(20+e.location*8)*2,knowledge=st.specials.knowledge&&Math.random()<.5;
+  const l=LOCS[e.location],st=stats(s),baseXp=(20+e.location*8)*2,knowledge=st.specials.knowledge&&Math.random()<.5*specialEffectPower(st.specials,'knowledge');
   s.kills++;s.normalWins[e.location]++;s.gold+=l.reward*2;e.acceptedXp=gainXp(s,baseXp*(knowledge?2:1)).acceptedXp;if(knowledge&&e.acceptedXp>0)e.rewardNotes.push('求知：额外基础经验 +'+baseXp);
   let first=null;const initial=e.enemies.filter(u=>u.origin==='initial');
   for(let round=0;round<2;round++){
@@ -1122,7 +1123,7 @@ function stepImpl(s,e,now=Date.now(),treeSkills=null){
  ensureEncounterAffixes(e);normalizeDungeonAffixUsage(s);e.heroHp=Math.min(e.heroHp,stats(s).hp);s.heroHp=e.heroHp;const drank=autoDrinkPotion(s,e,now);
  const eventAt=s.lastHealthClock,basicOnly=e.multiVersion===1&&Number.isFinite(e.pendingBasicAt)&&e.pendingBasicAt<=eventAt&&e.pendingBasicAt<(e.nextRegularAt??Infinity),combatDeltaMs=basicOnly?(e.pendingBasicDelayMs??165):1100-(e.basicMicroElapsed??0);
  const turn={burnAtStart:e.heroBurn??0,burnTicked:false},logs=withMultiRng(e,()=>stepMulti(s,e,turn,{stats:treeSkills?baseStats:stats,SKILLS,skillUnlocked,resolveElementDamage,treeSkills,basicOnly,combatDeltaMs,now:s.lastHealthClock,makeSummon:(u,n)=>normalizeEncounterElements(makeMultiUnit(e.id+'-summon-'+n,u.location,u.sourceInstanceId,LOCS[u.location],s.lastHealthClock))}));
- if(e.kind==='dungeon'&&s.dungeonRun?.runId===e.runId)s.dungeonRun.affixUsage.nirvanaUsed=e.affixState.nirvanaUsed;
+ if(e.kind==='dungeon'&&s.dungeonRun?.runId===e.runId){s.dungeonRun.affixUsage.nirvanaUsed=e.affixState.nirvanaUsed;if(e.affixState.nirvanaCount!==undefined)s.dungeonRun.affixUsage.nirvanaCount=e.affixState.nirvanaCount;}
  if(!storyScenarioNonlethal(e))recordGrowthKills(s,e,e.enemies.filter(u=>u.hp===0).map(u=>u.id));
  // Every executed player round consumes one turn of temporary player statuses,
  // including an early lethal hit. Do not run skipped damage phases.
@@ -1503,7 +1504,7 @@ export function validSave(s){
  if(s.version!==SCHEMA_VERSION||!PLAYABLE_RACES.includes(s.race)||s.hero!==getRacePack(s.race)?.heroName||!Number.isInteger(s.level)||s.level<1||s.level>=100000||!num(s.xp)||!num(s.gold)||!Number.isInteger(s.location)||s.location<0||!(Object.values(PLANNED_INSTANCES).some(x=>AREAS[x.areaId].number-1===s.location&&s.siteId===x.siteId)))return false;
  if(s.atCamp!==undefined&&typeof s.atCamp!=='boolean')return false;
  if(s.activeEncounter?.pauseAt!==undefined&&s.running)return false;
- if(s.activeEncounter?.kind==='dungeon'&&(!s.dungeonRun||s.activeEncounter.runId!==s.dungeonRun.runId||s.activeEncounter.dungeonStage!==s.dungeonRun.stage||s.dungeonRun.affixUsage!==undefined&&(s.activeEncounter.affixState?.nirvanaUsed!==s.dungeonRun.affixUsage.nirvanaUsed||s.activeEncounter.shelterUsed!==s.dungeonRun.affixUsage.shelterUsed)))return false;
+ if(s.activeEncounter?.kind==='dungeon'&&(!s.dungeonRun||s.activeEncounter.runId!==s.dungeonRun.runId||s.activeEncounter.dungeonStage!==s.dungeonRun.stage||s.dungeonRun.affixUsage!==undefined&&(s.activeEncounter.affixState?.nirvanaUsed!==s.dungeonRun.affixUsage.nirvanaUsed||nirvanaUseCount(s.activeEncounter.affixState)!==nirvanaUseCount(s.dungeonRun.affixUsage)||s.activeEncounter.shelterUsed!==s.dungeonRun.affixUsage.shelterUsed)))return false;
  if(s.contentMigration!==undefined)return false;
  if(s.activeEncounter&&(s.activeEncounter.multiVersion!==1||(!s.activeEncounter.developmentFixture&&(s.activeEncounter.contentVersion!=='dwarf-m2-v1'||s.activeEncounter.skillResolver!=='tree-v1'))))return false;
  if(!validRareRewardProgress(s,validEquipment)||!validRegionNavigation(s)||!validEquipmentRuntime(s)||!validMonsterLedger(s)||!validCodexCollection(s)||!validLootFilters(s)||!validPendingForgeClaim(s)||!validAreaProgress(s)||!validExpeditionState(s)||!Array.isArray(s.inventory)||s.inventory.length>INVENTORY_SAVE_LIMIT||!s.inventory.every(validEquipment)||s.inventory.filter(i=>i.legendaryId==='ashen-primal-core').length>1||!validPendingReforge(s))return false;

@@ -1,3 +1,4 @@
+import {specialEffectDescription} from './special-divine.js';
 import {formatAttribute as num,formatAttributePercent as pct} from './attribute-format.js';
 import {renderSetEffects} from './set-effects.js';
 import {returnRingExperienceBonus} from './return-ring-state.js';
@@ -37,7 +38,7 @@ export function renderCharacterStats(s,encounter){
  const potionRows=Object.entries(s.potionBuffs??{}).filter(([,b])=>b.endAt>(s.lastHealthClock??0)).map(([key,b])=>`<li><b>${esc(POTIONS[key]?.name??key)}</b> · 剩余${Math.ceil((b.endAt-(s.lastHealthClock??0))/1000)}秒<br>${esc(potionDescription(key,b.quality))}</li>`);
  const context=treePassiveContext(s),passives=(context?.selected??[]).map(id=>{const m=getSkillMetadata(id);return `<li><b>${esc(m?.name??id)}</b> · ${esc(typeof m?.description==='string'?m.description:m?.description?.base??'按技能说明生效。')}</li>`;});
  const gear=[...new Set(Object.values(s.equip??{}).filter(Boolean))].map(id=>s.inventory.find(it=>it.id===id)).filter(Boolean);
- const effects=gear.flatMap(it=>{const special=SPECIALS[it.special?.id],legend=LEGENDARY_CODEX.find(x=>x.id===it.legendaryId);return [special?`<li><b>${esc(special.name)}</b> · ${esc(special.desc)}</li>`:'',legend?`<li><b>${esc(legend.name)}</b> · ${esc(legend.effect)}</li>`:''].filter(Boolean);});
+ const effects=gear.flatMap(it=>{const special=SPECIALS[it.special?.id],legend=LEGENDARY_CODEX.find(x=>x.id===it.legendaryId);return [special?`<li><b>${esc(special.name)}</b> · ${esc(specialEffectDescription(it,special.desc))}</li>`:'',legend?`<li><b>${esc(legend.name)}</b> · ${esc(legend.effect)}</li>`:''].filter(Boolean);});
  const sets=Object.entries(st.count??{}).map(([id,count])=>{const def=SET_CODEX.find(x=>x.id===id);return `<li><b>${esc(def?.name??id)}</b> · 已穿戴${count}件${renderSetEffects(s,def)}</li>`;});
  const effectNames={attackUp:'攻击增强',defenseUp:'护甲增强',critUp:'暴击增强',penetrationUp:'穿甲增强',dodgeUp:'闪避增强',lifestealUp:'吸血增强',healOverTime:'持续回复'};
  const temporary=(e?.treeEffects?.hero?.sources??[]).filter(x=>x.endAt>e.treeEffects.clock).map(x=>`<li>${esc(effectNames[x.type]??getSkillMetadata(x.sourceId)?.name??'战技效果')} · ${num(x.amount)} · 剩余${Math.ceil((x.endAt-e.treeEffects.clock)/1000)}秒</li>`);

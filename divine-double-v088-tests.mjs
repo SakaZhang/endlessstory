@@ -16,7 +16,7 @@ for(const model of ['raw-v1','raw-v2']){
 for(const model of ['bad','raw-v0',undefined])assert.equal(E.divineMultiplier({divine:{id:'forge-favor',model}}),1);
 for(const race of ['dwarf','human','elf','goblin','ashen'])for(const legacy of [false,true]){
  const {s,it}=setup(race,legacy);assert(E.validSave(s));for(const key of Object.keys(s.equip))s.equip[key]=null;s.equip.weapon=it.id;
- const withGrowth=E.stats(s);it.special={id:'harvester',growthKills:0};const without=E.stats(s);assert.equal(withGrowth.atk-without.atk,123,'growth remains flat, not doubled');it.special={id:'harvester',growthKills:123};
+ const withGrowth=E.stats(s);it.special={id:'harvester',growthKills:0};const without=E.stats(s);assert.equal(withGrowth.atk-without.atk,246,'v090 divine doubles effective growth without rewriting counters');it.special={id:'harvester',growthKills:123};
  const expected={};for(const a of it.affixes)expected[a.stat]=(expected[a.stat]??0)+a.value*2;for(const [key,value]of Object.entries(expected))if(!['atk','luck','lifesteal'].includes(key))assert.equal(E.baseStats(s).bonus[key],value);
  const before=JSON.stringify(it);const stored=JSON.parse(JSON.stringify(s));assert(E.validSave(stored));assert.deepEqual(E.stats(stored),E.stats(s));assert.equal(JSON.stringify(it),before);
 }
@@ -39,7 +39,7 @@ for(const legacy of [false,true]){
  const raw=clone(donor.affixes[0]);assert(fixed(()=>E.reforge(s,it.id,'replace',0,donor.id)));assert(E.validSave(s));assert.deepEqual(s.pendingReforge.newAffixes[0],raw);assert(E.resolveReforge(s,true));assert.deepEqual(it.affixes[0],raw);assert.equal(E.divineMultiplier(it),2);assert.deepEqual(it.special,{id:'harvester',growthKills:123});assert(E.validSave(s));
 }
 for(const [id,kills,stat,expected]of [['harvester',123,'atk',123],['blesser',123,'luck',12.3],['glutton',123,'lifesteal',123]]){
- const {it}=setup();it.special={id,growthKills:kills};assert.equal(growthBonuses(it)[stat],expected);const prior=clone(it.special);E.itemTotals(it);assert.deepEqual(it.special,prior);
+ const {it}=setup();it.special={id,growthKills:kills};assert.equal(growthBonuses(it)[stat],expected*2);const prior=clone(it.special);E.itemTotals(it);assert.deepEqual(it.special,prior);
 }
 // Preserve exact historical /10 receipt arithmetic after single-affix operations.
 {
@@ -51,4 +51,4 @@ for(const [id,kills,stat,expected]of [['harvester',123,'atk',123],['blesser',123
 for(const props of [{set:'sentinel-set'},{legendaryId:'infinity-gauntlet',exclusive:{id:'infinity',percent:50}}]){
  const it={atk:120,hp:106,armor:20,affixes:[{stat:'crit',value:10}],...props};const before=clone(props);E.applyForgeFavor(it);for(const key of Object.keys(props))assert.deepEqual(it[key],before[key]);assert.equal(E.itemTotals(it).atk,240);
 }
-console.log('PASS v088 divine doubled: formula order, old/new raw formats, all5race aggregates, flat growth, reload idempotence, legacy pending accept/keep and resource conservation');
+console.log('PASS v088 divine doubled: formula order, old/new raw formats, all5race aggregates, effective growth, reload idempotence, legacy pending accept/keep and resource conservation');

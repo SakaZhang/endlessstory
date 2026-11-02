@@ -47,9 +47,9 @@ for(const [roll,expected] of [[.009999,true],[.01,false],[.019,false]]){
  const normal=clone(s);normal.momentum=0;step(s);step(normal);const boost=s.activeEncounter.lastCast.hits,plain=normal.activeEncounter.lastCast.hits;assert.equal(boost.length,2);assert.equal(plain.length,2);for(let i=0;i<2;i++){assert(boost[i].hit&&plain[i].hit);assert(Math.abs(boost[i].actualHpLost-2*plain[i].actualHpLost)<=1);}assert.equal(s.momentum,0);assert(E.validSave(s));
 }
 // Unequip only suspends growth; earned values are not ordinary affixes, and
-// divine does not multiply those earned counters.
+// divine multiplies effective benefits but never stored earned counters.
 {
- const s=fresh(),it=gear(s,'blesser');it.special.growthKills=7;const a=E.stats(s);assert.equal(E.specialAffixProgress(it).value,.7);assert(E.applyForgeFavor(it));const b=E.stats(s);assert.equal(b.luck,a.luck,'growth is not divine-scaled');const blank=E.item('ring',1,null,0);blank.special=null;s.inventory.push(blank);assert(E.equipItem(s,blank.id,'ring1'));assert.equal(it.special.growthKills,7);assert.equal(E.specialAffixProgress(it).value,.7);assert(E.equipItem(s,it.id,'ring1'));assert.equal(E.stats(s).luck,a.luck);
+ const s=fresh(),it=gear(s,'blesser');it.special.growthKills=7;const a=E.stats(s);assert.equal(E.specialAffixProgress(it).value,.7);assert(E.applyForgeFavor(it));const b=E.stats(s);assert.equal(b.luck,a.luck*2,'v090 divine doubles growth benefit, not stored kills');const blank=E.item('ring',1,null,0);blank.special=null;s.inventory.push(blank);assert(E.equipItem(s,blank.id,'ring1'));assert.equal(it.special.growthKills,7);assert.equal(E.specialAffixProgress(it).value,1.4);assert(E.equipItem(s,it.id,'ring1'));assert.equal(E.stats(s).luck,a.luck*2);
  for(const value of [-1,.1,201,NaN,Infinity]){const bad=clone(s);bad.inventory.find(x=>x.id===it.id).special.growthKills=value;assert(!E.validSave(bad));}
  const wrong=clone(s);wrong.inventory.find(x=>x.id===it.id).special.id='knowledge';assert(!E.validSave(wrong),'non-growth affix cannot carry growth');
 }

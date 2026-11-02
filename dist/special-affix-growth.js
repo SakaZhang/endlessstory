@@ -1,3 +1,4 @@
+import {specialDivineMultiplier} from './special-divine.js';
 // Permanent progress belongs to the individual special affix, never the hero.
 // Stats callers add these flat earned values only for currently equipped items.
 const freeze=x=>{if(x&&typeof x==='object'){Object.values(x).forEach(freeze);Object.freeze(x);}return x;};
@@ -20,7 +21,7 @@ export function specialAffixProgress(item){
  const special=item?.special,definition=special&&Object.hasOwn(GROWTH_SPECIAL_DEFS,special.id)?GROWTH_SPECIAL_DEFS[special.id]:null;
  if(!definition||!validGrowthSpecial(special))return null;
  const kills=special.growthKills??0;
- return {id:special.id,kills,maxKills:definition.maxKills,value:kills/definition.divisor,maxValue:definition.maxKills/definition.divisor,stat:definition.stat,unit:definition.unit};
+ return {id:special.id,kills,maxKills:definition.maxKills,value:kills/definition.divisor*specialDivineMultiplier(item),maxValue:definition.maxKills/definition.divisor*specialDivineMultiplier(item),stat:definition.stat,unit:definition.unit};
 }
 export function growthBonuses(item){
  const bonus={atk:0,luck:0,lifesteal:0},progress=specialAffixProgress(item);

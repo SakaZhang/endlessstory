@@ -17,7 +17,8 @@ for(const special of [false,[],{},{id:4},{id:''},{id:'knowledge',growthKills:0}]
 assert.equal(specialAffixProgress(gear('a','knowledge')),null);assert.equal(specialAffixProgress(gear('a','harvester',401)),null);
 assert.deepEqual(growthBonuses(gear('a','harvester',401)),{atk:0,luck:0,lifesteal:0});
 assert.equal(growthBonuses(gear('a','blesser',3)).luck,.3,'division avoids repeated floating-point accumulation');
-const divine=gear('divine','harvester',100);divine.divine={id:'forge-favor',bonus:{atk:300}};assert.equal(growthBonuses(divine).atk,100,'earned stats are never divine-amplified');
+const divine=gear('divine','harvester',100);divine.divine={id:'forge-favor',bonus:{atk:300}};assert.equal(growthBonuses(divine).atk,100,'unrecognized legacy marker without raw model does not amplify growth');
+for(const model of ['raw-v1','raw-v2']){const valid=structuredClone(divine);valid.divine.model=model;assert.equal(growthBonuses(valid).atk,200);assert.equal(valid.special.growthKills,100);}
 
 {
  const a=gear('a','harvester',399),b=gear('b','harvester',7),c=gear('c','blesser',199),d=gear('d','glutton',199),spare=gear('spare','harvester',20),s=save([a,b,c,d,spare],{weapon:'a',helm:'a',armor:'b',ring1:'c',ring2:'d',amulet:null}),e=encounter();
@@ -53,4 +54,4 @@ const divine=gear('divine','harvester',100);divine.divine={id:'forge-favor',bonu
  assert.equal(rerollGrowthSpecial({id:'harvester',growthKills:401},{id:'harvester'}),null);
  assert.equal(rerollGrowthSpecial({id:'harvester',growthKills:200},null),null);
 }
-console.log('Special-affix growth passed: item-bound integer counters, exact caps, no divine scaling, equipped deduplication, multi-item stacking, persistent kill receipts, atomic validation, unequip and same/different-affix reroll.');
+console.log('Special-affix growth passed: item-bound integer counters, exact stored kill caps, no unknown-marker scaling, equipped deduplication, multi-item stacking, persistent kill receipts, atomic validation, unequip and same/different-affix reroll.');

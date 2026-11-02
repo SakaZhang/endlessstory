@@ -1,3 +1,4 @@
+import {specialEffectPower,nirvanaUseCount} from './special-divine.js';
 // Additive schema. Importing this module does NOT activate any production roll pool.
 const freeze=x=>{if(x&&typeof x==='object'){Object.values(x).forEach(freeze);Object.freeze(x);}return x;};
 const nonnegative=n=>Number.isFinite(n)&&n>=0&&n<=1e12;
@@ -31,23 +32,23 @@ export function calculateLifesteal({rating,maxHp,currentHp,hits},config=LIFESTEA
  const rate=config.enabled?rating/config.ratingScale:0,cap=maxHp-currentHp;
  return {heal:currentHp<=0?0:Math.min(cap,actualHpDamage*rate),actualHpDamage,rate,cap};
 }
-export function openingShelterShield({hasShelter,maxHp,flatBonus=0,alreadyApplied=false}){
+export function openingShelterShield({hasShelter,maxHp,flatBonus=0,alreadyApplied=false,power=1}){
  if(typeof hasShelter!=='boolean'||typeof alreadyApplied!=='boolean'||!nonnegative(maxHp)||!nonnegative(flatBonus))return null;
- return hasShelter&&!alreadyApplied?Math.floor(maxHp*SPECIAL_AFFIX_EXPANSION.shelter.openingShieldFraction)+flatBonus:0;
+ return hasShelter&&!alreadyApplied?Math.floor(maxHp*SPECIAL_AFFIX_EXPANSION.shelter.openingShieldFraction*(power===2?2:1))+flatBonus:0;
 }
 // Caller owns battleId lifetime (individual encounter vs dungeon run remains an integration policy).
 export function createBattleAffixState(battleId){return id(battleId)?{version:1,battleId,nirvanaUsed:false,lastReaperCastId:null,reaperHits:[]}:null;}
-export function validBattleAffixState(s){return !!s&&s.version===1&&id(s.battleId)&&typeof s.nirvanaUsed==='boolean'&&(s.lastReaperCastId===undefined||s.lastReaperCastId===null||id(s.lastReaperCastId))&&Array.isArray(s.reaperHits)&&s.reaperHits.length<=4096&&new Set(s.reaperHits).size===s.reaperHits.length&&s.reaperHits.every(x=>typeof x==='string'&&x.length<=1000);}
-export function tryNirvana(s,{battleId,hasNirvana,hp,maxHp}){
+export function validBattleAffixState(s){return !!s&&s.version===1&&id(s.battleId)&&typeof s.nirvanaUsed==='boolean'&&(s.nirvanaCount===undefined||Number.isSafeInteger(s.nirvanaCount)&&s.nirvanaCount>=0&&s.nirvanaCount<=2&&s.nirvanaUsed===(s.nirvanaCount>0))&&(s.lastReaperCastId===undefined||s.lastReaperCastId===null||id(s.lastReaperCastId))&&Array.isArray(s.reaperHits)&&s.reaperHits.length<=4096&&new Set(s.reaperHits).size===s.reaperHits.length&&s.reaperHits.every(x=>typeof x==='string'&&x.length<=1000);}
+export function tryNirvana(s,{battleId,hasNirvana,hp,maxHp,power=1}){
  if(!validBattleAffixState(s)||battleId!==s.battleId||typeof hasNirvana!=='boolean'||!Number.isFinite(hp)||!nonnegative(maxHp)||maxHp<=0)return null;
- const revived=hasNirvana&&hp<=0&&!s.nirvanaUsed;return {state:{...s,reaperHits:[...s.reaperHits],nirvanaUsed:s.nirvanaUsed||revived},revived,hp:revived?maxHp:hp};
+ const count=nirvanaUseCount(s),revived=hasNirvana&&hp<=0&&count<(power===2?2:1);return {state:{...s,reaperHits:[...s.reaperHits],nirvanaUsed:s.nirvanaUsed||revived,...(power===2||s.nirvanaCount!==undefined?{nirvanaCount:count+(revived?1:0)}:{})},revived,hp:revived?maxHp:hp};
 }
-export function tryReaperHit(s,{battleId,castId,hitIndex,targetId,hit,targetHp,hasReaper},random=Math.random){
+export function tryReaperHit(s,{battleId,castId,hitIndex,targetId,hit,targetHp,hasReaper,power=1},random=Math.random){
  if(!validBattleAffixState(s)||battleId!==s.battleId||!id(castId)||!id(targetId)||!Number.isSafeInteger(hitIndex)||hitIndex<0||typeof hit!=='boolean'||typeof hasReaper!=='boolean'||!nonnegative(targetHp)||typeof random!=='function')return null;
  const key=JSON.stringify([hitIndex,targetId]),hits=s.lastReaperCastId===castId?s.reaperHits:[];if(hits.includes(key))return {state:s,triggered:false,targetHp,reason:'already-processed'};
  if(hits.length>=4096)return null;const state={...s,lastReaperCastId:castId,reaperHits:[...hits,key]};if(!hasReaper||!hit||targetHp===0)return {state,triggered:false,targetHp,reason:'ineligible'};
  let roll;try{roll=random();}catch{return null;}if(!Number.isFinite(roll)||roll<0||roll>=1)return null;
- const triggered=roll<SPECIAL_AFFIX_EXPANSION.reaper.chance;return {state,triggered,targetHp:triggered?0:targetHp,roll};
+ const triggered=roll<SPECIAL_AFFIX_EXPANSION.reaper.chance*(power===2?2:1);return {state,triggered,targetHp:triggered?0:targetHp,roll};
 }
 // Approved: one extra active cast, no recursion or cooldown payment; caller executes original skill.
 export function tryMulticast(context,{enabled=true,eligibleSources=['active'],allowTriggeredCasts=false,countAsActiveCast=true}={},random=Math.random){
@@ -55,7 +56,7 @@ export function tryMulticast(context,{enabled=true,eligibleSources=['active'],al
  if(!context||!Array.isArray(eligibleSources)||typeof allowTriggeredCasts!=='boolean'||countAsActiveCast!==true||allowTriggeredCasts!==false||typeof context.triggered!=='boolean'||typeof context.hasLivingEnemies!=='boolean'||typeof random!=='function')return null;
  if(!context.hasLivingEnemies||!eligibleSources.includes(context.source)||context.triggered&&!allowTriggeredCasts)return {triggered:false,reason:'ineligible'};
  let roll;try{roll=random();}catch{return null;}if(!Number.isFinite(roll)||roll<0||roll>=1)return null;
- return {triggered:roll<.15,roll,countAsActiveCast};
+ return {triggered:roll<.15*(context.power===2?2:1),roll,countAsActiveCast};
 }
 
 export const NEW_ORDINARY_AFFIX_DEFS=ORDINARY_AFFIX_CANDIDATES;
@@ -67,16 +68,16 @@ export function lifestealHeal({rating,damage,maxHp,currentHp,alreadyHealed=0}){
  return Math.min(maxHp-currentHp,damage*lifestealRate(rating));
 }
 // Convenience adapters for a caller that already processes each hit exactly once.
-export function rollReaper({hit,targetAlive,equipped},random=Math.random){if(!equipped||hit!==true||targetAlive!==true||typeof random!=='function')return false;let roll;try{roll=random();}catch{return false;}return Number.isFinite(roll)&&roll>=0&&roll<SPECIAL_AFFIX_EXPANSION.reaper.chance;}
+export function rollReaper({hit,targetAlive,equipped,power=1},random=Math.random){if(!equipped||hit!==true||targetAlive!==true||typeof random!=='function')return false;let roll;try{roll=random();}catch{return false;}return Number.isFinite(roll)&&roll>=0&&roll<SPECIAL_AFFIX_EXPANSION.reaper.chance*(power===2?2:1);}
 export function applyNirvana(encounter,maxHp,specials,logs=[]){
  if(!encounter||!validBattleAffixState(encounter.affixState))return false;
- const result=tryNirvana(encounter.affixState,{battleId:encounter.affixState.battleId,hasNirvana:!!specials?.nirvana,hp:encounter.heroHp,maxHp});
+ const result=tryNirvana(encounter.affixState,{battleId:encounter.affixState.battleId,hasNirvana:!!specials?.nirvana,hp:encounter.heroHp,maxHp,power:specialEffectPower(specials,'nirvana')});
  if(!result?.revived)return false;encounter.affixState=result.state;encounter.heroHp=result.hp;logs.push('涅槃 · 满血复活（本场已使用）');return true;
 }
 
 // One snapshot per damaging action: every landed segment shares the boost.
 // A multicast extra takes a fresh snapshot: only an unspent/rearmed charge applies.
-export function beginMomentumAction(save,{equipped=false,extra=false,damaging=true}={}){return {boosted:!!equipped&&damaging&&save.momentum===1,landed:false,directKill:false};}
-export function momentumHitMultiplier(action){action.landed=true;return action.boosted?2:1;}
+export function beginMomentumAction(save,{equipped=false,extra=false,damaging=true,power=1}={}){return {power:power===2?2:1,boosted:!!equipped&&damaging&&save.momentum===1,landed:false,directKill:false};}
+export function momentumHitMultiplier(action){action.landed=true;return action.boosted?1+(action.power===2?2:1):1;}
 export function finishMomentumAction(save,action,{equipped=false}={}){if(action.boosted&&action.landed)save.momentum=0;if(equipped&&action.directKill)save.momentum=1;}
-export function validDungeonAffixUsage(usage){return !!usage&&typeof usage==='object'&&!Array.isArray(usage)&&Object.keys(usage).length===2&&typeof usage.shelterUsed==='boolean'&&typeof usage.nirvanaUsed==='boolean';}
+export function validDungeonAffixUsage(usage){return !!usage&&typeof usage==='object'&&!Array.isArray(usage)&&Object.keys(usage).every(k=>['shelterUsed','nirvanaUsed','nirvanaCount'].includes(k))&&typeof usage.shelterUsed==='boolean'&&typeof usage.nirvanaUsed==='boolean'&&(usage.nirvanaCount===undefined||Number.isSafeInteger(usage.nirvanaCount)&&usage.nirvanaCount>=0&&usage.nirvanaCount<=2&&usage.nirvanaUsed===(usage.nirvanaCount>0));}
