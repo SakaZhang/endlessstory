@@ -27,3 +27,6 @@ svg[data-equipment-quality] { filter:none!important; }
    Match both modern PNG wrappers and retained SVG fallback icons. */
 :is(.itemCell,.equipSlot,.detailIcon,.forgeResult,.orbitSlot,.loadoutGearSlot,.batchSaleItem,.workshopItem,.shopGearIcon,.workshopBigIcon):has([data-equipment-quality="4"]) { background:#61502a!important; }
 :is(.itemCell,.equipSlot,.detailIcon):has([data-equipment-quality="4"]) { box-shadow:inset 0 0 0 1px #c7a361; }
+
+/* Match raster consumers: a framed set container owns the set outline. */
+:is(.itemCell,.equipSlot,.detailIcon,.forgeResult,.orbitSlot,.fusionGearCard,.commodityCard,.donorCard,.collectionTile,.collectionDetail,.collectedPart,.loadoutGearSlot,.batchSaleItem,.workshopItem,.shopGearIcon,.workshopBigIcon,.workshopTemplate) svg[data-equipment-set="true"] > rect[data-equipment-frame="true"] { display:none; }

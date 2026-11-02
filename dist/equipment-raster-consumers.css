@@ -48,3 +48,8 @@
 /* Legendary identity is independent of the four ordinary roll tiers. */
 :is(.itemCell,.equipSlot,.detailIcon,.forgeResult,.loadoutGearSlot,.batchSaleItem):has(.equipmentRaster[data-equipment-quality="4"]) { background:#5a4524!important; }
 :is(.itemCell,.equipSlot,.detailIcon):has(.equipmentRaster[data-equipment-quality="4"]) { box-shadow:inset 0 0 0 1px #c7a361; }
+
+/* v089: a framed set container owns the only green outline. Standalone icons retain theirs. */
+:is(.itemCell,.equipSlot,.detailIcon,.forgeResult,.orbitSlot,.fusionGearCard,.commodityCard,.donorCard,.collectionTile,.collectionDetail,.collectedPart,.loadoutGearSlot,.batchSaleItem,.workshopItem,.shopGearIcon,.workshopBigIcon,.workshopTemplate) .equipmentRaster[data-equipment-set="true"]:after { display:none; }
+/* A merchant card already owns its set frame; the nested icon box stays structural. */
+.commodityCard > .shopGearIcon:has([data-equipment-set="true"]) { border-color:transparent!important; box-shadow:none!important; }
