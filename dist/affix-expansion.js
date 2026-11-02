@@ -72,7 +72,7 @@ export function rollReaper({hit,targetAlive,equipped,power=1},random=Math.random
 export function applyNirvana(encounter,maxHp,specials,logs=[]){
  if(!encounter||!validBattleAffixState(encounter.affixState))return false;
  const result=tryNirvana(encounter.affixState,{battleId:encounter.affixState.battleId,hasNirvana:!!specials?.nirvana,hp:encounter.heroHp,maxHp,power:specialEffectPower(specials,'nirvana')});
- if(!result?.revived)return false;encounter.affixState=result.state;encounter.heroHp=result.hp;logs.push('涅槃 · 满血复活（本场已使用）');return true;
+ if(!result?.revived)return false;encounter.affixState=result.state;encounter.heroHp=result.hp;logs.push('涅槃 · 满血复活（本场第'+nirvanaUseCount(encounter.affixState)+ '次）');return true;
 }
 
 // One snapshot per damaging action: every landed segment shares the boost.

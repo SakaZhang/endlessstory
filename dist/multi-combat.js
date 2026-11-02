@@ -1,4 +1,4 @@
-import {specialEffectPower} from './special-divine.js';
+import {specialEffectPower,nirvanaUseCount} from './special-divine.js';
 import {setSkillCritChance} from './set-skill-critical.js';
 import {validGrowthKillLedger} from './special-affix-growth.js';
 import {equippedLuckyDice,rollLuckyDice,validLuckyDiceOutcome} from './lucky-dice.js';
@@ -156,7 +156,7 @@ export function stepMulti(s,e,turn,ctx){
  const advanceLegends=options=>advanceLegendaryCombat(s,{...options,alive:e.heroHp>0,hasTargets:e.enemies.some(u=>u.hp>0),resolve:legendaryProc});
  advanceLegends({combatDeltaMs:ctx.combatDeltaMs??1100});if(e.done)return logs;
 
- const heroDied=()=>{if(e.heroHp>0)return false;const revived=tryNirvana(e.affixState,{battleId:e.id,hasNirvana:!!st.specials.nirvana,hp:e.heroHp,maxHp:st.hp,power:specialEffectPower(st.specials,'nirvana')});if(revived){e.affixState=revived.state;if(revived.revived){const recovered=revived.hp-e.heroHp;e.heroHp=revived.hp;emitCombatDisplay(e,{kind:'heal',skillId:'nirvana',hpDelta:recovered});logs.push('涅槃 · 满血复生');return false;}}s.momentum=0;end(e,false,null);return true;};
+ const heroDied=()=>{if(e.heroHp>0)return false;const revived=tryNirvana(e.affixState,{battleId:e.id,hasNirvana:!!st.specials.nirvana,hp:e.heroHp,maxHp:st.hp,power:specialEffectPower(st.specials,'nirvana')});if(revived){e.affixState=revived.state;if(revived.revived){const recovered=revived.hp-e.heroHp;e.heroHp=revived.hp;emitCombatDisplay(e,{kind:'heal',skillId:'nirvana',hpDelta:recovered});logs.push('涅槃 · 满血复生（本场第'+nirvanaUseCount(e.affixState)+'次）');return false;}}s.momentum=0;end(e,false,null);return true;};
  if(!ctx.basicOnly)for(const k in e.cd)e.cd[k]=Math.max(0,e.cd[k]-1);
  if(!ctx.basicOnly)for(const k in e.treeSkillCooldowns??{})e.treeSkillCooldowns[k]=Math.max(0,e.treeSkillCooldowns[k]-1);
  for(const u of e.enemies){u.control=advanceControlClock(u.control,now);u.cd=Object.fromEntries(Object.entries(u.control.cooldowns).map(([k,v])=>[k,Math.max(0,Math.ceil((v-now)/1100))]));}

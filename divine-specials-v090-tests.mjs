@@ -1,4 +1,7 @@
 import assert from 'node:assert/strict';
+import {reachStoryScene} from './story-event-test-fixture.mjs';
+import {applyStoryEvent} from './dist/story-event-controller.js';
+import {STORY_SCENES} from './dist/story-event-registry.js';
 import * as E from './dist/engine.js';
 import {createBattleAffixState,validBattleAffixState,tryNirvana,tryReaperHit,tryMulticast,openingShelterShield,beginMomentumAction,momentumHitMultiplier,validDungeonAffixUsage} from './dist/affix-expansion.js';
 import {specialDivineMultiplier,specialEffectPower,specialEffectDescription,nirvanaUseCount} from './dist/special-divine.js';
@@ -34,5 +37,9 @@ function multiFixture(){const enemies=[0,1].map(i=>{const u=makeMultiUnit('u'+i,
 function runMulti(f,rolls){let i=0;const old=Math.random;Math.random=()=>rolls[Math.min(i++,rolls.length-1)];try{return stepMulti(f.s,f.e,{},f.ctx);}finally{Math.random=old;}}
 for(const [power,hp]of [[1,990],[2,0]]){const f=multiFixture();f.st.specials.reaper=power===1?true:2;runMulti(f,[0,.9,.015]);assert.equal(f.e.enemies[0].hp,hp);}
 for(const [power,casts]of [[1,1],[2,2]]){const f=multiFixture();f.s.skills=['warcry',null,null,null];f.ctx.SKILLS.warcry={cd:5,name:'战吼'};f.st.specials.multicast=power===1?true:2;runMulti(f,[.2]);assert.equal(f.e.activeCastCount,casts);}
+
+
+// Nonlethal authored rescue still excludes divine execution and growth rewards.
+{const id='C08.O11.human',s=reachStoryScene('human',id);gear(s,'reaper');const growth=gear(s,'harvester',true,'ring2');growth.special.growthKills=12;assert(applyStoryEvent(s,{type:'scenario',sceneId:id,scenarioId:STORY_SCENES[id].encounter.scenarioId},{now:Math.max(s.lastSeen,s.lastHealthClock??0,s.nextBattleAt??0)+2000}));const e=s.activeEncounter;let turns=0;while(!e.done&&turns++<3000)E.step(s,e,s.nextActionAt);assert(e.done);assert(e.enemies.every(u=>u.hp>=1));assert.equal(growth.special.growthKills,12);assert(E.validSave(s));}
 
 console.log('PASS v090 nine divine specials, exact effect boundaries, max-only aggregation, item growth/old counters, nonrecursive casts, production rewards and full-dungeon revival ledger.');

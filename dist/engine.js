@@ -907,7 +907,7 @@ function initializeEncounterAffixes(e,st,run=null){
  if(usage)usage.shelterUsed=e.shelterUsed;
 }
 function ensureEncounterAffixes(e){e.affixBattleId??=e.id??('legacy-battle-'+(++serial));e.affixState??=createBattleAffixState(e.affixBattleId);}
-function reviveEncounter(e,st,logs){const out=tryNirvana(e.affixState,{battleId:e.affixState.battleId,hasNirvana:!!st.specials.nirvana,hp:e.heroHp,maxHp:st.hp,power:specialEffectPower(st.specials,'nirvana')});if(!out)return false;e.affixState=out.state;if(out.revived){e.heroHp=out.hp;logs.push('涅槃 · 满血复活（本场已使用）');}return out.revived;}
+function reviveEncounter(e,st,logs){const out=tryNirvana(e.affixState,{battleId:e.affixState.battleId,hasNirvana:!!st.specials.nirvana,hp:e.heroHp,maxHp:st.hp,power:specialEffectPower(st.specials,'nirvana')});if(!out)return false;e.affixState=out.state;if(out.revived){e.heroHp=out.hp;logs.push('涅槃 · 满血复活（本场第'+nirvanaUseCount(e.affixState)+ '次）');}return out.revived;}
 // Authored nonlethal scene start. Caller must persist this candidate atomically.
 export function startStoryScenario(s,scenarioId,now=Date.now()){
  if(!validSave(s)||!canStartStoryScenario(s,scenarioId)||!storyScenarioForStart(s,scenarioId)||!Number.isSafeInteger(now)||now<0||now>1e15)return null;
