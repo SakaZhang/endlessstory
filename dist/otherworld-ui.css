@@ -17,3 +17,5 @@
 @media(max-width:1100px){.otherworldControls{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:480px){.otherworldPanel{padding:12px}.otherworldControls{gap:6px}.otherworldControls>label{flex-wrap:wrap;gap:3px}.otherworldControls input{width:70px}.otherworldControls>button{font-size:12px}.otherworldPending{grid-template-columns:1fr;min-height:104px}.otherworldPending button{min-height:42px}.otherworldPanelTitle h2{font-size:20px}.otherworldStats b{font-size:16px}}
 .otherworldControls>button:hover,.otherworldControls>button:active,.otherworldPending>button:hover,.otherworldPending>button:active{transform:none}
+
+.otherworldRange{display:inline-block;width:19ch;white-space:nowrap;text-align:left;font-variant-numeric:tabular-nums}

@@ -15,7 +15,7 @@ const before=JSON.stringify(s),refs=[...nodes.values()];
 for(let i=0;i<40;i++){s.activeEncounter={rewarded:i%2===0};updateOtherworldPanel(host,s);assert.equal(writes,0,'ticks must not replace controls');assert.deepEqual([...nodes.values()],refs);}
 s.activeEncounter=null;assert.equal(nodes.get('[data-otherworld="claim"]').disabled,true);
 // Floor progression updates all live data, but never overwrites a typed draft.
-s.otherworld.highestCleared=9;s.otherworld.floor=10;updateOtherworldPanel(host,s);assert.equal(input.value,'10');assert.equal(input.max,'10');
+s.otherworld.highestCleared=9;s.otherworld.floor=10;updateOtherworldPanel(host,s);assert.equal(input.value,'10');assert.equal(input.max,'10');assert.equal(nodes.get('[data-ow-text="range"]').textContent,'可选择第1–10层');
 input.value='2';doc.activeElement=input;s.otherworld.highestCleared=10;s.otherworld.floor=11;updateOtherworldPanel(host,s);assert.equal(input.value,'2');assert.equal(doc.activeElement,input);assert.equal(input.max,'11');
 doc.activeElement=null;updateOtherworldPanel(host,s);assert.equal(input.value,'2','blur does not erase unsubmitted floor draft');
 s.otherworld.floor=2;updateOtherworldPanel(host,s);s.otherworld.floor=3;updateOtherworldPanel(host,s);assert.equal(input.value,'2','automatic progression through the draft number cannot make it clean');
