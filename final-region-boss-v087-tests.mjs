@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {assertMonsterCatalogIds,assertPlannedNodeIds} from './monster-catalog-test-fixture.mjs';
+import {MONSTER_CATALOG} from './dist/monster-codex-schema.js';
 import * as E from './dist/engine.js';
 import {WORLD_MONSTERS,monsterParameters} from './dist/world-content.js';
 import {LEGENDARY_DROP_CANDIDATES} from './dist/legendary-drop.js';
@@ -10,6 +12,10 @@ import {earnAreaAccess} from './natural-area-access.mjs';
 const T=1700000000000,clock=Date.now;Date.now=()=>T;
 try{
  const proof=[];
+ assertMonsterCatalogIds(MONSTER_CATALOG);const nodes=E.plannedNodes(E.fresh());assertPlannedNodeIds(nodes);
+ const missing={...MONSTER_CATALOG};delete missing['goblin.a10.boss'];assert.throws(()=>assertMonsterCatalogIds(missing));
+ assert.throws(()=>assertMonsterCatalogIds({...MONSTER_CATALOG,'invented.boss':{}}));
+ assert.throws(()=>assertPlannedNodeIds(nodes.filter(n=>n.id!=='goblin.a10.boss')));assert.throws(()=>assertPlannedNodeIds([...nodes,{id:'invented.boss'}]));
  for(const race of E.RACE_KEYS){
   const id=race+'.a10.boss',s=setup(race,100,0,1);s.lastSeen=T;E.normalizeHealth(s,T);assert(E.travelToArea(s,race+'.a10',T));
   assert(E.INSTANCES[id]?.enabled);assert(E.plannedNodes(s).find(n=>n.id===id)?.unlocked);assert.equal(E.instanceCooldownMs(id),1800000);
