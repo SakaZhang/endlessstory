@@ -4,7 +4,7 @@ import {WORLD_MONSTERS,monsterParameters} from './dist/world-content.js';
 import {BOSS_DPS_REFERENCE_FRACTION} from './dist/monster-balance.js';
 const rows=JSON.parse(fs.readFileSync(new URL('./fixtures/boss-growth/parameter-contract.json',import.meta.url)));
 assert.equal(BOSS_DPS_REFERENCE_FRACTION,.024);
-const added=JSON.parse(fs.readFileSync(new URL('./fixtures/boss-growth/human-a10-v080.json',import.meta.url)));
+const added={...JSON.parse(fs.readFileSync(new URL('./fixtures/boss-growth/human-a10-v080.json',import.meta.url))),...JSON.parse(fs.readFileSync(new URL('./fixtures/boss-growth/goblin-a10-v087.json',import.meta.url)))};
 assert.deepEqual(Object.keys(WORLD_MONSTERS).sort(),[...rows.map(r=>r.id),...Object.keys(added)].sort());
 for(const [id,parameters] of Object.entries(added))assert.deepEqual(monsterParameters(id),parameters,id+' exact v080 addition');
 for(const r of rows){

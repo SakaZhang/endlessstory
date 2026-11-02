@@ -150,6 +150,21 @@ function authorizedBaseline(original,file){
   out.HUMAN_MATERIAL_ASSOCIATIONS[bossKey]=addition.association;out.HUMAN_MATERIAL_POOLS[bossKey]=addition.pool;out.HUMAN_MONSTER_SPRITES[bossId]=addition.sprite;
  }
 
+ // User-authorized v087 final goblin boss and explicit local material-source appends.
+ const goblinId='goblin.a10.boss',goblinAddition=JSON.parse(readFileSync(join(root,'fixtures/boss-growth/goblin-a10-content-v087.json'),'utf8'));
+ if(file==='races/goblin/areas.js'){assert.equal(out.areas[9].boss,false);out.areas[9].boss=true;}
+ if(file==='races/goblin/monsters.js'){assert(!Object.hasOwn(out.monsters,goblinId));out.monsters[goblinId]=clone(goblinAddition.monster);}
+ if(file==='races/goblin/parameters.js'){assert(!Object.hasOwn(out.parameters.monsters,goblinId));out.parameters.monsters[goblinId]=clone(goblinAddition.parameters);}
+ if(file==='races/goblin/materials.js')for(const id of goblinAddition.materialIds){assert(!out.materials[id].sources.includes(goblinId));out.materials[id].sources.push(goblinId);}
+ if(file==='engine.js')for(const m of Object.values(out.MATERIALS??{}))if(goblinAddition.materialIds.includes(m.catalogId)){assert(!m.sources.includes(goblinId));m.sources.push(goblinId);}
+ // Only the reviewed leaf changes in the two elf hero sprite metadata records.
+ // No art subtree or numeric field is excluded from comparison.
+ const elfMetadataChanges=JSON.parse(readFileSync(join(root,'fixtures/boss-growth/v087-elf-hero-metadata.json'),'utf8'));assert.equal(elfMetadataChanges.length,47);
+ if(file==='races/elf/content.js')for(const change of elfMetadataChanges){
+  assert(['bow','staff'].includes(change.path[0]));assert(['frames','animations','headY','healthBarAnchor'].includes(change.path[1]));
+  const parent=change.path.slice(0,-1).reduce((o,k)=>o[k],out.art.hero),key=change.path.at(-1);assert.deepEqual(parent[key],change.before);if(Object.hasOwn(change,'after'))parent[key]=clone(change.after);else delete parent[key];
+ }
+
  // Approved presentation-only 2/4-piece rows. Pin structure and thresholds;
  // descriptions alone are visible copy, never the numerical set tuning.
  if(file==='engine.js'){
@@ -240,6 +255,11 @@ try{
    rejectMutation('endgame boss gear basis',m=>m.HUMAN_AREAS[9].bossGearLevel=95);
    rejectMutation('earlier human boss budget',m=>m.HUMAN_PARAMETERS.monsters['human.a09.boss'].hp++);
   }
+  if(file==='races/goblin/monsters.js'){rejectMutation('goblin boss damage',m=>m.monsters['goblin.a10.boss'].skills[0].effects[0].coefficient++);rejectMutation('remove new boss',m=>delete m.monsters['goblin.a10.boss']);}
+  if(file==='races/goblin/areas.js')rejectMutation('disable final goblin boss',m=>m.areas[9].boss=false);
+  if(file==='races/goblin/parameters.js')rejectMutation('goblin boss budget',m=>m.parameters.monsters['goblin.a10.boss'].hp++);
+  if(file==='races/goblin/materials.js')rejectMutation('extra goblin boss source',m=>m.materials['goblin.mat.02'].sources.push('goblin.a10.boss'));
+  if(file==='races/elf/content.js'){rejectMutation('extra hero metadata drift',m=>m.art.hero.bow.frames[0].alphaBBox[0]++);rejectMutation('unapproved hero scale',m=>m.art.hero.staff.frameSize[0]++);}
   if(file==='races/human/equipment.js')rejectMutation('unapproved legendary source',m=>m.HUMAN_LEGENDARIES[0].bossPool.push('elf.a10.boss'));
   if(file==='return-ring-content.js'){
    rejectMutation('event ID',m=>m.RETURN_RING_EVENTS[0].id+='-changed');
@@ -297,6 +317,6 @@ try{
  ]){const corrupt=clone(after.BUILD);mutate(corrupt);assert.throws(()=>assert.deepEqual(project(corrupt,'engine.js','BUILD'),expectedBuild),assert.AssertionError,label);}
  // Mutation sentinels prove representative mechanics strings cannot be hidden.
  for(const [f,p]of [['racial-npc-event-content.js','RACIAL_NPC_EVENTS/0/conditions/accessPolicy'],['racial-npc-event-content.js','RACIAL_NPC_EVENTS/0/choices/0/effects/0/flag'],['npc-objective-content.js','NPC_OBJECTIVE_CONTENT/event/taskRewards/0/key'],['races/elf/skills.js','skills/elf.skill/weaponType'],['races/elf/equipment.js','legendaries/0/exclusiveId']])assert.notEqual(project('old',f,p),project('new',f,p),p);
- console.log(`PASS copy + bounded authorized revision invariants: ${compared} modules + engine catalogs vs ${BASELINE.slice(0,12)}; ${changedCopy.length} changed content modules. IDs, gates, objectives, rewards, effects, numeric budgets and legendary functions preserved except exact approved ring objectives / recipe additions / presentation-only set rows (2/4 thresholds pinned) / exact human A10 boss content and sources / exact v081 goblin poison deltas / exact fruit name and description / exact v082 Lucky Dice codex identity / reserved-reward v3 protocol / exact v084 staged seal-rescue contracts and four X01 alternative predecessors / exact v085 five-gem selector and protected-input helpers.`);
+ console.log(`PASS copy + bounded authorized revision invariants: ${compared} modules + engine catalogs vs ${BASELINE.slice(0,12)}; ${changedCopy.length} changed content modules. IDs, gates, objectives, rewards, effects, numeric budgets and legendary functions preserved except exact approved ring objectives / recipe additions / presentation-only set rows (2/4 thresholds pinned) / exact human A10 boss content and sources / exact v081 goblin poison deltas / exact fruit name and description / exact v082 Lucky Dice codex identity / reserved-reward v3 protocol / exact v084 staged seal-rescue contracts and four X01 alternative predecessors / exact v085 five-gem selector and protected-input helpers / exact v087 goblin A10 content and 47 elf hero metadata leaves.`);
  console.log('Boundary: does not prove new prose accurately describes mechanics, DOM behavior, non-exported function closures, or visual correctness; use gameplay/UI tests and review alongside this check.');
 }finally{rmSync(temp,{recursive:true,force:true});}

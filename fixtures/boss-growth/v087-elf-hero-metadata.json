@@ -1,0 +1,514 @@
+[
+  {
+    "path": [
+      "bow",
+      "frames",
+      "0",
+      "alphaBBox",
+      "0"
+    ],
+    "before": 57,
+    "after": 63
+  },
+  {
+    "path": [
+      "bow",
+      "frames",
+      "0",
+      "alphaBBox",
+      "2"
+    ],
+    "before": 135,
+    "after": 128
+  },
+  {
+    "path": [
+      "bow",
+      "frames",
+      "1",
+      "alphaBBox",
+      "0"
+    ],
+    "before": 55,
+    "after": 63
+  },
+  {
+    "path": [
+      "bow",
+      "frames",
+      "1",
+      "alphaBBox",
+      "1"
+    ],
+    "before": 97,
+    "after": 94
+  },
+  {
+    "path": [
+      "bow",
+      "frames",
+      "1",
+      "alphaBBox",
+      "2"
+    ],
+    "before": 137,
+    "after": 128
+  },
+  {
+    "path": [
+      "bow",
+      "frames",
+      "2",
+      "alphaBBox",
+      "0"
+    ],
+    "before": 57,
+    "after": 60
+  },
+  {
+    "path": [
+      "bow",
+      "frames",
+      "2",
+      "alphaBBox",
+      "1"
+    ],
+    "before": 92,
+    "after": 86
+  },
+  {
+    "path": [
+      "bow",
+      "frames",
+      "2",
+      "alphaBBox",
+      "2"
+    ],
+    "before": 135,
+    "after": 132
+  },
+  {
+    "path": [
+      "bow",
+      "frames",
+      "3",
+      "alphaBBox",
+      "0"
+    ],
+    "before": 49,
+    "after": 57
+  },
+  {
+    "path": [
+      "bow",
+      "frames",
+      "3",
+      "alphaBBox",
+      "1"
+    ],
+    "before": 81,
+    "after": 82
+  },
+  {
+    "path": [
+      "bow",
+      "frames",
+      "3",
+      "alphaBBox",
+      "2"
+    ],
+    "before": 143,
+    "after": 134
+  },
+  {
+    "path": [
+      "bow",
+      "frames",
+      "4",
+      "alphaBBox",
+      "0"
+    ],
+    "before": 54,
+    "after": 60
+  },
+  {
+    "path": [
+      "bow",
+      "frames",
+      "4",
+      "alphaBBox",
+      "1"
+    ],
+    "before": 87,
+    "after": 88
+  },
+  {
+    "path": [
+      "bow",
+      "frames",
+      "4",
+      "alphaBBox",
+      "2"
+    ],
+    "before": 137,
+    "after": 132
+  },
+  {
+    "path": [
+      "bow",
+      "frames",
+      "5",
+      "alphaBBox",
+      "0"
+    ],
+    "before": 57,
+    "after": 60
+  },
+  {
+    "path": [
+      "bow",
+      "frames",
+      "5",
+      "alphaBBox",
+      "2"
+    ],
+    "before": 134,
+    "after": 132
+  },
+  {
+    "path": [
+      "bow",
+      "frames",
+      "6",
+      "alphaBBox",
+      "0"
+    ],
+    "before": 50,
+    "after": 59
+  },
+  {
+    "path": [
+      "bow",
+      "frames",
+      "6",
+      "alphaBBox",
+      "1"
+    ],
+    "before": 96,
+    "after": 102
+  },
+  {
+    "path": [
+      "bow",
+      "frames",
+      "6",
+      "alphaBBox",
+      "2"
+    ],
+    "before": 141,
+    "after": 133
+  },
+  {
+    "path": [
+      "bow",
+      "frames",
+      "7",
+      "alphaBBox",
+      "0"
+    ],
+    "before": 42,
+    "after": 53
+  },
+  {
+    "path": [
+      "bow",
+      "frames",
+      "7",
+      "alphaBBox",
+      "1"
+    ],
+    "before": 123,
+    "after": 131
+  },
+  {
+    "path": [
+      "bow",
+      "frames",
+      "7",
+      "alphaBBox",
+      "2"
+    ],
+    "before": 150,
+    "after": 138
+  },
+  {
+    "path": [
+      "staff",
+      "frames",
+      "0",
+      "alphaBBox",
+      "0"
+    ],
+    "before": 55,
+    "after": 63
+  },
+  {
+    "path": [
+      "staff",
+      "frames",
+      "0",
+      "alphaBBox",
+      "1"
+    ],
+    "before": 91,
+    "after": 83
+  },
+  {
+    "path": [
+      "staff",
+      "frames",
+      "0",
+      "alphaBBox",
+      "2"
+    ],
+    "before": 136,
+    "after": 128
+  },
+  {
+    "path": [
+      "staff",
+      "frames",
+      "1",
+      "alphaBBox",
+      "0"
+    ],
+    "before": 52,
+    "after": 65
+  },
+  {
+    "path": [
+      "staff",
+      "frames",
+      "1",
+      "alphaBBox",
+      "1"
+    ],
+    "before": 95,
+    "after": 86
+  },
+  {
+    "path": [
+      "staff",
+      "frames",
+      "1",
+      "alphaBBox",
+      "2"
+    ],
+    "before": 139,
+    "after": 127
+  },
+  {
+    "path": [
+      "staff",
+      "frames",
+      "2",
+      "alphaBBox",
+      "1"
+    ],
+    "before": 77,
+    "after": 78
+  },
+  {
+    "path": [
+      "staff",
+      "frames",
+      "2",
+      "alphaBBox",
+      "2"
+    ],
+    "before": 137,
+    "after": 136
+  },
+  {
+    "path": [
+      "staff",
+      "frames",
+      "3",
+      "alphaBBox",
+      "0"
+    ],
+    "before": 45,
+    "after": 56
+  },
+  {
+    "path": [
+      "staff",
+      "frames",
+      "3",
+      "alphaBBox",
+      "1"
+    ],
+    "before": 103,
+    "after": 100
+  },
+  {
+    "path": [
+      "staff",
+      "frames",
+      "3",
+      "alphaBBox",
+      "2"
+    ],
+    "before": 147,
+    "after": 135
+  },
+  {
+    "path": [
+      "staff",
+      "frames",
+      "4",
+      "alphaBBox",
+      "0"
+    ],
+    "before": 38,
+    "after": 46
+  },
+  {
+    "path": [
+      "staff",
+      "frames",
+      "4",
+      "alphaBBox",
+      "1"
+    ],
+    "before": 100,
+    "after": 97
+  },
+  {
+    "path": [
+      "staff",
+      "frames",
+      "4",
+      "alphaBBox",
+      "2"
+    ],
+    "before": 154,
+    "after": 145
+  },
+  {
+    "path": [
+      "staff",
+      "frames",
+      "5",
+      "alphaBBox",
+      "0"
+    ],
+    "before": 39,
+    "after": 40
+  },
+  {
+    "path": [
+      "staff",
+      "frames",
+      "5",
+      "alphaBBox",
+      "1"
+    ],
+    "before": 100,
+    "after": 98
+  },
+  {
+    "path": [
+      "staff",
+      "frames",
+      "5",
+      "alphaBBox",
+      "2"
+    ],
+    "before": 152,
+    "after": 151
+  },
+  {
+    "path": [
+      "staff",
+      "frames",
+      "6",
+      "alphaBBox",
+      "0"
+    ],
+    "before": 51,
+    "after": 52
+  },
+  {
+    "path": [
+      "staff",
+      "frames",
+      "6",
+      "alphaBBox",
+      "1"
+    ],
+    "before": 99,
+    "after": 104
+  },
+  {
+    "path": [
+      "staff",
+      "frames",
+      "6",
+      "alphaBBox",
+      "2"
+    ],
+    "before": 140,
+    "after": 139
+  },
+  {
+    "path": [
+      "staff",
+      "frames",
+      "7",
+      "alphaBBox",
+      "0"
+    ],
+    "before": 47,
+    "after": 51
+  },
+  {
+    "path": [
+      "staff",
+      "frames",
+      "7",
+      "alphaBBox",
+      "1"
+    ],
+    "before": 123,
+    "after": 127
+  },
+  {
+    "path": [
+      "staff",
+      "frames",
+      "7",
+      "alphaBBox",
+      "2"
+    ],
+    "before": 145,
+    "after": 140
+  },
+  {
+    "path": [
+      "staff",
+      "headY"
+    ],
+    "before": 103,
+    "after": 95
+  },
+  {
+    "path": [
+      "staff",
+      "healthBarAnchor",
+      "1"
+    ],
+    "before": 83,
+    "after": 75
+  }
+]
