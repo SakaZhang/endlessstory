@@ -353,3 +353,6 @@ for(const file of ['story-player-prose-v084-tests.mjs','story-seal-rescue-tests.
 runAffixSourceTest(process.execPath,[new URL('./gauntlet-fusion-v085-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
 
 runAffixSourceTest(process.execPath,[new URL('./story-journal-prose-v085-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.87 retain otherworld controls during battle ticks.
+runAffixSourceTest(process.execPath,[new URL('./otherworld-stable-ui-v087-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
