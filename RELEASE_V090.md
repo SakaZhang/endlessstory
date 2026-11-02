@@ -12,4 +12,10 @@ This release retains v0.89 single-border presentation and all earlier runtime fe
 The fifteen-set tuning coefficients are implementation decisions under the user's explicit request to strengthen all sets, not a claim that the user individually authored every coefficient.
 
 ## Verification
-Pending final integrated verification; do not treat this draft as a publication receipt.
+- Engine/App suites cover first-clear stone grants, legacy highest baselines without compensation, already-won legacy pending floors, unfinished migrated fights, replay/reload/offline idempotence, all eight full equipment bags and quality filtering, storage failure/retry, and furnace repeated use.
+- Divine special tests cover strongest-source aggregation, independent growth counters, two-use revival carry through a normal dungeon, and nonlethal story combat preservation.
+- Acquisition tests include 2,000 real field settlements across all five races and deterministic source/luck boundaries. Exact fifteen-set coefficients and 35 same-seed old/new tower comparisons are recorded under `fixtures/set-v090/`.
+- Normal-browser furnace grant, reload persistence and original-save restoration are recorded in `fixtures/v090/BROWSER_QA.md`.
+- Container packaging metadata tests: 7 passed. No Docker image has been built or pushed in this release preparation.
+
+Final integrated regression and publication receipt remain pending; this document is not yet a deployment claim.
