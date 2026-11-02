@@ -33,6 +33,14 @@ async function probe(output,report){
   const bytes=await readFile(join(output,'releases',report.release,path));assert.equal(digest(bytes),files.get(path).sha256);
   const text=bytes.toString(),ext=path.split('.').pop();
   for(const dep of deps(text,ext).filter(x=>!external(x)))await visit(new URL(dep,url),url.href);
+  if(path==='casino-ui.js'){
+   // Casino imagery is emitted by the actual UI renderer, not an ESM/CSS edge.
+   // Exercise that renderer so a broken or removed image cannot be whitelisted.
+   const {renderCasino}=await import(pathToFileURL(join(emittedRoot,path)));
+   const {fresh}=await import(pathToFileURL(join(emittedRoot,'engine.js')));
+   const html=renderCasino(fresh());
+   for(const dep of deps(html,'html').filter(x=>!external(x)))await visit(new URL(dep,release),url.href+' rendered HTML');
+  }
   if(path==='equipment-raster-registry.js'){
    const {EQUIPMENT_RASTER_ASSETS}=await import(pathToFileURL(join(emittedRoot,path)));
    for(const sizes of Object.values(EQUIPMENT_RASTER_ASSETS))for(const file of Object.values(sizes))await visit(new URL(file,release),url.href);
@@ -113,6 +121,7 @@ async function probe(output,report){
  for(const actor of Object.values(STORY_ACTOR_ART))assert(urls.has(new URL(actor.file,release).href),'story actor must be reached through actual production battle manifest: '+actor.file);
  for(const module of ['chik-family-events.js','chik-family-event-rewards.js','chik-family-event-ui.js','hero-portraits/manifest.js','chik-family-registry.js','chik-family-ui.js','story-cast-registry.js','story-cast-ui.js','story-portrait-crops.js','npc-portraits.js','npc-portrait-registry.js','random-world-events.js','story-c08-scenarios.js','story-finale-scenes.js','story-finale-scenarios.js','otherworld-art.js','story-battle-backgrounds.js','story-scenario-registry.js','story-actor-art.js'])assert(urls.has(new URL(module,release).href),'new runtime module must be imported from an entry: '+module);
  // Dedicated tower art is reached through the actual extended production battle manifest.
+ assert(urls.has(new URL('service-assets/casino-hall-v083.webp',release).href),'casino room must be reached through rendered production UI');
  for(const asset of ['rift-arena',...['idle','anticipation','attack','recovery','hurt','death'].map(p=>'sentinel-'+p)])assert(urls.has(new URL('otherworld-assets/'+asset+'.png',release).href),'tower asset must be a runtime dependency: '+asset);
  const runtimeUrls=new Set(urls);
  const auxiliary=report.files.filter(f=>!f.path.endsWith('.html')&&!urls.has(new URL(f.path,release).href));
@@ -134,7 +143,7 @@ try{
  // Cache populated from actual checked-in legacy root and actual previous graph, not mocked module constants.
  const oldCache=new Map(before.map(([path,sha])=>[new URL(path,root).href,sha]));oldCache.set(new URL(legacyScript,root).href,'legacy entry cache');
  for(const url of graphA.urls)oldCache.set(url,'previous release cached bytes');
- for(const path of ['style.css','engine.js','battle-assets/manifest.json','map-assets/exploration-manifest.json','races/elf/assets/exploration-01.png','story-assets/central-ritual-open.png','story-assets/central-ritual-closed.png','otherworld-assets/rift-arena.png','otherworld-assets/sentinel-attack.png',before.find(([p])=>p.endsWith('.png'))[0]]){
+ for(const path of ['style.css','engine.js','battle-assets/manifest.json','map-assets/exploration-manifest.json','races/elf/assets/exploration-01.png','story-assets/central-ritual-open.png','story-assets/central-ritual-closed.png','otherworld-assets/rift-arena.png','otherworld-assets/sentinel-attack.png','service-assets/casino-hall-v083.webp',before.find(([p])=>p.endsWith('.png'))[0]]){
   const original=await readFile(join(source,path));await writeFile(join(source,path),Buffer.concat([original,Buffer.from(path.endsWith('.js')||path.endsWith('.css')?'\n/* cache mutation probe */\n':' ')]));
   const changed=await buildRelease({source,output});assert.notEqual(changed.release,a.release,'file failed to affect namespace '+path);
   // Manifest whitespace valid; PNG trailing whitespace allowed as byte-level cache test only.
@@ -143,6 +152,7 @@ try{
  }
  // Negative references must fail traversal even when build hashes are internally valid.
  for(const [file,mutate] of [
+  ['casino-ui.js',text=>text.replace('service-assets/casino-hall-v083.webp','service-assets/missing-casino-hall.webp')],
   ['equipment-raster-registry.js',text=>text.replace('equipment-assets/32/infinity-gauntlet.png','equipment-assets/32/missing-infinity.png')],
   ['map-assets/exploration-manifest.json',text=>text.replace('exploration-01.png','missing-exploration.png')],
   ['style.css',text=>text+'\n.broken{background:url(./missing-cache-probe.png)}'],
@@ -192,5 +202,5 @@ try{
 
  await writeFile(join(actualOutput,'dependency-probe.json'),JSON.stringify({release:actual.release,legacyEntry:legacyScript,packageCheck,kind:'Emitted bundled entry dependencies plus retained-source ESM/CSS dynamic manifest/image contract graph; filesystem + URL/cache model, not browser cache inspection',...graph},null,2)+'\n');
  console.log(packageCheck);
- console.log(`PASS release cache: ${actual.files.length} files hash-verified; ${graph.urls.length} resource URLs / ${graph.edges.length} dependency edges; old legacy and prior release cache misses; 10 byte mutations + 11 negative reference mutations; roots/navigation/origin/save key preserved.`);
+ console.log(`PASS release cache: ${actual.files.length} files hash-verified; ${graph.urls.length} resource URLs / ${graph.edges.length} dependency edges; old legacy and prior release cache misses; 11 byte mutations + 12 negative reference mutations; roots/navigation/origin/save key preserved.`);
 }finally{await rm(temp,{recursive:true,force:true});}

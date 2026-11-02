@@ -340,3 +340,6 @@ runAffixSourceTest(process.execPath,[new URL('./expedition-automation-app-ui-tes
 // v0.82 independent special-affix, casino and exclusive-dice contracts.
 // Fresh realms prevent old fixture providers or mock DOM state leaking in.
 for(const file of ['special-affix-growth-tests.mjs','special-affix-overhaul-tests.mjs','special-affix-reserved-reward-tests.mjs','lucky-dice-tests.mjs','casino-tests.mjs','casino-app-ui-tests.cjs','v082-independent-integration-tests.mjs','v082-casino-independent-tests.mjs','racial-ui-copy-tests.mjs','goblin-racial-growth-v082-tests.mjs','enhancement-scaling-v082-tests.mjs','enhancement-scaling-v082-app-tests.cjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.83 independent casino scene and standalone navigation presentation.
+runAffixSourceTest(process.execPath,[new URL('./casino-scene-v083-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});

@@ -2,7 +2,7 @@
 # Build from the generated portable package, not the repository root.
 FROM scratch
 ARG TARGETARCH
-ARG GAME_VERSION=0.82
+ARG GAME_VERSION=0.83
 ARG GAME_RELEASE
 ARG SOURCE_COMMIT
 COPY --chmod=0555 binaries/game-server-linux-${TARGETARCH} /game-server
