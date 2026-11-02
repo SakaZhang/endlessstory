@@ -26,3 +26,7 @@ Passed locally:
 Native evidence and importable synthetic fixtures are generated under qa/seal-rescue. They contain no user save data. Real browser QA and aggregate final release verification belong to integration and are not claimed by this note.
 
 Additional verification: story-c08-native-proof.mjs passed. v067-cross-system-tests.mjs fails at its historical NPC response assertion (line 20); the identical failure was reproduced on untouched casino baseline 12bb0b8. It is not counted as passing or as introduced by this change.
+
+Browser-follow-up correction: authored scenarios now display the story-scene title and “剧情战斗/剧情交手”, not the underlying field node's idle labels. The core uses a disabled “请使用剧情道具” control beside its explicit one-use action. Ordinary boss/rest/stop-after controls are hidden only during authored scenarios; underlying locations and battle rules are unchanged. Five-POV App UI assertions, cancellation and live-renderer regressions passed again after this change.
+
+Lemus art identity was checked: elf RACE_PACK.heroName is 莱姆斯; the encounter uses the same art.hero.staff → hero-elf-staff asset as the playable elf with a staff. It does not use a generic fallback. Existing cross-race art proportions were not globally changed.

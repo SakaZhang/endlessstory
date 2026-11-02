@@ -21,8 +21,8 @@ const click=(dataset={},id='')=>{const b={dataset,id};for(const fn of events.cli
    if(saved().story.activeScene.choiceId===null)click({storyAction:'choice',storyScene:id,storyChoice:d.choices[0].id});
    if(d.encounter&&!C.storyEventView(saved()).active.receipt){
     now=Math.max(now,saved().nextBattleAt??0,saved().lastHealthClock??0)+2000;const before=saved(),economy=JSON.stringify({gold:before.gold,xp:before.xp,kills:before.kills,inventory:before.inventory,materials:before.materialStacks});
-    click({storyAction:'scenario',storyScene:id,storyScenario:d.encounter.scenarioId});assert(saved().activeEncounter,'scenario start '+id+' toast='+el('toast').textContent+' active='+JSON.stringify(saved().story.activeScene));assert.equal(saved().activeEncounter.storyScenario.sceneId,id);
-    if(d.questTool){
+    click({storyAction:'scenario',storyScene:id,storyScenario:d.encounter.scenarioId});assert(saved().activeEncounter,'scenario start '+id+' toast='+el('toast').textContent+' active='+JSON.stringify(saved().story.activeScene));assert.equal(saved().activeEncounter.storyScenario.sceneId,id);assert(!el('viewTitle').textContent.includes('野外'));assert(!el('worldStatus').textContent.includes('持续挂机'));assert(!el('battleState').textContent.includes('野外挂机'));assert(el('bossBtn').hidden);assert(el('stopAfterBtn').hidden);
+    if(d.questTool){assert(el('runBtn').disabled);assert.equal(el('runBtn').textContent,'请使用剧情道具');
      const e=saved().activeEncounter,tool={storyAction:'use-tool',storyScene:id,storyEncounter:e.id,storyTarget:e.enemies[0].id};assert(el('storyScenarioNoticeHost').innerHTML.includes('data-story-action="use-tool"'));assert(el('storyScenarioNoticeHost').innerHTML.includes('消耗1件'));
      const snap=JSON.stringify(saved().story);tick();assert.equal(JSON.stringify(saved().story),snap);failWrite=true;click(tool);failWrite=false;assert(C.storyQuestToolAvailable(saved(),d.questTool));assert(saved().activeEncounter);assert(!saved().story.flags.includes('E_UNSEALED'));
      // Real App reload preserves the exact target and still-owned one-use tool.
