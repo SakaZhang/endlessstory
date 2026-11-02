@@ -79,7 +79,7 @@ export function storyCastDisplayLabel(scene,label){if(typeof label!=='string')re
 // Existing knowledge ID + flag + completed scene are checked together to avoid spoilers.
 export function knownStoryEvidenceCast(game){
  const st=game?.story;
- if(st?.flags?.includes('D_RELIC_SALE_COUP_PROVEN')||st?.flags?.includes('FIVE_HEROES_BRIEFED'))return [{...STORY_CAST_CHARACTERS['dwarf-minister'],summary:'布洛克与王室记录者保存的出库、运输、支出账及证词已对应：维尔铎盗卖王室遗物资助夺权。案情仍待继续追查，不表示已处刑。'}];
+ if(st?.flags?.includes('D_RELIC_SALE_COUP_PROVEN')||st?.flags?.includes('FIVE_HEROES_BRIEFED'))return [{...STORY_CAST_CHARACTERS['dwarf-minister'],summary:'布洛克与王室记录者保存的出库、运输、支出账及证词已对应：维尔铎盗卖王室遗物资助夺权。布洛克仍在继续追查这起案件。'}];
  if(game?.race!=='dwarf'||!st?.completedScenes?.includes('C06.D03.dwarf')||!st.flags?.includes('D_COUP_LINK_PARTIAL')||!st.knowledge?.some(k=>k.id==='C06.D03.dwarf.k0'))return [];
  return [{...STORY_CAST_CHARACTERS['dwarf-minister'],summary:'已保存的调拨证词指向维尔铎一方。遗物盗卖与夺权军资的完整资金链，仍待查清。'}];
 }

@@ -1,3 +1,4 @@
+import {storyJournalText} from './story-journal-copy.js';
 import {idleActionPreview,idleActionQueueHint} from './idle-action-ui.js';
 import {renderPersonalArcRecords,renderPersonalRewards,personalSceneCallback} from './personal-story-ui.js';
 import {renderStoryDialogue,renderKnownStoryEvidence} from './story-cast-ui.js';
@@ -10,7 +11,7 @@ import {AREAS} from './location-schema.js';
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const button=(action,id,text,disabled=false,extra='')=>`<button type="button" data-story-action="${action}" data-story-scene="${esc(id)}" ${disabled?'disabled':''} ${extra}>${esc(text)}</button>`;
 // Release scope, not story canon or a promise of an implemented ceasefire.
-export const STORY_WAR_RELEASE_NOTICE='开战后敌对地区普通活动封锁；必需主线可通过登记入口继续。推进至界外入侵后，双方转向抵抗恶魔，全境封锁解除，但并不因此和解。';
+export const STORY_WAR_RELEASE_NOTICE='开战后敌对地区普通活动封锁；必需主线可通过登记入口继续。可继续探索本族与非敌对地区，或沿剧情入口前往前线。';
 const warNotice=id=>STORY_WAR_DECLARATIONS.includes(id)?`<aside class="storyWarBoundary" role="note"><p>${STORY_WAR_RELEASE_NOTICE}</p><p>只有继续完成并确认本段剧情才会记录宣战；可暂缓推进。</p><button type="button" data-view="world">暂不推进，继续探索</button></aside>`:'';
 function storyTravelHint(s,d){
  const area=AREAS[d.siteId],unlocked=s.areaProgress?.[area?.race]?.unlocked??[1];
@@ -43,9 +44,9 @@ export function renderStoryEventBoard(s,{coordinateIdle=false}={}){
    if(a.grant==='ashen-primal-core')content+='<p><small>核心装备背包需有空位。领取、装备与剧情完成一次保存；空间不足不会前进或丢弃原核心。</small></p>';
   }
  }else if(v.available.length){content=v.available.map(d=>`<article class="storySceneOffer"><h4>${esc(d.title)}${d.personal?' · 个人长线':d.optional?' · 可选':''}</h4><p>${esc(storyCastDisplayLabel(d,chikFamilyDisplayText(d,d.npc)))} · ${esc(AREAS[d.siteId]?.name)} · 第${d.chapter}章</p><p>${esc(d.objective)}</p>${warNotice(d.id)}${renderChikFamilyCast(d)}${button('begin',d.id,d.personal?(s.personalStoryProgress?.paused?.[d.id]?'继续已保存的个人线':'开始个人线 · '+d.title):'与'+storyCastDisplayLabel(d,chikFamilyDisplayText(d,d.npc))+'交谈',!d.available)}${d.entryAvailable?button('enter',d.id,'通过本场剧情入口前往')+'<p><small>仅本场剧情通行；普通刷怪入口仍封锁。</small></p>':!d.atLocation?storyTravelHint(s,d):''}</article>`).join('');}
- else content=s.story?.flags.includes('EPILOGUE_COMPLETE')?'<p>主线与尾声已完成。门户已关闭，残留敌人与已开放支线仍可继续。五人保留联络，各族并未因此和解。</p>':v.chapter8Complete?'<p>界外入侵已经开始，双方转向抵抗恶魔。全境战争封锁已解除，但门户仍在运转。请继续返回神庙核实四处支撑，再与同伴会合。</p>':v.warOpeningComplete?'<p>前线任务已记录，请继续可用的救援与追踪场景。</p>':v.complete?'<p>前六章与归途之环图样已完成。</p>':'<p>当前没有可开始的主线场景。</p>';
- if(s.story?.flags.includes('EPILOGUE_COMPLETE')&&v.available.length)content='<p role="status">主线与尾声已完成。可继续同一存档探索或再访其他四位主角；当前地图与随机战争门禁仍生效。</p>'+content;
- if(s.diplomacy?.wars?.some(w=>w.id===STORY_WAR_ID&&w.status==='active'))content+='<p role="status">精灵与烬裔的战事仍在持续。参战主角的敌境普通入口已封锁；本族、非敌对地区与已登记的剧情入口不受此封锁。继续主线至界外入侵后解除本次全境封锁。</p>';
+ else content=s.story?.flags.includes('EPILOGUE_COMPLETE')?'<p>主线与尾声已完成。门户已关闭。五人留下联络的办法，各自踏上归路；你仍可继续探索，清理残敌，处理未完的事情。</p>':v.chapter8Complete?'<p>界外入侵已经开始，双方转向抵抗恶魔。全境战争封锁已解除，但门户仍在运转。请返回古神庙追查刻纹，再与同伴会合。</p>':v.warOpeningComplete?'<p>前线任务已记录，请继续可用的救援与追踪场景。</p>':v.complete?'<p>前六章与归途之环图样已完成。</p>':'<p>当前没有可开始的主线场景。</p>';
+ if(s.story?.flags.includes('EPILOGUE_COMPLETE')&&v.available.length)content='<p role="status">旅程仍可继续。可以探索各地，或再访四位同伴；出发前留意当地战况。</p>'+content;
+ if(s.diplomacy?.wars?.some(w=>w.id===STORY_WAR_ID&&w.status==='active'))content+='<p role="status">精灵与烬裔的战事仍在持续。参战主角的敌境普通入口已封锁；本族、非敌对地区与已登记的剧情入口不受此封锁。</p>';
  if(warWithdrawalAvailable(s))content+=button('retreat','','撤回本族起始营地',false,`data-story-return-site="${esc(s.race+'.a01')}"`)+'<p><small>撤回已解锁的本族营地；不额外休息、不恢复生命、不丢失战利品，当前剧情记录保留。</small></p>';
  return `<section class="panel storyEventBoard" aria-label="主线人物与事件"><h3>主线与个人长线</h3>${queueHint}${content}${renderPersonalRewards(s)}</section>`;
 }
@@ -62,4 +63,4 @@ export function storyActionFromDataset(data){
  if(data.storyAction==='encounter'&&typeof data.storyNode==='string')return {type:'encounter',sceneId:data.storyScene,nodeId:data.storyNode};
  return null;
 }
-export function renderStoryKnowledge(s){const v=storyEventView(s);if(!v.valid||!v.knowledge.length)return '';return '<section class="panel"><h3>我的见闻</h3>'+ (s.race==='elf'&&s.story?.flags.includes('E_WEDGE_AVAILABLE')?'<p><strong>任务道具 · 旧制楔钉</strong> · '+(storyQuestToolAvailable(s,'old-wedge')?'持有1件 · 不可出售或丢弃；解封核心时消耗':'已在解除封印核心时消耗')+'</p>':'')+v.knowledge.map(k=>`<p><strong>${{seen:'见到',heard:'听闻',confirmed:'已证实'}[k.mode]}</strong> · ${esc(k.id==='C01.E01.elf.k0'?'已学习旧制楔钉的用法；道具受任务保护，只在解除封印核心时消耗。':k.text)}</p>`).join('')+renderKnownStoryEvidence(s)+'</section>';}
+export function renderStoryKnowledge(s){const v=storyEventView(s);if(!v.valid||!v.knowledge.length)return '';return '<section class="panel"><h3>我的见闻</h3>'+ (s.race==='elf'&&s.story?.flags.includes('E_WEDGE_AVAILABLE')?'<p><strong>任务道具 · 旧制楔钉</strong> · '+(storyQuestToolAvailable(s,'old-wedge')?'持有1件 · 不可出售或丢弃；解封核心时消耗':'已在解除封印核心时消耗')+'</p>':'')+v.knowledge.map(k=>`<p><strong>${{seen:'见到',heard:'听闻',confirmed:'已证实'}[k.mode]}</strong> · ${esc(storyJournalText(k))}</p>`).join('')+renderKnownStoryEvidence(s)+'</section>';}

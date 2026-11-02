@@ -15,17 +15,17 @@ export function renderPersonalRewards(s){
  let html=events.map(d=>`<p>${esc(PERSONAL_STORY_SCENES[d.id]?.title)} · ${d.tier==='stage'?'阶段补给：重铸印记 × 1':'补给：普通治疗药剂 × 2'} <button data-personal-event-reward="${esc(d.id)}">领取已挣得补给</button></p>`).join('');
  if(done.includes(arc.finalSceneId)){
   if(claims.includes(arc.claimId))html+='<p>整条个人线奖励已领取 · 不会重复发放。</p>';
-  else if(status.slot)html+=`<p>已固定 ${esc(slotNames[status.slot]??status.slot)} · 等级基准 ${status.baseLevel}，重试不会改部位或重掷。</p><button data-personal-arc-reward="${esc(arc.id)}" data-personal-reward-slot="${esc(status.slot)}">领取已固定的 Q3 散件</button>`;
-  else html+=`<p>整条个人线已完成。首次明确确认部位时，按当时等级约 ±2 固定一件 Q3 普通散件。可晚些领取；浏览不生成。</p><div class="personalRewardSlots">${personalArcRewardSlots(s).map(slot=>`<button data-personal-arc-reward="${esc(arc.id)}" data-personal-reward-slot="${esc(slot)}">确认领取 · ${esc(slotNames[slot]??slot)}</button>`).join('')}</div>`;
+  else if(status.slot)html+=`<p>已固定 ${esc(slotNames[status.slot]??status.slot)} · 等级基准 ${status.baseLevel}，重试不会改部位或重掷。</p><button data-personal-arc-reward="${esc(arc.id)}" data-personal-reward-slot="${esc(status.slot)}">领取已选定的至臻装备</button>`;
+  else html+=`<p>这段旅程的谢礼已经备好。选择部位后，将获得一件与你等级相近（±2级）的至臻散件。可以晚些领取，确认后部位与属性不再改变。</p><div class="personalRewardSlots">${personalArcRewardSlots(s).map(slot=>`<button data-personal-arc-reward="${esc(arc.id)}" data-personal-reward-slot="${esc(slot)}">确认领取 · ${esc(slotNames[slot]??slot)}</button>`).join('')}</div>`;
  }
- return html?'<section class="personalRewardBoard" aria-label="个人线待领取奖励"><h4>个人线补给与整弧奖励</h4>'+html+'</section>':'';
+ return html?'<section class="personalRewardBoard" aria-label="个人线待领取奖励"><h4>个人线补给与谢礼</h4>'+html+'</section>':'';
 }
 
 export function personalSceneCallback(s,d){
  const choices=s.story?.choices??{};
  if(d.id==='personal.dwarf.coup.07')return choices['personal.dwarf.coup.06']==='crew-present'?'杜铎亲自发问：下面那班，也是人。布洛克在旁补充证据来源。':'布洛克代读矿班确认的问题：下面那班，也是人。杜铎仍在安置处；答复必须逐项带回。';
- if(d.id==='personal.dwarf.coup.06')return choices['personal.dwarf.coup.05']==='supplies-first'?'记录者：矿仓副页留下索引，主线已找齐对应原件。':'记录者：保留的局部支出记录已与主线收拢的原账接上。';
+ if(d.id==='personal.dwarf.coup.06')return choices['personal.dwarf.coup.05']==='supplies-first'?'记录者：循着矿仓副页上的索引，对应的原件已经找齐了。':'记录者：这份支出记录，正好能接上我们收拢的原账。';
  if(d.id==='personal.dwarf.coup.04')return choices['personal.dwarf.coup.01']==='crew-voiced'?'矿班自己拿出点名记录，主动核问还有谁未交接。':'杜铎先向布洛克报数，请他和矿班一起核实。';
- if(d.id==='personal.goblin.family.04')return '早期六件家庭小事的原记录与补给另存；没有做过也不阻塞此次团聚后的生活。孩子不承担前线职责。';
+ if(d.id==='personal.goblin.family.04')return '团聚之后，奇克还要和家人商量往后的生活。';
  return '';
 }

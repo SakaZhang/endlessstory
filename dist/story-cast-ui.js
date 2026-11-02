@@ -15,5 +15,5 @@ export function renderStoryDialogue(scene,line,displayLine=null){
 }
 export function renderKnownStoryEvidence(game){
  const rows=knownStoryEvidenceCast(game);if(!rows.length)return '';
- return '<aside class="storyEvidenceCast" aria-label="已知线索中的人物"><h4>已知线索中的人物</h4>'+rows.map(actor=>`<article class="storyEvidencePerson" data-story-evidence="${esc(actor.id)}">${renderStoryCastPortrait(actor)}<div><strong>${esc(actor.name)} · ${esc(actor.role)}</strong><p>${esc(actor.summary)}</p><small>线索资料，不表示人物正在现场。</small></div></article>`).join('')+'</aside>';
+ return '<aside class="storyEvidenceCast" aria-label="已知线索中的人物"><h4>已知线索中的人物</h4>'+rows.map(actor=>`<article class="storyEvidencePerson" data-story-evidence="${esc(actor.id)}">${renderStoryCastPortrait(actor)}<div><strong>${esc(actor.name)} · ${esc(actor.role)}</strong><p>${esc(actor.summary)}</p></div></article>`).join('')+'</aside>';
 }
