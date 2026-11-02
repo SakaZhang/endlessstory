@@ -3253,7 +3253,7 @@ export const materials={
     ],
     "uniqueHeld": true,
     "storyOnly": false,
-    "hiddenUsage": "无限手套隐藏配方的烬裔宝石。",
+    "hiddenUsage": "无限手套固定融合的烬裔宝石。",
     "sourceNote": "本族全区；高区概率更高；同区野外＜普通＜首领；同种最多1颗、丢失可重刷"
   },
   "ashen.silent_crystal": {

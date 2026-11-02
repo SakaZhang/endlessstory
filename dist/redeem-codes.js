@@ -3,7 +3,7 @@ import {INFINITY_GAUNTLET_MATERIALS} from './infinity-gauntlet-content.js';
 import {MATERIALS,validSave,normalizeMaterials} from './engine.js';
 import {BAG_LIMITS,bagCounts} from './inventory-schema.js';
 import {recordMaterialDiscovered} from './region-navigation-state.js';
-export const TEST_REDEEM_CODES=Object.freeze({INFINITY5:Object.freeze({testOnly:true,unlocksInfinityGauntletRecipe:true,rewards:Object.freeze(INFINITY_GAUNTLET_MATERIALS.map(({material})=>Object.freeze({material,quality:3,count:1,key:material+'|3',name:MATERIALS[material].name})))})});
+export const TEST_REDEEM_CODES=Object.freeze({INFINITY5:Object.freeze({testOnly:true,unlocksInfinityGauntletRecipe:false,rewards:Object.freeze(INFINITY_GAUNTLET_MATERIALS.map(({material})=>Object.freeze({material,quality:3,count:1,key:material+'|3',name:MATERIALS[material].name})))})});
 export function checkRedeemCapacity(s,rewards=TEST_REDEEM_CODES.INFINITY5.rewards){
  const stacks=s.materialStacks??{};
  if(rewards.some(r=>!Number.isSafeInteger(stacks[r.key]??0)||(stacks[r.key]??0)<0||(stacks[r.key]??0)+r.count>1e12))return 'quantity-limit';

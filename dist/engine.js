@@ -1,3 +1,4 @@
+import {INFINITY_GAUNTLET_KEYS,isInfinityGauntletFusion,hasInfinityGauntletMaterial} from './infinity-gauntlet-content.js';
 import {validCasinoState} from './casino-state.js';
 import {noncombatRunning} from './noncombat-policy.js';
 import {reforgeMaterialForLevel} from './reforge-materials.js';
@@ -1418,6 +1419,7 @@ export const FUSION_TAGS={
 export function fusionWeights(selection){const slots=Object.fromEntries(SLOTS.map(k=>[k,2]));for(const key of selection){const parsed=parseMaterialKey(key),tag=parsed?(FUSION_TAGS[parsed.material]??{slots:materialFusionSlotBias(MATERIALS[parsed.material])}):null;if(!tag?.slots)continue;for(const slot of SLOTS)slots[slot]+=tag.slots[slot]??0;}return {slots};}
 // Preview is read-only; share weights and favorable-roll policy with the actual draw.
 export function previewMaterialFusion(s,selection){
+ if(hasInfinityGauntletMaterial(selection)){const exact=isInfinityGauntletFusion(selection),crafted=!!s.infinityGauntlet?.crafted;return {kind:'infinity-gauntlet',complete:exact,crafted,blocked:!exact||crafted,gold:racialGoldCost(s,40)};}
  const weights=fusionQualityWeights(selection);if(!weights)return null;
  const parsed=selection.map(parseMaterialKey),chance=combinedFavorableRollChance(luckChance(effectiveLuck(s)),s.race,DWARF_FORGE_FAVOR_CONFIG);
  const qualityProbabilities=favorableQualityProbabilities(weights,chance);if(!qualityProbabilities)return null;
@@ -1429,6 +1431,13 @@ export function eligibleFusionEquipment(s){
  return s.inventory.filter(it=>validEquipment(it)&&!it.locked&&!Object.values(s.equip).includes(it.id)&&!isProtected(s,it.id));
 }
 export function forge(s,selection){
+ if(hasInfinityGauntletMaterial(selection)){
+  if(!isInfinityGauntletFusion(selection)||!validSave(s)||s.developmentEquipmentSandbox||s.infinityGauntlet?.crafted||s.pendingForgeClaim||s.running||s.activeEncounter&&!s.activeEncounter.done||!Number.isFinite(s.gold)||s.gold<racialGoldCost(s,40)||INFINITY_GAUNTLET_KEYS.some(key=>{const p=parseMaterialKey(key);return materialCount(s,p.material,p.quality)<1;}))return null;
+  const level=rollMaterialFusionLevel(s.level),it=level&&legendaryItem('infinity-gauntlet',level.level,level);if(!it)return null;
+  normalizeMaterials(s);for(const key of INFINITY_GAUNTLET_KEYS)s.materialStacks[key]--;s.gold-=racialGoldCost(s,40);
+  s.infinityGauntlet??={version:1,recipeLearned:true,crafted:false,craftedItemId:null};s.infinityGauntlet.crafted=true;s.infinityGauntlet.craftedItemId=it.id;
+  if(canReceiveEquipment(s,it)){s.inventory.push(it);recordCollectedEquipment(s,it);}else s.pendingForgeClaim={kind:'equipment',item:it};return it;
+ }
  if(!validCodexCollection(s)||!Array.isArray(selection)||selection.length<1||selection.length>5||!Number.isFinite(s.gold)||s.gold<racialGoldCost(s,40)||s.pendingForgeClaim||!validMaterials(s))return null;
  const counts={},parsed=[],gear=[],ids=new Set(),inputs=[],materials=[],eligible=new Map(eligibleFusionEquipment(s).map(it=>[it.id,it]));
  for(const input of selection){
@@ -1462,7 +1471,7 @@ export function applyForgeFavor(it){
  bonus.affixes=it.affixes.map(a=>({stat:a.stat,value:a.value/10}));
  it.divine={id:'forge-favor',name:'神赐·炉火眷顾',model:'raw-v1',bonus};return true;
 }
-export const LEGENDARY_CODEX=[{id:'infinity-gauntlet',name:'无限手套',slot:'gloves',icon:'gloves',implemented:true,lore:'五颗异色宝石被嵌进同一只护手，托座上还留着五种不同的锻造痕迹。握紧手掌时，原本互不相容的微光沿着指节相连，短暂地汇成一道亮线。',affix:'无限',effect:'每成功释放5次主动技能，对当前目标造成其最大生命50%的伤害；普通敌人与首领比例相同。普攻、被动与多段命中不额外计数，卸下清空累计。',acquisition:'普通副本通关时有机会学会隐藏配方，以五族各一颗至臻宝石制作；每档仅一次，失去后无法重造。',attributes:'4条可调整普通词条与固定专属'},{id:'return-ring',name:'归途之环',slot:'ring',icon:'ring',implemented:true,lore:'五件旧物沿着指环内侧相接，接缝没有被磨平。每一道细小的棱角，都让人想起送出它的人，以及那段曾停下脚步的路。',affix:'归途',effect:'装备时经验获取 +20%，双戒指槽不重复叠加，卸下后失效。每次战斗胜利恢复15%最大生命，最高恢复至生命上限，包含普通副本阶段胜利。首领传说、稀有材料与无限宝石的有效掉落率增加3个百分点；不改变来源和持有上限。',acquisition:'剧情学习配方后，以五族旧物制作；每档仅一次。',attributes:'4条可洗练普通词条与固定专属'},...EXPANSION_PACKS.flatMap(p=>p.legendaries.map(d=>({...d,implemented:true,lore:d.lore??d.description??'',affix:d.exclusiveName??d.exclusiveId,effect:d.exclusiveDescription??d.exclusive?.description??d.effect??d.description??'',acquisition:d.questOnly?'第五章主线剧情（唯一）':p.name+'地区首领额外掉落，可重复获得',attributes:d.ordinaryAffixCount===0?'仅基础属性与固定专属，无随机普通词条':'4条随机普通词条与固定专属',icon:d.icon??d.slot}))),{id:'first-forge-oathhammer',name:'王统·初炉誓锤',slot:'weapon',icon:'firstforge',implemented:true,lore:'每一代矮人王继承此锤时，都会重新锻造它，并刻下自己的名字。旧王的誓言留在锤身，新王的名字融入炉火。',affix:'祖王回响',effect:'普攻或主动伤害技能每5次出手，向当前目标追加140%攻击的单体重击，穿透30%护甲。',acquisition:'矮人地区首领额外掉落，可重复获得。',attributes:'4条随机普通词条与固定专属；基础和普通词条区间高于同等级至臻。',tuning:'回响可暴击、实际生命伤害可吸血，不触发死神、多重或累计。'},{id:'everburning-reactor',name:'不熄之炉',slot:'amulet',icon:'fire',implemented:true,lore:'这座微型炉藏在厚实的金属外壳里，贴近耳边时，能听见极轻的鼓风声。炉芯收拢战斗留下的余热，再从狭窄的排口吐出火光；火光散去后，仍有一层温热护在身前。',affix:'余热循环',effect:'每12秒实际战斗时间自动向全体释放75%攻击火焰脉冲，并获得8%最大生命加通用护盾增幅的护盾，持续3秒战斗时间；同源护盾刷新不叠加。',acquisition:'矮人地区首领额外掉落，可重复获得。',attributes:'4条随机普通词条与固定专属；基础和普通词条区间高于同等级至臻。',tuning:'实际卸下清空充能并移除自身护盾。'},LUCKY_DICE_CODEX];
+export const LEGENDARY_CODEX=[{id:'infinity-gauntlet',name:'无限手套',slot:'gloves',icon:'gloves',implemented:true,lore:'五颗异色宝石被嵌进同一只护手，托座上还留着五种不同的锻造痕迹。握紧手掌时，原本互不相容的微光沿着指节相连，短暂地汇成一道亮线。',affix:'无限',effect:'每成功释放5次主动技能，对当前目标造成其最大生命50%的伤害；普通敌人与首领比例相同。普攻、被动与多段命中不额外计数，卸下清空累计。',acquisition:'在熔炉融合中放入五族至臻宝石各1颗，固定获得；无需配方。每档仅一次，失去后无法重造。',attributes:'4条可调整普通词条与固定专属'},{id:'return-ring',name:'归途之环',slot:'ring',icon:'ring',implemented:true,lore:'五件旧物沿着指环内侧相接，接缝没有被磨平。每一道细小的棱角，都让人想起送出它的人，以及那段曾停下脚步的路。',affix:'归途',effect:'装备时经验获取 +20%，双戒指槽不重复叠加，卸下后失效。每次战斗胜利恢复15%最大生命，最高恢复至生命上限，包含普通副本阶段胜利。首领传说、稀有材料与无限宝石的有效掉落率增加3个百分点；不改变来源和持有上限。',acquisition:'剧情学习配方后，以五族旧物制作；每档仅一次。',attributes:'4条可洗练普通词条与固定专属'},...EXPANSION_PACKS.flatMap(p=>p.legendaries.map(d=>({...d,implemented:true,lore:d.lore??d.description??'',affix:d.exclusiveName??d.exclusiveId,effect:d.exclusiveDescription??d.exclusive?.description??d.effect??d.description??'',acquisition:d.questOnly?'第五章主线剧情（唯一）':p.name+'地区首领额外掉落，可重复获得',attributes:d.ordinaryAffixCount===0?'仅基础属性与固定专属，无随机普通词条':'4条随机普通词条与固定专属',icon:d.icon??d.slot}))),{id:'first-forge-oathhammer',name:'王统·初炉誓锤',slot:'weapon',icon:'firstforge',implemented:true,lore:'每一代矮人王继承此锤时，都会重新锻造它，并刻下自己的名字。旧王的誓言留在锤身，新王的名字融入炉火。',affix:'祖王回响',effect:'普攻或主动伤害技能每5次出手，向当前目标追加140%攻击的单体重击，穿透30%护甲。',acquisition:'矮人地区首领额外掉落，可重复获得。',attributes:'4条随机普通词条与固定专属；基础和普通词条区间高于同等级至臻。',tuning:'回响可暴击、实际生命伤害可吸血，不触发死神、多重或累计。'},{id:'everburning-reactor',name:'不熄之炉',slot:'amulet',icon:'fire',implemented:true,lore:'这座微型炉藏在厚实的金属外壳里，贴近耳边时，能听见极轻的鼓风声。炉芯收拢战斗留下的余热，再从狭窄的排口吐出火光；火光散去后，仍有一层温热护在身前。',affix:'余热循环',effect:'每12秒实际战斗时间自动向全体释放75%攻击火焰脉冲，并获得8%最大生命加通用护盾增幅的护盾，持续3秒战斗时间；同源护盾刷新不叠加。',acquisition:'矮人地区首领额外掉落，可重复获得。',attributes:'4条随机普通词条与固定专属；基础和普通词条区间高于同等级至臻。',tuning:'实际卸下清空充能并移除自身护盾。'},LUCKY_DICE_CODEX];
 export const SET_CODEX=BUILD.map(b=>({id:b.id,name:b.name,icon:b.id,parts:[...SET_SLOTS],bonus:b.bonus,effects:b.effects}));
 function validCodexCollection(s){return validCollectionLedger(s,SET_CODEX,LEGENDARY_CODEX);}
 export function normalizeCodexCollection(s){return normalizeCollectionLedger(s,SET_CODEX,LEGENDARY_CODEX,validEquipment);}

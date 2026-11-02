@@ -500,7 +500,7 @@ export const materials = {
     "id": "goblin.infinity_gem_goblin",
     "name": "诡影紫石",
     "description": "紫色石心中浮着错位的轮廓，换一个角度看又像空无一物。",
-    "use": "无限手套隐藏配方的裂穴诸部宝石。",
+    "use": "无限手套固定融合的裂穴诸部宝石。",
     "rarity": "珍奇",
     "kind": "宝石",
     "category": "特殊",

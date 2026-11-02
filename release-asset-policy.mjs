@@ -2,6 +2,8 @@ import {EXPANSION_PACKS} from './dist/race-packs.js';
 // Explicit reviewed nonruntime QA/authoring files. Sources remain versioned; never use a filename wildcard.
 // Adding an exclusion requires confirming no live consumer and updating packaging tests.
 export const RELEASE_QA_EXCLUSIONS = Object.freeze([
+  // Retired recipe-panel shim retained solely for regression imports; no live consumer.
+  "infinity-gauntlet-ui.js",
   "races/goblin/equipment-native-proof.png",
   "races/goblin/hero-weapons-native-proof.png",
   "races/goblin/monsters-native-proof.png",

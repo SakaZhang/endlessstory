@@ -770,7 +770,7 @@ export const HUMAN_MATERIALS={
     ],
     "source": "racial-natural",
     "origin": "王冠领",
-    "uses": "无限手套隐藏配方材料",
+    "uses": "无限手套固定融合材料",
     "merchantEnabled": false,
     "merchantAllowed": false,
     "price": 20,

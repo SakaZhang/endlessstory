@@ -1,12 +1,12 @@
 import {INFINITY_GAUNTLET_ID,INFINITY_GAUNTLET_MATERIALS} from './infinity-gauntlet-content.js';
-import {validInfinityGauntletState,infinityRecipeKnown} from './infinity-gauntlet-state.js';
+import {validInfinityGauntletState} from './infinity-gauntlet-state.js';
 import {validSave,legendaryItem,materialCount,normalizeMaterials,racialGoldCost,receiveBattleLoot,canReceiveEquipment,normalizeCodexCollection} from './engine.js';
 import {rollMaterialFusionLevel} from './equipment-level-schema.js';
 import {commitGameTransaction,SAVE_KEY} from './storage.js';
 const keys=Object.freeze(INFINITY_GAUNTLET_MATERIALS.map(m=>m.material+'|3'));
 function reason(s,inputs){
  if(!validSave(s)||!validInfinityGauntletState(s)||s.developmentEquipmentSandbox)return 'invalid-state';
- if(!infinityRecipeKnown(s))return 'recipe-unknown';if(s.infinityGauntlet.crafted)return 'already-crafted';
+ if(s.infinityGauntlet?.crafted)return 'already-crafted';
  if(s.pendingForgeClaim)return 'pending-forge';
  if(s.activeEncounter&&!s.activeEncounter.done||s.running)return 'in-battle';
  if(!Array.isArray(inputs)||inputs.length!==5||new Set(inputs).size!==5||!keys.every(k=>inputs.includes(k)))return 'ingredients';
@@ -31,7 +31,7 @@ export function createInfinityGauntletCraftService(){
   const tx=commitGameTransaction(storage,game,next=>{
    if(reason(next,inputs))return false;
    normalizeMaterials(next);for(const key of keys)next.materialStacks[key]--;
-   next.gold-=racialGoldCost(next,40);next.infinityGauntlet.crafted=true;next.infinityGauntlet.craftedItemId=item.id;
+   next.gold-=racialGoldCost(next,40);next.infinityGauntlet??={version:1,recipeLearned:true,crafted:false,craftedItemId:null};next.infinityGauntlet.crafted=true;next.infinityGauntlet.craftedItemId=item.id;
    const filters=next.lootFilters;next.lootFilters={equipment:[],materials:[],items:[]};
    if(canReceiveEquipment(next,item)){if(!receiveBattleLoot(next,{kind:'equipment',item}))return false;}
    else next.pendingForgeClaim={kind:'equipment',item};

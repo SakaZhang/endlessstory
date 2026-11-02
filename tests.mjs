@@ -346,3 +346,6 @@ runAffixSourceTest(process.execPath,[new URL('./casino-scene-v083-tests.mjs',imp
 
 // v0.84 staged seal rescue and player-facing prose, isolated from legacy fixtures.
 for(const file of ['story-player-prose-v084-tests.mjs','story-seal-rescue-tests.mjs','story-seal-rescue-native-proof.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.85 recipe-independent five-gem fusion and transaction regression.
+runAffixSourceTest(process.execPath,[new URL('./gauntlet-fusion-v085-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
