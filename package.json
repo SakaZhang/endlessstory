@@ -44,7 +44,8 @@
     "test:v086": "node reforge-special-preservation-v086-tests.mjs && node reforge-tests.mjs && node pending-reforge-tests.mjs && node reforge-v13-tests.mjs && node reforge-divine-tests.mjs && node reforge-inheritance-tests.mjs && node reforge-material-tiers-v081-tests.mjs && node special-affix-overhaul-tests.mjs && node reforge-divine-ui-tests.cjs && node reforge-inheritance-ui-tests.cjs && node reforge-ui-tests.cjs && node reforge-token-ui-tests.cjs",
     "test:v087": "node dwarf-scenes-v087-tests.mjs && node elf-redesign-v087-tests.mjs && node final-region-boss-v087-tests.mjs && node set-name-unification-v087-tests.mjs && node set-name-unification-app-ui-v087-tests.cjs && node otherworld-stable-ui-v087-tests.mjs && node otherworld-app-ui-tests.cjs && node legendary-race-art-tests.mjs",
     "test:v088": "node set-resource-overcap-v088-tests.mjs && node set-poison-overcap-v088-tests.mjs && node set-skill-critical-v088-tests.mjs && node set-effects-display-tests.mjs && node set-effects-app-ui-tests.cjs && node divine-double-v088-tests.mjs",
-    "test:v089": "node set-border-v089-tests.mjs && node equipment-presentation-css-tests.mjs && node equipment-presentation-tests.mjs && node equipment-raster-adapter-tests.mjs && node equipment-raster-live-app-ui-tests.cjs && node set-name-unification-v087-tests.mjs && node set-name-unification-app-ui-v087-tests.cjs"
+    "test:v089": "node set-border-v089-tests.mjs && node equipment-presentation-css-tests.mjs && node equipment-presentation-tests.mjs && node equipment-raster-adapter-tests.mjs && node equipment-raster-live-app-ui-tests.cjs && node set-name-unification-v087-tests.mjs && node set-name-unification-app-ui-v087-tests.cjs",
+    "test:v090": "node set-progression-v090-tests.mjs && node set-otherworld-v090-tests.mjs && node divine-specials-v090-tests.mjs && node divine-stone-v090-tests.mjs && node divine-stone-app-ui-v090-tests.cjs"
   },
   "devDependencies": {
     "esbuild": "0.28.2"

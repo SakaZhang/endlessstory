@@ -360,3 +360,6 @@ runAffixSourceTest(process.execPath,[new URL('./story-journal-prose-v085-tests.m
 
 // v0.87 retain otherworld controls during battle ticks.
 runAffixSourceTest(process.execPath,[new URL('./otherworld-stable-ui-v087-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.90 set progression, divine specials and first-clear stone transactions.
+for(const file of ['set-progression-v090-tests.mjs','set-otherworld-v090-tests.mjs','divine-specials-v090-tests.mjs','divine-stone-v090-tests.mjs','divine-stone-app-ui-v090-tests.cjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
