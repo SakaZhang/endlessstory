@@ -3,6 +3,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';import vm from 'node:vm';import {createHash} from 'node:crypto';
 import * as E from './dist/engine.js';
+import {equipmentDisplayName} from './dist/equipment-display-name.js';
 import {DEFAULT_SURVIVAL_GROWTH,GOBLIN_SURVIVAL_GROWTH,racialSurvivalGrowth} from './dist/race-survival-balance.js';
 import {derivePassiveStats} from './dist/skill-tree-passives.js';
 import {getRacePack} from './dist/race-registry.js';
@@ -92,7 +93,7 @@ for(const bad of [{...own,hp:own.hp-1},{...own,armor:own.armor-1},{...own,origin
 for(const race of ['goblin','human']){const s=E.fresh(race);s.gold=1e6;s.inventory=[clone(own)];E.applyForgeFavor(s.inventory[0]);const original=clone(s.inventory[0]);for(const roll of [0,0,.999]){const it=s.inventory[0],level=E.enhancementLevel(it),q=E.quoteEnhancement(s,it.id);assert(q.ok);for(const [key,n]of [['current',level],['success',level+1],['failure',Math.max(0,level-1)]])assert.deepEqual(q.bases[key],expectedEnhancedBase({atk:it.atk,hp:it.hp,armor:it.armor},n));assert(renderFormalEnhancement(s,{itemId:it.id,quote:q}).includes(String(q.bases.current.hp)));assert(E.enhanceEquipment(s,q,()=>roll));for(const k of ['atk','armor','hp','affixes','divine'])assert.deepEqual(s.inventory[0][k],original[k]);assert(E.validSave(s));}}
 // Actual App gear detail displays unchanged raw item stats, independent of wearer.
 const app=fs.readFileSync('dist/app.js','utf8'),line=name=>app.split('\n').find(l=>l.startsWith('function '+name+'('));
-const context=vm.createContext({...E,...EquipmentDisplay,MultiEngine:E,getRacePack,equipmentIcon,equipmentBudgetNotice,renderSetEffects,esc:x=>String(x??''),fmt:formatAttribute,divineBadge:()=>''});
+const context=vm.createContext({...E,...EquipmentDisplay,MultiEngine:E,getRacePack,equipmentIcon,equipmentDisplayName,equipmentBudgetNotice,renderSetEffects,esc:x=>String(x??''),fmt:formatAttribute,divineBadge:()=>''});
 for(const name of ['equipmentLevelTitle','affixHtml','itemDetail'])vm.runInContext(line(name),context);
 for(const race of ['goblin','human']){context.s={...E.fresh(race),inventory:[clone(own)]};context.item=own;const html=vm.runInContext('itemDetail(item)',context);for(const [k,name]of [['hp','生命'],['armor','护甲']])assert(html.includes(`<b>${formatAttribute(own[k])}</b><small>${name}</small>`));}
 const originalNow=Date.now,originalRandom=Math.random;Date.now=()=>1700000000000;Math.random=()=>.5;
