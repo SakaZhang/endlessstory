@@ -30,7 +30,7 @@ const enterFamilyArea=async area=>{
  }
  for(const race of ['dwarf','human','elf','goblin','ashen']){
   const arc=Object.values(PERSONAL_ARC_REWARDS).find(a=>a.race===race),game=completePersonalArc(race);now=Math.max(game.lastSeen,game.lastHealthClock)+1000;store.set(SAVE_KEY,JSON.stringify(game));await refresh('arc-reward-'+race);click({view:'journal'});
-  assert(el('view').innerHTML.includes('首次明确确认部位'));assert(!saved().personalArcRewards);assert(el('view').innerHTML.includes('手套'));
+  assert(el('view').innerHTML.includes('选择部位后，将获得一件与你等级相近（±2级）的至臻散件'));assert(el('view').innerHTML.includes('确认后部位与属性不再改变'));assert(!saved().personalArcRewards);assert(el('view').innerHTML.includes('手套'));
   failWrite=true;click({personalArcReward:arc.id,personalRewardSlot:'weapon'});failWrite=false;assert(!saved().personalArcRewards);
   click({personalArcReward:arc.id,personalRewardSlot:'weapon'});assert(saved().taskRewardClaims.includes(arc.claimId));assert(!saved().personalArcRewards[arc.id]);assert.equal(saved().inventory.find(i=>!game.inventory.some(old=>old.id===i.id)).slot,'weapon');const raw=store.get(SAVE_KEY);click({personalArcReward:arc.id,personalRewardSlot:'ring'});assert.equal(store.get(SAVE_KEY),raw);assert(E.validSave(saved()));
  }
