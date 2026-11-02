@@ -11,7 +11,7 @@ for(const race of Object.keys(codes)){
  seeded(123456,()=>{for(const socket of raceSockets(race)){const slot=E.SOCKET_TYPE[socket],set=['helm','armor','gloves','boots'].includes(slot)?targets[race].set:null,it=E.item(slot,100,set,3,{baseLevel:100,levelSource:'generated',originRace:race});it.special=null;base.inventory.push(it);assert(E.equipItem(base,it.id,socket));}});
  // Keep the legal earned skill tree from the complete-story fixture; no forged skill unlocks.
  for(const floor of [50,150,300]){
-  const s=structuredClone(base);s.heroHp=E.stats(s).hp;s.otherworld.highestCleared=floor-1;s.otherworld.floor=floor;assert(E.validSave(s));assert(E.enterOtherworld(s,s.lastHealthClock+2000));assert(E.setOtherworldAutoAdvance(s,false));
+  const s=structuredClone(base);s.heroHp=E.stats(s).hp;s.otherworld.highestCleared=floor-1;s.otherworld.floor=floor;/* Synthetic historical clears establish a no-retroactive-reward baseline. */s.divineStones={version:1,baseline:Math.floor((floor-1)/50),claimed:[],spent:0};assert(E.validSave(s));assert(E.enterOtherworld(s,s.lastHealthClock+2000));assert(E.setOtherworldAutoAdvance(s,false));
   const e=E.startRoutedEncounter(s,Math.max(s.lastHealthClock,s.nextBattleAt??0)+2000);assert(e);e.rngState=12345;let rounds=0;while(!e.done&&rounds++<3000)E.step(s,e,s.nextActionAt);assert(e.done,'bounded battle');assert(E.validSave(s));if(e.win)assert(E.reward(s,e,s.lastHealthClock));assert(E.validSave(JSON.parse(JSON.stringify(s))));rows.push({race,set:targets[race].set,floor,win:e.win,rounds,hp:Math.round(s.heroHp),maxHp:Math.round(E.stats(s).hp),attack:Math.round(E.stats(s).atk)});
  }
 }

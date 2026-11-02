@@ -10,7 +10,7 @@ for(const race of Object.keys(codes)){
  for(const quality of [0,2]){
   const s=structuredClone(base);s.level=100;s.xp=0;s.talents=Object.fromEntries(Object.keys(E.TALENTS).map(k=>[k,0]));
   seeded(123456,()=>{for(const socket of raceSockets(race)){const slot=E.SOCKET_TYPE[socket],it=E.item(slot,100,null,quality,{baseLevel:100,levelSource:'generated',originRace:race});s.inventory.push(it);assert(E.equipItem(s,it.id,socket));}});
-  const geared=structuredClone(s);for(const floor of [1,25,100,250,500]){const s=structuredClone(geared);s.heroHp=E.stats(s).hp;s.otherworld.highestCleared=floor-1;s.otherworld.floor=floor;assert(E.validSave(s));assert(E.enterOtherworld(s,s.lastHealthClock+2000));assert(E.setOtherworldAutoAdvance(s,false));
+  const geared=structuredClone(s);for(const floor of [1,25,100,250,500]){const s=structuredClone(geared);s.heroHp=E.stats(s).hp;s.otherworld.highestCleared=floor-1;s.otherworld.floor=floor;/* Synthetic historical clears establish a no-retroactive-reward baseline. */s.divineStones={version:1,baseline:Math.floor((floor-1)/50),claimed:[],spent:0};assert(E.validSave(s));assert(E.enterOtherworld(s,s.lastHealthClock+2000));assert(E.setOtherworldAutoAdvance(s,false));
   let wins=0,rests=0,totalRounds=0,firstResult=null,firstRounds=0;const start=s.lastHealthClock;
   while(wins<10&&rests<2){
    const e=E.startRoutedEncounter(s,Math.max(s.lastHealthClock,s.nextBattleAt??0)+2000);assert(e);e.rngState=12345+wins+rests;let n=0;

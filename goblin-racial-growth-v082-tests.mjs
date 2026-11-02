@@ -24,7 +24,9 @@ for(const race of E.RACE_KEYS)assert.equal(racialSurvivalGrowth(race),race==='go
 // Keep all208 inputs; independently reconcile every enhanced contribution below.
 // Exact reviewed v088 set-only bonus poison sources; immutable historical fixture remains untouched.
 const approvedV088Hashes={'dist/races/goblin/equipment.js':'d35835b84e76d21cdacd6457ceca03a445f8d1729687f3e1949a1736b4757fa1','dist/skill-tree-poison.js':'f901418b541ed5ac4ea8af0229077765c5ee9b3259e59ba27a18d9681a162af2'};
-for(const [name,digest]of Object.entries(fixture.sourceHashes).filter(([name])=>!['dist/legendary-equipment.js','dist/equipment-budget.js'].includes(name)))assert.equal(createHash('sha256').update(fs.readFileSync(name)).digest('hex'),(approvedV088Hashes[name]??digest),'unchanged gear/attack/ordinary poison/passives or exact approved set extension '+name);
+// Exact reviewed v090 set-only strengthening; preserve the historical fixture and v088 digest.
+const approvedV090Hashes={'dist/races/goblin/equipment.js':'a6b512ce61d3c5f1e863eeae9cf0053abdfe3cb9e816df4d3d421abfd8d82b38'};
+for(const [name,digest]of Object.entries(fixture.sourceHashes).filter(([name])=>!['dist/legendary-equipment.js','dist/equipment-budget.js'].includes(name)))assert.equal(createHash('sha256').update(fs.readFileSync(name)).digest('hex'),(approvedV090Hashes[name]??approvedV088Hashes[name]??digest),'unchanged gear/attack/ordinary poison/passives or exact approved set extension '+name);
 assert(!fs.existsSync('dist/equipment-base-balance.js'),'discarded gear-only policy removed, never stacked');
 const near=(actual,expected,label)=>assert(Math.abs(actual-expected)<1e-8,`${label}: ${actual} != ${expected}`);
 const statKeys=['atk','armor','hp'];

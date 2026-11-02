@@ -19,7 +19,7 @@ for(const race of Object.keys(codes)){
  [...targets[race].skills,...pass].forEach(unlock);p.active=targets[race].skills;p.passive=pass;p.conditions=['always','always','always','always'];assert(validSkillTree(base,config));
 
  for(const floor of [50,100,125,150,175,200,300]){
-  const s=structuredClone(base);s.heroHp=E.stats(s).hp;s.otherworld.highestCleared=floor-1;s.otherworld.floor=floor;assert(E.validSave(s));assert(E.enterOtherworld(s,s.lastHealthClock+2000));assert(E.setOtherworldAutoAdvance(s,false));
+  const s=structuredClone(base);s.heroHp=E.stats(s).hp;s.otherworld.highestCleared=floor-1;s.otherworld.floor=floor;/* Synthetic historical clears establish a no-retroactive-reward baseline. */s.divineStones={version:1,baseline:Math.floor((floor-1)/50),claimed:[],spent:0};assert(E.validSave(s));assert(E.enterOtherworld(s,s.lastHealthClock+2000));assert(E.setOtherworldAutoAdvance(s,false));
   const e=E.startRoutedEncounter(s,Math.max(s.lastHealthClock,s.nextBattleAt??0)+2000);assert(e);e.rngState=12345;let rounds=0;while(!e.done&&rounds++<3000)E.step(s,e,s.nextActionAt);assert(e.done,'bounded battle');assert(E.validSave(s));if(e.win)assert(E.reward(s,e,s.lastHealthClock));assert(E.validSave(JSON.parse(JSON.stringify(s))));rows.push({race,set:targets[race].set,floor,win:e.win,rounds,hp:Math.round(s.heroHp),maxHp:Math.round(E.stats(s).hp),attack:Math.round(E.stats(s).atk)});
  }
 }
