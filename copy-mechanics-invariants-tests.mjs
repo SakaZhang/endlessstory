@@ -221,6 +221,10 @@ function authorizedBaseline(original,file){
   }
  }
  if(file==='potion-catalog.js'){
+  // v0.92 user-approved healing-only cooldown; all other numeric rules stay pinned.
+  assert.equal(out.POTION_CATALOG_RULES.sharedDrinkCooldownMs,10000);
+  out.POTION_CATALOG_RULES.sharedDrinkCooldownMs=0;
+  out.POTION_CATALOG_RULES.healingDrinkCooldownMs=10000;
   for(const role of out.POTION_RECIPE_CATALOG['potion-luck'].roles)role.materialIds.push(...EARLY_LUCK);
   for(const [id,recipe]of AUXILIARIES)out.POTION_RECIPE_CATALOG[recipe].roles.find(r=>r.role==='aux').materialIds.push(id);
  }
@@ -301,6 +305,8 @@ try{
    rejectMutation('nonapproved material functional tag',m=>m.materials['elf.green_shale'].functionalTags.push('luckBase'));
   }
   if(file==='potion-catalog.js'){
+   rejectMutation('nonhealing cooldown restored',m=>m.POTION_CATALOG_RULES.sharedDrinkCooldownMs=10000);
+   rejectMutation('healing cooldown removed',m=>m.POTION_CATALOG_RULES.healingDrinkCooldownMs=0);
    rejectMutation('recipe input count',m=>m.POTION_RECIPE_CATALOG['potion-luck'].roles[0].unitsPerBottle=2);
    rejectMutation('unapproved auxiliary',m=>m.POTION_RECIPE_CATALOG['potion-earthResist'].roles[1].materialIds.push('human.mat.17'));
   }

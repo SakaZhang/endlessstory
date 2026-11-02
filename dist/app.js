@@ -82,7 +82,7 @@ import {renderMonsterCodex,renderMonsterDetail,renderMaterialSources} from './mo
 import {getReforgeQuote,racialGoldCost,getPendingReforgeCandidate,effectiveLuck,eligibleRecoveryMaterials,quoteRecoveryRecipe,craftRecoveryRecipe,setPotionPriority,resolvePotionKey,RECOVERY_RECIPE_CONFIG,eligibleFusionEquipment,quoteBatchSale,executeBatchSale,SET_CODEX,normalizeCodexCollection,codexSetState,isMerchantEquipmentSellable,normalizeInventoryState,bagCounts,BAG_LIMITS,canReceiveEquipment,canReceiveMaterial,canReceiveItem,setLootFilter,claimForgeResult,normalizeEquipmentLevels,normalizeAreaProgress,getAreaProgress,getMerchantEquipmentLevelRange,BUILD,SKILLS,LOCS,SLOTS,SLOTNAME,RARITY,fresh,stats,preset,encounter,configureExpedition,normalizeExpedition,startRoutedEncounter,startInstanceEncounter,setExpeditionLoop,step,reward,offline,forge,validSave,LEGENDARY_CODEX,codexState,SOCKETS,SOCKET_TYPE,AFFIX_DEFS,SPECIALS,equipItem,sellValue,affixRollInfo,divineMultiplier,itemTotals,getReforgeCost,reforge,resolveReforge,eligibleReforgeDonors,wardrobeIds,bagItems,isProtected,saveLoadout,deleteLoadout,applyLoadout,MATERIALS,ensureMerchant,buyMaterial,getMerchantRefreshCost,paidRefreshMerchant,purchaseEquipment,combatStatuses,TALENTS,normalizeTalents,spendTalent,getTalentRefundQuote,commitTalentRefund,purchaseConsumable,availableTalentPoints,normalizeMaterials,materialEntries,materialCount,materialKey,parseMaterialKey,normalizeHealth,normalizeEncounterElements,settleRest,startRest,canStartEncounter,POTIONS,normalizePotions,potionEntries,potionEffect,parsePotionKey,equipPotion,setPotionAuto,drinkPotion,RECIPES,normalizeRecipes,recipeKnown,craftRecipe,purchaseRecipe} from './engine.js';
 import {AREAS,SITES,INSTANCES,areaLevelRange} from './location-schema.js';
 import {ELEMENT_KEYS,ELEMENTS} from './element-schema.js';
-import {potionDescription,renderPotionPanel,renderBattlePotionButton,renderPotionSettings,renderPotionInventory,clampPotionUseQuantity} from './potion-ui.js';
+import {potionDescription,renderPotionPanel,renderBattlePotionButton,renderPotionSettings,renderPotionInventory,clampPotionUseQuantity,potionUsePreview} from './potion-ui.js';
 import {renderRecoveryRecipe} from './recovery-recipe-ui.js';
 import {renderLoadouts} from './loadout-ui.js';
 import {renderPixelInventory as renderInventory,bindEquipmentAlcove} from './pixel-inventory.js';
@@ -293,6 +293,7 @@ function updatePotionUseQuantity(key,value,input=null){
  const parsed=parsePotionKey(key);if(!parsed||parsed.type==='healing')return;
  const max=MultiEngine.maxPotionUseQuantity(s,key,Date.now()),quantity=clampPotionUseQuantity(max,value);potionUseQuantities[key]=quantity;
  const controls=input?.closest?.('.potionUseControls'),button=controls?.querySelector?.('[data-potion-use]');if(button&&!button.disabled)button.textContent='使用 ×'+quantity;
+ const preview=input?.closest?.('.inventoryPotionCard')?.querySelector?.('[data-potion-use-preview]');if(preview)preview.textContent=potionUsePreview(s,key,quantity,Date.now());
  return quantity;
 }
 let skillTreeMount=null;

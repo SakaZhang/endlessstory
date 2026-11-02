@@ -363,3 +363,6 @@ runAffixSourceTest(process.execPath,[new URL('./otherworld-stable-ui-v087-tests.
 
 // v0.90 set progression, divine specials and first-clear stone transactions.
 for(const file of ['set-progression-v090-tests.mjs','set-otherworld-v090-tests.mjs','divine-specials-v090-tests.mjs','divine-stone-v090-tests.mjs','divine-stone-app-ui-v090-tests.cjs','otherworld-elite-v090-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.92 non-healing cooldown removal and atomic bulk use.
+for(const file of ['potion-bulk-v092-tests.mjs','potion-bulk-app-ui-tests.cjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});

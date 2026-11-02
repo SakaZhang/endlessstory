@@ -14,3 +14,5 @@
 
 /* Potion quantity controls never enlarge the inventory card beyond the viewport. */
 .potionUseControls{display:grid;grid-template-columns:minmax(60px,84px) auto;gap:6px;align-items:end}.potionUseControls label{display:grid;gap:3px;font-size:11px;color:#bcc5ca}.potionUseControls input{box-sizing:border-box;min-width:0;width:100%;padding:6px;background:#0d1e28;color:#e8dfc8;border:1px solid #60717d;font-variant-numeric:tabular-nums}.potionUseControls>[data-potion-use]{grid-column:1/-1}.potionUseControls button{padding:7px 9px}.potionUseControls input:focus-visible{outline:2px solid #d4ba80;outline-offset:2px}@media(max-width:540px){.inventoryPotionCard{grid-template-columns:40px minmax(0,1fr);gap:8px}.potionUseControls{grid-column:1/-1;grid-template-columns:minmax(60px,1fr) auto auto}.potionUseControls>[data-potion-use]{grid-column:auto}.potionUseControls label{grid-template-columns:auto minmax(60px,1fr);align-items:center}.potionUseControls input{max-width:150px}}
+
+.inventoryPotionCard .potionUsePreview{color:#dec58d;font-size:12px;line-height:1.5;margin-top:7px}

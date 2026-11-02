@@ -550,14 +550,9 @@ function validPotions(s){
 export function normalizePotions(s){
  if(!validPotions(s))return false;s.potionStacks??={};s.potionSlot??={key:null,auto:false,priority:'low',priorityVersion:1};s.potionReadyAt??=0;s.potionFunctionCooldowns??=Object.fromEntries(POTION_BUFF_KEYS.map(type=>[type,s.potionReadyAt]));s.potionBuffs??={};for(const type of POTION_BUFF_KEYS)s.potionBuffs[type]??={quality:0,endAt:0};return true;
 }
-// Healing keeps its original save field; old shared timers seed every function once.
-// An unfinished encounter remains combat even while paused or not running.
+// Legacy function timers remain valid save data but no longer gate non-healing use.
 export function potionCooldownUntil(s,key,battle=s.activeEncounter??null){
- const type=parsePotionKey(key)?.type;if(!type)return 0;
- if(type==='healing')return s.potionReadyAt??0;
- const cooldowns=s.potionFunctionCooldowns;if(!cooldowns)return s.potionReadyAt??0;
- const inCombat=(battle&&!battle.done)||(s.activeEncounter&&!s.activeEncounter.done);
- return inCombat?Math.max(0,...POTION_BUFF_KEYS.map(id=>cooldowns[id]??0)):(cooldowns[type]??0);
+ return parsePotionKey(key)?.type==='healing'?(s.potionReadyAt??0):0;
 }
 export function potionCount(s,type,quality=0){return s.potionStacks?.[potionKey(type,quality)]??0;}
 
@@ -572,18 +567,31 @@ export function resolvePotionKey(s,now=Date.now(),priority=s.potionSlot?.priorit
  return quality===undefined?null:potionKey(selected.type,quality);
 }
 export function setPotionPriority(s,priority){if(!['low','high'].includes(priority)||!normalizePotions(s))return false;s.potionSlot.priority=priority;return true;}
-export function drinkPotion(s,key=undefined,now=Date.now(),battle=s.activeEncounter??null){
+export function drinkPotions(s,key,quantity=1,now=Date.now(),battle=s.activeEncounter??null){
+ if(!Number.isSafeInteger(quantity)||quantity<1)return false;
  if(key===undefined)key=resolvePotionKey(s,now);
 
- const parsed=parsePotionKey(key);if(!parsed||!POTION_QUALITY_EFFECTS[parsed.quality]||!validPotions(s)||!normalizeHealth(s,now))return false;settleRest(s,now);
- const {type,quality}=parsed,effect=POTION_QUALITY_EFFECTS[quality],clock=s.lastHealthClock;if(s.restUntil>0||s.heroHp<=0||potionCooldownUntil(s,parsed.key,battle)>clock||potionCount(s,type,quality)<1)return false;
+ const parsed=parsePotionKey(key);if(!parsed||(parsed.type==='healing'&&quantity!==1)||!POTION_QUALITY_EFFECTS[parsed.quality]||!validPotions(s)||!normalizeHealth(s,now))return false;settleRest(s,now);
+ const {type,quality}=parsed,effect=POTION_QUALITY_EFFECTS[quality],clock=s.lastHealthClock;if(s.restUntil>0||s.heroHp<=0||potionCooldownUntil(s,parsed.key,battle)>clock||potionCount(s,type,quality)<quantity)return false;
  const max=stats(s).hp;if(type==='healing'&&s.heroHp>=max)return false;
  const current=potionBuff(s,type),active=current.endAt>clock;if(type!=='healing'&&active&&quality<current.quality)return false;
- const end=type==='healing'?0:(active&&quality===current.quality?current.endAt:clock)+effect.durationMs;if(end>1e15||clock+POTION_COOLDOWN_MS>1e15)return false;
- normalizePotions(s);s.potionStacks[parsed.key]--;if(type==='healing')s.potionReadyAt=clock+POTION_COOLDOWN_MS;else s.potionFunctionCooldowns[type]=clock+POTION_COOLDOWN_MS;
+ const end=type==='healing'?0:(active&&quality===current.quality?current.endAt:clock)+effect.durationMs*quantity;if(end>1e15||(type==='healing'&&clock+POTION_COOLDOWN_MS>1e15))return false;
+ normalizePotions(s);s.potionStacks[parsed.key]-=quantity;if(type==='healing')s.potionReadyAt=clock+POTION_COOLDOWN_MS;
  if(type==='healing'){const beforeHp=s.heroHp,context=treePassiveContext(s),amount=context?passiveReceivedHeal(context,{amount:max*effect.heal,currentHp:s.heroHp,maxHp:max}):Math.min(max-s.heroHp,max*effect.heal);s.heroHp=Math.min(max,s.heroHp+amount);if(battle&&!battle.done){battle.heroHp=s.heroHp;if(s.heroHp>beforeHp)emitCombatDisplay(battle,{kind:'heal',sourceId:'potion:'+parsed.key,skillId:null,element:null,hpDelta:s.heroHp-beforeHp});}}
  else s.potionBuffs[type]={quality,endAt:end};
  return true;
+}
+export function drinkPotion(s,key=undefined,now=Date.now(),battle=s.activeEncounter??null){
+ return drinkPotions(s,key,1,now,battle);
+}
+export function maxPotionUseQuantity(s,key,now=Date.now()){
+ if(!Number.isFinite(now)||now<0||now>1e15)return 0;
+ const parsed=parsePotionKey(key);if(!parsed||!validPotions(s))return 0;
+ const stock=potionCount(s,parsed.type,parsed.quality);if(parsed.type==='healing')return Math.min(1,stock);
+ const clock=Math.max(now,s.lastHealthClock??0),buff=potionBuff(s,parsed.type),active=buff.endAt>clock;
+ if(active&&parsed.quality<buff.quality)return 0;
+ const start=active&&parsed.quality===buff.quality?buff.endAt:clock;
+ return Math.max(0,Math.min(stock,Math.floor((1e15-start)/POTION_DURATION_MS)));
 }
 export function resolveHealingPotionKey(s,now=Date.now()){
  return resolvePotionKey({...s,potionSlot:{...s.potionSlot,key:'healing|0'}},now);
