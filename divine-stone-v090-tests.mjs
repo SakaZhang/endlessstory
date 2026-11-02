@@ -20,6 +20,11 @@ for(const highest of [0,49,50,99,100,123,1800]){const s=make(highest),store=memo
 for(const [highest,floor,expected]of [[49,50,1],[50,50,0],[99,100,1],[123,100,0]]){
  const s=make(highest);s.otherworld.floor=floor;assert(E.enterOtherworld(s,s.lastSeen+5000));const e=E.startRoutedEncounter(s,s.lastSeen+10000);assert(e);let turns=0;while(!e.done&&turns++<5000)E.step(s,e,s.nextActionAt);assert(e.win,'win floor '+floor);assert(E.validSave(s));assert(E.reward(s,e,s.lastSeen+12000));assert.equal(divineStoneBalance(s),expected);assert.equal(E.reward(s,e,s.lastSeen+13000),null);assert(E.validSave(s));assert.equal(divineStoneBalance(JSON.parse(JSON.stringify(s))),expected);
 }
+// Full equipment bags and every loot quality filter never suppress the milestone ledger.
+{
+ const s=make(49);for(const slot of E.SLOTS)for(let n=0;n<E.BAG_LIMITS.equipment;n++)s.inventory.push(E.item(slot,1,null,0,{baseLevel:1,levelSource:'drop',originRace:slot==='core'?'ashen':'human'}));
+ E.setLootFilter(s,'equipment',[0,1,2,3,4]);assert(E.validSave(s));assert(E.enterOtherworld(s,s.lastSeen+5000));const e=E.startRoutedEncounter(s,s.lastSeen+10000);let turns=0;while(!e.done&&turns++<5000)E.step(s,e,s.nextActionAt);assert(e.win);assert(E.reward(s,e,s.lastHealthClock));assert.equal(divineStoneBalance(s),1);assert(E.validSave(s));
+}
 // Old already-won pending milestones are historical, while in-progress battles may earn after upgrade.
 for(const doneBeforeUpgrade of [false,true]){
  const s=make(49);assert(E.enterOtherworld(s,s.lastSeen+5000));const e=E.startRoutedEncounter(s,s.lastSeen+10000);assert(e);

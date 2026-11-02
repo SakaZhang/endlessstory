@@ -20,7 +20,7 @@ export function loadProgress(storage){
  try{
   const raw=storage.getItem(SAVE_KEY),keys=retiredKeys(storage);
   if(raw!==null){reason='invalid-current-save';const parsed=JSON.parse(raw);if(!validCurrent(parsed))return fail();game=parsed;}
-  else{game=fresh();game.lastSeen=Date.now();game.offlineLuck=effectiveLuck(game);if(!validCurrent(game)){game=null;reason='invalid-candidate';return fail();}reason='storage-write';storage.setItem(SAVE_KEY,JSON.stringify(game));initialized=true;}
+  else{game=fresh();normalizeDivineStones(game);game.lastSeen=Date.now();game.offlineLuck=effectiveLuck(game);if(!validCurrent(game)){game=null;reason='invalid-candidate';return fail();}reason='storage-write';storage.setItem(SAVE_KEY,JSON.stringify(game));initialized=true;}
   // Reconcile defaults and story entitlement in one validated candidate/write.
   // Failed persistence retains the exact original save, with neither grant adopted.
   const reconciled=structuredClone(game);
