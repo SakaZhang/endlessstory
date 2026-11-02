@@ -7,6 +7,7 @@ import {normalizeDivineStones,validDivineStones,awardDivineStone,divineStoneBala
 import {quoteDivineStone,applyDivineStone,transactDivineStone} from './dist/divine-stone.js';
 import {loadProgress,SAVE_KEY,commitGameTransaction} from './dist/storage.js';
 import {renderDivineStoneForge} from './dist/divine-stone-ui.js';
+const realRandom=Math.random;let seed=934271;Math.random=()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0)/2**32);
 const make=(highest=0)=>{const s=reachStoryScene('human','END.H01.human',{finishTarget:true,level:100,spring:'skip'});s.running=false;s.activeEncounter=null;for(const it of s.inventory.filter(it=>Object.values(s.equip).includes(it.id)))E.applyForgeFavor(it);s.heroHp=E.stats(s).hp;delete s.divineStones;s.otherworld={...freshOtherworldState(),highestCleared:highest,floor:highest+1};assert(E.validSave(s));return s;};
 const memory=s=>{let raw=JSON.stringify(s);return {getItem:k=>k===SAVE_KEY?raw:null,setItem(k,v){if(k===SAVE_KEY)raw=v;},removeItem(){},key(){return null;},get length(){return 0;}};};
 // Historical clear baseline never turns into awards, even after migration and reload.
@@ -43,4 +44,5 @@ for(const mode of ['ordinary','set','legendary','growth']){
 {
  const s=make(49);awardDivineStone(s,50);s.otherworld.highestCleared=50;s.otherworld.floor=51;const it=E.item('weapon',100,null,3,{baseLevel:100,levelSource:'drop',originRace:'human'});s.inventory.push(it);const original=JSON.stringify(s);const store={getItem:()=>original,setItem(){throw Error('quota');}};const tx=transactDivineStone(store,s,it.id);assert.equal(tx.reason,'storage');assert.equal(JSON.stringify(s),original);s.running=true;assert.equal(quoteDivineStone(s,it.id).reason,'busy');s.running=false;assert.match(renderDivineStoneForge(s,{slot:'weapon',itemId:it.id}),/天神之石 ×1/);assert.match(renderDivineStoneForge(s,{slot:'weapon',itemId:it.id}),/消耗1颗天神之石/);assert.match(renderDivineStoneForge(s,{slot:'weapon',itemId:it.id}),/不消耗金币/);
 }
+Math.random=realRandom;
 console.log('PASS v090 divine stone no-retro milestone migration, exact first-clear production awards, repeat/reload/old clears, validation, atomic furnace, special preservation, legendary/set, no gold, quota and stale rejection.');
