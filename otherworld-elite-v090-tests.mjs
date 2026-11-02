@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import * as E from './dist/engine.js';
+import {otherworldFloorStats,OTHERWORLD_MAX_FLOOR,validOtherworldEncounter} from './dist/otherworld-state.js';
+import {divineStoneBalance} from './dist/divine-stone-state.js';
+import {renderOtherworldPanel} from './dist/otherworld-ui.js';
+import {reachStoryScene} from './story-event-test-fixture.mjs';
+import {raceSockets} from './dist/race-registry.js';
+const realRandom=Math.random;let seed=934271;Math.random=()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0)/2**32);
+const at=s=>Math.max(s.lastHealthClock,s.nextBattleAt??0)+2000;
+function ready(floor,highest=floor-1){const s=reachStoryScene('goblin','END.G01.goblin',{finishTarget:true,level:100,spring:'skip'});s.running=false;for(const socket of raceSockets('goblin')){const slot=E.SOCKET_TYPE[socket],it=E.item(slot,100,['helm','armor','gloves','boots'].includes(slot)?'goblin_spore':null,3,{baseLevel:100,levelSource:'generated',originRace:'goblin'});E.applyForgeFavor(it);s.inventory.push(it);assert(E.equipItem(s,it.id,socket));}s.heroHp=E.stats(s).hp;s.otherworld.highestCleared=highest;s.otherworld.floor=floor;delete s.divineStones;assert(E.validSave(s));assert(E.enterOtherworld(s,at(s)));assert(E.setOtherworldAutoAdvance(s,false));return s;}
+for(const floor of [1,49,50,51,99,100,101,150,200,300,1800,OTHERWORLD_MAX_FLOOR]){const now=otherworldFloorStats(floor),old=otherworldFloorStats(floor,{legacy:true}),elite=floor%50===0;assert.equal(now.elite,elite);assert.equal(now.hp,Math.min(1e12,old.hp*(elite?1.25:1)));assert.equal(now.atk,old.atk*(elite?2:1));assert.equal(now.armor,old.armor*(elite?1.1:1));}
+for(const floor of [50,100,101]){const s=ready(floor),e=E.startRoutedEncounter(s,at(s));assert(e);assert.equal(e.otherworld.version,2);assert.equal(e.boss,false);assert.equal(e.kind,'field');assert.equal(e.enemies[0].name,(floor%50===0?'异界精英守卫':'异界守卫')+' · 第'+floor+'层');assert(E.validSave(s));assert(renderOtherworldPanel(s).includes(floor%50===0?'层 · 精英':'第 101 层'));for(const mutate of [e=>e.enemies[0].atk++,e=>e.enemies[0].name='异界守卫',e=>e.boss=true,e=>e.otherworld.version=3]){const bad=structuredClone(e);mutate(bad);assert(!validOtherworldEncounter(bad));}}
+// Old in-flight milestone retains its exact old stats/name after save reload.
+{const s=ready(50),e=E.startRoutedEncounter(s,at(s)),old=otherworldFloorStats(50,{legacy:true}),u=e.enemies[0];e.otherworld.version=1;u.parameterSetId='otherworld-v081';u.name='异界守卫 · 第50层';u.max=u.hp=old.hp;u.atk=old.atk;u.armor=old.armor;Object.assign(e,{name:u.name,max:u.max,hp:u.hp,atk:u.atk,armor:u.armor});assert(E.validSave(s));assert(E.validSave(JSON.parse(JSON.stringify(s))));assert.equal(E.otherworldStatus(s).stats.atk,old.atk);assert(!renderOtherworldPanel(s).includes('第 50 层 · 精英'));const before=u.atk;E.step(s,e,s.nextActionAt);assert.equal(u.atk,before);assert(E.validSave(s));}
+// Production victory/reward is still the isolated tower pool and one milestone only.
+{const s=ready(50),e=E.startRoutedEncounter(s,at(s));e.rngState=12345;let n=0;while(!e.done&&n++<3000)E.step(s,e,s.nextActionAt);assert(e.win);assert(E.reward(s,e,s.lastHealthClock));assert.equal(divineStoneBalance(s),1);assert.equal(s.otherworld.highestCleared,50);assert.equal(E.reward(s,e,s.lastHealthClock),null);assert.equal(divineStoneBalance(s),1);const again=E.startRoutedEncounter(s,at(s));assert(again);again.rngState=12345;n=0;while(!again.done&&n++<3000)E.step(s,again,s.nextActionAt);assert(again.win);assert(E.reward(s,again,s.lastHealthClock));assert.equal(divineStoneBalance(s),1);assert(E.validSave(s));}
+// Existing cleared milestone establishes a no-retroactive baseline.
+{const s=ready(50,100);assert.equal(divineStoneBalance(s),0);const e=E.startRoutedEncounter(s,at(s));assert(e);assert.equal(s.divineStones.baseline,2);assert.equal(divineStoneBalance(s),0);}
+Math.random=realRandom;
+console.log('PASS milestone elite exact stats/ordinary unchanged/strict v2 marker/old v1 snapshot/UI/actual wins/first clear only/no retroactive stones');
