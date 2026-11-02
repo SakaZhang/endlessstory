@@ -4,7 +4,7 @@ export const VERSION='dwarf-active-balance-test-v1';
 export const STATUS='reviewed-initial-v036';
 export const PERIODIC={burnTickMs:2000,bleedTickMs:2000,healingTickMs:2000};
 export const POISON_CANDIDATE={fractionPerLayer:.02,immutablePercent:true,globalDamageMultiplierApplies:false,maxStacks:5,tickIntervalMs:3000,layerLifetimeMs:9000,shieldPolicy:'absorb-shield-before-hp',status:'reviewed-initial-timing'};
-export const SETS={anvilTwoBonus:.20,anvilAxeExtraBonus:.60,anvilHammerConditionBonus:.75,anvilGenericBonus:.25,runeBurnBonus:.30,runeConsumeBonus:.70,runeGenericBonus:.30,runeBurnChanceBonus:.25,guardSkillShieldBonus:.25,guardShieldedBonus:.60,guardGenericBonus:.25,guardAxeDefenseBonus:.50};
+export const SETS={anvilTwoBonus:.30,anvilAxeExtraBonus:.90,anvilHammerConditionBonus:1,anvilGenericBonus:.40,runeBurnBonus:.45,runeConsumeBonus:1,runeGenericBonus:.45,runeBurnChanceBonus:.35,guardSkillShieldBonus:.35,guardShieldedBonus:.90,guardGenericBonus:.40,guardAxeDefenseBonus:.75};
 export function skillConfigs(st){
  if(!st||!['atk','hp','armor'].every(k=>Number.isFinite(st[k])&&st[k]>=0)||st.hp<=0)throw new TypeError('finite nonnegative atk/armor and positive hp required');
  const A=st.atk,H=st.hp,D=st.armor;

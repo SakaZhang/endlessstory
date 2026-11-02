@@ -12,7 +12,7 @@ function normalizeSourceDescriptor(source){
 }
 function validSource(s){
  if(!plain(s)||!safeId(s.sourceId)||!types.includes(s.type)||!num(s.amount)||!time(s.endAt)||!plain(s.source)||!['skill','equipment'].includes(s.source.kind)||!safeId(s.source.id)||Object.keys(s.source).length!==2)return false;
- if(s.type==='setSkillCrit'&&(s.amount!==.03||s.source.kind!=='skill'||s.source.id!==s.sourceId||!['human.precise_cut','human.flash_arc','human.opening'].includes(s.sourceId)))return false;
+ if(s.type==='setSkillCrit'&&(![.03,.05].includes(s.amount)||s.source.kind!=='skill'||s.source.id!==s.sourceId||!['human.precise_cut','human.flash_arc','human.opening'].includes(s.sourceId)))return false;
  const allowed=['sourceId','type','amount','endAt','source','status','damageType','nextTickAt','tickIntervalMs','requiresStatus','counterEligible'];if(Object.keys(s).some(k=>!allowed.includes(k)))return false;
  if(s.requiresStatus!==undefined&&!['burn','bleed'].includes(s.requiresStatus))return false;
  if(s.counterEligible!==undefined&&typeof s.counterEligible!=='boolean')return false;

@@ -60,9 +60,9 @@ for(const slot of slots)for(const [i,name]of names[slot].entries()){
  equipment.push({id,name,slot,weaponType,baseVariant,originRace:'goblin',kind:'scatter',setId:null,description:scatterDescriptions[slot][i],pixelAppearance:'苔绿、旧铜与暗紫菌光；旧皮绳结和实用修补纹理',visualVariant:id,visualKey:id,iconKey:slot});
 }
 export const sets=[
-{id:'goblin_spore',name:'苦菌行者',branch:'poison',description:'细口菌瓶绑在腰侧，护手内衬能擦去溅出的菌浆。',two:{description:'叠毒技能的削甲/减攻持续时间增加2秒。'},four:{description:'涂菌刺命中额外施加1层套装毒，独立积累至2层，与普通5层合计最多7层；每层每2秒造成目标最大生命3%的毒伤，叠毒刷新至12秒。'}},
-{id:'goblin_ambush',name:'余粮斥候',branch:'ambush',description:'轻装先手，留粮续行，抓住敌阵最薄的一瞬。',two:{description:'伏击分支直接伤害提高8%。'},four:{description:'首击与收尾割条件成立时额外提高25%直伤，穿隙步延长2秒。'}},
-{id:'goblin_snare',name:'旧索匠',branch:'contraption',description:'把废弃铜簧和兽筋绳变成活路。',two:{description:'机关的命中/攻击削弱提高15%。'},four:{description:'伏索多一次触发次数；每次反击伤害降低15%，反击不会再次触发机关。'}}
+{id:'goblin_spore',name:'苦菌行者',branch:'poison',description:'细口菌瓶绑在腰侧，护手内衬能擦去溅出的菌浆。',two:{description:'叠毒技能的削甲/减攻持续时间增加3秒。'},four:{description:'涂菌刺命中额外施加2层套装毒，独立积累至2层，与普通5层合计最多7层；每层每2秒造成目标最大生命3%的毒伤，叠毒刷新至12秒。'}},
+{id:'goblin_ambush',name:'余粮斥候',branch:'ambush',description:'轻装先手，留粮续行，抓住敌阵最薄的一瞬。',two:{description:'伏击分支直接伤害提高15%。'},four:{description:'首击与收尾割条件成立时额外提高35%直伤，穿隙步延长3秒。'}},
+{id:'goblin_snare',name:'旧索匠',branch:'contraption',description:'把废弃铜簧和兽筋绳变成活路。',two:{description:'机关的命中/攻击削弱提高25%。'},four:{description:'伏索多两次触发次数；每次反击伤害降低15%，反击不会再次触发机关。'}}
 ];
 for(const set of sets)for(const [i,slot]of ['helm','armor','gloves','boots'].entries()){
  const id=`${set.id}_${slot}`;equipment.push({id,name:set.name+['兜帽','轻甲','手套','软靴'][i],slot,weaponType:null,baseVariant:slot+'_'+(set.branch==='contraption'?'armor':'vitality'),originRace:'goblin',kind:'set',setId:set.id,description:set.description,pixelAppearance:'菌紫、旧铜、苔绿的套装工艺',visualVariant:id,visualKey:id,iconKey:slot});
@@ -74,14 +74,14 @@ export const legendaries=[
 export function modifySkillPlan(plan,{setCounts={},targets=[]}={}){
  if(!plan)return null;const p=structuredClone(plan),branch=p.skillId.split('.')[1],spore=setCounts.goblin_spore??0,ambush=setCounts.goblin_ambush??0,snare=setCounts.goblin_snare??0;
  for(const a of p.actions){
-  if(ambush>=2&&['opening_cut','finish_cut','stolen_moment','crossing_blade'].includes(branch)&&a.kind==='hit')a.coefficient*=1.08;
+  if(ambush>=2&&['opening_cut','finish_cut','stolen_moment','crossing_blade'].includes(branch)&&a.kind==='hit')a.coefficient*=1.15;
   const t=targets.find(t=>t.id===a.targetId),ratio=t?.maxHp>0?t.hp/t.maxHp:1;
-  if(ambush>=4&&a.kind==='hit'&&((branch==='opening_cut'&&ratio>.75)||(branch==='finish_cut'&&ratio<.3)))a.coefficient*=1.25;
-  if(spore>=4&&branch==='venom_cut'&&a.effects?.some(e=>e.type==='poison'))a.effects.push({...structuredClone(a.effects.find(e=>e.type==='poison')),setBonus:true});
+  if(ambush>=4&&a.kind==='hit'&&((branch==='opening_cut'&&ratio>.75)||(branch==='finish_cut'&&ratio<.3)))a.coefficient*=1.35;
+  if(spore>=4&&branch==='venom_cut'&&a.effects?.some(e=>e.type==='poison'))a.effects.push(...Array.from({length:2},()=>({...structuredClone(a.effects.find(e=>e.type==='poison')),setBonus:true})));
   for(const ef of a.effects??[]){
-   if(spore>=2&&['venom_cut','bitter_wound','mire_seal'].includes(branch)&&['armorDown','attackDown'].includes(ef.type))ef.durationMs+=2000;
-   if(ambush>=4&&branch==='seam_step')ef.durationMs+=2000;
-   if(ef.type==='raceReactive'){if(snare>=2){ef.hitDown*=1.15;ef.attackDown*=1.15;}if(snare>=4&&branch==='snare_wire'){ef.charges++;ef.coefficient*=.85;}}
+   if(spore>=2&&['venom_cut','bitter_wound','mire_seal'].includes(branch)&&['armorDown','attackDown'].includes(ef.type))ef.durationMs+=3000;
+   if(ambush>=4&&branch==='seam_step')ef.durationMs+=3000;
+   if(ef.type==='raceReactive'){if(snare>=2){ef.hitDown*=1.25;ef.attackDown*=1.25;}if(snare>=4&&branch==='snare_wire'){ef.charges+=2;ef.coefficient*=.85;}}
   }
  }return p;
 }

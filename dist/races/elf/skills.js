@@ -55,13 +55,13 @@ export function planSkill({skillId,castId,weaponType,selectedTargetId,targets=[]
 export function modifySkillPlan(plan,{setCounts={},weaponType,context={}}={}){
  const out=structuredClone(plan),counts={arrow:setCounts.elf_arrow??0,prism:setCounts.elf_prism??0,root:setCounts.elf_root??0};
  for(const a of out.actions){if(a.kind==='hit'){
-  if(out.branch==='bow'&&counts.arrow>=2)a.coefficient*=1.1;
-  if(out.branch==='bow'&&counts.arrow>=4&&a.hitIndex>=1)a.coefficient*=1.18;
-  if(out.branch==='elements'&&counts.prism>=2)a.coefficient*=1.1;
-  if(out.branch==='elements'&&counts.prism>=4&&context.runtime?.lastElement&&a.damageType!==context.runtime.lastElement)a.coefficient*=1.15;
-  if(out.branch==='staff'&&counts.root>=2)a.coefficient*=1.1;
-  if(out.branch==='staff'&&counts.root>=4&&a.damageType!=='physical')a.coefficient*=1.2;
+  if(out.branch==='bow'&&counts.arrow>=2)a.coefficient*=1.2;
+  if(out.branch==='bow'&&counts.arrow>=4&&a.hitIndex>=1)a.coefficient*=1.25;
+  if(out.branch==='elements'&&counts.prism>=2)a.coefficient*=1.2;
+  if(out.branch==='elements'&&counts.prism>=4&&context.runtime?.lastElement&&a.damageType!==context.runtime.lastElement)a.coefficient*=1.25;
+  if(out.branch==='staff'&&counts.root>=2)a.coefficient*=1.2;
+  if(out.branch==='staff'&&counts.root>=4&&a.damageType!=='physical')a.coefficient*=1.3;
  }
- for(const e of a.effects??[])if(counts.root>=4&&out.branch==='staff'&&e.type==='shield')e.amount*=1.2;
+ for(const e of a.effects??[])if(counts.root>=4&&out.branch==='staff'&&e.type==='shield')e.amount*=1.3;
  }return out;
 }

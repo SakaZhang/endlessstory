@@ -1,7 +1,7 @@
 // Pure plans; the host commits raceResource only after a successful cast.
 export const createRuntime=()=>({version:1,heat:0,shards:0,resonance:0,lastPulse:null});
 const RESOURCE_CAPS={heat:100,shards:6,resonance:3};
-const SET_RESOURCES={heat:{field:'setHeat',cap:25,set:'ashen.caldera',amount:5},shards:{field:'setShards',cap:2,set:'ashen.strata',amount:1}};
+const SET_RESOURCES={heat:{field:'setHeat',cap:25,set:'ashen.caldera',amount:10},shards:{field:'setShards',cap:2,set:'ashen.strata',amount:2}};
 export function validRuntime(r){
  if(!r||typeof r!=='object'||Array.isArray(r)||r.version!==1||!Object.keys(r).every(k=>['version','heat','shards','resonance','lastPulse','setHeat','setShards'].includes(k))||!['version','heat','shards','resonance','lastPulse'].every(k=>Object.hasOwn(r,k))||![null,'physical','light','dark'].includes(r.lastPulse))return false;
  for(const [key,cap]of Object.entries(RESOURCE_CAPS)){const def=SET_RESOURCES[key],bonus=def&&Object.hasOwn(r,def.field)?r[def.field]:0;if(!Number.isInteger(bonus)||bonus<0||bonus>(def?.cap??0)||!Number.isInteger(r[key])||r[key]<bonus||r[key]-bonus>cap)return false;}
@@ -92,14 +92,14 @@ return {skillId,castId,scope:meta.scope,branch:meta.branch,cooldownMs:meta.coold
 export function modifySkillPlan(plan,{setCounts={}}={}){
 const p=structuredClone(plan),key=p.skillId.slice(6),count=id=>setCounts['ashen.'+id]??0;
 for(const a of p.actions){if(a.kind==='hit'){
-if(count('caldera')>=4&&['vent','overload'].includes(key))a.coefficient*=1.15;
-if(count('strata')>=4&&['cleave','fracture'].includes(key))a.coefficient*=1.15;
-if(count('prism')>=2&&['tap','dawn','dusk'].includes(key))a.coefficient*=1.08;
-if(count('prism')>=4&&key==='resound')a.coefficient*=1.15;
+if(count('caldera')>=4&&['vent','overload'].includes(key))a.coefficient*=1.25;
+if(count('strata')>=4&&['cleave','fracture'].includes(key))a.coefficient*=1.25;
+if(count('prism')>=2&&['tap','dawn','dusk'].includes(key))a.coefficient*=1.15;
+if(count('prism')>=4&&key==='resound')a.coefficient*=1.25;
 }for(const e of a.effects??[]){
-if(count('caldera')>=2&&e.type==='raceResource'&&e.resource==='heat'&&e.operation==='add'&&!e.setSource)a.effects.push({...structuredClone(e),amount:5,setSource:'ashen.caldera'});
-if(count('caldera')>=4&&key==='anneal'&&e.type==='shield')e.amount*=1.2;
-if(count('strata')>=2&&key==='mantle'&&e.type==='raceResource'&&e.resource==='shards'&&!e.setSource)a.effects.push({...structuredClone(e),amount:1,setSource:'ashen.strata'});
-if(count('strata')>=4&&key==='rebuild'&&e.type==='heal')e.amount*=1.2;
-if(count('prism')>=4&&['chorus','mend'].includes(key)&&['heal','shield'].includes(e.type))e.amount*=1.2;
+if(count('caldera')>=2&&e.type==='raceResource'&&e.resource==='heat'&&e.operation==='add'&&!e.setSource)a.effects.push({...structuredClone(e),amount:10,setSource:'ashen.caldera'});
+if(count('caldera')>=4&&key==='anneal'&&e.type==='shield')e.amount*=1.3;
+if(count('strata')>=2&&key==='mantle'&&e.type==='raceResource'&&e.resource==='shards'&&!e.setSource)a.effects.push({...structuredClone(e),amount:2,setSource:'ashen.strata'});
+if(count('strata')>=4&&key==='rebuild'&&e.type==='heal')e.amount*=1.3;
+if(count('prism')>=4&&['chorus','mend'].includes(key)&&['heal','shield'].includes(e.type))e.amount*=1.3;
 }}return p;}

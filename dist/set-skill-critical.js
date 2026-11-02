@@ -4,8 +4,8 @@ import {skillEffectValue,validSkillEffectState} from './skill-tree-effects.js';
 export function setSkillCritChance(stats,effects){
  const ordinary=Math.max(0,Math.min(.6,Number.isFinite(stats?.crit)?stats.crit:0));
  const enabled=(stats?.count?.human_royal_edge??0)>=2&&validSkillEffectState(effects);
- const extra=enabled?Math.min(.03,skillEffectValue(effects,'self','setSkillCrit')??0):0;
- return Math.min(.63,ordinary+extra);
+ const extra=enabled?Math.min(.05,skillEffectValue(effects,'self','setSkillCrit')??0):0;
+ return Math.min(.65,ordinary+extra);
 }
 // A completed removal destroys the set-only window. Re-equipping never restores it.
 // Dungeon carry is separate from the live encounter and must be cleared as well.

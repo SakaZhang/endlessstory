@@ -3,11 +3,11 @@ import {EXPANSION_PACKS} from './race-packs.js';
 export const RACIAL_SET_POOLS=Object.freeze({dwarf:Object.freeze(['anvil','rune','guard']),human:Object.freeze([]),elf:Object.freeze([]),goblin:Object.freeze([]),ashen:Object.freeze([]),...Object.fromEntries(EXPANSION_PACKS.map(p=>[p.id,Object.freeze(p.sets.map(s=>s.id))]))});
 const slots=Object.freeze(['helm','armor','gloves','boots']);
 export function setDropProbability(kind,luck=0){
- if(!['dungeon','boss'].includes(kind)||!Number.isFinite(luck)||luck<0||luck>1000)return null;
- return (kind==='boss'?.12:.08)*(1+.20*luck/(luck+5));
+ if(!['field','dungeon','boss'].includes(kind)||!Number.isFinite(luck)||luck<0||luck>1000)return null;
+ return ({field:.03,dungeon:.15,boss:.25}[kind])*(1+.20*luck/(luck+5));
 }
 export function eligibleSetSource({source,kind,areaNumber,race,clear=false}){
- return source==='drop'&&(kind==='boss'||kind==='dungeon'&&clear===true)&&Number.isInteger(areaNumber)&&areaNumber>=3&&areaNumber<=10&&!!RACIAL_SET_POOLS[race]?.length;
+ return source==='drop'&&(kind==='field'||kind==='boss'||kind==='dungeon'&&clear===true)&&Number.isInteger(areaNumber)&&areaNumber>=3&&areaNumber<=10&&!!RACIAL_SET_POOLS[race]?.length;
 }
 export function rollSourceSet(args,random=Math.random){
  if(!eligibleSetSource(args))return null;

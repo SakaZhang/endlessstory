@@ -111,9 +111,9 @@ export const SLOTNAME = {weapon:'武器',helm:'头盔',armor:'护甲',gloves:'�
 export const RARITY = ['普通','稀有','优良','至臻'];
 export const SET_SLOTS = ['helm','armor','gloves','boots'];
 export const BUILD = [...EXPANSION_PACKS.flatMap(p=>p.sets.map(s=>({...s,originRace:p.id,skills:[],bonus:[s.two?.description,s.four?.description].filter(Boolean).join('；')||s.description||''}))),
- {id:'anvil',name:'碎砧',sub:'裂甲 · 重击',skills:['break','heavy','interrupt',null],bonus:'2件：对流血或破甲目标的物理技能直伤提高20%。4件：破隙追击持斧时，对流血目标的第二击伤害提高60%；持锤时，对破甲目标的条件追加伤害提高75%；其他武器对流血或破甲目标的基础伤害提高25%。'},
- {id:'rune',name:'炉纹',sub:'铭火 · 引燃',skills:['mark','ignite','interrupt',null],bonus:'2件：灼烧持续伤害提高30%。4件：炉焰迸发持斧时，灼烧施加概率增加25个百分点（最高100%）；持锤时，对灼烧目标的条件追加伤害提高70%；其他武器基础伤害提高30%。'},
- {id:'guard',name:'守冢',sub:'坚守 · 反击',skills:['guard','break','interrupt',null],bonus:'2件：技能产生的护盾量提高25%。4件：守势重击持斧时，防御提升效果提高50%；持锤且自身有护盾时，条件追加伤害提高60%；其他武器基础伤害提高25%。'}
+ {id:'anvil',name:'碎砧',sub:'裂甲 · 重击',skills:['break','heavy','interrupt',null],bonus:'2件：对流血或破甲目标的物理技能直伤提高30%。4件：破隙追击持斧时，对流血目标的第二击伤害提高90%；持锤时，对破甲目标的条件追加伤害提高100%；其他武器对流血或破甲目标的基础伤害提高40%。'},
+ {id:'rune',name:'炉纹',sub:'铭火 · 引燃',skills:['mark','ignite','interrupt',null],bonus:'2件：灼烧持续伤害提高45%。4件：炉焰迸发持斧时，灼烧施加概率增加35个百分点（最高100%）；持锤时，对灼烧目标的条件追加伤害提高100%；其他武器基础伤害提高45%。'},
+ {id:'guard',name:'守冢',sub:'坚守 · 反击',skills:['guard','break','interrupt',null],bonus:'2件：技能产生的护盾量提高35%。4件：守势重击持斧时，防御提升效果提高75%；持锤且自身有护盾时，条件追加伤害提高90%；其他武器基础伤害提高40%。'}
 ].map(withSetEffects);
 export const SKILLS={break:{name:'裂甲锤',icon:'⌁',cd:4,desc:'120%攻击伤害，削减目标25%护甲，持续6回合。'},heavy:{name:'重锻击',icon:'✦',cd:5,desc:'220%攻击伤害，破甲目标再提高25%。'},interrupt:{name:'断势',icon:'ϟ',cd:6,desc:'115%攻击伤害，打断本回合蓄力重击。'},mark:{name:'铭火',icon:'♨',cd:4,desc:'90%攻击的火元素伤害，附加5回合火焰灼烧；不受护甲影响。'},ignite:{name:'引燃',icon:'✧',cd:5,desc:'160%攻击的火元素伤害，灼烧目标额外80%攻击；不受护甲影响。'},guard:{name:'坚守',icon:'▣',cd:5,desc:'100%攻击伤害，3回合减伤40%并反击。'}};
 Object.assign(SKILLS,{
