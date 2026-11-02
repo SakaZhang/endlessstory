@@ -1,0 +1,355 @@
+{
+  "note": "Synthetic Lv100 supreme sets, legal set-linked skill tree, prerequisite closure budget enforced, no special-affix chance, measured survivability not a guaranteed progression promise",
+  "rows": [
+    {
+      "race": "human",
+      "set": "human_blood_oath",
+      "floor": 50,
+      "win": true,
+      "rounds": 24,
+      "hp": 8834,
+      "maxHp": 8834,
+      "attack": 1229
+    },
+    {
+      "race": "human",
+      "set": "human_blood_oath",
+      "floor": 100,
+      "win": true,
+      "rounds": 49,
+      "hp": 8520,
+      "maxHp": 8834,
+      "attack": 1229
+    },
+    {
+      "race": "human",
+      "set": "human_blood_oath",
+      "floor": 125,
+      "win": true,
+      "rounds": 75,
+      "hp": 8734,
+      "maxHp": 8834,
+      "attack": 1229
+    },
+    {
+      "race": "human",
+      "set": "human_blood_oath",
+      "floor": 150,
+      "win": true,
+      "rounds": 113,
+      "hp": 8351,
+      "maxHp": 8834,
+      "attack": 1229
+    },
+    {
+      "race": "human",
+      "set": "human_blood_oath",
+      "floor": 175,
+      "win": true,
+      "rounds": 172,
+      "hp": 8671,
+      "maxHp": 8834,
+      "attack": 1229
+    },
+    {
+      "race": "human",
+      "set": "human_blood_oath",
+      "floor": 200,
+      "win": true,
+      "rounds": 270,
+      "hp": 3228,
+      "maxHp": 8834,
+      "attack": 1229
+    },
+    {
+      "race": "human",
+      "set": "human_blood_oath",
+      "floor": 300,
+      "win": false,
+      "rounds": 44,
+      "hp": 0,
+      "maxHp": 8834,
+      "attack": 1229
+    },
+    {
+      "race": "dwarf",
+      "set": "anvil",
+      "floor": 50,
+      "win": true,
+      "rounds": 14,
+      "hp": 7129,
+      "maxHp": 7129,
+      "attack": 939
+    },
+    {
+      "race": "dwarf",
+      "set": "anvil",
+      "floor": 100,
+      "win": true,
+      "rounds": 26,
+      "hp": 7129,
+      "maxHp": 7129,
+      "attack": 939
+    },
+    {
+      "race": "dwarf",
+      "set": "anvil",
+      "floor": 125,
+      "win": true,
+      "rounds": 38,
+      "hp": 7129,
+      "maxHp": 7129,
+      "attack": 939
+    },
+    {
+      "race": "dwarf",
+      "set": "anvil",
+      "floor": 150,
+      "win": true,
+      "rounds": 50,
+      "hp": 6966,
+      "maxHp": 7129,
+      "attack": 939
+    },
+    {
+      "race": "dwarf",
+      "set": "anvil",
+      "floor": 175,
+      "win": true,
+      "rounds": 81,
+      "hp": 6820,
+      "maxHp": 7129,
+      "attack": 939
+    },
+    {
+      "race": "dwarf",
+      "set": "anvil",
+      "floor": 200,
+      "win": true,
+      "rounds": 164,
+      "hp": 7129,
+      "maxHp": 7129,
+      "attack": 939
+    },
+    {
+      "race": "dwarf",
+      "set": "anvil",
+      "floor": 300,
+      "win": false,
+      "rounds": 110,
+      "hp": 0,
+      "maxHp": 7129,
+      "attack": 939
+    },
+    {
+      "race": "elf",
+      "set": "elf_arrow",
+      "floor": 50,
+      "win": true,
+      "rounds": 16,
+      "hp": 7019,
+      "maxHp": 7035,
+      "attack": 1095
+    },
+    {
+      "race": "elf",
+      "set": "elf_arrow",
+      "floor": 100,
+      "win": true,
+      "rounds": 35,
+      "hp": 6896,
+      "maxHp": 7035,
+      "attack": 1095
+    },
+    {
+      "race": "elf",
+      "set": "elf_arrow",
+      "floor": 125,
+      "win": true,
+      "rounds": 61,
+      "hp": 6913,
+      "maxHp": 7035,
+      "attack": 1095
+    },
+    {
+      "race": "elf",
+      "set": "elf_arrow",
+      "floor": 150,
+      "win": true,
+      "rounds": 97,
+      "hp": 6741,
+      "maxHp": 7035,
+      "attack": 1095
+    },
+    {
+      "race": "elf",
+      "set": "elf_arrow",
+      "floor": 175,
+      "win": true,
+      "rounds": 157,
+      "hp": 6828,
+      "maxHp": 7035,
+      "attack": 1095
+    },
+    {
+      "race": "elf",
+      "set": "elf_arrow",
+      "floor": 200,
+      "win": true,
+      "rounds": 257,
+      "hp": 6505,
+      "maxHp": 7035,
+      "attack": 1095
+    },
+    {
+      "race": "elf",
+      "set": "elf_arrow",
+      "floor": 300,
+      "win": false,
+      "rounds": 64,
+      "hp": 0,
+      "maxHp": 7035,
+      "attack": 1095
+    },
+    {
+      "race": "goblin",
+      "set": "goblin_spore",
+      "floor": 50,
+      "win": true,
+      "rounds": 13,
+      "hp": 7529,
+      "maxHp": 7680,
+      "attack": 1282
+    },
+    {
+      "race": "goblin",
+      "set": "goblin_spore",
+      "floor": 100,
+      "win": true,
+      "rounds": 15,
+      "hp": 7317,
+      "maxHp": 7680,
+      "attack": 1282
+    },
+    {
+      "race": "goblin",
+      "set": "goblin_spore",
+      "floor": 125,
+      "win": true,
+      "rounds": 15,
+      "hp": 7186,
+      "maxHp": 7680,
+      "attack": 1282
+    },
+    {
+      "race": "goblin",
+      "set": "goblin_spore",
+      "floor": 150,
+      "win": true,
+      "rounds": 15,
+      "hp": 7019,
+      "maxHp": 7680,
+      "attack": 1282
+    },
+    {
+      "race": "goblin",
+      "set": "goblin_spore",
+      "floor": 175,
+      "win": true,
+      "rounds": 15,
+      "hp": 6807,
+      "maxHp": 7680,
+      "attack": 1282
+    },
+    {
+      "race": "goblin",
+      "set": "goblin_spore",
+      "floor": 200,
+      "win": true,
+      "rounds": 16,
+      "hp": 6546,
+      "maxHp": 7680,
+      "attack": 1282
+    },
+    {
+      "race": "goblin",
+      "set": "goblin_spore",
+      "floor": 300,
+      "win": true,
+      "rounds": 16,
+      "hp": 4494,
+      "maxHp": 7680,
+      "attack": 1282
+    },
+    {
+      "race": "ashen",
+      "set": "ashen.strata",
+      "floor": 50,
+      "win": true,
+      "rounds": 38,
+      "hp": 7623,
+      "maxHp": 7623,
+      "attack": 1255
+    },
+    {
+      "race": "ashen",
+      "set": "ashen.strata",
+      "floor": 100,
+      "win": true,
+      "rounds": 80,
+      "hp": 7523,
+      "maxHp": 7623,
+      "attack": 1255
+    },
+    {
+      "race": "ashen",
+      "set": "ashen.strata",
+      "floor": 125,
+      "win": true,
+      "rounds": 115,
+      "hp": 7569,
+      "maxHp": 7623,
+      "attack": 1255
+    },
+    {
+      "race": "ashen",
+      "set": "ashen.strata",
+      "floor": 150,
+      "win": true,
+      "rounds": 171,
+      "hp": 7502,
+      "maxHp": 7623,
+      "attack": 1255
+    },
+    {
+      "race": "ashen",
+      "set": "ashen.strata",
+      "floor": 175,
+      "win": true,
+      "rounds": 264,
+      "hp": 7623,
+      "maxHp": 7623,
+      "attack": 1255
+    },
+    {
+      "race": "ashen",
+      "set": "ashen.strata",
+      "floor": 200,
+      "win": true,
+      "rounds": 411,
+      "hp": 7440,
+      "maxHp": 7623,
+      "attack": 1255
+    },
+    {
+      "race": "ashen",
+      "set": "ashen.strata",
+      "floor": 300,
+      "win": false,
+      "rounds": 308,
+      "hp": 0,
+      "maxHp": 7623,
+      "attack": 1255
+    }
+  ]
+}
