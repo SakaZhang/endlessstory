@@ -15,13 +15,13 @@ assert.throws(()=>resolveElementDamage(100,'physical',0,0));
 const oldRandom=Math.random;Math.random=()=>.5;
 try{
  // Retired old14 skill mapping is covered by current tree typed-hit production tests.
- const s=fresh();addTestEquipment(s);s.inventory[0].affixes=[{stat:'element',value:2}];const raw=structuredClone(s.inventory[0]);applyForgeFavor(s.inventory[0]);assert.equal(stats(s).elementAttack.fire,2.2);assert.equal(stats(s).elementAttack.water,2.2);assert.deepEqual(s.inventory[0].affixes,raw.affixes);
+ const s=fresh();addTestEquipment(s);s.inventory[0].affixes=[{stat:'element',value:2}];const raw=structuredClone(s.inventory[0]);applyForgeFavor(s.inventory[0]);assert.equal(stats(s).elementAttack.fire,4);assert.equal(stats(s).elementAttack.water,4);assert.deepEqual(s.inventory[0].affixes,raw.affixes);
  s.talents.elementResist=2;s.potionBuffs={fireResist:{quality:0,endAt:1e15}};assert.equal(stats(s).elementResistance.fire,40);assert.equal(stats(s).elementResistance.water,10);
  for(const type of ELEMENT_KEYS){
   const x=fresh();addTestEquipment(x);x.inventory[0].affixes=[{stat:type+'Atk',value:7},{stat:type+'Resist',value:12}];
   applyForgeFavor(x.inventory[0]);
-  assert(Math.abs(stats(x).elementAttack[type]-7.7)<1e-10);
-  assert(Math.abs(stats(x).elementResistance[type]-13.2)<1e-10);
+  assert(Math.abs(stats(x).elementAttack[type]-14)<1e-10);
+  assert(Math.abs(stats(x).elementResistance[type]-24)<1e-10);
   assert(resolveElementDamage(100,type,stats(x).elementAttack[type],0)>100);
   assert(resolveElementDamage(100,type,0,stats(x).elementResistance[type])<100);
  }
