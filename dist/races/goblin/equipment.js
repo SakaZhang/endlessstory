@@ -60,7 +60,7 @@ for(const slot of slots)for(const [i,name]of names[slot].entries()){
  equipment.push({id,name,slot,weaponType,baseVariant,originRace:'goblin',kind:'scatter',setId:null,description:scatterDescriptions[slot][i],pixelAppearance:'苔绿、旧铜与暗紫菌光；旧皮绳结和实用修补纹理',visualVariant:id,visualKey:id,iconKey:slot});
 }
 export const sets=[
-{id:'goblin_spore',name:'苦菌行者',branch:'poison',description:'细口菌瓶绑在腰侧，护手内衬能擦去溅出的菌浆。',two:{description:'叠毒技能的削甲/减攻持续时间增加2秒。'},four:{description:'涂菌刺命中额外补一层毒；仍上限5层、每层3%每2秒，叠毒刷新全部哥布林毒层至12秒，不推迟下次跳毒。'}},
+{id:'goblin_spore',name:'苦菌行者',branch:'poison',description:'细口菌瓶绑在腰侧，护手内衬能擦去溅出的菌浆。',two:{description:'叠毒技能的削甲/减攻持续时间增加2秒。'},four:{description:'涂菌刺命中额外施加1层套装毒，独立积累至2层，与普通5层合计最多7层；每层每2秒造成目标最大生命3%的毒伤，叠毒刷新至12秒。'}},
 {id:'goblin_ambush',name:'余粮斥候',branch:'ambush',description:'轻装先手，留粮续行，抓住敌阵最薄的一瞬。',two:{description:'伏击分支直接伤害提高8%。'},four:{description:'首击与收尾割条件成立时额外提高25%直伤，穿隙步延长2秒。'}},
 {id:'goblin_snare',name:'旧索匠',branch:'contraption',description:'把废弃铜簧和兽筋绳变成活路。',two:{description:'机关的命中/攻击削弱提高15%。'},four:{description:'伏索多一次触发次数；每次反击伤害降低15%，反击不会再次触发机关。'}}
 ];
@@ -77,7 +77,7 @@ export function modifySkillPlan(plan,{setCounts={},targets=[]}={}){
   if(ambush>=2&&['opening_cut','finish_cut','stolen_moment','crossing_blade'].includes(branch)&&a.kind==='hit')a.coefficient*=1.08;
   const t=targets.find(t=>t.id===a.targetId),ratio=t?.maxHp>0?t.hp/t.maxHp:1;
   if(ambush>=4&&a.kind==='hit'&&((branch==='opening_cut'&&ratio>.75)||(branch==='finish_cut'&&ratio<.3)))a.coefficient*=1.25;
-  if(spore>=4&&branch==='venom_cut'&&a.effects?.some(e=>e.type==='poison'))a.effects.push(structuredClone(a.effects.find(e=>e.type==='poison')));
+  if(spore>=4&&branch==='venom_cut'&&a.effects?.some(e=>e.type==='poison'))a.effects.push({...structuredClone(a.effects.find(e=>e.type==='poison')),setBonus:true});
   for(const ef of a.effects??[]){
    if(spore>=2&&['venom_cut','bitter_wound','mire_seal'].includes(branch)&&['armorDown','attackDown'].includes(ef.type))ef.durationMs+=2000;
    if(ambush>=4&&branch==='seam_step')ef.durationMs+=2000;

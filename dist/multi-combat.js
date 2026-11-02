@@ -14,7 +14,7 @@ import {resolveTreePassives,derivePassiveStats,passiveDamageMultiplier,passiveRe
 import {skillTreeHeroStats,skillTreeEnemyAttributes} from './skill-tree-attributes.js';
 import {createTreeEffectHost} from './skill-tree-effect-host.js';
 import {applySkillEffect,validSkillEffectState} from './skill-tree-effects.js';
-import {validSkillPoison,createSkillPoison,applySkillPoison,advanceSkillPoison,poisonTickFraction} from './skill-tree-poison.js';
+import {validSkillPoison,createSkillPoison,applySkillPoison,advanceSkillPoison,poisonTickFraction,hasGoblinPoisonSet,clearUnequippedSetPoison} from './skill-tree-poison.js';
 import {executeTreeSkillTurn,planTreeSkill,resolveSetLinkedHit,resolveSetLinkedEffect,TREE_ACTIVE_SKILL_IDS,TREE_MAX_HITS_PER_TARGET} from './skill-tree-consumer.js';
 import {advanceLegendaryCombat} from './legendary-combat.js';
 import {createPlayerShieldLayers,expirePlayerShieldLayers,grantPlayerShieldLayer,absorbPlayerShieldDamage} from './player-shield-layers.js';
@@ -132,6 +132,7 @@ export function applyEnemyDamageSegment(s,e,amount,display={},context={}){
  return loss;
 }
 export function stepMulti(s,e,turn,ctx){
+ clearUnequippedSetPoison({...s,activeEncounter:e});
  const {stats,SKILLS,skillUnlocked,resolveElementDamage,now,makeSummon}=ctx,passives=treePassiveContext(ctx),baseStats=stats(s),st=treePassiveStats(baseStats,e,passives),logs=[];if(!ctx.basicOnly)e.round++;else {delete e.pendingBasicAt;delete e.pendingBasicDelayMs;}
  const enemyDamageSegment=(amount,display)=>applyEnemyDamageSegment(s,e,amount,display,{st,resolveElementDamage,logs});
  const refreshStats=()=>{const baseStats=stats(s);return Object.assign(st,treePassiveStats(e.treeEffects?skillTreeHeroStats(baseStats,e.treeEffects,ctx.treeSkills.attributeConfig):baseStats,e,passives));};
@@ -345,7 +346,7 @@ export function executeTreePlayerAction(s,e,ctx){
   onActiveCast:event=>{momentum=beginMomentumAction(s,{equipped:!!st.specials.momentum,extra:event.extra,damaging:event.damageActionCount>0});racialLegendEvent(s,e,{type:'beforeCast'},{st,resolveElementDamage,logs,castId:event.castId,skillId:event.skillId,weaponType:input.weaponType,scope:initialPlan.scope,damageActionCount:initialPlan.actions.filter(a=>a.kind==='hit').length,committed:true});commitRaceRuntime(e,s.race,event.runtimePatch);countEquippedSkillCast(s);infinityProc=countInfinityCast(s,e,event,{activeSkill:skillTreeNode(event.skillId)?.kind==='active'&&event.skillId!=='ashen-prism-beam'});emitCombatDisplay(e,{kind:'cast',castId:event.castId,skillId:event.skillId,targetId:initialPlan.scope==='self'?'hero':e.targetId??'hero',outcome:'none'});counter=null;lifestealHits=[];e.activeCastCount++;if(initialPlan.actions.every(a=>a.kind!=='hit'))logs.push('施放 · '+(skillTreeNode(event.skillId)?.name??event.skillId));e.lastCast={recordVersion:2,id:event.castId,skillId:event.skillId,scope:initialPlan.scope,hits:[]};},
   applyEffect:(target,effect,event)=>effects.apply(target,effect,event),
   resolveEffectHit:action=>{const u=byId(action.targetId),hit=Math.random()<st.hit,record={id:action.hitId,targetId:u.id,hitIndex:action.hitIndex,hit,hpBefore:u.hp,hpAfter:u.hp,actualHpLost:0,killProcHpLost:0};emitCombatDisplay(e,{castId:action.castId??e.lastCast.id,hitId:action.hitId,targetId:u.id,skillId:action.skillId??e.lastCast.skillId,outcome:hit?'hit':'miss',segmentIndex:action.hitIndex??0});if(!hit)logs.push(u.name+' · 未命中');return record;},
-  applyPoison:(target,descriptor)=>{const clock=e.treeCombatClock??e.treeEffects?.clock??0;e.treePoison??={};let ledger=e.treePoison[target]??createSkillPoison(target,descriptor.timing,clock);if(ledger.clock!==clock){const advanced=advanceSkillPoison(ledger,{enemyId:target,combatClock:clock,targetMaxHp:byId(target).max});if(!advanced||advanced.ticks.length)throw Error('Unsettled poison before application');ledger=advanced.state;}const next=applySkillPoison(ledger,{enemyId:target,sourceId:descriptor.sourceId,combatClock:clock,timing:descriptor.timing});if(!next)throw Error('Invalid poison application');e.treePoison[target]=next;logs.push(byId(target).name+' · 中毒 '+next.layers.length+'层');},
+  applyPoison:(target,descriptor)=>{const clock=e.treeCombatClock??e.treeEffects?.clock??0;e.treePoison??={};let ledger=e.treePoison[target]??createSkillPoison(target,descriptor.timing,clock);if(ledger.clock!==clock){const advanced=advanceSkillPoison(ledger,{enemyId:target,combatClock:clock,targetMaxHp:byId(target).max});if(!advanced||advanced.ticks.length)throw Error('Unsettled poison before application');ledger=advanced.state;}const next=applySkillPoison(ledger,{enemyId:target,sourceId:descriptor.sourceId,combatClock:clock,timing:descriptor.timing,setBonus:descriptor.setBonus===true&&hasGoblinPoisonSet(s)});if(descriptor.setBonus===true&&!hasGoblinPoisonSet(s))throw Error('Unequipped set poison');if(!next)throw Error('Invalid poison application');e.treePoison[target]=next;logs.push(byId(target).name+' · 中毒 '+next.layers.length+'层');},
   applyArmorBreak:effect=>effects.applyArmorBreak?.(effect),
   consumeStatus:(target,status,event)=>effects.consume?.(target,status,event),
   interrupt:(target,effect)=>{const u=byId(target),r=interruptPreparing(u.control,{now,briefStop:u.profile.interruptStop??1100});if(!r)return false;u.control=r.state;return r.interrupted===true;},
@@ -390,7 +391,7 @@ export function executeTreePlayerAction(s,e,ctx){
 // Approved percentage poison: no element, crit, lifesteal, execute or active-cast hooks.
 // The scheduled ledger determines tick times; now is the corresponding encounter timestamp.
 export function applyTreePoisonTick(e,tick,{now}={}){
- if(!e||e.done||e.heroHp<=0||!tick||typeof tick.tickId!=='string'||!tick.tickId||tick.tickId.length>1000||!Number.isSafeInteger(tick.at)||tick.at<0||tick.at>1e15||!Number.isFinite(now)||now<0||!Number.isInteger(tick.layers)||tick.layers<1||tick.layers>5||tick.damageKind!=='percent-max-hp'||tick.element!==null||tick.canCrit!==false||tick.reaperEligible!==false||tick.activeCastCount!==0)return null;
+ if(!e||e.done||e.heroHp<=0||!tick||typeof tick.tickId!=='string'||!tick.tickId||tick.tickId.length>1000||!Number.isSafeInteger(tick.at)||tick.at<0||tick.at>1e15||!Number.isFinite(now)||now<0||!Number.isInteger(tick.layers)||tick.layers<1||tick.layers>7||tick.damageKind!=='percent-max-hp'||tick.element!==null||tick.canCrit!==false||tick.reaperEligible!==false||tick.activeCastCount!==0)return null;
  const u=e.enemies.find(u=>u.id===tick.enemyId&&u.hp>0);if(!u)return null;
  const prior=e.treePoisonReceipts?.[u.id];if(prior&&tick.at<=prior.at)return null;
  const fraction=poisonTickFraction(tick);if(fraction===null)return null;const damage=u.max*fraction;if(!Number.isFinite(damage)||Math.abs(damage-tick.damage)>1e-8*Math.max(1,damage))return null;
