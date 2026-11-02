@@ -26,7 +26,7 @@ assert(validateEquipmentTemplates());
 // not a broad refreshed fixture. All other preserved hashes remain unchanged.
 const approvedV081GoblinSkills='7ff45f8fa5771712945340c76166d057f07bafbffa352ca157441d54ec6a07c5';
 assert.equal(baseline.preservedFiles['dist/races/goblin/skills.js'],'86769b18f8950b993b60eff03d1a2a402af665ff3c8d717ffe667f76117be9b2','original equipment milestone skill pin retained');
-for(const [path,digest] of Object.entries(baseline.preservedFiles))if(path!=='dist/races/ashen/story-core.js')assert.equal(hash(fs.readFileSync(path)),path==='dist/races/goblin/skills.js'?approvedV081GoblinSkills:digest,`preserved ${path}`);
+for(const [path,digest] of Object.entries(baseline.preservedFiles))if(path!=='dist/races/ashen/story-core.js')assert.equal(hash(fs.readFileSync(path)),path==='dist/races/goblin/skills.js'?approvedV081GoblinSkills:path==='dist/races/ashen/skills.js'?'0490b5caa3de748e89850bb0836b018a23a41e3cfefb104158a0fd4537639f27':digest,`preserved ${path}`);
 // Reuse the canonical production poison, cadence and offline/JSON contract in
 // its own process: the historical catalog fixture must not weaken those rules.
 execFileSync(process.execPath,[new URL('./goblin-poison-v081-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
@@ -40,13 +40,17 @@ assert(finishStoryScene(storyCoreSave,'C05.EA02.ashen'));const storyCores=storyC
 // Keep the historical fixture intact and reconcile only that exact text leaf.
 const approvedGoblinSets=structuredClone(baseline.races.goblin.sets),approvedSpore=approvedGoblinSets.find(set=>set.id==='goblin_spore');
 assert.equal(approvedSpore.four.description,'涂菌刺命中额外补一层毒；仍上限5层、每层2%每3秒。');
-approvedSpore.four.description='涂菌刺命中额外补一层毒；仍上限5层、每层3%每2秒，叠毒刷新全部哥布林毒层至12秒，不推迟下次跳毒。';
+approvedSpore.four.description='涂菌刺命中额外施加1层套装毒，独立积累至2层，与普通5层合计最多7层；每层每2秒造成目标最大生命3%的毒伤，叠毒刷新至12秒。';
+const approvedAshenSets=structuredClone(baseline.races.ashen.sets);
+approvedAshenSets.find(x=>x.id==='ashen.caldera').two.description='热量积蓄技能额外获得5热量，套装可额外储存25热量，总上限125。';
+approvedAshenSets.find(x=>x.id==='ashen.strata').two.description='凝岩披甲额外获得1岩片，套装可额外储存2岩片，总上限8。';
+approvedAshenSets.find(x=>x.id==='ashen.strata').four.description='裂壳横击与岩壳裂变提高15%伤害，岩壳裂变可消耗至多8岩片；碎壳重构提高20%治疗。';
 assert.equal(goblin.sets.find(set=>set.id==='goblin_spore').four.description,approvedSpore.four.description);
 const added=[];
 for(const [race,pack] of Object.entries({goblin,ashen})){
  const old=baseline.races[race];
  for(const t of old.equipment)assert.deepEqual(beforeEquipmentCopy(pack.equipment.find(x=>x.id===t.id)),t,`stable old identity ${t.id}`);
- for(const key of ['sets','legendaries',...(race==='ashen'?['coreVariants','weaponVariants']:[])])assert.deepEqual(beforeEquipmentCopy(pack[key]),race==='goblin'&&key==='sets'?approvedGoblinSets:old[key],`${race} ${key} unchanged except exact approved v081 poison tooltip`);
+ for(const key of ['sets','legendaries',...(race==='ashen'?['coreVariants','weaponVariants']:[])])assert.deepEqual(beforeEquipmentCopy(pack[key]),key==='sets'?(race==='goblin'?approvedGoblinSets:approvedAshenSets):old[key],`${race} ${key} unchanged except exact approved v081 poison tooltip`);
  const common=pack.equipment.filter(t=>t.kind==='scatter'&&t.slot!=='core');
  assert.equal(common.length,52);assert.equal(new Set(pack.equipment.map(t=>t.name)).size,pack.equipment.length,'unique old and new names');assert.equal(pack.equipment.filter(t=>t.kind==='set').length,12);
  assert.equal(pack.equipment.filter(t=>t.slot==='core').length,race==='ashen'?3:0);

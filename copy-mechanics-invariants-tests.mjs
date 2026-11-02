@@ -89,8 +89,13 @@ allow(/^(story-c08-scenarios|story-scenario-registry)\.js$/,[/^STORY_SCENARIOS\/
 const SEAL_V084=JSON.parse(readFileSync(join(root,'fixtures/story/seal-rescue-v084-contracts.json'),'utf8'));
 assert.equal(Object.keys(SEAL_V084.scenes).length,12);assert.equal(Object.keys(SEAL_V084.scenarios).length,12);
 const clone=v=>Array.isArray(v)?v.map(clone):v&&typeof v==='object'?Object.fromEntries(Object.entries(v).map(([k,x])=>[k,clone(x)])):v;
+const SET_V088=JSON.parse(readFileSync(join(root,'fixtures/set-v088/approved-functions.json'),'utf8'));
 function authorizedBaseline(original,file){
  const out=clone(original);
+ // Exactly reviewed source-tagged set-resource planners; no other export is exempt.
+ for(const [key,value]of Object.entries(SET_V088[file]??{})){if(key==='reconcileRuntimeSets')assert(!Object.hasOwn(out,key));else assert.equal(typeof out[key],'function');out[key]=value;}
+ if(file==='races/human/skills.js'){const royal=out.HUMAN_SETS.find(x=>x.id==='human_royal_edge');assert.deepEqual(royal.two,{critRatingBonus:6});royal.two={skillCritChanceBonus:.03};}
+ if(file==='engine.js'){const royal=out.BUILD.find(x=>x.id==='human_royal_edge');assert.deepEqual(royal.two,{critRatingBonus:6});royal.two={skillCritChanceBonus:.03};}
  // v085 authorizes only this exact five-gem selector and protection surface.
  // Keep ingredient identities, quality, unique definition and all other exports pinned.
  if(file==='infinity-gauntlet-content.js'){
@@ -286,6 +291,7 @@ try{
    rejectMutation('recipe input count',m=>m.POTION_RECIPE_CATALOG['potion-luck'].roles[0].unitsPerBottle=2);
    rejectMutation('unapproved auxiliary',m=>m.POTION_RECIPE_CATALOG['potion-earthResist'].roles[1].materialIds.push('human.mat.17'));
   }
+  if(SET_V088[file])for(const key of Object.keys(SET_V088[file]))rejectMutation('approved set function remains pinned '+key,m=>m[key]=()=>null);
   if(JSON.stringify(before)!==JSON.stringify(after))changedCopy.push(file);
  }
  // Engine functions legitimately contain revised log copy; compare the public
@@ -313,10 +319,11 @@ try{
   ['missing set tier',m=>m[0].effects.pop()],
   ['mechanics hidden beside description',m=>m[0].effects[0].multiplier=2],
   ['structured description',m=>m[0].effects[0].description={multiplier:2}],
+  ['royal bonus stays3pp',m=>m.find(x=>x.id==='human_royal_edge').two.skillCritChanceBonus=.04],
   ['existing set numerical tuning',m=>m.find(x=>x.id==='elf_arrow').two.damageMultiplier=2]
  ]){const corrupt=clone(after.BUILD);mutate(corrupt);assert.throws(()=>assert.deepEqual(project(corrupt,'engine.js','BUILD'),expectedBuild),assert.AssertionError,label);}
  // Mutation sentinels prove representative mechanics strings cannot be hidden.
  for(const [f,p]of [['racial-npc-event-content.js','RACIAL_NPC_EVENTS/0/conditions/accessPolicy'],['racial-npc-event-content.js','RACIAL_NPC_EVENTS/0/choices/0/effects/0/flag'],['npc-objective-content.js','NPC_OBJECTIVE_CONTENT/event/taskRewards/0/key'],['races/elf/skills.js','skills/elf.skill/weaponType'],['races/elf/equipment.js','legendaries/0/exclusiveId']])assert.notEqual(project('old',f,p),project('new',f,p),p);
- console.log(`PASS copy + bounded authorized revision invariants: ${compared} modules + engine catalogs vs ${BASELINE.slice(0,12)}; ${changedCopy.length} changed content modules. IDs, gates, objectives, rewards, effects, numeric budgets and legendary functions preserved except exact approved ring objectives / recipe additions / presentation-only set rows (2/4 thresholds pinned) / exact human A10 boss content and sources / exact v081 goblin poison deltas / exact fruit name and description / exact v082 Lucky Dice codex identity / reserved-reward v3 protocol / exact v084 staged seal-rescue contracts and four X01 alternative predecessors / exact v085 five-gem selector and protected-input helpers / exact v087 goblin A10 content and 47 elf hero metadata leaves.`);
+ console.log(`PASS copy + bounded authorized revision invariants: ${compared} modules + engine catalogs vs ${BASELINE.slice(0,12)}; ${changedCopy.length} changed content modules. IDs, gates, objectives, rewards, effects, numeric budgets and legendary functions preserved except exact approved ring objectives / recipe additions / presentation-only set rows (2/4 thresholds pinned) / exact human A10 boss content and sources / exact v081 goblin poison deltas / exact fruit name and description / exact v082 Lucky Dice codex identity / reserved-reward v3 protocol / exact v084 staged seal-rescue contracts and four X01 alternative predecessors / exact v085 five-gem selector and protected-input helpers / exact v087 goblin A10 content and 47 elf hero metadata leaves / exact v088 reviewed set planners and royal3pp metadata.`);
  console.log('Boundary: does not prove new prose accurately describes mechanics, DOM behavior, non-exported function closures, or visual correctness; use gameplay/UI tests and review alongside this check.');
 }finally{rmSync(temp,{recursive:true,force:true});}
