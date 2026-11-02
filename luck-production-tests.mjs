@@ -12,9 +12,12 @@ function state(luck=0){const s=forced(()=>E.fresh());s.gold=100000;s.level=31;s.
 const pool=getDwarfMaterialPool('dwarf.a01.normal.1','dwarf.a01.field');
 function materialRun(luck){let calls=0;return rollMonsterMaterials({}, {contentVersion:'dwarf-m2-v1',instanceId:'dwarf.a01.field'}, {definitionId:'dwarf.a01.normal.1',sourceInstanceId:'dwarf.a01.field',origin:'initial'}, {luck,random:()=>++calls===1?.36:.5,rollQuality:()=>0,owned:()=>false,receive:()=>true});}
 const lowMat=materialRun(0),highMat=materialRun(10);assert(lowMat.ok&&highMat.ok);assert(!lowMat.drops.some(x=>x.channel==='regular'));assert(highMat.drops.some(x=>x.channel==='regular'));assert(highMat.drops.every(x=>pool.channels.some(c=>c.channel===x.channel&&c.entries.some(e=>e.materialId===x.materialId))));
-// 2. Set occurrence is enhanced only behind existing source/race/area gates.
+// 2. v090 boss .25 -> .283333 at luck10: .267 straddles the exact updated boundary.
+// Field is now eligible at A3+, but invalid source/kind/race/early-area gates remain.
 const setArgs={source:'drop',kind:'boss',areaNumber:3,race:'dwarf'};
-assert.equal(E.rollSourceSet({...setArgs,luck:0},()=>.128),null);assert(E.rollSourceSet({...setArgs,luck:10},()=>.128));for(const override of [{source:'forge'},{source:'merchant'},{kind:'field'},{areaNumber:2},{race:'unknown'}])assert.equal(E.rollSourceSet({...setArgs,...override,luck:10},()=>0),null);
+assert.equal(E.rollSourceSet({...setArgs,luck:0},()=>.267),null);assert(E.rollSourceSet({...setArgs,luck:10},()=>.267));for(const override of [{source:'forge'},{source:'merchant'},{kind:'unknown'},{areaNumber:2},{race:'unknown'}])assert.equal(E.rollSourceSet({...setArgs,...override,luck:10},()=>0),null);
+// New independent field roll follows the same luck policy: .03 -> .034 at luck10.
+assert.equal(E.rollSourceSet({...setArgs,kind:'field',luck:0},()=>.032),null);assert(E.rollSourceSet({...setArgs,kind:'field',luck:10},()=>.032));assert.equal(E.rollSourceSet({...setArgs,kind:'field',areaNumber:2,luck:10},()=>0),null);
 // 3. Actual freshly completed field battle reward: deterministic saved RNG seed.
 const fight=state();fight.level=1000;const enemy=forced(()=>E.encounter(fight),()=>.1);for(let i=0;i<30&&!enemy.done;i++)E.step(fight,enemy);assert(enemy.done&&enemy.win);const rewardOut=[];for(const luck of [0,10]){const s=clone(fight);s.activeEncounter.rngState=2654435761;s.activeEncounter.luck=luck;const before=s.inventory.length;const completed=s.activeEncounter,marksBefore=s.consumables.reforgeToken;E.reward(s,completed);assert(completed.rewarded);assert.equal(s.consumables.reforgeToken,marksBefore,'field source cannot drop marks');assert(s.inventory.slice(before).every(it=>!it.set));rewardOut.push(s.inventory.length>before);}assert.deepEqual(rewardOut,[false,true]);
 // Actual completed boss settlement: mark occurrence enhanced, field cannot create marks.
