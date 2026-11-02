@@ -7,7 +7,7 @@ import {normalizeDivineStones,validDivineStones,awardDivineStone,divineStoneBala
 import {quoteDivineStone,applyDivineStone,transactDivineStone} from './dist/divine-stone.js';
 import {loadProgress,SAVE_KEY,commitGameTransaction} from './dist/storage.js';
 import {renderDivineStoneForge} from './dist/divine-stone-ui.js';
-const make=(highest=0)=>{const s=reachStoryScene('human','END.H01.human',{finishTarget:true,level:100,spring:'skip'});s.running=false;s.activeEncounter=null;s.otherworld={...freshOtherworldState(),highestCleared:highest,floor:highest+1};assert(E.validSave(s));return s;};
+const make=(highest=0)=>{const s=reachStoryScene('human','END.H01.human',{finishTarget:true,level:100,spring:'skip'});s.running=false;s.activeEncounter=null;delete s.divineStones;s.otherworld={...freshOtherworldState(),highestCleared:highest,floor:highest+1};assert(E.validSave(s));return s;};
 const memory=s=>{let raw=JSON.stringify(s);return {getItem:k=>k===SAVE_KEY?raw:null,setItem(k,v){if(k===SAVE_KEY)raw=v;},removeItem(){},key(){return null;},get length(){return 0;}};};
 // Historical clear baseline never turns into awards, even after migration and reload.
 for(const highest of [0,49,50,99,100,123,1800]){const s=make(highest),store=memory(s),loaded=loadProgress(store);assert(!loaded.blocked,highest);assert.equal(loaded.game.divineStones.baseline,Math.floor(highest/50));assert.equal(divineStoneBalance(loaded.game),0);assert.equal(divineStoneBalance(loadProgress(store).game),0);assert(!awardDivineStone(loaded.game,Math.floor(highest/50)*50));}
