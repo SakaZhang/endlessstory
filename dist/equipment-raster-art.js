@@ -1,3 +1,4 @@
+import {equipmentDisplayName} from './equipment-display-name.js';
 import {bindRecoverableImages} from './asset-recovery.js';
 import {EXPANSION_PACKS} from './race-packs.js';
 import {raceIconAsset} from './race-art.js';
@@ -12,7 +13,7 @@ export function equipmentRasterSource(template,size=48){const id=template?.id;co
 export function renderEquipmentRaster(item,template,{size=48}={}){
  if(item?.legendaryId&&item.legendaryId!==template?.id)return null;
  const px=equipmentRasterSize(size),src=equipmentRasterSource(template,px);if(!src)return null;
- const id=template.id,p=equipmentPresentation({...item,set:item?.set||template.setId}),label=esc(template.name);
+ const id=template.id,p=equipmentPresentation({...item,set:item?.set||template.setId}),label=esc(equipmentDisplayName(template));
  return `<span class="equipmentRaster" data-equipment-raster="true" data-equipment-raster-size="${px}" data-equipment-art="${id}" data-equipment-visual="${id}" ${item?.legendaryId?'':`data-equipment-template="${id}"`} data-equipment-quality="${p.quality}" data-equipment-set="${p.isSet}" role="img" aria-label="${label}" style="--equipment-size:${px}px;--equipment-bg:${p.background};--equipment-frame:${p.border}"><img class="equipmentRasterImage" data-equipment-raster-image="true" src="${src}" width="${px}" height="${px}" alt="${label}" draggable="false"><span class="equipmentRasterError" hidden>图像失败</span></span>`;
 }
 export function bindEquipmentRasterErrors(host){return bindRecoverableImages(host,{imageSelector:'.equipmentRasterImage',datasetKey:'equipmentRasterImage',wrapperSelector:'[data-equipment-raster="true"]',errorSelector:'.equipmentRasterError',label:'装备'});}

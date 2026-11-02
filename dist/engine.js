@@ -1,3 +1,4 @@
+import {equipmentDisplayName} from './equipment-display-name.js';
 import {INFINITY_GAUNTLET_KEYS,isInfinityGauntletFusion,hasInfinityGauntletMaterial} from './infinity-gauntlet-content.js';
 import {validCasinoState} from './casino-state.js';
 import {noncombatRunning} from './noncombat-policy.js';
@@ -798,9 +799,9 @@ function rewardOtherworld(s,e,now){
   if(Math.random()<OTHERWORLD_LOOT_POLICY.setChance){const set=BUILD[rand(0,BUILD.length-1)];drops.push(item(SET_SLOTS[rand(0,SET_SLOTS.length-1)],OTHERWORLD_LOOT_POLICY.equipmentLevel,set.id,3,{baseLevel:OTHERWORLD_LOOT_POLICY.equipmentLevel,levelSource:'drop',originRace:set.originRace??'dwarf',luck:e.luck??0}));}
   for(const it of drops){
    // Ordinary equipment obeys the existing quality filter; sets retain v0.79+ protection.
-   if(!it.set&&shouldDiscardLoot(s,'equipment',it.rarity)){e.lootSummary.discarded.equipment++;captureBattleLoot(s,{kind:'equipment',item:it},'filtered');e.rewardNotes.push('品质过滤丢弃 · '+it.name);continue;}
-   if(canReceiveEquipment(s,it)){s.inventory.push(it);recordCollectedEquipment(s,it);captureBattleLoot(s,{kind:'equipment',item:it},'received');e.rewardNotes.push(it.name);}
-   else{o.pendingEquipment.push(it);captureBattleLoot(s,{kind:'equipment',item:it},'pending');e.rewardNotes.push('异界装备待领取 · '+it.name);}
+   if(!it.set&&shouldDiscardLoot(s,'equipment',it.rarity)){e.lootSummary.discarded.equipment++;captureBattleLoot(s,{kind:'equipment',item:it},'filtered');e.rewardNotes.push('品质过滤丢弃 · '+equipmentDisplayName(it));continue;}
+   if(canReceiveEquipment(s,it)){s.inventory.push(it);recordCollectedEquipment(s,it);captureBattleLoot(s,{kind:'equipment',item:it},'received');e.rewardNotes.push(equipmentDisplayName(it));}
+   else{o.pendingEquipment.push(it);captureBattleLoot(s,{kind:'equipment',item:it},'pending');e.rewardNotes.push('异界装备待领取 · '+equipmentDisplayName(it));}
   }
   s.level=xpPlan.level;s.xp=xpPlan.xp;e.acceptedXp=xpPlan.acceptedXp;s.kills++;
   o.highestCleared=Math.max(o.highestCleared,e.otherworld.floor);
@@ -1160,7 +1161,7 @@ function rollDrop(s,boss,luck=0,instanceId=resolveLegacySite(s.location).id+'-fi
   if(p.dungeonDryStreak===RARE_REWARD_RULES.dungeonPity-1){
    const selected=rollSourceSet({source:'drop',kind:'dungeon',areaNumber:area.number,race:area.race,clear:true,luck,guaranteed:true});
    it=item(selected.slot,rolled.level,selected.set,selected.rarity,{...rolled,luck,originRace:area.race});p.dungeonDryStreak=0;p.pendingSets.push(it);
-   claimPendingRareRewards(s);captureBattleLoot(s,{kind:'equipment',item:it},p.pendingSets.some(x=>x.id===it.id)?'pending':'received');encounter.rewardNotes.push((p.pendingSets.some(x=>x.id===it.id)?'套装待领取 · ':'套装 · ')+it.name);return null;
+   claimPendingRareRewards(s);captureBattleLoot(s,{kind:'equipment',item:it},p.pendingSets.some(x=>x.id===it.id)?'pending':'received');encounter.rewardNotes.push((p.pendingSets.some(x=>x.id===it.id)?'套装待领取 · ':'套装 · ')+equipmentDisplayName(it));return null;
   }
   p.dungeonDryStreak++;
  }

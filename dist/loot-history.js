@@ -1,3 +1,4 @@
+import {equipmentNameFromReceipt} from './equipment-display-name.js';
 // Settlement-only observational receipts. No RNG, inventory writes, or claim replay.
 export const LOOT_HISTORY_LIMIT=100;
 const captures=new WeakMap();
@@ -13,5 +14,5 @@ const esc=x=>String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'
 export function renderLootHistory(s){
  if(!validLootHistory(s))return '<p>掉落记录格式无效。</p>';
  const records=s.lootHistory?.records??[],outcomes={received:'已入包',filtered:'品质过滤丢弃',pending:'结算时待领取（已保留）',overflow:'背包已满未收取'},modes={field:'野外',dungeon:'普通副本',boss:'首领',otherworld:'异界高塔'};
- return '<p class="subtleText">最近100场实际结算；仅记录结算时结果，后来领取不会重复记掉落。旧存档不补造历史物品。</p><div class="logList">'+(records.length?records.map(r=>'<section class="chronicle"><h3>'+esc(modes[r.mode]+' · '+r.region+' · '+r.node+(r.floor?' · 第'+r.floor+'层':'')+(r.stage?' · 阶段'+r.stage+'/3':''))+'</h3><time>'+esc(new Date(r.at).toLocaleString('zh-CN',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}))+'</time><ul>'+r.drops.map(d=>'<li>'+esc((d.kind==='consumable'?'':(d.kind==='equipment'?['普通','稀有','优良','至臻','传说']:['普通','稀有','优良','至臻'])[d.quality]+' ')+d.name+(d.level?' · Lv.'+d.level:'')+' ×'+d.quantity+' — '+outcomes[d.outcome])+'</li>').join('')+'</ul>'+(r.drops.length?'':'<p>本场未掉落物品。</p>')+'<p>结算收益（非物品）：金币 +'+r.gold+' / 经验 +'+r.xp+'</p></section>').join(''):'<p>尚无实际掉落结算记录。</p>')+'</div>';
+ return '<p class="subtleText">最近100场实际结算；仅记录结算时结果，后来领取不会重复记掉落。旧存档不补造历史物品。</p><div class="logList">'+(records.length?records.map(r=>'<section class="chronicle"><h3>'+esc(modes[r.mode]+' · '+r.region+' · '+r.node+(r.floor?' · 第'+r.floor+'层':'')+(r.stage?' · 阶段'+r.stage+'/3':''))+'</h3><time>'+esc(new Date(r.at).toLocaleString('zh-CN',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}))+'</time><ul>'+r.drops.map(d=>'<li>'+esc((d.kind==='consumable'?'':(d.kind==='equipment'?['普通','稀有','优良','至臻','传说']:['普通','稀有','优良','至臻'])[d.quality]+' ')+(d.kind==='equipment'?equipmentNameFromReceipt(d.name):d.name)+(d.level?' · Lv.'+d.level:'')+' ×'+d.quantity+' — '+outcomes[d.outcome])+'</li>').join('')+'</ul>'+(r.drops.length?'':'<p>本场未掉落物品。</p>')+'<p>结算收益（非物品）：金币 +'+r.gold+' / 经验 +'+r.xp+'</p></section>').join(''):'<p>尚无实际掉落结算记录。</p>')+'</div>';
 }
