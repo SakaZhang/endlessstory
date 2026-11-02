@@ -53,9 +53,9 @@ for(const [roll,expected] of [[.009999,true],[.01,false],[.019,false]]){
  for(const value of [-1,.1,201,NaN,Infinity]){const bad=clone(s);bad.inventory.find(x=>x.id===it.id).special.growthKills=value;assert(!E.validSave(bad));}
  const wrong=clone(s);wrong.inventory.find(x=>x.id===it.id).special.id='knowledge';assert(!E.validSave(wrong),'non-growth affix cannot carry growth');
 }
-// Pending reforge keeps newly earned progress only when the same special remains.
-for(const [newId,expected] of [['harvester',124],['glutton',0]]){
- const s=fresh(),it=gear(s,'harvester');it.special.growthKills=123;s.consumables.reforgeToken=1;const index=E.ACTIVE_SPECIAL_KEYS.indexOf(newId);const result=constantRandom((index+.1)/E.ACTIVE_SPECIAL_KEYS.length,()=>E.reforge(s,it.id,'all'));assert(result);assert.equal(s.pendingReforge.newSpecial.id,newId);assert(E.validSave(s));it.special.growthKills=124;assert(E.validSave(s),'progress earned after paid preview remains valid');const candidate=E.getPendingReforgeCandidate(s);assert.equal(E.specialAffixProgress(candidate).value,expected);assert(E.resolveReforge(s,true));assert.equal(E.specialAffixProgress(it).value,expected);assert(E.validSave(s));
+// Pending reforge never rerolls specials; newly earned progress survives every ordinary roll.
+for(const [newId,expected] of [['harvester',124],['glutton',124]]){
+ const s=fresh(),it=gear(s,'harvester');it.special.growthKills=123;s.consumables.reforgeToken=1;const index=E.ACTIVE_SPECIAL_KEYS.indexOf(newId);const result=constantRandom((index+.1)/E.ACTIVE_SPECIAL_KEYS.length,()=>E.reforge(s,it.id,'all'));assert(result);assert.equal(s.pendingReforge.newSpecial.id,'harvester');assert(E.validSave(s));it.special.growthKills=124;assert(E.validSave(s),'progress earned after paid preview remains valid');const candidate=E.getPendingReforgeCandidate(s);assert.equal(E.specialAffixProgress(candidate).value,expected);assert(E.resolveReforge(s,true));assert.equal(E.specialAffixProgress(it).value,expected);assert(E.validSave(s));
 }
 // Missing old run ledgers are narrowly inferred without deleting saves/items;
 // after the first stage, unknown prior proc usage is conservatively spent.

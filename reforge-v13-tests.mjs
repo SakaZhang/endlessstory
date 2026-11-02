@@ -10,9 +10,9 @@ try{
  for(const q of [0,1,2,3])for(const set of [null,...(q===3?['anvil']:[])]){
   const s=fresh(),it=target(s,q,set);s.consumables.reforgeToken=1;const before=JSON.stringify(it),gold=s.gold,materials=JSON.stringify(s.materialStacks);
   const r=reforge(s,it.id,'all');assert(r);assert.equal(s.consumables.reforgeToken,0);assert.equal(s.gold,gold);assert.equal(JSON.stringify(s.materialStacks),materials);assert.equal(JSON.stringify(it),before);
-  assert.equal(!!r.newSpecial,!set&&q>=2);assert(validSave(s));assert(resolveReforge(s,true,r.operationId));assert.equal(!!it.special,!set&&q>=2);assert(validSave(s));
+  assert.deepEqual(r.newSpecial,JSON.parse(before).special);assert(validSave(s));assert(resolveReforge(s,true,r.operationId));assert.deepEqual(it.special,JSON.parse(before).special);assert(validSave(s));
  }
- const seen=new Set();for(let i=0;i<100;i++){const s=fresh(),it=target(s);s.consumables.reforgeToken=1;const r=reforge(s,it.id,'all');seen.add(r.newSpecial.id);assert(resolveReforge(s,false));assert.equal(s.consumables.reforgeToken,0);}assert.equal(seen.size,Object.keys(SPECIALS).length);
+ for(const id of Object.keys(SPECIALS)){const s=fresh(),it=target(s);it.special={id};s.consumables.reforgeToken=1;const r=reforge(s,it.id,'all');assert.deepEqual(r.newSpecial,{id});assert(resolveReforge(s,false));assert.deepEqual(it.special,{id});assert.equal(s.consumables.reforgeToken,0);}
  const legacyAffix=a=>({stat:a.stat,value:Math.min(AFFIX_DEFS[a.stat].max,Math.max(AFFIX_DEFS[a.stat].min,a.value))});
  // Old v0.12 pending quotes resolve under their original rules, with no token.
  for(const mode of ['all','replace']){
@@ -41,5 +41,5 @@ try{
  Math.random=()=>0;
  const shopState=fresh();shopState.gold=1000;const m=ensureMerchant(shopState,1000);assert.equal(m.offers.length,8);assert(!m.offers.some(o=>o.consumable==='memoryFruit'));const offer=m.offers.find(o=>o.consumable==='reforgeToken');assert(offer);assert(purchaseConsumable(shopState,offer.offerId,0,1001));assert.equal(shopState.gold,880);assert.equal(shopState.consumables.reforgeToken,1);assert(!purchaseConsumable(shopState,offer.offerId,0,1002));assert(validSave(shopState));
  Math.random=rng;let fruit=0,token=0,both=0;for(let i=0;i<10000;i++){const p=fresh(),m=ensureMerchant(p,1000),f=m.offers.some(o=>o.consumable==='memoryFruit'),t=m.offers.some(o=>o.consumable==='reforgeToken');fruit+=f;token+=t;both+=f&&t;assert.equal(m.offers.length,8);}assert.equal(fruit,0,'v081 retires new merchant fruit offers');assert(token>850&&token<1150);assert.equal(both,0);console.log({fruit,token,both});
- console.log('v0.13 token/full-special/donor costs, exclusions, legacy pending and merchant/boss reward guards: PASS');
+ console.log('v0.13 token/preserved-special/donor costs, exclusions, legacy pending and merchant/boss reward guards: PASS');
 }finally{Math.random=original;}

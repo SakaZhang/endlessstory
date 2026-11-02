@@ -3,10 +3,10 @@ import * as E from './dist/engine.js';
 const clone=structuredClone;
 const setup=()=>{const s=E.fresh();s.consumables.reforgeToken=5;const it=E.item('gloves',15,null,3);it.bless=0;it.enhancement={version:1,model:'development-budget-v1',level:3};s.inventory.push(it);return {s,it};};
 function rolls(values,fn){const old=Math.random;let calls=0;Math.random=()=>{const n=values[calls++]??.9;return n;};try{return {value:fn(),calls};}finally{Math.random=old;}}
-// Dwarf q3 all: 4 types + 4 values + 4 combined-opportunity checks + 1 special, then one independent divine roll.
+// Dwarf q3 all: 4 types + 4 values + 4 combined-opportunity checks, then one independent divine roll; no special RNG.
 for(const accept of [false,true])for(const hit of [false,true]){
- const {s,it}=setup(),before=clone(it);const r=rolls([...Array(13).fill(.4),hit?.02:.033],()=>E.reforge(s,it.id,'all'));
- assert(r.value);assert.equal(r.calls,14);assert.equal(s.pendingReforge.ruleVersion,9);assert.equal(s.pendingReforge.oldDivine,null);assert.equal(!!s.pendingReforge.newDivine,hit);assert.deepEqual(it,before);assert.equal(s.consumables.reforgeToken,4);
+ const {s,it}=setup(),before=clone(it);const r=rolls([...Array(12).fill(.4),hit?.02:.033],()=>E.reforge(s,it.id,'all'));
+ assert(r.value);assert.equal(r.calls,13);assert.equal(s.pendingReforge.ruleVersion,10);assert.equal(s.pendingReforge.oldDivine,null);assert.equal(!!s.pendingReforge.newDivine,hit);assert.deepEqual(it,before);assert.equal(s.consumables.reforgeToken,4);
  const loaded=JSON.parse(JSON.stringify(s));assert(E.validPendingReforge(loaded));assert(E.validSave(loaded));const preview=E.getPendingReforgeCandidate(loaded);assert.equal(!!preview.divine,hit);assert.notEqual(preview,loaded.inventory.at(-1));
  rolls([],()=>{const old=Math.random;Math.random=()=>{throw Error('decision must not roll');};try{assert(E.resolveReforge(loaded,accept,loaded.pendingReforge.operationId));}finally{Math.random=old;}});
  const result=loaded.inventory.find(x=>x.id===it.id);assert.equal(!!result.divine,accept&&hit);assert.equal(loaded.consumables.reforgeToken,4);assert.equal(E.resolveReforge(loaded,true,'stale'),null);
@@ -14,12 +14,12 @@ for(const accept of [false,true])for(const hit of [false,true]){
  if(!accept)assert.deepEqual(result,before);if(accept&&hit){assert.equal(result.divine.bonus.atk,result.atk/10);result.affixes.forEach((a,i)=>assert.equal(result.divine.bonus.affixes[i].value,a.value/10));assert.equal(E.itemTotals(result).atk,result.atk*1.1);}
 }
 {
- const {s,it}=setup();E.applyForgeFavor(it);const before=clone(it);const r=rolls(Array(13).fill(.4),()=>E.reforge(s,it.id,'all'));assert.equal(r.calls,13);assert(E.validPendingReforge(s));assert(E.resolveReforge(s,true,s.pendingReforge.operationId));assert.equal(it.atk,before.atk);assert.equal(it.divine.bonus.atk,it.atk/10);assert.equal(it.divine.bonus.affixes[0].value,it.affixes[0].value/10);
+ const {s,it}=setup();E.applyForgeFavor(it);const before=clone(it);const r=rolls(Array(12).fill(.4),()=>E.reforge(s,it.id,'all'));assert.equal(r.calls,12);assert(E.validPendingReforge(s));assert(E.resolveReforge(s,true,s.pendingReforge.operationId));assert.equal(it.atk,before.atk);assert.equal(it.divine.bonus.atk,it.atk/10);assert.equal(it.divine.bonus.affixes[0].value,it.affixes[0].value/10);
 }
 // v0.37: value opportunity merged once; divine gets its existing luck then one racial multiplier.
 for(const luck of [0,10])for(const delta of [-.000001,0,.000001]){
  const threshold=.03*(1+.20*luck/(luck+5))*1.10,favor=threshold+delta;
- const {s,it}=setup();s.talents.luck=luck;s.level=Math.max(s.level,11);const count=13;
+ const {s,it}=setup();s.talents.luck=luck;s.level=Math.max(s.level,11);const count=12;
  const r=rolls([...Array(count).fill(.9),favor],()=>E.reforge(s,it.id,'all'));assert.equal(r.calls,count+1);assert.equal(!!s.pendingReforge.newDivine,delta<0);
 }
 // Retired pending all records reject without mutation or fresh rolls.
