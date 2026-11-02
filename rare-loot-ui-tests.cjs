@@ -15,7 +15,7 @@ global.document={hidden:false,getElementById:el,querySelector:selector=>selector
  assert(E.validSave(base),'test save must be valid');
  const pure=structuredClone(base);pure.talents.luck=21;const snap=JSON.stringify(pure),oldRandom=Math.random;Math.random=()=>{throw Error('UI must not roll')};
  const html=UI.renderLuckRates(pure)+UI.renderRareLootProgress(pure);Math.random=oldRandom;
- assert.equal(JSON.stringify(pure),snap);assert.match(html,/9.2923%/);assert.match(html,/13.9385%/);assert.match(html,/有效幸运 <b>21<\/b> 点/);assert.doesNotMatch(html,/不是掉率|并非|不决定|不提高|只计算一次/);
+ assert.equal(JSON.stringify(pure),snap);assert.match(html,/野外 <b>3\.4846%<\/b>/);assert.match(html,/普通副本 <b>17\.4231%<\/b>/);assert.match(html,/首领 <b>29\.0385%<\/b>/);assert.match(html,/有效幸运 <b>21<\/b> 点/);assert.doesNotMatch(html,/不是掉率|并非|不决定|不提高|只计算一次/);
  store.set(SAVE_KEY,JSON.stringify(base));await import('./dist/app.js');
  const saved=()=>JSON.parse(store.get(SAVE_KEY)),click=(dataset={})=>{const b={dataset,id:''};for(const f of events.click||[])f({target:{id:'',closest:()=>b}})};
  click({view:'inventory'});assert.match(el('view').innerHTML,/珍稀战利品/);assert.match(el('view').innerHTML,/幸运与实际概率/);const inventoryHtml=el('view').innerHTML,strip=inventoryHtml.split('<details>')[0];assert(!/套装未出|果实进度|回忆之果|19\s*\/\s*20|17\s*\/\s*20/.test(inventoryHtml));assert.match(strip,/灵慧之果/);assert.match(strip,/待领：/);assert.match(inventoryHtml,/<details><summary>掉落规则与幸运实际概率<\/summary>/);assert(!/<details[^>]*\bopen\b/.test(inventoryHtml));if(mode!=='old')assert.match(strip,/data-rare-loot-claim/);
