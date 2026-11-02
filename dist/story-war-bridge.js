@@ -30,6 +30,7 @@ export function applyStoryWarTransition(s,id,now){
 // UI-provided pass. Unlocks, prerequisites, current action and receipts are
 // separately enforced by the controller. Optional NPCs use territoryAccess.
 export const STORY_WAR_ENTRANCES=Object.freeze({
+ ...Object.fromEntries(['human','dwarf','goblin','ashen'].flatMap(r=>['11','12','13'].map(n=>['C08.O'+n+'.'+r,'ashen.a06']))),
  ...Object.fromEntries(Object.values(FINALE_SCENES).map(d=>[d.id,d.siteId])),
  'C01.H01.human':'goblin.a01','C01.X01.human':'goblin.a01',
  'C03.G01.goblin':'human.a02','C03.A01.ashen':'human.a02','C03.X01.dwarf':'human.a02','C03.X01.elf':'human.a02',

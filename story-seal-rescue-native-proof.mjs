@@ -1,0 +1,12 @@
+// Native production renderer evidence; not a browser screenshot.
+import assert from 'node:assert/strict';import fs from 'node:fs';import {createRequire} from 'node:module';
+import * as E from './dist/engine.js';import {reachStoryScene} from './story-event-test-fixture.mjs';import {STORY_SCENARIOS} from './dist/story-scenario-registry.js';import {extendBattleManifest} from './dist/race-art.js';import {createLiveBattlePresentation} from './dist/live-battle-view.js';import {normalizeBattleEnemies,renderEnemyRoster} from './dist/multi-battle-ui.js';
+const {createCanvas,loadImage}=createRequire(import.meta.url)('@napi-rs/canvas'),manifest=extendBattleManifest(JSON.parse(fs.readFileSync('dist/battle-assets/manifest.json'))),out='qa/seal-rescue';fs.mkdirSync(out,{recursive:true});
+for(const id of ['story.c08-o11-ashen','story.c08-o12-human','story.c08-o13-goblin','story.c08-e01-elf','story.c08-e02-elf']){
+ const d=STORY_SCENARIOS[id],s=reachStoryScene(d.race,d.sceneId);fs.writeFileSync(out+'/'+d.sceneId+'-ready.json',JSON.stringify(s));
+ const e=E.startStoryScenario(s,id,Math.max(s.lastHealthClock,s.nextBattleAt??0)+2000);assert(e);E.setMultiPaused(s,true,s.lastHealthClock);assert(E.validSave(s));fs.writeFileSync(out+'/'+d.sceneId+'-battle.json',JSON.stringify(s));
+ const u=normalizeBattleEnemies(e)[0],key=u.storyActorId?manifest.storyActorSprites[u.storyActorId]:manifest.raceHeroWeaponSprites[u.storyActorRace][u.storyActorWeapon],weapon=s.inventory.find(it=>it.id===s.equip.weapon).weaponType,keys=[manifest.raceHeroWeaponSprites[s.race][weapon],key],bgs=manifest.areaBackgrounds[d.siteId].map(id=>manifest.backgrounds.find(bg=>bg.id===id)),images=new Map();
+ for(const f of [...bgs,...keys.flatMap(k=>manifest.sprites[k].frames)])if(!images.has(f.file))images.set(f.file,await loadImage('dist/battle-assets/'+f.file));
+ const view=createLiveBattlePresentation({manifest,images}),canvas=createCanvas(480,270);assert.equal(view.sync(s,e,{now:s.lastHealthClock,running:s.running,visible:true}).mode,'ready');assert(view.draw(canvas,0));assert.equal(view.status.mode,'ready');assert(Object.values(view.positions).some(p=>p.sprite===key));assert(!renderEnemyRoster(e).includes('data-monster-detail'));fs.writeFileSync(out+'/'+d.sceneId+'.png',canvas.toBuffer('image/png'));view.dispose();
+}
+console.log('PASS production renderer: sealed Lemus outer/inner, cooperative core, elf two seal layers. Saved JSON fixtures for isolated preview import; no user saves touched.');

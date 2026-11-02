@@ -57,3 +57,7 @@ dialog:has(.heroSelection){max-width:920px;max-height:calc(100dvh - 32px);overfl
 @media(max-width:600px){.warStatusPanel{padding:11px 12px}.warStatusRow>div{display:block}.warDuration{display:block;margin-top:4px}}
 
 .worldMapStage .territoryPin[data-war-state] small{white-space:pre-line;line-height:1.25;letter-spacing:0}
+
+.sealBoundBadge{position:absolute;bottom:2px;left:0;right:0;color:#d7e7ff;background:#172947dc;font-size:10px;line-height:16px;text-align:center;pointer-events:none}
+
+.enemyPortrait{position:relative}

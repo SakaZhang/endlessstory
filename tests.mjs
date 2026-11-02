@@ -206,7 +206,7 @@ for(const file of ['tools/sync-infinity-gem-probabilities.mjs','infinity-gem-bas
 for(const file of ['war-story-access-tests.mjs','story-war-opening-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
 
 // Real canonical story/UI, cross-system Ring and image-recovery boundaries.
-for(const file of ['story-event-controller-tests.mjs','story-scenario-combat-tests.mjs','story-ring-integration-tests.mjs','story-event-app-ui-tests.cjs','npc-event-app-ui-tests.cjs','asset-recovery-tests.mjs','asset-recovery-app-ui-tests.cjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+for(const file of ['story-seal-rescue-tests.mjs','story-event-controller-tests.mjs','story-scenario-combat-tests.mjs','story-ring-integration-tests.mjs','story-event-app-ui-tests.cjs','npc-event-app-ui-tests.cjs','asset-recovery-tests.mjs','asset-recovery-app-ui-tests.cjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
 
 // Random world clock and the actual App tick/resume/storage boundary.
 for(const file of ['random-war-world-tests.mjs','random-war-story-access-tests.mjs','random-war-app-ui-tests.cjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});

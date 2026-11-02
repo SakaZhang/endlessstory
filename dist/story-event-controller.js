@@ -1,3 +1,4 @@
+import {sealRouteAvailable} from './story-seal-rescue.js';
 import {reconcileOtherworldStone} from './otherworld-entitlement.js';
 import {storyDialogueComplete,storyKnowledgeMatches} from './story-copy-compatibility.js';
 import {personalActions,personalSceneIsLate,personalSceneSite,personalSceneRuntimeAvailable} from './personal-story-registry.js';
@@ -82,7 +83,7 @@ function sceneAreaUnlocked(s,d){const area=AREAS[personalSceneSite(s,d)],progres
 export function canEnterWarStoryScene(s,id){
  if(!validStoryEventState(s)||!storySafeToInteract(s))return false;
  const d=scene(id),st=state(s),access=storyTerritoryAccess(s,id);
- return !!d&&d.pov===s.race&&!st.completedScenes.includes(id)&&(!st.activeScene||st.activeScene.id===id)&&prerequisites(st,d)&&(sceneAreaUnlocked(s,d)||!d.optional&&access.storyOnly===true)&&access.allowed&&access.storyOnly===true&&s.siteId!==d.siteId;
+ return !!d&&d.pov===s.race&&!st.completedScenes.includes(id)&&(!st.activeScene||st.activeScene.id===id)&&prerequisites(st,d)&&sealRouteAvailable(st,d)&&(sceneAreaUnlocked(s,d)||!d.optional&&access.storyOnly===true)&&access.allowed&&access.storyOnly===true&&s.siteId!==d.siteId;
 }
 export function enterWarStoryScene(s,id){
  if(!canEnterWarStoryScene(s,id))return false;const next=structuredClone(s),d=scene(id),area=AREAS[d.siteId];
@@ -95,11 +96,11 @@ export function warWithdrawalAvailable(s){return validSave(s)&&(territoryAccess(
 export function availableStoryScenes(s){
  if(!validStoryEventState(s))return [];
  const st=state(s);if(st.activeScene)return [];
- return Object.values(STORY_SCENES).filter(d=>d.pov===s.race&&!st.completedScenes.includes(d.id)&&prerequisites(st,d)&&personalSceneRuntimeAvailable(s,d)).sort((a,b)=>Number(!!a.personal)-Number(!!b.personal)).map(d=>({...structuredClone(d),siteId:personalSceneSite(s,d),atLocation:storySceneLocationAvailable(s,d),available:storySafeToInteract(s)&&storySceneLocationAvailable(s,d),entryAvailable:canEnterWarStoryScene(s,d.id)}));
+ return Object.values(STORY_SCENES).filter(d=>d.pov===s.race&&!st.completedScenes.includes(d.id)&&prerequisites(st,d)&&sealRouteAvailable(st,d)&&personalSceneRuntimeAvailable(s,d)).sort((a,b)=>Number(!!a.personal)-Number(!!b.personal)).map(d=>({...structuredClone(d),siteId:personalSceneSite(s,d),atLocation:storySceneLocationAvailable(s,d),available:storySafeToInteract(s)&&storySceneLocationAvailable(s,d),entryAvailable:canEnterWarStoryScene(s,d.id)}));
 }
 export function beginStoryScene(s,id){
  if(!validStoryEventState(s)||!storySafeToInteract(s))return false;
- const d=scene(id),st=state(s);if(!d||d.pov!==s.race||st.activeScene||st.completedScenes.includes(id)||!prerequisites(st,d)||!storySceneLocationAvailable(s,d))return false;
+ const d=scene(id),st=state(s);if(!d||d.pov!==s.race||st.activeScene||st.completedScenes.includes(id)||!prerequisites(st,d)||!sealRouteAvailable(st,d)||!storySceneLocationAvailable(s,d))return false;
  s.story??=blank(s.race);if(d.personal){const pp=ensurePersonal(s);if(pp.paused[id]){s.story.activeScene=pp.paused[id];delete pp.paused[id];if(!pp.lateIds.includes(id)&&personalSceneIsLate(s,d)&&!receiptFor(s.story,d)){pp.lateIds.push(id);pp.steps[id]=0;}return {sceneId:id,resumed:true};}pp.steps[id]=0;if(personalSceneIsLate(s,d))pp.lateIds.push(id);}s.story.activeScene={id,cursor:0,choiceId:null,encounterId:null};s.story.acceptedLevels[id]=s.level;return {sceneId:id};
 }
 export function advanceStoryDialogue(s,id){
@@ -187,13 +188,14 @@ export function canStartStoryFieldEncounter(s,nodeId){
  const a=s.story?.activeScene,d=scene(a?.id);return !!d&&d.encounter?.kind==='victory'&&needsEncounter(s,d)&&personalActionsDone(s,d)&&d.encounter.nodeId===nodeId&&storyDialogueComplete(d,a)&&!!choice(d,a.choiceId)&&!receiptFor(s.story,d)&&storySceneLocationAvailable(s,d);
 }
 
-export function storyQuestToolAvailable(s,id){return id==='old-wedge'&&validStoryEventState(s)&&s.story?.flags.includes('E_WEDGE_LEARNED')&&s.story.flags.includes('E_WEDGE_AVAILABLE')&&!s.story.flags.includes('E_WEDGE_USED');}
+export function storyQuestToolAvailable(s,id){if(id==='lemus-old-wedge')return validStoryEventState(s)&&s.race!=='elf'&&s.story?.completedScenes.includes('C08.O12.'+s.race)&&!s.story.flags.includes('E_RESCUE_WEDGE_USED');return id==='old-wedge'&&validStoryEventState(s)&&s.story?.flags.includes('E_WEDGE_LEARNED')&&s.story.flags.includes('E_WEDGE_AVAILABLE')&&!s.story.flags.includes('E_WEDGE_USED');}
 export function useStoryQuestTool(s,action,now){
- if(!validSave(s)||!storyQuestToolAvailable(s,'old-wedge')||s.race!=='elf'||action.sceneId!=='C08.E03.elf'||s.story?.activeScene?.id!==action.sceneId)return false;
+ const tool=STORY_SCENES[action.sceneId]?.questTool;
+ if(!validSave(s)||!tool||!storyQuestToolAvailable(s,tool)||s.story?.activeScene?.id!==action.sceneId)return false;
  const e=s.activeEncounter;if(!e||e.id!==action.encounterId||e.enemies[0]?.id!==action.targetId||e.storyScenario?.id!==STORY_SCENES[action.sceneId].encounter.scenarioId||e.done||e.rewarded)return false;
  const next=structuredClone(s),battle=next.activeEncounter;
  if(!resolveStoryToolEncounter(next,battle)||!recordStoryScenarioResult(next,battle)||!finalizeStoryScenario(next,battle)||!finishStoryScene(next,action.sceneId,now)||!validSave(next))return false;
- Object.assign(s,next);return {sceneId:action.sceneId,encounterId:e.id,toolUsed:'old-wedge',completed:true};
+ Object.assign(s,next);return {sceneId:action.sceneId,encounterId:e.id,toolUsed:tool,completed:true};
 }
 
 export function advancePersonalAction(s,action){

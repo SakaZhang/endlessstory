@@ -8,7 +8,7 @@ export const C08_SCENARIOS={
   "actorName": "战场残留威胁",
   "mode": "clear",
   "result": "front-cleared",
-  "objective": "清开去左翼的路，赶到族长所在处；本场不是击杀大祭司。",
+  "objective": "清开去左翼的路，赶到族长所在处。",
   "outcome": "赶到转折点时，族长已倒下。大祭司取走族长自身核心，离开了仍被围困的精灵部队。"
  },
  "story.c07-ea03-elf": {
@@ -20,7 +20,7 @@ export const C08_SCENARIOS={
   "mode": "nonlethal",
   "result": "elf-sealed",
   "defeatIsOutcome": true,
-  "objective": "挡住大祭司，为伤员争取撤离；对方力量远胜，抵抗后莱姆斯将被封印。",
+  "objective": "挡住大祭司，为身后的伤员争取撤离时间。",
   "outcome": "莱姆斯挡在大祭司面前，却抵挡不住。封印合拢；砾恩在外亲眼看见。",
   "rounds": 4,
   "actorId": "high-priest"
@@ -33,7 +33,7 @@ export const C08_SCENARIOS={
   "actorName": "战场残留威胁",
   "mode": "clear",
   "result": "front-cleared",
-  "objective": "突破阻拦，赶往族长；本场不是击杀大祭司。",
+  "objective": "突破沿路的阻拦，赶往族长所在处。",
   "outcome": "赶到转折点时，族长已倒下。大祭司取走族长自身核心，离开了仍被围困的精灵部队。"
  },
  "story.c08-e01-elf": {
@@ -44,7 +44,7 @@ export const C08_SCENARIOS={
   "actorName": "封印显现 · 第一层",
   "mode": "clear",
   "result": "seal-first-cleared",
-  "objective": "击退第一层显现的阻拦，抵达下一层；这是可胜的真实战斗。",
+  "objective": "击退第一层显现的阻拦，寻找通向封印深处的路。",
   "outcome": "第一层阻拦已解除。此安全点已保存，失败不会重打本层。"
  },
  "story.c08-e02-elf": {
@@ -133,7 +133,7 @@ export const C08_SCENARIOS={
   "actorName": "仪式外围阻拦",
   "mode": "clear",
   "result": "ritual-perimeter-cleared",
-  "objective": "突破仪式外围，尝试切断施法、救出核心；这不是保证关闭门户。",
+  "objective": "突破仪式外围，设法打断施法，救出被夺走的核心。",
   "outcome": "持续施法被打断，核心却仍自行运转；必须立刻撤出中心。"
  },
  "story.c08-x04-human": {
@@ -144,7 +144,7 @@ export const C08_SCENARIOS={
   "actorName": "界外入侵涌影",
   "mode": "survive",
   "result": "invasion-escaped",
-  "objective": "抵挡首波冲击并撤出中心；成功撤离不等于阻止仪式或关闭门户。",
+  "objective": "抵挡门户涌出的首波冲击，掩护众人撤出祭坛中心。",
   "outcome": "门户已经打开，大祭司死于反噬。你从首波入侵中撤出，并未阻止仪式。",
   "rounds": 4,
   "actorId": "invasion-wave"
@@ -168,7 +168,7 @@ export const C08_SCENARIOS={
   "actorName": "仪式外围阻拦",
   "mode": "clear",
   "result": "ritual-perimeter-cleared",
-  "objective": "突破仪式外围，尝试切断施法、救出核心；这不是保证关闭门户。",
+  "objective": "突破仪式外围，设法打断施法，救出被夺走的核心。",
   "outcome": "持续施法被打断，核心却仍自行运转；必须立刻撤出中心。"
  },
  "story.c08-x04-dwarf": {
@@ -179,7 +179,7 @@ export const C08_SCENARIOS={
   "actorName": "界外入侵涌影",
   "mode": "survive",
   "result": "invasion-escaped",
-  "objective": "抵挡首波冲击并撤出中心；成功撤离不等于阻止仪式或关闭门户。",
+  "objective": "抵挡门户涌出的首波冲击，掩护众人撤出祭坛中心。",
   "outcome": "门户已经打开，大祭司死于反噬。你从首波入侵中撤出，并未阻止仪式。",
   "rounds": 4,
   "actorId": "invasion-wave"
@@ -203,7 +203,7 @@ export const C08_SCENARIOS={
   "actorName": "仪式外围阻拦",
   "mode": "clear",
   "result": "ritual-perimeter-cleared",
-  "objective": "突破仪式外围，尝试切断施法、救出核心；这不是保证关闭门户。",
+  "objective": "突破仪式外围，设法打断施法，救出被夺走的核心。",
   "outcome": "持续施法被打断，核心却仍自行运转；必须立刻撤出中心。"
  },
  "story.c08-x04-elf": {
@@ -214,7 +214,7 @@ export const C08_SCENARIOS={
   "actorName": "界外入侵涌影",
   "mode": "survive",
   "result": "invasion-escaped",
-  "objective": "抵挡首波冲击并撤出中心；成功撤离不等于阻止仪式或关闭门户。",
+  "objective": "抵挡门户涌出的首波冲击，掩护众人撤出祭坛中心。",
   "outcome": "门户已经打开，大祭司死于反噬。你从首波入侵中撤出，并未阻止仪式。",
   "rounds": 4,
   "actorId": "invasion-wave"
@@ -238,7 +238,7 @@ export const C08_SCENARIOS={
   "actorName": "仪式外围阻拦",
   "mode": "clear",
   "result": "ritual-perimeter-cleared",
-  "objective": "突破仪式外围，尝试切断施法、救出核心；这不是保证关闭门户。",
+  "objective": "突破仪式外围，设法打断施法，救出被夺走的核心。",
   "outcome": "持续施法被打断，核心却仍自行运转；必须立刻撤出中心。"
  },
  "story.c08-x04-goblin": {
@@ -249,7 +249,7 @@ export const C08_SCENARIOS={
   "actorName": "界外入侵涌影",
   "mode": "survive",
   "result": "invasion-escaped",
-  "objective": "抵挡首波冲击并撤出中心；成功撤离不等于阻止仪式或关闭门户。",
+  "objective": "抵挡门户涌出的首波冲击，掩护众人撤出祭坛中心。",
   "outcome": "门户已经打开，大祭司死于反噬。你从首波入侵中撤出，并未阻止仪式。",
   "rounds": 4,
   "actorId": "invasion-wave"
@@ -273,7 +273,7 @@ export const C08_SCENARIOS={
   "actorName": "仪式外围阻拦",
   "mode": "clear",
   "result": "ritual-perimeter-cleared",
-  "objective": "突破仪式外围，尝试切断施法、救出核心；这不是保证关闭门户。",
+  "objective": "突破仪式外围，设法打断施法，救出被夺走的核心。",
   "outcome": "持续施法被打断，核心却仍自行运转；必须立刻撤出中心。"
  },
  "story.c08-x04-ashen": {
@@ -284,7 +284,7 @@ export const C08_SCENARIOS={
   "actorName": "界外入侵涌影",
   "mode": "survive",
   "result": "invasion-escaped",
-  "objective": "抵挡首波冲击并撤出中心；成功撤离不等于阻止仪式或关闭门户。",
+  "objective": "抵挡门户涌出的首波冲击，掩护众人撤出祭坛中心。",
   "outcome": "门户已经打开，大祭司死于反噬。你从首波入侵中撤出，并未阻止仪式。",
   "rounds": 4,
   "actorId": "invasion-wave"
