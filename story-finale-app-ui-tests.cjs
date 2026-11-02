@@ -41,7 +41,7 @@ const click=(dataset={},id='')=>{const b={dataset,id};for(const fn of events.cli
    if(id.startsWith('C10.X06')){const ledger=JSON.stringify(saved().story);await refresh('altar-'+race+'-'+id);assert.equal(JSON.stringify(saved().story),ledger,'each altar reload');}
    assert.equal(saved().race,race);assert.equal(saved().hero,hero);assert(E.validSave(saved()));
   }
-  assert(saved().story.flags.includes('EPILOGUE_COMPLETE'));assert(saved().story.flags.includes('MAIN_STORY_CLEAR'));assert(saved().story.flags.includes('PORTAL_CLOSED'));click({race:saved().siteId.split('.')[0]});assert(el('view').innerHTML.includes('主线与尾声已完成'));
+  assert(saved().story.flags.includes('EPILOGUE_COMPLETE'));assert(saved().story.flags.includes('MAIN_STORY_CLEAR'));assert(saved().story.flags.includes('PORTAL_CLOSED'));click({race:saved().siteId.split('.')[0]});assert(el('view').innerHTML.includes('旅程仍可继续。可以探索各地，或再访四位同伴'));
   const state=JSON.stringify(saved().story);await refresh('finale-complete-reload-'+race);assert.equal(JSON.stringify(saved().story),state);if(race==='ashen')assert.equal(saved().inventory.filter(i=>i.legendaryId==='ashen-primal-core').length,1);
   const external=saved();external.gold+=17;store.set(SAVE_KEY,JSON.stringify(external));const raw=store.get(SAVE_KEY);click({storyAction:'finish',storyScene:'C10.X07.'+race});periodic();tick();assert.equal(store.get(SAVE_KEY),raw,'newer save preserved before flush and future autosave');
  }
