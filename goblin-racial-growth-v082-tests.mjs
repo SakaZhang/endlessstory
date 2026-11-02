@@ -22,7 +22,9 @@ assert.equal(fixture.sourceCommit,'812e4e35');assert.equal(fixture.rows.length,2
 for(const race of E.RACE_KEYS)assert.equal(racialSurvivalGrowth(race),race==='goblin'?GOBLIN_SURVIVAL_GROWTH:DEFAULT_SURVIVAL_GROWTH);
 // Orthogonal v0.82 policies extend legends and change enhancement4%→5%.
 // Keep all208 inputs; independently reconcile every enhanced contribution below.
-for(const [name,digest]of Object.entries(fixture.sourceHashes).filter(([name])=>!['dist/legendary-equipment.js','dist/equipment-budget.js'].includes(name)))assert.equal(createHash('sha256').update(fs.readFileSync(name)).digest('hex'),digest,'unchanged gear/attack/poison/passives '+name);
+// Exact reviewed v088 set-only bonus poison sources; immutable historical fixture remains untouched.
+const approvedV088Hashes={'dist/races/goblin/equipment.js':'d35835b84e76d21cdacd6457ceca03a445f8d1729687f3e1949a1736b4757fa1','dist/skill-tree-poison.js':'f901418b541ed5ac4ea8af0229077765c5ee9b3259e59ba27a18d9681a162af2'};
+for(const [name,digest]of Object.entries(fixture.sourceHashes).filter(([name])=>!['dist/legendary-equipment.js','dist/equipment-budget.js'].includes(name)))assert.equal(createHash('sha256').update(fs.readFileSync(name)).digest('hex'),(approvedV088Hashes[name]??digest),'unchanged gear/attack/ordinary poison/passives or exact approved set extension '+name);
 assert(!fs.existsSync('dist/equipment-base-balance.js'),'discarded gear-only policy removed, never stacked');
 const near=(actual,expected,label)=>assert(Math.abs(actual-expected)<1e-8,`${label}: ${actual} != ${expected}`);
 const statKeys=['atk','armor','hp'];
