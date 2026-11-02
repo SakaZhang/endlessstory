@@ -1,5 +1,6 @@
 import {reconcileRuntimeSets} from './races/ashen/skills.js';
 import {clearUnequippedSetPoison,validEquippedSetPoison} from './skill-tree-poison.js';
+import {clearRemovedSetSkillCrit} from './set-skill-critical.js';
 import {validRacialLegendaryRuntime,clearRemovedRacialLegendaryRuntime,legendaryRuntimeOwner} from './racial-legendary-runtime.js';
 import {validPlayerShieldLayers,removePlayerShieldLayersByOwner} from './player-shield-layers.js';
 /** Per-item accumulation lifecycle; effect consumers live in legendary-combat.js.
@@ -44,5 +45,5 @@ export function applyEquipmentRuntimeChange(s,beforeEquip,nextEquip){
  let carry=s.equipmentShieldCarry;for(const id of before)if(!next.has(id)&&carry!==undefined){carry=removePlayerShieldLayersByOwner(carry,id);if(!carry)return false;}
  const current=normalized(s.equipmentRuntime,before),byId=Object.fromEntries([...next].map(id=>[id,before.has(id)?current.byId[id]:zero()]));
  const ashenNext=ashenSetRuntime(s,next);if(ashenNext===null)return false;for(const {holder,state}of ashenNext)holder.raceRuntime.state=state;
- clearUnequippedSetPoison(s,nextEquip);clearRemovedRacialLegendaryRuntime(s,next);s.equipmentRuntime={version:1,byId};if(shields!==undefined)s.activeEncounter.playerShieldLayers=shields;if(carry!==undefined)s.equipmentShieldCarry=carry;return true;
+ clearUnequippedSetPoison(s,nextEquip);clearRemovedRacialLegendaryRuntime(s,next);clearRemovedSetSkillCrit(s,next);s.equipmentRuntime={version:1,byId};if(shields!==undefined)s.activeEncounter.playerShieldLayers=shields;if(carry!==undefined)s.equipmentShieldCarry=carry;return true;
 }

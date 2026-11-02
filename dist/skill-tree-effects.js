@@ -2,7 +2,7 @@
 const clone=x=>structuredClone(x),plain=x=>!!x&&typeof x==='object'&&!Array.isArray(x);
 const safeId=x=>typeof x==='string'&&x.length>0&&x.length<=200&&!['__proto__','constructor','prototype','self'].includes(x);
 const time=x=>Number.isFinite(x)&&x>=0&&x<=1e15,num=x=>Number.isFinite(x)&&x>=0&&x<=1e12;
-const types=['armorDown','elementResistDown','fireResistDown','attackDown','hitDown','attackUp','critUp','penetrationUp','defenseUp','dodgeUp','lifestealUp','dot','healOverTime','shield'];
+const types=['armorDown','elementResistDown','fireResistDown','attackDown','hitDown','attackUp','critUp','setSkillCrit','penetrationUp','defenseUp','dodgeUp','lifestealUp','dot','healOverTime','shield'];
 const sourceKey=s=>s.source.kind+'|'+s.source.id+'|'+s.sourceId+'|'+s.type+'|'+(s.status??'')+'|'+(s.type==='elementResistDown'?s.damageType??'':'');
 function normalizeSourceDescriptor(source){
  if(!plain(source)||Object.keys(source).length!==2||!Object.hasOwn(source,'kind'))return null;
@@ -12,6 +12,7 @@ function normalizeSourceDescriptor(source){
 }
 function validSource(s){
  if(!plain(s)||!safeId(s.sourceId)||!types.includes(s.type)||!num(s.amount)||!time(s.endAt)||!plain(s.source)||!['skill','equipment'].includes(s.source.kind)||!safeId(s.source.id)||Object.keys(s.source).length!==2)return false;
+ if(s.type==='setSkillCrit'&&(s.amount!==.03||s.source.kind!=='skill'||s.source.id!==s.sourceId||!['human.precise_cut','human.flash_arc','human.opening'].includes(s.sourceId)))return false;
  const allowed=['sourceId','type','amount','endAt','source','status','damageType','nextTickAt','tickIntervalMs','requiresStatus','counterEligible'];if(Object.keys(s).some(k=>!allowed.includes(k)))return false;
  if(s.requiresStatus!==undefined&&!['burn','bleed'].includes(s.requiresStatus))return false;
  if(s.counterEligible!==undefined&&typeof s.counterEligible!=='boolean')return false;
@@ -41,6 +42,12 @@ export function applySkillEffect(state,targetId,effect,{clock=state?.clock,callb
  if(['dot','healOverTime'].includes(effect.type)){source.tickIntervalMs=effect.tickIntervalMs;source.nextTickAt=clock+effect.tickIntervalMs;}
  if(!validSource(source))return null;
  const next=clone(state),dest=target(next,targetId),key=sourceKey(source),existing=dest.sources.findIndex(x=>sourceKey(x)===key);if(existing<0&&dest.sources.length>=200)return null;
+ // On the first new set window, retire only identifiable legacy +6 rating payloads.
+ // Their original skill bonus and expiry survive; the old cast gains no new chance.
+ if(source.type==='setSkillCrit'&&targetId==='self')for(const old of dest.sources){
+  const legacy={'human.precise_cut':[14,16],'human.flash_arc':[18],'human.opening':[22]};
+  if(old.type==='critUp'&&old.source.kind==='skill'&&old.source.id===old.sourceId&&legacy[old.sourceId]?.includes(old.amount))old.amount-=6;
+ }
  if(effect.type==='shield'&&(typeof callbacks.shield!=='function'||callbacks.shield(targetId,clone(source))===false))return null;
  if(existing>=0)dest.sources[existing]=source;else dest.sources.push(source);
  return {state:next,result:clone(source)};
