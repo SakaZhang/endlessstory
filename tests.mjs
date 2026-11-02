@@ -1,3 +1,4 @@
+import './divine-double-v088-tests.mjs';
 import './set-resource-overcap-v088-tests.mjs';
 import './set-poison-overcap-v088-tests.mjs';
 import './set-skill-critical-v088-tests.mjs';
