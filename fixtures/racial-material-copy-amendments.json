@@ -207,7 +207,7 @@
     "id": "ashen.infinity_gem_ashen",
     "field": "hiddenUsage",
     "before": "无限手套隐藏配方的烬裔宝石；具体配方后续确定。",
-    "after": "无限手套隐藏配方的烬裔宝石。"
+    "after": "无限手套固定融合的烬裔宝石。"
   },
   {
     "id": "ashen.infinity_gem_ashen",
@@ -231,12 +231,24 @@
     "id": "goblin.infinity_gem_goblin",
     "field": "use",
     "before": "无限手套隐藏配方的裂穴诸部宝石；具体配方后续确定。",
-    "after": "无限手套隐藏配方的裂穴诸部宝石。"
+    "after": "无限手套固定融合的裂穴诸部宝石。"
   },
   {
     "id": "goblin.return_token_goblin",
     "field": "use",
     "before": "归途之环隐藏配方材料；获取配方前不展示此用途。",
     "after": "归途之环隐藏配方材料。"
+  },
+  {
+    "id": "elf.infinity_gem_elf",
+    "field": "uses",
+    "before": "无限手套隐藏配方材料",
+    "after": "无限手套固定融合材料"
+  },
+  {
+    "id": "human.mat.17",
+    "field": "uses",
+    "before": "无限手套隐藏配方材料",
+    "after": "无限手套固定融合材料"
   }
 ]

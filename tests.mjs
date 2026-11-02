@@ -349,3 +349,5 @@ for(const file of ['story-player-prose-v084-tests.mjs','story-seal-rescue-tests.
 
 // v0.85 recipe-independent five-gem fusion and transaction regression.
 runAffixSourceTest(process.execPath,[new URL('./gauntlet-fusion-v085-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+runAffixSourceTest(process.execPath,[new URL('./story-journal-prose-v085-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});

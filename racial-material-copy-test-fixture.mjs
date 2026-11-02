@@ -7,7 +7,7 @@ export const MATERIAL_COPY_AMENDMENTS=JSON.parse(readFileSync(new URL('./fixture
 export function beforeMaterialCopy(materials){
  const historical=structuredClone(materials);
  for(const {id,field,before,after} of MATERIAL_COPY_AMENDMENTS){
-  assert(['sourceNote','sourcePolicy','hiddenUsage','use'].includes(field),'only reviewed prose fields');
+  assert(['sourceNote','sourcePolicy','hiddenUsage','use','uses'].includes(field),'only reviewed prose fields');
   assert.equal(typeof before,'string');assert.equal(typeof after,'string');
   assert.equal(historical[id]?.[field],after,`${id}.${field}: expected exact reviewed copy`);
   historical[id][field]=before;
