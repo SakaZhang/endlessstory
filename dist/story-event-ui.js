@@ -25,10 +25,10 @@ export function renderStoryEventBoard(s,{coordinateIdle=false}={}){
   const blocked=!a.safe||!a.atLocation;
   content=`<h4>${esc(a.title)}</h4><p>${esc(storyCastDisplayLabel(a,chikFamilyDisplayText(a,a.npc)))} · ${esc(AREAS[a.siteId]?.name)} · 第${a.chapter}章</p><p>${esc(a.objective)}</p>`+warNotice(a.id)+renderChikFamilyCast(a,a.line);
   if(!a.atLocation)content+=a.entryAvailable?button('enter',a.id,'通过本场剧情入口前往')+'<p>仅本场剧情通行；普通刷怪入口仍封锁。</p>':storyTravelHint(s,a);
-  if(a.personalDeferred)content+='<p role="status">入侵后家人的位置尚未由主线确认。可暂缓本段；C10实际确认三人安全后，在安全营地继续，不会倒放旧粮路。</p>';
+  if(a.personalDeferred)content+='<p role="status">入侵切断了旧粮路。先沿主线找到米芮、咔洛和豆布，护送他们到安全营地后，再继续家里的事。</p>';
   if(!a.safe)content+='<p>请先结束当前战斗、停止远征并完成休息，再继续对话。</p>';
   if(a.personal)content+='<p><strong>个人长线 · 可暂缓，不阻塞主线</strong></p>'+button('personal-pause',a.id,'保存这段进度，暂缓个人线',!a.safe||!!s.activeEncounter?.storyScenario)+renderPersonalArcRecords(s,a.arcId)+(personalSceneCallback(s,a)?'<p>'+esc(personalSceneCallback(s,a))+'</p>':'');
-  if(a.line!==null){const line=a.personalLate?(a.cursor===0?a.lateIntro:'只办理当前的修护与交接，既有经历不改写。'):a.line;content+=renderStoryDialogue(a,line,chikFamilyDisplayText(a,line))+button('next',a.id,'继续对话',blocked,`data-story-cursor="${a.cursor}"`);}
+  if(a.line!==null){const line=a.personalLate?(a.cursor===0?a.lateIntro:'眼前的修护和交接还在等人处理。先问清大家如今需要什么。'):a.line;content+=renderStoryDialogue(a,line,chikFamilyDisplayText(a,line))+button('next',a.id,'继续对话',blocked,`data-story-cursor="${a.cursor}"`);}
   else if(a.choiceId===null){content+='<div class="storyChoices">'+a.choices.map(c=>button('choice',a.id,(STORY_WAR_DECLARATIONS.includes(a.id)?'继续战争剧情 · ':'')+c.label,blocked,`data-story-choice="${esc(c.id)}"`)).join('')+'</div>';}
   else if(a.personal&&a.personalStep<a.personalActions.length){
    const step=a.personalActions[a.personalStep];content+='<section class="personalActionObjective" aria-label="个人线行动目标"><h4>行动 '+(a.personalStep+1)+' / '+a.personalActions.length+'</h4><p>'+esc(step.prompt)+'</p>'+step.options.map(o=>button('personal-step',a.id,o.label,blocked,`data-story-step="${a.personalStep}" data-story-option="${esc(o.id)}"`)).join('')+'</section>';

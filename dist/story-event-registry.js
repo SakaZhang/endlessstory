@@ -67,7 +67,7 @@ export const STORY_SCENES=freeze({
    "运粮者：人族追过来了。袋子怎么办？",
    "奇克：你拖袋子，我把他引开。别把我的那份弄丢。"
   ],
-  "objective": "撑过拦截，找到撤离口；不要求杀死罗什福尔。",
+  "objective": "撑过罗什福尔的拦截，找到撤离的窄口。",
   "flags": [
    "G_MET_H"
   ],
@@ -104,7 +104,7 @@ export const STORY_SCENES=freeze({
    "罗什福尔：这些线……",
    "奇克：慢慢看！别等我！"
   ],
-  "objective": "记录眼前所见或先离开；调查不是通关钥匙。",
+  "objective": "查看石壁上的刻纹，或先沿窄道离开。",
   "flags": [],
   "knowledge": [
    {
@@ -151,7 +151,7 @@ export const STORY_SCENES=freeze({
    "罗什福尔：这些线……",
    "奇克：慢慢看！别等我！"
   ],
-  "objective": "记录眼前所见或先离开；调查不是通关钥匙。",
+  "objective": "查看石壁上的刻纹，或先沿窄道离开。",
   "flags": [],
   "knowledge": [
    {
@@ -310,7 +310,7 @@ export const STORY_SCENES=freeze({
    "布洛克：哪一处又坏了？",
    "矿班长：这回不是矿。是王室的东西。"
   ],
-  "objective": "确认下一段本地行程；没有收到异地刻纹报告。",
+  "objective": "问清眼前的事，准备下一段行程。",
   "flags": [
    "return-ring.elf.scene-open"
   ],
@@ -340,7 +340,7 @@ export const STORY_SCENES=freeze({
    "斥候：粮袋收回一批，人也送回了。商路还有别的差事。",
    "罗什福尔：把没找回的记清。不能换张单子就算没丢过。"
   ],
-  "objective": "确认下一段本地行程；没有收到异地刻纹报告。",
+  "objective": "问清眼前的事，准备下一段行程。",
   "flags": [
    "return-ring.elf.scene-open"
   ],
@@ -372,7 +372,7 @@ export const STORY_SCENES=freeze({
    "快长大的那个：你先前不是说不饿？",
    "奇克：我说过的话多着呢。"
   ],
-  "objective": "确认下一段本地行程；没有收到异地刻纹报告。",
+  "objective": "问清眼前的事，准备下一段行程。",
   "flags": [
    "return-ring.elf.scene-open"
   ],
@@ -403,7 +403,7 @@ export const STORY_SCENES=freeze({
    "砾恩：那边有东西可换。",
    "修护者：看清再拿。别替别人背上债。"
   ],
-  "objective": "确认下一段本地行程；没有收到异地刻纹报告。",
+  "objective": "问清眼前的事，准备下一段行程。",
   "flags": [
    "return-ring.elf.scene-open"
   ],
@@ -655,7 +655,7 @@ export const STORY_SCENES=freeze({
    "传令兵：路边的货检棚。",
    "罗什福尔：通知棚里腾地方。货单留一份，我去找还没回来的人。"
   ],
-  "objective": "救人、清路并追回失货；不是只追王室箱子。",
+  "objective": "救出被困的商旅，清开车道，再寻找散失的货物。",
   "flags": [
    "H_CARAVAN_RESCUE",
    "H_CARAVAN_IDENTIFIED"
@@ -748,7 +748,7 @@ export const STORY_SCENES=freeze({
    "[裂开的王室箱里透出微光。袭击已经发生，砾恩独自接近。]",
    "砾恩：先离开。"
   ],
-  "objective": "清除阻碍，带遗物核心离开；只记任务持有，不复制装备。",
+  "objective": "清开退路，带着从箱中取出的遗物核心离开。",
   "flags": [
    "A_HAS_ROYAL_RELIC"
   ],
@@ -1009,7 +1009,7 @@ export const STORY_SCENES=freeze({
    "奇克：有的在别人背上。你要我替你全背回来？",
    "奇克：带你们去粮车被拖走的地方。到地方，你别拿我家里的那袋凑账。"
   ],
-  "objective": "清理失货支路，救回残留伤者；不记作全部货物追回。",
+  "objective": "沿失货留下的痕迹清开支路，救回仍困在路上的伤者。",
   "flags": [
    "CONTACT_H_G",
    "G_GRAIN_ROUTE_SHARED",
@@ -1062,7 +1062,7 @@ export const STORY_SCENES=freeze({
    "奇克：有的在别人背上。你要我替你全背回来？",
    "奇克：带你们去粮车被拖走的地方。到地方，你别拿我家里的那袋凑账。"
   ],
-  "objective": "清理失货支路，救回残留伤者；不记作全部货物追回。",
+  "objective": "沿失货留下的痕迹清开支路，救回仍困在路上的伤者。",
   "flags": [
    "CONTACT_H_G",
    "G_GRAIN_ROUTE_SHARED",
@@ -1115,7 +1115,7 @@ export const STORY_SCENES=freeze({
    "奇克：有的在别人背上。你要我替你全背回来？",
    "奇克：带你们去粮车被拖走的地方。到地方，你别拿我家里的那袋凑账。"
   ],
-  "objective": "清理失货支路，救回残留伤者；不记作全部货物追回。",
+  "objective": "沿失货留下的痕迹清开支路，救回仍困在路上的伤者。",
   "flags": [
    "CONTACT_H_G",
    "G_GRAIN_ROUTE_SHARED",
@@ -1256,7 +1256,7 @@ export const STORY_SCENES=freeze({
    "莱姆斯：那你说。",
    "砾恩：我也在找。"
   ],
-  "objective": "沿旧石阶进入神庙外层；尚不知神庙用途。",
+  "objective": "沿旧石阶进入神庙，查看前方传来回响的地方。",
   "flags": [
    "return-ring.human.scene-open"
   ],
@@ -1298,7 +1298,7 @@ export const STORY_SCENES=freeze({
    "莱姆斯：那你说。",
    "砾恩：我也在找。"
   ],
-  "objective": "沿旧石阶进入神庙外层；尚不知神庙用途。",
+  "objective": "沿旧石阶进入神庙，查看前方传来回响的地方。",
   "flags": [
    "return-ring.human.scene-open"
   ],
@@ -1378,7 +1378,7 @@ export const STORY_SCENES=freeze({
    "莱姆斯：我会再来。",
    "砾恩：下回，先想清你替谁拿东西。"
   ],
-  "objective": "离开或记录神庙；王室遗物核心始终留在砾恩身上。",
+  "objective": "查看旧座留下的刻纹，或随砾恩离开神庙。",
   "flags": [
    "A_RELIC_CORE_UPGRADED",
    "E_TEMPLE_DEFEATED",
@@ -1430,7 +1430,7 @@ export const STORY_SCENES=freeze({
    "莱姆斯：我不能空手让你离开。",
    "砾恩：那就让开手里的路。"
   ],
-  "objective": "稳住核心，突破拦截；这是非致命剧情交手。",
+  "objective": "稳住胸前的核心，设法从莱姆斯的拦截中脱身。",
   "flags": [],
   "knowledge": [],
   "choices": [
@@ -1469,7 +1469,7 @@ export const STORY_SCENES=freeze({
    "莱姆斯：我会再来。",
    "砾恩：下回，先想清你替谁拿东西。"
   ],
-  "objective": "离开或记录神庙；王室遗物核心始终留在砾恩身上。",
+  "objective": "查看旧座留下的刻纹，或随砾恩离开神庙。",
   "flags": [
    "A_RELIC_CORE_UPGRADED",
    "E_TEMPLE_DEFEATED",
@@ -1523,7 +1523,7 @@ export const STORY_SCENES=freeze({
    "莱姆斯：我没有这么说。商队最初的袭击者，也还没查明。",
    "大祭司：你只需要记住，核心在烬裔手里。"
   ],
-  "objective": "如实回报，不把未明袭击者等同烬裔。",
+  "objective": "向大祭司回报神庙里亲眼看见的事。",
   "flags": [
    "E_RELIC_FAILURE_REPORTED"
   ],
@@ -1939,7 +1939,7 @@ export const STORY_SCENES=freeze({
    "砾恩：我没把这东西交给他。",
    "族长：我看见了。去看看外面的哨口。"
   ],
-  "objective": "支援边哨，确认精灵部队集结；两件核心不交换。",
+  "objective": "支援边哨，向族长确认精灵部队的动向。",
   "flags": [
    "A_CLAN_ALERTED",
    "return-ring.ashen.scene-open"
@@ -1986,7 +1986,7 @@ export const STORY_SCENES=freeze({
    "主角：东西不齐呢？",
    "工匠：先把图样收好。东西还在，就还有机会。已经丢掉的，我补不出来。"
   ],
-  "objective": "学习归途之环图样；不要求先持有任何材料。",
+  "objective": "向工匠学习归途之环的做法，记下要寻找的旧物。",
   "flags": [
    "return-ring.recipe-revealed",
    "return-ring.dwarf.scene-open",
@@ -2031,7 +2031,7 @@ export const STORY_SCENES=freeze({
    "主角：东西不齐呢？",
    "工匠：先把图样收好。东西还在，就还有机会。已经丢掉的，我补不出来。"
   ],
-  "objective": "学习归途之环图样；不要求先持有任何材料。",
+  "objective": "向工匠学习归途之环的做法，记下要寻找的旧物。",
   "flags": [
    "return-ring.recipe-revealed",
    "return-ring.dwarf.scene-open",
@@ -2076,7 +2076,7 @@ export const STORY_SCENES=freeze({
    "主角：东西不齐呢？",
    "工匠：先把图样收好。东西还在，就还有机会。已经丢掉的，我补不出来。"
   ],
-  "objective": "学习归途之环图样；不要求先持有任何材料。",
+  "objective": "向工匠学习归途之环的做法，记下要寻找的旧物。",
   "flags": [
    "return-ring.recipe-revealed",
    "return-ring.dwarf.scene-open",
@@ -2121,7 +2121,7 @@ export const STORY_SCENES=freeze({
    "主角：东西不齐呢？",
    "工匠：先把图样收好。东西还在，就还有机会。已经丢掉的，我补不出来。"
   ],
-  "objective": "学习归途之环图样；不要求先持有任何材料。",
+  "objective": "向工匠学习归途之环的做法，记下要寻找的旧物。",
   "flags": [
    "return-ring.recipe-revealed",
    "return-ring.dwarf.scene-open",
@@ -2166,7 +2166,7 @@ export const STORY_SCENES=freeze({
    "主角：东西不齐呢？",
    "工匠：先把图样收好。东西还在，就还有机会。已经丢掉的，我补不出来。"
   ],
-  "objective": "学习归途之环图样；不要求先持有任何材料。",
+  "objective": "向工匠学习归途之环的做法，记下要寻找的旧物。",
   "flags": [
    "return-ring.recipe-revealed",
    "return-ring.dwarf.scene-open",
@@ -2254,7 +2254,7 @@ export const STORY_SCENES=freeze({
    "莱姆斯：是一个人拿走的。",
    "大祭司：队伍已经出发。去你该去的位置。"
   ],
-  "objective": "跟随部队通过首段险路，护住救护队；质疑命令不会取消已发起的战争。",
+  "objective": "跟随部队穿过险路，护住落在后方的救护队。",
   "flags": [
    "WAR_DECLARED",
    "E_MARCH_JOINED",
@@ -2300,7 +2300,7 @@ export const STORY_SCENES=freeze({
    "族长：现在冲着我们的路来。你一个人出去，他们就会停？",
    "砾恩：我去接最后一班。"
   ],
-  "objective": "守住撤退通道，接回哨卫；不能靠交出核心取消战争。",
+  "objective": "守住撤退通道，接回仍在哨口的族人。",
   "flags": [
    "WAR_DECLARED",
    "A_FIRST_DEFENSE_DONE",
@@ -2437,7 +2437,7 @@ export const STORY_SCENES=freeze({
    "快长大的那个：你一个人背不完。",
    "奇克：背不完还能回来。你跑进战线，我上哪儿找？"
   ],
-  "objective": "护送家人返安全处，再完成这次换粮；奇克不是族群代表。",
+  "objective": "先把家人送回安全处，再沿尚能通行的小路换粮。",
   "flags": [
    "WAR_DECLARED",
    "G_WAR_FOOD_RUN_DONE",
@@ -2483,7 +2483,7 @@ export const STORY_SCENES=freeze({
    "莱姆斯：路上躺着自己人。",
    "传令者：命令没有改。"
   ],
-  "objective": "再次开辟掩护路线，送走伤员后抵达部队集合点；不跳过持续战事。",
+  "objective": "开辟掩护路线，送走伤员，再赶往部队集合点。",
   "flags": [
    "E_WAR_ATTRITION_SEEN"
   ],
@@ -2568,7 +2568,7 @@ export const STORY_SCENES=freeze({
    "大祭司：继续前进。",
    "族长：想进来，就从这里过。"
   ],
-  "objective": "清开去左翼的路，赶到族长所在处；本场不是击杀大祭司。",
+  "objective": "清开去左翼的路，赶到族长所在处。",
   "flags": [
    "CHIEFTAIN_KILLED",
    "PRIEST_HAS_CHIEFTAIN_CORE"
@@ -2616,7 +2616,7 @@ export const STORY_SCENES=freeze({
    "大祭司：你在命令我？",
    "莱姆斯：是您把他们带来的。"
   ],
-  "objective": "挡住大祭司，为伤员争取撤离；对方力量远胜，抵抗后莱姆斯将被封印。",
+  "objective": "挡住大祭司，为身后的伤员争取撤离时间。",
   "flags": [
    "E_SEALED",
    "A_WITNESSED_E_REBELLION"
@@ -2660,7 +2660,7 @@ export const STORY_SCENES=freeze({
    "大祭司：继续前进。",
    "族长：想进来，就从这里过。"
   ],
-  "objective": "突破阻拦，赶往族长；本场不是击杀大祭司。",
+  "objective": "突破沿路的阻拦，赶往族长所在处。",
   "flags": [
    "CHIEFTAIN_KILLED",
    "PRIEST_HAS_CHIEFTAIN_CORE"
@@ -2713,7 +2713,7 @@ export const STORY_SCENES=freeze({
    "砾恩：莱姆斯。",
    "[通向大祭司的近路崩断了。砾恩试着往前一步，碎石便落入裂隙；他转回封印旁，向仍在撤离的人呼喊，寻找能帮忙开路的人。]"
   ],
-  "objective": "目击莱姆斯因保护弃军反抗而被封；确定从外侧营救的起点。",
+  "objective": "赶到莱姆斯身边，寻找接应他的机会。",
   "flags": [
    "E_SEALED",
    "A_WITNESSED_E_REBELLION"
@@ -2759,7 +2759,7 @@ export const STORY_SCENES=freeze({
    "信使：一个叫砾恩的烬裔。他没走，说需要能开路的人。",
    "布洛克：把伤员的退路画给我。别让我走进你们进军的路。"
   ],
-  "objective": "接下有来源的撤离路线，沿路线前往前线救护点；不假装亲见异地交手。",
+  "objective": "向送信人问清撤离路线，赶往前线救护点。",
   "flags": [
    "SELECTED_HERO_SEAL_ROUTE_KNOWN",
    "E_SEALED"
@@ -2798,7 +2798,7 @@ export const STORY_SCENES=freeze({
    "信使：救护队。我从那边撤出来的。布洛克留过你的名字。",
    "罗什福尔：带我到安全接应点。你不必再进战场。"
   ],
-  "objective": "接下有来源的撤离路线，沿路线前往前线救护点；不假装亲见异地交手。",
+  "objective": "向送信人问清撤离路线，赶往前线救护点。",
   "flags": [
    "SELECTED_HERO_SEAL_ROUTE_KNOWN",
    "E_SEALED"
@@ -2838,7 +2838,7 @@ export const STORY_SCENES=freeze({
    "信使：有伤员，还有个被封住的人。路图在这。",
    "奇克：路开了，你们把沿路的人一起带出来。别让我只赚一条死路。"
   ],
-  "objective": "接下有来源的撤离路线，沿路线前往前线救护点；不假装亲见异地交手。",
+  "objective": "向送信人问清撤离路线，赶往前线救护点。",
   "flags": [
    "SELECTED_HERO_SEAL_ROUTE_KNOWN",
    "E_SEALED"
@@ -2876,7 +2876,7 @@ export const STORY_SCENES=freeze({
    "[远处传来一次闷响，随后停下。]",
    "莱姆斯：不是全封死的。"
   ],
-  "objective": "击退第一层显现的阻拦，抵达下一层；这是可胜的真实战斗。",
+  "objective": "击退第一层显现的阻拦，寻找通向封印深处的路。",
   "flags": [
    "E_SEAL_FIRST_CLEARED"
   ],
@@ -3183,7 +3183,7 @@ export const STORY_SCENES=freeze({
    "莱姆斯：你也别挡我救人。",
    "罗什福尔：伤员有人接应。先把追踪方向说清。"
   ],
-  "objective": "带着保留共同追踪；不是五人提前结盟。",
+  "objective": "与莱姆斯、砾恩说清追踪的方向，循大祭司留下的痕迹前行。",
   "flags": [
    "E_UNSEALED"
   ],
@@ -3259,7 +3259,7 @@ export const STORY_SCENES=freeze({
   "title": "主祭坛",
   "npc": "大祭司",
   "lines": [
-   "[族长核心置入中央结构，已亮起。砾恩胸前仍是升级后的王室遗物核心。]",
+   "[族长的核心嵌在祭坛中央，刺眼的光沿石槽向外流淌。砾恩按住胸前震动的核心，盯着大祭司的手。]",
    "莱姆斯：停下。你把他们留在战场，就是为了这个？",
    "大祭司：我等不到下一次了。",
    "莱姆斯：等什么？",
@@ -3274,7 +3274,7 @@ export const STORY_SCENES=freeze({
    "砾恩：那也不是你拿走他的理由。",
    "莱姆斯：如果你知道，就更该停下！"
   ],
-  "objective": "记录大祭司当场宣称的古代身份和惧死动机；尚未得到独立遗迹印证。",
+  "objective": "走近主祭坛，听大祭司说下去。",
   "flags": [
    "PRIEST_MORTALITY_MOTIVE_HEARD",
    "ASHEN_ORIGIN_CLAIM_HEARD"
@@ -3310,7 +3310,7 @@ export const STORY_SCENES=freeze({
    "[祭坛外缘的光一层层收紧，族长的核心悬在中央。你们沿空隙逼近，想先打断大祭司的施法，再设法取回它。]",
    "[脚下的纹路仍在向中央汇流，没人能断定停下施法后它是否也会停。莱姆斯沿着石沿寻找落脚处，砾恩紧盯着那枚核心。]"
   ],
-  "objective": "突破仪式外围，尝试切断施法、救出核心；这不是保证关闭门户。",
+  "objective": "突破仪式外围，设法打断施法，救出被夺走的核心。",
   "flags": [
    "RITUAL_CAST_INTERRUPTED"
   ],
@@ -3359,7 +3359,7 @@ export const STORY_SCENES=freeze({
    "砾恩：我看见了。",
    "罗什福尔：靠着退路，别被冲散！"
   ],
-  "objective": "抵挡首波冲击并撤出中心；成功撤离不等于阻止仪式或关闭门户。",
+  "objective": "抵挡门户涌出的首波冲击，掩护众人撤出祭坛中心。",
   "flags": [
    "RITUAL_SUCCEEDED",
    "PRIEST_DIED_BACKLASH",
@@ -3407,7 +3407,7 @@ export const STORY_SCENES=freeze({
    "莱姆斯：在哪里？",
    "砾恩：那座神庙。我得回去。"
   ],
-  "objective": "记录激活刻纹，发出撤离消息，准备返回古神庙核实；暂不确认支撑数量。",
+  "objective": "记下亮起的刻纹，送出撤离消息，再回古神庙追查这些连接。",
   "flags": [
    "ACTIVE_MARKS_RECORDED",
    "TEMPLE_RETURN_PLANNED",
@@ -3451,7 +3451,7 @@ export const STORY_SCENES=freeze({
    "莱姆斯：你也别挡我救人。",
    "布洛克：路上再吵。他带着核心走多久了？"
   ],
-  "objective": "带着保留共同追踪；不是五人提前结盟。",
+  "objective": "与莱姆斯、砾恩说清追踪的方向，循大祭司留下的痕迹前行。",
   "flags": [
    "E_UNSEALED"
   ],
@@ -3527,7 +3527,7 @@ export const STORY_SCENES=freeze({
   "title": "主祭坛",
   "npc": "大祭司",
   "lines": [
-   "[族长核心置入中央结构，已亮起。砾恩胸前仍是升级后的王室遗物核心。]",
+   "[族长的核心嵌在祭坛中央，刺眼的光沿石槽向外流淌。砾恩按住胸前震动的核心，盯着大祭司的手。]",
    "莱姆斯：停下。你把他们留在战场，就是为了这个？",
    "大祭司：我等不到下一次了。",
    "莱姆斯：等什么？",
@@ -3542,7 +3542,7 @@ export const STORY_SCENES=freeze({
    "砾恩：那也不是你拿走他的理由。",
    "莱姆斯：如果你知道，就更该停下！"
   ],
-  "objective": "记录大祭司当场宣称的古代身份和惧死动机；尚未得到独立遗迹印证。",
+  "objective": "走近主祭坛，听大祭司说下去。",
   "flags": [
    "PRIEST_MORTALITY_MOTIVE_HEARD",
    "ASHEN_ORIGIN_CLAIM_HEARD"
@@ -3578,7 +3578,7 @@ export const STORY_SCENES=freeze({
    "[祭坛外缘的光一层层收紧，族长的核心悬在中央。你们沿空隙逼近，想先打断大祭司的施法，再设法取回它。]",
    "[脚下的纹路仍在向中央汇流，没人能断定停下施法后它是否也会停。莱姆斯沿着石沿寻找落脚处，砾恩紧盯着那枚核心。]"
   ],
-  "objective": "突破仪式外围，尝试切断施法、救出核心；这不是保证关闭门户。",
+  "objective": "突破仪式外围，设法打断施法，救出被夺走的核心。",
   "flags": [
    "RITUAL_CAST_INTERRUPTED"
   ],
@@ -3627,7 +3627,7 @@ export const STORY_SCENES=freeze({
    "砾恩：我看见了。",
    "布洛克：出口还能走，快！"
   ],
-  "objective": "抵挡首波冲击并撤出中心；成功撤离不等于阻止仪式或关闭门户。",
+  "objective": "抵挡门户涌出的首波冲击，掩护众人撤出祭坛中心。",
   "flags": [
    "RITUAL_SUCCEEDED",
    "PRIEST_DIED_BACKLASH",
@@ -3675,7 +3675,7 @@ export const STORY_SCENES=freeze({
    "莱姆斯：在哪里？",
    "砾恩：那座神庙。我得回去。"
   ],
-  "objective": "记录激活刻纹，发出撤离消息，准备返回古神庙核实；暂不确认支撑数量。",
+  "objective": "记下亮起的刻纹，送出撤离消息，再回古神庙追查这些连接。",
   "flags": [
    "ACTIVE_MARKS_RECORDED",
    "TEMPLE_RETURN_PLANNED",
@@ -3718,7 +3718,7 @@ export const STORY_SCENES=freeze({
    "砾恩：别挡我的路。",
    "莱姆斯：你也别挡我救人。"
   ],
-  "objective": "带着保留共同追踪；不是五人提前结盟。",
+  "objective": "与砾恩说清追踪的方向，循大祭司留下的痕迹前行。",
   "flags": [
    "E_UNSEALED"
   ],
@@ -3794,7 +3794,7 @@ export const STORY_SCENES=freeze({
   "title": "主祭坛",
   "npc": "大祭司",
   "lines": [
-   "[族长核心置入中央结构，已亮起。砾恩胸前仍是升级后的王室遗物核心。]",
+   "[族长的核心嵌在祭坛中央，刺眼的光沿石槽向外流淌。砾恩按住胸前震动的核心，盯着大祭司的手。]",
    "莱姆斯：停下。你把他们留在战场，就是为了这个？",
    "大祭司：我等不到下一次了。",
    "莱姆斯：等什么？",
@@ -3809,7 +3809,7 @@ export const STORY_SCENES=freeze({
    "砾恩：那也不是你拿走他的理由。",
    "莱姆斯：如果你知道，就更该停下！"
   ],
-  "objective": "记录大祭司当场宣称的古代身份和惧死动机；尚未得到独立遗迹印证。",
+  "objective": "走近主祭坛，听大祭司说下去。",
   "flags": [
    "PRIEST_MORTALITY_MOTIVE_HEARD",
    "ASHEN_ORIGIN_CLAIM_HEARD"
@@ -3845,7 +3845,7 @@ export const STORY_SCENES=freeze({
    "[祭坛外缘的光一层层收紧，族长的核心悬在中央。你们沿空隙逼近，想先打断大祭司的施法，再设法取回它。]",
    "[脚下的纹路仍在向中央汇流，没人能断定停下施法后它是否也会停。莱姆斯沿着石沿寻找落脚处，砾恩紧盯着那枚核心。]"
   ],
-  "objective": "突破仪式外围，尝试切断施法、救出核心；这不是保证关闭门户。",
+  "objective": "突破仪式外围，设法打断施法，救出被夺走的核心。",
   "flags": [
    "RITUAL_CAST_INTERRUPTED"
   ],
@@ -3893,7 +3893,7 @@ export const STORY_SCENES=freeze({
    "莱姆斯：后退！门已经开了！",
    "砾恩：我看见了。"
   ],
-  "objective": "抵挡首波冲击并撤出中心；成功撤离不等于阻止仪式或关闭门户。",
+  "objective": "抵挡门户涌出的首波冲击，掩护众人撤出祭坛中心。",
   "flags": [
    "RITUAL_SUCCEEDED",
    "PRIEST_DIED_BACKLASH",
@@ -3941,7 +3941,7 @@ export const STORY_SCENES=freeze({
    "莱姆斯：在哪里？",
    "砾恩：那座神庙。我得回去。"
   ],
-  "objective": "记录激活刻纹，发出撤离消息，准备返回古神庙核实；暂不确认支撑数量。",
+  "objective": "记下亮起的刻纹，送出撤离消息，再回古神庙追查这些连接。",
   "flags": [
    "ACTIVE_MARKS_RECORDED",
    "TEMPLE_RETURN_PLANNED",
@@ -3986,7 +3986,7 @@ export const STORY_SCENES=freeze({
    "奇克：我只问一件事。跟过去，还有回来的路吗？",
    "莱姆斯：不知道。我会先看退路。"
   ],
-  "objective": "带着保留共同追踪；不是五人提前结盟。",
+  "objective": "与莱姆斯、砾恩说清追踪的方向，循大祭司留下的痕迹前行。",
   "flags": [
    "E_UNSEALED"
   ],
@@ -4062,7 +4062,7 @@ export const STORY_SCENES=freeze({
   "title": "主祭坛",
   "npc": "大祭司",
   "lines": [
-   "[族长核心置入中央结构，已亮起。砾恩胸前仍是升级后的王室遗物核心。]",
+   "[族长的核心嵌在祭坛中央，刺眼的光沿石槽向外流淌。砾恩按住胸前震动的核心，盯着大祭司的手。]",
    "莱姆斯：停下。你把他们留在战场，就是为了这个？",
    "大祭司：我等不到下一次了。",
    "莱姆斯：等什么？",
@@ -4077,7 +4077,7 @@ export const STORY_SCENES=freeze({
    "砾恩：那也不是你拿走他的理由。",
    "莱姆斯：如果你知道，就更该停下！"
   ],
-  "objective": "记录大祭司当场宣称的古代身份和惧死动机；尚未得到独立遗迹印证。",
+  "objective": "走近主祭坛，听大祭司说下去。",
   "flags": [
    "PRIEST_MORTALITY_MOTIVE_HEARD",
    "ASHEN_ORIGIN_CLAIM_HEARD"
@@ -4113,7 +4113,7 @@ export const STORY_SCENES=freeze({
    "[祭坛外缘的光一层层收紧，族长的核心悬在中央。你们沿空隙逼近，想先打断大祭司的施法，再设法取回它。]",
    "[脚下的纹路仍在向中央汇流，没人能断定停下施法后它是否也会停。莱姆斯沿着石沿寻找落脚处，砾恩紧盯着那枚核心。]"
   ],
-  "objective": "突破仪式外围，尝试切断施法、救出核心；这不是保证关闭门户。",
+  "objective": "突破仪式外围，设法打断施法，救出被夺走的核心。",
   "flags": [
    "RITUAL_CAST_INTERRUPTED"
   ],
@@ -4162,7 +4162,7 @@ export const STORY_SCENES=freeze({
    "砾恩：我看见了。",
    "奇克：这边！刚才的缝还在！"
   ],
-  "objective": "抵挡首波冲击并撤出中心；成功撤离不等于阻止仪式或关闭门户。",
+  "objective": "抵挡门户涌出的首波冲击，掩护众人撤出祭坛中心。",
   "flags": [
    "RITUAL_SUCCEEDED",
    "PRIEST_DIED_BACKLASH",
@@ -4210,7 +4210,7 @@ export const STORY_SCENES=freeze({
    "莱姆斯：在哪里？",
    "砾恩：那座神庙。我得回去。"
   ],
-  "objective": "记录激活刻纹，发出撤离消息，准备返回古神庙核实；暂不确认支撑数量。",
+  "objective": "记下亮起的刻纹，送出撤离消息，再回古神庙追查这些连接。",
   "flags": [
    "ACTIVE_MARKS_RECORDED",
    "TEMPLE_RETURN_PLANNED",
@@ -4253,7 +4253,7 @@ export const STORY_SCENES=freeze({
    "砾恩：别挡我的路。",
    "莱姆斯：你也别挡我救人。"
   ],
-  "objective": "带着保留共同追踪；不是五人提前结盟。",
+  "objective": "与莱姆斯说清追踪的方向，循大祭司留下的痕迹前行。",
   "flags": [
    "E_UNSEALED"
   ],
@@ -4329,7 +4329,7 @@ export const STORY_SCENES=freeze({
   "title": "主祭坛",
   "npc": "大祭司",
   "lines": [
-   "[族长核心置入中央结构，已亮起。砾恩胸前仍是升级后的王室遗物核心。]",
+   "[族长的核心嵌在祭坛中央，刺眼的光沿石槽向外流淌。砾恩按住胸前震动的核心，盯着大祭司的手。]",
    "莱姆斯：停下。你把他们留在战场，就是为了这个？",
    "大祭司：我等不到下一次了。",
    "莱姆斯：等什么？",
@@ -4344,7 +4344,7 @@ export const STORY_SCENES=freeze({
    "砾恩：那也不是你拿走他的理由。",
    "莱姆斯：如果你知道，就更该停下！"
   ],
-  "objective": "记录大祭司当场宣称的古代身份和惧死动机；尚未得到独立遗迹印证。",
+  "objective": "走近主祭坛，听大祭司说下去。",
   "flags": [
    "PRIEST_MORTALITY_MOTIVE_HEARD",
    "ASHEN_ORIGIN_CLAIM_HEARD"
@@ -4380,7 +4380,7 @@ export const STORY_SCENES=freeze({
    "[祭坛外缘的光一层层收紧，族长的核心悬在中央。你们沿空隙逼近，想先打断大祭司的施法，再设法取回它。]",
    "[脚下的纹路仍在向中央汇流，没人能断定停下施法后它是否也会停。莱姆斯沿着石沿寻找落脚处，砾恩紧盯着那枚核心。]"
   ],
-  "objective": "突破仪式外围，尝试切断施法、救出核心；这不是保证关闭门户。",
+  "objective": "突破仪式外围，设法打断施法，救出被夺走的核心。",
   "flags": [
    "RITUAL_CAST_INTERRUPTED"
   ],
@@ -4428,7 +4428,7 @@ export const STORY_SCENES=freeze({
    "莱姆斯：后退！门已经开了！",
    "砾恩：我看见了。"
   ],
-  "objective": "抵挡首波冲击并撤出中心；成功撤离不等于阻止仪式或关闭门户。",
+  "objective": "抵挡门户涌出的首波冲击，掩护众人撤出祭坛中心。",
   "flags": [
    "RITUAL_SUCCEEDED",
    "PRIEST_DIED_BACKLASH",
@@ -4476,7 +4476,7 @@ export const STORY_SCENES=freeze({
    "莱姆斯：在哪里？",
    "砾恩：那座神庙。我得回去。"
   ],
-  "objective": "记录激活刻纹，发出撤离消息，准备返回古神庙核实；暂不确认支撑数量。",
+  "objective": "记下亮起的刻纹，送出撤离消息，再回古神庙追查这些连接。",
   "flags": [
    "ACTIVE_MARKS_RECORDED",
    "TEMPLE_RETURN_PLANNED",
