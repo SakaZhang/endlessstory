@@ -1,3 +1,4 @@
+import {normalizeDivineStones} from './dist/divine-stone-state.js';
 import assert from 'node:assert/strict';
 import * as E from './dist/engine.js';
 import {SAVE_KEY,loadProgress} from './dist/storage.js';
@@ -5,6 +6,7 @@ import {claimTaskReward,createTaskRewardService,validTaskRewardState,TASK_REWARD
 const clone=structuredClone;
 function store(game){const data=new Map([[SAVE_KEY,JSON.stringify(game)]]);return {fail:false,writes:0,get length(){return data.size},key:i=>[...data.keys()][i],getItem:k=>data.get(k)??null,removeItem:k=>data.delete(k),setItem(k,v){if(this.fail)throw Error('quota');this.writes++;data.set(k,v);}};}
 function fixture(s,{costs=[],rewards=[{kind:'material',key:'铁屑|0',quantity:2}],eligible=()=>true}={}){
+ normalizeDivineStones(s); // Current-version fixture: reload must not need a historical ledger migration.
  const definitions={'test.claim':{isEligible:eligible,materials:costs,rewards}};
  return {storage:store(s),claim:createTaskRewardService(definitions),definitions};
 }
