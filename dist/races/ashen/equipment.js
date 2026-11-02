@@ -39,8 +39,8 @@ const scatterDescriptions=[
 ];
 const pieces=['helm','armor','gloves','boots'],labels={helm:'冠',armor:'甲',gloves:'握',boots:'履',ring:'环',amulet:'坠',core:'核'};
 export const sets=[
-{id:'ashen.caldera',name:'赤脉泄压',branch:'heat',description:'四片矿甲沿热脉留出泄压孔。',two:{description:'热量积蓄技能额外获得5热量。'},four:{description:'消耗热量的伤害技能提高15%伤害；退火壳提高20%护盾。'}},
-{id:'ashen.strata',name:'断层重构',branch:'shell',description:'交错岩层将碎裂变成下一次重构的材料。',two:{description:'凝岩披甲额外获得1岩片。'},four:{description:'裂壳横击与岩壳裂变提高15%伤害；碎壳重构提高20%治疗。'}},
+{id:'ashen.caldera',name:'赤脉泄压',branch:'heat',description:'四片矿甲沿热脉留出泄压孔。',two:{description:'热量积蓄技能额外获得5热量，套装可额外储存25热量，总上限125。'},four:{description:'消耗热量的伤害技能提高15%伤害；退火壳提高20%护盾。'}},
+{id:'ashen.strata',name:'断层重构',branch:'shell',description:'交错岩层将碎裂变成下一次重构的材料。',two:{description:'凝岩披甲额外获得1岩片，套装可额外储存2岩片，总上限8。'},four:{description:'裂壳横击与岩壳裂变提高15%伤害，岩壳裂变可消耗至多8岩片；碎壳重构提高20%治疗。'}},
 {id:'ashen.prism',name:'三相晶格',branch:'crystal',description:'明暗晶面以细银纹相连，回应有序的敲击。',two:{description:'叩晶、折光脉与沉影脉提高8%伤害。'},four:{description:'同频护幕与晶脉接续提高20%效果；三相回响提高15%伤害。'}}
 ];
 const scatter=[

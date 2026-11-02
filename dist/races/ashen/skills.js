@@ -1,7 +1,33 @@
 // Pure plans; the host commits raceResource only after a successful cast.
 export const createRuntime=()=>({version:1,heat:0,shards:0,resonance:0,lastPulse:null});
-export function validRuntime(r){return !!r&&typeof r==='object'&&!Array.isArray(r)&&Object.keys(r).length===5&&r.version===1&&Number.isInteger(r.heat)&&r.heat>=0&&r.heat<=100&&Number.isInteger(r.shards)&&r.shards>=0&&r.shards<=6&&Number.isInteger(r.resonance)&&r.resonance>=0&&r.resonance<=3&&[null,'physical','light','dark'].includes(r.lastPulse);}
-export function applyRaceEffects(runtime,effects){if(!validRuntime(runtime)||!Array.isArray(effects))return null;const r=structuredClone(runtime);for(const e of effects){if(e.type!=='raceResource')continue;if(e.operation==='pulse'){if(!['physical','light','dark'].includes(e.pulse))return null;if(r.lastPulse!==null&&r.lastPulse!==e.pulse)r.resonance=Math.min(3,r.resonance+1);r.lastPulse=e.pulse;continue;}const cap={heat:100,shards:6,resonance:3}[e.resource];if(!cap||!Number.isInteger(e.amount)||e.amount<0||!['add','spend'].includes(e.operation))return null;if(e.operation==='spend'){if(r[e.resource]<e.amount)return null;r[e.resource]-=e.amount;}else r[e.resource]=Math.min(cap,r[e.resource]+e.amount);}return r;}
+const RESOURCE_CAPS={heat:100,shards:6,resonance:3};
+const SET_RESOURCES={heat:{field:'setHeat',cap:25,set:'ashen.caldera',amount:5},shards:{field:'setShards',cap:2,set:'ashen.strata',amount:1}};
+export function validRuntime(r){
+ if(!r||typeof r!=='object'||Array.isArray(r)||r.version!==1||!Object.keys(r).every(k=>['version','heat','shards','resonance','lastPulse','setHeat','setShards'].includes(k))||!['version','heat','shards','resonance','lastPulse'].every(k=>Object.hasOwn(r,k))||![null,'physical','light','dark'].includes(r.lastPulse))return false;
+ for(const [key,cap]of Object.entries(RESOURCE_CAPS)){const def=SET_RESOURCES[key],bonus=def&&Object.hasOwn(r,def.field)?r[def.field]:0;if(!Number.isInteger(bonus)||bonus<0||bonus>(def?.cap??0)||!Number.isInteger(r[key])||r[key]<bonus||r[key]-bonus>cap)return false;}
+ return true;
+}
+// Total values remain the public skill/HUD counters; these two ledgers record only set-generated reserves.
+export function reconcileRuntimeSets(runtime,setCounts={}){
+ if(!validRuntime(runtime))return null;const r=structuredClone(runtime);
+ for(const [key,def]of Object.entries(SET_RESOURCES))if((setCounts[def.set]??0)<2){r[key]-=r[def.field]??0;delete r[def.field];}
+ return r;
+}
+export function applyRaceEffects(runtime,effects){
+ if(!validRuntime(runtime)||!Array.isArray(effects))return null;const r=structuredClone(runtime);
+ for(const e of effects){
+  if(e.type!=='raceResource')continue;
+  if(e.operation==='pulse'){if(e.setSource!==undefined)return null;if(!['physical','light','dark'].includes(e.pulse))return null;if(r.lastPulse!==null&&r.lastPulse!==e.pulse)r.resonance=Math.min(3,r.resonance+1);r.lastPulse=e.pulse;continue;}
+  const cap=RESOURCE_CAPS[e.resource],def=SET_RESOURCES[e.resource];if(!cap||!Number.isInteger(e.amount)||e.amount<0||!['add','spend'].includes(e.operation))return null;
+  if(e.setSource!==undefined){
+   if(e.operation!=='add'||!def||e.setSource!==def.set||e.amount!==def.amount||e.resource==='shards'&&e.sourceId!=='ashen.mantle'||e.resource==='heat'&&!['ashen.kindle','ashen.surge','ashen.temper'].includes(e.sourceId))return null;
+   const before=r[def.field]??0,after=Math.min(def.cap,before+e.amount);r[def.field]=after;r[e.resource]+=after-before;
+  }else if(e.operation==='spend'){
+   if(r[e.resource]<e.amount)return null;const used=def?Math.min(r[def.field]??0,e.amount):0;if(def&&Object.hasOwn(r,def.field))r[def.field]-=used;r[e.resource]-=e.amount;
+  }else{const bonus=def&&Object.hasOwn(r,def.field)?r[def.field]:0;r[e.resource]=Math.min(cap,r[e.resource]-bonus+e.amount)+bonus;}
+ }
+ return validRuntime(r)?r:null;
+}
 const defs=[
 ['heat','kindle','引脉拳','single',6500,'物理打击并积蓄20热量；护臂额外积蓄5。'],
 ['heat','vent','泄压冲','all',10000,'消耗至多40热量强化火焰冲击；无热量仍有基础伤害。'],
@@ -14,7 +40,7 @@ const defs=[
 ['shell','fault','断纹钉','single',9000,'物理刺击并降低目标防御12%，持续6秒；获得1枚岩片。'],
 ['shell','rebuild','碎壳重构','self',18000,'消耗至多3枚岩片修复生命；防御提高12%，每枚消耗岩片再提高2.5个百分点（最多19.5%），持续6秒。'],
 ['shell','quarry','沉岩震踏','all',15000,'地元素震击并降低各目标攻击10%，持续5秒；获得1枚岩片。'],
-['shell','fracture','岩壳裂变','all',20000,'消耗至多6枚岩片形成一次性群体碎晶冲击，绝不触发自身连锁。'],
+['shell','fracture','岩壳裂变','all',20000,'消耗至多6枚岩片形成一次性群体碎晶冲击；断层重构四件套可消耗至多8枚。'],
 ['crystal','tap','叩晶','single',6000,'物理脉冲；与上一次不同相位时获得1晶鸣。'],
 ['crystal','dawn','折光脉','single',8000,'光脉冲；异相序列获得1晶鸣。'],
 ['crystal','dusk','沉影脉','single',8000,'暗脉冲；异相序列获得1晶鸣。'],
@@ -53,7 +79,7 @@ if(key==='cleave'){const n=spend('shards',3);hit('physical',.75+n*.23*bonus);}
 if(key==='fault'){hit('physical',.95,t=>[eff('armorDown',targetBase(t,'baseArmor')*.12,6000)]);resource('shards','add',1);}
 if(key==='rebuild'){const n=spend('shards',3);self([eff('heal',hp*(.04+n*.022),0),eff('defenseUp',baseArmor*(.12+n*.025),6000)]);}
 if(key==='quarry'){hit('earth',.85,t=>[eff('attackDown',targetBase(t,'baseAtk')*.10,5000)]);resource('shards','add',1);}
-if(key==='fracture'){const n=spend('shards',6);hit('physical',.8+n*.22*bonus);}
+if(key==='fracture'){const n=spend('shards',(stats.count?.['ashen.strata']??0)>=4?8:6);hit('physical',.8+n*.22*bonus);}
 if(['tap','dawn','dusk'].includes(key)){const pulse={tap:'physical',dawn:'light',dusk:'dark'}[key];hit(pulse,1.05+(weaponType==='armguard'?.08:0));self([{type:'raceResource',operation:'pulse',pulse,sourceId:skillId}]);}
 if(key==='chorus'){const n=spend('resonance',3);self([eff('shield',hp*(.06+n*.035),8500)]);}
 if(key==='mend'){const n=spend('resonance',2);self([eff('heal',hp*(.045+n*.035),0)]);}
@@ -71,9 +97,9 @@ if(count('strata')>=4&&['cleave','fracture'].includes(key))a.coefficient*=1.15;
 if(count('prism')>=2&&['tap','dawn','dusk'].includes(key))a.coefficient*=1.08;
 if(count('prism')>=4&&key==='resound')a.coefficient*=1.15;
 }for(const e of a.effects??[]){
-if(count('caldera')>=2&&e.type==='raceResource'&&e.resource==='heat'&&e.operation==='add')e.amount+=5;
+if(count('caldera')>=2&&e.type==='raceResource'&&e.resource==='heat'&&e.operation==='add'&&!e.setSource)a.effects.push({...structuredClone(e),amount:5,setSource:'ashen.caldera'});
 if(count('caldera')>=4&&key==='anneal'&&e.type==='shield')e.amount*=1.2;
-if(count('strata')>=2&&key==='mantle'&&e.type==='raceResource'&&e.resource==='shards')e.amount+=1;
+if(count('strata')>=2&&key==='mantle'&&e.type==='raceResource'&&e.resource==='shards'&&!e.setSource)a.effects.push({...structuredClone(e),amount:1,setSource:'ashen.strata'});
 if(count('strata')>=4&&key==='rebuild'&&e.type==='heal')e.amount*=1.2;
 if(count('prism')>=4&&['chorus','mend'].includes(key)&&['heal','shield'].includes(e.type))e.amount*=1.2;
 }}return p;}
