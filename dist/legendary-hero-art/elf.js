@@ -1283,13 +1283,13 @@ export const ELF_LEGENDARY_HERO_ART={
               7
             ]
           ],
+          "drawHand": [
+            97,
+            102
+          ],
           "bowPull": [
             45.1,
             33.87
-          ],
-          "drawHand": [
-            94.8,
-            116.64
           ]
         }
       },
@@ -1332,10 +1332,6 @@ export const ELF_LEGENDARY_HERO_ART={
               7,
               7
             ]
-          ],
-          "bowPull": [
-            43.81,
-            33.87
           ]
         }
       },
