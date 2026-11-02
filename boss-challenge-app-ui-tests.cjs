@@ -70,7 +70,7 @@ for(const race of races){
   click({},'bossBtn');assert.equal(saved().activeEncounter.id,started.activeEncounter.id);assert.equal(saved().extraBossChallenges,started.extraBossChallenges,'repeated HUD challenge does not create/debit another fight');
  }
 }
-for(const [kind,race,site] of [['no-boss','human','human.a01'],['no-boss','goblin','goblin.a10'],['locked','human','human.a10']]){
+for(const [kind,race,site] of [['no-boss','human','human.a01'],['no-boss','goblin','goblin.a08'],['locked','human','human.a10']]){
  now+=500;const rejected=E.fresh(race);E.normalizeExpedition(rejected);E.normalizeHealth(rejected,now);rejected.restResume=false;rejected.extraBossChallenges=3;
  rejected.siteId=site;rejected.location=Number(site.slice(-2))-1;rejected.expedition.fieldId=site+'.field';
  if(race==='goblin')rejected.areaProgress.goblin={unlocked:[1,2,3,4,5,6,7,8,9,10],cleared:[1,2,3,4,5,6,7,8,9]};

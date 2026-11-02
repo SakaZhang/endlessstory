@@ -1504,3 +1504,13 @@ for(const[id,rows]of Object.entries(bosses)){
 monsters['goblin.a06.elite'].trait={type:'followers',shares:[.52,.12,.12,.12,.12],name:'砂铜鳌兽',followerMonsterId:'goblin.a06.normal.1'};
 monsters['goblin.a07.elite'].trait={type:'followers',shares:[.52,.12,.12,.12,.12],name:'废垒巡械',followerMonsterId:'goblin.a07.normal.1'};
 monsters['goblin.a09.boss'].trait={type:'followers',shares:[.55,.15,.15,.15],name:'断响晶蛾',followerMonsterId:'goblin.a09.normal.2'};
+
+// Final-region boss: the deep colony's oldest fungal shell. Existing ecology,
+// independently registered boss encounter; the shared regional budget sets stats.
+monsters['goblin.a10.boss']={
+ id:'goblin.a10.boss',name:'群穴菌王 · 古根',area:10,rank:'boss',nodes:['goblin.a10.boss'],elementTags:['earth'],basicAttackType:'physical',
+ skills:[
+ {id:'goblin.a10.boss:spores',name:'菌尘封路',cooldownMs:12000,firstAtMs:3000,castMs:900,requiresHitForEffects:true,effects:[{type:'damage',coefficient:1.35,damageType:'earth',powerBasis:'elementalPower'},{type:'next_basic_slow',multiplier:1.15}],trigger:null,maxCasts:null},
+ {id:'goblin.a10.boss:roots',name:'古根震地',cooldownMs:18000,firstAtMs:6500,castMs:1700,requiresHitForEffects:true,effects:[{type:'damage',coefficient:1.7,damageType:'earth',powerBasis:'elementalPower'}],trigger:null,maxCasts:null}
+ ],trait:null,description:'厚重菌壳连着群穴深处的古根。它伏在废弃石阶间，震动的根须将闯入者逼离菌巢。'
+};

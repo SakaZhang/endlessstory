@@ -561,3 +561,6 @@ export const materials = {
     "storyOnly": true
   }
 };
+
+// Final-region boss retains local salvage and the existing race gem channel.
+for(const id of ['goblin.mat.11','goblin.mat.12','goblin.mat.16','goblin.infinity_gem_goblin'])materials[id].sources.push('goblin.a10.boss');

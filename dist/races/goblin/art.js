@@ -9540,3 +9540,6 @@ art.equipment['goblin_scatter_weapon_16']={file:'races/goblin/assets/goblin_scat
 art.equipment['goblin_scatter_weapon_7']={file:'races/goblin/assets/goblin_scatter_weapon_7.png',width:64,height:64};
 art.equipment['goblin_scatter_weapon_8']={file:'races/goblin/assets/goblin_scatter_weapon_8.png',width:64,height:64};
 art.equipment['goblin_scatter_weapon_9']={file:'races/goblin/assets/goblin_scatter_weapon_9.png',width:64,height:64};
+
+// Same deep-colony species as the local fungal shell beast; full native lifecycle.
+art.monsters['goblin.a10.boss']=structuredClone(art.monsters['goblin.a10.elite']);

@@ -336,7 +336,8 @@
       "goblin.a08.dungeon",
       "goblin.a09.dungeon",
       "goblin.a10.dungeon",
-      "goblin.a09.boss"
+      "goblin.a09.boss",
+      "goblin.a10.boss"
     ],
     "qualityRange": [
       0,
@@ -369,7 +370,8 @@
       "goblin.a08.dungeon",
       "goblin.a09.dungeon",
       "goblin.a10.dungeon",
-      "goblin.a09.boss"
+      "goblin.a09.boss",
+      "goblin.a10.boss"
     ],
     "qualityRange": [
       0,
@@ -485,7 +487,8 @@
       "goblin.a10.field",
       "goblin.a08.dungeon",
       "goblin.a10.dungeon",
-      "goblin.a09.boss"
+      "goblin.a09.boss",
+      "goblin.a10.boss"
     ],
     "qualityRange": [
       0,
@@ -532,7 +535,8 @@
       "goblin.a10.dungeon",
       "goblin.a03.boss",
       "goblin.a06.boss",
-      "goblin.a09.boss"
+      "goblin.a09.boss",
+      "goblin.a10.boss"
     ],
     "qualityRange": [
       3

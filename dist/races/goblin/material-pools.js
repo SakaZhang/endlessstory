@@ -3446,4 +3446,7 @@ export const materialAssociations = {
     ]
   }
 };
+const finalBoss=structuredClone(materialAssociations['goblin.a10.elite|goblin.a10.dungeon']);
+finalBoss.monsterId=finalBoss.nodeId='goblin.a10.boss';
+materialAssociations['goblin.a10.boss|goblin.a10.boss']=finalBoss;
 export const materialPools = buildMaterialPools({materials,monsters,associations:materialAssociations});

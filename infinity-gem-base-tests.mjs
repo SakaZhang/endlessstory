@@ -1,4 +1,4 @@
-import {beforeHumanEndgameSources,beforeEarlyLuckTags,beforeMaterialCopy} from './racial-material-copy-test-fixture.mjs';
+import {beforeGoblinEndgameSources,beforeHumanEndgameSources,beforeEarlyLuckTags,beforeMaterialCopy} from './racial-material-copy-test-fixture.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
@@ -17,10 +17,11 @@ const context=p=>[{instanceId:p.nodeId,contentVersion:'dwarf-m2-v1'},{definition
 const gemOf=p=>p.channels.find(c=>c.channel==='gem');
 const options={rollQuality:()=>0,owned:(s,id)=>!!s[id],receive:(s,row)=>{s[row.materialId]=(s[row.materialId]??0)+1;return true;},luck:0};
 let total=0;const summary=[];
-assert.equal(sha(beforeMaterialCopy(beforeEarlyLuckTags(beforeHumanEndgameSources(WORLD_MATERIALS)))),baseline.materialsSha256,'all original material identities, source whitelists, quality ranges and uniqueness unchanged');
+assert.equal(sha(beforeMaterialCopy(beforeEarlyLuckTags(beforeHumanEndgameSources(beforeGoblinEndgameSources(WORLD_MATERIALS))))),baseline.materialsSha256,'all original material identities, source whitelists, quality ranges and uniqueness unchanged');
 for(const [race,pools] of races){
  const old=baseline.races[race],rest=structuredClone(pools),counts={race,field:0,dungeon:0,boss:0};
  if(race==='human'){const key='human.a10.boss|human.a10.boss',addition=JSON.parse(readFileSync(new URL('./fixtures/boss-growth/human-a10-content-v080.json',import.meta.url)));assert.deepEqual(rest[key],addition.pool);assert.equal(gemOf(rest[key]).hitProbability,.05);delete rest[key];}
+ if(race==='goblin'){const key='goblin.a10.boss|goblin.a10.boss',addition=JSON.parse(readFileSync(new URL('./fixtures/boss-growth/goblin-a10-content-v087.json',import.meta.url)));assert.deepEqual(rest[key],addition.pool);assert.equal(gemOf(rest[key]).hitProbability,.05);delete rest[key];}
  assert.equal(Object.keys(rest).length,old.gemChannels.length);
  for(const p of Object.values(rest))for(const c of p.channels)if(c.channel==='gem'&&c.entries.length)delete c.hitProbability;
  assert.equal(sha(rest),old.unchangedPoolDataSha256,race+' exact old JSON unchanged except populated gem hitProbability');

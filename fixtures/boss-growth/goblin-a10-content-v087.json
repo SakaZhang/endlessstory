@@ -1,0 +1,90 @@
+{
+  "pool": {
+    "monsterId": "goblin.a10.boss",
+    "nodeId": "goblin.a10.boss",
+    "channels": [
+      {
+        "channel": "regular",
+        "id": "regular",
+        "hitProbability": 0.75,
+        "quantity": 1,
+        "entries": [
+          {
+            "materialId": "goblin.mat.11",
+            "weight": 0.5,
+            "qualityWeights": [
+              0.1417004048582996,
+              0.37786774628879893,
+              0.3454790823211876,
+              0.1349527665317139
+            ]
+          },
+          {
+            "materialId": "goblin.mat.12",
+            "weight": 0.5,
+            "qualityWeights": [
+              0.1417004048582996,
+              0.37786774628879893,
+              0.3454790823211876,
+              0.1349527665317139
+            ]
+          }
+        ]
+      },
+      {
+        "channel": "recovery",
+        "id": "recovery",
+        "hitProbability": 0.9,
+        "quantity": 1,
+        "entries": [
+          {
+            "materialId": "goblin.mat.12",
+            "weight": 1,
+            "qualityWeights": [
+              0.1417004048582996,
+              0.37786774628879893,
+              0.3454790823211876,
+              0.1349527665317139
+            ]
+          }
+        ]
+      },
+      {
+        "channel": "special",
+        "id": "special",
+        "hitProbability": 0.1376,
+        "quantity": 1,
+        "entries": [
+          {
+            "materialId": "goblin.mat.16",
+            "weight": 1,
+            "qualityWeights": [
+              0.1417004048582996,
+              0.37786774628879893,
+              0.3454790823211876,
+              0.1349527665317139
+            ]
+          }
+        ]
+      },
+      {
+        "channel": "gem",
+        "id": "gem",
+        "hitProbability": 0.05,
+        "quantity": 1,
+        "entries": [
+          {
+            "materialId": "goblin.infinity_gem_goblin",
+            "weight": 1,
+            "qualityWeights": [
+              0,
+              0,
+              0,
+              1
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,3 +1,4 @@
+import './final-region-boss-v087-tests.mjs';
 import './reforge-special-preservation-v086-tests.mjs';
 import './infinity-gauntlet-tests.mjs';
 import './infinity-gauntlet-combat-tests.mjs';

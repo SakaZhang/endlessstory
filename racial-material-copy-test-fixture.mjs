@@ -35,3 +35,12 @@ export function beforeHumanEndgameSources(materials){
  for(const id of HUMAN_ENDGAME_MATERIAL_IDS){assert.equal(historical[id].sources.at(-1),node);assert.equal(historical[id].sources.filter(n=>n===node).length,1);historical[id].sources.pop();}
  return historical;
 }
+
+// v087 authorizes exactly four local A10 boss source appends; other fields stay hashed.
+export const GOBLIN_ENDGAME_MATERIAL_IDS=Object.freeze(['goblin.mat.11','goblin.mat.12','goblin.mat.16','goblin.infinity_gem_goblin']);
+export function beforeGoblinEndgameSources(materials){
+ const historical=structuredClone(materials),node='goblin.a10.boss';
+ assert.deepEqual(Object.values(historical).filter(m=>m.sources?.includes(node)).map(m=>m.id).sort(),[...GOBLIN_ENDGAME_MATERIAL_IDS].sort());
+ for(const id of GOBLIN_ENDGAME_MATERIAL_IDS){assert.equal(historical[id].sources.at(-1),node);assert.equal(historical[id].sources.filter(n=>n===node).length,1);historical[id].sources.pop();}
+ return historical;
+}

@@ -116,7 +116,7 @@ export const areas = [
       91,
       100
     ],
-    "boss": false,
+    "boss": true,
     "description": "裂穴诸部的群穴腹地；地貌与遭遇为探索内容，不确定主线剧情。"
   }
 ];

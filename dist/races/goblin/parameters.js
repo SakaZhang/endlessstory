@@ -828,3 +828,6 @@ export const parameters = {
   },
   "interruptStopMs": 1100
 };
+
+// Seed resistances/cadence from the local ecology; runtime applies A10 boss budget.
+parameters.monsters['goblin.a10.boss']=structuredClone(parameters.monsters['goblin.a10.elite']);
