@@ -21,8 +21,8 @@ function seeded(template,seed,streak=0){const s=clone(template);s.rareRewardProg
 const added=(s,t)=>s.inventory.filter(it=>!t.inventory.some(old=>old.id===it.id));
 function find(template,predicate,streak=0,max=3000){for(let seed=1;seed<=max;seed++){const s=seeded(template,seed,streak);if(predicate(s))return {seed,s};}assert.fail('seeded production path not found');}
 const eligible={source:'drop',kind:'dungeon',areaNumber:10,race:'elf',clear:true,luck:21};
-assert.equal(setDropProbability('dungeon',0),.08);assert.equal(setDropProbability('boss',0),.12);assert(Math.abs(setDropProbability('dungeon',21)-.09292307692307693)<1e-14);assert(Math.abs(setDropProbability('boss',21)-.13938461538461538)<1e-14);
-for(const override of [{clear:false},{kind:'field'},{source:'forge'},{areaNumber:2},{race:'unknown'}])assert.equal(rollSourceSet({...eligible,...override},()=>0),null);
+assert.equal(setDropProbability('dungeon',0),.15);assert.equal(setDropProbability('boss',0),.25);assert(Math.abs(setDropProbability('dungeon',21)-(.15*(1+.2*21/26)))<1e-14);assert(Math.abs(setDropProbability('boss',21)-(.25*(1+.2*21/26)))<1e-14);
+for(const override of [{clear:false},{kind:'unknown'},{source:'forge'},{areaNumber:2},{race:'unknown'}])assert.equal(rollSourceSet({...eligible,...override},()=>0),null);
 assert(rollSourceSet({...eligible,guaranteed:true},()=>.999));
 const stage1=fixture(),stage2=fixture(2),clear=fixture(3);
 const gear=find(stage1,s=>s.rareRewardProgress.dungeonDryStreak===1),empty=find(stage1,s=>s.rareRewardProgress.dungeonDryStreak===0&&added(s,stage1).length===0);

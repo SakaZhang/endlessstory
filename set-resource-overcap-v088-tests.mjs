@@ -3,7 +3,7 @@ import * as A from './dist/races/ashen/skills.js';
 import * as E from './dist/engine.js';
 import {applyRaceRuntimeEffect,raceRuntimeContext} from './dist/race-runtime.js';
 import {applyEquipmentRuntimeChange,validEquipmentRuntime} from './dist/equipment-runtime.js';
-const clone=x=>structuredClone(x),normal=(resource,amount,operation='add')=>({type:'raceResource',resource,amount,operation}),bonus=resource=>({...normal(resource,resource==='heat'?5:1),setSource:resource==='heat'?'ashen.caldera':'ashen.strata',sourceId:resource==='heat'?'ashen.kindle':'ashen.mantle'});
+const clone=x=>structuredClone(x),normal=(resource,amount,operation='add')=>({type:'raceResource',resource,amount,operation}),bonus=resource=>({...normal(resource,resource==='heat'?10:2),setSource:resource==='heat'?'ashen.caldera':'ashen.strata',sourceId:resource==='heat'?'ashen.kindle':'ashen.mantle'});
 let r=A.createRuntime();assert(A.validRuntime(r));assert.deepEqual(A.reconcileRuntimeSets(r,{}),r);
 for(const resource of ['heat','shards']){
  const cap=resource==='heat'?100:6,max=resource==='heat'?25:2,field=resource==='heat'?'setHeat':'setShards';
@@ -50,7 +50,7 @@ const {planTreeSkill,validTreeSkillPlan}=await import('./dist/skill-tree-consume
 for(const key of ['kindle','surge','temper','mantle','fracture']){
  const skillId='ashen.'+key,p=planTreeSkill({skillId,castId:'production-plan',weaponType:'armguard',config:{cooldownMs:A.skills[skillId].cooldownMs},stats:{...stats,count:{'ashen.caldera':2,'ashen.strata':4}},context:{runtime:full},hero:{hp:500,maxHp:1000,eligibleDebuffIds:[]},selectedTargetId:'enemy',targets:[{id:'enemy',alive:true,hp:100,maxHp:100,baseAtk:100,baseArmor:100}]});
  assert(p&&validTreeSkillPlan(p),key+' production planner');const holder={raceRuntime:{race:'ashen',state:clone(full)}};for(const fx of p.actions.flatMap(a=>a.effects??[]).filter(e=>e.type==='raceResource'))assert(applyRaceRuntimeEffect(holder,'ashen',fx));assert(A.validRuntime(holder.raceRuntime.state));
- if(key==='fracture'){assert.equal(holder.raceRuntime.state.shards,0);assert.equal(holder.raceRuntime.state.setShards,0);assert(Math.abs(p.actions.find(a=>a.kind==='hit').coefficient-2.944)<1e-9);}
+ if(key==='fracture'){assert.equal(holder.raceRuntime.state.shards,0);assert.equal(holder.raceRuntime.state.setShards,0);assert(Math.abs(p.actions.find(a=>a.kind==='hit').coefficient-3.2)<1e-9);}
 }
 console.log('PASS actual planTreeSkill -> validTreeSkillPlan -> applyRaceRuntimeEffect integrates tagged adds and 8-shard fracture.');
 

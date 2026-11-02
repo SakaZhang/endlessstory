@@ -11,10 +11,10 @@ try{
  // Fifteen unknown books use the existing 1–2-book slots (formerly capped by one enabled book).
  assert.equal(equipment+books+materials+fruit+token,20000*8);assert(books>29000&&books<31000);assert(equipment>70000&&equipment<85000);assert.equal(fruit,0);assert(token>1750&&token<2250);
  // Source policy is independent of concrete instance availability.
- for(const kind of ['dungeon','boss']){let count=0;const sets=new Set(),slots=new Set();for(let i=0;i<20000;i++){const result=rollSourceSet({source:'drop',kind,areaNumber:3,race:'dwarf',clear:true},rng);if(result){count++;sets.add(result.set);slots.add(result.slot);assert.equal(result.rarity,3);assert(SET_SLOTS.includes(result.slot));}}assert.equal(sets.size,3);assert.equal(slots.size,4);assert(count>(kind==='boss'?2100:1350)&&count<(kind==='boss'?2700:1850));}
+ for(const kind of ['field','dungeon','boss']){let count=0;const sets=new Set(),slots=new Set();for(let i=0;i<20000;i++){const result=rollSourceSet({source:'drop',kind,areaNumber:3,race:'dwarf',clear:true},rng);if(result){count++;sets.add(result.set);slots.add(result.slot);assert.equal(result.rarity,3);assert(SET_SLOTS.includes(result.slot));}}assert.equal(sets.size,3);assert.equal(slots.size,4);assert(Math.abs(count/20000-({field:.03,dungeon:.15,boss:.25}[kind]))<.012);}
  let draws=0;const zero=()=>{draws++;return 0;};
  for(const source of ['forge','merchant','drop'])for(const areaNumber of [1,2,3])for(const kind of ['field','dungeon','boss']){
-  if(source==='drop'&&areaNumber===3&&kind!=='field')continue;const before=draws;assert.equal(rollSourceSet({source,kind,areaNumber,race:'dwarf'},zero),null);assert.equal(draws,before);
+  if(source==='drop'&&areaNumber===3&&(kind==='field'||kind==='boss'))continue;const before=draws;assert.equal(rollSourceSet({source,kind,areaNumber,race:'dwarf'},zero),null);assert.equal(draws,before);
  }
  assert.deepEqual(rollSourceSet({source:'drop',kind:'boss',areaNumber:3,race:'elf'},zero),{set:'elf_arrow',slot:'helm',rarity:3});assert.equal(rollSourceSet({source:'drop',kind:'boss',areaNumber:3,race:'unknown'},zero),null);
  Math.random=()=>0;const forced=fresh();assert.equal(forge(forced,['铁屑|0']).set,null);assert(ensureMerchant(fresh(),1000).offers.filter(o=>o.type==='equipment').every(o=>!o.item.set));

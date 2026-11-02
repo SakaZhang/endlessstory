@@ -17,12 +17,12 @@ for(const [id,description] of Object.entries(expected)){
 // The conditional bonus is not a multiplier on the entire skill.
 const hit={baseDamage:100,conditionalBonus:20,source:{kind:'skill'},direct:true,damageType:'physical',weaponType:'hammer'};
 const anvil=resolveSetLinkedHit({...hit,skillId:'breach_followup',targetBroken:true},{anvil:4},SETS);
-assert.equal(anvil.baseDamage,120);assert.equal(anvil.conditionalBonus,42);
+assert.equal(anvil.baseDamage,130);assert.equal(anvil.conditionalBonus,52);
 const rune=resolveSetLinkedHit({...hit,skillId:'furnace_wave',targetBurning:true},{rune:4},SETS);
-assert.equal(rune.baseDamage,100);assert.equal(rune.conditionalBonus,34);
+assert.equal(rune.baseDamage,100);assert.equal(rune.conditionalBonus,40);
 const guard=resolveSetLinkedHit({...hit,skillId:'bastion_blow',heroShielded:true},{guard:4},SETS);
-assert.equal(guard.baseDamage,100);assert.equal(guard.conditionalBonus,32);
-assert.equal(resolveSetLinkedEffect({type:'shield',amount:100,source:{kind:'skill'}},{guard:2},SETS).amount,125);
+assert.equal(guard.baseDamage,100);assert.equal(guard.conditionalBonus,38);
+assert.equal(resolveSetLinkedEffect({type:'shield',amount:100,source:{kind:'skill'}},{guard:2},SETS).amount,135);
 assert.equal(resolveSetLinkedEffect({type:'shield',amount:100,source:{kind:'equipment'}},{guard:2},SETS).amount,100);
 assert.equal(resolveSetLinkedEffect({type:'dot',status:'burn',amount:100,skillId:'furnace_wave',weaponType:'axe',chance:.9},{rune:4},SETS).chance,1);
 console.log('PASS dwarf set descriptions: current names, tuning-derived 2/4-piece values, conditional-only bonuses, skill shield scope and capped probability.');

@@ -10,7 +10,7 @@ global.document={hidden:false,getElementById:el,querySelector:selector=>selector
  const click=(dataset={},id='')=>{const b={dataset,id};for(const f of events.click||[])f({target:{id,closest:()=>b}});};
  const saved=()=>JSON.parse(store.get(SAVE_KEY));
  click({view:'inventory'});click({item:parts[0].id});
- const verify=(html,n)=>{assert.match(html,new RegExp(`当前已穿戴 ${n} / 4 件`));assert.match(html,/直接伤害提高10%/);assert.match(html,/额外提高18%/);assert.match(html,/29.8%/);for(const threshold of [2,4])assert(html.includes(`data-set-pieces="${threshold}" data-set-active="${n>=threshold}"`));};
+ const verify=(html,n)=>{assert.match(html,new RegExp(`当前已穿戴 ${n} / 4 件`));assert.match(html,/直接伤害提高20%/);assert.match(html,/额外提高25%/);assert.match(html,/50%/);for(const threshold of [2,4])assert(html.includes(`data-set-pieces="${threshold}" data-set-active="${n>=threshold}"`));};
  verify(el('view').innerHTML,0);
  for(let n=1;n<=4;n++){click({equip:parts[n-1].id});verify(el('view').innerHTML,n);}
  click({view:'codex'});click({codexSet:'elf_arrow'});verify(el('view').innerHTML,4);

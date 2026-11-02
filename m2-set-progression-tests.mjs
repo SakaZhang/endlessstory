@@ -15,7 +15,7 @@ for(const area of [1,2]){const id=`dwarf.a0${area}.dungeon`;for(let stage=1;stag
 assert.deepEqual(E.getAreaProgress(s).unlocked,[1,2,3]);
 // Actual A03 complete-clear rewards, not source-policy-only synthetic calls. Replay the
 // completed victory with explicit deterministic RNG boundaries until each part.
-for(const area of [1,2,3]){const c=structuredClone(s);c.dungeonRun=null;c.activeEncounter=null;start(c,`dwarf.a0${area}.field`);for(let seed=0;seed<128;seed++){const trial=structuredClone(c);trial.activeEncounter.rngState=seed;const before=new Set(trial.inventory.map(it=>it.id));E.reward(trial,trial.activeEncounter,trial.lastHealthClock);assert(!trial.inventory.some(it=>!before.has(it.id)&&it.set),'actual fields never sets');}}
+for(const area of [1,2,3]){const c=structuredClone(s);c.dungeonRun=null;c.activeEncounter=null;start(c,`dwarf.a0${area}.field`);for(let seed=0;seed<128;seed++){const trial=structuredClone(c);trial.activeEncounter.rngState=seed;const before=new Set(trial.inventory.map(it=>it.id));E.reward(trial,trial.activeEncounter,trial.lastHealthClock);if(area<3)assert(!trial.inventory.some(it=>!before.has(it.id)&&it.set),'early fields never sets');else for(const it of trial.inventory.filter(it=>!before.has(it.id)&&it.set))assert(['anvil','rune','guard'].includes(it.set));}}
 const acquired=[];
 for(const slot of ['helm','armor','gloves','boots']){
  // Sets now roll independently on the complete third stage, never on partial clears.
