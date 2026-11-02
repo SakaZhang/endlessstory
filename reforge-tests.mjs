@@ -19,14 +19,14 @@ try{
   if(mode==='value')assert.equal(it.affixes[index].stat,before[index].stat);
   if(mode==='replace')assert.notEqual(it.affixes[index].stat,before[index].stat);
   if(mode!=='all')it.affixes.forEach((a,j)=>{if(j!==index)assert.deepEqual(a,before[j]);});
-  for(const a of it.affixes){const d=affixRollInfo(a);assert(a.value>=d.min&&a.value<=d.max);assert.equal(affixRollInfo(a).raw,a.value);assert.equal(it.divine.bonus.affixes.find(b=>b.stat===a.stat).value,a.value/10);}
+  for(const a of it.affixes){const d=affixRollInfo(a);assert(a.value>=d.min&&a.value<=d.max);assert.equal(affixRollInfo(a).raw,a.value);assert.equal(it.divine.bonus.affixes.find(b=>b.stat===a.stat).value,a.value);}
  }
  assert(validSave(s));assert.deepEqual(stats(JSON.parse(JSON.stringify(s))),stats(s));
  let snapshot=JSON.stringify(s);s.gold=0;s.consumables.reforgeToken=0;let noMoney=JSON.stringify(s);c=calls;assert.equal(reforge(s,it.id,'all'),null);assert.equal(JSON.stringify(s),noMoney);assert.equal(calls,c);Object.assign(s,JSON.parse(snapshot));
  s.materialStacks['炉火晶|0']=0;noMoney=JSON.stringify(s);assert.equal(reforge(s,it.id,'replace',0),null);assert.equal(JSON.stringify(s),noMoney);
  // Values change actual equipped combat stats, not only labels; divine color remains raw.
  const p=fresh(),gear=item('weapon',1,null,0);gear.affixes=[currentAffix('atk',3)];applyForgeFavor(gear);p.inventory.push(gear);equipItem(p,gear.id);const low=stats(p).atk;Math.random=()=>.999999;
- const result=reforge(p,gear.id,'value',0);assert(resolveReforge(p,true));assert.equal(result.item.affixes[0].value,8);assert(stats(p).atk>low);assert.equal(affixRollInfo(gear.affixes[0]).tier,3);assert.equal(gear.divine.bonus.affixes[0].value,.8);assert(validSave(p));
+ const result=reforge(p,gear.id,'value',0);assert(resolveReforge(p,true));assert.equal(result.item.affixes[0].value,8);assert(stats(p).atk>low);assert.equal(affixRollInfo(gear.affixes[0]).tier,3);assert.equal(gear.divine.bonus.affixes[0].value,8);assert(validSave(p));
  // Sets retain their four-piece identities and no-special invariant.
  const set=item('gloves',2,'anvil',3);p.inventory.push(set);p.gold=1000;p.consumables.reforgeToken=1;p.materialStacks={'铁屑|0':10,'炉火晶|0':10,'誓约残片|0':1};assert(reforge(p,set.id,'all'));assert.equal(set.set,'anvil');assert.equal(set.special,null);assert(validSave(p));
  console.log('v0.5 reforge: 3,000 operations, atomic costs, invalid/no-RNG previews, legal rolls, identity/divine persistence, real stats: PASS');

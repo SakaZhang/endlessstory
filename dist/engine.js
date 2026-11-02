@@ -208,7 +208,7 @@ export function affixRollInfo(a){
  const tier=Math.min(3,Math.floor(ratio*4));
  return {min:def.min,max:def.max,raw:a.value,tier,sourceLabel:affixSourceLabel(a),color:['#e4e5e7','#69b9f0','#bc8cf2','#f07878'][tier]};
 }
-export function divineMultiplier(it){return it.divine?.id==='forge-favor'&&it.divine.model==='raw-v1'?1.1:1;}
+export function divineMultiplier(it){return it.divine?.id==='forge-favor'&&['raw-v1','raw-v2'].includes(it.divine.model)?2:1;}
 export const SPECIALS={
  knowledge:{name:'求知',desc:'常规战斗胜利时50%概率额外获得一次基础战斗经验，不重复触发；异界除外。'},
  momentum:{name:'余势',desc:'直接攻击击杀后，下一次命中的普攻或主动伤害技能伤害 +100%（整次施放含多段；多重追加独立消耗新余势）。不叠加，败退清除，持续伤害和反击不触发。'},
@@ -284,7 +284,7 @@ function reforgeCandidateItem(it,p){
  // Legacy paid candidates may contain a rerolled special; never apply that retired result.
  candidate.special=structuredClone(it.special??null);
  if(p.mode==='all'){if(p.newDivine===null)delete candidate.divine;else candidate.divine=structuredClone(p.newDivine);}
- else if(divineMultiplier(candidate)>1)candidate.divine.bonus.affixes=candidate.affixes.map(a=>({stat:a.stat,value:a.value/10}));
+ else if(divineMultiplier(candidate)>1)candidate.divine.bonus.affixes=candidate.affixes.map(a=>({stat:a.stat,value:candidate.divine.model==='raw-v1'?a.value/10:a.value}));
  return candidate;
 }
 // Returns the complete candidate, never the owned target or a mutable pending reference.
@@ -292,7 +292,7 @@ export function getPendingReforgeCandidate(s){
  if(!s?.pendingReforge||!validPendingReforge(s))return null;
  return reforgeCandidateItem(s.inventory.find(it=>it.id===s.pendingReforge.itemId),s.pendingReforge);
 }
-function canonicalReforgeDivine(it){const copy=structuredClone(it);delete copy.divine;applyForgeFavor(copy);return copy.divine;}
+function canonicalReforgeDivine(it,model=it.divine?.model??'raw-v2'){const copy=structuredClone(it);delete copy.divine;applyForgeFavor(copy);if(model==='raw-v1'){copy.divine.model='raw-v1';for(const k of ['atk','armor','hp'])copy.divine.bonus[k]=copy[k]/10;copy.divine.bonus.affixes=copy.affixes.map(a=>({stat:a.stat,value:a.value/10}));}return copy.divine;}
 export function reforge(s,itemId,mode,index=0,donorId,expectedQuote){
  if(!s||!Array.isArray(s.inventory)||s.pendingReforge)return null;
  const it=s.inventory.find(i=>i.id===itemId),cost=getReforgeCost(it,mode,s);
@@ -368,7 +368,7 @@ export function validPendingReforge(s){
   if(!Object.hasOwn(p,'oldDivine')||!Object.hasOwn(p,'newDivine')||!sameReforgeData(p.oldDivine,it.divine??null))return false;
   if(p.oldDivine!==null&&!sameReforgeData(p.oldDivine,canonicalReforgeDivine(it)))return false;
   const expected=structuredClone(it);expected.affixes=structuredClone(p.newAffixes);expected.special=structuredClone(p.newSpecial);
-  if(p.newDivine!==null&&!sameReforgeData(p.newDivine,canonicalReforgeDivine(expected)))return false;
+  if(p.newDivine!==null&&!sameReforgeData(p.newDivine,canonicalReforgeDivine(expected,p.newDivine.model)))return false;
   if(p.oldDivine!==null&&p.newDivine===null)return false;
  }else if(p.oldDivine!==undefined||p.newDivine!==undefined)return false;
  if(p.mode==='all')return p.index===null&&p.newAffixes.every(a=>(p.ruleVersion>=8?ordinaryAffixKeys(it.slot):ACTIVE_AFFIX_KEYS).includes(a.stat)&&sameReforgeData(a.sourceRange,makeAffixSourceRange(AFFIX_DEFS[a.stat],it.legendaryId?4:it.rarity,p.ruleVersion>=7?{stat:a.stat,sourceLevel:it.level}:null)));
@@ -384,7 +384,7 @@ export function resolveReforge(s,accept,expectedOperationId){
   it.affixes=structuredClone(p.newAffixes);
   // Reforge never changes or restores a special: retain current earned growth verbatim.
   if(p.mode==='all'){if(p.newDivine===null)delete it.divine;else it.divine=structuredClone(p.newDivine);}
-  else if(divineMultiplier(it)>1)it.divine.bonus.affixes=it.affixes.map(a=>({stat:a.stat,value:a.value/10}));
+  else if(divineMultiplier(it)>1)it.divine.bonus.affixes=it.affixes.map(a=>({stat:a.stat,value:it.divine.model==='raw-v1'?a.value/10:a.value}));
  }
  s.pendingReforge=null;capHealth(s);
  return {item:it,accepted:accept,operationId:p.operationId};
@@ -1330,7 +1330,7 @@ function earnedMaterials(s,material,count,boss=false,luck=0,weights=null,summary
 export const MERCHANT_STOCK={...Object.fromEntries(Object.entries(MATERIALS).map(([key,m])=>[key,m.stock??(m.rarity==='珍奇'?[1,2]:m.rarity==='少见'?[2,5]:[4,8])])),...Object.fromEntries(Object.entries(POTION_IMPORT_MATERIALS).map(([key,m])=>[key,m.stock])), '铁屑':[6,12],'炉火晶':[3,7],'誓约残片':[2,5],'灰根草':[4,8],'dwarf.blackvein_ore':[6,12],'dwarf.rock_lizard_sinew':[3,7]};
 export function merchantMaterialKeys(){return Object.keys(MATERIALS).filter(k=>MATERIALS[k].merchantEnabled!==false&&!EXPANSION_PACKS.some(p=>p.materialAliases?.[k]));}
 export const MERCHANT_CYCLE_MS=30*60*1000;
-function validEquipment(i){try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;return Number.isSafeInteger(i.level)&&i.level>=1&&Number.isSafeInteger(i.baseLevel)&&i.baseLevel>=1&&(i.legendaryId||(typeof i.templateId==='string'&&typeof i.baseBudgetModel==='string'))&&validItemBudgetMetadata(i)&&(!i.legendaryId||validLegendaryEquipmentMetadata(i,AFFIX_DEFS))&&validEquipmentTemplateMetadata(i)&&validEnhancementMetadata(i)&&validEquipmentLevelMetadata(i)&&typeof i.id==='string'&&typeof i.name==='string'&&SLOTS.includes(i.slot)&&Number.isInteger(i.rarity)&&i.rarity>=0&&i.rarity<=3&&(!i.set||(BUILD.some(b=>b.id===i.set)&&SET_SLOTS.includes(i.slot)&&i.rarity===3))&&num(i.atk)&&num(i.hp)&&num(i.armor)&&num(i.level)&&i.bless===0&&Array.isArray(i.affixes)&&(i.rarity===0?i.affixes.length<=1:i.affixes.length===(LEGENDARY_EQUIPMENT_DEFINITIONS[i.legendaryId]?.ordinaryAffixCount??i.rarity+1))&&new Set(i.affixes.map(a=>a.stat)).size===i.affixes.length&&i.affixes.every(a=>(a.sourceRange!==undefined&&validAffixSource(a,AFFIX_DEFS)))&&(!i.special||(!i.set&&i.rarity>=2&&Object.hasOwn(SPECIALS,i.special.id)&&validGrowthSpecial(i.special)))&&(i.legendaryId===null||LEGENDARY_CODEX.some(def=>def.id===i.legendaryId&&def.implemented&&def.slot===i.slot&&!i.set))&&(i.divine===undefined||(i.divine?.id==='forge-favor'&&i.divine.name==='神赐·炉火眷顾'&&i.divine.model==='raw-v1'&&['atk','armor','hp'].every(k=>num(i.divine.bonus?.[k]))));}catch{return false;}}
+function validEquipment(i){try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;return Number.isSafeInteger(i.level)&&i.level>=1&&Number.isSafeInteger(i.baseLevel)&&i.baseLevel>=1&&(i.legendaryId||(typeof i.templateId==='string'&&typeof i.baseBudgetModel==='string'))&&validItemBudgetMetadata(i)&&(!i.legendaryId||validLegendaryEquipmentMetadata(i,AFFIX_DEFS))&&validEquipmentTemplateMetadata(i)&&validEnhancementMetadata(i)&&validEquipmentLevelMetadata(i)&&typeof i.id==='string'&&typeof i.name==='string'&&SLOTS.includes(i.slot)&&Number.isInteger(i.rarity)&&i.rarity>=0&&i.rarity<=3&&(!i.set||(BUILD.some(b=>b.id===i.set)&&SET_SLOTS.includes(i.slot)&&i.rarity===3))&&num(i.atk)&&num(i.hp)&&num(i.armor)&&num(i.level)&&i.bless===0&&Array.isArray(i.affixes)&&(i.rarity===0?i.affixes.length<=1:i.affixes.length===(LEGENDARY_EQUIPMENT_DEFINITIONS[i.legendaryId]?.ordinaryAffixCount??i.rarity+1))&&new Set(i.affixes.map(a=>a.stat)).size===i.affixes.length&&i.affixes.every(a=>(a.sourceRange!==undefined&&validAffixSource(a,AFFIX_DEFS)))&&(!i.special||(!i.set&&i.rarity>=2&&Object.hasOwn(SPECIALS,i.special.id)&&validGrowthSpecial(i.special)))&&(i.legendaryId===null||LEGENDARY_CODEX.some(def=>def.id===i.legendaryId&&def.implemented&&def.slot===i.slot&&!i.set))&&(i.divine===undefined||(i.divine?.id==='forge-favor'&&i.divine.name==='神赐·炉火眷顾'&&['raw-v1','raw-v2'].includes(i.divine.model)&&['atk','armor','hp'].every(k=>num(i.divine.bonus?.[k]))));}catch{return false;}}
 function validMerchant(merchant,s=null){
  if(!merchant||merchant.version!==1||(merchant.pricingVersion!==undefined&&merchant.pricingVersion!==MERCHANT_PRICING_VERSION)||!Number.isFinite(merchant.generatedAt)||merchant.generatedAt<0||merchant.generatedAt>1e15||!Array.isArray(merchant.offers))return false;
  const rows=merchant.offers;
@@ -1468,10 +1468,11 @@ export function forge(s,selection){
 export function applyForgeFavor(it){
  if(it.divine)return false;
  // Raw bases and raw rolls stay unchanged. Bonus is presentation metadata only;
- // aggregation uses the marker once, with fractional gains preserved until totals.
- const bonus={};for(const key of ['atk','armor','hp'])bonus[key]=it[key]/10;
- bonus.affixes=it.affixes.map(a=>({stat:a.stat,value:a.value/10}));
- it.divine={id:'forge-favor',name:'神赐·炉火眷顾',model:'raw-v1',bonus};return true;
+ // aggregation uses the marker once. raw-v1 remains an immutable historical +10%
+ // receipt for old saves; both versions now receive the approved +100% effect.
+ const bonus={};for(const key of ['atk','armor','hp'])bonus[key]=it[key];
+ bonus.affixes=it.affixes.map(a=>({stat:a.stat,value:a.value}));
+ it.divine={id:'forge-favor',name:'神赐·炉火眷顾',model:'raw-v2',bonus};return true;
 }
 export const LEGENDARY_CODEX=[{id:'infinity-gauntlet',name:'无限手套',slot:'gloves',icon:'gloves',implemented:true,lore:'五颗异色宝石被嵌进同一只护手，托座上还留着五种不同的锻造痕迹。握紧手掌时，原本互不相容的微光沿着指节相连，短暂地汇成一道亮线。',affix:'无限',effect:'每成功释放5次主动技能，对当前目标造成其最大生命50%的伤害；普通敌人与首领比例相同。普攻、被动与多段命中不额外计数，卸下清空累计。',acquisition:'在熔炉融合中放入五族至臻宝石各1颗，固定获得；无需配方。每档仅一次，失去后无法重造。',attributes:'4条可调整普通词条与固定专属'},{id:'return-ring',name:'归途之环',slot:'ring',icon:'ring',implemented:true,lore:'五件旧物沿着指环内侧相接，接缝没有被磨平。每一道细小的棱角，都让人想起送出它的人，以及那段曾停下脚步的路。',affix:'归途',effect:'装备时经验获取 +20%，双戒指槽不重复叠加，卸下后失效。每次战斗胜利恢复15%最大生命，最高恢复至生命上限，包含普通副本阶段胜利。首领传说、稀有材料与无限宝石的有效掉落率增加3个百分点；不改变来源和持有上限。',acquisition:'剧情学习配方后，以五族旧物制作；每档仅一次。',attributes:'4条可洗练普通词条与固定专属'},...EXPANSION_PACKS.flatMap(p=>p.legendaries.map(d=>({...d,implemented:true,lore:d.lore??d.description??'',affix:d.exclusiveName??d.exclusiveId,effect:d.exclusiveDescription??d.exclusive?.description??d.effect??d.description??'',acquisition:d.questOnly?'第五章主线剧情（唯一）':p.name+'地区首领额外掉落，可重复获得',attributes:d.ordinaryAffixCount===0?'仅基础属性与固定专属，无随机普通词条':'4条随机普通词条与固定专属',icon:d.icon??d.slot}))),{id:'first-forge-oathhammer',name:'王统·初炉誓锤',slot:'weapon',icon:'firstforge',implemented:true,lore:'每一代矮人王继承此锤时，都会重新锻造它，并刻下自己的名字。旧王的誓言留在锤身，新王的名字融入炉火。',affix:'祖王回响',effect:'普攻或主动伤害技能每5次出手，向当前目标追加140%攻击的单体重击，穿透30%护甲。',acquisition:'矮人地区首领额外掉落，可重复获得。',attributes:'4条随机普通词条与固定专属；基础和普通词条区间高于同等级至臻。',tuning:'回响可暴击、实际生命伤害可吸血，不触发死神、多重或累计。'},{id:'everburning-reactor',name:'不熄之炉',slot:'amulet',icon:'fire',implemented:true,lore:'这座微型炉藏在厚实的金属外壳里，贴近耳边时，能听见极轻的鼓风声。炉芯收拢战斗留下的余热，再从狭窄的排口吐出火光；火光散去后，仍有一层温热护在身前。',affix:'余热循环',effect:'每12秒实际战斗时间自动向全体释放75%攻击火焰脉冲，并获得8%最大生命加通用护盾增幅的护盾，持续3秒战斗时间；同源护盾刷新不叠加。',acquisition:'矮人地区首领额外掉落，可重复获得。',attributes:'4条随机普通词条与固定专属；基础和普通词条区间高于同等级至臻。',tuning:'实际卸下清空充能并移除自身护盾。'},LUCKY_DICE_CODEX];
 export const SET_CODEX=BUILD.map(b=>({id:b.id,name:b.name,icon:b.id,parts:[...SET_SLOTS],bonus:b.bonus,effects:b.effects}));

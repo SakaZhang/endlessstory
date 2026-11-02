@@ -11,10 +11,10 @@ for(const accept of [false,true])for(const hit of [false,true]){
  rolls([],()=>{const old=Math.random;Math.random=()=>{throw Error('decision must not roll');};try{assert(E.resolveReforge(loaded,accept,loaded.pendingReforge.operationId));}finally{Math.random=old;}});
  const result=loaded.inventory.find(x=>x.id===it.id);assert.equal(!!result.divine,accept&&hit);assert.equal(loaded.consumables.reforgeToken,4);assert.equal(E.resolveReforge(loaded,true,'stale'),null);
  for(const key of ['id','level','baseLevel','levelSource','slot','baseVariant','templateId','rarity','bless','enhancement','atk','armor','hp','legendaryId'])assert.deepEqual(result[key],before[key]);
- if(!accept)assert.deepEqual(result,before);if(accept&&hit){assert.equal(result.divine.bonus.atk,result.atk/10);result.affixes.forEach((a,i)=>assert.equal(result.divine.bonus.affixes[i].value,a.value/10));assert.equal(E.itemTotals(result).atk,result.atk*1.1);}
+ if(!accept)assert.deepEqual(result,before);if(accept&&hit){assert.equal(result.divine.bonus.atk,result.atk);result.affixes.forEach((a,i)=>assert.equal(result.divine.bonus.affixes[i].value,a.value));assert.equal(E.itemTotals(result).atk,result.atk*2);}
 }
 {
- const {s,it}=setup();E.applyForgeFavor(it);const before=clone(it);const r=rolls(Array(12).fill(.4),()=>E.reforge(s,it.id,'all'));assert.equal(r.calls,12);assert(E.validPendingReforge(s));assert(E.resolveReforge(s,true,s.pendingReforge.operationId));assert.equal(it.atk,before.atk);assert.equal(it.divine.bonus.atk,it.atk/10);assert.equal(it.divine.bonus.affixes[0].value,it.affixes[0].value/10);
+ const {s,it}=setup();E.applyForgeFavor(it);const before=clone(it);const r=rolls(Array(12).fill(.4),()=>E.reforge(s,it.id,'all'));assert.equal(r.calls,12);assert(E.validPendingReforge(s));assert(E.resolveReforge(s,true,s.pendingReforge.operationId));assert.equal(it.atk,before.atk);assert.equal(it.divine.bonus.atk,it.atk);assert.equal(it.divine.bonus.affixes[0].value,it.affixes[0].value);
 }
 // v0.37: value opportunity merged once; divine gets its existing luck then one racial multiplier.
 for(const luck of [0,10])for(const delta of [-.000001,0,.000001]){

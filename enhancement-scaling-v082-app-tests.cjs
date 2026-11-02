@@ -18,14 +18,14 @@ global.requestAnimationFrame=()=>{};global.setInterval=()=>0;global.setTimeout=(
  assert(E.equipItem(s,basic[3].id));E.normalizeHealth(s,s.lastSeen);assert(E.validSave(s));const rawInventory=JSON.stringify(s.inventory);store.set(SAVE_KEY,JSON.stringify(s));await import('./dist/app.js');
  const click=(dataset={})=>{const button={dataset,id:''};for(const fn of events.click||[])fn({target:{id:'',closest:()=>button}});};
  const statsHtml=html=>{const result=html.match(/<div class="itemStats">([\s\S]*?)<\/div><div class="affixBlock">/);assert(result,'item stat section');return result[1];};
- const expectedRow=(it,key,label)=>{const base=Math.round(it[key]*(1+.05*it.enhancement.level)),delta=base-it[key],god=Math.round(base*(it.divine?1.1:1))-base;return `<b>${it[key]}${delta?` <small class="enhancementIncrease" title="强化" aria-label="强化 +${delta}">+${delta}</small>`:''}</b><small>${label}${it.divine&&base?`<br><span class="divineIncrease">神赐 +${god}</span>`:''}</small>`;};
+ const expectedRow=(it,key,label)=>{const base=Math.round(it[key]*(1+.05*it.enhancement.level)),delta=base-it[key],god=Math.round(base*(it.divine?2:1))-base;return `<b>${it[key]}${delta?` <small class="enhancementIncrease" title="强化" aria-label="强化 +${delta}">+${delta}</small>`:''}</b><small>${label}${it.divine&&base?`<br><span class="divineIncrease">神赐 +${god}</span>`:''}</small>`;};
  for(const it of [...basic,blade,blessedBlade,dice]){
   click({view:'inventory'});click({item:it.id});const html=el('view').innerHTML,base=statsHtml(html);assert.doesNotMatch(base,/实际|原始数值/);for(const [key,label]of [['atk','攻击'],['armor','护甲'],['hp','生命']])assert(base.includes(expectedRow(it,key,label)),`${race}/${it.id}/${key} expected ${expectedRow(it,key,label)}; got ${base}`);
   const affixes=html.match(/<div class="affixBlock">([\s\S]*?)<\/div>(?:<div class="legendaryExclusive"|<div class="specialAffix"|<div class="detailActions"|<p class="subtleText")/)?.[1]??'';assert.doesNotMatch(affixes,/实际/);
  }
  // Exact reported Lv53 blade: +3 is now15%, not the obsolete12%/+14.
  click({item:blade.id});let html=statsHtml(el('view').innerHTML);assert.match(html,/aria-label="强化 \+18">\+18/);assert.match(html,/aria-label="强化 \+16">\+16/);assert.doesNotMatch(html,/\+14|134/);
- click({item:blessedBlade.id});html=statsHtml(el('view').innerHTML);assert.match(html,/强化 \+18/);assert.match(html,/神赐 \+14/);assert.match(html,/强化 \+16/);assert.match(html,/神赐 \+12/);
+ click({item:blessedBlade.id});html=statsHtml(el('view').innerHTML);assert.match(html,/强化 \+18/);assert.match(html,/神赐 \+138/);assert.match(html,/强化 \+16/);assert.match(html,/神赐 \+122/);
  // Same reusable detail renderer opens/closes in a modal without changing raw save.
  for(let i=0;i<2;i++){click({wardrobeitem:blessedBlade.id});assert(el('modal').open);assert.equal(statsHtml(el('modalBody').innerHTML),html);el('closeModal').click();assert.equal(el('modal').open,false);}
  click({enhanceItem:blade.id});assert.match(el('view').innerHTML,/\+5% \/ \+10% \/ \+15% \/ \+20% \/ \+25%/);assert.match(el('view').innerHTML,/当前 \+3/);assert.match(el('view').innerHTML,/>138<\/td>/);assert.match(el('view').innerHTML,/>122<\/td>/);

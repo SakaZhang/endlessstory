@@ -31,14 +31,14 @@ try{
  }
  p=fresh();const divineItem=item('weapon',1,null,3);p.inventory[0]=divineItem;p.equip.weapon=divineItem.id;divineItem.affixes=[currentAffix('atk',3),currentAffix('hp',15),currentAffix('crit',5),currentAffix('element',2)];divineItem.bless=0;
  const raw=structuredClone(divineItem),pre=stats(p);assert(applyForgeFavor(divineItem));
- assert.equal(divineMultiplier(divineItem),1.1);for(const key of ['atk','armor','hp','name','bless'])assert.equal(divineItem[key],raw[key]);assert.deepEqual(divineItem.affixes,raw.affixes);
- assert.equal(itemTotals(divineItem).atk,raw.atk*1.1);
- let post=stats(p);assert.equal(post.atk,Math.round(pre.atk+(raw.atk+3)/10));assert.equal(post.hp,Math.round(pre.hp+(raw.hp+15)/10));assert.equal(post.bonus.crit,5.5);assert.equal(post.element,2.2);
+ assert.equal(divineMultiplier(divineItem),2);for(const key of ['atk','armor','hp','name','bless'])assert.equal(divineItem[key],raw[key]);assert.deepEqual(divineItem.affixes,raw.affixes);
+ assert.equal(itemTotals(divineItem).atk,raw.atk*2);
+ let post=stats(p);assert.equal(post.atk,Math.round(pre.atk+(raw.atk+3)));assert.equal(post.hp,Math.round(pre.hp+(raw.hp+15)));assert.equal(post.bonus.crit,10);assert.equal(post.element,4);
  assert.equal(post.specials.knowledge,pre.specials.knowledge);assert.deepEqual(post.count,pre.count);
  const stored=JSON.stringify(p);assert(validSave(JSON.parse(stored)));assert.deepEqual(stats(JSON.parse(stored)),post);assert(!applyForgeFavor(divineItem));assert.equal(JSON.stringify(p),stored);
  for(const a of divineItem.affixes)assert.deepEqual(affixRollInfo(a),affixRollInfo(raw.affixes.find(x=>x.stat===a.stat)));
  // Tiny gains accumulate before rounding instead of every tiny roll rounding up.
  p=fresh();equipTestLoadout(p);for(const gear of p.inventory){gear.atk=1;gear.armor=1;gear.hp=1;gear.affixes=[{stat:'atk',value:3}];applyForgeFavor(gear);}
- assert.equal(stats(p).atk,Math.round(17+8*4.4));
+ assert.equal(stats(p).atk,Math.round(17+8*8));
  console.log('Current equipment/quality/affix/raw stats/fusion/divine/schema tests passed; retired old combat matrix lives outside the current generation.');
 }finally{Math.random=originalRandom;}

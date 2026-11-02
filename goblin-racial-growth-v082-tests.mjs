@@ -37,13 +37,19 @@ function expectedBase(row){
  const expected=clone(row.base),s=row.state,gear=[...new Set(Object.values(s.equip).filter(Boolean))].map(id=>s.inventory.find(it=>it.id===id));
  if(gear.some(it=>it.enhancement?.level)){
   assert.equal(row.profile,'divine','all frozen enhanced cases remain covered');assert(gear.every(it=>!it.legendaryId),'no legendary attack multiplier hidden in enhanced fixtures');
-  const levelBase={atk:0,armor:s.level,hp:s.level*14},newTotal={atk:14+s.level*3+s.talents.power*3,armor:5+s.talents.steel*3,hp:120+s.talents.heart*20},oldTotal=Object.fromEntries(statKeys.map(k=>[k,newTotal[k]+levelBase[k]])),bonus={atk:0,armor:0,hp:0};
+  const levelBase={atk:0,armor:s.level,hp:s.level*14},newTotal={atk:14+s.level*3+s.talents.power*3,armor:5+s.talents.steel*3,hp:120+s.talents.heart*20},oldTotal=Object.fromEntries(statKeys.map(k=>[k,newTotal[k]+levelBase[k]])),bonus={atk:0,armor:0,hp:0},currentBonus={atk:0,armor:0,hp:0};
   for(const it of gear){
    const raw=Object.fromEntries(statKeys.map(k=>[k,it[k]])),level=it.enhancement?.model==='equipment-budget-m2-v1'?it.enhancement.level:0,multiplier=it.divine?1.1:1,old=historicalEnhancedBase(raw,level),next=expectedEnhancedBase(raw,level);
-   for(const k of statKeys){oldTotal[k]+=old[k]*multiplier;newTotal[k]+=next[k]*multiplier;}
-   for(const a of it.affixes)if(statKeys.includes(a.stat))bonus[a.stat]+=a.value*multiplier;
+   for(const k of statKeys){oldTotal[k]+=old[k]*multiplier;newTotal[k]+=next[k]*(it.divine?2:1);}
+   for(const a of it.affixes)if(statKeys.includes(a.stat)){bonus[a.stat]+=a.value*multiplier;currentBonus[a.stat]+=a.value*(it.divine?2:1);}
   }
-  const delta={};for(const k of statKeys){assert.equal(Math.round(oldTotal[k]+bonus[k]),row.base[k],`immutable old4% ${row.level}/${k} reconstructed exactly`);const current=Math.round(newTotal[k]+bonus[k])+levelBase[k];delta[k]=current-row.base[k];expected[k]+=delta[k];}
+  const delta={};for(const k of statKeys){assert.equal(Math.round(oldTotal[k]+bonus[k]),row.base[k],`immutable old4% ${row.level}/${k} reconstructed exactly`);const current=Math.round(newTotal[k]+currentBonus[k])+levelBase[k];delta[k]=current-row.base[k];expected[k]+=delta[k];}
+  const current=Object.fromEntries(Object.keys(row.base.bonus).map(k=>[k,0]));
+  for(const it of gear)for(const a of it.affixes)current[a.stat]+=a.value*(it.divine?2:1);
+  current.hit+=(s.talents.precision??0)*5;current.crit+=(s.talents.crit??0)*5;current.critDamage+=(s.talents.critDamage??0)*8;current.element+=(s.talents.element??0)*2;
+  const factor=x=>Math.max(0,x)/(100+Math.max(0,x));expected.bonus=current;
+  for(const element of Object.keys(expected.elementAttack)){expected.elementAttack[element]=current.element+(current[element+'Atk']??0);expected.elementResistance[element]=(s.talents.elementResist??0)*5+(current[element+'Resist']??0);}
+  Object.assign(expected,{hitRating:current.hit,critRating:current.crit,critDamageRating:current.critDamage,hit:Math.min(.995,.9+.1*factor(current.hit)),crit:Math.min(.6,.05+.55*factor(current.crit)),critDamage:Math.min(2.5,1.5+factor(current.critDamage)),element:current.element,lifesteal:current.lifesteal,lifestealRating:current.lifesteal,lifestealRate:current.lifesteal/1000,luck:(s.talents.luck??0)+current.luck,elementResist:.5*factor(expected.elementResistance.fire)});
   enhancementAdjustments.push({level:row.level,profile:row.profile,delta});
  }
  if(row.race==='goblin'){expected.hp-=row.level*2.8;expected.armor-=row.level*.3;}return expected;
@@ -59,7 +65,7 @@ for(const row of fixture.rows){
  const expected=expectedBase(row);compare(E.baseStats(s),expected,`${row.race}/${row.level}/${row.profile} base`);compare(E.stats(s),expectedStats(s,expected),`${row.race}/${row.level}/${row.profile} final`);
  const panel=characterStatsSnapshot(s);assert.deepEqual(panel.current,E.stats(s));assert.deepEqual(panel.permanent,E.stats(s));
  assert(renderCharacterStats(s).includes(formatAttribute(E.stats(s).hp)));assert.equal(JSON.stringify(s),before,'stat reads and UI do not rewrite equipment');
- for(const it of s.inventory){assert(validItemBudgetMetadata(it));const raw={atk:it.atk,armor:it.armor,hp:it.hp},base=it.enhancement?.model==='equipment-budget-m2-v1'?expectedEnhancedBase(raw,it.enhancement.level):raw;assert.deepEqual(E.itemTotals(it),Object.fromEntries(Object.entries(base).map(([k,v])=>[k,v*(it.divine?1.1:1)])),'item has NO racial cut');}
+ for(const it of s.inventory){assert(validItemBudgetMetadata(it));const raw={atk:it.atk,armor:it.armor,hp:it.hp},base=it.enhancement?.model==='equipment-budget-m2-v1'?expectedEnhancedBase(raw,it.enhancement.level):raw;assert.deepEqual(E.itemTotals(it),Object.fromEntries(Object.entries(base).map(([k,v])=>[k,v*(it.divine?2:1)])),'item has NO racial cut');}
  const normalized=clone(s);normalized.heroHp=Math.min(normalized.heroHp,E.stats(s).hp);assert(E.normalizeHealth(s,s.lastHealthClock));assert.deepEqual(s,normalized,'only existing health cap, no save migration');assert(E.validSave(s));
  row.race==='goblin'?affected++:controls++;
 }
@@ -79,7 +85,7 @@ let gearCases=0,talentCases=0;
 for(const level of [1,20,60,100,101,1000])for(const profile of ['q2','divine']){
  const equipment=fixture.rows.find(r=>r.race==='goblin'&&r.level===level&&r.profile===profile).state.inventory;
  for(const item of equipment)for(const race of E.RACE_KEYS){
-  const s=E.fresh(race);s.level=level;const a=E.baseStats(s);s.inventory=[clone(item)];assert(E.equipItem(s,item.id));const b=E.baseStats(s),base=expectedEnhancedBase(item,item.enhancement?.model==='equipment-budget-m2-v1'?item.enhancement.level:0),raw=Object.fromEntries(statKeys.map(k=>[k,base[k]*(item.divine?1.1:1)])),bonus=k=>item.affixes.filter(x=>x.stat===k).reduce((n,x)=>n+x.value*(item.divine?1.1:1),0);
+  const s=E.fresh(race);s.level=level;const a=E.baseStats(s);s.inventory=[clone(item)];assert(E.equipItem(s,item.id));const b=E.baseStats(s),base=expectedEnhancedBase(item,item.enhancement?.model==='equipment-budget-m2-v1'?item.enhancement.level:0),raw=Object.fromEntries(statKeys.map(k=>[k,base[k]*(item.divine?2:1)])),bonus=k=>item.affixes.filter(x=>x.stat===k).reduce((n,x)=>n+x.value*(item.divine?2:1),0);
   for(const k of ['hp','armor','atk'])near(b[k]-a[k],Math.round(raw[k]+bonus(k)),`${race}/Lv${level}/${profile}/${item.slot} full gear ${k}`);
   assert(E.validSave(s));gearCases++;
  }
