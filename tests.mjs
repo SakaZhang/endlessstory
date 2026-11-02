@@ -1,3 +1,4 @@
+import './reforge-special-preservation-v086-tests.mjs';
 import './infinity-gauntlet-tests.mjs';
 import './infinity-gauntlet-combat-tests.mjs';
 import './infinity-gauntlet-recipe-tests.mjs';

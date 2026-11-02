@@ -66,7 +66,7 @@ import {initializeDwarfActor} from './dwarf-effects.js';
 import {WORLD_MATERIAL_REGISTRY as DWARF_MATERIAL_REGISTRY,rollWorldMaterials as rollMonsterMaterials,worldInventoryKey as toDwarfInventoryKey,getWorldMaterialPool as getDwarfMaterialPool} from './world-materials.js';
 import {chooseFusionOrigin,fusionOriginTemplates,fusionOriginWeights} from './fusion-origin.js';
 export {chooseFusionOrigin,fusionOriginWeights} from './fusion-origin.js';
-import {GROWTH_SPECIAL_DEFS,validGrowthSpecial,growthBonuses,recordGrowthKills,rerollGrowthSpecial} from './special-affix-growth.js';
+import {GROWTH_SPECIAL_DEFS,validGrowthSpecial,growthBonuses,recordGrowthKills} from './special-affix-growth.js';
 export {specialAffixProgress} from './special-affix-growth.js';
 import {LUCKY_DICE_CODEX,luckyDiceStatBonuses} from './lucky-dice.js';
 import {NEW_ORDINARY_AFFIX_DEFS,NEW_SPECIAL_DEFS,createBattleAffixState,validBattleAffixState,tryNirvana,tryReaperHit,lifestealRate,lifestealHeal,openingShelterShield,validDungeonAffixUsage} from './affix-expansion.js';
@@ -279,7 +279,9 @@ const sameReforgeData=(a,b)=>{
 };
 function reforgeCandidateItem(it,p){
  const candidate=structuredClone(it);candidate.affixes=structuredClone(p.newAffixes);
- candidate.special=rerollGrowthSpecial(it.special,p.newSpecial);
+ // Special affixes belong to the owned item, including growth earned while a choice is pending.
+ // Legacy paid candidates may contain a rerolled special; never apply that retired result.
+ candidate.special=structuredClone(it.special??null);
  if(p.mode==='all'){if(p.newDivine===null)delete candidate.divine;else candidate.divine=structuredClone(p.newDivine);}
  else if(divineMultiplier(candidate)>1)candidate.divine.bonus.affixes=candidate.affixes.map(a=>({stat:a.stat,value:a.value/10}));
  return candidate;
@@ -314,9 +316,7 @@ export function reforge(s,itemId,mode,index=0,donorId,expectedQuote){
   const pool=[...ordinaryAffixKeys(it.slot)];
   for(let i=0;i<after.length;i++)after[i]=roll(pool.splice(rand(0,pool.length-1),1)[0]);
  }
- const oldSpecial=it.special?{...it.special}:null;
- const rolledSpecial=mode==='all'&&!it.set&&it.rarity>=2&&!it.legendaryId?{id:activeSpecialKeys()[rand(0,activeSpecialKeys().length-1)]}:oldSpecial?{...oldSpecial}:null;
- const newSpecial=rerollGrowthSpecial(oldSpecial,rolledSpecial);
+ const oldSpecial=structuredClone(it.special??null),newSpecial=structuredClone(oldSpecial);
  const divineSnapshot={};
  if(mode==='all'){
   const candidate=structuredClone(it);candidate.affixes=structuredClone(after);candidate.special=structuredClone(newSpecial);
@@ -329,13 +329,13 @@ export function reforge(s,itemId,mode,index=0,donorId,expectedQuote){
  if(donor)normalizeCodexCollection(s);
  if(donor)s.inventory.splice(s.inventory.findIndex(x=>x.id===donor.item.id),1);
  const operationId='reforge-'+Date.now().toString(36)+'-'+(++serial).toString(36);
- s.pendingReforge={ruleVersion:9,targetLevel:it.level,operationId,itemId:it.id,mode,index:mode==='all'?null:index,oldAffixes:before,newAffixes:after,oldSpecial,newSpecial,cost,...divineSnapshot,...(donor?{donor:{id:donor.item.id,name:donor.item.name,slot:donor.item.slot,eligibleStats:donor.affixes.map(a=>a.stat),eligibleAffixes:structuredClone(donor.affixes),selectedAffix:structuredClone(after[index])}}:{})};
+ s.pendingReforge={ruleVersion:10,targetLevel:it.level,operationId,itemId:it.id,mode,index:mode==='all'?null:index,oldAffixes:before,newAffixes:after,oldSpecial,newSpecial,cost,...divineSnapshot,...(donor?{donor:{id:donor.item.id,name:donor.item.name,slot:donor.item.slot,eligibleStats:donor.affixes.map(a=>a.stat),eligibleAffixes:structuredClone(donor.affixes),selectedAffix:structuredClone(after[index])}}:{})};
  return {item:it,operationId,mode,index:mode==='all'?null:index,cost,before:structuredClone(before),after:structuredClone(after),oldSpecial,newSpecial,pending:true};
 }
 export function validPendingReforge(s){
  const p=s.pendingReforge;if(p===undefined||p===null)return true;
  if(!p||typeof p!=='object'||Array.isArray(p)||typeof p.operationId!=='string'||p.operationId.length<1||p.operationId.length>160)return false;
- if(![6,7,8,9].includes(p.ruleVersion))return false;
+ if(![6,7,8,9,10].includes(p.ruleVersion))return false;
  const it=s.inventory?.find(i=>i.id===p.itemId),currentCost=getReforgeCost(it,p.mode,s);
  // Paid legacy candidates retain their historical iron price; never charge again.
  const cost=p.ruleVersion<9&&p.mode==='value'&&currentCost?{...currentCost,materials:{'铁屑':1}}:currentCost;
@@ -356,7 +356,8 @@ export function validPendingReforge(s){
   }else if(p.donor!==undefined)return false;
   const legalSpecial=x=>x===null||(x&&typeof x==='object'&&!Array.isArray(x)&&Object.keys(x).every(k=>['id','growthKills'].includes(k))&&Object.hasOwn(SPECIALS,x.id)&&validGrowthSpecial(x));
   if(!legalSpecial(p.oldSpecial)||!legalSpecial(p.newSpecial)||(p.oldSpecial?.id??null)!==(it.special?.id??null))return false;
-  if(p.mode==='all'&&!it.set&&it.rarity>=2&&!it.legendaryId){if(!p.newSpecial)return false;}
+  if(p.ruleVersion>=10){if(!sameReforgeData(p.oldSpecial,p.newSpecial))return false;}
+  else if(p.mode==='all'&&!it.set&&it.rarity>=2&&!it.legendaryId){if(!p.newSpecial)return false;}
   else if((p.oldSpecial?.id??null)!==(p.newSpecial?.id??null))return false;
  }
  const legal=list=>Array.isArray(list)&&list.length===it.affixes.length&&new Set(list.map(a=>a?.stat)).size===list.length&&list.every(a=>a?.sourceRange!==undefined&&validAffixSource(a,AFFIX_DEFS));
@@ -380,7 +381,7 @@ export function resolveReforge(s,accept,expectedOperationId){
  if(accept&&Object.values(s.equip).includes(it.id)&&(noncombatRunning(s)||(s.activeEncounter&&!s.activeEncounter.done)))return null;
  if(accept){
   it.affixes=structuredClone(p.newAffixes);
-  it.special=rerollGrowthSpecial(it.special,p.newSpecial);
+  // Reforge never changes or restores a special: retain current earned growth verbatim.
   if(p.mode==='all'){if(p.newDivine===null)delete it.divine;else it.divine=structuredClone(p.newDivine);}
   else if(divineMultiplier(it)>1)it.divine.bonus.affixes=it.affixes.map(a=>({stat:a.stat,value:a.value/10}));
  }
