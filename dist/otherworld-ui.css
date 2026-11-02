@@ -19,3 +19,7 @@
 .otherworldControls>button:hover,.otherworldControls>button:active,.otherworldPending>button:hover,.otherworldPending>button:active{transform:none}
 
 .otherworldRange{display:inline-block;width:19ch;white-space:nowrap;text-align:left;font-variant-numeric:tabular-nums}
+
+/* The map portal is centered with transform. Global button hover/disabled
+   transforms must not move its hit target away from a stationary pointer. */
+.otherworldPortal:hover,.otherworldPortal:active,.otherworldPortal:focus-visible,.otherworldPortal:disabled{transform:translate(-50%,-50%)}
