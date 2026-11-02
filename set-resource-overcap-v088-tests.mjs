@@ -56,3 +56,11 @@ console.log('PASS actual planTreeSkill -> validTreeSkillPlan -> applyRaceRuntime
 
 const carried=clone(old);carried.dungeonRun={carry:{raceRuntime:clone(carried.activeEncounter.raceRuntime)}};delete carried.activeEncounter;assert(validEquipmentRuntime(carried));const carriedEquip={...carried.equip,helm:null};assert(applyEquipmentRuntimeChange(carried,carried.equip,carriedEquip));carried.equip=carriedEquip;assert.equal(carried.dungeonRun.carry.raceRuntime.state.shards,6);assert(!Object.hasOwn(carried.dungeonRun.carry.raceRuntime.state,'setShards'));assert(validEquipmentRuntime(carried));const refilled=clone(carried);refilled.dungeonRun.carry.raceRuntime.state.shards=8;refilled.dungeonRun.carry.raceRuntime.state.setShards=2;assert(!validEquipmentRuntime(refilled));
 console.log('PASS dormant dungeon carry reserve cleared on unequip and cannot resurrect after stage transition.');
+for(const [set,key,initial,expected]of [['ashen.strata','fracture',{shards:8,setShards:2},0],['ashen.caldera','overload',{heat:125,setHeat:25},55]]){
+ const state=E.fresh('ashen');state.level=100;state.skillTree.presets[0].unlocked=A.tree.nodes.map(n=>n.id);state.skillTree.presets[0].active=['ashen.'+key,null,null,null];
+ for(const slot of ['helm','armor','gloves','boots']){const it=E.item(slot,100,set,3,{originRace:'ashen'});state.inventory.push(it);assert(E.equipItem(state,it.id));}
+ E.normalizeHealth(state,state.lastSeen);E.normalizeExpedition(state);state.heroHp=E.stats(state).hp;
+ const encounter=E.startInstanceEncounter(state,'ashen.a01.field',state.lastHealthClock);encounter.raceRuntime={race:'ashen',state:{...A.createRuntime(),...initial}};const random=Math.random;Math.random=()=>.5;try{E.step(state,encounter,state.nextActionAt);}finally{Math.random=random;}
+ assert.equal(encounter.lastCast.skillId,'ashen.'+key);assert.equal(encounter.raceRuntime.state[key==='fracture'?'shards':'heat'],expected);assert(E.validSave(state));assert(E.validSave(JSON.parse(JSON.stringify(state))));
+}
+console.log('PASS production E.step executes 8-shard fracture and 70-of-125 heat overload with valid post-cast saves.');
