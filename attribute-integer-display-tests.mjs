@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import {formatAttribute,formatAttributePercent} from './dist/attribute-format.js';
-import {fresh,stats} from './dist/engine.js';
+import {fresh,stats,item as createItem,applyForgeFavor,divineMultiplier,AFFIX_DEFS,SPECIALS,affixRollInfo,RARITY,validSave} from './dist/engine.js';
 import {createSkillEffectState,applySkillEffect} from './dist/skill-tree-effects.js';
 import {characterStatsSnapshot,renderCharacterStats} from './dist/character-stats-ui.js';
 for(const [input,expected] of [[1152.3600000000001,'1152'],[385,'385'],[0,'0'],[1.5,'2'],[1.49,'1'],[-1.6,'-2'],[NaN,'—'],[Infinity,'—'],[undefined,'—']])assert.equal(formatAttribute(input),expected);
@@ -25,10 +25,14 @@ for(const race of ['human','dwarf','elf','goblin','ashen']){
  assert.match(html,/43 \/ /);assert.match(html,/暴击伤害倍率/);assert.match(html,/150% 即一点五倍/);
  assert.deepEqual(s,before);assert.deepEqual(stats(s),prior);assert.deepEqual(characterStatsSnapshot(s),snapshot);
 }
-// Actual equipment detail/affix renderers retain fractional source values, show integers.
-const context={fmt:formatAttribute,LEGENDARY_CODEX:[],affixRollInfo:()=>({tier:0,min:0,max:10,sourceLabel:'测试'}),RARITY:['普通'],esc:String,AFFIX_DEFS:{atk:{name:'攻击'}},SPECIALS:{}};
+// Actual equipment renderer uses a legal four-affix item and the production divine helper.
+// Fractional formatting boundaries remain covered above; raw item affixes stay integral.
+const context={fmt:formatAttribute,LEGENDARY_CODEX:[],affixRollInfo,RARITY,esc:String,AFFIX_DEFS,SPECIALS,divineMultiplier};
 const affix=app.match(/function affixHtml\(it\)\{[^\n]+/)[0];
-const renderAffix=vm.runInNewContext('('+affix+')',context),item={affixes:[{stat:'atk',value:10.5}],divine:true},before=structuredClone(item);
-assert.match(renderAffix(item),/\+11/);assert.match(renderAffix(item),/神赐 \+1/);assert.doesNotMatch(renderAffix(item),/实际 \+/);assert.deepEqual(item,before);
+const renderAffix=vm.runInNewContext('('+affix+')',context),item=createItem('weapon',53,null,3,{originRace:'human'});
+item.special=null;applyForgeFavor(item);const fixture=fresh('human');fixture.inventory.push(item);assert(validSave(fixture));assert.equal(item.affixes.length,4);
+const before=structuredClone(item),html=renderAffix(item);
+for(const a of item.affixes){const value=formatAttribute(a.value);assert(html.includes(`+${value}<small class="divineIncrease">神赐 +${value}</small>`));}
+assert.doesNotMatch(html,/实际 \+/);assert.doesNotMatch(html,/\d\.\d/);assert.deepEqual(item,before);
 assert.match(app,/fmt\(it\[k\]\)/);assert.match(app,/fmt\(enhanced\[k\]\)-fmt\(it\[k\]\)/);assert.match(app,/fmt\(tot\[k\]\)-fmt\(enhanced\[k\]\)/);
 console.log('PASS integer attributes: screenshot rail, rounding boundaries, percentages/multiplier, all-race full stats, equipment affixes; state and derived combat precision unchanged');
