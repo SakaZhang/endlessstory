@@ -343,3 +343,6 @@ for(const file of ['special-affix-growth-tests.mjs','special-affix-overhaul-test
 
 // v0.83 independent casino scene and standalone navigation presentation.
 runAffixSourceTest(process.execPath,[new URL('./casino-scene-v083-tests.mjs',import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.84 staged seal rescue and player-facing prose, isolated from legacy fixtures.
+for(const file of ['story-player-prose-v084-tests.mjs','story-seal-rescue-tests.mjs','story-seal-rescue-native-proof.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});

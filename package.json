@@ -38,7 +38,8 @@
     "test:auto-idle": "node idle-action-controller-tests.mjs && node auto-idle-safety-tests.mjs && node idle-action-ui-tests.mjs && node idle-action-app-ui-tests.cjs",
     "test:elf-visual": "node elf-monster-facing-regression-tests.mjs && node elf-background-viewport-tests.mjs",
     "test:v082": "node special-affix-growth-tests.mjs && node special-affix-overhaul-tests.mjs && node special-affix-reserved-reward-tests.mjs && node lucky-dice-tests.mjs && node casino-tests.mjs && node casino-app-ui-tests.cjs && node v082-independent-integration-tests.mjs && node v082-casino-independent-tests.mjs && node goblin-equipment-v0812-tests.mjs && node racial-ui-copy-tests.mjs && node goblin-racial-growth-v082-tests.mjs && node enhancement-scaling-v082-tests.mjs && node enhancement-scaling-v082-app-tests.cjs",
-    "test:v083": "node casino-scene-v083-tests.mjs && node casino-tests.mjs && node casino-app-ui-tests.cjs && node v082-casino-independent-tests.mjs && node racial-ui-copy-tests.mjs"
+    "test:v083": "node casino-scene-v083-tests.mjs && node casino-tests.mjs && node casino-app-ui-tests.cjs && node v082-casino-independent-tests.mjs && node racial-ui-copy-tests.mjs",
+    "test:v084": "node story-player-prose-v084-tests.mjs && node story-seal-rescue-tests.mjs && node story-seal-rescue-native-proof.mjs && node narrative-copy-tests.mjs && node copy-mechanics-invariants-tests.mjs && node story-copy-compatibility-tests.mjs && node story-copy-compatibility-app-ui-tests.cjs && node story-c08-runtime-tests.mjs && node story-c08-app-ui-tests.cjs && node story-c08-native-proof.mjs && node story-scenario-combat-tests.mjs && node story-event-controller-tests.mjs && node story-cancellation-app-ui-tests.cjs && node story-portrait-recovery-tests.mjs"
   },
   "devDependencies": {
     "esbuild": "0.28.2"
