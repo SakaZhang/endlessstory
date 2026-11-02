@@ -8,7 +8,7 @@ import {territoryAccess} from './dist/war-diplomacy.js';
 import {reachStoryScene,playActiveStoryEncounter} from './story-event-test-fixture.mjs';
 import {SAVE_KEY} from './dist/storage.js';
 import {renderStoryKnowledge,renderStoryEventBoard} from './dist/story-event-ui.js';
-assert.match(STORY_SCENARIOS['story.c07-ea02-ashen'].objective,/突破阻拦，赶往族长/);assert.match(STORY_SCENARIOS['story.c07-ea02-elf'].objective,/去左翼/);
+assert.match(STORY_SCENARIOS['story.c07-ea02-ashen'].objective,/突破沿路的阻拦，赶往族长所在处/);assert.match(STORY_SCENARIOS['story.c07-ea02-elf'].objective,/去左翼/);
 const economic=s=>JSON.stringify({inventory:s.inventory,gold:s.gold,xp:s.xp,kills:s.kills,materials:s.materialStacks,claims:s.taskRewardClaims});
 const war=s=>s.diplomacy.wars.find(w=>w.id===STORY_WAR_ID);
 const nextTime=s=>Math.max(s.lastSeen,s.lastHealthClock??0,s.nextBattleAt??0)+2000;

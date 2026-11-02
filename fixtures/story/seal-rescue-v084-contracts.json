@@ -1,0 +1,646 @@
+{
+  "scenes": {
+    "C08.O11.human": {
+      "id": "C08.O11.human",
+      "sourceScene": "C08.O11",
+      "chapter": 8,
+      "pov": "human",
+      "siteId": "ashen.a06",
+      "title": "封印中的莱姆斯 · 外层",
+      "npc": "被封印的莱姆斯",
+      "lines": [
+        "[光纹将莱姆斯困在原地。他抬起手，封印却牵动他的手臂，将靠近的人推开。]",
+        "莱姆斯：别靠太近……它会反击。",
+        "罗什福尔：我看见了。我们破开它，不伤你。"
+      ],
+      "objective": "压住被封印的莱姆斯，击破外层束缚；不要伤他性命。",
+      "flags": [
+        "E_RESCUE_FIRST_CLEARED"
+      ],
+      "knowledge": [],
+      "choices": [
+        {
+          "id": "proceed",
+          "label": "靠近封印，开始解救",
+          "flags": []
+        }
+      ],
+      "requires": [
+        "C07.O02.human"
+      ],
+      "optional": false,
+      "encounter": {
+        "kind": "scenario",
+        "scenarioId": "story.c08-o11-human",
+        "nodeId": "ashen.a06.field",
+        "count": 1
+      }
+    },
+    "C08.O12.human": {
+      "id": "C08.O12.human",
+      "sourceScene": "C08.O12",
+      "chapter": 8,
+      "pov": "human",
+      "siteId": "ashen.a06",
+      "title": "封印中的莱姆斯 · 内层",
+      "npc": "被封印的莱姆斯",
+      "lines": [
+        "[断开的光纹向里收紧。莱姆斯护住胸口，另一只手仍被牵着向外挥动。]",
+        "罗什福尔：还有一层。我来挡住反击，你找它收紧的位置。",
+        "莱姆斯：我带着旧制楔钉。等核心露出来，就能卡住回弹。"
+      ],
+      "objective": "击破第二层束缚，让莱姆斯露出封印核心。",
+      "flags": [
+        "E_RESCUE_SECOND_CLEARED"
+      ],
+      "knowledge": [],
+      "choices": [
+        {
+          "id": "proceed",
+          "label": "靠近封印，开始解救",
+          "flags": []
+        }
+      ],
+      "requires": [
+        "C08.O11.human"
+      ],
+      "optional": false,
+      "encounter": {
+        "kind": "scenario",
+        "scenarioId": "story.c08-o12-human",
+        "nodeId": "ashen.a06.field",
+        "count": 1
+      }
+    },
+    "C08.O13.human": {
+      "id": "C08.O13.human",
+      "sourceScene": "C08.O13",
+      "chapter": 8,
+      "pov": "human",
+      "siteId": "ashen.a06",
+      "title": "合力破开封印",
+      "npc": "莱姆斯与罗什福尔",
+      "lines": [
+        "[核心在裂口中一开一合。莱姆斯将旧制楔钉对准缝隙，等外侧的人替他压住回弹。]",
+        "莱姆斯：这是守林者教我的。替我稳住这里。",
+        "罗什福尔：稳住了。动手！"
+      ],
+      "objective": "从外侧稳住封印，让莱姆斯消耗旧制楔钉击破核心。",
+      "flags": [
+        "E_RESCUE_WEDGE_USED",
+        "E_SEAL_OUTER_OPENED",
+        "E_UNSEALED"
+      ],
+      "knowledge": [
+        {
+          "id": "C08.O13.human.k0",
+          "text": "从外侧稳住封印，配合莱姆斯使用他持有的旧制楔钉解开核心；楔钉已耗尽。",
+          "mode": "seen"
+        }
+      ],
+      "choices": [
+        {
+          "id": "proceed",
+          "label": "与莱姆斯一起破开核心",
+          "flags": []
+        }
+      ],
+      "requires": [
+        "C08.O12.human"
+      ],
+      "optional": false,
+      "encounter": {
+        "kind": "scenario",
+        "scenarioId": "story.c08-o13-human",
+        "nodeId": "ashen.a06.field",
+        "count": 1
+      },
+      "questTool": "lemus-old-wedge"
+    },
+    "C08.O11.dwarf": {
+      "id": "C08.O11.dwarf",
+      "sourceScene": "C08.O11",
+      "chapter": 8,
+      "pov": "dwarf",
+      "siteId": "ashen.a06",
+      "title": "封印中的莱姆斯 · 外层",
+      "npc": "被封印的莱姆斯",
+      "lines": [
+        "[光纹将莱姆斯困在原地。他抬起手，封印却牵动他的手臂，将靠近的人推开。]",
+        "莱姆斯：别靠太近……它会反击。",
+        "布洛克：我看见了。我们破开它，不伤你。"
+      ],
+      "objective": "压住被封印的莱姆斯，击破外层束缚；不要伤他性命。",
+      "flags": [
+        "E_RESCUE_FIRST_CLEARED"
+      ],
+      "knowledge": [],
+      "choices": [
+        {
+          "id": "proceed",
+          "label": "靠近封印，开始解救",
+          "flags": []
+        }
+      ],
+      "requires": [
+        "C07.O02.dwarf"
+      ],
+      "optional": false,
+      "encounter": {
+        "kind": "scenario",
+        "scenarioId": "story.c08-o11-dwarf",
+        "nodeId": "ashen.a06.field",
+        "count": 1
+      }
+    },
+    "C08.O12.dwarf": {
+      "id": "C08.O12.dwarf",
+      "sourceScene": "C08.O12",
+      "chapter": 8,
+      "pov": "dwarf",
+      "siteId": "ashen.a06",
+      "title": "封印中的莱姆斯 · 内层",
+      "npc": "被封印的莱姆斯",
+      "lines": [
+        "[断开的光纹向里收紧。莱姆斯护住胸口，另一只手仍被牵着向外挥动。]",
+        "布洛克：还有一层。我来挡住反击，你找它收紧的位置。",
+        "莱姆斯：我带着旧制楔钉。等核心露出来，就能卡住回弹。"
+      ],
+      "objective": "击破第二层束缚，让莱姆斯露出封印核心。",
+      "flags": [
+        "E_RESCUE_SECOND_CLEARED"
+      ],
+      "knowledge": [],
+      "choices": [
+        {
+          "id": "proceed",
+          "label": "靠近封印，开始解救",
+          "flags": []
+        }
+      ],
+      "requires": [
+        "C08.O11.dwarf"
+      ],
+      "optional": false,
+      "encounter": {
+        "kind": "scenario",
+        "scenarioId": "story.c08-o12-dwarf",
+        "nodeId": "ashen.a06.field",
+        "count": 1
+      }
+    },
+    "C08.O13.dwarf": {
+      "id": "C08.O13.dwarf",
+      "sourceScene": "C08.O13",
+      "chapter": 8,
+      "pov": "dwarf",
+      "siteId": "ashen.a06",
+      "title": "合力破开封印",
+      "npc": "莱姆斯与布洛克",
+      "lines": [
+        "[核心在裂口中一开一合。莱姆斯将旧制楔钉对准缝隙，等外侧的人替他压住回弹。]",
+        "莱姆斯：这是守林者教我的。替我稳住这里。",
+        "布洛克：稳住了。动手！"
+      ],
+      "objective": "从外侧稳住封印，让莱姆斯消耗旧制楔钉击破核心。",
+      "flags": [
+        "E_RESCUE_WEDGE_USED",
+        "E_SEAL_OUTER_OPENED",
+        "E_UNSEALED"
+      ],
+      "knowledge": [
+        {
+          "id": "C08.O13.dwarf.k0",
+          "text": "从外侧稳住封印，配合莱姆斯使用他持有的旧制楔钉解开核心；楔钉已耗尽。",
+          "mode": "seen"
+        }
+      ],
+      "choices": [
+        {
+          "id": "proceed",
+          "label": "与莱姆斯一起破开核心",
+          "flags": []
+        }
+      ],
+      "requires": [
+        "C08.O12.dwarf"
+      ],
+      "optional": false,
+      "encounter": {
+        "kind": "scenario",
+        "scenarioId": "story.c08-o13-dwarf",
+        "nodeId": "ashen.a06.field",
+        "count": 1
+      },
+      "questTool": "lemus-old-wedge"
+    },
+    "C08.O11.goblin": {
+      "id": "C08.O11.goblin",
+      "sourceScene": "C08.O11",
+      "chapter": 8,
+      "pov": "goblin",
+      "siteId": "ashen.a06",
+      "title": "封印中的莱姆斯 · 外层",
+      "npc": "被封印的莱姆斯",
+      "lines": [
+        "[光纹将莱姆斯困在原地。他抬起手，封印却牵动他的手臂，将靠近的人推开。]",
+        "莱姆斯：别靠太近……它会反击。",
+        "奇克：我看见了。我们破开它，不伤你。"
+      ],
+      "objective": "压住被封印的莱姆斯，击破外层束缚；不要伤他性命。",
+      "flags": [
+        "E_RESCUE_FIRST_CLEARED"
+      ],
+      "knowledge": [],
+      "choices": [
+        {
+          "id": "proceed",
+          "label": "靠近封印，开始解救",
+          "flags": []
+        }
+      ],
+      "requires": [
+        "C07.O02.goblin"
+      ],
+      "optional": false,
+      "encounter": {
+        "kind": "scenario",
+        "scenarioId": "story.c08-o11-goblin",
+        "nodeId": "ashen.a06.field",
+        "count": 1
+      }
+    },
+    "C08.O12.goblin": {
+      "id": "C08.O12.goblin",
+      "sourceScene": "C08.O12",
+      "chapter": 8,
+      "pov": "goblin",
+      "siteId": "ashen.a06",
+      "title": "封印中的莱姆斯 · 内层",
+      "npc": "被封印的莱姆斯",
+      "lines": [
+        "[断开的光纹向里收紧。莱姆斯护住胸口，另一只手仍被牵着向外挥动。]",
+        "奇克：还有一层。我来挡住反击，你找它收紧的位置。",
+        "莱姆斯：我带着旧制楔钉。等核心露出来，就能卡住回弹。"
+      ],
+      "objective": "击破第二层束缚，让莱姆斯露出封印核心。",
+      "flags": [
+        "E_RESCUE_SECOND_CLEARED"
+      ],
+      "knowledge": [],
+      "choices": [
+        {
+          "id": "proceed",
+          "label": "靠近封印，开始解救",
+          "flags": []
+        }
+      ],
+      "requires": [
+        "C08.O11.goblin"
+      ],
+      "optional": false,
+      "encounter": {
+        "kind": "scenario",
+        "scenarioId": "story.c08-o12-goblin",
+        "nodeId": "ashen.a06.field",
+        "count": 1
+      }
+    },
+    "C08.O13.goblin": {
+      "id": "C08.O13.goblin",
+      "sourceScene": "C08.O13",
+      "chapter": 8,
+      "pov": "goblin",
+      "siteId": "ashen.a06",
+      "title": "合力破开封印",
+      "npc": "莱姆斯与奇克",
+      "lines": [
+        "[核心在裂口中一开一合。莱姆斯将旧制楔钉对准缝隙，等外侧的人替他压住回弹。]",
+        "莱姆斯：这是守林者教我的。替我稳住这里。",
+        "奇克：稳住了。动手！"
+      ],
+      "objective": "从外侧稳住封印，让莱姆斯消耗旧制楔钉击破核心。",
+      "flags": [
+        "E_RESCUE_WEDGE_USED",
+        "E_SEAL_OUTER_OPENED",
+        "E_UNSEALED"
+      ],
+      "knowledge": [
+        {
+          "id": "C08.O13.goblin.k0",
+          "text": "从外侧稳住封印，配合莱姆斯使用他持有的旧制楔钉解开核心；楔钉已耗尽。",
+          "mode": "seen"
+        }
+      ],
+      "choices": [
+        {
+          "id": "proceed",
+          "label": "与莱姆斯一起破开核心",
+          "flags": []
+        }
+      ],
+      "requires": [
+        "C08.O12.goblin"
+      ],
+      "optional": false,
+      "encounter": {
+        "kind": "scenario",
+        "scenarioId": "story.c08-o13-goblin",
+        "nodeId": "ashen.a06.field",
+        "count": 1
+      },
+      "questTool": "lemus-old-wedge"
+    },
+    "C08.O11.ashen": {
+      "id": "C08.O11.ashen",
+      "sourceScene": "C08.O11",
+      "chapter": 8,
+      "pov": "ashen",
+      "siteId": "ashen.a06",
+      "title": "封印中的莱姆斯 · 外层",
+      "npc": "被封印的莱姆斯",
+      "lines": [
+        "[光纹将莱姆斯困在原地。他抬起手，封印却牵动他的手臂，将靠近的人推开。]",
+        "莱姆斯：别靠太近……它会反击。",
+        "砾恩：我看见了。我们破开它，不伤你。"
+      ],
+      "objective": "压住被封印的莱姆斯，击破外层束缚；不要伤他性命。",
+      "flags": [
+        "E_RESCUE_FIRST_CLEARED"
+      ],
+      "knowledge": [],
+      "choices": [
+        {
+          "id": "proceed",
+          "label": "靠近封印，开始解救",
+          "flags": []
+        }
+      ],
+      "requires": [
+        "C07.EA03.ashen"
+      ],
+      "optional": false,
+      "encounter": {
+        "kind": "scenario",
+        "scenarioId": "story.c08-o11-ashen",
+        "nodeId": "ashen.a06.field",
+        "count": 1
+      }
+    },
+    "C08.O12.ashen": {
+      "id": "C08.O12.ashen",
+      "sourceScene": "C08.O12",
+      "chapter": 8,
+      "pov": "ashen",
+      "siteId": "ashen.a06",
+      "title": "封印中的莱姆斯 · 内层",
+      "npc": "被封印的莱姆斯",
+      "lines": [
+        "[断开的光纹向里收紧。莱姆斯护住胸口，另一只手仍被牵着向外挥动。]",
+        "砾恩：还有一层。我来挡住反击，你找它收紧的位置。",
+        "莱姆斯：我带着旧制楔钉。等核心露出来，就能卡住回弹。"
+      ],
+      "objective": "击破第二层束缚，让莱姆斯露出封印核心。",
+      "flags": [
+        "E_RESCUE_SECOND_CLEARED"
+      ],
+      "knowledge": [],
+      "choices": [
+        {
+          "id": "proceed",
+          "label": "靠近封印，开始解救",
+          "flags": []
+        }
+      ],
+      "requires": [
+        "C08.O11.ashen"
+      ],
+      "optional": false,
+      "encounter": {
+        "kind": "scenario",
+        "scenarioId": "story.c08-o12-ashen",
+        "nodeId": "ashen.a06.field",
+        "count": 1
+      }
+    },
+    "C08.O13.ashen": {
+      "id": "C08.O13.ashen",
+      "sourceScene": "C08.O13",
+      "chapter": 8,
+      "pov": "ashen",
+      "siteId": "ashen.a06",
+      "title": "合力破开封印",
+      "npc": "莱姆斯与砾恩",
+      "lines": [
+        "[核心在裂口中一开一合。莱姆斯将旧制楔钉对准缝隙，等外侧的人替他压住回弹。]",
+        "莱姆斯：这是守林者教我的。替我稳住这里。",
+        "砾恩：稳住了。动手！"
+      ],
+      "objective": "从外侧稳住封印，让莱姆斯消耗旧制楔钉击破核心。",
+      "flags": [
+        "E_RESCUE_WEDGE_USED",
+        "E_SEAL_OUTER_OPENED",
+        "E_UNSEALED"
+      ],
+      "knowledge": [
+        {
+          "id": "C08.O13.ashen.k0",
+          "text": "从外侧稳住封印，配合莱姆斯使用他持有的旧制楔钉解开核心；楔钉已耗尽。",
+          "mode": "seen"
+        }
+      ],
+      "choices": [
+        {
+          "id": "proceed",
+          "label": "与莱姆斯一起破开核心",
+          "flags": []
+        }
+      ],
+      "requires": [
+        "C08.O12.ashen"
+      ],
+      "optional": false,
+      "encounter": {
+        "kind": "scenario",
+        "scenarioId": "story.c08-o13-ashen",
+        "nodeId": "ashen.a06.field",
+        "count": 1
+      },
+      "questTool": "lemus-old-wedge"
+    }
+  },
+  "scenarios": {
+    "story.c08-o11-human": {
+      "sceneId": "C08.O11.human",
+      "race": "human",
+      "siteId": "ashen.a06",
+      "budgetId": "ashen.a06.normal.1",
+      "actorName": "被封印的莱姆斯",
+      "mode": "clear",
+      "result": "seal-rescue-first",
+      "objective": "击破外层束缚，不伤莱姆斯性命。",
+      "outcome": "外层束缚已破，莱姆斯仍被内层光纹困住。",
+      "actorRace": "elf",
+      "actorWeapon": "staff",
+      "keepAlive": true,
+      "sealRescue": true
+    },
+    "story.c08-o12-human": {
+      "sceneId": "C08.O12.human",
+      "race": "human",
+      "siteId": "ashen.a06",
+      "budgetId": "ashen.a06.normal.2",
+      "actorName": "被封印的莱姆斯",
+      "mode": "clear",
+      "result": "seal-rescue-second",
+      "objective": "击破内层束缚，露出封印核心。",
+      "outcome": "内层束缚已破，莱姆斯取出旧制楔钉；核心尚待合力解除。",
+      "actorRace": "elf",
+      "actorWeapon": "staff",
+      "keepAlive": true,
+      "sealRescue": true
+    },
+    "story.c08-o13-human": {
+      "sceneId": "C08.O13.human",
+      "race": "human",
+      "siteId": "ashen.a06",
+      "budgetId": "ashen.a06.normal.3",
+      "actorName": "封印核心",
+      "mode": "tool",
+      "result": "seal-rescue-opened",
+      "objective": "稳住外侧封印，与莱姆斯合力击破核心。",
+      "outcome": "莱姆斯消耗旧制楔钉击破核心，走出封印。",
+      "actorId": "seal-core",
+      "cooperativeTool": true
+    },
+    "story.c08-o11-dwarf": {
+      "sceneId": "C08.O11.dwarf",
+      "race": "dwarf",
+      "siteId": "ashen.a06",
+      "budgetId": "ashen.a06.normal.1",
+      "actorName": "被封印的莱姆斯",
+      "mode": "clear",
+      "result": "seal-rescue-first",
+      "objective": "击破外层束缚，不伤莱姆斯性命。",
+      "outcome": "外层束缚已破，莱姆斯仍被内层光纹困住。",
+      "actorRace": "elf",
+      "actorWeapon": "staff",
+      "keepAlive": true,
+      "sealRescue": true
+    },
+    "story.c08-o12-dwarf": {
+      "sceneId": "C08.O12.dwarf",
+      "race": "dwarf",
+      "siteId": "ashen.a06",
+      "budgetId": "ashen.a06.normal.2",
+      "actorName": "被封印的莱姆斯",
+      "mode": "clear",
+      "result": "seal-rescue-second",
+      "objective": "击破内层束缚，露出封印核心。",
+      "outcome": "内层束缚已破，莱姆斯取出旧制楔钉；核心尚待合力解除。",
+      "actorRace": "elf",
+      "actorWeapon": "staff",
+      "keepAlive": true,
+      "sealRescue": true
+    },
+    "story.c08-o13-dwarf": {
+      "sceneId": "C08.O13.dwarf",
+      "race": "dwarf",
+      "siteId": "ashen.a06",
+      "budgetId": "ashen.a06.normal.3",
+      "actorName": "封印核心",
+      "mode": "tool",
+      "result": "seal-rescue-opened",
+      "objective": "稳住外侧封印，与莱姆斯合力击破核心。",
+      "outcome": "莱姆斯消耗旧制楔钉击破核心，走出封印。",
+      "actorId": "seal-core",
+      "cooperativeTool": true
+    },
+    "story.c08-o11-goblin": {
+      "sceneId": "C08.O11.goblin",
+      "race": "goblin",
+      "siteId": "ashen.a06",
+      "budgetId": "ashen.a06.normal.1",
+      "actorName": "被封印的莱姆斯",
+      "mode": "clear",
+      "result": "seal-rescue-first",
+      "objective": "击破外层束缚，不伤莱姆斯性命。",
+      "outcome": "外层束缚已破，莱姆斯仍被内层光纹困住。",
+      "actorRace": "elf",
+      "actorWeapon": "staff",
+      "keepAlive": true,
+      "sealRescue": true
+    },
+    "story.c08-o12-goblin": {
+      "sceneId": "C08.O12.goblin",
+      "race": "goblin",
+      "siteId": "ashen.a06",
+      "budgetId": "ashen.a06.normal.2",
+      "actorName": "被封印的莱姆斯",
+      "mode": "clear",
+      "result": "seal-rescue-second",
+      "objective": "击破内层束缚，露出封印核心。",
+      "outcome": "内层束缚已破，莱姆斯取出旧制楔钉；核心尚待合力解除。",
+      "actorRace": "elf",
+      "actorWeapon": "staff",
+      "keepAlive": true,
+      "sealRescue": true
+    },
+    "story.c08-o13-goblin": {
+      "sceneId": "C08.O13.goblin",
+      "race": "goblin",
+      "siteId": "ashen.a06",
+      "budgetId": "ashen.a06.normal.3",
+      "actorName": "封印核心",
+      "mode": "tool",
+      "result": "seal-rescue-opened",
+      "objective": "稳住外侧封印，与莱姆斯合力击破核心。",
+      "outcome": "莱姆斯消耗旧制楔钉击破核心，走出封印。",
+      "actorId": "seal-core",
+      "cooperativeTool": true
+    },
+    "story.c08-o11-ashen": {
+      "sceneId": "C08.O11.ashen",
+      "race": "ashen",
+      "siteId": "ashen.a06",
+      "budgetId": "ashen.a06.normal.1",
+      "actorName": "被封印的莱姆斯",
+      "mode": "clear",
+      "result": "seal-rescue-first",
+      "objective": "击破外层束缚，不伤莱姆斯性命。",
+      "outcome": "外层束缚已破，莱姆斯仍被内层光纹困住。",
+      "actorRace": "elf",
+      "actorWeapon": "staff",
+      "keepAlive": true,
+      "sealRescue": true
+    },
+    "story.c08-o12-ashen": {
+      "sceneId": "C08.O12.ashen",
+      "race": "ashen",
+      "siteId": "ashen.a06",
+      "budgetId": "ashen.a06.normal.2",
+      "actorName": "被封印的莱姆斯",
+      "mode": "clear",
+      "result": "seal-rescue-second",
+      "objective": "击破内层束缚，露出封印核心。",
+      "outcome": "内层束缚已破，莱姆斯取出旧制楔钉；核心尚待合力解除。",
+      "actorRace": "elf",
+      "actorWeapon": "staff",
+      "keepAlive": true,
+      "sealRescue": true
+    },
+    "story.c08-o13-ashen": {
+      "sceneId": "C08.O13.ashen",
+      "race": "ashen",
+      "siteId": "ashen.a06",
+      "budgetId": "ashen.a06.normal.3",
+      "actorName": "封印核心",
+      "mode": "tool",
+      "result": "seal-rescue-opened",
+      "objective": "稳住外侧封印，与莱姆斯合力击破核心。",
+      "outcome": "莱姆斯消耗旧制楔钉击破核心，走出封印。",
+      "actorId": "seal-core",
+      "cooperativeTool": true
+    }
+  }
+}
