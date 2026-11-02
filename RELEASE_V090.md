@@ -11,6 +11,8 @@ This release retains v0.89 single-border presentation and all earlier runtime fe
 
 The fifteen-set tuning coefficients are implementation decisions under the user's explicit request to strengthen all sets, not a claim that the user individually authored every coefficient.
 
+- New encounters at every 50th otherworld floor are explicitly marked elites: HP ×1.25, attack ×2 and armor ×1.1. Ordinary floors keep their existing curve; legacy active encounter snapshots are preserved.
+
 ## Verification
 - Engine/App suites cover first-clear stone grants, legacy highest baselines without compensation, already-won legacy pending floors, unfinished migrated fights, replay/reload/offline idempotence, all eight full equipment bags and quality filtering, storage failure/retry, and furnace repeated use.
 - Divine special tests cover strongest-source aggregation, independent growth counters, two-use revival carry through a normal dungeon, and nonlethal story combat preservation.
