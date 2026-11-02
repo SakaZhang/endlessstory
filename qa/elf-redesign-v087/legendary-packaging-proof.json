@@ -1,0 +1,1188 @@
+[
+  {
+    "id": "first-forge-oathhammer",
+    "frame": "idle-0",
+    "sourceBBox": [
+      66,
+      67,
+      321,
+      427
+    ],
+    "scale": 0.27146814404432135,
+    "alphaBBox": [
+      62,
+      79,
+      130,
+      176
+    ],
+    "hand": [
+      115,
+      135
+    ],
+    "other": [
+      111,
+      133
+    ],
+    "fullBounds": [
+      62,
+      79,
+      183,
+      198
+    ]
+  },
+  {
+    "id": "first-forge-oathhammer",
+    "frame": "idle-1",
+    "sourceBBox": [
+      71,
+      68,
+      344,
+      427
+    ],
+    "scale": 0.27146814404432135,
+    "alphaBBox": [
+      59,
+      79,
+      132,
+      176
+    ],
+    "hand": [
+      111,
+      134
+    ],
+    "other": [
+      107,
+      132
+    ],
+    "fullBounds": [
+      59,
+      79,
+      179,
+      197
+    ]
+  },
+  {
+    "id": "first-forge-oathhammer",
+    "frame": "anticipation",
+    "sourceBBox": [
+      92,
+      56,
+      374,
+      423
+    ],
+    "scale": 0.27146814404432135,
+    "alphaBBox": [
+      58,
+      77,
+      134,
+      176
+    ],
+    "hand": [
+      92,
+      82
+    ],
+    "other": [
+      87,
+      89
+    ],
+    "fullBounds": [
+      40,
+      22,
+      134,
+      176
+    ]
+  },
+  {
+    "id": "first-forge-oathhammer",
+    "frame": "attack",
+    "sourceBBox": [
+      29,
+      116,
+      422,
+      423
+    ],
+    "scale": 0.27146814404432135,
+    "alphaBBox": [
+      43,
+      93,
+      149,
+      176
+    ],
+    "hand": [
+      146,
+      119
+    ],
+    "other": [
+      142,
+      119
+    ],
+    "fullBounds": [
+      43,
+      62,
+      217,
+      178
+    ]
+  },
+  {
+    "id": "first-forge-oathhammer",
+    "frame": "recovery",
+    "sourceBBox": [
+      47,
+      37,
+      341,
+      381
+    ],
+    "scale": 0.27146814404432135,
+    "alphaBBox": [
+      56,
+      83,
+      135,
+      176
+    ],
+    "hand": [
+      112,
+      131
+    ],
+    "other": [
+      108,
+      129
+    ],
+    "fullBounds": [
+      56,
+      76,
+      180,
+      194
+    ]
+  },
+  {
+    "id": "first-forge-oathhammer",
+    "frame": "hurt",
+    "sourceBBox": [
+      77,
+      21,
+      385,
+      378
+    ],
+    "scale": 0.27146814404432135,
+    "alphaBBox": [
+      54,
+      80,
+      137,
+      176
+    ],
+    "hand": [
+      111,
+      100
+    ],
+    "other": [
+      95,
+      90
+    ],
+    "fullBounds": [
+      54,
+      55,
+      168,
+      176
+    ]
+  },
+  {
+    "id": "first-forge-oathhammer",
+    "frame": "guard",
+    "sourceBBox": [
+      71,
+      37,
+      380,
+      380
+    ],
+    "scale": 0.27146814404432135,
+    "alphaBBox": [
+      54,
+      84,
+      137,
+      176
+    ],
+    "hand": [
+      109,
+      127
+    ],
+    "other": [
+      126,
+      96
+    ],
+    "fullBounds": [
+      52,
+      56,
+      169,
+      176
+    ]
+  },
+  {
+    "id": "first-forge-oathhammer",
+    "frame": "death",
+    "sourceBBox": [
+      23,
+      246,
+      417,
+      365
+    ],
+    "scale": 0.27146814404432135,
+    "alphaBBox": [
+      43,
+      144,
+      149,
+      176
+    ],
+    "hand": [
+      142,
+      171
+    ],
+    "other": null,
+    "fullBounds": [
+      43,
+      114,
+      213,
+      230
+    ]
+  },
+  {
+    "id": "human-oathblade",
+    "frame": "idle-0",
+    "sourceBBox": [
+      64,
+      87,
+      314,
+      411
+    ],
+    "scale": 0.30153846153846153,
+    "alphaBBox": [
+      58,
+      79,
+      133,
+      176
+    ],
+    "hand": [
+      113,
+      126
+    ],
+    "other": [
+      108,
+      126
+    ],
+    "fullBounds": [
+      58,
+      80,
+      189,
+      188
+    ]
+  },
+  {
+    "id": "human-oathblade",
+    "frame": "idle-1",
+    "sourceBBox": [
+      88,
+      86,
+      327,
+      412
+    ],
+    "scale": 0.30153846153846153,
+    "alphaBBox": [
+      60,
+      78,
+      131,
+      176
+    ],
+    "hand": [
+      108,
+      126
+    ],
+    "other": [
+      105,
+      125
+    ],
+    "fullBounds": [
+      60,
+      78,
+      184,
+      188
+    ]
+  },
+  {
+    "id": "human-oathblade",
+    "frame": "anticipation",
+    "sourceBBox": [
+      58,
+      65,
+      341,
+      412
+    ],
+    "scale": 0.30153846153846153,
+    "alphaBBox": [
+      53,
+      72,
+      138,
+      176
+    ],
+    "hand": [
+      112,
+      76
+    ],
+    "other": [
+      115,
+      81
+    ],
+    "fullBounds": [
+      49,
+      15,
+      138,
+      176
+    ]
+  },
+  {
+    "id": "human-oathblade",
+    "frame": "attack",
+    "sourceBBox": [
+      85,
+      131,
+      406,
+      411
+    ],
+    "scale": 0.30153846153846153,
+    "alphaBBox": [
+      48,
+      92,
+      144,
+      176
+    ],
+    "hand": [
+      141,
+      116
+    ],
+    "other": [
+      138,
+      120
+    ],
+    "fullBounds": [
+      49,
+      62,
+      228,
+      176
+    ]
+  },
+  {
+    "id": "human-oathblade",
+    "frame": "recovery",
+    "sourceBBox": [
+      55,
+      37,
+      321,
+      365
+    ],
+    "scale": 0.30153846153846153,
+    "alphaBBox": [
+      56,
+      78,
+      136,
+      176
+    ],
+    "hand": [
+      114,
+      124
+    ],
+    "other": [
+      106,
+      124
+    ],
+    "fullBounds": [
+      56,
+      78,
+      190,
+      186
+    ]
+  },
+  {
+    "id": "human-oathblade",
+    "frame": "hurt",
+    "sourceBBox": [
+      82,
+      48,
+      381,
+      367
+    ],
+    "scale": 0.30153846153846153,
+    "alphaBBox": [
+      51,
+      81,
+      140,
+      176
+    ],
+    "hand": [
+      100,
+      118
+    ],
+    "other": [
+      93,
+      119
+    ],
+    "fullBounds": [
+      51,
+      54,
+      166,
+      176
+    ]
+  },
+  {
+    "id": "human-oathblade",
+    "frame": "guard",
+    "sourceBBox": [
+      58,
+      85,
+      324,
+      368
+    ],
+    "scale": 0.30153846153846153,
+    "alphaBBox": [
+      56,
+      91,
+      136,
+      176
+    ],
+    "hand": [
+      119,
+      114
+    ],
+    "other": [
+      111,
+      114
+    ],
+    "fullBounds": [
+      56,
+      27,
+      170,
+      176
+    ]
+  },
+  {
+    "id": "human-oathblade",
+    "frame": "death",
+    "sourceBBox": [
+      49,
+      258,
+      419,
+      364
+    ],
+    "scale": 0.30153846153846153,
+    "alphaBBox": [
+      40,
+      145,
+      151,
+      176
+    ],
+    "hand": [
+      149,
+      172
+    ],
+    "other": [
+      124,
+      174
+    ],
+    "fullBounds": [
+      41,
+      118,
+      236,
+      223
+    ]
+  },
+  {
+    "id": "elf-sixfold-heartwood",
+    "frame": "idle-0",
+    "sourceBBox": [
+      56,
+      59,
+      333,
+      436
+    ],
+    "scale": 0.25925925925925924,
+    "alphaBBox": [
+      60,
+      79,
+      131,
+      176
+    ],
+    "hand": [
+      125,
+      113
+    ],
+    "other": null,
+    "fullBounds": [
+      60,
+      62,
+      148,
+      176
+    ]
+  },
+  {
+    "id": "elf-sixfold-heartwood",
+    "frame": "idle-1",
+    "sourceBBox": [
+      68,
+      59,
+      344,
+      436
+    ],
+    "scale": 0.25925925925925924,
+    "alphaBBox": [
+      60,
+      79,
+      131,
+      176
+    ],
+    "hand": [
+      126,
+      114
+    ],
+    "other": null,
+    "fullBounds": [
+      60,
+      63,
+      149,
+      176
+    ]
+  },
+  {
+    "id": "elf-sixfold-heartwood",
+    "frame": "anticipation",
+    "sourceBBox": [
+      67,
+      89,
+      361,
+      436
+    ],
+    "scale": 0.25925925925925924,
+    "alphaBBox": [
+      58,
+      87,
+      133,
+      176
+    ],
+    "hand": [
+      97,
+      100
+    ],
+    "other": [
+      102,
+      107
+    ],
+    "fullBounds": [
+      43,
+      49,
+      150,
+      176
+    ]
+  },
+  {
+    "id": "elf-sixfold-heartwood",
+    "frame": "attack",
+    "sourceBBox": [
+      68,
+      94,
+      401,
+      436
+    ],
+    "scale": 0.25925925925925924,
+    "alphaBBox": [
+      53,
+      88,
+      139,
+      176
+    ],
+    "hand": [
+      136,
+      112
+    ],
+    "other": [
+      127,
+      111
+    ],
+    "fullBounds": [
+      53,
+      88,
+      187,
+      176
+    ]
+  },
+  {
+    "id": "elf-sixfold-heartwood",
+    "frame": "recovery",
+    "sourceBBox": [
+      47,
+      26,
+      352,
+      383
+    ],
+    "scale": 0.25925925925925924,
+    "alphaBBox": [
+      57,
+      84,
+      135,
+      176
+    ],
+    "hand": [
+      128,
+      132
+    ],
+    "other": null,
+    "fullBounds": [
+      57,
+      77,
+      176,
+      186
+    ]
+  },
+  {
+    "id": "elf-sixfold-heartwood",
+    "frame": "hurt",
+    "sourceBBox": [
+      74,
+      57,
+      405,
+      383
+    ],
+    "scale": 0.25925925925925924,
+    "alphaBBox": [
+      53,
+      92,
+      138,
+      176
+    ],
+    "hand": [
+      110,
+      110
+    ],
+    "other": [
+      93,
+      105
+    ],
+    "fullBounds": [
+      53,
+      58,
+      162,
+      176
+    ]
+  },
+  {
+    "id": "elf-sixfold-heartwood",
+    "frame": "guard",
+    "sourceBBox": [
+      69,
+      55,
+      361,
+      383
+    ],
+    "scale": 0.25925925925925924,
+    "alphaBBox": [
+      58,
+      92,
+      133,
+      176
+    ],
+    "hand": [
+      107,
+      114
+    ],
+    "other": [
+      103,
+      118
+    ],
+    "fullBounds": [
+      58,
+      63,
+      133,
+      176
+    ]
+  },
+  {
+    "id": "elf-sixfold-heartwood",
+    "frame": "death",
+    "sourceBBox": [
+      10,
+      240,
+      409,
+      368
+    ],
+    "scale": 0.25925925925925924,
+    "alphaBBox": [
+      44,
+      144,
+      147,
+      176
+    ],
+    "hand": [
+      144,
+      172
+    ],
+    "other": null,
+    "fullBounds": [
+      44,
+      144,
+      195,
+      195
+    ]
+  },
+  {
+    "id": "elf-last-string",
+    "frame": "idle-0",
+    "sourceBBox": [
+      54,
+      51,
+      344,
+      440
+    ],
+    "scale": 0.2512820512820513,
+    "alphaBBox": [
+      60,
+      79,
+      132,
+      176
+    ],
+    "hand": [
+      126,
+      133
+    ],
+    "other": null,
+    "fullBounds": [
+      60,
+      80,
+      140,
+      176
+    ]
+  },
+  {
+    "id": "elf-last-string",
+    "frame": "idle-1",
+    "sourceBBox": [
+      66,
+      56,
+      336,
+      443
+    ],
+    "scale": 0.2512820512820513,
+    "alphaBBox": [
+      62,
+      80,
+      129,
+      176
+    ],
+    "hand": [
+      121,
+      133
+    ],
+    "other": null,
+    "fullBounds": [
+      62,
+      80,
+      135,
+      176
+    ]
+  },
+  {
+    "id": "elf-last-string",
+    "frame": "anticipation",
+    "sourceBBox": [
+      34,
+      68,
+      401,
+      440
+    ],
+    "scale": 0.2512820512820513,
+    "alphaBBox": [
+      50,
+      83,
+      141,
+      176
+    ],
+    "hand": [
+      139,
+      108
+    ],
+    "other": [
+      97,
+      102
+    ],
+    "fullBounds": [
+      50,
+      61,
+      153,
+      176
+    ]
+  },
+  {
+    "id": "elf-last-string",
+    "frame": "attack",
+    "sourceBBox": [
+      76,
+      68,
+      422,
+      441
+    ],
+    "scale": 0.2512820512820513,
+    "alphaBBox": [
+      53,
+      83,
+      139,
+      176
+    ],
+    "hand": [
+      136,
+      108
+    ],
+    "other": [
+      96,
+      102
+    ],
+    "fullBounds": [
+      53,
+      61,
+      150,
+      176
+    ]
+  },
+  {
+    "id": "elf-last-string",
+    "frame": "recovery",
+    "sourceBBox": [
+      33,
+      18,
+      363,
+      395
+    ],
+    "scale": 0.2512820512820513,
+    "alphaBBox": [
+      55,
+      82,
+      137,
+      176
+    ],
+    "hand": [
+      132,
+      134
+    ],
+    "other": null,
+    "fullBounds": [
+      55,
+      82,
+      146,
+      176
+    ]
+  },
+  {
+    "id": "elf-last-string",
+    "frame": "hurt",
+    "sourceBBox": [
+      85,
+      66,
+      383,
+      395
+    ],
+    "scale": 0.2512820512820513,
+    "alphaBBox": [
+      59,
+      94,
+      133,
+      176
+    ],
+    "hand": [
+      124,
+      142
+    ],
+    "other": null,
+    "fullBounds": [
+      59,
+      94,
+      138,
+      184
+    ]
+  },
+  {
+    "id": "elf-last-string",
+    "frame": "guard",
+    "sourceBBox": [
+      56,
+      41,
+      400,
+      392
+    ],
+    "scale": 0.2512820512820513,
+    "alphaBBox": [
+      53,
+      89,
+      139,
+      176
+    ],
+    "hand": [
+      130,
+      103
+    ],
+    "other": [
+      108,
+      120
+    ],
+    "fullBounds": [
+      53,
+      56,
+      144,
+      176
+    ]
+  },
+  {
+    "id": "elf-last-string",
+    "frame": "death",
+    "sourceBBox": [
+      7,
+      242,
+      442,
+      378
+    ],
+    "scale": 0.2512820512820513,
+    "alphaBBox": [
+      41,
+      143,
+      150,
+      176
+    ],
+    "hand": [
+      145,
+      172
+    ],
+    "other": null,
+    "fullBounds": [
+      41,
+      111,
+      190,
+      180
+    ]
+  },
+  {
+    "id": "goblin-silent-ration",
+    "frame": "idle-0",
+    "sourceBBox": [
+      39,
+      54,
+      289,
+      423
+    ],
+    "scale": 0.2648648648648649,
+    "alphaBBox": [
+      63,
+      79,
+      128,
+      176
+    ],
+    "hand": [
+      121,
+      134
+    ],
+    "other": null,
+    "fullBounds": [
+      63,
+      80,
+      160,
+      176
+    ]
+  },
+  {
+    "id": "goblin-silent-ration",
+    "frame": "idle-1",
+    "sourceBBox": [
+      78,
+      54,
+      322,
+      423
+    ],
+    "scale": 0.2648648648648649,
+    "alphaBBox": [
+      64,
+      79,
+      128,
+      176
+    ],
+    "hand": [
+      121,
+      136
+    ],
+    "other": null,
+    "fullBounds": [
+      64,
+      80,
+      160,
+      176
+    ]
+  },
+  {
+    "id": "goblin-silent-ration",
+    "frame": "anticipation",
+    "sourceBBox": [
+      20,
+      85,
+      352,
+      423
+    ],
+    "scale": 0.2648648648648649,
+    "alphaBBox": [
+      52,
+      87,
+      139,
+      176
+    ],
+    "hand": [
+      82,
+      97
+    ],
+    "other": null,
+    "fullBounds": [
+      51,
+      65,
+      139,
+      176
+    ]
+  },
+  {
+    "id": "goblin-silent-ration",
+    "frame": "attack",
+    "sourceBBox": [
+      30,
+      115,
+      421,
+      424
+    ],
+    "scale": 0.2648648648648649,
+    "alphaBBox": [
+      44,
+      95,
+      147,
+      176
+    ],
+    "hand": [
+      144,
+      115
+    ],
+    "other": null,
+    "fullBounds": [
+      44,
+      82,
+      189,
+      176
+    ]
+  },
+  {
+    "id": "goblin-silent-ration",
+    "frame": "recovery",
+    "sourceBBox": [
+      57,
+      21,
+      336,
+      382
+    ],
+    "scale": 0.2648648648648649,
+    "alphaBBox": [
+      59,
+      81,
+      132,
+      176
+    ],
+    "hand": [
+      123,
+      135
+    ],
+    "other": null,
+    "fullBounds": [
+      59,
+      81,
+      162,
+      176
+    ]
+  },
+  {
+    "id": "goblin-silent-ration",
+    "frame": "hurt",
+    "sourceBBox": [
+      83,
+      42,
+      395,
+      382
+    ],
+    "scale": 0.2648648648648649,
+    "alphaBBox": [
+      55,
+      87,
+      137,
+      176
+    ],
+    "hand": [
+      111,
+      106
+    ],
+    "other": null,
+    "fullBounds": [
+      55,
+      72,
+      150,
+      176
+    ]
+  },
+  {
+    "id": "goblin-silent-ration",
+    "frame": "guard",
+    "sourceBBox": [
+      50,
+      59,
+      352,
+      379
+    ],
+    "scale": 0.2648648648648649,
+    "alphaBBox": [
+      56,
+      92,
+      135,
+      176
+    ],
+    "hand": [
+      118,
+      138
+    ],
+    "other": null,
+    "fullBounds": [
+      56,
+      92,
+      150,
+      176
+    ]
+  },
+  {
+    "id": "goblin-silent-ration",
+    "frame": "death",
+    "sourceBBox": [
+      13,
+      203,
+      413,
+      384
+    ],
+    "scale": 0.2648648648648649,
+    "alphaBBox": [
+      43,
+      129,
+      148,
+      176
+    ],
+    "hand": [
+      146,
+      163
+    ],
+    "other": null,
+    "fullBounds": [
+      43,
+      130,
+      191,
+      195
+    ]
+  }
+]

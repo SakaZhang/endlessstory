@@ -51,21 +51,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-first-forge-oathhammer/idle-0.png",
         "durationMs": 180,
         "alphaBBox": [
-          26,
-          75,
-          183,
-          191
+          62,
+          79,
+          130,
+          176
         ],
         "solidBBox": [
-          26,
-          75,
-          183,
-          191
+          62,
+          79,
+          130,
+          176
         ],
         "weaponPose": {
           "hand": [
-            116,
-            148
+            115,
+            135
           ],
           "grip": [
             35,
@@ -75,15 +75,15 @@ export const ELF_LEGENDARY_HERO_ART={
           "front": [
             [
               112,
-              143,
-              9,
-              10
+              132,
+              7,
+              7
             ],
             [
-              96,
-              138,
-              9,
-              10
+              108,
+              130,
+              7,
+              7
             ]
           ]
         }
@@ -93,21 +93,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-first-forge-oathhammer/idle-1.png",
         "durationMs": 180,
         "alphaBBox": [
-          34,
-          75,
-          188,
-          191
+          59,
+          79,
+          132,
+          176
         ],
         "solidBBox": [
-          34,
-          75,
-          188,
-          191
+          59,
+          79,
+          132,
+          176
         ],
         "weaponPose": {
           "hand": [
-            115,
-            148
+            111,
+            134
           ],
           "grip": [
             35,
@@ -116,16 +116,16 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": 146,
           "front": [
             [
-              111,
-              143,
-              9,
-              10
+              108,
+              131,
+              7,
+              7
             ],
             [
-              92,
-              138,
-              9,
-              10
+              104,
+              129,
+              7,
+              7
             ]
           ]
         }
@@ -135,21 +135,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-first-forge-oathhammer/anticipation.png",
         "durationMs": 180,
         "alphaBBox": [
-          54,
-          79,
-          163,
-          190
+          58,
+          77,
+          134,
+          176
         ],
         "solidBBox": [
-          54,
-          79,
-          163,
-          190
+          58,
+          77,
+          134,
+          176
         ],
         "weaponPose": {
           "hand": [
-            90,
-            110
+            92,
+            82
           ],
           "grip": [
             35,
@@ -158,16 +158,16 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": -9,
           "front": [
             [
-              86,
-              105,
-              9,
-              10
+              89,
+              79,
+              7,
+              7
             ],
             [
-              79,
-              108,
-              9,
-              10
+              84,
+              86,
+              7,
+              7
             ]
           ]
         }
@@ -177,21 +177,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-first-forge-oathhammer/attack.png",
         "durationMs": 180,
         "alphaBBox": [
-          31,
-          88,
-          206,
-          191
+          43,
+          93,
+          149,
+          176
         ],
         "solidBBox": [
-          31,
-          88,
-          206,
-          191
+          43,
+          93,
+          149,
+          176
         ],
         "weaponPose": {
           "hand": [
-            139,
-            137
+            146,
+            119
           ],
           "grip": [
             35,
@@ -200,16 +200,16 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": 130,
           "front": [
             [
-              135,
-              132,
-              9,
-              10
+              143,
+              116,
+              7,
+              7
             ],
             [
-              121,
-              130,
-              9,
-              10
+              139,
+              116,
+              7,
+              7
             ]
           ]
         }
@@ -219,21 +219,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-first-forge-oathhammer/recovery.png",
         "durationMs": 180,
         "alphaBBox": [
-          23,
-          77,
-          182,
-          182
+          56,
+          83,
+          135,
+          176
         ],
         "solidBBox": [
-          23,
-          77,
-          182,
-          182
+          56,
+          83,
+          135,
+          176
         ],
         "weaponPose": {
           "hand": [
-            117,
-            143
+            112,
+            131
           ],
           "grip": [
             35,
@@ -242,16 +242,16 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": 146,
           "front": [
             [
-              113,
-              138,
-              9,
-              10
+              109,
+              128,
+              7,
+              7
             ],
             [
-              97,
-              131,
-              9,
-              10
+              105,
+              126,
+              7,
+              7
             ]
           ]
         }
@@ -261,21 +261,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-first-forge-oathhammer/hurt.png",
         "durationMs": 180,
         "alphaBBox": [
-          29,
-          69,
-          171,
-          181
+          54,
+          80,
+          137,
+          176
         ],
         "solidBBox": [
-          29,
-          69,
-          171,
-          181
+          54,
+          80,
+          137,
+          176
         ],
         "weaponPose": {
           "hand": [
-            125,
-            103
+            111,
+            100
           ],
           "grip": [
             35,
@@ -284,16 +284,16 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": 89,
           "front": [
             [
-              121,
-              98,
-              9,
-              10
+              108,
+              97,
+              7,
+              7
             ],
             [
-              89,
-              123,
-              9,
-              10
+              92,
+              87,
+              7,
+              7
             ]
           ]
         }
@@ -303,21 +303,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-first-forge-oathhammer/guard.png",
         "durationMs": 180,
         "alphaBBox": [
-          46,
-          74,
-          134,
-          178
+          54,
+          84,
+          137,
+          176
         ],
         "solidBBox": [
-          46,
-          74,
-          134,
-          178
+          54,
+          84,
+          137,
+          176
         ],
         "weaponPose": {
           "hand": [
-            112,
-            119
+            109,
+            127
           ],
           "grip": [
             35,
@@ -326,16 +326,16 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": 45,
           "front": [
             [
-              108,
-              114,
-              9,
-              10
+              106,
+              124,
+              7,
+              7
             ],
             [
-              116,
-              80,
-              9,
-              10
+              123,
+              93,
+              7,
+              7
             ]
           ]
         }
@@ -345,21 +345,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-first-forge-oathhammer/death.png",
         "durationMs": 180,
         "alphaBBox": [
-          4,
-          128,
-          194,
-          178
+          43,
+          144,
+          149,
+          176
         ],
         "solidBBox": [
-          4,
-          128,
-          194,
-          178
+          43,
+          144,
+          148,
+          176
         ],
         "weaponPose": {
           "hand": [
-            98,
-            170
+            142,
+            171
           ],
           "grip": [
             35,
@@ -368,10 +368,10 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": 130,
           "front": [
             [
-              94,
-              165,
-              9,
-              10
+              139,
+              168,
+              7,
+              7
             ]
           ]
         }
@@ -430,21 +430,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-human-oathblade/idle-0.png",
         "durationMs": 180,
         "alphaBBox": [
-          61,
-          76,
-          181,
+          58,
+          79,
+          133,
           176
         ],
         "solidBBox": [
-          61,
-          76,
-          181,
+          58,
+          80,
+          133,
           176
         ],
         "weaponPose": {
           "hand": [
-            119,
-            140
+            113,
+            126
           ],
           "grip": [
             48,
@@ -453,16 +453,16 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": -105,
           "front": [
             [
-              115,
-              135,
-              9,
-              10
+              110,
+              123,
+              7,
+              7
             ],
             [
-              108,
-              135,
-              9,
-              10
+              105,
+              123,
+              7,
+              7
             ]
           ]
         }
@@ -472,21 +472,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-human-oathblade/idle-1.png",
         "durationMs": 180,
         "alphaBBox": [
-          29,
-          76,
-          168,
+          60,
+          78,
+          131,
           176
         ],
         "solidBBox": [
-          29,
-          76,
-          168,
+          60,
+          78,
+          131,
           176
         ],
         "weaponPose": {
           "hand": [
-            117,
-            140
+            108,
+            126
           ],
           "grip": [
             48,
@@ -495,16 +495,16 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": -105,
           "front": [
             [
-              113,
-              135,
-              9,
-              10
+              105,
+              123,
+              7,
+              7
             ],
             [
-              106,
-              135,
-              9,
-              10
+              102,
+              122,
+              7,
+              7
             ]
           ]
         }
@@ -514,21 +514,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-human-oathblade/anticipation.png",
         "durationMs": 180,
         "alphaBBox": [
-          34,
-          79,
-          133,
+          53,
+          72,
+          138,
           176
         ],
         "solidBBox": [
-          34,
-          79,
-          133,
+          53,
+          72,
+          138,
           176
         ],
         "weaponPose": {
           "hand": [
-            106,
-            89
+            112,
+            76
           ],
           "grip": [
             48,
@@ -537,16 +537,16 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": 90,
           "front": [
             [
-              102,
-              84,
-              9,
-              10
+              109,
+              73,
+              7,
+              7
             ],
             [
-              110,
-              92,
-              9,
-              10
+              112,
+              78,
+              7,
+              7
             ]
           ]
         }
@@ -556,21 +556,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-human-oathblade/attack.png",
         "durationMs": 180,
         "alphaBBox": [
-          18,
-          93,
-          174,
-          177
+          48,
+          92,
+          144,
+          176
         ],
         "solidBBox": [
-          18,
-          93,
-          174,
-          177
+          49,
+          92,
+          144,
+          176
         ],
         "weaponPose": {
           "hand": [
-            146,
-            135
+            141,
+            116
           ],
           "grip": [
             48,
@@ -579,16 +579,16 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": -135,
           "front": [
             [
-              142,
-              130,
-              9,
-              10
+              138,
+              113,
+              7,
+              7
             ],
             [
               135,
-              128,
-              9,
-              10
+              117,
+              7,
+              7
             ]
           ]
         }
@@ -598,21 +598,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-human-oathblade/recovery.png",
         "durationMs": 180,
         "alphaBBox": [
-          53,
-          82,
-          160,
-          175
+          56,
+          78,
+          136,
+          176
         ],
         "solidBBox": [
-          53,
-          82,
-          160,
-          175
+          56,
+          78,
+          136,
+          176
         ],
         "weaponPose": {
           "hand": [
-            119,
-            143
+            114,
+            124
           ],
           "grip": [
             48,
@@ -621,16 +621,16 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": -105,
           "front": [
             [
-              115,
-              138,
-              9,
-              10
+              111,
+              121,
+              7,
+              7
             ],
             [
-              106,
-              134,
-              9,
-              10
+              103,
+              121,
+              7,
+              7
             ]
           ]
         }
@@ -640,21 +640,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-human-oathblade/hurt.png",
         "durationMs": 180,
         "alphaBBox": [
-          31,
-          85,
-          158,
-          178
+          51,
+          81,
+          140,
+          176
         ],
         "solidBBox": [
-          31,
-          85,
-          158,
-          178
+          51,
+          82,
+          140,
+          176
         ],
         "weaponPose": {
           "hand": [
-            118,
-            125
+            100,
+            118
           ],
           "grip": [
             48,
@@ -663,16 +663,16 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": -175,
           "front": [
             [
-              114,
-              120,
-              9,
-              10
+              97,
+              115,
+              7,
+              7
             ],
             [
-              103,
-              128,
-              9,
-              10
+              90,
+              116,
+              7,
+              7
             ]
           ]
         }
@@ -682,21 +682,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-human-oathblade/guard.png",
         "durationMs": 180,
         "alphaBBox": [
-          38,
-          85,
-          132,
-          179
+          56,
+          91,
+          136,
+          176
         ],
         "solidBBox": [
-          38,
-          85,
-          132,
-          179
+          56,
+          91,
+          136,
+          176
         ],
         "weaponPose": {
           "hand": [
-            118,
-            117
+            119,
+            114
           ],
           "grip": [
             48,
@@ -705,16 +705,16 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": 135,
           "front": [
             [
-              114,
-              112,
-              9,
-              10
+              116,
+              111,
+              7,
+              7
             ],
             [
-              114,
-              124,
-              9,
-              10
+              108,
+              111,
+              7,
+              7
             ]
           ]
         }
@@ -724,21 +724,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-human-oathblade/death.png",
         "durationMs": 180,
         "alphaBBox": [
-          20,
-          133,
-          156,
-          178
+          40,
+          145,
+          151,
+          176
         ],
         "solidBBox": [
-          20,
-          133,
-          156,
-          178
+          41,
+          146,
+          151,
+          176
         ],
         "weaponPose": {
           "hand": [
-            152,
-            168
+            149,
+            172
           ],
           "grip": [
             48,
@@ -747,16 +747,16 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": -135,
           "front": [
             [
-              148,
-              163,
-              9,
-              10
+              146,
+              169,
+              7,
+              7
             ],
             [
-              120,
-              166,
-              9,
-              10
+              121,
+              171,
+              7,
+              7
             ]
           ]
         }
@@ -815,21 +815,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-elf-sixfold-heartwood/idle-0.png",
         "durationMs": 180,
         "alphaBBox": [
-          51,
-          73,
-          173,
-          191
+          60,
+          79,
+          131,
+          176
         ],
         "solidBBox": [
-          51,
-          73,
-          173,
-          191
+          60,
+          79,
+          131,
+          176
         ],
         "weaponPose": {
           "hand": [
-            128,
-            122
+            125,
+            113
           ],
           "grip": [
             31,
@@ -838,10 +838,10 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": 0,
           "front": [
             [
-              124,
-              117,
-              9,
-              10
+              122,
+              110,
+              7,
+              7
             ]
           ]
         }
@@ -851,21 +851,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-elf-sixfold-heartwood/idle-1.png",
         "durationMs": 180,
         "alphaBBox": [
-          31,
-          75,
-          174,
-          191
+          60,
+          79,
+          131,
+          176
         ],
         "solidBBox": [
-          31,
-          75,
-          174,
-          191
+          60,
+          79,
+          131,
+          176
         ],
         "weaponPose": {
           "hand": [
-            125,
-            121
+            126,
+            114
           ],
           "grip": [
             31,
@@ -874,10 +874,10 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": 0,
           "front": [
             [
-              121,
-              116,
-              9,
-              10
+              123,
+              111,
+              7,
+              7
             ]
           ]
         }
@@ -887,21 +887,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-elf-sixfold-heartwood/anticipation.png",
         "durationMs": 180,
         "alphaBBox": [
-          35,
-          90,
-          142,
-          192
+          58,
+          87,
+          133,
+          176
         ],
         "solidBBox": [
-          35,
-          90,
-          142,
-          192
+          58,
+          87,
+          133,
+          176
         ],
         "weaponPose": {
           "hand": [
-            80,
-            106
+            97,
+            100
           ],
           "grip": [
             31,
@@ -910,16 +910,16 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": -50,
           "front": [
             [
-              76,
-              101,
-              9,
-              10
+              94,
+              97,
+              7,
+              7
             ],
             [
-              121,
-              138,
-              9,
-              10
+              99,
+              104,
+              7,
+              7
             ]
           ]
         }
@@ -929,21 +929,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-elf-sixfold-heartwood/attack.png",
         "durationMs": 180,
         "alphaBBox": [
-          30,
-          86,
-          201,
-          192
+          53,
+          88,
+          139,
+          176
         ],
         "solidBBox": [
-          30,
-          86,
-          201,
-          192
+          53,
+          88,
+          139,
+          176
         ],
         "weaponPose": {
           "hand": [
-            125,
-            121
+            136,
+            112
           ],
           "grip": [
             31,
@@ -952,16 +952,16 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": 90,
           "front": [
             [
-              121,
-              116,
-              9,
-              10
+              133,
+              109,
+              7,
+              7
             ],
             [
-              104,
-              116,
-              9,
-              10
+              124,
+              108,
+              7,
+              7
             ]
           ]
         }
@@ -971,21 +971,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-elf-sixfold-heartwood/recovery.png",
         "durationMs": 180,
         "alphaBBox": [
-          30,
-          74,
-          170,
-          187
+          57,
+          84,
+          135,
+          176
         ],
         "solidBBox": [
-          30,
-          74,
-          170,
-          187
+          57,
+          85,
+          135,
+          176
         ],
         "weaponPose": {
           "hand": [
-            120,
-            137
+            128,
+            132
           ],
           "grip": [
             31,
@@ -994,10 +994,10 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": 35,
           "front": [
             [
-              116,
-              132,
-              9,
-              10
+              125,
+              129,
+              7,
+              7
             ]
           ]
         }
@@ -1007,21 +1007,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-elf-sixfold-heartwood/hurt.png",
         "durationMs": 180,
         "alphaBBox": [
-          21,
-          83,
-          162,
-          188
+          53,
+          92,
+          138,
+          176
         ],
         "solidBBox": [
-          21,
-          83,
-          162,
-          188
+          53,
+          92,
+          138,
+          176
         ],
         "weaponPose": {
           "hand": [
-            96,
-            107
+            110,
+            110
           ],
           "grip": [
             31,
@@ -1030,16 +1030,16 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": 45,
           "front": [
             [
-              92,
-              102,
-              9,
-              10
+              107,
+              107,
+              7,
+              7
             ],
             [
-              71,
-              116,
-              9,
-              10
+              90,
+              102,
+              7,
+              7
             ]
           ]
         }
@@ -1049,21 +1049,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-elf-sixfold-heartwood/guard.png",
         "durationMs": 180,
         "alphaBBox": [
-          48,
-          86,
-          140,
-          183
+          58,
+          92,
+          133,
+          176
         ],
         "solidBBox": [
-          48,
-          86,
-          140,
-          183
+          58,
+          92,
+          133,
+          176
         ],
         "weaponPose": {
           "hand": [
-            121,
-            120
+            107,
+            114
           ],
           "grip": [
             31,
@@ -1072,16 +1072,16 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": 0,
           "front": [
             [
-              117,
-              115,
-              9,
-              10
+              104,
+              111,
+              7,
+              7
             ],
             [
-              117,
-              124,
-              9,
-              10
+              100,
+              115,
+              7,
+              7
             ]
           ]
         }
@@ -1091,21 +1091,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-elf-sixfold-heartwood/death.png",
         "durationMs": 180,
         "alphaBBox": [
-          23,
-          137,
-          184,
-          184
+          44,
+          144,
+          147,
+          176
         ],
         "solidBBox": [
-          23,
-          137,
-          184,
-          184
+          44,
+          144,
+          147,
+          176
         ],
         "weaponPose": {
           "hand": [
-            114,
-            170
+            144,
+            172
           ],
           "grip": [
             31,
@@ -1114,10 +1114,10 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": 90,
           "front": [
             [
-              110,
-              165,
-              9,
-              10
+              141,
+              169,
+              7,
+              7
             ]
           ]
         }
@@ -1176,21 +1176,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-elf-last-string/idle-0.png",
         "durationMs": 180,
         "alphaBBox": [
-          19,
-          77,
-          184,
-          192
+          60,
+          79,
+          132,
+          176
         ],
         "solidBBox": [
-          19,
-          77,
-          184,
-          192
+          60,
+          80,
+          132,
+          176
         ],
         "weaponPose": {
           "hand": [
-            116,
-            143
+            126,
+            133
           ],
           "grip": [
             18,
@@ -1199,10 +1199,10 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": 180,
           "front": [
             [
-              112,
-              138,
-              9,
-              10
+              123,
+              130,
+              7,
+              7
             ]
           ]
         }
@@ -1212,21 +1212,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-elf-last-string/idle-1.png",
         "durationMs": 180,
         "alphaBBox": [
-          10,
-          73,
-          179,
-          191
+          62,
+          80,
+          129,
+          176
         ],
         "solidBBox": [
-          10,
-          73,
-          179,
-          191
+          62,
+          80,
+          129,
+          176
         ],
         "weaponPose": {
           "hand": [
-            117,
-            143
+            121,
+            133
           ],
           "grip": [
             18,
@@ -1235,10 +1235,10 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": 180,
           "front": [
             [
-              113,
-              138,
-              9,
-              10
+              118,
+              130,
+              7,
+              7
             ]
           ]
         }
@@ -1249,20 +1249,20 @@ export const ELF_LEGENDARY_HERO_ART={
         "durationMs": 180,
         "alphaBBox": [
           50,
-          77,
-          201,
-          180
+          83,
+          141,
+          176
         ],
         "solidBBox": [
           50,
-          77,
-          201,
-          180
+          84,
+          141,
+          176
         ],
         "weaponPose": {
           "hand": [
-            144,
-            117
+            139,
+            108
           ],
           "grip": [
             18,
@@ -1271,21 +1271,21 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": 180,
           "front": [
             [
-              140,
-              112,
-              9,
-              10
+              136,
+              105,
+              7,
+              7
             ],
             [
-              91.8,
-              113.64,
+              94,
+              99,
               7,
               7
             ]
           ],
           "bowPull": [
-            49.74193548387097,
-            30.23225806451613
+            45.1,
+            33.87
           ],
           "drawHand": [
             94.8,
@@ -1298,21 +1298,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-elf-last-string/attack.png",
         "durationMs": 180,
         "alphaBBox": [
-          52,
-          80,
-          193,
-          191
+          53,
+          83,
+          139,
+          176
         ],
         "solidBBox": [
-          52,
-          80,
-          193,
-          191
+          53,
+          83,
+          139,
+          176
         ],
         "weaponPose": {
           "hand": [
             136,
-            120
+            108
           ],
           "grip": [
             18,
@@ -1321,11 +1321,21 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": 180,
           "front": [
             [
-              132,
-              115,
-              9,
-              10
+              133,
+              105,
+              7,
+              7
+            ],
+            [
+              93,
+              99,
+              7,
+              7
             ]
+          ],
+          "bowPull": [
+            43.81,
+            33.87
           ]
         }
       },
@@ -1334,21 +1344,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-elf-last-string/recovery.png",
         "durationMs": 180,
         "alphaBBox": [
-          48,
-          74,
-          188,
-          188
+          55,
+          82,
+          137,
+          176
         ],
         "solidBBox": [
-          48,
-          74,
-          188,
-          188
+          55,
+          82,
+          137,
+          176
         ],
         "weaponPose": {
           "hand": [
-            120,
-            141
+            132,
+            134
           ],
           "grip": [
             18,
@@ -1357,10 +1367,10 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": 180,
           "front": [
             [
-              116,
-              136,
-              9,
-              10
+              129,
+              131,
+              7,
+              7
             ]
           ]
         }
@@ -1370,21 +1380,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-elf-last-string/hurt.png",
         "durationMs": 180,
         "alphaBBox": [
-          10,
-          80,
-          167,
-          181
+          59,
+          94,
+          133,
+          176
         ],
         "solidBBox": [
-          10,
-          80,
-          167,
-          181
+          59,
+          94,
+          133,
+          176
         ],
         "weaponPose": {
           "hand": [
-            84,
-            139
+            124,
+            142
           ],
           "grip": [
             18,
@@ -1393,10 +1403,10 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": 180,
           "front": [
             [
-              80,
-              134,
-              9,
-              10
+              121,
+              139,
+              7,
+              7
             ]
           ]
         }
@@ -1406,21 +1416,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-elf-last-string/guard.png",
         "durationMs": 180,
         "alphaBBox": [
-          54,
-          80,
-          194,
-          187
+          53,
+          89,
+          139,
+          176
         ],
         "solidBBox": [
-          54,
-          80,
-          194,
-          187
+          53,
+          89,
+          139,
+          176
         ],
         "weaponPose": {
           "hand": [
-            127,
-            117
+            130,
+            103
           ],
           "grip": [
             18,
@@ -1429,10 +1439,16 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": 180,
           "front": [
             [
-              123,
-              112,
-              9,
-              10
+              127,
+              100,
+              7,
+              7
+            ],
+            [
+              105,
+              117,
+              7,
+              7
             ]
           ]
         }
@@ -1442,21 +1458,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-elf-last-string/death.png",
         "durationMs": 180,
         "alphaBBox": [
-          25,
-          124,
-          144,
-          173
+          41,
+          143,
+          150,
+          176
         ],
         "solidBBox": [
-          25,
-          124,
-          144,
-          173
+          41,
+          143,
+          150,
+          176
         ],
         "weaponPose": {
           "hand": [
-            136,
-            166
+            145,
+            172
           ],
           "grip": [
             14,
@@ -1465,10 +1481,10 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": -90,
           "front": [
             [
-              132,
-              161,
-              9,
-              10
+              142,
+              169,
+              7,
+              7
             ]
           ]
         }
@@ -1527,21 +1543,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-goblin-silent-ration/idle-0.png",
         "durationMs": 180,
         "alphaBBox": [
-          56,
-          75,
-          167,
-          179
+          63,
+          79,
+          128,
+          176
         ],
         "solidBBox": [
-          56,
-          75,
-          167,
-          179
+          63,
+          80,
+          128,
+          176
         ],
         "weaponPose": {
           "hand": [
-            115,
-            143
+            121,
+            134
           ],
           "grip": [
             32,
@@ -1550,10 +1566,10 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": -105,
           "front": [
             [
-              111,
-              138,
-              9,
-              10
+              118,
+              131,
+              7,
+              7
             ]
           ]
         }
@@ -1563,21 +1579,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-goblin-silent-ration/idle-1.png",
         "durationMs": 180,
         "alphaBBox": [
-          30,
-          77,
-          159,
-          179
+          64,
+          79,
+          128,
+          176
         ],
         "solidBBox": [
-          30,
-          77,
-          159,
-          179
+          64,
+          80,
+          128,
+          176
         ],
         "weaponPose": {
           "hand": [
-            113,
-            143
+            121,
+            136
           ],
           "grip": [
             32,
@@ -1586,10 +1602,10 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": -105,
           "front": [
             [
-              109,
-              138,
-              9,
-              10
+              118,
+              133,
+              7,
+              7
             ]
           ]
         }
@@ -1599,21 +1615,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-goblin-silent-ration/anticipation.png",
         "durationMs": 180,
         "alphaBBox": [
-          48,
-          94,
+          52,
+          87,
           139,
-          179
+          176
         ],
         "solidBBox": [
-          48,
-          94,
+          52,
+          87,
           139,
-          179
+          176
         ],
         "weaponPose": {
           "hand": [
-            67,
-            113
+            82,
+            97
           ],
           "grip": [
             32,
@@ -1622,10 +1638,10 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": 90,
           "front": [
             [
-              63,
-              108,
-              9,
-              10
+              79,
+              94,
+              7,
+              7
             ]
           ]
         }
@@ -1635,21 +1651,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-goblin-silent-ration/attack.png",
         "durationMs": 180,
         "alphaBBox": [
-          33,
-          92,
-          178,
-          179
+          44,
+          95,
+          147,
+          176
         ],
         "solidBBox": [
-          33,
-          92,
-          178,
-          179
+          44,
+          95,
+          147,
+          176
         ],
         "weaponPose": {
           "hand": [
-            143,
-            130
+            144,
+            115
           ],
           "grip": [
             32,
@@ -1658,10 +1674,10 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": -140,
           "front": [
             [
-              139,
-              125,
-              9,
-              10
+              141,
+              112,
+              7,
+              7
             ]
           ]
         }
@@ -1671,21 +1687,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-goblin-silent-ration/recovery.png",
         "durationMs": 180,
         "alphaBBox": [
-          37,
-          79,
-          146,
-          180
+          59,
+          81,
+          132,
+          176
         ],
         "solidBBox": [
-          37,
-          79,
-          146,
-          180
+          59,
+          81,
+          132,
+          176
         ],
         "weaponPose": {
           "hand": [
             123,
-            141
+            135
           ],
           "grip": [
             32,
@@ -1694,10 +1710,10 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": -105,
           "front": [
             [
-              119,
-              136,
-              9,
-              10
+              120,
+              132,
+              7,
+              7
             ]
           ]
         }
@@ -1707,21 +1723,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-goblin-silent-ration/hurt.png",
         "durationMs": 180,
         "alphaBBox": [
-          51,
-          80,
-          144,
-          179
+          55,
+          87,
+          137,
+          176
         ],
         "solidBBox": [
-          51,
-          80,
-          144,
-          179
+          55,
+          87,
+          137,
+          176
         ],
         "weaponPose": {
           "hand": [
-            93,
-            139
+            111,
+            106
           ],
           "grip": [
             32,
@@ -1730,10 +1746,10 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": -165,
           "front": [
             [
-              89,
-              134,
-              9,
-              10
+              108,
+              103,
+              7,
+              7
             ]
           ]
         }
@@ -1743,21 +1759,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-goblin-silent-ration/guard.png",
         "durationMs": 180,
         "alphaBBox": [
-          45,
-          85,
-          136,
-          179
+          56,
+          92,
+          135,
+          176
         ],
         "solidBBox": [
-          45,
-          85,
-          136,
-          179
+          56,
+          92,
+          135,
+          176
         ],
         "weaponPose": {
           "hand": [
-            112,
-            124
+            118,
+            138
           ],
           "grip": [
             32,
@@ -1766,10 +1782,10 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": 135,
           "front": [
             [
-              108,
-              119,
-              9,
-              10
+              115,
+              135,
+              7,
+              7
             ]
           ]
         }
@@ -1779,21 +1795,21 @@ export const ELF_LEGENDARY_HERO_ART={
         "file": "../legendary-hero-body/elf-goblin-silent-ration/death.png",
         "durationMs": 180,
         "alphaBBox": [
-          36,
+          43,
           129,
-          160,
+          148,
           176
         ],
         "solidBBox": [
-          36,
-          129,
-          160,
+          43,
+          130,
+          148,
           176
         ],
         "weaponPose": {
           "hand": [
-            122,
-            171
+            146,
+            163
           ],
           "grip": [
             32,
@@ -1802,10 +1818,10 @@ export const ELF_LEGENDARY_HERO_ART={
           "angle": -135,
           "front": [
             [
-              118,
-              166,
-              9,
-              10
+              143,
+              160,
+              7,
+              7
             ]
           ]
         }

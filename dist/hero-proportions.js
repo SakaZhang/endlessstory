@@ -7,9 +7,9 @@ export const HERO_REFERENCE_HEIGHTS=Object.freeze({goblin:62,elf:98});
 // Read authored facing (including per-frame overrides); never rewrite the PNG.
 export const heroPortraitFlipX=(sprite,frame)=>(frame?.facing??sprite?.facing)==='left';
 // Inclusive head/hood-to-foot Y bounds, visually inspected in the idle PNG.
-// Staff tip is NOT anatomy: elf staff alpha starts92 but hair starts101.
+// Staff tip is NOT anatomy: elf staff alpha starts83 but hair starts94.
 export const HERO_BODY_REFERENCE_BOUNDS=Object.freeze({
- elf:Object.freeze({bow:[94,175],staff:[101,175],neutral:[95,176]}),
+ elf:Object.freeze({bow:[94,175],staff:[94,175],neutral:[95,176]}),
  goblin:Object.freeze({dagger:[39,176],sword:[52,176],neutral:[39,176]})
 });
 export function heroPresentationScale(sprite,race){

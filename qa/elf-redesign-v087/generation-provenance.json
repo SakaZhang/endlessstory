@@ -1,0 +1,28 @@
+{
+  "tool": "image_gen__imagegen",
+  "transparent_background": true,
+  "sources": {
+    "bow": "1565087c-1bea-496b-b4ae-abb4b90f618d",
+    "staff": "e75dff04-64fd-424b-bf46-89d02a2f12d6",
+    "neutral": "5cd60f8e-8354-4ce5-a42a-cb35b0158c87",
+    "first-forge-oathhammer": "5e2c3719-58de-4c78-9e7e-c1eb2ffe6aba",
+    "human-oathblade": "d2d9a846-cad0-4bca-855d-4c9b7f0c6abb",
+    "elf-sixfold-heartwood": "f10a143b-180a-4628-8b4d-bd396db4964e",
+    "elf-last-string": "dadadaf1-ee6a-492f-b643-21fde834894c",
+    "goblin-silent-ration": "afd40a7f-d27e-4b92-b160-f13880e8627e"
+  },
+  "reference": "existing repository native/legendary body-only action sheets; new bow sheet as the shared identity reference",
+  "promptSpecification": {
+    "common": "Redesign the same young male Elf priest with small balanced head, alert narrow eyes, refined youthful face, long slim torso and legs, silver hair and pointed ears, ivory/gold tunic, forest green cloak, brown boots. Crisp dark medieval pixel game art, not chibi. Preserve frame count, pose order and right-facing direction. Same body scale across each sheet, transparent background, complete figures, no text/grid/floor/shadow or extra limbs.",
+    "nativeBow": "Four columns and two rows: idle, alternate idle, nocking, fully drawn aim; release, recovery, hurt, collapsed defeat. Gold recurved bow and arrow retained.",
+    "nativeStaff": "Four columns and two rows: idle, alternate idle, raise staff, draw back; extend cast, small blue spark, hurt, collapsed defeat. Slender gold-brown staff with small blue orb. Final edit repairs layout spacing to avoid clipped tip and effect.",
+    "neutral": "Two columns and two rows: idle, unarmed punch, hurt recoil, collapsed death. Empty hands. Final repair explicitly removes extraneous third hand and requests genuine transparent alpha.",
+    "legendary": "Five separate four-column two-row body-only sheets preserve old weapon-specific poses: idle0/idle1/anticipation/attack/recovery/hurt/guard/death. Empty gripping fists, absolutely no weapons because runtime overlays immutable canonical weapon PNGs. Native new bow sheet supplies character identity."
+  },
+  "rejectedCandidates": [
+    "staff original-reference candidate retained too much old chibi anatomy",
+    "staff second candidate needed layout margin repair",
+    "neutral first candidate had extra hand and required correction"
+  ],
+  "packaging": "crop/low-alpha fringe cleanup/uniform nearest-neighbor scaling/foot-anchor placement only; no artistic repaint by code"
+}

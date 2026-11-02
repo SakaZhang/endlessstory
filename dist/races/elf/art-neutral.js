@@ -1,4 +1,4 @@
-// Imagegen slender empty-hand Elf lifecycle; 192px canvases and existing anchors preserved.
+// Imagegen refined youthful Elf, empty-hand lifecycle.
 export const HERO_NEUTRAL={
   "frameSize": [
     192,
@@ -16,13 +16,13 @@ export const HERO_NEUTRAL={
       "file": "races/elf/assets/hero-neutral-idle.png",
       "durationMs": 160,
       "alphaBBox": [
-        68,
+        67,
         95,
         124,
         176
       ],
       "solidBBox": [
-        68,
+        67,
         95,
         124,
         176
@@ -33,15 +33,15 @@ export const HERO_NEUTRAL={
       "file": "races/elf/assets/hero-neutral-strike.png",
       "durationMs": 160,
       "alphaBBox": [
-        60,
-        100,
-        132,
+        54,
+        103,
+        138,
         176
       ],
       "solidBBox": [
-        60,
-        100,
-        132,
+        54,
+        103,
+        138,
         176
       ]
     },
@@ -50,15 +50,15 @@ export const HERO_NEUTRAL={
       "file": "races/elf/assets/hero-neutral-hurt.png",
       "durationMs": 160,
       "alphaBBox": [
-        59,
-        98,
-        133,
+        60,
+        104,
+        132,
         176
       ],
       "solidBBox": [
-        59,
-        98,
-        133,
+        60,
+        104,
+        132,
         176
       ]
     },
@@ -67,15 +67,15 @@ export const HERO_NEUTRAL={
       "file": "races/elf/assets/hero-neutral-death.png",
       "durationMs": 650,
       "alphaBBox": [
-        44,
-        143,
-        148,
+        41,
+        151,
+        151,
         176
       ],
       "solidBBox": [
-        44,
-        143,
-        148,
+        41,
+        151,
+        151,
         176
       ]
     }

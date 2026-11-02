@@ -27,8 +27,8 @@ for(const race of ['dwarf','human','elf','goblin','ashen']){
  }
 }
 assert(heroPresentationScale(manifest.sprites['hero-elf-bow'],'elf')>1);
-assert.deepEqual(manifest.sprites['hero-elf-staff'].bodyReferenceBounds,[101,175]);
-assert.equal(heroPresentationScale(manifest.sprites['hero-elf-staff'],'elf'),98/75);
+assert.deepEqual(manifest.sprites['hero-elf-staff'].bodyReferenceBounds,[94,175]);
+assert.equal(heroPresentationScale(manifest.sprites['hero-elf-staff'],'elf'),98/82);
 assert.equal(HERO_REFERENCE_HEIGHTS.goblin,62);assert.equal(HERO_REFERENCE_HEIGHTS.elf,98);
 console.log('PASS fixed idle-reference transforms for all native/neutral lifecycle frames, camp/field baselines, uniform portrait scaling, nearest-neighbor rendering; unchanged other race sizing.');
 console.table(results);

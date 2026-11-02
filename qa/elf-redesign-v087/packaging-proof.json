@@ -1,0 +1,482 @@
+[
+  {
+    "variant": "bow",
+    "id": "hero-bow-0",
+    "sourceRect": [
+      0,
+      0,
+      444,
+      444
+    ],
+    "sourceBBox": [
+      61,
+      76,
+      345,
+      431
+    ],
+    "hairTop": 76,
+    "scale": 0.2303370786516854,
+    "alphaBBox": [
+      63,
+      94,
+      128,
+      175
+    ]
+  },
+  {
+    "variant": "bow",
+    "id": "hero-bow-1",
+    "sourceRect": [
+      444,
+      0,
+      443,
+      444
+    ],
+    "sourceBBox": [
+      73,
+      76,
+      360,
+      430
+    ],
+    "hairTop": 76,
+    "scale": 0.2303370786516854,
+    "alphaBBox": [
+      63,
+      94,
+      128,
+      175
+    ]
+  },
+  {
+    "variant": "bow",
+    "id": "hero-bow-2",
+    "sourceRect": [
+      887,
+      0,
+      444,
+      444
+    ],
+    "sourceBBox": [
+      74,
+      42,
+      388,
+      430
+    ],
+    "hairTop": 76,
+    "scale": 0.2303370786516854,
+    "alphaBBox": [
+      60,
+      86,
+      132,
+      175
+    ]
+  },
+  {
+    "variant": "bow",
+    "id": "hero-bow-3",
+    "sourceRect": [
+      1331,
+      0,
+      443,
+      444
+    ],
+    "sourceBBox": [
+      83,
+      23,
+      425,
+      430
+    ],
+    "hairTop": 76,
+    "scale": 0.2303370786516854,
+    "alphaBBox": [
+      57,
+      82,
+      134,
+      175
+    ]
+  },
+  {
+    "variant": "bow",
+    "id": "hero-bow-4",
+    "sourceRect": [
+      0,
+      444,
+      444,
+      443
+    ],
+    "sourceBBox": [
+      48,
+      18,
+      363,
+      398
+    ],
+    "hairTop": 76,
+    "scale": 0.2303370786516854,
+    "alphaBBox": [
+      60,
+      88,
+      132,
+      175
+    ]
+  },
+  {
+    "variant": "bow",
+    "id": "hero-bow-5",
+    "sourceRect": [
+      444,
+      444,
+      443,
+      443
+    ],
+    "sourceBBox": [
+      73,
+      45,
+      391,
+      396
+    ],
+    "hairTop": 76,
+    "scale": 0.2303370786516854,
+    "alphaBBox": [
+      60,
+      95,
+      132,
+      175
+    ]
+  },
+  {
+    "variant": "bow",
+    "id": "hero-bow-6",
+    "sourceRect": [
+      887,
+      444,
+      444,
+      443
+    ],
+    "sourceBBox": [
+      69,
+      79,
+      394,
+      398
+    ],
+    "hairTop": 76,
+    "scale": 0.2303370786516854,
+    "alphaBBox": [
+      59,
+      102,
+      133,
+      175
+    ]
+  },
+  {
+    "variant": "bow",
+    "id": "hero-bow-7",
+    "sourceRect": [
+      1331,
+      444,
+      443,
+      443
+    ],
+    "sourceBBox": [
+      42,
+      190,
+      413,
+      384
+    ],
+    "hairTop": 76,
+    "scale": 0.2303370786516854,
+    "alphaBBox": [
+      53,
+      131,
+      138,
+      175
+    ]
+  },
+  {
+    "variant": "staff",
+    "id": "hero-staff-0",
+    "sourceRect": [
+      0,
+      0,
+      443,
+      470
+    ],
+    "sourceBBox": [
+      78,
+      82,
+      327,
+      434
+    ],
+    "hairTop": 123,
+    "scale": 0.26282051282051283,
+    "alphaBBox": [
+      63,
+      83,
+      128,
+      175
+    ]
+  },
+  {
+    "variant": "staff",
+    "id": "hero-staff-1",
+    "sourceRect": [
+      443,
+      0,
+      444,
+      470
+    ],
+    "sourceBBox": [
+      81,
+      94,
+      319,
+      434
+    ],
+    "hairTop": 123,
+    "scale": 0.26282051282051283,
+    "alphaBBox": [
+      65,
+      86,
+      127,
+      175
+    ]
+  },
+  {
+    "variant": "staff",
+    "id": "hero-staff-2",
+    "sourceRect": [
+      887,
+      0,
+      443,
+      470
+    ],
+    "sourceBBox": [
+      53,
+      62,
+      365,
+      435
+    ],
+    "hairTop": 123,
+    "scale": 0.26282051282051283,
+    "alphaBBox": [
+      55,
+      78,
+      136,
+      175
+    ]
+  },
+  {
+    "variant": "staff",
+    "id": "hero-staff-3",
+    "sourceRect": [
+      1330,
+      0,
+      444,
+      470
+    ],
+    "sourceBBox": [
+      102,
+      145,
+      407,
+      435
+    ],
+    "hairTop": 123,
+    "scale": 0.26282051282051283,
+    "alphaBBox": [
+      56,
+      100,
+      135,
+      175
+    ]
+  },
+  {
+    "variant": "staff",
+    "id": "hero-staff-4",
+    "sourceRect": [
+      0,
+      470,
+      443,
+      417
+    ],
+    "sourceBBox": [
+      57,
+      59,
+      436,
+      357
+    ],
+    "hairTop": 123,
+    "scale": 0.26282051282051283,
+    "alphaBBox": [
+      46,
+      97,
+      145,
+      175
+    ]
+  },
+  {
+    "variant": "staff",
+    "id": "hero-staff-5",
+    "sourceRect": [
+      443,
+      470,
+      502,
+      417
+    ],
+    "sourceBBox": [
+      46,
+      60,
+      476,
+      357
+    ],
+    "hairTop": 123,
+    "scale": 0.26282051282051283,
+    "alphaBBox": [
+      40,
+      98,
+      151,
+      175
+    ]
+  },
+  {
+    "variant": "staff",
+    "id": "hero-staff-6",
+    "sourceRect": [
+      945,
+      470,
+      385,
+      417
+    ],
+    "sourceBBox": [
+      6,
+      84,
+      339,
+      357
+    ],
+    "hairTop": 123,
+    "scale": 0.26282051282051283,
+    "alphaBBox": [
+      52,
+      104,
+      139,
+      175
+    ]
+  },
+  {
+    "variant": "staff",
+    "id": "hero-staff-7",
+    "sourceRect": [
+      1330,
+      470,
+      444,
+      417
+    ],
+    "sourceBBox": [
+      54,
+      158,
+      395,
+      344
+    ],
+    "hairTop": 123,
+    "scale": 0.26282051282051283,
+    "alphaBBox": [
+      51,
+      127,
+      140,
+      175
+    ]
+  },
+  {
+    "variant": "neutral",
+    "id": "idle",
+    "sourceRect": [
+      0,
+      0,
+      768,
+      536
+    ],
+    "sourceBBox": [
+      201,
+      16,
+      564,
+      528
+    ],
+    "hairTop": 16,
+    "scale": 0.15984405458089668,
+    "alphaBBox": [
+      67,
+      95,
+      124,
+      176
+    ]
+  },
+  {
+    "variant": "neutral",
+    "id": "strike",
+    "sourceRect": [
+      768,
+      0,
+      768,
+      536
+    ],
+    "sourceBBox": [
+      65,
+      69,
+      598,
+      530
+    ],
+    "hairTop": 16,
+    "scale": 0.15984405458089668,
+    "alphaBBox": [
+      54,
+      103,
+      138,
+      176
+    ]
+  },
+  {
+    "variant": "neutral",
+    "id": "hurt",
+    "sourceRect": [
+      0,
+      536,
+      768,
+      488
+    ],
+    "sourceBBox": [
+      191,
+      2,
+      645,
+      458
+    ],
+    "hairTop": 16,
+    "scale": 0.15984405458089668,
+    "alphaBBox": [
+      60,
+      104,
+      132,
+      176
+    ]
+  },
+  {
+    "variant": "neutral",
+    "id": "death",
+    "sourceRect": [
+      768,
+      536,
+      768,
+      488
+    ],
+    "sourceBBox": [
+      2,
+      279,
+      697,
+      443
+    ],
+    "hairTop": 16,
+    "scale": 0.15984405458089668,
+    "alphaBBox": [
+      41,
+      151,
+      151,
+      176
+    ]
+  }
+]
