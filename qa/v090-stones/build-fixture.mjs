@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+import * as E from '../../dist/engine.js';
+import {reachStoryScene} from '../../story-event-test-fixture.mjs';
+import {freshOtherworldState} from '../../dist/otherworld-state.js';
+import {awardDivineStone,divineStoneBalance} from '../../dist/divine-stone-state.js';
+const s=reachStoryScene('human','END.H01.human',{finishTarget:true,level:100,spring:'skip'});s.running=false;s.activeEncounter=null;s.otherworld={...freshOtherworldState(),highestCleared:49,floor:50};awardDivineStone(s,50);s.otherworld.highestCleared=50;s.otherworld.floor=51;
+const gear=E.item('gloves',100,null,3,{baseLevel:100,levelSource:'drop',originRace:'human'});gear.special={id:'reaper'};s.inventory.push(gear);
+const old=E.item('helm',100,null,3,{baseLevel:100,levelSource:'drop',originRace:'human'});old.special={id:'harvester',growthKills:123};E.applyForgeFavor(old);old.divine.model='raw-v1';for(const k of ['atk','armor','hp'])old.divine.bonus[k]=old[k]/10;old.divine.bonus.affixes=old.affixes.map(a=>({stat:a.stat,value:a.value/10}));s.inventory.push(old);s.lastSeen=Date.now();s.lastHealthClock=s.lastSeen;
+if(!E.validSave(s))throw Error('invalid fixture');fs.writeFileSync(new URL('./stone-furnace-ready.json',import.meta.url),JSON.stringify(s));fs.writeFileSync(new URL('./fixture-evidence.json',import.meta.url),JSON.stringify({source:'Synthetic production story fixture, no user data',validSave:true,balance:divineStoneBalance(s),target:{id:gear.id,slot:gear.slot,name:gear.name,special:gear.special},legacy:{id:old.id,slot:old.slot,name:old.name,special:old.special,model:old.divine.model}},null,2));
+console.log('fixture valid',gear.id);

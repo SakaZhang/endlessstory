@@ -1,3 +1,4 @@
+import {normalizeDivineStones} from './divine-stone-state.js';
 import {reconcileOtherworldStone} from './otherworld-entitlement.js';
 import {fresh,validSave,effectiveLuck,normalizeRecipes} from './engine.js';
 import {SCHEMA_VERSION,SAVE_KEY} from './save-generation.js';
@@ -23,7 +24,7 @@ export function loadProgress(storage){
   // Reconcile defaults and story entitlement in one validated candidate/write.
   // Failed persistence retains the exact original save, with neither grant adopted.
   const reconciled=structuredClone(game);
-  normalizeRecipes(reconciled);reconcileOtherworldStone(reconciled);
+  normalizeRecipes(reconciled);reconcileOtherworldStone(reconciled);normalizeDivineStones(reconciled);
   if(JSON.stringify(reconciled)!==JSON.stringify(game)){
    if(!validCurrent(reconciled)){reason='invalid-candidate';return fail();}
    reason='storage-read';const expected=JSON.stringify(game),current=storage.getItem(SAVE_KEY);

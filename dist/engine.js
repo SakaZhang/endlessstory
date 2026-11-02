@@ -1,4 +1,5 @@
 import {specialDivineMultiplier,specialEffectPower,nirvanaUseCount} from './special-divine.js';
+import {validDivineStones,normalizeDivineStones,awardDivineStone} from './divine-stone-state.js';
 import {equipmentDisplayName} from './equipment-display-name.js';
 import {INFINITY_GAUNTLET_KEYS,isInfinityGauntletFusion,hasInfinityGauntletMaterial} from './infinity-gauntlet-content.js';
 import {validCasinoState} from './casino-state.js';
@@ -778,6 +779,7 @@ export function claimPendingOtherworldEquipment(s){
 }
 function startOtherworldEncounter(s,now){
  if(!validSave(s)||!s.otherworld?.active||!otherworldUnlocked(s)||!canStartEncounterHealth(s,now))return null;
+ normalizeDivineStones(s);
  if(s.activeEncounter&&!s.activeEncounter.rewarded)return s.activeEncounter.otherworld?s.activeEncounter:null;
  if(s.otherworld.pendingEquipment.length>OTHERWORLD_PENDING_LIMIT-2){s.running=false;s.restResume=false;return null;}
  try{applyExperience({...s},OTHERWORLD_LOOT_POLICY.xp);if(s.kills>=1e12)throw Error('Counter limit');}catch{s.running=false;s.restResume=false;return null;}
@@ -805,6 +807,7 @@ function rewardOtherworld(s,e,now){
    else{o.pendingEquipment.push(it);captureBattleLoot(s,{kind:'equipment',item:it},'pending');e.rewardNotes.push('异界装备待领取 · '+equipmentDisplayName(it));}
   }
   s.level=xpPlan.level;s.xp=xpPlan.xp;e.acceptedXp=xpPlan.acceptedXp;s.kills++;
+  if(awardDivineStone(s,e.otherworld.floor)){e.rewardNotes.push('天神之石 ×1 · 首次通过第'+e.otherworld.floor+'层');s.chronicle.unshift('首次通过异界第'+e.otherworld.floor+'层，获得天神之石 ×1。');}
   o.highestCleared=Math.max(o.highestCleared,e.otherworld.floor);
   if(o.autoAdvance&&o.floor<OTHERWORLD_MAX_FLOOR)o.floor++;
   else if(o.autoAdvance&&o.floor===OTHERWORLD_MAX_FLOOR){s.running=false;e.rewardNotes.push('已到达安全数值边界；可选择已通关层数继续挑战。');}
@@ -1219,8 +1222,9 @@ function rewardWithoutHistory(s,e,now=Date.now()){
  return null;
 }
 export function offline(s,now=Date.now()){
- if(s?.version!==SCHEMA_VERSION||!validLootHistory(s)||!validOtherworldState(s,validEquipment)||!validExpeditionState(s)||!validRareRewardProgress(s,validEquipment))return null;
+ if(s?.version!==SCHEMA_VERSION||!validDivineStones(s)||!validLootHistory(s)||!validOtherworldState(s,validEquipment)||!validExpeditionState(s)||!validRareRewardProgress(s,validEquipment))return null;
  if(!Number.isFinite(now)||now<0||now>1e15)return null;
+ normalizeDivineStones(s);
  const start=Math.max(s.lastSeen,s.lastHealthClock??s.lastSeen),end=Math.min(now,start+4*3600000),beforeGold=s.gold,beforeXp=totalEarnedXp(s);
  if(!normalizeHealth(s,start)||!normalizeMaterials(s)||!normalizePotions(s))return null;
  const worldEvents=advanceRandomWorldEvents(s,now);if(!worldEvents)return null;
@@ -1496,7 +1500,7 @@ export function codexState(s,id){
 }
 export function validSave(s){
  try{const num=(n,max=1e12)=>Number.isFinite(n)&&n>=0&&n<=max;
- if(!validCasinoState(s)||!validOtherworldState(s,validEquipment)||!validBossChallengeState(s)||!validDungeonLootReceipts(s)||!validLootHistory(s)||!validPersonalArcRewardState(s)||!validTaskRewardState(s)||!validDiplomacy(s)||!validWorldEventState(s)||!validStoryWarState(s)||!validNpcEventState(s)||!validReturnRingState(s)||!validInfinityGauntletState(s)||!validStoryEventState(s)||!validStoryScenarioState(s))return false;
+ if(!validDivineStones(s)||!validCasinoState(s)||!validOtherworldState(s,validEquipment)||!validBossChallengeState(s)||!validDungeonLootReceipts(s)||!validLootHistory(s)||!validPersonalArcRewardState(s)||!validTaskRewardState(s)||!validDiplomacy(s)||!validWorldEventState(s)||!validStoryWarState(s)||!validNpcEventState(s)||!validReturnRingState(s)||!validInfinityGauntletState(s)||!validStoryEventState(s)||!validStoryScenarioState(s))return false;
  if(!validSkillTree(s,getSkillTreeDefinition(s))||s.skillTree?.mode!=='active')return false;
  if(s.activeEncounter?.skillResolver!==undefined&&(s.activeEncounter.skillResolver!=='tree-v1'||s.skillTree?.mode!=='active'||s.activeEncounter.multiVersion!==1))return false;
  if(s.supportGrantEligible!==undefined||s.testGrants!==undefined||s.bonusTalentPoints!==undefined||s.skillRulesVersion!==undefined||s.skillAccess!==undefined)return false;

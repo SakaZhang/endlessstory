@@ -1,0 +1,23 @@
+{
+  "source": "Synthetic production story fixture, no user data",
+  "validSave": true,
+  "balance": 1,
+  "target": {
+    "id": "mvyzyk60-17-kkgaf",
+    "slot": "gloves",
+    "name": "驿路手套",
+    "special": {
+      "id": "reaper"
+    }
+  },
+  "legacy": {
+    "id": "mvyzyk60-18-f5gjt",
+    "slot": "helm",
+    "name": "盐泉盔",
+    "special": {
+      "id": "harvester",
+      "growthKills": 123
+    },
+    "model": "raw-v1"
+  }
+}
