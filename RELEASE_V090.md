@@ -20,4 +20,8 @@ The fifteen-set tuning coefficients are implementation decisions under the user'
 - Normal-browser furnace grant, reload persistence and original-save restoration are recorded in `fixtures/v090/BROWSER_QA.md`.
 - Container packaging metadata tests: 7 passed. No Docker image has been built or pushed in this release preparation.
 
-Final integrated regression and publication receipt remain pending; this document is not yet a deployment claim.
+- Final registered coverage passed: all 70 static imports plus recovery import in one entry process, and all 255 registered subprocess invocations in their original sequence (segmented runner avoids fail-fast hiding later results). Both processes exited 0. The focused six-test v0.90 command also exited 0.
+- Final cache validation passed: 3,059 hash-verified files, 3,057 resource URLs, 8,877 dependency edges, eleven byte mutation and twelve negative-reference checks. Runtime build hash: `9a1ebfd2395b5cf93748869cb5621c746824fa1327710a240ebbfd67ab363f05`.
+- Complete invocation manifest and final 255 results are retained under `fixtures/v090/`.
+
+Source is verified and ready for owner-private Sites publication. Publication IDs are reported separately from this pre-publication source document.
