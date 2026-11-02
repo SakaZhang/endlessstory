@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "purpose": "Exploration-only scene routing. Dwarf legacy layers retained; expansion races use dedicated geography.",
+  "purpose": "Exploration-only scene routing. All races use dedicated complete geography; dwarf scenes refreshed in v0.87.",
   "backgrounds": [
     {
       "id": "cave",
@@ -541,48 +541,128 @@
         270
       ],
       "z": 0
+    },
+    {
+      "id": "dwarf-v087-dwarf.a01",
+      "file": "../battle-assets/backgrounds/dwarf-v087/dwarf.a01.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "dwarf-v087-dwarf.a02",
+      "file": "../battle-assets/backgrounds/dwarf-v087/dwarf.a02.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "dwarf-v087-dwarf.a03",
+      "file": "../battle-assets/backgrounds/dwarf-v087/dwarf.a03.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "dwarf-v087-dwarf.a04",
+      "file": "../battle-assets/backgrounds/dwarf-v087/dwarf.a04.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "dwarf-v087-dwarf.a05",
+      "file": "../battle-assets/backgrounds/dwarf-v087/dwarf.a05.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "dwarf-v087-dwarf.a06",
+      "file": "../battle-assets/backgrounds/dwarf-v087/dwarf.a06.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "dwarf-v087-dwarf.a07",
+      "file": "../battle-assets/backgrounds/dwarf-v087/dwarf.a07.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "dwarf-v087-dwarf.a08",
+      "file": "../battle-assets/backgrounds/dwarf-v087/dwarf.a08.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "dwarf-v087-dwarf.a09",
+      "file": "../battle-assets/backgrounds/dwarf-v087/dwarf.a09.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "dwarf-v087-dwarf.a10",
+      "file": "../battle-assets/backgrounds/dwarf-v087/dwarf.a10.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
     }
   ],
   "areaBackgrounds": {
     "dwarf.a01": [
-      "cave",
-      "stage"
+      "dwarf-v087-dwarf.a01"
     ],
     "dwarf.a02": [
-      "rift-cave",
-      "rift-platform"
+      "dwarf-v087-dwarf.a02"
     ],
     "dwarf.a03": [
-      "oath-ruins",
-      "oath-platform"
+      "dwarf-v087-dwarf.a03"
     ],
     "dwarf.a04": [
-      "ash-furnaces",
-      "slag-platform"
+      "dwarf-v087-dwarf.a04"
     ],
     "dwarf.a05": [
-      "mineral-springs",
-      "spring-platform"
+      "dwarf-v087-dwarf.a05"
     ],
     "dwarf.a06": [
-      "sunken-forge",
-      "forge-platform"
+      "dwarf-v087-dwarf.a06"
     ],
     "dwarf.a07": [
-      "silver-gallery",
-      "silver-platform"
+      "dwarf-v087-dwarf.a07"
     ],
     "dwarf.a08": [
-      "obsidian-rift",
-      "a08-rift-platform"
+      "dwarf-v087-dwarf.a08"
     ],
     "dwarf.a09": [
-      "runebone-archive",
-      "archive-platform"
+      "dwarf-v087-dwarf.a09"
     ],
     "dwarf.a10": [
-      "deepcore-forge",
-      "deepforge-platform"
+      "dwarf-v087-dwarf.a10"
     ],
     "human.a01": [
       "exploration-human.a01"

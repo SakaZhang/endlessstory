@@ -1,0 +1,216 @@
+{
+  "tool": "built-in image_gen",
+  "packaging": "uniform center-crop to 16:9; nearest-neighbor 480x270",
+  "scenes": [
+    {
+      "id": "dwarf.a01",
+      "file": "backgrounds/dwarf-v087/dwarf.a01.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0,
+      "source": "exec-b39c32ce-374b-4a90-986a-b926432048e3.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "crop": [
+        0,
+        0.25,
+        1672,
+        940.5
+      ],
+      "sha256": "76abed072dcfde2aa590706797f1c8be4fdf9ae30a85b666521aaf51b8054468"
+    },
+    {
+      "id": "dwarf.a02",
+      "file": "backgrounds/dwarf-v087/dwarf.a02.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0,
+      "source": "exec-fb5dd59a-2765-4abd-94e9-ae5947dc734b.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "crop": [
+        0,
+        0.25,
+        1672,
+        940.5
+      ],
+      "sha256": "d6289ca8c9457fde649d9e1199761a92ad48676c31255264539f4144d816a4e9"
+    },
+    {
+      "id": "dwarf.a03",
+      "file": "backgrounds/dwarf-v087/dwarf.a03.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0,
+      "source": "exec-d436f9fa-053b-4632-b452-aa6b0d0b578d.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "crop": [
+        0,
+        0.25,
+        1672,
+        940.5
+      ],
+      "sha256": "06431f8b285c67a67dd27a2a9fb6675642108f8c535f80fbb73ed4bac0eab895"
+    },
+    {
+      "id": "dwarf.a04",
+      "file": "backgrounds/dwarf-v087/dwarf.a04.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0,
+      "source": "exec-2ef39b1f-0ee6-434c-92d0-e2ff380b3cd5.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "crop": [
+        0,
+        0.25,
+        1672,
+        940.5
+      ],
+      "sha256": "1b214e3006539711f6382d7f515a60ca14f14c0fbcfe711125ce2cd9ed630a20"
+    },
+    {
+      "id": "dwarf.a05",
+      "file": "backgrounds/dwarf-v087/dwarf.a05.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0,
+      "source": "exec-02852614-a175-4e5c-9da2-e0797f756fb7.png",
+      "sourceSize": [
+        1672,
+        940
+      ],
+      "crop": [
+        0.44444444444457076,
+        5.684341886080802e-14,
+        1671.1111111111109,
+        939.9999999999999
+      ],
+      "sha256": "3b0c585bd1d8452175672c6c02cad0161114bec173526eebe653092be7cd45fe"
+    },
+    {
+      "id": "dwarf.a06",
+      "file": "backgrounds/dwarf-v087/dwarf.a06.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0,
+      "source": "exec-138b9114-13e9-4800-986f-41dfa00cbd69.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "crop": [
+        0,
+        0.25,
+        1672,
+        940.5
+      ],
+      "sha256": "decea366d1193f438b3eeed9ca6224a52d618c87c7c931f03f4e8be4d8f35a10"
+    },
+    {
+      "id": "dwarf.a07",
+      "file": "backgrounds/dwarf-v087/dwarf.a07.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0,
+      "source": "exec-899d33a2-9427-4d0f-b6bf-c082fe969df3.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "crop": [
+        0,
+        0.25,
+        1672,
+        940.5
+      ],
+      "sha256": "72c2f655dc4c1697d6b9a32148ffa52fadd8c85321fde18268f654bdb2c0b550"
+    },
+    {
+      "id": "dwarf.a08",
+      "file": "backgrounds/dwarf-v087/dwarf.a08.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0,
+      "source": "exec-bca56713-c4f0-4b3a-91e8-8b5a6e012a19.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "crop": [
+        0,
+        0.25,
+        1672,
+        940.5
+      ],
+      "sha256": "ac0f6b2fefb3b5c8a683e947553e9b943167c245ad8d111f8b198a09e1855ce4"
+    },
+    {
+      "id": "dwarf.a09",
+      "file": "backgrounds/dwarf-v087/dwarf.a09.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0,
+      "source": "exec-7492613d-37b5-462a-a511-ea05142ae068.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "crop": [
+        0,
+        0.25,
+        1672,
+        940.5
+      ],
+      "sha256": "8fd6b20f4c3db206e1e237087d67272280c76bace50be07b703ecc1097277811"
+    },
+    {
+      "id": "dwarf.a10",
+      "file": "backgrounds/dwarf-v087/dwarf.a10.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0,
+      "source": "exec-0e65085f-65e8-40ed-a6fe-0d6c2deee6fc.png",
+      "sourceSize": [
+        1672,
+        941
+      ],
+      "crop": [
+        0,
+        0.25,
+        1672,
+        940.5
+      ],
+      "sha256": "9c26058da59213891f32ce003ae65c4aaa8b6d00ee29a8c3732937de7e220c7a"
+    }
+  ]
+}

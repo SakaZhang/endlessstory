@@ -10960,6 +10960,96 @@
       "z": 1,
       "hasAlpha": true,
       "parallax": 1
+    },
+    {
+      "id": "dwarf-v087-dwarf.a01",
+      "file": "backgrounds/dwarf-v087/dwarf.a01.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "dwarf-v087-dwarf.a02",
+      "file": "backgrounds/dwarf-v087/dwarf.a02.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "dwarf-v087-dwarf.a03",
+      "file": "backgrounds/dwarf-v087/dwarf.a03.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "dwarf-v087-dwarf.a04",
+      "file": "backgrounds/dwarf-v087/dwarf.a04.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "dwarf-v087-dwarf.a05",
+      "file": "backgrounds/dwarf-v087/dwarf.a05.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "dwarf-v087-dwarf.a06",
+      "file": "backgrounds/dwarf-v087/dwarf.a06.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "dwarf-v087-dwarf.a07",
+      "file": "backgrounds/dwarf-v087/dwarf.a07.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "dwarf-v087-dwarf.a08",
+      "file": "backgrounds/dwarf-v087/dwarf.a08.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "dwarf-v087-dwarf.a09",
+      "file": "backgrounds/dwarf-v087/dwarf.a09.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
+    },
+    {
+      "id": "dwarf-v087-dwarf.a10",
+      "file": "backgrounds/dwarf-v087/dwarf.a10.png",
+      "size": [
+        480,
+        270
+      ],
+      "z": 0
     }
   ],
   "limitations": [
@@ -11023,44 +11113,34 @@
   },
   "areaBackgrounds": {
     "dwarf.a01": [
-      "cave",
-      "stage"
+      "dwarf-v087-dwarf.a01"
     ],
     "dwarf.a02": [
-      "rift-cave",
-      "rift-platform"
+      "dwarf-v087-dwarf.a02"
     ],
     "dwarf.a03": [
-      "oath-ruins",
-      "oath-platform"
+      "dwarf-v087-dwarf.a03"
     ],
     "dwarf.a04": [
-      "ash-furnaces",
-      "slag-platform"
+      "dwarf-v087-dwarf.a04"
     ],
     "dwarf.a05": [
-      "mineral-springs",
-      "spring-platform"
+      "dwarf-v087-dwarf.a05"
     ],
     "dwarf.a06": [
-      "sunken-forge",
-      "forge-platform"
+      "dwarf-v087-dwarf.a06"
     ],
     "dwarf.a07": [
-      "silver-gallery",
-      "silver-platform"
+      "dwarf-v087-dwarf.a07"
     ],
     "dwarf.a08": [
-      "obsidian-rift",
-      "a08-rift-platform"
+      "dwarf-v087-dwarf.a08"
     ],
     "dwarf.a09": [
-      "runebone-archive",
-      "archive-platform"
+      "dwarf-v087-dwarf.a09"
     ],
     "dwarf.a10": [
-      "deepcore-forge",
-      "deepforge-platform"
+      "dwarf-v087-dwarf.a10"
     ]
   },
   "coveragePolicy": "Only explicit monsterSprites AND areaBackgrounds mappings are allowed; missing coverage must use legacy renderer, never index/modulo or generic substitution.",
@@ -11184,5 +11264,10 @@
       176
     ],
     "facing": "right"
+  },
+  "dwarfSceneRedesign": {
+    "version": "v0.87",
+    "source": "dwarf-scenes-v087-source.json",
+    "note": "Ten complete generated landscapes. Historical layers preserved for compatibility; current battle and exploration share updated geography. Camp unchanged."
   }
 }
