@@ -5,7 +5,7 @@ import {fresh} from './dist/engine.js';
 import {renderLuckRates,rareLootSnapshot} from './dist/rare-loot-ui.js';
 import {ordinarySecondRollProbability} from './dist/luck-policy.js';
 const read=path=>readFileSync(path,'utf8');
-const index=read('dist/index.html');assert.match(index,/>天赋 <b id="talentCount"/);assert.doesNotMatch(index,/黑炉氏族|血脉天赋/);assert.match(index,/v0\.92/);
+const index=read('dist/index.html');assert.match(index,/>天赋 <b id="talentCount"/);assert.doesNotMatch(index,/黑炉氏族|血脉天赋/);assert.match(index,/v0\.94/);
 for(const path of ['dist/app.js','dist/rare-loot-ui.js','dist/adjacent-region.js','dist/dwarf-region-ui.js'])assert.doesNotMatch(read(path),/黑炉血脉|DWARVEN LEGACY|黑炉锻坊|推荐等级不是进入限制|不是掉率增加|不限制其他种族穿戴/,path);
 // Race-specific world names and art are intentionally retained.
 assert.match(read('dist/dwarf-region-ui.js'),/黑炉山脉/);assert.match(read('dist/equipment-templates.js'),/黑炉板甲/);
