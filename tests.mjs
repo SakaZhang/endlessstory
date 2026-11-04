@@ -366,3 +366,7 @@ for(const file of ['set-progression-v090-tests.mjs','set-otherworld-v090-tests.m
 
 // v0.92 non-healing cooldown removal and atomic bulk use.
 for(const file of ['potion-bulk-v092-tests.mjs','potion-bulk-app-ui-tests.cjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+
+// v0.94: per-item divine legendary effects, existing saves and repeatable test rewards.
+for(const file of ['divine-legendary-boundaries-v094-tests.mjs','divine-legendary-v094-tests.mjs','divine-lucky-dice-v094-tests.mjs','legendary-divine-app-ui-v094-tests.cjs','redeem-extra-rewards-v094-tests.mjs'])runAffixSourceTest(process.execPath,[new URL('./'+file,import.meta.url).pathname],{stdio:'inherit'});
+for(const mode of ['rest','battle','full','goldcap'])runAffixSourceTest(process.execPath,[new URL('./redeem-extra-rewards-app-ui-v094-tests.cjs',import.meta.url).pathname,mode],{stdio:'inherit'});

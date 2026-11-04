@@ -48,7 +48,8 @@
     "test:v090": "node set-progression-v090-tests.mjs && node set-otherworld-v090-tests.mjs && node divine-specials-v090-tests.mjs && node divine-stone-v090-tests.mjs && node divine-stone-app-ui-v090-tests.cjs && node otherworld-elite-v090-tests.mjs",
     "test:v091": "node casino-app-ui-tests.cjs && node casino-scene-v083-tests.mjs && node casino-tests.mjs && node v082-casino-independent-tests.mjs && node otherworld-portal-hover-v091-tests.mjs && node otherworld-stable-ui-v087-tests.mjs && node otherworld-app-ui-tests.cjs && node otherworld-ui-display-tests.mjs && node otherworld-routing-tests.mjs",
     "test:v092": "node potion-bulk-v092-tests.mjs && node potion-bulk-app-ui-tests.cjs && node potion-tests.mjs && node potion-independent-cooldown-tests.mjs && node potion-expansion-tests.mjs && node potion-ui-tests.cjs && node potion-expansion-ui-tests.cjs && node potion-expiry-parity-tests.mjs && node battle-potion-owned-tests.mjs && node combat-display-potion-tests.mjs",
-    "test:v093": "node set-name-complete-v093-tests.mjs && node set-name-complete-app-ui-v093-tests.cjs && node set-name-unification-v087-tests.mjs && node set-name-unification-app-ui-v087-tests.cjs"
+    "test:v093": "node set-name-complete-v093-tests.mjs && node set-name-complete-app-ui-v093-tests.cjs && node set-name-unification-v087-tests.mjs && node set-name-unification-app-ui-v087-tests.cjs",
+    "test:v094": "node divine-legendary-boundaries-v094-tests.mjs && node divine-legendary-v094-tests.mjs && node divine-lucky-dice-v094-tests.mjs && node legendary-divine-app-ui-v094-tests.cjs && node redeem-extra-rewards-v094-tests.mjs && node redeem-extra-rewards-app-ui-v094-tests.cjs rest && node redeem-extra-rewards-app-ui-v094-tests.cjs battle && node redeem-extra-rewards-app-ui-v094-tests.cjs full && node redeem-extra-rewards-app-ui-v094-tests.cjs goldcap"
   },
   "devDependencies": {
     "esbuild": "0.28.2"

@@ -1,0 +1,25 @@
+const assert=require('assert/strict');const {createCanvas}=require('@napi-rs/canvas');
+let SAVE_KEY;let elements=new Map(),events={},windowEvents={},intervals=[],store=new Map(),failWrite=false,now=Date.now(),serial=0;
+function el(id){if(elements.has(id))return elements.get(id);const canvas=createCanvas(960,540),listeners={};const obj={id,width:960,height:540,style:{},listeners,classList:{add(){},remove(){}},open:false,showModal(){this.open=true},close(){this.open=false},addEventListener(k,f){(listeners[k]??=[]).push(f);},removeEventListener(k,f){listeners[k]=(listeners[k]??[]).filter(x=>x!==f);},contains:n=>n?.owner===id,click(){this.onclick?.()},getContext:(...a)=>canvas.getContext(...a),getBoundingClientRect:()=>({left:0,top:0,width:960,height:420}),querySelector(selector){return selector.includes('canvas')?el('adjacentCanvas'):null;},querySelectorAll(selector){if(selector!=='.skillSlot')return [];return this.slots??[];}};let html='';Object.defineProperty(obj,'innerHTML',{get:()=>html,set:v=>{html=String(v);for(const m of html.matchAll(/id="([^"]+)"/g))el(m[1]);if(id==='view')obj.slots=Array.from({length:(html.match(/class="skillSlot /g)||[]).length},(_,i)=>({owner:id,dataset:{},index:i}));}});elements.set(id,obj);return obj;}
+function install(){global.document={hidden:false,getElementById:el,querySelector:selector=>selector==='.heroIdentity'?{querySelector:tag=>el('heroIdentity-'+tag)}:null,addEventListener:(k,f)=>(events[k]??=[]).push(f),createElement:()=>({click(){}})};global.window={addEventListener:(k,f)=>(windowEvents[k]??=[]).push(f),matchMedia:()=>({matches:true})};global.localStorage={getItem:k=>store.get(k)||null,setItem(k,v){if(failWrite)throw Error('quota');store.set(k,String(v));},get length(){return store.size},key:i=>[...store.keys()][i]};global.requestAnimationFrame=()=>{};global.setInterval=(fn,ms)=>{intervals.push({fn,ms});return intervals.length};global.setTimeout=()=>++serial;global.clearTimeout=()=>{};global.confirm=()=>true;}
+const click=(dataset={},id='')=>{const b={dataset,id};for(const fn of events.click??[])fn({target:{id,closest:()=>b}});};const saved=()=>JSON.parse(store.get(SAVE_KEY));const tick=()=>{now+=1100;for(const x of intervals.filter(x=>x.ms===250))x.fn();};const periodic=()=>{for(const x of intervals.filter(x=>x.ms===10000))x.fn();};const refresh=async label=>{elements=new Map();events={};windowEvents={};intervals=[];install();await import('./dist/app.js?multi-app-'+label);};
+(async()=>{
+ ({SAVE_KEY}=await import('./dist/save-generation.js'));const E=await import('./dist/engine.js');
+ const {legendaryEffectDescription}=await import('./dist/legendary-divine-display.js');
+ const expectations={
+ 'first-forge-oathhammer':['280%','60%'], 'everburning-reactor':['150%','16%'],
+ 'human-oathblade':['1.6倍','0.16倍'], 'human-banner-armor':['100%'],
+ 'elf-sixfold-heartwood':['60%','总计3倍'], 'elf-last-string':['60%','100%'],
+ 'goblin-silent-ration':['80%','16%','140%'], 'goblin-silent-steps':['闪避+200'],
+ 'ashen-molten-core':['每层40%','（120%）'], 'ashen-stone-core':['获得4岩片','8%'],
+ 'ashen-crystal-core':['400%'], 'lucky-dice':['150%','6666']};
+ const base=E.fresh('ashen');base.lastSeen=now;Date.now=()=>now;
+ for(const d of E.LEGENDARY_CODEX){const it=E.legendaryItem(d.id,90);assert(it);base.inventory.push(it);if(['infinity-gauntlet','return-ring'].includes(d.id))base[d.id==='return-ring'?'returnRing':'infinityGauntlet']={version:1,recipeLearned:true,crafted:true,craftedItemId:it.id};}
+ assert(E.validSave(base));store.set(SAVE_KEY,JSON.stringify(base));await refresh('legend-divine-normal');click({view:'inventory'});
+ for(const it of base.inventory.filter(i=>i.legendaryId)){click({bagSlot:it.slot});click({item:it.id});const d=E.LEGENDARY_CODEX.find(d=>d.id===it.legendaryId);assert.equal(legendaryEffectDescription(it,d.effect),d.effect);if(it.legendaryId==='lucky-dice')assert.match(el('view').innerHTML,/幸运 \+33 · 暴击等级 \+33/);}
+ const divine=structuredClone(base);for(const it of divine.inventory.filter(i=>i.legendaryId))E.applyForgeFavor(it);assert(E.validSave(divine));
+ for(let pass=0;pass<2;pass++){store.set(SAVE_KEY,JSON.stringify(divine));await refresh('legend-divine-'+pass);click({view:'inventory'});
+  for(const it of divine.inventory.filter(i=>i.legendaryId)){click({bagSlot:it.slot});click({item:it.id});const html=el('view').innerHTML,d=E.LEGENDARY_CODEX.find(d=>d.id===it.legendaryId);for(const expected of expectations[it.legendaryId]??[])assert(html.includes(expected),it.legendaryId+' missing '+expected);if(!expectations[it.legendaryId])assert.equal(legendaryEffectDescription(it,d.effect),d.effect,'excluded unchanged');if(it.legendaryId==='lucky-dice'){assert.match(html,/幸运 \+66 · 暴击等级 \+66/);assert.match(html,/33%造成75%伤害/);assert.match(html,/33%造成100%伤害/);assert.match(html,/1%造成固定6666伤害/);}assert.doesNotMatch(html,/特殊词条、成长与专属效果不变|传说专属效果不变/);}
+ }
+ console.log('PASS v094 actual App all15 legendary normal/divine/reload descriptions, 3 exclusions, dice positive/negative/neutral/probability/fixed stat display.');
+})();
