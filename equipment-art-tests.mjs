@@ -6,15 +6,18 @@ import {EQUIPMENT_TEMPLATES as ALL_EQUIPMENT_TEMPLATES} from './dist/equipment-t
 // This historical renderer fixture covers the original dwarf pixel/raster collection.
 const EQUIPMENT_TEMPLATES=ALL_EQUIPMENT_TEMPLATES.filter(t=>t.originRace==='dwarf');
 import {equipmentIcon,equipmentArtTemplate} from './dist/equipment-art.js';
+import {equipmentDisplayName} from './dist/equipment-display-name.js';
 import {equipmentRasterSource,drawEquipmentRaster,LEGENDARY_RASTER_IDENTITIES} from './dist/equipment-raster-art.js';
 import {icon} from './dist/icons.js';
 import {equipmentPresentation,EQUIPMENT_QUALITY_BACKGROUNDS,EQUIPMENT_NEUTRAL_FRAME,EQUIPMENT_SET_FRAME} from './dist/equipment-presentation.js';
 GlobalFonts.registerFromPath('/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc','Equipment CJK');
 const hash=x=>crypto.createHash('sha256').update(x).digest('hex');
+// v093 canonical set labels are display-only; raw historical template names remain intact.
+const attributeLabel=item=>String(equipmentDisplayName(item)).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;');
 const order=['weapon','helm','armor','gloves','boots','ring','amulet'];
 const templates=[...EQUIPMENT_TEMPLATES].sort((a,b)=>order.indexOf(a.slot)-order.indexOf(b.slot)||String(a.weaponType||'').localeCompare(String(b.weaponType||''))||String(a.setId||'').localeCompare(String(b.setId||'')));
 assert.equal(templates.length,64);const geometries=new Set(),renders=new Set();
-for(const t of templates){const before=JSON.stringify(t),markup=equipmentIcon(t);assert(markup.startsWith('<span class="equipmentRaster"'));assert(markup.includes(`data-equipment-visual="${t.id}"`));assert(markup.includes(`aria-label="${t.name}"`));assert.equal(equipmentArtTemplate({templateId:t.id}),t);assert.equal(equipmentArtTemplate({visualVariant:t.id}),t);assert.equal(JSON.stringify(t),before);renders.add(hash(markup));
+for(const t of templates){const before=JSON.stringify(t),markup=equipmentIcon(t);assert(markup.startsWith('<span class="equipmentRaster"'));assert(markup.includes(`data-equipment-visual="${t.id}"`));assert(markup.includes(`aria-label="${attributeLabel(t)}"`));assert.equal(equipmentArtTemplate({templateId:t.id}),t);assert.equal(equipmentArtTemplate({visualVariant:t.id}),t);assert.equal(JSON.stringify(t),before);renders.add(hash(markup));
  for(const size of [32,48,64]){const source=equipmentRasterSource(t,size);assert(source?.endsWith('/'+t.id+'.png'));const bytes=fs.readFileSync('dist/'+source.replace(/^\.\//,'')),image=await loadImage(bytes);assert.equal(image.width,size);assert.equal(image.height,size);if(size===48)geometries.add(hash(bytes));}}
 assert.equal(geometries.size,templates.length,'all dwarf real PNG files must have distinct bytes');assert.equal(renders.size,templates.length);
 async function drawActual(g,item,x,y,size){const t=LEGENDARY_RASTER_IDENTITIES[item.legendaryId]??equipmentArtTemplate(item);if(t){const rasterSize=[32,48,64].includes(size)?size:64;const img=await loadImage('dist/'+equipmentRasterSource(t,rasterSize).replace(/^\.\//,''));g.save();g.translate(x,y);g.scale(size/rasterSize,size/rasterSize);drawEquipmentRaster(g,img,item,t,{size:rasterSize});g.restore();}else{const img=await loadImage(Buffer.from(equipmentIcon(item,{size})));g.drawImage(img,x,y,size,size);}}
@@ -22,10 +25,10 @@ const legacy={name:'旧物',slot:'weapon',set:'rune',rarity:2};assert(equipmentI
 const out='/workspace/shared/equipment-art-v053';fs.mkdirSync(out,{recursive:true});
 const qualityNames=['普通','稀有','优良','至臻'];
 async function sheet(size,cols,file){const w=250,h=size+82,c=createCanvas(cols*w,Math.ceil(templates.length/cols)*h),g=c.getContext('2d');g.fillStyle='#101820';g.fillRect(0,0,c.width,c.height);g.imageSmoothingEnabled=false;
- for(let i=0;i<templates.length;i++){const t=templates[i],x=(i%cols)*w,y=Math.floor(i/cols)*h;g.fillStyle='#19252c';g.fillRect(x+7,y+7,w-14,h-14);const item={...t,rarity:i%4};const presentation=equipmentPresentation(item);assert.equal(presentation.border,t.setId?EQUIPMENT_SET_FRAME:EQUIPMENT_NEUTRAL_FRAME);await drawActual(g,item,x+(w-size)/2,y+16,size);g.textAlign='center';g.fillStyle='#e6dfc9';g.font='16px "Equipment CJK"';g.fillText(t.name,x+w/2,y+size+42);g.fillStyle='#94a7ab';g.font='12px "Equipment CJK"';g.fillText(`${t.setId?'套装 · ':''}${qualityNames[presentation.quality]} · ${size}px`,x+w/2,y+size+63);}
+ for(let i=0;i<templates.length;i++){const t=templates[i],x=(i%cols)*w,y=Math.floor(i/cols)*h;g.fillStyle='#19252c';g.fillRect(x+7,y+7,w-14,h-14);const item={...t,rarity:i%4};const presentation=equipmentPresentation(item);assert.equal(presentation.border,t.setId?EQUIPMENT_SET_FRAME:EQUIPMENT_NEUTRAL_FRAME);await drawActual(g,item,x+(w-size)/2,y+16,size);g.textAlign='center';g.fillStyle='#e6dfc9';g.font='16px "Equipment CJK"';g.fillText(equipmentDisplayName(t),x+w/2,y+size+42);g.fillStyle='#94a7ab';g.font='12px "Equipment CJK"';g.fillText(`${t.setId?'套装 · ':''}${qualityNames[presentation.quality]} · ${size}px`,x+w/2,y+size+63);}
  fs.writeFileSync(`${out}/${file}`,c.toBuffer('image/png'));}
 await sheet(48,6,'equipment-48px.png');await sheet(128,6,'equipment-128px.png');await sheet(32,6,'equipment-32px.png');
-fs.writeFileSync(`${out}/template-order.json`,JSON.stringify(templates.map(x=>({id:x.id,name:x.name,slot:x.slot})),null,2));
+fs.writeFileSync(`${out}/template-order.json`,JSON.stringify(templates.map(x=>({id:x.id,name:equipmentDisplayName(x),rawName:x.name,slot:x.slot})),null,2));
 console.log('PASS: 64 unique real PNG identities at32/48/64; legacy fallback; zero mutation; native same production draw helper at32/48/enlarged128.');
 
 const comparison=[...[0,1,2,3].map(rarity=>({item:{...templates[0],rarity},label:qualityNames[rarity]})),{item:{...templates.find(t=>t.slot==='helm'&&!t.setId),rarity:3},label:'至臻散件 · 中性框'},{item:{...templates.find(t=>t.slot==='helm'&&t.setId),rarity:3},label:'至臻套装 · 绿色框'},{item:legacy,label:'旧制套装 · 保留图形'}];
