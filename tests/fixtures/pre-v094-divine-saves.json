@@ -1,0 +1,5434 @@
+{
+  "source": {
+    "version": "v0.9.3",
+    "commit": "bd2e839aaeefe4a3ddc56d5dc95f7f89bd87a473",
+    "description": "Frozen saves generated using only the unmodified v0.9.3 engine. Every listed item already carried forge-favor before serialization. raw-v1 uses the historical one-tenth receipt."
+  },
+  "saves": {
+    "raw-v1": {
+      "dwarf": {
+        "version": 6,
+        "divineStones": {
+          "version": 1,
+          "baseline": 0,
+          "claimed": [],
+          "spent": 0
+        },
+        "learnedRecipes": [
+          "potion-healing"
+        ],
+        "talentBalanceVersion": 1,
+        "diplomacy": {
+          "version": 1,
+          "revision": 0,
+          "wars": []
+        },
+        "race": "dwarf",
+        "hero": "布洛克",
+        "atCamp": true,
+        "level": 100,
+        "xp": 0,
+        "gold": 100,
+        "location": 0,
+        "siteId": "dwarf.a01",
+        "expedition": {
+          "mode": "field",
+          "fieldId": "dwarf.a01.field",
+          "targetInstanceId": null,
+          "loop": false
+        },
+        "build": "custom",
+        "inventory": [
+          {
+            "id": "mw1ttkw0-1-kkiuw",
+            "legendaryId": "first-forge-oathhammer",
+            "name": "王统·初炉誓锤",
+            "slot": "weapon",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "hammer_balanced",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 337,
+            "armor": 67,
+            "hp": 225,
+            "affixes": [
+              {
+                "stat": "atk",
+                "value": 4,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 4,
+                  "max": 10
+                }
+              },
+              {
+                "stat": "hp",
+                "value": 18,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 18,
+                  "max": 50
+                }
+              },
+              {
+                "stat": "armor",
+                "value": 3,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 3,
+                  "max": 8
+                }
+              },
+              {
+                "stat": "luck",
+                "value": 2,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "ancestor-echo"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "weaponType": "hammer",
+            "originRace": "dwarf",
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v1",
+              "bonus": {
+                "atk": 33.7,
+                "armor": 6.7,
+                "hp": 22.5,
+                "affixes": [
+                  {
+                    "stat": "atk",
+                    "value": 0.4
+                  },
+                  {
+                    "stat": "hp",
+                    "value": 1.8
+                  },
+                  {
+                    "stat": "armor",
+                    "value": 0.3
+                  },
+                  {
+                    "stat": "luck",
+                    "value": 0.2
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "mw1ttkw0-2-iaxys",
+            "legendaryId": "everburning-reactor",
+            "name": "不熄之炉",
+            "slot": "amulet",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "amulet_survival",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 57,
+            "armor": 134,
+            "hp": 956,
+            "affixes": [
+              {
+                "stat": "atk",
+                "value": 4,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 4,
+                  "max": 10
+                }
+              },
+              {
+                "stat": "hp",
+                "value": 18,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 18,
+                  "max": 50
+                }
+              },
+              {
+                "stat": "armor",
+                "value": 3,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 3,
+                  "max": 8
+                }
+              },
+              {
+                "stat": "luck",
+                "value": 2,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "residual-heat-cycle"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "originRace": "dwarf",
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v1",
+              "bonus": {
+                "atk": 5.7,
+                "armor": 13.4,
+                "hp": 95.6,
+                "affixes": [
+                  {
+                    "stat": "atk",
+                    "value": 0.4
+                  },
+                  {
+                    "stat": "hp",
+                    "value": 1.8
+                  },
+                  {
+                    "stat": "armor",
+                    "value": 0.3
+                  },
+                  {
+                    "stat": "luck",
+                    "value": 0.2
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "mw1ttkw0-3-b8tpo",
+            "legendaryId": "infinity-gauntlet",
+            "name": "无限手套",
+            "slot": "gloves",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "gloves_armor",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 58,
+            "armor": 146,
+            "hp": 439,
+            "affixes": [
+              {
+                "stat": "atk",
+                "value": 4,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 4,
+                  "max": 10
+                }
+              },
+              {
+                "stat": "hp",
+                "value": 18,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 18,
+                  "max": 50
+                }
+              },
+              {
+                "stat": "armor",
+                "value": 3,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 3,
+                  "max": 8
+                }
+              },
+              {
+                "stat": "luck",
+                "value": 2,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "infinity-snap"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "originRace": null,
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v1",
+              "bonus": {
+                "atk": 5.8,
+                "armor": 14.6,
+                "hp": 43.9,
+                "affixes": [
+                  {
+                    "stat": "atk",
+                    "value": 0.4
+                  },
+                  {
+                    "stat": "hp",
+                    "value": 1.8
+                  },
+                  {
+                    "stat": "armor",
+                    "value": 0.3
+                  },
+                  {
+                    "stat": "luck",
+                    "value": 0.2
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "mw1ttkw0-4-m7r2x",
+            "legendaryId": "return-ring",
+            "name": "归途之环",
+            "slot": "ring",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "ring_survival",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 72,
+            "armor": 126,
+            "hp": 810,
+            "affixes": [
+              {
+                "stat": "atk",
+                "value": 4,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 4,
+                  "max": 10
+                }
+              },
+              {
+                "stat": "hp",
+                "value": 18,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 18,
+                  "max": 50
+                }
+              },
+              {
+                "stat": "armor",
+                "value": 3,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 3,
+                  "max": 8
+                }
+              },
+              {
+                "stat": "luck",
+                "value": 2,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "return-home"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "originRace": null,
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v1",
+              "bonus": {
+                "atk": 7.2,
+                "armor": 12.6,
+                "hp": 81,
+                "affixes": [
+                  {
+                    "stat": "atk",
+                    "value": 0.4
+                  },
+                  {
+                    "stat": "hp",
+                    "value": 1.8
+                  },
+                  {
+                    "stat": "armor",
+                    "value": 0.3
+                  },
+                  {
+                    "stat": "luck",
+                    "value": 0.2
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "mw1ttkw0-5-tlnhh",
+            "legendaryId": "lucky-dice",
+            "name": "幸运骰子",
+            "slot": "amulet",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "amulet_survival",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 33,
+            "armor": 0,
+            "hp": 333,
+            "affixes": [],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "lucky-dice-roll"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "originRace": null,
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v1",
+              "bonus": {
+                "atk": 3.3,
+                "armor": 0,
+                "hp": 33.3,
+                "affixes": []
+              }
+            }
+          }
+        ],
+        "equip": {
+          "weapon": "mw1ttkw0-1-kkiuw",
+          "helm": null,
+          "armor": null,
+          "gloves": null,
+          "boots": null,
+          "ring1": null,
+          "ring2": null,
+          "amulet": null
+        },
+        "skills": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "conditions": [
+          "always",
+          "always",
+          "always",
+          "always"
+        ],
+        "materialStacks": {
+          "铁屑|0": 5,
+          "炉火晶|0": 2,
+          "誓约残片|0": 1
+        },
+        "offlineLuck": 0,
+        "talents": {
+          "power": 0,
+          "heart": 0,
+          "steel": 0,
+          "precision": 0,
+          "crit": 0,
+          "critDamage": 0,
+          "penetration": 0,
+          "element": 0,
+          "elementResist": 0,
+          "block": 0,
+          "shield": 0,
+          "healing": 0,
+          "resolve": 0,
+          "luck": 0
+        },
+        "consumables": {
+          "memoryFruit": 0,
+          "refundCredits": 0,
+          "reforgeToken": 0
+        },
+        "potionSlot": {
+          "key": null,
+          "auto": false,
+          "priority": "low",
+          "priorityVersion": 1
+        },
+        "kills": 0,
+        "normalWins": [
+          0,
+          0,
+          0
+        ],
+        "bossWins": [
+          0,
+          0,
+          0
+        ],
+        "bossReady": [
+          0,
+          0,
+          0
+        ],
+        "stock": 3,
+        "loadouts": [
+          null,
+          null,
+          null
+        ],
+        "chapters": [],
+        "chronicle": [
+          "灰冠历317年：你离开黑炉堡，踏上寻找失踪商队的路。"
+        ],
+        "momentum": 0,
+        "lastSeen": 10000,
+        "running": false,
+        "skillTree": {
+          "version": 1,
+          "mode": "active",
+          "configId": "dwarf-skill-tree-99-expanded-v2",
+          "revision": 0,
+          "selectedPreset": 0,
+          "presets": [
+            {
+              "name": "方案1",
+              "unlocked": [
+                "fracture_strike",
+                "fault_sweep",
+                "breaking_intercept",
+                "axe_fervor",
+                "hammer_penetration",
+                "breach_followup",
+                "ore_rally",
+                "crag_verdict",
+                "ember_brand",
+                "furnace_etch",
+                "scatter_ash",
+                "fire_affinity",
+                "ember_temper",
+                "furnace_wave",
+                "cinder_barrage",
+                "bellows_ward",
+                "iron_vigil",
+                "repelling_wave",
+                "purifying_bulwark",
+                "shield_reserve",
+                "anvil_balance",
+                "bastion_blow",
+                "stone_anchor",
+                "shield_relay",
+                "mountain_vitality",
+                "anvil_cry",
+                "forge_breath",
+                "forged_resilience",
+                "patient_craft",
+                "prospectors_mark"
+              ],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案2",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案3",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            }
+          ]
+        },
+        "heroHp": 2006,
+        "restUntil": 0,
+        "lastHealthClock": 10000,
+        "areaProgress": {
+          "human": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "dwarf": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "elf": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "goblin": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "ashen": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          }
+        },
+        "instanceCooldowns": {},
+        "infinityGauntlet": {
+          "version": 1,
+          "recipeLearned": true,
+          "crafted": true,
+          "craftedItemId": "mw1ttkw0-3-b8tpo"
+        },
+        "returnRing": {
+          "version": 1,
+          "recipeLearned": true,
+          "crafted": true,
+          "craftedItemId": "mw1ttkw0-4-m7r2x"
+        },
+        "equipmentRuntime": {
+          "version": 1,
+          "byId": {
+            "mw1ttkw0-1-kkiuw": {
+              "combatMs": 0,
+              "attackCount": 0,
+              "castCount": 0
+            }
+          }
+        },
+        "nextBattleAt": 0
+      },
+      "human": {
+        "version": 6,
+        "divineStones": {
+          "version": 1,
+          "baseline": 0,
+          "claimed": [],
+          "spent": 0
+        },
+        "learnedRecipes": [
+          "potion-healing"
+        ],
+        "talentBalanceVersion": 1,
+        "diplomacy": {
+          "version": 1,
+          "revision": 0,
+          "wars": []
+        },
+        "race": "human",
+        "hero": "罗什福尔",
+        "atCamp": true,
+        "level": 100,
+        "xp": 0,
+        "gold": 100,
+        "location": 0,
+        "siteId": "human.a01",
+        "expedition": {
+          "mode": "field",
+          "fieldId": "human.a01.field",
+          "targetInstanceId": null,
+          "loop": false
+        },
+        "build": "custom",
+        "inventory": [
+          {
+            "id": "mw1ttkw0-6-y0bsp",
+            "legendaryId": "human-oathblade",
+            "name": "王誓 · 未折之锋",
+            "slot": "weapon",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "axe_balanced",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 360,
+            "armor": 0,
+            "hp": 450,
+            "affixes": [
+              {
+                "stat": "atk",
+                "value": 4,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 4,
+                  "max": 10
+                }
+              },
+              {
+                "stat": "hp",
+                "value": 18,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 18,
+                  "max": 50
+                }
+              },
+              {
+                "stat": "armor",
+                "value": 3,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 3,
+                  "max": 8
+                }
+              },
+              {
+                "stat": "luck",
+                "value": 2,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "human-duel-oath"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "weaponType": "greatsword",
+            "originRace": "human",
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v1",
+              "bonus": {
+                "atk": 36,
+                "armor": 0,
+                "hp": 45,
+                "affixes": [
+                  {
+                    "stat": "atk",
+                    "value": 0.4
+                  },
+                  {
+                    "stat": "hp",
+                    "value": 1.8
+                  },
+                  {
+                    "stat": "armor",
+                    "value": 0.3
+                  },
+                  {
+                    "stat": "luck",
+                    "value": 0.2
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "mw1ttkw0-7-11rz8",
+            "legendaryId": "human-banner-armor",
+            "name": "遗旗 · 不坠之誓",
+            "slot": "armor",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "armor_armor",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 0,
+            "armor": 362,
+            "hp": 776,
+            "affixes": [
+              {
+                "stat": "atk",
+                "value": 4,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 4,
+                  "max": 10
+                }
+              },
+              {
+                "stat": "hp",
+                "value": 18,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 18,
+                  "max": 50
+                }
+              },
+              {
+                "stat": "armor",
+                "value": 3,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 3,
+                  "max": 8
+                }
+              },
+              {
+                "stat": "luck",
+                "value": 2,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "human-oath-reflection"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "originRace": "human",
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v1",
+              "bonus": {
+                "atk": 0,
+                "armor": 36.2,
+                "hp": 77.6,
+                "affixes": [
+                  {
+                    "stat": "atk",
+                    "value": 0.4
+                  },
+                  {
+                    "stat": "hp",
+                    "value": 1.8
+                  },
+                  {
+                    "stat": "armor",
+                    "value": 0.3
+                  },
+                  {
+                    "stat": "luck",
+                    "value": 0.2
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "equip": {
+          "weapon": "mw1ttkw0-6-y0bsp",
+          "helm": null,
+          "armor": null,
+          "gloves": null,
+          "boots": null,
+          "ring1": null,
+          "ring2": null,
+          "amulet": null
+        },
+        "skills": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "conditions": [
+          "always",
+          "always",
+          "always",
+          "always"
+        ],
+        "materialStacks": {},
+        "offlineLuck": 0,
+        "talents": {
+          "power": 0,
+          "heart": 0,
+          "steel": 0,
+          "precision": 0,
+          "crit": 0,
+          "critDamage": 0,
+          "penetration": 0,
+          "element": 0,
+          "elementResist": 0,
+          "block": 0,
+          "shield": 0,
+          "healing": 0,
+          "resolve": 0,
+          "luck": 0
+        },
+        "consumables": {
+          "memoryFruit": 0,
+          "refundCredits": 0,
+          "reforgeToken": 0
+        },
+        "potionSlot": {
+          "key": null,
+          "auto": false,
+          "priority": "low",
+          "priorityVersion": 1
+        },
+        "kills": 0,
+        "normalWins": [
+          0,
+          0,
+          0
+        ],
+        "bossWins": [
+          0,
+          0,
+          0
+        ],
+        "bossReady": [
+          0,
+          0,
+          0
+        ],
+        "stock": 3,
+        "loadouts": [
+          null,
+          null,
+          null
+        ],
+        "chapters": [],
+        "chronicle": [
+          "你从人族的营地开始旅程。"
+        ],
+        "momentum": 0,
+        "lastSeen": 10000,
+        "running": false,
+        "skillTree": {
+          "version": 1,
+          "mode": "active",
+          "configId": "human-tree-99-v1",
+          "revision": 0,
+          "selectedPreset": 0,
+          "presets": [
+            {
+              "name": "方案1",
+              "unlocked": [
+                "human.cut",
+                "human.red_sweep",
+                "human.open_wound",
+                "human.blood_mark",
+                "human.sever",
+                "human.red_recovery",
+                "human.serrated_edge",
+                "human.steady_blood",
+                "human.precise_cut",
+                "human.opening",
+                "human.cross_cut",
+                "human.expose",
+                "human.decisive",
+                "human.flash_arc",
+                "human.keen_eye",
+                "human.long_edge",
+                "human.oath_guard",
+                "human.shield_bash",
+                "human.hold_line",
+                "human.repulse",
+                "human.return_cut",
+                "human.rally",
+                "human.shield_drill",
+                "human.enduring_oath",
+                "human.field_dressing",
+                "human.intercept",
+                "human.cleanse",
+                "human.march",
+                "human.discipline",
+                "human.renewal"
+              ],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案2",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案3",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            }
+          ]
+        },
+        "heroHp": 2456,
+        "restUntil": 0,
+        "lastHealthClock": 10000,
+        "areaProgress": {
+          "human": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "dwarf": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "elf": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "goblin": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "ashen": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          }
+        },
+        "instanceCooldowns": {},
+        "equipmentRuntime": {
+          "version": 1,
+          "byId": {
+            "mw1ttkw0-6-y0bsp": {
+              "combatMs": 0,
+              "attackCount": 0,
+              "castCount": 0
+            }
+          }
+        },
+        "nextBattleAt": 0
+      },
+      "elf": {
+        "version": 6,
+        "divineStones": {
+          "version": 1,
+          "baseline": 0,
+          "claimed": [],
+          "spent": 0
+        },
+        "learnedRecipes": [
+          "potion-healing"
+        ],
+        "talentBalanceVersion": 1,
+        "diplomacy": {
+          "version": 1,
+          "revision": 0,
+          "wars": []
+        },
+        "race": "elf",
+        "hero": "莱姆斯",
+        "atCamp": true,
+        "level": 100,
+        "xp": 0,
+        "gold": 100,
+        "location": 0,
+        "siteId": "elf.a01",
+        "expedition": {
+          "mode": "field",
+          "fieldId": "elf.a01.field",
+          "targetInstanceId": null,
+          "loop": false
+        },
+        "build": "custom",
+        "inventory": [
+          {
+            "id": "mw1ttkw0-8-mehqw",
+            "legendaryId": "elf-sixfold-heartwood",
+            "name": "六相·心木初鸣",
+            "slot": "weapon",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "staff_balanced",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 337,
+            "armor": 22,
+            "hp": 450,
+            "affixes": [
+              {
+                "stat": "atk",
+                "value": 4,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 4,
+                  "max": 10
+                }
+              },
+              {
+                "stat": "hp",
+                "value": 18,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 18,
+                  "max": 50
+                }
+              },
+              {
+                "stat": "armor",
+                "value": 3,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 3,
+                  "max": 8
+                }
+              },
+              {
+                "stat": "luck",
+                "value": 2,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "elf-sixfold-charge"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "weaponType": "staff",
+            "originRace": "elf",
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v1",
+              "bonus": {
+                "atk": 33.7,
+                "armor": 2.2,
+                "hp": 45,
+                "affixes": [
+                  {
+                    "stat": "atk",
+                    "value": 0.4
+                  },
+                  {
+                    "stat": "hp",
+                    "value": 1.8
+                  },
+                  {
+                    "stat": "armor",
+                    "value": 0.3
+                  },
+                  {
+                    "stat": "luck",
+                    "value": 0.2
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "mw1ttkw0-9-tt6i2",
+            "legendaryId": "elf-last-string",
+            "name": "归林·最后一弦",
+            "slot": "weapon",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "bow_attack",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 405,
+            "armor": 0,
+            "hp": 225,
+            "affixes": [
+              {
+                "stat": "atk",
+                "value": 4,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 4,
+                  "max": 10
+                }
+              },
+              {
+                "stat": "hp",
+                "value": 18,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 18,
+                  "max": 50
+                }
+              },
+              {
+                "stat": "armor",
+                "value": 3,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 3,
+                  "max": 8
+                }
+              },
+              {
+                "stat": "luck",
+                "value": 2,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "elf-last-string-pierce"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "weaponType": "bow",
+            "originRace": "elf",
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v1",
+              "bonus": {
+                "atk": 40.5,
+                "armor": 0,
+                "hp": 22.5,
+                "affixes": [
+                  {
+                    "stat": "atk",
+                    "value": 0.4
+                  },
+                  {
+                    "stat": "hp",
+                    "value": 1.8
+                  },
+                  {
+                    "stat": "armor",
+                    "value": 0.3
+                  },
+                  {
+                    "stat": "luck",
+                    "value": 0.2
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "equip": {
+          "weapon": "mw1ttkw0-8-mehqw",
+          "helm": null,
+          "armor": null,
+          "gloves": null,
+          "boots": null,
+          "ring1": null,
+          "ring2": null,
+          "amulet": null
+        },
+        "skills": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "conditions": [
+          "always",
+          "always",
+          "always",
+          "always"
+        ],
+        "materialStacks": {},
+        "offlineLuck": 0,
+        "talents": {
+          "power": 0,
+          "heart": 0,
+          "steel": 0,
+          "precision": 0,
+          "crit": 0,
+          "critDamage": 0,
+          "penetration": 0,
+          "element": 0,
+          "elementResist": 0,
+          "block": 0,
+          "shield": 0,
+          "healing": 0,
+          "resolve": 0,
+          "luck": 0
+        },
+        "consumables": {
+          "memoryFruit": 0,
+          "refundCredits": 0,
+          "reforgeToken": 0
+        },
+        "potionSlot": {
+          "key": null,
+          "auto": false,
+          "priority": "low",
+          "priorityVersion": 1
+        },
+        "kills": 0,
+        "normalWins": [
+          0,
+          0,
+          0
+        ],
+        "bossWins": [
+          0,
+          0,
+          0
+        ],
+        "bossReady": [
+          0,
+          0,
+          0
+        ],
+        "stock": 3,
+        "loadouts": [
+          null,
+          null,
+          null
+        ],
+        "chapters": [],
+        "chronicle": [
+          "你从精灵的营地开始旅程。"
+        ],
+        "momentum": 0,
+        "lastSeen": 10000,
+        "running": false,
+        "skillTree": {
+          "version": 1,
+          "mode": "active",
+          "configId": "elf-tree-v1",
+          "revision": 0,
+          "selectedPreset": 0,
+          "presets": [
+            {
+              "name": "方案1",
+              "unlocked": [
+                "elf.twin_arrow",
+                "elf.thread_volley",
+                "elf.hunter_mark",
+                "elf.swift_draw",
+                "elf.pursuit",
+                "elf.moon_finisher",
+                "elf.steady_string",
+                "elf.forest_pursuer",
+                "elf.sixfold_shift",
+                "elf.ember_bloom",
+                "elf.moon_tide",
+                "elf.wind_prism",
+                "elf.root_eclipse",
+                "elf.sixfold_chorus",
+                "elf.sixfold_affinity",
+                "elf.prism_skin",
+                "elf.root_strike",
+                "elf.moon_sweep",
+                "elf.resonant_guard",
+                "elf.prism_impact",
+                "elf.dusk_reversal",
+                "elf.heartwood_release",
+                "elf.root_balance",
+                "elf.living_resonance",
+                "elf.dew_mending",
+                "elf.leaf_ward",
+                "elf.clear_moon",
+                "elf.forest_vitality",
+                "elf.clear_mind",
+                "elf.dew_blessing"
+              ],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案2",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案3",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            }
+          ]
+        },
+        "heroHp": 2456,
+        "restUntil": 0,
+        "lastHealthClock": 10000,
+        "areaProgress": {
+          "human": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "dwarf": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "elf": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "goblin": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "ashen": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          }
+        },
+        "instanceCooldowns": {},
+        "equipmentRuntime": {
+          "version": 1,
+          "byId": {
+            "mw1ttkw0-8-mehqw": {
+              "combatMs": 0,
+              "attackCount": 0,
+              "castCount": 0
+            }
+          }
+        },
+        "nextBattleAt": 0
+      },
+      "goblin": {
+        "version": 6,
+        "divineStones": {
+          "version": 1,
+          "baseline": 0,
+          "claimed": [],
+          "spent": 0
+        },
+        "learnedRecipes": [
+          "potion-healing"
+        ],
+        "talentBalanceVersion": 1,
+        "diplomacy": {
+          "version": 1,
+          "revision": 0,
+          "wars": []
+        },
+        "race": "goblin",
+        "hero": "奇克",
+        "atCamp": true,
+        "level": 100,
+        "xp": 0,
+        "gold": 100,
+        "location": 0,
+        "siteId": "goblin.a01",
+        "expedition": {
+          "mode": "field",
+          "fieldId": "goblin.a01.field",
+          "targetInstanceId": null,
+          "loop": false
+        },
+        "build": "custom",
+        "inventory": [
+          {
+            "id": "mw1ttkw0-a-n35k5",
+            "legendaryId": "goblin-silent-ration",
+            "name": "留一口 · 无声刃",
+            "slot": "weapon",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "dagger_balanced",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 382,
+            "armor": 0,
+            "hp": 337,
+            "affixes": [
+              {
+                "stat": "atk",
+                "value": 4,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 4,
+                  "max": 10
+                }
+              },
+              {
+                "stat": "hp",
+                "value": 18,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 18,
+                  "max": 50
+                }
+              },
+              {
+                "stat": "armor",
+                "value": 3,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 3,
+                  "max": 8
+                }
+              },
+              {
+                "stat": "luck",
+                "value": 2,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "goblin-ration-opening"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "weaponType": "dagger",
+            "originRace": "goblin",
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v1",
+              "bonus": {
+                "atk": 38.2,
+                "armor": 0,
+                "hp": 33.7,
+                "affixes": [
+                  {
+                    "stat": "atk",
+                    "value": 0.4
+                  },
+                  {
+                    "stat": "hp",
+                    "value": 1.8
+                  },
+                  {
+                    "stat": "armor",
+                    "value": 0.3
+                  },
+                  {
+                    "stat": "luck",
+                    "value": 0.2
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "mw1ttkw0-b-suaqc",
+            "legendaryId": "goblin-silent-steps",
+            "name": "溜影 · 无声足",
+            "slot": "boots",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "boots_vitality",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 15,
+            "armor": 88,
+            "hp": 950,
+            "affixes": [
+              {
+                "stat": "atk",
+                "value": 4,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 4,
+                  "max": 10
+                }
+              },
+              {
+                "stat": "hp",
+                "value": 18,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 18,
+                  "max": 50
+                }
+              },
+              {
+                "stat": "armor",
+                "value": 3,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 3,
+                  "max": 8
+                }
+              },
+              {
+                "stat": "luck",
+                "value": 2,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "goblin-thief-evasion"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "originRace": "goblin",
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v1",
+              "bonus": {
+                "atk": 1.5,
+                "armor": 8.8,
+                "hp": 95,
+                "affixes": [
+                  {
+                    "stat": "atk",
+                    "value": 0.4
+                  },
+                  {
+                    "stat": "hp",
+                    "value": 1.8
+                  },
+                  {
+                    "stat": "armor",
+                    "value": 0.3
+                  },
+                  {
+                    "stat": "luck",
+                    "value": 0.2
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "equip": {
+          "weapon": "mw1ttkw0-a-n35k5",
+          "helm": null,
+          "armor": null,
+          "gloves": null,
+          "boots": null,
+          "ring1": null,
+          "ring2": null,
+          "amulet": null
+        },
+        "skills": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "conditions": [
+          "always",
+          "always",
+          "always",
+          "always"
+        ],
+        "materialStacks": {},
+        "offlineLuck": 0,
+        "talents": {
+          "power": 0,
+          "heart": 0,
+          "steel": 0,
+          "precision": 0,
+          "crit": 0,
+          "critDamage": 0,
+          "penetration": 0,
+          "element": 0,
+          "elementResist": 0,
+          "block": 0,
+          "shield": 0,
+          "healing": 0,
+          "resolve": 0,
+          "luck": 0
+        },
+        "consumables": {
+          "memoryFruit": 0,
+          "refundCredits": 0,
+          "reforgeToken": 0
+        },
+        "potionSlot": {
+          "key": null,
+          "auto": false,
+          "priority": "low",
+          "priorityVersion": 1
+        },
+        "kills": 0,
+        "normalWins": [
+          0,
+          0,
+          0
+        ],
+        "bossWins": [
+          0,
+          0,
+          0
+        ],
+        "bossReady": [
+          0,
+          0,
+          0
+        ],
+        "stock": 3,
+        "loadouts": [
+          null,
+          null,
+          null
+        ],
+        "chapters": [],
+        "chronicle": [
+          "你从裂穴诸部的营地开始旅程。"
+        ],
+        "momentum": 0,
+        "lastSeen": 10000,
+        "running": false,
+        "skillTree": {
+          "version": 1,
+          "mode": "active",
+          "configId": "goblin-tree-v1",
+          "revision": 0,
+          "selectedPreset": 0,
+          "presets": [
+            {
+              "name": "方案1",
+              "unlocked": [
+                "goblin.venom_cut",
+                "goblin.spore_fan",
+                "goblin.bitter_wound",
+                "goblin.spore_transfer",
+                "goblin.toxic_feint",
+                "goblin.mire_seal",
+                "goblin.spore_lore",
+                "goblin.bitter_edge",
+                "goblin.opening_cut",
+                "goblin.seam_step",
+                "goblin.finish_cut",
+                "goblin.stolen_moment",
+                "goblin.crossing_blade",
+                "goblin.ration_rush",
+                "goblin.light_pack",
+                "goblin.scout_breath",
+                "goblin.snare_wire",
+                "goblin.rattle_decoy",
+                "goblin.tangle_cut",
+                "goblin.spring_scatter",
+                "goblin.jam_joint",
+                "goblin.braced_lure",
+                "goblin.copper_brace",
+                "goblin.tendon_knots",
+                "goblin.patch_ration",
+                "goblin.dust_escape",
+                "goblin.shed_binding",
+                "goblin.tunnel_survivor",
+                "goblin.ration_sense",
+                "goblin.quiet_step"
+              ],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案2",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案3",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            }
+          ]
+        },
+        "heroHp": 1950,
+        "restUntil": 0,
+        "lastHealthClock": 10000,
+        "areaProgress": {
+          "human": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "dwarf": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "elf": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "goblin": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "ashen": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          }
+        },
+        "instanceCooldowns": {},
+        "equipmentRuntime": {
+          "version": 1,
+          "byId": {
+            "mw1ttkw0-a-n35k5": {
+              "combatMs": 0,
+              "attackCount": 0,
+              "castCount": 0
+            }
+          }
+        },
+        "nextBattleAt": 0
+      },
+      "ashen": {
+        "version": 6,
+        "divineStones": {
+          "version": 1,
+          "baseline": 0,
+          "claimed": [],
+          "spent": 0
+        },
+        "learnedRecipes": [
+          "potion-healing"
+        ],
+        "talentBalanceVersion": 1,
+        "diplomacy": {
+          "version": 1,
+          "revision": 0,
+          "wars": []
+        },
+        "race": "ashen",
+        "hero": "砾恩",
+        "atCamp": true,
+        "level": 100,
+        "xp": 0,
+        "gold": 100,
+        "location": 0,
+        "siteId": "ashen.a01",
+        "expedition": {
+          "mode": "field",
+          "fieldId": "ashen.a01.field",
+          "targetInstanceId": null,
+          "loop": false
+        },
+        "build": "custom",
+        "inventory": [
+          {
+            "id": "mw1ttkw0-c-mz985",
+            "legendaryId": "ashen-molten-core",
+            "name": "余烬·不灭薪",
+            "slot": "core",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "core_molten",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 180,
+            "armor": 180,
+            "hp": 0,
+            "affixes": [
+              {
+                "stat": "atk",
+                "value": 4,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 4,
+                  "max": 10
+                }
+              },
+              {
+                "stat": "hp",
+                "value": 18,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 18,
+                  "max": 50
+                }
+              },
+              {
+                "stat": "armor",
+                "value": 3,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 3,
+                  "max": 8
+                }
+              },
+              {
+                "stat": "luck",
+                "value": 2,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "ashen-ember-fuel"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "originRace": "ashen",
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v1",
+              "bonus": {
+                "atk": 18,
+                "armor": 18,
+                "hp": 0,
+                "affixes": [
+                  {
+                    "stat": "atk",
+                    "value": 0.4
+                  },
+                  {
+                    "stat": "hp",
+                    "value": 1.8
+                  },
+                  {
+                    "stat": "armor",
+                    "value": 0.3
+                  },
+                  {
+                    "stat": "luck",
+                    "value": 0.2
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "mw1ttkw0-d-bz6bd",
+            "legendaryId": "ashen-stone-core",
+            "name": "负山·长眠垒",
+            "slot": "core",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "core_stone",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 0,
+            "armor": 180,
+            "hp": 900,
+            "affixes": [
+              {
+                "stat": "atk",
+                "value": 4,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 4,
+                  "max": 10
+                }
+              },
+              {
+                "stat": "hp",
+                "value": 18,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 18,
+                  "max": 50
+                }
+              },
+              {
+                "stat": "armor",
+                "value": 3,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 3,
+                  "max": 8
+                }
+              },
+              {
+                "stat": "luck",
+                "value": 2,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "ashen-mountain-rest"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "originRace": "ashen",
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v1",
+              "bonus": {
+                "atk": 0,
+                "armor": 18,
+                "hp": 90,
+                "affixes": [
+                  {
+                    "stat": "atk",
+                    "value": 0.4
+                  },
+                  {
+                    "stat": "hp",
+                    "value": 1.8
+                  },
+                  {
+                    "stat": "armor",
+                    "value": 0.3
+                  },
+                  {
+                    "stat": "luck",
+                    "value": 0.2
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "mw1ttkw0-e-dsjzm",
+            "legendaryId": "ashen-crystal-core",
+            "name": "折曦·三声遗响",
+            "slot": "core",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "core_crystal",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 180,
+            "armor": 0,
+            "hp": 900,
+            "affixes": [
+              {
+                "stat": "atk",
+                "value": 4,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 4,
+                  "max": 10
+                }
+              },
+              {
+                "stat": "hp",
+                "value": 18,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 18,
+                  "max": 50
+                }
+              },
+              {
+                "stat": "armor",
+                "value": 3,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 3,
+                  "max": 8
+                }
+              },
+              {
+                "stat": "luck",
+                "value": 2,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "ashen-prism-beam"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "originRace": "ashen",
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v1",
+              "bonus": {
+                "atk": 18,
+                "armor": 0,
+                "hp": 90,
+                "affixes": [
+                  {
+                    "stat": "atk",
+                    "value": 0.4
+                  },
+                  {
+                    "stat": "hp",
+                    "value": 1.8
+                  },
+                  {
+                    "stat": "armor",
+                    "value": 0.3
+                  },
+                  {
+                    "stat": "luck",
+                    "value": 0.2
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "mw1ttkw0-f-cd7jk",
+            "legendaryId": "ashen-primal-core",
+            "name": "原初核心",
+            "slot": "core",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "core_primal",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 120,
+            "armor": 120,
+            "hp": 600,
+            "affixes": [],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "ashen-primal-power"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "originRace": "ashen",
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v1",
+              "bonus": {
+                "atk": 12,
+                "armor": 12,
+                "hp": 60,
+                "affixes": []
+              }
+            }
+          }
+        ],
+        "equip": {
+          "weapon": null,
+          "helm": null,
+          "armor": null,
+          "gloves": null,
+          "boots": null,
+          "ring1": null,
+          "ring2": null,
+          "amulet": null,
+          "core": "mw1ttkw0-c-mz985"
+        },
+        "skills": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "conditions": [
+          "always",
+          "always",
+          "always",
+          "always"
+        ],
+        "materialStacks": {},
+        "offlineLuck": 0,
+        "talents": {
+          "power": 0,
+          "heart": 0,
+          "steel": 0,
+          "precision": 0,
+          "crit": 0,
+          "critDamage": 0,
+          "penetration": 0,
+          "element": 0,
+          "elementResist": 0,
+          "block": 0,
+          "shield": 0,
+          "healing": 0,
+          "resolve": 0,
+          "luck": 0
+        },
+        "consumables": {
+          "memoryFruit": 0,
+          "refundCredits": 0,
+          "reforgeToken": 0
+        },
+        "potionSlot": {
+          "key": null,
+          "auto": false,
+          "priority": "low",
+          "priorityVersion": 1
+        },
+        "kills": 0,
+        "normalWins": [
+          0,
+          0,
+          0
+        ],
+        "bossWins": [
+          0,
+          0,
+          0
+        ],
+        "bossReady": [
+          0,
+          0,
+          0
+        ],
+        "stock": 3,
+        "loadouts": [
+          null,
+          null,
+          null
+        ],
+        "chapters": [],
+        "chronicle": [
+          "你从烬裔的营地开始旅程。"
+        ],
+        "momentum": 0,
+        "lastSeen": 10000,
+        "running": false,
+        "skillTree": {
+          "version": 1,
+          "mode": "active",
+          "configId": "ashen-tree-v1",
+          "revision": 0,
+          "selectedPreset": 0,
+          "presets": [
+            {
+              "name": "方案1",
+              "unlocked": [
+                "ashen.kindle",
+                "ashen.vent",
+                "ashen.anneal",
+                "ashen.surge",
+                "ashen.temper",
+                "ashen.overload",
+                "ashen.thermal",
+                "ashen.insulation",
+                "ashen.mantle",
+                "ashen.cleave",
+                "ashen.fault",
+                "ashen.rebuild",
+                "ashen.quarry",
+                "ashen.fracture",
+                "ashen.laminate",
+                "ashen.matrix",
+                "ashen.tap",
+                "ashen.dawn",
+                "ashen.dusk",
+                "ashen.chorus",
+                "ashen.mend",
+                "ashen.resound",
+                "ashen.lattice",
+                "ashen.clarity",
+                "ashen.salve",
+                "ashen.interrupt",
+                "ashen.purify",
+                "ashen.endurance",
+                "ashen.vitality",
+                "ashen.precision"
+              ],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案2",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案3",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            }
+          ]
+        },
+        "heroHp": 1556,
+        "restUntil": 0,
+        "lastHealthClock": 10000,
+        "areaProgress": {
+          "human": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "dwarf": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "elf": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "goblin": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "ashen": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          }
+        },
+        "instanceCooldowns": {},
+        "equipmentRuntime": {
+          "version": 1,
+          "byId": {
+            "mw1ttkw0-c-mz985": {
+              "combatMs": 0,
+              "attackCount": 0,
+              "castCount": 0
+            }
+          }
+        },
+        "nextBattleAt": 0
+      }
+    },
+    "raw-v2": {
+      "dwarf": {
+        "version": 6,
+        "divineStones": {
+          "version": 1,
+          "baseline": 0,
+          "claimed": [],
+          "spent": 0
+        },
+        "learnedRecipes": [
+          "potion-healing"
+        ],
+        "talentBalanceVersion": 1,
+        "diplomacy": {
+          "version": 1,
+          "revision": 0,
+          "wars": []
+        },
+        "race": "dwarf",
+        "hero": "布洛克",
+        "atCamp": true,
+        "level": 100,
+        "xp": 0,
+        "gold": 100,
+        "location": 0,
+        "siteId": "dwarf.a01",
+        "expedition": {
+          "mode": "field",
+          "fieldId": "dwarf.a01.field",
+          "targetInstanceId": null,
+          "loop": false
+        },
+        "build": "custom",
+        "inventory": [
+          {
+            "id": "mw1ttkw0-g-nldaz",
+            "legendaryId": "first-forge-oathhammer",
+            "name": "王统·初炉誓锤",
+            "slot": "weapon",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "hammer_balanced",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 337,
+            "armor": 67,
+            "hp": 225,
+            "affixes": [
+              {
+                "stat": "atk",
+                "value": 4,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 4,
+                  "max": 10
+                }
+              },
+              {
+                "stat": "hp",
+                "value": 18,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 18,
+                  "max": 50
+                }
+              },
+              {
+                "stat": "armor",
+                "value": 3,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 3,
+                  "max": 8
+                }
+              },
+              {
+                "stat": "luck",
+                "value": 2,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "ancestor-echo"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "weaponType": "hammer",
+            "originRace": "dwarf",
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v2",
+              "bonus": {
+                "atk": 337,
+                "armor": 67,
+                "hp": 225,
+                "affixes": [
+                  {
+                    "stat": "atk",
+                    "value": 4
+                  },
+                  {
+                    "stat": "hp",
+                    "value": 18
+                  },
+                  {
+                    "stat": "armor",
+                    "value": 3
+                  },
+                  {
+                    "stat": "luck",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "mw1ttkw0-h-0paw2",
+            "legendaryId": "everburning-reactor",
+            "name": "不熄之炉",
+            "slot": "amulet",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "amulet_survival",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 57,
+            "armor": 134,
+            "hp": 956,
+            "affixes": [
+              {
+                "stat": "atk",
+                "value": 4,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 4,
+                  "max": 10
+                }
+              },
+              {
+                "stat": "hp",
+                "value": 18,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 18,
+                  "max": 50
+                }
+              },
+              {
+                "stat": "armor",
+                "value": 3,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 3,
+                  "max": 8
+                }
+              },
+              {
+                "stat": "luck",
+                "value": 2,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "residual-heat-cycle"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "originRace": "dwarf",
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v2",
+              "bonus": {
+                "atk": 57,
+                "armor": 134,
+                "hp": 956,
+                "affixes": [
+                  {
+                    "stat": "atk",
+                    "value": 4
+                  },
+                  {
+                    "stat": "hp",
+                    "value": 18
+                  },
+                  {
+                    "stat": "armor",
+                    "value": 3
+                  },
+                  {
+                    "stat": "luck",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "mw1ttkw0-i-0avsc",
+            "legendaryId": "infinity-gauntlet",
+            "name": "无限手套",
+            "slot": "gloves",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "gloves_armor",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 58,
+            "armor": 146,
+            "hp": 439,
+            "affixes": [
+              {
+                "stat": "atk",
+                "value": 4,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 4,
+                  "max": 10
+                }
+              },
+              {
+                "stat": "hp",
+                "value": 18,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 18,
+                  "max": 50
+                }
+              },
+              {
+                "stat": "armor",
+                "value": 3,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 3,
+                  "max": 8
+                }
+              },
+              {
+                "stat": "luck",
+                "value": 2,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "infinity-snap"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "originRace": null,
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v2",
+              "bonus": {
+                "atk": 58,
+                "armor": 146,
+                "hp": 439,
+                "affixes": [
+                  {
+                    "stat": "atk",
+                    "value": 4
+                  },
+                  {
+                    "stat": "hp",
+                    "value": 18
+                  },
+                  {
+                    "stat": "armor",
+                    "value": 3
+                  },
+                  {
+                    "stat": "luck",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "mw1ttkw0-j-rkfjm",
+            "legendaryId": "return-ring",
+            "name": "归途之环",
+            "slot": "ring",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "ring_survival",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 72,
+            "armor": 126,
+            "hp": 810,
+            "affixes": [
+              {
+                "stat": "atk",
+                "value": 4,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 4,
+                  "max": 10
+                }
+              },
+              {
+                "stat": "hp",
+                "value": 18,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 18,
+                  "max": 50
+                }
+              },
+              {
+                "stat": "armor",
+                "value": 3,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 3,
+                  "max": 8
+                }
+              },
+              {
+                "stat": "luck",
+                "value": 2,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "return-home"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "originRace": null,
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v2",
+              "bonus": {
+                "atk": 72,
+                "armor": 126,
+                "hp": 810,
+                "affixes": [
+                  {
+                    "stat": "atk",
+                    "value": 4
+                  },
+                  {
+                    "stat": "hp",
+                    "value": 18
+                  },
+                  {
+                    "stat": "armor",
+                    "value": 3
+                  },
+                  {
+                    "stat": "luck",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "mw1ttkw0-k-as0yc",
+            "legendaryId": "lucky-dice",
+            "name": "幸运骰子",
+            "slot": "amulet",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "amulet_survival",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 33,
+            "armor": 0,
+            "hp": 333,
+            "affixes": [],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "lucky-dice-roll"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "originRace": null,
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v2",
+              "bonus": {
+                "atk": 33,
+                "armor": 0,
+                "hp": 333,
+                "affixes": []
+              }
+            }
+          }
+        ],
+        "equip": {
+          "weapon": "mw1ttkw0-g-nldaz",
+          "helm": null,
+          "armor": null,
+          "gloves": null,
+          "boots": null,
+          "ring1": null,
+          "ring2": null,
+          "amulet": null
+        },
+        "skills": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "conditions": [
+          "always",
+          "always",
+          "always",
+          "always"
+        ],
+        "materialStacks": {
+          "铁屑|0": 5,
+          "炉火晶|0": 2,
+          "誓约残片|0": 1
+        },
+        "offlineLuck": 0,
+        "talents": {
+          "power": 0,
+          "heart": 0,
+          "steel": 0,
+          "precision": 0,
+          "crit": 0,
+          "critDamage": 0,
+          "penetration": 0,
+          "element": 0,
+          "elementResist": 0,
+          "block": 0,
+          "shield": 0,
+          "healing": 0,
+          "resolve": 0,
+          "luck": 0
+        },
+        "consumables": {
+          "memoryFruit": 0,
+          "refundCredits": 0,
+          "reforgeToken": 0
+        },
+        "potionSlot": {
+          "key": null,
+          "auto": false,
+          "priority": "low",
+          "priorityVersion": 1
+        },
+        "kills": 0,
+        "normalWins": [
+          0,
+          0,
+          0
+        ],
+        "bossWins": [
+          0,
+          0,
+          0
+        ],
+        "bossReady": [
+          0,
+          0,
+          0
+        ],
+        "stock": 3,
+        "loadouts": [
+          null,
+          null,
+          null
+        ],
+        "chapters": [],
+        "chronicle": [
+          "灰冠历317年：你离开黑炉堡，踏上寻找失踪商队的路。"
+        ],
+        "momentum": 0,
+        "lastSeen": 10000,
+        "running": false,
+        "skillTree": {
+          "version": 1,
+          "mode": "active",
+          "configId": "dwarf-skill-tree-99-expanded-v2",
+          "revision": 0,
+          "selectedPreset": 0,
+          "presets": [
+            {
+              "name": "方案1",
+              "unlocked": [
+                "fracture_strike",
+                "fault_sweep",
+                "breaking_intercept",
+                "axe_fervor",
+                "hammer_penetration",
+                "breach_followup",
+                "ore_rally",
+                "crag_verdict",
+                "ember_brand",
+                "furnace_etch",
+                "scatter_ash",
+                "fire_affinity",
+                "ember_temper",
+                "furnace_wave",
+                "cinder_barrage",
+                "bellows_ward",
+                "iron_vigil",
+                "repelling_wave",
+                "purifying_bulwark",
+                "shield_reserve",
+                "anvil_balance",
+                "bastion_blow",
+                "stone_anchor",
+                "shield_relay",
+                "mountain_vitality",
+                "anvil_cry",
+                "forge_breath",
+                "forged_resilience",
+                "patient_craft",
+                "prospectors_mark"
+              ],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案2",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案3",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            }
+          ]
+        },
+        "heroHp": 2006,
+        "restUntil": 0,
+        "lastHealthClock": 10000,
+        "areaProgress": {
+          "human": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "dwarf": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "elf": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "goblin": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "ashen": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          }
+        },
+        "instanceCooldowns": {},
+        "infinityGauntlet": {
+          "version": 1,
+          "recipeLearned": true,
+          "crafted": true,
+          "craftedItemId": "mw1ttkw0-i-0avsc"
+        },
+        "returnRing": {
+          "version": 1,
+          "recipeLearned": true,
+          "crafted": true,
+          "craftedItemId": "mw1ttkw0-j-rkfjm"
+        },
+        "equipmentRuntime": {
+          "version": 1,
+          "byId": {
+            "mw1ttkw0-g-nldaz": {
+              "combatMs": 0,
+              "attackCount": 0,
+              "castCount": 0
+            }
+          }
+        },
+        "nextBattleAt": 0
+      },
+      "human": {
+        "version": 6,
+        "divineStones": {
+          "version": 1,
+          "baseline": 0,
+          "claimed": [],
+          "spent": 0
+        },
+        "learnedRecipes": [
+          "potion-healing"
+        ],
+        "talentBalanceVersion": 1,
+        "diplomacy": {
+          "version": 1,
+          "revision": 0,
+          "wars": []
+        },
+        "race": "human",
+        "hero": "罗什福尔",
+        "atCamp": true,
+        "level": 100,
+        "xp": 0,
+        "gold": 100,
+        "location": 0,
+        "siteId": "human.a01",
+        "expedition": {
+          "mode": "field",
+          "fieldId": "human.a01.field",
+          "targetInstanceId": null,
+          "loop": false
+        },
+        "build": "custom",
+        "inventory": [
+          {
+            "id": "mw1ttkw0-l-aifrz",
+            "legendaryId": "human-oathblade",
+            "name": "王誓 · 未折之锋",
+            "slot": "weapon",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "axe_balanced",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 360,
+            "armor": 0,
+            "hp": 450,
+            "affixes": [
+              {
+                "stat": "atk",
+                "value": 4,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 4,
+                  "max": 10
+                }
+              },
+              {
+                "stat": "hp",
+                "value": 18,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 18,
+                  "max": 50
+                }
+              },
+              {
+                "stat": "armor",
+                "value": 3,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 3,
+                  "max": 8
+                }
+              },
+              {
+                "stat": "luck",
+                "value": 2,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "human-duel-oath"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "weaponType": "greatsword",
+            "originRace": "human",
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v2",
+              "bonus": {
+                "atk": 360,
+                "armor": 0,
+                "hp": 450,
+                "affixes": [
+                  {
+                    "stat": "atk",
+                    "value": 4
+                  },
+                  {
+                    "stat": "hp",
+                    "value": 18
+                  },
+                  {
+                    "stat": "armor",
+                    "value": 3
+                  },
+                  {
+                    "stat": "luck",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "mw1ttkw0-m-knria",
+            "legendaryId": "human-banner-armor",
+            "name": "遗旗 · 不坠之誓",
+            "slot": "armor",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "armor_armor",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 0,
+            "armor": 362,
+            "hp": 776,
+            "affixes": [
+              {
+                "stat": "atk",
+                "value": 4,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 4,
+                  "max": 10
+                }
+              },
+              {
+                "stat": "hp",
+                "value": 18,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 18,
+                  "max": 50
+                }
+              },
+              {
+                "stat": "armor",
+                "value": 3,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 3,
+                  "max": 8
+                }
+              },
+              {
+                "stat": "luck",
+                "value": 2,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "human-oath-reflection"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "originRace": "human",
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v2",
+              "bonus": {
+                "atk": 0,
+                "armor": 362,
+                "hp": 776,
+                "affixes": [
+                  {
+                    "stat": "atk",
+                    "value": 4
+                  },
+                  {
+                    "stat": "hp",
+                    "value": 18
+                  },
+                  {
+                    "stat": "armor",
+                    "value": 3
+                  },
+                  {
+                    "stat": "luck",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "equip": {
+          "weapon": "mw1ttkw0-l-aifrz",
+          "helm": null,
+          "armor": null,
+          "gloves": null,
+          "boots": null,
+          "ring1": null,
+          "ring2": null,
+          "amulet": null
+        },
+        "skills": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "conditions": [
+          "always",
+          "always",
+          "always",
+          "always"
+        ],
+        "materialStacks": {},
+        "offlineLuck": 0,
+        "talents": {
+          "power": 0,
+          "heart": 0,
+          "steel": 0,
+          "precision": 0,
+          "crit": 0,
+          "critDamage": 0,
+          "penetration": 0,
+          "element": 0,
+          "elementResist": 0,
+          "block": 0,
+          "shield": 0,
+          "healing": 0,
+          "resolve": 0,
+          "luck": 0
+        },
+        "consumables": {
+          "memoryFruit": 0,
+          "refundCredits": 0,
+          "reforgeToken": 0
+        },
+        "potionSlot": {
+          "key": null,
+          "auto": false,
+          "priority": "low",
+          "priorityVersion": 1
+        },
+        "kills": 0,
+        "normalWins": [
+          0,
+          0,
+          0
+        ],
+        "bossWins": [
+          0,
+          0,
+          0
+        ],
+        "bossReady": [
+          0,
+          0,
+          0
+        ],
+        "stock": 3,
+        "loadouts": [
+          null,
+          null,
+          null
+        ],
+        "chapters": [],
+        "chronicle": [
+          "你从人族的营地开始旅程。"
+        ],
+        "momentum": 0,
+        "lastSeen": 10000,
+        "running": false,
+        "skillTree": {
+          "version": 1,
+          "mode": "active",
+          "configId": "human-tree-99-v1",
+          "revision": 0,
+          "selectedPreset": 0,
+          "presets": [
+            {
+              "name": "方案1",
+              "unlocked": [
+                "human.cut",
+                "human.red_sweep",
+                "human.open_wound",
+                "human.blood_mark",
+                "human.sever",
+                "human.red_recovery",
+                "human.serrated_edge",
+                "human.steady_blood",
+                "human.precise_cut",
+                "human.opening",
+                "human.cross_cut",
+                "human.expose",
+                "human.decisive",
+                "human.flash_arc",
+                "human.keen_eye",
+                "human.long_edge",
+                "human.oath_guard",
+                "human.shield_bash",
+                "human.hold_line",
+                "human.repulse",
+                "human.return_cut",
+                "human.rally",
+                "human.shield_drill",
+                "human.enduring_oath",
+                "human.field_dressing",
+                "human.intercept",
+                "human.cleanse",
+                "human.march",
+                "human.discipline",
+                "human.renewal"
+              ],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案2",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案3",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            }
+          ]
+        },
+        "heroHp": 2456,
+        "restUntil": 0,
+        "lastHealthClock": 10000,
+        "areaProgress": {
+          "human": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "dwarf": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "elf": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "goblin": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "ashen": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          }
+        },
+        "instanceCooldowns": {},
+        "equipmentRuntime": {
+          "version": 1,
+          "byId": {
+            "mw1ttkw0-l-aifrz": {
+              "combatMs": 0,
+              "attackCount": 0,
+              "castCount": 0
+            }
+          }
+        },
+        "nextBattleAt": 0
+      },
+      "elf": {
+        "version": 6,
+        "divineStones": {
+          "version": 1,
+          "baseline": 0,
+          "claimed": [],
+          "spent": 0
+        },
+        "learnedRecipes": [
+          "potion-healing"
+        ],
+        "talentBalanceVersion": 1,
+        "diplomacy": {
+          "version": 1,
+          "revision": 0,
+          "wars": []
+        },
+        "race": "elf",
+        "hero": "莱姆斯",
+        "atCamp": true,
+        "level": 100,
+        "xp": 0,
+        "gold": 100,
+        "location": 0,
+        "siteId": "elf.a01",
+        "expedition": {
+          "mode": "field",
+          "fieldId": "elf.a01.field",
+          "targetInstanceId": null,
+          "loop": false
+        },
+        "build": "custom",
+        "inventory": [
+          {
+            "id": "mw1ttkw0-n-ceb52",
+            "legendaryId": "elf-sixfold-heartwood",
+            "name": "六相·心木初鸣",
+            "slot": "weapon",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "staff_balanced",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 337,
+            "armor": 22,
+            "hp": 450,
+            "affixes": [
+              {
+                "stat": "atk",
+                "value": 4,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 4,
+                  "max": 10
+                }
+              },
+              {
+                "stat": "hp",
+                "value": 18,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 18,
+                  "max": 50
+                }
+              },
+              {
+                "stat": "armor",
+                "value": 3,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 3,
+                  "max": 8
+                }
+              },
+              {
+                "stat": "luck",
+                "value": 2,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "elf-sixfold-charge"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "weaponType": "staff",
+            "originRace": "elf",
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v2",
+              "bonus": {
+                "atk": 337,
+                "armor": 22,
+                "hp": 450,
+                "affixes": [
+                  {
+                    "stat": "atk",
+                    "value": 4
+                  },
+                  {
+                    "stat": "hp",
+                    "value": 18
+                  },
+                  {
+                    "stat": "armor",
+                    "value": 3
+                  },
+                  {
+                    "stat": "luck",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "mw1ttkw0-o-wanr5",
+            "legendaryId": "elf-last-string",
+            "name": "归林·最后一弦",
+            "slot": "weapon",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "bow_attack",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 405,
+            "armor": 0,
+            "hp": 225,
+            "affixes": [
+              {
+                "stat": "atk",
+                "value": 4,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 4,
+                  "max": 10
+                }
+              },
+              {
+                "stat": "hp",
+                "value": 18,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 18,
+                  "max": 50
+                }
+              },
+              {
+                "stat": "armor",
+                "value": 3,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 3,
+                  "max": 8
+                }
+              },
+              {
+                "stat": "luck",
+                "value": 2,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "elf-last-string-pierce"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "weaponType": "bow",
+            "originRace": "elf",
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v2",
+              "bonus": {
+                "atk": 405,
+                "armor": 0,
+                "hp": 225,
+                "affixes": [
+                  {
+                    "stat": "atk",
+                    "value": 4
+                  },
+                  {
+                    "stat": "hp",
+                    "value": 18
+                  },
+                  {
+                    "stat": "armor",
+                    "value": 3
+                  },
+                  {
+                    "stat": "luck",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "equip": {
+          "weapon": "mw1ttkw0-n-ceb52",
+          "helm": null,
+          "armor": null,
+          "gloves": null,
+          "boots": null,
+          "ring1": null,
+          "ring2": null,
+          "amulet": null
+        },
+        "skills": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "conditions": [
+          "always",
+          "always",
+          "always",
+          "always"
+        ],
+        "materialStacks": {},
+        "offlineLuck": 0,
+        "talents": {
+          "power": 0,
+          "heart": 0,
+          "steel": 0,
+          "precision": 0,
+          "crit": 0,
+          "critDamage": 0,
+          "penetration": 0,
+          "element": 0,
+          "elementResist": 0,
+          "block": 0,
+          "shield": 0,
+          "healing": 0,
+          "resolve": 0,
+          "luck": 0
+        },
+        "consumables": {
+          "memoryFruit": 0,
+          "refundCredits": 0,
+          "reforgeToken": 0
+        },
+        "potionSlot": {
+          "key": null,
+          "auto": false,
+          "priority": "low",
+          "priorityVersion": 1
+        },
+        "kills": 0,
+        "normalWins": [
+          0,
+          0,
+          0
+        ],
+        "bossWins": [
+          0,
+          0,
+          0
+        ],
+        "bossReady": [
+          0,
+          0,
+          0
+        ],
+        "stock": 3,
+        "loadouts": [
+          null,
+          null,
+          null
+        ],
+        "chapters": [],
+        "chronicle": [
+          "你从精灵的营地开始旅程。"
+        ],
+        "momentum": 0,
+        "lastSeen": 10000,
+        "running": false,
+        "skillTree": {
+          "version": 1,
+          "mode": "active",
+          "configId": "elf-tree-v1",
+          "revision": 0,
+          "selectedPreset": 0,
+          "presets": [
+            {
+              "name": "方案1",
+              "unlocked": [
+                "elf.twin_arrow",
+                "elf.thread_volley",
+                "elf.hunter_mark",
+                "elf.swift_draw",
+                "elf.pursuit",
+                "elf.moon_finisher",
+                "elf.steady_string",
+                "elf.forest_pursuer",
+                "elf.sixfold_shift",
+                "elf.ember_bloom",
+                "elf.moon_tide",
+                "elf.wind_prism",
+                "elf.root_eclipse",
+                "elf.sixfold_chorus",
+                "elf.sixfold_affinity",
+                "elf.prism_skin",
+                "elf.root_strike",
+                "elf.moon_sweep",
+                "elf.resonant_guard",
+                "elf.prism_impact",
+                "elf.dusk_reversal",
+                "elf.heartwood_release",
+                "elf.root_balance",
+                "elf.living_resonance",
+                "elf.dew_mending",
+                "elf.leaf_ward",
+                "elf.clear_moon",
+                "elf.forest_vitality",
+                "elf.clear_mind",
+                "elf.dew_blessing"
+              ],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案2",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案3",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            }
+          ]
+        },
+        "heroHp": 2456,
+        "restUntil": 0,
+        "lastHealthClock": 10000,
+        "areaProgress": {
+          "human": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "dwarf": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "elf": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "goblin": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "ashen": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          }
+        },
+        "instanceCooldowns": {},
+        "equipmentRuntime": {
+          "version": 1,
+          "byId": {
+            "mw1ttkw0-n-ceb52": {
+              "combatMs": 0,
+              "attackCount": 0,
+              "castCount": 0
+            }
+          }
+        },
+        "nextBattleAt": 0
+      },
+      "goblin": {
+        "version": 6,
+        "divineStones": {
+          "version": 1,
+          "baseline": 0,
+          "claimed": [],
+          "spent": 0
+        },
+        "learnedRecipes": [
+          "potion-healing"
+        ],
+        "talentBalanceVersion": 1,
+        "diplomacy": {
+          "version": 1,
+          "revision": 0,
+          "wars": []
+        },
+        "race": "goblin",
+        "hero": "奇克",
+        "atCamp": true,
+        "level": 100,
+        "xp": 0,
+        "gold": 100,
+        "location": 0,
+        "siteId": "goblin.a01",
+        "expedition": {
+          "mode": "field",
+          "fieldId": "goblin.a01.field",
+          "targetInstanceId": null,
+          "loop": false
+        },
+        "build": "custom",
+        "inventory": [
+          {
+            "id": "mw1ttkw0-p-8spu6",
+            "legendaryId": "goblin-silent-ration",
+            "name": "留一口 · 无声刃",
+            "slot": "weapon",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "dagger_balanced",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 382,
+            "armor": 0,
+            "hp": 337,
+            "affixes": [
+              {
+                "stat": "atk",
+                "value": 4,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 4,
+                  "max": 10
+                }
+              },
+              {
+                "stat": "hp",
+                "value": 18,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 18,
+                  "max": 50
+                }
+              },
+              {
+                "stat": "armor",
+                "value": 3,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 3,
+                  "max": 8
+                }
+              },
+              {
+                "stat": "luck",
+                "value": 2,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "goblin-ration-opening"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "weaponType": "dagger",
+            "originRace": "goblin",
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v2",
+              "bonus": {
+                "atk": 382,
+                "armor": 0,
+                "hp": 337,
+                "affixes": [
+                  {
+                    "stat": "atk",
+                    "value": 4
+                  },
+                  {
+                    "stat": "hp",
+                    "value": 18
+                  },
+                  {
+                    "stat": "armor",
+                    "value": 3
+                  },
+                  {
+                    "stat": "luck",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "mw1ttkw0-q-f8e7o",
+            "legendaryId": "goblin-silent-steps",
+            "name": "溜影 · 无声足",
+            "slot": "boots",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "boots_vitality",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 15,
+            "armor": 88,
+            "hp": 950,
+            "affixes": [
+              {
+                "stat": "atk",
+                "value": 4,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 4,
+                  "max": 10
+                }
+              },
+              {
+                "stat": "hp",
+                "value": 18,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 18,
+                  "max": 50
+                }
+              },
+              {
+                "stat": "armor",
+                "value": 3,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 3,
+                  "max": 8
+                }
+              },
+              {
+                "stat": "luck",
+                "value": 2,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "goblin-thief-evasion"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "originRace": "goblin",
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v2",
+              "bonus": {
+                "atk": 15,
+                "armor": 88,
+                "hp": 950,
+                "affixes": [
+                  {
+                    "stat": "atk",
+                    "value": 4
+                  },
+                  {
+                    "stat": "hp",
+                    "value": 18
+                  },
+                  {
+                    "stat": "armor",
+                    "value": 3
+                  },
+                  {
+                    "stat": "luck",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "equip": {
+          "weapon": "mw1ttkw0-p-8spu6",
+          "helm": null,
+          "armor": null,
+          "gloves": null,
+          "boots": null,
+          "ring1": null,
+          "ring2": null,
+          "amulet": null
+        },
+        "skills": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "conditions": [
+          "always",
+          "always",
+          "always",
+          "always"
+        ],
+        "materialStacks": {},
+        "offlineLuck": 0,
+        "talents": {
+          "power": 0,
+          "heart": 0,
+          "steel": 0,
+          "precision": 0,
+          "crit": 0,
+          "critDamage": 0,
+          "penetration": 0,
+          "element": 0,
+          "elementResist": 0,
+          "block": 0,
+          "shield": 0,
+          "healing": 0,
+          "resolve": 0,
+          "luck": 0
+        },
+        "consumables": {
+          "memoryFruit": 0,
+          "refundCredits": 0,
+          "reforgeToken": 0
+        },
+        "potionSlot": {
+          "key": null,
+          "auto": false,
+          "priority": "low",
+          "priorityVersion": 1
+        },
+        "kills": 0,
+        "normalWins": [
+          0,
+          0,
+          0
+        ],
+        "bossWins": [
+          0,
+          0,
+          0
+        ],
+        "bossReady": [
+          0,
+          0,
+          0
+        ],
+        "stock": 3,
+        "loadouts": [
+          null,
+          null,
+          null
+        ],
+        "chapters": [],
+        "chronicle": [
+          "你从裂穴诸部的营地开始旅程。"
+        ],
+        "momentum": 0,
+        "lastSeen": 10000,
+        "running": false,
+        "skillTree": {
+          "version": 1,
+          "mode": "active",
+          "configId": "goblin-tree-v1",
+          "revision": 0,
+          "selectedPreset": 0,
+          "presets": [
+            {
+              "name": "方案1",
+              "unlocked": [
+                "goblin.venom_cut",
+                "goblin.spore_fan",
+                "goblin.bitter_wound",
+                "goblin.spore_transfer",
+                "goblin.toxic_feint",
+                "goblin.mire_seal",
+                "goblin.spore_lore",
+                "goblin.bitter_edge",
+                "goblin.opening_cut",
+                "goblin.seam_step",
+                "goblin.finish_cut",
+                "goblin.stolen_moment",
+                "goblin.crossing_blade",
+                "goblin.ration_rush",
+                "goblin.light_pack",
+                "goblin.scout_breath",
+                "goblin.snare_wire",
+                "goblin.rattle_decoy",
+                "goblin.tangle_cut",
+                "goblin.spring_scatter",
+                "goblin.jam_joint",
+                "goblin.braced_lure",
+                "goblin.copper_brace",
+                "goblin.tendon_knots",
+                "goblin.patch_ration",
+                "goblin.dust_escape",
+                "goblin.shed_binding",
+                "goblin.tunnel_survivor",
+                "goblin.ration_sense",
+                "goblin.quiet_step"
+              ],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案2",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案3",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            }
+          ]
+        },
+        "heroHp": 1950,
+        "restUntil": 0,
+        "lastHealthClock": 10000,
+        "areaProgress": {
+          "human": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "dwarf": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "elf": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "goblin": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "ashen": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          }
+        },
+        "instanceCooldowns": {},
+        "equipmentRuntime": {
+          "version": 1,
+          "byId": {
+            "mw1ttkw0-p-8spu6": {
+              "combatMs": 0,
+              "attackCount": 0,
+              "castCount": 0
+            }
+          }
+        },
+        "nextBattleAt": 0
+      },
+      "ashen": {
+        "version": 6,
+        "divineStones": {
+          "version": 1,
+          "baseline": 0,
+          "claimed": [],
+          "spent": 0
+        },
+        "learnedRecipes": [
+          "potion-healing"
+        ],
+        "talentBalanceVersion": 1,
+        "diplomacy": {
+          "version": 1,
+          "revision": 0,
+          "wars": []
+        },
+        "race": "ashen",
+        "hero": "砾恩",
+        "atCamp": true,
+        "level": 100,
+        "xp": 0,
+        "gold": 100,
+        "location": 0,
+        "siteId": "ashen.a01",
+        "expedition": {
+          "mode": "field",
+          "fieldId": "ashen.a01.field",
+          "targetInstanceId": null,
+          "loop": false
+        },
+        "build": "custom",
+        "inventory": [
+          {
+            "id": "mw1ttkw0-r-or6gr",
+            "legendaryId": "ashen-molten-core",
+            "name": "余烬·不灭薪",
+            "slot": "core",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "core_molten",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 180,
+            "armor": 180,
+            "hp": 0,
+            "affixes": [
+              {
+                "stat": "atk",
+                "value": 4,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 4,
+                  "max": 10
+                }
+              },
+              {
+                "stat": "hp",
+                "value": 18,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 18,
+                  "max": 50
+                }
+              },
+              {
+                "stat": "armor",
+                "value": 3,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 3,
+                  "max": 8
+                }
+              },
+              {
+                "stat": "luck",
+                "value": 2,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "ashen-ember-fuel"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "originRace": "ashen",
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v2",
+              "bonus": {
+                "atk": 180,
+                "armor": 180,
+                "hp": 0,
+                "affixes": [
+                  {
+                    "stat": "atk",
+                    "value": 4
+                  },
+                  {
+                    "stat": "hp",
+                    "value": 18
+                  },
+                  {
+                    "stat": "armor",
+                    "value": 3
+                  },
+                  {
+                    "stat": "luck",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "mw1ttkw0-s-n1ybr",
+            "legendaryId": "ashen-stone-core",
+            "name": "负山·长眠垒",
+            "slot": "core",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "core_stone",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 0,
+            "armor": 180,
+            "hp": 900,
+            "affixes": [
+              {
+                "stat": "atk",
+                "value": 4,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 4,
+                  "max": 10
+                }
+              },
+              {
+                "stat": "hp",
+                "value": 18,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 18,
+                  "max": 50
+                }
+              },
+              {
+                "stat": "armor",
+                "value": 3,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 3,
+                  "max": 8
+                }
+              },
+              {
+                "stat": "luck",
+                "value": 2,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "ashen-mountain-rest"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "originRace": "ashen",
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v2",
+              "bonus": {
+                "atk": 0,
+                "armor": 180,
+                "hp": 900,
+                "affixes": [
+                  {
+                    "stat": "atk",
+                    "value": 4
+                  },
+                  {
+                    "stat": "hp",
+                    "value": 18
+                  },
+                  {
+                    "stat": "armor",
+                    "value": 3
+                  },
+                  {
+                    "stat": "luck",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "mw1ttkw0-t-mswav",
+            "legendaryId": "ashen-crystal-core",
+            "name": "折曦·三声遗响",
+            "slot": "core",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "core_crystal",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 180,
+            "armor": 0,
+            "hp": 900,
+            "affixes": [
+              {
+                "stat": "atk",
+                "value": 4,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 4,
+                  "max": 10
+                }
+              },
+              {
+                "stat": "hp",
+                "value": 18,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 18,
+                  "max": 50
+                }
+              },
+              {
+                "stat": "armor",
+                "value": 3,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 3,
+                  "max": 8
+                }
+              },
+              {
+                "stat": "luck",
+                "value": 2,
+                "sourceRange": {
+                  "model": "quality-v1",
+                  "quality": 4,
+                  "min": 2,
+                  "max": 5
+                }
+              }
+            ],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "ashen-prism-beam"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "originRace": "ashen",
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v2",
+              "bonus": {
+                "atk": 180,
+                "armor": 0,
+                "hp": 900,
+                "affixes": [
+                  {
+                    "stat": "atk",
+                    "value": 4
+                  },
+                  {
+                    "stat": "hp",
+                    "value": 18
+                  },
+                  {
+                    "stat": "armor",
+                    "value": 3
+                  },
+                  {
+                    "stat": "luck",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "mw1ttkw0-u-93lqb",
+            "legendaryId": "ashen-primal-core",
+            "name": "原初核心",
+            "slot": "core",
+            "rarity": 3,
+            "budgetQuality": 4,
+            "baseVariant": "core_primal",
+            "level": 100,
+            "baseLevel": 100,
+            "levelSource": "drop",
+            "atk": 120,
+            "armor": 120,
+            "hp": 600,
+            "affixes": [],
+            "special": null,
+            "set": null,
+            "exclusive": {
+              "id": "ashen-primal-power"
+            },
+            "locked": false,
+            "bless": 0,
+            "legendaryBudget": {
+              "model": "equipment-budget-m2-v1",
+              "quality": 4,
+              "budgetLevel": 100,
+              "sourceLevel": 100
+            },
+            "originRace": "ashen",
+            "divine": {
+              "id": "forge-favor",
+              "name": "神赐·炉火眷顾",
+              "model": "raw-v2",
+              "bonus": {
+                "atk": 120,
+                "armor": 120,
+                "hp": 600,
+                "affixes": []
+              }
+            }
+          }
+        ],
+        "equip": {
+          "weapon": null,
+          "helm": null,
+          "armor": null,
+          "gloves": null,
+          "boots": null,
+          "ring1": null,
+          "ring2": null,
+          "amulet": null,
+          "core": "mw1ttkw0-r-or6gr"
+        },
+        "skills": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "conditions": [
+          "always",
+          "always",
+          "always",
+          "always"
+        ],
+        "materialStacks": {},
+        "offlineLuck": 0,
+        "talents": {
+          "power": 0,
+          "heart": 0,
+          "steel": 0,
+          "precision": 0,
+          "crit": 0,
+          "critDamage": 0,
+          "penetration": 0,
+          "element": 0,
+          "elementResist": 0,
+          "block": 0,
+          "shield": 0,
+          "healing": 0,
+          "resolve": 0,
+          "luck": 0
+        },
+        "consumables": {
+          "memoryFruit": 0,
+          "refundCredits": 0,
+          "reforgeToken": 0
+        },
+        "potionSlot": {
+          "key": null,
+          "auto": false,
+          "priority": "low",
+          "priorityVersion": 1
+        },
+        "kills": 0,
+        "normalWins": [
+          0,
+          0,
+          0
+        ],
+        "bossWins": [
+          0,
+          0,
+          0
+        ],
+        "bossReady": [
+          0,
+          0,
+          0
+        ],
+        "stock": 3,
+        "loadouts": [
+          null,
+          null,
+          null
+        ],
+        "chapters": [],
+        "chronicle": [
+          "你从烬裔的营地开始旅程。"
+        ],
+        "momentum": 0,
+        "lastSeen": 10000,
+        "running": false,
+        "skillTree": {
+          "version": 1,
+          "mode": "active",
+          "configId": "ashen-tree-v1",
+          "revision": 0,
+          "selectedPreset": 0,
+          "presets": [
+            {
+              "name": "方案1",
+              "unlocked": [
+                "ashen.kindle",
+                "ashen.vent",
+                "ashen.anneal",
+                "ashen.surge",
+                "ashen.temper",
+                "ashen.overload",
+                "ashen.thermal",
+                "ashen.insulation",
+                "ashen.mantle",
+                "ashen.cleave",
+                "ashen.fault",
+                "ashen.rebuild",
+                "ashen.quarry",
+                "ashen.fracture",
+                "ashen.laminate",
+                "ashen.matrix",
+                "ashen.tap",
+                "ashen.dawn",
+                "ashen.dusk",
+                "ashen.chorus",
+                "ashen.mend",
+                "ashen.resound",
+                "ashen.lattice",
+                "ashen.clarity",
+                "ashen.salve",
+                "ashen.interrupt",
+                "ashen.purify",
+                "ashen.endurance",
+                "ashen.vitality",
+                "ashen.precision"
+              ],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案2",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            },
+            {
+              "name": "方案3",
+              "unlocked": [],
+              "active": [
+                null,
+                null,
+                null,
+                null
+              ],
+              "passive": [
+                null,
+                null
+              ],
+              "conditions": [
+                "always",
+                "always",
+                "always",
+                "always"
+              ]
+            }
+          ]
+        },
+        "heroHp": 1556,
+        "restUntil": 0,
+        "lastHealthClock": 10000,
+        "areaProgress": {
+          "human": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "dwarf": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "elf": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "goblin": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          },
+          "ashen": {
+            "unlocked": [
+              1
+            ],
+            "cleared": []
+          }
+        },
+        "instanceCooldowns": {},
+        "equipmentRuntime": {
+          "version": 1,
+          "byId": {
+            "mw1ttkw0-r-or6gr": {
+              "combatMs": 0,
+              "attackCount": 0,
+              "castCount": 0
+            }
+          }
+        },
+        "nextBattleAt": 0
+      }
+    }
+  },
+  "oldBehavior": {
+    "divineDiceBonuses": {
+      "luck": 33,
+      "crit": 33
+    },
+    "divineDiceHigh": {
+      "outcome": "high",
+      "multiplier": 1.25,
+      "fixedDamage": null
+    },
+    "divineDiceJackpot": {
+      "outcome": "jackpot",
+      "multiplier": 1,
+      "fixedDamage": 3333
+    },
+    "staffElementMultiplier": 1.3,
+    "divineBootsDodgeRating": 100,
+    "divinePrismCoefficient": 2
+  }
+}
