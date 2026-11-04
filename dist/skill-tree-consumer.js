@@ -1,3 +1,4 @@
+import {legendaryDivineMultiplier} from './legendary-divine.js';
 import {getRaceSkillPlanner,getSkillOwner,RACE_PACKS} from './race-registry.js';
 import {validPoisonTiming,isGoblinPoisonTiming,isGoblinPoisonSource} from './skill-tree-poison.js';
 // Production adapter plans for the new tree. No live registry activation or numeric defaults.
@@ -105,8 +106,9 @@ export function planTreeSkill(input={}){
  let plan;
  const external=getRaceSkillPlanner(input.skillId);
  if(input.skillId==='ashen-prism-beam'){
-  if(!input.context?.equippedLegends?.some(x=>x.legendaryId==='ashen-crystal-core')||input.config.cooldownMs!==30000||!input.targets.some(t=>t.id===input.selectedTargetId&&t.alive))return null;
-  plan={skillId:input.skillId,castId:input.castId,scope:'single',branch:'equipment',cooldownMs:30000,activeCastCount:1,damageActionCount:1,actions:[{kind:'hit',castId:input.castId,hitId:input.castId+':beam',targetId:input.selectedTargetId,hitIndex:0,damageType:'light',coefficient:2,independentHit:true,independentCrit:true,reaperEligible:true,ignoreArmor:true,ignoreElementResistance:true,effects:[]}]};
+  const owner=input.context?.equippedLegends?.find(x=>x.legendaryId==='ashen-crystal-core');
+  if(!owner||input.config.cooldownMs!==30000||!input.targets.some(t=>t.id===input.selectedTargetId&&t.alive))return null;
+  plan={skillId:input.skillId,castId:input.castId,scope:'single',branch:'equipment',cooldownMs:30000,activeCastCount:1,damageActionCount:1,actions:[{kind:'hit',castId:input.castId,hitId:input.castId+':beam',targetId:input.selectedTargetId,hitIndex:0,damageType:'light',coefficient:2*legendaryDivineMultiplier(owner),independentHit:true,independentCrit:true,reaperEligible:true,ignoreArmor:true,ignoreElementResistance:true,effects:[]}]};
  }else if(external){plan=external(input);if(!plan)return null;plan=clone(plan);const owner=getSkillOwner(input.skillId);if(owner?.modifySkillPlan)plan=owner.modifySkillPlan(plan,{...input,stats:input.stats,setCounts:input.stats?.count??{}});if(!plan)return null;}
  else if(input.skillId==='fracture_strike'){
   if(!input.targets.some(t=>t.id===input.selectedTargetId&&t.alive))return null;
