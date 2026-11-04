@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {mkdtempSync, mkdirSync, writeFileSync, rmSync, existsSync, readFileSync} from 'node:fs';
 import {tmpdir} from 'node:os';
@@ -91,12 +92,36 @@ assert.equal(Object.keys(SEAL_V084.scenes).length,12);assert.equal(Object.keys(S
 const clone=v=>Array.isArray(v)?v.map(clone):v&&typeof v==='object'?Object.fromEntries(Object.entries(v).map(([k,x])=>[k,clone(x)])):v;
 const SET_V088=JSON.parse(readFileSync(join(root,'fixtures/set-v088/approved-functions.json'),'utf8'));
 const SET_V090=JSON.parse(readFileSync(join(root,'fixtures/set-v090/approved-functions.json'),'utf8'));
+// Exact v094 reviewed reducer revisions, never a function/numeric exemption.
+// The original v077 baseline above and all previous approval fixtures are immutable.
+const DIVINE_V094=JSON.parse(readFileSync(join(root,'fixtures/divine-v094/approved-functions.json'),'utf8'));
+const DIVINE_REVIEW_V094=JSON.parse(readFileSync(join(root,'fixtures/divine-v094/review.json'),'utf8'));
+const sha256=value=>createHash('sha256').update(value).digest('hex');
+const divineReducerFiles=['races/human/legendary.js','races/goblin/legends.js','races/ashen/legendary.js'];
+assert.deepEqual(Object.keys(DIVINE_V094),divineReducerFiles);
+assert.deepEqual(Object.keys(DIVINE_REVIEW_V094.functions),divineReducerFiles);
+assert.deepEqual(Object.keys(DIVINE_REVIEW_V094.sourceHashes),[...divineReducerFiles,'legendary-divine.js']);
+assert.equal(DIVINE_REVIEW_V094.previousSourceCommit,'bd2e839aaeefe4a3ddc56d5dc95f7f89bd87a473');
+assert.equal(DIVINE_REVIEW_V094.reviewedRuntimeCommit,'1f2b42c5268d42005f176a550786d645eb31e3bc');
+assert.deepEqual(DIVINE_REVIEW_V094.proof,['divine-legendary-boundaries-v094-tests.mjs','divine-legendary-v094-tests.mjs','tests/fixtures/pre-v094-divine-saves.json']);
+for(const proof of DIVINE_REVIEW_V094.proof)assert(existsSync(join(root,proof)),`Missing divine review proof: ${proof}`);
+for(const [file,hash]of Object.entries(DIVINE_REVIEW_V094.sourceHashes))assert.equal(sha256(readFileSync(join(root,'dist',file))),hash,`Unreviewed v094 reducer/helper source drift: ${file}`);
+for(const file of divineReducerFiles){assert.deepEqual(Object.keys(DIVINE_V094[file]),['reduceLegendaryEvent']);assert.deepEqual(Object.keys(DIVINE_REVIEW_V094.functions[file]),['reduceLegendaryEvent']);}
+
 function authorizedBaseline(original,file){
  const out=clone(original);
  // Exactly reviewed source-tagged set-resource planners; no other export is exempt.
  for(const [key,value]of Object.entries(SET_V088[file]??{})){if(key==='reconcileRuntimeSets')assert(!Object.hasOwn(out,key));else assert.equal(typeof out[key],'function');out[key]=value;}
  // Exact v090 set-only numeric revision; historical v088 fixture remains immutable.
  for(const [key,value]of Object.entries(SET_V090[file]??{})){assert(Object.hasOwn(out,key));out[key]=value;}
+ // Apply only the three exact reviewed reducers. The previous body must match
+ // its frozen hash, and the approved body must match its separately pinned hash.
+ for(const [key,value]of Object.entries(DIVINE_V094[file]??{})){
+  assert.equal(typeof out[key],'function');const hashes=DIVINE_REVIEW_V094.functions[file][key];
+  assert.equal(sha256('<function:'+out[key].toString()+'>'),hashes.beforeSHA256,`Unexpected pre-v094 reducer: ${file}/${key}`);
+  assert.equal(sha256(value),hashes.afterSHA256,`Changed v094 reviewed fixture: ${file}/${key}`);out[key]=value;
+ }
+
  const human=file==='races/human/skills.js'?out.HUMAN_SETS:file==='engine.js'?out.BUILD:null;
  if(human){for(const [id,two,four] of [
  ['human_blood_oath',{bleedMultiplier:1.3},{severBleedingCoefficient:.8,bleedDurationMs:3000}],
@@ -311,6 +336,16 @@ try{
    rejectMutation('unapproved auxiliary',m=>m.POTION_RECIPE_CATALOG['potion-earthResist'].roles[1].materialIds.push('human.mat.17'));
   }
   if(SET_V088[file]||SET_V090[file])for(const key of new Set([...Object.keys(SET_V088[file]??{}),...Object.keys(SET_V090[file]??{})]))rejectMutation('approved set function remains pinned '+key,m=>m[key]=()=>null);
+  if(DIVINE_V094[file]){
+   rejectMutation('approved divine reducer remains fully pinned',m=>m.reduceLegendaryEvent=()=>null);
+   const sentinels={
+    'races/human/legendary.js':[['damage coefficient','.8*power','.9*power'],['mark delay','>=2200','>=1100'],['bleed duration','durationMs:6000','durationMs:12000'],['cooldown','clock+10000','clock+5000']],
+    'races/goblin/legends.js':[['shield fraction','shieldBefore*.4*power','shieldBefore*.5*power'],['shield cap','maxHp*.08*power','maxHp*.16*power'],['shield duration','durationMs:6000','durationMs:12000'],['target ledger bound','length<100','length<200']],
+    'races/ashen/legendary.js':[['refund amount','amount:2*power','amount:3*power'],['heal fraction','maxHp*.04*power','maxHp*.08*power'],['shield-break cooldown','clock+8000','clock+4000'],['stack cap','Math.min(3,','Math.min(6,'],['heat threshold','Math.floor(total/30)','Math.floor(total/15)']]
+   };
+   for(const [label,from,to]of sentinels[file]){const source=after.reduceLegendaryEvent.toString();assert.equal(source.split(from).length,2,`Unique reviewed mutation sentinel: ${file}/${label}`);rejectMutation('divine approval cannot hide '+label,m=>m.reduceLegendaryEvent='<function:'+source.replace(from,to)+'>');}
+  }
+
   if(JSON.stringify(before)!==JSON.stringify(after))changedCopy.push(file);
  }
  // Engine functions legitimately contain revised log copy; compare the public
@@ -343,6 +378,6 @@ try{
  ]){const corrupt=clone(after.BUILD);mutate(corrupt);assert.throws(()=>assert.deepEqual(project(corrupt,'engine.js','BUILD'),expectedBuild),assert.AssertionError,label);}
  // Mutation sentinels prove representative mechanics strings cannot be hidden.
  for(const [f,p]of [['racial-npc-event-content.js','RACIAL_NPC_EVENTS/0/conditions/accessPolicy'],['racial-npc-event-content.js','RACIAL_NPC_EVENTS/0/choices/0/effects/0/flag'],['npc-objective-content.js','NPC_OBJECTIVE_CONTENT/event/taskRewards/0/key'],['races/elf/skills.js','skills/elf.skill/weaponType'],['races/elf/equipment.js','legendaries/0/exclusiveId']])assert.notEqual(project('old',f,p),project('new',f,p),p);
- console.log(`PASS copy + bounded authorized revision invariants: ${compared} modules + engine catalogs vs ${BASELINE.slice(0,12)}; ${changedCopy.length} changed content modules. IDs, gates, objectives, rewards, effects, numeric budgets and legendary functions preserved except exact approved ring objectives / recipe additions / presentation-only set rows (2/4 thresholds pinned) / exact human A10 boss content and sources / exact v081 goblin poison deltas / exact fruit name and description / exact v082 Lucky Dice codex identity / reserved-reward v3 protocol / exact v084 staged seal-rescue contracts and four X01 alternative predecessors / exact v085 five-gem selector and protected-input helpers / exact v087 goblin A10 content and 47 elf hero metadata leaves / exact v088 source-tagged planners / exact v090 set-only planner and metadata strengthening.`);
+ console.log(`PASS copy + bounded authorized revision invariants: ${compared} modules + engine catalogs vs ${BASELINE.slice(0,12)}; ${changedCopy.length} changed content modules. IDs, gates, objectives, rewards, effects, numeric budgets and legendary functions preserved except exact approved ring objectives / recipe additions / presentation-only set rows (2/4 thresholds pinned) / exact human A10 boss content and sources / exact v081 goblin poison deltas / exact fruit name and description / exact v082 Lucky Dice codex identity / reserved-reward v3 protocol / exact v084 staged seal-rescue contracts and four X01 alternative predecessors / exact v085 five-gem selector and protected-input helpers / exact v087 goblin A10 content and 47 elf hero metadata leaves / exact v088 source-tagged planners / exact v090 set-only planner and metadata strengthening / exact v094 three owner-scoped divine reducers with before/after hashes, pinned shared helper and unchanged timing/cap sentinels.`);
  console.log('Boundary: does not prove new prose accurately describes mechanics, DOM behavior, non-exported function closures, or visual correctness; use gameplay/UI tests and review alongside this check.');
 }finally{rmSync(temp,{recursive:true,force:true});}

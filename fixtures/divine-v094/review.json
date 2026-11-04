@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "previousSourceCommit": "bd2e839aaeefe4a3ddc56d5dc95f7f89bd87a473",
+  "reviewedRuntimeCommit": "1f2b42c5268d42005f176a550786d645eb31e3bc",
+  "scope": "Only these three existing reducers gain item-owned divine power for positive effect magnitudes. Baseline, all other exports, triggers, durations, counter limits and resource caps remain pinned.",
+  "proof": [
+    "divine-legendary-boundaries-v094-tests.mjs",
+    "divine-legendary-v094-tests.mjs",
+    "tests/fixtures/pre-v094-divine-saves.json"
+  ],
+  "functions": {
+    "races/human/legendary.js": {
+      "reduceLegendaryEvent": {
+        "beforeSHA256": "0a09d7dab17fc034f7c129836c3d142c5830d99738b363ee7930cd58bb62f712",
+        "afterSHA256": "10d9a789aa4f5baf401c4a88161ae6052ca7651e990b75f05527a6627f4054ce"
+      }
+    },
+    "races/goblin/legends.js": {
+      "reduceLegendaryEvent": {
+        "beforeSHA256": "48a7061a807b3025cb208b0265a1511c71725c8321a41989e4d10d76875f53cc",
+        "afterSHA256": "d38c91114eed31b2d1fa349a1a93c449c3c36143668907ef4955a16450fe2c50"
+      }
+    },
+    "races/ashen/legendary.js": {
+      "reduceLegendaryEvent": {
+        "beforeSHA256": "fccf0ce75d6605f586066b5224816e22c096348e6986a5495c9f3687e95c5305",
+        "afterSHA256": "316a69f7110530a183d3f7c21056a02ab9f8ca55dd052dadc81b926752e70496"
+      }
+    }
+  },
+  "sourceHashes": {
+    "races/human/legendary.js": "f5dc400af811cc125ca7455aa21d053745d221d472a81bfa4b9336cbf8c4d785",
+    "races/goblin/legends.js": "e941e4469aa9ff578ca29356ef75218798ea83bcc987229bbc7d35ae66faa750",
+    "races/ashen/legendary.js": "4193f279527aac3f8f80ff09e1748e0a30840d10fe4713c3230fcc577fd81fc9",
+    "legendary-divine.js": "c050f2dbcf2e6e1e360a531f147b7dff003419936087eecd8ae275b9367f1b71"
+  },
+  "changes": {
+    "races/human/legendary.js": {
+      "divineOnly": {
+        "detonationCoefficient": [
+          0.8,
+          1.6
+        ],
+        "bleedAttackFraction": [
+          0.08,
+          0.16
+        ],
+        "receivedDamageReflection": [
+          0.5,
+          1
+        ]
+      },
+      "unchanged": {
+        "separateCastDelayMs": 2200,
+        "markAndBleedDurationMs": 6000,
+        "bleedTickMs": 2000,
+        "cooldownMs": 10000
+      }
+    },
+    "races/goblin/legends.js": {
+      "divineOnly": {
+        "shieldTheftFraction": [
+          0.4,
+          0.8
+        ],
+        "maxHpShieldCap": [
+          0.08,
+          0.16
+        ],
+        "fallbackCoefficient": [
+          0.7,
+          1.4
+        ]
+      },
+      "unchanged": {
+        "shieldDurationMs": 6000,
+        "seenTargetLimit": 100,
+        "firstSuccessfulDirectHitOnly": true
+      }
+    },
+    "races/ashen/legendary.js": {
+      "divineOnly": {
+        "shardsRefund": [
+          2,
+          4
+        ],
+        "maxHpHealFraction": [
+          0.04,
+          0.08
+        ]
+      },
+      "unchanged": {
+        "shieldBreakCooldownMs": 8000,
+        "heatPerStack": 30,
+        "maxStacks": 3,
+        "stackDurationMs": 6000,
+        "primalExcluded": true
+      }
+    }
+  }
+}
