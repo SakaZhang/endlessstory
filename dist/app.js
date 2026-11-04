@@ -421,13 +421,20 @@ function showTalents(){const points=availableTalentPoints(s),fruit=s.consumables
 $('talentBtn').onclick=()=>{if(runtimeStorageBlocked)return;finishForgePresentation();talentRefundMode=false;talentRefundDraft={};showTalents();};$('homeBtn').onclick=()=>go('world');
 $('helpBtn').onclick=()=>{if(runtimeStorageBlocked)return;finishForgePresentation();modal(`<h2>玩法说明</h2><p class="versionNote">选择一位旅人，探索各族领地，收集装备并学习战技。</p><p>点击世界地图上的领地，再选择已探索的据点展开自动远征。</p><ol><li>初始使用普通攻击，每升一级获得1技能点。到战技树学习技能，并装入主动或被动槽后使用。</li><li>远征可获得装备、经验和材料，通关普通副本可解锁下一区域。挂机高级设置可自动挑战本区域的普通副本与首领，冷却期间回到野外战斗。</li><li>点击装备图标查看属性或穿戴；在战技树调整技能与释放条件，确认后生效。挂机中换装或切换方案，会等本场或本轮副本结束后办理，再继续远征。</li><li>熔炉每次最多融合五份装备或材料，投入会被消耗，成品品质可能升降。学习药剂配方后可批量制药；生命药剂可在战斗右上角设置自动饮用，功能药剂在背包使用。</li></ol><p>一份存档对应一名主角，各族领地分别记录探索进度。套装从第3—10区域的野外胜利、整轮普通副本通关与首领胜利独立掉落，基础概率分别为3%、15%与25%，受幸运小幅提升。灵慧之果是精灵地区战斗特产，使用1枚永久增加3点可分配天赋点。套装不受品质丢弃设置影响，满包奖励保存在背包页待领取。融合只能获得散件装备或药剂。</p><p>战斗之间不会自动回满生命。战败后休息5分钟，再继续自动远征；主动休息后需自行出发。离线战斗也会消耗生命与药剂，最多结算4小时收益，休息期间没有战利品。存档保存在当前浏览器，可在设置中导出备份。</p><button class="primary" id="beginBtn">前往地图</button>`);};
 function showRedeemCode(){
- modal(`<h2>兑换码 · 测试用途</h2><p>测试码 <strong>INFINITY5</strong>：领取五族至臻无限宝石各1颗，可重复领取，不限次数。不直接制造手套，也不重置制造记录。</p><label for="redeemCodeInput">兑换码</label><input id="redeemCodeInput" type="text" maxlength="80" autocomplete="off" spellcheck="false"><button id="redeemCodeSubmit" class="primary">兑换</button><p id="redeemCodeResult" role="status" aria-live="polite"></p>`);
+ modal(`<h2>兑换码 · 测试用途</h2><p>以下测试码均可重复领取，不限次数，每次点击兑换领取一份奖励。</p><ul><li><strong>INFINITY5</strong>：领取五族至臻无限宝石各1颗。不直接制造手套，也不重置制造记录。</li><li><strong>GOLD100K</strong>：领取100000金币（10万）。</li><li><strong>LUCKYDICE</strong>：领取幸运骰子传说项链1件，等级与当前角色等级相同，放入项链背包，不会自动装备。</li></ul><label for="redeemCodeInput">兑换码</label><input id="redeemCodeInput" type="text" maxlength="80" autocomplete="off" spellcheck="false"><button id="redeemCodeSubmit" class="primary">兑换</button><p id="redeemCodeResult" role="status" aria-live="polite"></p>`);
+ let busy=false;
  $('redeemCodeSubmit').onclick=()=>{
-  if(sandboxSession||runtimeStorageBlocked)return;
+  if(busy||sandboxSession||runtimeStorageBlocked)return;
   const input=$('redeemCodeInput').value,quote=quoteRedeemCode(s,input),result=$('redeemCodeResult');
-  if(!quote.ok){result.textContent=({'invalid-code':'兑换码无效，请检查后重试。','capacity':'材料包空间不足，五颗宝石均未发放，制造记录未变更；整理后可重试。','quantity-limit':'材料数量已达上限，五颗宝石均未发放，制造记录未变更。'})[quote.reason]||'当前存档无法兑换。';return;}
-  const tx=persistGameChange(next=>redeemCode(next,input));
-  result.textContent=tx.ok?'兑换成功：'+tx.value.rewards.map(r=>r.name+'（至臻）×'+r.count).join('、')+'。可将五颗宝石一起放入熔炉融合，固定获得无限手套，无需配方。已保存，可再次兑换。':tx.reason==='storage-blocked'?'存档已变化，请刷新后重试；未发放宝石，制造记录未变更。':'保存失败，五颗宝石均未发放，制造记录未变更；释放存储空间后可重试。';
+  if(!quote.ok){result.textContent=({'invalid-code':'兑换码无效，请检查后重试。','capacity':'材料包空间不足，五颗宝石均未发放，制造记录未变更；整理后可重试。','quantity-limit':'材料数量已达上限，五颗宝石均未发放，制造记录未变更。','gold-limit':'金币将超过上限，本次未发放；使用部分金币后可重试。','amulet-capacity':'项链背包或装备总容量已满，幸运骰子未发放；整理后可重试。'})[quote.reason]||'当前存档无法兑换。';return;}
+  const submit=$('redeemCodeSubmit');busy=true;submit.disabled=true;
+  try{
+   const tx=persistGameChange(next=>redeemCode(next,input));
+   if(tx.ok){
+    const granted=tx.value,reward=granted.gold?granted.gold+'金币':granted.equipment?granted.equipment.name+'（传说项链，Lv.'+granted.equipment.level+'）×1':granted.rewards.map(r=>r.name+'（至臻）×'+r.count).join('、');
+    result.textContent='兑换成功：'+reward+'。'+(granted.code==='INFINITY5'?'可将五颗宝石一起放入熔炉融合，固定获得无限手套，无需配方。':'')+'已保存，可再次兑换。';hud();
+   }else result.textContent=tx.reason==='storage-blocked'?'存档已变化，请刷新后重试；奖励未发放，制造记录未变更。':'保存失败，奖励未发放，制造记录未变更；释放存储空间后可重试。';
+  }finally{busy=false;submit.disabled=false;}
  };
 }
 function downloadSave(raw,filename){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([raw],{type:'application/json'}));a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
