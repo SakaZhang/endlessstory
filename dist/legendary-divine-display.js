@@ -18,4 +18,4 @@ export function legendaryEffectDescription(item,base=''){
  if(legendaryDivineMultiplier(item)!==2)return base;
  return (changes[item.legendaryId]??[]).reduce((text,[from,to])=>text.replaceAll(from,to),base);
 }
-export const DIVINE_EFFECT_SUMMARY='神赐使强化后的基础属性、普通数值词条与特殊词条的主要数值翻倍；普通传说专属的正向效果量翻倍，触发条件、冷却和持续时间不变。无限手套、归途之环与原初核心的专属效果保持原样；幸运骰子的概率与减伤档不变。';
+export const DIVINE_EFFECT_SUMMARY='神赐使强化后的基础属性、普通数值词条与特殊词条的主要数值翻倍；普通传说专属的正向效果量翻倍，触发条件、冷却和持续时间不变。无限手套、归途之环与原初核心的专属效果保持原样；幸运骰子的概率与减伤档不变。已有神赐装备自动生效，无需再次消耗天神之石。';
